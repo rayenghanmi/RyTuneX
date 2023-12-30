@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="RyTuneX.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ScrollView x:Name="ContentArea" HorizontalScrollMode="Disabled" Margin="-20,0,-20,10" Padding="0,5,0,5">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Margin="10" CornerRadius="8" Grid.Row="0" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondary}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Left" IsTextSelectionEnabled="False" Margin="20" FontSize="20" FontWeight="Bold">
+                        1. Streamlined System Services:
+                    </TextBlock>
+                    <TextBlock
+                        Margin="20,0,20,20"
+                        Style="{ThemeResource BodyTextBlockStyle}">
+                        RyTuneX stands out as a comprehensive Windows 11 optimizer with backward compatibility for Windows 10. One of its key capabilities involves streamlining the system services to enhance overall device performance. By meticulously analyzing and selectively disabling unnecessary background services, RyTuneX ensures that system resources are directed towards essential tasks. This results in a more efficient and responsive computing experience for users, as resources are no longer tied up by redundant processes, contributing to improved system speed and responsiveness.
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="10" CornerRadius="8" Grid.Row="1" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondary}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Left" IsTextSelectionEnabled="False" Margin="20" FontSize="20" FontWeight="Bold">
+                        2. Fine-Tuned Registry Optimization:
+                    </TextBlock>
+                    <TextBlock
+                        Margin="20,0,20,20"
+                        Style="{ThemeResource BodyTextBlockStyle}">
+                            RyTuneX stands out as a powerful Windows 11 optimizer with compatibility extending to Windows 10. A core capability of this optimization tool involves meticulous registry adjustments aimed at unlocking the full potential of your device. RyTuneX intelligently fine-tunes registry keys, ensuring that the Windows operating system is configured for optimal performance. By optimizing registry settings, the application enhances system responsiveness and speed, providing users with a computing environment that is finely tuned to their specific hardware configuration.        
+                    </TextBlock>
+                    <RichTextBlockOverflow x:Name="thirdOverflowContainer" OverflowContentTarget="{x:Bind fourthOverflowContainer}" Grid.Row="1" Margin="12,0"/>
+                    <RichTextBlockOverflow x:Name="fourthOverflowContainer" Grid.Row="2" Margin="12,0"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="10" CornerRadius="8" Grid.Row="2" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondary}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Left" IsTextSelectionEnabled="False" Margin="20" FontSize="20" FontWeight="Bold">
+                        3. Bloat-Free Performance:
+                    </TextBlock>
+                    <TextBlock
+                        Margin="20,0,20,20"
+                        Style="{ThemeResource BodyTextBlockStyle}">
+                            RyTuneX goes beyond basic optimizations by addressing and eliminating system bloat. The application identifies and removes redundant pre-installed software and unnecessary features that may have come bundled with the operating system. This meticulous approach to reducing bloat not only frees up valuable storage space but also ensures that the system's resources are dedicated to running the applications and processes that matter most to the user. The result is a leaner, more efficient system that operates with improved speed and agility, catering to the performance needs of both Windows 11 and Windows 10 users.
+                    </TextBlock>
+                    <RichTextBlockOverflow x:Name="fifthOverflowContainer" OverflowContentTarget="{x:Bind sixethOverflowContainer}" Grid.Row="1" Margin="12,0"/>
+                    <RichTextBlockOverflow x:Name="sixethOverflowContainer" Grid.Row="2" Margin="12,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollView>
+</Page>

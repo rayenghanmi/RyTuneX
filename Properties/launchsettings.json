@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "RyTuneX (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "RyTuneX (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}

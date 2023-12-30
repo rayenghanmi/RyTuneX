@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="RyTuneX.Views.SystemInfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="-26,0,-26,20" x:Name="ContentArea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" ToolTipService.ToolTip="Sync System Info" Click="ReloadInfo" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <FontIcon Margin="3"  Glyph="&#xE72C;"/>
+                <TextBlock Margin="3" Text="Refresh"/>
+            </StackPanel>
+        </Button>
+        <ScrollView Grid.Row="1" Margin="0,10,0,0" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto">
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Margin="20,10,20,0">
+                    <TextBlock Text="CPU" ToolTipService.ToolTip="Central Processing Unit" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                    <StackPanel x:Name="cpuPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
+                        <ProgressRing x:Name="cpuProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="cpu" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Margin="20,10,20,0">
+                    <TextBlock Text="GPU" ToolTipService.ToolTip="Graphics Processing Unit" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                    <StackPanel x:Name="gpuPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
+                        <ProgressRing x:Name="gpuProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="gpu" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Margin="20,10,20,0">
+                    <TextBlock Text="Ram" ToolTipService.ToolTip="Random Access Memory" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                    <StackPanel x:Name="ramPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
+                        <ProgressRing x:Name="ramProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="ram" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Margin="20,10,20,20">
+                    <TextBlock Text="Storage" ToolTipService.ToolTip="Storage Devices" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                    <StackPanel x:Name="diskPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
+                        <ProgressRing x:Name="diskProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="disk" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</Page>

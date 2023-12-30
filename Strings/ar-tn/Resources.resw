@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>RyTuneX</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX</value>
+  </data>
+  <data name="Shell_Home.Content" xml:space="preserve">
+    <value>ما هو RyTuneX؟</value>
+  </data>
+  <data name="Debloat_NoSelection.Text" xml:space="preserve">
+    <value>اختار عنصراً من القائمة</value>
+  </data>
+  <data name="Shell_Debloat.Content" xml:space="preserve">
+    <value>تقليل الوظائف الزائدة</value>
+  </data>
+  <data name="Shell_SystemInfo.Content" xml:space="preserve">
+    <value>معلومات النظام</value>
+  </data>
+  <data name="Shell_ReportBug.Content" xml:space="preserve">
+    <value>الإبلاغ عن خطأ</value>
+  </data>
+  <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
+    <value>تحسين النظام</value>
+  </data>
+  <data name="Settings_Personalization.Text" xml:space="preserve">
+    <value>تخصيص</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>سمة</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>فاتح</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>داكن</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>افتراضي</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>حول هذا التطبيق</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>محسّن لنظامي ويندوز 10 و 11، تم إنشاؤه بواسطة ريان غانمي، وهو مصمم لتعزيز أداء النظام وكفاءته من خلال إزالة اختيارية للبرمجيات المحددة وتعطيل الخدمات غير الضرورية.</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+    <value>بيان الخصوصية</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
+    <value>https://rayen.vercel.app/rytunex/privacy.html</value>
+  </data>
+  <data name="WelcomeNotification" xml:space="preserve">
+    <value>&lt;toast launch="action=ToastClick"&gt;
+  &lt;visual&gt;
+    &lt;binding template="ToastGeneric"&gt;
+      &lt;text&gt;أهلاً بك في RyTuneX&lt;/text&gt;
+      &lt;text&gt;مُحسّنك المثالي لتسريع نظامك&lt;/text&gt;
+      &lt;image placement="appLogoOverride" src="{0}Assets/WindowIcon.ico"/&gt;
+    &lt;/binding&gt;
+  &lt;/visual&gt;
+  &lt;actions&gt;
+    &lt;action content="Learn More" arguments="action=Settings"/&gt;
+  &lt;/actions&gt;
+&lt;/toast&gt;</value>
+  </data>
+  <data name="Settings_Language.Text" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <data name="WelcomeNotice" xml:space="preserve">
+    <value>عزيزنا المستخدم،\n\nيسرنا أن نرحب بك في RyTuneX، حيث يلتقي تحسين الأداء بالدقة. تم تطويره بواسطة ريان غانمي وصُمم بفخر من قِبل RyByte، RyTuneX ليس مجرد تطبيق، بل هو بوابتك إلى تجربة حوسبة محسّنة. سواء كنت تستخدم Windows 11 أو Windows 10، تم تصميم RyTuneX لرفع أداء جهازك إلى آفاق جديدة. استمتع بعالم حيث يتم إسكات الخدمات الغير ضرورية، ويتم طرد الفضول، ويتم ضبط نظامك بعناية من خلال تحسينات السجل الذكية. استعد لفتح قوة جهازك الحقيقية - مرحبًا بك في RyTuneX، حيث يكون كل نقرة خطوة نحو رحلة حوسبة أسرع وأكثر استجابة.\n\nملحوظة: يرجى أن تكون على علم بأن RyTuneX حاليًا في مرحلة التجربة. بينما نحن متحمسون لاستقبالك، قد تكون بعض الميزات قيد التطوير، وقد تحدث مشاكل عرضية. رأيك لدينا قيم للغاية في مساعدتنا على تحسين وتحسين تجربة RyTuneX. شكرًا لك على كونك جزءًا من رحلتنا لتحسين وتعزيز تجربة Windows الخاصة بك.\n\nمع خالص التحية،\n\nفريق RyByte</value>
+  </data>
+  <data name="WelcomeNoticeTitle" xml:space="preserve">
+    <value>أهلاً بك في RyTuneX - أطلق عنان إلى كامل إمكانيات جهازك!</value>
+  </data>
+</root>
