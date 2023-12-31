@@ -163,10 +163,10 @@
     <value>محسّن لنظامي ويندوز 10 و 11، تم إنشاؤه بواسطة ريان غانمي، وهو مصمم لتعزيز أداء النظام وكفاءته من خلال إزالة اختيارية للبرمجيات المحددة وتعطيل الخدمات غير الضرورية.</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>بيان الخصوصية</value>
+    <value>AGPL v3.0</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://rayen.vercel.app/rytunex/privacy.html</value>
+    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="WelcomeNotification" xml:space="preserve">
     <value>&lt;toast launch="action=ToastClick"&gt;
@@ -190,5 +190,23 @@
   </data>
   <data name="WelcomeNoticeTitle" xml:space="preserve">
     <value>أهلاً بك في RyTuneX - أطلق عنان إلى كامل إمكانيات جهازك!</value>
+  </data>
+  <data name="HomePage_Content1.Text" xml:space="preserve">
+    <value>يتميز RyTuneX كأداة شاملة لتحسين Windows 11 مع التوافق الخلفي لـ Windows 10. إحدى قدراته الرئيسية تتضمن تبسيط خدمات النظام لتعزيز أداء الجهاز الشامل. من خلال تحليل الخلفيات بعناية وتعطيل الخدمات الغير ضرورية بشكل انتقائي، يضمن RyTuneX توجيه موارد النظام نحو المهام الأساسية. وهذا يؤدي إلى تحسين تجربة الحوسبة بشكل أكثر فعالية واستجابة للمستخدمين، حيث لا تتم ربط الموارد بعمليات زائدة، مما يسهم في تحسين سرعة النظام واستجابته.</value>
+  </data>
+  <data name="HomePage_Content2.Text" xml:space="preserve">
+    <value>RyTuneX يتميز كأداة قوية لتحسين Windows 11 مع توافق يمتد إلى Windows 10. إحدى قدرات هذه الأداة الأساسية تتضمن تعديلات دقيقة للسجل تهدف إلى فتح الإمكانيات الكاملة لجهازك. يقوم RyTuneX بضبط مفاتيح السجل بذكاء، مضمنًا في ذلك تأكيد أن نظام التشغيل Windows مُكوَّن للأداء الأمثل. من خلال تحسين إعدادات السجل، تعزز الطلب استجابية النظام وسرعته، مما يوفر للمستخدمين بيئة حوسبة تم تنغيمها بعناية وفقًا لتكوين الأجهزة الخاص بهم.</value>
+  </data>
+  <data name="HomePage_Content3.Text" xml:space="preserve">
+    <value>تتجاوز RyTuneX الأمور الأساسية لتحسين الأداء عبر التعامل مع والتخلص من زيادة حجم النظام. تقوم البرنامج بتحديد وإزالة البرمجيات المثبتة مسبقًا والميزات غير الضرورية التي قد تكون مضمنة مع نظام التشغيل. هذا النهج الدقيق لتقليل حجم النظام لا يحرر مساحة التخزين القيمة فقط، ولكنه أيضًا يضمن أن موارد النظام مُخصصة لتشغيل التطبيقات والعمليات التي تهم المستخدم بشكل أكبر. النتيجة هي نظام أكثر نحافة وكفاءة، يعمل بسرعة ورشاقة محسّنة، ملائمًا لاحتياجات أداء مستخدمي كل من Windows 11 وWindows 10.</value>
+  </data>
+  <data name="HomePage_Title1.Text" xml:space="preserve">
+    <value>1. خدمات النظام المُبسّطة:</value>
+  </data>
+  <data name="HomePage_Title2.Text" xml:space="preserve">
+    <value>2. تحسين سجل التسجيل المُعدَّل بدقة:</value>
+  </data>
+  <data name="HomePage_Title3.Text" xml:space="preserve">
+    <value>3. أداء خالٍ من التضخم:</value>
   </data>
 </root>

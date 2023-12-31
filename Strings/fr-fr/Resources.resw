@@ -163,10 +163,10 @@
     <value>RyTuneX, un optimiseur pour Windows 10 et 11 créé par Rayen Ghanmi, est conçu pour améliorer les performances et l'efficacité du système en supprimant sélectivement les logiciels choisis et en désactivant les services inutiles.</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>Déclaration de confidentialité</value>
+    <value>AGPL v3.0</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://rayen.vercel.app/rytunex/privacy.html</value>
+    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="WelcomeNotification" xml:space="preserve">
     <value>&lt;toast launch="action=ToastClick"&gt;
@@ -190,5 +190,23 @@
   </data>
   <data name="WelcomeNoticeTitle" xml:space="preserve">
     <value>Bienvenue dans RyTuneX - Libérez tout le potentiel de votre appareil !</value>
+  </data>
+  <data name="HomePage_Content1.Text" xml:space="preserve">
+    <value>RyTuneX se distingue en tant qu'optimiseur complet pour Windows 11, avec une compatibilité ascendante pour Windows 10. Une de ses capacités clés consiste à rationaliser les services système pour améliorer les performances globales de l'appareil. En analysant méticuleusement et en désactivant sélectivement les services en arrière-plan inutiles, RyTuneX veille à ce que les ressources du système soient dirigées vers les tâches essentielles. Cela se traduit par une expérience informatique plus efficace et réactive pour les utilisateurs, car les ressources ne sont plus monopolisées par des processus redondants, contribuant ainsi à une vitesse et une réactivité du système améliorées.</value>
+  </data>
+  <data name="HomePage_Content2.Text" xml:space="preserve">
+    <value>RyTuneX se distingue en tant qu'optimiseur puissant pour Windows 11, avec une compatibilité étendue à Windows 10. Une fonctionnalité essentielle de cet outil d'optimisation implique des ajustements méticuleux du registre visant à libérer tout le potentiel de votre appareil. RyTuneX règle intelligemment les clés du registre, garantissant que le système d'exploitation Windows est configuré pour des performances optimales. En optimisant les paramètres du registre, l'application améliore la réactivité et la vitesse du système, offrant aux utilisateurs un environnement informatique parfaitement adapté à leur configuration matérielle spécifique.</value>
+  </data>
+  <data name="HomePage_Content3.Text" xml:space="preserve">
+    <value>RyTuneX va au-delà des optimisations de base en s'attaquant et éliminant la surcharge système. L'application identifie et supprime les logiciels préinstallés redondants et les fonctionnalités inutiles qui peuvent être incluses avec le système d'exploitation. Cette approche méticuleuse de la réduction de la surcharge libère non seulement un espace de stockage précieux, mais garantit également que les ressources du système sont dédiées à l'exécution des applications et des processus les plus importants pour l'utilisateur. Le résultat est un système plus léger, plus efficace, fonctionnant avec une vitesse et une agilité améliorées, répondant aux besoins de performance des utilisateurs de Windows 11 et Windows 10.</value>
+  </data>
+  <data name="HomePage_Title1.Text" xml:space="preserve">
+    <value>1. Services système rationalisés:</value>
+  </data>
+  <data name="HomePage_Title2.Text" xml:space="preserve">
+    <value>2. Optimisation fine du registre:</value>
+  </data>
+  <data name="HomePage_Title3.Text" xml:space="preserve">
+    <value>3. Performances sans surcharge:</value>
   </data>
 </root>

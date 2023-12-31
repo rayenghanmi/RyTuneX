@@ -17,7 +17,6 @@ public class PageService : IPageService
         Configure<HomeViewModel, HomePage>();
         Configure<DebloatSystemViewModel, DebloatSystemPage>();
         Configure<SystemInfoViewModel, SystemInfoPage>();
-        Configure<ReportBugViewModel, ReportBugPage>();
         Configure<OptimizeSystemViewModel, OptimizeSystemPage>();
         Configure<SettingsViewModel, SettingsPage>();
     }
