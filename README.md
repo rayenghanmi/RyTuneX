@@ -13,6 +13,9 @@
 [![Discord](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/1129340862044839936)
 [![Website](https://img.shields.io/badge/Website-RyTuneX-blue)](https://rayen.vercel.app/rytunex)
 
+> [!NOTE]  
+> Any url redirecting to my website whether in github or in the app is not working right now as I'm working on a newer one.
+
 ## Description
 
 RyTuneX is an optimizer made using the WinUI 3 framework, designed to elevate the performance of Windows devices. Tailored for both Windows 10 and 11, RyTuneX allows users to selectively remove unwanted pre-built applications that are challenging to uninstall and to disable unnecessary background services.
