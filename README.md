@@ -15,31 +15,19 @@
 
 ## Description
 
-RyTuneX is a powerful optimizer crafted using the WinUI 3 framework, designed to elevate the performance of Windows devices. Tailored for both Windows 10 and 11, RyTuneX empowers users by selectively removing unwanted pre-built applications that are challenging to uninstall and disabling unnecessary background services.
+RyTuneX is an optimizer made using the WinUI 3 framework, designed to elevate the performance of Windows devices. Tailored for both Windows 10 and 11, RyTuneX allows users to selectively remove unwanted pre-built applications that are challenging to uninstall and to disable unnecessary background services.
 
 ## Key Features:
 
-- **Selective App Removal:** Effortlessly remove unwanted pre-installed apps that are typically hard to uninstall, freeing up valuable storage space.
+- **Selective App Removal:** Remove unwanted pre-installed apps that are typically hard to uninstall, freeing up valuable storage space.
 
 - **Background Service Management:** Disable unnecessary background services to streamline system resources, enhancing overall performance.
 
-- **Privacy Enhancements:** RyTuneX includes features that enhance privacy by blocking telemetry and data collection processes, ensuring a more secure computing environment.
+- **Privacy Enhancements:** Enhance privacy by blocking telemetry and data collection processes, ensuring a more secure computing environment.
 
 - **WinUI 3 Framework:** Built with the modern WinUI 3 framework, RyTuneX ensures a sleek and responsive user interface.
 
-- **Windows 10 and 11 Compatibility:** Optimized to deliver peak performance on both Windows 10 and Windows 11.
-
-## Why Choose RyTuneX?
-
-RyTuneX goes beyond a traditional optimizer. It provides users with fine-grained control over their Windows experience, allowing them to tailor their system for optimal performance.
-
-Download RyTuneX now and experience a faster, more responsive Windows environment. Your device, your rules!
-
-<p align="center">
-  <a href="link_to_latest_release" target="_blank">
-    <img src="https://img.shields.io/badge/Download-Latest%20Release-blue" alt="Download Latest Release">
-  </a>
-</p>
+- **Windows 10 and 11 Compatibility:** Optimized to enhance performance on both Windows 10 and Windows 11.
 
 ## Screenshots
 
