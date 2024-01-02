@@ -18,7 +18,7 @@
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
                     <TextBlock x:Uid="Settings_Language"/>
 
-                    <ComboBox x:Name="LanguageComboBox" Margin="{StaticResource SmallTopMargin}" SelectionChanged="LanguageComboBox_SelectionChanged">
+                    <ComboBox x:Name="LanguageComboBox" PlaceholderText="System Language" Margin="{StaticResource SmallTopMargin}" SelectionChanged="LanguageComboBox_SelectionChanged">
                         <ComboBoxItem Content="English (US)" Tag="en-us"/>
                         <ComboBoxItem Content="French (France)" Tag="fr-fr"/>
                         <ComboBoxItem Content="Arabic (Tunisia)" Tag="ar-tn"/>

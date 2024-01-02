@@ -209,4 +209,22 @@
   <data name="HomePage_Title3.Text" xml:space="preserve">
     <value>3. Performances sans surcharge:</value>
   </data>
+  <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
+    <value>Récupération des données des applications installées...</value>
+  </data>
+  <data name="DebloatSystemPage_ShowAll.Content" xml:space="preserve">
+    <value>Afficher tout</value>
+  </data>
+  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+    <value>Désinstaller app(s) sélectionnée(s</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="Uninstalling" xml:space="preserve">
+    <value>Désinstallation en cours</value>
+  </data>
+  <data name="UninstallTip" xml:space="preserve">
+    <value>Sélectionnez les applications que vous souhaitez supprimer et appuyez sur Désinstaller</value>
+  </data>
 </root>

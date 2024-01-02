@@ -3,7 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="using:RyTuneX.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:SystemInfoViewModel}"
     mc:Ignorable="d">
 
     <Grid Margin="-26,0,-26,20" x:Name="ContentArea">
@@ -25,29 +26,37 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Margin="20,10,20,0">
+                    <TextBlock Text="OS" ToolTipService.ToolTip="Operating System" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                    <StackPanel x:Name="osPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
+                        <ProgressRing x:Name="osProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="os" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Margin="20,10,20,0">
                     <TextBlock Text="CPU" ToolTipService.ToolTip="Central Processing Unit" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                     <StackPanel x:Name="cpuPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
                         <ProgressRing x:Name="cpuProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="cpu" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="1" Margin="20,10,20,0">
+                <StackPanel Grid.Row="2" Margin="20,10,20,0">
                     <TextBlock Text="GPU" ToolTipService.ToolTip="Graphics Processing Unit" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                     <StackPanel x:Name="gpuPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
                         <ProgressRing x:Name="gpuProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="gpu" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="2" Margin="20,10,20,0">
+                <StackPanel Grid.Row="3" Margin="20,10,20,0">
                     <TextBlock Text="Ram" ToolTipService.ToolTip="Random Access Memory" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                     <StackPanel x:Name="ramPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
                         <ProgressRing x:Name="ramProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="ram" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="3" Margin="20,10,20,20">
+                <StackPanel Grid.Row="4" Margin="20,10,20,20">
                     <TextBlock Text="Storage" ToolTipService.ToolTip="Storage Devices" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                     <StackPanel x:Name="diskPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
                         <ProgressRing x:Name="diskProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>

@@ -21,9 +21,9 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-    <AssemblyVersion>0.3.0.0</AssemblyVersion>
-    <FileVersion>0.3.0.0</FileVersion>
-    <PackageCertificateThumbprint>35AF781985A681F22026C164C102F36066A8BEE6</PackageCertificateThumbprint>
+    <AssemblyVersion>0.5.0.0</AssemblyVersion>
+    <FileVersion>0.5.0.0</FileVersion>
+    <PackageCertificateThumbprint>1D92A91C88A122BB200B96F35A8311064D7AD1CE</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\WindowIcon.ico" />

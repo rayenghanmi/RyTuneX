@@ -49,7 +49,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.IsEnabled = false;
                 installedAppsCount.Visibility = Visibility.Collapsed;
                 uninstallingStatusText.Foreground = new SolidColorBrush(Colors.White);
-                uninstallingStatusText.Text = "Select apps that you want to remove and hit uninstall";
+                uninstallingStatusText.Text = "UninstallTip".GetLocalized();
                 uninstallingStatusBar.Visibility = Visibility.Collapsed;
                 showAll.Visibility = Visibility.Collapsed;
                 uninstallButton.Visibility = Visibility.Collapsed;
@@ -84,14 +84,14 @@ public sealed partial class DebloatSystemPage : Page
                 if (selectedApp is KeyValuePair<string, string> appInfo)
                 {
                     var selectedAppInfo = appInfo;
-                    uninstallingStatusText.Text = $"Uninstalling {selectedAppInfo.Key}";
+                    uninstallingStatusText.Text = "Uninstalling".GetLocalized() + selectedAppInfo.Key.ToString();
                     await UninstallApps(appInfo.Key);
                 }
             }
             // Reload the installed apps after successfull uninstall
             LoadInstalledApps();
             // update ui elements
-            uninstallingStatusText.Text = "Done";
+            uninstallingStatusText.Text = "Done".GetLocalized();
             uninstallingStatusText.Foreground = new SolidColorBrush(Colors.LightGreen);
             uninstallingStatusBar.Visibility = Visibility.Collapsed;
         }

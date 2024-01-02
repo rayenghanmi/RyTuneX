@@ -1,5 +1,5 @@
 ﻿/*
- * RyTuneX - A Windows 10 and 11 optimizer is designed to enhance system performance.
+ * RyTuneX - A Windows 10 and 11 optimizer designed to enhance system performance.
  * Copyright (C) 2023 Rayen Ghanmi
  *
  * This program is free software: you can redistribute it and/or modify

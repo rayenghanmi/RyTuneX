@@ -1,6 +1,12 @@
 # CHANGELOG.md
 
 All notable changes to this project will be documented in this file.
+## 0.5
+
+### Added
+
+- Extended System information (Operating System, cpu, gpu, ram, ...).
+
 
 ## 0.4
 
