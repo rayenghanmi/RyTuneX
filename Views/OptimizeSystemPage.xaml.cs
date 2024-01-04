@@ -1,8 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using System.Diagnostics;
 using Microsoft.UI.Xaml.Controls;
-
-using RyTuneX.ViewModels;
 using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
@@ -11,17 +9,11 @@ namespace RyTuneX.Views;
 
 public sealed partial class OptimizeSystemPage : Page
 {
-    public OptimizeSystemViewModel ViewModel
-    {
-        get;
-
-    }
 
     private readonly bool isInitialSetup = true;
 
     public OptimizeSystemPage()
     {
-        ViewModel = App.GetService<OptimizeSystemViewModel>();
         InitializeComponent();
         Loaded += (sender, e) => InitializeToggleSwitches();
         isInitialSetup = false;

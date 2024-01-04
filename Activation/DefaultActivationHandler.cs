@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
 
 using RyTuneX.Contracts.Services;
-using RyTuneX.ViewModels;
+using RyTuneX.Views;
 
 namespace RyTuneX.Activation;
 
@@ -22,7 +22,7 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
 
     protected async override Task HandleInternalAsync(LaunchActivatedEventArgs args)
     {
-        _navigationService.NavigateTo(typeof(HomeViewModel).FullName!, args.Arguments);
+        _navigationService.NavigateTo(typeof(HomePage).FullName!, args.Arguments);
 
         await Task.CompletedTask;
     }

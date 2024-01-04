@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="RyTuneX.Views.DebloatSystemPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -6,7 +5,7 @@
     xmlns:local="using:RyTuneX.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="using:RyTuneX.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:DebloatSystemViewModel}"
+    xmlns:viewmodels="using:RyTuneX.ViewModels"
     mc:Ignorable="d">
     <Grid Margin="0,0,0,26">
         <Grid.RowDefinitions>

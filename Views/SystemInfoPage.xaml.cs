@@ -5,20 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management;
 using System.Threading.Tasks;
-using RyTuneX.ViewModels;
 
 namespace RyTuneX.Views;
 
 public sealed partial class SystemInfoPage : Page
 {
-    public SystemInfoViewModel ViewModel
-    {
-        get;
-    }
-
     public SystemInfoPage()
     {
-        ViewModel = App.GetService<SystemInfoViewModel>();
         InitializeComponent();
         UpdateSystemInfoAsync();
     }

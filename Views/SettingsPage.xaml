@@ -11,8 +11,7 @@
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </Page.Resources>
     <Grid>
-        <StackPanel
-            x:Name="ContentArea">
+        <StackPanel x:Name="ContentArea">
             <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
@@ -31,8 +30,8 @@
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
                     <RadioButton
                         x:Uid="Settings_Theme_Light"
-                        Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                        IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"
+                        Command="{x:Bind SwitchThemeCommand}"
+                        IsChecked="{x:Bind ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"
                         FontSize="15"
                         GroupName="AppTheme">
                         <RadioButton.CommandParameter>
@@ -41,8 +40,8 @@
                     </RadioButton>
                     <RadioButton
                         x:Uid="Settings_Theme_Dark"
-                        Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                        IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
+                        Command="{x:Bind SwitchThemeCommand}"
+                        IsChecked="{x:Bind ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
                         FontSize="15"
                         GroupName="AppTheme">
                         <RadioButton.CommandParameter>
@@ -51,8 +50,8 @@
                     </RadioButton>
                     <RadioButton
                         x:Uid="Settings_Theme_Default"
-                        Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                        IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}"
+                        Command="{x:Bind SwitchThemeCommand}"
+                        IsChecked="{x:Bind ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}"
                         FontSize="15"
                         GroupName="AppTheme">
                         <RadioButton.CommandParameter>
@@ -65,7 +64,7 @@
             <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
 
             <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                <TextBlock Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}" Style="{ThemeResource BodyTextBlockStyle}" />
+                <TextBlock Text="{x:Bind VersionDescription, Mode=OneWay}" Style="{ThemeResource BodyTextBlockStyle}" />
 
                 <TextBlock
                     x:Name="AboutDescription"

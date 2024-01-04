@@ -1,10 +1,15 @@
 ﻿{
-    "profiles": {
-      "RyTuneX (Package)": {
-        "commandName": "MsixPackage"
-      },
-      "RyTuneX (Unpackaged)": {
-        "commandName": "Project"
-      }
+  "profiles": {
+    "RyTuneX": {
+      "commandName": "MsixPackage",
+      "commandLineArgs": "",
+      "alwaysReinstallApp": false,
+      "remoteDebugEnabled": false,
+      "allowLocalNetworkLoopbackProperty": true,
+      "authenticationMode": "Windows",
+      "doNotLaunchApp": false,
+      "remoteDebugMachine": "",
+      "nativeDebugging": false
     }
+  }
 }

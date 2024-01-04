@@ -1,31 +1,46 @@
-﻿using System.Diagnostics;
-using CommunityToolkit.WinUI;
-using Microsoft.UI;
+﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
-using RyTuneX.ViewModels;
-using Windows.ApplicationModel.Core;
-using Windows.Globalization;
+using RyTuneX.Contracts.Services;
+using RyTuneX.Helpers;
+using Windows.ApplicationModel;
 using Windows.Storage;
-using Windows.UI.Core;
 
 namespace RyTuneX.Views;
 
 public sealed partial class SettingsPage : Page
 {
-    public SettingsViewModel ViewModel
+    private readonly IThemeSelectorService _themeSelectorService;
+
+    private ElementTheme _elementTheme;
+    private string _versionDescription;
+    public ICommand SwitchThemeCommand
     {
         get;
     }
 
     public SettingsPage()
     {
-        ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
+
+        _themeSelectorService = App.GetService<IThemeSelectorService>();
 
         // Set the default language based on the stored setting or the system if not set explicitly
         SetDefaultLanguageBasedOnSystem();
+
+        _elementTheme = _themeSelectorService.Theme;
+        _versionDescription = GetVersionDescription();
+
+        SwitchThemeCommand = new RelayCommand<ElementTheme>(
+            async (param) =>
+            {
+                if (ElementTheme != param)
+                {
+                    ElementTheme = param;
+                    await _themeSelectorService.SetThemeAsync(param);
+                }
+            });
     }
     private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -78,6 +93,52 @@ public sealed partial class SettingsPage : Page
             {
                 LanguageComboBox.SelectedItem = item;
                 break;
+            }
+        }
+    }
+    private string GetVersionDescription()
+    {
+        Version version;
+
+        if (RuntimeHelper.IsMSIX)
+        {
+            var packageVersion = Package.Current.Id.Version;
+
+            version = new(packageVersion.Major, packageVersion.Minor, packageVersion.Build, packageVersion.Revision);
+        }
+        else
+        {
+            version = typeof(SettingsPage).Assembly.GetName().Version!;
+        }
+
+        return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+    }
+    public ElementTheme ElementTheme
+    {
+        get
+        {
+            return _elementTheme;
+        }
+        set
+        {
+            if (_elementTheme != value)
+            {
+                _elementTheme = value;
+            }
+        }
+    }
+
+    public string VersionDescription
+    {
+        get
+        {
+            return _versionDescription;
+        }
+        set
+        {
+            if (_versionDescription != value)
+            {
+                _versionDescription = value;
             }
         }
     }

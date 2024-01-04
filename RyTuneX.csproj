@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>RyTuneX</RootNamespace>
     <ApplicationIcon>Assets/WindowIcon.ico</ApplicationIcon>
@@ -21,9 +21,13 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-    <AssemblyVersion>0.5.0.0</AssemblyVersion>
-    <FileVersion>0.5.0.0</FileVersion>
+    <AssemblyVersion>0.6.0.0</AssemblyVersion>
+    <FileVersion>0.6.0.0</FileVersion>
     <PackageCertificateThumbprint>1D92A91C88A122BB200B96F35A8311064D7AD1CE</PackageCertificateThumbprint>
+    <StartupObject>RyTuneX.Program</StartupObject>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/rayenghanmi/rytunex</RepositoryUrl>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\WindowIcon.ico" />
@@ -61,6 +65,16 @@
 
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+
+    <None Update="LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
     <Page Update="Views\DebloatSystemPage.xaml">
       <Generator>MSBuild:Compile</Generator>

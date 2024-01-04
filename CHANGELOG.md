@@ -1,6 +1,27 @@
 # CHANGELOG.md
 
 All notable changes to this project will be documented in this file.
+
+## 0.6
+
+> [!TIP]
+> **This version adressed the following issue:**
+>
+> Windows Defender detecting the setup as a trojan:
+>
+> This problem occurs because `pyinstaller` compiling is similar to a trojan, and Windows Defender detects the executable as a malicious file due to the way it was compiled.
+
+### Added
+
+- An enhanced setup file.
+
+### Changes
+
+- Code clean up.
+
+> [!NOTE]
+> If you have any design ideas for the setup, feel free to share them.
+
 ## 0.5
 
 ### Added

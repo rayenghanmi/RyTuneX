@@ -44,22 +44,22 @@
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
             Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Uid="Shell_Home" helpers:NavigationHelper.NavigateTo="RyTuneX.ViewModels.HomeViewModel">
+                <NavigationViewItem x:Uid="Shell_Home" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.HomePage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE80F;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_OptimizeSystem" helpers:NavigationHelper.NavigateTo="RyTuneX.ViewModels.OptimizeSystemViewModel">
+                <NavigationViewItem x:Uid="Shell_OptimizeSystem" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.OptimizeSystemPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF259;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Debloat" helpers:NavigationHelper.NavigateTo="RyTuneX.ViewModels.DebloatSystemViewModel">
+                <NavigationViewItem x:Uid="Shell_Debloat" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.DebloatSystemPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE74C;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_SystemInfo" helpers:NavigationHelper.NavigateTo="RyTuneX.ViewModels.SystemInfoViewModel">
+                <NavigationViewItem x:Uid="Shell_SystemInfo" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.SystemInfoPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE770;"/>
                     </NavigationViewItem.Icon>

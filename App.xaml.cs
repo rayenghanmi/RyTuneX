@@ -87,15 +87,10 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
-            services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
-            services.AddTransient<OptimizeSystemViewModel>();
             services.AddTransient<OptimizeSystemPage>();
-            services.AddTransient<SystemInfoViewModel>();
             services.AddTransient<SystemInfoPage>();
-            services.AddTransient<DebloatSystemViewModel>();
             services.AddTransient<DebloatSystemPage>();
-            services.AddTransient<HomeViewModel>();
             services.AddTransient<HomePage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
