@@ -4,17 +4,17 @@
 
 # RyTuneX
 
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![License: AGPL v3.0](https://img.shields.io/badge/License-AGPL%20v3.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.html)
 [![GitHub stars](https://img.shields.io/github/stars/rayenghanmi/RyTuneX.svg)](https://github.com/rayenghanmi/RyTuneX/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/rayenghanmi/RyTuneX.svg)](https://github.com/rayenghanmi/RyTuneX/issues)
 [![GitHub forks](https://img.shields.io/github/forks/rayenghanmi/RyTuneX.svg)](https://github.com/rayenghanmi/RyTuneX/network)
 [![Twitter Follow](https://img.shields.io/twitter/follow/rayen_ghanmi_23.svg?style=social)](https://twitter.com/rayen_ghanmi_23)
 [![Facebook](https://img.shields.io/badge/Facebook-rayen.ghanmi.23-blue)](https://www.facebook.com/rayen.ghanmi.23)
-[![Discord](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/1129340862044839936)
-[![Website](https://img.shields.io/badge/Website-RyTuneX-blue)](https://rayen.vercel.app/rytunex)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/gyBzyd364t)
+[![Website](https://img.shields.io/badge/Website-RyTuneX-blue)](https://rayenghanmi.github.io/rytunex)
 
 > [!NOTE]  
-> Any url redirecting to my website whether in github or in the app is not working right now as I'm working on a newer one.
+> [New Website](https://rayenghanmi.github.io/rytunex/index.html)
 
 ## Description
 
