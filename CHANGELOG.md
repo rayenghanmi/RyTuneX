@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 0.6
 
 > [!TIP]
-> **This version adressed the following issue:**
+> **This version addressed the following issue:**
 >
 > Windows Defender detecting the setup as a trojan:
 >
