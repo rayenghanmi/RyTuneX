@@ -1,8 +1,8 @@
 # CHANGELOG.md
 
-All notable changes to this project will be documented in this file.
+All notable changes to this branch will be documented in this file.
 
-## 0.7
+## 0.7 - Work In Progress
 
 ## Added
 
@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 - Selecting and unselecting a package, then selecting it again, should now attempt to remove it once.
 - Crashing when exiting the app while fetching installed apps.
 
-## 0.6
+## 0.6 - Released
 
 > [!TIP]
 > **This version adressed the following issue:**
@@ -40,14 +40,14 @@ All notable changes to this project will be documented in this file.
 > [!NOTE]
 > If you have any design ideas for the setup, feel free to share them.
 
-## 0.5
+## 0.5 - Unreleased
 
 ### Added
 
 - Extended System information (Operating System, cpu, gpu, ram, ...).
 
 
-## 0.4
+## 0.4 - Unreleased
 
 ### Added
 
