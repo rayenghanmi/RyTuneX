@@ -16,6 +16,8 @@
 > [!NOTE]  
 > [New Website](https://rayenghanmi.github.io/rytunex/index.html)
 
+> [!TIP]  
+> To keep an eye on what's currently being worked on and what's being fixed check testing branch's [CHANGELOG.md](../testing/CHANGELOG.md)
 ## Description
 
 RyTuneX is an optimizer made using the WinUI 3 framework, designed to elevate the performance of Windows devices. Tailored for both Windows 10 and 11, RyTuneX allows users to selectively remove unwanted pre-built applications that are challenging to uninstall and to disable unnecessary background services.
