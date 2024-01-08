@@ -19,19 +19,11 @@
                    HorizontalAlignment="Left"
                    Width="22"
                    Height="22" />
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="34,0,0,0">
-                <TextBlock x:Name="AppTitleBarText"
+            <TextBlock x:Name="AppTitleBarText"
+                    VerticalAlignment="Center"
+                    Margin="34,0,0,0"
                     TextWrapping="NoWrap"
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Margin="5"/>
-                <TextBlock x:Name="AppTitleBarVersion"
-                    Text="0.3 Beta"
-                    TextWrapping="NoWrap"
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Foreground="{ThemeResource HyperlinkDisabledThemeBrush}"
-                    Margin="5"/>
-            </StackPanel>
-            
+                    Style="{StaticResource CaptionTextBlockStyle}"/>
         </Grid>
         <NavigationView
             x:Name="NavigationViewControl"

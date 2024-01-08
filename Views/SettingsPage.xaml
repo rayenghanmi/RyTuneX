@@ -10,8 +10,8 @@
     <Page.Resources>
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </Page.Resources>
-    <Grid>
-        <StackPanel x:Name="ContentArea">
+    <ScrollView Margin="-26,0,-26,16">
+        <StackPanel x:Name="ContentArea" Margin="16,0,0,0">
             <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
@@ -65,7 +65,7 @@
 
             <StackPanel Margin="{StaticResource XSmallTopMargin}">
                 <TextBlock Text="{x:Bind VersionDescription, Mode=OneWay}" Style="{ThemeResource BodyTextBlockStyle}" />
-
+                <HyperlinkButton Content="View Logs" Click="HyperlinkButton_Click" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}"/>
                 <TextBlock
                     x:Name="AboutDescription"
                     x:Uid="Settings_AboutDescription"
@@ -74,5 +74,5 @@
                 <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
             </StackPanel>
         </StackPanel>
-    </Grid>
+    </ScrollView>
 </Page>

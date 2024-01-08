@@ -61,7 +61,7 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-
+        LogHelper.Log("Initializing App");
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).
@@ -102,23 +102,17 @@ public partial class App : Application
 
         App.GetService<IAppNotificationService>().Initialize();
 
-        UnhandledException += App_UnhandledException;
-    }
-
-    private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
-    {
-        // TODO: Log and handle exceptions as appropriate.
-        // https://docs.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.application.unhandledexception.
     }
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
 
-        bool showWelcomeNotification = ShouldShowWelcomeNotification();
+        var showWelcomeNotification = ShouldShowWelcomeNotification();
 
         if (showWelcomeNotification)
         {
+            await LogHelper.Log("Showing Welcome Notification");
             App.GetService<IAppNotificationService>().Show(string.Format("WelcomeNotification".GetLocalized(), AppContext.BaseDirectory));
 
             // Set the flag to indicate that the welcome notification has been shown
@@ -143,6 +137,7 @@ public partial class App : Application
     private void SetWelcomeNotificationShown()
     {
         // Set the flag to true to indicate that the welcome notification has been shown
+        LogHelper.Log("Setting WelcomeNotificationShown");
         ApplicationData.Current.LocalSettings.Values["WelcomeNotificationShown"] = true;
     }
 }

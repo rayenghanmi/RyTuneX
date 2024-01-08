@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.7
+
+## Added
+
+- Error Logging for better debugging.
+- New `View Logs` HyperLink in Settings Page.
+
+## Changes
+
+- Minor UI improvements and fixes.
+- Better exception handling.
+- Package Name has been changed to `Rayen.RyTuneX`.
+
+### Fixes
+
+- Selecting and unselecting a package, then selecting it again, should now attempt to remove it once.
+- Crashing when exiting the app while fetching installed apps.
+
 ## 0.6
 
 > [!TIP]

@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.0.230907" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.231115000" />
@@ -107,5 +108,9 @@
   
   <ItemGroup>
     <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.4.231115000\buildTransitive\..\include\WindowsAppSDK-VersionInfo.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.4.231115000\buildTransitive\..\include\DeploymentManagerAutoInitializer.cs" />
   </ItemGroup>
 </Project>

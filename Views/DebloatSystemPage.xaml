@@ -5,7 +5,9 @@
     xmlns:local="using:RyTuneX.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="using:RyTuneX.ViewModels"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d">
     <Grid Margin="0,0,0,26">
         <Grid.RowDefinitions>
@@ -37,5 +39,14 @@
         <TextBlock Margin="3" Grid.Row="3" x:Name="uninstallingStatusText"/>
         <ProgressBar Margin="2" Grid.Row="4" x:Name="uninstallingStatusBar" Width="Auto" IsIndeterminate="True" Visibility="Collapsed"/>
         <Button x:Uid="DebloatSystemPage_UninstallButton" Margin="3" Grid.Row="5" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <muxc:InfoBar
+                      MaxWidth="480"
+                      Margin="16"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Bottom">
+            <interactivity:Interaction.Behaviors>
+                <behaviors:StackedNotificationsBehavior x:Name="NotificationQueue" />
+            </interactivity:Interaction.Behaviors>
+        </muxc:InfoBar>
     </Grid>
 </Page>
