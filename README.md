@@ -4,19 +4,17 @@
 
 # RyTuneX
 
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![License: AGPL v3.0](https://img.shields.io/badge/License-AGPL%20v3.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.html)
 [![GitHub stars](https://img.shields.io/github/stars/rayenghanmi/RyTuneX.svg)](https://github.com/rayenghanmi/RyTuneX/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/rayenghanmi/RyTuneX.svg)](https://github.com/rayenghanmi/RyTuneX/issues)
 [![GitHub forks](https://img.shields.io/github/forks/rayenghanmi/RyTuneX.svg)](https://github.com/rayenghanmi/RyTuneX/network)
 [![Twitter Follow](https://img.shields.io/twitter/follow/rayen_ghanmi_23.svg?style=social)](https://twitter.com/rayen_ghanmi_23)
 [![Facebook](https://img.shields.io/badge/Facebook-rayen.ghanmi.23-blue)](https://www.facebook.com/rayen.ghanmi.23)
-[![Discord](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/1129340862044839936)
-[![Website](https://img.shields.io/badge/Website-RyTuneX-blue)](https://rayen.vercel.app/rytunex)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/gyBzyd364t)
+[![Website](https://img.shields.io/badge/Website-RyTuneX-blue)](https://rayenghanmi.github.io/rytunex)
 
 > [!NOTE]  
-> Any url redirecting to my website whether in github or in the app is not working right now as I'm working on a newer one.
-
-## Description
+> [New Website](https://rayenghanmi.github.io/rytunex/index.html)
 
 RyTuneX is an optimizer made using the WinUI 3 framework, designed to elevate the performance of Windows devices. Tailored for both Windows 10 and 11, RyTuneX allows users to selectively remove unwanted pre-built applications that are challenging to uninstall and to disable unnecessary background services.
 
@@ -35,13 +33,17 @@ RyTuneX is an optimizer made using the WinUI 3 framework, designed to elevate th
 ## Screenshots
 
 <p align="center">
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/ecaffb57-5b33-4762-baf7-e16ac26ebe26" alt="RyTuneX Setup 1" width="250" />
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/eb676c75-b839-4e03-81c5-75b5b1830c66" alt="RyTuneX Setup 2" width="250" />
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/37b3ddc4-3b24-4cd9-915d-8e73788a0331" alt="RyTuneX Setup 3" width="250" />
+  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/65af8e80-8465-4c3c-8622-7bf821b9318b" alt="RyTuneX" width="425" />
+  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/c3b4b9d7-2f7c-428e-8cd7-1bbea54d8614" alt="RyTuneX" width="425" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/3c234ba8-6904-4a48-b2ad-f932b386a01f" alt="RyTuneX" width="750" />
+  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/b1110e85-f436-4035-8b90-7048168ad9e9" alt="RyTuneX Setup" width="850" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/7ade8a24-6c01-4d37-be9b-c3c85289dd8b" alt="RyTuneX" width="425" />
+  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/b4c20e7e-463a-4372-84b7-7295d286b277" alt="RyTuneX" width="425" />
 </p>
 
 ## Installation
