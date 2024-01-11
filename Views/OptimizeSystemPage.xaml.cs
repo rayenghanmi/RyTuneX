@@ -266,7 +266,6 @@ public sealed partial class OptimizeSystemPage : Page
                         case "GamingMode":
                             if (toggleSwitch.IsOn)
                             {
-                                throw new Exception();
                                 OptimizeSystemHelper.EnableGamingMode();
                                 ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
                             }
