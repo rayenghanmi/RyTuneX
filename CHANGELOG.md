@@ -10,7 +10,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Added
 
-- Version number is now displayed the taskbar.
+- Version number is now displayed on the titlbar.
 
 ### Fixes
 
