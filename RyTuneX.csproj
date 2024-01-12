@@ -21,8 +21,6 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-    <AssemblyVersion>0.6.0.0</AssemblyVersion>
-    <FileVersion>0.6.0.0</FileVersion>
     <PackageCertificateThumbprint>1D92A91C88A122BB200B96F35A8311064D7AD1CE</PackageCertificateThumbprint>
     <StartupObject>RyTuneX.Program</StartupObject>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -31,6 +29,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\WindowIcon.ico" />
+    <None Remove="Views\BenchmarkPage.xaml" />
     <None Remove="Views\DebloatSystemPage.xaml" />
   </ItemGroup>
 
@@ -79,6 +78,9 @@
     </None>
     <Page Update="Views\DebloatSystemPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\BenchmarkPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>
 

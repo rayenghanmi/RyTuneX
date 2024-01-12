@@ -16,6 +16,7 @@ using Windows.UI.Core;
 using Windows.UI.Notifications;
 using CommunityToolkit.WinUI.Behaviors;
 using System.Threading;
+using Windows.ApplicationModel.Core;
 
 namespace RyTuneX.Views;
 
@@ -45,18 +46,19 @@ public sealed partial class DebloatSystemPage : Page
 
     private async void LoadInstalledApps(bool uninstallableOnly = true, CancellationToken cancellationToken = default)
     {
-        await Task.Run(() =>
+        try
         {
-            LogHelper.Log("Loading InstalledApps");
+            await LogHelper.Log("Loading InstalledApps");
+
             // Check for cancellation request
             cancellationToken.ThrowIfCancellationRequested();
 
-            var installedApps = OptimizationOptions.GetUWPApps(uninstallableOnly);
+            var installedApps = await Task.Run(() => OptimizationOptions.GetUWPApps(uninstallableOnly), cancellationToken);
             var numberOfInstalledApps = installedApps.Count;
 
-            DispatcherQueue.TryEnqueue(() =>
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                // fetching installed apps data & hiding ui elements
+                // fetching installed apps data & hiding UI elements
                 AppList.Clear();
                 gettingAppsLoading.Visibility = Visibility.Visible;
                 appTreeView.Visibility = Visibility.Collapsed;
@@ -68,10 +70,12 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallingStatusBar.Visibility = Visibility.Collapsed;
                 showAll.Visibility = Visibility.Collapsed;
                 uninstallButton.Visibility = Visibility.Collapsed;
+
                 foreach (var app in installedApps)
                 {
                     AppList.Add(app);
                 }
+
                 // showing the installed apps data after fetching
                 installedAppsCount.Text = $"Total: {numberOfInstalledApps} Apps";
                 installedAppsCount.Visibility = Visibility.Visible;
@@ -82,10 +86,14 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.IsEnabled = true;
                 gettingAppsLoading.Visibility = Visibility.Collapsed;
                 uninstallingStatusBar.ShowError = false;
-
             });
-        }, cancellationToken);
+        }
+        catch (OperationCanceledException ex)
+        {
+            await LogHelper.Log(ex.ToString());
+        }
     }
+
     private async void UninstallSelectedApp_Click(object sender, RoutedEventArgs e)
     {
         // Check if at least one item is selected

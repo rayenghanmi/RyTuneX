@@ -61,7 +61,7 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-        LogHelper.Log("Initializing App");
+        LogHelper.Log("___________ New Session ___________");
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).

@@ -227,4 +227,7 @@
   <data name="UninstallTip" xml:space="preserve">
     <value>حدد التطبيقات التي ترغب في إزالتها واضغط على إلغاء التثبيت</value>
   </data>
+  <data name="Shell_Benchmark.Content" xml:space="preserve">
+    <value>قياس الأداء</value>
+  </data>
 </root>

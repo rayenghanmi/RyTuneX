@@ -6,7 +6,7 @@ using Microsoft.UI.Xaml.Media;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.ViewModels;
-
+using Windows.ApplicationModel;
 using Windows.System;
 
 namespace RyTuneX.Views;
@@ -26,10 +26,8 @@ public sealed partial class ShellPage : Page
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
-
-        // TODO: Set the title bar icon by updating /Assets/WindowIcon.ico.
-        // A custom title bar is required for full window theme and Mica support.
-        // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
+        var packageVersion = Package.Current.Id.Version;
+        AppTitleBarVersion.Text = $"{packageVersion.Major}.{packageVersion.Minor}";
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;

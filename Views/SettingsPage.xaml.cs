@@ -108,13 +108,13 @@ public sealed partial class SettingsPage : Page
         {
             var packageVersion = Package.Current.Id.Version;
 
-            version = new(packageVersion.Major, packageVersion.Minor, packageVersion.Build, packageVersion.Revision);
+            version = new(packageVersion.Major, packageVersion.Minor, packageVersion.Build);
         }
         else
         {
             version = typeof(SettingsPage).Assembly.GetName().Version!;
         }
-        return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+        return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}";
     }
     public ElementTheme ElementTheme
     {

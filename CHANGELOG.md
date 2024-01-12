@@ -2,14 +2,24 @@
 
 All notable changes to this branch will be documented in this file.
 
-## 0.7 - Work In Progress
+## 0.7.1 - Released
 
-## Added
+### Added
+
+- Version number is now displayed the taskbar.
+
+### Fixes
+
+- Crashing when exiting the app while fetching installed apps.
+
+## 0.7.0 - Unreleased
+
+### Added
 
 - Error Logging for better debugging.
 - New `View Logs` HyperLink in Settings Page.
 
-## Changes
+### Changes
 
 - Minor UI improvements and fixes.
 - Better exception handling.
