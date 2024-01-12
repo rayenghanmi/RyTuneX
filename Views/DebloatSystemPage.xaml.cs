@@ -56,7 +56,7 @@ public sealed partial class DebloatSystemPage : Page
             var installedApps = await Task.Run(() => OptimizationOptions.GetUWPApps(uninstallableOnly), cancellationToken);
             var numberOfInstalledApps = installedApps.Count;
 
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            DispatcherQueue.TryEnqueue(() =>
             {
                 // fetching installed apps data & hiding UI elements
                 AppList.Clear();
@@ -90,7 +90,7 @@ public sealed partial class DebloatSystemPage : Page
         }
         catch (OperationCanceledException ex)
         {
-            await LogHelper.Log(ex.ToString());
+            await LogHelper.LogError(ex.ToString());
         }
     }
 
