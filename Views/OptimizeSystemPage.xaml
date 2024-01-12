@@ -4,13 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="using:RyTuneX.ViewModels"
     mc:Ignorable="d">
     <Grid x:Name="ContentArea" Margin="-45,10,-45,10">
-        <ScrollViewer>
-            <StackPanel>
+        <ScrollViewer Margin="20" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
+            <StackPanel Margin="20">
                 <!-- System Optimization Toggles -->
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" CornerRadius="8" Padding="16" Margin="20,5,20,20">
                     <FontIcon Margin="6" Glyph="&#xE9F5;"/>
                     <TextBlock Margin="6" Text="Basic Optimizations"/>
                 </StackPanel>
@@ -24,7 +23,7 @@
                 <ToggleSwitch x:Name="Privacy" Tag="Privacy" Header="Enhance Privacy" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Enhances privacy settings and restrict data sharing"/>
                 <ToggleSwitch x:Name="Drivers" Tag="Drivers" Header="Exclude Drivers From Windows Updates" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Excludes driver updates from Windows Update"/>
                 <!-- Advanced System Optimizations -->
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="20,10,20,20">
                     <FontIcon Margin="6" Glyph="&#xE7BA;"/>
                     <TextBlock Margin="6" Text="Advanced Optimizations"/>
                 </StackPanel>
@@ -36,7 +35,7 @@
                 <ToggleSwitch x:Name="AutomaticUpdates" Tag="AutomaticUpdates" Header="Disable Automatic Updates" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off automatic Windows updates for manual control of update installations."/>
                 <ToggleSwitch x:Name="SmartScreen" Tag="SmartScreen" Header="Disable Smart Screen" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Tursn off SmartScreen Filter for apps and files."/>
                 <!-- System Feature Control Toggles -->
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="20,10,20,20">
                     <FontIcon Margin="6" Glyph="&#xE770;"/>
                     <TextBlock Margin="6" Text="System Features"/>
                 </StackPanel>
@@ -59,7 +58,7 @@
                 <ToggleSwitch x:Name="StickyKeys" Tag="StickyKeys" Header="Disable Sticky Keys" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables Sticky Keys accessibility feature"/>
                 <ToggleSwitch x:Name="CastToDevice" Tag="CastToDevice" Header="Disable Cast to Device" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the Cast to Device feature in Windows"/>
                 <!-- Telemetry Elements -->
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="20,10,20,20">
                     <FontIcon Margin="6" Glyph="&#xE9D9;"/>
                     <TextBlock Margin="6" Text="Telemetry"/>
                 </StackPanel>
@@ -70,7 +69,7 @@
                 <ToggleSwitch x:Name="ChromeTelemetry" Tag="ChromeTelemetry" Header="Disable Chrome Telemetry" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables telemetry data collection in Google Chrome."/>
                 <ToggleSwitch x:Name="FirefoxTelemetry" Tag="FirefoxTelemetry" Header="Disable Firefox Telemetry" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables telemetry data collection in Mozilla Firefox."/>
                 <!-- Windows 11 Exclusive Elements -->
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="20,10,20,20">
                     <FontIcon Margin="6" Glyph="&#xE705;"/>
                     <TextBlock Margin="6" Text="Windows 11 Exclusive"/>
                 </StackPanel>

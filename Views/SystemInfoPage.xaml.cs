@@ -13,6 +13,7 @@ public sealed partial class SystemInfoPage : Page
     public SystemInfoPage()
     {
         InitializeComponent();
+        LogHelper.Log("Initializing SystemInfoPage");
         UpdateSystemInfoAsync();
     }
     private async void UpdateSystemInfoAsync()
@@ -22,7 +23,7 @@ public sealed partial class SystemInfoPage : Page
             try
             {
                 // This code will run on a background thread
-
+                LogHelper.Log("Updating SystemInfo");
                 var osInformation = GetOsInformation();
                 var cpuInformation = GetCpuInformation();
                 var gpuInformation = GetGpuInformation();
@@ -55,7 +56,7 @@ public sealed partial class SystemInfoPage : Page
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error updating system information: {ex}");
+                LogHelper.LogError($"Error updating system information: {ex}");
             }
         });
     }
@@ -64,6 +65,7 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
+            LogHelper.Log("Getting CPU Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
             var collection = searcher.Get();
             searcher.Dispose();
@@ -77,13 +79,12 @@ public sealed partial class SystemInfoPage : Page
             $"Socket Designation: {cpu["SocketDesignation"]}\n" +
             $"L2 Cache Size: {cpu["L2CacheSize"]} KB\n" +
             $"L3 Cache Size: {cpu["L3CacheSize"]} KB");
-            Debug.WriteLine("Getting CPU info");
 
             return string.Join(Environment.NewLine, cpuInfoLines);
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error getting CPU info: {ex}");
+            LogHelper.LogError($"Error getting CPU info: {ex}");
             return string.Empty;
         }
     }
@@ -92,6 +93,7 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
+            LogHelper.Log("Getting GPU Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
             var collection = searcher.Get();
             searcher.Dispose();
@@ -107,12 +109,12 @@ public sealed partial class SystemInfoPage : Page
                 gpuNumber++;
                 return gpuInfo;
             });
-            Debug.WriteLine("Getting GPU info");
+
             return string.Join(Environment.NewLine, gpuInfoLines);
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error getting GPU info: {ex}");
+            LogHelper.LogError($"Error getting GPU info: {ex}");
             return string.Empty;
         }
     }
@@ -121,6 +123,7 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
+            LogHelper.Log("Getting RAM Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
             var collection = searcher.Get();
             searcher.Dispose();
@@ -132,12 +135,11 @@ public sealed partial class SystemInfoPage : Page
                 $"  Speed: {ram["Speed"]} MHz\n" +
                 $"  Manufacturer: {ram["Manufacturer"]}");
 
-            Debug.WriteLine("Getting RAM info");
             return string.Join(Environment.NewLine, ramInfoLines);
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error getting RAM info: {ex}");
+            LogHelper.LogError($"Error getting RAM info: {ex}");
             return string.Empty;
         }
     }
@@ -146,6 +148,7 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
+            LogHelper.Log("Getting Disks Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
             var collection = searcher.Get();
             searcher.Dispose();
@@ -162,13 +165,12 @@ public sealed partial class SystemInfoPage : Page
                 diskNumber++;
                 return diskInfo;
             });
-            Debug.WriteLine("Getting Disk info");
             return string.Join(Environment.NewLine, diskInfoLines);
         }
 
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error getting Disk info: {ex}");
+            LogHelper.LogError($"Error getting Disk info: {ex}");
             return string.Empty; ;
         }
     }
@@ -177,6 +179,7 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
+            LogHelper.Log("Getting OS Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
             var collection = searcher.Get();
             searcher.Dispose();
@@ -193,12 +196,11 @@ public sealed partial class SystemInfoPage : Page
                 $"System Directory: {os["SystemDirectory"]}\n" +
                 $"Last Boot Up Time: {os["LastBootUpTime"]}");
 
-            Debug.WriteLine("Getting OS info");
             return string.Join(Environment.NewLine, osInfoLines);
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error getting OS info: {ex}");
+            LogHelper.LogError($"Error getting OS info: {ex}");
             return string.Empty;
         }
     }
@@ -207,13 +209,13 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            Debug.WriteLine("Reloading SystemInfo Page");
+            LogHelper.LogError("Reloading SystemInfo Page");
             Frame.Navigate(Frame.CurrentSourcePageType);
             Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error reloading SystemInfo Page: {ex}");
+            LogHelper.LogError($"Error reloading SystemInfo Page: {ex}");
         }
     }
 }

@@ -13,7 +13,7 @@ internal class OptimizationOptions
 
         using (var PowerShellInstance = PowerShell.Create())
         {
-
+            LogHelper.Log("Getting Installed Apps [OptimizationOptions.cs]");
             PowerShellInstance.AddScript("Set-ExecutionPolicy RemoteSigned -Scope Process");
             PowerShellInstance.AddScript("Import-Module Appx")
                 .AddArgument("-ExecutionPolicy Bypass");
@@ -52,7 +52,7 @@ internal class OptimizationOptions
                 }
             }
         }
-
+        LogHelper.Log("Returning Installed Apps [OptimizationOptions.cs]");
         return installedApps;
     }
 
@@ -64,6 +64,7 @@ internal class OptimizationOptions
     {
         if (ServiceExists(serviceName))
         {
+            LogHelper.Log($"Stopping svc: {serviceName}");
             var sc = new ServiceController(serviceName);
             if (sc.CanStop)
             {
@@ -77,6 +78,7 @@ internal class OptimizationOptions
         {
             return;
         }
+        LogHelper.Log("Starting CMD Command");
         using var p = new Process();
         p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
         p.StartInfo.FileName = "cmd.exe";
@@ -90,6 +92,7 @@ internal class OptimizationOptions
     {
         if (ServiceExists(serviceName))
         {
+            LogHelper.Log($"Starting svc: {serviceName}");
             var sc = new ServiceController(serviceName);
             sc.Start();
         }

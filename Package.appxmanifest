@@ -11,9 +11,9 @@
   IgnorableNamespaces="uap rescap genTemplate">
 
   <Identity
-    Name="593c7ba8-f1c9-47cf-a952-7c22b10aac3a"
+    Name="Rayen.RyTuneX"
     Publisher="CN=Ghanmi"
-    Version="0.6.0.0" />
+    Version="0.7.1.0" />
     
   <mp:PhoneIdentity PhoneProductId="593c7ba8-f1c9-47cf-a952-7c22b10aac3a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
     

@@ -23,6 +23,7 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         InitializeComponent();
+        LogHelper.Log("Initializing SettingsPage");
 
         _themeSelectorService = App.GetService<IThemeSelectorService>();
 
@@ -60,6 +61,8 @@ public sealed partial class SettingsPage : Page
             }
             else
             {
+                LogHelper.Log("Invalid language tag");
+                LogHelper.LogError("Invalid language tag");
                 throw new Exception($"Invalid language tag");
             }
         }
@@ -87,6 +90,7 @@ public sealed partial class SettingsPage : Page
 
     private void SetDefaultLanguage(string tag)
     {
+        LogHelper.Log($"Setting Language: {tag}");
         foreach (ComboBoxItem item in LanguageComboBox.Items)
         {
             if (item.Tag as string == tag)
@@ -104,25 +108,26 @@ public sealed partial class SettingsPage : Page
         {
             var packageVersion = Package.Current.Id.Version;
 
-            version = new(packageVersion.Major, packageVersion.Minor, packageVersion.Build, packageVersion.Revision);
+            version = new(packageVersion.Major, packageVersion.Minor, packageVersion.Build);
         }
         else
         {
             version = typeof(SettingsPage).Assembly.GetName().Version!;
         }
-
-        return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+        return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}";
     }
     public ElementTheme ElementTheme
     {
         get
         {
+            LogHelper.Log("Returning ElementTheme");
             return _elementTheme;
         }
         set
         {
             if (_elementTheme != value)
             {
+                LogHelper.Log("Setting ElementTheme");
                 _elementTheme = value;
             }
         }
@@ -132,14 +137,41 @@ public sealed partial class SettingsPage : Page
     {
         get
         {
+            LogHelper.Log("Getting VersionDescription");
             return _versionDescription;
         }
         set
         {
             if (_versionDescription != value)
             {
+                LogHelper.Log("Setting VersionDescription");
                 _versionDescription = value;
             }
+        }
+    }
+
+    private async void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+    {
+        await OpenLogFile();
+    }
+
+    private async Task OpenLogFile()
+    {
+        try
+        {
+            StorageFolder tempFolder = ApplicationData.Current.TemporaryFolder;
+            StorageFile logFile = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
+
+            if (logFile != null)
+            {
+                var options = new Windows.System.LauncherOptions();
+                options.DisplayApplicationPicker = false;
+                await Windows.System.Launcher.LaunchFileAsync(logFile, options);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error opening log file: {ex.Message}");
         }
     }
 }
