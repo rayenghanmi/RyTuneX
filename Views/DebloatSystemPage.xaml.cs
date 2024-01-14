@@ -65,7 +65,6 @@ public sealed partial class DebloatSystemPage : Page
                 appTreeView.IsEnabled = false;
                 uninstallButton.IsEnabled = false;
                 installedAppsCount.Visibility = Visibility.Collapsed;
-                uninstallingStatusText.Foreground = new SolidColorBrush(Colors.White);
                 uninstallingStatusText.Text = "UninstallTip".GetLocalized();
                 uninstallingStatusBar.Visibility = Visibility.Collapsed;
                 showAll.Visibility = Visibility.Collapsed;
@@ -79,6 +78,7 @@ public sealed partial class DebloatSystemPage : Page
                 // showing the installed apps data after fetching
                 installedAppsCount.Text = $"Total: {numberOfInstalledApps} Apps";
                 installedAppsCount.Visibility = Visibility.Visible;
+                showAll.IsEnabled = true;
                 showAll.Visibility = Visibility.Visible;
                 uninstallButton.Visibility = Visibility.Visible;
                 appTreeView.Visibility = Visibility.Visible;
@@ -148,7 +148,6 @@ public sealed partial class DebloatSystemPage : Page
             await LogHelper.LogError($"Error Uninstalling: {ex}");
             // update ui elements
             uninstallingStatusText.Text = $"Error: {ex}";
-            uninstallingStatusText.Foreground = new SolidColorBrush(Colors.Crimson);
             uninstallingStatusBar.ShowError = true;
             NotificationQueue.Show(NotificationContent("Debloat", "Error uninstalling", InfoBarSeverity.Error, 5000));
             // reload
@@ -170,6 +169,7 @@ public sealed partial class DebloatSystemPage : Page
         LogHelper.Log("Reloading Installed Apps Data (All)");
         DispatcherQueue.TryEnqueue(() =>
         {
+            showAll.IsEnabled = false;
             gettingAppsLoading.Visibility = Visibility.Visible;
             appTreeView.Visibility = Visibility.Collapsed;
             appTreeView.IsEnabled = false;
@@ -184,6 +184,7 @@ public sealed partial class DebloatSystemPage : Page
         LogHelper.Log("Reloading Installed Apps Data (Uninstallable Only)");
         DispatcherQueue.TryEnqueue(() =>
         {
+            showAll.IsEnabled = false;
             gettingAppsLoading.Visibility = Visibility.Visible;
             appTreeView.Visibility = Visibility.Collapsed;
             appTreeView.IsEnabled = false;

@@ -1,18 +1,22 @@
 ﻿using Microsoft.UI.Xaml;
+using System.Diagnostics;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
+using Windows.UI.Popups;
+using Json.Schema;
+using System;
 using CommunityToolkit.WinUI.Controls;
 
 namespace RyTuneX.Views;
 
-public sealed partial class OptimizeSystemPage : Page
+public sealed partial class PrivacyPage : Page
 {
 
     private readonly bool isInitialSetup = true;
 
-    public OptimizeSystemPage()
+    public PrivacyPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing OptimizeSystemPage");
@@ -77,20 +81,20 @@ public sealed partial class OptimizeSystemPage : Page
                 {
                     switch (toggleSwitch.Tag)
                     {
-                        case "PerformanceTweaks":
-                        case "Superfetch":
-                        case "NTFSTimeStamp":
-                        case "GamingMode":
-                        case "Drivers":
-                        case "SystemRestore":
-                        case "Cortana":
-                        case "StoreUpdates":
-                        case "AutomaticUpdates":
-                        case "SmartScreen":
-                            var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
-                            typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
-                            ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = toggleSwitch.IsOn;
-                            break;
+                        case "Privacy":
+                        case "SMBv1":
+                        case "SMBv2":
+                        case "SMBv3":
+                        case "TelemetryServices":
+                        case "EdgeTelemetry":
+                        case "VisualStudioTelemetry":
+                        case "NvidiaTelemetry":
+                        case "ChromeTelemetry":
+                        case "FirefoxTelemetry":
+                        var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
+                        typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
+                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = toggleSwitch.IsOn;
+                        break;
 
                         default:
                             break;

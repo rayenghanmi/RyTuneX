@@ -1,21 +1,25 @@
 ﻿using Microsoft.UI.Xaml;
+using System.Diagnostics;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
+using Windows.UI.Popups;
+using Json.Schema;
+using System;
 using CommunityToolkit.WinUI.Controls;
 
 namespace RyTuneX.Views;
 
-public sealed partial class OptimizeSystemPage : Page
+public sealed partial class FeaturesPage : Page
 {
 
     private readonly bool isInitialSetup = true;
 
-    public OptimizeSystemPage()
+    public FeaturesPage()
     {
         InitializeComponent();
-        LogHelper.Log("Initializing OptimizeSystemPage");
+        LogHelper.Log("Initializing FeaturesPage");
         Loaded += (sender, e) => InitializeToggleSwitches();
         isInitialSetup = false;
     }
@@ -77,16 +81,38 @@ public sealed partial class OptimizeSystemPage : Page
                 {
                     switch (toggleSwitch.Tag)
                     {
-                        case "PerformanceTweaks":
-                        case "Superfetch":
-                        case "NTFSTimeStamp":
-                        case "GamingMode":
-                        case "Drivers":
-                        case "SystemRestore":
-                        case "Cortana":
-                        case "StoreUpdates":
-                        case "AutomaticUpdates":
-                        case "SmartScreen":
+                        case "TaskbarColor":
+                        case "Hibernation":
+                        case "HomeGroup":
+                        case "PrintService":
+                        case "CompatibilityAssistant":
+                        case "Search":
+                        case "ErrorReporting":
+                        case "GameBar":
+                        case "QuickAccessHistory":
+                        case "StartMenuAds":
+                        case "MyPeople":
+                        case "SensorServices":
+                        case "WindowsInk":
+                        case "SpellingAndTypingFeatures":
+                        case "FaxService":
+                        case "InsiderService":
+                        case "CloudClipboard":
+                        case "StickyKeys":
+                        case "CastToDevice":
+                        case "VBS":
+                        case "TaskbarToLeft":
+                        case "SnapAssist":
+                        case "Widgets":
+                        case "Chat":
+                        case "ContextMenu":
+                        case "LegacyVolumeSlider":
+                        case "ShowMoreOptions":
+                        case "TPMCheck":
+                        case "FilesCompactMode":
+                        case "Stickers":
+                        case "EdgeDiscoverBar":
+                        case "CoPilotAI":
                             var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
                             typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
                             ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = toggleSwitch.IsOn;

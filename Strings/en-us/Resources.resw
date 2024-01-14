@@ -124,7 +124,7 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Home.Content" xml:space="preserve">
-    <value>What's RyTuneX?</value>
+    <value>RyTuneX</value>
   </data>
   <data name="Debloat_NoSelection.Text" xml:space="preserve">
     <value>Select an item from the list.</value>
@@ -229,5 +229,11 @@
   </data>
   <data name="Shell_Benchmark.Content" xml:space="preserve">
     <value>Benchmark</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>Windows Features</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>Privacy</value>
   </data>
 </root>

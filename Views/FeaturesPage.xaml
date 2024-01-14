@@ -1,0 +1,161 @@
+﻿<Page
+    x:Class="RyTuneX.Views.FeaturesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <x:Double x:Key="SettingsCardSpacing">4</x:Double>
+        <Style x:Key="SettingsSectionHeaderTextBlockStyle"
+           BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+           TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Margin" Value="1,30,0,6" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+    <Grid x:Name="ContentArea" Margin="-45,10,-45,10">
+        <ScrollViewer Margin="20" Padding="16,6,16,6">
+            <StackPanel Spacing="{StaticResource SettingsCardSpacing}">
+
+                <!-- System Feature Control Toggles -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    Text="System Features"/>
+                
+                <controls:SettingsCard Header="Enable Taskbar Color" Description="Enables custom color settings for the taskbar">
+                    <ToggleSwitch x:Name="TaskbarColor" Tag="TaskbarColor" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+                
+                <controls:SettingsCard Header="Disable Hibernation" Description="Turn off hibernation to save power and prevent the computer from entering sleep mode">
+                    <ToggleSwitch x:Name="Hibernation" Tag="Hibernation" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Home Group" Description="Turns off Home Group to stop sharing files and printers with other devices on the network">
+                    <ToggleSwitch x:Name="HomeGroup" Tag="HomeGroup" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Print Service" Description="Disables the printing service, preventing print-related functionalities">
+                    <ToggleSwitch x:Name="PrintService" Tag="PrintService" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Compatibility Assistant" Description="Turns off Compatibility Assistant to disable automatic compatibility checks for programs">
+                    <ToggleSwitch x:Name="CompatibilityAssistant" Tag="CompatibilityAssistant" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Search" Description="Turns off system-wide search functionality">
+                    <ToggleSwitch x:Name="Search" Tag="Search" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Error Reporting" Description="Turns off error reporting to prevent the automatic sending of error reports to Microsoft">
+                    <ToggleSwitch x:Name="ErrorReporting" Tag="ErrorReporting" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Game Bar" Description="Turns off the Game Bar and its associated features">
+                    <ToggleSwitch x:Name="GameBar" Tag="GameBar" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Quick Access History" Description="Disables recording and display of Quick Access history">
+                    <ToggleSwitch x:Name="QuickAccessHistory" Tag="QuickAccessHistory" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Start Menu Ads" Description="Disables ads in the Start Menu">
+                    <ToggleSwitch x:Name="StartMenuAds" Tag="StartMenuAds" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable My People" Description="Turns off My People feature in the taskbar">
+                    <ToggleSwitch x:Name="MyPeople" Tag="MyPeople" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Sensor Services" Description="Turns off sensor services for privacy and power savings">
+                    <ToggleSwitch x:Name="SensorServices" Tag="SensorServices" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Windows Ink" Description="Turns off Windows Ink Workspace and related features">
+                    <ToggleSwitch x:Name="WindowsInk" Tag="WindowsInk" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Spelling and Typing Features" Description="Disables spelling and typing suggestions">
+                    <ToggleSwitch x:Name="SpellingAndTypingFeatures" Tag="SpellingAndTypingFeatures" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Fax Service" Description="Disables the Fax service in Windows">
+                    <ToggleSwitch x:Name="FaxService" Tag="FaxService" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Insider Service" Description="Opt-out of Windows Insider Program and stop receiving preview builds">
+                    <ToggleSwitch x:Name="InsiderService" Tag="InsiderService" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Cloud Clipboard" Description="Disables Cloud Clipboard feature for cross-device clipboard sharing">
+                    <ToggleSwitch x:Name="CloudClipboard" Tag="CloudClipboard" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Sticky Keys" Description="Disables Sticky Keys accessibility feature">
+                    <ToggleSwitch x:Name="StickyKeys" Tag="StickyKeys" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Cast to Device" Description="Disables the Cast to Device feature in Windows">
+                    <ToggleSwitch x:Name="CastToDevice" Tag="CastToDevice" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    Text="Windows 11 Exclusive"/>
+                <controls:SettingsCard Header="Disable VBS" Description="Disables Virtualization-Based Security (VBS) for advanced security features.">
+                    <ToggleSwitch x:Name="VBS" Tag="VBS" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Move Taskbar to The Left" Description="Moves the taskbar from the default bottom position to the left side of the screen.">
+                    <ToggleSwitch x:Name="TaskbarToLeft" Tag="TaskbarToLeft" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Snap Assist" Description="Disables Snap Assist, which automatically arranges open windows when dragging.">
+                    <ToggleSwitch x:Name="SnapAssist" Tag="SnapAssist" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Widgets" Description="Disables the Widgets feature on the Windows 11 taskbar.">
+                    <ToggleSwitch x:Name="Widgets" Tag="Widgets" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Chat" Description="Disables the Chat feature on the Windows 11 taskbar.">
+                    <ToggleSwitch x:Name="Chat" Tag="Chat" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Restore Classic Context Menu" Description="Enables Full (Classic) Context Menu in Windows 11.">
+                    <ToggleSwitch x:Name="ContextMenu" Tag="ContextMenu" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Enable Legacy Volume Slider" Description="Enables the legacy volume slider in the system tray">
+                    <ToggleSwitch x:Name="LegacyVolumeSlider" Tag="LegacyVolumeSlider" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+                
+                <controls:SettingsCard Header="Disable Show More Options" Description="Hides additional options in various Windows settings.">
+                    <ToggleSwitch x:Name="ShowMoreOptions" Tag="ShowMoreOptions" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable TPM Check" Description="Disables the requirement for Trusted Platform Module (TPM) during Windows installation.">
+                    <ToggleSwitch x:Name="TPMCheck" Tag="TPMCheck" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Enable Files Compact Mode" Description="Enables Compact Mode for file browsing with smaller thumbnails.">
+                    <ToggleSwitch x:Name="FilesCompactMode" Tag="FilesCompactMode" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Stickers" Description="Disables the Stickers feature in the Windows 11 messaging app.">
+                    <ToggleSwitch x:Name="Stickers" Tag="Stickers" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Edge Discover Bar" Description="Disables the Discover Bar feature in Microsoft Edge.">
+                    <ToggleSwitch x:Name="EdgeDiscoverBar" Tag="EdgeDiscoverBar" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable CoPilot AI" Description="Disables the CoPilot AI feature in Windows for assistance with code writing.">
+                    <ToggleSwitch x:Name="CoPilotAI" Tag="CoPilotAI" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

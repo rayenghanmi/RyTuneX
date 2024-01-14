@@ -488,7 +488,7 @@ internal class OptimizeSystemHelper
         OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SensorService /v Start /t REG_DWORD /d 4 /f");
     }
 
-    internal static void EnhancePrivacy()
+    internal static void EnablePrivacy()
     {
         OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds /v EnableFeeds /t REG_DWORD /d 0 /f");
         OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds /v EnableFeeds /t REG_DWORD /d 0 /f");
@@ -592,7 +592,7 @@ internal class OptimizeSystemHelper
 
     }
 
-    internal static void CompromisePrivacy()
+    internal static void DisablePrivacy()
     {
         OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\" /v \"RotatingLockScreenOverlayEnabled\" /f");
         OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\" /v \"RotatingLockScreenEnabled\" /f");
@@ -974,12 +974,12 @@ internal class OptimizeSystemHelper
         OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked\" /V {7AD84985-87B4-4a16-BE58-8B72A5B390F7} /F");
     }
 
-    internal static void DisableVirtualizationBasedSecurity()
+    internal static void DisableVBS()
     {
         OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\" /V EnableVirtualizationBasedSecurity /T REG_DWORD /D 0 /F");
     }
 
-    internal static void EnableVirtualizationBasedSecurity()
+    internal static void EnableVBS()
     {
         OptimizationOptions.StartInCmd("REG DELETE \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\" /V EnableVirtualizationBasedSecurity /F");
     }

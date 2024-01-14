@@ -17,6 +17,8 @@ public class PageService : IPageService
         Configure<HomePage>();
         Configure<BenchmarkPage>();
         Configure<DebloatSystemPage>();
+        Configure<PrivacyPage>();
+        Configure<FeaturesPage>();
         Configure<SystemInfoPage>();
         Configure<OptimizeSystemPage>();
         Configure<SettingsPage>();
