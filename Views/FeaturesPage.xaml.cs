@@ -76,51 +76,12 @@ public sealed partial class FeaturesPage : Page
             if (!isInitialSetup)
             {
                 var toggleSwitch = (ToggleSwitch)sender;
-                LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
                 if (toggleSwitch != null && toggleSwitch.Tag != null)
                 {
-                    switch (toggleSwitch.Tag)
-                    {
-                        case "TaskbarColor":
-                        case "Hibernation":
-                        case "HomeGroup":
-                        case "PrintService":
-                        case "CompatibilityAssistant":
-                        case "Search":
-                        case "ErrorReporting":
-                        case "GameBar":
-                        case "QuickAccessHistory":
-                        case "StartMenuAds":
-                        case "MyPeople":
-                        case "SensorServices":
-                        case "WindowsInk":
-                        case "SpellingAndTypingFeatures":
-                        case "FaxService":
-                        case "InsiderService":
-                        case "CloudClipboard":
-                        case "StickyKeys":
-                        case "CastToDevice":
-                        case "VBS":
-                        case "TaskbarToLeft":
-                        case "SnapAssist":
-                        case "Widgets":
-                        case "Chat":
-                        case "ContextMenu":
-                        case "LegacyVolumeSlider":
-                        case "ShowMoreOptions":
-                        case "TPMCheck":
-                        case "FilesCompactMode":
-                        case "Stickers":
-                        case "EdgeDiscoverBar":
-                        case "CoPilotAI":
-                            var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
-                            typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
-                            ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = toggleSwitch.IsOn;
-                            break;
-
-                        default:
-                            break;
-                    }
+                    Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+                    var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
+                    typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
+                    ApplicationData.Current.LocalSettings.Values[toggleSwitch.Tag.ToString()] = toggleSwitch.IsOn;
                 }
             }
         }

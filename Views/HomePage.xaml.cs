@@ -1,4 +1,6 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using System.Diagnostics;
+using System.Security.Policy;
+using Microsoft.UI.Xaml.Controls;
 
 namespace RyTuneX.Views;
 
@@ -8,5 +10,32 @@ public sealed partial class HomePage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing HomePage");
+    }
+
+    private void GithubButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://rayenghanmi.github.io/rytunex",
+            UseShellExecute = true
+        });
+    }
+
+    private void DiscordButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://discord.gg/gyBzyd364t",
+            UseShellExecute = true
+        });
+    }
+
+    private void IssueButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://github.com/rayenghanmi/rytunex/issues/new",
+            UseShellExecute = true
+        });
     }
 }

@@ -28,9 +28,9 @@
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Assets\bug.svg" />
-    <None Remove="Assets\discord.svg" />
-    <None Remove="Assets\github.svg" />
+    <None Remove="Assets\bug.png" />
+    <None Remove="Assets\discord.png" />
+    <None Remove="Assets\github.png" />
     <None Remove="Assets\WindowIcon.ico" />
     <None Remove="Views\BenchmarkPage.xaml" />
     <None Remove="Views\DebloatSystemPage.xaml" />

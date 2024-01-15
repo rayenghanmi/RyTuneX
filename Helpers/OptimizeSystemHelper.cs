@@ -295,14 +295,34 @@ internal class OptimizeSystemHelper
         OptimizationOptions.StartService("WSearch");
     }
 
-    internal static void DisableSMB(string v)
+    internal static void DisableSMB1()
     {
-        OptimizationOptions.StartInCmd($"reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v SMB{v} /t REG_DWORD /d 0 /f");
+        OptimizationOptions.StartInCmd($"reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v SMB1 /t REG_DWORD /d 0 /f");
     }
 
-    internal static void EnableSMB(string v)
+    internal static void EnableSMB1()
     {
-        OptimizationOptions.StartInCmd($"reg delete \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v SMB{v} /f");
+        OptimizationOptions.StartInCmd($"reg delete \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v SMB1 /f");
+    }
+
+    internal static void DisableSMB2()
+    {
+        OptimizationOptions.StartInCmd($"reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v SMB2 /t REG_DWORD /d 0 /f");
+    }
+
+    internal static void EnableSMB2()
+    {
+        OptimizationOptions.StartInCmd($"reg delete \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v SMB2 /f");
+    }
+
+    internal static void DisableSMB3()
+    {
+        OptimizationOptions.StartInCmd($"reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v SMB3 /t REG_DWORD /d 0 /f");
+    }
+
+    internal static void EnableSMB3()
+    {
+        OptimizationOptions.StartInCmd($"reg delete \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v SMB3 /f");
     }
 
     internal static void DisableNTFSTimeStamp()

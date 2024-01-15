@@ -47,37 +47,41 @@
                     Width="{StaticResource ContentDialogButtonMaxWidth}"
                     Style="{StaticResource AccentButtonStyle}"
                     Margin="6"
-                    DefaultStyleResourceUri="https://rayenghanmi/rytunex">
+                    Click="GithubButton_Click">
                     <StackPanel Orientation="Horizontal">
-                        <Image
+                        <BitmapIcon
                             Width="20"
                             Margin="10,0,10,0"
                             HorizontalAlignment="Left"
-                            Source="/Assets/github.svg"/>
+                            UriSource="ms-appx:///Assets/github.png"/>
                         <TextBlock Text="Check out RyTuneX"/>
                     </StackPanel>
                 </Button>
                 <Button
+                    Click="DiscordButton_Click"
                     Width="{StaticResource ContentDialogButtonMaxWidth}"
                     Margin="6">
                     <StackPanel Orientation="Horizontal">
-                        <Image
+                        <BitmapIcon
+                            Foreground="{ThemeResource TextFillColorPrimary}"
                             Width="20"
                             Margin="10,0,10,0"
                             HorizontalAlignment="Left"
-                            Source="/Assets/discord.svg"/>
+                            UriSource="ms-appx:///Assets/discord.png"/>
                         <TextBlock Text="Join Our Server"/>
                     </StackPanel>
                 </Button>
                 <Button
+                    Click="IssueButton_Click"
                     Width="{StaticResource ContentDialogButtonMaxWidth}"
                     Margin="6">
                     <StackPanel Orientation="Horizontal">
-                        <Image
+                        <BitmapIcon
+                            Foreground="{ThemeResource TextFillColorPrimary}"
                             Width="20"
                             Margin="10,0,10,0"
                             HorizontalAlignment="Left"
-                            Source="/Assets/bug.svg"/>
+                            UriSource="ms-appx:///Assets/bug.png"/>
                         <TextBlock Text="Report Issue"/>
                     </StackPanel>
                 </Button>

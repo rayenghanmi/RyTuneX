@@ -76,29 +76,12 @@ public sealed partial class PrivacyPage : Page
             if (!isInitialSetup)
             {
                 var toggleSwitch = (ToggleSwitch)sender;
-                LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
                 if (toggleSwitch != null && toggleSwitch.Tag != null)
                 {
-                    switch (toggleSwitch.Tag)
-                    {
-                        case "Privacy":
-                        case "SMBv1":
-                        case "SMBv2":
-                        case "SMBv3":
-                        case "TelemetryServices":
-                        case "EdgeTelemetry":
-                        case "VisualStudioTelemetry":
-                        case "NvidiaTelemetry":
-                        case "ChromeTelemetry":
-                        case "FirefoxTelemetry":
-                        var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
-                        typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
-                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = toggleSwitch.IsOn;
-                        break;
-
-                        default:
-                            break;
-                    }
+                    Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+                    var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
+                    typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
+                    ApplicationData.Current.LocalSettings.Values[toggleSwitch.Tag.ToString()] = toggleSwitch.IsOn;
                 }
             }
         }

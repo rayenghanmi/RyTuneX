@@ -4,6 +4,7 @@ using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
 using CommunityToolkit.WinUI.Controls;
+using System.Diagnostics;
 
 namespace RyTuneX.Views;
 
@@ -72,29 +73,12 @@ public sealed partial class OptimizeSystemPage : Page
             if (!isInitialSetup)
             {
                 var toggleSwitch = (ToggleSwitch)sender;
-                LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
                 if (toggleSwitch != null && toggleSwitch.Tag != null)
                 {
-                    switch (toggleSwitch.Tag)
-                    {
-                        case "PerformanceTweaks":
-                        case "Superfetch":
-                        case "NTFSTimeStamp":
-                        case "GamingMode":
-                        case "Drivers":
-                        case "SystemRestore":
-                        case "Cortana":
-                        case "StoreUpdates":
-                        case "AutomaticUpdates":
-                        case "SmartScreen":
-                            var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
-                            typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
-                            ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = toggleSwitch.IsOn;
-                            break;
-
-                        default:
-                            break;
-                    }
+                    Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+                    var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
+                    typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
+                    ApplicationData.Current.LocalSettings.Values[toggleSwitch.Tag.ToString()] = toggleSwitch.IsOn;
                 }
             }
         }
