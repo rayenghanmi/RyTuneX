@@ -101,7 +101,7 @@
                 </controls:SettingsExpander.Items>
             </controls:SettingsExpander>
             <HyperlinkButton Margin="0,8,0,0"
-                     Content="Send feedback"
+                     x:Uid="SettingsPage_FeedbackButton"
                      NavigateUri="https://github.com/rayenghanmi/rytunex/issues/new" />
         </StackPanel>
     </ScrollView>

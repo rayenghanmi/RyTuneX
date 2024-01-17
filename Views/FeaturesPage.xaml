@@ -24,11 +24,7 @@
                 <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                     Text="System Features"/>
-                
-                <controls:SettingsCard Header="Enable Taskbar Color" Description="Enables custom color settings for the taskbar">
-                    <ToggleSwitch x:Name="TaskbarColor" Tag="TaskbarColor" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-                
+
                 <controls:SettingsCard Header="Disable Hibernation" Description="Turn off hibernation to save power and prevent the computer from entering sleep mode">
                     <ToggleSwitch x:Name="Hibernation" Tag="Hibernation" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
@@ -122,10 +118,6 @@
 
                 <controls:SettingsCard Header="Disable Chat" Description="Disables the Chat feature on the Windows 11 taskbar.">
                     <ToggleSwitch x:Name="Chat" Tag="Chat" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-
-                <controls:SettingsCard Header="Restore Classic Context Menu" Description="Enables Full (Classic) Context Menu in Windows 11.">
-                    <ToggleSwitch x:Name="ContextMenu" Tag="ContextMenu" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard Header="Enable Legacy Volume Slider" Description="Enables the legacy volume slider in the system tray">

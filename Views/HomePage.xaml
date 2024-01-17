@@ -54,7 +54,7 @@
                             Margin="10,0,10,0"
                             HorizontalAlignment="Left"
                             UriSource="ms-appx:///Assets/github.png"/>
-                        <TextBlock Text="Check out RyTuneX"/>
+                        <TextBlock x:Uid="HomePage_WebsiteButton"/>
                     </StackPanel>
                 </Button>
                 <Button
@@ -68,7 +68,7 @@
                             Margin="10,0,10,0"
                             HorizontalAlignment="Left"
                             UriSource="ms-appx:///Assets/discord.png"/>
-                        <TextBlock Text="Join Our Server"/>
+                        <TextBlock x:Uid="HomePage_DiscordButton"/>
                     </StackPanel>
                 </Button>
                 <Button
@@ -82,7 +82,7 @@
                             Margin="10,0,10,0"
                             HorizontalAlignment="Left"
                             UriSource="ms-appx:///Assets/bug.png"/>
-                        <TextBlock Text="Report Issue"/>
+                        <TextBlock x:Uid="HomePage_IssueButton"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

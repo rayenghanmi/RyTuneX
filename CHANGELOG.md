@@ -4,8 +4,6 @@ All notable changes to this branch will be documented in this file.
 
 ## 0.7.2 - Work In Progress
 
-## Changes
-
 ### Changes
 
 - An Overhauled UX & Redesigned UI :heart_eyes:.
@@ -14,6 +12,10 @@ All notable changes to this branch will be documented in this file.
 ### Removed
 
 - Irrelevent Optimization options as well as non-working ones.
+
+### Fixed
+
+- Some optimization issues.
 
 ## 0.7.1 - Released
 

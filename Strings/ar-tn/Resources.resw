@@ -230,4 +230,34 @@
   <data name="Shell_Benchmark.Content" xml:space="preserve">
     <value>قياس الأداء</value>
   </data>
+  <data name="HomePage_DiscordButton.Text" xml:space="preserve">
+    <value>انضم إلى خادمنا</value>
+  </data>
+  <data name="HomePage_IssueButton.Text" xml:space="preserve">
+    <value>أبلغ عن مشكلة</value>
+  </data>
+  <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
+    <value>تحقق من RyTuneX</value>
+  </data>
+  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
+    <value>أرسل تعليقاتك</value>
+  </data>
+  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
+    <value>المعالج</value>
+  </data>
+  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
+    <value>بطاقة الرسومات</value>
+  </data>
+  <data name="SystemInfoPage_OS.Text" xml:space="preserve">
+    <value>نظام التشغيل</value>
+  </data>
+  <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
+    <value>ذاكرة الوصول العشوائي</value>
+  </data>
+  <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
+    <value>التخزين</value>
+  </data>
 </root>

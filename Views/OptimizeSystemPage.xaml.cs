@@ -76,15 +76,13 @@ public sealed partial class OptimizeSystemPage : Page
                 if (toggleSwitch != null && toggleSwitch.Tag != null)
                 {
                     Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
-                    var methodName = toggleSwitch.IsOn ? $"Enable{toggleSwitch.Tag}" : $"Disable{toggleSwitch.Tag}";
-                    typeof(OptimizeSystemHelper).GetMethod(methodName)?.Invoke(null, null);
-                    ApplicationData.Current.LocalSettings.Values[toggleSwitch.Tag.ToString()] = toggleSwitch.IsOn;
+                    OptimizationOptions.XamlSwitches(toggleSwitch);
                 }
             }
         }
         catch (Exception ex)
         {
-            LogHelper.ShowErrorMessageAndLog(ex, this.XamlRoot);
+            LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
     }
 }
