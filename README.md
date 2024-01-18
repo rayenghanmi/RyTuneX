@@ -14,7 +14,7 @@
 [![Website](https://img.shields.io/badge/Website-RyTuneX-blue)](https://rayenghanmi.github.io/rytunex)
 
 > [!NOTE]  
-> [New Website](https://rayenghanmi.github.io/rytunex/index.html)
+> Follow RyTuneX on [Facebook](https://facebook.com/rytunex)
 
 > [!TIP]  
 > To keep an eye on what's currently being worked on and what's being fixed check testing branch's [CHANGELOG.md](../testing/CHANGELOG.md)
@@ -63,7 +63,7 @@ It has never been easier to get started with RyTuneX. Follow these simple steps:
 That's it! It's as easy as that. Now you're ready to enjoy the features of RyTuneX.
 
 > [!NOTE]  
-> Due to the no-certified setup excutable you'll encounter warnings from Windows Defender during installation saying that the app is a malware or it's from an untrusted source due to , if you're concerned you can clone the repo and build it yourself.
+> Due to the non-certified setup executable, you may encounter warnings from Windows Defender during installation, indicating that the app is flagged as malware or from an untrusted source. If you have concerns, you can clone the repository and builde the application yourself.
 
 **Important**: Only download RyTuneX from the official [GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases). Avoid downloading from unofficial sources to ensure the integrity of the application.
 
