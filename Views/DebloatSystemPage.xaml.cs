@@ -133,11 +133,11 @@ public sealed partial class DebloatSystemPage : Page
             uninstallingStatusBar.Visibility = Visibility.Collapsed;
             if (appTreeView.SelectedItems.Count > 1)
             {
-                NotificationQueue.Show(NotificationContent("Debloat", $"{appTreeView.SelectedItems.Count} Apps uninstalled successfully", InfoBarSeverity.Success, 4000));
+                NotificationQueue.Show(NotificationContent("Debloat", appTreeView.SelectedItems.Count + " " + "UninstallationSuccessMultiple".GetLocalized(), InfoBarSeverity.Success, 4000));
             }
             else
             {
-                NotificationQueue.Show(NotificationContent("Debloat", "App uninstalled successfully", InfoBarSeverity.Success, 4000));
+                NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccessSingle".GetLocalized(), InfoBarSeverity.Success, 4000));
             }
             
         }
@@ -149,7 +149,7 @@ public sealed partial class DebloatSystemPage : Page
             // update ui elements
             uninstallingStatusText.Text = $"Error: {ex}";
             uninstallingStatusBar.ShowError = true;
-            NotificationQueue.Show(NotificationContent("Debloat", "Error uninstalling", InfoBarSeverity.Error, 5000));
+            NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(), "UninstallationError".GetLocalized(), InfoBarSeverity.Error, 5000));
             // reload
             LoadInstalledApps();
         }
@@ -174,7 +174,7 @@ public sealed partial class DebloatSystemPage : Page
             appTreeView.Visibility = Visibility.Collapsed;
             appTreeView.IsEnabled = false;
             uninstallButton.IsEnabled = false;
-            NotificationQueue.Show(NotificationContent("Debloat", "Uninstalling some apps may break your system!", InfoBarSeverity.Warning, 4000));
+            NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(), "DebloatPage_NotificationBody".GetLocalized(), InfoBarSeverity.Warning, 4000));
         });
         LoadInstalledApps(uninstallableOnly: false, cancellationTokenSource.Token);
     }

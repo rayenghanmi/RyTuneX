@@ -21,10 +21,16 @@
             <StackPanel Spacing="{StaticResource SettingsCardSpacing}">
 
                 <!-- System Feature Control Toggles -->
-                <TextBlock Margin="6"
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                     Text="System Features"/>
-
+                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/systemfeatures.html">
+                        <FontIcon FontSize="15"
+                                  Glyph="&#xE946;" />
+                    </HyperlinkButton>
+                </StackPanel>
+                
                 <controls:SettingsCard Header="Disable Hibernation" Description="Turn off hibernation to save power and prevent the computer from entering sleep mode">
                     <ToggleSwitch x:Name="Hibernation" Tag="Hibernation" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
@@ -97,9 +103,16 @@
                     <ToggleSwitch x:Name="CastToDevice" Tag="CastToDevice" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <TextBlock Margin="6"
-                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                    Text="Windows 11 Exclusive"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="6"
+                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                        Text="Windows 11 Exclusive"/>
+                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/windows11.html">
+                        <FontIcon FontSize="15"
+                                  Glyph="&#xE946;" />
+                    </HyperlinkButton>
+                </StackPanel>
+                
                 <controls:SettingsCard Header="Disable VBS" Description="Disables Virtualization-Based Security (VBS) for advanced security features.">
                     <ToggleSwitch x:Name="VBS" Tag="VBS" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>

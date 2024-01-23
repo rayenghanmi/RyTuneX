@@ -69,7 +69,7 @@ public sealed partial class PrivacyPage : Page
             }
         }
     }
-    private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+    private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -85,7 +85,7 @@ public sealed partial class PrivacyPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.ShowErrorMessageAndLog(ex, this.XamlRoot);
+            await LogHelper.ShowErrorMessageAndLog(ex, this.XamlRoot);
         }
     }
 }

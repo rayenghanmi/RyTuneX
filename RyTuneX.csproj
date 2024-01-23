@@ -32,7 +32,6 @@
     <None Remove="Assets\discord.png" />
     <None Remove="Assets\github.png" />
     <None Remove="Assets\WindowIcon.ico" />
-    <None Remove="Views\BenchmarkPage.xaml" />
     <None Remove="Views\DebloatSystemPage.xaml" />
     <None Remove="Views\FeaturesPage.xaml" />
     <None Remove="Views\PrivacyPage.xaml" />
@@ -84,9 +83,6 @@
     </None>
     <Page Update="Views\DebloatSystemPage.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="Views\BenchmarkPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="Views\FeaturesPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Margin="-65,-150,-65,0">
+    Margin="-65,-160,-65,0">
     <Grid x:Name="HeaderGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="450" />
@@ -34,7 +34,7 @@
             </StackPanel.Background>
             <TextBlock
                     FontSize="16"
-                    Text="Version 0.7.2" />
+                    Text="{x:Bind _versionDescription}" />
             <TextBlock
                     Style="{StaticResource TitleLargeTextBlockStyle}"
                     Text="RyTuneX" />

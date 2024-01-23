@@ -21,12 +21,22 @@
             <StackPanel Spacing="{StaticResource SettingsCardSpacing}">
 
                 <!-- System Optimization Toggles -->
-                <TextBlock Margin="6"
-                           Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                           Text="Basic Optimizations"/>
-                
-                <controls:SettingsCard Header="Performance Tweaks" Description="Enables system optimizations to improve overall performance">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="6"
+                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                        Text="Basic Optimizations"/>
+                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/basic.html">
+                        <FontIcon FontSize="15"
+                            Glyph="&#xE946;" />
+                    </HyperlinkButton>
+                </StackPanel>
+
+                <controls:SettingsCard Header="Performance Tweaks">
                     <ToggleSwitch x:Name="PerformanceTweaks" Tag="PerformanceTweaks" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.Description>
+                        <HyperlinkButton Content="Learn more about what's being disabled"
+                                         NavigateUri="https://rayenghanmi.github.io/rytunex/performance.html" />
+                    </controls:SettingsCard.Description>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard Header="Disable Superfetch" Description="Turns off Superfetch to disable preloading of frequently used applications for faster startup">
@@ -46,10 +56,16 @@
                 </controls:SettingsCard>
                 
                 <!-- Advanced System Optimizations -->
-                <TextBlock Margin="6"
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="6"
                         Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                         Text="Advanced Optimizations"/>
-                
+                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/advanced.html">
+                        <FontIcon FontSize="15"
+                            Glyph="&#xE946;" />
+                    </HyperlinkButton>
+                </StackPanel>
+
                 <controls:SettingsCard Header="Disable System Restore" Description="Disables System Restore to prevent the creation of restore points for system recovery">
                     <ToggleSwitch x:Name="SystemRestore" Tag="SystemRestore" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>

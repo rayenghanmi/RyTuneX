@@ -227,9 +227,6 @@
   <data name="UninstallTip" xml:space="preserve">
     <value>Select apps that you want to remove and hit uninstall</value>
   </data>
-  <data name="Shell_Benchmark.Content" xml:space="preserve">
-    <value>Benchmark</value>
-  </data>
   <data name="Shell_Features.Content" xml:space="preserve">
     <value>Windows Features</value>
   </data>
@@ -265,5 +262,20 @@
   </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
     <value>Storage</value>
+  </data>
+  <data name="Debloat" xml:space="preserve">
+    <value>Debloat</value>
+  </data>
+  <data name="DebloatPage_NotificationBody" xml:space="preserve">
+    <value>Uninstalling some of these apps may not remove them completely.</value>
+  </data>
+  <data name="UninstallationError" xml:space="preserve">
+    <value>Error uninstalling.</value>
+  </data>
+  <data name="UninstallationSuccessMultiple" xml:space="preserve">
+    <value>apps uninstalled successfully.</value>
+  </data>
+  <data name="UninstallationSuccessSingle" xml:space="preserve">
+    <value>App uninstalled successfully.</value>
   </data>
 </root>

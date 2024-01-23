@@ -227,9 +227,6 @@
   <data name="UninstallTip" xml:space="preserve">
     <value>Sélectionnez les applications que vous souhaitez supprimer et appuyez sur Désinstaller</value>
   </data>
-  <data name="Shell_Benchmark.Content" xml:space="preserve">
-    <value>Performance</value>
-  </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
     <value>Rejoignez Discord</value>
   </data>
@@ -259,5 +256,26 @@
   </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
     <value>Stockage</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>Fonctionnalités de Windows</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>Confidentialité</value>
+  </data>
+  <data name="Debloat" xml:space="preserve">
+    <value>Alléger</value>
+  </data>
+  <data name="DebloatPage_NotificationBody" xml:space="preserve">
+    <value>La désinstallation de certaines de ces applications peut ne pas les supprimer complètement.</value>
+  </data>
+  <data name="UninstallationError" xml:space="preserve">
+    <value>Erreur lors de la désinstallation.</value>
+  </data>
+  <data name="UninstallationSuccessMultiple" xml:space="preserve">
+    <value>applications désinstallées avec succès.</value>
+  </data>
+  <data name="UninstallationSuccessSingle" xml:space="preserve">
+    <value>Désinstallation de l'application réussie.</value>
   </data>
 </root>

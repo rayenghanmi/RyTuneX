@@ -6,10 +6,13 @@ namespace RyTuneX.Views;
 
 public sealed partial class HomePage : Page
 {
+    private readonly string _versionDescription;
+
     public HomePage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing HomePage");
+        _versionDescription = "Version " + SettingsPage.GetVersionDescription();
     }
 
     private void GithubButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

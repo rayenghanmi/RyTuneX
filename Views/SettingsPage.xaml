@@ -12,8 +12,6 @@
     <Page.Resources>
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
         <x:Double x:Key="SettingsCardSpacing">4</x:Double>
-
-        <!--  Style (inc. the correct spacing) of a section header  -->
         <Style x:Key="SettingsSectionHeaderTextBlockStyle"
        BasedOn="{StaticResource BodyStrongTextBlockStyle}"
        TargetType="TextBlock">
@@ -34,8 +32,8 @@
                     <TextBlock x:Uid="Settings_Language" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
                     <ComboBox x:Name="LanguageComboBox" PlaceholderText="System Language" Margin="{StaticResource SmallTopMargin}" SelectionChanged="LanguageComboBox_SelectionChanged">
                         <ComboBoxItem Content="English (US)" Tag="en-us"/>
-                        <ComboBoxItem Content="French (France)" Tag="fr-fr"/>
-                        <ComboBoxItem Content="Arabic (Tunisia)" Tag="ar-tn"/>
+                        <ComboBoxItem Content="Français (France)" Tag="fr-fr"/>
+                        <ComboBoxItem Content="العربية (تونس)" Tag="ar-tn"/>
                     </ComboBox>
                 </StackPanel>
             </StackPanel>
@@ -80,10 +78,10 @@
 
             <controls:SettingsExpander Description="© 2024 Rayen Ghanmi"
                                Header="RyTuneX"
-                               HeaderIcon="{ui:BitmapIcon Source=Assets/Square150x150Logo.scale-400.png}">
+                               HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.scale-100.png}">
                 <TextBlock IsTextSelectionEnabled="True"
                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                   Text="Version 0.7.2" />
+                   Text="{x:Bind _versionDescription}" />
                 <controls:SettingsExpander.Items>
                     <controls:SettingsCard HorizontalContentAlignment="Left"
                                    ContentAlignment="Left">

@@ -21,12 +21,22 @@
             <StackPanel Spacing="{StaticResource SettingsCardSpacing}">
                 
                 <!-- Telemetry Elements -->
-                <TextBlock Margin="6"
-                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                    Text="Telemetry"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="6"
+                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                        Text="Telemetry"/>
+                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/telemetry.html">
+                        <FontIcon FontSize="15"
+                            Glyph="&#xE946;" />
+                    </HyperlinkButton>
+                </StackPanel>
 
-                <controls:SettingsCard Header="Enhance Privacy" Description="Enhances privacy settings and restricts data sharing">
+                <controls:SettingsCard Header="Enhance Privacy">
                     <ToggleSwitch x:Name="Privacy" Tag="Privacy" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.Description>
+                        <HyperlinkButton Content="Learn more about what's being disabled" 
+                                         NavigateUri="https://rayenghanmi.github.io/rytunex/privacy.html" />
+                    </controls:SettingsCard.Description>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard Header="Disable SMBv1" Description="Disables Server Message Block version 1 (SMBv1) for enhanced security">
