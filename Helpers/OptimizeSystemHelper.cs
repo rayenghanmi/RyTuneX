@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Win32;
 
 namespace RyTuneX.Helpers;
@@ -264,6 +265,36 @@ internal class OptimizeSystemHelper
     {
         OptimizationOptions.StopService("PcaSvc");
         OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\PcaSvc\" /v Start /t REG_DWORD /d 4 /f");
+    }
+
+    internal static void EnableVerboseLogon()
+    {
+        OptimizationOptions.StartInCmd("reg add \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v VerboseStatus /t REG_DWORD /d 1 /f");
+    }
+
+    internal static void DisableVerboseLogon()
+    {
+        OptimizationOptions.StartInCmd("reg add \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v VerboseStatus /t REG_DWORD /d 0 /f");
+    }
+
+    internal static void EnableClassicContextMenu()
+    {
+        OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\\");
+    }
+
+    internal static void DisableClassicContextMenu()
+    {
+        OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\\");
+    }
+
+    internal static void EnableClassicStartMenu()
+    {
+        //Working on it
+    }
+
+    internal static void DisableClassicStartMenu()
+    {
+        //Working on it
     }
 
     internal static void DisableSystemRestore()

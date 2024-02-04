@@ -4,8 +4,14 @@ All notable changes to this branch will be documented in this file.
 
 ## 0.7.2 - Work In Progress
 
+### Added
+
+- Verbose Logon Messages option in `System Features Page`.
+- Restoring Classic Start Menu option in `System Features Page` under `Windows 11 Exclusive`.
+
 ### Changes
 
+- Upgraded minimum requirements to `Windows 10 20H1`.
 - An Overhauled UX & Redesigned UI :heart_eyes:.
 - Rearraged Optimization options.
 

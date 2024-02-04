@@ -85,4 +85,13 @@ public sealed partial class FeaturesPage : Page
             LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
     }
+
+    private void SettingsCard_Click(object sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://github.com/valinet/ExplorerPatcher",
+            UseShellExecute = true
+        });
+    }
 }

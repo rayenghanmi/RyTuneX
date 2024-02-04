@@ -11,7 +11,6 @@ using Windows.System;
 
 namespace RyTuneX.Views;
 
-// TODO: Update NavigationViewItem titles and icons in ShellPage.xaml.
 public sealed partial class ShellPage : Page
 {
     public ShellViewModel ViewModel

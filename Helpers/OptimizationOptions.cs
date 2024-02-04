@@ -81,19 +81,10 @@ internal class OptimizationOptions
             using var p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.Arguments = $"/C {command}";
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            p.StartInfo.CreateNoWindow = false;
+            p.StartInfo.UseShellExecute = true;
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
             p.Start();
-            p.WaitForExit();
-
-            var output = p.StandardOutput.ReadToEnd();
-            var error = p.StandardError.ReadToEnd();
-
-            Debug.WriteLine($"Command Output: {output}");
-            Debug.WriteLine($"Command Error: {error}");
         }
         catch (Exception ex)
         {
@@ -197,6 +188,42 @@ internal class OptimizationOptions
                     else
                     {
                         OptimizeSystemHelper.EnableSystemRestore();
+                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
+                    }
+                    break;
+                case "VerboseLogon":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableVerboseLogon();
+                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableVerboseLogon();
+                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
+                    }
+                    break;
+                case "ClassicContextMenu":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableClassicContextMenu();
+                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableClassicContextMenu();
+                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
+                    }
+                    break;
+                case "ClassicStartMenu":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableClassicStartMenu();
+                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableClassicStartMenu();
                         ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
                     }
                     break;

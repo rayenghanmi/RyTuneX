@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
     <Page.Resources>
         <x:Double x:Key="SettingsCardSpacing">4</x:Double>
@@ -30,7 +31,11 @@
                                   Glyph="&#xE946;" />
                     </HyperlinkButton>
                 </StackPanel>
-                
+
+                <controls:SettingsCard Header="Enable Verbose Logon" Description="Enable detailed logon messages for better system monitoring and troubleshooting.">
+                    <ToggleSwitch x:Name="VerboseLogon" Tag="VerboseLogon" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
                 <controls:SettingsCard Header="Disable Hibernation" Description="Turn off hibernation to save power and prevent the computer from entering sleep mode">
                     <ToggleSwitch x:Name="Hibernation" Tag="Hibernation" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
@@ -112,6 +117,14 @@
                                   Glyph="&#xE946;" />
                     </HyperlinkButton>
                 </StackPanel>
+
+                <controls:SettingsCard Header="Restore Classic Context Menu" Description="Bring back the familiar Windows 10 context menu for a classic and efficient user experience.">
+                    <ToggleSwitch x:Name="ClassicContextMenu" Tag="ClassicContextMenu" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+                
+                <controls:SettingsCard Header="Restore Classic Start Menu" Description="Restore the classic Windows 10 Start Menu for a familiar user experience and enhanced usability.">
+                    <ToggleSwitch x:Name="ClassicStartMenu" Tag="ClassicStartMenu" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
                 
                 <controls:SettingsCard Header="Disable VBS" Description="Disables Virtualization-Based Security (VBS) for advanced security features.">
                     <ToggleSwitch x:Name="VBS" Tag="VBS" Toggled="ToggleSwitch_Toggled"/>
@@ -160,6 +173,14 @@
                 <controls:SettingsCard Header="Disable CoPilot AI" Description="Disables the CoPilot AI feature in Windows for assistance with code writing.">
                     <ToggleSwitch x:Name="CoPilotAI" Tag="CoPilotAI" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
+
+                <controls:SettingsCard ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
+                               ActionIconToolTip="Open in new window"
+                               Description="Use ExplorerPatcher by valinet, to get more Windows 11 customizations."
+                               Header="Want more customizations?"
+                               HeaderIcon="{ui:FontIcon Glyph=&#xE774;}"
+                               IsClickEnabled="True"
+                               Click="SettingsCard_Click"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
