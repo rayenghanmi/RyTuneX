@@ -2,7 +2,7 @@
 
 All notable changes to this branch will be documented in this file.
 
-## 0.7.2 - Work In Progress
+## 0.7.2 - Released
 
 ### Added
 
@@ -21,6 +21,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Fixes
 
+- [x] Setup not opening for some users.
 - [ ] Some optimization issues.
 - [x] Some logs that are not being logged.
 

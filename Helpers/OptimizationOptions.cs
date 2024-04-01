@@ -623,18 +623,6 @@ internal class OptimizationOptions
                         ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
                     }
                     break;
-                case "TPMCheck":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisableTPMCheck();
-                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnableTPMCheck();
-                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
-                    }
-                    break;
                 case "FilesCompactMode":
                     if (toggleSwitch.IsOn)
                     {

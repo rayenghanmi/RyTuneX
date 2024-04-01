@@ -26,7 +26,7 @@ public sealed partial class ShellPage : Page
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
         var packageVersion = Package.Current.Id.Version;
-        AppTitleBarVersion.Text = $"{packageVersion.Major}.{packageVersion.Minor}";
+        AppTitleBarVersion.Text = $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}";
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;

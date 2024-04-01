@@ -149,13 +149,9 @@
                 <controls:SettingsCard Header="Enable Legacy Volume Slider" Description="Enables the legacy volume slider in the system tray">
                     <ToggleSwitch x:Name="LegacyVolumeSlider" Tag="LegacyVolumeSlider" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
-                
+
                 <controls:SettingsCard Header="Disable Show More Options" Description="Hides additional options in various Windows settings.">
                     <ToggleSwitch x:Name="ShowMoreOptions" Tag="ShowMoreOptions" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-
-                <controls:SettingsCard Header="Disable TPM Check" Description="Disables the requirement for Trusted Platform Module (TPM) during Windows installation.">
-                    <ToggleSwitch x:Name="TPMCheck" Tag="TPMCheck" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard Header="Enable Files Compact Mode" Description="Enables Compact Mode for file browsing with smaller thumbnails.">

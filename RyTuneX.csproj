@@ -21,7 +21,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-    <PackageCertificateThumbprint>1D92A91C88A122BB200B96F35A8311064D7AD1CE</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>DF8A7D4022DFD5CBB74CBD267C30722B1313BD08</PackageCertificateThumbprint>
     <StartupObject>RyTuneX.Program</StartupObject>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/rayenghanmi/rytunex</RepositoryUrl>

@@ -1054,27 +1054,6 @@ internal class OptimizeSystemHelper
         OptimizationOptions.StartInCmd("REG Delete \"HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\" /F");
     }
 
-    internal static void DisableTPMCheck()
-    {
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\MoSetup\" /V AllowUpgradesWithUnsupportedTPMOrCPU /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassCPUCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassStorageCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassTPMCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassRAMCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassSecureBootCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Control Panel\\UnsupportedHardwareNotificationCache\" /V SV2 /T REG_DWORD /D 0 /F");
-    }
-
-    internal static void EnableTPMCheck()
-    {
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\MoSetup\" /V AllowUpgradesWithUnsupportedTPMOrCPU /T REG_DWORD /D 0 /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassTPMCheck /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassRAMCheck /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassSecureBootCheck /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassStorageCheck /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassCPUCheck /F");
-    }
-
     internal static void EnableFilesCompactMode()
     {
         OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V UseCompactMode /T REG_DWORD /D 1 /F");

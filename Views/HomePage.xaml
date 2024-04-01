@@ -37,6 +37,7 @@
                     Text="{x:Bind _versionDescription}" />
             <TextBlock
                     Style="{StaticResource TitleLargeTextBlockStyle}"
+                    FontWeight="Bold"
                     Text="RyTuneX" />
             <TextBlock
                     Margin="3"
