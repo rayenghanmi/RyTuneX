@@ -124,13 +124,13 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Home.Content" xml:space="preserve">
-    <value>ما هو RyTuneX؟</value>
+    <value>RyTuneX</value>
   </data>
   <data name="Debloat_NoSelection.Text" xml:space="preserve">
     <value>اختار عنصراً من القائمة</value>
   </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>تقليل الوظائف الزائدة</value>
+    <value>إزالة البرامج</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>معلومات النظام</value>
@@ -227,7 +227,55 @@
   <data name="UninstallTip" xml:space="preserve">
     <value>حدد التطبيقات التي ترغب في إزالتها واضغط على إلغاء التثبيت</value>
   </data>
-  <data name="Shell_Benchmark.Content" xml:space="preserve">
-    <value>قياس الأداء</value>
+  <data name="HomePage_DiscordButton.Text" xml:space="preserve">
+    <value>انضم إلى خادمنا</value>
+  </data>
+  <data name="HomePage_IssueButton.Text" xml:space="preserve">
+    <value>أبلغ عن مشكلة</value>
+  </data>
+  <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
+    <value>تحقق من RyTuneX</value>
+  </data>
+  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
+    <value>أرسل تعليقاتك</value>
+  </data>
+  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
+    <value>المعالج</value>
+  </data>
+  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
+    <value>بطاقة الرسومات</value>
+  </data>
+  <data name="SystemInfoPage_OS.Text" xml:space="preserve">
+    <value>نظام التشغيل</value>
+  </data>
+  <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
+    <value>ذاكرة الوصول العشوائي</value>
+  </data>
+  <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
+    <value>التخزين</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>خصائص ويندوز</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>الخصوصية</value>
+  </data>
+  <data name="Debloat" xml:space="preserve">
+    <value>إزالة البرامج</value>
+  </data>
+  <data name="DebloatPage_NotificationBody" xml:space="preserve">
+    <value>قد لا يقوم إلغاء تثبيت بعض هذه التطبيقات بإزالتها تمامًا.</value>
+  </data>
+  <data name="UninstallationError" xml:space="preserve">
+    <value>خطأ أثناء عملية الإلغاء.</value>
+  </data>
+  <data name="UninstallationSuccessMultiple" xml:space="preserve">
+    <value>,تم إلغاء التثبيت بنجاح.</value>
+  </data>
+  <data name="UninstallationSuccessSingle" xml:space="preserve">
+    <value>تم إلغاء تثبيت التطبيق بنجاح.</value>
   </data>
 </root>

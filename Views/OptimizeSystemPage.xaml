@@ -4,87 +4,88 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d">
+    <Page.Resources>
+        <x:Double x:Key="SettingsCardSpacing">4</x:Double>
+        <Style x:Key="SettingsSectionHeaderTextBlockStyle"
+           BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+           TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Margin" Value="1,30,0,6" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
     <Grid x:Name="ContentArea" Margin="-45,10,-45,10">
-        <ScrollViewer Margin="20" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}">
-            <StackPanel Margin="20">
+        <ScrollViewer Margin="20" Padding="16,6,16,6">
+            <StackPanel Spacing="{StaticResource SettingsCardSpacing}">
+
                 <!-- System Optimization Toggles -->
-                <StackPanel Orientation="Horizontal" CornerRadius="8" Padding="16" Margin="20,5,20,20">
-                    <FontIcon Margin="6" Glyph="&#xE9F5;"/>
-                    <TextBlock Margin="6" Text="Basic Optimizations"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="6"
+                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                        Text="Basic Optimizations"/>
+                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/basic.html">
+                        <FontIcon FontSize="15"
+                            Glyph="&#xE946;" />
+                    </HyperlinkButton>
                 </StackPanel>
-                <ToggleSwitch x:Name="PerformanceTweaks" Tag="PerformanceTweaks" Header="Performance Tweaks" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Enables system optimizations to improve overall performance"/>
-                <ToggleSwitch x:Name="Superfetch" Tag="Superfetch" Header="Disable Superfetch" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off Superfetch to disable preloading of frequently used applications for faster startup"/>
-                <ToggleSwitch x:Name="NTFSTimeStamp" Tag="NTFSTimeStamp" Header="Disable NTFS Timestamp" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables NTFS timestamp updates for file operations"/>
-                <ToggleSwitch x:Name="LegacyVolumeSlider" Tag="LegacyVolumeSlider" Header="Enable Legacy Volume Slider" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Enables the legacy volume slider in the system tray"/>
-                <ToggleSwitch x:Name="TaskbarColor" Tag="TaskbarColor" Header="Enable Taskbar Color" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Enables custom color settings for the taskbar"/>
-                <ToggleSwitch x:Name="GamingMode" Tag="GamingMode" Header="Enable Gaming Mode" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Enables Gaming Mode for an enhanced gaming experience"/>
-                <ToggleSwitch x:Name="StoreUpdates" Tag="StoreUpdates" Header="Disable Store Updates" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables automatic updates for Windows Store apps"/>
-                <ToggleSwitch x:Name="Privacy" Tag="Privacy" Header="Enhance Privacy" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Enhances privacy settings and restrict data sharing"/>
-                <ToggleSwitch x:Name="Drivers" Tag="Drivers" Header="Exclude Drivers From Windows Updates" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Excludes driver updates from Windows Update"/>
+
+                <controls:SettingsCard Header="Performance Tweaks">
+                    <ToggleSwitch x:Name="PerformanceTweaks" Tag="PerformanceTweaks" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.Description>
+                        <HyperlinkButton Content="Learn more about what's being disabled"
+                                         NavigateUri="https://rayenghanmi.github.io/rytunex/performance.html" />
+                    </controls:SettingsCard.Description>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Superfetch" Description="Turns off Superfetch to disable preloading of frequently used applications for faster startup">
+                    <ToggleSwitch x:Name="Superfetch" Tag="Superfetch" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable NTFS Timestamp" Description="Disables NTFS timestamp updates for file operations">
+                    <ToggleSwitch x:Name="NTFSTimeStamp" Tag="NTFSTimeStamp" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Enable Gaming Mode" Description="Enables Gaming Mode for an enhanced gaming experience">
+                    <ToggleSwitch x:Name="GamingMode" Tag="GamingMode" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Exclude Drivers From Windows Updates" Description="Excludes driver updates from Windows Update">
+                    <ToggleSwitch x:Name="Drivers" Tag="Drivers" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+                
                 <!-- Advanced System Optimizations -->
-                <StackPanel Orientation="Horizontal" Margin="20,10,20,20">
-                    <FontIcon Margin="6" Glyph="&#xE7BA;"/>
-                    <TextBlock Margin="6" Text="Advanced Optimizations"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="6"
+                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                        Text="Advanced Optimizations"/>
+                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/advanced.html">
+                        <FontIcon FontSize="15"
+                            Glyph="&#xE946;" />
+                    </HyperlinkButton>
                 </StackPanel>
-                <ToggleSwitch x:Name="SystemRestore" Tag="SystemRestore" Header="Disable System Restore" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables System Restore to prevent the creation of restore points for system recovery."/>
-                <ToggleSwitch x:Name="SMBv1" Tag="SMBv1" Header="Disable SMBv1" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables Server Message Block version 1 (SMBv1) for enhanced security."/>
-                <ToggleSwitch x:Name="SMBv2" Tag="SMBv2" Header="Disable SMBv2" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables Server Message Block version 2 (SMBv2) for enhanced security."/>
-                <ToggleSwitch x:Name="SMBv3" Tag="SMBv3" Header="Disable SMBv3" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables Server Message Block version 3 (SMBv3) for enhanced security."/>
-                <ToggleSwitch x:Name="Cortana" Tag="Cortana" Header="Disable Cortana" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables Cortana, the virtual assistant, and search feature."/>
-                <ToggleSwitch x:Name="AutomaticUpdates" Tag="AutomaticUpdates" Header="Disable Automatic Updates" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off automatic Windows updates for manual control of update installations."/>
-                <ToggleSwitch x:Name="SmartScreen" Tag="SmartScreen" Header="Disable Smart Screen" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Tursn off SmartScreen Filter for apps and files."/>
-                <!-- System Feature Control Toggles -->
-                <StackPanel Orientation="Horizontal" Margin="20,10,20,20">
-                    <FontIcon Margin="6" Glyph="&#xE770;"/>
-                    <TextBlock Margin="6" Text="System Features"/>
-                </StackPanel>
-                <ToggleSwitch x:Name="Hibernation" Tag="Hibernation" Header="Disable Hibernation" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turn off hibernation to save power and prevent the computer from entering sleep mode"/>
-                <ToggleSwitch x:Name="HomeGroup" Tag="HomeGroup" Header="Disable Home Group" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off Home Group to stop sharing files and printers with other devices on the network"/>
-                <ToggleSwitch x:Name="PrintService" Tag="PrintService" Header="Disable Print Service" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the printing service, preventing print-related functionalities"/>
-                <ToggleSwitch x:Name="CompatibilityAssistant" Tag="CompatibilityAssistant" Header="Disable Compatibility Assistant" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off Compatibility Assistant to disable automatic compatibility checks for programs"/>
-                <ToggleSwitch x:Name="Search" Tag="Search" Header="Disable Search" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off system-wide search functionality"/>
-                <ToggleSwitch x:Name="ErrorReporting" Tag="ErrorReporting" Header="Disable Error Reporting" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off error reporting to prevent the automatic sending of error reports to Microsoft"/>
-                <ToggleSwitch x:Name="GameBar" Tag="GameBar" Header="Disable Game Bar" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off the Game Bar and its associated features"/>
-                <ToggleSwitch x:Name="QuickAccessHistory" Tag="QuickAccessHistory" Header="Disable Quick Access History" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables recording and display of Quick Access history"/>
-                <ToggleSwitch x:Name="StartMenuAds" Tag="StartMenuAds" Header="Disable Start Menu Ads" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables ads in the Start Menu"/>
-                <ToggleSwitch x:Name="MyPeople" Tag="MyPeople" Header="Disable My People" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off My People feature in the taskbar"/>
-                <ToggleSwitch x:Name="SensorServices" Tag="SensorServices" Header="Disable Sensor Services" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off sensor services for privacy and power savings"/>
-                <ToggleSwitch x:Name="WindowsInk" Tag="WindowsInk" Header="Disable Windows Ink" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off Windows Ink Workspace and related features"/>
-                <ToggleSwitch x:Name="SpellingAndTypingFeatures" Tag="SpellingAndTypingFeatures" Header="Disable Spelling and Typing Features" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables spelling and typing suggestions"/>
-                <ToggleSwitch x:Name="FaxService" Tag="FaxService" Header="Disable Fax Service" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the Fax service in Windows"/>
-                <ToggleSwitch x:Name="InsiderService" Tag="InsiderService" Header="Disable Insider Service" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Opt-out of Windows Insider Program and stop receiving preview builds"/>
-                <ToggleSwitch x:Name="CloudClipboard" Tag="CloudClipboard" Header="Disable Cloud Clipboard" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables Cloud Clipboard feature for cross-device clipboard sharing"/>
-                <ToggleSwitch x:Name="StickyKeys" Tag="StickyKeys" Header="Disable Sticky Keys" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables Sticky Keys accessibility feature"/>
-                <ToggleSwitch x:Name="CastToDevice" Tag="CastToDevice" Header="Disable Cast to Device" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the Cast to Device feature in Windows"/>
-                <!-- Telemetry Elements -->
-                <StackPanel Orientation="Horizontal" Margin="20,10,20,20">
-                    <FontIcon Margin="6" Glyph="&#xE9D9;"/>
-                    <TextBlock Margin="6" Text="Telemetry"/>
-                </StackPanel>
-                <ToggleSwitch x:Name="TelemetryServices" Tag="TelemetryServices" Header="Disable Telemetry Services" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Turns off telemetry services to prevent the collection and transmission of usage data by the operating system."/>
-                <ToggleSwitch x:Name="EdgeTelemetry" Tag="EdgeTelemetry" Header="Disable Edge Telemetry" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables telemetry data collection in Microsoft Edge."/>
-                <ToggleSwitch x:Name="VisualStudioTelemetry" Tag="VisualStudioTelemetry" Header="Disable Visual Studio Telemetry" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables telemetry data collection in Visual Studio."/>
-                <ToggleSwitch x:Name="NvidiaTelemetry" Tag="NvidiaTelemetry" Header="Disable Nvidia Telemetry" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables telemetry data collection by Nvidia drivers."/>
-                <ToggleSwitch x:Name="ChromeTelemetry" Tag="ChromeTelemetry" Header="Disable Chrome Telemetry" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables telemetry data collection in Google Chrome."/>
-                <ToggleSwitch x:Name="FirefoxTelemetry" Tag="FirefoxTelemetry" Header="Disable Firefox Telemetry" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables telemetry data collection in Mozilla Firefox."/>
-                <!-- Windows 11 Exclusive Elements -->
-                <StackPanel Orientation="Horizontal" Margin="20,10,20,20">
-                    <FontIcon Margin="6" Glyph="&#xE705;"/>
-                    <TextBlock Margin="6" Text="Windows 11 Exclusive"/>
-                </StackPanel>
-                <ToggleSwitch x:Name="VBS" Tag="VBS" Header="Disable VBS" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables Virtualization-Based Security (VBS) for advanced security features."/>
-                <ToggleSwitch x:Name="TaskbarToLeft" Tag="TaskbarToLeft" Header="Move Taskbar to The Left" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Moves the taskbar from the default bottom position to the left side of the screen."/>
-                <ToggleSwitch x:Name="SnapAssist" Tag="SnapAssist" Header="Disable Snap Assist" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables Snap Assist, which automatically arranges open windows when dragging."/>
-                <ToggleSwitch x:Name="Widgets" Tag="Widgets" Header="Disable Widgets" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the Widgets feature on the Windows 11 taskbar."/>
-                <ToggleSwitch x:Name="Chat" Tag="Chat" Header="Disable Chat" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the Chat feature on the Windows 11 taskbar."/>
-                <ToggleSwitch x:Name="ContextMenu" Tag="ContextMenu" Header="Restore Classic Context Menu" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Enables Full (Classic) Context Menu in Windows 11."/>
-                <ToggleSwitch x:Name="ShowMoreOptions" Tag="ShowMoreOptions" Header="Disable Show More Options" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Hides additional options in various Windows settings."/>
-                <ToggleSwitch x:Name="TPMCheck" Tag="TPMCheck" Header="Disable TPM Check" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the requirement for Trusted Platform Module (TPM) during Windows installation."/>
-                <ToggleSwitch x:Name="FilesCompactMode" Tag="FilesCompactMode" Header="Enable Files Compact Mode" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Enables Compact Mode for file browsing with smaller thumbnails."/>
-                <ToggleSwitch x:Name="Stickers" Tag="Stickers" Header="Disable Stickers" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the Stickers feature in the Windows 11 messaging app."/>
-                <ToggleSwitch x:Name="EdgeDiscoverBar" Tag="EdgeDiscoverBar" Header="Disable Edge Discover Bar" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the Discover Bar feature in Microsoft Edge."/>
-                <ToggleSwitch x:Name="CoPilotAI" Tag="CoPilotAI" Header="Disable CoPilot AI" Toggled="ToggleSwitch_Toggled" ToolTipService.ToolTip="Disables the CoPilot AI feature in Windows for assistance with code writing."/>
+
+                <controls:SettingsCard Header="Disable System Restore" Description="Disables System Restore to prevent the creation of restore points for system recovery">
+                    <ToggleSwitch x:Name="SystemRestore" Tag="SystemRestore" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Cortana" Description="Disables Cortana, the virtual assistant, and search feature">
+                    <ToggleSwitch x:Name="Cortana" Tag="Cortana" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Store Updates" Description="Disables automatic updates for Windows Store apps">
+                    <ToggleSwitch x:Name="StoreUpdates" Tag="StoreUpdates" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+                
+                <controls:SettingsCard Header="Disable Automatic Updates" Description="Turns off automatic Windows updates for manual control of update installations">
+                    <ToggleSwitch x:Name="AutomaticUpdates" Tag="AutomaticUpdates" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Smart Screen" Description="Turns off SmartScreen Filter for apps and files">
+                    <ToggleSwitch x:Name="SmartScreen" Tag="SmartScreen" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

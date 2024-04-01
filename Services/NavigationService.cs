@@ -9,8 +9,6 @@ using RyTuneX.Helpers;
 
 namespace RyTuneX.Services;
 
-// For more information on navigation between pages see
-// https://github.com/microsoft/TemplateStudio/blob/main/docs/WinUI/navigation.md
 public class NavigationService : INavigationService
 {
     private readonly IPageService _pageService;

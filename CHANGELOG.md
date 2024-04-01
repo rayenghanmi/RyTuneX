@@ -2,15 +2,38 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 0.7.2 - Released
+
+### Added
+
+- Verbose Logon Messages option in `System Features Page`.
+- Restoring Classic Start Menu option in `System Features Page` under `Windows 11 Exclusive`.
+
+### Changes
+
+- Upgraded minimum requirements to `Windows 10 20H1`.
+- An Overhauled UX & Redesigned UI :heart_eyes:.
+- Rearraged Optimization options.
+
+### Removed
+
+- Irrelevent Optimization options as well as non-working ones.
+
+### Fixes
+
+- [x] Setup not opening for some users.
+- [ ] Some optimization issues.
+- [x] Some logs that are not being logged.
+
 ## 0.7.1 - Released
 
 ### Added
 
-- Version number is now displayed on the titlebar.
+- Version number is now displayed on the titlbar.
 
 ### Fixes
 
-- Crashing when exiting the app while fetching installed apps.
+- [x] Crashing when exiting the app while fetching installed apps.
 
 ## 0.7.0 - Unreleased
 
@@ -27,13 +50,13 @@ All notable changes to this branch will be documented in this file.
 
 ### Fixes
 
-- Selecting and unselecting a package, then selecting it again, should now attempt to remove it once.
-- Crashing when exiting the app while fetching installed apps.
+- [x] Selecting and unselecting a package, then selecting it again, should now attempt to remove it once.
+- [x] Crashing when exiting the app while fetching installed apps.
 
 ## 0.6.0 - Released
 
 > [!TIP]
-> **This version addressed the following issue:**
+> **This version adressed the following issue:**
 >
 > Windows Defender detecting the setup as a trojan:
 >
@@ -67,10 +90,10 @@ All notable changes to this branch will be documented in this file.
 
 - Bug reports (If you want to report a bug, open a new [issue](https://github.com/rayenghanmi/RyTuneX/issues/new) at GitHub). 
 
-### Fixed
+### Fixes
 
-- Language selection.
-- The welcome notification should be shown once now.
+- [x] Language selection.
+- [x] The welcome notification should be shown once now.
 
 ## Usage Guidance
 

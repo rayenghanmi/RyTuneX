@@ -1,22 +1,25 @@
 ﻿using Microsoft.UI.Xaml;
+using System.Diagnostics;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
+using Windows.UI.Popups;
+using Json.Schema;
+using System;
 using CommunityToolkit.WinUI.Controls;
-using System.Diagnostics;
 
 namespace RyTuneX.Views;
 
-public sealed partial class OptimizeSystemPage : Page
+public sealed partial class FeaturesPage : Page
 {
 
     private readonly bool isInitialSetup = true;
 
-    public OptimizeSystemPage()
+    public FeaturesPage()
     {
         InitializeComponent();
-        LogHelper.Log("Initializing OptimizeSystemPage");
+        LogHelper.Log("Initializing FeaturesPage");
         Loaded += (sender, e) => InitializeToggleSwitches();
         isInitialSetup = false;
     }
@@ -66,23 +69,29 @@ public sealed partial class OptimizeSystemPage : Page
             }
         }
     }
-    private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+    private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
             if (!isInitialSetup)
             {
                 var toggleSwitch = (ToggleSwitch)sender;
-                if (toggleSwitch != null && toggleSwitch.Tag != null)
-                {
-                    Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
-                    OptimizationOptions.XamlSwitches(toggleSwitch);
-                }
+                Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+                OptimizationOptions.XamlSwitches(toggleSwitch);
             }
         }
         catch (Exception ex)
         {
-            await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
+            LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
+    }
+
+    private void SettingsCard_Click(object sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://github.com/valinet/ExplorerPatcher",
+            UseShellExecute = true
+        });
     }
 }

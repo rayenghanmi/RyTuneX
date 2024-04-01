@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Win32;
 
 namespace RyTuneX.Helpers;
@@ -67,67 +68,67 @@ internal class OptimizeSystemHelper
 
     internal static void DisablePerformanceTweaks()
     {
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoComplete\" /v \"Append Completion\" /f");
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoComplete\" /v AutoSuggest /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoComplete\" /v \"Append Completion\" /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoComplete\" /v AutoSuggest /f");
 
-            OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\WOW6432Node\\Microsoft\\Windows Media Foundation\" /v EnableFrameServerMode /f");
+        OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\WOW6432Node\\Microsoft\\Windows Media Foundation\" /v EnableFrameServerMode /f");
 
-            OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\" /v CrashDumpEnabled /t REG_DWORD /d 7 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\" /v CrashDumpEnabled /t REG_DWORD /d 7 /f");
 
-            OptimizationOptions.StartInCmd("reg add \"Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\" /v EnableAutoTray /t REG_DWORD /d 1 /f");
+        OptimizationOptions.StartInCmd("reg add \"Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\" /v EnableAutoTray /t REG_DWORD /d 1 /f");
 
-            OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Remote Assistance\" /v fAllowToGetHelp /t REG_DWORD /d 1 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Remote Assistance\" /v fAllowToGetHelp /t REG_DWORD /d 1 /f");
 
-            OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v DisallowShaking /t REG_DWORD /d 0 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v DisallowShaking /t REG_DWORD /d 0 /f");
 
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_CLASSES_ROOT\\AllFilesystemObjects\\shellex\\ContextMenuHandlers\\Copy To\" /f");
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_CLASSES_ROOT\\AllFilesystemObjects\\shellex\\ContextMenuHandlers\\Move To\" /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_CLASSES_ROOT\\AllFilesystemObjects\\shellex\\ContextMenuHandlers\\Copy To\" /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_CLASSES_ROOT\\AllFilesystemObjects\\shellex\\ContextMenuHandlers\\Move To\" /f");
 
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v AutoEndTasks /f");
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v HungAppTimeout /f");
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v WaitToKillAppTimeout /f");
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v LowLevelHooksTimeout /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v AutoEndTasks /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v HungAppTimeout /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v WaitToKillAppTimeout /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v LowLevelHooksTimeout /f");
 
-            OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v MenuShowDelay /t REG_SZ /d 400 /f");
-            OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseHoverTime /t REG_SZ /d 400 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v MenuShowDelay /t REG_SZ /d 400 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseHoverTime /t REG_SZ /d 400 /f");
 
-            OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoLowDiskSpaceChecks /f");
-            OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v LinkResolveIgnoreLinkInfo /f");
-            OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoResolveSearch /f");
-            OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoResolveTrack /f");
-            OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoInternetOpenWith /f");
+        OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoLowDiskSpaceChecks /f");
+        OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v LinkResolveIgnoreLinkInfo /f");
+        OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoResolveSearch /f");
+        OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoResolveTrack /f");
+        OptimizationOptions.StartInCmd("reg delete \"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" /v NoInternetOpenWith /f");
 
-            OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\" /v WaitToKillServiceTimeout /t REG_SZ /d 5000 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\" /v WaitToKillServiceTimeout /t REG_SZ /d 5000 /f");
 
-            OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\DiagTrack\" /v Start /t REG_DWORD /d 2 /f");
-            OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service\" /v Start /t REG_DWORD /d 2 /f");
-            OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\dmwappushservice\" /v Start /t REG_DWORD /d 2 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\DiagTrack\" /v Start /t REG_DWORD /d 2 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service\" /v Start /t REG_DWORD /d 2 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\dmwappushservice\" /v Start /t REG_DWORD /d 2 /f");
 
-            OptimizationOptions.StartService("DiagTrack");
-            OptimizationOptions.StartService("diagnosticshub.standardcollector.service");
-            OptimizationOptions.StartService("dmwappushservice");
+        OptimizationOptions.StartService("DiagTrack");
+        OptimizationOptions.StartService("diagnosticshub.standardcollector.service");
+        OptimizationOptions.StartService("dmwappushservice");
 
-            OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v HideFileExt /t REG_DWORD /d 1 /f");
-            OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v Hidden /t REG_DWORD /d 0 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v HideFileExt /t REG_DWORD /d 1 /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v Hidden /t REG_DWORD /d 0 /f");
 
-            OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v SystemResponsiveness /t REG_DWORD /d 14 /f");
-            OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v NoLazyMode /f");
-            OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v AlwaysOn /f");
-            OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v \"GPU Priority\" /f");
-            OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v Priority /f");
-            OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v \"Scheduling Category\" /f");
-            OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v \"SFIO Priority\" /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v SystemResponsiveness /t REG_DWORD /d 14 /f");
+        OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v NoLazyMode /f");
+        OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v AlwaysOn /f");
+        OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v \"GPU Priority\" /f");
+        OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v Priority /f");
+        OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v \"Scheduling Category\" /f");
+        OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v \"SFIO Priority\" /f");
 
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"GPU Priority\" /f");
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v Priority /f");
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"Scheduling Category\" /f");
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"SFIO Priority\" /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"GPU Priority\" /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v Priority /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"Scheduling Category\" /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"SFIO Priority\" /f");
 
-            OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Psched\" /v NonBestEffortLimit /t REG_DWORD /d 80 /f");
-            OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v NetworkThrottlingIndex /f");
+        OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Psched\" /v NonBestEffortLimit /t REG_DWORD /d 80 /f");
+        OptimizationOptions.StartInCmd("reg delete \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v NetworkThrottlingIndex /f");
 
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters\" /v MaxCacheTtl /f");
-            OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters\" /v MaxNegativeCacheTtl /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters\" /v MaxCacheTtl /f");
+        OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters\" /v MaxNegativeCacheTtl /f");
 
     }
 
@@ -266,6 +267,36 @@ internal class OptimizeSystemHelper
         OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\PcaSvc\" /v Start /t REG_DWORD /d 4 /f");
     }
 
+    internal static void EnableVerboseLogon()
+    {
+        OptimizationOptions.StartInCmd("reg add \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v VerboseStatus /t REG_DWORD /d 1 /f");
+    }
+
+    internal static void DisableVerboseLogon()
+    {
+        OptimizationOptions.StartInCmd("reg add \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v VerboseStatus /t REG_DWORD /d 0 /f");
+    }
+
+    internal static void EnableClassicContextMenu()
+    {
+        OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\\");
+    }
+
+    internal static void DisableClassicContextMenu()
+    {
+        OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\\");
+    }
+
+    internal static void EnableClassicStartMenu()
+    {
+        //Working on it
+    }
+
+    internal static void DisableClassicStartMenu()
+    {
+        //Working on it
+    }
+
     internal static void DisableSystemRestore()
     {
         OptimizationOptions.StartInCmd("vssadmin delete shadows /for=c: /all /quiet");
@@ -348,19 +379,6 @@ internal class OptimizeSystemHelper
     {
         OptimizationOptions.StartInCmd("reg add \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\MTCUVC\" /v EnableMtcUvc /t REG_DWORD /d 1 /f");
     }
-
-    internal static void EnableTaskbarColor()
-    {
-        OptimizationOptions.StartInCmd("reg add \"HKCU\\SOFTWARE\\Microsoft\\Windows\\DWM\" /v ColorPrevalence /t REG_DWORD /d 00000001 /f");
-        OptimizationOptions.StartInCmd("reg add \"HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v ColorPrevalence /t REG_DWORD /d 00000000 /f");
-    }
-
-    internal static void DisableTaskbarColor()
-    {
-        OptimizationOptions.StartInCmd("reg add \"HKCU\\SOFTWARE\\Microsoft\\Windows\\DWM\" /v ColorPrevalence /t REG_DWORD /d 00000000 /f");
-        OptimizationOptions.StartInCmd("reg add \"HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v ColorPrevalence /t REG_DWORD /d 00000001 /f");
-    }
-
 
     internal static void DisableCortana()
     {
@@ -974,12 +992,12 @@ internal class OptimizeSystemHelper
         OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked\" /V {7AD84985-87B4-4a16-BE58-8B72A5B390F7} /F");
     }
 
-    internal static void DisableVirtualizationBasedSecurity()
+    internal static void DisableVBS()
     {
         OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\" /V EnableVirtualizationBasedSecurity /T REG_DWORD /D 0 /F");
     }
 
-    internal static void EnableVirtualizationBasedSecurity()
+    internal static void EnableVBS()
     {
         OptimizationOptions.StartInCmd("REG DELETE \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\" /V EnableVirtualizationBasedSecurity /F");
     }
@@ -1026,16 +1044,6 @@ internal class OptimizeSystemHelper
         OptimizationOptions.StartInCmd("REG Delete \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V TaskbarMn /F");
     }
 
-    internal static void EnableClassicMenu()
-    {
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /V \"\" /T REG_SZ /D \"\" /F");
-    }
-
-    internal static void DisableClassicMenu()
-    {
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\" /F");
-    }
-
     internal static void DisableShowMoreOptions()
     {
         OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /V \"\" /F");
@@ -1044,27 +1052,6 @@ internal class OptimizeSystemHelper
     internal static void EnableShowMoreOptions()
     {
         OptimizationOptions.StartInCmd("REG Delete \"HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\" /F");
-    }
-
-    internal static void DisableTPMCheck()
-    {
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\MoSetup\" /V AllowUpgradesWithUnsupportedTPMOrCPU /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassCPUCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassStorageCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassTPMCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassRAMCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassSecureBootCheck /T REG_DWORD /D 1 /F");
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Control Panel\\UnsupportedHardwareNotificationCache\" /V SV2 /T REG_DWORD /D 0 /F");
-    }
-
-    internal static void EnableTPMCheck()
-    {
-        OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\MoSetup\" /V AllowUpgradesWithUnsupportedTPMOrCPU /T REG_DWORD /D 0 /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassTPMCheck /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassRAMCheck /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassSecureBootCheck /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassStorageCheck /F");
-        OptimizationOptions.StartInCmd("REG Delete \"HKEY_LOCAL_MACHINE\\SYSTEM\\Setup\\LabConfig\" /V BypassCPUCheck /F");
     }
 
     internal static void EnableFilesCompactMode()

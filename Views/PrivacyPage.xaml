@@ -1,0 +1,80 @@
+﻿<Page
+    x:Class="RyTuneX.Views.PrivacyPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <x:Double x:Key="SettingsCardSpacing">4</x:Double>
+        <Style x:Key="SettingsSectionHeaderTextBlockStyle"
+           BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+           TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Margin" Value="1,30,0,6" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+    <Grid x:Name="ContentArea" Margin="-45,10,-45,10">
+        <ScrollViewer Margin="20" Padding="16,6,16,6">
+            <StackPanel Spacing="{StaticResource SettingsCardSpacing}">
+                
+                <!-- Telemetry Elements -->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="6"
+                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                        Text="Telemetry"/>
+                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/telemetry.html">
+                        <FontIcon FontSize="15"
+                            Glyph="&#xE946;" />
+                    </HyperlinkButton>
+                </StackPanel>
+
+                <controls:SettingsCard Header="Enhance Privacy">
+                    <ToggleSwitch x:Name="Privacy" Tag="Privacy" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.Description>
+                        <HyperlinkButton Content="Learn more about what's being disabled" 
+                                         NavigateUri="https://rayenghanmi.github.io/rytunex/privacy.html" />
+                    </controls:SettingsCard.Description>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable SMBv1" Description="Disables Server Message Block version 1 (SMBv1) for enhanced security">
+                    <ToggleSwitch x:Name="SMBv1" Tag="SMBv1" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable SMBv2" Description="Disables Server Message Block version 2 (SMBv2) for enhanced security">
+                    <ToggleSwitch x:Name="SMBv2" Tag="SMBv2" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable SMBv3" Description="Disables Server Message Block version 3 (SMBv3) for enhanced security">
+                    <ToggleSwitch x:Name="SMBv3" Tag="SMBv3" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+                
+                <controls:SettingsCard Header="Disable Telemetry Services" Description="Turns off telemetry services to prevent the collection and transmission of usage data by the operating system.">
+                    <ToggleSwitch x:Name="TelemetryServices" Tag="TelemetryServices" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Edge Telemetry" Description="Disables telemetry data collection in Microsoft Edge.">
+                    <ToggleSwitch x:Name="EdgeTelemetry" Tag="EdgeTelemetry" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Visual Studio Telemetry" Description="Disables telemetry data collection in Visual Studio.">
+                    <ToggleSwitch x:Name="VisualStudioTelemetry" Tag="VisualStudioTelemetry" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Nvidia Telemetry" Description="Disables telemetry data collection by Nvidia drivers.">
+                    <ToggleSwitch x:Name="NvidiaTelemetry" Tag="NvidiaTelemetry" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Chrome Telemetry" Description="Disables telemetry data collection in Google Chrome.">
+                    <ToggleSwitch x:Name="ChromeTelemetry" Tag="ChromeTelemetry" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard Header="Disable Firefox Telemetry" Description="Disables telemetry data collection in Mozilla Firefox.">
+                    <ToggleSwitch x:Name="FirefoxTelemetry" Tag="FirefoxTelemetry" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

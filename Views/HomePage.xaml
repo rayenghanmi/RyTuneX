@@ -4,118 +4,94 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-    <ScrollView x:Name="ContentArea" HorizontalScrollMode="Disabled" Margin="-20,0,-20,10" Padding="0,5,0,5">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <StackPanel Grid.Row="0" HorizontalAlignment="Center">
-                <Image
-                Source="/Assets/WindowIcon.ico"
-                Width="128"
-                HorizontalAlignment="Center"
-                Margin="0,12" />
-
-                <TextBlock
-                Text="RyTuneX"
-                HorizontalAlignment="Center"
-                FontWeight="Bold"
-                FontSize="20"
-                Margin="0,12" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="1" HorizontalAlignment="Center">
-
-                <HyperlinkButton
-                NavigateUri="link_to_latest_release"
-                Content="Github repo"
-                HorizontalAlignment="Center"
-                Margin="0,12" />
-            </StackPanel>
-
+    mc:Ignorable="d"
+    Margin="-65,-160,-65,0">
+    <Grid x:Name="HeaderGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="450" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel
+                Grid.Row="0"
+                CornerRadius="6"
+                Padding="50"
+                VerticalAlignment="Center"
+                Orientation="Vertical">
+            <StackPanel.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0.0" Color="#f177a6" />
+                    <GradientStop Offset="0.1" Color="#f177a6" />
+                    <GradientStop Offset="0.2" Color="#f177a6" />
+                    <GradientStop Offset="0.3" Color="#f177a6" />
+                    <GradientStop Offset="0.4" Color="#ccf177a6" />
+                    <GradientStop Offset="0.5" Color="#b3f177a6" />
+                    <GradientStop Offset="0.6" Color="#99f177a6" />
+                    <GradientStop Offset="0.7" Color="#4df177a6" />
+                    <GradientStop Offset="0.8" Color="#33f177a6" />
+                    <GradientStop Offset="0.9" Color="#1af177a6" />
+                    <GradientStop Offset="1.0" Color="#00f177a6" />
+                </LinearGradientBrush>
+            </StackPanel.Background>
             <TextBlock
-            Grid.Row="2"
-            TextWrapping="Wrap"
-            Text="RyTuneX is an optimizer made using the WinUI 3 framework, designed to elevate the performance of Windows devices. Tailored for both Windows 10 and 11, RyTuneX allows users to selectively remove unwanted pre-built applications that are challenging to uninstall and to disable unnecessary background services." 
-            HorizontalAlignment="Left"
-            Margin="12" />
+                    FontSize="16"
+                    Text="{x:Bind _versionDescription}" />
             <TextBlock
-                Grid.Row="3"
-                HorizontalAlignment="Left"
-                Margin="12"
-                Text="Key Features:"
-                FontWeight="Bold"/>
+                    Style="{StaticResource TitleLargeTextBlockStyle}"
+                    FontWeight="Bold"
+                    Text="RyTuneX" />
             <TextBlock
-            Grid.Row="4"
-            TextWrapping="Wrap"
-            HorizontalAlignment="Left"
-            Margin="12">
-                - Selective App Removal: Effortlessly remove unwanted pre-installed apps that are typically hard to uninstall, freeing up valuable storage space.<LineBreak/><LineBreak/>
-                - Background Service Management: Disable unnecessary background services to streamline system resources, enhancing overall performance.<LineBreak/><LineBreak/>
-                - Privacy Enhancements: RyTuneX includes features that enhance privacy by blocking telemetry and data collection processes, ensuring a more secure computing environment.<LineBreak/><LineBreak/>
-                - WinUI 3 Framework: Built with the modern WinUI 3 framework, RyTuneX ensures a sleek and responsive user interface.<LineBreak/><LineBreak/>
-                - Windows 10 and 11 Compatibility: Optimized to deliver peak performance on both Windows 10 and Windows 11.<LineBreak/>
-            </TextBlock>
-
-            <StackPanel HorizontalAlignment="Left" Grid.Row="8">
-                <TextBlock
-                Text="License"
-                FontWeight="Bold"
-                FontSize="16"
-                Margin="0,12" />
-
-                <TextBlock
-                    TextWrapping="Wrap"
-                    Text="This project is licensed under the GNU Affero General Public License v3.0." 
-                    HorizontalAlignment="Left"
-                    Margin="12" />
-                <HyperlinkButton Content="License: AGPL v3.0" NavigateUri="https://www.gnu.org/licenses/agpl-3.0.html"/>
+                    Margin="3"
+                    FontSize="18"
+                    Text="A Windows 10 and 11 Optimizer" />
+            <StackPanel Padding="10">
+                <Button
+                    Width="{StaticResource ContentDialogButtonMaxWidth}"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Margin="6"
+                    Click="GithubButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <BitmapIcon
+                            Width="20"
+                            Margin="10,0,10,0"
+                            HorizontalAlignment="Left"
+                            UriSource="ms-appx:///Assets/github.png"/>
+                        <TextBlock x:Uid="HomePage_WebsiteButton"/>
+                    </StackPanel>
+                </Button>
+                <Button
+                    Click="DiscordButton_Click"
+                    Width="{StaticResource ContentDialogButtonMaxWidth}"
+                    Margin="6">
+                    <StackPanel Orientation="Horizontal">
+                        <BitmapIcon
+                            Foreground="{ThemeResource TextFillColorPrimary}"
+                            Width="20"
+                            Margin="10,0,10,0"
+                            HorizontalAlignment="Left"
+                            UriSource="ms-appx:///Assets/discord.png"/>
+                        <TextBlock x:Uid="HomePage_DiscordButton"/>
+                    </StackPanel>
+                </Button>
+                <Button
+                    Click="IssueButton_Click"
+                    Width="{StaticResource ContentDialogButtonMaxWidth}"
+                    Margin="6">
+                    <StackPanel Orientation="Horizontal">
+                        <BitmapIcon
+                            Foreground="{ThemeResource TextFillColorPrimary}"
+                            Width="20"
+                            Margin="10,0,10,0"
+                            HorizontalAlignment="Left"
+                            UriSource="ms-appx:///Assets/bug.png"/>
+                        <TextBlock x:Uid="HomePage_IssueButton"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
-
-            <StackPanel HorizontalAlignment="Left" Grid.Row="9">
-                <TextBlock
-                Text="Contact"
-                FontWeight="Bold"
-                FontSize="16"
-                Margin="0,12" />
-
-                <StackPanel
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <HyperlinkButton
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Content="ghanmirayen12@gmail.com"
-                        NavigateUri="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ghanmirayen12@gmail.com"/>
-                    <HyperlinkButton
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Content="Twitter"
-                        NavigateUri="https://www.twitter.com/rayen_ghanmi_23"/>
-                    <HyperlinkButton
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Content="Facebook"
-                        NavigateUri="https://www.facebook.com/rayen.ghanmi.23"/>
-                    <HyperlinkButton
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Content="Instagram"
-                        NavigateUri="https://www.instagram.com/rayen.ghanmi.23"/>
-                </StackPanel>
-            </StackPanel>
-        </Grid>
-    </ScrollView>
+        </StackPanel>
+        <ScrollView
+            Grid.Row="1"
+            Margin="20"
+            HorizontalScrollMode="Disabled">
+        </ScrollView>
+    </Grid>
 </Page>

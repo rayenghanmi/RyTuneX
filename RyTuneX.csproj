@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <RootNamespace>RyTuneX</RootNamespace>
     <ApplicationIcon>Assets/WindowIcon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -21,16 +21,20 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-    <PackageCertificateThumbprint>1D92A91C88A122BB200B96F35A8311064D7AD1CE</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>DF8A7D4022DFD5CBB74CBD267C30722B1313BD08</PackageCertificateThumbprint>
     <StartupObject>RyTuneX.Program</StartupObject>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/rayenghanmi/rytunex</RepositoryUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\bug.png" />
+    <None Remove="Assets\discord.png" />
+    <None Remove="Assets\github.png" />
     <None Remove="Assets\WindowIcon.ico" />
-    <None Remove="Views\BenchmarkPage.xaml" />
     <None Remove="Views\DebloatSystemPage.xaml" />
+    <None Remove="Views\FeaturesPage.xaml" />
+    <None Remove="Views\PrivacyPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +44,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.0.230907" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.0.240109" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.231115000" />
@@ -79,7 +84,10 @@
     <Page Update="Views\DebloatSystemPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Update="Views\BenchmarkPage.xaml">
+    <Page Update="Views\FeaturesPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Views\PrivacyPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>

@@ -31,7 +31,7 @@ public sealed partial class SettingsPage : Page
         SetDefaultLanguageBasedOnSystem();
 
         _elementTheme = _themeSelectorService.Theme;
-        _versionDescription = GetVersionDescription();
+        _versionDescription = "Version " + GetVersionDescription();
 
         SwitchThemeCommand = new RelayCommand<ElementTheme>(
             async (param) =>
@@ -100,7 +100,7 @@ public sealed partial class SettingsPage : Page
             }
         }
     }
-    private string GetVersionDescription()
+    public static string GetVersionDescription()
     {
         Version version;
 
@@ -114,7 +114,7 @@ public sealed partial class SettingsPage : Page
         {
             version = typeof(SettingsPage).Assembly.GetName().Version!;
         }
-        return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}";
+        return $"{version.Major}.{version.Minor}.{version.Build}";
     }
     public ElementTheme ElementTheme
     {

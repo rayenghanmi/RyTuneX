@@ -124,7 +124,7 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Home.Content" xml:space="preserve">
-    <value>Qu'est-ce que RyTuneX?</value>
+    <value>RyTuneX</value>
   </data>
   <data name="Debloat_NoSelection.Text" xml:space="preserve">
     <value>Sélectionnez un élément de la liste</value>
@@ -227,7 +227,55 @@
   <data name="UninstallTip" xml:space="preserve">
     <value>Sélectionnez les applications que vous souhaitez supprimer et appuyez sur Désinstaller</value>
   </data>
-  <data name="Shell_Benchmark.Content" xml:space="preserve">
-    <value>Performance</value>
+  <data name="HomePage_DiscordButton.Text" xml:space="preserve">
+    <value>Rejoignez Discord</value>
+  </data>
+  <data name="HomePage_IssueButton.Text" xml:space="preserve">
+    <value>Signalez</value>
+  </data>
+  <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
+    <value>Vérifiez RyTuneX</value>
+  </data>
+  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
+    <value>Votre avis</value>
+  </data>
+  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
+    <value>Processeur</value>
+  </data>
+  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
+    <value>Carte graphique</value>
+  </data>
+  <data name="SystemInfoPage_OS.Text" xml:space="preserve">
+    <value>Système d'exploitation</value>
+  </data>
+  <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
+    <value>Stockage</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>Fonctionnalités de Windows</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>Confidentialité</value>
+  </data>
+  <data name="Debloat" xml:space="preserve">
+    <value>Alléger</value>
+  </data>
+  <data name="DebloatPage_NotificationBody" xml:space="preserve">
+    <value>La désinstallation de certaines de ces applications peut ne pas les supprimer complètement.</value>
+  </data>
+  <data name="UninstallationError" xml:space="preserve">
+    <value>Erreur lors de la désinstallation.</value>
+  </data>
+  <data name="UninstallationSuccessMultiple" xml:space="preserve">
+    <value>applications désinstallées avec succès.</value>
+  </data>
+  <data name="UninstallationSuccessSingle" xml:space="preserve">
+    <value>Désinstallation de l'application réussie.</value>
   </data>
 </root>

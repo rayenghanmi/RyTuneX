@@ -4,17 +4,20 @@ using Windows.Storage;
 
 internal class LogHelper
 {
-    public static async void ShowErrorMessageAndLog(Exception ex, XamlRoot xamlRoot)
+    private static readonly SemaphoreSlim LogSemaphore = new(1, 1);
+
+    public static async Task ShowErrorMessageAndLog(Exception ex, XamlRoot xamlRoot)
     {
         var errorMessage = $"Caught Error: {ex.Message}";
 
-        await LogError(errorMessage);
+        await Log($"Error: { errorMessage}");
 
-        InitiliseErrorMessage(errorMessage, xamlRoot);
+        await InitializeErrorMessage(errorMessage, xamlRoot);
     }
 
     private static async Task LogToFile(string message, string fileName)
     {
+        await LogSemaphore.WaitAsync();
         try
         {
             var tempFolder = ApplicationData.Current.TemporaryFolder;
@@ -27,32 +30,47 @@ internal class LogHelper
         {
             Console.WriteLine($"Error logging to file: {logException.Message}");
         }
+        finally
+        {
+            LogSemaphore.Release();
+        }
     }
 
-    private static async void InitiliseErrorMessage(string errorMessage, XamlRoot xamlRoot)
+    private static async Task InitializeErrorMessage(string errorMessage, XamlRoot xamlRoot)
     {
-        ContentDialog errorDialog = new ContentDialog
+        await LogSemaphore.WaitAsync();
+        try
         {
-            Title = "Error",
-            Content = errorMessage,
-            CloseButtonText = "Close",
-            PrimaryButtonText = "Open Logs File"
-        };
-        errorDialog.XamlRoot = xamlRoot;
-
-        errorDialog.PrimaryButtonClick += async (sender, args) =>
-        {
-            StorageFolder tempFolder = ApplicationData.Current.TemporaryFolder;
-            StorageFile logFile = await tempFolder.GetFileAsync($"ErrorLogs_{DateTime.Now:yyyy-MM-dd}.txt");
-            if (logFile != null)
+            var errorDialog = new ContentDialog
             {
-                var options = new Windows.System.LauncherOptions();
-                options.DisplayApplicationPicker = false;
-                await Windows.System.Launcher.LaunchFileAsync(logFile, options);
-            }
-        };
-        await errorDialog.ShowAsync();
+                Title = "Error",
+                Content = errorMessage,
+                CloseButtonText = "Close",
+                PrimaryButtonText = "Open Logs File",
+                XamlRoot = xamlRoot
+            };
+
+            errorDialog.PrimaryButtonClick += async (sender, args) =>
+            {
+                var tempFolder = ApplicationData.Current.TemporaryFolder;
+                var logFile = await tempFolder.GetFileAsync($"ErrorLogs_{DateTime.Now:yyyy-MM-dd}.txt");
+                if (logFile != null)
+                {
+                    var options = new Windows.System.LauncherOptions
+                    {
+                        DisplayApplicationPicker = false
+                    };
+                    await Windows.System.Launcher.LaunchFileAsync(logFile, options);
+                }
+            };
+            await errorDialog.ShowAsync();
+        }
+        finally
+        {
+            LogSemaphore.Release();
+        }
     }
+
     public static Task Log(string message) => LogToFile(message, "Logs");
-    public static Task LogError(string message) => LogToFile(message, "ErrorLogs");
+    public static Task LogError(string message) => LogToFile($"Error: {message}", "Logs");
 }

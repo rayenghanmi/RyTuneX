@@ -47,17 +47,22 @@
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE80F;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Benchmark" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.BenchmarkPage">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE770;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_OptimizeSystem" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.OptimizeSystemPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF259;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_Debloat" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.DebloatSystemPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE71D;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_Privacy" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.PrivacyPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA18;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_Features" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.FeaturesPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE74C;"/>
                     </NavigationViewItem.Icon>
