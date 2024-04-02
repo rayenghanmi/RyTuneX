@@ -3,6 +3,7 @@
 </p>
 
 # RyTuneX
+[![Ceasefire Now](https://badge.techforpalestine.org/default)](https://techforpalestine.org/learn-more)
 
 [![License: AGPL v3.0](https://img.shields.io/badge/License-AGPL%20v3.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.html)
 [![GitHub stars](https://img.shields.io/github/stars/rayenghanmi/RyTuneX.svg)](https://github.com/rayenghanmi/RyTuneX/stargazers)
