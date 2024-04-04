@@ -47,10 +47,6 @@
                     <ToggleSwitch x:Name="SMBv2" Tag="SMBv2" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable SMBv3" Description="Disables Server Message Block version 3 (SMBv3) for enhanced security">
-                    <ToggleSwitch x:Name="SMBv3" Tag="SMBv3" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-                
                 <controls:SettingsCard Header="Disable Telemetry Services" Description="Turns off telemetry services to prevent the collection and transmission of usage data by the operating system.">
                     <ToggleSwitch x:Name="TelemetryServices" Tag="TelemetryServices" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>

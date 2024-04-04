@@ -186,7 +186,7 @@
     <value>Language</value>
   </data>
   <data name="WelcomeNotice" xml:space="preserve">
-    <value>Dear Valued User,\n\nWe're thrilled to welcome you to RyTuneX, where performance optimization meets precision. Developed by Rayen Ghanmi and proudly crafted by RyByte, RyTuneX is not just an application; it's your gateway to an enhanced computing experience. Whether you're running Windows 11 or Windows 10, RyTuneX is designed to elevate your device's performance to new heights. Dive into a world where unnecessary services are silenced, bloat is banished, and the very heart of your system is finely tuned through intelligent registry optimizations. Get ready to unlock the true power of your device – welcome to RyTuneX, where every click is a step towards a faster, more responsive computing journey.\n\nNote: Please be aware that RyTuneX is currently in beta. While we're excited to have you on board, some features may be in development, and occasional issues might arise. Your feedback is invaluable in helping us refine and perfect the RyTuneX experience. Thank you for being a part of our journey to optimize and enhance your Windows experience.\n\nBest regards,\n\nThe RyByte Team</value>
+    <value>Dear Valued User,\n\nWe're thrilled to welcome you to RyTuneX, where performance optimization meets precision. Developed and proudly crafted by Rayen Ghanmi, RyTuneX is not just an application, it's your gateway to an enhanced computing experience. Whether you're running Windows 11 or Windows 10, RyTuneX is designed to elevate your device's performance to new heights. Dive into a world where unnecessary services are silenced, bloat is banished, and the very heart of your system is finely tuned through intelligent registry optimizations. Get ready to unlock the true power of your device – welcome to RyTuneX, where every click is a step towards a faster, more responsive computing journey.\n\nNote: While we're excited to have you on board, some features may be in development, and occasional issues might arise. Your feedback is invaluable in helping us refine and perfect the RyTuneX experience. Thank you for being a part of our journey to optimize and enhance your Windows experience.\n\nBest regards,\n\nRayen Ghanmi</value>
   </data>
   <data name="WelcomeNoticeTitle" xml:space="preserve">
     <value>Welcome to RyTuneX - Unleash Your Device's Full Potential!</value>
@@ -270,12 +270,12 @@
     <value>Uninstalling some of these apps may not remove them completely.</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>Error uninstalling.</value>
+    <value>Error uninstalling</value>
   </data>
   <data name="UninstallationSuccessMultiple" xml:space="preserve">
-    <value>apps uninstalled successfully.</value>
+    <value>Apps uninstalled successfully</value>
   </data>
   <data name="UninstallationSuccessSingle" xml:space="preserve">
-    <value>App uninstalled successfully.</value>
+    <value>App uninstalled successfully</value>
   </data>
 </root>

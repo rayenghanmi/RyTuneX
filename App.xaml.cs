@@ -122,19 +122,19 @@ public partial class App : Application
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
 
-    private bool ShouldShowWelcomeNotification()
+    private static bool ShouldShowWelcomeNotification()
     {
         // Check if the setting is not present or set to false
-        if (!ApplicationData.Current.LocalSettings.Values.ContainsKey("WelcomeNotificationShown"))
+        if (!ApplicationData.Current.LocalSettings.Values.TryGetValue("WelcomeNotificationShown", out var value))
         {
             return true; // Show the notification if the setting is not present
         }
 
         // Check the value of the setting
-        return !(bool)ApplicationData.Current.LocalSettings.Values["WelcomeNotificationShown"];
+        return !(bool)value;
     }
 
-    private void SetWelcomeNotificationShown()
+    private static void SetWelcomeNotificationShown()
     {
         // Set the flag to true to indicate that the welcome notification has been shown
         LogHelper.Log("Setting WelcomeNotificationShown");

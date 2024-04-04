@@ -186,7 +186,7 @@
     <value>Langue</value>
   </data>
   <data name="WelcomeNotice" xml:space="preserve">
-    <value>Cher utilisateur précieux,\n\nNous sommes ravis de vous accueillir dans RyTuneX, où l'optimisation des performances rencontre la précision. Développé par Rayen Ghanmi et fièrement conçu par RyByte, RyTuneX n'est pas simplement une application ; c'est votre porte d'entrée vers une expérience informatique améliorée. Que vous utilisiez Windows 11 ou Windows 10, RyTuneX est conçu pour élever les performances de votre appareil à de nouveaux sommets. Plongez dans un univers où les services inutiles sont réduits au silence, les éléments superflus sont éliminés, et le cœur même de votre système est finement réglé grâce à des optimisations intelligentes de la base de registre. Préparez-vous à libérer la véritable puissance de votre appareil - bienvenue dans RyTuneX, où chaque clic est un pas vers un parcours informatique plus rapide et réactif.\n\nRemarque : Veuillez noter que RyTuneX est actuellement en version bêta. Bien que nous soyons ravis de vous avoir parmi nous, certaines fonctionnalités sont en cours de développement, et des problèmes occasionnels peuvent survenir. Vos commentaires sont précieux pour nous aider à affiner et à perfectionner l'expérience RyTuneX. Merci de faire partie de notre parcours visant à optimiser et améliorer votre expérience Windows.\n\nCordialement,\n\nL'équipe RyByte</value>
+    <value>Cher utilisateur précieux,\n\nNous sommes ravis de vous accueillir dans RyTuneX, où l'optimisation des performances rencontre la précision. Développé et fièrement conçu par Rayen Ghanmi, RyTuneX n'est pas simplement une application ; c'est votre porte d'entrée vers une expérience informatique améliorée. Que vous utilisiez Windows 11 ou Windows 10, RyTuneX est conçu pour élever les performances de votre appareil à de nouveaux sommets. Plongez dans un univers où les services inutiles sont réduits au silence, les éléments superflus sont éliminés, et le cœur même de votre système est finement réglé grâce à des optimisations intelligentes de la base de registre. Préparez-vous à libérer la véritable puissance de votre appareil - bienvenue dans RyTuneX, où chaque clic est un pas vers un parcours informatique plus rapide et réactif.\n\nRemarque: Bien que nous soyons ravis de vous avoir parmi nous, certaines fonctionnalités sont en cours de développement, et des problèmes occasionnels peuvent survenir. Vos commentaires sont précieux pour nous aider à affiner et à perfectionner l'expérience RyTuneX. Merci de faire partie de notre parcours visant à optimiser et améliorer votre expérience Windows.\n\nCordialement,\n\nRayen Ghanmi</value>
   </data>
   <data name="WelcomeNoticeTitle" xml:space="preserve">
     <value>Bienvenue dans RyTuneX - Libérez tout le potentiel de votre appareil !</value>
@@ -270,12 +270,12 @@
     <value>La désinstallation de certaines de ces applications peut ne pas les supprimer complètement.</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>Erreur lors de la désinstallation.</value>
+    <value>Erreur lors de la désinstallation</value>
   </data>
   <data name="UninstallationSuccessMultiple" xml:space="preserve">
-    <value>applications désinstallées avec succès.</value>
+    <value>Applications désinstallées avec succès</value>
   </data>
   <data name="UninstallationSuccessSingle" xml:space="preserve">
-    <value>Désinstallation de l'application réussie.</value>
+    <value>Désinstallation de l'application réussie</value>
   </data>
 </root>

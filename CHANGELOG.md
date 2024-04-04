@@ -2,6 +2,14 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 0.8.0 - Work In Progress
+
+### Fixes
+
+- [x] When finished uninstalling apps, the `Show All` checkbox should keep the same state after refreshing installed apps' list.
+- [x] Some apps that were not removed are showing `Uninstalled successfully`.
+- [x] Some packages may show an error even after being successfully removed.
+
 ## 0.7.2 - Released
 
 ### Added

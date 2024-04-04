@@ -263,18 +263,6 @@ internal class OptimizationOptions
                         ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
                     }
                     break;
-                case "SMBv3":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisableSMB("3");
-                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnableSMB("3");
-                        ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
-                    }
-                    break;
                 case "NTFSTimeStamp":
                     if (toggleSwitch.IsOn)
                     {

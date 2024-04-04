@@ -98,9 +98,13 @@
                     </controls:SettingsCard>
                 </controls:SettingsExpander.Items>
             </controls:SettingsExpander>
-            <HyperlinkButton Margin="0,8,0,0"
-                     x:Uid="SettingsPage_FeedbackButton"
-                     NavigateUri="https://github.com/rayenghanmi/rytunex/issues/new" />
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                <HyperlinkButton x:Uid="SettingsPage_FeedbackButton"
+                    NavigateUri="https://github.com/rayenghanmi/rytunex/issues/new" />
+                <HyperlinkButton x:Uid="SettingsPage_SupportButton"
+                    Content="#CeasefireNOW"
+                    NavigateUri="https://techforpalestine.org/learn-more/" />
+            </StackPanel>
         </StackPanel>
     </ScrollView>
 </Page>
