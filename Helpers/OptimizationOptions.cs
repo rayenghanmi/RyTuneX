@@ -74,23 +74,34 @@ internal class OptimizationOptions
             }
         }
     }
-    internal static void StartInCmd(string command)
+    internal static async Task<int> StartInCmd(string command)
     {
         try
         {
             using var p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.Arguments = $"/C {command}";
-            p.StartInfo.CreateNoWindow = false;
+            p.StartInfo.CreateNoWindow = true;
             p.StartInfo.UseShellExecute = true;
-            p.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
-            p.Start();
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+            // Start the process in a separate Task
+            Task startTask = Task.Run(() => p.Start());
+
+            // Await the start task to ensure process starts
+            await startTask;
+
+            // Await process completion and capture exit code
+            await p.WaitForExitAsync();
+            return p.ExitCode;
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error running command: {ex.Message}");
+            throw;
         }
     }
+
 
     internal static void StartService(string serviceName)
     {

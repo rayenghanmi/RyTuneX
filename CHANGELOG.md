@@ -10,6 +10,10 @@ All notable changes to this branch will be documented in this file.
 - [x] Some apps that were not removed are showing `Uninstalled successfully`.
 - [x] Some packages may show an error even after being successfully removed.
 
+### Added
+
+- Option to remove temporary files in `Debloat` page.
+
 ## 0.7.2 - Released
 
 ### Added

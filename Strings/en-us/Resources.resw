@@ -278,4 +278,7 @@
   <data name="UninstallationSuccessSingle" xml:space="preserve">
     <value>App uninstalled successfully</value>
   </data>
+  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+    <value>Remove Temp Files</value>
+  </data>
 </root>

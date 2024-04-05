@@ -74,6 +74,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallingStatusBar.Visibility = Visibility.Collapsed;
                 showAll.Visibility = Visibility.Collapsed;
                 uninstallButton.Visibility = Visibility.Collapsed;
+                TempStackButtonTextBar.Visibility = Visibility.Collapsed;
 
                 foreach (var app in installedApps)
                 {
@@ -95,6 +96,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.IsEnabled = true;
                 gettingAppsLoading.Visibility = Visibility.Collapsed;
                 uninstallingStatusBar.ShowError = false;
+                TempStackButtonTextBar.Visibility = Visibility.Visible;
             });
         }
         catch (OperationCanceledException ex)
@@ -250,5 +252,38 @@ public sealed partial class DebloatSystemPage : Page
         };
         LogHelper.Log("Returning Debloat Notification");
         return notification;
+    }
+
+    private async void RemoveTempFiles(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            TempStack.Visibility = Visibility.Visible;
+            TempProgress.ShowError = false;
+            TempProgress.Visibility = Visibility.Visible;
+            TempButton.Visibility = Visibility.Collapsed;
+            TempStatusText.Text = "Deleting Temp Files...";
+
+            var exitCode = await OptimizationOptions.StartInCmd("Del /F /S /Q \"C:\\*.tmp\"");
+
+            // Check for successful execution
+            if (exitCode == 0)
+            {
+                TempStatusText.Text = "Temp Files Deleted Successfully!";
+                TempProgress.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                TempStatusText.Text = "Error Deleting Temp Files";
+                TempProgress.ShowError = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            TempStatusText.Text = "Error: " + ex.Message;
+            TempButton.Visibility = Visibility.Visible;
+            TempProgress.Visibility = Visibility.Collapsed;
+            TempProgress.ShowError = true;
+        }
     }
 }
