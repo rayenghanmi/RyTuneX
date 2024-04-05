@@ -14,14 +14,13 @@ namespace RyTuneX.Views;
 public sealed partial class PrivacyPage : Page
 {
 
-    private readonly bool isInitialSetup = true;
+    private bool isInitialLoad = true;
 
     public PrivacyPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing OptimizeSystemPage");
         Loaded += (sender, e) => InitializeToggleSwitches();
-        isInitialSetup = false;
     }
     private void InitializeToggleSwitches()
     {
@@ -39,6 +38,7 @@ public sealed partial class PrivacyPage : Page
                 }
             }
         }
+        isInitialLoad = false;
     }
     // Helper method to find all children of a specific type in the visual tree
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -69,23 +69,32 @@ public sealed partial class PrivacyPage : Page
             }
         }
     }
-    private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+    private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
-            if (!isInitialSetup)
+            var toggleSwitch = (ToggleSwitch)sender;
+            Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            if (toggleSwitch.IsOn)
             {
-                var toggleSwitch = (ToggleSwitch)sender;
-                if (toggleSwitch != null && toggleSwitch.Tag != null)
-                {
-                    Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
-                    OptimizationOptions.XamlSwitches(toggleSwitch);
-                }
+                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
+            }
+            else
+            {
+                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
+            }
+            if (isInitialLoad)
+            {
+                OptimizationOptions.XamlSwitches(toggleSwitch);
+            }
+            else
+            {
+                OptimizationOptions.XamlSwitches(toggleSwitch, false);
             }
         }
         catch (Exception ex)
         {
-            await LogHelper.ShowErrorMessageAndLog(ex, this.XamlRoot);
+            LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
     }
 }

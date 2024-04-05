@@ -13,15 +13,13 @@ namespace RyTuneX.Views;
 
 public sealed partial class FeaturesPage : Page
 {
-
-    private readonly bool isInitialSetup = true;
+    private bool isInitialLoad = true;
 
     public FeaturesPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing FeaturesPage");
         Loaded += (sender, e) => InitializeToggleSwitches();
-        isInitialSetup = false;
     }
     private void InitializeToggleSwitches()
     {
@@ -39,6 +37,7 @@ public sealed partial class FeaturesPage : Page
                 }
             }
         }
+        isInitialLoad = false;
     }
     // Helper method to find all children of a specific type in the visual tree
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -73,11 +72,23 @@ public sealed partial class FeaturesPage : Page
     {
         try
         {
-            if (!isInitialSetup)
+            var toggleSwitch = (ToggleSwitch)sender;
+            Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            if (toggleSwitch.IsOn)
             {
-                var toggleSwitch = (ToggleSwitch)sender;
-                Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
+            }
+            else
+            {
+                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
+            }
+            if (isInitialLoad)
+            {
                 OptimizationOptions.XamlSwitches(toggleSwitch);
+            }
+            else
+            {
+                OptimizationOptions.XamlSwitches(toggleSwitch, false);
             }
         }
         catch (Exception ex)

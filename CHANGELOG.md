@@ -9,6 +9,7 @@ All notable changes to this branch will be documented in this file.
 - [x] When finished uninstalling apps, the `Show All` checkbox should keep the same state after refreshing installed apps' list.
 - [x] Some apps that were not removed are showing `Uninstalled successfully`.
 - [x] Some packages may show an error even after being successfully removed.
+- [x] Reapplying tweaks when initializing toggle switches' previous state.
 
 ### Added
 
