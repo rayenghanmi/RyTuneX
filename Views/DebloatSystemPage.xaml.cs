@@ -21,6 +21,7 @@ using Windows.Storage;
 using RyTuneX.Contracts.Services;
 using Json.Schema;
 using Windows.UI.Popups;
+using ColorCode.Compilation.Languages;
 
 namespace RyTuneX.Views;
 
@@ -196,18 +197,25 @@ public sealed partial class DebloatSystemPage : Page
     }
     private static async Task UninstallApps(string appName)
     {
-        await LogHelper.Log($"Uninstalling: {appName}");
-        using var script = PowerShell.Create();
-        script.AddScript($"Get-AppxPackage -AllUsers | Where-Object {{$_.Name -eq '{appName}'}} | Remove-AppxPackage");
-
-        var result = await script.InvokeAsync();
-
-        if (script.HadErrors)
+        if (!appName.Contains("Edge"))
         {
-            var errorMessage = string.Join(Environment.NewLine, script.Streams.Error.Select(err => err.ToString()));
-            await LogHelper.LogError(errorMessage);
-            throw new Exception(errorMessage);
+            await LogHelper.Log($"Uninstalling: {appName}");
+            using var script = System.Management.Automation.PowerShell.Create();
+            script.AddScript($"Get-AppxPackage -AllUsers | Where-Object {{$_.Name -eq '{appName}'}} | Remove-AppxPackage");
+
+            var result = await script.InvokeAsync();
+
+            if (script.HadErrors)
+            {
+                var errorMessage = string.Join(Environment.NewLine, script.Streams.Error.Select(err => err.ToString()));
+                await LogHelper.LogError(errorMessage);
+                throw new Exception(errorMessage);
+            }
         }
+        else
+        {
+            await OptimizationOptions.ExecuteBatchFileAsync();
+        }   
     }
 
     private void ShowAll_Checked(object sender, RoutedEventArgs e)

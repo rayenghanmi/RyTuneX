@@ -20,6 +20,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 
 using RyTuneX.Activation;
@@ -100,7 +101,7 @@ public partial class App : Application
         }).
         Build();
 
-        App.GetService<IAppNotificationService>().Initialize();
+        //App.GetService<IAppNotificationService>().Initialize();
 
     }
 
@@ -113,7 +114,11 @@ public partial class App : Application
         if (showWelcomeNotification)
         {
             await LogHelper.Log("Showing Welcome Notification");
-            App.GetService<IAppNotificationService>().Show(string.Format("WelcomeNotification".GetLocalized(), AppContext.BaseDirectory));
+            App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+            {
+                var welcomeMessage = "WelcomeNotice".GetLocalized().Replace("\\n", Environment.NewLine); ;
+                App.MainWindow.ShowMessageDialogAsync(welcomeMessage, "WelcomeNoticeTitle".GetLocalized());
+            });
 
             // Set the flag to indicate that the welcome notification has been shown
             SetWelcomeNotificationShown();

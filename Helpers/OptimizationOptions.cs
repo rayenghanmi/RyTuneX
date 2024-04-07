@@ -74,6 +74,73 @@ internal class OptimizationOptions
             }
         }
     }
+
+    /*internal static async Task RemoveEdgeScript(string powerShellScript)
+    {
+        try
+        {
+            // Write the PowerShell script content to a temporary file
+            var tempPowerShellFile = Path.GetTempFileName() + ".ps1";
+            File.WriteAllText(tempPowerShellFile, powerShellScript);
+
+            // Execute the PowerShell script asynchronously
+            // Use Task.Run to start the PowerShell process on a thread pool thread
+            await Task.Run(() =>
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments = $"-ExecutionPolicy Bypass -File \"{tempPowerShellFile}\"",
+                    UseShellExecute = true,
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                }).WaitForExit();
+            });
+
+            // Clean up the temporary file
+            File.Delete(tempPowerShellFile);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred: " + ex.Message);
+        }
+    }*/
+
+    internal static async Task ExecuteBatchFileAsync()
+    {
+        var batchFileName = "RemoveEdge.bat"; // Name of your .bat file
+        var appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        var batchFilePath = Path.Combine(appDirectory, "Helpers", batchFileName);
+        using Process process = new Process();
+        process.StartInfo.FileName = "cmd.exe";
+        process.StartInfo.Arguments = $"/c \"{batchFilePath}\""; // /c option carries out the command specified by the string and then terminates
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = true;
+
+        process.OutputDataReceived += (sender, e) =>
+        {
+            if (!string.IsNullOrEmpty(e.Data))
+            {
+                Console.WriteLine(e.Data);
+            }
+        };
+
+        process.ErrorDataReceived += (sender, e) =>
+        {
+            if (!string.IsNullOrEmpty(e.Data))
+            {
+                Console.WriteLine($"Error: {e.Data}");
+            }
+        };
+
+        process.Start();
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+
+        await Task.Run(() => process.WaitForExit()); // Wait for the process to exit
+    }
+
     internal static async Task<int> StartInCmd(string command)
     {
         try
