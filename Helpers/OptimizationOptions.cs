@@ -1,10 +1,10 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.ServiceProcess;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
-using Windows.Storage;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml;
+using System.Reflection;
 
 namespace RyTuneX.Helpers;
 internal class OptimizationOptions
@@ -75,70 +75,62 @@ internal class OptimizationOptions
         }
     }
 
-    /*internal static async Task RemoveEdgeScript(string powerShellScript)
+    internal static async Task ExecuteBatchFileAsync()
     {
         try
         {
-            // Write the PowerShell script content to a temporary file
-            var tempPowerShellFile = Path.GetTempFileName() + ".ps1";
-            File.WriteAllText(tempPowerShellFile, powerShellScript);
+            // Get the path to the PowerShell script file
+            string scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
 
-            // Execute the PowerShell script asynchronously
-            // Use Task.Run to start the PowerShell process on a thread pool thread
-            await Task.Run(() =>
+
+
+            if (!File.Exists(scriptFilePath))
             {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = "powershell.exe",
-                    Arguments = $"-ExecutionPolicy Bypass -File \"{tempPowerShellFile}\"",
-                    UseShellExecute = true,
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Hidden
-                }).WaitForExit();
-            });
+                LogHelper.Log($"Script file not found: {scriptFilePath}");
+                return;
+            }
 
-            // Clean up the temporary file
-            File.Delete(tempPowerShellFile);
+            // Read the content of the script file
+            string scriptContent = File.ReadAllText(scriptFilePath);
+
+            // Create a PowerShell instance
+            using (var PowerShellInstance = PowerShell.Create())
+            {
+                LogHelper.Log("Getting Installed Apps [OptimizationOptions.cs]");
+
+                // Add the script content
+                PowerShellInstance.AddScript(scriptContent)
+                    .AddArgument("-Set-ExecutionPolicy Unrestricted");
+
+                // Invoke the script asynchronously
+                await Task.Run(() => PowerShellInstance.Invoke());
+
+                // Check for errors
+                if (PowerShellInstance.HadErrors)
+                {
+                    foreach (var error in PowerShellInstance.Streams.Error)
+                    {
+                        LogHelper.Log($"PowerShell Error: {error}");
+                    }
+                }
+                else
+                {
+                    LogHelper.Log("PowerShell script executed successfully.");
+                }
+            }
         }
         catch (Exception ex)
         {
-            Console.WriteLine("An error occurred: " + ex.Message);
+            LogHelper.Log($"Error: {ex.Message}");
         }
-    }*/
+    }
 
-    internal static async Task ExecuteBatchFileAsync()
+    // Helper method to get the path of the script file
+    private string GetScriptFilePath(string scriptFileName)
     {
-        var batchFileName = "RemoveEdge.bat"; // Name of your .bat file
-        var appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        var batchFilePath = Path.Combine(appDirectory, "Helpers", batchFileName);
-        using Process process = new Process();
-        process.StartInfo.FileName = "cmd.exe";
-        process.StartInfo.Arguments = $"/c \"{batchFilePath}\""; // /c option carries out the command specified by the string and then terminates
-        process.StartInfo.UseShellExecute = false;
-        process.StartInfo.RedirectStandardOutput = true;
-        process.StartInfo.RedirectStandardError = true;
-
-        process.OutputDataReceived += (sender, e) =>
-        {
-            if (!string.IsNullOrEmpty(e.Data))
-            {
-                Console.WriteLine(e.Data);
-            }
-        };
-
-        process.ErrorDataReceived += (sender, e) =>
-        {
-            if (!string.IsNullOrEmpty(e.Data))
-            {
-                Console.WriteLine($"Error: {e.Data}");
-            }
-        };
-
-        process.Start();
-        process.BeginOutputReadLine();
-        process.BeginErrorReadLine();
-
-        await Task.Run(() => process.WaitForExit()); // Wait for the process to exit
+        string assemblyLocation = Assembly.GetExecutingAssembly().Location;
+        string scriptDirectory = Path.Combine(Path.GetDirectoryName(assemblyLocation), "Helpers");
+        return Path.Combine(scriptDirectory, scriptFileName);
     }
 
     internal static async Task<int> StartInCmd(string command)

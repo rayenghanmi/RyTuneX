@@ -4,9 +4,6 @@ using Microsoft.UI.Xaml.Controls;
 using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
-using Windows.UI.Popups;
-using Json.Schema;
-using System;
 using CommunityToolkit.WinUI.Controls;
 
 namespace RyTuneX.Views;

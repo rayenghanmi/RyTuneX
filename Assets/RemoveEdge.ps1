@@ -1,7 +1,3 @@
-@(set "0=%~f0"^)#) & powershell -nop -c iex([io.file]::ReadAllText($env:0)) & exit /b
-#:: just copy-paste into powershell - it's a standalone hybrid script
-sp 'HKCU:\Volatile Environment' 'Edge_Removal' @'
-
 $also_remove_webview = 1
 ## why also remove webview? because it is 2 copies of edge, not a slimmed down CEF, and is driving bloated web apps
 $also_remove_widgets = 1
@@ -9,7 +5,6 @@ $also_remove_widgets = 1
 $also_remove_xsocial = 1
 ## why also remove xsocial? because it starts webview setup every boot - xbox gamebar will still work without the social crap
 
-$host.ui.RawUI.WindowTitle = 'Edge Removal - AveYo, 2023.09.14'
 write-host "Run the script again whenever you need to reinstall and update edge or webview..`n"
 $remove_appx = @("MicrosoftEdge"); $remove_win32 = @("Microsoft Edge","Microsoft Edge Update"); $skip = @() # @("DevTools")
 if ($also_remove_webview -eq 1) {$remove_appx += "Win32WebViewHost"; $remove_win32 += "Microsoft EdgeWebView"}
@@ -28,24 +23,6 @@ $global:ALLHIVES = 'HKCU:\SOFTWARE','HKLM:\SOFTWARE','HKCU:\SOFTWARE\Policies','
 if ($IS64) { $global:ALLHIVES += "HKCU:\$SOFTWARE","HKLM:\$SOFTWARE","HKCU:\$SOFTWARE\Policies","HKLM:\$SOFTWARE\Policies"}
 ## -------------------------------------------------------------------------------------------------------------------------------
 
-## 1 bonus! enter into powershell console: firefox / edge / webview to install a browser / reinstall edge / webview after removal
-function global:firefox { $url = 'https://download.mozilla.org/?product=firefox-stub'
-  $setup = "$((new-object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path)\Firefox Installer.exe"
-  write-host $url; Invoke-WebRequest $url -OutFile $setup; start $setup
-}
-function global:edge { $url = 'https://go.microsoft.com/fwlink/?linkid=2108834&Channel=Stable&language=en'
-  $setup = "$((new-object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path)\MicrosoftEdgeSetup.exe"
-  write-host $url; Invoke-WebRequest $url -OutFile $setup; PREPARE_EDGE; start $setup
-}
-function global:webview { $url = 'https://go.microsoft.com/fwlink/p/?LinkId=2124703'
-  $setup = "$((new-object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path)\MicrosoftEdgeWebview2Setup.exe"
-  write-host $url; Invoke-WebRequest $url -OutFile $setup; PREPARE_WEBVIEW; start $setup
-}
-function global:xsocial { $url = 'https://dlassets-ssl.xboxlive.com/public/content/XboxInstaller/XboxInstaller.exe'
-  $setup = "$((new-object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path)\XboxInstaller.exe"
-  write-host $url; Invoke-WebRequest $url -OutFile $setup; PREPARE_WEBVIEW; start $setup
-}
-
 ## helper for set-itemproperty remove-itemproperty new-item remove-item with auto test-path
 function global:sp_test_path { if (test-path $args[0]) {Microsoft.PowerShell.Management\Set-ItemProperty @args} else {
   Microsoft.PowerShell.Management\New-Item $args[0] -force -ea 0 >''; Microsoft.PowerShell.Management\Set-ItemProperty @args} }
@@ -53,44 +30,6 @@ function global:rp_test_path { if (test-path $args[0]) {Microsoft.PowerShell.Man
 function global:ni_test_path { if (-not (test-path $args[0])) {Microsoft.PowerShell.Management\New-Item @args} }
 function global:ri_test_path { if (test-path $args[0]) {Microsoft.PowerShell.Management\Remove-Item @args} }
 foreach ($f in 'sp','rp','ni','ri') {set-alias -Name $f -Value "${f}_test_path" -Scope Local -Option AllScope -force -ea 0}
-
-## helper for edgeupdate reinstall
-function global:PREPARE_UPDT($cdp='msedgeupdate', $uid=$UPDT_UID) {
-  foreach ($f in 'sp','rp','ni','ri') {set-alias -Name $f -Value "${f}_test_path" -Scope Local -Option AllScope -force -ea 0}
-  foreach ($sw in $ALLHIVES) { 
-    rp "$sw\Microsoft\EdgeUpdate" 'DoNotUpdateToEdgeWithChromium' -force -ea 0
-    rp "$sw\Microsoft\EdgeUpdate" 'UpdaterExperimentationAndConfigurationServiceControl' -force -ea 0
-    rp "$sw\Microsoft\EdgeUpdate" "InstallDefault" -force -ea 0
-    rp "$sw\Microsoft\EdgeUpdate" "Install${uid}" -force -ea 0
-    rp "$sw\Microsoft\EdgeUpdate" "EdgePreview${uid}" -force -ea 0
-    rp "$sw\Microsoft\EdgeUpdate" "Update${uid}" -force -ea 0
-    rp "$sw\Microsoft\EdgeUpdate\ClientState\*" 'experiment_control_labels' -force -ea 0 
-    ri "$sw\Microsoft\EdgeUpdate\Clients\${uid}\Commands" -recurse -force -ea 0
-    rp "$sw\Microsoft\EdgeUpdateDev\CdpNames" "$cdp-*" -force -ea 0
-    sp "$sw\Microsoft\EdgeUpdateDev" 'CanContinueWithMissingUpdate' 1 -type Dword -force
-    sp "$sw\Microsoft\EdgeUpdateDev" 'AllowUninstall' 1 -type Dword -force
-  }
-}
-## helper for edge reinstall - remove bundled OpenWebSearch redirector and edgeupdate policies
-function global:PREPARE_EDGE {
-  foreach ($f in 'sp','rp','ni','ri') {set-alias -Name $f -Value "${f}_test_path" -Scope Local -Option AllScope -force -ea 0}
-  PREPARE_UPDT 'msedge' $EDGE_UID; PREPARE_UPDT 'msedgeupdate' $UPDT_UID 
-  $MSEDGE = "$PROGRAMS\Microsoft\Edge\Application\msedge.exe"
-  ri "$IFEO\msedge.exe" -recurse -force; ri "$IFEO\ie_to_edge_stub.exe" -recurse -force
-  ri 'Registry::HKEY_Users\S-1-5-21*\Software\Classes\microsoft-edge' -recurse -force
-  sp 'HKLM:\SOFTWARE\Classes\microsoft-edge\shell\open\command' '(Default)' "`"$MSEDGE`" --single-argument %%1" -force
-  ri 'Registry::HKEY_Users\S-1-5-21*\Software\Classes\MSEdgeHTM' -recurse -force
-  sp 'HKLM:\SOFTWARE\Classes\MSEdgeHTM\shell\open\command' '(Default)' "`"$MSEDGE`" --single-argument %%1" -force
-}
-## helper for webview reinstall - restore webexperience (widgets) if available
-function global:PREPARE_WEBVIEW {
-  PREPARE_UPDT 'msedgewebview' $WEBV_UID; PREPARE_UPDT 'msedgeupdate' $UPDT_UID
-  $cfg = @{Register=$true; ForceApplicationShutdown=$true; ForceUpdateFromAnyVersion=$true; DisableDevelopmentMode=$true} 
-  dir "$env:SystemRoot\SystemApps\Microsoft.Win32WebViewHost*\AppxManifest.xml" -rec -ea 0 | Add-AppxPackage @cfg
-  dir "$env:ProgramFiles\WindowsApps\MicrosoftWindows.Client.WebExperience*\AppxManifest.xml" -rec -ea 0 | Add-AppxPackage @cfg
-  kill -name explorer -ea 0; if ((get-process -name 'explorer' -ea 0) -eq $null) {start explorer}
-}
-## -------------------------------------------------------------------------------------------------------------------------------
 
 ## 2 enable admin privileges
 $D1=[uri].module.gettype('System.Diagnostics.Process')."GetM`ethods"(42) |where {$_.Name -eq 'SetPrivilege'} #`:no-ev-warn
@@ -235,7 +174,7 @@ $ta = New-ScheduledTaskAction -Execute '%Temp%\OpenWebSearchRepair.cmd'
 $tt = New-ScheduledTaskTrigger -Once -At 00:00; $ts = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries
 Register-ScheduledTask -TaskName 'OpenWebSearchRepair' -Action $ta -Trigger $tt -Settings $ts -RunLevel Highest -Force >''
 
-$OpenWebSearch = @$
+$OpenWebSearch = @'
 @title OpenWebSearch Redux & echo off & set ?= open start menu web search, widgets links or help in your chosen browser - by AveYo
 for /f %%E in ('"prompt $E$S& for %%e in (1) do rem"') do echo;%%E[2t 2>nul & rem AveYo: minimize prompt
 call :reg_var "HKCU\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice" ProgID ProgID
@@ -284,20 +223,10 @@ set ".=!.:{=%%!" &rem set ",=!.:%%=!" & if "!,!" neq "!.!" endlocal& set "URL=%.
 endlocal& set "URL=%.:}=!%" & exit /b
 rem done
 
-$@
+'@
 [io.file]::WriteAllText("$DIR\OpenWebSearch.cmd", $OpenWebSearch)
 ## -------------------------------------------------------------------------------------------------------------------------------
 
 ## 8 done
 $done = gp 'Registry::HKEY_Users\S-1-5-21*\Volatile*' Edge_Removal -ea 0; if ($done) {rp $done.PSPath Edge_Removal -force -ea 0}
 if ((get-process -name 'explorer' -ea 0) -eq $null) {start explorer}
-
-## bonus enter into powershell console: firefox / edge / webview to install a browser / reinstall edge or webview after removal
-${.} = [char]27; $firefox = "${.}[38;2;255;165;0m firefox"; $reinstall = "${.}[96m edge / webview / xsocial${.}[97m "
-write-host "`n${.}[40;32m EDGE REMOVED! ${.}[97m -GET-ANOTHER-BROWSER? ENTER:$firefox ${.}[97m -REINSTALL? ENTER:$reinstall"
-## -------------------------------------------------------------------------------------------------------------------------------
-
-## 0 ask to run script as admin
-'@.replace("$@","'@").replace("@$","@'") -force -ea 0; $code='gp ''Registry::HKEY_Users\S-1-5-21*\Volatile*'' Edge_Removal -ea 0'
-start powershell -args "-nop -noe -c & {iex(($code)[0].Edge_Removal)}" -verb runas
-#::

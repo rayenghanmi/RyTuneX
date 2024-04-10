@@ -1,27 +1,11 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Management.Automation;
-using System.Reflection;
-using Microsoft.Extensions.Logging;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
-using Windows.ApplicationModel;
-using Windows.UI.Core;
-using Windows.UI.Notifications;
-using CommunityToolkit.WinUI.Behaviors;
-using System.Threading;
-using Windows.ApplicationModel.Core;
 using Windows.Storage;
-using RyTuneX.Contracts.Services;
-using Json.Schema;
-using Windows.UI.Popups;
-using ColorCode.Compilation.Languages;
+
 
 namespace RyTuneX.Views;
 
@@ -61,7 +45,6 @@ public sealed partial class DebloatSystemPage : Page
 
             var installedApps = await Task.Run(() => OptimizationOptions.GetUWPApps(uninstallableOnly), cancellationToken);
             var numberOfInstalledApps = installedApps.Count - 1; // removes Rayen.RyTuneX from total installed apps count
-
             DispatcherQueue.TryEnqueue(() =>
             {
                 // fetching installed apps data & hiding UI elements
@@ -138,6 +121,7 @@ public sealed partial class DebloatSystemPage : Page
                     }
                 }
             }
+            appTreeView.SelectedItems.Clear();
             // Reload the installed apps after successfull uninstall
             await LogHelper.Log("Reloading Installed Apps Data");
             if (uninstallableOnlyChecked)
@@ -159,7 +143,7 @@ public sealed partial class DebloatSystemPage : Page
             {
                 NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccessSingle".GetLocalized(), InfoBarSeverity.Success, 4000));
             }
-            
+
         }
         // in case of an error
         catch (Exception ex)
@@ -183,7 +167,8 @@ public sealed partial class DebloatSystemPage : Page
             // Use Process.Start to open the file with the default application
             Process.Start(new ProcessStartInfo(file.Path) { UseShellExecute = true });
 
-            // reload
+            // reload after error
+
             if (uninstallableOnlyChecked)
             {
                 LoadInstalledApps();
@@ -197,7 +182,7 @@ public sealed partial class DebloatSystemPage : Page
     }
     private static async Task UninstallApps(string appName)
     {
-        if (!appName.Contains("Edge"))
+        if (!appName.Contains("Microsoft.MicrosoftEdge"))
         {
             await LogHelper.Log($"Uninstalling: {appName}");
             using var script = System.Management.Automation.PowerShell.Create();
@@ -214,8 +199,24 @@ public sealed partial class DebloatSystemPage : Page
         }
         else
         {
-            await OptimizationOptions.ExecuteBatchFileAsync();
-        }   
+            var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
+
+            var scriptContent = File.ReadAllText(scriptFilePath);
+
+            await LogHelper.Log($"Uninstalling: {appName}");
+
+            using var PowerShellInstance = PowerShell.Create();
+            PowerShellInstance.AddScript(scriptContent)
+                .AddArgument("-Set-ExecutionPolicy Unrestricted");
+
+            var result = PowerShellInstance.InvokeAsync();
+            if (PowerShellInstance.HadErrors)
+            {
+                var errorMessage = string.Join(Environment.NewLine, PowerShellInstance.Streams.Error.Select(err => err.ToString()));
+                await LogHelper.LogError(errorMessage);
+                throw new Exception(errorMessage);
+            }
+        }
     }
 
     private void ShowAll_Checked(object sender, RoutedEventArgs e)
@@ -272,10 +273,11 @@ public sealed partial class DebloatSystemPage : Page
             TempButton.Visibility = Visibility.Collapsed;
             TempStatusText.Text = "Deleting Temp Files...";
 
-            var exitCode = await OptimizationOptions.StartInCmd("Del /F /S /Q \"C:\\*.tmp\"");
+            var exitCode1 = await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\*.tmp\"");
+            var exitCode2 = await OptimizationOptions.StartInCmd("del /q/f/s %TEMP%\\*");
 
             // Check for successful execution
-            if (exitCode == 0)
+            if (exitCode1 == 0 && exitCode2 == 0)
             {
                 TempStatusText.Text = "Temp Files Deleted Successfully!";
                 TempProgress.Visibility = Visibility.Collapsed;

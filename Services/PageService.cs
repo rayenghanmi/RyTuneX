@@ -1,9 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-using Microsoft.UI.Xaml.Controls;
-
-using RyTuneX.Contracts.Services;
-using RyTuneX.ViewModels;
+﻿using RyTuneX.Contracts.Services;
 using RyTuneX.Views;
 
 namespace RyTuneX.Services;
