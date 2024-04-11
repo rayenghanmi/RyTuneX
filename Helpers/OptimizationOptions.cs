@@ -80,57 +80,47 @@ internal class OptimizationOptions
         try
         {
             // Get the path to the PowerShell script file
-            string scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
+            var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
 
 
 
             if (!File.Exists(scriptFilePath))
             {
-                LogHelper.Log($"Script file not found: {scriptFilePath}");
+                await LogHelper.Log($"Script file not found: {scriptFilePath}");
                 return;
             }
 
             // Read the content of the script file
-            string scriptContent = File.ReadAllText(scriptFilePath);
+            var scriptContent = File.ReadAllText(scriptFilePath);
 
             // Create a PowerShell instance
-            using (var PowerShellInstance = PowerShell.Create())
+            using var PowerShellInstance = PowerShell.Create();
+            await LogHelper.Log("Getting Installed Apps [OptimizationOptions.cs]");
+
+            // Add the script content
+            PowerShellInstance.AddScript(scriptContent)
+                .AddArgument("-Set-ExecutionPolicy Unrestricted");
+
+            // Invoke the script asynchronously
+            await Task.Run(() => PowerShellInstance.Invoke());
+
+            // Check for errors
+            if (PowerShellInstance.HadErrors)
             {
-                LogHelper.Log("Getting Installed Apps [OptimizationOptions.cs]");
-
-                // Add the script content
-                PowerShellInstance.AddScript(scriptContent)
-                    .AddArgument("-Set-ExecutionPolicy Unrestricted");
-
-                // Invoke the script asynchronously
-                await Task.Run(() => PowerShellInstance.Invoke());
-
-                // Check for errors
-                if (PowerShellInstance.HadErrors)
+                foreach (var error in PowerShellInstance.Streams.Error)
                 {
-                    foreach (var error in PowerShellInstance.Streams.Error)
-                    {
-                        LogHelper.Log($"PowerShell Error: {error}");
-                    }
+                    await LogHelper.Log($"PowerShell Error: {error}");
                 }
-                else
-                {
-                    LogHelper.Log("PowerShell script executed successfully.");
-                }
+            }
+            else
+            {
+                await LogHelper.Log("PowerShell script executed successfully.");
             }
         }
         catch (Exception ex)
         {
-            LogHelper.Log($"Error: {ex.Message}");
+            await LogHelper.Log($"Error: {ex.Message}");
         }
-    }
-
-    // Helper method to get the path of the script file
-    private string GetScriptFilePath(string scriptFileName)
-    {
-        string assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        string scriptDirectory = Path.Combine(Path.GetDirectoryName(assemblyLocation), "Helpers");
-        return Path.Combine(scriptDirectory, scriptFileName);
     }
 
     internal static async Task<int> StartInCmd(string command)

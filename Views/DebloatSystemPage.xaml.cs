@@ -29,7 +29,7 @@ public sealed partial class DebloatSystemPage : Page
         selectedAppsForUninstall.Clear();
         cancellationTokenSource.Cancel();
     }
-    private void appTreeView_DragItemsStarting(TreeView sender, TreeViewDragItemsStartingEventArgs args)
+    private static void AppTreeView_DragItemsStarting(TreeView sender, TreeViewDragItemsStartingEventArgs args)
     {
         args.Cancel = true;
     }
@@ -155,7 +155,7 @@ public sealed partial class DebloatSystemPage : Page
 
             var uninstallationFailed = new ContentDialog()
             {
-                XamlRoot = this.XamlRoot,
+                XamlRoot = XamlRoot,
                 Title = "UninstallationError".GetLocalized(),
                 Content = ex.Message,
                 CloseButtonText = "View logs"
@@ -250,7 +250,7 @@ public sealed partial class DebloatSystemPage : Page
         uninstallableOnlyChecked = true;
         LoadInstalledApps(uninstallableOnly: true, cancellationTokenSource.Token);
     }
-    private CommunityToolkit.WinUI.Behaviors.Notification NotificationContent(string title, string message, InfoBarSeverity severity, int duration)
+    private static CommunityToolkit.WinUI.Behaviors.Notification NotificationContent(string title, string message, InfoBarSeverity severity, int duration)
     {
         var notification = new CommunityToolkit.WinUI.Behaviors.Notification
         {

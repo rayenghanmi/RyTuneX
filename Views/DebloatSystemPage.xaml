@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Padding="5" CornerRadius="8" BorderThickness="1" BorderBrush="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
-            <TreeView Grid.Row="0" x:Name="appTreeView" Visibility="Collapsed" ItemsSource="{x:Bind AppList}" SelectionMode="Multiple" DragItemsStarting="appTreeView_DragItemsStarting">
+            <TreeView Grid.Row="0" x:Name="appTreeView" Visibility="Collapsed" ItemsSource="{x:Bind AppList}" SelectionMode="Multiple" DragItemsStarting="AppTreeView_DragItemsStarting">
                 <TreeView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

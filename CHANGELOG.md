@@ -2,7 +2,7 @@
 
 All notable changes to this branch will be documented in this file.
 
-## 1.0.0 - Work In Progress
+## 0.8.0 - Released
 
 ### Fixes
 
@@ -10,15 +10,12 @@ All notable changes to this branch will be documented in this file.
 - [x] Some apps that were not removed are showing `Uninstalled successfully`.
 - [x] Some packages may show an error even after being successfully removed.
 - [x] Reapplying tweaks when initializing toggle switches' previous state.
-- [x] Wrong uninstalled apps counting.
+- [x] Outputting the wrong uninstalled apps count.
+- [x] Issue #8.
 
 ### Added
 
 - Option to remove temporary files in `Debloat` page.
-
-## 0.8.0 - Unreleased
-
-### Version numbering jumped to 1.0.0
 
 ## 0.7.2 - Released
 
