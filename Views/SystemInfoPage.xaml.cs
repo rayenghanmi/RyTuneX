@@ -1,10 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
 using Microsoft.UI.Xaml.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Management;
-using System.Threading.Tasks;
+using Windows.Storage.Pickers;
+using Windows.Storage;
+using System.Runtime.InteropServices;
+using WinRT.Interop;
+using Microsoft.UI.Xaml;
+using RyTuneX.Helpers;
+
 
 namespace RyTuneX.Views;
 
@@ -205,17 +208,171 @@ public sealed partial class SystemInfoPage : Page
         }
     }
 
-    private void ReloadInfo(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    // Working on it
+
+    /*private static async Task ImportDrivers(string path)
+    {
+        await OptimizationOptions.StartInCmd($"pnputil.exe /add-driver '{path}'\\*.inf /subdirs /install");
+    }
+    public static async Task<int> ProcessSubdirectories(string parentDirectory)
     {
         try
         {
-            LogHelper.LogError("Reloading SystemInfo Page");
-            Frame.Navigate(Frame.CurrentSourcePageType);
-            Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+            string[] subdirectories = Directory.GetDirectories(parentDirectory);
+
+            foreach (string subdir in subdirectories)
+            {
+                await OptimizationOptions.StartInCmd($"pnputil.exe /add-driver '{subdir}'\\*.inf /install");
+                await ProcessSubdirectories(subdir);
+            }
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error reloading SystemInfo Page: {ex}");
+            Console.WriteLine($"Error: {ex.Message}");
         }
+        return 0;
+    }
+    private async void ImportButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        var folderPath = FolderPathText.Text;
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        ImportingStatusText.Text = "Importing drivers...";
+        ImportingStatusPb.ShowError = false;
+        ImportingStatus.Visibility = Visibility.Visible;
+        try
+        {
+            //var exitCode = await OptimizationOptions.StartInCmd($"pnputil.exe /add-driver '{folderPath}'\\*.inf /subdirs /install");
+            var exitCode = await ProcessSubdirectories(folderPath);
+            if (exitCode == 0)
+            {
+                ImportingStatusText.Text = "Done";
+                ImportingStatusPb.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ImportingStatusText.Text = "There was an error while importing drivers";
+                ImportingStatusPb.ShowError = true;
+            }
+        }
+        catch
+        {
+            ImportingStatusText.Text = "There was an error while importing drivers";
+            ImportingStatusPb.ShowError = true;
+        }
+
+    }
+
+    private void ImportSelectPathButton_Click(object sender, RoutedEventArgs e)
+    {
+
+        var selectedFolderPath = ShowDialog("C:\\", "Select a Folder...");
+        if (!string.IsNullOrEmpty(selectedFolderPath))
+        {
+            ImportFolderPathText.Text = selectedFolderPath;
+            ImportButton.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            ImportButton.Visibility = Visibility.Collapsed;
+            ImportFolderPathText.Text = "Select a folder";
+        }
+    }*/
+
+    private async void ExtractButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        var folderPath = FolderPathText.Text + $"\\RyTuneX_Drivers_{DateTime.Now:yyyy-MM-dd}";
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        ExtractingStatusText.Text = "Extracting drivers...";
+        ExtractingStatusPb.ShowError = false;
+        ExtractingStatus.Visibility = Visibility.Visible;
+        try
+        {
+            var exitCode = await OptimizationOptions.StartInCmd($"powershell Export-WindowsDriver -Online -Destination '{folderPath}'");
+            if ( exitCode == 0 )
+            {
+                ExtractingStatusText.Text = "Done";
+                ExtractingStatusPb.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ExtractingStatusText.Text = "There was an error while extracting drivers";
+                ExtractingStatusPb.ShowError = true;
+            }
+        }
+        catch
+        {
+            ExtractingStatusText.Text = "There was an error while extracting drivers";
+            ExtractingStatusPb.ShowError = true;
+        }
+
+    }
+
+    private void SelectPathButton_Click(object sender, RoutedEventArgs e)
+    {
+
+        var selectedFolderPath = ShowDialog("C:\\", "Select a Folder...");
+        if (!string.IsNullOrEmpty(selectedFolderPath))
+        {
+            FolderPathText.Text = selectedFolderPath;
+            ExtractButton.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            ExtractButton.Visibility = Visibility.Collapsed;
+            FolderPathText.Text = "Select a folder";
+        }
+    }
+
+    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+    private static extern IntPtr SHBrowseForFolder(ref BROWSEINFO lpbi);
+
+    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+    private static extern bool SHGetPathFromIDList(IntPtr pidl, IntPtr pszPath);
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    private struct BROWSEINFO
+    {
+        public IntPtr hwndOwner;
+        public IntPtr pidlRoot;
+        public string pszDisplayName;
+        public string lpszTitle;
+        public uint ulFlags;
+        public IntPtr lpfn;
+        public IntPtr lParam;
+        public int iImage;
+    }
+
+    public static string ShowDialog(string startingDirectory, string dialogTitle)
+    {
+        var bi = new BROWSEINFO
+        {
+            hwndOwner = IntPtr.Zero,
+            pidlRoot = IntPtr.Zero,
+            pszDisplayName = new string('\0', 260),
+            lpszTitle = dialogTitle,
+            ulFlags = 0x00000040 | 0x00000001 // BIF_NEWDIALOGSTYLE | BIF_RETURNONLYFSDIRS
+        };
+
+        var pidl = SHBrowseForFolder(ref bi);
+        if (pidl != IntPtr.Zero)
+        {
+            var pathPtr = Marshal.AllocCoTaskMem(260 * sizeof(char));
+            if (SHGetPathFromIDList(pidl, pathPtr))
+            {
+                var path = Marshal.PtrToStringUni(pathPtr);
+                Marshal.FreeCoTaskMem(pidl);
+                Marshal.FreeCoTaskMem(pathPtr);
+                return path;
+            }
+            Marshal.FreeCoTaskMem(pidl);
+            Marshal.FreeCoTaskMem(pathPtr);
+        }
+        return string.Empty;
     }
 }

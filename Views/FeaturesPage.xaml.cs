@@ -4,24 +4,19 @@ using Microsoft.UI.Xaml.Controls;
 using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
-using Windows.UI.Popups;
-using Json.Schema;
-using System;
 using CommunityToolkit.WinUI.Controls;
 
 namespace RyTuneX.Views;
 
 public sealed partial class FeaturesPage : Page
 {
-
-    private readonly bool isInitialSetup = true;
+    private bool isInitialLoad = true;
 
     public FeaturesPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing FeaturesPage");
         Loaded += (sender, e) => InitializeToggleSwitches();
-        isInitialSetup = false;
     }
     private void InitializeToggleSwitches()
     {
@@ -39,6 +34,7 @@ public sealed partial class FeaturesPage : Page
                 }
             }
         }
+        isInitialLoad = false;
     }
     // Helper method to find all children of a specific type in the visual tree
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -69,29 +65,37 @@ public sealed partial class FeaturesPage : Page
             }
         }
     }
-    private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+    private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
-            if (!isInitialSetup)
+            var toggleSwitch = (ToggleSwitch)sender;
+            Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            if (toggleSwitch.IsOn)
             {
-                var toggleSwitch = (ToggleSwitch)sender;
-                Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
+            }
+            else
+            {
+                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
+            }
+            if (isInitialLoad)
+            {
                 OptimizationOptions.XamlSwitches(toggleSwitch);
+            }
+            else
+            {
+                OptimizationOptions.XamlSwitches(toggleSwitch, false);
             }
         }
         catch (Exception ex)
         {
-            LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
+            await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
     }
 
     private void SettingsCard_Click(object sender, RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = "https://github.com/valinet/ExplorerPatcher",
-            UseShellExecute = true
-        });
+        Process.Start("explorer.exe", "ms-settings:personalization");
     }
 }

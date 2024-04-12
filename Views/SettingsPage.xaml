@@ -30,11 +30,17 @@
                 </StackPanel.ChildrenTransitions>
                 <StackPanel>
                     <TextBlock x:Uid="Settings_Language" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-                    <ComboBox x:Name="LanguageComboBox" PlaceholderText="System Language" Margin="{StaticResource SmallTopMargin}" SelectionChanged="LanguageComboBox_SelectionChanged">
-                        <ComboBoxItem Content="English (US)" Tag="en-us"/>
-                        <ComboBoxItem Content="Français (France)" Tag="fr-fr"/>
-                        <ComboBoxItem Content="العربية (تونس)" Tag="ar-tn"/>
-                    </ComboBox>
+                    <controls:SettingsCard x:Name="LanguageSettingsCard"
+                               Description="Choose your default language"
+                               Header="Change Language"
+                               HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
+                        <ComboBox x:Name="LanguageComboBox" PlaceholderText="System Language" Margin="{StaticResource SmallTopMargin}" SelectionChanged="LanguageComboBox_SelectionChanged">
+                            <ComboBoxItem Content="English (US)" Tag="en-us"/>
+                            <ComboBoxItem Content="Français (France)" Tag="fr-fr"/>
+                            <ComboBoxItem Content="العربية (تونس)" Tag="ar-tn"/>
+                        </ComboBox>
+                    </controls:SettingsCard>
+
                 </StackPanel>
             </StackPanel>
             <StackPanel>
@@ -98,9 +104,13 @@
                     </controls:SettingsCard>
                 </controls:SettingsExpander.Items>
             </controls:SettingsExpander>
-            <HyperlinkButton Margin="0,8,0,0"
-                     x:Uid="SettingsPage_FeedbackButton"
-                     NavigateUri="https://github.com/rayenghanmi/rytunex/issues/new" />
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                <HyperlinkButton x:Uid="SettingsPage_FeedbackButton"
+                    NavigateUri="https://github.com/rayenghanmi/rytunex/issues/new" />
+                <HyperlinkButton x:Uid="SettingsPage_SupportButton"
+                    Content="#CeasefireNOW"
+                    NavigateUri="https://techforpalestine.org/learn-more/" />
+            </StackPanel>
         </StackPanel>
     </ScrollView>
 </Page>

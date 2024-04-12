@@ -32,11 +32,11 @@
                     </HyperlinkButton>
                 </StackPanel>
 
-                <controls:SettingsCard Header="Enable Verbose Logon" Description="Enable detailed logon messages for better system monitoring and troubleshooting.">
+                <controls:SettingsCard Header="Enable Verbose Logon" Description="Enable detailed logon messages for better system monitoring and troubleshooting. May not be user-friendly for everyday use">
                     <ToggleSwitch x:Name="VerboseLogon" Tag="VerboseLogon" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Hibernation" Description="Turn off hibernation to save power and prevent the computer from entering sleep mode">
+                <controls:SettingsCard Header="Disable Hibernation" Description="Turn off hibernation to save power and prevent the computer from entering sleep mode. Not recommended for laptops">
                     <ToggleSwitch x:Name="Hibernation" Tag="Hibernation" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
@@ -68,19 +68,15 @@
                     <ToggleSwitch x:Name="QuickAccessHistory" Tag="QuickAccessHistory" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Start Menu Ads" Description="Disables ads in the Start Menu">
-                    <ToggleSwitch x:Name="StartMenuAds" Tag="StartMenuAds" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-
                 <controls:SettingsCard Header="Disable My People" Description="Turns off My People feature in the taskbar">
                     <ToggleSwitch x:Name="MyPeople" Tag="MyPeople" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Sensor Services" Description="Turns off sensor services for privacy and power savings">
+                <controls:SettingsCard Header="Disable Sensor Services" Description="Turns off sensor services for privacy and power savings. Not recommended for laptops with relevant sensors">
                     <ToggleSwitch x:Name="SensorServices" Tag="SensorServices" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Windows Ink" Description="Turns off Windows Ink Workspace and related features">
+                <controls:SettingsCard Header="Disable Windows Ink" Description="Turns off Windows Ink Workspace and related features. Not recommended for devices with a stylus">
                     <ToggleSwitch x:Name="WindowsInk" Tag="WindowsInk" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
@@ -100,11 +96,11 @@
                     <ToggleSwitch x:Name="CloudClipboard" Tag="CloudClipboard" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Sticky Keys" Description="Disables Sticky Keys accessibility feature">
+                <controls:SettingsCard Header="Disable Sticky Keys" Description="Disables Sticky Keys accessibility feature. Useful for people who accidentally press multiple keys at once">
                     <ToggleSwitch x:Name="StickyKeys" Tag="StickyKeys" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Cast to Device" Description="Disables the Cast to Device feature in Windows">
+                <controls:SettingsCard Header="Disable Cast to Device" Description="Disables the Cast to Device feature in Windows. Useful for presentations or sharing media on other devices">
                     <ToggleSwitch x:Name="CastToDevice" Tag="CastToDevice" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
@@ -118,63 +114,51 @@
                     </HyperlinkButton>
                 </StackPanel>
 
-                <controls:SettingsCard Header="Restore Classic Context Menu" Description="Bring back the familiar Windows 10 context menu for a classic and efficient user experience.">
+                <!--<controls:SettingsCard Header="Restore Classic Context Menu" Description="Bring back the familiar Windows 10 context menu for a classic and efficient user experience.">
                     <ToggleSwitch x:Name="ClassicContextMenu" Tag="ClassicContextMenu" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-                
-                <controls:SettingsCard Header="Restore Classic Start Menu" Description="Restore the classic Windows 10 Start Menu for a familiar user experience and enhanced usability.">
-                    <ToggleSwitch x:Name="ClassicStartMenu" Tag="ClassicStartMenu" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-                
-                <controls:SettingsCard Header="Disable VBS" Description="Disables Virtualization-Based Security (VBS) for advanced security features.">
+                </controls:SettingsCard>-->
+
+                <controls:SettingsCard Header="Disable VBS" Description="Disables Virtualization-Based Security (VBS) for advanced security features. Not recommended for high-security environments">
                     <ToggleSwitch x:Name="VBS" Tag="VBS" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Move Taskbar to The Left" Description="Moves the taskbar from the default bottom position to the left side of the screen.">
+                <controls:SettingsCard Header="Move Taskbar to The Left" Description="Moves the taskbar from the default bottom position to the left side of the screen. Personal preference">
                     <ToggleSwitch x:Name="TaskbarToLeft" Tag="TaskbarToLeft" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Snap Assist" Description="Disables Snap Assist, which automatically arranges open windows when dragging.">
+                <controls:SettingsCard Header="Disable Snap Assist" Description="Disables Snap Assist, which automatically arranges open windows when dragging.  Useful for multitasking but some users prefer manual window management">
                     <ToggleSwitch x:Name="SnapAssist" Tag="SnapAssist" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Widgets" Description="Disables the Widgets feature on the Windows 11 taskbar.">
+                <controls:SettingsCard Header="Disable Widgets" Description="Disables the Widgets feature on the Windows 11 taskbar. Consider if you find the widgets useful for quick updates (Windows 11 only)">
                     <ToggleSwitch x:Name="Widgets" Tag="Widgets" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Chat" Description="Disables the Chat feature on the Windows 11 taskbar.">
+                <controls:SettingsCard Header="Disable Chat" Description="Disables the Chat feature on the Windows 11 taskbar. Only recommended if you don't use the chat feature for communication (Windows 11 only)">
                     <ToggleSwitch x:Name="Chat" Tag="Chat" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Enable Legacy Volume Slider" Description="Enables the legacy volume slider in the system tray">
-                    <ToggleSwitch x:Name="LegacyVolumeSlider" Tag="LegacyVolumeSlider" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-
-                <controls:SettingsCard Header="Disable Show More Options" Description="Hides additional options in various Windows settings.">
-                    <ToggleSwitch x:Name="ShowMoreOptions" Tag="ShowMoreOptions" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-
-                <controls:SettingsCard Header="Enable Files Compact Mode" Description="Enables Compact Mode for file browsing with smaller thumbnails.">
+                <controls:SettingsCard Header="Enable Files Compact Mode" Description="Enables Compact Mode for file browsing with smaller thumbnails. Useful for low-resolution displays or managing large folders">
                     <ToggleSwitch x:Name="FilesCompactMode" Tag="FilesCompactMode" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Stickers" Description="Disables the Stickers feature in the Windows 11 messaging app.">
+                <controls:SettingsCard Header="Disable Stickers" Description="Disables the Stickers feature in the Windows 11 messaging app. Only recommended if you don't use stickers for communication (Windows 11 only)">
                     <ToggleSwitch x:Name="Stickers" Tag="Stickers" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Edge Discover Bar" Description="Disables the Discover Bar feature in Microsoft Edge.">
+                <controls:SettingsCard Header="Disable Edge Discover Bar" Description="Disables the Discover Bar feature in Microsoft Edge. Useful if you find it distracting or prefer cleaner browser interface">
                     <ToggleSwitch x:Name="EdgeDiscoverBar" Tag="EdgeDiscoverBar" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable CoPilot AI" Description="Disables the CoPilot AI feature in Windows for assistance with code writing.">
+                <controls:SettingsCard Header="Disable CoPilot AI" Description="Disables the CoPilot AI feature in Windows for assistance with code writing. Not recommended for developers">
                     <ToggleSwitch x:Name="CoPilotAI" Tag="CoPilotAI" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
-                               ActionIconToolTip="Open in new window"
-                               Description="Use ExplorerPatcher by valinet, to get more Windows 11 customizations."
-                               Header="Want more customizations?"
-                               HeaderIcon="{ui:FontIcon Glyph=&#xE774;}"
+                               ActionIconToolTip="Open Rersonalization"
+                               Description="Currently, RyTuneX does not provide full system customizations but we're working on enhancing it"
+                               Header="Rersonalize your system"
+                               HeaderIcon="{ui:FontIcon Glyph=&#xE771;}"
                                IsClickEnabled="True"
                                Click="SettingsCard_Click"/>
             </StackPanel>

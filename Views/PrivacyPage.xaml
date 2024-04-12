@@ -34,23 +34,18 @@
                 <controls:SettingsCard Header="Enhance Privacy">
                     <ToggleSwitch x:Name="Privacy" Tag="Privacy" Toggled="ToggleSwitch_Toggled"/>
                     <controls:SettingsCard.Description>
-                        <HyperlinkButton Content="Learn more about what's being disabled" 
-                                         NavigateUri="https://rayenghanmi.github.io/rytunex/privacy.html" />
+                        <HyperlinkButton Content="Learn more about what's being disabled" NavigateUri="https://docs.github.com/en/enterprise-cloud@latest/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site" />
                     </controls:SettingsCard.Description>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable SMBv1" Description="Disables Server Message Block version 1 (SMBv1) for enhanced security">
+                <controls:SettingsCard Header="Disable SMBv1" Description="Disables Server Message Block version 1 (SMBv1) for enhanced security. Recommended">
                     <ToggleSwitch x:Name="SMBv1" Tag="SMBv1" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable SMBv2" Description="Disables Server Message Block version 2 (SMBv2) for enhanced security">
+                <controls:SettingsCard Header="Disable SMBv2" Description="Disables Server Message Block version 2 (SMBv2) for enhanced security. Use with caution as it might break network file sharing functionalities.">
                     <ToggleSwitch x:Name="SMBv2" Tag="SMBv2" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable SMBv3" Description="Disables Server Message Block version 3 (SMBv3) for enhanced security">
-                    <ToggleSwitch x:Name="SMBv3" Tag="SMBv3" Toggled="ToggleSwitch_Toggled"/>
-                </controls:SettingsCard>
-                
                 <controls:SettingsCard Header="Disable Telemetry Services" Description="Turns off telemetry services to prevent the collection and transmission of usage data by the operating system.">
                     <ToggleSwitch x:Name="TelemetryServices" Tag="TelemetryServices" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
@@ -74,6 +69,7 @@
                 <controls:SettingsCard Header="Disable Firefox Telemetry" Description="Disables telemetry data collection in Mozilla Firefox.">
                     <ToggleSwitch x:Name="FirefoxTelemetry" Tag="FirefoxTelemetry" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

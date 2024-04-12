@@ -39,22 +39,22 @@
                     </controls:SettingsCard.Description>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Superfetch" Description="Turns off Superfetch to disable preloading of frequently used applications for faster startup">
+                <controls:SettingsCard Header="Disable Superfetch" Description="Turns off Superfetch, which preloads frequently used applications for faster startup. May impact startup times for some programs if you're using HDD.">
                     <ToggleSwitch x:Name="Superfetch" Tag="Superfetch" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable NTFS Timestamp" Description="Disables NTFS timestamp updates for file operations">
+                <controls:SettingsCard Header="Disable NTFS Timestamp" Description="Disables updates to NTFS timestamps for file operations. May affect functionality of programs relying on precise timestamps.">
                     <ToggleSwitch x:Name="NTFSTimeStamp" Tag="NTFSTimeStamp" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Enable Gaming Mode" Description="Enables Gaming Mode for an enhanced gaming experience">
+                <controls:SettingsCard Header="Enable Gaming Mode" Description="Enables Gaming Mode, which optimizes system resources for a smoother gaming experience. May affect background processes.">
                     <ToggleSwitch x:Name="GamingMode" Tag="GamingMode" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Exclude Drivers From Windows Updates" Description="Excludes driver updates from Windows Update">
+                <controls:SettingsCard Header="Exclude Drivers From Windows Updates" Description="Excludes driver updates from Windows Update. May lead to outdated drivers with potential security risks or compatibility issues. Use with caution.">
                     <ToggleSwitch x:Name="Drivers" Tag="Drivers" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
-                
+
                 <!-- Advanced System Optimizations -->
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="6"
@@ -66,23 +66,23 @@
                     </HyperlinkButton>
                 </StackPanel>
 
-                <controls:SettingsCard Header="Disable System Restore" Description="Disables System Restore to prevent the creation of restore points for system recovery">
+                <controls:SettingsCard Header="Disable System Restore" Description="Disables System Restore, which creates restore points to revert the system to a previous state in case of problems. Not recommended. Disabling this feature removes the ability to easily recover from potential system issues.">
                     <ToggleSwitch x:Name="SystemRestore" Tag="SystemRestore" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Cortana" Description="Disables Cortana, the virtual assistant, and search feature">
+                <controls:SettingsCard Header="Disable Cortana" Description="Disables Cortana, the virtual assistant that can answer questions and complete tasks. May impact voice search and some productivity features.">
                     <ToggleSwitch x:Name="Cortana" Tag="Cortana" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Store Updates" Description="Disables automatic updates for Windows Store apps">
+                <controls:SettingsCard Header="Disable Store Updates" Description="Disables automatic updates for apps downloaded from the Microsoft Store. May leave apps vulnerable to security risks or lacking new features.">
                     <ToggleSwitch x:Name="StoreUpdates" Tag="StoreUpdates" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
-                
-                <controls:SettingsCard Header="Disable Automatic Updates" Description="Turns off automatic Windows updates for manual control of update installations">
+
+                <controls:SettingsCard Header="Disable Automatic Updates" Description="Turns off automatic Windows updates, requiring manual installation. Highly discouraged. This can leave your system vulnerable to security exploits and bug fixes.">
                     <ToggleSwitch x:Name="AutomaticUpdates" Tag="AutomaticUpdates" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Disable Smart Screen" Description="Turns off SmartScreen Filter for apps and files">
+                <controls:SettingsCard Header="Disable Smart Screen" Description="Turns off SmartScreen Filter, which warns you about potentially unsafe apps and files downloaded from the internet. Not recommended for security reasons. Disabling this feature increases the risk of malware infection.">
                     <ToggleSwitch x:Name="SmartScreen" Tag="SmartScreen" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 

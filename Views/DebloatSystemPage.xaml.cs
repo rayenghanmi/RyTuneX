@@ -1,27 +1,18 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Management.Automation;
-using System.Reflection;
-using Microsoft.Extensions.Logging;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using RyTuneX.Helpers;
-using Windows.ApplicationModel;
-using Windows.UI.Core;
-using Windows.UI.Notifications;
-using CommunityToolkit.WinUI.Behaviors;
-using System.Threading;
-using Windows.ApplicationModel.Core;
+using Windows.Storage;
+
 
 namespace RyTuneX.Views;
 
 public sealed partial class DebloatSystemPage : Page
 {
+    private bool uninstallableOnlyChecked = true;
     public ObservableCollection<KeyValuePair<string, string>> AppList { get; set; } = [];
     private readonly HashSet<string> selectedAppsForUninstall = [];
     private readonly CancellationTokenSource cancellationTokenSource = new();
@@ -39,7 +30,7 @@ public sealed partial class DebloatSystemPage : Page
         selectedAppsForUninstall.Clear();
         cancellationTokenSource.Cancel();
     }
-    private void appTreeView_DragItemsStarting(TreeView sender, TreeViewDragItemsStartingEventArgs args)
+    private void AppTreeView_DragItemsStarting(TreeView sender, TreeViewDragItemsStartingEventArgs args)
     {
         args.Cancel = true;
     }
@@ -54,8 +45,7 @@ public sealed partial class DebloatSystemPage : Page
             cancellationToken.ThrowIfCancellationRequested();
 
             var installedApps = await Task.Run(() => OptimizationOptions.GetUWPApps(uninstallableOnly), cancellationToken);
-            var numberOfInstalledApps = installedApps.Count;
-
+            var numberOfInstalledApps = installedApps.Count - 1; // removes Rayen.RyTuneX from total installed apps count
             DispatcherQueue.TryEnqueue(() =>
             {
                 // fetching installed apps data & hiding UI elements
@@ -69,10 +59,15 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallingStatusBar.Visibility = Visibility.Collapsed;
                 showAll.Visibility = Visibility.Collapsed;
                 uninstallButton.Visibility = Visibility.Collapsed;
+                TempStackButtonTextBar.Visibility = Visibility.Collapsed;
 
                 foreach (var app in installedApps)
                 {
-                    AppList.Add(app);
+                    // prevent displaying Rayen.RyTuneX in AppList
+                    if (!app.ToString().Contains("Rayen.RyTuneX"))
+                    {
+                        AppList.Add(app);
+                    }
                 }
 
                 // showing the installed apps data after fetching
@@ -86,6 +81,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.IsEnabled = true;
                 gettingAppsLoading.Visibility = Visibility.Collapsed;
                 uninstallingStatusBar.ShowError = false;
+                TempStackButtonTextBar.Visibility = Visibility.Visible;
             });
         }
         catch (OperationCanceledException ex)
@@ -126,9 +122,18 @@ public sealed partial class DebloatSystemPage : Page
                     }
                 }
             }
+            appTreeView.SelectedItems.Clear();
             // Reload the installed apps after successfull uninstall
             await LogHelper.Log("Reloading Installed Apps Data");
-            LoadInstalledApps();
+            if (uninstallableOnlyChecked)
+            {
+                LoadInstalledApps();
+            }
+            else
+            {
+                LoadInstalledApps(false);
+            }
+
             // update ui elements
             uninstallingStatusBar.Visibility = Visibility.Collapsed;
             if (appTreeView.SelectedItems.Count > 1)
@@ -139,30 +144,82 @@ public sealed partial class DebloatSystemPage : Page
             {
                 NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccessSingle".GetLocalized(), InfoBarSeverity.Success, 4000));
             }
-            
+
         }
         // in case of an error
         catch (Exception ex)
         {
-            await LogHelper.Log("Error Uninstalling");
-            await LogHelper.LogError($"Error Uninstalling: {ex}");
             // update ui elements
-            uninstallingStatusText.Text = $"Error: {ex}";
+            uninstallingStatusText.Text = ex.ToString();
             uninstallingStatusBar.ShowError = true;
             NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(), "UninstallationError".GetLocalized(), InfoBarSeverity.Error, 5000));
-            // reload
-            LoadInstalledApps();
+
+            var uninstallationFailed = new ContentDialog()
+            {
+                XamlRoot = XamlRoot,
+                Title = "UninstallationError".GetLocalized(),
+                Content = ex.Message,
+                CloseButtonText = "View logs"
+            };
+            await uninstallationFailed.ShowAsync();
+            var tempFolder = ApplicationData.Current.TemporaryFolder;
+            var file = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
+
+            // Use Process.Start to open the file with the default application
+            Process.Start(new ProcessStartInfo(file.Path) { UseShellExecute = true });
+
+            // reload after error
+
+            if (uninstallableOnlyChecked)
+            {
+                LoadInstalledApps();
+            }
+            else
+            {
+                LoadInstalledApps(false);
+            }
+
         }
     }
     private static async Task UninstallApps(string appName)
     {
-        await LogHelper.Log($"Uninstalling: {appName}");
-        using var script = PowerShell.Create();
-        script.AddScript("Import-Module -SkipEditionCheck");
-        script.AddScript($"Get-AppxPackage -AllUsers {appName} | Remove-AppxPackage");
+        if (!appName.Contains("Microsoft.MicrosoftEdge"))
+        {
+            await LogHelper.Log($"Uninstalling: {appName}");
+            using var script = System.Management.Automation.PowerShell.Create();
+            script.AddScript($"Get-AppxPackage -AllUsers | Where-Object {{$_.Name -eq '{appName}'}} | Remove-AppxPackage");
 
-        await script.InvokeAsync();
+            var result = await script.InvokeAsync();
+
+            if (script.HadErrors)
+            {
+                var errorMessage = string.Join(Environment.NewLine, script.Streams.Error.Select(err => err.ToString()));
+                await LogHelper.LogError(errorMessage);
+                throw new Exception(errorMessage);
+            }
+        }
+        else
+        {
+            var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
+
+            var scriptContent = File.ReadAllText(scriptFilePath);
+
+            await LogHelper.Log($"Uninstalling: {appName}");
+
+            using var PowerShellInstance = PowerShell.Create();
+            PowerShellInstance.AddScript(scriptContent)
+                .AddArgument("-Set-ExecutionPolicy Unrestricted");
+
+            var result = PowerShellInstance.InvokeAsync();
+            if (PowerShellInstance.HadErrors)
+            {
+                var errorMessage = string.Join(Environment.NewLine, PowerShellInstance.Streams.Error.Select(err => err.ToString()));
+                await LogHelper.LogError(errorMessage);
+                throw new Exception(errorMessage);
+            }
+        }
     }
+
     private void ShowAll_Checked(object sender, RoutedEventArgs e)
     {
         // Show uninstallable apps only
@@ -176,6 +233,7 @@ public sealed partial class DebloatSystemPage : Page
             uninstallButton.IsEnabled = false;
             NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(), "DebloatPage_NotificationBody".GetLocalized(), InfoBarSeverity.Warning, 4000));
         });
+        uninstallableOnlyChecked = false;
         LoadInstalledApps(uninstallableOnly: false, cancellationTokenSource.Token);
     }
     private void ShowAll_Unchecked(object sender, RoutedEventArgs e)
@@ -190,9 +248,10 @@ public sealed partial class DebloatSystemPage : Page
             appTreeView.IsEnabled = false;
             uninstallButton.IsEnabled = false;
         });
+        uninstallableOnlyChecked = true;
         LoadInstalledApps(uninstallableOnly: true, cancellationTokenSource.Token);
     }
-    private CommunityToolkit.WinUI.Behaviors.Notification NotificationContent(string title, string message, InfoBarSeverity severity, int duration)
+    private static CommunityToolkit.WinUI.Behaviors.Notification NotificationContent(string title, string message, InfoBarSeverity severity, int duration)
     {
         var notification = new CommunityToolkit.WinUI.Behaviors.Notification
         {
@@ -204,4 +263,57 @@ public sealed partial class DebloatSystemPage : Page
         LogHelper.Log("Returning Debloat Notification");
         return notification;
     }
+
+    private async void RemoveTempFiles(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            TempStack.Visibility = Visibility.Visible;
+            TempProgress.ShowError = false;
+            TempProgress.Visibility = Visibility.Visible;
+            TempButton.Visibility = Visibility.Collapsed;
+            TempStatusText.Text = "Deleting Temp Files...";
+
+            var exitCode1 = await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\*.tmp\"");
+            var exitCode2 = await OptimizationOptions.StartInCmd("del /q/f/s %TEMP%\\*");
+
+            // Check for successful execution
+            if (exitCode1 == 0 && exitCode2 == 0)
+            {
+                TempStatusText.Text = "Temp Files Deleted Successfully!";
+                TempProgress.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                TempStatusText.Text = "Error Deleting Temp Files";
+                TempProgress.ShowError = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            TempStatusText.Text = "Error: " + ex.Message;
+            TempButton.Visibility = Visibility.Visible;
+            TempProgress.Visibility = Visibility.Collapsed;
+            TempProgress.ShowError = true;
+        }
+    }
+    private void TextBlock_Loaded(object sender, RoutedEventArgs e)
+    {
+        var textBlock = sender as TextBlock;
+        if (textBlock != null)
+        {
+            var storyboard = new Storyboard();
+            var fadeInAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = new Duration(TimeSpan.FromSeconds(0.5))
+            };
+            Storyboard.SetTarget(fadeInAnimation, textBlock);
+            Storyboard.SetTargetProperty(fadeInAnimation, "Opacity");
+            storyboard.Children.Add(fadeInAnimation);
+            storyboard.Begin();
+        }
+    }
+
 }
