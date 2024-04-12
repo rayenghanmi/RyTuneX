@@ -10,6 +10,10 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d">
     <Grid Margin="0,0,0,26">
+        <Grid.ChildrenTransitions>
+            <EntranceThemeTransition FromVerticalOffset="50" />
+            <RepositionThemeTransition IsStaggeringEnabled="True" />
+        </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -23,7 +27,7 @@
                 <TreeView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Key}" />
+                            <TextBlock Text="{Binding Key}" Loaded="TextBlock_Loaded" />
                             <TextBlock Text="{Binding Value}" Visibility="Collapsed"/>
                         </StackPanel>
                     </DataTemplate>
@@ -51,9 +55,17 @@
             </interactivity:Interaction.Behaviors>
         </muxc:InfoBar>
         <StackPanel Orientation="Horizontal" Margin="3" Grid.Row="5">
+            <StackPanel.ChildrenTransitions>
+                <EntranceThemeTransition FromVerticalOffset="50" />
+                <RepositionThemeTransition IsStaggeringEnabled="True" />
+            </StackPanel.ChildrenTransitions>
             <Button Margin="3" x:Uid="DebloatSystemPage_UninstallButton" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click"/>
             <StackPanel x:Name="TempStackButtonTextBar" Margin="3" Orientation="Vertical" VerticalAlignment="Center" Visibility="Collapsed">
                 <Grid>
+                    <Grid.ChildrenTransitions>
+                        <EntranceThemeTransition FromVerticalOffset="50" />
+                        <RepositionThemeTransition IsStaggeringEnabled="True" />
+                    </Grid.ChildrenTransitions>
                     <Button x:Uid="DebloatSystemPage_TempButton" x:Name="TempButton" Click="RemoveTempFiles"/>
                     <StackPanel x:Name="TempStack" Visibility="Collapsed">
                         <ProgressBar x:Name="TempProgress" Margin="3" IsIndeterminate="True" Visibility="Collapsed"/>

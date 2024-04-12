@@ -6,16 +6,23 @@ All notable changes to this branch will be documented in this file.
 
 ### Fixes
 
-- [x] When finished uninstalling apps, the `Show All` checkbox should keep the same state after refreshing installed apps' list.
-- [x] Some apps that were not removed are showing `Uninstalled successfully`.
-- [x] Some packages may show an error even after being successfully removed.
-- [x] Reapplying tweaks when initializing toggle switches' previous state.
-- [x] Outputting the wrong uninstalled apps count.
-- [x] Issue #8.
+- [x] Addressed a bug where the `Show All` checkbox would not retain its state after refreshing the list of installed apps upon uninstallation completion.
+- [x] Resolved an issue where certain apps were incorrectly displaying `Uninstalled successfully` despite not being removed.
+- [x] Fixed a recurring exception error that could arise after successfully removing certain packages.
+- [x] Rectified an issue where reapplying tweaks would fail to initialize toggle switches' previous states.
+- [x] Corrected the inaccurate count of uninstalled apps displayed on the `Debloat` page.
+- [x] Mitigated a crash occurring on specific Windows versions upon successful installation startup. Refer to issue #8 for more details.
 
 ### Added
 
-- Option to remove temporary files in `Debloat` page.
+- Introduced an option to remove temporary files within the `Debloat` page.
+- Included the capability to uninstall `Microsoft.MicrosoftEdge`.
+- Included an option to extract and import drivers within the `System Info` page.
+- Enhanced text and navigation animations.
+
+## Known Issues
+
+- Inconsistencies in language translation for Arabic and French.
 
 ## 0.7.2 - Released
 

@@ -65,7 +65,7 @@ public sealed partial class FeaturesPage : Page
             }
         }
     }
-    private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+    private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -90,16 +90,12 @@ public sealed partial class FeaturesPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
+            await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
     }
 
     private void SettingsCard_Click(object sender, RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = "https://github.com/valinet/ExplorerPatcher",
-            UseShellExecute = true
-        });
+        Process.Start("explorer.exe", "ms-settings:personalization");
     }
 }

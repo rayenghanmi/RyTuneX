@@ -7,17 +7,7 @@
     mc:Ignorable="d">
 
     <Grid Margin="-26,0,-26,20" x:Name="ContentArea">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Button Grid.Row="0" ToolTipService.ToolTip="Sync System Info" Click="ReloadInfo" HorizontalAlignment="Right">
-            <StackPanel Orientation="Horizontal">
-                <FontIcon Margin="3"  Glyph="&#xE72C;"/>
-                <TextBlock x:Uid="SystemInfoPage_ReloadButton" Margin="3"/>
-            </StackPanel>
-        </Button>
-        <ScrollView Grid.Row="1" Margin="0,10,0,0" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Background="Transparent">
+        <ScrollView Margin="0,10,0,0" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Background="Transparent">
             
             <Grid>
                 <Grid.RowDefinitions>
@@ -26,36 +16,78 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Margin="20,10,20,0">
+                <StackPanel Grid.Row="0" Margin="20,10,20,20">
+                    <TextBlock Text="Drivers" Margin="10" ToolTipService.ToolTip="Extract your current drivers for an easier backup" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                    <StackPanel x:Name="driversPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="driversImport" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                Extract your drivers to an external folder for easy backup.
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
+                            <ScrollView VerticalScrollMode="Disabled" VerticalAlignment="Center" MinWidth="230">
+                                <TextBox x:Name="FolderPathText" Text="Select a folder" IsEnabled="False"/>
+                            </ScrollView>
+                            <Button Margin="15,15,0,15" Content="Select" Click="SelectPathButton_Click"/>
+                            <Button Margin="15,15,0,15" x:Name="ExtractButton" Visibility="Collapsed" Content="Extract" Click="ExtractButton_Click"/>
+                        </StackPanel>
+                        <StackPanel x:Name="ExtractingStatus" Visibility="Collapsed">
+                            <TextBlock x:Name="ExtractingStatusText" Text="Extracting" Margin="3"/>
+                            <ProgressBar x:Name="ExtractingStatusPb" IsIndeterminate="True"/>
+                        </StackPanel>
+                        
+                        <!-- Working on it -->
+                        
+                        <!--<StackPanel Margin="15,0,0,0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="drivers" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                Import extracted drivers backup using RyTuneX.
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
+                            <ScrollView VerticalScrollMode="Disabled" VerticalAlignment="Center" MinWidth="230">
+                                <TextBox x:Name="ImportFolderPathText" Text="Select a folder" IsEnabled="False"/>
+                            </ScrollView>
+                            <Button Margin="15,15,0,15" Content="Select" Click="ImportSelectPathButton_Click"/>
+                            <Button Margin="15,15,0,15" x:Name="ImportButton" Visibility="Collapsed" Content="Import" Click="ImportButton_Click"/>
+                        </StackPanel>
+                        <StackPanel x:Name="ImportingStatus" Visibility="Collapsed">
+                            <TextBlock x:Name="ImportingStatusText" Text="Importing" Margin="3"/>
+                            <ProgressBar x:Name="ImportingStatusPb" IsIndeterminate="True"/>
+                        </StackPanel>-->
+
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Margin="20,10,20,0">
                     <TextBlock x:Uid="SystemInfoPage_OS" ToolTipService.ToolTip="Operating System" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                     <StackPanel x:Name="osPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                         <ProgressRing x:Name="osProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="os" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="1" Margin="20,10,20,0">
+                <StackPanel Grid.Row="2" Margin="20,10,20,0">
                     <TextBlock x:Uid="SystemInfoPage_CPU" ToolTipService.ToolTip="Central Processing Unit" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                     <StackPanel x:Name="cpuPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                         <ProgressRing x:Name="cpuProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="cpu" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="2" Margin="20,10,20,0">
+                <StackPanel Grid.Row="3" Margin="20,10,20,0">
                     <TextBlock x:Uid="SystemInfoPage_GPU" ToolTipService.ToolTip="Graphics Processing Unit" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                     <StackPanel x:Name="gpuPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                         <ProgressRing x:Name="gpuProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="gpu" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="3" Margin="20,10,20,0">
+                <StackPanel Grid.Row="4" Margin="20,10,20,0">
                     <TextBlock x:Uid="SystemInfoPage_RAM" ToolTipService.ToolTip="Random Access Memory" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                     <StackPanel x:Name="ramPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                         <ProgressRing x:Name="ramProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="ram" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="4" Margin="20,10,20,20">
+                <StackPanel Grid.Row="5" Margin="20,10,20,0">
                     <TextBlock x:Uid="SystemInfoPage_Storage" ToolTipService.ToolTip="Storage Devices" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                     <StackPanel x:Name="diskPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
                         <ProgressRing x:Name="diskProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>

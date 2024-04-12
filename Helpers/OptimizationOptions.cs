@@ -275,18 +275,6 @@ internal class OptimizationOptions
                         
                     }
                     break;
-                case "ClassicStartMenu":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.EnableClassicStartMenu();
-                        
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.DisableClassicStartMenu();
-                        
-                    }
-                    break;
                 case "Search":
                     if (toggleSwitch.IsOn)
                     {
@@ -344,18 +332,6 @@ internal class OptimizationOptions
                     else
                     {
                         OptimizeSystemHelper.EnableErrorReporting();
-                        
-                    }
-                    break;
-                case "LegacyVolumeSlider":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisableLegacyVolumeSlider();
-                        
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnableLegacyVolumeSlider();
                         
                     }
                     break;
@@ -465,16 +441,6 @@ internal class OptimizationOptions
                     {
                         OptimizeSystemHelper.EnableQuickAccessHistory();
                         
-                    }
-                    break;
-                case "StartMenuAds":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisableStartMenuAds();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnableStartMenuAds();
                     }
                     break;
                 case "MyPeople":
@@ -654,18 +620,6 @@ internal class OptimizationOptions
                     else
                     {
                         OptimizeSystemHelper.EnableChat();
-                        
-                    }
-                    break;
-                case "ShowMoreOptions":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisableShowMoreOptions();
-                        
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnableShowMoreOptions();
                         
                     }
                     break;

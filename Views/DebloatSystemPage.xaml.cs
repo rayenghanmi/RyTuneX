@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Management.Automation;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
 using RyTuneX.Helpers;
 using Windows.Storage;
 
@@ -29,7 +30,7 @@ public sealed partial class DebloatSystemPage : Page
         selectedAppsForUninstall.Clear();
         cancellationTokenSource.Cancel();
     }
-    private static void AppTreeView_DragItemsStarting(TreeView sender, TreeViewDragItemsStartingEventArgs args)
+    private void AppTreeView_DragItemsStarting(TreeView sender, TreeViewDragItemsStartingEventArgs args)
     {
         args.Cancel = true;
     }
@@ -296,4 +297,23 @@ public sealed partial class DebloatSystemPage : Page
             TempProgress.ShowError = true;
         }
     }
+    private void TextBlock_Loaded(object sender, RoutedEventArgs e)
+    {
+        var textBlock = sender as TextBlock;
+        if (textBlock != null)
+        {
+            var storyboard = new Storyboard();
+            var fadeInAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = new Duration(TimeSpan.FromSeconds(0.5))
+            };
+            Storyboard.SetTarget(fadeInAnimation, textBlock);
+            Storyboard.SetTargetProperty(fadeInAnimation, "Opacity");
+            storyboard.Children.Add(fadeInAnimation);
+            storyboard.Begin();
+        }
+    }
+
 }
