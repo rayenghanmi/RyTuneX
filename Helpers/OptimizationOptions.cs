@@ -3,8 +3,6 @@ using System.ServiceProcess;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml;
-using System.Reflection;
 
 namespace RyTuneX.Helpers;
 internal class OptimizationOptions
@@ -13,50 +11,63 @@ internal class OptimizationOptions
     {
         var installedApps = new List<KeyValuePair<string, string>>();
 
-        using (var PowerShellInstance = PowerShell.Create())
+        string command;
+        if (uninstallableOnly)
         {
-            LogHelper.Log("Getting Installed Apps [OptimizationOptions.cs]");
-            PowerShellInstance.AddScript("Set-ExecutionPolicy RemoteSigned -Scope Process");
-            PowerShellInstance.AddScript("Import-Module Appx")
-                .AddArgument("-ExecutionPolicy Bypass");
+            command = @"powershell.exe -Command ""Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation""";
+        }
+        else
+        {
+            command = @"powershell.exe -Command ""Get-AppxPackage | Select-Object Name,InstallLocation""";
+        }
 
-            if (uninstallableOnly)
+        try
+        {
+            using var process = new Process
             {
-                PowerShellInstance.AddScript(@"Get-AppxPackage | Where {$_.NonRemovable -like ""False""} | Select  Name,InstallLocation");
-            }
-            else
-            {
-                PowerShellInstance.AddScript("Get-AppxPackage | Select Name,InstallLocation");
-            }
-
-            string[] tmp;
-            Collection<PSObject> psResult;
-            try
-            {
-                psResult = PowerShellInstance.Invoke();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-                return installedApps;
-            }
-
-            if (psResult == null)
-            {
-                return installedApps;
-            }
-            foreach (var x in psResult)
-            {
-                tmp = x.ToString().Replace("@", string.Empty).Replace("{", string.Empty).Replace("}", string.Empty).Replace("Name=", string.Empty).Replace("InstallLocation=", string.Empty).Trim().Split(';');
-                if (!installedApps.Exists(i => i.Key == tmp[0]))
+                StartInfo = new ProcessStartInfo
                 {
-                    installedApps.Add(new KeyValuePair<string, string>(tmp[0], tmp[1]));
+                    FileName = "cmd.exe",
+                    Arguments = $"/C {command}",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
                 }
+            };
+            {
+                process.Start();
+
+                /* Skip the first two lines as they contain headers
+                   Removing this will cause two apps to appear named
+                   "----" and "Name" */
+                process.StandardOutput.ReadLine();
+                process.StandardOutput.ReadLine();
+                process.StandardOutput.ReadLine();
+
+                // Read the output directly
+                while (!process.StandardOutput.EndOfStream)
+                {
+                    var line = process.StandardOutput.ReadLine();
+                    var parts = line?.Split(new[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries);
+                    if (parts?.Length == 2 && !installedApps.Exists(i => i.Key == parts[0]))
+                    {
+                        installedApps.Add(new KeyValuePair<string, string>(parts[0], parts[1]));
+                    }
+                }
+
+                process.WaitForExit();
             }
         }
-        LogHelper.Log("Returning Installed Apps [OptimizationOptions.cs]");
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            return installedApps;
+        }
+
+        LogHelper.Log("Returning Installed Apps [GetUWPApps]");
         return installedApps;
     }
+
 
     internal static bool ServiceExists(string serviceName)
     {

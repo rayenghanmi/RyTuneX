@@ -2,6 +2,22 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 0.8.1 - Released
+
+> This is a hotfix for version 0.8.0
+
+## Added
+
+- Add Simplified Chinese translation
+
+## Fixes
+
+- [x] Resolved an issue stopping users on Windows 10 from using `Debloat`.
+
+## Known Issues
+
+- This hotfix broke the ability to remove `MicrosoftEdge` (will be fixed in the next version).
+
 ## 0.8.0 - Released
 
 ### Fixes
