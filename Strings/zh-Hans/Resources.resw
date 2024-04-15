@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>RyTuneX</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX</value>
+  </data>
+  <data name="Shell_Home.Content" xml:space="preserve">
+    <value>RyTuneX</value>
+  </data>
+  <data name="Debloat_NoSelection.Text" xml:space="preserve">
+    <value>从列表中选择一个项目。</value>
+  </data>
+  <data name="Shell_Debloat.Content" xml:space="preserve">
+    <value>减少臃肿</value>
+  </data>
+  <data name="Shell_SystemInfo.Content" xml:space="preserve">
+    <value>系统信息</value>
+  </data>
+  <data name="Shell_ReportBug.Content" xml:space="preserve">
+    <value>报告错误</value>
+  </data>
+  <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
+    <value>优化系统</value>
+  </data>
+  <data name="Settings_Personalization.Text" xml:space="preserve">
+    <value>个性化</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>RyTuneX 是由 Rayen Ghanmi 开发的 Windows 10 和 11 优化工具，旨在通过有选择地删除所选软件并禁用不必要的服务来增强系统性能和效率。</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+    <value>AGPL v3.0</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
+    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
+  </data>
+  <data name="WelcomeNotification" xml:space="preserve">
+    <value>&lt;toast launch="action=ToastClick"&gt;
+  &lt;visual&gt;
+    &lt;binding template="ToastGeneric"&gt;
+      &lt;text&gt;欢迎使用 RyTuneX&lt;/text&gt;
+      &lt;text&gt;加速您系统的完美优化工具&lt;/text&gt;
+      &lt;image placement="appLogoOverride" src="{0}Assets/WindowIcon.ico"/&gt;
+    &lt;/binding&gt;
+  &lt;/visual&gt;
+  &lt;actions&gt;
+    &lt;action content="了解更多" arguments="action=Settings"/&gt;
+  &lt;/actions&gt;
+&lt;/toast&gt;</value>
+  </data>
+  <data name="Settings_Language.Text" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="WelcomeNotice" xml:space="preserve">
+    <value>尊敬的用户：\n\n我们非常高兴地欢迎您使用 RyTuneX，在这里，性能优化与精度相结合。 RyTuneX 由 Rayen Ghanmi 开发，它不仅仅是一款应用程序，它还是您获得增强计算体验的门户。 无论您运行的是 Windows 11 还是 Windows 10，RyTuneX 都旨在将您的设备性能提升到新的高度。 步入一个全新的领域，这里冗余的服务被悄然静音，臃肿的组件被彻底消除，而系统的核心则通过智能的注册表优化得到了精细的调整。 准备好释放您设备的真正力量 - 欢迎来到 RyTuneX，每一次点击都是迈向更快、响应更灵敏的计算之旅的一步。\n\n注意：虽然我们很高兴您加入，但某些功能可能会受到限制。 在开发过程中，偶尔会出现一些问题。 您的反馈对于帮助我们改进和完善 RyTuneX 体验非常宝贵。 感谢您参与我们优化和增强 Windows 体验的旅程。\n\n此致，\n\nRayen Ghanmi</value>
+  </data>
+  <data name="WelcomeNoticeTitle" xml:space="preserve">
+    <value>欢迎使用 RyTuneX - 释放您设备的全部潜力！</value>
+  </data>
+  <data name="HomePage_Content1.Text" xml:space="preserve">
+    <value>RyTuneX 作为一款全面的 Windows 11 优化工具脱颖而出，向后兼容 Windows 10。其关键功能之一涉及简化系统服务以增强整体设备性能。 通过仔细分析并有选择地禁用不必要的后台服务，RyTuneX 确保系统资源用于重要任务。 这将为用户带来更高效、响应更灵敏的计算体验，因为资源不再受到冗余进程的束缚，从而有助于提高系统速度和响应能力。</value>
+  </data>
+  <data name="HomePage_Content2.Text" xml:space="preserve">
+    <value>RyTuneX 是一款功能强大的 Windows 11 优化工具，其兼容性扩展到 Windows 10。该优化工具的核心功能包括细致的注册表调整，旨在释放设备的全部潜力。 RyTuneX 智能地微调注册表项，确保 Windows 操作系统配置为最佳性能。 通过优化注册表设置，该应用程序增强了系统响应能力和速度，为用户提供了一个根据其特定硬件配置进行微调的计算环境。</value>
+  </data>
+  <data name="HomePage_Content3.Text" xml:space="preserve">
+    <value>RyTuneX 通过解决和消除系统膨胀而超越了基本优化。 该应用程序识别并删除多余的预装软件和可能与操作系统捆绑在一起的不必要的功能。 这种减少膨胀的细致方法不仅可以释放宝贵的存储空间，还可以确保系统资源专用于运行对用户最重要的应用程序和进程。 其结果是一个更精简、更高效的系统，运行速度和敏捷性得到提高，满足 Windows 11 和 Windows 10 用户的性能需求。</value>
+  </data>
+  <data name="HomePage_Title1.Text" xml:space="preserve">
+    <value>1. 简化系统服务：</value>
+  </data>
+  <data name="HomePage_Title2.Text" xml:space="preserve">
+    <value>2. 微调注册表优化：</value>
+  </data>
+  <data name="HomePage_Title3.Text" xml:space="preserve">
+    <value>3. 无膨胀性能：</value>
+  </data>
+  <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
+    <value>正在获取已安装的应用程序数据...</value>
+  </data>
+  <data name="DebloatSystemPage_ShowAll.Content" xml:space="preserve">
+    <value>显示全部</value>
+  </data>
+  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+    <value>卸载所选应用程序</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="Uninstalling" xml:space="preserve">
+    <value>正在卸载</value>
+  </data>
+  <data name="UninstallTip" xml:space="preserve">
+    <value>选择您要删除的应用程序并点击卸载</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>Windows 功能</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>隐私</value>
+  </data>
+  <data name="HomePage_DiscordButton.Text" xml:space="preserve">
+    <value>加入我们的服务器</value>
+  </data>
+  <data name="HomePage_IssueButton.Text" xml:space="preserve">
+    <value>报告问题</value>
+  </data>
+  <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
+    <value>查看 RyTuneX</value>
+  </data>
+  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
+    <value>发送反馈</value>
+  </data>
+  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
+    <value>处理器</value>
+  </data>
+  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
+    <value>显卡</value>
+  </data>
+  <data name="SystemInfoPage_OS.Text" xml:space="preserve">
+    <value>操作系统</value>
+  </data>
+  <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
+    <value>内存</value>
+  </data>
+  <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
+    <value>存储</value>
+  </data>
+  <data name="Debloat" xml:space="preserve">
+    <value>减少臃肿</value>
+  </data>
+  <data name="DebloatPage_NotificationBody" xml:space="preserve">
+    <value>卸载其中一些应用程序可能无法将其完全删除。</value>
+  </data>
+  <data name="UninstallationError" xml:space="preserve">
+    <value>卸载时出错</value>
+  </data>
+  <data name="UninstallationSuccessMultiple" xml:space="preserve">
+    <value>应用程序已成功卸载</value>
+  </data>
+  <data name="UninstallationSuccessSingle" xml:space="preserve">
+    <value>应用程序已成功卸载</value>
+  </data>
+  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+    <value>删除临时文件</value>
+  </data>
+</root>

@@ -109,9 +109,7 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
-        var showWelcomeNotification = ShouldShowWelcomeNotification();
-
-        if (showWelcomeNotification)
+        if (ShouldShowWelcomeNotification())
         {
             await LogHelper.Log("Showing Welcome Notification");
             App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>

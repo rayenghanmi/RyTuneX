@@ -41,7 +41,7 @@
 
   <ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.0.230907" />
+	  <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.0.240109" />
 	  <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.0.240109" />
 	  <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
@@ -49,16 +49,16 @@
 	  <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
 	  <PackageReference Include="System.Management" Version="8.0.0" />
 	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
-	  <PackageReference Include="WinUI3Localizer" Version="2.1.0" />
-	  <PackageReference Include="WinUIEx" Version="2.3.3" />
-	  <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics" Version="7.4.0" />
-	  <PackageReference Include="Microsoft.PowerShell.Commands.Management" Version="7.4.0" />
-	  <PackageReference Include="Microsoft.PowerShell.Commands.Utility" Version="7.4.0" />
-	  <PackageReference Include="Microsoft.PowerShell.ConsoleHost" Version="7.4.0" />
-	  <PackageReference Include="Microsoft.WSMan.Management" Version="7.4.0" />
+	  <PackageReference Include="WinUI3Localizer" Version="2.2.0" />
+	  <PackageReference Include="WinUIEx" Version="2.3.4" />
+	  <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics" Version="7.4.2" />
+	  <PackageReference Include="Microsoft.PowerShell.Commands.Management" Version="7.4.2" />
+	  <PackageReference Include="Microsoft.PowerShell.Commands.Utility" Version="7.4.2" />
+	  <PackageReference Include="Microsoft.PowerShell.ConsoleHost" Version="7.4.2" />
+	  <PackageReference Include="Microsoft.WSMan.Management" Version="7.4.2" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
-	  <PackageReference Include="System.Management.Automation" Version="7.4.0" />
+	  <PackageReference Include="System.Management.Automation" Version="7.4.2" />
   </ItemGroup>
 
 <ItemGroup>
@@ -99,26 +99,26 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.4.231115000\buildTransitive\..\include\DeploymentManagerAutoInitializer.cs" />
+    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.5.240404000\buildTransitive\..\include\DeploymentManagerAutoInitializer.cs" />
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.4.231115000\buildTransitive\..\include\WindowsAppSDK-VersionInfo.cs" />
+    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.5.240404000\buildTransitive\..\include\WindowsAppSDK-VersionInfo.cs" />
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.4.231115000\buildTransitive\..\include\WindowsAppSDK-VersionInfo.cs" />
+    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.5.240404000\buildTransitive\..\include\WindowsAppSDK-VersionInfo.cs" />
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.4.231115000\buildTransitive\..\include\WindowsAppSDK-VersionInfo.cs" />
+    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.5.240404000\buildTransitive\..\include\WindowsAppSDK-VersionInfo.cs" />
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.4.231115000\buildTransitive\..\include\WindowsAppSDK-VersionInfo.cs" />
+    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.5.240404000\buildTransitive\..\include\WindowsAppSDK-VersionInfo.cs" />
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.4.231115000\buildTransitive\..\include\DeploymentManagerAutoInitializer.cs" />
+    <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.5.240404000\buildTransitive\..\include\DeploymentManagerAutoInitializer.cs" />
   </ItemGroup>
 </Project>

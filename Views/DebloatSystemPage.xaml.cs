@@ -183,21 +183,39 @@ public sealed partial class DebloatSystemPage : Page
     }
     private static async Task UninstallApps(string appName)
     {
-        if (!appName.Contains("Microsoft.MicrosoftEdge"))
-        {
+        /*if (!appName.Contains("Microsoft.MicrosoftEdge"))
+        {*/
             await LogHelper.Log($"Uninstalling: {appName}");
-            using var script = System.Management.Automation.PowerShell.Create();
-            script.AddScript($"Get-AppxPackage -AllUsers | Where-Object {{$_.Name -eq '{appName}'}} | Remove-AppxPackage");
 
-            var result = await script.InvokeAsync();
+            var cmdCommand = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
 
-            if (script.HadErrors)
+            var processInfo = new ProcessStartInfo("cmd.exe", $"/c {cmdCommand}")
             {
-                var errorMessage = string.Join(Environment.NewLine, script.Streams.Error.Select(err => err.ToString()));
-                await LogHelper.LogError(errorMessage);
-                throw new Exception(errorMessage);
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = new Process { StartInfo = processInfo };
+            {
+                process.Start();
+
+                var output = await process.StandardOutput.ReadToEndAsync();
+                var error = await process.StandardError.ReadToEndAsync();
+
+                await LogHelper.Log(output);
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    await LogHelper.LogError(error);
+                    throw new Exception(error);
+                }
             }
-        }
+            
+        // Edge removal (will be added soon)
+
+        /*}
         else
         {
             var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
@@ -217,7 +235,7 @@ public sealed partial class DebloatSystemPage : Page
                 await LogHelper.LogError(errorMessage);
                 throw new Exception(errorMessage);
             }
-        }
+        }*/
     }
 
     private void ShowAll_Checked(object sender, RoutedEventArgs e)
