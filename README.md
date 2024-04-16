@@ -49,20 +49,9 @@ RyTuneX is a cutting-edge optimizer built with the WinUI 3 framework, designed t
 
 ## 📸 Screenshots
 
-<div align="center">
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/ba1547f9-05b3-4408-bfdd-be59bf42f090" alt="RyTuneX" width="400" />
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/344ed2a2-a7e5-4684-9bd4-63e5c36e39eb" alt="RyTuneX" width="400" />
-</div>
 
-<div align="center">
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/47c15490-7505-4255-8f82-d78eefd4b534" alt="RyTuneX Setup" width="800" />
-</div>
-
-<div align="center">
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/b32ba614-2a9f-4fe7-b5b8-49d3c009e2bb" alt="RyTuneX" width="400" />
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/f67bdd4a-9d92-4ac6-8a75-e23ae9d07b58" alt="RyTuneX" width="400" />
-</div>
-
+![version 0.1.8](https://github.com/rayenghanmi/RyTuneX/assets/108760398/02f08c0c-bfa4-48ee-ad68-8b4228337a8f)
+![0.8.1 setup](https://github.com/rayenghanmi/RyTuneX/assets/108760398/ae2ad043-da1b-4f00-9105-bf47c213f892)
 
 
 ## 🛠 Installation
