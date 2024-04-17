@@ -29,13 +29,9 @@
   <a href="https://rayenghanmi.github.io/rytunex"><img src="https://img.shields.io/badge/Website-RyTuneX-blue" alt="Website"></a>
 </p>
 
-
-
 ## 📝 About
 
 RyTuneX is a cutting-edge optimizer built with the WinUI 3 framework, designed to amplify the performance of Windows devices 🚀. Crafted for Windows 10 and 11, RyTuneX empowers users to effortlessly remove stubborn pre-installed apps and optimize system resources 🛠️.
-
-
 
 ## 🚀 Features
 
@@ -45,14 +41,10 @@ RyTuneX is a cutting-edge optimizer built with the WinUI 3 framework, designed t
 - **Modern Design**: Enjoy a sleek and intuitive interface powered by WinUI 3 🎨.
 - **Cross-Compatible**: Experience seamless performance optimization on both Windows 10 and 11 🖥️.
 
-
-
 ## 📸 Screenshots
-
 
 ![version 0.1.8](https://github.com/rayenghanmi/RyTuneX/assets/108760398/02f08c0c-bfa4-48ee-ad68-8b4228337a8f)
 ![0.8.1 setup](https://github.com/rayenghanmi/RyTuneX/assets/108760398/ae2ad043-da1b-4f00-9105-bf47c213f892)
-
 
 ## 🛠 Installation
 
@@ -63,8 +55,6 @@ RyTuneX is a cutting-edge optimizer built with the WinUI 3 framework, designed t
 
 > [!IMPORTANT]
 > Always download RyTuneX from the official [GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety 🔒.
-
-
 
 ## 📖 Usage
 
@@ -131,19 +121,24 @@ This page offers detailed insights into your system's hardware and OS. Familiari
 > [!NOTE]
 > Driver extraction aids in backups and reinstalls. Always backup drivers before making system changes 🔒.
 
-
-
 ## 🤝 Contributing
 
 We value your contributions! Please submit all pull requests to the `testing` branch. Contributions to `main` will not be accepted.
 
+## 🌐 Translation
 
+If you're interested in contributing translations, please follow these steps:
+
+1. **Clone the File**: Clone the [Resources.resw](../testing/Strings/en-us/Resources.resw) file.
+2. **Translate the File**: Translate its contents into your desired language.
+3. **Save and Structure**: Save the translated file with the name `Resources.resw` inside a new folder named with your language code (e.g., `fr-fr` for French).
+4. **Create Pull Request**: Submit a pull request to the `testing` branch, ensuring the new `resw` file is included in the correct language folder within the `Strings` directory.
+
+Thank you for your help in making RyTuneX accessible to more people!
 
 ## 📝 License
 
 This project is licensed under the [GNU Affero General Public License v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
-
-
 
 ## 📞 Contact
 
