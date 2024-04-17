@@ -2,6 +2,15 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 0.8.2 - Unreleased
+
+## Changes
+
+- Enhanced translation consistency across Arabic, French, and Simplified Chinese.
+
+> [!NOTE]
+> Interested in contributing to RyTuneX translations? [Learn more here](https://github.com/rayenghanmi/RyTuneX?tab=readme-ov-file#-translation).
+
 ## 0.8.1 - Released
 
 > This is a hotfix for version 0.8.0

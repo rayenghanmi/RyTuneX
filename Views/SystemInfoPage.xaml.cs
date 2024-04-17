@@ -73,15 +73,15 @@ public sealed partial class SystemInfoPage : Page
             var collection = searcher.Get();
             searcher.Dispose();
             var cpuInfoLines = collection.Cast<ManagementObject>().Select(cpu =>
-            $"Name: {cpu["Name"]}\n" +
-            $"Manufacturer: {cpu["Manufacturer"]}\n" +
-            $"Architecture: {cpu["Architecture"]}\n" +
-            $"Cores: {cpu["NumberOfCores"]}\n" +
-            $"Logical Processors: {cpu["NumberOfLogicalProcessors"]}\n" +
-            $"Max Speed: {cpu["MaxClockSpeed"]} MHz\n" +
-            $"Socket Designation: {cpu["SocketDesignation"]}\n" +
-            $"L2 Cache Size: {cpu["L2CacheSize"]} KB\n" +
-            $"L3 Cache Size: {cpu["L3CacheSize"]} KB");
+            "Name".GetLocalized() + $": {cpu["Name"]}\n" +
+            "Manufacturer".GetLocalized() + $": {cpu["Manufacturer"]}\n" +
+            "Architecture".GetLocalized() + $": {cpu["Architecture"]}\n" +
+            "Cores".GetLocalized() + $": {cpu["NumberOfCores"]}\n" +
+            "LogicalProcessors".GetLocalized() + $": {cpu["NumberOfLogicalProcessors"]}\n" +
+            "MaxSpeed".GetLocalized() + $": {cpu["MaxClockSpeed"]} MHz\n" +
+            "SocketDesignation".GetLocalized() + $": {cpu["SocketDesignation"]}\n" +
+            "L2Cache".GetLocalized() + $": {cpu["L2CacheSize"]} KB\n" +
+            "L3Cache".GetLocalized() + $": {cpu["L3CacheSize"]} KB");
 
             return string.Join(Environment.NewLine, cpuInfoLines);
         }
@@ -103,11 +103,11 @@ public sealed partial class SystemInfoPage : Page
             var gpuNumber = 0;
             var gpuInfoLines = collection.Cast<ManagementObject>().Select(gpu =>
             {
-                var gpuInfo = $"GPU {gpuNumber}:\n" +
-                              $"  Name: {gpu["Caption"]}\n" +
-                              $"  Adapter RAM: {gpu["AdapterRAM"]} bytes\n" +
-                              $"  Driver Version: {gpu["DriverVersion"]}\n" +
-                              $"  Video Architecture: {gpu["VideoArchitecture"]}";
+                var gpuInfo = "GPU".GetLocalized() + $" {gpuNumber}:\n" +
+                              "   " + "Name".GetLocalized() + $": {gpu["Caption"]}\n" +
+                              "   " + "AdapterRAM".GetLocalized() + $": {gpu["AdapterRAM"]} bytes\n" +
+                              "   " + "DriverVersion".GetLocalized() + $": {gpu["DriverVersion"]}\n" +
+                              "   " + "VideoArchitecture".GetLocalized() + $": {gpu["VideoArchitecture"]}";
 
                 gpuNumber++;
                 return gpuInfo;
@@ -132,11 +132,11 @@ public sealed partial class SystemInfoPage : Page
             searcher.Dispose();
 
             var ramInfoLines = collection.Cast<ManagementObject>().Select((ram, i) =>
-                $"RAM Module {i + 1}:\n" +
-                $"  Device Locator: {ram["DeviceLocator"]}\n" +
-                $"  Capacity: {((ulong)ram["Capacity"]) / (1024 * 1024)} MB\n" +
-                $"  Speed: {ram["Speed"]} MHz\n" +
-                $"  Manufacturer: {ram["Manufacturer"]}");
+                "RAMModule".GetLocalized() + $" {i + 1}:\n" +
+                "   " + "DeviceLocator".GetLocalized() + $": {ram["DeviceLocator"]}\n" +
+                "   " + "Capacity".GetLocalized() + $": {((ulong)ram["Capacity"]) / (1024 * 1024)} MB\n" +
+                "   " + "Speed".GetLocalized() + $": {ram["Speed"]} MHz\n" +
+                "   " + "Manufacturer".GetLocalized() + $": {ram["Manufacturer"]}");
 
             return string.Join(Environment.NewLine, ramInfoLines);
         }
@@ -158,12 +158,12 @@ public sealed partial class SystemInfoPage : Page
             var diskNumber = 0;
             var diskInfoLines = collection.Cast<ManagementObject>().Select(disk =>
             {
-                var diskInfo = $"Disk {diskNumber}:\n" +
-                               $"  Caption: {disk["Caption"]}\n" +
-                               $"  Size: {disk["Size"]} bytes\n" +
-                               $"  Interface Type: {disk["InterfaceType"]}\n" +
-                               $"  Manufacturer: {disk["Manufacturer"]}\n" +
-                               $"  Model: {disk["Model"]}";
+                var diskInfo = "Disk".GetLocalized() + $" {diskNumber}:\n" +
+                               "   " + "Caption".GetLocalized() + $": {disk["Caption"]}\n" +
+                               "   " + "Size".GetLocalized() + $": {disk["Size"]} bytes\n" +
+                               "   " + "InterfaceType".GetLocalized() + $": {disk["InterfaceType"]}\n" +
+                               "   " + "Manufacturer".GetLocalized() + $": {disk["Manufacturer"]}\n" +
+                               "   " + "Model".GetLocalized() + $": {disk["Model"]}";
 
                 diskNumber++;
                 return diskInfo;
@@ -188,16 +188,15 @@ public sealed partial class SystemInfoPage : Page
             searcher.Dispose();
 
             var osInfoLines = collection.Cast<ManagementObject>().Select(os =>
-                $"OS Name: {os["Caption"]}\n" +
-                $"Version: {os["Version"]}\n" +
-                $"Build Number: {os["BuildNumber"]}\n" +
-                $"Architecture: {os["OSArchitecture"]}\n" +
-                $"Install Date: {os["InstallDate"]}\n" +
-                $"Registered User: {os["RegisteredUser"]}\n" +
-                $"Product Key: {os["SerialNumber"]}\n" +
-                $"Windows Directory: {os["WindowsDirectory"]}\n" +
-                $"System Directory: {os["SystemDirectory"]}\n" +
-                $"Last Boot Up Time: {os["LastBootUpTime"]}");
+                "OSName".GetLocalized() + $": {os["Caption"]}\n" +
+                "Version".GetLocalized() + $": {os["Version"]}\n" +
+                "BuildNumber".GetLocalized() + $": {os["BuildNumber"]}\n" +
+                "Architecture".GetLocalized() + $": {os["OSArchitecture"]}\n" +
+                "InstallDate".GetLocalized() + $": {os["InstallDate"]}\n" +
+                "RegisteredUser".GetLocalized() + $": {os["RegisteredUser"]}\n" +
+                "WindowsDirectory".GetLocalized() + $": {os["WindowsDirectory"]}\n" +
+                "SystemDirectory".GetLocalized() + $": {os["SystemDirectory"]}\n" +
+                "LastBoot".GetLocalized() + $": {os["LastBootUpTime"]}");
 
             return string.Join(Environment.NewLine, osInfoLines);
         }
@@ -288,7 +287,7 @@ public sealed partial class SystemInfoPage : Page
         {
             Directory.CreateDirectory(folderPath);
         }
-        ExtractingStatusText.Text = "Extracting drivers...";
+        ExtractingStatusText.Text = "ExtractingDrivers".GetLocalized() + "...";
         ExtractingStatusPb.ShowError = false;
         ExtractingStatus.Visibility = Visibility.Visible;
         try
@@ -296,18 +295,18 @@ public sealed partial class SystemInfoPage : Page
             var exitCode = await OptimizationOptions.StartInCmd($"powershell Export-WindowsDriver -Online -Destination '{folderPath}'");
             if ( exitCode == 0 )
             {
-                ExtractingStatusText.Text = "Done";
+                ExtractingStatusText.Text = "Done".GetLocalized();
                 ExtractingStatusPb.Visibility = Visibility.Collapsed;
             }
             else
             {
-                ExtractingStatusText.Text = "There was an error while extracting drivers";
+                ExtractingStatusText.Text = "ErrDriversExtract".GetLocalized();
                 ExtractingStatusPb.ShowError = true;
             }
         }
         catch
         {
-            ExtractingStatusText.Text = "There was an error while extracting drivers";
+            ExtractingStatusText.Text = "ErrDriversExtract".GetLocalized();
             ExtractingStatusPb.ShowError = true;
         }
 
@@ -316,7 +315,7 @@ public sealed partial class SystemInfoPage : Page
     private void SelectPathButton_Click(object sender, RoutedEventArgs e)
     {
 
-        var selectedFolderPath = ShowDialog("C:\\", "Select a Folder...");
+        var selectedFolderPath = ShowDialog("C:\\", "SelecFold".GetLocalized() + "...");
         if (!string.IsNullOrEmpty(selectedFolderPath))
         {
             FolderPathText.Text = selectedFolderPath;
@@ -325,7 +324,7 @@ public sealed partial class SystemInfoPage : Page
         else
         {
             ExtractButton.Visibility = Visibility.Collapsed;
-            FolderPathText.Text = "Select a folder";
+            FolderPathText.Text = "SelecFold".GetLocalized();
         }
     }
 

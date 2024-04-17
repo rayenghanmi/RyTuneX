@@ -136,15 +136,7 @@ public sealed partial class DebloatSystemPage : Page
 
             // update ui elements
             uninstallingStatusBar.Visibility = Visibility.Collapsed;
-            if (appTreeView.SelectedItems.Count > 1)
-            {
-                NotificationQueue.Show(NotificationContent("Debloat", appTreeView.SelectedItems.Count + " " + "UninstallationSuccessMultiple".GetLocalized(), InfoBarSeverity.Success, 4000));
-            }
-            else
-            {
-                NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccessSingle".GetLocalized(), InfoBarSeverity.Success, 4000));
-            }
-
+            NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccess".GetLocalized(), InfoBarSeverity.Success, 4000));
         }
         // in case of an error
         catch (Exception ex)
@@ -290,7 +282,7 @@ public sealed partial class DebloatSystemPage : Page
             TempProgress.ShowError = false;
             TempProgress.Visibility = Visibility.Visible;
             TempButton.Visibility = Visibility.Collapsed;
-            TempStatusText.Text = "Deleting Temp Files...";
+            TempStatusText.Text = "DeligTemp".GetLocalized() + "...";
 
             var exitCode1 = await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\*.tmp\"");
             var exitCode2 = await OptimizationOptions.StartInCmd("del /q/f/s %TEMP%\\*");
@@ -298,12 +290,12 @@ public sealed partial class DebloatSystemPage : Page
             // Check for successful execution
             if (exitCode1 == 0 && exitCode2 == 0)
             {
-                TempStatusText.Text = "Temp Files Deleted Successfully!";
+                TempStatusText.Text = "TempDelSucc".GetLocalized();
                 TempProgress.Visibility = Visibility.Collapsed;
             }
             else
             {
-                TempStatusText.Text = "Error Deleting Temp Files";
+                TempStatusText.Text = "ErrTempDel".GetLocalized();
                 TempProgress.ShowError = true;
             }
         }
