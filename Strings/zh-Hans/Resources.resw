@@ -360,12 +360,6 @@
   <data name="TempDelSucc" xml:space="preserve">
     <value>临时文件已成功删除！</value>
   </data>
-  <data name="Header_EnableVerboseLogon" xml:space="preserve">
-    <value>启用详细登录</value>
-  </data>
-  <data name="Description_EnableVerboseLogon" xml:space="preserve">
-    <value>启用详细的登录消息，以便更好地进行系统监控和故障排除。 可能不适合日常使用</value>
-  </data>
   <data name="Disk" xml:space="preserve">
     <value>磁盘</value>
   </data>
