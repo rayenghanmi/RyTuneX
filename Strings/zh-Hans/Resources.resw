@@ -666,4 +666,52 @@
   <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
     <value>禁用 Mozilla Firefox 中的遥测数据收集。</value>
   </data>
+  <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
+    <value>选择您的默认语言</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
+    <value>更改语言</value>
+  </data>
+  <data name="Feature_EnableEndTask.Description" xml:space="preserve">
+    <value>Enables an option when right clicking on apps' icons in the taskbar, allowing you to quickly terminate unresponsive applications without opening Task Manager.</value>
+  </data>
+  <data name="Feature_EnableEndTask.Header" xml:space="preserve">
+    <value>Enable EndTask</value>
+  </data>
+  <data name="Network_ApplyDNS.Content" xml:space="preserve">
+    <value>Apply DNS</value>
+  </data>
+  <data name="Network_IPv4Title.Text" xml:space="preserve">
+    <value>IPv4 DNS Servers</value>
+  </data>
+  <data name="Network_IPv6Title.Text" xml:space="preserve">
+    <value>IPv6 DNS Servers</value>
+  </data>
+  <data name="Network_NicTitle.Text" xml:space="preserve">
+    <value>Network Interface</value>
+  </data>
+  <data name="Network_Primary.Text" xml:space="preserve">
+    <value>Primary</value>
+  </data>
+  <data name="Network_ResetDNS.Content" xml:space="preserve">
+    <value>Reset Default DNS</value>
+  </data>
+  <data name="Network_Secondary.Text" xml:space="preserve">
+    <value>Secondary</value>
+  </data>
+  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
+    <value>Set Custom DNS</value>
+  </data>
+  <data name="NoIPv4" xml:space="preserve">
+    <value>No IPv4 DNS addresses found</value>
+  </data>
+  <data name="NoIPv6" xml:space="preserve">
+    <value>No IPv6 DNS addresses found</value>
+  </data>
+  <data name="NoNic" xml:space="preserve">
+    <value>No network interface selected</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>Not set</value>
+  </data>
 </root>

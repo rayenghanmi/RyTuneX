@@ -66,7 +66,7 @@ public sealed partial class OptimizeSystemPage : Page
             }
         }
     }
-    private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+    private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -91,7 +91,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
+            await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
     }
 }

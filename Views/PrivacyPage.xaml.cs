@@ -16,7 +16,7 @@ public sealed partial class PrivacyPage : Page
     public PrivacyPage()
     {
         InitializeComponent();
-        LogHelper.Log("Initializing OptimizeSystemPage");
+        LogHelper.Log("Initializing PrivacyPage");
         Loaded += (sender, e) => InitializeToggleSwitches();
     }
     private void InitializeToggleSwitches()

@@ -32,6 +32,7 @@
     <None Remove="Assets\WindowIcon.ico" />
     <None Remove="Views\DebloatSystemPage.xaml" />
     <None Remove="Views\FeaturesPage.xaml" />
+    <None Remove="Views\NetworkPage.xaml" />
     <None Remove="Views\PrivacyPage.xaml" />
   </ItemGroup>
 
@@ -51,11 +52,6 @@
 	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
 	  <PackageReference Include="WinUI3Localizer" Version="2.2.0" />
 	  <PackageReference Include="WinUIEx" Version="2.3.4" />
-	  <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics" Version="7.4.2" />
-	  <PackageReference Include="Microsoft.PowerShell.Commands.Management" Version="7.4.2" />
-	  <PackageReference Include="Microsoft.PowerShell.Commands.Utility" Version="7.4.2" />
-	  <PackageReference Include="Microsoft.PowerShell.ConsoleHost" Version="7.4.2" />
-	  <PackageReference Include="Microsoft.WSMan.Management" Version="7.4.2" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
 	  <PackageReference Include="System.Management.Automation" Version="7.4.2" />
@@ -84,6 +80,10 @@
     </Page>
     <Page Update="Views\FeaturesPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Views\NetworkPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PrivacyPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

@@ -37,13 +37,6 @@ internal class OptimizationOptions
             {
                 process.Start();
 
-                /* Skip the first two lines as they contain headers
-                   Removing this will cause two apps to appear named
-                   "----" and "Name" */
-                process.StandardOutput.ReadLine();
-                process.StandardOutput.ReadLine();
-                process.StandardOutput.ReadLine();
-
                 // Read the output directly
                 while (!process.StandardOutput.EndOfStream)
                 {
@@ -752,6 +745,18 @@ internal class OptimizationOptions
                     {
                         OptimizeSystemHelper.EnableHibernation();
                         
+                    }
+                    break;
+                case "EndTask":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableEndTask();
+
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableEndTask();
+
                     }
                     break;
             }

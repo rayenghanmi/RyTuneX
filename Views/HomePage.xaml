@@ -43,12 +43,22 @@
                     Margin="3"
                     FontSize="18"
                     Text="A Windows 10 and 11 Optimizer" />
-            <StackPanel Padding="10">
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Button
-                    Width="{StaticResource ContentDialogButtonMaxWidth}"
                     Style="{StaticResource AccentButtonStyle}"
                     Margin="6"
-                    Click="GithubButton_Click">
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="0"
+                    Click="GithubButton_Click"
+                    Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <BitmapIcon
                             Width="20"
@@ -58,10 +68,13 @@
                         <TextBlock x:Uid="HomePage_WebsiteButton"/>
                     </StackPanel>
                 </Button>
+
                 <Button
                     Click="DiscordButton_Click"
-                    Width="{StaticResource ContentDialogButtonMaxWidth}"
-                    Margin="6">
+                    Margin="6"
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="1"
+                    Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <BitmapIcon
                             Foreground="{ThemeResource TextFillColorPrimary}"
@@ -72,10 +85,13 @@
                         <TextBlock x:Uid="HomePage_DiscordButton"/>
                     </StackPanel>
                 </Button>
+
                 <Button
                     Click="IssueButton_Click"
-                    Width="{StaticResource ContentDialogButtonMaxWidth}"
-                    Margin="6">
+                    Margin="6"
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="2"
+                    Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <BitmapIcon
                             Foreground="{ThemeResource TextFillColorPrimary}"
@@ -86,7 +102,7 @@
                         <TextBlock x:Uid="HomePage_IssueButton"/>
                     </StackPanel>
                 </Button>
-            </StackPanel>
+            </Grid>
         </StackPanel>
         <ScrollView
             Grid.Row="1"

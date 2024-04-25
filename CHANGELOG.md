@@ -4,9 +4,25 @@ All notable changes to this branch will be documented in this file.
 
 ## 0.8.2 - Unreleased
 
+## TODO
+
+- Startup apps
+- Edge removal (partially done) (not tested)
+
 ## Changes
 
 - Enhanced translation consistency across Arabic, French, and Simplified Chinese.
+- Updated Simplified Chinese translation thanks to @wcxu21.
+
+## Added
+
+- Implemented German language translation.
+- Introduced new Networking section with the bility to change DNS server.
+- Ability to enable Endtask option in Windows 11.
+
+## Fixes
+
+- Fixed minor `debloat` problems.
 
 > [!NOTE]
 > Interested in contributing to RyTuneX translations? [Learn more here](https://github.com/rayenghanmi/RyTuneX?tab=readme-ov-file#-translation).

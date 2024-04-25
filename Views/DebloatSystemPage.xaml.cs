@@ -45,7 +45,7 @@ public sealed partial class DebloatSystemPage : Page
             cancellationToken.ThrowIfCancellationRequested();
 
             var installedApps = await Task.Run(() => OptimizationOptions.GetUWPApps(uninstallableOnly), cancellationToken);
-            var numberOfInstalledApps = installedApps.Count - 1; // removes Rayen.RyTuneX from total installed apps count
+            var numberOfInstalledApps = installedApps.Count - 3; // removes Rayen.RyTuneX from total installed apps count
             DispatcherQueue.TryEnqueue(() =>
             {
                 // fetching installed apps data & hiding UI elements
@@ -64,7 +64,9 @@ public sealed partial class DebloatSystemPage : Page
                 foreach (var app in installedApps)
                 {
                     // prevent displaying Rayen.RyTuneX in AppList
-                    if (!app.ToString().Contains("Rayen.RyTuneX"))
+                    if (!(app.ToString().Contains("Rayen.RyTuneX") ||
+                    app.ToString().Contains("----") ||
+                    app.ToString().Contains("Name")))
                     {
                         AppList.Add(app);
                     }
@@ -175,8 +177,8 @@ public sealed partial class DebloatSystemPage : Page
     }
     private static async Task UninstallApps(string appName)
     {
-        /*if (!appName.Contains("Microsoft.MicrosoftEdge"))
-        {*/
+        if (!appName.Contains("MicrosoftEdge"))
+        {
             await LogHelper.Log($"Uninstalling: {appName}");
 
             var cmdCommand = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
@@ -204,30 +206,39 @@ public sealed partial class DebloatSystemPage : Page
                     throw new Exception(error);
                 }
             }
-            
-        // Edge removal (will be added soon)
-
-        /*}
+        }
         else
         {
             var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
 
-            var scriptContent = File.ReadAllText(scriptFilePath);
-
             await LogHelper.Log($"Uninstalling: {appName}");
 
-            using var PowerShellInstance = PowerShell.Create();
-            PowerShellInstance.AddScript(scriptContent)
-                .AddArgument("-Set-ExecutionPolicy Unrestricted");
+            var cmdCommand = $"powershell.exe -ExecutionPolicy Bypass -File \"{scriptFilePath}\"";
 
-            var result = PowerShellInstance.InvokeAsync();
-            if (PowerShellInstance.HadErrors)
+            var processInfo = new ProcessStartInfo("cmd.exe", $"/c {cmdCommand}")
             {
-                var errorMessage = string.Join(Environment.NewLine, PowerShellInstance.Streams.Error.Select(err => err.ToString()));
-                await LogHelper.LogError(errorMessage);
-                throw new Exception(errorMessage);
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = new Process { StartInfo = processInfo };
+            {
+                process.Start();
+
+                var output = await process.StandardOutput.ReadToEndAsync();
+                var error = await process.StandardError.ReadToEndAsync();
+
+                await LogHelper.Log(output);
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    await LogHelper.LogError(error);
+                    throw new Exception(error);
+                }
             }
-        }*/
+        }
     }
 
     private void ShowAll_Checked(object sender, RoutedEventArgs e)

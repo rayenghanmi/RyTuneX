@@ -118,6 +118,10 @@
                     <ToggleSwitch x:Name="VBS" Tag="VBS" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Feature_EnableEndTask">
+                    <ToggleSwitch x:Name="EndTask" Tag="EndTask" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+
                 <controls:SettingsCard x:Uid="Feature_MoveTaskbarToLeft">
                     <ToggleSwitch x:Name="TaskbarToLeft" Tag="TaskbarToLeft" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
@@ -150,12 +154,12 @@
                     <ToggleSwitch x:Name="CoPilotAI" Tag="CoPilotAI" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
+                <!--<controls:SettingsCard ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
                                Description="Currently, RyTuneX does not provide full system customizations but we're working on enhancing it"
                                Header="Personalize your system"
                                HeaderIcon="{ui:FontIcon Glyph=&#xE771;}"
                                IsClickEnabled="True"
-                               Click="SettingsCard_Click"/>
+                               Click="SettingsCard_Click"/>-->
             </StackPanel>
         </ScrollViewer>
     </Grid>

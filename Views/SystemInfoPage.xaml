@@ -26,7 +26,7 @@
                         </StackPanel>
                         <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
                             <ScrollView VerticalScrollMode="Disabled" VerticalAlignment="Center" MinWidth="230">
-                                <TextBox x:Uid="SystemInfoPage_FolderPathText" x:Name="FolderPathText" IsEnabled="False"/>
+                                <TextBox x:Uid="SystemInfoPage_FolderPathText" x:Name="FolderPathText" IsReadOnly="True"/>
                             </ScrollView>
                             <Button x:Uid="SystemInfoPage_SelectButton" Margin="15,15,0,15" Click="SelectPathButton_Click"/>
                             <Button x:Uid="SystemInfoPage_ExtractButton" Margin="15,15,0,15" x:Name="ExtractButton" Visibility="Collapsed" Click="ExtractButton_Click"/>
