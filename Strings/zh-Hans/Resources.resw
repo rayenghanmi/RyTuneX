@@ -673,45 +673,54 @@
     <value>更改语言</value>
   </data>
   <data name="Feature_EnableEndTask.Description" xml:space="preserve">
-    <value>Enables an option when right clicking on apps' icons in the taskbar, allowing you to quickly terminate unresponsive applications without opening Task Manager.</value>
+    <value>在任务栏上右键点击应用程序图标时启用一个选项，允许您快速终止无响应的应用程序，无需打开任务管理器。</value>
   </data>
   <data name="Feature_EnableEndTask.Header" xml:space="preserve">
-    <value>Enable EndTask</value>
+    <value>启用结束任务</value>
   </data>
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
-    <value>Apply DNS</value>
+    <value>应用 DNS</value>
   </data>
   <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
+    <value>IPv4 DNS 服务器</value>
   </data>
   <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
+    <value>IPv6 DNS 服务器</value>
   </data>
   <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>Network Interface</value>
+    <value>网络接口</value>
   </data>
   <data name="Network_Primary.Text" xml:space="preserve">
-    <value>Primary</value>
+    <value>主要</value>
   </data>
   <data name="Network_ResetDNS.Content" xml:space="preserve">
-    <value>Reset Default DNS</value>
+    <value>重置默认 DNS</value>
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
-    <value>Secondary</value>
+    <value>次要</value>
   </data>
   <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
+    <value>设置自定义 DNS</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
-    <value>No IPv4 DNS addresses found</value>
+    <value>未找到 IPv4 DNS 地址</value>
   </data>
   <data name="NoIPv6" xml:space="preserve">
-    <value>No IPv6 DNS addresses found</value>
+    <value>未找到 IPv6 DNS 地址</value>
   </data>
   <data name="NoNic" xml:space="preserve">
-    <value>No network interface selected</value>
+    <value>未选择网络接口</value>
   </data>
   <data name="NotSet" xml:space="preserve">
-    <value>Not set</value>
+    <value>未设置</value>
+  </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>网络技术</value>
+  </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>（成人过滤器）</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>自动</value>
   </data>
 </root>

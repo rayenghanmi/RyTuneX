@@ -673,45 +673,54 @@
     <value>Changer de langue</value>
   </data>
   <data name="Feature_EnableEndTask.Description" xml:space="preserve">
-    <value>Enables an option when right clicking on apps' icons in the taskbar, allowing you to quickly terminate unresponsive applications without opening Task Manager.</value>
+    <value>Active une option lors d'un clic droit sur les icônes des applications dans la barre des tâches, vous permettant de mettre fin rapidement aux applications qui ne répondent pas sans ouvrir le Gestionnaire des tâches.</value>
   </data>
   <data name="Feature_EnableEndTask.Header" xml:space="preserve">
-    <value>Enable EndTask</value>
+    <value>Activer Fin de tâche</value>
   </data>
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
-    <value>Apply DNS</value>
+    <value>Appliquer DNS</value>
   </data>
   <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
+    <value>Serveurs DNS IPv4</value>
   </data>
   <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
+    <value>Serveurs DNS IPv6</value>
   </data>
   <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>Network Interface</value>
+    <value>Interface réseau</value>
   </data>
   <data name="Network_Primary.Text" xml:space="preserve">
-    <value>Primary</value>
+    <value>Primaire</value>
   </data>
   <data name="Network_ResetDNS.Content" xml:space="preserve">
-    <value>Reset Default DNS</value>
+    <value>Réinitialiser DNS par défaut</value>
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
-    <value>Secondary</value>
+    <value>Secondaire</value>
   </data>
   <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
+    <value>Appliquer DNS personnalisé</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
-    <value>No IPv4 DNS addresses found</value>
+    <value>Aucune adresse DNS IPv4 trouvée</value>
   </data>
   <data name="NoIPv6" xml:space="preserve">
-    <value>No IPv6 DNS addresses found</value>
+    <value>Aucune adresse DNS IPv6 trouvée</value>
   </data>
   <data name="NoNic" xml:space="preserve">
-    <value>No network interface selected</value>
+    <value>Aucune interface réseau sélectionnée</value>
   </data>
   <data name="NotSet" xml:space="preserve">
-    <value>Not set</value>
+    <value>Non défini</value>
+  </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>Réseau</value>
+  </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>(filtre adulte)</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>Automatique</value>
   </data>
 </root>

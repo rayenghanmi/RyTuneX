@@ -717,4 +717,10 @@
   <data name="NotSet" xml:space="preserve">
     <value>Not set</value>
   </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>(adult filter)</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
 </root>

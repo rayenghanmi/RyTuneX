@@ -673,45 +673,54 @@
     <value>تغيير اللغة</value>
   </data>
   <data name="Feature_EnableEndTask.Description" xml:space="preserve">
-    <value>Enables an option when right clicking on apps' icons in the taskbar, allowing you to quickly terminate unresponsive applications without opening Task Manager.</value>
+    <value>تمكين خيار عند النقر بزر الماوس الأيمن على رموز التطبيقات في شريط المهام، مما يتيح لك إنهاء التطبيقات التي لا تستجيب بسرعة دون الحاجة إلى فتح مدير المهام.</value>
   </data>
   <data name="Feature_EnableEndTask.Header" xml:space="preserve">
-    <value>Enable EndTask</value>
+    <value>تمكين إنهاء المهمة</value>
   </data>
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
-    <value>Apply DNS</value>
+    <value>تطبيق DNS</value>
   </data>
   <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
+    <value>خوادم DNS IPv4</value>
   </data>
   <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
+    <value>خوادم DNS IPv6</value>
   </data>
   <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>Network Interface</value>
+    <value>واجهة الشبكة</value>
   </data>
   <data name="Network_Primary.Text" xml:space="preserve">
-    <value>Primary</value>
+    <value>أساسي</value>
   </data>
   <data name="Network_ResetDNS.Content" xml:space="preserve">
-    <value>Reset Default DNS</value>
+    <value>إعادة تعيين DNS الافتراضي</value>
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
-    <value>Secondary</value>
+    <value>ثانوي</value>
   </data>
   <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
+    <value>تعيين DNS مخصص</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
-    <value>No IPv4 DNS addresses found</value>
+    <value>لم يتم العثور على عناوين DNS IPv4</value>
   </data>
   <data name="NoIPv6" xml:space="preserve">
-    <value>No IPv6 DNS addresses found</value>
+    <value>لم يتم العثور على عناوين DNS IPv6</value>
   </data>
   <data name="NoNic" xml:space="preserve">
-    <value>No network interface selected</value>
+    <value>لم يتم اختيار واجهة الشبكة</value>
   </data>
   <data name="NotSet" xml:space="preserve">
-    <value>Not set</value>
+    <value>لم يتم التعيين</value>
+  </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>شبكات</value>
+  </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>(فلتر للبالغين)</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>أوتوماتيكي</value>
   </data>
 </root>

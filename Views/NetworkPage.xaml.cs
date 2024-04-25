@@ -13,7 +13,7 @@ public sealed partial class NetworkPage : Page
         get;
     } =
     {
-        "Automatic",
+        "Automatic".GetLocalized(),
         "Cloudflare",
         "OpenDNS",
         "Quad9",
@@ -21,7 +21,7 @@ public sealed partial class NetworkPage : Page
         "AlternateDNS",
         "Adguard",
         "CleanBrowsing",
-        "CleanBrowsing (adult filter)",
+        "CleanBrowsing " + "AdultFilter".GetLocalized(),
         "Comodo Secure DNS",
         "Verisign Public DNS"
     };
