@@ -723,4 +723,10 @@
   <data name="Automatic" xml:space="preserve">
     <value>Automatique</value>
   </data>
+  <data name="Feature_ExplorerBlur.Header" xml:space="preserve">
+    <value>Activer le flou de l'explorateur</value>
+  </data>
+  <data name="Feature_ExplorerBlurLearnButton.Content" xml:space="preserve">
+    <value>En savoir plus sur le créateur original</value>
+  </data>
 </root>

@@ -127,6 +127,20 @@ internal class OptimizationOptions
         }
     }
 
+    internal static void RestartExplorer()
+    {
+        var ExplorerProcess = Process.GetProcessesByName("explorer");
+        foreach (var p in ExplorerProcess)
+        {
+            p.Kill();
+        }
+        ExplorerProcess = Process.GetProcessesByName("explorer");
+        if (ExplorerProcess.Length == 0)
+        {
+            Process.Start("explorer.exe");
+        }
+    }
+
     internal static async Task<int> StartInCmd(string command)
     {
         try
@@ -756,6 +770,18 @@ internal class OptimizationOptions
                     else
                     {
                         OptimizeSystemHelper.DisableEndTask();
+
+                    }
+                    break;
+                case "ExplorerBlur":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableExplorerBlur();
+
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableExplorerBlur();
 
                     }
                     break;

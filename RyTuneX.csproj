@@ -28,6 +28,7 @@
   <ItemGroup>
     <None Remove="Assets\bug.png" />
     <None Remove="Assets\discord.png" />
+    <None Remove="Assets\ExplorerBlurMica.dll" />
     <None Remove="Assets\github.png" />
     <None Remove="Assets\WindowIcon.ico" />
     <None Remove="Views\DebloatSystemPage.xaml" />

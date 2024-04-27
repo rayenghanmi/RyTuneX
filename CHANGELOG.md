@@ -19,6 +19,7 @@ All notable changes to this branch will be documented in this file.
 - Implemented German language translation.
 - Introduced new Networking section with the bility to change DNS server.
 - Ability to enable Endtask option in Windows 11.
+- Option to add background blur effect to explorer made by [Maplespe's ExplorerBlurMica](https://github.com/Maplespe/ExplorerBlurMica).
 
 ## Fixes
 

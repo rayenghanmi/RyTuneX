@@ -723,4 +723,10 @@
   <data name="Automatic" xml:space="preserve">
     <value>أوتوماتيكي</value>
   </data>
+  <data name="Feature_ExplorerBlur.Header" xml:space="preserve">
+    <value>Enable Explorer Blur</value>
+  </data>
+  <data name="Feature_ExplorerBlurLearnButton.Content" xml:space="preserve">
+    <value>Learn more about the original creator</value>
+  </data>
 </root>

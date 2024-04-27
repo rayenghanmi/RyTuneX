@@ -1255,4 +1255,18 @@ internal class OptimizeSystemHelper
     {
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings /v TaskbarEndTask /t REG_DWORD /d 0 /f");
     }
+
+    internal static async void EnableExplorerBlur()
+    {
+        var dll = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "ExplorerBlurMica.dll");
+        await OptimizationOptions.StartInCmd($"regsvr32 /s {dll}");
+        OptimizationOptions.RestartExplorer();
+    }
+
+    internal static async void DisableExplorerBlur()
+    {
+        var dll = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "ExplorerBlurMica.dll");
+        await OptimizationOptions.StartInCmd($"regsvr32 /s /u {dll}");
+        OptimizationOptions.RestartExplorer();
+    }
 }

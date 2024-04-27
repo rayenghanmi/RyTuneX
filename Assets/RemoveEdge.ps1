@@ -5,8 +5,8 @@ $also_remove_widgets = 1
 $also_remove_xsocial = 1
 ## why also remove xsocial? because it starts webview setup every boot - xbox gamebar will still work without the social crap
 
-$host.ui.RawUI.WindowTitle = 'RyTuneX Edge Removal - Rayen Ghanmi'
-$remove_appx = @("MicrosoftEdge"); $remove_win32 = @("Microsoft Edge","Microsoft Edge Update"); $skip = @() # @("DevTools")
+$host.ui.RawUI.WindowTitle = 'Edge Removal - RyTuneX'
+$remove_appx = @("MicrosoftEdge"); $remove_win32 = @("Microsoft Edge","Microsoft Edge Update"); $skip = @("DevTools")
 if ($also_remove_webview -eq 1) {$remove_appx += "Win32WebViewHost"; $remove_win32 += "Microsoft EdgeWebView"}
 if ($also_remove_widgets -eq 1) {$remove_appx += "WebExperience"}
 if ($also_remove_xsocial -eq 1) {$remove_appx += "GamingServices"}
@@ -285,5 +285,4 @@ rem done
 
 ## 8 done
 $done = gp 'Registry::HKEY_Users\S-1-5-21*\Volatile*' Edge_Removal -ea 0; if ($done) {rp $done.PSPath Edge_Removal -force -ea 0}
-if ((get-process -name 'explorer' -ea 0) -eq $null) {start explorer}
 ## -------------------------------------------------------------------------------------------------------------------------------

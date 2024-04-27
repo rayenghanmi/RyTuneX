@@ -1,5 +1,4 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using System.Linq;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using RyTuneX.Helpers;
@@ -12,7 +11,7 @@ public sealed partial class NetworkPage : Page
     {
         get;
     } =
-    {
+    [
         "Automatic".GetLocalized(),
         "Cloudflare",
         "OpenDNS",
@@ -24,7 +23,7 @@ public sealed partial class NetworkPage : Page
         "CleanBrowsing " + "AdultFilter".GetLocalized(),
         "Comodo Secure DNS",
         "Verisign Public DNS"
-    };
+    ];
 
     private string selectedInterfaceName = string.Empty;
 
@@ -119,8 +118,8 @@ public sealed partial class NetworkPage : Page
 
         if (!string.IsNullOrEmpty(selectedDNS))
         {
-            string[]? dnsv4 = null;
-            string[]? dnsv6 = null;
+            var dnsv4 = Array.Empty<string>();
+            var dnsv6 = Array.Empty<string>();
 
             switch (selectedDNS)
             {
@@ -225,7 +224,7 @@ public sealed partial class NetworkPage : Page
 
     private void cmbNetworkInterfaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        selectedInterfaceName = cmbNetworkInterfaces.SelectedItem?.ToString();
+        selectedInterfaceName = cmbNetworkInterfaces.SelectedItem?.ToString() ?? "";
         DisplayNetworkInfo();
     }
 }

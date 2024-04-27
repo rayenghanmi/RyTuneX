@@ -238,6 +238,12 @@ public sealed partial class DebloatSystemPage : Page
                     throw new Exception(error);
                 }
             }
+            // starting explorer
+            var ExplorerProcess = Process.GetProcessesByName("explorer");
+            if (ExplorerProcess.Length == 0)
+            {
+                Process.Start("explorer.exe");
+            }
         }
     }
 
