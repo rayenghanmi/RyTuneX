@@ -576,9 +576,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Exclut les mises à jour de pilotes de Windows Update. Peut entraîner des pilotes obsolètes avec des risques de sécurité potentiels ou des problèmes de compatibilité. Utilisez avec prudence.</value>
   </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>En savoir plus sur ce qui est désactivé</value>
-  </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>Optimisations Avancées</value>
   </data>
@@ -725,8 +722,5 @@
   </data>
   <data name="Feature_ExplorerBlur.Header" xml:space="preserve">
     <value>Activer le flou de l'explorateur</value>
-  </data>
-  <data name="Feature_ExplorerBlurLearnButton.Content" xml:space="preserve">
-    <value>En savoir plus sur le créateur original</value>
   </data>
 </root>

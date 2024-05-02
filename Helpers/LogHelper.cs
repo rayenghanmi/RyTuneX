@@ -10,7 +10,7 @@ internal class LogHelper
     {
         var errorMessage = $"Caught Error: {ex.Message}";
 
-        await Log($"Error: { errorMessage}");
+        await Log($"Error: {errorMessage}");
 
         await InitializeErrorMessage(errorMessage, xamlRoot);
     }

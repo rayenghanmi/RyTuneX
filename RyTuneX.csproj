@@ -48,13 +48,9 @@
 	  <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240404000" />
-	  <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
 	  <PackageReference Include="System.Management" Version="8.0.0" />
 	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
-	  <PackageReference Include="WinUI3Localizer" Version="2.2.0" />
 	  <PackageReference Include="WinUIEx" Version="2.3.4" />
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
 	  <PackageReference Include="System.Management.Automation" Version="7.4.2" />
   </ItemGroup>
 

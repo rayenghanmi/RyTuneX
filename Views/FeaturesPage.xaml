@@ -31,15 +31,7 @@
                                   Glyph="&#xE946;" />
                     </HyperlinkButton>
                 </StackPanel>
-                
-                <controls:SettingsCard x:Uid="Feature_ExplorerBlur">
-                    <ToggleSwitch x:Name="ExplorerBlur" Tag="ExplorerBlur" Toggled="ToggleSwitch_Toggled"/>
-                    <controls:SettingsCard.Description>
-                        <HyperlinkButton x:Uid="Feature_ExplorerBlurLearnButton"
-                            NavigateUri="https://github.com/Maplespe/ExplorerBlurMica" />
-                    </controls:SettingsCard.Description>
-                </controls:SettingsCard>
-                
+
                 <controls:SettingsCard x:Uid="Feature_EnableVerboseLogon">
                     <ToggleSwitch x:Name="VerboseLogon" Tag="VerboseLogon" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>

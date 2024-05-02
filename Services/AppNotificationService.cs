@@ -3,7 +3,6 @@ using System.Web;
 using Microsoft.Windows.AppNotifications;
 
 using RyTuneX.Contracts.Services;
-using RyTuneX.ViewModels;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Notifications;

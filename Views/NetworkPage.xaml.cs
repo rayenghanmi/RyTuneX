@@ -1,6 +1,6 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using System.Net.NetworkInformation;
+﻿using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using Microsoft.UI.Xaml.Controls;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;

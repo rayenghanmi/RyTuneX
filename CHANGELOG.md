@@ -4,11 +4,6 @@ All notable changes to this branch will be documented in this file.
 
 ## 0.8.2 - Unreleased
 
-## TODO
-
-- Startup apps
-- Edge removal (partially done) (not tested)
-
 ## Changes
 
 - Enhanced translation consistency across Arabic, French, and Simplified Chinese.
@@ -19,11 +14,11 @@ All notable changes to this branch will be documented in this file.
 - Implemented German language translation.
 - Introduced new Networking section with the bility to change DNS server.
 - Ability to enable Endtask option in Windows 11.
-- Option to add background blur effect to explorer made by [Maplespe's ExplorerBlurMica](https://github.com/Maplespe/ExplorerBlurMica).
-
+- Ability to uninstall `Microsoft Edge` (Tested on Windows 11 22H2).
+ 
 ## Fixes
 
-- Fixed minor `debloat` problems.
+- Fixed minor `Debloat` problems.
 
 > [!NOTE]
 > Interested in contributing to RyTuneX translations? [Learn more here](https://github.com/rayenghanmi/RyTuneX?tab=readme-ov-file#-translation).

@@ -1,10 +1,10 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Diagnostics;
+using CommunityToolkit.WinUI.Controls;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
-using CommunityToolkit.WinUI.Controls;
-using System.Diagnostics;
+using Windows.Storage;
 
 namespace RyTuneX.Views;
 

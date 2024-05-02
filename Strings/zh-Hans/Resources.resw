@@ -723,10 +723,4 @@
   <data name="Automatic" xml:space="preserve">
     <value>自动</value>
   </data>
-  <data name="Feature_ExplorerBlur.Header" xml:space="preserve">
-    <value>启用资源管理器模糊</value>
-  </data>
-  <data name="Feature_ExplorerBlurLearnButton.Content" xml:space="preserve">
-    <value>了解更多关于原创者的信息</value>
-  </data>
 </root>

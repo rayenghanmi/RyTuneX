@@ -1,9 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Management.Automation;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Animation;
 using RyTuneX.Helpers;
 using Windows.Storage;
 
@@ -61,12 +59,25 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.Visibility = Visibility.Collapsed;
                 TempStackButtonTextBar.Visibility = Visibility.Collapsed;
 
+                var isEdgeUninstalled = true;
+                var settingsEdgeUninstalled = ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"];
+
+                if (settingsEdgeUninstalled != null && settingsEdgeUninstalled is bool settingValue)
+                {
+                    isEdgeUninstalled = settingValue;
+                }
+
                 foreach (var app in installedApps)
                 {
                     // prevent displaying Rayen.RyTuneX in AppList
-                    if (!(app.ToString().Contains("Rayen.RyTuneX") ||
+                    if (app.ToString().Contains("Rayen.RyTuneX") ||
                     app.ToString().Contains("----") ||
-                    app.ToString().Contains("Name")))
+                    app.ToString().Contains("Name") ||
+                    (app.ToString().Contains("Edge") && isEdgeUninstalled))
+                    {
+                        Debug.WriteLine(app.ToString());
+                    }
+                    else
                     {
                         AppList.Add(app);
                     }
@@ -159,7 +170,6 @@ public sealed partial class DebloatSystemPage : Page
             var tempFolder = ApplicationData.Current.TemporaryFolder;
             var file = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
 
-            // Use Process.Start to open the file with the default application
             Process.Start(new ProcessStartInfo(file.Path) { UseShellExecute = true });
 
             // reload after error
@@ -179,6 +189,7 @@ public sealed partial class DebloatSystemPage : Page
     {
         if (!appName.Contains("MicrosoftEdge"))
         {
+            // uwp apps removal
             await LogHelper.Log($"Uninstalling: {appName}");
 
             var cmdCommand = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
@@ -209,6 +220,7 @@ public sealed partial class DebloatSystemPage : Page
         }
         else
         {
+            // edge removal process
             var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
 
             await LogHelper.Log($"Uninstalling: {appName}");
@@ -230,19 +242,15 @@ public sealed partial class DebloatSystemPage : Page
                 var output = await process.StandardOutput.ReadToEndAsync();
                 var error = await process.StandardError.ReadToEndAsync();
 
-                await LogHelper.Log(output);
+                // setting edge installation state to uninstalled
+                ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"] = true;
 
-                if (!string.IsNullOrEmpty(error))
-                {
-                    await LogHelper.LogError(error);
-                    throw new Exception(error);
-                }
-            }
-            // starting explorer
-            var ExplorerProcess = Process.GetProcessesByName("explorer");
-            if (ExplorerProcess.Length == 0)
-            {
-                Process.Start("explorer.exe");
+                // starting explorer
+                OptimizationOptions.RestartExplorer();
+
+                // writing output log
+                await LogHelper.Log(output);
+                await LogHelper.LogError(error);
             }
         }
     }
@@ -324,23 +332,4 @@ public sealed partial class DebloatSystemPage : Page
             TempProgress.ShowError = true;
         }
     }
-    private void TextBlock_Loaded(object sender, RoutedEventArgs e)
-    {
-        var textBlock = sender as TextBlock;
-        if (textBlock != null)
-        {
-            var storyboard = new Storyboard();
-            var fadeInAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = new Duration(TimeSpan.FromSeconds(0.5))
-            };
-            Storyboard.SetTarget(fadeInAnimation, textBlock);
-            Storyboard.SetTargetProperty(fadeInAnimation, "Opacity");
-            storyboard.Children.Add(fadeInAnimation);
-            storyboard.Begin();
-        }
-    }
-
 }

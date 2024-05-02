@@ -1,11 +1,7 @@
-﻿using System;
-using Microsoft.UI.Xaml.Controls;
-using System.Management;
-using Windows.Storage.Pickers;
-using Windows.Storage;
+﻿using System.Management;
 using System.Runtime.InteropServices;
-using WinRT.Interop;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using RyTuneX.Helpers;
 
 
@@ -293,7 +289,7 @@ public sealed partial class SystemInfoPage : Page
         try
         {
             var exitCode = await OptimizationOptions.StartInCmd($"powershell Export-WindowsDriver -Online -Destination '{folderPath}'");
-            if ( exitCode == 0 )
+            if (exitCode == 0)
             {
                 ExtractingStatusText.Text = "Done".GetLocalized();
                 ExtractingStatusPb.Visibility = Visibility.Collapsed;

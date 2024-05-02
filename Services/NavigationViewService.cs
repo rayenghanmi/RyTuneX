@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml.Controls;
 
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
-using RyTuneX.ViewModels;
 
 namespace RyTuneX.Services;
 
