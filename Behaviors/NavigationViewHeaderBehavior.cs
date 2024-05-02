@@ -101,8 +101,8 @@ public class NavigationViewHeaderBehavior : Behavior<NavigationView>
 
                 if (headerMode == NavigationViewHeaderMode.Always)
                 {
-                        AssociatedObject.AlwaysShowHeader = true;
-                    }
+                    AssociatedObject.AlwaysShowHeader = true;
+                }
                 else
                 {
                     AssociatedObject.AlwaysShowHeader = false;

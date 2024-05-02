@@ -2,11 +2,8 @@
 
 using RyTuneX.Contracts.Services;
 using RyTuneX.Core.Contracts.Services;
-using RyTuneX.Core.Helpers;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
-
-using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace RyTuneX.Services;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -126,9 +126,6 @@
   <data name="Shell_Home.Content" xml:space="preserve">
     <value>RyTuneX</value>
   </data>
-  <data name="Debloat_NoSelection.Text" xml:space="preserve">
-    <value>从列表中选择一个项目。</value>
-  </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
     <value>减少臃肿</value>
   </data>
@@ -157,7 +154,7 @@
     <value>默认</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>关于</value>
+    <value>关于此应用程序</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>RyTuneX 是由 Rayen Ghanmi 开发的 Windows 10 和 11 优化工具，旨在通过有选择地删除所选软件并禁用不必要的服务来增强系统性能和效率。</value>
@@ -168,46 +165,23 @@
   <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
     <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
-  <data name="WelcomeNotification" xml:space="preserve">
-    <value>&lt;toast launch="action=ToastClick"&gt;
-  &lt;visual&gt;
-    &lt;binding template="ToastGeneric"&gt;
-      &lt;text&gt;欢迎使用 RyTuneX&lt;/text&gt;
-      &lt;text&gt;加速您系统的完美优化工具&lt;/text&gt;
-      &lt;image placement="appLogoOverride" src="{0}Assets/WindowIcon.ico"/&gt;
-    &lt;/binding&gt;
-  &lt;/visual&gt;
-  &lt;actions&gt;
-    &lt;action content="了解更多" arguments="action=Settings"/&gt;
-  &lt;/actions&gt;
-&lt;/toast&gt;</value>
-  </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>语言</value>
   </data>
   <data name="WelcomeNotice" xml:space="preserve">
-    <value>尊敬的用户：\n\n我们非常高兴地欢迎您使用 RyTuneX，在这里，性能优化与精度相结合。 RyTuneX 由 Rayen Ghanmi 开发，它不仅仅是一款应用程序，它还是您获得增强计算体验的门户。 无论您运行的是 Windows 11 还是 Windows 10，RyTuneX 都旨在将您的设备性能提升到新的高度。 步入一个全新的领域，这里冗余的服务被悄然静音，臃肿的组件被彻底消除，而系统的核心则通过智能的注册表优化得到了精细的调整。 准备好释放您设备的真正力量 - 欢迎来到 RyTuneX，每一次点击都是迈向更快、响应更灵敏的计算之旅的一步。\n\n注意：虽然我们很高兴您加入，但某些功能可能会受到限制。 在开发过程中，偶尔会出现一些问题。 您的反馈对于帮助我们改进和完善 RyTuneX 体验非常宝贵。 感谢您参与我们优化和增强 Windows 体验的旅程。\n\n此致，\n\nRayen Ghanmi</value>
+    <value>亲爱的用户，\n\n我们很高兴欢迎您使用 RyTuneX，在这里，性能优化与精度完美融合。 RyTuneX 由 Rayen Ghanmi 开发并自豪地制作，它不仅仅是一款应用程序，它还是您获得增强计算体验的门户。 无论您运行的是 Windows 11 还是 Windows 10，RyTuneX 都旨在将您的设备性能提升到新的高度。 在 RyTuneX 的世界里，不必要的服务被静默处理，冗余被清除，系统核心通过智能注册表优化得到精细调整。准备好释放您设备的真正潜能了吗？欢迎使用 RyTuneX，您的每一次点击都是向更快、更灵敏的计算之旅迈进的一步。\n\n此致，\n\nRayen Ghanmi</value>
   </data>
   <data name="WelcomeNoticeTitle" xml:space="preserve">
     <value>欢迎使用 RyTuneX - 释放您设备的全部潜力！</value>
   </data>
-  <data name="HomePage_Content1.Text" xml:space="preserve">
-    <value>RyTuneX 作为一款全面的 Windows 11 优化工具脱颖而出，向后兼容 Windows 10。其关键功能之一涉及简化系统服务以增强整体设备性能。 通过仔细分析并有选择地禁用不必要的后台服务，RyTuneX 确保系统资源用于重要任务。 这将为用户带来更高效、响应更灵敏的计算体验，因为资源不再受到冗余进程的束缚，从而有助于提高系统速度和响应能力。</value>
-  </data>
-  <data name="HomePage_Content2.Text" xml:space="preserve">
-    <value>RyTuneX 是一款功能强大的 Windows 11 优化工具，其兼容性扩展到 Windows 10。该优化工具的核心功能包括细致的注册表调整，旨在释放设备的全部潜力。 RyTuneX 智能地微调注册表项，确保 Windows 操作系统配置为最佳性能。 通过优化注册表设置，该应用程序增强了系统响应能力和速度，为用户提供了一个根据其特定硬件配置进行微调的计算环境。</value>
-  </data>
-  <data name="HomePage_Content3.Text" xml:space="preserve">
-    <value>RyTuneX 通过解决和消除系统膨胀而超越了基本优化。 该应用程序识别并删除多余的预装软件和可能与操作系统捆绑在一起的不必要的功能。 这种减少膨胀的细致方法不仅可以释放宝贵的存储空间，还可以确保系统资源专用于运行对用户最重要的应用程序和进程。 其结果是一个更精简、更高效的系统，运行速度和敏捷性得到提高，满足 Windows 11 和 Windows 10 用户的性能需求。</value>
-  </data>
   <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. 简化系统服务：</value>
+    <value>1. 简化系统服务:</value>
   </data>
   <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. 微调注册表优化：</value>
+    <value>2. 微调注册表优化:</value>
   </data>
   <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. 无膨胀性能：</value>
+    <value>3. 无臃肿性能:</value>
   </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>正在获取已安装的应用程序数据...</value>
@@ -249,7 +223,7 @@
     <value>处理器</value>
   </data>
   <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>显卡</value>
+    <value>网卡</value>
   </data>
   <data name="SystemInfoPage_OS.Text" xml:space="preserve">
     <value>操作系统</value>
@@ -261,24 +235,492 @@
     <value>刷新</value>
   </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
-    <value>存储</value>
+    <value>储存</value>
   </data>
   <data name="Debloat" xml:space="preserve">
     <value>减少臃肿</value>
   </data>
   <data name="DebloatPage_NotificationBody" xml:space="preserve">
-    <value>卸载其中一些应用程序可能无法将其完全删除。</value>
+    <value>卸载其中一些应用程序可能无法完全删除它们。</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
     <value>卸载时出错</value>
   </data>
-  <data name="UninstallationSuccessMultiple" xml:space="preserve">
-    <value>应用程序已成功卸载</value>
-  </data>
-  <data name="UninstallationSuccessSingle" xml:space="preserve">
-    <value>应用程序已成功卸载</value>
+  <data name="UninstallationSuccess" xml:space="preserve">
+    <value>卸载成功</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
     <value>删除临时文件</value>
+  </data>
+  <data name="AdapterRAM" xml:space="preserve">
+    <value>适配器内存</value>
+  </data>
+  <data name="Architecture" xml:space="preserve">
+    <value>架构</value>
+  </data>
+  <data name="BuildNumber" xml:space="preserve">
+    <value>内部版本号</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>容量</value>
+  </data>
+  <data name="Caption" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="Cores" xml:space="preserve">
+    <value>核心</value>
+  </data>
+  <data name="DeviceLocator" xml:space="preserve">
+    <value>设备定位器</value>
+  </data>
+  <data name="DriverVersion" xml:space="preserve">
+    <value>驱动版本</value>
+  </data>
+  <data name="ErrDriversExtract" xml:space="preserve">
+    <value>提取驱动程序时发生错误</value>
+  </data>
+  <data name="ExtractingDrivers" xml:space="preserve">
+    <value>正在提取驱动程序</value>
+  </data>
+  <data name="GPU" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="InstallDate" xml:space="preserve">
+    <value>安装日期</value>
+  </data>
+  <data name="InterfaceType" xml:space="preserve">
+    <value>接口类型</value>
+  </data>
+  <data name="L2Cache" xml:space="preserve">
+    <value>二级缓存大小</value>
+  </data>
+  <data name="L3Cache" xml:space="preserve">
+    <value>三级缓存大小</value>
+  </data>
+  <data name="LastBoot" xml:space="preserve">
+    <value>最后启动时间</value>
+  </data>
+  <data name="LogicalProcessors" xml:space="preserve">
+    <value>逻辑处理器</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>制造商</value>
+  </data>
+  <data name="MaxSpeed" xml:space="preserve">
+    <value>最大速度</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="OSName" xml:space="preserve">
+    <value>操作系统名称</value>
+  </data>
+  <data name="RAMModule" xml:space="preserve">
+    <value>内存模块</value>
+  </data>
+  <data name="RegisteredUser" xml:space="preserve">
+    <value>已注册用户</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="SocketDesignation" xml:space="preserve">
+    <value>插槽指定</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>速度</value>
+  </data>
+  <data name="SystemDirectory" xml:space="preserve">
+    <value>系统目录</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="VideoArchitecture" xml:space="preserve">
+    <value>视频架构</value>
+  </data>
+  <data name="WindowsDirectory" xml:space="preserve">
+    <value>Windows 目录</value>
+  </data>
+  <data name="DeligTemp" xml:space="preserve">
+    <value>删除临时文件</value>
+  </data>
+  <data name="ErrTempDel" xml:space="preserve">
+    <value>删除临时文件时出错</value>
+  </data>
+  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
+    <value>系统功能</value>
+  </data>
+  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
+    <value>Windows 11 独占</value>
+  </data>
+  <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
+    <value>选择一个文件夹</value>
+  </data>
+  <data name="TempDelSucc" xml:space="preserve">
+    <value>临时文件已成功删除！</value>
+  </data>
+  <data name="Disk" xml:space="preserve">
+    <value>磁盘</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>型号</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
+    <value>启用详细的登录消息，以便更好地进行系统监控和故障排除。 可能不适合日常使用</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
+    <value>启用详细登录</value>
+  </data>
+  <data name="SelecFold" xml:space="preserve">
+    <value>选择一个文件夹</value>
+  </data>
+  <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
+    <value>驱动程序</value>
+  </data>
+  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
+    <value>提取</value>
+  </data>
+  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
+    <value>提取您的驱动程序到外部文件夹以便于备份</value>
+  </data>
+  <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
+    <value>提取驱动程序</value>
+  </data>
+  <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="Feature_DisableHibernation.Header" xml:space="preserve">
+    <value>禁用休眠</value>
+  </data>
+  <data name="Feature_DisableHibernation.Description" xml:space="preserve">
+    <value>关闭休眠功能可以节省电量并防止计算机进入睡眠模式。 不推荐用于笔记本电脑</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
+    <value>禁用家庭组</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
+    <value>关闭家庭组以停止与网络上的其他设备共享文件和打印机</value>
+  </data>
+  <data name="Feature_DisablePrintService.Header" xml:space="preserve">
+    <value>禁用打印服务</value>
+  </data>
+  <data name="Feature_DisablePrintService.Description" xml:space="preserve">
+    <value>禁用打印服务，阻止与打印相关的功能</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
+    <value>禁用兼容性助手</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
+    <value>关闭兼容性助手以禁用程序的自动兼容性检查</value>
+  </data>
+  <data name="Feature_DisableSearch.Header" xml:space="preserve">
+    <value>禁用搜索</value>
+  </data>
+  <data name="Feature_DisableSearch.Description" xml:space="preserve">
+    <value>关闭系统范围的搜索功能</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
+    <value>禁用错误报告</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
+    <value>关闭错误报告以防止自动向 Microsoft 发送错误报告</value>
+  </data>
+  <data name="Feature_DisableGameBar.Header" xml:space="preserve">
+    <value>禁用游戏栏</value>
+  </data>
+  <data name="Feature_DisableGameBar.Description" xml:space="preserve">
+    <value>关闭游戏栏及其相关功能</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
+    <value>禁用快速访问历史记录</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
+    <value>禁用快速访问历史记录的记录和显示</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
+    <value>禁用我的人脉</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
+    <value>关闭任务栏中的我的人脉功能</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
+    <value>禁用传感器服务</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
+    <value>关闭传感器服务以保护隐私和节省电量。 不推荐用于具有相关传感器的笔记本电脑</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
+    <value>禁用 Windows Ink</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
+    <value>关闭 Windows Ink 工作区和相关功能。 不推荐用于带有手写笔的设备</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
+    <value>禁用拼写和打字功能</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
+    <value>禁用拼写和输入建议</value>
+  </data>
+  <data name="Feature_DisableFaxService.Header" xml:space="preserve">
+    <value>禁用传真服务</value>
+  </data>
+  <data name="Feature_DisableFaxService.Description" xml:space="preserve">
+    <value>禁用 Windows 中的传真服务</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
+    <value>禁用内部服务</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
+    <value>选择退出 Windows Insider 计划并停止接收预览版本</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
+    <value>禁用云剪贴板</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
+    <value>禁用云剪贴板功能以进行跨设备剪贴板共享</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
+    <value>禁用粘滞键</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
+    <value>禁用粘滞键辅助功能。 对于不小心同时按下多个键的人很有用</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
+    <value>禁用投射到设备</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
+    <value>禁用 Windows 中的“投射到设备”功能。 对于在其他设备上演示或共享媒体很有用</value>
+  </data>
+  <data name="Feature_DisableVBS.Header" xml:space="preserve">
+    <value>禁用 VBS</value>
+  </data>
+  <data name="Feature_DisableVBS.Description" xml:space="preserve">
+    <value>禁用基于虚拟化的安全性 (VBS) 以实现高级安全功能。 不建议用于高安全环境</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
+    <value>移动任务栏到左侧</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
+    <value>将任务栏从默认底部位置移动到屏幕左侧。 个人喜好</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
+    <value>禁用捕捉辅助</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
+    <value>禁用捕捉辅助，拖动时会自动排列打开的窗口。 对于多任务处理很有用，但有些用户更喜欢手动窗口管理</value>
+  </data>
+  <data name="Feature_DisableWidgets.Header" xml:space="preserve">
+    <value>禁用小部件</value>
+  </data>
+  <data name="Feature_DisableWidgets.Description" xml:space="preserve">
+    <value>禁用 Windows 11 任务栏上的小部件功能。 考虑一下您是否发现这些小部件对于快速更新有用（仅限 Windows 11）</value>
+  </data>
+  <data name="Feature_DisableChat.Header" xml:space="preserve">
+    <value>禁用聊天</value>
+  </data>
+  <data name="Feature_DisableChat.Description" xml:space="preserve">
+    <value>禁用 Windows 11 任务栏上的聊天功能。 仅在您不使用聊天功能进行通信时推荐（仅限 Windows 11）</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
+    <value>启用文件紧凑模式</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
+    <value>启用紧凑模式以使用较小的缩略图浏览文件。 对于低分辨率显示器或管理大型文件夹很有用</value>
+  </data>
+  <data name="Feature_DisableStickers.Header" xml:space="preserve">
+    <value>禁用贴纸</value>
+  </data>
+  <data name="Feature_DisableStickers.Description" xml:space="preserve">
+    <value>禁用 Windows 11 消息应用程序中的贴纸功能。 仅在您不使用贴纸进行交流时推荐（仅限 Windows 11）</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
+    <value>禁用 Edge 发现栏</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
+    <value>禁用 Microsoft Edge 中的发现栏功能。 如果您发现它分散注意力或喜欢更干净的浏览器界面，则很有用</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
+    <value>禁用 CoPilot AI</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
+    <value>禁用 Windows 中的 CoPilot AI 功能以帮助编写代码。 不建议开发者使用</value>
+  </data>
+  <data name="OptimizeBasic.Text" xml:space="preserve">
+    <value>基本优化</value>
+  </data>
+  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
+    <value>性能调整</value>
+  </data>
+  <data name="Feature_DisableSuperfetch.Header" xml:space="preserve">
+    <value>禁用 Superfetch</value>
+  </data>
+  <data name="Feature_DisableSuperfetch.Description" xml:space="preserve">
+    <value>关闭 Superfetch，它会预加载常用的应用程序以加快启动速度。 如果您使用 HDD，可能会影响某些程序的启动时间。</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
+    <value>禁用 NTFS 时间戳</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
+    <value>禁用对文件操作的 NTFS 时间戳的更新。 可能会影响依赖精确时间戳的程序的功能。</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
+    <value>启用游戏模式</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
+    <value>启用游戏模式，可优化系统资源以获得更流畅的游戏体验。 可能会影响后台进程。</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
+    <value>从 Windows 更新中排除驱动程序</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
+    <value>不包括来自 Windows Update 的驱动程序更新。 可能会导致过时的驱动程序存在潜在的安全风险或兼容性问题。 谨慎使用。</value>
+  </data>
+  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
+    <value>详细了解被禁用的内容</value>
+  </data>
+  <data name="OptimizeAdvanced.Text" xml:space="preserve">
+    <value>高级优化</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
+    <value>禁用系统还原</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
+    <value>禁用系统还原，系统还原会创建还原点以在出现问题时将系统恢复到之前的状态。 不建议。 禁用此功能将无法轻松地从潜在的系统问题中恢复。</value>
+  </data>
+  <data name="Feature_DisableCortana.Header" xml:space="preserve">
+    <value>禁用 Cortana</value>
+  </data>
+  <data name="Feature_DisableCortana.Description" xml:space="preserve">
+    <value>禁用可以回答问题和完成任务的虚拟助手 Cortana。 可能会影响语音搜索和一些生产力功能。</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
+    <value>禁用商店更新</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
+    <value>禁用从 Microsoft Store 下载的应用程序的自动更新。 可能会使应用程序容易受到安全风险或缺乏新功能。</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
+    <value>禁用自动更新</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
+    <value>关闭自动 Windows 更新，需要手动安装。 非常沮丧。 这可能会使您的系统容易受到安全漏洞和错误修复的影响。</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>禁用 SmartScreen</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>关闭 SmartScreen 筛选器，该筛选器会警告您有关从 Internet 下载的潜在不安全应用程序和文件的信息。 出于安全原因不建议使用。 禁用此功能会增加恶意软件感染的风险。</value>
+  </data>
+  <data name="Privacy_Telemetry.Text" xml:space="preserve">
+    <value>遥测</value>
+  </data>
+  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
+    <value>增强隐私</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
+    <value>禁用 SMBv1</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
+    <value>禁用服务器消息块版本 1 (SMBv1) 以增强安全性。 推荐</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
+    <value>禁用 SMBv2</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
+    <value>禁用服务器消息块版本 2 (SMBv2) 以增强安全性。 请谨慎使用，因为它可能会破坏网络文件共享功能。</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
+    <value>禁用遥测服务</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
+    <value>关闭遥测服务以防止操作系统收集和传输使用数据。</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
+    <value>禁用 Edge 遥测</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
+    <value>禁用 Microsoft Edge 中的遥测数据收集。</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
+    <value>禁用 Visual Studio 遥测</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
+    <value>禁用 Visual Studio 中的遥测数据收集。</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
+    <value>禁用 Nvidia 遥测</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
+    <value>禁用 Nvidia 驱动程序收集遥测数据。</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
+    <value>禁用 Chrome 遥测</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
+    <value>禁用 Google Chrome 中的遥测数据收集。</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
+    <value>禁用 Firefox 遥测</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
+    <value>禁用 Mozilla Firefox 中的遥测数据收集。</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
+    <value>选择您的默认语言</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
+    <value>更改语言</value>
+  </data>
+  <data name="Feature_EnableEndTask.Description" xml:space="preserve">
+    <value>在任务栏上右键点击应用程序图标时启用一个选项，允许您快速终止无响应的应用程序，无需打开任务管理器。</value>
+  </data>
+  <data name="Feature_EnableEndTask.Header" xml:space="preserve">
+    <value>启用结束任务</value>
+  </data>
+  <data name="Network_ApplyDNS.Content" xml:space="preserve">
+    <value>应用 DNS</value>
+  </data>
+  <data name="Network_IPv4Title.Text" xml:space="preserve">
+    <value>IPv4 DNS 服务器</value>
+  </data>
+  <data name="Network_IPv6Title.Text" xml:space="preserve">
+    <value>IPv6 DNS 服务器</value>
+  </data>
+  <data name="Network_NicTitle.Text" xml:space="preserve">
+    <value>网络接口</value>
+  </data>
+  <data name="Network_Primary.Text" xml:space="preserve">
+    <value>主要</value>
+  </data>
+  <data name="Network_ResetDNS.Content" xml:space="preserve">
+    <value>重置默认 DNS</value>
+  </data>
+  <data name="Network_Secondary.Text" xml:space="preserve">
+    <value>次要</value>
+  </data>
+  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
+    <value>设置自定义 DNS</value>
+  </data>
+  <data name="NoIPv4" xml:space="preserve">
+    <value>未找到 IPv4 DNS 地址</value>
+  </data>
+  <data name="NoIPv6" xml:space="preserve">
+    <value>未找到 IPv6 DNS 地址</value>
+  </data>
+  <data name="NoNic" xml:space="preserve">
+    <value>未选择网络接口</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>未设置</value>
+  </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>网络技术</value>
+  </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>（成人过滤器）</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>自动</value>
   </data>
 </root>

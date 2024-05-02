@@ -10,11 +10,12 @@ public class PageService : IPageService
     public PageService()
     {
         Configure<HomePage>();
+        Configure<OptimizeSystemPage>();
         Configure<DebloatSystemPage>();
         Configure<PrivacyPage>();
         Configure<FeaturesPage>();
+        Configure<NetworkPage>();
         Configure<SystemInfoPage>();
-        Configure<OptimizeSystemPage>();
         Configure<SettingsPage>();
     }
 

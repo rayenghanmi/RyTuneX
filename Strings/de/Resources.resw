@@ -127,37 +127,37 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>إزالة البرامج الزائدة</value>
+    <value>Aufblähen</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>معلومات النظام</value>
+    <value>Systeminformationen</value>
   </data>
   <data name="Shell_ReportBug.Content" xml:space="preserve">
-    <value>الإبلاغ عن خلل</value>
+    <value>Fehler melden</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>تحسين النظام</value>
+    <value>System optimieren</value>
   </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>تخصيص</value>
+    <value>Personalisierung</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>السمة</value>
+    <value>Thema</value>
   </data>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>فاتحة</value>
+    <value>Licht</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>داكنة</value>
+    <value>dunkel</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>افتراضية</value>
+    <value>Vorgabe</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>حول هذا التطبيق</value>
+    <value>Über diese Anwendung</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>راي تيونكس، المحسن لنظام ويندوز 10 و 11 المُبتكر من قبل ريان غانمي، مصمم لتحسين أداء النظام وكفاءته من خلال إزالة البرمجيات المختارة وتعطيل الخدمات غير الضرورية.</value>
+    <value>RyTuneX, ein von Rayen Ghanmi entwickelter Optimier für Windows 10 und 11, wurde entwickelt, um die Systemleistung und -effizienz zu verbessern, indem ausgewählte Software selektiv entfernt und unnötige Dienste deaktiviert werden.</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
     <value>AGPL v3.0</value>
@@ -166,561 +166,561 @@
     <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
-    <value>اللغة</value>
+    <value>Sprache</value>
   </data>
   <data name="WelcomeNotice" xml:space="preserve">
-    <value>عزيزي المستخدم الكريم،\n\nنرحب بك بحرارة في راي تيونكس، حيث تلتقي تحسين الأداء بالدقة. تم تطوير راي تيونكس بكل فخر من قبل ريان غانمي، وهو ليس مجرد تطبيق، بل هو بوابتك إلى تجربة حوسبة محسنة. سواء كنت تستخدم ويندوز 11 أو ويندوز 10، تم تصميم راي تيونكس لرفع أداء جهازك إلى مستويات جديدة. استعد لفتح القدرات الحقيقية لجهازك - مرحبًا بك في راي تيونكس، حيث كل نقرة تمثل خطوة نحو رحلة حوسبة أسرع وأكثر استجابة.\n\nملاحظة: نحن متحمسون لاستقبالك، ولكن قد تكون بعض الميزات قيد التطوير وقد تواجه بعض المشكلات. رأيك له قيمة كبيرة في مساعدتنا على تحسين وتحديث تجربة راي تيونكس. شكراً لك على أنك جزء من رحلتنا لتحسين وتعزيز تجربتك مع ويندوز.\n\nمع أطيب التحية،\n\nريان غانمي</value>
+    <value>Liebe/r geschätzte/r Benutzer/in,\n\nWir freuen uns sehr, Sie bei RyTuneX begrüßen zu dürfen, wo Leistungsoptimierung auf Präzision trifft. Entwickelt und stolz von Rayen Ghanmi gestaltet, ist RyTuneX nicht nur eine Anwendung, sondern Ihr Tor zu einem verbesserten Computererlebnis. Ob Sie Windows 11 oder Windows 10 verwenden, RyTuneX ist darauf ausgelegt, die Leistung Ihres Geräts auf ein neues Niveau zu heben. Tauchen Sie ein in eine Welt, in der unnötige Dienste zum Schweigen gebracht, Ballast verbannt und das Herz Ihres Systems durch intelligente Registry-Optimierungen fein abgestimmt wird. Machen Sie sich bereit, die wahre Kraft Ihres Geräts freizuschalten – willkommen bei RyTuneX, wo jeder Klick ein Schritt zu einer schnelleren und reaktionsschnelleren Computerreise ist.\n\nHinweis: Obwohl wir uns freuen, Sie an Bord zu haben, können einige Funktionen noch in Entwicklung sein und gelegentliche Probleme auftreten. Ihr Feedback ist unschätzbar, um uns dabei zu helfen, das RyTuneX-Erlebnis zu verfeinern und zu perfektionieren. Vielen Dank, dass Sie ein Teil unserer Reise zur Optimierung und Verbesserung Ihres Windows-Erlebnisses sind.\n\nMit freundlichen Grüßen,\n\nRayen Ghanmi</value>
   </data>
   <data name="WelcomeNoticeTitle" xml:space="preserve">
-    <value>مرحبًا بك في راي تيونكس - أطلق قدرات جهازك الكاملة!</value>
+    <value>Willkommen bei RyTuneX - Entfesseln Sie das volle Potenzial Ihres Geräts!</value>
   </data>
   <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. خدمات النظام المُبسطة:</value>
+    <value>1. Optimierte Systemdienste:</value>
   </data>
   <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. تحسين سجل النظام بدقة:</value>
+    <value>2. Fein abgestimmte Registry-Optimierung:</value>
   </data>
   <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. أداء خالٍ من البرامج الزائدة:</value>
+    <value>3. Blähungsfreie Leistung:</value>
   </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
-    <value>جلب بيانات التطبيقات المثبتة...</value>
+    <value>Daten für installierte Apps werden abgerufen...</value>
   </data>
   <data name="DebloatSystemPage_ShowAll.Content" xml:space="preserve">
-    <value>عرض الكل</value>
+    <value>Alle anzeigen</value>
   </data>
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
-    <value>إلغاء تثبيت التطبيق(ات) المحدد(ة)</value>
+    <value>Ausgewählte App(s) deinstallieren</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>تم</value>
+    <value>fertig</value>
   </data>
   <data name="Uninstalling" xml:space="preserve">
-    <value>جاري إلغاء التثبيت</value>
+    <value>Deinstallieren</value>
   </data>
   <data name="UninstallTip" xml:space="preserve">
-    <value>حدد التطبيقات التي ترغب في إزالتها واضغط على إلغاء التثبيت</value>
+    <value>Wählen Sie Apps aus, die Sie entfernen möchten, und klicken Sie auf Deinstallieren</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>ميزات ويندوز</value>
+    <value>Windows-Funktionen</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
-    <value>الخصوصية</value>
+    <value>Privatsphäre</value>
   </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
-    <value>انضم إلى خادمنا</value>
+    <value>Treten Sie unserem Server bei</value>
   </data>
   <data name="HomePage_IssueButton.Text" xml:space="preserve">
-    <value>الإبلاغ عن مشكلة</value>
+    <value>Problem melden</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>تفقد راي تيونكس</value>
+    <value>Schauen Sie sich RyTuneX an</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>ترك تقييم</value>
+    <value>Feedback senden</value>
   </data>
   <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>المعالج</value>
+    <value>Prozessor</value>
   </data>
   <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>بطاقة الرسومات</value>
+    <value>Grafikkarte</value>
   </data>
   <data name="SystemInfoPage_OS.Text" xml:space="preserve">
-    <value>نظام التشغيل</value>
+    <value>Betriebssystem</value>
   </data>
   <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
-    <value>الذاكرة العشوائية (RAM)</value>
+    <value>Widder</value>
   </data>
   <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
-    <value>تحديث</value>
+    <value>auffrischen</value>
   </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
-    <value>التخزين</value>
+    <value>Lagerung</value>
   </data>
   <data name="Debloat" xml:space="preserve">
-    <value>إزالة البرامج الزائدة</value>
+    <value>Aufblähen</value>
   </data>
   <data name="DebloatPage_NotificationBody" xml:space="preserve">
-    <value>قد لا يتم إزالة بعض هذه التطبيقات بشكل كامل.</value>
+    <value>Durch die Deinstallation einiger dieser Apps werden sie möglicherweise nicht vollständig entfernt.</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>حدث خطأ أثناء الإلغاء</value>
+    <value>Fehler bei der Deinstallation</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>تم الإلغاء بنجاح</value>
+    <value>Erfolgreich deinstalliert</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>إزالة الملفات المؤقتة</value>
+    <value>Temporäre Dateien entfernen</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
-    <value>RAM للمحول</value>
+    <value>Adapter-RAM</value>
   </data>
   <data name="Architecture" xml:space="preserve">
-    <value>الهندسة</value>
+    <value>Architektur</value>
   </data>
   <data name="BuildNumber" xml:space="preserve">
-    <value>رقم الإصدار</value>
+    <value>Build-Nummer</value>
   </data>
   <data name="Capacity" xml:space="preserve">
-    <value>السعة</value>
+    <value>Fassungsvermögen</value>
   </data>
   <data name="Caption" xml:space="preserve">
-    <value>العنوان</value>
+    <value>Überschrift</value>
   </data>
   <data name="Cores" xml:space="preserve">
-    <value>النوى</value>
+    <value>Kerne</value>
   </data>
   <data name="DeviceLocator" xml:space="preserve">
-    <value>موقع الجهاز</value>
+    <value>Geräte-Locator</value>
   </data>
   <data name="DriverVersion" xml:space="preserve">
-    <value>نسخة السائق</value>
+    <value>Treiber-Version</value>
   </data>
   <data name="ErrDriversExtract" xml:space="preserve">
-    <value>حدث خطأ أثناء استخراج السائقين</value>
+    <value>Beim Extrahieren von Treibern ist ein Fehler aufgetreten</value>
   </data>
   <data name="ExtractingDrivers" xml:space="preserve">
-    <value>جاري استخراج السائقين</value>
+    <value>Extrahieren von Treibern</value>
   </data>
   <data name="GPU" xml:space="preserve">
-    <value>بطاقة الرسومات</value>
+    <value>gpu</value>
   </data>
   <data name="InstallDate" xml:space="preserve">
-    <value>تاريخ التثبيت</value>
+    <value>Installationsdatum</value>
   </data>
   <data name="InterfaceType" xml:space="preserve">
-    <value>نوع الواجهة</value>
+    <value>Schnittstellen-Typ</value>
   </data>
   <data name="L2Cache" xml:space="preserve">
-    <value>حجم الذاكرة المؤقتة L2</value>
+    <value>L2-Cache-Größe</value>
   </data>
   <data name="L3Cache" xml:space="preserve">
-    <value>حجم الذاكرة المؤقتة L3</value>
+    <value>L3-Cache-Größe</value>
   </data>
   <data name="LastBoot" xml:space="preserve">
-    <value>وقت آخر إقلاع</value>
+    <value>Zeitpunkt des letzten Hochfahrens</value>
   </data>
   <data name="LogicalProcessors" xml:space="preserve">
-    <value>المعالجات المنطقية</value>
+    <value>Logische Prozessoren</value>
   </data>
   <data name="Manufacturer" xml:space="preserve">
-    <value>المصنع</value>
+    <value>Hersteller</value>
   </data>
   <data name="MaxSpeed" xml:space="preserve">
-    <value>السرعة القصوى</value>
+    <value>Maximale Geschwindigkeit</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>الاسم</value>
+    <value>Name</value>
   </data>
   <data name="OSName" xml:space="preserve">
-    <value>اسم نظام التشغيل</value>
+    <value>Name des Betriebssystems</value>
   </data>
   <data name="RAMModule" xml:space="preserve">
-    <value>وحدة الذاكرة العشوائية (RAM)</value>
+    <value>RAM-Modul</value>
   </data>
   <data name="RegisteredUser" xml:space="preserve">
-    <value>المستخدم المُسجل</value>
+    <value>Registrierter Benutzer</value>
   </data>
   <data name="Size" xml:space="preserve">
-    <value>الحجم</value>
+    <value>Größe</value>
   </data>
   <data name="SocketDesignation" xml:space="preserve">
-    <value>تصميم المقبس</value>
+    <value>Sockel-Bezeichnung</value>
   </data>
   <data name="Speed" xml:space="preserve">
-    <value>السرعة</value>
+    <value>Geschwindigkeit</value>
   </data>
   <data name="SystemDirectory" xml:space="preserve">
-    <value>دليل النظام</value>
+    <value>Systemverzeichnis</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>الإصدار</value>
+    <value>Version</value>
   </data>
   <data name="VideoArchitecture" xml:space="preserve">
-    <value>هندسة الفيديو</value>
+    <value>Video-Architektur</value>
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
-    <value>دليل ويندوز</value>
+    <value>Windows-Verzeichnis</value>
   </data>
   <data name="DeligTemp" xml:space="preserve">
-    <value>جاري حذف الملفات المؤقتة</value>
+    <value>Temporäre Dateien löschen</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
-    <value>حدث خطأ أثناء حذف الملفات المؤقتة</value>
+    <value>Fehler beim Löschen temporärer Dateien</value>
   </data>
   <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>ميزات النظام</value>
+    <value>Systemmerkmale</value>
   </data>
   <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>حصري لويندوز 11</value>
+    <value>Exklusiv für Windows 11</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
-    <value>حدد مجلدًا</value>
+    <value>Wählen Sie einen Ordner aus</value>
   </data>
   <data name="TempDelSucc" xml:space="preserve">
-    <value>تم حذف الملفات المؤقتة بنجاح!</value>
+    <value>Temporäre Dateien erfolgreich gelöscht!</value>
   </data>
   <data name="Disk" xml:space="preserve">
-    <value>القرص</value>
+    <value>Disk</value>
   </data>
   <data name="Model" xml:space="preserve">
-    <value>النموذج</value>
+    <value>Modell</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
-    <value>تفعيل رسائل تسجيل الدخول التفصيلية لمراقبة النظام وحل المشكلات. قد لا يكون مناسبًا للاستخدام اليومي</value>
+    <value>Aktivieren Sie detaillierte Anmeldeinformationen für eine bessere Systemüberwachung und Problembehandlung. Nicht unbedingt benutzerfreundlich für den täglichen Gebrauch</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
-    <value>تفعيل تسجيل الدخول المفصل</value>
+    <value>Detaillierte Anmeldung aktivieren</value>
   </data>
   <data name="SelecFold" xml:space="preserve">
-    <value>اختر مجلدًا</value>
+    <value>Wählen Sie einen Ordner aus</value>
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
-    <value>التعريفات</value>
+    <value>Treiber</value>
   </data>
   <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>استخراج</value>
+    <value>Extrahieren</value>
   </data>
   <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>استخراج التعريفات إلى مجلد خارجي لسهولة النسخ الاحتياطي</value>
+    <value>Extrahieren Sie Ihre Treiber in einen externen Ordner zur einfachen Sicherung</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
-    <value>جاري استخراج التعريفات</value>
+    <value>Treiber werden extrahiert</value>
   </data>
   <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
-    <value>اختر</value>
+    <value>Auswählen</value>
   </data>
   <data name="Feature_DisableHibernation.Header" xml:space="preserve">
-    <value>تعطيل وضع السكون</value>
+    <value>Ruhezustand deaktivieren</value>
   </data>
   <data name="Feature_DisableHibernation.Description" xml:space="preserve">
-    <value>إيقاف وضع السكون لتوفير الطاقة ومنع الكمبيوتر من دخول وضع السكون. غير مُوصى به للأجهزة المحمولة</value>
+    <value>Schalten Sie den Ruhezustand aus, um Energie zu sparen und den Computer daran zu hindern, in den Ruhezustand zu gehen. Nicht empfohlen für Laptops</value>
   </data>
   <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
-    <value>تعطيل المجموعة المنزلية</value>
+    <value>Heimnetzgruppe deaktivieren</value>
   </data>
   <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
-    <value>إيقاف المجموعة المنزلية لإيقاف مشاركة الملفات والطابعات مع الأجهزة الأخرى في الشبكة</value>
+    <value>Schaltet die Heimnetzgruppe aus, um das Teilen von Dateien und Druckern mit anderen Geräten im Netzwerk zu stoppen</value>
   </data>
   <data name="Feature_DisablePrintService.Header" xml:space="preserve">
-    <value>تعطيل خدمة الطباعة</value>
+    <value>Druckdienst deaktivieren</value>
   </data>
   <data name="Feature_DisablePrintService.Description" xml:space="preserve">
-    <value>تعطيل خدمة الطباعة لمنع وظائف ذات صلة بالطباعة</value>
+    <value>Deaktiviert den Druckdienst und verhindert druckbezogene Funktionen</value>
   </data>
   <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
-    <value>تعطيل مساعد التوافق</value>
+    <value>Kompatibilitätsassistent deaktivieren</value>
   </data>
   <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
-    <value>إيقاف مساعد التوافق لتعطيل الفحوصات التوافقية التلقائية للبرامج</value>
+    <value>Schaltet den Kompatibilitätsassistenten aus, um automatische Kompatibilitätsprüfungen für Programme zu deaktivieren</value>
   </data>
   <data name="Feature_DisableSearch.Header" xml:space="preserve">
-    <value>تعطيل البحث</value>
+    <value>Suche deaktivieren</value>
   </data>
   <data name="Feature_DisableSearch.Description" xml:space="preserve">
-    <value>إيقاف وظيفة البحث في النظام بأكمله</value>
+    <value>Schaltet die systemweite Suchfunktionalität aus</value>
   </data>
   <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
-    <value>تعطيل إبلاغ الأخطاء</value>
+    <value>Fehlerberichterstattung deaktivieren</value>
   </data>
   <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
-    <value>إيقاف إبلاغ الأخطاء لمنع إرسال التقارير التلقائية للأخطاء إلى مايكروسوفت</value>
+    <value>Schaltet die Fehlerberichterstattung aus, um das automatische Senden von Fehlerberichten an Microsoft zu verhindern</value>
   </data>
   <data name="Feature_DisableGameBar.Header" xml:space="preserve">
-    <value>تعطيل شريط الألعاب</value>
+    <value>Game Bar deaktivieren</value>
   </data>
   <data name="Feature_DisableGameBar.Description" xml:space="preserve">
-    <value>إيقاف شريط الألعاب وميزاته المرتبطة</value>
+    <value>Schaltet die Game Bar und die zugehörigen Funktionen aus</value>
   </data>
   <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
-    <value>تعطيل تاريخ الوصول السريع</value>
+    <value>Verlauf des Schnellzugriffs deaktivieren</value>
   </data>
   <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
-    <value>تعطيل تسجيل وعرض تاريخ الوصول السريع</value>
+    <value>Deaktiviert das Aufzeichnen und Anzeigen des Verlaufs des Schnellzugriffs</value>
   </data>
   <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
-    <value>تعطيل أصدقائي</value>
+    <value>Meine Kontakte deaktivieren</value>
   </data>
   <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
-    <value>إيقاف ميزة أصدقائي في شريط المهام</value>
+    <value>Schaltet die Meine Kontakte-Funktion in der Taskleiste aus</value>
   </data>
   <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
-    <value>تعطيل خدمات الاستشعار</value>
+    <value>Sensordienste deaktivieren</value>
   </data>
   <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
-    <value>إيقاف خدمات الاستشعار للخصوصية وتوفير الطاقة. غير مُوصى به للأجهزة المحمولة التي تحتوي على أجهزة استشعار ذات صلة</value>
+    <value>Schaltet die Sensordienste aus, um die Privatsphäre und den Stromverbrauch zu schützen. Nicht empfohlen für Laptops mit relevanten Sensoren</value>
   </data>
   <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
-    <value>تعطيل حبر ويندوز</value>
+    <value>Windows Ink deaktivieren</value>
   </data>
   <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
-    <value>إيقاف مساحة حبر ويندوز وميزاتها المرتبطة. غير مُوصى به للأجهزة التي تحتوي على قلم</value>
+    <value>Schaltet das Windows Ink Workspace und die zugehörigen Funktionen aus. Nicht empfohlen für Geräte mit einem Stift</value>
   </data>
   <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
-    <value>تعطيل ميزات التهجئة والكتابة</value>
+    <value>Rechtschreib- und Tippfunktionen deaktivieren</value>
   </data>
   <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
-    <value>تعطيل اقتراحات التهجئة والكتابة</value>
+    <value>Deaktiviert Rechtschreib- und Tippvorschläge</value>
   </data>
   <data name="Feature_DisableFaxService.Header" xml:space="preserve">
-    <value>تعطيل خدمة الفاكس</value>
+    <value>Faxdienst deaktivieren</value>
   </data>
   <data name="Feature_DisableFaxService.Description" xml:space="preserve">
-    <value>تعطيل خدمة الفاكس في ويندوز</value>
+    <value>Deaktiviert den Faxdienst in Windows</value>
   </data>
   <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
-    <value>تعطيل خدمة المشاركين في البرنامج التجريبي</value>
+    <value>Insider-Dienst deaktivieren</value>
   </data>
   <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
-    <value>الغاء الاشتراك في برنامج المشاركين في ويندوز ووقف استقبال البناء المعاينة</value>
+    <value>Austritt aus dem Windows Insider-Programm und Einstellung des Empfangs von Vorabversionen</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
-    <value>تعطيل حافظة السحاب</value>
+    <value>Cloud-Zwischenablage deaktivieren</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
-    <value>تعطيل ميزة حافظة السحاب لمشاركة الحافظة عبر الأجهزة</value>
+    <value>Deaktiviert die Cloud-Zwischenablage-Funktion für das Teilen von Zwischenablageinhalten zwischen Geräten</value>
   </data>
   <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
-    <value>تعطيل المفاتيح اللزقة</value>
+    <value>Klebe-Tasten deaktivieren</value>
   </data>
   <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
-    <value>تعطيل ميزة إمكانية الوصول للمفاتيح اللزقة. مفيد للأشخاص الذين يضغطون على عدة مفاتيح بشكل عرضي</value>
+    <value>Deaktiviert die Klebe-Tasten-Zugänglichkeitsfunktion. Nützlich für Personen, die versehentlich mehrere Tasten gleichzeitig drücken</value>
   </data>
   <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
-    <value>تعطيل البث إلى الجهاز</value>
+    <value>Gerätewiedergabe deaktivieren</value>
   </data>
   <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
-    <value>تعطيل ميزة البث إلى الجهاز في ويندوز. مفيد للعروض أو مشاركة الوسائط على أجهزة أخرى</value>
+    <value>Deaktiviert die Gerätewiedergabe-Funktion in Windows. Nützlich für Präsentationen oder das Teilen von Medien mit anderen Geräten</value>
   </data>
   <data name="Feature_DisableVBS.Header" xml:space="preserve">
-    <value>تعطيل VBS</value>
+    <value>VBS deaktivieren</value>
   </data>
   <data name="Feature_DisableVBS.Description" xml:space="preserve">
-    <value>يعطل الأمان القائم على الافتراضي (VBS) لميزات الأمان المتقدمة. غير مُوصى به للبيئات عالية الأمان</value>
+    <value>Deaktiviert Virtualization-Based Security (VBS) für erweiterte Sicherheitsfunktionen. Nicht empfohlen für Umgebungen mit hoher Sicherheitsanforderung</value>
   </data>
   <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
-    <value>نقل شريط المهام إلى اليسار</value>
+    <value>Taskleiste nach links verschieben</value>
   </data>
   <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
-    <value>ينقل شريط المهام من الوضع الافتراضي في الأسفل إلى الجانب الأيسر من الشاشة. حسب الاختيار الشخصي</value>
+    <value>Verschiebt die Taskleiste von der standardmäßigen unteren Position an die linke Bildschirmseite. Persönliche Vorliebe</value>
   </data>
   <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
-    <value>تعطيل مساعد النافذة المنقسمة</value>
+    <value>Snap Assist deaktivieren</value>
   </data>
   <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
-    <value>يعطل مساعد النافذة المنقسمة، الذي ينظم النوافذ المفتوحة تلقائيًا عند السحب. مفيد للتعدد المهام ولكن يفضله بعض المستخدمين لإدارة النوافذ يدويًا</value>
+    <value>Deaktiviert Snap Assist, welches offene Fenster automatisch anordnet, wenn sie gezogen werden. Nützlich für Multitasking, aber einige Benutzer bevorzugen manuelles Fenstermanagement</value>
   </data>
   <data name="Feature_DisableWidgets.Header" xml:space="preserve">
-    <value>تعطيل الودجت</value>
+    <value>Widgets deaktivieren</value>
   </data>
   <data name="Feature_DisableWidgets.Description" xml:space="preserve">
-    <value>يعطل ميزة الودجت على شريط المهام في ويندوز 11. يُفكر فيه إذا كنت تجد الودجت مفيدة للتحديثات السريعة (فقط ويندوز 11)</value>
+    <value>Deaktiviert die Widgets-Funktion in der Windows 11 Taskleiste. Überlegen Sie, ob Sie die Widgets für schnelle Updates nützlich finden (nur Windows 11)</value>
   </data>
   <data name="Feature_DisableChat.Header" xml:space="preserve">
-    <value>تعطيل الدردشة</value>
+    <value>Chat deaktivieren</value>
   </data>
   <data name="Feature_DisableChat.Description" xml:space="preserve">
-    <value>يعطل ميزة الدردشة على شريط المهام في ويندوز 11. يُوصى به إذا لم تستخدم ميزة الدردشة للتواصل (فقط ويندوز 11)</value>
+    <value>Deaktiviert die Chat-Funktion in der Windows 11 Taskleiste. Nur empfohlen, wenn Sie die Chat-Funktion nicht für die Kommunikation nutzen (nur Windows 11)</value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
-    <value>تمكين وضع الملفات المُدمج</value>
+    <value>Kompaktmodus für Dateien aktivieren</value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
-    <value>يمكن التصفح في وضع مُدمج مع الصور المصغرة الصغيرة. مفيد للشاشات ذات الدقة المنخفضة أو إدارة المجلدات الكبيرة</value>
+    <value>Aktiviert den Kompaktmodus für die Dateiansicht mit kleineren Miniaturansichten. Nützlich für Bildschirme mit geringer Auflösung oder zur Verwaltung großer Ordner</value>
   </data>
   <data name="Feature_DisableStickers.Header" xml:space="preserve">
-    <value>تعطيل الملصقات</value>
+    <value>Sticker deaktivieren</value>
   </data>
   <data name="Feature_DisableStickers.Description" xml:space="preserve">
-    <value>يعطل ميزة الملصقات في تطبيق الرسائل في ويندوز 11. يُوصى به إذا لم تستخدم الملصقات للتواصل (فقط ويندوز 11)</value>
+    <value>Deaktiviert die Sticker-Funktion in der Windows 11 Nachrichten-App. Nur empfohlen, wenn Sie Sticker nicht für die Kommunikation nutzen (nur Windows 11)</value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
-    <value>تعطيل شريط اكتشاف إيدج</value>
+    <value>Edge Discover Bar deaktivieren</value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
-    <value>يعطل ميزة شريط الاكتشاف في مايكروسوفت إيدج. مفيد إذا كنت تجده مُزعجًا أو تفضل واجهة متصفح أنظف</value>
+    <value>Deaktiviert die Discover Bar-Funktion in Microsoft Edge. Nützlich, wenn Sie diese als störend empfinden oder eine übersichtlichere Browseroberfläche bevorzugen</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
-    <value>تعطيل CoPilot AI</value>
+    <value>CoPilot AI deaktivieren</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
-    <value>يعطل ميزة CoPilot AI في ويندوز للمساعدة في كتابة الشيفرة. غير مُوصى به للمطورين</value>
+    <value>Deaktiviert die CoPilot AI Funktion in Windows zur Unterstützung bei der Code-Schreibung. Nicht empfohlen für Entwickler</value>
   </data>
   <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>التحسينات الأساسية</value>
+    <value>Grundlegende Optimierungen</value>
   </data>
   <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>إجراءات تعديل الأداء</value>
+    <value>Leistungsoptimierungen</value>
   </data>
   <data name="Feature_DisableSuperfetch.Header" xml:space="preserve">
-    <value>تعطيل Superfetch</value>
+    <value>Superfetch deaktivieren</value>
   </data>
   <data name="Feature_DisableSuperfetch.Description" xml:space="preserve">
-    <value>يُوقف Superfetch، الذي يُسبق تحميل التطبيقات المستخدمة بشكل متكرر لبدء أسرع. قد يؤثر على أوقات البدء لبعض البرامج إذا كنت تستخدم HDD</value>
+    <value>Deaktiviert Superfetch, welches häufig genutzte Anwendungen für einen schnelleren Start vorlädt. Kann die Startzeiten einiger Programme beeinflussen, wenn HDD verwendet wird.</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>تعطيل الطابع الزمني NTFS</value>
+    <value>NTFS-Zeitstempel deaktivieren</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>يُوقف تحديثات الطابع الزمني NTFS لعمليات الملفات. قد يؤثر على وظائف البرامج التي تعتمد على الطوابع الزمنية الدقيقة</value>
+    <value>Deaktiviert Aktualisierungen von NTFS-Zeitstempeln für Dateioperationen. Kann die Funktionalität von Programmen beeinträchtigen, die genaue Zeitstempel benötigen.</value>
   </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
-    <value>تمكين وضع اللعب</value>
+    <value>Gaming-Modus aktivieren</value>
   </data>
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
-    <value>يُمكن وضع اللعب، الذي يُحسن من موارد النظام لتجربة لعب أكثر سلاسة. قد يؤثر على عمليات الخلفية</value>
+    <value>Aktiviert den Gaming-Modus, welcher Systemressourcen für ein flüssigeres Spielerlebnis optimiert. Kann Hintergrundprozesse beeinflussen.</value>
   </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
-    <value>استبعاد تحديثات السائقين من ويندوز</value>
+    <value>Treiber von Windows-Updates ausschließen</value>
   </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
-    <value>يُستبعد تحديثات السائقين من تحديث ويندوز. قد يؤدي إلى سائقين قديمين مع مخاطر أمان محتملة أو مشكلات التوافق. استخدم بحذر</value>
+    <value>Schließt Treiberupdates von Windows Update aus. Kann zu veralteten Treibern mit potenziellen Sicherheitsrisiken oder Kompatibilitätsproblemen führen. Mit Vorsicht verwenden.</value>
   </data>
   <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>تعرف على المزيد عما يتم تعطيله</value>
+    <value>Erfahren Sie mehr darüber, was deaktiviert wird</value>
   </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>التحسينات المتقدمة</value>
+    <value>Erweiterte Optimierungen</value>
   </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
-    <value>تعطيل استعادة النظام</value>
+    <value>Systemwiederherstellung deaktivieren</value>
   </data>
   <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
-    <value>يُعطل استعادة النظام، التي تُنشئ نقاط استعادة لإرجاع النظام إلى حالة سابقة في حالة حدوث مشاكل. غير مُوصى به. تعطيل هذه الميزة يزيل القدرة على الاستعادة بسهولة من المشكلات المحتملة</value>
+    <value>Deaktiviert die Systemwiederherstellung, die Wiederherstellungspunkte erstellt, um das System bei Problemen auf einen früheren Zustand zurückzusetzen. Nicht empfohlen. Das Deaktivieren dieser Funktion entfernt die Möglichkeit, einfach von potenziellen Systemproblemen wiederherzustellen.</value>
   </data>
   <data name="Feature_DisableCortana.Header" xml:space="preserve">
-    <value>تعطيل كورتانا</value>
+    <value>Cortana deaktivieren</value>
   </data>
   <data name="Feature_DisableCortana.Description" xml:space="preserve">
-    <value>يُعطل كورتانا، المساعد الافتراضي الذي يمكنه الإجابة على الأسئلة وإكمال المهام. قد يؤثر على البحث الصوتي وبعض ميزات الإنتاجية</value>
+    <value>Deaktiviert Cortana, den virtuellen Assistenten, der Fragen beantworten und Aufgaben erledigen kann. Kann die Sprachsuche und einige Produktivitätsfunktionen beeinflussen.</value>
   </data>
   <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
-    <value>تعطيل تحديثات المتجر</value>
+    <value>Store-Updates deaktivieren</value>
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
-    <value>يُعطل التحديثات التلقائية للتطبيقات التي تم تنزيلها من متجر مايكروسوفت. قد يترك التطبيقات عرضة لمخاطر الأمان أو تفتقر إلى ميزات جديدة</value>
+    <value>Deaktiviert automatische Updates für Apps, die aus dem Microsoft Store heruntergeladen wurden. Kann Apps anfällig für Sicherheitsrisiken machen oder ohne neue Funktionen lassen.</value>
   </data>
   <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>تعطيل التحديثات التلقائية</value>
+    <value>Automatische Updates deaktivieren</value>
   </data>
   <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>يُوقف تحديثات ويندوز التلقائية، مما يتطلب التثبيت اليدوي. يُنصح بشدة بعدم فعل ذلك. يمكن أن يترك نظامك عرضة للاستغلالات الأمنية وإصلاح الأخطاء</value>
+    <value>Deaktiviert automatische Windows-Updates und erfordert manuelle Installationen. Sehr abgeraten. Dies kann Ihr System anfällig für Sicherheitslücken und Fehlerbehebungen machen.</value>
   </data>
   <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
-    <value>تعطيل شاشة سمارت</value>
+    <value>SmartScreen deaktivieren</value>
   </data>
   <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>يُوقف شاشة سمارت فلتر، الذي يُحذرك من التطبيقات والملفات المحتملة غير الآمنة التي تم تنزيلها من الإنترنت. غير مُوصى به لأسباب الأمان. تعطيل هذه الميزة يزيد من خطر الإصابة بالبرامج الضارة</value>
+    <value>Deaktiviert den SmartScreen-Filter, der Sie vor potenziell unsicheren Apps und Dateien aus dem Internet warnt. Aus Sicherheitsgründen nicht empfohlen. Das Deaktivieren dieser Funktion erhöht das Risiko einer Malware-Infektion.</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>التجسس</value>
+    <value>Telemetrie</value>
   </data>
   <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>تعزيز الخصوصية</value>
+    <value>Datenschutz verbessern</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
-    <value>تعطيل SMBv1</value>
+    <value>SMBv1 deaktivieren</value>
   </data>
   <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
-    <value>يُوقف Server Message Block الإصدار 1 (SMBv1) لأمان مُعزز. يُوصى به</value>
+    <value>Deaktiviert Server Message Block Version 1 (SMBv1) für verbesserte Sicherheit. Empfohlen</value>
   </data>
   <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
-    <value>تعطيل SMBv2</value>
+    <value>SMBv2 deaktivieren</value>
   </data>
   <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
-    <value>يُوقف Server Message Block الإصدار 2 (SMBv2) لأمان مُعزز. استخدم بحذر حيث قد يُفسد وظائف مشاركة الملفات عبر الشبكة</value>
+    <value>Deaktiviert Server Message Block Version 2 (SMBv2) für verbesserte Sicherheit. Mit Vorsicht verwenden, da dies die Funktionalität der Netzwerkdateifreigabe beeinträchtigen könnte.</value>
   </data>
   <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
-    <value>تعطيل خدمات التجسس</value>
+    <value>Telemetriedienste deaktivieren</value>
   </data>
   <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
-    <value>يُوقف خدمات التجسس لمنع جمع وإرسال بيانات الاستخدام من قبل نظام التشغيل</value>
+    <value>Deaktiviert Telemetriedienste, um die Sammlung und Übermittlung von Nutzungsdaten durch das Betriebssystem zu verhindern.</value>
   </data>
   <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
-    <value>تعطيل تجسس إيدج</value>
+    <value>Edge Telemetrie deaktivieren</value>
   </data>
   <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
-    <value>يُوقف جمع بيانات التجسس في مايكروسوفت إيدج</value>
+    <value>Deaktiviert die Erfassung von Telemetriedaten in Microsoft Edge.</value>
   </data>
   <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
-    <value>تعطيل تجسس فيجوال ستوديو</value>
+    <value>Visual Studio Telemetrie deaktivieren</value>
   </data>
   <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
-    <value>يُوقف جمع بيانات التجسس في فيجوال ستوديو</value>
+    <value>Deaktiviert die Erfassung von Telemetriedaten in Visual Studio.</value>
   </data>
   <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
-    <value>تعطيل تجسس نفيديا</value>
+    <value>Nvidia Telemetrie deaktivieren</value>
   </data>
   <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
-    <value>يُوقف جمع بيانات التجسس من قبل تعريفات نفيديا</value>
+    <value>Deaktiviert die Erfassung von Telemetriedaten durch Nvidia-Treiber.</value>
   </data>
   <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
-    <value>تعطيل تجسس كروم</value>
+    <value>Chrome Telemetrie deaktivieren</value>
   </data>
   <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
-    <value>يُوقف جمع بيانات التجسس في جوجل كروم</value>
+    <value>Deaktiviert die Erfassung von Telemetriedaten in Google Chrome.</value>
   </data>
   <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
-    <value>تعطيل تجسس فايرفوكس</value>
+    <value>Firefox Telemetrie deaktivieren</value>
   </data>
   <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
-    <value>يُوقف جمع بيانات التجسس في موزيلا فايرفوكس</value>
+    <value>Deaktiviert die Erfassung von Telemetriedaten in Mozilla Firefox.</value>
   </data>
   <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
-    <value>اختر لغتك الافتراضية</value>
+    <value>Wählen Sie Ihre Standardsprache aus</value>
   </data>
   <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
-    <value>تغيير اللغة</value>
+    <value>Sprache ändern</value>
   </data>
   <data name="Feature_EnableEndTask.Description" xml:space="preserve">
-    <value>تمكين خيار عند النقر بزر الماوس الأيمن على رموز التطبيقات في شريط المهام، مما يتيح لك إنهاء التطبيقات التي لا تستجيب بسرعة دون الحاجة إلى فتح مدير المهام.</value>
+    <value>Enables an option when right clicking on apps' icons in the taskbar, allowing you to quickly terminate unresponsive applications without opening Task Manager.</value>
   </data>
   <data name="Feature_EnableEndTask.Header" xml:space="preserve">
-    <value>تمكين إنهاء المهمة</value>
+    <value>Enable EndTask</value>
   </data>
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
-    <value>تطبيق DNS</value>
+    <value>Apply DNS</value>
   </data>
   <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>خوادم DNS IPv4</value>
+    <value>IPv4 DNS Servers</value>
   </data>
   <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>خوادم DNS IPv6</value>
+    <value>IPv6 DNS Servers</value>
   </data>
   <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>واجهة الشبكة</value>
+    <value>Network Interface</value>
   </data>
   <data name="Network_Primary.Text" xml:space="preserve">
-    <value>أساسي</value>
+    <value>Primary</value>
   </data>
   <data name="Network_ResetDNS.Content" xml:space="preserve">
-    <value>إعادة تعيين DNS الافتراضي</value>
+    <value>Reset Default DNS</value>
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
-    <value>ثانوي</value>
+    <value>Secondary</value>
   </data>
   <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>تعيين DNS مخصص</value>
+    <value>Set Custom DNS</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
-    <value>لم يتم العثور على عناوين DNS IPv4</value>
+    <value>No IPv4 DNS addresses found</value>
   </data>
   <data name="NoIPv6" xml:space="preserve">
-    <value>لم يتم العثور على عناوين DNS IPv6</value>
+    <value>No IPv6 DNS addresses found</value>
   </data>
   <data name="NoNic" xml:space="preserve">
-    <value>لم يتم اختيار واجهة الشبكة</value>
+    <value>No network interface selected</value>
   </data>
   <data name="NotSet" xml:space="preserve">
-    <value>لم يتم التعيين</value>
+    <value>Not set</value>
   </data>
   <data name="Shell_Network.Content" xml:space="preserve">
-    <value>شبكات</value>
+    <value>Netzwerken</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
-    <value>(فلتر للبالغين)</value>
+    <value>(adult filter)</value>
   </data>
   <data name="Automatic" xml:space="preserve">
-    <value>أوتوماتيكي</value>
+    <value>Automatic</value>
   </data>
 </root>

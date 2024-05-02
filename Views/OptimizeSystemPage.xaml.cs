@@ -1,10 +1,10 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Diagnostics;
+using CommunityToolkit.WinUI.Controls;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
-using CommunityToolkit.WinUI.Controls;
-using System.Diagnostics;
+using Windows.Storage;
 
 namespace RyTuneX.Views;
 
@@ -66,7 +66,7 @@ public sealed partial class OptimizeSystemPage : Page
             }
         }
     }
-    private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+    private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -91,7 +91,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
+            await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
     }
 }

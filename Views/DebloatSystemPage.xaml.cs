@@ -1,9 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Management.Automation;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Animation;
 using RyTuneX.Helpers;
 using Windows.Storage;
 
@@ -45,7 +43,7 @@ public sealed partial class DebloatSystemPage : Page
             cancellationToken.ThrowIfCancellationRequested();
 
             var installedApps = await Task.Run(() => OptimizationOptions.GetUWPApps(uninstallableOnly), cancellationToken);
-            var numberOfInstalledApps = installedApps.Count - 1; // removes Rayen.RyTuneX from total installed apps count
+            var numberOfInstalledApps = installedApps.Count - 3; // removes Rayen.RyTuneX from total installed apps count
             DispatcherQueue.TryEnqueue(() =>
             {
                 // fetching installed apps data & hiding UI elements
@@ -61,10 +59,25 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.Visibility = Visibility.Collapsed;
                 TempStackButtonTextBar.Visibility = Visibility.Collapsed;
 
+                var isEdgeUninstalled = true;
+                var settingsEdgeUninstalled = ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"];
+
+                if (settingsEdgeUninstalled != null && settingsEdgeUninstalled is bool settingValue)
+                {
+                    isEdgeUninstalled = settingValue;
+                }
+
                 foreach (var app in installedApps)
                 {
                     // prevent displaying Rayen.RyTuneX in AppList
-                    if (!app.ToString().Contains("Rayen.RyTuneX"))
+                    if (app.ToString().Contains("Rayen.RyTuneX") ||
+                    app.ToString().Contains("----") ||
+                    app.ToString().Contains("Name") ||
+                    (app.ToString().Contains("Edge") && isEdgeUninstalled))
+                    {
+                        Debug.WriteLine(app.ToString());
+                    }
+                    else
                     {
                         AppList.Add(app);
                     }
@@ -136,15 +149,7 @@ public sealed partial class DebloatSystemPage : Page
 
             // update ui elements
             uninstallingStatusBar.Visibility = Visibility.Collapsed;
-            if (appTreeView.SelectedItems.Count > 1)
-            {
-                NotificationQueue.Show(NotificationContent("Debloat", appTreeView.SelectedItems.Count + " " + "UninstallationSuccessMultiple".GetLocalized(), InfoBarSeverity.Success, 4000));
-            }
-            else
-            {
-                NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccessSingle".GetLocalized(), InfoBarSeverity.Success, 4000));
-            }
-
+            NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccess".GetLocalized(), InfoBarSeverity.Success, 4000));
         }
         // in case of an error
         catch (Exception ex)
@@ -165,7 +170,6 @@ public sealed partial class DebloatSystemPage : Page
             var tempFolder = ApplicationData.Current.TemporaryFolder;
             var file = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
 
-            // Use Process.Start to open the file with the default application
             Process.Start(new ProcessStartInfo(file.Path) { UseShellExecute = true });
 
             // reload after error
@@ -183,8 +187,9 @@ public sealed partial class DebloatSystemPage : Page
     }
     private static async Task UninstallApps(string appName)
     {
-        /*if (!appName.Contains("Microsoft.MicrosoftEdge"))
-        {*/
+        if (!appName.Contains("MicrosoftEdge"))
+        {
+            // uwp apps removal
             await LogHelper.Log($"Uninstalling: {appName}");
 
             var cmdCommand = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
@@ -212,30 +217,42 @@ public sealed partial class DebloatSystemPage : Page
                     throw new Exception(error);
                 }
             }
-            
-        // Edge removal (will be added soon)
-
-        /*}
+        }
         else
         {
+            // edge removal process
             var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
-
-            var scriptContent = File.ReadAllText(scriptFilePath);
 
             await LogHelper.Log($"Uninstalling: {appName}");
 
-            using var PowerShellInstance = PowerShell.Create();
-            PowerShellInstance.AddScript(scriptContent)
-                .AddArgument("-Set-ExecutionPolicy Unrestricted");
+            var cmdCommand = $"powershell.exe -ExecutionPolicy Bypass -File \"{scriptFilePath}\"";
 
-            var result = PowerShellInstance.InvokeAsync();
-            if (PowerShellInstance.HadErrors)
+            var processInfo = new ProcessStartInfo("cmd.exe", $"/c {cmdCommand}")
             {
-                var errorMessage = string.Join(Environment.NewLine, PowerShellInstance.Streams.Error.Select(err => err.ToString()));
-                await LogHelper.LogError(errorMessage);
-                throw new Exception(errorMessage);
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = new Process { StartInfo = processInfo };
+            {
+                process.Start();
+
+                var output = await process.StandardOutput.ReadToEndAsync();
+                var error = await process.StandardError.ReadToEndAsync();
+
+                // setting edge installation state to uninstalled
+                ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"] = true;
+
+                // starting explorer
+                OptimizationOptions.RestartExplorer();
+
+                // writing output log
+                await LogHelper.Log(output);
+                await LogHelper.LogError(error);
             }
-        }*/
+        }
     }
 
     private void ShowAll_Checked(object sender, RoutedEventArgs e)
@@ -290,7 +307,7 @@ public sealed partial class DebloatSystemPage : Page
             TempProgress.ShowError = false;
             TempProgress.Visibility = Visibility.Visible;
             TempButton.Visibility = Visibility.Collapsed;
-            TempStatusText.Text = "Deleting Temp Files...";
+            TempStatusText.Text = "DeligTemp".GetLocalized() + "...";
 
             var exitCode1 = await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\*.tmp\"");
             var exitCode2 = await OptimizationOptions.StartInCmd("del /q/f/s %TEMP%\\*");
@@ -298,12 +315,12 @@ public sealed partial class DebloatSystemPage : Page
             // Check for successful execution
             if (exitCode1 == 0 && exitCode2 == 0)
             {
-                TempStatusText.Text = "Temp Files Deleted Successfully!";
+                TempStatusText.Text = "TempDelSucc".GetLocalized();
                 TempProgress.Visibility = Visibility.Collapsed;
             }
             else
             {
-                TempStatusText.Text = "Error Deleting Temp Files";
+                TempStatusText.Text = "ErrTempDel".GetLocalized();
                 TempProgress.ShowError = true;
             }
         }
@@ -315,23 +332,4 @@ public sealed partial class DebloatSystemPage : Page
             TempProgress.ShowError = true;
         }
     }
-    private void TextBlock_Loaded(object sender, RoutedEventArgs e)
-    {
-        var textBlock = sender as TextBlock;
-        if (textBlock != null)
-        {
-            var storyboard = new Storyboard();
-            var fadeInAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = new Duration(TimeSpan.FromSeconds(0.5))
-            };
-            Storyboard.SetTarget(fadeInAnimation, textBlock);
-            Storyboard.SetTargetProperty(fadeInAnimation, "Opacity");
-            storyboard.Children.Add(fadeInAnimation);
-            storyboard.Begin();
-        }
-    }
-
 }

@@ -28,10 +28,12 @@
   <ItemGroup>
     <None Remove="Assets\bug.png" />
     <None Remove="Assets\discord.png" />
+    <None Remove="Assets\ExplorerBlurMica.dll" />
     <None Remove="Assets\github.png" />
     <None Remove="Assets\WindowIcon.ico" />
     <None Remove="Views\DebloatSystemPage.xaml" />
     <None Remove="Views\FeaturesPage.xaml" />
+    <None Remove="Views\NetworkPage.xaml" />
     <None Remove="Views\PrivacyPage.xaml" />
   </ItemGroup>
 
@@ -46,18 +48,9 @@
 	  <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240404000" />
-	  <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
 	  <PackageReference Include="System.Management" Version="8.0.0" />
 	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
-	  <PackageReference Include="WinUI3Localizer" Version="2.2.0" />
 	  <PackageReference Include="WinUIEx" Version="2.3.4" />
-	  <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics" Version="7.4.2" />
-	  <PackageReference Include="Microsoft.PowerShell.Commands.Management" Version="7.4.2" />
-	  <PackageReference Include="Microsoft.PowerShell.Commands.Utility" Version="7.4.2" />
-	  <PackageReference Include="Microsoft.PowerShell.ConsoleHost" Version="7.4.2" />
-	  <PackageReference Include="Microsoft.WSMan.Management" Version="7.4.2" />
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
 	  <PackageReference Include="System.Management.Automation" Version="7.4.2" />
   </ItemGroup>
 
@@ -84,6 +77,10 @@
     </Page>
     <Page Update="Views\FeaturesPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Views\NetworkPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PrivacyPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

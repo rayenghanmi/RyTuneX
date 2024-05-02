@@ -126,17 +126,14 @@
   <data name="Shell_Home.Content" xml:space="preserve">
     <value>RyTuneX</value>
   </data>
-  <data name="Debloat_NoSelection.Text" xml:space="preserve">
-    <value>Sélectionnez un élément de la liste</value>
-  </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>Alléger</value>
+    <value>Désinstallation de logiciels inutiles</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Informations système</value>
   </data>
   <data name="Shell_ReportBug.Content" xml:space="preserve">
-    <value>Signaler un bogue</value>
+    <value>Signaler un bug</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Optimiser le système</value>
@@ -160,7 +157,7 @@
     <value>À propos de cette application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>RyTuneX, un optimiseur pour Windows 10 et 11 créé par Rayen Ghanmi, est conçu pour améliorer les performances et l'efficacité du système en supprimant sélectivement les logiciels choisis et en désactivant les services inutiles.</value>
+    <value>RyTuneX, un optimiseur pour Windows 10 et 11 créé par Rayen Ghanmi, est conçu pour améliorer les performances et l'efficacité du système en supprimant sélectivement certains logiciels et en désactivant des services inutiles.</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
     <value>AGPL v3.0</value>
@@ -168,46 +165,23 @@
   <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
     <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
-  <data name="WelcomeNotification" xml:space="preserve">
-    <value>&lt;toast launch="action=ToastClick"&gt;
-  &lt;visual&gt;
-    &lt;binding template="ToastGeneric"&gt;
-      &lt;text&gt;Bienvenue dans RyTuneX&lt;/text&gt;
-      &lt;text&gt;Votre optimiseur parfait pour accélérer votre système&lt;/text&gt;
-      &lt;image placement="appLogoOverride" src="{0}Assets/WindowIcon.ico"/&gt;
-    &lt;/binding&gt;
-  &lt;/visual&gt;
-  &lt;actions&gt;
-    &lt;action content="Learn More" arguments="action=Settings"/&gt;
-  &lt;/actions&gt;
-&lt;/toast&gt;</value>
-  </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Langue</value>
   </data>
   <data name="WelcomeNotice" xml:space="preserve">
-    <value>Cher utilisateur précieux,\n\nNous sommes ravis de vous accueillir dans RyTuneX, où l'optimisation des performances rencontre la précision. Développé et fièrement conçu par Rayen Ghanmi, RyTuneX n'est pas simplement une application ; c'est votre porte d'entrée vers une expérience informatique améliorée. Que vous utilisiez Windows 11 ou Windows 10, RyTuneX est conçu pour élever les performances de votre appareil à de nouveaux sommets. Plongez dans un univers où les services inutiles sont réduits au silence, les éléments superflus sont éliminés, et le cœur même de votre système est finement réglé grâce à des optimisations intelligentes de la base de registre. Préparez-vous à libérer la véritable puissance de votre appareil - bienvenue dans RyTuneX, où chaque clic est un pas vers un parcours informatique plus rapide et réactif.\n\nRemarque: Bien que nous soyons ravis de vous avoir parmi nous, certaines fonctionnalités sont en cours de développement, et des problèmes occasionnels peuvent survenir. Vos commentaires sont précieux pour nous aider à affiner et à perfectionner l'expérience RyTuneX. Merci de faire partie de notre parcours visant à optimiser et améliorer votre expérience Windows.\n\nCordialement,\n\nRayen Ghanmi</value>
+    <value>Cher utilisateur précieux,\n\nNous sommes ravis de vous accueillir sur RyTuneX, où l'optimisation des performances rencontre la précision. Développé et méticuleusement conçu par Rayen Ghanmi, RyTuneX n'est pas seulement une application, c'est votre passerelle vers une expérience informatique améliorée. Que vous utilisiez Windows 11 ou Windows 10, RyTuneX est conçu pour élever les performances de votre appareil à de nouveaux sommets. Plongez dans un univers où les services inutiles sont réduits au silence, où les logiciels superflus sont bannis et où le cœur même de votre système est affiné grâce à des optimisations intelligentes du registre. Préparez-vous à libérer la véritable puissance de votre appareil – bienvenue sur RyTuneX, où chaque clic est une étape vers une expérience informatique plus rapide et réactive.\n\nNote : Bien que nous soyons ravis de vous avoir à bord, certaines fonctionnalités sont peut-être en développement et des problèmes occasionnels peuvent survenir. Vos retours sont inestimables pour nous aider à affiner et à parfaire l'expérience RyTuneX. Merci d'être un acteur de notre voyage visant à optimiser et à améliorer votre expérience Windows.\n\nCordialement,\n\nRayen Ghanmi</value>
   </data>
   <data name="WelcomeNoticeTitle" xml:space="preserve">
-    <value>Bienvenue dans RyTuneX - Libérez tout le potentiel de votre appareil !</value>
-  </data>
-  <data name="HomePage_Content1.Text" xml:space="preserve">
-    <value>RyTuneX se distingue en tant qu'optimiseur complet pour Windows 11, avec une compatibilité ascendante pour Windows 10. Une de ses capacités clés consiste à rationaliser les services système pour améliorer les performances globales de l'appareil. En analysant méticuleusement et en désactivant sélectivement les services en arrière-plan inutiles, RyTuneX veille à ce que les ressources du système soient dirigées vers les tâches essentielles. Cela se traduit par une expérience informatique plus efficace et réactive pour les utilisateurs, car les ressources ne sont plus monopolisées par des processus redondants, contribuant ainsi à une vitesse et une réactivité du système améliorées.</value>
-  </data>
-  <data name="HomePage_Content2.Text" xml:space="preserve">
-    <value>RyTuneX se distingue en tant qu'optimiseur puissant pour Windows 11, avec une compatibilité étendue à Windows 10. Une fonctionnalité essentielle de cet outil d'optimisation implique des ajustements méticuleux du registre visant à libérer tout le potentiel de votre appareil. RyTuneX règle intelligemment les clés du registre, garantissant que le système d'exploitation Windows est configuré pour des performances optimales. En optimisant les paramètres du registre, l'application améliore la réactivité et la vitesse du système, offrant aux utilisateurs un environnement informatique parfaitement adapté à leur configuration matérielle spécifique.</value>
-  </data>
-  <data name="HomePage_Content3.Text" xml:space="preserve">
-    <value>RyTuneX va au-delà des optimisations de base en s'attaquant et éliminant la surcharge système. L'application identifie et supprime les logiciels préinstallés redondants et les fonctionnalités inutiles qui peuvent être incluses avec le système d'exploitation. Cette approche méticuleuse de la réduction de la surcharge libère non seulement un espace de stockage précieux, mais garantit également que les ressources du système sont dédiées à l'exécution des applications et des processus les plus importants pour l'utilisateur. Le résultat est un système plus léger, plus efficace, fonctionnant avec une vitesse et une agilité améliorées, répondant aux besoins de performance des utilisateurs de Windows 11 et Windows 10.</value>
+    <value>Bienvenue sur RyTuneX - Libérez le plein potentiel de votre appareil !</value>
   </data>
   <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. Services système rationalisés:</value>
+    <value>1. Services système optimisés :</value>
   </data>
   <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. Optimisation fine du registre:</value>
+    <value>2. Optimisation précise du registre :</value>
   </data>
   <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. Performances sans surcharge:</value>
+    <value>3. Performance sans superflu :</value>
   </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>Récupération des données des applications installées...</value>
@@ -216,7 +190,7 @@
     <value>Afficher tout</value>
   </data>
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
-    <value>Désinstaller app(s) sélectionnée(s</value>
+    <value>Désinstaller l'application(s) sélectionnée(s)</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Terminé</value>
@@ -225,19 +199,25 @@
     <value>Désinstallation en cours</value>
   </data>
   <data name="UninstallTip" xml:space="preserve">
-    <value>Sélectionnez les applications que vous souhaitez supprimer et appuyez sur Désinstaller</value>
+    <value>Sélectionnez les applications que vous souhaitez supprimer et cliquez sur désinstaller</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>Fonctionnalités de Windows</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>Vie privée</value>
   </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
-    <value>Rejoignez Discord</value>
+    <value>Rejoindre notre serveur</value>
   </data>
   <data name="HomePage_IssueButton.Text" xml:space="preserve">
-    <value>Signalez</value>
+    <value>Signaler un problème</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>Vérifiez RyTuneX</value>
+    <value>Découvrir RyTuneX</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>Votre avis</value>
+    <value>Envoyer un retour</value>
   </data>
   <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
     <value>Processeur</value>
@@ -257,14 +237,8 @@
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
     <value>Stockage</value>
   </data>
-  <data name="Shell_Features.Content" xml:space="preserve">
-    <value>Fonctionnalités de Windows</value>
-  </data>
-  <data name="Shell_Privacy.Content" xml:space="preserve">
-    <value>Confidentialité</value>
-  </data>
   <data name="Debloat" xml:space="preserve">
-    <value>Alléger</value>
+    <value>Désinstallation de logiciels inutiles</value>
   </data>
   <data name="DebloatPage_NotificationBody" xml:space="preserve">
     <value>La désinstallation de certaines de ces applications peut ne pas les supprimer complètement.</value>
@@ -272,10 +246,481 @@
   <data name="UninstallationError" xml:space="preserve">
     <value>Erreur lors de la désinstallation</value>
   </data>
-  <data name="UninstallationSuccessMultiple" xml:space="preserve">
-    <value>Applications désinstallées avec succès</value>
+  <data name="UninstallationSuccess" xml:space="preserve">
+    <value>Désinstallé avec succès</value>
   </data>
-  <data name="UninstallationSuccessSingle" xml:space="preserve">
-    <value>Désinstallation de l'application réussie</value>
+  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+    <value>Supprimer les fichiers temporaires</value>
+  </data>
+  <data name="AdapterRAM" xml:space="preserve">
+    <value>RAM de l'adaptateur</value>
+  </data>
+  <data name="Architecture" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="BuildNumber" xml:space="preserve">
+    <value>Numéro de build</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>Capacité</value>
+  </data>
+  <data name="Caption" xml:space="preserve">
+    <value>Légende</value>
+  </data>
+  <data name="Cores" xml:space="preserve">
+    <value>Cœurs</value>
+  </data>
+  <data name="DeviceLocator" xml:space="preserve">
+    <value>Emplacement du périphérique</value>
+  </data>
+  <data name="DriverVersion" xml:space="preserve">
+    <value>Version du pilote</value>
+  </data>
+  <data name="ErrDriversExtract" xml:space="preserve">
+    <value>Une erreur s'est produite lors de l'extraction des pilotes</value>
+  </data>
+  <data name="ExtractingDrivers" xml:space="preserve">
+    <value>Extraction des pilotes en cours</value>
+  </data>
+  <data name="GPU" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="InstallDate" xml:space="preserve">
+    <value>Date d'installation</value>
+  </data>
+  <data name="InterfaceType" xml:space="preserve">
+    <value>Type d'interface</value>
+  </data>
+  <data name="L2Cache" xml:space="preserve">
+    <value>Taille du cache L2</value>
+  </data>
+  <data name="L3Cache" xml:space="preserve">
+    <value>Taille du cache L3</value>
+  </data>
+  <data name="LastBoot" xml:space="preserve">
+    <value>Dernière heure de démarrage</value>
+  </data>
+  <data name="LogicalProcessors" xml:space="preserve">
+    <value>Processeurs logiques</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>Fabricant</value>
+  </data>
+  <data name="MaxSpeed" xml:space="preserve">
+    <value>Vitesse maximale</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="OSName" xml:space="preserve">
+    <value>Nom du SE</value>
+  </data>
+  <data name="RAMModule" xml:space="preserve">
+    <value>Module RAM</value>
+  </data>
+  <data name="RegisteredUser" xml:space="preserve">
+    <value>Utilisateur enregistré</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Taille</value>
+  </data>
+  <data name="SocketDesignation" xml:space="preserve">
+    <value>Désignation du socket</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Vitesse</value>
+  </data>
+  <data name="SystemDirectory" xml:space="preserve">
+    <value>Répertoire système</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="VideoArchitecture" xml:space="preserve">
+    <value>Architecture vidéo</value>
+  </data>
+  <data name="WindowsDirectory" xml:space="preserve">
+    <value>Répertoire Windows</value>
+  </data>
+  <data name="DeligTemp" xml:space="preserve">
+    <value>Suppression des fichiers temporaires</value>
+  </data>
+  <data name="ErrTempDel" xml:space="preserve">
+    <value>Erreur lors de la suppression des fichiers temporaires</value>
+  </data>
+  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
+    <value>Fonctionnalités du système</value>
+  </data>
+  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
+    <value>Exclusivité Windows 11</value>
+  </data>
+  <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
+    <value>Sélectionnez un dossier</value>
+  </data>
+  <data name="TempDelSucc" xml:space="preserve">
+    <value>Suppression des fichiers temporaires réussie !</value>
+  </data>
+  <data name="Disk" xml:space="preserve">
+    <value>Disque</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Modèle</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
+    <value>Activer les messages de connexion détaillés pour une meilleure surveillance et résolution des problèmes système. Peut ne pas être convivial pour une utilisation quotidienne.</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
+    <value>Activer la Connexion Détaillée</value>
+  </data>
+  <data name="SelecFold" xml:space="preserve">
+    <value>Sélectionnez un dossier</value>
+  </data>
+  <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
+    <value>Pilotes</value>
+  </data>
+  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
+    <value>Extraire</value>
+  </data>
+  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
+    <value>Extrayez vos pilotes vers un dossier externe pour une sauvegarde facile</value>
+  </data>
+  <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
+    <value>Extraction des Pilotes</value>
+  </data>
+  <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="Feature_DisableHibernation.Header" xml:space="preserve">
+    <value>Désactiver l'Hibernation</value>
+  </data>
+  <data name="Feature_DisableHibernation.Description" xml:space="preserve">
+    <value>Désactive l'hibernation pour économiser de l'énergie et empêcher l'ordinateur d'entrer en mode veille. Non recommandé pour les ordinateurs portables.</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
+    <value>Désactiver le Groupe Domestique</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
+    <value>Désactive le Groupe Domestique pour arrêter le partage de fichiers et d'imprimantes avec d'autres appareils sur le réseau.</value>
+  </data>
+  <data name="Feature_DisablePrintService.Header" xml:space="preserve">
+    <value>Désactiver le Service d'Impression</value>
+  </data>
+  <data name="Feature_DisablePrintService.Description" xml:space="preserve">
+    <value>Désactive le service d'impression, empêchant les fonctionnalités liées à l'impression.</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
+    <value>Désactiver l'Assistant de Compatibilité</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
+    <value>Désactive l'Assistant de Compatibilité pour désactiver les vérifications automatiques de compatibilité des programmes.</value>
+  </data>
+  <data name="Feature_DisableSearch.Header" xml:space="preserve">
+    <value>Désactiver la Recherche</value>
+  </data>
+  <data name="Feature_DisableSearch.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité de recherche à l'échelle du système.</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
+    <value>Désactiver le Rapport d'Erreurs</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
+    <value>Désactive le rapport d'erreurs pour empêcher l'envoi automatique de rapports d'erreurs à Microsoft.</value>
+  </data>
+  <data name="Feature_DisableGameBar.Header" xml:space="preserve">
+    <value>Désactiver la Barre de Jeu</value>
+  </data>
+  <data name="Feature_DisableGameBar.Description" xml:space="preserve">
+    <value>Désactive la Barre de Jeu et ses fonctionnalités associées.</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
+    <value>Désactiver l'Histoire d'Accès Rapide</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
+    <value>Désactive l'enregistrement et l'affichage de l'historique d'accès rapide.</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
+    <value>Désactiver Mes Contacts</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité Mes Contacts dans la barre des tâches.</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
+    <value>Désactiver les Services de Capteur</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
+    <value>Désactive les services de capteur pour la confidentialité et l'économie d'énergie. Non recommandé pour les ordinateurs portables avec des capteurs pertinents.</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
+    <value>Désactiver Windows Ink</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
+    <value>Désactive l'Espace de Travail Windows Ink et les fonctionnalités associées. Non recommandé pour les appareils avec un stylet.</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
+    <value>Désactiver les Fonctionnalités d'Orthographe et de Saisie</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
+    <value>Désactive les suggestions d'orthographe et de saisie.</value>
+  </data>
+  <data name="Feature_DisableFaxService.Header" xml:space="preserve">
+    <value>Désactiver le Service de Fax</value>
+  </data>
+  <data name="Feature_DisableFaxService.Description" xml:space="preserve">
+    <value>Désactive le service de fax dans Windows.</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
+    <value>Désactiver le Service Insider</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
+    <value>Se désinscrire du programme Windows Insider et cesser de recevoir des versions de prévisualisation.</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
+    <value>Désactiver le Presse-Papiers Cloud</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité Presse-Papiers Cloud pour le partage du presse-papiers entre appareils.</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
+    <value>Désactiver les Touches Verrouillées</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité d'accessibilité Touches Verrouillées. Utile pour les personnes qui appuient accidentellement sur plusieurs touches à la fois.</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
+    <value>Désactiver le Cast sur Appareil</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité de Cast sur Appareil dans Windows. Utile pour les présentations ou le partage de médias sur d'autres appareils.</value>
+  </data>
+  <data name="Feature_DisableVBS.Header" xml:space="preserve">
+    <value>Désactiver VBS</value>
+  </data>
+  <data name="Feature_DisableVBS.Description" xml:space="preserve">
+    <value>Désactive la Sécurité Basée sur la Virtualisation (VBS) pour des fonctionnalités de sécurité avancées. Non recommandé pour les environnements à haute sécurité.</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
+    <value>Déplacer la Barre des Tâches à Gauche</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
+    <value>Déplace la barre des tâches de la position par défaut en bas vers le côté gauche de l'écran. Préférence personnelle.</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
+    <value>Désactiver l'Assistance Snap</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
+    <value>Désactive l'Assistance Snap, qui organise automatiquement les fenêtres ouvertes lors du déplacement. Utile pour le multitâche, mais certains utilisateurs préfèrent la gestion manuelle des fenêtres.</value>
+  </data>
+  <data name="Feature_DisableWidgets.Header" xml:space="preserve">
+    <value>Désactiver les Widgets</value>
+  </data>
+  <data name="Feature_DisableWidgets.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité Widgets sur la barre des tâches de Windows 11. À considérer si vous trouvez les widgets utiles pour les mises à jour rapides (Windows 11 uniquement).</value>
+  </data>
+  <data name="Feature_DisableChat.Header" xml:space="preserve">
+    <value>Désactiver le Chat</value>
+  </data>
+  <data name="Feature_DisableChat.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité Chat sur la barre des tâches de Windows 11. Recommandé uniquement si vous n'utilisez pas la fonctionnalité chat pour la communication (Windows 11 uniquement).</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
+    <value>Activer le Mode Compact des Fichiers</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
+    <value>Active le Mode Compact pour la navigation dans les fichiers avec de plus petites vignettes. Utile pour les affichages de faible résolution ou la gestion de grands dossiers.</value>
+  </data>
+  <data name="Feature_DisableStickers.Header" xml:space="preserve">
+    <value>Désactiver les Autocollants</value>
+  </data>
+  <data name="Feature_DisableStickers.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité Autocollants dans l'application de messagerie de Windows 11. Recommandé uniquement si vous n'utilisez pas les autocollants pour la communication (Windows 11 uniquement).</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
+    <value>Désactiver la Barre de Découverte Edge</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité Barre de Découverte dans Microsoft Edge. Utile si vous la trouvez distrayante ou si vous préférez une interface de navigateur plus épurée.</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
+    <value>Désactiver CoPilot AI</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
+    <value>Désactive la fonctionnalité CoPilot AI dans Windows pour l'assistance à la rédaction de code. Non recommandé pour les développeurs.</value>
+  </data>
+  <data name="OptimizeBasic.Text" xml:space="preserve">
+    <value>Optimisations de Base</value>
+  </data>
+  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
+    <value>Optimisations de Performance</value>
+  </data>
+  <data name="Feature_DisableSuperfetch.Header" xml:space="preserve">
+    <value>Désactiver Superfetch</value>
+  </data>
+  <data name="Feature_DisableSuperfetch.Description" xml:space="preserve">
+    <value>Désactive Superfetch, qui précharge les applications fréquemment utilisées pour un démarrage plus rapide. Peut affecter les temps de démarrage pour certains programmes si vous utilisez un HDD.</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
+    <value>Désactiver le Timestamp NTFS</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
+    <value>Désactive les mises à jour des timestamps NTFS pour les opérations de fichiers. Peut affecter les fonctionnalités des programmes qui dépendent de timestamps précis.</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
+    <value>Activer le Mode Jeu</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
+    <value>Active le Mode Jeu, qui optimise les ressources du système pour une expérience de jeu plus fluide. Peut affecter les processus en arrière-plan.</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
+    <value>Exclure les Pilotes des Mises à Jour Windows</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
+    <value>Exclut les mises à jour de pilotes de Windows Update. Peut entraîner des pilotes obsolètes avec des risques de sécurité potentiels ou des problèmes de compatibilité. Utilisez avec prudence.</value>
+  </data>
+  <data name="OptimizeAdvanced.Text" xml:space="preserve">
+    <value>Optimisations Avancées</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
+    <value>Désactiver la Restauration du Système</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
+    <value>Désactive la Restauration du Système, qui crée des points de restauration pour revenir à un état précédent en cas de problèmes. Non recommandé. Désactiver cette fonctionnalité supprime la capacité de récupérer facilement d'éventuels problèmes système.</value>
+  </data>
+  <data name="Feature_DisableCortana.Header" xml:space="preserve">
+    <value>Désactiver Cortana</value>
+  </data>
+  <data name="Feature_DisableCortana.Description" xml:space="preserve">
+    <value>Désactive Cortana, l'assistant virtuel qui peut répondre aux questions et effectuer des tâches. Peut affecter la recherche vocale et certaines fonctionnalités de productivité.</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
+    <value>Désactiver les Mises à Jour du Store</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
+    <value>Désactive les mises à jour automatiques pour les applications téléchargées depuis le Microsoft Store. Peut rendre les applications vulnérables aux risques de sécurité ou manquantes de nouvelles fonctionnalités.</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
+    <value>Désactiver les Mises à Jour Automatiques</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
+    <value>Désactive les mises à jour automatiques de Windows, nécessitant une installation manuelle. Fortement déconseillé. Cela peut rendre votre système vulnérable aux exploits de sécurité et aux correctifs de bugs.</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>Désactiver SmartScreen</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>Désactive le filtre SmartScreen, qui vous avertit des applications et fichiers potentiellement dangereux téléchargés depuis Internet. Non recommandé pour des raisons de sécurité. Désactiver cette fonction augmente le risque d'infection par des malwares.</value>
+  </data>
+  <data name="Privacy_Telemetry.Text" xml:space="preserve">
+    <value>Télémétrie</value>
+  </data>
+  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
+    <value>Améliorer la Confidentialité</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
+    <value>Désactiver SMBv1</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
+    <value>Désactive le protocole SMB version 1 (SMBv1) pour une sécurité renforcée. Recommandé</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
+    <value>Désactiver SMBv2</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
+    <value>Désactive le protocole SMB version 2 (SMBv2) pour une sécurité renforcée. Utilisez avec prudence car cela pourrait interrompre les fonctionnalités de partage de fichiers réseau.</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
+    <value>Désactiver les Services de Télémétrie</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
+    <value>Désactive les services de télémétrie pour empêcher la collecte et la transmission des données d'utilisation par le système d'exploitation.</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
+    <value>Désactiver la Télémétrie Edge</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
+    <value>Désactive la collecte de données de télémétrie dans Microsoft Edge.</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
+    <value>Désactiver la Télémétrie Visual Studio</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
+    <value>Désactive la collecte de données de télémétrie dans Visual Studio.</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
+    <value>Désactiver la Télémétrie Nvidia</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
+    <value>Désactive la collecte de données de télémétrie par les pilotes Nvidia.</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
+    <value>Désactiver la Télémétrie Chrome</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
+    <value>Désactive la collecte de données de télémétrie dans Google Chrome.</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
+    <value>Désactiver la Télémétrie Firefox</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
+    <value>Désactive la collecte de données de télémétrie dans Mozilla Firefox.</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
+    <value>Choisissez votre langue par défaut</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
+    <value>Changer de langue</value>
+  </data>
+  <data name="Feature_EnableEndTask.Description" xml:space="preserve">
+    <value>Active une option lors d'un clic droit sur les icônes des applications dans la barre des tâches, vous permettant de mettre fin rapidement aux applications qui ne répondent pas sans ouvrir le Gestionnaire des tâches.</value>
+  </data>
+  <data name="Feature_EnableEndTask.Header" xml:space="preserve">
+    <value>Activer Fin de tâche</value>
+  </data>
+  <data name="Network_ApplyDNS.Content" xml:space="preserve">
+    <value>Appliquer DNS</value>
+  </data>
+  <data name="Network_IPv4Title.Text" xml:space="preserve">
+    <value>Serveurs DNS IPv4</value>
+  </data>
+  <data name="Network_IPv6Title.Text" xml:space="preserve">
+    <value>Serveurs DNS IPv6</value>
+  </data>
+  <data name="Network_NicTitle.Text" xml:space="preserve">
+    <value>Interface réseau</value>
+  </data>
+  <data name="Network_Primary.Text" xml:space="preserve">
+    <value>Primaire</value>
+  </data>
+  <data name="Network_ResetDNS.Content" xml:space="preserve">
+    <value>Réinitialiser DNS par défaut</value>
+  </data>
+  <data name="Network_Secondary.Text" xml:space="preserve">
+    <value>Secondaire</value>
+  </data>
+  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
+    <value>Appliquer DNS personnalisé</value>
+  </data>
+  <data name="NoIPv4" xml:space="preserve">
+    <value>Aucune adresse DNS IPv4 trouvée</value>
+  </data>
+  <data name="NoIPv6" xml:space="preserve">
+    <value>Aucune adresse DNS IPv6 trouvée</value>
+  </data>
+  <data name="NoNic" xml:space="preserve">
+    <value>Aucune interface réseau sélectionnée</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>Non défini</value>
+  </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>Réseau</value>
+  </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>(filtre adulte)</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>Automatique</value>
+  </data>
+  <data name="Feature_ExplorerBlur.Header" xml:space="preserve">
+    <value>Activer le flou de l'explorateur</value>
   </data>
 </root>

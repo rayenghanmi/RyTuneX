@@ -1,10 +1,10 @@
-﻿using Microsoft.UI.Xaml;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using CommunityToolkit.WinUI.Controls;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Windows.Storage;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
-using CommunityToolkit.WinUI.Controls;
+using Windows.Storage;
 
 namespace RyTuneX.Views;
 
@@ -16,7 +16,7 @@ public sealed partial class PrivacyPage : Page
     public PrivacyPage()
     {
         InitializeComponent();
-        LogHelper.Log("Initializing OptimizeSystemPage");
+        LogHelper.Log("Initializing PrivacyPage");
         Loaded += (sender, e) => InitializeToggleSwitches();
     }
     private void InitializeToggleSwitches()
