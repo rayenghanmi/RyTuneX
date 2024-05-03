@@ -2,7 +2,7 @@
 
 All notable changes to this branch will be documented in this file.
 
-## 0.8.2 - Unreleased
+## 0.8.2 - Released
 
 ## Changes
 
