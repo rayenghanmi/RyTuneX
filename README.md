@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> I want to let you know that I'm going offline for a period of time, to focus on my bac exams, I appreciate your understanding of the challenges I've been facing.
+>
+> I'll be back soon and I'm planning to make RyTuneX unpackaged to prevent any installation issues some users are encountering.
+
 <div align="center">
   <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/9017b3b3-5288-4156-bd18-15dbe64ab111" alt="RyTuneX Logo" width="128">
 </div>
