@@ -25,8 +25,10 @@
             <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel>
                 <StackPanel.ChildrenTransitions>
-                    <EntranceThemeTransition FromVerticalOffset="50" />
-                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromVerticalOffset="50" />
+                        <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    </TransitionCollection>
                 </StackPanel.ChildrenTransitions>
                 <StackPanel>
                     <TextBlock x:Uid="Settings_Language" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>

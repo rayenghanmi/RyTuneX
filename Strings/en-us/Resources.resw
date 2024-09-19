@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
-  <data name="AppDescription" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
   <data name="Shell_Home.Content" xml:space="preserve">
     <value>RyTuneX</value>
   </data>
@@ -167,12 +161,6 @@
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Language</value>
-  </data>
-  <data name="WelcomeNotice" xml:space="preserve">
-    <value>Dear Valued User,\n\nWe're thrilled to welcome you to RyTuneX, where performance optimization meets precision. Developed and proudly crafted by Rayen Ghanmi, RyTuneX is not just an application, it's your gateway to an enhanced computing experience. Whether you're running Windows 11 or Windows 10, RyTuneX is designed to elevate your device's performance to new heights. Dive into a world where unnecessary services are silenced, bloat is banished, and the very heart of your system is finely tuned through intelligent registry optimizations. Get ready to unlock the true power of your device – welcome to RyTuneX, where every click is a step towards a faster, more responsive computing journey.\n\nNote: While we're excited to have you on board, some features may be in development, and occasional issues might arise. Your feedback is invaluable in helping us refine and perfect the RyTuneX experience. Thank you for being a part of our journey to optimize and enhance your Windows experience.\n\nBest regards,\n\nRayen Ghanmi</value>
-  </data>
-  <data name="WelcomeNoticeTitle" xml:space="preserve">
-    <value>Welcome to RyTuneX - Unleash Your Device's Full Potential!</value>
   </data>
   <data name="HomePage_Title1.Text" xml:space="preserve">
     <value>1. Streamlined System Services:</value>
@@ -722,5 +710,14 @@
   </data>
   <data name="Automatic" xml:space="preserve">
     <value>Automatic</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
+    <value>Disables the use of biometrics for authentication, such as fingerprint or facial recognition.</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
+    <value>Disable Biometrics features</value>
+  </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>RyTuneX</value>
   </data>
 </root>

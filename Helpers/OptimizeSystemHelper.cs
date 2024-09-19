@@ -551,7 +551,6 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Sensor\\Overrides\\{BFA794E4-F964-4FDB-90F6-51056BFE4B44} /v SensorPermissionState /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\lfsvc\\Service\\Configuration /v Status /t REG_DWORD /d 0 /f");
 
-        await OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Biometrics /v Enabled /t REG_DWORD /d 0 /f");
 
         await OptimizationOptions.StartInCmd("REG ADD HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds /v ShellFeedsTaskbarOpenOnHover /t REG_DWORD /d 0 /f");
 
@@ -650,7 +649,6 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Sensor\\Overrides\\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}\" /v \"SensorPermissionState\" /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\System\\CurrentControlSet\\Services\\lfsvc\\Service\\Configuration\" /v \"Status\" /f");
 
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\" /v \"Enabled\" /f");
 
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform\" /v \"NoGenTicket\" /f");
 
@@ -701,6 +699,16 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Policies\\Microsoft\\Windows\\System\" /v \"EnableMmx\" /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Policies\\Microsoft\\Windows\\System\" /v \"RSoPLogging\" /f");
 
+    }
+
+    internal static async void DisableBiometrics()
+    {
+        await OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Biometrics /v Enabled /t REG_DWORD /d 0 /f");
+    }
+
+    internal static async void EnableBiometrics()
+    {
+        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\" /v \"Enabled\" /f");
     }
 
     internal static async void DisableGameBar()

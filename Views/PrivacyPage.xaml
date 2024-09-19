@@ -39,6 +39,10 @@
                     </controls:SettingsCard.Description>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Feature_DisableBiometrics">
+                    <ToggleSwitch x:Name="Biometrics" Tag="Biometrics" Toggled="ToggleSwitch_Toggled"/>
+                </controls:SettingsCard>
+                
                 <controls:SettingsCard x:Uid="Feature_DisableSMBv1">
                     <ToggleSwitch x:Name="SMBv1" Tag="SMBv1" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>

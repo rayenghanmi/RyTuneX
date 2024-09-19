@@ -59,7 +59,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.Visibility = Visibility.Collapsed;
                 TempStackButtonTextBar.Visibility = Visibility.Collapsed;
 
-                var isEdgeUninstalled = true;
+                var isEdgeUninstalled = false;
                 var settingsEdgeUninstalled = ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"];
 
                 if (settingsEdgeUninstalled != null && settingsEdgeUninstalled is bool settingValue)

@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
-  <data name="AppDescription" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
   <data name="Shell_Home.Content" xml:space="preserve">
     <value>RyTuneX</value>
   </data>
@@ -167,12 +161,6 @@
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Sprache</value>
-  </data>
-  <data name="WelcomeNotice" xml:space="preserve">
-    <value>Liebe/r geschätzte/r Benutzer/in,\n\nWir freuen uns sehr, Sie bei RyTuneX begrüßen zu dürfen, wo Leistungsoptimierung auf Präzision trifft. Entwickelt und stolz von Rayen Ghanmi gestaltet, ist RyTuneX nicht nur eine Anwendung, sondern Ihr Tor zu einem verbesserten Computererlebnis. Ob Sie Windows 11 oder Windows 10 verwenden, RyTuneX ist darauf ausgelegt, die Leistung Ihres Geräts auf ein neues Niveau zu heben. Tauchen Sie ein in eine Welt, in der unnötige Dienste zum Schweigen gebracht, Ballast verbannt und das Herz Ihres Systems durch intelligente Registry-Optimierungen fein abgestimmt wird. Machen Sie sich bereit, die wahre Kraft Ihres Geräts freizuschalten – willkommen bei RyTuneX, wo jeder Klick ein Schritt zu einer schnelleren und reaktionsschnelleren Computerreise ist.\n\nHinweis: Obwohl wir uns freuen, Sie an Bord zu haben, können einige Funktionen noch in Entwicklung sein und gelegentliche Probleme auftreten. Ihr Feedback ist unschätzbar, um uns dabei zu helfen, das RyTuneX-Erlebnis zu verfeinern und zu perfektionieren. Vielen Dank, dass Sie ein Teil unserer Reise zur Optimierung und Verbesserung Ihres Windows-Erlebnisses sind.\n\nMit freundlichen Grüßen,\n\nRayen Ghanmi</value>
-  </data>
-  <data name="WelcomeNoticeTitle" xml:space="preserve">
-    <value>Willkommen bei RyTuneX - Entfesseln Sie das volle Potenzial Ihres Geräts!</value>
   </data>
   <data name="HomePage_Title1.Text" xml:space="preserve">
     <value>1. Optimierte Systemdienste:</value>
@@ -722,5 +710,14 @@
   </data>
   <data name="Automatic" xml:space="preserve">
     <value>Automatic</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
+    <value>Deaktiviert die Verwendung von biometrischen Methoden zur Authentifizierung, wie Fingerabdruck- oder Gesichtserkennung.</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
+    <value>Biometriefunktionen deaktivieren</value>
+  </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>RyTuneX</value>
   </data>
 </root>

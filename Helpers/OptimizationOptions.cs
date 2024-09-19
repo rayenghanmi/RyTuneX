@@ -304,6 +304,18 @@ internal class OptimizationOptions
 
                     }
                     break;
+                case "Biometrics":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableBiometrics();
+
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableBiometrics();
+
+                    }
+                    break;
                 case "SMBv1":
                     if (toggleSwitch.IsOn)
                     {

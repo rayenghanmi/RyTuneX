@@ -2,6 +2,20 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 0.8.3 - Released
+
+## Changes
+
+- Introduced a Biometrics toggle as a separate option on the Privacy page.
+
+## Fixes
+
+- Fixed some minor translation mistakes.
+- Made several other minor enhancements.
+
+> [!NOTE]
+> After removing Microsoft Edge, File Explorer may not restart immediately. You can simply open Task Manager and start a new task for explorer.exe.
+
 ## 0.8.2 - Released
 
 ## Changes
