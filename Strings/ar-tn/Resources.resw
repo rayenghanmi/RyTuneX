@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
-  <data name="AppDescription" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
   <data name="Shell_Home.Content" xml:space="preserve">
     <value>RyTuneX</value>
   </data>
@@ -167,12 +161,6 @@
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>اللغة</value>
-  </data>
-  <data name="WelcomeNotice" xml:space="preserve">
-    <value>عزيزي المستخدم الكريم،\n\nنرحب بك بحرارة في راي تيونكس، حيث تلتقي تحسين الأداء بالدقة. تم تطوير راي تيونكس بكل فخر من قبل ريان غانمي، وهو ليس مجرد تطبيق، بل هو بوابتك إلى تجربة حوسبة محسنة. سواء كنت تستخدم ويندوز 11 أو ويندوز 10، تم تصميم راي تيونكس لرفع أداء جهازك إلى مستويات جديدة. استعد لفتح القدرات الحقيقية لجهازك - مرحبًا بك في راي تيونكس، حيث كل نقرة تمثل خطوة نحو رحلة حوسبة أسرع وأكثر استجابة.\n\nملاحظة: نحن متحمسون لاستقبالك، ولكن قد تكون بعض الميزات قيد التطوير وقد تواجه بعض المشكلات. رأيك له قيمة كبيرة في مساعدتنا على تحسين وتحديث تجربة راي تيونكس. شكراً لك على أنك جزء من رحلتنا لتحسين وتعزيز تجربتك مع ويندوز.\n\nمع أطيب التحية،\n\nريان غانمي</value>
-  </data>
-  <data name="WelcomeNoticeTitle" xml:space="preserve">
-    <value>مرحبًا بك في راي تيونكس - أطلق قدرات جهازك الكاملة!</value>
   </data>
   <data name="HomePage_Title1.Text" xml:space="preserve">
     <value>1. خدمات النظام المُبسطة:</value>
@@ -722,5 +710,20 @@
   </data>
   <data name="Automatic" xml:space="preserve">
     <value>أوتوماتيكي</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
+    <value>يعطّل استخدام التقنيات الحيوية للمصادقة، مثل بصمة الإصبع أو التعرف على الوجه.</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
+    <value>تعطيل ميزات القياسات الحيوية</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX هو أداة تحسين متقدمة تم بناؤها باستخدام إطار عمل WinUI 3، مصممة لتعزيز أداء أجهزة Windows. مصمم لنظامي Windows 10 و11، يمكّن RyTuneX المستخدمين من إزالة التطبيقات المثبتة مسبقًا بسهولة وتحسين موارد النظام</value>
+  </data>
+  <data name="Feature_CleanMemory.Description" xml:space="preserve">
+    <value>يفعّل خدمة rytunexsvc اللي تراقب الذاكرة (RAM) بشكل دوري وتنظفها وقت اللي تتعدى 80%</value>
+  </data>
+  <data name="Feature_CleanMemory.Header" xml:space="preserve">
+    <value>فعّل منظف الرام</value>
   </data>
 </root>

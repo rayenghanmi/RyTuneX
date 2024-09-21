@@ -96,6 +96,7 @@ public partial class App : Application
             services.AddTransient<SystemInfoPage>();
             services.AddTransient<DebloatSystemPage>();
             services.AddTransient<HomePage>();
+            services.AddTransient<NetworkPage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 
@@ -112,7 +113,7 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
-        if (ShouldShowWelcomeNotification())
+        /*if (ShouldShowWelcomeNotification())
         {
             await LogHelper.Log("Showing Welcome Notification");
             App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
@@ -123,12 +124,12 @@ public partial class App : Application
 
             // Set the flag to indicate that the welcome notification has been shown
             SetWelcomeNotificationShown();
-        }
+        }*/
 
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
 
-    private static bool ShouldShowWelcomeNotification()
+    /*private static bool ShouldShowWelcomeNotification()
     {
         // Check if the setting is not present or set to false
         if (!ApplicationData.Current.LocalSettings.Values.TryGetValue("WelcomeNotificationShown", out var value))
@@ -145,5 +146,5 @@ public partial class App : Application
         // Set the flag to true to indicate that the welcome notification has been shown
         LogHelper.Log("Setting WelcomeNotificationShown");
         ApplicationData.Current.LocalSettings.Values["WelcomeNotificationShown"] = true;
-    }
+    }*/
 }

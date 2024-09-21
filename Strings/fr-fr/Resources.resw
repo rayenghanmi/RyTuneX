@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
-  <data name="AppDescription" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
   <data name="Shell_Home.Content" xml:space="preserve">
     <value>RyTuneX</value>
   </data>
@@ -167,12 +161,6 @@
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Langue</value>
-  </data>
-  <data name="WelcomeNotice" xml:space="preserve">
-    <value>Cher utilisateur précieux,\n\nNous sommes ravis de vous accueillir sur RyTuneX, où l'optimisation des performances rencontre la précision. Développé et méticuleusement conçu par Rayen Ghanmi, RyTuneX n'est pas seulement une application, c'est votre passerelle vers une expérience informatique améliorée. Que vous utilisiez Windows 11 ou Windows 10, RyTuneX est conçu pour élever les performances de votre appareil à de nouveaux sommets. Plongez dans un univers où les services inutiles sont réduits au silence, où les logiciels superflus sont bannis et où le cœur même de votre système est affiné grâce à des optimisations intelligentes du registre. Préparez-vous à libérer la véritable puissance de votre appareil – bienvenue sur RyTuneX, où chaque clic est une étape vers une expérience informatique plus rapide et réactive.\n\nNote : Bien que nous soyons ravis de vous avoir à bord, certaines fonctionnalités sont peut-être en développement et des problèmes occasionnels peuvent survenir. Vos retours sont inestimables pour nous aider à affiner et à parfaire l'expérience RyTuneX. Merci d'être un acteur de notre voyage visant à optimiser et à améliorer votre expérience Windows.\n\nCordialement,\n\nRayen Ghanmi</value>
-  </data>
-  <data name="WelcomeNoticeTitle" xml:space="preserve">
-    <value>Bienvenue sur RyTuneX - Libérez le plein potentiel de votre appareil !</value>
   </data>
   <data name="HomePage_Title1.Text" xml:space="preserve">
     <value>1. Services système optimisés :</value>
@@ -720,7 +708,19 @@
   <data name="Automatic" xml:space="preserve">
     <value>Automatique</value>
   </data>
-  <data name="Feature_ExplorerBlur.Header" xml:space="preserve">
-    <value>Activer le flou de l'explorateur</value>
+  <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
+    <value>Désactive l'utilisation des méthodes biométriques pour l'authentification, telles que la reconnaissance des empreintes digitales ou faciale.</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
+    <value>Désactiver les fonctionnalités biométriques</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX est un optimiseur de pointe construit avec le framework WinUI 3, conçu pour amplifier les performances des appareils Windows. Conçu pour Windows 10 et 11, RyTuneX permet aux utilisateurs de supprimer facilement les applications préinstallées indésirables et d'optimiser les ressources système</value>
+  </data>
+  <data name="Feature_CleanMemory.Description" xml:space="preserve">
+    <value>Active le service rytunexsvc qui vérifie périodiquement l'utilisation de la RAM et la libère lorsqu'elle dépasse 80%</value>
+  </data>
+  <data name="Feature_CleanMemory.Header" xml:space="preserve">
+    <value>Activer le nettoyeur de RAM</value>
   </data>
 </root>

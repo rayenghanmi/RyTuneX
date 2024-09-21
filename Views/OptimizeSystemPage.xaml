@@ -30,13 +30,16 @@
                             Glyph="&#xE946;" />
                     </HyperlinkButton>
                 </StackPanel>
-
                 <controls:SettingsCard x:Uid="Feature_PerformanceTweaks">
                     <ToggleSwitch x:Name="PerformanceTweaks" Tag="PerformanceTweaks" Toggled="ToggleSwitch_Toggled"/>
                     <controls:SettingsCard.Description>
                         <HyperlinkButton x:Uid="Feature_LearnButtonLink"
                                          NavigateUri="https://rayenghanmi.github.io/rytunex/performance.html" />
                     </controls:SettingsCard.Description>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_CleanMemory">
+                    <ToggleSwitch x:Name="CleanMemory" Tag="CleanMemory" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableSuperfetch">

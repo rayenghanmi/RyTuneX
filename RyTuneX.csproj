@@ -19,16 +19,17 @@
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	<AppxBundle>Never</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-    <PackageCertificateThumbprint>DF8A7D4022DFD5CBB74CBD267C30722B1313BD08</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>68F15F2E2995C98E753050430DFB4AB2C22CA7EE</PackageCertificateThumbprint>
     <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <Version>0.8.3</Version>
+    <Authors>Rayen Ghanmi</Authors>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\bug.png" />
     <None Remove="Assets\discord.png" />
-    <None Remove="Assets\ExplorerBlurMica.dll" />
     <None Remove="Assets\github.png" />
     <None Remove="Assets\WindowIcon.ico" />
     <None Remove="Views\DebloatSystemPage.xaml" />
@@ -47,11 +48,11 @@
 	  <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.0.240109" />
 	  <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
-	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240404000" />
+	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240627000" />
 	  <PackageReference Include="System.Management" Version="8.0.0" />
 	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
 	  <PackageReference Include="WinUIEx" Version="2.3.4" />
-	  <PackageReference Include="System.Management.Automation" Version="7.4.2" />
+	  <PackageReference Include="System.Management.Automation" Version="7.4.3" />
   </ItemGroup>
 
 <ItemGroup>
@@ -63,14 +64,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
 
-    <None Update="LICENSE.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-
-    <None Update="README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
+    <None Update="Assets\RyTuneXService.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Page Update="Views\DebloatSystemPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -117,5 +112,9 @@
   
   <ItemGroup>
     <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.5.240404000\buildTransitive\..\include\DeploymentManagerAutoInitializer.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Remove="Assets\RyTuneXService.exe" />
   </ItemGroup>
 </Project>

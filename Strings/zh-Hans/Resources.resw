@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
-  <data name="AppDescription" xml:space="preserve">
-    <value>RyTuneX</value>
-  </data>
   <data name="Shell_Home.Content" xml:space="preserve">
     <value>RyTuneX</value>
   </data>
@@ -167,12 +161,6 @@
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>语言</value>
-  </data>
-  <data name="WelcomeNotice" xml:space="preserve">
-    <value>亲爱的用户，\n\n我们很高兴欢迎您使用 RyTuneX，在这里，性能优化与精度完美融合。 RyTuneX 由 Rayen Ghanmi 开发并自豪地制作，它不仅仅是一款应用程序，它还是您获得增强计算体验的门户。 无论您运行的是 Windows 11 还是 Windows 10，RyTuneX 都旨在将您的设备性能提升到新的高度。 在 RyTuneX 的世界里，不必要的服务被静默处理，冗余被清除，系统核心通过智能注册表优化得到精细调整。准备好释放您设备的真正潜能了吗？欢迎使用 RyTuneX，您的每一次点击都是向更快、更灵敏的计算之旅迈进的一步。\n\n此致，\n\nRayen Ghanmi</value>
-  </data>
-  <data name="WelcomeNoticeTitle" xml:space="preserve">
-    <value>欢迎使用 RyTuneX - 释放您设备的全部潜力！</value>
   </data>
   <data name="HomePage_Title1.Text" xml:space="preserve">
     <value>1. 简化系统服务:</value>
@@ -223,7 +211,7 @@
     <value>处理器</value>
   </data>
   <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>网卡</value>
+    <value>显卡</value>
   </data>
   <data name="SystemInfoPage_OS.Text" xml:space="preserve">
     <value>操作系统</value>
@@ -722,5 +710,20 @@
   </data>
   <data name="Automatic" xml:space="preserve">
     <value>自动</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
+    <value>禁用生物识别技术进行身份验证，例如指纹或面部识别。</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
+    <value>禁用生物识别功能</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX 是一个使用 WinUI 3 框架构建的尖端优化工具，旨在提升 Windows 设备的性能。适用于 Windows 10 和 11，RyTuneX 帮助用户轻松删除顽固的预装应用程序并优化系统资源。</value>
+  </data>
+  <data name="Feature_CleanMemory.Description" xml:space="preserve">
+    <value>启用 rytunexsvc，它会定期检查内存使用情况，并在超过 80% 时清理内存。</value>
+  </data>
+  <data name="Feature_CleanMemory.Header" xml:space="preserve">
+    <value>Enable Ram Cleaner</value>
   </data>
 </root>

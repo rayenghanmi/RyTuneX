@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.Win32;
+using Windows.ApplicationModel;
 
 namespace RyTuneX.Helpers;
 internal class OptimizeSystemHelper
@@ -551,7 +552,6 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Sensor\\Overrides\\{BFA794E4-F964-4FDB-90F6-51056BFE4B44} /v SensorPermissionState /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\lfsvc\\Service\\Configuration /v Status /t REG_DWORD /d 0 /f");
 
-        await OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Biometrics /v Enabled /t REG_DWORD /d 0 /f");
 
         await OptimizationOptions.StartInCmd("REG ADD HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds /v ShellFeedsTaskbarOpenOnHover /t REG_DWORD /d 0 /f");
 
@@ -650,7 +650,6 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Sensor\\Overrides\\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}\" /v \"SensorPermissionState\" /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\System\\CurrentControlSet\\Services\\lfsvc\\Service\\Configuration\" /v \"Status\" /f");
 
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\" /v \"Enabled\" /f");
 
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform\" /v \"NoGenTicket\" /f");
 
@@ -701,6 +700,16 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Policies\\Microsoft\\Windows\\System\" /v \"EnableMmx\" /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Policies\\Microsoft\\Windows\\System\" /v \"RSoPLogging\" /f");
 
+    }
+
+    internal static async void DisableBiometrics()
+    {
+        await OptimizationOptions.StartInCmd("REG ADD HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Biometrics /v Enabled /t REG_DWORD /d 0 /f");
+    }
+
+    internal static async void EnableBiometrics()
+    {
+        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\" /v \"Enabled\" /f");
     }
 
     internal static async void DisableGameBar()
@@ -1253,5 +1262,24 @@ internal class OptimizeSystemHelper
     internal static async void DisableEndTask()
     {
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings /v TaskbarEndTask /t REG_DWORD /d 0 /f");
+    }
+
+    internal static async Task EnableMemClean()
+    {
+        try
+        {
+            await OptimizationOptions.StartInCmd($"sc create rytunexsvc binpath=\"{Package.Current.InstalledLocation.Path}\\Assets\\RyTuneXService.exe\" start= delayed-auto displayname=\"RyTuneX Memory Service\"");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+        await OptimizationOptions.StartInCmd("sc config rytunexsvc start= delayed-auto");
+        await OptimizationOptions.StartInCmd("sc start rytunexsvc");
+    }
+    internal static async Task DisableMemClean()
+    {
+        await OptimizationOptions.StartInCmd("sc stop rytunexsvc");
+        await OptimizationOptions.StartInCmd("sc delete rytunexsvc");
     }
 }
