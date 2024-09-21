@@ -20,6 +20,7 @@
 	<Properties>
 		<DisplayName>RyTuneX</DisplayName>
 		<PublisherDisplayName>Rayen Ghanmi</PublisherDisplayName>
+		<Description>ms-resource:AppDescription</Description>
 		<Logo>Assets\StoreLogo.png</Logo>
 	</Properties>
 
@@ -37,8 +38,8 @@
 		  Executable="$targetnametoken$.exe"
 		  EntryPoint="$targetentrypoint$">
 			<uap:VisualElements
-			  DisplayName="ms-resource:AppDisplayName"
-			  Description="A Windows 10 and 11 optimizer designed to amplify the performance of your device"
+			  DisplayName="RyTuneX"
+			  Description="ms-resource:AppDescription"
 			  BackgroundColor="transparent"
 			  Square150x150Logo="Assets\Square150x150Logo.png"
 			  Square44x44Logo="Assets\Square44x44Logo.png">

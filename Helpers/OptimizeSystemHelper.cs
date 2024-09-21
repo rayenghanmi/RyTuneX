@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.Win32;
+using Windows.ApplicationModel;
 
 namespace RyTuneX.Helpers;
 internal class OptimizeSystemHelper
@@ -1261,5 +1262,24 @@ internal class OptimizeSystemHelper
     internal static async void DisableEndTask()
     {
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings /v TaskbarEndTask /t REG_DWORD /d 0 /f");
+    }
+
+    internal static async Task EnableMemClean()
+    {
+        try
+        {
+            await OptimizationOptions.StartInCmd($"sc create rytunexsvc binpath=\"{Package.Current.InstalledLocation.Path}\\Assets\\RyTuneXService.exe\" start= delayed-auto displayname=\"RyTuneX Memory Service\"");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+        await OptimizationOptions.StartInCmd("sc config rytunexsvc start= delayed-auto");
+        await OptimizationOptions.StartInCmd("sc start rytunexsvc");
+    }
+    internal static async Task DisableMemClean()
+    {
+        await OptimizationOptions.StartInCmd("sc stop rytunexsvc");
+        await OptimizationOptions.StartInCmd("sc delete rytunexsvc");
     }
 }

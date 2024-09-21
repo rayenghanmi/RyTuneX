@@ -717,7 +717,13 @@
   <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
     <value>Biometriefunktionen deaktivieren</value>
   </data>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>RyTuneX</value>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX ist ein hochmodernes Optimierungstool, das mit dem WinUI 3-Framework entwickelt wurde und darauf abzielt, die Leistung von Windows-Geräten zu steigern. Entwickelt für Windows 10 und 11, ermöglicht RyTuneX den Benutzern, hartnäckige vorinstallierte Apps mühelos zu entfernen und Systemressourcen zu optimieren</value>
+  </data>
+  <data name="Feature_CleanMemory.Description" xml:space="preserve">
+    <value>Aktiviert den rytunexsvc, der regelmäßig die RAM-Auslastung überprüft und ihn leert, wenn sie 80% überschreitet</value>
+  </data>
+  <data name="Feature_CleanMemory.Header" xml:space="preserve">
+    <value>RAM-Reiniger aktivieren</value>
   </data>
 </root>

@@ -717,7 +717,13 @@
   <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
     <value>Disable Biometrics features</value>
   </data>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>RyTuneX</value>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX is a cutting-edge optimizer built with the WinUI 3 framework, designed to amplify the performance of Windows devices. Crafted for both Windows 10 and 11, RyTuneX empowers users to effortlessly remove stubborn pre-installed apps and optimize system resources</value>
+  </data>
+  <data name="Feature_CleanMemory.Header" xml:space="preserve">
+    <value>Enable Ram Cleaner</value>
+  </data>
+  <data name="Feature_CleanMemory.Description" xml:space="preserve">
+    <value>Enables rytunexsvc that periodically checks for ram usage and clears it when it exceeds 80%</value>
   </data>
 </root>

@@ -717,7 +717,13 @@
   <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
     <value>تعطيل ميزات القياسات الحيوية</value>
   </data>
-  <data name="AppDisplayName" xml:space="preserve">
-    <value>RyTuneX</value>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX هو أداة تحسين متقدمة تم بناؤها باستخدام إطار عمل WinUI 3، مصممة لتعزيز أداء أجهزة Windows. مصمم لنظامي Windows 10 و11، يمكّن RyTuneX المستخدمين من إزالة التطبيقات المثبتة مسبقًا بسهولة وتحسين موارد النظام</value>
+  </data>
+  <data name="Feature_CleanMemory.Description" xml:space="preserve">
+    <value>يفعّل خدمة rytunexsvc اللي تراقب الذاكرة (RAM) بشكل دوري وتنظفها وقت اللي تتعدى 80%</value>
+  </data>
+  <data name="Feature_CleanMemory.Header" xml:space="preserve">
+    <value>فعّل منظف الرام</value>
   </data>
 </root>

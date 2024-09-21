@@ -63,6 +63,10 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+
+    <None Update="Assets\RyTuneXService.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Page Update="Views\DebloatSystemPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -108,5 +112,9 @@
   
   <ItemGroup>
     <Compile Remove="C:\Users\Ghanmi\.nuget\packages\microsoft.windowsappsdk\1.5.240404000\buildTransitive\..\include\DeploymentManagerAutoInitializer.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Remove="Assets\RyTuneXService.exe" />
   </ItemGroup>
 </Project>

@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics;
 using System.Management.Automation;
+using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using Microsoft.UI.Xaml.Controls;
 
 namespace RyTuneX.Helpers;
 internal class OptimizationOptions
 {
+    [DllImport("psapi.dll")]
+    public static extern bool EmptyWorkingSet(IntPtr hProcess);
     public static List<KeyValuePair<string, string>> GetUWPApps(bool uninstallableOnly)
     {
         var installedApps = new List<KeyValuePair<string, string>>();
@@ -178,6 +181,27 @@ internal class OptimizationOptions
             sc.Start();
         }
     }
+
+    internal static void ClearWorkingSet()
+    {
+        // Clear the working set for the current process
+        EmptyWorkingSet(Process.GetCurrentProcess().Handle);
+
+        // Get all running processes
+        foreach (Process process in Process.GetProcesses())
+        {
+            try
+            {
+                // Clear the working set for each process
+                EmptyWorkingSet(process.Handle);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(ex.Message);
+            }
+        }
+    }
+
     public static void XamlSwitches(ToggleSwitch toggleSwitch, bool isAutomated = true)
     {
         if (!isAutomated && toggleSwitch != null && toggleSwitch.Tag != null)
@@ -782,6 +806,16 @@ internal class OptimizationOptions
                     {
                         OptimizeSystemHelper.DisableEndTask();
 
+                    }
+                    break;
+                case "CleanMemory":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableMemClean();
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableMemClean();
                     }
                     break;
             }

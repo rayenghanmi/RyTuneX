@@ -4,33 +4,38 @@ All notable changes to this branch will be documented in this file.
 
 ## 0.8.3 - Released
 
-## Changes
+### Added
 
-- Introduced a Biometrics toggle as a separate option on the Privacy page.
+- Introduced a `RAM cleaner` toggle that utilizes the new `rytunexsvc` service, which periodically checks RAM usage and reduces its usage when it exceeds 80% by clearing the working set.
 
-## Fixes
+### Changes
+
+- Introduced a `Biometrics` toggle as a separate option on the `Privacy` page.
+
+### Fixes
 
 - Fixed some minor translation mistakes.
 - Made several other minor enhancements.
+- Solved an issue where Microsoft Edge does not appear in the debloat list even though it was installed.
 
 > [!NOTE]
 > After removing Microsoft Edge, File Explorer may not restart immediately. You can simply open Task Manager and start a new task for explorer.exe.
 
 ## 0.8.2 - Released
 
-## Changes
+### Changes
 
 - Enhanced translation consistency across Arabic, French, and Simplified Chinese.
 - Updated Simplified Chinese translation thanks to @wcxu21.
 
-## Added
+### Added
 
 - Implemented German language translation.
 - Introduced new Networking section with the bility to change DNS server.
 - Ability to enable Endtask option in Windows 11.
 - Ability to uninstall `Microsoft Edge` (Tested on Windows 11 22H2).
  
-## Fixes
+### Fixes
 
 - Fixed minor `Debloat` problems.
 
@@ -41,15 +46,15 @@ All notable changes to this branch will be documented in this file.
 
 > This is a hotfix for version 0.8.0
 
-## Added
+### Added
 
 - Add Simplified Chinese translation
 
-## Fixes
+### Fixes
 
 - [x] Resolved an issue stopping users on Windows 10 from using `Debloat`.
 
-## Known Issues
+### Known Issues
 
 - This hotfix broke the ability to remove `MicrosoftEdge` (will be fixed in the next version).
 
