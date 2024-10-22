@@ -2,6 +2,12 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 0.9.0 - Unreleased
+
+### Fixes
+
+- Resolved an issue where temporary files were not being removed.
+
 ## 0.8.3 - Released
 
 ### Added

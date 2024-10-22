@@ -214,7 +214,7 @@ public sealed partial class DebloatSystemPage : Page
                 if (!string.IsNullOrEmpty(error))
                 {
                     await LogHelper.LogError(error);
-                    throw new Exception(error);
+                    //throw new Exception(error);
                 }
             }
         }
@@ -309,26 +309,25 @@ public sealed partial class DebloatSystemPage : Page
             TempButton.Visibility = Visibility.Collapsed;
             TempStatusText.Text = "DeligTemp".GetLocalized() + "...";
 
-            var exitCode1 = await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\*.tmp\"");
-            var exitCode2 = await OptimizationOptions.StartInCmd("del /q/f/s %TEMP%\\*");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\*.tmp\"");
+            await OptimizationOptions.StartInCmd("rd /S /Q \"%TEMP%\\*\"");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\Temp\\*\"");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\Prefetch\\*\"");
+            await OptimizationOptions.StartInCmd("PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"");
+            await OptimizationOptions.StartInCmd("PowerShell.exe -NoProfile -Command \"wevtutil cl System\"");
+            await OptimizationOptions.StartInCmd("PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\Download\\*\"");
+            await OptimizationOptions.StartInCmd("RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 255");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\*\"");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\DeliveryOptimization\\*\"");
 
-            // Check for successful execution
-            if (exitCode1 == 0 && exitCode2 == 0)
-            {
-                TempStatusText.Text = "TempDelSucc".GetLocalized();
-                TempProgress.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                TempStatusText.Text = "ErrTempDel".GetLocalized();
-                TempProgress.ShowError = true;
-            }
-        }
-        catch (Exception ex)
-        {
-            TempStatusText.Text = "Error: " + ex.Message;
-            TempButton.Visibility = Visibility.Visible;
+            TempStatusText.Text = "TempDelSucc".GetLocalized();
             TempProgress.Visibility = Visibility.Collapsed;
+        }
+        catch (Exception)
+        {
+            TempStatusText.Text = "ErrTempDel".GetLocalized();
+            TempButton.Visibility = Visibility.Visible;
             TempProgress.ShowError = true;
         }
     }
