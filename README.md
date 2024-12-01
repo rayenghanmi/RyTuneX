@@ -8,7 +8,12 @@
   <strong>Enhance your Windows 10 and 11 experience with RyTuneX – your go-to optimizer by Rayen Ghanmi 🛠️.</strong>
 </p>
 
+
+
 <p align="center">
+  <a href="https://www.buymeacoffee.com/rayen.ghanmi.22"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=rayen.ghanmi.22&button_colour=f177a6&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=FFDD00" /></a>
+<br>
+<br>
   <a href="https://techforpalestine.org/learn-more">
     <img src="https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/StandWithPalestine.svg" alt="Ceasefire Now">
   </a>
