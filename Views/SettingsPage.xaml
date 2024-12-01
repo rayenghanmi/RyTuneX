@@ -35,7 +35,7 @@
                     <controls:SettingsCard x:Name="LanguageSettingsCard"
                                x:Uid="Settings_LanguageSettingsCard"
                                HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
-                        <ComboBox x:Name="LanguageComboBox" PlaceholderText="System Language" Margin="{StaticResource SmallTopMargin}" SelectionChanged="LanguageComboBox_SelectionChanged">
+                        <ComboBox VerticalAlignment="Center" x:Name="LanguageComboBox" PlaceholderText="System Language" Margin="{StaticResource SmallTopMargin}" SelectionChanged="LanguageComboBox_SelectionChanged">
                             <ComboBoxItem Content="English (US)" Tag="en-us"/>
                             <ComboBoxItem Content="Français (France)" Tag="fr-fr"/>
                             <ComboBoxItem Content="العربية (تونس)" Tag="ar-tn"/>
@@ -88,9 +88,12 @@
             <controls:SettingsExpander Description="© 2024 Rayen Ghanmi"
                                Header="RyTuneX"
                                HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.scale-100.png}">
-                <TextBlock IsTextSelectionEnabled="True"
-                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                   Text="{x:Bind _versionDescription}" />
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Uid="SettingsPage_UpdateButton" Click="Button_Click" Margin="25,0"/>
+                    <TextBlock VerticalAlignment="Center" IsTextSelectionEnabled="True"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Text="{x:Bind _versionDescription}" />
+                </StackPanel>
                 <controls:SettingsExpander.Items>
                     <controls:SettingsCard HorizontalContentAlignment="Left"
                                    ContentAlignment="Left">

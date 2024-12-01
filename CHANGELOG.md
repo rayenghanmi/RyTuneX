@@ -4,9 +4,17 @@ All notable changes to this branch will be documented in this file.
 
 ## 0.9.0 - Unreleased
 
+### Added
+
+- Introduced the ability to update the app without the need to install it from the website.
+
 ### Fixes
 
 - Resolved an issue where temporary files were not being removed.
+
+### Changes
+
+- Enhanced the failed uninstallation notification to ensure that the debloat process continues even if some apps fail to uninstall.
 
 ## 0.8.3 - Released
 

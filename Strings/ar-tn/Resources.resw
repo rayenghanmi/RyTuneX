@@ -726,4 +726,32 @@
   <data name="Feature_CleanMemory.Header" xml:space="preserve">
     <value>فعّل منظف الرام</value>
   </data>
+  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
+    <value>تحقق من التحديثات</value>
+  </data>
+  <data name="AvailableUpdateContent0" xml:space="preserve">
+    <value>نسخة أحدث (</value>
+  </data>
+  <data name="AvailableUpdateContent1" xml:space="preserve">
+    <value>) متوفرة. يُرجى التحديث إلى أحدث إصدار للاستمتاع بالميزات والتحسينات الجديدة.</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>تحديثات RyTuneX</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>حدث خطأ. تأكد من اتصالك بالإنترنت وحاول مرة أخرى لاحقًا.</value>
+  </data>
+  <data name="UnavailableUpdate0" xml:space="preserve">
+    <value>أنت تستخدم أحدث إصدار بالفعل (</value>
+  </data>
+  <data name="UnavailableUpdate1" xml:space="preserve">
+    <value>). لا توجد تحديثات متوفرة حاليًا.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+
 </root>

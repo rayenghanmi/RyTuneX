@@ -20,20 +20,17 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 
 using RyTuneX.Activation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Core.Contracts.Services;
 using RyTuneX.Core.Services;
-using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.Notifications;
 using RyTuneX.Services;
 using RyTuneX.ViewModels;
 using RyTuneX.Views;
-using Windows.Storage;
 
 namespace RyTuneX;
 

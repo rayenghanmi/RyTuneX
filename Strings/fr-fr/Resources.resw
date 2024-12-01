@@ -723,4 +723,31 @@
   <data name="Feature_CleanMemory.Header" xml:space="preserve">
     <value>Activer le nettoyeur de RAM</value>
   </data>
+  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
+    <value>Vérifier les mises à jour</value>
+  </data>
+  <data name="AvailableUpdateContent0" xml:space="preserve">
+    <value>Une nouvelle version (</value>
+  </data>
+  <data name="AvailableUpdateContent1" xml:space="preserve">
+    <value>) est disponible. Veuillez mettre à jour vers la dernière version pour profiter des nouvelles fonctionnalités et améliorations.</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>Mises à jour RyTuneX</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Une erreur s'est produite. Vérifiez votre connexion Internet et réessayez plus tard.</value>
+  </data>
+  <data name="UnavailableUpdate0" xml:space="preserve">
+    <value>Vous utilisez déjà la dernière version (</value>
+  </data>
+  <data name="UnavailableUpdate1" xml:space="preserve">
+    <value>). Aucune mise à jour n'est disponible pour le moment.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
 </root>
