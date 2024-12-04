@@ -726,4 +726,31 @@
   <data name="Feature_CleanMemory.Description" xml:space="preserve">
     <value>Enables rytunexsvc that periodically checks for ram usage and clears it when it exceeds 80%</value>
   </data>
+  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="AvailableUpdateContent0" xml:space="preserve">
+    <value>A newer version (</value>
+  </data>
+  <data name="AvailableUpdateContent1" xml:space="preserve">
+    <value>) is available. Please update to the latest version to enjoy new features and improvements.</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>RyTuneX updates</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>There was an error. Make sure to check your internet connection and try again later.</value>
+  </data>
+  <data name="UnavailableUpdate0" xml:space="preserve">
+    <value>You are already running the latest version (</value>
+  </data>
+  <data name="UnavailableUpdate1" xml:space="preserve">
+    <value>). No updates are available at this time.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
 </root>

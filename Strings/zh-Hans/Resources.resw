@@ -726,4 +726,31 @@
   <data name="Feature_CleanMemory.Header" xml:space="preserve">
     <value>Enable Ram Cleaner</value>
   </data>
+  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="AvailableUpdateContent0" xml:space="preserve">
+    <value>有新版本 (</value>
+  </data>
+  <data name="AvailableUpdateContent1" xml:space="preserve">
+    <value>) 可用。请更新至最新版本以享受新功能和改进。</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>RyTuneX 更新</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>发生错误。请检查您的互联网连接并稍后重试。</value>
+  </data>
+  <data name="UnavailableUpdate0" xml:space="preserve">
+    <value>您已经运行的是最新版本 (</value>
+  </data>
+  <data name="UnavailableUpdate1" xml:space="preserve">
+    <value>)。当前没有可用的更新。</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>更新</value>
+  </data>
 </root>

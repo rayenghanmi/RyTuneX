@@ -113,38 +113,23 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
-        /*if (ShouldShowWelcomeNotification())
+        if (ApplicationData.Current.LocalSettings.Values.TryGetValue("JustUpdated", out var value))
         {
-            await LogHelper.Log("Showing Welcome Notification");
-            App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+            ApplicationData.Current.LocalSettings.Values["JustUpdated"] = false;
+            if ((bool)value == true)
             {
-                var welcomeMessage = "WelcomeNotice".GetLocalized().Replace("\\n", Environment.NewLine); ;
-                App.MainWindow.ShowMessageDialogAsync(welcomeMessage, "WelcomeNoticeTitle".GetLocalized());
-            });
-
-            // Set the flag to indicate that the welcome notification has been shown
-            SetWelcomeNotificationShown();
-        }*/
-
+                await OptimizationOptions.StartInCmd("rd /S /Q \"%TEMP%\"");
+                if (ApplicationData.Current.LocalSettings.Values.TryGetValue("DoneUpdating", out var isDoneUpdating)
+                    && ApplicationData.Current.LocalSettings.Values.TryGetValue("latestChanges", out var latestChanges))
+                {
+                    App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+                    {
+                        App.MainWindow.ShowMessageDialogAsync((string)latestChanges, "UpdateTitle".GetLocalized());
+                    });
+                    ApplicationData.Current.LocalSettings.Values["DoneUpdating"] = false;
+                }
+            }
+        }
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
-
-    /*private static bool ShouldShowWelcomeNotification()
-    {
-        // Check if the setting is not present or set to false
-        if (!ApplicationData.Current.LocalSettings.Values.TryGetValue("WelcomeNotificationShown", out var value))
-        {
-            return true; // Show the notification if the setting is not present
-        }
-
-        // Check the value of the setting
-        return !(bool)value;
-    }
-
-    private static void SetWelcomeNotificationShown()
-    {
-        // Set the flag to true to indicate that the welcome notification has been shown
-        LogHelper.Log("Setting WelcomeNotificationShown");
-        ApplicationData.Current.LocalSettings.Values["WelcomeNotificationShown"] = true;
-    }*/
 }

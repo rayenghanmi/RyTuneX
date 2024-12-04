@@ -110,14 +110,18 @@ public sealed partial class DebloatSystemPage : Page
         {
             return;
         }
+
         uninstallButton.IsEnabled = false;
         appTreeView.IsEnabled = false;
         uninstallingStatusBar.Visibility = Visibility.Visible;
+
+        // List to store names of apps that failed to uninstall
+        var failedUninstalls = new List<string>();
+
         try
         {
             foreach (var selectedApp in appTreeView.SelectedItems)
             {
-
                 if (selectedApp is KeyValuePair<string, string> appInfo)
                 {
                     var selectedAppName = appInfo.Key;
@@ -128,13 +132,22 @@ public sealed partial class DebloatSystemPage : Page
                         var selectedAppInfo = appInfo;
                         uninstallingStatusText.Text = "Uninstalling".GetLocalized() + " " + selectedAppInfo.Key.ToString();
 
-                        await UninstallApps(selectedAppName);
+                        try
+                        {
+                            await UninstallApps(selectedAppName);
 
-                        // Add the app to the HashSet to mark it as selected for uninstallation
-                        selectedAppsForUninstall.Add(selectedAppName);
+                            // Add the app to the HashSet to mark it as selected for uninstallation
+                            selectedAppsForUninstall.Add(selectedAppName);
+                        }
+                        catch (Exception)
+                        {
+                            // Add to the list of failed uninstalls
+                            failedUninstalls.Add(selectedAppName);
+                        }
                     }
                 }
             }
+
             appTreeView.SelectedItems.Clear();
             // Reload the installed apps after successfull uninstall
             await LogHelper.Log("Reloading Installed Apps Data");
@@ -147,32 +160,22 @@ public sealed partial class DebloatSystemPage : Page
                 LoadInstalledApps(false);
             }
 
-            // update ui elements
+            // Show success notification if no errors, otherwise show the error notification
             uninstallingStatusBar.Visibility = Visibility.Collapsed;
-            NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccess".GetLocalized(), InfoBarSeverity.Success, 4000));
+            if (failedUninstalls.Count == 0)
+            {
+                NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccess".GetLocalized(), InfoBarSeverity.Success, 5000));
+            }
+            else
+            {
+                var failedAppsMessage = string.Join("\n", failedUninstalls);
+                NotificationQueue.Show(NotificationContent("Debloat", $"Error uninstalling the following app(s):\n{failedAppsMessage}", InfoBarSeverity.Error, 5000));
+            }
         }
-        // in case of an error
         catch (Exception ex)
         {
-            // update ui elements
-            uninstallingStatusText.Text = ex.ToString();
             uninstallingStatusBar.ShowError = true;
-            NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(), "UninstallationError".GetLocalized(), InfoBarSeverity.Error, 5000));
-
-            var uninstallationFailed = new ContentDialog()
-            {
-                XamlRoot = XamlRoot,
-                Title = "UninstallationError".GetLocalized(),
-                Content = ex.Message,
-                CloseButtonText = "View logs"
-            };
-            await uninstallationFailed.ShowAsync();
-            var tempFolder = ApplicationData.Current.TemporaryFolder;
-            var file = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
-
-            Process.Start(new ProcessStartInfo(file.Path) { UseShellExecute = true });
-
-            // reload after error
+            NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(), ex.ToString(), InfoBarSeverity.Error, 5000));
 
             if (uninstallableOnlyChecked)
             {
@@ -182,9 +185,9 @@ public sealed partial class DebloatSystemPage : Page
             {
                 LoadInstalledApps(false);
             }
-
         }
     }
+
     private static async Task UninstallApps(string appName)
     {
         if (!appName.Contains("MicrosoftEdge"))
@@ -309,26 +312,24 @@ public sealed partial class DebloatSystemPage : Page
             TempButton.Visibility = Visibility.Collapsed;
             TempStatusText.Text = "DeligTemp".GetLocalized() + "...";
 
-            var exitCode1 = await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\*.tmp\"");
-            var exitCode2 = await OptimizationOptions.StartInCmd("del /q/f/s %TEMP%\\*");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\*.tmp\"");
+            await OptimizationOptions.StartInCmd("rd /S /Q \"%TEMP%\"");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\Temp\\*\"");
+            await OptimizationOptions.StartInCmd("PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"");
+            await OptimizationOptions.StartInCmd("PowerShell.exe -NoProfile -Command \"wevtutil cl System\"");
+            await OptimizationOptions.StartInCmd("PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\Download\\*\"");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\*\"");
+            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\DeliveryOptimization\\*\"");
 
-            // Check for successful execution
-            if (exitCode1 == 0 && exitCode2 == 0)
-            {
-                TempStatusText.Text = "TempDelSucc".GetLocalized();
-                TempProgress.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                TempStatusText.Text = "ErrTempDel".GetLocalized();
-                TempProgress.ShowError = true;
-            }
-        }
-        catch (Exception ex)
-        {
-            TempStatusText.Text = "Error: " + ex.Message;
-            TempButton.Visibility = Visibility.Visible;
+
+            TempStatusText.Text = "TempDelSucc".GetLocalized();
             TempProgress.Visibility = Visibility.Collapsed;
+        }
+        catch (Exception)
+        {
+            TempStatusText.Text = "ErrTempDel".GetLocalized();
+            TempButton.Visibility = Visibility.Visible;
             TempProgress.ShowError = true;
         }
     }

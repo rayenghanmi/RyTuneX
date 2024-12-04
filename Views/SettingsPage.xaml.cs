@@ -1,7 +1,13 @@
-﻿using System.Windows.Input;
+﻿using System.Diagnostics;
+using System.IO.Compression;
+using System.Net;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Newtonsoft.Json.Linq;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using Windows.ApplicationModel;
@@ -11,6 +17,7 @@ namespace RyTuneX.Views;
 
 public sealed partial class SettingsPage : Page
 {
+    private static readonly HttpClient httpClient = new();
     private readonly IThemeSelectorService _themeSelectorService;
 
     private ElementTheme _elementTheme;
@@ -19,6 +26,7 @@ public sealed partial class SettingsPage : Page
     {
         get;
     }
+    public static string latestVersionString;
 
     public SettingsPage()
     {
@@ -171,7 +179,212 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error opening log file: {ex.Message}");
+            Debug.WriteLine($"Error opening log file: {ex.Message}");
+        }
+    }
+    public static async Task<bool?> CheckForUpdatesAsync(XamlRoot xaml)
+    {
+        try
+        {
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("RyTuneX/0.9");
+            var response = await httpClient.GetAsync("https://api.github.com/repos/rayenghanmi/rytunex/releases");
+            response.EnsureSuccessStatusCode();
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var releases = JArray.Parse(responseString);
+
+            // Check if any releases are available
+            if (releases.Count > 0)
+            {
+                // Get the latest release version (e.g., "v1.0.0")
+                latestVersionString = releases[0]["tag_name"].ToString();
+
+                // Remove leading 'v'
+                if (latestVersionString.StartsWith("v"))
+                {
+                    latestVersionString = latestVersionString.Substring(1);
+                }
+
+                // Get the current assembly version
+                var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+
+                // Parse the latest version string into a Version object
+                var latestVersion = new Version(latestVersionString);
+
+                // Log both versions for debugging
+                Debug.WriteLine($"Current version: {currentVersion}");
+                Debug.WriteLine($"Parsed latest version: {latestVersion}");
+
+                // Compare versions: check if the latest version is greater than the current version
+                var isUpdateAvailable = latestVersion > currentVersion;
+
+                Debug.WriteLine($"Is update available: {isUpdateAvailable}");
+                await LogHelper.Log($"Is update available: {isUpdateAvailable}");
+
+                return isUpdateAvailable;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"HTTP error: {ex.Message}");
+            var networkError = new ContentDialog()
+            {
+                XamlRoot = xaml,
+                Title = "UpdateTitle".GetLocalized(),
+                Content = "NetworkError".GetLocalized(),
+                CloseButtonText = "Close".GetLocalized()
+            };
+            await networkError.ShowAsync();
+            await LogHelper.LogError($"HTTP error: {ex}");
+        }
+
+        return null;
+    }
+
+    private async void Button_Click(object sender, RoutedEventArgs e)
+    {
+        var res = await CheckForUpdatesAsync(XamlRoot);
+        if (res == false)
+        {
+            var updateUnavailable = new ContentDialog()
+            {
+                XamlRoot = XamlRoot,
+                Title = "UpdateTitle".GetLocalized(),
+                Content = "UnavailableUpdate0".GetLocalized() + latestVersionString + "UnavailableUpdate1".GetLocalized(),
+                CloseButtonText = "Close".GetLocalized()
+            };
+            await updateUnavailable.ShowAsync();
+        }
+        if (res == true)
+        {
+            var updateAvailable = new ContentDialog()
+            {
+                XamlRoot = XamlRoot,
+                Title = "UpdateTitle".GetLocalized(),
+                Content = "AvailableUpdateContent0".GetLocalized() + latestVersionString + "AvailableUpdateContent1".GetLocalized(),
+                CloseButtonText = "Close".GetLocalized(),
+                PrimaryButtonText = "Update".GetLocalized(),
+                PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
+            };
+            // Show the dialog and await the result
+            var result = await updateAvailable.ShowAsync();
+
+            // Check if the "Update" button was clicked
+            if (result == ContentDialogResult.Primary)
+            {
+                // Run the installation module
+                ApplicationData.Current.LocalSettings.Values["JustUpdated"] = true;
+                var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip";
+                await InstallRyTuneX(downloadUrl);
+            }
+        }
+    }
+    static string ExtractLatestVersionChanges(string changelog)
+    {
+        // Regex to match the latest version section
+        var match = Regex.Match(changelog, @"## (\d+\.\d+\.\d+) - Released\n((.|\n)*?)(?=\n## |$)");
+        if (match.Success)
+        {
+            var latestChanges = match.Groups[2].Value.Trim();
+            latestChanges = Regex.Replace(latestChanges, @"^###\s+", "", RegexOptions.Multiline);
+            latestChanges = Regex.Replace(latestChanges, @"^>\s+", "", RegexOptions.Multiline);
+            latestChanges = Regex.Replace(latestChanges, @"\[\!(.*?)\]", match => match.Groups[1].Value);
+
+            return latestChanges;
+        }
+        else
+        {
+            return "No notable changes found.";
+        }
+    }
+
+    public async Task InstallRyTuneX(string downloadUrl)
+    {
+        var tempPath = Path.GetTempPath();
+        var zipFilePath = Path.Combine(tempPath, "RyTuneX.Setup.zip");
+        var extractionPath = Path.Combine(tempPath, "RyTuneX");
+        var setupFilePath = Path.Combine(extractionPath, "RyTuneXSetup.exe");
+        var changelogUrl = "https://raw.githubusercontent.com/rayenghanmi/RyTuneX/refs/heads/main/CHANGELOG.md";
+
+        try
+        {
+            UpdateButton.Visibility = Visibility.Collapsed;
+            UpdateStack.Visibility = Visibility.Visible;
+            UpdateProgress.ShowError = false;
+            UpdateProgress.Visibility = Visibility.Visible;
+            UpdateStatusText.Text = "Downloading...";
+
+            // Download the ZIP file
+            using (var webClient = new WebClient())
+            {
+                await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), zipFilePath);
+                Debug.WriteLine("Download complete.");
+            }
+
+            string changelogContent;
+            using (var webClient = new WebClient())
+            {
+                changelogContent = await webClient.DownloadStringTaskAsync(new Uri(changelogUrl));
+                Debug.WriteLine("Changelog download complete.");
+            }
+
+            ApplicationData.Current.LocalSettings.Values["latestChanges"] = ExtractLatestVersionChanges(changelogContent);
+
+            // Extract the ZIP file
+            Debug.WriteLine("Extracting files...");
+            UpdateStatusText.Text = "Extracting...";
+            if (Directory.Exists(extractionPath))
+            {
+                Directory.Delete(extractionPath, true);
+            }
+            ZipFile.ExtractToDirectory(zipFilePath, extractionPath);
+            Debug.WriteLine("Extraction complete.");
+
+            // Delete the ZIP file
+            Debug.WriteLine("Cleaning up...");
+            if (File.Exists(zipFilePath))
+            {
+                File.Delete(zipFilePath);
+                Debug.WriteLine("Deleted RyTuneX.Setup.zip.");
+            }
+
+            // Run the setup file with the --silent argument
+            UpdateStatusText.Text = "Installing...";
+            Debug.WriteLine("Running RyTuneX Setup.exe...");
+            Process setupProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = $"/c \"{setupFilePath} --silent\"",
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    Verb = "runas"
+                }
+            };
+            setupProcess.Start();
+            await setupProcess.WaitForExitAsync();
+            Debug.WriteLine("RyTuneX Setup.exe has finished execution.");
+        }
+        catch (Exception ex)
+        {
+            UpdateStatusText.Text = "Error has occurred";
+            UpdateProgress.ShowError = true;
+            Debug.WriteLine($"An error occurred: {ex.Message}");
+        }
+        finally
+        {
+            // Cleanup the extracted files
+            if (Directory.Exists(extractionPath))
+            {
+                Directory.Delete(extractionPath, true);
+            }
+            ApplicationData.Current.LocalSettings.Values["DoneUpdating"] = true;
+            UpdateStatusText.Text = "Done";
+            UpdateButton.Visibility = Visibility.Visible;
+            UpdateStack.Visibility = Visibility.Collapsed;
+            UpdateProgress.Visibility = Visibility.Collapsed;
+
         }
     }
 }
