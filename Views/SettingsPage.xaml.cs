@@ -2,6 +2,7 @@
 using System.IO.Compression;
 using System.Net;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
@@ -278,12 +279,26 @@ public sealed partial class SettingsPage : Page
             }
         }
     }
+    static string ExtractLatestVersionChanges(string changelog)
+    {
+        // Regex to match the latest version section
+        var match = Regex.Match(changelog, @"## (\d+\.\d+\.\d+) - Released\n((.|\n)*?)(?=\n## |$)");
+        if (match.Success)
+        {
+            return match.Groups[2].Value.Trim();
+        }
+        else
+        {
+            return "No notable changes found.";
+        }
+    }
     public async Task InstallRyTuneX(string downloadUrl)
     {
         var tempPath = Path.GetTempPath();
         var zipFilePath = Path.Combine(tempPath, "RyTuneX.Setup.zip");
         var extractionPath = Path.Combine(tempPath, "RyTuneX");
         var setupFilePath = Path.Combine(extractionPath, "RyTuneXSetup.exe");
+        var changelogUrl = "https://raw.githubusercontent.com/rayenghanmi/RyTuneX/refs/heads/main/CHANGELOG.md";
 
         try
         {
@@ -292,14 +307,24 @@ public sealed partial class SettingsPage : Page
             UpdateProgress.ShowError = false;
             UpdateProgress.Visibility = Visibility.Visible;
             UpdateStatusText.Text = "Downloading...";
-            
+
             // Step 1: Download the ZIP file
             using (var webClient = new WebClient())
             {
                 await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), zipFilePath);
                 Debug.WriteLine("Download complete.");
             }
-            
+
+            string changelogContent;
+            using (var webClient = new WebClient())
+            {
+                changelogContent = await webClient.DownloadStringTaskAsync(new Uri(changelogUrl));
+                Debug.WriteLine("Changelog download complete.");
+            }
+
+            // Extract the latest version's changes
+            ApplicationData.Current.LocalSettings.Values["latestChanges"] = ExtractLatestVersionChanges(changelogContent);
+
             // Step 2: Extract the ZIP file
             Debug.WriteLine("Extracting files...");
             UpdateStatusText.Text = "Extracting...";
@@ -349,11 +374,12 @@ public sealed partial class SettingsPage : Page
             {
                 Directory.Delete(extractionPath, true);
             }
+            ApplicationData.Current.LocalSettings.Values["DoneUpdating"] = true;
             UpdateStatusText.Text = "Done";
             UpdateButton.Visibility = Visibility.Visible;
             UpdateStack.Visibility = Visibility.Collapsed;
             UpdateProgress.Visibility = Visibility.Collapsed;
-            
+
         }
     }
 }

@@ -20,6 +20,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 
 using RyTuneX.Activation;
@@ -111,12 +112,22 @@ public partial class App : Application
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
+
         if (ApplicationData.Current.LocalSettings.Values.TryGetValue("JustUpdated", out var value))
         {
+            ApplicationData.Current.LocalSettings.Values["JustUpdated"] = false;
             if ((bool)value == true)
             {
                 await OptimizationOptions.StartInCmd("rd /S /Q \"%TEMP%\"");
-                ApplicationData.Current.LocalSettings.Values["JustUpdated"] = false;
+                if (ApplicationData.Current.LocalSettings.Values.TryGetValue("DoneUpdating", out var isDoneUpdating)
+                    && ApplicationData.Current.LocalSettings.Values.TryGetValue("latestChanges", out var latestChanges))
+                {
+                    App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+                    {
+                        App.MainWindow.ShowMessageDialogAsync((string)latestChanges, "UpdateTitle".GetLocalized());
+                    });
+                    ApplicationData.Current.LocalSettings.Values["DoneUpdating"] = false;
+                }
             }
         }
         await App.GetService<IActivationService>().ActivateAsync(args);
