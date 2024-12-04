@@ -285,13 +285,19 @@ public sealed partial class SettingsPage : Page
         var match = Regex.Match(changelog, @"## (\d+\.\d+\.\d+) - Released\n((.|\n)*?)(?=\n## |$)");
         if (match.Success)
         {
-            return match.Groups[2].Value.Trim();
+            var latestChanges = match.Groups[2].Value.Trim();
+            latestChanges = Regex.Replace(latestChanges, @"^###\s+", "", RegexOptions.Multiline);
+            latestChanges = Regex.Replace(latestChanges, @"^>\s+", "", RegexOptions.Multiline);
+            latestChanges = Regex.Replace(latestChanges, @"\[\!(.*?)\]", match => match.Groups[1].Value);
+
+            return latestChanges;
         }
         else
         {
             return "No notable changes found.";
         }
     }
+
     public async Task InstallRyTuneX(string downloadUrl)
     {
         var tempPath = Path.GetTempPath();
@@ -308,7 +314,7 @@ public sealed partial class SettingsPage : Page
             UpdateProgress.Visibility = Visibility.Visible;
             UpdateStatusText.Text = "Downloading...";
 
-            // Step 1: Download the ZIP file
+            // Download the ZIP file
             using (var webClient = new WebClient())
             {
                 await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), zipFilePath);
@@ -322,10 +328,9 @@ public sealed partial class SettingsPage : Page
                 Debug.WriteLine("Changelog download complete.");
             }
 
-            // Extract the latest version's changes
             ApplicationData.Current.LocalSettings.Values["latestChanges"] = ExtractLatestVersionChanges(changelogContent);
 
-            // Step 2: Extract the ZIP file
+            // Extract the ZIP file
             Debug.WriteLine("Extracting files...");
             UpdateStatusText.Text = "Extracting...";
             if (Directory.Exists(extractionPath))
@@ -335,7 +340,7 @@ public sealed partial class SettingsPage : Page
             ZipFile.ExtractToDirectory(zipFilePath, extractionPath);
             Debug.WriteLine("Extraction complete.");
 
-            // Step 3: Delete the ZIP file
+            // Delete the ZIP file
             Debug.WriteLine("Cleaning up...");
             if (File.Exists(zipFilePath))
             {
@@ -343,7 +348,7 @@ public sealed partial class SettingsPage : Page
                 Debug.WriteLine("Deleted RyTuneX.Setup.zip.");
             }
 
-            // Step 4: Run the setup file with the --silent argument
+            // Run the setup file with the --silent argument
             UpdateStatusText.Text = "Installing...";
             Debug.WriteLine("Running RyTuneX Setup.exe...");
             Process setupProcess = new Process
