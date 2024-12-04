@@ -26,11 +26,13 @@ using RyTuneX.Activation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Core.Contracts.Services;
 using RyTuneX.Core.Services;
+using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.Notifications;
 using RyTuneX.Services;
 using RyTuneX.ViewModels;
 using RyTuneX.Views;
+using Windows.Storage;
 
 namespace RyTuneX;
 
@@ -109,39 +111,14 @@ public partial class App : Application
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
-
-        /*if (ShouldShowWelcomeNotification())
+        if (ApplicationData.Current.LocalSettings.Values.TryGetValue("JustUpdated", out var value))
         {
-            await LogHelper.Log("Showing Welcome Notification");
-            App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
+            if ((bool)value == true)
             {
-                var welcomeMessage = "WelcomeNotice".GetLocalized().Replace("\\n", Environment.NewLine); ;
-                App.MainWindow.ShowMessageDialogAsync(welcomeMessage, "WelcomeNoticeTitle".GetLocalized());
-            });
-
-            // Set the flag to indicate that the welcome notification has been shown
-            SetWelcomeNotificationShown();
-        }*/
-
+                await OptimizationOptions.StartInCmd("rd /S /Q \"%TEMP%\"");
+                ApplicationData.Current.LocalSettings.Values["JustUpdated"] = false;
+            }
+        }
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
-
-    /*private static bool ShouldShowWelcomeNotification()
-    {
-        // Check if the setting is not present or set to false
-        if (!ApplicationData.Current.LocalSettings.Values.TryGetValue("WelcomeNotificationShown", out var value))
-        {
-            return true; // Show the notification if the setting is not present
-        }
-
-        // Check the value of the setting
-        return !(bool)value;
-    }
-
-    private static void SetWelcomeNotificationShown()
-    {
-        // Set the flag to true to indicate that the welcome notification has been shown
-        LogHelper.Log("Setting WelcomeNotificationShown");
-        ApplicationData.Current.LocalSettings.Values["WelcomeNotificationShown"] = true;
-    }*/
 }

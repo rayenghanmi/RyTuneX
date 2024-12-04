@@ -313,16 +313,15 @@ public sealed partial class DebloatSystemPage : Page
             TempStatusText.Text = "DeligTemp".GetLocalized() + "...";
 
             await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\*.tmp\"");
-            await OptimizationOptions.StartInCmd("rd /S /Q \"%TEMP%\\*\"");
+            await OptimizationOptions.StartInCmd("rd /S /Q \"%TEMP%\"");
             await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\Temp\\*\"");
-            await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\Prefetch\\*\"");
             await OptimizationOptions.StartInCmd("PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"");
             await OptimizationOptions.StartInCmd("PowerShell.exe -NoProfile -Command \"wevtutil cl System\"");
             await OptimizationOptions.StartInCmd("PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"");
             await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\Download\\*\"");
-            await OptimizationOptions.StartInCmd("RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 255");
             await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\*\"");
             await OptimizationOptions.StartInCmd("del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\DeliveryOptimization\\*\"");
+
 
             TempStatusText.Text = "TempDelSucc".GetLocalized();
             TempProgress.Visibility = Visibility.Collapsed;

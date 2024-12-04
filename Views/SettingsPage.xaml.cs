@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.IO.Compression;
+using System.Net;
 using System.Reflection;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
@@ -176,7 +178,7 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error opening log file: {ex.Message}");
+            Debug.WriteLine($"Error opening log file: {ex.Message}");
         }
     }
     public static async Task<bool?> CheckForUpdatesAsync(XamlRoot xaml)
@@ -263,7 +265,95 @@ public sealed partial class SettingsPage : Page
                 PrimaryButtonText = "Update".GetLocalized(),
                 PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
             };
-            await updateAvailable.ShowAsync();
+            // Show the dialog and await the result
+            var result = await updateAvailable.ShowAsync();
+
+            // Check if the "Update" button was clicked
+            if (result == ContentDialogResult.Primary)
+            {
+                // Run the installation module
+                ApplicationData.Current.LocalSettings.Values["JustUpdated"] = true;
+                var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip";
+                await InstallRyTuneX(downloadUrl);
+            }
+        }
+    }
+    public async Task InstallRyTuneX(string downloadUrl)
+    {
+        var tempPath = Path.GetTempPath();
+        var zipFilePath = Path.Combine(tempPath, "RyTuneX.Setup.zip");
+        var extractionPath = Path.Combine(tempPath, "RyTuneX");
+        var setupFilePath = Path.Combine(extractionPath, "RyTuneXSetup.exe");
+
+        try
+        {
+            UpdateButton.Visibility = Visibility.Collapsed;
+            UpdateStack.Visibility = Visibility.Visible;
+            UpdateProgress.ShowError = false;
+            UpdateProgress.Visibility = Visibility.Visible;
+            UpdateStatusText.Text = "Downloading...";
+            
+            // Step 1: Download the ZIP file
+            using (var webClient = new WebClient())
+            {
+                await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), zipFilePath);
+                Debug.WriteLine("Download complete.");
+            }
+            
+            // Step 2: Extract the ZIP file
+            Debug.WriteLine("Extracting files...");
+            UpdateStatusText.Text = "Extracting...";
+            if (Directory.Exists(extractionPath))
+            {
+                Directory.Delete(extractionPath, true);
+            }
+            ZipFile.ExtractToDirectory(zipFilePath, extractionPath);
+            Debug.WriteLine("Extraction complete.");
+
+            // Step 3: Delete the ZIP file
+            Debug.WriteLine("Cleaning up...");
+            if (File.Exists(zipFilePath))
+            {
+                File.Delete(zipFilePath);
+                Debug.WriteLine("Deleted RyTuneX.Setup.zip.");
+            }
+
+            // Step 4: Run the setup file with the --silent argument
+            UpdateStatusText.Text = "Installing...";
+            Debug.WriteLine("Running RyTuneX Setup.exe...");
+            Process setupProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = $"/c \"{setupFilePath} --silent\"",
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    Verb = "runas"
+                }
+            };
+            setupProcess.Start();
+            await setupProcess.WaitForExitAsync();
+            Debug.WriteLine("RyTuneX Setup.exe has finished execution.");
+        }
+        catch (Exception ex)
+        {
+            UpdateStatusText.Text = "Error has occurred";
+            UpdateProgress.ShowError = true;
+            Debug.WriteLine($"An error occurred: {ex.Message}");
+        }
+        finally
+        {
+            // Cleanup the extracted files
+            if (Directory.Exists(extractionPath))
+            {
+                Directory.Delete(extractionPath, true);
+            }
+            UpdateStatusText.Text = "Done";
+            UpdateButton.Visibility = Visibility.Visible;
+            UpdateStack.Visibility = Visibility.Collapsed;
+            UpdateProgress.Visibility = Visibility.Collapsed;
+            
         }
     }
 }

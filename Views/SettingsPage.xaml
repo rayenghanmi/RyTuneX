@@ -89,7 +89,16 @@
                                Header="RyTuneX"
                                HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.scale-100.png}">
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Uid="SettingsPage_UpdateButton" Click="Button_Click" Margin="25,0"/>
+                    
+                    <StackPanel Margin="25,0" Orientation="Vertical" VerticalAlignment="Center">
+                        <Grid>
+                            <Button x:Uid="SettingsPage_UpdateButton" x:Name="UpdateButton" Click="Button_Click"/>
+                            <StackPanel x:Name="UpdateStack" Visibility="Collapsed">
+                                <ProgressBar x:Name="UpdateProgress" Margin="3" IsIndeterminate="True" Visibility="Collapsed"/>
+                                <TextBlock x:Name="UpdateStatusText"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
                     <TextBlock VerticalAlignment="Center" IsTextSelectionEnabled="True"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                         Text="{x:Bind _versionDescription}" />
