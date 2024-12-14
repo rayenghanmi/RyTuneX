@@ -16,6 +16,7 @@ public sealed partial class PrivacyPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing PrivacyPage");
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += (sender, e) => InitializeToggleSwitches();
     }
 

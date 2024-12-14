@@ -16,6 +16,7 @@ public sealed partial class OptimizeSystemPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing OptimizeSystemPage");
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += (sender, e) => InitializeToggleSwitchesAsync();
     }
     private async void InitializeToggleSwitchesAsync()

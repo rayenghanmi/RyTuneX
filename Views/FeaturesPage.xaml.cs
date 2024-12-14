@@ -16,6 +16,7 @@ public sealed partial class FeaturesPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing FeaturesPage");
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += (sender, e) => InitializeToggleSwitches();
     }
     private void InitializeToggleSwitches()
