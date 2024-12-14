@@ -8,7 +8,7 @@ internal class LogHelper
 
     public static async Task ShowErrorMessageAndLog(Exception ex, XamlRoot xamlRoot)
     {
-        var errorMessage = $"Caught Error: {ex.Message}";
+        var errorMessage = $"Caught Error: {ex.Message}\nStack Trace: {ex.StackTrace}";
 
         await Log($"Error: {errorMessage}");
 

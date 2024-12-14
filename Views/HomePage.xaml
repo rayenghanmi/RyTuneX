@@ -33,6 +33,7 @@
                 </LinearGradientBrush>
             </StackPanel.Background>
             <TextBlock
+                    Margin="0,36,0,0"
                     FontSize="16"
                     Text="{x:Bind _versionDescription}" />
             <TextBlock
@@ -48,6 +49,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -100,6 +102,22 @@
                             HorizontalAlignment="Left"
                             UriSource="ms-appx:///Assets/bug.png"/>
                         <TextBlock x:Uid="HomePage_IssueButton"/>
+                    </StackPanel>
+                </Button>
+                <Button
+                    Click="SupportButton_Click"
+                    Margin="6"
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="3"
+                    Grid.Column="0">
+                    <StackPanel Orientation="Horizontal">
+                        <BitmapIcon
+                            Foreground="#f177a6"
+                            Width="20"
+                            Margin="10,0,10,0"
+                            HorizontalAlignment="Left"
+                            UriSource="ms-appx:///Assets/support.png"/>
+                        <TextBlock x:Uid="HomePage_SupportButton"/>
                     </StackPanel>
                 </Button>
             </Grid>

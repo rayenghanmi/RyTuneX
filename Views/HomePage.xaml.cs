@@ -40,4 +40,13 @@ public sealed partial class HomePage : Page
             UseShellExecute = true
         });
     }
+
+    private void SupportButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://buymeacoffee.com/rayen.ghanmi.22",
+            UseShellExecute = true
+        });
+    }
 }

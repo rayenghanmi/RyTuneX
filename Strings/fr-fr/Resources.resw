@@ -750,4 +750,28 @@
   <data name="Update" xml:space="preserve">
     <value>Mettre à jour</value>
   </data>
+  <data name="HomePage_SupportButton.Text" xml:space="preserve">
+    <value>Soutenez-nous</value>
+  </data>
+  <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
+    <value>Batterie</value>
+  </data>
+  <data name="SystemInfoPage_Network.Text" xml:space="preserve">
+    <value>Réseau</value>
+  </data>
+  <data name="MACAddress" xml:space="preserve">
+    <value>Adresse MAC</value>
+  </data>
+  <data name="AdapterType" xml:space="preserve">
+    <value>Type d’adaptateur</value>
+  </data>
+  <data name="EstimatedChargeRemaining" xml:space="preserve">
+    <value>Charge restante estimée</value>
+  </data>
+  <data name="BatteryStatus" xml:space="preserve">
+    <value>État de la batterie</value>
+  </data>
+  <data name="Chemistry" xml:space="preserve">
+    <value>Composition chimique</value>
+  </data>
 </root>

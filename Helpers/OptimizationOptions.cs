@@ -9,19 +9,14 @@ internal class OptimizationOptions
 {
     [DllImport("psapi.dll")]
     public static extern bool EmptyWorkingSet(IntPtr hProcess);
+
     public static List<KeyValuePair<string, string>> GetUWPApps(bool uninstallableOnly)
     {
         var installedApps = new List<KeyValuePair<string, string>>();
 
-        string command;
-        if (uninstallableOnly)
-        {
-            command = @"powershell.exe -Command ""Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation""";
-        }
-        else
-        {
-            command = @"powershell.exe -Command ""Get-AppxPackage | Select-Object Name,InstallLocation""";
-        }
+        string command = uninstallableOnly
+            ? @"powershell.exe -Command ""Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation"""
+            : @"powershell.exe -Command ""Get-AppxPackage | Select-Object Name,InstallLocation""";
 
         try
         {
@@ -36,38 +31,35 @@ internal class OptimizationOptions
                     CreateNoWindow = true
                 }
             };
+            process.Start();
+
+            // Read the output directly
+            while (!process.StandardOutput.EndOfStream)
             {
-                process.Start();
-
-                // Read the output directly
-                while (!process.StandardOutput.EndOfStream)
+                var line = process.StandardOutput.ReadLine();
+                var parts = line?.Split(new[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries);
+                if (parts?.Length == 2 && !installedApps.Exists(i => i.Key == parts[0]))
                 {
-                    var line = process.StandardOutput.ReadLine();
-                    var parts = line?.Split(new[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries);
-                    if (parts?.Length == 2 && !installedApps.Exists(i => i.Key == parts[0]))
-                    {
-                        installedApps.Add(new KeyValuePair<string, string>(parts[0], parts[1]));
-                    }
+                    installedApps.Add(new KeyValuePair<string, string>(parts[0], parts[1]));
                 }
-
-                process.WaitForExit();
             }
+
+            process.WaitForExit();
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
-            return installedApps;
         }
 
         LogHelper.Log("Returning Installed Apps [GetUWPApps]");
         return installedApps;
     }
 
-
     internal static bool ServiceExists(string serviceName)
     {
-        return Array.Exists(ServiceController.GetServices(), (serviceController => serviceController.ServiceName.Equals(serviceName)));
+        return Array.Exists(ServiceController.GetServices(), serviceController => serviceController.ServiceName.Equals(serviceName));
     }
+
     internal static void StopService(string serviceName)
     {
         if (ServiceExists(serviceName))
@@ -88,8 +80,6 @@ internal class OptimizationOptions
             // Get the path to the PowerShell script file
             var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
 
-
-
             if (!File.Exists(scriptFilePath))
             {
                 await LogHelper.Log($"Script file not found: {scriptFilePath}");
@@ -97,7 +87,7 @@ internal class OptimizationOptions
             }
 
             // Read the content of the script file
-            var scriptContent = File.ReadAllText(scriptFilePath);
+            var scriptContent = await File.ReadAllTextAsync(scriptFilePath);
 
             // Create a PowerShell instance
             using var PowerShellInstance = PowerShell.Create();
@@ -147,18 +137,20 @@ internal class OptimizationOptions
     {
         try
         {
-            using var p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.Arguments = $"/C {command}";
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.UseShellExecute = true;
-            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            using var p = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = $"/C {command}",
+                    CreateNoWindow = true,
+                    UseShellExecute = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                }
+            };
 
             // Start the process in a separate Task
-            Task startTask = Task.Run(() => p.Start());
-
-            // Await the start task to ensure process starts
-            await startTask;
+            await Task.Run(() => p.Start());
 
             // Await process completion and capture exit code
             await p.WaitForExitAsync();
@@ -170,7 +162,6 @@ internal class OptimizationOptions
             throw;
         }
     }
-
 
     internal static void StartService(string serviceName)
     {
@@ -188,7 +179,7 @@ internal class OptimizationOptions
         EmptyWorkingSet(Process.GetCurrentProcess().Handle);
 
         // Get all running processes
-        foreach (Process process in Process.GetProcesses())
+        foreach (var process in Process.GetProcesses())
         {
             try
             {

@@ -10,32 +10,39 @@ namespace RyTuneX.Views;
 
 public sealed partial class OptimizeSystemPage : Page
 {
-
     private bool isInitialLoad = true;
 
     public OptimizeSystemPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing OptimizeSystemPage");
-        Loaded += (sender, e) => InitializeToggleSwitches();
+        Loaded += (sender, e) => InitializeToggleSwitchesAsync();
     }
-    private void InitializeToggleSwitches()
+    private async void InitializeToggleSwitchesAsync()
     {
-        LogHelper.Log("Initializing Toggle Switches");
-        foreach (var control in FindVisualChildren<ToggleSwitch>(this))
+        await LogHelper.Log("Initializing Toggle Switches");
+        try
         {
-            if (control.Tag != null && control.Tag is string tagName)
+            var tasks = FindVisualChildren<ToggleSwitch>(this).Select(async control =>
             {
-                // Set the initial state based on the stored value in LocalSettings
-                var settingValueObj = ApplicationData.Current.LocalSettings.Values[tagName];
-
-                if (settingValueObj != null && settingValueObj is bool settingValue)
+                if (control.Tag != null && control.Tag is string tagName)
                 {
-                    control.IsOn = settingValue;
+                    // Set the initial state based on the stored value in LocalSettings
+                    var settingValueObj = ApplicationData.Current.LocalSettings.Values[tagName];
+
+                    if (settingValueObj != null && settingValueObj is bool settingValue)
+                    {
+                        control.IsOn = settingValue;
+                    }
                 }
-            }
+            });
+            await Task.WhenAll(tasks);
+            isInitialLoad = false;
         }
-        isInitialLoad = false;
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
+        }
     }
     // Helper method to find all children of a specific type in the visual tree
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -72,6 +79,7 @@ public sealed partial class OptimizeSystemPage : Page
         {
             var toggleSwitch = (ToggleSwitch)sender;
             Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            await LogHelper.Log($"ToggleSwitch Toggled: Tag={toggleSwitch.Tag}, IsOn={toggleSwitch.IsOn}");
             if (toggleSwitch.IsOn)
             {
                 ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
@@ -93,10 +101,5 @@ public sealed partial class OptimizeSystemPage : Page
         {
             await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
-    }
-
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        OptimizationOptions.ClearWorkingSet();
     }
 }

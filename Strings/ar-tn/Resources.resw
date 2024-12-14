@@ -753,5 +753,28 @@
   <data name="Update" xml:space="preserve">
     <value>تحديث</value>
   </data>
-
+  <data name="HomePage_SupportButton.Text" xml:space="preserve">
+    <value>ساندنا</value>
+  </data>
+  <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
+    <value>البطارية</value>
+  </data>
+  <data name="SystemInfoPage_Network.Text" xml:space="preserve">
+    <value>الشبكة</value>
+  </data>
+  <data name="MACAddress" xml:space="preserve">
+    <value>عنوان ماك</value>
+  </data>
+  <data name="AdapterType" xml:space="preserve">
+    <value>نوع المهايئ</value>
+  </data>
+  <data name="EstimatedChargeRemaining" xml:space="preserve">
+    <value>النسبة المتبقية للشحن</value>
+  </data>
+  <data name="BatteryStatus" xml:space="preserve">
+    <value>حالة البطارية</value>
+  </data>
+  <data name="Chemistry" xml:space="preserve">
+    <value>نوع التركيبة الكيميائية للبطارية</value>
+  </data>
 </root>

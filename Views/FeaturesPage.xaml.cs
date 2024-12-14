@@ -21,20 +21,27 @@ public sealed partial class FeaturesPage : Page
     private void InitializeToggleSwitches()
     {
         LogHelper.Log("Initializing Toggle Switches");
-        foreach (var control in FindVisualChildren<ToggleSwitch>(this))
+        try
         {
-            if (control.Tag != null && control.Tag is string tagName)
+            foreach (var control in FindVisualChildren<ToggleSwitch>(this))
             {
-                // Set the initial state based on the stored value in LocalSettings
-                var settingValueObj = ApplicationData.Current.LocalSettings.Values[tagName];
-
-                if (settingValueObj != null && settingValueObj is bool settingValue)
+                if (control.Tag != null && control.Tag is string tagName)
                 {
-                    control.IsOn = settingValue;
+                    // Set the initial state based on the stored value in LocalSettings
+                    var settingValueObj = ApplicationData.Current.LocalSettings.Values[tagName];
+
+                    if (settingValueObj != null && settingValueObj is bool settingValue)
+                    {
+                        control.IsOn = settingValue;
+                    }
                 }
             }
+            isInitialLoad = false;
         }
-        isInitialLoad = false;
+        catch (Exception ex)
+        {
+            LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
+        }
     }
     // Helper method to find all children of a specific type in the visual tree
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -71,6 +78,7 @@ public sealed partial class FeaturesPage : Page
         {
             var toggleSwitch = (ToggleSwitch)sender;
             Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            await LogHelper.Log($"ToggleSwitch Toggled: Tag={toggleSwitch.Tag}, IsOn={toggleSwitch.IsOn}");
             if (toggleSwitch.IsOn)
             {
                 ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
@@ -92,10 +100,5 @@ public sealed partial class FeaturesPage : Page
         {
             await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
-    }
-
-    private void SettingsCard_Click(object sender, RoutedEventArgs e)
-    {
-        Process.Start("explorer.exe", "ms-settings:personalization");
     }
 }

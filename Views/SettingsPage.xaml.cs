@@ -32,6 +32,7 @@ public sealed partial class SettingsPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing SettingsPage");
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
 
         _themeSelectorService = App.GetService<IThemeSelectorService>();
 
@@ -51,6 +52,7 @@ public sealed partial class SettingsPage : Page
                 }
             });
     }
+
     private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedLanguage = (ComboBoxItem)LanguageComboBox.SelectedItem;
@@ -75,6 +77,7 @@ public sealed partial class SettingsPage : Page
             }
         }
     }
+
     private void SetDefaultLanguageBasedOnSystem()
     {
         // Check if the user has previously selected a language
@@ -108,6 +111,7 @@ public sealed partial class SettingsPage : Page
             }
         }
     }
+
     public static string GetVersionDescription()
     {
         Version version;
@@ -124,6 +128,7 @@ public sealed partial class SettingsPage : Page
         }
         return $"{version.Major}.{version.Minor}.{version.Build}";
     }
+
     public ElementTheme ElementTheme
     {
         get
@@ -179,9 +184,10 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error opening log file: {ex.Message}");
+            await LogHelper.LogError($"Error opening log file: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
+
     public static async Task<bool?> CheckForUpdatesAsync(XamlRoot xaml)
     {
         try
@@ -226,7 +232,7 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"HTTP error: {ex.Message}");
+            await LogHelper.LogError($"HTTP error: {ex.Message}\nStack Trace: {ex.StackTrace}");
             var networkError = new ContentDialog()
             {
                 XamlRoot = xaml,
@@ -235,7 +241,6 @@ public sealed partial class SettingsPage : Page
                 CloseButtonText = "Close".GetLocalized()
             };
             await networkError.ShowAsync();
-            await LogHelper.LogError($"HTTP error: {ex}");
         }
 
         return null;
@@ -243,58 +248,74 @@ public sealed partial class SettingsPage : Page
 
     private async void Button_Click(object sender, RoutedEventArgs e)
     {
-        var res = await CheckForUpdatesAsync(XamlRoot);
-        if (res == false)
+        try
         {
-            var updateUnavailable = new ContentDialog()
+            var res = await CheckForUpdatesAsync(XamlRoot);
+            if (res == false)
             {
-                XamlRoot = XamlRoot,
-                Title = "UpdateTitle".GetLocalized(),
-                Content = "UnavailableUpdate0".GetLocalized() + latestVersionString + "UnavailableUpdate1".GetLocalized(),
-                CloseButtonText = "Close".GetLocalized()
-            };
-            await updateUnavailable.ShowAsync();
-        }
-        if (res == true)
-        {
-            var updateAvailable = new ContentDialog()
+                var updateUnavailable = new ContentDialog()
+                {
+                    XamlRoot = XamlRoot,
+                    Title = "UpdateTitle".GetLocalized(),
+                    Content = "UnavailableUpdate0".GetLocalized() + latestVersionString + "UnavailableUpdate1".GetLocalized(),
+                    CloseButtonText = "Close".GetLocalized()
+                };
+                await updateUnavailable.ShowAsync();
+            }
+            if (res == true)
             {
-                XamlRoot = XamlRoot,
-                Title = "UpdateTitle".GetLocalized(),
-                Content = "AvailableUpdateContent0".GetLocalized() + latestVersionString + "AvailableUpdateContent1".GetLocalized(),
-                CloseButtonText = "Close".GetLocalized(),
-                PrimaryButtonText = "Update".GetLocalized(),
-                PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
-            };
-            // Show the dialog and await the result
-            var result = await updateAvailable.ShowAsync();
+                var updateAvailable = new ContentDialog()
+                {
+                    XamlRoot = XamlRoot,
+                    Title = "UpdateTitle".GetLocalized(),
+                    Content = "AvailableUpdateContent0".GetLocalized() + latestVersionString + "AvailableUpdateContent1".GetLocalized(),
+                    CloseButtonText = "Close".GetLocalized(),
+                    PrimaryButtonText = "Update".GetLocalized(),
+                    PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
+                };
+                // Show the dialog and await the result
+                var result = await updateAvailable.ShowAsync();
 
-            // Check if the "Update" button was clicked
-            if (result == ContentDialogResult.Primary)
-            {
-                // Run the installation module
-                ApplicationData.Current.LocalSettings.Values["JustUpdated"] = true;
-                var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip";
-                await InstallRyTuneX(downloadUrl);
+                // Check if the "Update" button was clicked
+                if (result == ContentDialogResult.Primary)
+                {
+                    // Run the installation module
+                    ApplicationData.Current.LocalSettings.Values["JustUpdated"] = true;
+                    var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip";
+                    await InstallRyTuneX(downloadUrl);
+                }
             }
         }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error during update check: {ex.Message}\nStack Trace: {ex.StackTrace}");
+        }
     }
+
     static string ExtractLatestVersionChanges(string changelog)
     {
-        // Regex to match the latest version section
-        var match = Regex.Match(changelog, @"## (\d+\.\d+\.\d+) - Released\n((.|\n)*?)(?=\n## |$)");
-        if (match.Success)
+        try
         {
-            var latestChanges = match.Groups[2].Value.Trim();
-            latestChanges = Regex.Replace(latestChanges, @"^###\s+", "", RegexOptions.Multiline);
-            latestChanges = Regex.Replace(latestChanges, @"^>\s+", "", RegexOptions.Multiline);
-            latestChanges = Regex.Replace(latestChanges, @"\[\!(.*?)\]", match => match.Groups[1].Value);
+            // Regex to match the latest version section
+            var match = Regex.Match(changelog, @"## (\d+\.\d+\.\d+) - Released\n((.|\n)*?)(?=\n## |$)");
+            if (match.Success)
+            {
+                var latestChanges = match.Groups[2].Value.Trim();
+                latestChanges = Regex.Replace(latestChanges, @"^###\s+", "", RegexOptions.Multiline);
+                latestChanges = Regex.Replace(latestChanges, @"^>\s+", "", RegexOptions.Multiline);
+                latestChanges = Regex.Replace(latestChanges, @"\[\!(.*?)\]", match => match.Groups[1].Value);
 
-            return latestChanges;
+                return latestChanges;
+            }
+            else
+            {
+                return "No notable changes found.";
+            }
         }
-        else
+        catch (Exception ex)
         {
-            return "No notable changes found.";
+            LogHelper.LogError($"Error extracting latest version changes: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            return "Error extracting latest version changes.";
         }
     }
 
@@ -370,7 +391,7 @@ public sealed partial class SettingsPage : Page
         {
             UpdateStatusText.Text = "Error has occurred";
             UpdateProgress.ShowError = true;
-            Debug.WriteLine($"An error occurred: {ex.Message}");
+            await LogHelper.LogError($"Error during installation: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
         finally
         {
@@ -384,7 +405,6 @@ public sealed partial class SettingsPage : Page
             UpdateButton.Visibility = Visibility.Visible;
             UpdateStack.Visibility = Visibility.Collapsed;
             UpdateProgress.Visibility = Visibility.Collapsed;
-
         }
     }
 }
