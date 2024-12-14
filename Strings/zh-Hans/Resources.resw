@@ -753,4 +753,28 @@
   <data name="Update" xml:space="preserve">
     <value>更新</value>
   </data>
+  <data name="HomePage_SupportButton.Text" xml:space="preserve">
+    <value>支持我们</value>
+  </data>
+  <data name="SystemInfoPage_Network.Text" xml:space="preserve">
+    <value>网络</value>
+  </data>
+  <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
+    <value>电池</value>
+  </data>
+  <data name="MACAddress" xml:space="preserve">
+    <value>MAC地址</value>
+  </data>
+  <data name="AdapterType" xml:space="preserve">
+    <value>适配器类型</value>
+  </data>
+  <data name="EstimatedChargeRemaining" xml:space="preserve">
+    <value>预计剩余电量</value>
+  </data>
+  <data name="BatteryStatus" xml:space="preserve">
+    <value>电池状态</value>
+  </data>
+  <data name="Chemistry" xml:space="preserve">
+    <value>化学成分</value>
+  </data>
 </root>

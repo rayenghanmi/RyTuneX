@@ -20,8 +20,8 @@
             </Style.Setters>
         </Style>
     </Page.Resources>
-    <ScrollView Margin="-26,0,-26,16">
-        <StackPanel x:Name="ContentArea" Margin="16">
+    <ScrollView Padding="0,10,24,0" Margin="-26,0,-56,0">
+        <StackPanel x:Name="ContentArea" Padding="0,0,0,40">
             <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel>
                 <StackPanel.ChildrenTransitions>

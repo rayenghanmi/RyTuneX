@@ -17,9 +17,9 @@
             </Style.Setters>
         </Style>
     </Page.Resources>
-    <Grid x:Name="ContentArea" Margin="-45,10,-45,10">
-        <ScrollViewer Margin="20" Padding="16,6,16,6">
-            <StackPanel Spacing="{StaticResource SettingsCardSpacing}">
+    <Grid x:Name="ContentArea">
+        <ScrollViewer Padding="-24,10,24,0" Margin="0,0,-56,0">
+            <StackPanel Padding="0,0,0,40" Spacing="{StaticResource SettingsCardSpacing}">
 
                 <!-- System Feature Control Toggles -->
                 <StackPanel Orientation="Horizontal">
@@ -154,12 +154,6 @@
                     <ToggleSwitch x:Name="CoPilotAI" Tag="CoPilotAI" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <!--<controls:SettingsCard ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
-                               Description="Currently, RyTuneX does not provide full system customizations but we're working on enhancing it"
-                               Header="Personalize your system"
-                               HeaderIcon="{ui:FontIcon Glyph=&#xE771;}"
-                               IsClickEnabled="True"
-                               Click="SettingsCard_Click"/>-->
             </StackPanel>
         </ScrollViewer>
     </Grid>

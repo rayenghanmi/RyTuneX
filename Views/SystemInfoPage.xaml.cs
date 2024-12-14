@@ -3,7 +3,9 @@ using System.Runtime.InteropServices;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using RyTuneX.Helpers;
-
+using Windows.Storage.Pickers;
+using Windows.Storage;
+using WinRT.Interop;
 
 namespace RyTuneX.Views;
 
@@ -13,23 +15,36 @@ public sealed partial class SystemInfoPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing SystemInfoPage");
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         UpdateSystemInfoAsync();
     }
+
     private async void UpdateSystemInfoAsync()
     {
-        await Task.Run(() =>
+        await Task.Run(async () =>
         {
             try
             {
-                // This code will run on a background thread
-                LogHelper.Log("Updating SystemInfo");
-                var osInformation = GetOsInformation();
-                var cpuInformation = GetCpuInformation();
-                var gpuInformation = GetGpuInformation();
-                var ramInformation = GetRamInformation();
-                var diskInformation = GetDiskInformation();
+                await LogHelper.Log("Updating SystemInfo");
 
-                // Update UI on the UI thread
+                var osTask = Task.Run(() => GetOsInformation());
+                var cpuTask = Task.Run(() => GetCpuInformation());
+                var gpuTask = Task.Run(() => GetGpuInformation());
+                var ramTask = Task.Run(() => GetRamInformation());
+                var diskTask = Task.Run(() => GetDiskInformation());
+                var networkTask = Task.Run(() => GetNetworkInformation());
+                var batteryTask = Task.Run(() => GetBatteryInformation());
+
+                await Task.WhenAll(osTask, cpuTask, gpuTask, ramTask, diskTask, networkTask, batteryTask).ConfigureAwait(false);
+
+                var osInformation = await osTask.ConfigureAwait(false);
+                var cpuInformation = await cpuTask.ConfigureAwait(false);
+                var gpuInformation = await gpuTask.ConfigureAwait(false);
+                var ramInformation = await ramTask.ConfigureAwait(false);
+                var diskInformation = await diskTask.ConfigureAwait(false);
+                var networkInformation = await networkTask.ConfigureAwait(false);
+                var batteryInformation = await batteryTask.ConfigureAwait(false);
+
                 DispatcherQueue.TryEnqueue(() =>
                 {
                     os.Text = osInformation;
@@ -37,25 +52,29 @@ public sealed partial class SystemInfoPage : Page
                     gpu.Text = gpuInformation;
                     ram.Text = ramInformation;
                     disk.Text = diskInformation;
+                    network.Text = networkInformation;
+                    battery.Text = batteryInformation;
 
-                    // Show text blocks
-                    os.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
-                    cpu.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
-                    gpu.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
-                    ram.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
-                    disk.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                    os.Visibility = Visibility.Visible;
+                    cpu.Visibility = Visibility.Visible;
+                    gpu.Visibility = Visibility.Visible;
+                    ram.Visibility = Visibility.Visible;
+                    disk.Visibility = Visibility.Visible;
+                    network.Visibility = Visibility.Visible;
+                    battery.Visibility = Visibility.Visible;
 
-                    // Hide progress Bars
-                    osProgressRing.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
-                    cpuProgressRing.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
-                    gpuProgressRing.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
-                    ramProgressRing.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
-                    diskProgressRing.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    osProgressRing.Visibility = Visibility.Collapsed;
+                    cpuProgressRing.Visibility = Visibility.Collapsed;
+                    gpuProgressRing.Visibility = Visibility.Collapsed;
+                    ramProgressRing.Visibility = Visibility.Collapsed;
+                    diskProgressRing.Visibility = Visibility.Collapsed;
+                    networkProgressRing.Visibility = Visibility.Collapsed;
+                    batteryProgressRing.Visibility = Visibility.Collapsed;
                 });
             }
             catch (Exception ex)
             {
-                LogHelper.LogError($"Error updating system information: {ex}");
+                await LogHelper.LogError($"Error updating system information: {ex}");
             }
         });
     }
@@ -67,7 +86,6 @@ public sealed partial class SystemInfoPage : Page
             LogHelper.Log("Getting CPU Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
             var collection = searcher.Get();
-            searcher.Dispose();
             var cpuInfoLines = collection.Cast<ManagementObject>().Select(cpu =>
             "Name".GetLocalized() + $": {cpu["Name"]}\n" +
             "Manufacturer".GetLocalized() + $": {cpu["Manufacturer"]}\n" +
@@ -95,7 +113,6 @@ public sealed partial class SystemInfoPage : Page
             LogHelper.Log("Getting GPU Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
             var collection = searcher.Get();
-            searcher.Dispose();
             var gpuNumber = 0;
             var gpuInfoLines = collection.Cast<ManagementObject>().Select(gpu =>
             {
@@ -125,7 +142,6 @@ public sealed partial class SystemInfoPage : Page
             LogHelper.Log("Getting RAM Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
             var collection = searcher.Get();
-            searcher.Dispose();
 
             var ramInfoLines = collection.Cast<ManagementObject>().Select((ram, i) =>
                 "RAMModule".GetLocalized() + $" {i + 1}:\n" +
@@ -150,7 +166,6 @@ public sealed partial class SystemInfoPage : Page
             LogHelper.Log("Getting Disks Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
             var collection = searcher.Get();
-            searcher.Dispose();
             var diskNumber = 0;
             var diskInfoLines = collection.Cast<ManagementObject>().Select(disk =>
             {
@@ -166,11 +181,10 @@ public sealed partial class SystemInfoPage : Page
             });
             return string.Join(Environment.NewLine, diskInfoLines);
         }
-
         catch (Exception ex)
         {
             LogHelper.LogError($"Error getting Disk info: {ex}");
-            return string.Empty; ;
+            return string.Empty;
         }
     }
 
@@ -181,7 +195,6 @@ public sealed partial class SystemInfoPage : Page
             LogHelper.Log("Getting OS Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
             var collection = searcher.Get();
-            searcher.Dispose();
 
             var osInfoLines = collection.Cast<ManagementObject>().Select(os =>
                 "OSName".GetLocalized() + $": {os["Caption"]}\n" +
@@ -203,80 +216,53 @@ public sealed partial class SystemInfoPage : Page
         }
     }
 
-    // Working on it
-
-    /*private static async Task ImportDrivers(string path)
-    {
-        await OptimizationOptions.StartInCmd($"pnputil.exe /add-driver '{path}'\\*.inf /subdirs /install");
-    }
-    public static async Task<int> ProcessSubdirectories(string parentDirectory)
+    private static string GetNetworkInformation()
     {
         try
         {
-            string[] subdirectories = Directory.GetDirectories(parentDirectory);
+            LogHelper.Log("Getting Network Info");
+            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE NetEnabled = TRUE");
+            var collection = searcher.Get();
 
-            foreach (string subdir in subdirectories)
-            {
-                await OptimizationOptions.StartInCmd($"pnputil.exe /add-driver '{subdir}'\\*.inf /install");
-                await ProcessSubdirectories(subdir);
-            }
+            var networkInfoLines = collection.Cast<ManagementObject>().Select(network =>
+                "Name".GetLocalized() + $": {network["Name"]}\n" +
+                "MACAddress".GetLocalized() + $": {network["MACAddress"]}\n" +
+                "Speed".GetLocalized() + $": {network["Speed"]} bps\n" +
+                "AdapterType".GetLocalized() + $": {network["AdapterType"]}");
+
+            return string.Join(Environment.NewLine, networkInfoLines);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");
+            LogHelper.LogError($"Error getting Network info: {ex}");
+            return "Error retrieving network information.";
         }
-        return 0;
     }
-    private async void ImportButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+
+    private static string GetBatteryInformation()
     {
-        var folderPath = FolderPathText.Text;
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
-        }
-        ImportingStatusText.Text = "Importing drivers...";
-        ImportingStatusPb.ShowError = false;
-        ImportingStatus.Visibility = Visibility.Visible;
         try
         {
-            //var exitCode = await OptimizationOptions.StartInCmd($"pnputil.exe /add-driver '{folderPath}'\\*.inf /subdirs /install");
-            var exitCode = await ProcessSubdirectories(folderPath);
-            if (exitCode == 0)
-            {
-                ImportingStatusText.Text = "Done";
-                ImportingStatusPb.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                ImportingStatusText.Text = "There was an error while importing drivers";
-                ImportingStatusPb.ShowError = true;
-            }
-        }
-        catch
-        {
-            ImportingStatusText.Text = "There was an error while importing drivers";
-            ImportingStatusPb.ShowError = true;
-        }
+            LogHelper.Log("Getting Battery Info");
+            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Battery");
+            var collection = searcher.Get();
 
+            var batteryInfoLines = collection.Cast<ManagementObject>().Select(battery =>
+                "Name".GetLocalized() + $": {battery["Name"]}\n" +
+                "EstimatedChargeRemaining".GetLocalized() + $": {battery["EstimatedChargeRemaining"]}%\n" +
+                "BatteryStatus".GetLocalized() + $": {battery["BatteryStatus"]}\n" +
+                "Chemistry".GetLocalized() + $": {battery["Chemistry"]}");
+
+            return string.Join(Environment.NewLine, batteryInfoLines);
+        }
+        catch (Exception ex)
+        {
+            LogHelper.LogError($"Error getting Battery info: {ex}");
+            return "Error retrieving battery information.";
+        }
     }
 
-    private void ImportSelectPathButton_Click(object sender, RoutedEventArgs e)
-    {
-
-        var selectedFolderPath = ShowDialog("C:\\", "Select a Folder...");
-        if (!string.IsNullOrEmpty(selectedFolderPath))
-        {
-            ImportFolderPathText.Text = selectedFolderPath;
-            ImportButton.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            ImportButton.Visibility = Visibility.Collapsed;
-            ImportFolderPathText.Text = "Select a folder";
-        }
-    }*/
-
-    private async void ExtractButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private async void ExtractButton_Click(object sender, RoutedEventArgs e)
     {
         var folderPath = FolderPathText.Text + $"\\RyTuneX_Drivers_{DateTime.Now:yyyy-MM-dd}";
         if (!Directory.Exists(folderPath))
@@ -305,16 +291,24 @@ public sealed partial class SystemInfoPage : Page
             ExtractingStatusText.Text = "ErrDriversExtract".GetLocalized();
             ExtractingStatusPb.ShowError = true;
         }
-
     }
 
-    private void SelectPathButton_Click(object sender, RoutedEventArgs e)
+    private async void SelectPathButton_Click(object sender, RoutedEventArgs e)
     {
-
-        var selectedFolderPath = ShowDialog("C:\\", "SelecFold".GetLocalized() + "...");
-        if (!string.IsNullOrEmpty(selectedFolderPath))
+        var folderPicker = new FolderPicker
         {
-            FolderPathText.Text = selectedFolderPath;
+            SuggestedStartLocation = PickerLocationId.Desktop
+        };
+        folderPicker.FileTypeFilter.Add("*");
+
+        // Get the current window's HWND
+        var hwnd = WindowNative.GetWindowHandle(App.MainWindow);
+        InitializeWithWindow.Initialize(folderPicker, hwnd);
+
+        StorageFolder folder = await folderPicker.PickSingleFolderAsync();
+        if (folder != null)
+        {
+            FolderPathText.Text = folder.Path;
             ExtractButton.Visibility = Visibility.Visible;
         }
         else
@@ -323,51 +317,5 @@ public sealed partial class SystemInfoPage : Page
             FolderPathText.Text = "SelecFold".GetLocalized();
         }
     }
-
-    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-    private static extern IntPtr SHBrowseForFolder(ref BROWSEINFO lpbi);
-
-    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-    private static extern bool SHGetPathFromIDList(IntPtr pidl, IntPtr pszPath);
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    private struct BROWSEINFO
-    {
-        public IntPtr hwndOwner;
-        public IntPtr pidlRoot;
-        public string pszDisplayName;
-        public string lpszTitle;
-        public uint ulFlags;
-        public IntPtr lpfn;
-        public IntPtr lParam;
-        public int iImage;
-    }
-
-    public static string ShowDialog(string startingDirectory, string dialogTitle)
-    {
-        var bi = new BROWSEINFO
-        {
-            hwndOwner = IntPtr.Zero,
-            pidlRoot = IntPtr.Zero,
-            pszDisplayName = new string('\0', 260),
-            lpszTitle = dialogTitle,
-            ulFlags = 0x00000040 | 0x00000001 // BIF_NEWDIALOGSTYLE | BIF_RETURNONLYFSDIRS
-        };
-
-        var pidl = SHBrowseForFolder(ref bi);
-        if (pidl != IntPtr.Zero)
-        {
-            var pathPtr = Marshal.AllocCoTaskMem(260 * sizeof(char));
-            if (SHGetPathFromIDList(pidl, pathPtr))
-            {
-                var path = Marshal.PtrToStringUni(pathPtr);
-                Marshal.FreeCoTaskMem(pidl);
-                Marshal.FreeCoTaskMem(pathPtr);
-                return path;
-            }
-            Marshal.FreeCoTaskMem(pidl);
-            Marshal.FreeCoTaskMem(pathPtr);
-        }
-        return string.Empty;
-    }
 }
+

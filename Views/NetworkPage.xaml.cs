@@ -30,201 +30,206 @@ public sealed partial class NetworkPage : Page
     public NetworkPage()
     {
         InitializeComponent();
+        LogHelper.Log("Initializing NetworkPage");
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         PopulateNetworkInterfaces();
         DisplayNetworkInfo();
         cmbDNSOptions.SelectedIndex = 0;
     }
-
-    private void PopulateNetworkInterfaces()
+    private async void PopulateNetworkInterfaces()
     {
-        var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces().Where(
-            a => a.OperationalStatus == OperationalStatus.Up &&
-            (a.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || a.NetworkInterfaceType == NetworkInterfaceType.Ethernet) &&
-            a.GetIPProperties().GatewayAddresses.Any(g => g.Address.AddressFamily == AddressFamily.InterNetwork));
-
-        var interfaceNames = networkInterfaces.Select(n => n.Name).ToList();
-
-        cmbNetworkInterfaces.ItemsSource = interfaceNames;
-        if (interfaceNames.Count > 0)
+        try
         {
-            cmbNetworkInterfaces.SelectedIndex = 0;
-            selectedInterfaceName = interfaceNames[0];
+            await LogHelper.Log("Populating Network Interfaces");
+
+            var networkInterfaces = await Task.Run(() =>
+                NetworkInterface.GetAllNetworkInterfaces().Where(
+                    a => a.OperationalStatus == OperationalStatus.Up &&
+                    (a.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || a.NetworkInterfaceType == NetworkInterfaceType.Ethernet) &&
+                    a.GetIPProperties().GatewayAddresses.Any(g => g.Address.AddressFamily == AddressFamily.InterNetwork))
+                .Select(n => n.Name).ToList()
+            );
+
+            cmbNetworkInterfaces.ItemsSource = networkInterfaces;
+            if (networkInterfaces.Count > 0)
+            {
+                cmbNetworkInterfaces.SelectedIndex = 0;
+                selectedInterfaceName = networkInterfaces[0];
+            }
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error populating network interfaces: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
-
     private void DisplayNetworkInfo()
     {
-        var selectedInterface = selectedInterfaceName;
-
-        var nic = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(n => n.Name == selectedInterface);
-
-        if (nic != null)
+        try
         {
-            var dnsAddresses = nic.GetIPProperties().DnsAddresses;
+            LogHelper.Log("Displaying Network Info");
 
-            var ipv4Addresses = dnsAddresses.Where(d => d.AddressFamily == AddressFamily.InterNetwork).ToList();
-            var ipv6Addresses = dnsAddresses.Where(d => d.AddressFamily == AddressFamily.InterNetworkV6).ToList();
+            var selectedInterface = selectedInterfaceName;
 
-            if (ipv4Addresses.Count > 0)
+            var nic = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(n => n.Name == selectedInterface);
+
+            if (nic != null)
             {
-                txtIPv4DNSPrimary.Text = ipv4Addresses[0].ToString();
+                var dnsAddresses = nic.GetIPProperties().DnsAddresses;
 
-                if (ipv4Addresses.Count > 1)
+                var ipv4Addresses = dnsAddresses.Where(d => d.AddressFamily == AddressFamily.InterNetwork).ToList();
+                var ipv6Addresses = dnsAddresses.Where(d => d.AddressFamily == AddressFamily.InterNetworkV6).ToList();
+
+                if (ipv4Addresses.Count > 0)
                 {
-                    txtIPv4DNSSecondary.Text = ipv4Addresses[1].ToString();
+                    txtIPv4DNSPrimary.Text = ipv4Addresses[0].ToString();
+
+                    if (ipv4Addresses.Count > 1)
+                    {
+                        txtIPv4DNSSecondary.Text = ipv4Addresses[1].ToString();
+                    }
+                    else
+                    {
+                        txtIPv4DNSSecondary.Text = "NotSet".GetLocalized();
+                    }
                 }
                 else
                 {
-                    txtIPv4DNSSecondary.Text = "NotSet".GetLocalized();
+                    txtIPv4DNSPrimary.Text = "NoIPv4".GetLocalized();
+                    txtIPv4DNSSecondary.Text = "NoIPv4".GetLocalized();
+                }
+
+                if (ipv6Addresses.Count > 0)
+                {
+                    txtIPv6DNSPrimary.Text = ipv6Addresses[0].ToString();
+
+                    if (ipv6Addresses.Count > 1)
+                    {
+                        txtIPv6DNSSecondary.Text = ipv6Addresses[1].ToString();
+                    }
+                    else
+                    {
+                        txtIPv6DNSSecondary.Text = "NotSet".GetLocalized();
+                    }
+                }
+                else
+                {
+                    txtIPv6DNSPrimary.Text = "NoIPv6".GetLocalized();
+                    txtIPv6DNSSecondary.Text = "NoIPv6".GetLocalized();
                 }
             }
             else
             {
-                txtIPv4DNSPrimary.Text = "NoIPv4".GetLocalized();
-                txtIPv4DNSSecondary.Text = "NoIPv4".GetLocalized();
-            }
-
-            if (ipv6Addresses.Count > 0)
-            {
-                txtIPv6DNSPrimary.Text = ipv6Addresses[0].ToString();
-
-                if (ipv6Addresses.Count > 1)
-                {
-                    txtIPv6DNSSecondary.Text = ipv6Addresses[1].ToString();
-                }
-                else
-                {
-                    txtIPv6DNSSecondary.Text = "NotSet".GetLocalized();
-                }
-            }
-            else
-            {
-                txtIPv6DNSPrimary.Text = "NoIPv6".GetLocalized();
-                txtIPv6DNSSecondary.Text = "NoIPv6".GetLocalized();
+                txtIPv4DNSPrimary.Text = "NoNic".GetLocalized();
+                txtIPv4DNSSecondary.Text = "NoNic".GetLocalized();
+                txtIPv6DNSPrimary.Text = "NoNic".GetLocalized();
+                txtIPv6DNSSecondary.Text = "NoNic".GetLocalized();
             }
         }
-        else
+        catch (Exception ex)
         {
-            txtIPv4DNSPrimary.Text = "NoNic".GetLocalized();
-            txtIPv4DNSSecondary.Text = "NoNic".GetLocalized();
-            txtIPv6DNSPrimary.Text = "NoNic".GetLocalized();
-            txtIPv6DNSSecondary.Text = "NoNic".GetLocalized();
+            LogHelper.LogError($"Error displaying network info: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
-
     private async void ApplyDNS_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var selectedDNS = cmbDNSOptions.SelectedItem?.ToString();
-
-        if (!string.IsNullOrEmpty(selectedDNS))
+        try
         {
-            var dnsv4 = Array.Empty<string>();
-            var dnsv6 = Array.Empty<string>();
+            var selectedDNS = cmbDNSOptions.SelectedItem?.ToString();
 
-            switch (selectedDNS)
+            if (!string.IsNullOrEmpty(selectedDNS))
             {
-                case "Google":
-                    dnsv4 = ["8.8.8.8", "8.8.4.4"];
-                    dnsv6 = ["2001:4860:4860::8888", "2001:4860:4860::8844"];
-                    break;
-                case "OpenDNS":
-                    dnsv4 = ["208.67.222.222", "208.67.220.220"];
-                    dnsv6 = ["2620:0:ccc::2", "2620:0:ccd::2"];
-                    break;
-                case "Cloudflare":
-                    dnsv4 = ["1.1.1.1", "1.0.0.1"];
-                    dnsv6 = ["2606:4700:4700::1111", "2606:4700:4700::1001"];
-                    break;
-                case "Quad9":
-                    dnsv4 = ["9.9.9.9", "149.112.112.112"];
-                    dnsv6 = ["2620:fe::fe", string.Empty];
-                    break;
-                case "CleanBrowsing":
-                    dnsv4 = ["185.228.168.168", "185.228.168.169"];
-                    dnsv6 = ["2a0d:2a00:1::", "2a0d:2a00:2::"];
-                    break;
-                case "CleanBrowsing (adult filter)":
-                    dnsv4 = ["185.228.168.10", "185.228.168.11"];
-                    dnsv6 = ["2a0d:2a00:1::1", "2a0d:2a00:2::1"];
-                    break;
-                case "AlternateDNS":
-                    dnsv4 = ["76.76.19.19", "76.223.122.150"];
-                    dnsv6 = ["2602:fcbc::ad", "2602:fcbc:2::ad"];
-                    break;
-                case "Adguard":
-                    dnsv4 = ["94.140.14.14", "94.140.15.15"];
-                    dnsv6 = ["2a10:50c0::ad1:ff", "2a10:50c0::ad2:ff"];
-                    break;
-                case "Comodo Secure DNS":
-                    dnsv4 = ["8.26.56.26", "8.20.247.20"];
-                    dnsv6 = ["2a00:d8a0:1:200::c056", "2a00:d8a0:1:200::c060"];
-                    break;
-                case "Verisign Public DNS":
-                    dnsv4 = ["64.6.64.6", "64.6.65.6"];
-                    dnsv6 = ["2620:113::130", "2620:113::131"];
-                    break;
-                default:
-                    break;
+                var (dnsv4, dnsv6) = GetDNSAddresses(selectedDNS);
+
+                await SetDNS(selectedInterfaceName, dnsv4, dnsv6);
+                DisplayNetworkInfo();
             }
-
-            await SetDNS(selectedInterfaceName, dnsv4, dnsv6);
-
-            DisplayNetworkInfo();
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error applying DNS settings: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
-
+    private (string[] dnsv4, string[] dnsv6) GetDNSAddresses(string selectedDNS)
+    {
+        return selectedDNS switch
+        {
+            "Google" => (new[] { "8.8.8.8", "8.8.4.4" }, new[] { "2001:4860:4860::8888", "2001:4860:4860::8844" }),
+            "OpenDNS" => (new[] { "208.67.222.222", "208.67.220.220" }, new[] { "2620:0:ccc::2", "2620:0:ccd::2" }),
+            "Cloudflare" => (new[] { "1.1.1.1", "1.0.0.1" }, new[] { "2606:4700:4700::1111", "2606:4700:4700::1001" }),
+            "Quad9" => (new[] { "9.9.9.9", "149.112.112.112" }, new[] { "2620:fe::fe", string.Empty }),
+            "CleanBrowsing" => (new[] { "185.228.168.168", "185.228.168.169" }, new[] { "2a0d:2a00:1::", "2a0d:2a00:2::" }),
+            "CleanBrowsing (adult filter)" => (new[] { "185.228.168.10", "185.228.168.11" }, new[] { "2a0d:2a00:1::1", "2a0d:2a00:2::1" }),
+            "AlternateDNS" => (new[] { "76.76.19.19", "76.223.122.150" }, new[] { "2602:fcbc::ad", "2602:fcbc:2::ad" }),
+            "Adguard" => (new[] { "94.140.14.14", "94.140.15.15" }, new[] { "2a10:50c0::ad1:ff", "2a10:50c0::ad2:ff" }),
+            "Comodo Secure DNS" => (new[] { "8.26.56.26", "8.20.247.20" }, new[] { "2a00:d8a0:1:200::c056", "2a00:d8a0:1:200::c060" }),
+            "Verisign Public DNS" => (new[] { "64.6.64.6", "64.6.65.6" }, new[] { "2620:113::130", "2620:113::131" }),
+            _ => (Array.Empty<string>(), Array.Empty<string>())
+        };
+    }
     private async Task SetDNS(string nic, string[] dnsv4, string[] dnsv6)
     {
-        await Task.Run(async () =>
+        try
         {
-            var cmdv4Alternate = string.Empty;
-            var cmdv6Alternate = string.Empty;
+            await LogHelper.Log($"Setting DNS for {nic}");
 
-            var cmdv4Primary = $"netsh interface ipv4 set dnsservers {nic} static {dnsv4[0]} primary";
-            if (dnsv4.Length == 2)
+            var commands = new List<string>
             {
-                cmdv4Alternate = $"netsh interface ipv4 add dnsservers {nic} {dnsv4[1]} index=2";
-            }
+                $"netsh interface ipv4 set dnsservers {nic} static {dnsv4[0]} primary",
+                dnsv4.Length == 2 ? $"netsh interface ipv4 add dnsservers {nic} {dnsv4[1]} index=2" : null,
+                $"netsh interface ipv6 set dnsservers {nic} static {dnsv6[0]} primary",
+                dnsv6.Length == 2 ? $"netsh interface ipv6 add dnsservers {nic} {dnsv6[1]} index=2" : null
+            }.Where(cmd => !string.IsNullOrEmpty(cmd));
 
-            var cmdv6Primary = $"netsh interface ipv6 set dnsservers {nic} static {dnsv6[0]} primary";
-            if (dnsv6.Length == 2)
+            foreach (var cmd in commands)
             {
-                cmdv6Alternate = $"netsh interface ipv6 add dnsservers {nic} {dnsv6[1]} index=2";
+                await OptimizationOptions.StartInCmd(cmd);
             }
-
-            await OptimizationOptions.StartInCmd(cmdv4Primary);
-            if (!string.IsNullOrEmpty(cmdv4Alternate))
-            {
-                await OptimizationOptions.StartInCmd(cmdv4Alternate);
-            }
-
-            await OptimizationOptions.StartInCmd(cmdv6Primary);
-            if (!string.IsNullOrEmpty(cmdv6Alternate))
-            {
-                await OptimizationOptions.StartInCmd(cmdv6Alternate);
-            }
-        });
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error setting DNS for {nic}: {ex.Message}\nStack Trace: {ex.StackTrace}");
+        }
     }
-
     private async void ResetDefaultDNS_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        cmbDNSOptions.SelectedIndex = 0;
-        await ResetDefaultDNS(selectedInterfaceName);
-        DisplayNetworkInfo();
+        try
+        {
+            cmbDNSOptions.SelectedIndex = 0;
+            await ResetDefaultDNS(selectedInterfaceName);
+            DisplayNetworkInfo();
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error resetting DNS to default: {ex.Message}\nStack Trace: {ex.StackTrace}");
+        }
     }
-
     private async Task ResetDefaultDNS(string nic)
     {
-        var cmdv4 = $"netsh interface ipv4 set dnsservers \"{nic}\" dhcp";
-        var cmdv6 = $"netsh interface ipv6 set dnsservers \"{nic}\" dhcp";
+        try
+        {
+            await LogHelper.Log($"Resetting DNS to default for {nic}");
 
-        await OptimizationOptions.StartInCmd(cmdv4);
-        await OptimizationOptions.StartInCmd(cmdv6);
+            var cmdv4 = $"netsh interface ipv4 set dnsservers \"{nic}\" dhcp";
+            var cmdv6 = $"netsh interface ipv6 set dnsservers \"{nic}\" dhcp";
+
+            await OptimizationOptions.StartInCmd(cmdv4);
+            await OptimizationOptions.StartInCmd(cmdv6);
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error resetting DNS to default for {nic}: {ex.Message}\nStack Trace: {ex.StackTrace}");
+        }
     }
-
     private void cmbNetworkInterfaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        selectedInterfaceName = cmbNetworkInterfaces.SelectedItem?.ToString() ?? "";
-        DisplayNetworkInfo();
+        try
+        {
+            selectedInterfaceName = cmbNetworkInterfaces.SelectedItem?.ToString() ?? "";
+            DisplayNetworkInfo();
+        }
+        catch (Exception ex)
+        {
+            LogHelper.LogError($"Error changing network interface selection: {ex.Message}\nStack Trace: {ex.StackTrace}");
+        }
     }
 }

@@ -2,6 +2,25 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 0.9.1 - Released
+
+### Added
+
+- Added detailed sections for Network and Battery information in `System Info` page.
+- Enhanced `System Info` page to include more detailed information and options.
+- Replaced the old Win32 folder picker with the modern `FolderPicker` from the `Windows.Storage.Pickers` namespace for selecting the folder path in the `System Info` page.
+- Added caching to some pages to retain their data when navigating away and returning.
+
+### Changes
+
+- Optimized the loading of installed apps by parallelizing tasks and minimizing UI updates.
+- Improved the efficiency of the uninstallation process by running tasks in parallel.
+- Enhanced the responsiveness of the `Debloat` page.
+- Introduced an enhanced way to gather system information in `System Info` page.
+- Optimized the `Networking` page by caching network interfaces, enhancing DNS setting process and improving the UI responsiveness.
+- Enhanced the UI by initializing toggle switches asynchronously and minimizing UI updates.
+- Improved logging and error handling.
+
 ## 0.9.0 - Released
 
 ### Added
