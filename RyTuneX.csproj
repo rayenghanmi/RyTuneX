@@ -24,7 +24,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <Version>0.9.1</Version>
+    <Version>1.0.1</Version>
     <Authors>Rayen Ghanmi</Authors>
   </PropertyGroup>
   <ItemGroup>
@@ -69,6 +69,9 @@
     </None>
     <Page Update="Views\DebloatSystemPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\SecurityPage.xaml">
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\FeaturesPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

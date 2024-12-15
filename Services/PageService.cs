@@ -15,6 +15,7 @@ public class PageService : IPageService
         Configure<PrivacyPage>();
         Configure<FeaturesPage>();
         Configure<NetworkPage>();
+        Configure<SecurityPage>();
         Configure<SystemInfoPage>();
         Configure<SettingsPage>();
     }

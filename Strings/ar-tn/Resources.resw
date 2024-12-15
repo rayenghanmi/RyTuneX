@@ -777,4 +777,7 @@
   <data name="Chemistry" xml:space="preserve">
     <value>نوع التركيبة الكيميائية للبطارية</value>
   </data>
+  <data name="Shell_Security.Content" xml:space="preserve">
+    <value>أمان</value>
+  </data>
 </root>

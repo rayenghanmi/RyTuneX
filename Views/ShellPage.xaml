@@ -59,7 +59,7 @@
                 </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_Privacy" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.PrivacyPage">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA18;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7B3;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_Features" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.FeaturesPage">
@@ -70,6 +70,11 @@
                 <NavigationViewItem x:Uid="Shell_Network" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.NetworkPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE968;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_Security" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.SecurityPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA18;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_SystemInfo" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.SystemInfoPage">

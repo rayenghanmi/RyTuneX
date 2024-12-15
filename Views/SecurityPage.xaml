@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="RyTuneX.Views.SecurityPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <x:Double x:Key="SettingsCardSpacing">4</x:Double>
+        <Style x:Key="SettingsSectionHeaderTextBlockStyle"
+       BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+       TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Margin" Value="1,30,0,6" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+    <Grid x:Name="ContentArea">
+        <ScrollViewer Padding="-24,10,24,0" Margin="0,0,-56,0">
+            <StackPanel Padding="0,0,0,40" Spacing="{StaticResource SettingsCardSpacing}">
+
+                
+                
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

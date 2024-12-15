@@ -777,4 +777,7 @@
   <data name="Chemistry" xml:space="preserve">
     <value>化学成分</value>
   </data>
+  <data name="Shell_Security.Content" xml:space="preserve">
+    <value>安全</value>
+  </data>
 </root>
