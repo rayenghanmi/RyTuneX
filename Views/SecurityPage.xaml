@@ -11,19 +11,19 @@
     <Page.Resources>
         <x:Double x:Key="SettingsCardSpacing">4</x:Double>
         <Style x:Key="SettingsSectionHeaderTextBlockStyle"
-       BasedOn="{StaticResource BodyStrongTextBlockStyle}"
-       TargetType="TextBlock">
+            BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+            TargetType="TextBlock">
             <Style.Setters>
                 <Setter Property="Margin" Value="1,30,0,6" />
             </Style.Setters>
         </Style>
     </Page.Resources>
     <Grid x:Name="ContentArea">
-        <ScrollViewer Padding="-24,10,24,0" Margin="0,0,-56,0">
-            <StackPanel Padding="0,0,0,40" Spacing="{StaticResource SettingsCardSpacing}">
-
-                
-                
+        <ScrollViewer Padding="24,14,24,0">
+            <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
+                <TextBlock Style="{StaticResource TitleLargeTextBlockStyle}"
+                    HorizontalAlignment="Center"
+                    Text="Coming Soon" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -15,8 +15,8 @@
     </Page.Resources>
 
     <Grid x:Name="ContentArea">
-        <ScrollViewer Padding="-24,10,24,0" Margin="0,0,-56,0">
-            <StackPanel Padding="0,0,0,40">
+        <ScrollViewer Padding="24,14,24,0">
+            <StackPanel Margin="0,0,0,38">
                 <TextBlock x:Uid="Network_NicTitle" Style="{StaticResource BodyStrongTextBlockStyle}" Margin="0,0,0,10"/>
                 <ComboBox x:Name="cmbNetworkInterfaces" SelectionChanged="cmbNetworkInterfaces_SelectionChanged" Margin="0,0,0,20"/>
 

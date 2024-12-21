@@ -121,19 +121,16 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>Désinstallation de logiciels inutiles</value>
+    <value>Désencombrer</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>Informations système</value>
+    <value>Appareil</value>
   </data>
-  <data name="Shell_ReportBug.Content" xml:space="preserve">
-    <value>Signaler un bug</value>
+  <data name="Shell_Issue.Content" xml:space="preserve">
+    <value>Signaler</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>Optimiser le système</value>
-  </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>Personnalisation</value>
+    <value>Optimiser</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>Thème</value>
@@ -190,16 +187,13 @@
     <value>Sélectionnez les applications que vous souhaitez supprimer et cliquez sur désinstaller</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>Fonctionnalités de Windows</value>
+    <value>Fonctionnalités</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
-    <value>Vie privée</value>
+    <value>Confidentialité</value>
   </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
     <value>Rejoindre notre serveur</value>
-  </data>
-  <data name="HomePage_IssueButton.Text" xml:space="preserve">
-    <value>Signaler un problème</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
     <value>Découvrir RyTuneX</value>
@@ -232,10 +226,10 @@
     <value>La désinstallation de certaines de ces applications peut ne pas les supprimer complètement.</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>Erreur lors de la désinstallation</value>
+    <value>Erreur lors de la désinstallation de l'application(s) suivante(s)</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>Désinstallé avec succès</value>
+    <value>L'application(s) suivante(s) a/ont été désinstallée(s) avec succès</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
     <value>Supprimer les fichiers temporaires</value>
@@ -750,8 +744,8 @@
   <data name="Update" xml:space="preserve">
     <value>Mettre à jour</value>
   </data>
-  <data name="HomePage_SupportButton.Text" xml:space="preserve">
-    <value>Soutenez-nous</value>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>Support</value>
   </data>
   <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
     <value>Batterie</value>
@@ -776,5 +770,14 @@
   </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>Sécurité</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Une erreur inattendue est survenue</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>Afficher les journaux</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>Total : {0} application(s)</value>
   </data>
 </root>

@@ -121,19 +121,16 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>إزالة البرامج الزائدة</value>
+    <value>إزالة التطبيقات</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>معلومات النظام</value>
+    <value>الجهاز</value>
   </data>
-  <data name="Shell_ReportBug.Content" xml:space="preserve">
-    <value>الإبلاغ عن خلل</value>
+  <data name="Shell_Issue.Content" xml:space="preserve">
+    <value>الإبلاغ</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>تحسين النظام</value>
-  </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>تخصيص</value>
+    <value>تحسين</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>السمة</value>
@@ -190,7 +187,7 @@
     <value>حدد التطبيقات التي ترغب في إزالتها واضغط على إلغاء التثبيت</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>ميزات ويندوز</value>
+    <value>الميزات</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
     <value>الخصوصية</value>
@@ -198,11 +195,8 @@
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
     <value>انضم إلى خادمنا</value>
   </data>
-  <data name="HomePage_IssueButton.Text" xml:space="preserve">
-    <value>الإبلاغ عن مشكلة</value>
-  </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>تفقد راي تيونكس</value>
+    <value>تفقد RyTuneX</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>ترك تقييم</value>
@@ -232,10 +226,10 @@
     <value>قد لا يتم إزالة بعض هذه التطبيقات بشكل كامل.</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>حدث خطأ أثناء الإلغاء</value>
+    <value>حدث خطأ أثناء إلغاء تثبيت التطبيق(التطبيقات) التالية</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>تم الإلغاء بنجاح</value>
+    <value>تم إلغاء تثبيت التطبيق(التطبيقات) التالية بنجاح</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
     <value>إزالة الملفات المؤقتة</value>
@@ -703,7 +697,7 @@
     <value>لم يتم التعيين</value>
   </data>
   <data name="Shell_Network.Content" xml:space="preserve">
-    <value>شبكات</value>
+    <value>الشبكات</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
     <value>(فلتر للبالغين)</value>
@@ -753,8 +747,8 @@
   <data name="Update" xml:space="preserve">
     <value>تحديث</value>
   </data>
-  <data name="HomePage_SupportButton.Text" xml:space="preserve">
-    <value>ساندنا</value>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>الدعم</value>
   </data>
   <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
     <value>البطارية</value>
@@ -778,6 +772,15 @@
     <value>نوع التركيبة الكيميائية للبطارية</value>
   </data>
   <data name="Shell_Security.Content" xml:space="preserve">
-    <value>أمان</value>
+    <value>الأمان</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>حدث خطأ غير متوقع</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>عرض السجلات</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>الإجمالي: {0} تطبيق(ات)</value>
   </data>
 </root>

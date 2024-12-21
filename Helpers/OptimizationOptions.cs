@@ -2,6 +2,8 @@
 using System.Management.Automation;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using Microsoft.UI.Xaml.Controls;
 
 namespace RyTuneX.Helpers;
@@ -14,9 +16,9 @@ internal class OptimizationOptions
     {
         var installedApps = new List<KeyValuePair<string, string>>();
 
-        string command = uninstallableOnly
-            ? @"powershell.exe -Command ""Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation"""
-            : @"powershell.exe -Command ""Get-AppxPackage | Select-Object Name,InstallLocation""";
+        var command = uninstallableOnly
+            ? @"Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation | Format-List"
+            : @"Get-AppxPackage | Select-Object Name,InstallLocation | Format-List";
 
         try
         {
@@ -24,8 +26,8 @@ internal class OptimizationOptions
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "cmd.exe",
-                    Arguments = $"/C {command}",
+                    FileName = "powershell.exe",
+                    Arguments = $"-NoProfile -Command \"{command}\"",
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
@@ -33,15 +35,38 @@ internal class OptimizationOptions
             };
             process.Start();
 
-            // Read the output directly
-            while (!process.StandardOutput.EndOfStream)
+            var output = process.StandardOutput.ReadToEnd();
+
+            string? currentName = null;
+            string? currentLocation = null;
+
+            foreach (var line in output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
-                var line = process.StandardOutput.ReadLine();
-                var parts = line?.Split(new[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries);
-                if (parts?.Length == 2 && !installedApps.Exists(i => i.Key == parts[0]))
+                if (line.StartsWith("Name"))
                 {
-                    installedApps.Add(new KeyValuePair<string, string>(parts[0], parts[1]));
+                    if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
+                    {
+                        var logoPath = ExtractLogoPath(currentLocation);
+                        installedApps.Add(new KeyValuePair<string, string>(currentName, logoPath));
+                    }
+
+                    currentName = line.Split(new[] { ':' }, 2)[1].Trim();
+                    currentLocation = null;
                 }
+                else if (line.StartsWith("InstallLocation"))
+                {
+                    currentLocation = line.Split(new[] { ':' }, 2)[1].Trim();
+                }
+                else if (!string.IsNullOrWhiteSpace(currentLocation) && line.StartsWith(" "))
+                {
+                    currentLocation += " " + line.Trim();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
+            {
+                var logoPath = ExtractLogoPath(currentLocation);
+                installedApps.Add(new KeyValuePair<string, string>(currentName, logoPath));
             }
 
             process.WaitForExit();
@@ -53,6 +78,61 @@ internal class OptimizationOptions
 
         LogHelper.Log("Returning Installed Apps [GetUWPApps]");
         return installedApps;
+    }
+
+    private static string ExtractLogoPath(string installLocation)
+    {
+        try
+        {
+            string[] possibleManifestPaths = {
+            Path.Combine(installLocation, "AppxManifest.xml"),
+            Path.Combine(installLocation, "appxmanifest.xml")
+        };
+
+            var manifestPath = possibleManifestPaths.FirstOrDefault(File.Exists);
+
+            if (manifestPath != null)
+            {
+                var doc = XDocument.Load(manifestPath);
+                XNamespace ns = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
+
+                var logoElement = doc.Descendants(ns + "Logo").FirstOrDefault();
+                if (logoElement != null)
+                {
+                    var relativeLogoPath = logoElement.Value.Replace('/', '\\');
+                    var baseLogoName = Path.GetFileNameWithoutExtension(relativeLogoPath);
+                    var logoDirectory = Path.Combine(installLocation, Path.GetDirectoryName(relativeLogoPath) ?? "");
+
+                    if (Directory.Exists(logoDirectory))
+                    {
+                        var exactLogoPath = Path.Combine(logoDirectory, relativeLogoPath);
+                        if (File.Exists(exactLogoPath))
+                        {
+                            return exactLogoPath;
+                        }
+                        var logoFiles = Directory.GetFiles(logoDirectory, $"{baseLogoName}.Scale-*.png");
+                        var selectedLogoFile = logoFiles
+                            .OrderBy(f => Math.Abs(GetScaleFromFileName(f) - 200))
+                            .FirstOrDefault();
+
+                        if (!string.IsNullOrEmpty(selectedLogoFile) && File.Exists(selectedLogoFile))
+                        {
+                            return selectedLogoFile;
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to extract logo path: {ex.Message}");
+        }
+        return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
+    }
+    private static int GetScaleFromFileName(string fileName)
+    {
+        var match = Regex.Match(fileName, @"Scale-(\d+)");
+        return match.Success ? int.Parse(match.Groups[1].Value) : 100;
     }
 
     internal static bool ServiceExists(string serviceName)

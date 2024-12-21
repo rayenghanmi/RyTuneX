@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Diagnostics;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 
@@ -77,5 +78,22 @@ public sealed partial class ShellPage : Page
         var result = navigationService.GoBack();
 
         args.Handled = result;
+    }
+    private void IssueButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://github.com/rayenghanmi/rytunex/issues/new",
+            UseShellExecute = true
+        });
+    }
+
+    private void SupportButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://buymeacoffee.com/rayen.ghanmi.22",
+            UseShellExecute = true
+        });
     }
 }

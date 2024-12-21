@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
-
 using RyTuneX.Contracts.Services;
 using RyTuneX.Contracts.ViewModels;
 using RyTuneX.Helpers;
@@ -67,7 +66,7 @@ public class NavigationService : INavigationService
         if (CanGoBack)
         {
             var vmBeforeNavigation = _frame.GetPageViewModel();
-            _frame.GoBack();
+            _frame.GoBack(new DrillInNavigationTransitionInfo());
             if (vmBeforeNavigation is INavigationAware navigationAware)
             {
                 navigationAware.OnNavigatedFrom();
@@ -87,7 +86,7 @@ public class NavigationService : INavigationService
         {
             _frame.Tag = clearNavigation;
             var vmBeforeNavigation = _frame.GetPageViewModel();
-            var navigated = _frame.Navigate(pageType, parameter);
+            var navigated = _frame.Navigate(pageType, parameter, new DrillInNavigationTransitionInfo());
             if (navigated)
             {
                 _lastParameterUsed = parameter;

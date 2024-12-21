@@ -9,38 +9,43 @@
     xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d">
-    <Grid Margin="-26,0,-30,40">
+    <Grid Margin="24,14,24,38">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border Padding="5" CornerRadius="8" BorderThickness="1" BorderBrush="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
-            <TreeView Grid.Row="0" x:Name="appTreeView" Visibility="Collapsed" ItemsSource="{x:Bind AppList}" SelectionMode="Multiple" DragItemsStarting="AppTreeView_DragItemsStarting" VirtualizingStackPanel.VirtualizationMode="Recycling">
+        <ScrollViewer Grid.Row="0" Height="auto">
+            <TreeView x:Name="appTreeView" Visibility="Collapsed" ItemsSource="{x:Bind AppList}" SelectionMode="Multiple" DragItemsStarting="AppTreeView_DragItemsStarting" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="Background" Value="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}"/>
+                        <Setter Property="Padding" Value="10"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
                 <TreeView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Key}" />
-                            <TextBlock Text="{Binding Value}" Visibility="Collapsed"/>
+                        <StackPanel Orientation="Horizontal" Padding="5">
+                            <Image Source="{Binding Value}" Width="32" Height="32" Margin="-30,0,18,0" />
+                            <TextBlock Text="{Binding Key}" VerticalAlignment="Center" />
                         </StackPanel>
                     </DataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
-        </Border>
+        </ScrollViewer>
         <StackPanel Margin="10" x:Name="gettingAppsLoading" Grid.Row="0" Visibility="Visible">
-            <TextBlock x:Uid="DebloatSystemPage_FetchingInstalledApps"/>
+            <TextBlock x:Uid="DebloatSystemPage_FetchingInstalledApps" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
             <ProgressBar Margin="3" Width="Auto" IsIndeterminate="True"/>
         </StackPanel>
-        <TextBlock Margin="3" Grid.Row="1" x:Name="installedAppsCount" Visibility="Collapsed"/>
-        <CheckBox x:Uid="DebloatSystemPage_ShowAll" Margin="3" Grid.Row="2" x:Name="showAll" Visibility="Collapsed" Checked="ShowAll_Checked" Unchecked="ShowAll_Unchecked"/>
-        <ScrollViewer Margin="3" Grid.Row="3">
-            <TextBlock Margin="3" x:Name="uninstallingStatusText"/>
-        </ScrollViewer>
-
-        <ProgressBar Margin="2" Grid.Row="4" x:Name="uninstallingStatusBar" Width="Auto" IsIndeterminate="True" Visibility="Collapsed"/>
+        <TextBlock Margin="10,6" Grid.Row="1" HorizontalAlignment="Right" x:Name="installedAppsCount" Visibility="Collapsed"/>
+        <CheckBox Margin="10,6" Grid.Row="1" x:Uid="DebloatSystemPage_ShowAll" x:Name="showAll" Visibility="Collapsed" Checked="ShowAll_Checked" Unchecked="ShowAll_Unchecked"/>
+        <TextBlock Margin="3" Grid.Row="2" x:Name="uninstallingStatusText"/>
+        <ProgressBar Margin="2" Grid.Row="3" x:Name="uninstallingStatusBar" Width="Auto" IsIndeterminate="True"/>
         <muxc:InfoBar
                       MaxWidth="480"
                       Margin="16"
@@ -50,7 +55,7 @@
                 <behaviors:StackedNotificationsBehavior x:Name="NotificationQueue" />
             </interactivity:Interaction.Behaviors>
         </muxc:InfoBar>
-        <StackPanel Orientation="Horizontal" Margin="3" Grid.Row="5">
+        <StackPanel Orientation="Horizontal" Margin="3" Grid.Row="4">
             <Button Margin="3" x:Uid="DebloatSystemPage_UninstallButton" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click"/>
             <StackPanel x:Name="TempStackButtonTextBar" Margin="3" Orientation="Vertical" VerticalAlignment="Center" Visibility="Collapsed">
                 <Grid>

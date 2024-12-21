@@ -17,8 +17,8 @@
         </Style>
     </Page.Resources>
     <Grid x:Name="ContentArea">
-        <ScrollViewer Padding="-24,10,24,0" Margin="0,0,-56,0">
-            <StackPanel Padding="0,0,0,40" Spacing="{StaticResource SettingsCardSpacing}">
+        <ScrollViewer Padding="24,14,24,0">
+            <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
                 
                 <!-- Telemetry Elements -->
                 <StackPanel Orientation="Horizontal">

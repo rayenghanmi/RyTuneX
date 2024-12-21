@@ -121,19 +121,16 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>减少臃肿</value>
+    <value>精简</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>系统信息</value>
+    <value>设备</value>
   </data>
-  <data name="Shell_ReportBug.Content" xml:space="preserve">
+  <data name="Shell_Issue.Content" xml:space="preserve">
     <value>报告错误</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>优化系统</value>
-  </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>个性化</value>
+    <value>优化</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>主题</value>
@@ -190,16 +187,13 @@
     <value>选择您要删除的应用程序并点击卸载</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>Windows 功能</value>
+    <value>功能</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
     <value>隐私</value>
   </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
     <value>加入我们的服务器</value>
-  </data>
-  <data name="HomePage_IssueButton.Text" xml:space="preserve">
-    <value>报告问题</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
     <value>查看 RyTuneX</value>
@@ -232,10 +226,10 @@
     <value>卸载其中一些应用程序可能无法完全删除它们。</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>卸载时出错</value>
+    <value>卸载以下应用时发生错误</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>卸载成功</value>
+    <value>成功卸载了以下应用</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
     <value>删除临时文件</value>
@@ -703,7 +697,7 @@
     <value>未设置</value>
   </data>
   <data name="Shell_Network.Content" xml:space="preserve">
-    <value>网络技术</value>
+    <value>网络</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
     <value>（成人过滤器）</value>
@@ -753,8 +747,8 @@
   <data name="Update" xml:space="preserve">
     <value>更新</value>
   </data>
-  <data name="HomePage_SupportButton.Text" xml:space="preserve">
-    <value>支持我们</value>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>支持</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>网络</value>
@@ -779,5 +773,14 @@
   </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>安全</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>发生了一个意外错误</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>查看日志</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>总数: {0} 个应用</value>
   </data>
 </root>

@@ -4,7 +4,23 @@ All notable changes to this branch will be documented in this file.
 
 ## 1.0.1 - Unreleased
 
+### Added
 
+- Introduced a new `Security` page with a dedicated `Firewall` section.
+- Added Japanese language (`ja-jp`).
+- Added Realtime Performance Monitoring in `Home` page.
+
+### Fixes
+
+- Fixed an issue where the uninstallation state text did not display the current app being uninstalled.
+- Resolved a bug causing the UI under the apps list in the `Debloat` page to flicker when the scroll bar appeared or disappeared.
+
+### Changes
+
+- General enhancements to the UI.
+- Introduced a new page transition effect.
+- Improved the installed apps list in the `Debloat` page by adding logos for each app.
+- Moved the `Report` and `Support` buttons to the footer of the navigation menu.
 
 ## 0.9.1 - Released
 

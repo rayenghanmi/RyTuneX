@@ -121,34 +121,34 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>Debloat</value>
+    <value>デブロート</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>Gerät</value>
+    <value>デバイス</value>
   </data>
   <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Bericht</value>
+    <value>バグを報告</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>Optimieren</value>
+    <value>最適化</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>Thema</value>
+    <value>テーマ</value>
   </data>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>Licht</value>
+    <value>ライト</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>dunkel</value>
+    <value>ダーク</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>Vorgabe</value>
+    <value>デフォルト</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>Über diese Anwendung</value>
+    <value>このアプリケーションについて</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>RyTuneX, ein von Rayen Ghanmi entwickelter Optimier für Windows 10 und 11, wurde entwickelt, um die Systemleistung und -effizienz zu verbessern, indem ausgewählte Software selektiv entfernt und unnötige Dienste deaktiviert werden.</value>
+    <value>RyTuneXは、Rayen Ghanmiによって作成されたWindows 10および11の最適化ツールで、選択したソフトウェアを削除し、不要なサービスを無効にすることでシステムのパフォーマンスと効率を向上させることを目的としています。</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
     <value>AGPL v3.0</value>
@@ -157,627 +157,630 @@
     <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
-    <value>Sprache</value>
+    <value>言語</value>
   </data>
   <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. Optimierte Systemdienste:</value>
+    <value>1. システムサービスの簡素化:</value>
   </data>
   <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. Fein abgestimmte Registry-Optimierung:</value>
+    <value>2. レジストリの最適化:</value>
   </data>
   <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. Blähungsfreie Leistung:</value>
+    <value>3. ブロートフリーのパフォーマンス:</value>
   </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
-    <value>Daten für installierte Apps werden abgerufen...</value>
+    <value>インストールされたアプリデータを取得中...</value>
   </data>
   <data name="DebloatSystemPage_ShowAll.Content" xml:space="preserve">
-    <value>Alle anzeigen</value>
+    <value>すべて表示</value>
   </data>
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
-    <value>Ausgewählte App(s) deinstallieren</value>
+    <value>選択したアプリをアンインストール</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>fertig</value>
+    <value>完了</value>
   </data>
   <data name="Uninstalling" xml:space="preserve">
-    <value>Deinstallieren</value>
+    <value>アンインストール中</value>
   </data>
   <data name="UninstallTip" xml:space="preserve">
-    <value>Wählen Sie Apps aus, die Sie entfernen möchten, und klicken Sie auf Deinstallieren</value>
+    <value>削除したいアプリを選択してアンインストールをクリック</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>Funktionen</value>
+    <value>機能</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
-    <value>Datenschutz</value>
+    <value>プライバシー</value>
   </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
-    <value>Treten Sie unserem Server bei</value>
+    <value>サーバーに参加</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>Schauen Sie sich RyTuneX an</value>
+    <value>RyTuneXをチェック</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>Feedback senden</value>
+    <value>フィードバックを送信</value>
   </data>
   <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>Prozessor</value>
+    <value>プロセッサ</value>
   </data>
   <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>Grafikkarte</value>
+    <value>グラフィックスカード</value>
   </data>
   <data name="SystemInfoPage_OS.Text" xml:space="preserve">
-    <value>Betriebssystem</value>
+    <value>オペレーティングシステム</value>
   </data>
   <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
-    <value>Widder</value>
+    <value>RAM</value>
   </data>
   <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
-    <value>auffrischen</value>
+    <value>更新</value>
   </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
-    <value>Lagerung</value>
+    <value>ストレージ</value>
   </data>
   <data name="Debloat" xml:space="preserve">
-    <value>Aufblähen</value>
+    <value>デブロート</value>
   </data>
   <data name="DebloatPage_NotificationBody" xml:space="preserve">
-    <value>Durch die Deinstallation einiger dieser Apps werden sie möglicherweise nicht vollständig entfernt.</value>
+    <value>これらのアプリの一部をアンインストールしても完全に削除されない場合があります。</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>Fehler beim Deinstallieren der folgenden App(s)</value>
+    <value>以下のアプリのアンインストール中にエラーが発生しました</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>Erfolgreich deinstallierte(r) folgende(n) App(s)</value>
+    <value>以下のアプリが正常にアンインストールされました</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Temporäre Dateien entfernen</value>
+    <value>一時ファイルを削除</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
-    <value>Adapter-RAM</value>
+    <value>アダプターRAM</value>
   </data>
   <data name="Architecture" xml:space="preserve">
-    <value>Architektur</value>
+    <value>アーキテクチャ</value>
   </data>
   <data name="BuildNumber" xml:space="preserve">
-    <value>Build-Nummer</value>
+    <value>ビルド番号</value>
   </data>
   <data name="Capacity" xml:space="preserve">
-    <value>Fassungsvermögen</value>
+    <value>容量</value>
   </data>
   <data name="Caption" xml:space="preserve">
-    <value>Überschrift</value>
+    <value>キャプション</value>
   </data>
   <data name="Cores" xml:space="preserve">
-    <value>Kerne</value>
+    <value>コア</value>
   </data>
   <data name="DeviceLocator" xml:space="preserve">
-    <value>Geräte-Locator</value>
+    <value>デバイスロケータ</value>
   </data>
   <data name="DriverVersion" xml:space="preserve">
-    <value>Treiber-Version</value>
+    <value>ドライバーバージョン</value>
   </data>
   <data name="ErrDriversExtract" xml:space="preserve">
-    <value>Beim Extrahieren von Treibern ist ein Fehler aufgetreten</value>
+    <value>ドライバーの抽出中にエラーが発生しました</value>
   </data>
   <data name="ExtractingDrivers" xml:space="preserve">
-    <value>Extrahieren von Treibern</value>
+    <value>ドライバーを抽出中</value>
   </data>
   <data name="GPU" xml:space="preserve">
-    <value>gpu</value>
+    <value>GPU</value>
   </data>
   <data name="InstallDate" xml:space="preserve">
-    <value>Installationsdatum</value>
+    <value>インストール日</value>
   </data>
   <data name="InterfaceType" xml:space="preserve">
-    <value>Schnittstellen-Typ</value>
+    <value>インターフェイスタイプ</value>
   </data>
   <data name="L2Cache" xml:space="preserve">
-    <value>L2-Cache-Größe</value>
+    <value>L2キャッシュサイズ</value>
   </data>
   <data name="L3Cache" xml:space="preserve">
-    <value>L3-Cache-Größe</value>
+    <value>L3キャッシュサイズ</value>
   </data>
   <data name="LastBoot" xml:space="preserve">
-    <value>Zeitpunkt des letzten Hochfahrens</value>
+    <value>最終起動時間</value>
   </data>
   <data name="LogicalProcessors" xml:space="preserve">
-    <value>Logische Prozessoren</value>
+    <value>論理プロセッサ</value>
   </data>
   <data name="Manufacturer" xml:space="preserve">
-    <value>Hersteller</value>
+    <value>製造元</value>
   </data>
   <data name="MaxSpeed" xml:space="preserve">
-    <value>Maximale Geschwindigkeit</value>
+    <value>最大速度</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>名前</value>
+  </data>
+  <data name="OSName" xml:space="preserve">
+    <value>OS名</value>
   </data>
   <data name="RAMModule" xml:space="preserve">
-    <value>RAM-Modul</value>
+    <value>RAMモジュール</value>
   </data>
   <data name="RegisteredUser" xml:space="preserve">
-    <value>Registrierter Benutzer</value>
+    <value>登録ユーザー</value>
   </data>
   <data name="Size" xml:space="preserve">
-    <value>Größe</value>
+    <value>サイズ</value>
   </data>
   <data name="SocketDesignation" xml:space="preserve">
-    <value>Sockel-Bezeichnung</value>
+    <value>ソケット指定</value>
   </data>
   <data name="Speed" xml:space="preserve">
-    <value>Geschwindigkeit</value>
+    <value>速度</value>
   </data>
   <data name="SystemDirectory" xml:space="preserve">
-    <value>Systemverzeichnis</value>
+    <value>システムディレクトリ</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version</value>
+    <value>バージョン</value>
   </data>
   <data name="VideoArchitecture" xml:space="preserve">
-    <value>Video-Architektur</value>
+    <value>ビデオアーキテクチャ</value>
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
-    <value>Windows-Verzeichnis</value>
+    <value>Windowsディレクトリ</value>
   </data>
   <data name="DeligTemp" xml:space="preserve">
-    <value>Temporäre Dateien löschen</value>
+    <value>一時ファイルを削除中</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
-    <value>Fehler beim Löschen temporärer Dateien</value>
+    <value>一時ファイルの削除エラー</value>
   </data>
   <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>Systemmerkmale</value>
+    <value>システム機能</value>
   </data>
   <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>Exklusiv für Windows 11</value>
+    <value>Windows 11専用</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
-    <value>Wählen Sie einen Ordner aus</value>
+    <value>フォルダーを選択</value>
   </data>
   <data name="TempDelSucc" xml:space="preserve">
-    <value>Temporäre Dateien erfolgreich gelöscht!</value>
+    <value>一時ファイルが正常に削除されました！</value>
   </data>
   <data name="Disk" xml:space="preserve">
-    <value>Disk</value>
+    <value>ディスク</value>
   </data>
   <data name="Model" xml:space="preserve">
-    <value>Modell</value>
+    <value>モデル</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
-    <value>Aktivieren Sie detaillierte Anmeldeinformationen für eine bessere Systemüberwachung und Problembehandlung. Nicht unbedingt benutzerfreundlich für den täglichen Gebrauch</value>
+    <value>詳細なログオンメッセージを有効にして、システムの監視とトラブルシューティングを改善します。日常使用には適していない場合があります。</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
-    <value>Detaillierte Anmeldung aktivieren</value>
+    <value>詳細なログオンを有効にする</value>
   </data>
   <data name="SelecFold" xml:space="preserve">
-    <value>Wählen Sie einen Ordner aus</value>
+    <value>フォルダーを選択</value>
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
-    <value>Treiber</value>
+    <value>ドライバー</value>
   </data>
   <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>Extrahieren</value>
+    <value>抽出</value>
   </data>
   <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>Extrahieren Sie Ihre Treiber in einen externen Ordner zur einfachen Sicherung</value>
+    <value>ドライバーを外部フォルダーに抽出して簡単にバックアップ</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
-    <value>Treiber werden extrahiert</value>
+    <value>ドライバーを抽出中</value>
   </data>
   <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
-    <value>Auswählen</value>
+    <value>選択</value>
   </data>
   <data name="Feature_DisableHibernation.Header" xml:space="preserve">
-    <value>Ruhezustand deaktivieren</value>
+    <value>休止状態を無効にする</value>
   </data>
   <data name="Feature_DisableHibernation.Description" xml:space="preserve">
-    <value>Schalten Sie den Ruhezustand aus, um Energie zu sparen und den Computer daran zu hindern, in den Ruhezustand zu gehen. Nicht empfohlen für Laptops</value>
+    <value>休止状態を無効にして電力を節約し、コンピューターがスリープモードに入るのを防ぎます。ノートパソコンには推奨されません。</value>
   </data>
   <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
-    <value>Heimnetzgruppe deaktivieren</value>
+    <value>ホームグループを無効にする</value>
   </data>
   <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
-    <value>Schaltet die Heimnetzgruppe aus, um das Teilen von Dateien und Druckern mit anderen Geräten im Netzwerk zu stoppen</value>
+    <value>ホームグループを無効にして、ネットワーク上の他のデバイスとファイルやプリンターを共有しないようにします。</value>
   </data>
   <data name="Feature_DisablePrintService.Header" xml:space="preserve">
-    <value>Druckdienst deaktivieren</value>
+    <value>印刷サービスを無効にする</value>
   </data>
   <data name="Feature_DisablePrintService.Description" xml:space="preserve">
-    <value>Deaktiviert den Druckdienst und verhindert druckbezogene Funktionen</value>
+    <value>印刷サービスを無効にして、印刷関連の機能を停止します。</value>
   </data>
   <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
-    <value>Kompatibilitätsassistent deaktivieren</value>
+    <value>互換性アシスタントを無効にする</value>
   </data>
   <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
-    <value>Schaltet den Kompatibilitätsassistenten aus, um automatische Kompatibilitätsprüfungen für Programme zu deaktivieren</value>
+    <value>互換性アシスタントを無効にして、プログラムの自動互換性チェックを停止します。</value>
   </data>
   <data name="Feature_DisableSearch.Header" xml:space="preserve">
-    <value>Suche deaktivieren</value>
+    <value>検索を無効にする</value>
   </data>
   <data name="Feature_DisableSearch.Description" xml:space="preserve">
-    <value>Schaltet die systemweite Suchfunktionalität aus</value>
+    <value>システム全体の検索機能を無効にします。</value>
   </data>
   <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
-    <value>Fehlerberichterstattung deaktivieren</value>
+    <value>エラー報告を無効にする</value>
   </data>
   <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
-    <value>Schaltet die Fehlerberichterstattung aus, um das automatische Senden von Fehlerberichten an Microsoft zu verhindern</value>
+    <value>エラー報告を無効にして、エラー報告を自動的にMicrosoftに送信しないようにします。</value>
   </data>
   <data name="Feature_DisableGameBar.Header" xml:space="preserve">
-    <value>Game Bar deaktivieren</value>
+    <value>ゲームバーを無効にする</value>
   </data>
   <data name="Feature_DisableGameBar.Description" xml:space="preserve">
-    <value>Schaltet die Game Bar und die zugehörigen Funktionen aus</value>
+    <value>ゲームバーとその関連機能を無効にします。</value>
   </data>
   <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
-    <value>Verlauf des Schnellzugriffs deaktivieren</value>
+    <value>クイックアクセス履歴を無効にする</value>
   </data>
   <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
-    <value>Deaktiviert das Aufzeichnen und Anzeigen des Verlaufs des Schnellzugriffs</value>
+    <value>クイックアクセス履歴の記録と表示を無効にします。</value>
   </data>
   <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
-    <value>Meine Kontakte deaktivieren</value>
+    <value>My Peopleを無効にする</value>
   </data>
   <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
-    <value>Schaltet die Meine Kontakte-Funktion in der Taskleiste aus</value>
+    <value>タスクバーのMy People機能を無効にします。</value>
   </data>
   <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
-    <value>Sensordienste deaktivieren</value>
+    <value>センサーサービスを無効にする</value>
   </data>
   <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
-    <value>Schaltet die Sensordienste aus, um die Privatsphäre und den Stromverbrauch zu schützen. Nicht empfohlen für Laptops mit relevanten Sensoren</value>
+    <value>プライバシーと電力節約のためにセンサーサービスを無効にします。関連するセンサーを持つノートパソコンには推奨されません。</value>
   </data>
   <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
-    <value>Windows Ink deaktivieren</value>
+    <value>Windows Inkを無効にする</value>
   </data>
   <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
-    <value>Schaltet das Windows Ink Workspace und die zugehörigen Funktionen aus. Nicht empfohlen für Geräte mit einem Stift</value>
+    <value>Windows Inkワークスペースと関連機能を無効にします。スタイラスを使用するデバイスには推奨されません。</value>
   </data>
   <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
-    <value>Rechtschreib- und Tippfunktionen deaktivieren</value>
+    <value>スペルとタイピング機能を無効にする</value>
   </data>
   <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
-    <value>Deaktiviert Rechtschreib- und Tippvorschläge</value>
+    <value>スペルとタイピングの提案を無効にします。</value>
   </data>
   <data name="Feature_DisableFaxService.Header" xml:space="preserve">
-    <value>Faxdienst deaktivieren</value>
+    <value>ファクスサービスを無効にする</value>
   </data>
   <data name="Feature_DisableFaxService.Description" xml:space="preserve">
-    <value>Deaktiviert den Faxdienst in Windows</value>
+    <value>Windowsのファクスサービスを無効にします。</value>
   </data>
   <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
-    <value>Insider-Dienst deaktivieren</value>
+    <value>インサイダーサービスを無効にする</value>
   </data>
   <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
-    <value>Austritt aus dem Windows Insider-Programm und Einstellung des Empfangs von Vorabversionen</value>
+    <value>Windowsインサイダープログラムからオプトアウトし、プレビュー版の受信を停止します。</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
-    <value>Cloud-Zwischenablage deaktivieren</value>
+    <value>クラウドクリップボードを無効にする</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
-    <value>Deaktiviert die Cloud-Zwischenablage-Funktion für das Teilen von Zwischenablageinhalten zwischen Geräten</value>
+    <value>デバイス間でクリップボードを共有するクラウドクリップボード機能を無効にします。</value>
   </data>
   <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
-    <value>Klebe-Tasten deaktivieren</value>
+    <value>スティッキーキーを無効にする</value>
   </data>
   <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
-    <value>Deaktiviert die Klebe-Tasten-Zugänglichkeitsfunktion. Nützlich für Personen, die versehentlich mehrere Tasten gleichzeitig drücken</value>
+    <value>スティッキーキーのアクセシビリティ機能を無効にします。複数のキーを同時に押してしまう人に便利です。</value>
   </data>
   <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
-    <value>Gerätewiedergabe deaktivieren</value>
+    <value>デバイスへのキャストを無効にする</value>
   </data>
   <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
-    <value>Deaktiviert die Gerätewiedergabe-Funktion in Windows. Nützlich für Präsentationen oder das Teilen von Medien mit anderen Geräten</value>
+    <value>Windowsのデバイスへのキャスト機能を無効にします。プレゼンテーションや他のデバイスでメディアを共有するのに便利です。</value>
   </data>
   <data name="Feature_DisableVBS.Header" xml:space="preserve">
-    <value>VBS deaktivieren</value>
+    <value>VBSを無効にする</value>
   </data>
   <data name="Feature_DisableVBS.Description" xml:space="preserve">
-    <value>Deaktiviert Virtualization-Based Security (VBS) für erweiterte Sicherheitsfunktionen. Nicht empfohlen für Umgebungen mit hoher Sicherheitsanforderung</value>
+    <value>高度なセキュリティ機能のための仮想化ベースのセキュリティ（VBS）を無効にします。高セキュリティ環境には推奨されません。</value>
   </data>
   <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
-    <value>Taskleiste nach links verschieben</value>
+    <value>タスクバーを左に移動</value>
   </data>
   <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
-    <value>Verschiebt die Taskleiste von der standardmäßigen unteren Position an die linke Bildschirmseite. Persönliche Vorliebe</value>
+    <value>タスクバーをデフォルトの下部位置から画面の左側に移動します。個人の好みによります。</value>
   </data>
   <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
-    <value>Snap Assist deaktivieren</value>
+    <value>スナップアシストを無効にする</value>
   </data>
   <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
-    <value>Deaktiviert Snap Assist, welches offene Fenster automatisch anordnet, wenn sie gezogen werden. Nützlich für Multitasking, aber einige Benutzer bevorzugen manuelles Fenstermanagement</value>
+    <value>ドラッグ時に開いているウィンドウを自動的に配置するスナップアシストを無効にします。マルチタスクに便利ですが、一部のユーザーは手動でウィンドウを管理することを好みます。</value>
   </data>
   <data name="Feature_DisableWidgets.Header" xml:space="preserve">
-    <value>Widgets deaktivieren</value>
+    <value>ウィジェットを無効にする</value>
   </data>
   <data name="Feature_DisableWidgets.Description" xml:space="preserve">
-    <value>Deaktiviert die Widgets-Funktion in der Windows 11 Taskleiste. Überlegen Sie, ob Sie die Widgets für schnelle Updates nützlich finden (nur Windows 11)</value>
+    <value>Windows 11のタスクバーのウィジェット機能を無効にします。ウィジェットが便利であれば無効にしないでください（Windows 11のみ）。</value>
   </data>
   <data name="Feature_DisableChat.Header" xml:space="preserve">
-    <value>Chat deaktivieren</value>
+    <value>チャットを無効にする</value>
   </data>
   <data name="Feature_DisableChat.Description" xml:space="preserve">
-    <value>Deaktiviert die Chat-Funktion in der Windows 11 Taskleiste. Nur empfohlen, wenn Sie die Chat-Funktion nicht für die Kommunikation nutzen (nur Windows 11)</value>
+    <value>Windows 11のタスクバーのチャット機能を無効にします。コミュニケーションにチャット機能を使用しない場合にのみ推奨されます（Windows 11のみ）。</value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
-    <value>Kompaktmodus für Dateien aktivieren</value>
+    <value>ファイルのコンパクトモードを有効にする</value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
-    <value>Aktiviert den Kompaktmodus für die Dateiansicht mit kleineren Miniaturansichten. Nützlich für Bildschirme mit geringer Auflösung oder zur Verwaltung großer Ordner</value>
+    <value>小さなサムネイルでファイルを閲覧するためのコンパクトモードを有効にします。低解像度のディスプレイや大きなフォルダーを管理するのに便利です。</value>
   </data>
   <data name="Feature_DisableStickers.Header" xml:space="preserve">
-    <value>Sticker deaktivieren</value>
+    <value>ステッカーを無効にする</value>
   </data>
   <data name="Feature_DisableStickers.Description" xml:space="preserve">
-    <value>Deaktiviert die Sticker-Funktion in der Windows 11 Nachrichten-App. Nur empfohlen, wenn Sie Sticker nicht für die Kommunikation nutzen (nur Windows 11)</value>
+    <value>Windows 11のメッセージングアプリのステッカー機能を無効にします。コミュニケーションにステッカーを使用しない場合にのみ推奨されます（Windows 11のみ）。</value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
-    <value>Edge Discover Bar deaktivieren</value>
+    <value>Edge Discover Barを無効にする</value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
-    <value>Deaktiviert die Discover Bar-Funktion in Microsoft Edge. Nützlich, wenn Sie diese als störend empfinden oder eine übersichtlichere Browseroberfläche bevorzugen</value>
+    <value>Microsoft EdgeのDiscover Bar機能を無効にします。気が散る場合やクリーンなブラウザーインターフェースを好む場合に便利です。</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
-    <value>CoPilot AI deaktivieren</value>
+    <value>CoPilot AIを無効にする</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
-    <value>Deaktiviert die CoPilot AI Funktion in Windows zur Unterstützung bei der Code-Schreibung. Nicht empfohlen für Entwickler</value>
+    <value>コード作成の支援のためのWindowsのCoPilot AI機能を無効にします。開発者には推奨されません。</value>
   </data>
   <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>Grundlegende Optimierungen</value>
+    <value>基本的な最適化</value>
   </data>
   <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>Leistungsoptimierungen</value>
+    <value>パフォーマンスの調整</value>
   </data>
   <data name="Feature_DisableSuperfetch.Header" xml:space="preserve">
-    <value>Superfetch deaktivieren</value>
+    <value>Superfetchを無効にする</value>
   </data>
   <data name="Feature_DisableSuperfetch.Description" xml:space="preserve">
-    <value>Deaktiviert Superfetch, welches häufig genutzte Anwendungen für einen schnelleren Start vorlädt. Kann die Startzeiten einiger Programme beeinflussen, wenn HDD verwendet wird.</value>
+    <value>頻繁に使用するアプリケーションを事前に読み込むSuperfetchを無効にします。HDDを使用している場合、一部のプログラムの起動時間に影響を与える可能性があります。</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>NTFS-Zeitstempel deaktivieren</value>
+    <value>NTFSタイムスタンプを無効にする</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>Deaktiviert Aktualisierungen von NTFS-Zeitstempeln für Dateioperationen. Kann die Funktionalität von Programmen beeinträchtigen, die genaue Zeitstempel benötigen.</value>
+    <value>ファイル操作のためのNTFSタイムスタンプの更新を無効にします。正確なタイムスタンプに依存するプログラムの機能に影響を与える可能性があります。</value>
   </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
-    <value>Gaming-Modus aktivieren</value>
+    <value>ゲームモードを有効にする</value>
   </data>
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
-    <value>Aktiviert den Gaming-Modus, welcher Systemressourcen für ein flüssigeres Spielerlebnis optimiert. Kann Hintergrundprozesse beeinflussen.</value>
+    <value>システムリソースを最適化してスムーズなゲーム体験を提供するゲームモードを有効にします。バックグラウンドプロセスに影響を与える可能性があります。</value>
   </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
-    <value>Treiber von Windows-Updates ausschließen</value>
+    <value>Windowsアップデートからドライバーを除外</value>
   </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
-    <value>Schließt Treiberupdates von Windows Update aus. Kann zu veralteten Treibern mit potenziellen Sicherheitsrisiken oder Kompatibilitätsproblemen führen. Mit Vorsicht verwenden.</value>
+    <value>Windowsアップデートからドライバーの更新を除外します。セキュリティリスクや互換性の問題が発生する可能性があるため、注意して使用してください。</value>
   </data>
   <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>Erfahren Sie mehr darüber, was deaktiviert wird</value>
+    <value>無効にされる内容について詳しく知る</value>
   </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>Erweiterte Optimierungen</value>
+    <value>高度な最適化</value>
   </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
-    <value>Systemwiederherstellung deaktivieren</value>
+    <value>システムの復元を無効にする</value>
   </data>
   <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
-    <value>Deaktiviert die Systemwiederherstellung, die Wiederherstellungspunkte erstellt, um das System bei Problemen auf einen früheren Zustand zurückzusetzen. Nicht empfohlen. Das Deaktivieren dieser Funktion entfernt die Möglichkeit, einfach von potenziellen Systemproblemen wiederherzustellen.</value>
+    <value>問題が発生した場合にシステムを以前の状態に戻すための復元ポイントを作成するシステムの復元を無効にします。推奨されません。この機能を無効にすると、潜在的なシステム問題から簡単に回復する能力が失われます。</value>
   </data>
   <data name="Feature_DisableCortana.Header" xml:space="preserve">
-    <value>Cortana deaktivieren</value>
+    <value>Cortanaを無効にする</value>
   </data>
   <data name="Feature_DisableCortana.Description" xml:space="preserve">
-    <value>Deaktiviert Cortana, den virtuellen Assistenten, der Fragen beantworten und Aufgaben erledigen kann. Kann die Sprachsuche und einige Produktivitätsfunktionen beeinflussen.</value>
+    <value>質問に答えたりタスクを完了したりする仮想アシスタントであるCortanaを無効にします。音声検索や一部の生産性機能に影響を与える可能性があります。</value>
   </data>
   <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
-    <value>Store-Updates deaktivieren</value>
+    <value>ストアの更新を無効にする</value>
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
-    <value>Deaktiviert automatische Updates für Apps, die aus dem Microsoft Store heruntergeladen wurden. Kann Apps anfällig für Sicherheitsrisiken machen oder ohne neue Funktionen lassen.</value>
+    <value>Microsoft Storeからダウンロードしたアプリの自動更新を無効にします。アプリがセキュリティリスクにさらされたり、新機能が欠けたりする可能性があります。</value>
   </data>
   <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>Automatische Updates deaktivieren</value>
+    <value>自動更新を無効にする</value>
   </data>
   <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>Deaktiviert automatische Windows-Updates und erfordert manuelle Installationen. Sehr abgeraten. Dies kann Ihr System anfällig für Sicherheitslücken und Fehlerbehebungen machen.</value>
+    <value>自動Windows更新を無効にし、手動でのインストールを必要とします。強く推奨されません。これにより、システムがセキュリティの脆弱性やバグ修正にさらされる可能性があります。</value>
   </data>
   <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
-    <value>SmartScreen deaktivieren</value>
+    <value>SmartScreenを無効にする</value>
   </data>
   <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>Deaktiviert den SmartScreen-Filter, der Sie vor potenziell unsicheren Apps und Dateien aus dem Internet warnt. Aus Sicherheitsgründen nicht empfohlen. Das Deaktivieren dieser Funktion erhöht das Risiko einer Malware-Infektion.</value>
+    <value>インターネットからダウンロードした潜在的に安全でないアプリやファイルについて警告するSmartScreenフィルターを無効にします。セキュリティ上の理由から推奨されません。この機能を無効にすると、マルウェア感染のリスクが高まります。</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>Telemetrie</value>
+    <value>テレメトリ</value>
   </data>
   <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>Datenschutz verbessern</value>
+    <value>プライバシーを強化</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
-    <value>SMBv1 deaktivieren</value>
+    <value>SMBv1を無効にする</value>
   </data>
   <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
-    <value>Deaktiviert Server Message Block Version 1 (SMBv1) für verbesserte Sicherheit. Empfohlen</value>
+    <value>セキュリティを強化するためにServer Message Blockバージョン1（SMBv1）を無効にします。推奨されます。</value>
   </data>
   <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
-    <value>SMBv2 deaktivieren</value>
+    <value>SMBv2を無効にする</value>
   </data>
   <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
-    <value>Deaktiviert Server Message Block Version 2 (SMBv2) für verbesserte Sicherheit. Mit Vorsicht verwenden, da dies die Funktionalität der Netzwerkdateifreigabe beeinträchtigen könnte.</value>
+    <value>セキュリティを強化するためにServer Message Blockバージョン2（SMBv2）を無効にします。ネットワークファイル共有機能が壊れる可能性があるため、注意して使用してください。</value>
   </data>
   <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
-    <value>Telemetriedienste deaktivieren</value>
+    <value>テレメトリサービスを無効にする</value>
   </data>
   <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
-    <value>Deaktiviert Telemetriedienste, um die Sammlung und Übermittlung von Nutzungsdaten durch das Betriebssystem zu verhindern.</value>
+    <value>オペレーティングシステムによる使用データの収集と送信を防ぐためにテレメトリサービスを無効にします。</value>
   </data>
   <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
-    <value>Edge Telemetrie deaktivieren</value>
+    <value>Edgeテレメトリを無効にする</value>
   </data>
   <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
-    <value>Deaktiviert die Erfassung von Telemetriedaten in Microsoft Edge.</value>
+    <value>Microsoft Edgeのテレメトリデータ収集を無効にします。</value>
   </data>
   <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
-    <value>Visual Studio Telemetrie deaktivieren</value>
+    <value>Visual Studioテレメトリを無効にする</value>
   </data>
   <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
-    <value>Deaktiviert die Erfassung von Telemetriedaten in Visual Studio.</value>
+    <value>Visual Studioのテレメトリデータ収集を無効にします。</value>
   </data>
   <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
-    <value>Nvidia Telemetrie deaktivieren</value>
+    <value>Nvidiaテレメトリを無効にする</value>
   </data>
   <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
-    <value>Deaktiviert die Erfassung von Telemetriedaten durch Nvidia-Treiber.</value>
+    <value>Nvidiaドライバーによるテレメトリデータ収集を無効にします。</value>
   </data>
   <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
-    <value>Chrome Telemetrie deaktivieren</value>
+    <value>Chromeテレメトリを無効にする</value>
   </data>
   <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
-    <value>Deaktiviert die Erfassung von Telemetriedaten in Google Chrome.</value>
+    <value>Google Chromeのテレメトリデータ収集を無効にします。</value>
   </data>
   <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
-    <value>Firefox Telemetrie deaktivieren</value>
+    <value>Firefoxテレメトリを無効にする</value>
   </data>
   <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
-    <value>Deaktiviert die Erfassung von Telemetriedaten in Mozilla Firefox.</value>
+    <value>Mozilla Firefoxのテレメトリデータ収集を無効にします。</value>
   </data>
   <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
-    <value>Wählen Sie Ihre Standardsprache aus</value>
+    <value>デフォルトの言語を選択</value>
   </data>
   <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
-    <value>Sprache ändern</value>
-  </data>
-  <data name="Feature_EnableEndTask.Description" xml:space="preserve">
-    <value>Enables an option when right clicking on apps' icons in the taskbar, allowing you to quickly terminate unresponsive applications without opening Task Manager.</value>
-  </data>
-  <data name="Feature_EnableEndTask.Header" xml:space="preserve">
-    <value>Enable EndTask</value>
-  </data>
-  <data name="Network_ApplyDNS.Content" xml:space="preserve">
-    <value>Apply DNS</value>
-  </data>
-  <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
-  </data>
-  <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
-  </data>
-  <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>Network Interface</value>
-  </data>
-  <data name="Network_Primary.Text" xml:space="preserve">
-    <value>Primary</value>
-  </data>
-  <data name="Network_ResetDNS.Content" xml:space="preserve">
-    <value>Reset Default DNS</value>
-  </data>
-  <data name="Network_Secondary.Text" xml:space="preserve">
-    <value>Secondary</value>
-  </data>
-  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
-  </data>
-  <data name="NoIPv4" xml:space="preserve">
-    <value>No IPv4 DNS addresses found</value>
-  </data>
-  <data name="NoIPv6" xml:space="preserve">
-    <value>No IPv6 DNS addresses found</value>
-  </data>
-  <data name="NoNic" xml:space="preserve">
-    <value>No network interface selected</value>
-  </data>
-  <data name="NotSet" xml:space="preserve">
-    <value>Not set</value>
+    <value>言語を変更</value>
   </data>
   <data name="Shell_Network.Content" xml:space="preserve">
-    <value>Netzwerk</value>
+    <value>ネットワーク</value>
+  </data>
+  <data name="Feature_EnableEndTask.Description" xml:space="preserve">
+    <value>タスクバーのアプリアイコンを右クリックすると、タスクマネージャーを開かずに応答しないアプリケーションをすばやく終了するオプションが有効になります。</value>
+  </data>
+  <data name="Feature_EnableEndTask.Header" xml:space="preserve">
+    <value>EndTaskを有効にする</value>
+  </data>
+  <data name="Network_ApplyDNS.Content" xml:space="preserve">
+    <value>DNSを適用</value>
+  </data>
+  <data name="Network_IPv4Title.Text" xml:space="preserve">
+    <value>IPv4 DNSサーバー</value>
+  </data>
+  <data name="Network_IPv6Title.Text" xml:space="preserve">
+    <value>IPv6 DNSサーバー</value>
+  </data>
+  <data name="Network_NicTitle.Text" xml:space="preserve">
+    <value>ネットワークインターフェース</value>
+  </data>
+  <data name="Network_Primary.Text" xml:space="preserve">
+    <value>プライマリ</value>
+  </data>
+  <data name="Network_ResetDNS.Content" xml:space="preserve">
+    <value>デフォルトDNSにリセット</value>
+  </data>
+  <data name="Network_Secondary.Text" xml:space="preserve">
+    <value>セカンダリ</value>
+  </data>
+  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
+    <value>カスタムDNSを設定</value>
+  </data>
+  <data name="NoIPv4" xml:space="preserve">
+    <value>IPv4 DNSアドレスが見つかりません</value>
+  </data>
+  <data name="NoIPv6" xml:space="preserve">
+    <value>IPv6 DNSアドレスが見つかりません</value>
+  </data>
+  <data name="NoNic" xml:space="preserve">
+    <value>ネットワークインターフェースが選択されていません</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>設定されていません</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
-    <value>(adult filter)</value>
+    <value>（アダルトフィルター）</value>
   </data>
   <data name="Automatic" xml:space="preserve">
-    <value>Automatic</value>
+    <value>自動</value>
   </data>
   <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
-    <value>Deaktiviert die Verwendung von biometrischen Methoden zur Authentifizierung, wie Fingerabdruck- oder Gesichtserkennung.</value>
+    <value>指紋認証や顔認証などの生体認証の使用を無効にします。</value>
   </data>
   <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
-    <value>Biometriefunktionen deaktivieren</value>
+    <value>生体認証機能を無効にする</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>RyTuneX ist ein hochmodernes Optimierungstool, das mit dem WinUI 3-Framework entwickelt wurde und darauf abzielt, die Leistung von Windows-Geräten zu steigern. Entwickelt für Windows 10 und 11, ermöglicht RyTuneX den Benutzern, hartnäckige vorinstallierte Apps mühelos zu entfernen und Systemressourcen zu optimieren</value>
-  </data>
-  <data name="Feature_CleanMemory.Description" xml:space="preserve">
-    <value>Aktiviert den rytunexsvc, der regelmäßig die RAM-Auslastung überprüft und ihn leert, wenn sie 80% überschreitet</value>
+    <value>RyTuneXは、WinUI 3フレームワークで構築された最先端の最適化ツールで、Windowsデバイスのパフォーマンスを向上させます。Windows 10および11の両方に対応し、ユーザーが頑固なプリインストールアプリを簡単に削除し、システムリソースを最適化できるようにします。</value>
   </data>
   <data name="Feature_CleanMemory.Header" xml:space="preserve">
-    <value>RAM-Reiniger aktivieren</value>
+    <value>RAMクリーナーを有効にする</value>
+  </data>
+  <data name="Feature_CleanMemory.Description" xml:space="preserve">
+    <value>rytunexsvcを有効にし、RAM使用量を定期的にチェックし、80％を超えた場合にクリアします。</value>
   </data>
   <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>Nach Updates suchen</value>
+    <value>更新を確認</value>
   </data>
   <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>Eine neuere Version (</value>
+    <value>新しいバージョン（</value>
   </data>
   <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>) ist verfügbar. Bitte aktualisieren Sie auf die neueste Version, um neue Funktionen und Verbesserungen zu nutzen.</value>
+    <value>）が利用可能です。新機能と改善を楽しむために最新バージョンに更新してください。</value>
   </data>
   <data name="UpdateTitle" xml:space="preserve">
-    <value>RyTuneX-Updates</value>
+    <value>RyTuneXの更新</value>
   </data>
   <data name="NetworkError" xml:space="preserve">
-    <value>Ein Fehler ist aufgetreten. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es später erneut.</value>
+    <value>エラーが発生しました。インターネット接続を確認し、後でもう一度お試しください。</value>
   </data>
   <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>Sie verwenden bereits die neueste Version (</value>
+    <value>最新バージョン（</value>
   </data>
   <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>). Es sind keine Updates verfügbar.</value>
+    <value>）を既に使用しています。現在、更新は利用できません。</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Schließen</value>
+    <value>閉じる</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>Aktualisieren</value>
+    <value>更新</value>
   </data>
   <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Unterstützung</value>
+    <value>サポート</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
-    <value>Netzwerk</value>
+    <value>ネットワーク</value>
   </data>
   <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
-    <value>Batterie</value>
+    <value>バッテリー</value>
   </data>
   <data name="MACAddress" xml:space="preserve">
-    <value>MAC-Adresse</value>
+    <value>MACアドレス</value>
   </data>
   <data name="AdapterType" xml:space="preserve">
-    <value>Adaptertyp</value>
+    <value>アダプタータイプ</value>
   </data>
   <data name="EstimatedChargeRemaining" xml:space="preserve">
-    <value>Geschätzte verbleibende Ladung</value>
+    <value>推定残量</value>
   </data>
   <data name="BatteryStatus" xml:space="preserve">
-    <value>Batteriestatus</value>
+    <value>バッテリーステータス</value>
   </data>
   <data name="Chemistry" xml:space="preserve">
-    <value>Chemische Zusammensetzung</value>
+    <value>化学</value>
   </data>
   <data name="Shell_Security.Content" xml:space="preserve">
-    <value>Sicherheit</value>
+    <value>セキュリティ</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
-    <value>Es ist ein unerwarteter Fehler aufgetreten</value>
+    <value>予期しないエラーが発生しました</value>
   </data>
   <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>Protokolle anzeigen</value>
+    <value>ログを表示</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
-    <value>Gesamt: {0} App(s)</value>
+    <value>合計: {0} アプリ</value>
   </data>
 </root>

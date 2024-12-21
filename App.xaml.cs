@@ -97,6 +97,7 @@ public partial class App : Application
             services.AddTransient<DebloatSystemPage>();
             services.AddTransient<HomePage>();
             services.AddTransient<NetworkPage>();
+            services.AddTransient<SecurityPage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 

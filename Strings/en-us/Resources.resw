@@ -124,16 +124,13 @@
     <value>Debloat</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>System Info</value>
+    <value>Device</value>
   </data>
-  <data name="Shell_ReportBug.Content" xml:space="preserve">
-    <value>Report Bug</value>
+  <data name="Shell_Issue.Content" xml:space="preserve">
+    <value>Report</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>Optimize System</value>
-  </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>Personalization</value>
+    <value>Optimize</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>Theme</value>
@@ -190,16 +187,13 @@
     <value>Select apps that you want to remove and hit uninstall</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>Windows Features</value>
+    <value>Features</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
     <value>Privacy</value>
   </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
     <value>Join Our Server</value>
-  </data>
-  <data name="HomePage_IssueButton.Text" xml:space="preserve">
-    <value>Report Issue</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
     <value>Check out RyTuneX</value>
@@ -232,10 +226,10 @@
     <value>Uninstalling some of these apps may not remove them completely.</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>Error uninstalling</value>
+    <value>Error uninstalling the following app(s)</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>Uninstalled successfully</value>
+    <value>Successfully uninstalled the following app(s)</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
     <value>Remove Temp Files</value>
@@ -753,8 +747,8 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="HomePage_SupportButton.Text" xml:space="preserve">
-    <value>Support us</value>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>Support</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Network</value>
@@ -779,5 +773,14 @@
   </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>Security</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>There was an unexpected error</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>View Logs</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>Total: {0} App(s)</value>
   </data>
 </root>

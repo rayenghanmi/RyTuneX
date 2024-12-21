@@ -40,7 +40,7 @@ public sealed partial class SettingsPage : Page
         SetDefaultLanguageBasedOnSystem();
 
         _elementTheme = _themeSelectorService.Theme;
-        _versionDescription = "Version " + GetVersionDescription();
+        _versionDescription = "Version".GetLocalized() + " " + GetVersionDescription();
 
         SwitchThemeCommand = new RelayCommand<ElementTheme>(
             async (param) =>
@@ -389,7 +389,7 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            UpdateStatusText.Text = "Error has occurred";
+            UpdateStatusText.Text = "UnexpectedError".GetLocalized();
             UpdateProgress.ShowError = true;
             await LogHelper.LogError($"Error during installation: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
@@ -401,7 +401,7 @@ public sealed partial class SettingsPage : Page
                 Directory.Delete(extractionPath, true);
             }
             ApplicationData.Current.LocalSettings.Values["DoneUpdating"] = true;
-            UpdateStatusText.Text = "Done";
+            UpdateStatusText.Text = "Done".GetLocalized();
             UpdateButton.Visibility = Visibility.Visible;
             UpdateStack.Visibility = Visibility.Collapsed;
             UpdateProgress.Visibility = Visibility.Collapsed;

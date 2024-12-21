@@ -8,5 +8,4 @@ public sealed partial class SecurityPage : Page
     {
         InitializeComponent();
     }
-
 }

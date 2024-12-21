@@ -9,7 +9,7 @@ namespace RyTuneX.Views;
 
 public sealed partial class DebloatSystemPage : Page
 {
-    private bool uninstallableOnlyChecked = true;
+    private bool uninstallableOnly = true;
     public ObservableCollection<KeyValuePair<string, string>> AppList { get; set; } = new();
     private readonly HashSet<string> selectedAppsForUninstall = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
@@ -25,45 +25,44 @@ public sealed partial class DebloatSystemPage : Page
         args.Cancel = true;
     }
 
-    private async void LoadInstalledApps(bool uninstallableOnly = true, CancellationToken cancellationToken = default)
+    private async void LoadInstalledApps(bool uninstallableOnly = true)
     {
         try
         {
-            await LogHelper.Log("Loading InstalledApps");
-
-            // Check for cancellation request
-            cancellationToken.ThrowIfCancellationRequested();
-
-            var installedApps = await Task.Run(() => OptimizationOptions.GetUWPApps(uninstallableOnly), cancellationToken);
-            var numberOfInstalledApps = installedApps.Count - 3; // removes Rayen.RyTuneX from total installed apps count
-
-            var filteredApps = installedApps.Where(app => !app.ToString().Contains("Rayen.RyTuneX") &&
-                                                          !app.ToString().Contains("----") &&
-                                                          !app.ToString().Contains("Name") &&
-                                                          !(app.ToString().Contains("Edge") && IsEdgeUninstalled())).ToList();
-
             DispatcherQueue.TryEnqueue(() =>
             {
-                // fetching installed apps data & hiding UI elements
-                AppList.Clear();
+                // hiding UI elements
                 gettingAppsLoading.Visibility = Visibility.Visible;
                 appTreeView.Visibility = Visibility.Collapsed;
                 appTreeView.IsEnabled = false;
                 uninstallButton.IsEnabled = false;
-                installedAppsCount.Visibility = Visibility.Collapsed;
                 uninstallingStatusText.Text = "UninstallTip".GetLocalized();
                 uninstallingStatusBar.Visibility = Visibility.Collapsed;
-                showAll.Visibility = Visibility.Collapsed;
-                uninstallButton.Visibility = Visibility.Collapsed;
-                TempStackButtonTextBar.Visibility = Visibility.Collapsed;
+                showAll.IsEnabled = false;
+            });
 
+            await LogHelper.Log("Loading InstalledApps");
+
+            // fetching installed apps data
+            var installedApps = await Task.Run(() => OptimizationOptions.GetUWPApps(uninstallableOnly));
+            var numberOfInstalledApps = installedApps.Count - 3;
+
+            var filteredApps = installedApps.Where(app =>
+                !app.ToString().Contains("Rayen.RyTuneX") &&
+                !app.ToString().Contains("----") &&
+                !app.ToString().Contains("Name") &&
+                !(app.ToString().Contains("Edge") && IsEdgeUninstalled())).ToList();
+
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                // showing the installed apps data after fetching
+                AppList.Clear();
                 foreach (var app in filteredApps)
                 {
                     AppList.Add(app);
                 }
 
-                // showing the installed apps data after fetching
-                installedAppsCount.Text = $"Total: {numberOfInstalledApps} Apps";
+                installedAppsCount.Text = string.Format("TotalApps".GetLocalized(), numberOfInstalledApps);
                 installedAppsCount.Visibility = Visibility.Visible;
                 showAll.IsEnabled = true;
                 showAll.Visibility = Visibility.Visible;
@@ -72,20 +71,14 @@ public sealed partial class DebloatSystemPage : Page
                 appTreeView.IsEnabled = true;
                 uninstallButton.IsEnabled = true;
                 gettingAppsLoading.Visibility = Visibility.Collapsed;
-                uninstallingStatusBar.ShowError = false;
                 TempStackButtonTextBar.Visibility = Visibility.Visible;
             });
-        }
-        catch (OperationCanceledException ex)
-        {
-            await LogHelper.LogError($"Operation canceled: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
         catch (Exception ex)
         {
             await LogHelper.LogError($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
-
     private bool IsEdgeUninstalled()
     {
         var settingsEdgeUninstalled = ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"];
@@ -101,59 +94,69 @@ public sealed partial class DebloatSystemPage : Page
         }
 
         uninstallButton.IsEnabled = false;
+        showAll.IsEnabled = false;
         appTreeView.IsEnabled = false;
         uninstallingStatusBar.Visibility = Visibility.Visible;
 
-        // List to store names of apps that failed to uninstall
+        // List to store names of apps that failed or succeeded to uninstall
         var failedUninstalls = new List<string>();
+        var successfulUninstalls = new List<string>();
 
         try
         {
-            var uninstallTasks = appTreeView.SelectedItems
-                .OfType<KeyValuePair<string, string>>()
-                .Where(appInfo => !selectedAppsForUninstall.Contains(appInfo.Key))
-                .Select(async appInfo =>
+            foreach (var appInfo in appTreeView.SelectedItems.OfType<KeyValuePair<string, string>>())
+            {
+                var selectedAppName = appInfo.Key;
+                DispatcherQueue.TryEnqueue(() =>
                 {
-                    var selectedAppName = appInfo.Key;
                     uninstallingStatusText.Text = "Uninstalling".GetLocalized() + " " + selectedAppName;
-
-                    try
-                    {
-                        await UninstallApps(selectedAppName);
-                        selectedAppsForUninstall.Add(selectedAppName);
-                    }
-                    catch (Exception ex)
-                    {
-                        await LogHelper.LogError($"Error uninstalling {selectedAppName}: {ex.Message}\nStack Trace: {ex.StackTrace}");
-                        failedUninstalls.Add(selectedAppName);
-                    }
                 });
 
-            await Task.WhenAll(uninstallTasks);
+                try
+                {
+                    await UninstallApps(selectedAppName);
+                    successfulUninstalls.Add(selectedAppName);
+                    selectedAppsForUninstall.Add(selectedAppName);
+                }
+                catch (Exception ex)
+                {
+                    await LogHelper.LogError($"Error uninstalling {selectedAppName}: {ex.Message}\nStack Trace: {ex.StackTrace}");
+                    failedUninstalls.Add(selectedAppName);
+                }
+            }
+
+            uninstallingStatusText.Text = "UninstallTip".GetLocalized();
+            uninstallingStatusBar.Visibility = Visibility.Collapsed;
 
             appTreeView.SelectedItems.Clear();
             // Reload the installed apps after successful uninstall
             await LogHelper.Log("Reloading Installed Apps Data");
-            LoadInstalledApps(uninstallableOnlyChecked);
+            LoadInstalledApps(uninstallableOnly);
 
-            // Show success notification if no errors, otherwise show the error notification
-            uninstallingStatusBar.Visibility = Visibility.Collapsed;
-            if (failedUninstalls.Count == 0)
+            // Show notifications for succeeded apps
+            if (successfulUninstalls.Count > 0)
             {
-                NotificationQueue.Show(NotificationContent("Debloat", "UninstallationSuccess".GetLocalized(), InfoBarSeverity.Success, 5000));
+                var successfulAppsMessage = string.Join("\n", successfulUninstalls);
+                NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(),
+                    "UninstallationSuccess".GetLocalized() + $":\n{successfulAppsMessage}",
+                    InfoBarSeverity.Success, 5000));
             }
-            else
+
+            // Show notifications for failed apps
+            if (failedUninstalls.Count > 0)
             {
                 var failedAppsMessage = string.Join("\n", failedUninstalls);
-                NotificationQueue.Show(NotificationContent("Debloat", $"Error uninstalling the following app(s):\n{failedAppsMessage}", InfoBarSeverity.Error, 5000));
+                NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(),
+                    "UninstallationError".GetLocalized() + $":\n{failedAppsMessage}",
+                    InfoBarSeverity.Error, 5000));
             }
         }
         catch (Exception ex)
         {
             await LogHelper.LogError($"Error during uninstallation process: {ex.Message}\nStack Trace: {ex.StackTrace}");
             uninstallingStatusBar.ShowError = true;
-            NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(), ex.ToString(), InfoBarSeverity.Error, 5000));
-            LoadInstalledApps(uninstallableOnlyChecked);
+            NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(), "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000));
+            LoadInstalledApps(uninstallableOnly);
         }
     }
 
@@ -233,34 +236,13 @@ public sealed partial class DebloatSystemPage : Page
 
     private void ShowAll_Checked(object sender, RoutedEventArgs e)
     {
-        // Show uninstallable apps only
-        LogHelper.Log("Reloading Installed Apps Data (All)");
-        DispatcherQueue.TryEnqueue(() =>
-        {
-            showAll.IsEnabled = false;
-            gettingAppsLoading.Visibility = Visibility.Visible;
-            appTreeView.Visibility = Visibility.Collapsed;
-            appTreeView.IsEnabled = false;
-            uninstallButton.IsEnabled = false;
-            NotificationQueue.Show(NotificationContent("Debloat".GetLocalized(), "DebloatPage_NotificationBody".GetLocalized(), InfoBarSeverity.Warning, 4000));
-        });
-        uninstallableOnlyChecked = false;
-        LoadInstalledApps(uninstallableOnly: false, cancellationTokenSource.Token);
+        uninstallableOnly = false;
+        LoadInstalledApps(uninstallableOnly);
     }
     private void ShowAll_Unchecked(object sender, RoutedEventArgs e)
     {
-        // Show all apps
-        LogHelper.Log("Reloading Installed Apps Data (Uninstallable Only)");
-        DispatcherQueue.TryEnqueue(() =>
-        {
-            showAll.IsEnabled = false;
-            gettingAppsLoading.Visibility = Visibility.Visible;
-            appTreeView.Visibility = Visibility.Collapsed;
-            appTreeView.IsEnabled = false;
-            uninstallButton.IsEnabled = false;
-        });
-        uninstallableOnlyChecked = true;
-        LoadInstalledApps(uninstallableOnly: true, cancellationTokenSource.Token);
+        uninstallableOnly = true;
+        LoadInstalledApps(uninstallableOnly);
     }
     private static CommunityToolkit.WinUI.Behaviors.Notification NotificationContent(string title, string message, InfoBarSeverity severity, int duration)
     {
