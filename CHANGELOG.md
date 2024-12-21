@@ -6,8 +6,8 @@ All notable changes to this branch will be documented in this file.
 
 ### Added
 
-- Introduced a new `Security` page with a dedicated `Firewall` section.
-- Added Japanese language (`ja-jp`).
+- Introduced a new `Security` page ~~with a dedicated `Firewall` section.~~
+- Added Japanese language (`ja-jp`) thanks to @coolvitto.
 - Added Realtime Performance Monitoring in `Home` page.
 
 ### Fixes
