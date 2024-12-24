@@ -1,13 +1,15 @@
 ﻿using System.Diagnostics;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-
+using Microsoft.UI.Xaml.Media;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.ViewModels;
 using Windows.ApplicationModel;
 using Windows.System;
+using Windows.UI;
 
 namespace RyTuneX.Views;
 
@@ -95,5 +97,19 @@ public sealed partial class ShellPage : Page
             FileName = "https://buymeacoffee.com/rayen.ghanmi.22",
             UseShellExecute = true
         });
+    }
+
+    private async void NavigationViewItem_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        await new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            Title = "Restart",
+            Content = "Some of the applied optimizations require a device restart to take effect.",
+            PrimaryButtonText = "Restart",
+            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
+            CloseButtonText = "Cancel"
+        }.ShowAsync();
     }
 }

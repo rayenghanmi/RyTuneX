@@ -159,15 +159,6 @@
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Sprache</value>
   </data>
-  <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. Optimierte Systemdienste:</value>
-  </data>
-  <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. Fein abgestimmte Registry-Optimierung:</value>
-  </data>
-  <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. Blähungsfreie Leistung:</value>
-  </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>Daten für installierte Apps werden abgerufen...</value>
   </data>
@@ -779,5 +770,32 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Gesamt: {0} App(s)</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>Leistung</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>Firewall- und Netzwerkschutz</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>Echtzeitschutz</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>Sicherheitsstatus</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>Benutzerkontensteuerung (UAC)</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>Schutz vor Viren und Bedrohungen</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>Windows Update</value>
   </data>
 </root>

@@ -14,7 +14,6 @@ public sealed partial class HomePage : Page
     private readonly PerformanceCounter cpuCounter;
     private readonly PerformanceCounter diskCounter;
     private readonly CancellationTokenSource _cancellationTokenSource;
-    private bool isFirstUpdate = true;
 
     public HomePage()
     {
@@ -60,36 +59,14 @@ public sealed partial class HomePage : Page
                     processesCountText.Text = processesCount.ToString();
                     servicesCountText.Text = servicesCount.ToString();
                     gpuUsageText.Text = $"{gpuUsage}%";
-
-                    if (isFirstUpdate)
-                    {
-                        cpuUsageRing.Visibility = Visibility.Collapsed;
-                        cpuUsageText.Visibility = Visibility.Visible;
-
-                        ramUsageRing.Visibility = Visibility.Collapsed;
-                        ramUsageText.Visibility = Visibility.Visible;
-
-                        diskUsageRing.Visibility = Visibility.Collapsed;
-                        diskUsageText.Visibility = Visibility.Visible;
-
-                        networkUsageRing.Visibility = Visibility.Collapsed;
-                        networkUsageText.Visibility = Visibility.Visible;
-
-                        installedAppsCountRing.Visibility = Visibility.Collapsed;
-                        installedAppsCountText.Visibility = Visibility.Visible;
-
-                        processesCountRing.Visibility = Visibility.Collapsed;
-                        processesCountText.Visibility = Visibility.Visible;
-
-                        servicesCountRing.Visibility = Visibility.Collapsed;
-                        servicesCountText.Visibility = Visibility.Visible;
-
-                        gpuUsageRing.Visibility = Visibility.Collapsed;
-                        gpuUsageText.Visibility = Visibility.Visible;
-
-                        // Only allow to hide the progress ring on the first update
-                        isFirstUpdate = false;
-                    }
+                    cpuUsageText.Visibility = Visibility.Visible;
+                    ramUsageText.Visibility = Visibility.Visible;
+                    diskUsageText.Visibility = Visibility.Visible;
+                    networkUsageText.Visibility = Visibility.Visible;
+                    installedAppsCountText.Visibility = Visibility.Visible;
+                    processesCountText.Visibility = Visibility.Visible;
+                    servicesCountText.Visibility = Visibility.Visible;
+                    gpuUsageText.Visibility = Visibility.Visible;
                 });
 
                 await Task.Delay(1000, cancellationToken);

@@ -159,15 +159,6 @@
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. Streamlined System Services:</value>
-  </data>
-  <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. Fine-Tuned Registry Optimization:</value>
-  </data>
-  <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. Bloat-Free Performance:</value>
-  </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>Fetching Installed Apps Data...</value>
   </data>
@@ -782,5 +773,38 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Total: {0} App(s)</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>Performance</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>Security Status</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>Virus &amp; Threat Protection</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>Firewall &amp; Network Protection</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>Windows Update</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>Real-Time Protection</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>User Account Control (UAC)</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>Details</value>
   </data>
 </root>

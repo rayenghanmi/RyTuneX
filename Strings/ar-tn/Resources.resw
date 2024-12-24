@@ -159,15 +159,6 @@
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>اللغة</value>
   </data>
-  <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. خدمات النظام المُبسطة:</value>
-  </data>
-  <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. تحسين سجل النظام بدقة:</value>
-  </data>
-  <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. أداء خالٍ من البرامج الزائدة:</value>
-  </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>جلب بيانات التطبيقات المثبتة...</value>
   </data>
@@ -782,5 +773,32 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>الإجمالي: {0} تطبيق(ات)</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>الأداء</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>التفاصيل</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>حماية الجدار الناري والشبكة</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>الحماية في الوقت الحقيقي</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>الشاشة الذكية (SmartScreen)</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>حالة الأمان</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>التحكم في حساب المستخدم (UAC)</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>الحماية من الفيروسات والتهديدات</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>تحديثات ويندوز</value>
   </data>
 </root>

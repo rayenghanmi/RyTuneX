@@ -159,15 +159,6 @@
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>言語</value>
   </data>
-  <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. システムサービスの簡素化:</value>
-  </data>
-  <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. レジストリの最適化:</value>
-  </data>
-  <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. ブロートフリーのパフォーマンス:</value>
-  </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>インストールされたアプリデータを取得中...</value>
   </data>
@@ -782,5 +773,32 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>合計: {0} アプリ</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>パフォーマンス</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>ファイアウォールとネットワークの保護</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>リアルタイム保護</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>セキュリティの状態</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>ユーザー アカウント制御 (UAC)</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>ウイルスと脅威の防御</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>Windows Update</value>
   </data>
 </root>

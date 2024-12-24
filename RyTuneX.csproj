@@ -52,6 +52,7 @@
 	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.0" />
 	  <PackageReference Include="System.Management" Version="9.0.0" />
 	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.0" />
+	  <PackageReference Include="vocaluxe.dependencies.netfwtypelib" Version="1.0.1" />
 	  <PackageReference Include="WinUIEx" Version="2.5.0" />
 	  <PackageReference Include="System.Management.Automation" Version="7.4.6" />
   </ItemGroup>
@@ -68,6 +69,10 @@
     <None Update="Assets\RyTuneXService.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+
+    <Page Update="Views\StartupAppsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\DebloatSystemPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

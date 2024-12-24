@@ -236,6 +236,7 @@ public sealed partial class SettingsPage : Page
             var networkError = new ContentDialog()
             {
                 XamlRoot = xaml,
+                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 Title = "UpdateTitle".GetLocalized(),
                 Content = "NetworkError".GetLocalized(),
                 CloseButtonText = "Close".GetLocalized()
@@ -256,6 +257,7 @@ public sealed partial class SettingsPage : Page
                 var updateUnavailable = new ContentDialog()
                 {
                     XamlRoot = XamlRoot,
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     Title = "UpdateTitle".GetLocalized(),
                     Content = "UnavailableUpdate0".GetLocalized() + latestVersionString + "UnavailableUpdate1".GetLocalized(),
                     CloseButtonText = "Close".GetLocalized()
@@ -267,6 +269,7 @@ public sealed partial class SettingsPage : Page
                 var updateAvailable = new ContentDialog()
                 {
                     XamlRoot = XamlRoot,
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     Title = "UpdateTitle".GetLocalized(),
                     Content = "AvailableUpdateContent0".GetLocalized() + latestVersionString + "AvailableUpdateContent1".GetLocalized(),
                     CloseButtonText = "Close".GetLocalized(),

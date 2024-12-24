@@ -44,6 +44,7 @@ internal class LogHelper
             var errorDialog = new ContentDialog
             {
                 Title = "Error",
+                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 Content = errorMessage,
                 CloseButtonText = "Close",
                 PrimaryButtonText = "Open Logs File",

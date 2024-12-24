@@ -25,7 +25,6 @@
 	</Properties>
 
 	<Dependencies>
-		<TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
 		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
 	</Dependencies>
 
@@ -45,19 +44,6 @@
 			  Square44x44Logo="Assets\Square44x44Logo.png">
 				<uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
 			</uap:VisualElements>
-						<Extensions>
-				<desktop:Extension Category="windows.toastNotificationActivation">
-					<desktop:ToastNotificationActivation ToastActivatorCLSID="7191f6ac-c7a2-433c-a636-77629eae8a01"/>
-				</desktop:Extension>
-
-				<com:Extension Category="windows.comServer">
-					<com:ComServer>
-						<com:ExeServer Executable="RyTuneX.exe" Arguments="----AppNotificationActivated:" DisplayName="Toast activator">
-							<com:Class Id="7191f6ac-c7a2-433c-a636-77629eae8a01" DisplayName="Toast activator"/>
-						</com:ExeServer>
-					</com:ComServer>
-				</com:Extension>
-			</Extensions>
 		</Application>
 	</Applications>
 

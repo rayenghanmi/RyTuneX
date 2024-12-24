@@ -58,6 +58,12 @@
                     <ToggleSwitch x:Name="Drivers" Tag="Drivers" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard Header="Startup Apps" IsClickEnabled="True" Click="SettingsCard_Click">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE7B5;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                </controls:SettingsCard>
+
                 <!-- Advanced System Optimizations -->
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="6"

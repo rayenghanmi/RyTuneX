@@ -159,15 +159,6 @@
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>语言</value>
   </data>
-  <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. 简化系统服务:</value>
-  </data>
-  <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. 微调注册表优化:</value>
-  </data>
-  <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. 无臃肿性能:</value>
-  </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>正在获取已安装的应用程序数据...</value>
   </data>
@@ -782,5 +773,32 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>总数: {0} 个应用</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>性能</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>详细信息</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>防火墙和网络保护</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>实时保护</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>安全状态</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>用户帐户控制 (UAC)</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>病毒和威胁防护</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>Windows 更新</value>
   </data>
 </root>

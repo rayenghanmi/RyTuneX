@@ -12,7 +12,7 @@ public sealed partial class DebloatSystemPage : Page
     private bool uninstallableOnly = true;
     public ObservableCollection<KeyValuePair<string, string>> AppList { get; set; } = new();
     private readonly HashSet<string> selectedAppsForUninstall = new();
-    private readonly CancellationTokenSource cancellationTokenSource = new();
+    private List<KeyValuePair<string, string>> allApps = new();
     public DebloatSystemPage()
     {
         InitializeComponent();
@@ -34,10 +34,9 @@ public sealed partial class DebloatSystemPage : Page
                 // hiding UI elements
                 gettingAppsLoading.Visibility = Visibility.Visible;
                 appTreeView.Visibility = Visibility.Collapsed;
-                appTreeView.IsEnabled = false;
                 uninstallButton.IsEnabled = false;
                 uninstallingStatusText.Text = "UninstallTip".GetLocalized();
-                uninstallingStatusBar.Visibility = Visibility.Collapsed;
+                uninstallingStatusBar.Opacity = 0;
                 showAll.IsEnabled = false;
             });
 
@@ -55,8 +54,9 @@ public sealed partial class DebloatSystemPage : Page
 
             DispatcherQueue.TryEnqueue(() =>
             {
-                // showing the installed apps data after fetching
+                // Clear previous data
                 AppList.Clear();
+                allApps = filteredApps;
                 foreach (var app in filteredApps)
                 {
                     AppList.Add(app);
@@ -96,7 +96,6 @@ public sealed partial class DebloatSystemPage : Page
         uninstallButton.IsEnabled = false;
         showAll.IsEnabled = false;
         appTreeView.IsEnabled = false;
-        uninstallingStatusBar.Visibility = Visibility.Visible;
 
         // List to store names of apps that failed or succeeded to uninstall
         var failedUninstalls = new List<string>();
@@ -104,6 +103,14 @@ public sealed partial class DebloatSystemPage : Page
 
         try
         {
+            var totalApps = appTreeView.SelectedItems.Count;
+            var completedApps = 0;
+
+            // Initialize status bar
+            uninstallingStatusBar.Value = 0;
+            uninstallingStatusBar.Maximum = totalApps;
+            uninstallingStatusBar.Opacity = 1;
+
             foreach (var appInfo in appTreeView.SelectedItems.OfType<KeyValuePair<string, string>>())
             {
                 var selectedAppName = appInfo.Key;
@@ -123,10 +130,16 @@ public sealed partial class DebloatSystemPage : Page
                     await LogHelper.LogError($"Error uninstalling {selectedAppName}: {ex.Message}\nStack Trace: {ex.StackTrace}");
                     failedUninstalls.Add(selectedAppName);
                 }
+
+                // Update progress bar
+                completedApps++;
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    uninstallingStatusBar.Value = completedApps;
+                });
             }
 
             uninstallingStatusText.Text = "UninstallTip".GetLocalized();
-            uninstallingStatusBar.Visibility = Visibility.Collapsed;
 
             appTreeView.SelectedItems.Clear();
             // Reload the installed apps after successful uninstall
@@ -292,6 +305,40 @@ public sealed partial class DebloatSystemPage : Page
             TempStatusText.Text = "ErrTempDel".GetLocalized();
             TempButton.Visibility = Visibility.Visible;
             TempProgress.ShowError = true;
+        }
+    }
+    private void AppSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+        {
+            noAppFoundText.Visibility = Visibility.Collapsed;
+            var query = sender.Text.ToLower();
+            var filteredApps = allApps.Where(app => app.Key.ToLower().Contains(query)).OrderBy(app => app.Key).ToList();
+            AppList.Clear();
+            foreach (var app in filteredApps)
+            {
+                AppList.Add(app);
+            }
+        }
+        if (AppList.Count == 0)
+        {
+            noAppFoundText.Visibility = Visibility.Visible;
+        }
+    }
+
+    private void AppSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    {
+        noAppFoundText.Visibility = Visibility.Collapsed;
+        var query = args.QueryText.ToLower();
+        var filteredApps = allApps.Where(app => app.Key.ToLower().Contains(query)).OrderBy(app => app.Key).ToList();
+        AppList.Clear();
+        foreach (var app in filteredApps)
+        {
+            AppList.Add(app);
+        }
+        if (AppList.Count == 0)
+        {
+            noAppFoundText.Visibility = Visibility.Visible;
         }
     }
 }

@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
     <ScrollView Padding="24,14,24,0">
-        <Grid x:Name="HeaderGrid">
+        <Grid x:Name="HeaderGrid" Margin="0,0,0,38">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -52,89 +52,66 @@
                     </Button>
                 </StackPanel>
             </StackPanel>
-
-            <controls:WrapPanel Grid.Row="1" Orientation="Horizontal">
-                
-                <!-- CPU Usage Block -->
-                <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
-                    <FontIcon Glyph="&#xEEA1;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBlock Text="CPU Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
-                        <ProgressRing x:Name="cpuUsageRing" IsIndeterminate="True"/>
-                        <TextBlock x:Name="cpuUsageText" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <TextBlock x:Uid="HomePage_Performance" Margin="0,20,0,10" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
+                <controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!-- CPU Usage Block -->
+                    <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <FontIcon Glyph="&#xEEA1;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="CPU Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
+                        <TextBlock x:Name="cpuUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
                     </Grid>
-                </Grid>
 
-                <!-- RAM Usage Block -->
-                <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
-                    <FontIcon Glyph="&#xE964;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBlock Text="RAM Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
-                        <ProgressRing x:Name="ramUsageRing" IsIndeterminate="True"/>
-                        <TextBlock x:Name="ramUsageText" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                    <!-- RAM Usage Block -->
+                    <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <FontIcon Glyph="&#xE964;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="RAM Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
+                        <TextBlock x:Name="ramUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
                     </Grid>
-                </Grid>
 
-                <!-- Disk Usage Block -->
-                <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
-                    <FontIcon Glyph="&#xEDA2;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBlock Text="Disk Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
-                        <ProgressRing x:Name="diskUsageRing" IsIndeterminate="True"/>
-                        <TextBlock x:Name="diskUsageText" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                    <!-- Disk Usage Block -->
+                    <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <FontIcon Glyph="&#xEDA2;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="Disk Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
+                        <TextBlock x:Name="diskUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
                     </Grid>
-                </Grid>
 
-                <!-- Network Usage Block -->
-                <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
-                    <FontIcon Glyph="&#xEDA3;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBlock Text="Network Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
-                        <ProgressRing x:Name="networkUsageRing" IsIndeterminate="True"/>
-                        <TextBlock x:Name="networkUsageText" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                    <!-- Network Usage Block -->
+                    <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <FontIcon Glyph="&#xEDA3;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="Network Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
+                        <TextBlock x:Name="networkUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
                     </Grid>
-                </Grid>
 
-                <!-- Installed Apps Count Block -->
-                <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
-                    <FontIcon Glyph="&#xE71D;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBlock Text="Installed Apps" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
-                        <ProgressRing x:Name="installedAppsCountRing" IsIndeterminate="True"/>
-                        <TextBlock x:Name="installedAppsCountText" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                    <!-- Installed Apps Count Block -->
+                    <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <FontIcon Glyph="&#xE71D;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="Installed Apps" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
+                        <TextBlock x:Name="installedAppsCountText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
                     </Grid>
-                </Grid>
 
-                <!-- Processes Count Block -->
-                <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
-                    <FontIcon Glyph="&#xECAA;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBlock Text="Processes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
-                        <ProgressRing x:Name="processesCountRing" IsIndeterminate="True"/>
-                        <TextBlock x:Name="processesCountText" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                    <!-- Processes Count Block -->
+                    <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <FontIcon Glyph="&#xECAA;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="Processes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
+                        <TextBlock x:Name="processesCountText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
                     </Grid>
-                </Grid>
 
-                <!-- Services Count Block -->
-                <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
-                    <FontIcon Glyph="&#xEA86;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBlock Text="Services" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
-                        <ProgressRing x:Name="servicesCountRing" IsIndeterminate="True"/>
-                        <TextBlock x:Name="servicesCountText" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                    <!-- Services Count Block -->
+                    <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <FontIcon Glyph="&#xEA86;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="Services" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
+                        <TextBlock x:Name="servicesCountText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
                     </Grid>
-                </Grid>
 
-                <!-- GPU Usage Block -->
-                <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
-                    <FontIcon Glyph="&#xF211;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBlock Text="GPU Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
-                        <ProgressRing x:Name="gpuUsageRing" IsIndeterminate="True"/>
-                        <TextBlock x:Name="gpuUsageText" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                    <!-- GPU Usage Block -->
+                    <Grid Padding="10" Width="200" Height="150" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <FontIcon Glyph="&#xF211;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="GPU Usage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
+                        <TextBlock x:Name="gpuUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
                     </Grid>
-                </Grid>
-            </controls:WrapPanel>
+                </controls:WrapPanel>
+            </StackPanel>
         </Grid>
     </ScrollView>
 </Page>
