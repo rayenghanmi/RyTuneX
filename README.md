@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/rayenghanmi/RyTuneX/assets/108760398/9017b3b3-5288-4156-bd18-15dbe64ab111" alt="RyTuneX Logo" width="128">
+  <img src="https://github.com/user-attachments/assets/bc2beddd-99fe-4a50-b85f-0806b754a176" alt="RyTuneX Logo" width="128">
 </div>
 
 <h1 align="center">RyTuneX 🚀</h1>
@@ -48,8 +48,8 @@ RyTuneX is a cutting-edge optimizer built with the WinUI 3 framework, designed t
 
 ## 📸 Screenshots
 
-![version 0.1.8](https://github.com/rayenghanmi/RyTuneX/assets/108760398/02f08c0c-bfa4-48ee-ad68-8b4228337a8f)
-![0.8.1 setup](https://github.com/rayenghanmi/RyTuneX/assets/108760398/ae2ad043-da1b-4f00-9105-bf47c213f892)
+![version 1.0.1](https://github.com/rayenghanmi/RyTuneX/assets/108760398/8e2141a6-fe98-44fc-be91-0b15328ab08e)
+![1.0.1 setup](https://github.com/rayenghanmi/RyTuneX/assets/108760398/85be5acc-753b-4b25-85ae-cc41312961ad)
 
 ## 🛠 Installation
 
