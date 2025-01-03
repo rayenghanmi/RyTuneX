@@ -11,13 +11,13 @@ public class PageService : IPageService
     {
         Configure<HomePage>();
         Configure<OptimizeSystemPage>();
+        Configure<RepairPage>();
         Configure<DebloatSystemPage>();
         Configure<PrivacyPage>();
         Configure<FeaturesPage>();
         Configure<NetworkPage>();
         Configure<SecurityPage>();
         Configure<SystemInfoPage>();
-        Configure<StartupAppsPage>();
         Configure<SettingsPage>();
     }
 

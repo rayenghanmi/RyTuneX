@@ -104,9 +104,4 @@ public sealed partial class OptimizeSystemPage : Page
             await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
     }
-
-    private void SettingsCard_Click(object sender, RoutedEventArgs e)
-    {
-        Frame.Navigate(typeof(StartupAppsPage));
-    }
 }

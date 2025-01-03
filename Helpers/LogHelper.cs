@@ -1,6 +1,8 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Diagnostics;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Storage;
+using System.Text;
 
 internal class LogHelper
 {
@@ -8,32 +10,11 @@ internal class LogHelper
 
     public static async Task ShowErrorMessageAndLog(Exception ex, XamlRoot xamlRoot)
     {
-        var errorMessage = $"Caught Error: {ex.Message}\nStack Trace: {ex.StackTrace}";
+        var errorMessage = $"{ex.Message}\nStack Trace: {ex.StackTrace}";
 
-        await Log($"Error: {errorMessage}");
+        await LogError(errorMessage);
 
         await InitializeErrorMessage(errorMessage, xamlRoot);
-    }
-
-    private static async Task LogToFile(string message, string fileName)
-    {
-        await LogSemaphore.WaitAsync();
-        try
-        {
-            var tempFolder = ApplicationData.Current.TemporaryFolder;
-
-            var logFile = await tempFolder.CreateFileAsync($"{fileName}_{DateTime.Now:yyyy-MM-dd}.txt", CreationCollisionOption.OpenIfExists);
-
-            await FileIO.AppendTextAsync(logFile, $"{DateTime.Now:T}: {message}\n");
-        }
-        catch (Exception logException)
-        {
-            Console.WriteLine($"Error logging to file: {logException.Message}");
-        }
-        finally
-        {
-            LogSemaphore.Release();
-        }
     }
 
     private static async Task InitializeErrorMessage(string errorMessage, XamlRoot xamlRoot)
@@ -72,6 +53,34 @@ internal class LogHelper
         }
     }
 
-    public static Task Log(string message) => LogToFile(message, "Logs");
-    public static Task LogError(string message) => LogToFile($"Error: {message}", "Logs");
+    private static async Task LogToFile(string message, string fileName)
+    {
+        await LogSemaphore.WaitAsync();
+        try
+        {
+            var tempFolder = ApplicationData.Current.TemporaryFolder;
+            var logFile = await tempFolder.CreateFileAsync($"{fileName}_{DateTime.Now:yyyy-MM-dd}.txt", CreationCollisionOption.OpenIfExists);
+
+            // Ensure UTF-8 encoding when appending to the log file
+            using (var stream = await logFile.OpenStreamForWriteAsync())
+            {
+                stream.Seek(0, SeekOrigin.End); // Append to the file
+                using (var writer = new StreamWriter(stream, new UTF8Encoding(false))) // Disable BOM
+                {
+                    await writer.WriteLineAsync($"{DateTime.Now:T}: {message}");
+                }
+            }
+        }
+        catch (Exception logException)
+        {
+            Debug.WriteLine($"Error logging to file: {logException.Message}");
+        }
+        finally
+        {
+            LogSemaphore.Release();
+        }
+    }
+
+    public static Task Log(string message) => LogToFile($"[DEBUG] {message}", "Logs");
+    public static Task LogError(string message) => LogToFile($"[ERROR] {message}", "Logs");
 }

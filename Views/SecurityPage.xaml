@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
@@ -22,37 +22,37 @@
                 <ScrollView>
                     <controls:WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
 
-                        <Grid Padding="10" Width="270" Height="100" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <Grid Padding="10" Width="270" Height="100" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xEA18;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBlock x:Name="VirusThreatProtectionStatus" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                             <TextBlock x:Uid="SecurityPage_VirusThreatProtection" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                         </Grid>
 
-                        <Grid Padding="10" Width="270" Height="100" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <Grid Padding="10" Width="270" Height="100" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE964;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBlock x:Name="FirewallStatus" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                             <TextBlock x:Uid="SecurityPage_FirewallNetworkProtection" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                         </Grid>
 
-                        <Grid Padding="10" Width="270" Height="100" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <Grid Padding="10" Width="270" Height="100" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE895;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBlock x:Name="WindowsUpdateStatus" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                             <TextBlock x:Uid="SecurityPage_WindowsUpdate" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                         </Grid>
 
-                        <Grid Padding="10" Width="270" Height="100" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <Grid Padding="10" Width="270" Height="100" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xF8A5;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBlock x:Name="SmartScreenStatus" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                             <TextBlock x:Uid="SecurityPage_SmartScreen" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                         </Grid>
 
-                        <Grid Padding="10" Width="270" Height="100" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <Grid Padding="10" Width="270" Height="100" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE7EF;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBlock x:Name="RealTimeProtectionStatus" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                             <TextBlock x:Uid="SecurityPage_RealTimeProtection" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                         </Grid>
 
-                        <Grid Padding="10" Width="270" Height="100" CornerRadius="4" Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}" Margin="5">
+                        <Grid Padding="10" Width="270" Height="100" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE7C1;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBlock x:Name="UACStatus" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                             <TextBlock x:Uid="SecurityPage_UAC" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>

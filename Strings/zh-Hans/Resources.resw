@@ -204,14 +204,11 @@
   <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
     <value>内存</value>
   </data>
-  <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
-    <value>刷新</value>
-  </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
     <value>储存</value>
   </data>
   <data name="Debloat" xml:space="preserve">
-    <value>减少臃肿</value>
+    <value>精简</value>
   </data>
   <data name="DebloatPage_NotificationBody" xml:space="preserve">
     <value>卸载其中一些应用程序可能无法完全删除它们。</value>
@@ -525,11 +522,11 @@
   <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
     <value>性能调整</value>
   </data>
-  <data name="Feature_DisableSuperfetch.Header" xml:space="preserve">
-    <value>禁用 Superfetch</value>
+  <data name="Feature_DisableSysMain.Header" xml:space="preserve">
+    <value>禁用 SysMain</value>
   </data>
-  <data name="Feature_DisableSuperfetch.Description" xml:space="preserve">
-    <value>关闭 Superfetch，它会预加载常用的应用程序以加快启动速度。 如果您使用 HDD，可能会影响某些程序的启动时间。</value>
+  <data name="Feature_DisableSysMain.Description" xml:space="preserve">
+    <value>关闭 SysMain，它会预加载常用的应用程序以加快启动速度。 如果您使用 HDD，可能会影响某些程序的启动时间。</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
     <value>禁用 NTFS 时间戳</value>
@@ -578,12 +575,6 @@
   </data>
   <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
     <value>关闭自动 Windows 更新，需要手动安装。 非常沮丧。 这可能会使您的系统容易受到安全漏洞和错误修复的影响。</value>
-  </data>
-  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
-    <value>禁用 SmartScreen</value>
-  </data>
-  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>关闭 SmartScreen 筛选器，该筛选器会警告您有关从 Internet 下载的潜在不安全应用程序和文件的信息。 出于安全原因不建议使用。 禁用此功能会增加恶意软件感染的风险。</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>遥测</value>
@@ -705,12 +696,6 @@
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneX 是一个使用 WinUI 3 框架构建的尖端优化工具，旨在提升 Windows 设备的性能。适用于 Windows 10 和 11，RyTuneX 帮助用户轻松删除顽固的预装应用程序并优化系统资源。</value>
   </data>
-  <data name="Feature_CleanMemory.Description" xml:space="preserve">
-    <value>启用 rytunexsvc，它会定期检查内存使用情况，并在超过 80% 时清理内存。</value>
-  </data>
-  <data name="Feature_CleanMemory.Header" xml:space="preserve">
-    <value>Enable Ram Cleaner</value>
-  </data>
   <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
     <value>检查更新</value>
   </data>
@@ -800,5 +785,314 @@
   </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
     <value>Windows 更新</value>
+  </data>
+  <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>修理</value>
+  </data>
+  <data name="ConfirmRemoveApps" xml:space="preserve">
+    <value>您即将从系统中完全删除以下应用:</value>
+  </data>
+  <data name="ConfirmContinue" xml:space="preserve">
+    <value>您确定要继续吗?</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>继续</value>
+  </data>
+  <data name="HomePage_cpuUsage.Text" xml:space="preserve">
+    <value>CPU 使用率</value>
+  </data>
+  <data name="HomePage_ramUsage.Text" xml:space="preserve">
+    <value>内存使用率</value>
+  </data>
+  <data name="HomePage_gpuUsage.Text" xml:space="preserve">
+    <value>GPU 使用率</value>
+  </data>
+  <data name="HomePage_diskUsage.Text" xml:space="preserve">
+    <value>磁盘使用率</value>
+  </data>
+  <data name="HomePage_networkUsage.Text" xml:space="preserve">
+    <value>网络使用率</value>
+  </data>
+  <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
+    <value>已安装应用</value>
+  </data>
+  <data name="HomePage_processesCount.Text" xml:space="preserve">
+    <value>进程</value>
+  </data>
+  <data name="HomePage_servicesCount.Text" xml:space="preserve">
+    <value>服务</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>禁用智能屏幕</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>关闭智能屏幕过滤器，该过滤器会警告您下载自互联网的潜在不安全应用和文件。禁用此功能会增加恶意软件感染的风险。</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
+    <value>禁用新闻和兴趣</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
+    <value>禁用任务栏上的新闻和兴趣信息流，显示新闻、天气和其他更新。禁用此功能可能提高系统性能。</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
+    <value>禁用聚焦功能</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
+    <value>关闭聚焦功能，阻止锁屏上显示个性化内容和推荐。禁用此功能有助于保护隐私。</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
+    <value>禁用个性化体验</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
+    <value>禁用跨应用和服务的个性化体验，防止Windows收集您的偏好设置和活动数据。</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
+    <value>禁用云优化内容</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
+    <value>禁用云优化内容，包括应用更新和文件同步。这可以减少互联网带宽使用，但可能会限制功能。</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
+    <value>禁用反馈通知</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
+    <value>防止Windows显示与您操作系统体验相关的反馈通知。禁用此功能可以减少干扰。</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
+    <value>禁用广告ID</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
+    <value>禁用广告ID，防止Windows跟踪您的活动以进行定向广告。这可以增强隐私，但可能影响应用体验。</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
+    <value>禁用蓝牙广告</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
+    <value>关闭蓝牙广告，阻止您的设备向附近的其他设备广播存在。禁用此功能可以减少隐私风险。</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
+    <value>禁用自动重启自动登录</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
+    <value>禁用重启后的自动登录，要求您手动输入凭据。这可以增强安全性，但增加了登录的额外步骤。</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
+    <value>禁用手写数据共享</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
+    <value>关闭与Microsoft服务共享手写数据，提升隐私，但可能减少与手写识别相关的一些功能。</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
+    <value>禁用文本输入数据收集</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
+    <value>禁用文本输入数据的收集，防止Windows存储和分析您输入的内容。这有助于保护隐私，但可能降低打字准确性改进。</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
+    <value>禁用输入个性化</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
+    <value>禁用输入法的个性化，包括预测文本和自动修正功能。禁用此功能可能会减少系统在文本输入上的性能提升。</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
+    <value>禁用安全搜索模式</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
+    <value>关闭安全搜索模式，过滤掉搜索结果中可能有害或不适当的内容。禁用此功能会增加暴露于不安全内容的风险。</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
+    <value>禁用活动上传</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
+    <value>禁用活动数据上传，防止Microsoft收集您的使用数据以改善服务。这有助于保持隐私。</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
+    <value>禁用剪贴板同步</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
+    <value>禁用跨设备的剪贴板同步，确保您的复制数据保持本地，并防止数据与其他设备共享。</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
+    <value>禁用消息同步</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
+    <value>防止消息在设备间同步，确保您的短信和通知仅在您使用的设备上可用。</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
+    <value>禁用设置同步</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
+    <value>禁用系统设置的跨设备同步。这样您的设备设置、主题和其他配置将无法共享。</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
+    <value>禁用语音激活</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
+    <value>禁用语音激活功能，如Cortana，防止助手监听您的语音命令。这可以提高隐私性，但会减少语音命令功能。</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
+    <value>禁用查找我的设备</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
+    <value>禁用查找我的设备功能，该功能帮助在丢失设备时找到它。禁用此功能减少了找回丢失设备的能力，但提高了隐私性。</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
+    <value>禁用活动反馈</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
+    <value>关闭显示您最近活动的活动反馈，有助于通过防止他人看到您在设备上做了什么来保护您的隐私。</value>
+  </data>
+  <data name="Feature_DisableCdp.Header" xml:space="preserve">
+    <value>禁用CDP（客户数据平台）</value>
+  </data>
+  <data name="Feature_DisableCdp.Description" xml:space="preserve">
+    <value>禁用CDP，防止客户数据平台收集和使用您的数据进行分析和定向推荐。这可以提高隐私性，但可能会限制个性化功能。</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
+    <value>禁用隐私中的个性化体验</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
+    <value>禁用隐私设置中的个性化体验，停止Windows使用您的数据来定制您的体验。这可能减少个性化功能。</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
+    <value>禁用诊断弹窗</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
+    <value>关闭诊断弹窗通知，防止Windows显示与系统健康或错误相关的提示。这有助于减少干扰。</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
+    <value>禁用在线语音隐私</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
+    <value>禁用在线语音隐私，防止Windows存储或处理语音命令。这提高了隐私性，但会限制语音搜索和命令等功能。</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
+    <value>禁用位置访问</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
+    <value>关闭应用和服务的位置信息访问，防止它们使用设备的GPS或网络位置。这提高了隐私性，但可能限制基于位置的服务。</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
+    <value>禁用位置功能</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
+    <value>禁用设备上的所有位置功能，包括应用的定位服务和安全功能。这可以增强隐私性，但会减少依赖位置的服务功能。</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
+    <value>禁用菜单显示延迟</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
+    <value>控制鼠标悬停后菜单显示的延迟。禁用此功能可以让菜单立即打开，提高响应性，但可能减少用户控制。</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
+    <value>禁用鼠标悬停时间</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
+    <value>调整系统等待触发悬停事件的时间。禁用此功能可能加速交互，但可能导致无意的激活。</value>
+  </data>
+  <data name="Feature_AutoComplete.Header" xml:space="preserve">
+    <value>禁用自动完成</value>
+  </data>
+  <data name="Feature_AutoComplete.Description" xml:space="preserve">
+    <value>禁用在某些字段（如搜索框和表单输入）中的自动建议。禁用此功能可以减少干扰，但可能会减慢工作流。</value>
+  </data>
+  <data name="Feature_CrashDump.Header" xml:space="preserve">
+    <value>禁用崩溃转储</value>
+  </data>
+  <data name="Feature_CrashDump.Description" xml:space="preserve">
+    <value>控制应用崩溃时是否生成崩溃报告和内存转储。禁用此功能可以节省磁盘空间，但可能减少诊断和故障排除应用问题的能力。</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
+    <value>禁用远程协助</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
+    <value>禁用远程支持功能，防止其他人通过远程桌面协助您。禁用此功能可以提高安全性，但限制支持选项。</value>
+  </data>
+  <data name="Feature_WindowShake.Header" xml:space="preserve">
+    <value>禁用窗口摇晃</value>
+  </data>
+  <data name="Feature_WindowShake.Description" xml:space="preserve">
+    <value>禁用窗口摇晃功能，该功能会在摇晃窗口时最小化所有打开的窗口。禁用此功能可以提高专注度，但也取消了一个方便的窗口管理工具。</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
+    <value>添加复制/移动上下文菜单</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
+    <value>在文件上下文菜单中启用额外的选项，以便轻松将文件复制或移动到新位置。此功能通过直接从右键菜单提供快速访问来简化文件管理。</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
+    <value>调整任务超时</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
+    <value>修改系统任务的超时设置。调整此设置可以在某些情况下提高性能，但可能导致任务在某些条件下失败。</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
+    <value>启用低磁盘空间检查</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
+    <value>启用低磁盘空间的自动检查，以防止性能问题。禁用此功能可以减少通知，但可能会错过关键的存储警告。</value>
+  </data>
+  <data name="Feature_LinkResolve.Header" xml:space="preserve">
+    <value>禁用链接解析</value>
+  </data>
+  <data name="Feature_LinkResolve.Description" xml:space="preserve">
+    <value>禁用文件和文件夹中损坏链接的解析。禁用此功能可以加速操作，但可能会留下未解决的过时链接。</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
+    <value>减少服务超时</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
+    <value>调整系统服务的超时设置。缩短超时时间可以提高性能，但可能导致服务过早终止。</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
+    <value>禁用远程注册表</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
+    <value>禁用远程访问注册表。禁用此功能提高了安全性，但防止远程配置注册表设置。</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
+    <value>隐藏文件扩展名和隐藏文件</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
+    <value>控制文件扩展名和隐藏文件的可见性。启用此功能可以减少杂乱，但会隐藏重要的文件细节。</value>
+  </data>
+  <data name="Feature_SystemProfile.Header" xml:space="preserve">
+    <value>优化系统配置文件</value>
+  </data>
+  <data name="Feature_SystemProfile.Description" xml:space="preserve">
+    <value>通过调整系统配置文件设置来增强系统性能。此功能优先考虑速度和效率，提高整体系统响应能力和资源管理。</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
+    <value>增强GPU和优先级设置</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
+    <value>优化GPU配置和进程优先级，以提高性能，确保更好的图形渲染和更流畅的资源密集型任务操作，如游戏和多任务处理。</value>
+  </data>
+  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
+    <value>禁用帧服务器模式</value>
+  </data>
+  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
+    <value>禁用用于高级视频编码的帧服务器模式。禁用此功能可以提高性能，但在某些情况下可能会降低视频质量。</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
+    <value>调整低延迟GPU设置</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
+    <value>调整GPU设置以减少延迟，提高游戏或视频性能。</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
+    <value>设置非最佳努力限制</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
+    <value>为非最佳努力进程设置限制。启用此功能可以优先提高性能，但可能会在某些情况下减少系统灵活性。</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>已启用</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>已禁用</value>
+  </data>
+  <data name="LoadingWindowText.Text" xml:space="preserve">
+    <value>加载中...</value>
   </data>
 </root>

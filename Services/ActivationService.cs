@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
 using RyTuneX.Activation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Views;
@@ -23,11 +22,19 @@ public class ActivationService : IActivationService
 
     public async Task ActivateAsync(object activationArgs)
     {
+        // Show the LoadingWindow
+        var loadingWindow = new LoadingWindow();
+        App.MainWindow.Content = loadingWindow;
+        App.MainWindow.Activate();
+
+        // Add a small delay to ensure the LoadingWindow is rendered
+        await Task.Delay(500);
+
         // Execute tasks before activation.
         await InitializeAsync();
 
         // Set the MainWindow Content.
-        if (App.MainWindow.Content == null)
+        if (App.MainWindow.Content == loadingWindow)
         {
             _shell = App.GetService<ShellPage>();
             App.MainWindow.Content = _shell ?? new Frame();

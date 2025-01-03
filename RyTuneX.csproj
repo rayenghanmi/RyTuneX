@@ -31,11 +31,18 @@
     <None Remove="Assets\bug.png" />
     <None Remove="Assets\discord.png" />
     <None Remove="Assets\github.png" />
+    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
     <None Remove="Assets\WindowIcon.ico" />
     <None Remove="Views\DebloatSystemPage.xaml" />
     <None Remove="Views\FeaturesPage.xaml" />
+    <None Remove="Views\LoadingWindow.xaml" />
     <None Remove="Views\NetworkPage.xaml" />
     <None Remove="Views\PrivacyPage.xaml" />
+    <None Remove="Views\RepairPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,11 +52,12 @@
   <ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 	  <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.1.240916" />
+	  <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.1.240916" />
 	  <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240916" />
-	  <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
 	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
 	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.0" />
+	  <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
 	  <PackageReference Include="System.Management" Version="9.0.0" />
 	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.0" />
 	  <PackageReference Include="vocaluxe.dependencies.netfwtypelib" Version="1.0.1" />
@@ -66,11 +74,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
 
-    <None Update="Assets\RyTuneXService.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Page Update="Views\LoadingWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
 
-    <Page Update="Views\StartupAppsPage.xaml">
+    <Page Update="Views\RepairPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Views\DebloatSystemPage.xaml">
@@ -98,8 +106,4 @@
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
-
-	<ItemGroup>
-		<Content Remove="Assets\RyTuneXService.exe" />
-	</ItemGroup>
 </Project>

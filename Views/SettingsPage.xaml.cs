@@ -71,7 +71,6 @@ public sealed partial class SettingsPage : Page
             }
             else
             {
-                LogHelper.Log("Invalid language tag");
                 LogHelper.LogError("Invalid language tag");
                 throw new Exception($"Invalid language tag");
             }
@@ -379,7 +378,9 @@ public sealed partial class SettingsPage : Page
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "cmd.exe",
+                    FileName = Environment.Is64BitOperatingSystem
+                    ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                    : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
                     Arguments = $"/c \"{setupFilePath} --silent\"",
                     UseShellExecute = false,
                     CreateNoWindow = true,
@@ -408,6 +409,76 @@ public sealed partial class SettingsPage : Page
             UpdateButton.Visibility = Visibility.Visible;
             UpdateStack.Visibility = Visibility.Collapsed;
             UpdateProgress.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    private async void RevertChanges_Click(object sender, RoutedEventArgs e)
+    {
+        var revertDialog = new ContentDialog()
+        {
+            XamlRoot = XamlRoot,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            Title = "RyTuneX",
+            Content = "You're about to revert all the changes made by RyTuneX to your system (Except for uninstalled apps) and reset the app's preferences.\nAre you sure you want to continue?",
+            CloseButtonText = "Cancel".GetLocalized(),
+            PrimaryButtonText = "Continue".GetLocalized(),
+            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
+        };
+        var result = await revertDialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            try
+            {
+                ProgressRing progressRing = new ProgressRing
+                {
+                    IsActive = true,
+                    Width = 50,
+                    Height = 50
+                };
+
+                TextBlock textBlock = new TextBlock
+                {
+                    Text = "Currently reverting changes...",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(10)
+                };
+
+                var currentDialog = new ContentDialog()
+                {
+                    XamlRoot = XamlRoot,
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    Title = "RyTuneX",
+                    Content = new StackPanel
+                    {
+                        Children = { progressRing, textBlock },
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Spacing = 20
+                    },
+                    IsPrimaryButtonEnabled = false,
+                };
+
+                // Show the ContentDialog asynchronously (non-blocking)
+                var dialogTask = currentDialog.ShowAsync();
+
+                // Execute the revert operation
+                await OptimizationOptions.RevertAllChanges();
+
+                // Clear all local settings
+                var localSettings = ApplicationData.Current.LocalSettings;
+                localSettings.Values.Clear();
+
+                // Wait for a small delay for the operations to complete
+                await Task.Delay(1000);
+
+                // Close the application after the operations are completed
+                Application.Current.Exit();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error: {ex.Message}");
+            }
         }
     }
 }

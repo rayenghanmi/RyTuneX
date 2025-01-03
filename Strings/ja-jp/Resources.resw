@@ -204,9 +204,6 @@
   <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
     <value>RAM</value>
   </data>
-  <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
-    <value>更新</value>
-  </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
     <value>ストレージ</value>
   </data>
@@ -525,11 +522,11 @@
   <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
     <value>パフォーマンスの調整</value>
   </data>
-  <data name="Feature_DisableSuperfetch.Header" xml:space="preserve">
-    <value>Superfetchを無効にする</value>
+  <data name="Feature_DisableSysMain.Header" xml:space="preserve">
+    <value>SysMainを無効にする</value>
   </data>
-  <data name="Feature_DisableSuperfetch.Description" xml:space="preserve">
-    <value>頻繁に使用するアプリケーションを事前に読み込むSuperfetchを無効にします。HDDを使用している場合、一部のプログラムの起動時間に影響を与える可能性があります。</value>
+  <data name="Feature_DisableSysMain.Description" xml:space="preserve">
+    <value>頻繁に使用するアプリケーションを事前に読み込むSysMainを無効にします。HDDを使用している場合、一部のプログラムの起動時間に影響を与える可能性があります。</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
     <value>NTFSタイムスタンプを無効にする</value>
@@ -578,12 +575,6 @@
   </data>
   <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
     <value>自動Windows更新を無効にし、手動でのインストールを必要とします。強く推奨されません。これにより、システムがセキュリティの脆弱性やバグ修正にさらされる可能性があります。</value>
-  </data>
-  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
-    <value>SmartScreenを無効にする</value>
-  </data>
-  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>インターネットからダウンロードした潜在的に安全でないアプリやファイルについて警告するSmartScreenフィルターを無効にします。セキュリティ上の理由から推奨されません。この機能を無効にすると、マルウェア感染のリスクが高まります。</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>テレメトリ</value>
@@ -705,12 +696,6 @@
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneXは、WinUI 3フレームワークで構築された最先端の最適化ツールで、Windowsデバイスのパフォーマンスを向上させます。Windows 10および11の両方に対応し、ユーザーが頑固なプリインストールアプリを簡単に削除し、システムリソースを最適化できるようにします。</value>
   </data>
-  <data name="Feature_CleanMemory.Header" xml:space="preserve">
-    <value>RAMクリーナーを有効にする</value>
-  </data>
-  <data name="Feature_CleanMemory.Description" xml:space="preserve">
-    <value>rytunexsvcを有効にし、RAM使用量を定期的にチェックし、80％を超えた場合にクリアします。</value>
-  </data>
   <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
     <value>更新を確認</value>
   </data>
@@ -800,5 +785,314 @@
   </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
     <value>Windows Update</value>
+  </data>
+  <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>修理</value>
+  </data>
+  <data name="ConfirmRemoveApps" xml:space="preserve">
+    <value>これから以下のアプリをシステムから完全に削除します:</value>
+  </data>
+  <data name="ConfirmContinue" xml:space="preserve">
+    <value>続行してもよろしいですか?</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>続ける</value>
+  </data>
+  <data name="HomePage_cpuUsage.Text" xml:space="preserve">
+    <value>CPU使用率</value>
+  </data>
+  <data name="HomePage_ramUsage.Text" xml:space="preserve">
+    <value>RAM使用率</value>
+  </data>
+  <data name="HomePage_gpuUsage.Text" xml:space="preserve">
+    <value>GPU使用率</value>
+  </data>
+  <data name="HomePage_diskUsage.Text" xml:space="preserve">
+    <value>ディスク使用率</value>
+  </data>
+  <data name="HomePage_networkUsage.Text" xml:space="preserve">
+    <value>ネットワーク使用率</value>
+  </data>
+  <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
+    <value>インストール済みアプリ</value>
+  </data>
+  <data name="HomePage_processesCount.Text" xml:space="preserve">
+    <value>プロセス</value>
+  </data>
+  <data name="HomePage_servicesCount.Text" xml:space="preserve">
+    <value>サービス</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>スマートスクリーンを無効化</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>インターネットからダウンロードした潜在的に安全でないアプリやファイルについて警告するスマートスクリーンフィルターをオフにします。この機能を無効にすると、マルウェア感染のリスクが高まります。</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
+    <value>ニュースと興味を無効化</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
+    <value>ニュース、天気、その他の更新を表示するタスクバーのニュースと興味のフィードを無効にします。これを無効にすると、システムのパフォーマンスが向上する可能性があります。</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
+    <value>スポットライト機能を無効化</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
+    <value>ロック画面に表示される個別化されたコンテンツや推奨を表示するスポットライト機能をオフにします。この機能を無効にすると、プライバシー保護に役立ちます。</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
+    <value>個別化された体験を無効化</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
+    <value>アプリとサービスの個別化体験を無効にし、Windowsがあなたの好みやアクティビティデータを収集しないようにします。</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
+    <value>クラウド最適化コンテンツを無効化</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
+    <value>アプリの更新やファイルの同期など、クラウド最適化コンテンツを無効にします。これにより、インターネット帯域幅の使用が削減される可能性がありますが、機能が制限される場合があります。</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
+    <value>フィードバック通知を無効化</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
+    <value>WindowsがOSに関する体験のフィードバック通知を表示しないようにします。この機能を無効にすると、通知が減少します。</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
+    <value>広告IDを無効化</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
+    <value>広告IDを無効にし、Windowsがターゲット広告のためにあなたのアクティビティを追跡しないようにします。これにより、プライバシーが強化されますが、アプリの体験に影響を与える可能性があります。</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
+    <value>Bluetooth広告を無効化</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
+    <value>Bluetooth広告をオフにし、他の近くのデバイスにあなたのデバイスの存在を通知しないようにします。これにより、プライバシーリスクが低減します。</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
+    <value>自動再起動サインオンを無効化</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
+    <value>再起動後に自動サインインを無効にし、手動で資格情報を入力する必要があります。これにより、セキュリティが強化されますが、ログイン手順が増えます。</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
+    <value>手書きデータの共有を無効化</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
+    <value>手書きデータのMicrosoftサービスとの共有を無効にします。これにより、プライバシーが向上しますが、手書き認識に関連する機能が制限されます。</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
+    <value>テキスト入力データの収集を無効化</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
+    <value>テキスト入力データの収集を無効にし、Windowsがあなたが入力する内容を保存・分析しないようにします。これにより、プライバシーが保護されますが、入力精度の改善が制限される場合があります。</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
+    <value>入力の個別化を無効化</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
+    <value>予測テキストや自動修正機能を含む入力方法の個別化を無効にします。これにより、テキスト入力のシステムパフォーマンス改善が減少する可能性があります。</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
+    <value>セーフサーチモードを無効化</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
+    <value>有害または不適切なコンテンツを検索結果からフィルタリングするセーフサーチモードを無効にします。これを無効にすると、安全でないコンテンツに触れるリスクが高まります。</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
+    <value>アクティビティのアップロードを無効化</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
+    <value>アクティビティデータのアップロードを無効にし、Microsoftがサービスの改善のために使用データを収集しないようにします。これにより、プライバシーが保護されます。</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
+    <value>クリップボードの同期を無効化</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
+    <value>デバイス間でのクリップボード同期を無効にし、コピーしたデータがローカルに留まり、他のデバイスと共有されないようにします。</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
+    <value>メッセージ同期の無効化</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
+    <value>デバイス間でメッセージが同期されないようにします。これにより、テキストメッセージや通知は使用しているデバイスのみで利用可能となります。</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
+    <value>設定の同期無効化</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
+    <value>システム設定のデバイス間での同期を無効にします。これにより、デバイスの設定やテーマ、その他の構成が共有されなくなります。</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
+    <value>音声起動の無効化</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
+    <value>Cortanaなどの音声起動機能を無効にし、音声コマンドの受付を停止します。これによりプライバシーが向上しますが、音声コマンド機能は制限されます。</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
+    <value>デバイスの検索無効化</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
+    <value>デバイス紛失時にデバイスを探す機能「Find My Device」を無効にします。これにより、デバイスを見つける能力が低下しますが、プライバシーが向上します。</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
+    <value>アクティビティフィードの無効化</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
+    <value>最近のアクティビティを表示するフィードを無効にします。これにより、他の人があなたのデバイスで何をしているかを見えなくし、プライバシーを保護します。</value>
+  </data>
+  <data name="Feature_DisableCdp.Header" xml:space="preserve">
+    <value>CDP（顧客データプラットフォーム）の無効化</value>
+  </data>
+  <data name="Feature_DisableCdp.Description" xml:space="preserve">
+    <value>顧客データプラットフォームによるデータの収集と分析を無効にします。これによりプライバシーが向上しますが、パーソナライズ機能が制限される可能性があります。</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
+    <value>プライバシー設定のカスタマイズ体験無効化</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
+    <value>プライバシー設定でのカスタマイズ体験機能を無効にします。これにより、Windowsがデータを使って体験をカスタマイズすることが止まります。これにより、パーソナライズ機能が低下する可能性があります。</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
+    <value>診断トースト通知の無効化</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
+    <value>システムの健全性やエラーに関する診断トースト通知を無効にします。これにより、気を散らす通知が減少します。</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
+    <value>オンライン音声プライバシーの無効化</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
+    <value>音声コマンドの保存や処理を無効にします。これによりプライバシーが向上しますが、音声検索やコマンド機能が制限されます。</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
+    <value>位置情報アクセスの無効化</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
+    <value>アプリやサービスがデバイスのGPSやネットワーク位置情報を使用しないようにします。これによりプライバシーが向上しますが、位置情報に依存するサービスが制限されます。</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
+    <value>位置情報機能の無効化</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
+    <value>デバイス上の位置情報関連機能をすべて無効にします。これによりプライバシーが向上しますが、位置情報に依存するサービスの機能が低下します。</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
+    <value>メニュー表示遅延の無効化</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
+    <value>マウスホバー後のメニュー表示遅延を制御します。この機能を無効にすると、メニューが即座に表示され、レスポンスが向上しますが、ユーザーの制御が減少する可能性があります。</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
+    <value>マウスホバー時間の無効化</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
+    <value>システムがホバーイベントをトリガーするまでの時間を調整します。これを無効にすると、インタラクションが速くなりますが、意図しないアクティベーションが発生する可能性があります。</value>
+  </data>
+  <data name="Feature_AutoComplete.Header" xml:space="preserve">
+    <value>自動補完の無効化</value>
+  </data>
+  <data name="Feature_AutoComplete.Description" xml:space="preserve">
+    <value>検索ボックスやフォーム入力などでの自動補完機能を無効にします。これを無効にすると、気を散らすことなく作業できますが、ワークフローが遅くなる可能性があります。</value>
+  </data>
+  <data name="Feature_CrashDump.Header" xml:space="preserve">
+    <value>クラッシュダンプの無効化</value>
+  </data>
+  <data name="Feature_CrashDump.Description" xml:space="preserve">
+    <value>アプリケーションがクラッシュした際のクラッシュレポートやメモリダンプの生成を制御します。これを無効にするとディスクスペースが節約できますが、アプリケーションの問題の診断とトラブルシューティングが難しくなる可能性があります。</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
+    <value>リモート支援の無効化</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
+    <value>リモートデスクトップを使用した他者による支援を無効にします。これによりセキュリティが向上しますが、サポートオプションが制限されます。</value>
+  </data>
+  <data name="Feature_WindowShake.Header" xml:space="preserve">
+    <value>ウィンドウシェイクの無効化</value>
+  </data>
+  <data name="Feature_WindowShake.Description" xml:space="preserve">
+    <value>ウィンドウをシェイクするとすべてのウィンドウを最小化する機能を無効にします。これにより、集中力が向上しますが、ウィンドウ管理ツールがなくなります。</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
+    <value>コピー/移動コンテキストメニューの追加</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
+    <value>ファイルのコンテキストメニューに、ファイルを新しい場所にコピーまたは移動するオプションを追加します。この機能により、右クリックメニューからこれらの機能に迅速にアクセスでき、ファイル管理が効率化されます。</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
+    <value>タスクのタイムアウト設定</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
+    <value>システムタスクのタイムアウト設定を変更します。これにより、特定のシナリオでパフォーマンスが向上する場合がありますが、タスクが失敗する可能性もあります。</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
+    <value>低ディスク容量チェックの有効化</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
+    <value>ディスク容量が不足している場合に自動的にチェックし、パフォーマンス問題を防止します。これを無効にすると通知が減りますが、重要なストレージ警告を見逃す可能性があります。</value>
+  </data>
+  <data name="Feature_LinkResolve.Header" xml:space="preserve">
+    <value>リンク解決の無効化</value>
+  </data>
+  <data name="Feature_LinkResolve.Description" xml:space="preserve">
+    <value>ファイルやフォルダ内で壊れたリンクの解決を無効にします。これを無効にすると、操作が高速化されますが、古いリンクが解決されなくなる可能性があります。</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
+    <value>サービスタイムアウトの短縮</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
+    <value>システムサービスのタイムアウトを調整します。これを短縮するとパフォーマンスが向上しますが、サービスが早期に終了する可能性があります。</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
+    <value>リモートレジストリの無効化</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
+    <value>レジストリへのリモートアクセスを無効にします。これによりセキュリティが向上しますが、レジストリ設定のリモート構成が制限されます。</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
+    <value>ファイル拡張子と隠しファイルの表示の無効化</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
+    <value>ファイル拡張子や隠しファイルの表示を制御します。これを有効にすると、クリーンで整理された表示になりますが、重要なファイルの詳細が隠れる場合があります。</value>
+  </data>
+  <data name="Feature_SystemProfile.Header" xml:space="preserve">
+    <value>システムプロファイルの最適化</value>
+  </data>
+  <data name="Feature_SystemProfile.Description" xml:space="preserve">
+    <value>システムプロファイル設定を調整して、システムのパフォーマンスを向上させます。この機能により、速度と効率が優先され、システムの全体的なレスポンスとリソース管理が改善されます。</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
+    <value>GPUと優先設定の強化</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
+    <value>GPU設定とプロセス優先度を最適化し、パフォーマンスを向上させます。これにより、ゲームやマルチタスクなど、リソースを多く使う作業がスムーズに行えます。</value>
+  </data>
+  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
+    <value>フレームサーバーモードの無効化</value>
+  </data>
+  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
+    <value>高度なビデオエンコーディングのためにフレームサーバーモードを無効にします。これによりパフォーマンスが向上しますが、特定の条件下ではビデオ品質が低下する可能性があります。</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
+    <value>低遅延GPU設定の調整</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
+    <value>GPU設定を調整して遅延を最小限に抑え、ゲームやビデオパフォーマンスを向上させます。</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
+    <value>最適化でないプロセスの制限</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
+    <value>最適化でないプロセスに制限を設定します。これによりパフォーマンスが優先されますが、場合によってはシステムの柔軟性が低下することがあります。</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>有効</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>無効</value>
+  </data>
+  <data name="LoadingWindowText.Text" xml:space="preserve">
+    <value>読み込み中...</value>
   </data>
 </root>

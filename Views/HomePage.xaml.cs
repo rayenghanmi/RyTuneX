@@ -5,6 +5,7 @@ using Windows.Networking.Connectivity;
 using Microsoft.UI.Xaml;
 using System.ServiceProcess;
 using RyTuneX.Helpers;
+using System.Threading;
 
 namespace RyTuneX.Views;
 
@@ -33,40 +34,58 @@ public sealed partial class HomePage : Page
     {
         try
         {
-            while (true)
+            // Fetch static values once at the beginning
+            var installedAppsCount = await Task.Run(() => GetInstalledAppsCount());
+            var servicesCount = await Task.Run(() => GetServicesCount());
+            var processesCount = await Task.Run(() => GetProcessesCount());
+
+            while (!cancellationToken.IsCancellationRequested)
             {
-                // Check for cancellation
-                cancellationToken.ThrowIfCancellationRequested();
+                // Fetch real-time usage values concurrently
+                var cpuUsageTask = Task.Run(() => GetCpuUsage());
+                var ramUsageTask = Task.Run(() => GetRamUsage());
+                var diskUsageTask = Task.Run(() => GetDiskUsage());
+                var networkUsageTask = Task.Run(() => GetNetworkUsage());
+                var gpuUsageTask = Task.Run(() => GetGpuUsage());
 
-                // Fetch real-time usage values
-                var cpuUsage = await Task.Run(() => GetCpuUsage());
-                var ramUsage = await Task.Run(() => GetRamUsage());
-                var diskUsage = await Task.Run(() => GetDiskUsage());
-                var networkUsage = await Task.Run(() => GetNetworkUsage());
-                var installedAppsCount = await Task.Run(() => GetInstalledAppsCount());
-                var processesCount = await Task.Run(() => GetProcessesCount());
-                var servicesCount = await Task.Run(() => GetServicesCount());
-                var gpuUsage = await Task.Run(() => GetGpuUsage());
+                await Task.WhenAll(cpuUsageTask, ramUsageTask, diskUsageTask, networkUsageTask, gpuUsageTask);
 
-                // Update the UI with the fetched values
+                var cpuUsage = cpuUsageTask.Result;
+                var ramUsage = ramUsageTask.Result;
+                var diskUsage = diskUsageTask.Result;
+                var networkUsage = networkUsageTask.Result;
+                var gpuUsage = gpuUsageTask.Result;
+
+                // Update the UI on the main thread
                 DispatcherQueue.TryEnqueue(() =>
                 {
-                    cpuUsageText.Text = $"{cpuUsage}%";
-                    ramUsageText.Text = $"{ramUsage}%";
-                    diskUsageText.Text = $"{diskUsage}%";
-                    networkUsageText.Text = $"{networkUsage}%";
-                    installedAppsCountText.Text = installedAppsCount.ToString();
-                    processesCountText.Text = processesCount.ToString();
-                    servicesCountText.Text = servicesCount.ToString();
-                    gpuUsageText.Text = $"{gpuUsage}%";
-                    cpuUsageText.Visibility = Visibility.Visible;
-                    ramUsageText.Visibility = Visibility.Visible;
-                    diskUsageText.Visibility = Visibility.Visible;
-                    networkUsageText.Visibility = Visibility.Visible;
-                    installedAppsCountText.Visibility = Visibility.Visible;
-                    processesCountText.Visibility = Visibility.Visible;
-                    servicesCountText.Visibility = Visibility.Visible;
-                    gpuUsageText.Visibility = Visibility.Visible;
+                    if (this.Visibility == Visibility.Visible)
+                    {
+                        try
+                        {
+                            cpuUsageText.Text = $"{cpuUsage}%";
+                            ramUsageText.Text = $"{ramUsage}%";
+                            diskUsageText.Text = $"{diskUsage}%";
+                            networkUsageText.Text = $"{networkUsage}%";
+                            installedAppsCountText.Text = installedAppsCount.ToString();
+                            processesCountText.Text = processesCount.ToString();
+                            servicesCountText.Text = servicesCount.ToString();
+                            gpuUsageText.Text = $"{gpuUsage}%";
+
+                            cpuUsageText.Visibility = Visibility.Visible;
+                            ramUsageText.Visibility = Visibility.Visible;
+                            diskUsageText.Visibility = Visibility.Visible;
+                            networkUsageText.Visibility = Visibility.Visible;
+                            installedAppsCountText.Visibility = Visibility.Visible;
+                            processesCountText.Visibility = Visibility.Visible;
+                            servicesCountText.Visibility = Visibility.Visible;
+                            gpuUsageText.Visibility = Visibility.Visible;
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"Error updating UI: {ex.Message}");
+                        }
+                    }
                 });
 
                 await Task.Delay(1000, cancellationToken);
@@ -75,6 +94,10 @@ public sealed partial class HomePage : Page
         catch (OperationCanceledException)
         {
             Debug.WriteLine("UpdateSystemStats task was canceled.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Unexpected error: {ex.Message}");
         }
     }
 
@@ -134,7 +157,7 @@ public sealed partial class HomePage : Page
 
     private int GetInstalledAppsCount()
     {
-        var apps = OptimizationOptions.GetUWPApps(false);
+        var apps = OptimizationOptions.GetInstalledApps(false);
         return apps.Count() - 3;
     }
 
@@ -149,15 +172,44 @@ public sealed partial class HomePage : Page
         return services.Length;
     }
 
-    private int GetGpuUsage()
+    public static async Task<int> GetGpuUsage()
     {
-        var gpuUsageQuery = new ObjectQuery("SELECT * FROM Win32_VideoController");
-        var searcher = new ManagementObjectSearcher(gpuUsageQuery);
-        foreach (ManagementObject queryObj in searcher.Get())
+        try
         {
-            return Convert.ToInt32(queryObj["CurrentVerticalResolution"]);
+            var category = new PerformanceCounterCategory("GPU Engine");
+            var counterNames = category.GetInstanceNames();
+            var gpuCounters = new List<PerformanceCounter>();
+            var result = 0f;
+
+            foreach (var counterName in counterNames)
+            {
+                if (counterName.EndsWith("engtype_3D"))
+                {
+                    foreach (PerformanceCounter counter in category.GetCounters(counterName))
+                    {
+                        if (counter.CounterName == "Utilization Percentage")
+                        {
+                            gpuCounters.Add(counter);
+                        }
+                    }
+                }
+            }
+
+            gpuCounters.ForEach(x =>
+            {
+                _ = x.NextValue();
+            });
+            await Task.Delay(1000);
+            gpuCounters.ForEach(x =>
+            {
+                result += x.NextValue();
+            });
+            return (int)result;
         }
-        return 0;
+        catch
+        {
+            return 0;
+        }
     }
 
     private void GithubButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

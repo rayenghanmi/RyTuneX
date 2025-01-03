@@ -7,20 +7,35 @@ All notable changes to this branch will be documented in this file.
 ### Added
 
 - Introduced a new `Security` page.
-- Added Japanese language (`ja-jp`) thanks to @coolvitto.
-- Added Realtime Performance Monitoring in `Home` page.
+- Added support for Japanese language (`ja-jp`), contributed by @coolvitto.
+- Integrated Realtime Performance Monitoring on the `Home` page.
+- Included a Search Box on the `Debloat` page for improved navigation.
+- Added a `Restart` button to the navigation menu for easy application restarts.
+- Implemented Win32 app detection and removal on the `Debloat` page.
+- Introduced a new `Repair` page to address system issues.
+- Enabled the creation of a restore point on the first launch for added safety.
+- Added functionality to restore the system to the most recent restore point and undo changes made by the app.
+- Added a new loading animation at app startup, optimizing loading times for improved user experience.
 
 ### Fixes
 
-- Fixed an issue where the uninstallation state text did not display the current app being uninstalled.
+- Fixed an issue where the uninstallation state text did not reflect the current app being uninstalled.
 - Resolved a bug causing the UI under the apps list in the `Debloat` page to flicker when the scroll bar appeared or disappeared.
+- Fixed an issue where GPU information was not displayed correctly on the `Home` page.
 
 ### Changes
 
-- General enhancements to the UI.
-- Introduced a new page transition effect.
-- Improved the installed apps list in the `Debloat` page by adding logos for each app.
-- Moved the `Report` and `Support` buttons to the footer of the navigation menu.
+- General UI enhancements for better user experience and consistency.
+- Introduced a smooth page transition effect for seamless navigation.
+- Improved the installed apps list on the `Debloat` page, adding logos for easier app identification.
+- Moved the `Report` and `Support` buttons to the footer of the navigation menu for a cleaner layout.
+- Improved error logging to prevent log corruption and enhance troubleshooting.
+- Enhanced the visibility of the `Optimize`, `Privacy`, and `Features` pages by adding icons for better access.
+- Expanded the `Optimize System` page with new settings for basic and advanced system optimizations, breaking down Performance Tweaks into smaller, more manageable controls:
+  - `Menu Show Delay`, `Mouse Hover Time`, `Auto Complete`, `Crash Dump`, `Remote Assistance`, `Window Shake`, `Copy Move Context Menu`, `Task Timeouts`, `Low Disk Space Checks`, `Link Resolve`, `Service Timeouts`, `Remote Registry`, `File Extensions and Hidden Files`, `System Profile`, `GPU and Priority Settings`, `Frame Server Mode`, `Low Latency GPU Settings`, `Non-Best Effort Limit`.
+- Introduced new privacy settings on the `Privacy` page, breaking down `Enhance Privacy` into smaller, focused controls:
+  - `Advertising ID`, `Bluetooth Advertising`, `News and Interests`, `Spotlight Features`, `Tailored Experiences`, `Cloud Optimized Content`, `Feedback Notifications`, `Activity Feed`, `Cdp`, `Diagnostics Toast`, `Online Speech Privacy`, `Location Features`, `Automatic Restart Sign-On`, `Handwriting Data Sharing`, `Text Input Data Collection`, `Input Personalization`, `Safe Search Mode`, `Activity Uploads`, `Clipboard Sync`, `Message Sync`, `Setting Sync`, `Voice Activation`, `Find My Device`.
+
 
 ## 0.9.1 - Released
 

@@ -75,11 +75,21 @@
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
-            
+
+            <TextBlock Text="Revert changes" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+            <controls:SettingsCard Header="Revert all changes"
+                Description="Reverts all the changes that RyTuneX has made to your system, including the restore point."
+                IsClickEnabled="True"
+                Click="RevertChanges_Click">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE777;"/>
+                </controls:SettingsCard.HeaderIcon>
+            </controls:SettingsCard>
+
             <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                 x:Uid="Settings_About" />
 
-            <controls:SettingsExpander Description="© 2024 Rayen Ghanmi"
+            <controls:SettingsExpander Description="© 2025 Rayen Ghanmi"
                                Header="RyTuneX"
                                HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.scale-100.png}">
                 <StackPanel Orientation="Horizontal">

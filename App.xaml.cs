@@ -98,7 +98,7 @@ public partial class App : Application
             services.AddTransient<HomePage>();
             services.AddTransient<NetworkPage>();
             services.AddTransient<SecurityPage>();
-            services.AddTransient<StartupAppsPage>();
+            services.AddTransient<RepairPage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 

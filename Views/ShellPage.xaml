@@ -21,7 +21,7 @@
                 <ColumnDefinition Width="128"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Image Source="/Assets/WindowIcon.ico"
+                <Image x:Name="ShellTitleBarImage" Source="/Assets/WindowIcon.ico"
                     HorizontalAlignment="Left"
                     Width="22"
                     Height="22" />
@@ -66,6 +66,11 @@
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF259;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_Repair" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.RepairPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE90F;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_Debloat" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.DebloatSystemPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE74D;"/>
@@ -98,7 +103,7 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="Restart" SelectsOnInvoked="False" PointerPressed="NavigationViewItem_PointerPressed">
+                <NavigationViewItem x:Name="RestartItem" Visibility="Collapsed" Content="Restart" SelectsOnInvoked="False" PointerPressed="NavigationViewItem_PointerPressed">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource SystemFillColorCaution}" Glyph="&#xE777;"/>
                     </NavigationViewItem.Icon>
