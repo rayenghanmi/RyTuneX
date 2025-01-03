@@ -1095,4 +1095,10 @@
   <data name="LoadingWindowText.Text" xml:space="preserve">
     <value>جاري التحميل...</value>
   </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>تفعيل قائمة السياق الكلاسيكية</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>يستعيد نمط قائمة السياق الكلاسيكية لويندوز 10، مما يوفر تجربة مألوفة عند النقر بزر الفأرة الأيمن مع عرض جميع الخيارات مباشرة</value>
+  </data>
 </root>

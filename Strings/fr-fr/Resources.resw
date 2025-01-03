@@ -1092,4 +1092,10 @@
   <data name="LoadingWindowText.Text" xml:space="preserve">
     <value>Chargement...</value>
   </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>Activer le menu contextuel classique</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>Restaure le style du menu contextuel classique de Windows 10, offrant une expérience familière de clic droit avec toutes les options affichées immédiatement</value>
+  </data>
 </root>

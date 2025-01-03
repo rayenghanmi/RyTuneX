@@ -1098,4 +1098,10 @@
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Device Information</value>
   </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>Enable Classic Context Menu</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>Restores the classic context menu style of Windows 10, providing a familiar right-click menu experience with all options displayed immediately</value>
+  </data>
 </root>

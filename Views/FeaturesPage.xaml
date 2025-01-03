@@ -204,9 +204,9 @@
                     <ToggleSwitch x:Name="EndTask" Tag="EndTask" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard Header="Feature_EnableClassicContextMenu">
+                <controls:SettingsCard x:Uid="Feature_EnableClassicContextMenu">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE25B;"/>
+                        <FontIcon Glyph="&#xE8C8;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="ClassicContextMenu" Tag="ClassicContextMenu" Toggled="ToggleSwitch_Toggled"/>
                 </controls:SettingsCard>

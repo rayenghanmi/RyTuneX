@@ -1095,4 +1095,10 @@
   <data name="LoadingWindowText.Text" xml:space="preserve">
     <value>加载中...</value>
   </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>启用经典上下文菜单</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>恢复Windows 10的经典上下文菜单样式，提供熟悉的右键菜单体验，所有选项即时显示</value>
+  </data>
 </root>

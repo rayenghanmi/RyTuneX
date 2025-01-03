@@ -1095,4 +1095,10 @@
   <data name="LoadingWindowText.Text" xml:space="preserve">
     <value>読み込み中...</value>
   </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>クラシックコンテキストメニューを有効にする</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>Windows 10のクラシックコンテキストメニュースタイルを復元し、すべてのオプションが即座に表示される馴染みのある右クリックメニュー体験を提供します</value>
+  </data>
 </root>

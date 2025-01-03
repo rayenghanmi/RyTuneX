@@ -1092,4 +1092,10 @@
   <data name="LoadingWindowText.Text" xml:space="preserve">
     <value>Laden...</value>
   </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>Klassisches Kontextmenü aktivieren</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>Stellt den klassischen Kontextmenüstil von Windows 10 wieder her und bietet eine vertraute Rechtsklick-Menüerfahrung, bei der alle Optionen sofort angezeigt werden</value>
+  </data>
 </root>
