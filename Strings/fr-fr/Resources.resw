@@ -1218,4 +1218,10 @@
   <data name="RestorePointTitle_fr-fr" xml:space="preserve">
     <value>Point de restauration</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Avertissement</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>Désactiver la restauration du système supprimera tous les points de restauration, y compris ceux créés par RyTuneX.&#10;&#10;Êtes-vous sûr de vouloir continuer ?</value>
+  </data>
 </root>

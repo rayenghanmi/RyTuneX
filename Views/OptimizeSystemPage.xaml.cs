@@ -11,8 +11,6 @@ namespace RyTuneX.Views;
 
 public sealed partial class OptimizeSystemPage : Page
 {
-    private bool isInitialLoad = true;
-
     public OptimizeSystemPage()
     {
         InitializeComponent();
@@ -34,12 +32,13 @@ public sealed partial class OptimizeSystemPage : Page
 
                     if (settingValueObj != null && settingValueObj is bool settingValue)
                     {
+                        // Subscribe to the Toggled event
                         control.IsOn = settingValue;
                     }
+                    control.Toggled += ToggleSwitch_Toggled;
                 }
             });
             await Task.WhenAll(tasks);
-            isInitialLoad = false;
         }
         catch (Exception ex)
         {
@@ -81,23 +80,8 @@ public sealed partial class OptimizeSystemPage : Page
         {
             var toggleSwitch = (ToggleSwitch)sender;
             Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
-            await LogHelper.Log($"ToggleSwitch Toggled: Tag={toggleSwitch.Tag}, IsOn={toggleSwitch.IsOn}");
-            if (toggleSwitch.IsOn)
-            {
-                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
-            }
-            else
-            {
-                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
-            }
-            if (isInitialLoad)
-            {
-                OptimizationOptions.XamlSwitches(toggleSwitch);
-            }
-            else
-            {
-                OptimizationOptions.XamlSwitches(toggleSwitch, false);
-            }
+            await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
+            ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = toggleSwitch.IsOn;
         }
         catch (Exception ex)
         {

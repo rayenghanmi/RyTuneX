@@ -1108,7 +1108,7 @@
     <value>创建还原点</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
-    <value>强烈建议在对系统进行任何更改之前创建一个还原点. &#10;在继续之前, 是否要创建一个系统还原点？</value>
+    <value>强烈建议在对系统进行任何更改之前创建一个还原点. &#10;在继续之前, 是否要创建一个系统还原点?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>正在创建还原点</value>
@@ -1135,7 +1135,7 @@
     <value>正在还原更改...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>您将还原 RyTuneX 对系统所做的所有更改（已卸载的应用程序除外）并重置应用程序的首选项. &#10;&#10;您确定要继续吗？</value>
+    <value>您将还原 RyTuneX 对系统所做的所有更改（已卸载的应用程序除外）并重置应用程序的首选项. &#10;&#10;您确定要继续吗?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
     <value>未发现显著更改. </value>
@@ -1220,5 +1220,11 @@
   </data>
   <data name="RestorePointTitle_zh-Hans" xml:space="preserve">
     <value>恢复点</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>禁用系统还原将删除所有还原点, 包括由RyTuneX创建的还原点.&#10;&#10;您确定要继续吗?</value>
   </data>
 </root>

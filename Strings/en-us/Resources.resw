@@ -1111,7 +1111,8 @@
     <value>Create Restore Point</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
-    <value>It's highly recommended to create a restore point before making any changes to your system.&#10;Would you like to create a system restore point before proceeding?</value>
+    <value>It's highly recommended to create a restore point before making any changes to your system.
+Would you like to create a system restore point before proceeding?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>Creating Restore Point</value>
@@ -1138,7 +1139,9 @@
     <value>Currently reverting changes...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>You're about to revert all the changes made by RyTuneX to your system (Except for uninstalled apps) and reset the app's preferences.&#10;&#10;Are you sure you want to continue?</value>
+    <value>You're about to revert all the changes made by RyTuneX to your system (Except for uninstalled apps) and reset the app's preferences.
+
+Are you sure you want to continue?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
     <value>No notable changes found.</value>
@@ -1223,5 +1226,11 @@
   </data>
   <data name="RestorePointTitle" xml:space="preserve">
     <value>Restore Point</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>Disabling System Restore will delete all restore points including those created by RyTuneX.&#10;&#10;Are you sure you want to continue?</value>
   </data>
 </root>

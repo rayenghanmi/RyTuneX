@@ -1218,4 +1218,10 @@
   <data name="RestorePointTitle_de-de" xml:space="preserve">
     <value>Wiederherstellungspunkt</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warnung</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>Das Deaktivieren der Systemwiederherstellung löscht alle Wiederherstellungspunkte, einschließlich der von RyTuneX erstellten.&#10;&#10; Sind Sie sicher, dass Sie fortfahren möchten?</value>
+  </data>
 </root>

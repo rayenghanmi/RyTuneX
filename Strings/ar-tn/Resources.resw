@@ -1221,4 +1221,10 @@
   <data name="RestorePointTitle_ar-tn" xml:space="preserve">
     <value>نقطة الاستعادة</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>تحذير</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>تعطيل استعادة النظام سيؤدي إلى حذف جميع نقاط الاستعادة بما في ذلك تلك التي أنشأها RyTuneX.&#10;&#10;هل أنت متأكد أنك تريد المتابعة؟</value>
+  </data>
 </root>

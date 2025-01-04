@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
 using System.Text.Json;
 using Windows.Storage;
+using Microsoft.UI.Xaml;
 
 namespace RyTuneX.Helpers;
 internal class OptimizationOptions
@@ -685,9 +686,9 @@ internal class OptimizationOptions
             });
         }
     }
-    public static void XamlSwitches(ToggleSwitch toggleSwitch, bool isAutomated = true)
+    public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)
     {
-        if (!isAutomated && toggleSwitch != null && toggleSwitch.Tag != null)
+        if (toggleSwitch != null && toggleSwitch.Tag != null)
         {
             switch (toggleSwitch.Tag)
             {
@@ -993,8 +994,26 @@ internal class OptimizationOptions
                 case "SystemRestore":
                     if (toggleSwitch.IsOn)
                     {
-                        OptimizeSystemHelper.DisableSystemRestore();
-                        SaveRevertAction("EnableSystemRestore");
+                        var restoreWarning = new ContentDialog
+                        {
+                            XamlRoot = App.MainWindow.Content.XamlRoot,
+                            Title = "Warning".GetLocalized(),
+                            Content = "RestoreWarningDialogText".GetLocalized(),
+                            PrimaryButtonText = "Continue".GetLocalized(),
+                            CloseButtonText = "Cancel".GetLocalized(),
+                            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
+                        };
+                        var dialogResult = await restoreWarning.ShowAsync();
+                        if (dialogResult == ContentDialogResult.Primary)
+                        {
+                            OptimizeSystemHelper.DisableSystemRestore();
+                            SaveRevertAction("EnableSystemRestore");
+                        }
+                        else
+                        {
+                            toggleSwitch.IsOn = false;
+                        }
                     }
                     else
                     {

@@ -10,21 +10,19 @@ namespace RyTuneX.Views;
 
 public sealed partial class FeaturesPage : Page
 {
-    private bool isInitialLoad = true;
-
     public FeaturesPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing FeaturesPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
-        Loaded += (sender, e) => InitializeToggleSwitches();
+        Loaded += (sender, e) => InitializeToggleSwitchesAsync();
     }
-    private void InitializeToggleSwitches()
+    private async void InitializeToggleSwitchesAsync()
     {
-        LogHelper.Log("Initializing Toggle Switches");
+        await LogHelper.Log("Initializing Toggle Switches");
         try
         {
-            foreach (var control in FindVisualChildren<ToggleSwitch>(this))
+            var tasks = FindVisualChildren<ToggleSwitch>(this).Select(async control =>
             {
                 if (control.Tag != null && control.Tag is string tagName)
                 {
@@ -33,15 +31,17 @@ public sealed partial class FeaturesPage : Page
 
                     if (settingValueObj != null && settingValueObj is bool settingValue)
                     {
+                        // Subscribe to the Toggled event
                         control.IsOn = settingValue;
                     }
+                    control.Toggled += ToggleSwitch_Toggled;
                 }
-            }
-            isInitialLoad = false;
+            });
+            await Task.WhenAll(tasks);
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            await LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
     // Helper method to find all children of a specific type in the visual tree
@@ -79,23 +79,8 @@ public sealed partial class FeaturesPage : Page
         {
             var toggleSwitch = (ToggleSwitch)sender;
             Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
-            await LogHelper.Log($"ToggleSwitch Toggled: Tag={toggleSwitch.Tag}, IsOn={toggleSwitch.IsOn}");
-            if (toggleSwitch.IsOn)
-            {
-                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = true;
-            }
-            else
-            {
-                ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = false;
-            }
-            if (isInitialLoad)
-            {
-                OptimizationOptions.XamlSwitches(toggleSwitch);
-            }
-            else
-            {
-                OptimizationOptions.XamlSwitches(toggleSwitch, false);
-            }
+            await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
+            ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = toggleSwitch.IsOn;
         }
         catch (Exception ex)
         {

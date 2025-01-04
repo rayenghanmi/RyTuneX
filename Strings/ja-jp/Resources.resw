@@ -1108,7 +1108,7 @@
     <value>復元ポイントの作成</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
-    <value>システムに変更を加える前に、復元ポイントを作成することを強くお勧めします. &#10;続行する前にシステムの復元ポイントを作成しますか？</value>
+    <value>システムに変更を加える前に、復元ポイントを作成することを強くお勧めします. &#10;続行する前にシステムの復元ポイントを作成しますか?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>復元ポイントを作成中</value>
@@ -1135,7 +1135,7 @@
     <value>変更を元に戻しています...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>RyTuneX によってシステムに加えられたすべての変更（アンインストールされたアプリを除く）を元に戻し、アプリの設定をリセットしようとしています. &#10;&#10;本当に続行してよろしいですか？</value>
+    <value>RyTuneX によってシステムに加えられたすべての変更（アンインストールされたアプリを除く）を元に戻し、アプリの設定をリセットしようとしています. &#10;&#10;本当に続行してよろしいですか?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
     <value>注目すべき変更は見つかりませんでした. </value>
@@ -1220,5 +1220,11 @@
   </data>
   <data name="RestorePointTitle_ja-jp" xml:space="preserve">
     <value>復元ポイント</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>システムの復元を無効にすると、RyTuneXによって作成されたものを含むすべての復元ポイントが削除されます<div class=""></div>&#10;&#10;続行してもよろしいですか?</value>
   </data>
 </root>
