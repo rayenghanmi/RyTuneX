@@ -76,9 +76,8 @@
                 </StackPanel>
             </StackPanel>
 
-            <TextBlock Text="Revert changes" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-            <controls:SettingsCard Header="Revert all changes"
-                Description="Reverts all the changes that RyTuneX has made to your system, including the restore point."
+            <TextBlock x:Uid="Settings_RevertTitle" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+            <controls:SettingsCard x:Uid="Settings_RevertChanges"
                 IsClickEnabled="True"
                 Click="RevertChanges_Click">
                 <controls:SettingsCard.HeaderIcon>

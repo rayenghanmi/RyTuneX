@@ -1104,4 +1104,124 @@
   <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
     <value>Restores the classic context menu style of Windows 10, providing a familiar right-click menu experience with all options displayed immediately</value>
   </data>
+  <data name="DoNotShowCheckBox" xml:space="preserve">
+    <value>Don't show this message again</value>
+  </data>
+  <data name="RestorePointDialogTitle" xml:space="preserve">
+    <value>Create Restore Point</value>
+  </data>
+  <data name="RestorePointDialogText" xml:space="preserve">
+    <value>It's highly recommended to create a restore point before making any changes to your system.&#10;Would you like to create a system restore point before proceeding?</value>
+  </data>
+  <data name="CreatingRestorePoint" xml:space="preserve">
+    <value>Creating Restore Point</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>Restore Point Created</value>
+  </data>
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>A system restore point has been successfully created.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>Failed to create a restore point</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Revert changes</value>
+  </data>
+  <data name="Settings_RevertChanges.Header" xml:space="preserve">
+    <value>Revert all changes</value>
+  </data>
+  <data name="Settings_RevertChanges.Description" xml:space="preserve">
+    <value>Reverts all the changes that RyTuneX has made to your system, including the restore point</value>
+  </data>
+  <data name="RevertingChanges" xml:space="preserve">
+    <value>Currently reverting changes...</value>
+  </data>
+  <data name="RevertChangesDialogText" xml:space="preserve">
+    <value>You're about to revert all the changes made by RyTuneX to your system (Except for uninstalled apps) and reset the app's preferences.&#10;&#10;Are you sure you want to continue?</value>
+  </data>
+  <data name="NoChangesFound" xml:space="preserve">
+    <value>No notable changes found.</value>
+  </data>
+  <data name="OperationStopped" xml:space="preserve">
+    <value>Operation stopped</value>
+  </data>
+  <data name="ReportSaved" xml:space="preserve">
+    <value>Report saved to your Desktop</value>
+  </data>
+  <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
+    <value>Memory Diagnostic</value>
+  </data>
+  <data name="MemoryDiagnosticDialogText" xml:space="preserve">
+    <value>Memory problems can cause your computer to lose information or stop working.&#10;&#10;Check your computer for memory problems</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Restart now</value>
+  </data>
+  <data name="ScheduleLater" xml:space="preserve">
+    <value>Schedule for later</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ScheduledLater" xml:space="preserve">
+    <value>Scheduled for next restart</value>
+  </data>
+  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
+    <value>Scan</value>
+  </data>
+  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
+    <value>Repair</value>
+  </data>
+  <data name="RepairPage_StopButton.Content" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>Select at least one option to scan/repair</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
+    <value>Battery Health</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
+    <value>This will generate a complete stat about your battery's health</value>
+  </data>
+  <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
+    <value>Memory Diagnostic</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
+    <value>Analyze your system's memory for potential issues and improve stability</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
+    <value>Diagnose</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
+    <value>Disk Optimizations</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
+    <value>This will optimize your storage device by defraging it (if HDD) or retrimming it (if SSD)</value>
+  </data>
+  <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+    <value>Optimize</value>
+  </data>
+  <data name="RepairPage_EventViewer.Header" xml:space="preserve">
+    <value>Event Viewer</value>
+  </data>
+  <data name="RepairPage_EventViewer.Description" xml:space="preserve">
+    <value>This will display recent system event logs for troubleshooting</value>
+  </data>
+  <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
+    <value>Repair Options</value>
+  </data>
+  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
+    <value>Diagnose Options</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>Operation Completed</value>
+  </data>
+  <data name="RestorePointTitle" xml:space="preserve">
+    <value>Restore Point</value>
+  </data>
 </root>

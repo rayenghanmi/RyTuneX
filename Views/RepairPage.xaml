@@ -19,6 +19,7 @@
     <Grid x:Name="ContentArea">
         <ScrollViewer Padding="24,14,24,0">
             <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
+                <TextBlock x:Uid="RepairPage_RepairOptions" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
                 <StackPanel CornerRadius="4" Padding="24" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                     <StackPanel x:Name="CheckBoxes">
                         <CheckBox x:Name="DismCheckBox" Content="DISM" Checked="CheckBox_Changed" Unchecked="CheckBox_Changed" Margin="0,0,0,10"/>
@@ -27,10 +28,10 @@
                     </StackPanel>
                     <Grid>
                         <StackPanel x:Name="ScanRepairPanel" Orientation="Horizontal">
-                            <Button x:Name="ScanButton" Content="Scan" Click="OnScanButtonClick" Margin="0,0,10,0"/>
-                            <Button x:Name="RepairButton" Content="Repair" Click="OnRepairButtonClick"/>
+                            <Button x:Uid="RepairPage_ScanButton" Click="OnScanButtonClick" Margin="0,0,10,0"/>
+                            <Button x:Uid="RepairPage_RepairButton" Click="OnRepairButtonClick"/>
                         </StackPanel>
-                        <Button x:Name="StopButton" Content="Stop" Click="OnStopButtonClick" Visibility="Collapsed"/>
+                        <Button x:Uid="RepairPage_StopButton" x:Name="StopButton" Click="OnStopButtonClick" Visibility="Collapsed"/>
                     </Grid>
                     <Grid x:Name="ProgressGrid" ColumnSpacing="16" Margin="0,6,0,6">
                         <Grid.ColumnDefinitions>
@@ -40,51 +41,40 @@
                         <ProgressBar x:Name="ProgressBar" Grid.Column="0" Maximum="100" Minimum="0"/>
                         <TextBlock x:Name="PercentageTextBlock" Text="0%" Grid.Column="1" Padding="4,0" Style="{StaticResource CaptionTextBlockStyle}"/>
                     </Grid>
-                    <TextBlock x:Name="StatusTextBlock" Text="Select at least one option to scan/repair" Style="{StaticResource CaptionTextBlockStyle}"/>
+                    <TextBlock x:Uid="RepairPage_StatusTextBlock" x:Name="StatusTextBlock" Style="{StaticResource CaptionTextBlockStyle}"/>
                 </StackPanel>
+                <TextBlock x:Uid="RepairPage_DiagnoseOptions" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
                 <controls:SettingsCard
-                    Header="Battery Health"
-                    Description="This will generate a complete stat about your battery's health">
+                    x:Uid="RepairPage_BatteryHealth">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xF5FC;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Name="BatteryStatusText" Margin="14,0" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center"/>
-                        <Button Content="Generate" Click="BatteryHealthButton_Click"/>
+                        <Button x:Uid="RepairPage_BatteryHealthGenerate" Click="BatteryHealthButton_Click"/>
                     </StackPanel>
                 </controls:SettingsCard>
                 <controls:SettingsCard
-                    Header="Memory Diagnostics"
-                    Description="Empty">
+                    x:Uid="RepairPage_MemoryDiagnostic">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE964;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Name="MemStatusText" Margin="14,0" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center"/>
-                        <Button x:Name="MemCheckButton" Content="Diagnose" Click="MemoryHealthButton_Click"/>
+                        <Button x:Uid="RepairPage_MemoryDiagnosticButton" x:Name="MemCheckButton" Click="MemoryHealthButton_Click"/>
                     </StackPanel>
                 </controls:SettingsCard>
                 <controls:SettingsCard
-                    Header="Disk Optimizations"
-                    Description="This will optimize your storage device by defraging it (if HDD) or retrimming it (if SSD)">
+                    x:Uid="RepairPage_DiskOptimizations">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xEB05;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <Button Content="Optimize"/>
+                    <Button x:Uid="RepairPage_DiskOptimizationsButton"/>
                 </controls:SettingsCard>
                 <controls:SettingsCard
-                    Header="Network Diagnostics"
-                    Description="This will check the status of your network connection and diagnose common issues">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE774;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <Button Content="Diagnose"/>
-                </controls:SettingsCard>
-                <controls:SettingsCard
+                    x:Uid="RepairPage_EventViewer"
                     Click="EventViewerSettingsCard_Click"
-                    IsClickEnabled="True"
-                    Header="Event Viewer"
-                    Description="This will display recent system event logs for troubleshooting">
+                    IsClickEnabled="True">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE82D;"/>
                     </controls:SettingsCard.HeaderIcon>

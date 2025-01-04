@@ -311,7 +311,7 @@ public sealed partial class SettingsPage : Page
             }
             else
             {
-                return "No notable changes found.";
+                return "NoChangesFound".GetLocalized();
             }
         }
         catch (Exception ex)
@@ -419,8 +419,8 @@ public sealed partial class SettingsPage : Page
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             Title = "RyTuneX",
-            Content = "You're about to revert all the changes made by RyTuneX to your system (Except for uninstalled apps) and reset the app's preferences.\nAre you sure you want to continue?",
-            CloseButtonText = "Cancel".GetLocalized(),
+            Content = "RevertChangesDialogText".GetLocalized(),
+            CloseButtonText = "Close".GetLocalized(),
             PrimaryButtonText = "Continue".GetLocalized(),
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
         };
@@ -438,7 +438,7 @@ public sealed partial class SettingsPage : Page
 
                 TextBlock textBlock = new TextBlock
                 {
-                    Text = "Currently reverting changes...",
+                    Text = "RevertingChanges".GetLocalized(),
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Margin = new Thickness(10)

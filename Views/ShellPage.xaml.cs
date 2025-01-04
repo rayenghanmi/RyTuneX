@@ -141,7 +141,7 @@ public sealed partial class ShellPage : Page
     {
         var neverShowAgain = new CheckBox
         {
-            Content = "Don't show this message again",
+            Content = "DoNotShowCheckBox".GetLocalized(),
             Margin = new Thickness(0, 10, 0, 0),
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top
@@ -149,21 +149,21 @@ public sealed partial class ShellPage : Page
 
         var dialog = new ContentDialog
         {
-            Title = "Create Restore Point",
+            Title = "RestorePointTitle".GetLocalized(),
             Content = new StackPanel
             {
                 Children =
                 {
                     new TextBlock
                     {
-                        Text = "It's highly recommended to create a restore point before making any changes to your system.\nWould you like to create a system restore point before proceeding?",
+                        Text = "RestorePointDialogText".GetLocalized(),
                         Margin = new Thickness(0, 0, 0, 10)
                     },
                     neverShowAgain
                 }
             },
-            PrimaryButtonText = "Yes",
-            CloseButtonText = "No",
+            PrimaryButtonText = "Continue".GetLocalized(),
+            CloseButtonText = "Close".GetLocalized(),
             XamlRoot = this.Content.XamlRoot,
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
@@ -178,10 +178,11 @@ public sealed partial class ShellPage : Page
         {
             var progressDialog = new ContentDialog
             {
-                Title = "Creating Restore Point",
+                Title = "CreatingRestorePoint".GetLocalized(),
                 Content = new ProgressRing { IsActive = true, Width = 50, Height = 50 },
-                XamlRoot = this.Content.XamlRoot,
-                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
+                XamlRoot = Content.XamlRoot,
+                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                IsPrimaryButtonEnabled = false
             };
 
             await progressDialog.ShowAsync();
@@ -192,8 +193,8 @@ public sealed partial class ShellPage : Page
                 progressDialog.Hide();
                 await new ContentDialog
                 {
-                    Title = "Restore Point Created",
-                    Content = "A system restore point has been successfully created.",
+                    Title = "RestorePointCreated".GetLocalized(),
+                    Content = "RestorePointCreationSuccess".GetLocalized(),
                     CloseButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
                     PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
@@ -205,8 +206,8 @@ public sealed partial class ShellPage : Page
                 progressDialog.Hide();
                 await new ContentDialog
                 {
-                    Title = "Error",
-                    Content = $"Failed to create a restore point: {ex.Message}",
+                    Title = "UnexpectedError".GetLocalized(),
+                    Content = $"RestorePointCreationError".GetLocalized(),
                     CloseButtonText = "OK",
                     XamlRoot = Content.XamlRoot,
                     PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],

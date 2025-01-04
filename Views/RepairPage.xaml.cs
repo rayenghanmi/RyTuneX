@@ -38,7 +38,7 @@ public sealed partial class RepairPage : Page
         if (_runningProcess != null && !_runningProcess.HasExited)
         {
             _runningProcess.Kill(); // Stop the running process
-            StatusTextBlock.Text = "Operation stopped.";
+            StatusTextBlock.Text = "OperationStopped".GetLocalized();
             ProgressBar.Value = 0;
             StopButton.Visibility = Visibility.Collapsed;
             ScanRepairPanel.Visibility = Visibility.Visible;
@@ -73,7 +73,7 @@ public sealed partial class RepairPage : Page
             }
         }
 
-        StatusTextBlock.Text = "Operation completed.";
+        StatusTextBlock.Text = "OperationCompleted".GetLocalized();
         ScanRepairPanel.Visibility = Visibility.Visible;
         StopButton.Visibility = Visibility.Collapsed;
         PercentageTextBlock.Text = "0%";
@@ -193,7 +193,7 @@ public sealed partial class RepairPage : Page
     private async void BatteryHealthButton_Click(object sender, RoutedEventArgs e)
     {
         await OptimizationOptions.StartInCmd($"powercfg /batteryreport /output \"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\batteryreport.html\"");
-        BatteryStatusText.Text = "Report saved to your Desktop";
+        BatteryStatusText.Text = "ReportSaved".GetLocalized();
     }
 
     private async void MemoryHealthButton_Click(object sender, RoutedEventArgs e)
@@ -204,11 +204,11 @@ public sealed partial class RepairPage : Page
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             SecondaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-            Title = "Memory Diagnostic",
-            Content = "Memory problems can cause your computer to lose information or stop working.\n\nCheck your computer for memory problems",
-            PrimaryButtonText = "Restart now",
-            SecondaryButtonText = "Schedule for later",
-            CloseButtonText = "Cancel"
+            Title = "MemoryDiagnosticDialogTitle".GetLocalized(),
+            Content = "MemoryDiagnosticDialogText".GetLocalized(),
+            PrimaryButtonText = "RestartNow".GetLocalized(),
+            SecondaryButtonText = "ScheduleLater".GetLocalized(),
+            CloseButtonText = "Cancel".GetLocalized()
         };
         memDialog.PrimaryButtonClick += async (sender, args) =>
         {
@@ -216,7 +216,7 @@ public sealed partial class RepairPage : Page
         };
         memDialog.SecondaryButtonClick += async (sender, args) =>
         {
-            MemStatusText.Text = "Scheduled for next restart";
+            MemStatusText.Text = "ScheduledLater".GetLocalized();
             MemCheckButton.IsEnabled = false;
             await OptimizationOptions.StartInCmd("bcdedit /bootsequence {memdiag}");
         };

@@ -1101,4 +1101,124 @@
   <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
     <value>يستعيد نمط قائمة السياق الكلاسيكية لويندوز 10، مما يوفر تجربة مألوفة عند النقر بزر الفأرة الأيمن مع عرض جميع الخيارات مباشرة</value>
   </data>
+  <data name="DoNotShowCheckBox" xml:space="preserve">
+    <value>لا تعرض هذه الرسالة مرة أخرى</value>
+  </data>
+  <data name="RestorePointDialogTitle" xml:space="preserve">
+    <value>إنشاء نقطة استعادة</value>
+  </data>
+  <data name="RestorePointDialogText" xml:space="preserve">
+    <value>يُنصح بشدة بإنشاء نقطة استعادة قبل إجراء أي تغييرات على نظامك.&#10;هل ترغب في إنشاء نقطة استعادة للنظام قبل المتابعة؟</value>
+  </data>
+  <data name="CreatingRestorePoint" xml:space="preserve">
+    <value>جاري إنشاء نقطة استعادة</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>تم إنشاء نقطة الاستعادة</value>
+  </data>
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>تم إنشاء نقطة استعادة للنظام بنجاح.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>فشل في إنشاء نقطة الاستعادة</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>تراجع عن التغييرات</value>
+  </data>
+  <data name="Settings_RevertChanges.Header" xml:space="preserve">
+    <value>التراجع عن كل التغييرات</value>
+  </data>
+  <data name="Settings_RevertChanges.Description" xml:space="preserve">
+    <value>يتراجع عن كل التغييرات التي أجراها RyTuneX على نظامك، بما في ذلك نقطة الاستعادة</value>
+  </data>
+  <data name="RevertingChanges" xml:space="preserve">
+    <value>جاري التراجع عن التغييرات...</value>
+  </data>
+  <data name="RevertChangesDialogText" xml:space="preserve">
+    <value>أنت على وشك التراجع عن جميع التغييرات التي أجراها RyTuneX على نظامك (باستثناء التطبيقات التي تم إلغاء تثبيتها) وإعادة تعيين تفضيلات التطبيق.&#10;&#10;هل أنت متأكد أنك تريد المتابعة؟</value>
+  </data>
+  <data name="NoChangesFound" xml:space="preserve">
+    <value>لم يتم العثور على تغييرات ملحوظة.</value>
+  </data>
+  <data name="OperationStopped" xml:space="preserve">
+    <value>تم إيقاف العملية</value>
+  </data>
+  <data name="ReportSaved" xml:space="preserve">
+    <value>تم حفظ التقرير على سطح المكتب</value>
+  </data>
+  <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
+    <value>تشخيص الذاكرة</value>
+  </data>
+  <data name="MemoryDiagnosticDialogText" xml:space="preserve">
+    <value>قد تتسبب مشاكل الذاكرة في فقدان الكمبيوتر للمعلومات أو توقفه عن العمل.&#10;&#10;افحص جهاز الكمبيوتر الخاص بك بحثًا عن مشاكل في الذاكرة</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>إعادة التشغيل الآن</value>
+  </data>
+  <data name="ScheduleLater" xml:space="preserve">
+    <value>جدولة لاحقًا</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="ScheduledLater" xml:space="preserve">
+    <value>تمت الجدولة لإعادة التشغيل القادمة</value>
+  </data>
+  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
+    <value>فحص</value>
+  </data>
+  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
+    <value>إصلاح</value>
+  </data>
+  <data name="RepairPage_StopButton.Content" xml:space="preserve">
+    <value>إيقاف</value>
+  </data>
+  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>اختر على الأقل خيارًا واحدًا للفحص/الإصلاح</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
+    <value>حالة البطارية</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
+    <value>سيتم إنشاء تقرير كامل عن حالة بطاريتك</value>
+  </data>
+  <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
+    <value>توليد</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
+    <value>تشخيص الذاكرة</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
+    <value>قم بتحليل ذاكرة نظامك لمشاكل محتملة وتحسين الاستقرار</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
+    <value>تشخيص</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
+    <value>تحسينات القرص</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
+    <value>سيتم تحسين جهاز التخزين الخاص بك عن طريق تجزئته (إذا كان HDD) أو إعادة ترتيبه (إذا كان SSD)</value>
+  </data>
+  <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+    <value>تحسين</value>
+  </data>
+  <data name="RepairPage_EventViewer.Header" xml:space="preserve">
+    <value>عارض الأحداث</value>
+  </data>
+  <data name="RepairPage_EventViewer.Description" xml:space="preserve">
+    <value>سيتم عرض سجلات الأحداث الأخيرة للنظام لأغراض استكشاف الأخطاء وإصلاحها</value>
+  </data>
+  <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
+    <value>خيارات الإصلاح</value>
+  </data>
+  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
+    <value>خيارات التشخيص</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>اكتملت العملية</value>
+  </data>
+  <data name="RestorePointTitle_ar-tn" xml:space="preserve">
+    <value>نقطة الاستعادة</value>
+  </data>
 </root>

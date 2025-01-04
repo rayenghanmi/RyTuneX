@@ -733,7 +733,7 @@
     <value>Adresse MAC</value>
   </data>
   <data name="AdapterType" xml:space="preserve">
-    <value>Type d’adaptateur</value>
+    <value>Type d'adaptateur</value>
   </data>
   <data name="EstimatedChargeRemaining" xml:space="preserve">
     <value>Charge restante estimée</value>
@@ -1097,5 +1097,125 @@
   </data>
   <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
     <value>Restaure le style du menu contextuel classique de Windows 10, offrant une expérience familière de clic droit avec toutes les options affichées immédiatement</value>
+  </data>
+  <data name="DoNotShowCheckBox" xml:space="preserve">
+    <value>Ne plus afficher ce message</value>
+  </data>
+  <data name="RestorePointDialogTitle" xml:space="preserve">
+    <value>Créer un point de restauration</value>
+  </data>
+  <data name="RestorePointDialogText" xml:space="preserve">
+    <value>Il est fortement recommandé de créer un point de restauration avant d'apporter des modifications à votre système.&#10;Souhaitez-vous créer un point de restauration système avant de continuer ?</value>
+  </data>
+  <data name="CreatingRestorePoint" xml:space="preserve">
+    <value>Création d'un point de restauration</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>Point de restauration créé</value>
+  </data>
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>Un point de restauration système a été créé avec succès.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>Échec de la création du point de restauration</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Annuler les modifications</value>
+  </data>
+  <data name="Settings_RevertChanges.Header" xml:space="preserve">
+    <value>Annuler toutes les modifications</value>
+  </data>
+  <data name="Settings_RevertChanges.Description" xml:space="preserve">
+    <value>Annule toutes les modifications apportées à votre système par RyTuneX, y compris le point de restauration</value>
+  </data>
+  <data name="RevertingChanges" xml:space="preserve">
+    <value>Annulation des modifications en cours...</value>
+  </data>
+  <data name="RevertChangesDialogText" xml:space="preserve">
+    <value>Vous êtes sur le point d'annuler toutes les modifications apportées à votre système par RyTuneX (à l'exception des applications désinstallées) et de réinitialiser les préférences de l'application.&#10;&#10;Êtes-vous sûr de vouloir continuer ?</value>
+  </data>
+  <data name="NoChangesFound" xml:space="preserve">
+    <value>Aucun changement notable trouvé.</value>
+  </data>
+  <data name="OperationStopped" xml:space="preserve">
+    <value>Opération arrêtée</value>
+  </data>
+  <data name="ReportSaved" xml:space="preserve">
+    <value>Rapport enregistré sur votre bureau</value>
+  </data>
+  <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
+    <value>Diagnostic de la mémoire</value>
+  </data>
+  <data name="MemoryDiagnosticDialogText" xml:space="preserve">
+    <value>Les problèmes de mémoire peuvent entraîner une perte d'informations ou un dysfonctionnement de votre ordinateur.&#10;&#10;Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Redémarrer maintenant</value>
+  </data>
+  <data name="ScheduleLater" xml:space="preserve">
+    <value>Planifier pour plus tard</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="ScheduledLater" xml:space="preserve">
+    <value>Planifié pour le prochain redémarrage</value>
+  </data>
+  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
+    <value>Analyser</value>
+  </data>
+  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
+    <value>Réparer</value>
+  </data>
+  <data name="RepairPage_StopButton.Content" xml:space="preserve">
+    <value>Arrêter</value>
+  </data>
+  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>Sélectionnez au moins une option pour analyser/réparer</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
+    <value>État de la batterie</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
+    <value>Cela générera un rapport complet sur l'état de santé de votre batterie</value>
+  </data>
+  <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
+    <value>Générer</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
+    <value>Diagnostic de la mémoire</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
+    <value>Analysez la mémoire de votre système pour détecter d'éventuels problèmes et améliorer sa stabilité</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
+    <value>Diagnostiquer</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
+    <value>Optimisations du disque</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
+    <value>Optimise votre périphérique de stockage en le défragmentant (si HDD) ou en le retrimant (si SSD)</value>
+  </data>
+  <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+    <value>Optimiser</value>
+  </data>
+  <data name="RepairPage_EventViewer.Header" xml:space="preserve">
+    <value>Observateur d'événements</value>
+  </data>
+  <data name="RepairPage_EventViewer.Description" xml:space="preserve">
+    <value>Affiche les journaux des événements système récents pour le dépannage</value>
+  </data>
+  <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
+    <value>Options de réparation</value>
+  </data>
+  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
+    <value>Options de diagnostic</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>Opération terminée</value>
+  </data>
+  <data name="RestorePointTitle_fr-fr" xml:space="preserve">
+    <value>Point de restauration</value>
   </data>
 </root>
