@@ -226,7 +226,11 @@ public sealed partial class RepairPage : Page
 
     private async void EventViewerSettingsCard_Click(object sender, RoutedEventArgs e)
     {
-        await OptimizationOptions.StartInCmd("eventvwr.msc");
+        await OptimizationOptions.StartInCmd("eventvwr.msc"); 
+    }
+    private async void DiskOptimizationsButton_Click(object sender, RoutedEventArgs e)
+    {
+        await OptimizationOptions.StartInCmd("dfrgui.exe");
     }
 
     private void CheckBox_Changed(object sender, RoutedEventArgs e)

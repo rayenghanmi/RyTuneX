@@ -439,6 +439,7 @@ public sealed partial class SettingsPage : Page
                 TextBlock textBlock = new TextBlock
                 {
                     Text = "RevertingChanges".GetLocalized(),
+                    TextWrapping = TextWrapping.Wrap,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Margin = new Thickness(10)

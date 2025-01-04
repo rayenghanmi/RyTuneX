@@ -69,7 +69,7 @@
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xEB05;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <Button x:Uid="RepairPage_DiskOptimizationsButton"/>
+                    <Button x:Uid="RepairPage_DiskOptimizationsButton" Click="DiskOptimizationsButton_Click"/>
                 </controls:SettingsCard>
                 <controls:SettingsCard
                     x:Uid="RepairPage_EventViewer"

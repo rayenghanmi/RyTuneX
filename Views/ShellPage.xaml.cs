@@ -157,6 +157,7 @@ public sealed partial class ShellPage : Page
                     new TextBlock
                     {
                         Text = "RestorePointDialogText".GetLocalized(),
+                        TextWrapping = TextWrapping.Wrap,
                         Margin = new Thickness(0, 0, 0, 10)
                     },
                     neverShowAgain

@@ -22,6 +22,7 @@ All notable changes to this branch will be documented in this file.
 - Fixed an issue where the uninstallation state text did not reflect the current app being uninstalled.
 - Resolved a bug causing the UI under the apps list in the `Debloat` page to flicker when the scroll bar appeared or disappeared.
 - Fixed an issue where GPU information was not displayed correctly on the `Home` page.
+- Resolved an issue where the optimization functions whould run when the app was loading the toggle switches on initial load.
 
 ### Changes
 
