@@ -1108,7 +1108,8 @@
     <value>إنشاء نقطة استعادة</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
-    <value>يُنصح بشدة بإنشاء نقطة استعادة قبل إجراء أي تغييرات على نظامك.&#10;هل ترغب في إنشاء نقطة استعادة للنظام قبل المتابعة؟</value>
+    <value>يُنصح بشدة بإنشاء نقطة استعادة قبل إجراء أي تغييرات على نظامك.
+هل ترغب في إنشاء نقطة استعادة للنظام قبل المتابعة؟</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>جاري إنشاء نقطة استعادة</value>
@@ -1135,7 +1136,9 @@
     <value>جاري التراجع عن التغييرات...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>أنت على وشك التراجع عن جميع التغييرات التي أجراها RyTuneX على نظامك (باستثناء التطبيقات التي تم إلغاء تثبيتها) وإعادة تعيين تفضيلات التطبيق.&#10;&#10;هل أنت متأكد أنك تريد المتابعة؟</value>
+    <value>أنت على وشك التراجع عن جميع التغييرات التي أجراها RyTuneX على نظامك (باستثناء التطبيقات التي تم إلغاء تثبيتها) وإعادة تعيين تفضيلات التطبيق.
+
+هل أنت متأكد أنك تريد المتابعة؟</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
     <value>لم يتم العثور على تغييرات ملحوظة.</value>
@@ -1150,7 +1153,9 @@
     <value>تشخيص الذاكرة</value>
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
-    <value>قد تتسبب مشاكل الذاكرة في فقدان الكمبيوتر للمعلومات أو توقفه عن العمل.&#10;&#10;افحص جهاز الكمبيوتر الخاص بك بحثًا عن مشاكل في الذاكرة</value>
+    <value>قد تتسبب مشاكل الذاكرة في فقدان الكمبيوتر للمعلومات أو توقفه عن العمل.
+
+افحص جهاز الكمبيوتر الخاص بك بحثًا عن مشاكل في الذاكرة</value>
   </data>
   <data name="RestartNow" xml:space="preserve">
     <value>إعادة التشغيل الآن</value>
@@ -1225,6 +1230,32 @@
     <value>تحذير</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>تعطيل استعادة النظام سيؤدي إلى حذف جميع نقاط الاستعادة بما في ذلك تلك التي أنشأها RyTuneX.&#10;&#10;هل أنت متأكد أنك تريد المتابعة؟</value>
+    <value>تعطيل استعادة النظام سيؤدي إلى حذف جميع نقاط الاستعادة بما في ذلك تلك التي أنشأها RyTuneX.
+
+هل أنت متأكد أنك تريد المتابعة؟</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>معلومات الجهاز</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>إعدادات الإعلانات</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>إعدادات القياس عن بعد</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>إعدادات أخرى</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>تحسينات النظام الأساسية</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>تحسينات النظام المتقدمة</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>لا توجد تطبيقات تطابق بحثك</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>ابحث عن التطبيقات...</value>
   </data>
 </root>

@@ -53,19 +53,19 @@
                 </TreeView.ItemTemplate>
             </TreeView>
         </ScrollViewer>
-        <TextBlock Text="No apps match your search" x:Name="noAppFoundText" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+        <TextBlock x:Uid="DebloatSystemPage_NoAppFound" x:Name="noAppFoundText" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
         <StackPanel Margin="10" x:Name="gettingAppsLoading" Grid.Row="0" VerticalAlignment="Center" Visibility="Visible">
             <ProgressRing Margin="20" Width="100" Height="100" IsIndeterminate="True"/>
             <TextBlock x:Uid="DebloatSystemPage_FetchingInstalledApps" HorizontalAlignment="Center" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
         </StackPanel>
         <TextBlock Margin="10,6" Grid.Row="1" HorizontalAlignment="Right" x:Name="installedAppsCount" Visibility="Collapsed"/>
-        <AutoSuggestBox x:Name="AppSearchBox" 
+        <AutoSuggestBox x:Name="AppSearchBox"
+            x:Uid="DebloatSystemPage_SearchBar"
             Grid.Row="1"
             HorizontalAlignment="Stretch"
             MaxWidth="200"
             Height="32"
             Visibility="Collapsed"
-            PlaceholderText="Search apps..." 
             TextChanged="AppSearchBox_TextChanged" 
             QuerySubmitted="AppSearchBox_QuerySubmitted"/>
         <CheckBox Margin="10,6" Grid.Row="1" x:Uid="DebloatSystemPage_ShowAll" x:Name="showAll" Visibility="Collapsed" Checked="ShowAll_Checked" Unchecked="ShowAll_Unchecked"/>

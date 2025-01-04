@@ -1156,7 +1156,9 @@ Are you sure you want to continue?</value>
     <value>Memory Diagnostic</value>
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
-    <value>Memory problems can cause your computer to lose information or stop working.&#10;&#10;Check your computer for memory problems</value>
+    <value>Memory problems can cause your computer to lose information or stop working.
+
+Check your computer for memory problems</value>
   </data>
   <data name="RestartNow" xml:space="preserve">
     <value>Restart now</value>
@@ -1231,6 +1233,29 @@ Are you sure you want to continue?</value>
     <value>Warning</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Disabling System Restore will delete all restore points including those created by RyTuneX.&#10;&#10;Are you sure you want to continue?</value>
+    <value>Disabling System Restore will delete all restore points including those created by RyTuneX.
+
+Are you sure you want to continue?</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>Advertising Settings</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>Telemetry Settings</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>OtherSettings</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>Basic System Optimizations</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>Advanced System Optimizations</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>No apps match your search</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>Search apps...</value>
   </data>
 </root>

@@ -21,27 +21,9 @@
             <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
 
                 <!-- Advertising Section -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        Text="Advertising Settings"/>
-                    <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                        BorderBrush="Transparent"
-                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                            Glyph="&#xE946;" />
-                        <Button.Flyout>
-                            <Flyout>
-                                <StackPanel Padding="0" MaxWidth="300">
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section contains toggles for various advertising features that can be enabled or disabled."/>
-                                    <MenuFlyoutSeparator Margin="-12,10"/>
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="Advertising ID, Bluetooth Advertising, News and Interests, Spotlight Features, Tailored Experiences, Cloud Optimized Content, Feedback Notifications."/>
-                                </StackPanel>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="PrivacyPage_AdvertisingSettings"/>
                 <controls:SettingsCard x:Uid="Feature_DisableAdvertisingID">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xF427;"/>
@@ -92,27 +74,9 @@
                 </controls:SettingsCard>
                 
                 <!-- Telemetry Section -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        Text="Telemetry Settings"/>
-                    <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                        BorderBrush="Transparent"
-                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                            Glyph="&#xE946;" />
-                        <Button.Flyout>
-                            <Flyout>
-                                <StackPanel Padding="0" MaxWidth="300">
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section contains toggles for various telemetry features that can be enabled or disabled."/>
-                                    <MenuFlyoutSeparator Margin="-12,10"/>
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="Telemetry Services, Edge Telemetry, Visual Studio Telemetry, Nvidia Telemetry, Chrome Telemetry, Firefox Telemetry, Activity Feed, Cdp, Diagnostics Toast, Online Speech Privacy, Location Features, Biometrics."/>
-                                </StackPanel>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="PrivacyPage_TelemetrySettings"/>
                 <controls:SettingsCard x:Uid="Feature_DisableTelemetryServices">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE9F9;"/>
@@ -198,27 +162,9 @@
                 </controls:SettingsCard>
 
                 <!-- Other Settings Section -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        Text="Other Settings"/>
-                    <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                        BorderBrush="Transparent"
-                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                            Glyph="&#xE946;" />
-                        <Button.Flyout>
-                            <Flyout>
-                                <StackPanel Padding="0" MaxWidth="300">
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section contains toggles for various other features that can be enabled or disabled."/>
-                                    <MenuFlyoutSeparator Margin="-12,10"/>
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="Automatic Restart Sign-On, Handwriting Data Sharing, Text Input Data Collection, Input Personalization, Safe Search Mode, Activity Uploads, Clipboard Sync, Message Sync, Setting Sync, Voice Activation, Find My Device, SMBv1, SMBv2."/>
-                                </StackPanel>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="OtherSettings"/>
                 <controls:SettingsCard x:Uid="Feature_DisableAutomaticRestartSignOn">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE777;"/>

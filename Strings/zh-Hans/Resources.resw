@@ -1108,7 +1108,8 @@
     <value>创建还原点</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
-    <value>强烈建议在对系统进行任何更改之前创建一个还原点. &#10;在继续之前, 是否要创建一个系统还原点?</value>
+    <value>强烈建议在对系统进行任何更改之前创建一个还原点. 
+在继续之前, 是否要创建一个系统还原点?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>正在创建还原点</value>
@@ -1135,7 +1136,9 @@
     <value>正在还原更改...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>您将还原 RyTuneX 对系统所做的所有更改（已卸载的应用程序除外）并重置应用程序的首选项. &#10;&#10;您确定要继续吗?</value>
+    <value>您将还原 RyTuneX 对系统所做的所有更改（已卸载的应用程序除外）并重置应用程序的首选项. 
+
+您确定要继续吗?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
     <value>未发现显著更改. </value>
@@ -1150,7 +1153,9 @@
     <value>内存诊断</value>
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
-    <value>内存问题可能会导致计算机丢失信息或停止工作. &#10;&#10;检查计算机的内存问题</value>
+    <value>内存问题可能会导致计算机丢失信息或停止工作. 
+
+检查计算机的内存问题</value>
   </data>
   <data name="RestartNow" xml:space="preserve">
     <value>立即重启</value>
@@ -1225,6 +1230,32 @@
     <value>警告</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>禁用系统还原将删除所有还原点, 包括由RyTuneX创建的还原点.&#10;&#10;您确定要继续吗?</value>
+    <value>禁用系统还原将删除所有还原点, 包括由RyTuneX创建的还原点.
+
+您确定要继续吗?</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>设备信息</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>广告设置</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>遥测设置</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>其他设置</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>基本系统优化</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>高级系统优化</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>没有应用匹配您的搜索</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>搜索应用...</value>
   </data>
 </root>

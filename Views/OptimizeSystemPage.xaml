@@ -21,31 +21,13 @@
             <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
 
                 <!-- Basic System Optimization Section -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        Text="Basic System Optimization"/>
-                    <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                        BorderBrush="Transparent"
-                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                            Glyph="&#xE946;" />
-                        <Button.Flyout>
-                            <Flyout>
-                                <StackPanel Padding="0" MaxWidth="300">
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section contains toggles for basic system optimization features."/>
-                                    <MenuFlyoutSeparator Margin="-12,10"/>
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="Menu Show Delay, Mouse Hover Time, Auto Complete, Crash Dump, Remote Assistance, Window Shake, Copy Move Context Menu, Task Timeouts, Low Disk Space Checks, Link Resolve, Service Timeouts, Remote Registry, File Extensions and Hidden Files."/>
-                                </StackPanel>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="OptimizeSystemPage_BasicOptimization"/>
                 <controls:SettingsCard x:Uid="Feature_MenuShowDelay">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xF182;"/>
-                    </controls:SettingsCard.HeaderIcon>
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xF182;"/>
+                </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="MenuShowDelay" Tag="MenuShowDelay"/>
                 </controls:SettingsCard>
 
@@ -134,27 +116,9 @@
                 </controls:SettingsCard>
 
                 <!-- Advanced System Optimization Section -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        Text="Advanced System Optimization"/>
-                    <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                        BorderBrush="Transparent"
-                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                            Glyph="&#xE946;" />
-                        <Button.Flyout>
-                            <Flyout>
-                                <StackPanel Padding="0" MaxWidth="300">
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section contains toggles for advanced system optimization features."/>
-                                    <MenuFlyoutSeparator Margin="-12,10"/>
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="System Profile, GPU and Priority Settings, Frame Server Mode, Low Latency GPU Settings, Non Best Effort Limit, SysMain, NTFS Timestamp, Gaming Mode, Exclude Drivers from Windows Updates."/>
-                                </StackPanel>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="OptimizeSystemPage_AdvancedOptimization"/>
                 <controls:SettingsCard x:Uid="Feature_SystemProfile">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE9F5;"/>
@@ -219,27 +183,9 @@
                 </controls:SettingsCard>
 
                 <!-- Other System Optimization Section -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        Text="Other System Optimization"/>
-                    <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                        BorderBrush="Transparent"
-                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                            Glyph="&#xE946;" />
-                        <Button.Flyout>
-                            <Flyout>
-                                <StackPanel Padding="0" MaxWidth="300">
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section contains toggles for other system optimization features."/>
-                                    <MenuFlyoutSeparator Margin="-12,10"/>
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="System Restore, Cortana, Store Updates, Automatic Updates, Smart Screen."/>
-                                </StackPanel>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="OtherSettings"/>
                 <controls:SettingsCard x:Uid="Feature_DisableSystemRestore">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE777;"/>

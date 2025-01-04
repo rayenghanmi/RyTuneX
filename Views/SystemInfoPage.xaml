@@ -25,24 +25,7 @@
 
                 <!-- Drivers Section -->
                 <StackPanel Grid.Row="0">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Uid="SystemInfoPage_Drivers" Margin="6" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-                        <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                            BorderBrush="Transparent"
-                            Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                            <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                                Glyph="&#xE946;" />
-                            <Button.Flyout>
-                                <Flyout>
-                                    <StackPanel Padding="0" MaxWidth="300">
-                                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section allows you to extract drivers from your system."/>
-                                        <MenuFlyoutSeparator Margin="-12,10"/>
-                                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="By selecting a folder path and clicking the 'Extract' button, you can save all the drivers installed on your system to the specified location. This can be useful for backup purposes or for transferring drivers to another system."/>
-                                    </StackPanel>
-                                </Flyout>
-                            </Button.Flyout>
-                        </Button>
-                    </StackPanel>
+                    <TextBlock x:Uid="SystemInfoPage_Drivers" Margin="6" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
                     <StackPanel x:Name="driversPanel" Padding="20" CornerRadius="4"  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                         <TextBlock x:Uid="SystemInfoPage_ExtractDrivers"/>
                         <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
@@ -59,25 +42,8 @@
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Margin="0,10,0,0">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="6"
-                            x:Uid="SystemInfoPage_DeviceInfo" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-                        <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                            BorderBrush="Transparent"
-                            Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                            <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                                Glyph="&#xE946;" />
-                            <Button.Flyout>
-                                <Flyout>
-                                    <StackPanel Padding="0" MaxWidth="300">
-                                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section provides detailed information about your device."/>
-                                        <MenuFlyoutSeparator Margin="-12,10"/>
-                                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="You can view information about your operating system, CPU, GPU, RAM, storage, network, and battery."/>
-                                    </StackPanel>
-                                </Flyout>
-                            </Button.Flyout>
-                        </Button>
-                    </StackPanel>
+                    <TextBlock Margin="6"
+                        x:Uid="SystemInfoPage_DeviceInfo" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
                     <!-- OS Information Section -->
                     <StackPanel x:Name="osPanel" Margin="0,0,0,10" Padding="20" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">

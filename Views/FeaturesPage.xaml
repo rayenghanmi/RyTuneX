@@ -22,27 +22,9 @@
             <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
 
                 <!-- System Feature Control Toggles -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
+                <TextBlock Margin="6"
                     x:Uid="FeaturesPage_SysFeat"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-                    <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                        BorderBrush="Transparent"
-                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                                  Glyph="&#xE946;" />
-                        <Button.Flyout>
-                            <Flyout>
-                                <StackPanel Padding="0" MaxWidth="300">
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section contains toggles for various system features that can be enabled or disabled. "/>
-                                    <MenuFlyoutSeparator Margin="-12,10"/>
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="Each toggle allows you to control specific functionalities of the system, such as verbose logon, hibernation, home group, print service, and more. Adjust these settings to optimize your system's performance and behavior according to your preferences."/>
-                                </StackPanel>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-
                 <controls:SettingsCard x:Uid="Feature_EnableVerboseLogon">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE946;"/>
@@ -169,27 +151,9 @@
                     <ToggleSwitch x:Name="CastToDevice" Tag="CastToDevice"/>
                 </controls:SettingsCard>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        x:Uid="FeaturesPage_Win11"/>
-                    <Button Margin="2" Padding="3" VerticalAlignment="Bottom" Background="Transparent"
-                        BorderBrush="Transparent"
-                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
-                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource InfoBarHyperlinkButtonFontSize}"
-                            Glyph="&#xE946;" />
-                        <Button.Flyout>
-                            <Flyout>
-                                <StackPanel Padding="0" MaxWidth="300">
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="This section contains toggles for various Windows 11 specific features that can be enabled or disabled."/>
-                                    <MenuFlyoutSeparator Margin="-12,10"/>
-                                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="Each toggle allows you to control specific functionalities of the system, such as VBS, end task, taskbar position, snap assist, widgets, chat, files compact mode, stickers, Edge discover bar, and CoPilot AI. Adjust these settings to optimize your system's performance and behavior according to your preferences."/>
-                                </StackPanel>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="FeaturesPage_Win11"/>
                 <controls:SettingsCard x:Uid="Feature_DisableVBS">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xF552;"/>

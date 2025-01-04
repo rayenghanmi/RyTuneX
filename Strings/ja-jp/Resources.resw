@@ -1108,7 +1108,8 @@
     <value>復元ポイントの作成</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
-    <value>システムに変更を加える前に、復元ポイントを作成することを強くお勧めします. &#10;続行する前にシステムの復元ポイントを作成しますか?</value>
+    <value>システムに変更を加える前に、復元ポイントを作成することを強くお勧めします. 
+続行する前にシステムの復元ポイントを作成しますか?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>復元ポイントを作成中</value>
@@ -1135,7 +1136,9 @@
     <value>変更を元に戻しています...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>RyTuneX によってシステムに加えられたすべての変更（アンインストールされたアプリを除く）を元に戻し、アプリの設定をリセットしようとしています. &#10;&#10;本当に続行してよろしいですか?</value>
+    <value>RyTuneX によってシステムに加えられたすべての変更（アンインストールされたアプリを除く）を元に戻し、アプリの設定をリセットしようとしています. 
+
+本当に続行してよろしいですか?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
     <value>注目すべき変更は見つかりませんでした. </value>
@@ -1150,7 +1153,9 @@
     <value>メモリ診断</value>
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
-    <value>メモリの問題があると、コンピューターが情報を失ったり、動作を停止したりする可能性があります. &#10;&#10;メモリの問題を確認してください. </value>
+    <value>メモリの問題があると、コンピューターが情報を失ったり、動作を停止したりする可能性があります. 
+
+メモリの問題を確認してください. </value>
   </data>
   <data name="RestartNow" xml:space="preserve">
     <value>今すぐ再起動</value>
@@ -1225,6 +1230,30 @@
     <value>警告</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>システムの復元を無効にすると、RyTuneXによって作成されたものを含むすべての復元ポイントが削除されます<div class=""></div>&#10;&#10;続行してもよろしいですか?</value>
+    <value />
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>デバイス情報</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>広告設定</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>テレメトリ設定</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>その他の設定</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>基本的なシステムの最適化</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>高度なシステムの最適化</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>検索に一致するアプリはありません</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>アプリを検索...</value>
   </data>
 </root>
