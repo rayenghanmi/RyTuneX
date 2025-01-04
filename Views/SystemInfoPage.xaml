@@ -5,28 +5,29 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <x:Double x:Key="SettingsCardSpacing">4</x:Double>
+        <Style x:Key="SettingsSectionHeaderTextBlockStyle"
+            BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+            TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Margin" Value="1,30,0,6" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
     <Grid x:Name="ContentArea">
-        <ScrollViewer Padding="-24,10,24,0" Margin="0,0,-56,0" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Background="Transparent">
-            <Grid Padding="0,0,0,40">
+        <ScrollViewer Padding="24,14,24,0" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Background="Transparent">
+            <Grid Margin="0,0,0,38">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <!-- Drivers Section -->
-                <StackPanel Grid.Row="0" Margin="20,10,20,20">
-                    <TextBlock x:Uid="SystemInfoPage_Drivers" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                    <StackPanel x:Name="driversPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Uid="SystemInfoPage_ExtractDrivers" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        </StackPanel>
+                <StackPanel Grid.Row="0">
+                    <TextBlock x:Uid="SystemInfoPage_Drivers" Margin="6" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+                    <StackPanel x:Name="driversPanel" Padding="20" CornerRadius="4"  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                        <TextBlock x:Uid="SystemInfoPage_ExtractDrivers"/>
                         <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
                             <ScrollViewer VerticalScrollMode="Disabled" VerticalAlignment="Center" MinWidth="230">
                                 <TextBox x:Uid="SystemInfoPage_FolderPathText" x:Name="FolderPathText" IsReadOnly="True"/>
@@ -40,65 +41,75 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-
-                <!-- OS Information Section -->
-                <StackPanel Grid.Row="1" Margin="20,10,20,0">
-                    <TextBlock x:Uid="SystemInfoPage_OS" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                    <StackPanel x:Name="osPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
-                        <ProgressRing x:Name="osProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                    <TextBlock Margin="6"
+                        x:Uid="SystemInfoPage_DeviceInfo" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+                    <!-- OS Information Section -->
+                    <StackPanel x:Name="osPanel" Margin="0,0,0,10" Padding="20" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <FontIcon Glyph="&#xE958;" VerticalAlignment="Center" Margin="6"/>
+                            <TextBlock x:Uid="SystemInfoPage_OS" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
+                        </StackPanel>
+                        <ProgressRing x:Name="osProgressRing" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="os" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
-                </StackPanel>
 
-                <!-- CPU Information Section -->
-                <StackPanel Grid.Row="2" Margin="20,10,20,0">
-                    <TextBlock x:Uid="SystemInfoPage_CPU" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                    <StackPanel x:Name="cpuPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                    <!-- CPU Information Section -->
+                    <StackPanel x:Name="cpuPanel" Margin="0,0,0,10" Padding="20" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <FontIcon Glyph="&#xEEA1;" VerticalAlignment="Center" Margin="6"/>
+                            <TextBlock x:Uid="SystemInfoPage_CPU" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
+                        </StackPanel>
                         <ProgressRing x:Name="cpuProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="cpu" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
-                </StackPanel>
 
-                <!-- GPU Information Section -->
-                <StackPanel Grid.Row="3" Margin="20,10,20,0">
-                    <TextBlock x:Uid="SystemInfoPage_GPU" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                    <StackPanel x:Name="gpuPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                    <!-- GPU Information Section -->
+                    <StackPanel x:Name="gpuPanel" Margin="0,0,0,10" Padding="20" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <FontIcon Glyph="&#xF211;" VerticalAlignment="Center" Margin="6"/>
+                            <TextBlock x:Uid="SystemInfoPage_GPU" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
+                        </StackPanel>
                         <ProgressRing x:Name="gpuProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="gpu" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
-                </StackPanel>
 
-                <!-- RAM Information Section -->
-                <StackPanel Grid.Row="4" Margin="20,10,20,0">
-                    <TextBlock x:Uid="SystemInfoPage_RAM" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                    <StackPanel x:Name="ramPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                    <!-- RAM Information Section -->
+                    <StackPanel x:Name="ramPanel" Margin="0,0,0,10" Padding="20" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <FontIcon Glyph="&#xE964;" VerticalAlignment="Center" Margin="6"/>
+                            <TextBlock x:Uid="SystemInfoPage_RAM" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
+                        </StackPanel>
                         <ProgressRing x:Name="ramProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="ram" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
-                </StackPanel>
 
-                <!-- Disk Information Section -->
-                <StackPanel Grid.Row="5" Margin="20,10,20,0">
-                    <TextBlock x:Uid="SystemInfoPage_Storage" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                    <StackPanel x:Name="diskPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                    <!-- Disk Information Section -->
+                    <StackPanel x:Name="diskPanel" Margin="0,0,0,10" Padding="20" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <FontIcon Glyph="&#xEDA2;" VerticalAlignment="Center" Margin="6"/>
+                            <TextBlock x:Uid="SystemInfoPage_Storage" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
+                        </StackPanel>
                         <ProgressRing x:Name="diskProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="disk" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
-                </StackPanel>
 
-                <!-- Network Information Section -->
-                <StackPanel Grid.Row="6" Margin="20,10,20,0">
-                    <TextBlock x:Uid="SystemInfoPage_Network" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                    <StackPanel x:Name="networkPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                    <!-- Network Information Section -->
+                    <StackPanel x:Name="networkPanel" Margin="0,0,0,10" Padding="20" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <FontIcon Glyph="&#xEDA3;" VerticalAlignment="Center" Margin="6"/>
+                            <TextBlock x:Uid="SystemInfoPage_Network" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
+                        </StackPanel>
                         <ProgressRing x:Name="networkProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="network" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>
-                </StackPanel>
 
-                <!-- Battery Information Section -->
-                <StackPanel Grid.Row="7" Margin="20,10,20,0">
-                    <TextBlock x:Uid="SystemInfoPage_Battery" Margin="10" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                    <StackPanel x:Name="batteryPanel" Padding="10" CornerRadius="8" Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
+                    <!-- Battery Information Section -->
+                    <StackPanel x:Name="batteryPanel" Margin="0,0,0,10" Padding="20" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <FontIcon Glyph="&#xF5F9;" VerticalAlignment="Center" Margin="6"/>
+                            <TextBlock x:Uid="SystemInfoPage_Battery" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
+                        </StackPanel>
                         <ProgressRing x:Name="batteryProgressRing" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" x:Name="battery" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
                     </StackPanel>

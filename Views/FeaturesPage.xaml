@@ -18,140 +18,217 @@
         </Style>
     </Page.Resources>
     <Grid x:Name="ContentArea">
-        <ScrollViewer Padding="-24,10,24,0" Margin="0,0,-56,0">
-            <StackPanel Padding="0,0,0,40" Spacing="{StaticResource SettingsCardSpacing}">
+        <ScrollViewer Padding="24,14,24,0">
+            <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
 
                 <!-- System Feature Control Toggles -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
+                <TextBlock Margin="6"
                     x:Uid="FeaturesPage_SysFeat"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/systemfeatures.html">
-                        <FontIcon FontSize="15"
-                                  Glyph="&#xE946;" />
-                    </HyperlinkButton>
-                </StackPanel>
-
                 <controls:SettingsCard x:Uid="Feature_EnableVerboseLogon">
-                    <ToggleSwitch x:Name="VerboseLogon" Tag="VerboseLogon" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE946;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="VerboseLogon" Tag="VerboseLogon"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableHibernation">
-                    <ToggleSwitch x:Name="Hibernation" Tag="Hibernation" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE708;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="Hibernation" Tag="Hibernation"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableHomeGroup">
-                    <ToggleSwitch x:Name="HomeGroup" Tag="HomeGroup" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE902;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="HomeGroup" Tag="HomeGroup"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisablePrintService">
-                    <ToggleSwitch x:Name="PrintService" Tag="PrintService" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE749;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="PrintService" Tag="PrintService"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableCompatibilityAssistant">
-                    <ToggleSwitch x:Name="CompatibilityAssistant" Tag="CompatibilityAssistant" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE83D;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="CompatibilityAssistant" Tag="CompatibilityAssistant"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableSearch">
-                    <ToggleSwitch x:Name="Search" Tag="Search" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE721;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="Search" Tag="Search"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableErrorReporting">
-                    <ToggleSwitch x:Name="ErrorReporting" Tag="ErrorReporting" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE9F9;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="ErrorReporting" Tag="ErrorReporting"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableGameBar">
-                    <ToggleSwitch x:Name="GameBar" Tag="GameBar" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE990;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="GameBar" Tag="GameBar"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableQuickAccessHistory">
-                    <ToggleSwitch x:Name="QuickAccessHistory" Tag="QuickAccessHistory" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE81C;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="QuickAccessHistory" Tag="QuickAccessHistory"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableMyPeople">
-                    <ToggleSwitch x:Name="MyPeople" Tag="MyPeople" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE716;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="MyPeople" Tag="MyPeople"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableSensorServices">
-                    <ToggleSwitch x:Name="SensorServices" Tag="SensorServices" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE957;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="SensorServices" Tag="SensorServices"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableWindowsInk">
-                    <ToggleSwitch x:Name="WindowsInk" Tag="WindowsInk" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEDC6;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="WindowsInk" Tag="WindowsInk"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableSpellingAndTypingFeatures">
-                    <ToggleSwitch x:Name="SpellingAndTypingFeatures" Tag="SpellingAndTypingFeatures" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF87B;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="SpellingAndTypingFeatures" Tag="SpellingAndTypingFeatures"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableFaxService">
-                    <ToggleSwitch x:Name="FaxService" Tag="FaxService" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEF40;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="FaxService" Tag="FaxService"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableInsiderService">
-                    <ToggleSwitch x:Name="InsiderService" Tag="InsiderService" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF1AD;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="InsiderService" Tag="InsiderService"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableCloudClipboard">
-                    <ToggleSwitch x:Name="CloudClipboard" Tag="CloudClipboard" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEBC3;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="CloudClipboard" Tag="CloudClipboard"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableStickyKeys">
-                    <ToggleSwitch x:Name="StickyKeys" Tag="StickyKeys" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE765;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="StickyKeys" Tag="StickyKeys"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableCastToDevice">
-                    <ToggleSwitch x:Name="CastToDevice" Tag="CastToDevice" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEC15;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="CastToDevice" Tag="CastToDevice"/>
                 </controls:SettingsCard>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        x:Uid="FeaturesPage_Win11"/>
-                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/windows11.html">
-                        <FontIcon FontSize="15"
-                                  Glyph="&#xE946;" />
-                    </HyperlinkButton>
-                </StackPanel>
-
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="FeaturesPage_Win11"/>
                 <controls:SettingsCard x:Uid="Feature_DisableVBS">
-                    <ToggleSwitch x:Name="VBS" Tag="VBS" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF552;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="VBS" Tag="VBS"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_EnableEndTask">
-                    <ToggleSwitch x:Name="EndTask" Tag="EndTask" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE25B;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="EndTask" Tag="EndTask"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_EnableClassicContextMenu">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8C8;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="ClassicContextMenu" Tag="ClassicContextMenu"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_MoveTaskbarToLeft">
-                    <ToggleSwitch x:Name="TaskbarToLeft" Tag="TaskbarToLeft" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE64E;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="TaskbarToLeft" Tag="TaskbarToLeft"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableSnapAssist">
-                    <ToggleSwitch x:Name="SnapAssist" Tag="SnapAssist" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE7C4;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="SnapAssist" Tag="SnapAssist"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableWidgets">
-                    <ToggleSwitch x:Name="Widgets" Tag="Widgets" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE66B;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="Widgets" Tag="Widgets"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableChat">
-                    <ToggleSwitch x:Name="Chat" Tag="Chat" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8BD;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="Chat" Tag="Chat"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_EnableFilesCompactMode">
-                    <ToggleSwitch x:Name="FilesCompactMode" Tag="FilesCompactMode" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8FD;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="FilesCompactMode" Tag="FilesCompactMode"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableStickers">
-                    <ToggleSwitch x:Name="Stickers" Tag="Stickers" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF4AA;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="Stickers" Tag="Stickers"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableEdgeDiscoverBar">
-                    <ToggleSwitch x:Name="EdgeDiscoverBar" Tag="EdgeDiscoverBar" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF6FA;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="EdgeDiscoverBar" Tag="EdgeDiscoverBar"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableCoPilotAI">
-                    <ToggleSwitch x:Name="CoPilotAI" Tag="CoPilotAI" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE99A;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="CoPilotAI" Tag="CoPilotAI"/>
                 </controls:SettingsCard>
 
             </StackPanel>

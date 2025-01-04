@@ -40,7 +40,7 @@ public sealed partial class SettingsPage : Page
         SetDefaultLanguageBasedOnSystem();
 
         _elementTheme = _themeSelectorService.Theme;
-        _versionDescription = "Version " + GetVersionDescription();
+        _versionDescription = "Version".GetLocalized() + " " + GetVersionDescription();
 
         SwitchThemeCommand = new RelayCommand<ElementTheme>(
             async (param) =>
@@ -71,7 +71,6 @@ public sealed partial class SettingsPage : Page
             }
             else
             {
-                LogHelper.Log("Invalid language tag");
                 LogHelper.LogError("Invalid language tag");
                 throw new Exception($"Invalid language tag");
             }
@@ -236,6 +235,7 @@ public sealed partial class SettingsPage : Page
             var networkError = new ContentDialog()
             {
                 XamlRoot = xaml,
+                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 Title = "UpdateTitle".GetLocalized(),
                 Content = "NetworkError".GetLocalized(),
                 CloseButtonText = "Close".GetLocalized()
@@ -256,6 +256,7 @@ public sealed partial class SettingsPage : Page
                 var updateUnavailable = new ContentDialog()
                 {
                     XamlRoot = XamlRoot,
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     Title = "UpdateTitle".GetLocalized(),
                     Content = "UnavailableUpdate0".GetLocalized() + latestVersionString + "UnavailableUpdate1".GetLocalized(),
                     CloseButtonText = "Close".GetLocalized()
@@ -267,6 +268,7 @@ public sealed partial class SettingsPage : Page
                 var updateAvailable = new ContentDialog()
                 {
                     XamlRoot = XamlRoot,
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     Title = "UpdateTitle".GetLocalized(),
                     Content = "AvailableUpdateContent0".GetLocalized() + latestVersionString + "AvailableUpdateContent1".GetLocalized(),
                     CloseButtonText = "Close".GetLocalized(),
@@ -309,7 +311,7 @@ public sealed partial class SettingsPage : Page
             }
             else
             {
-                return "No notable changes found.";
+                return "NoChangesFound".GetLocalized();
             }
         }
         catch (Exception ex)
@@ -376,7 +378,9 @@ public sealed partial class SettingsPage : Page
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "cmd.exe",
+                    FileName = Environment.Is64BitOperatingSystem
+                    ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                    : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
                     Arguments = $"/c \"{setupFilePath} --silent\"",
                     UseShellExecute = false,
                     CreateNoWindow = true,
@@ -389,7 +393,7 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            UpdateStatusText.Text = "Error has occurred";
+            UpdateStatusText.Text = "UnexpectedError".GetLocalized();
             UpdateProgress.ShowError = true;
             await LogHelper.LogError($"Error during installation: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
@@ -401,10 +405,81 @@ public sealed partial class SettingsPage : Page
                 Directory.Delete(extractionPath, true);
             }
             ApplicationData.Current.LocalSettings.Values["DoneUpdating"] = true;
-            UpdateStatusText.Text = "Done";
+            UpdateStatusText.Text = "Done".GetLocalized();
             UpdateButton.Visibility = Visibility.Visible;
             UpdateStack.Visibility = Visibility.Collapsed;
             UpdateProgress.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    private async void RevertChanges_Click(object sender, RoutedEventArgs e)
+    {
+        var revertDialog = new ContentDialog()
+        {
+            XamlRoot = XamlRoot,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            Title = "RyTuneX",
+            Content = "RevertChangesDialogText".GetLocalized(),
+            CloseButtonText = "Close".GetLocalized(),
+            PrimaryButtonText = "Continue".GetLocalized(),
+            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
+        };
+        var result = await revertDialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            try
+            {
+                ProgressRing progressRing = new ProgressRing
+                {
+                    IsActive = true,
+                    Width = 50,
+                    Height = 50
+                };
+
+                TextBlock textBlock = new TextBlock
+                {
+                    Text = "RevertingChanges".GetLocalized(),
+                    TextWrapping = TextWrapping.Wrap,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(10)
+                };
+
+                var currentDialog = new ContentDialog()
+                {
+                    XamlRoot = XamlRoot,
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    Title = "RyTuneX",
+                    Content = new StackPanel
+                    {
+                        Children = { progressRing, textBlock },
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Spacing = 20
+                    },
+                    IsPrimaryButtonEnabled = false,
+                };
+
+                // Show the ContentDialog asynchronously (non-blocking)
+                var dialogTask = currentDialog.ShowAsync();
+
+                // Execute the revert operation
+                await OptimizationOptions.RevertAllChanges();
+
+                // Clear all local settings
+                var localSettings = ApplicationData.Current.LocalSettings;
+                localSettings.Values.Clear();
+
+                // Wait for a small delay for the operations to complete
+                await Task.Delay(1000);
+
+                // Close the application after the operations are completed
+                Application.Current.Exit();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error: {ex.Message}");
+            }
         }
     }
 }

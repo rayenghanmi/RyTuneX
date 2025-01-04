@@ -13,34 +13,28 @@
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
         <x:Double x:Key="SettingsCardSpacing">4</x:Double>
         <Style x:Key="SettingsSectionHeaderTextBlockStyle"
-       BasedOn="{StaticResource BodyStrongTextBlockStyle}"
-       TargetType="TextBlock">
+            BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+            TargetType="TextBlock">
             <Style.Setters>
                 <Setter Property="Margin" Value="1,30,0,6" />
             </Style.Setters>
         </Style>
     </Page.Resources>
-    <ScrollView Padding="0,10,24,0" Margin="-26,0,-56,0">
-        <StackPanel x:Name="ContentArea" Padding="0,0,0,40">
-            <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
+    <ScrollView Padding="24,14,24,0">
+        <StackPanel x:Name="ContentArea" Margin="0,0,0,38">
             <StackPanel>
-                <StackPanel.ChildrenTransitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromVerticalOffset="50" />
-                        <RepositionThemeTransition IsStaggeringEnabled="False" />
-                    </TransitionCollection>
-                </StackPanel.ChildrenTransitions>
                 <StackPanel>
                     <TextBlock x:Uid="Settings_Language" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
                     <controls:SettingsCard x:Name="LanguageSettingsCard"
                                x:Uid="Settings_LanguageSettingsCard"
                                HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
-                        <ComboBox VerticalAlignment="Center" x:Name="LanguageComboBox" PlaceholderText="System Language" Margin="{StaticResource SmallTopMargin}" SelectionChanged="LanguageComboBox_SelectionChanged">
+                        <ComboBox VerticalAlignment="Center" x:Name="LanguageComboBox" PlaceholderText="System Language" SelectionChanged="LanguageComboBox_SelectionChanged">
                             <ComboBoxItem Content="English (US)" Tag="en-us"/>
                             <ComboBoxItem Content="Français (France)" Tag="fr-fr"/>
                             <ComboBoxItem Content="العربية (تونس)" Tag="ar-tn"/>
                             <ComboBoxItem Content="中文 (简体)" Tag="zh-hans"/>
                             <ComboBoxItem Content="Deutsch (Deutschland)" Tag="de"/>
+                            <ComboBoxItem Content="日本語 (日本)" Tag="ja-jp"/>
                         </ComboBox>
                     </controls:SettingsCard>
 
@@ -81,18 +75,27 @@
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
-            
+
+            <TextBlock x:Uid="Settings_RevertTitle" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+            <controls:SettingsCard x:Uid="Settings_RevertChanges"
+                IsClickEnabled="True"
+                Click="RevertChanges_Click">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE777;"/>
+                </controls:SettingsCard.HeaderIcon>
+            </controls:SettingsCard>
+
             <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                 x:Uid="Settings_About" />
 
-            <controls:SettingsExpander Description="© 2024 Rayen Ghanmi"
+            <controls:SettingsExpander Description="© 2025 Rayen Ghanmi"
                                Header="RyTuneX"
                                HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.scale-100.png}">
                 <StackPanel Orientation="Horizontal">
-                    
+
                     <StackPanel Margin="25,0" Orientation="Vertical" VerticalAlignment="Center">
                         <Grid>
-                            <Button x:Uid="SettingsPage_UpdateButton" x:Name="UpdateButton" Click="Button_Click"/>
+                            <Button x:Uid="SettingsPage_UpdateButton" Style="{StaticResource AccentButtonStyle}" x:Name="UpdateButton" Click="Button_Click"/>
                             <StackPanel x:Name="UpdateStack" Visibility="Collapsed">
                                 <ProgressBar x:Name="UpdateProgress" Margin="3" IsIndeterminate="True" Visibility="Collapsed"/>
                                 <TextBlock x:Name="UpdateStatusText"/>
@@ -113,18 +116,19 @@
                                     x:Uid="Settings_AboutDescription"
                                     Margin="{StaticResource XSmallTopMargin}"
                                     Style="{ThemeResource BodyTextBlockStyle}" />
-                            <HyperlinkButton Content="View Logs" Click="HyperlinkButton_Click" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}"/>
-                            <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+                            <StackPanel Orientation="Horizontal">
+                                <HyperlinkButton x:Uid="SettingsPage_LogsLink" Margin="0,8,0,0" Click="HyperlinkButton_Click"/>
+                                <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="0,8,0,0"/>
+                            </StackPanel>
                         </StackPanel>
                     </controls:SettingsCard>
                 </controls:SettingsExpander.Items>
             </controls:SettingsExpander>
-            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,42,0,0">
+                <FontIcon Glyph="&#xED15;" FontSize="16" Margin="0,0,14,0"/>
                 <HyperlinkButton x:Uid="SettingsPage_FeedbackButton"
-                    NavigateUri="https://github.com/rayenghanmi/rytunex/issues/new" />
-                <HyperlinkButton x:Uid="SettingsPage_SupportButton"
-                    Content="#CeasefireNOW"
-                    NavigateUri="https://techforpalestine.org/learn-more/" />
+                        Padding="0"
+                        NavigateUri="https://github.com/rayenghanmi/rytunex/issues/new" />
             </StackPanel>
         </StackPanel>
     </ScrollView>

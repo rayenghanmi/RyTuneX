@@ -121,19 +121,16 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>إزالة البرامج الزائدة</value>
+    <value>إزالة التطبيقات</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>معلومات النظام</value>
+    <value>الجهاز</value>
   </data>
-  <data name="Shell_ReportBug.Content" xml:space="preserve">
-    <value>الإبلاغ عن خلل</value>
+  <data name="Shell_Issue.Content" xml:space="preserve">
+    <value>الإبلاغ</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>تحسين النظام</value>
-  </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>تخصيص</value>
+    <value>تحسين</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>السمة</value>
@@ -162,15 +159,6 @@
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>اللغة</value>
   </data>
-  <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. خدمات النظام المُبسطة:</value>
-  </data>
-  <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. تحسين سجل النظام بدقة:</value>
-  </data>
-  <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. أداء خالٍ من البرامج الزائدة:</value>
-  </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>جلب بيانات التطبيقات المثبتة...</value>
   </data>
@@ -190,7 +178,7 @@
     <value>حدد التطبيقات التي ترغب في إزالتها واضغط على إلغاء التثبيت</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>ميزات ويندوز</value>
+    <value>الميزات</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
     <value>الخصوصية</value>
@@ -198,11 +186,8 @@
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
     <value>انضم إلى خادمنا</value>
   </data>
-  <data name="HomePage_IssueButton.Text" xml:space="preserve">
-    <value>الإبلاغ عن مشكلة</value>
-  </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>تفقد راي تيونكس</value>
+    <value>تفقد RyTuneX</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>ترك تقييم</value>
@@ -219,23 +204,20 @@
   <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
     <value>الذاكرة العشوائية (RAM)</value>
   </data>
-  <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
-    <value>تحديث</value>
-  </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
     <value>التخزين</value>
   </data>
   <data name="Debloat" xml:space="preserve">
-    <value>إزالة البرامج الزائدة</value>
+    <value>إزالة التطبيقات</value>
   </data>
   <data name="DebloatPage_NotificationBody" xml:space="preserve">
     <value>قد لا يتم إزالة بعض هذه التطبيقات بشكل كامل.</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>حدث خطأ أثناء الإلغاء</value>
+    <value>حدث خطأ أثناء إلغاء تثبيت التطبيق(التطبيقات) التالية</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>تم الإلغاء بنجاح</value>
+    <value>تم إلغاء تثبيت التطبيق(التطبيقات) التالية بنجاح</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
     <value>إزالة الملفات المؤقتة</value>
@@ -540,11 +522,11 @@
   <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
     <value>إجراءات تعديل الأداء</value>
   </data>
-  <data name="Feature_DisableSuperfetch.Header" xml:space="preserve">
-    <value>تعطيل Superfetch</value>
+  <data name="Feature_DisableSysMain.Header" xml:space="preserve">
+    <value>تعطيل SysMain</value>
   </data>
-  <data name="Feature_DisableSuperfetch.Description" xml:space="preserve">
-    <value>يُوقف Superfetch، الذي يُسبق تحميل التطبيقات المستخدمة بشكل متكرر لبدء أسرع. قد يؤثر على أوقات البدء لبعض البرامج إذا كنت تستخدم HDD</value>
+  <data name="Feature_DisableSysMain.Description" xml:space="preserve">
+    <value>يُوقف SysMain، الذي يُسبق تحميل التطبيقات المستخدمة بشكل متكرر لبدء أسرع. قد يؤثر على أوقات البدء لبعض البرامج إذا كنت تستخدم HDD</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
     <value>تعطيل الطابع الزمني NTFS</value>
@@ -593,12 +575,6 @@
   </data>
   <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
     <value>يُوقف تحديثات ويندوز التلقائية، مما يتطلب التثبيت اليدوي. يُنصح بشدة بعدم فعل ذلك. يمكن أن يترك نظامك عرضة للاستغلالات الأمنية وإصلاح الأخطاء</value>
-  </data>
-  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
-    <value>تعطيل شاشة سمارت</value>
-  </data>
-  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>يُوقف شاشة سمارت فلتر، الذي يُحذرك من التطبيقات والملفات المحتملة غير الآمنة التي تم تنزيلها من الإنترنت. غير مُوصى به لأسباب الأمان. تعطيل هذه الميزة يزيد من خطر الإصابة بالبرامج الضارة</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>التجسس</value>
@@ -703,7 +679,7 @@
     <value>لم يتم التعيين</value>
   </data>
   <data name="Shell_Network.Content" xml:space="preserve">
-    <value>شبكات</value>
+    <value>الشبكات</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
     <value>(فلتر للبالغين)</value>
@@ -719,12 +695,6 @@
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneX هو أداة تحسين متقدمة تم بناؤها باستخدام إطار عمل WinUI 3، مصممة لتعزيز أداء أجهزة Windows. مصمم لنظامي Windows 10 و11، يمكّن RyTuneX المستخدمين من إزالة التطبيقات المثبتة مسبقًا بسهولة وتحسين موارد النظام</value>
-  </data>
-  <data name="Feature_CleanMemory.Description" xml:space="preserve">
-    <value>يفعّل خدمة rytunexsvc اللي تراقب الذاكرة (RAM) بشكل دوري وتنظفها وقت اللي تتعدى 80%</value>
-  </data>
-  <data name="Feature_CleanMemory.Header" xml:space="preserve">
-    <value>فعّل منظف الرام</value>
   </data>
   <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
     <value>تحقق من التحديثات</value>
@@ -753,8 +723,8 @@
   <data name="Update" xml:space="preserve">
     <value>تحديث</value>
   </data>
-  <data name="HomePage_SupportButton.Text" xml:space="preserve">
-    <value>ساندنا</value>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>الدعم</value>
   </data>
   <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
     <value>البطارية</value>
@@ -776,5 +746,516 @@
   </data>
   <data name="Chemistry" xml:space="preserve">
     <value>نوع التركيبة الكيميائية للبطارية</value>
+  </data>
+  <data name="Shell_Security.Content" xml:space="preserve">
+    <value>الأمان</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>حدث خطأ غير متوقع</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>عرض السجلات</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>الإجمالي: {0} تطبيق(ات)</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>الأداء</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>التفاصيل</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>حماية الجدار الناري والشبكة</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>الحماية في الوقت الحقيقي</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>الشاشة الذكية (SmartScreen)</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>حالة الأمان</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>التحكم في حساب المستخدم (UAC)</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>الحماية من الفيروسات والتهديدات</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>تحديثات ويندوز</value>
+  </data>
+  <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>اصلاح</value>
+  </data>
+  <data name="ConfirmRemoveApps" xml:space="preserve">
+    <value>أنت على وشك إزالة التطبيقات التالية من نظامك بالكامل:</value>
+  </data>
+  <data name="ConfirmContinue" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد المتابعة؟</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>استمر</value>
+  </data>
+  <data name="HomePage_cpuUsage.Text" xml:space="preserve">
+    <value>استخدام المعالج</value>
+  </data>
+  <data name="HomePage_ramUsage.Text" xml:space="preserve">
+    <value>استخدام الذاكرة</value>
+  </data>
+  <data name="HomePage_gpuUsage.Text" xml:space="preserve">
+    <value>بطاقة الرسومات</value>
+  </data>
+  <data name="HomePage_diskUsage.Text" xml:space="preserve">
+    <value>استخدام القرص</value>
+  </data>
+  <data name="HomePage_networkUsage.Text" xml:space="preserve">
+    <value>استخدام الشبكة</value>
+  </data>
+  <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
+    <value>التطبيقات المثبتة</value>
+  </data>
+  <data name="HomePage_processesCount.Text" xml:space="preserve">
+    <value>العمليات</value>
+  </data>
+  <data name="HomePage_servicesCount.Text" xml:space="preserve">
+    <value>الخدمات</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>تعطيل فلتر الشاشة الذكية</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>يقوم بإيقاف فلتر SmartScreen الذي يحذرك من التطبيقات والملفات التي قد تكون غير آمنة والمُحمّلة من الإنترنت. تعطيل هذه الميزة يزيد من خطر الإصابة بالبرمجيات الخبيثة.</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
+    <value>تعطيل الأخبار والاهتمامات</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
+    <value>يقوم بإيقاف عرض موجز الأخبار والاهتمامات في شريط المهام، الذي يعرض الأخبار والطقس والتحديثات الأخرى. تعطيل هذه الميزة قد يحسن أداء النظام.</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
+    <value>تعطيل ميزات Spotlight</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
+    <value>يقوم بإيقاف ميزة Spotlight التي تعرض المحتوى والتوصيات المخصصة على شاشة القفل. تعطيل هذه الميزة يمكن أن يساعد في حماية الخصوصية.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
+    <value>تعطيل التجارب المخصصة</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
+    <value>يقوم بإيقاف التجارب المخصصة عبر التطبيقات والخدمات، مما يمنع ويندوز من جمع تفضيلاتك وبيانات نشاطك.</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
+    <value>تعطيل المحتوى المحسن من السحابة</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
+    <value>يقوم بإيقاف المحتوى المحسن من السحابة، والذي قد يشمل تحديثات التطبيقات ومزامنة الملفات. هذا يمكن أن يقلل من استخدام النطاق الترددي للإنترنت ولكنه قد يحد من الوظائف.</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
+    <value>تعطيل إشعارات التعليقات</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
+    <value>يمنع ويندوز من عرض إشعارات التعليقات المتعلقة بتجربتك مع النظام. تعطيل هذه الميزة قد يقلل من الإزعاجات.</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
+    <value>تعطيل معرّف الإعلانات</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
+    <value>يمنع ويندوز من تتبع أنشطتك لأغراض الإعلان الموجه. هذا يمكن أن يعزز الخصوصية ولكن قد يؤثر على تجربة التطبيقات.</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
+    <value>تعطيل إعلانات البلوتوث</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
+    <value>يقوم بإيقاف إعلانات البلوتوث، مما يمنع جهازك من البث إلى الأجهزة القريبة الأخرى. تعطيل هذه الميزة يمكن أن يقلل من المخاطر المتعلقة بالخصوصية.</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
+    <value>تعطيل تسجيل الدخول التلقائي بعد إعادة التشغيل</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
+    <value>يمنع تسجيل الدخول التلقائي بعد إعادة التشغيل، مما يتطلب منك إدخال بيانات الاعتماد يدويًا. هذا قد يعزز الأمان لكنه يضيف خطوة إضافية لتسجيل الدخول.</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
+    <value>تعطيل مشاركة بيانات الكتابة اليدوية</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
+    <value>يوقف مشاركة بيانات الكتابة اليدوية مع خدمات مايكروسوفت، مما يحسن الخصوصية ولكن يقلل من بعض الوظائف المتعلقة بالتعرف على الكتابة اليدوية.</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
+    <value>تعطيل جمع بيانات الإدخال النصي</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
+    <value>يمنع جمع بيانات الإدخال النصي، مما يمنع ويندوز من تخزين وتحليل ما تكتبه. هذا يساعد في حماية الخصوصية ولكنه قد يقلل من تحسينات دقة الكتابة.</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
+    <value>تعطيل تخصيص الإدخال</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
+    <value>يوقف تخصيص طرق الإدخال، بما في ذلك النص التنبؤي وميزات التصحيح التلقائي. هذا قد يقلل من تحسينات أداء النظام في الإدخال النصي.</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
+    <value>تعطيل وضع البحث الآمن</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
+    <value>يوقف وضع البحث الآمن، الذي يقوم بتصفية المحتوى الضار أو غير المناسب من نتائج البحث. تعطيل هذه الميزة يزيد من خطر التعرض لمحتوى غير آمن.</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
+    <value>تعطيل رفع الأنشطة</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
+    <value>يوقف رفع بيانات الأنشطة، مما يمنع مايكروسوفت من جمع بيانات استخدامك لتحسين الخدمات. هذا يساعد في الحفاظ على الخصوصية.</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
+    <value>تعطيل مزامنة الحافظة</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
+    <value>يوقف مزامنة الحافظة عبر أجهزتك، مما يضمن أن البيانات المنسوخة تبقى محلية ولا يتم مشاركتها مع أجهزة أخرى.</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
+    <value>تعطيل مزامنة الرسائل</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
+    <value>يمنع مزامنة الرسائل عبر الأجهزة، مما يضمن أن الرسائل النصية والإشعارات متاحة فقط على الجهاز الذي تستخدمه.</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
+    <value>تعطيل مزامنة الإعدادات</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
+    <value>يوقف مزامنة إعدادات النظام عبر الأجهزة. هذا يمنع مشاركة إعدادات جهازك، والسمات، والتكوينات الأخرى.</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
+    <value>تعطيل تفعيل الصوت</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
+    <value>يوقف ميزات تفعيل الصوت مثل كورتانا، مما يمنع المساعد من الاستماع إلى أوامر صوتية. هذا يمكن أن يحسن الخصوصية ولكنه يقلل من وظائف الأوامر الصوتية.</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
+    <value>تعطيل العثور على جهازي</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
+    <value>يوقف ميزة العثور على جهازي، التي تساعد في تحديد موقع جهازك إذا ضاع. تعطيل هذه الميزة يقلل من قدرتك على استرجاع جهاز ضائع ولكنه يعزز الخصوصية.</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
+    <value>تعطيل موجز الأنشطة</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
+    <value>يوقف الموجز الذي يعرض الأنشطة الأخيرة، مما يساعد في حماية خصوصيتك عن طريق منع الآخرين من رؤية ما قمت به على جهازك.</value>
+  </data>
+  <data name="Feature_DisableCdp.Header" xml:space="preserve">
+    <value>تعطيل جمع بيانات الاستخدام</value>
+  </data>
+  <data name="Feature_DisableCdp.Description" xml:space="preserve">
+    <value>يمنع جمع بيانات الاستخدام من جهازك، مما يعزز خصوصيتك. تعطيل هذه الميزة قد يؤدي إلى تقليل بعض الخدمات التي تعتمد على هذه البيانات.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
+    <value>تعطيل التجارب المخصصة في الخصوصية</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
+    <value>يُعطّل ميزة التجارب المخصصة في إعدادات الخصوصية، مما يمنع ويندوز من استخدام بياناتك لتخصيص تجاربك. قد يقلل ذلك من بعض ميزات التخصيص.</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
+    <value>تعطيل إشعارات التشخيص</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
+    <value>يُوقف إشعارات التشخيص، مما يمنع ويندوز من عرض رسائل تتعلق بصحة النظام أو الأخطاء. هذا يساعد على تقليل التشتت.</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
+    <value>تعطيل خصوصية الصوت عبر الإنترنت</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
+    <value>يُعطّل خصوصية الصوت عبر الإنترنت، مما يمنع ويندوز من تخزين أو معالجة الأوامر الصوتية. هذا يزيد الخصوصية ولكنه يحد من ميزات الصوت مثل البحث الصوتي والأوامر.</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
+    <value>تعطيل الوصول إلى الموقع</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
+    <value>يُوقف الوصول إلى الموقع للتطبيقات والخدمات، مما يمنعها من استخدام GPS الجهاز أو الموقع الشبكي. هذا يحسن الخصوصية ولكنه قد يحد من الخدمات المعتمدة على الموقع.</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
+    <value>تعطيل ميزات الموقع</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
+    <value>يُعطّل جميع ميزات الموقع على جهازك، بما في ذلك خدمات الموقع للتطبيقات وميزات الأمان. هذا يمكن أن يعزز الخصوصية ولكنه يقلل من وظائف الخدمات المعتمدة على الموقع.</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
+    <value>تعطيل تأخير إظهار القوائم</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
+    <value>يتحكم في التأخير قبل ظهور القوائم بعد مرور الفأرة عليها. تعطيل هذه الميزة يمكن أن يجعل القوائم تفتح على الفور، مما يحسن الاستجابة ولكن قد يقلل من تحكم المستخدم.</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
+    <value>تعطيل وقت التمرير بالفأرة</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
+    <value>يُعدّل الوقت الذي ينتظره النظام قبل تنفيذ حدث التمرير. تعطيله قد يسرع التفاعلات ولكن قد يؤدي إلى تفعيلات غير مقصودة.</value>
+  </data>
+  <data name="Feature_AutoComplete.Header" xml:space="preserve">
+    <value>تعطيل الإكمال التلقائي</value>
+  </data>
+  <data name="Feature_AutoComplete.Description" xml:space="preserve">
+    <value>يُعطّل الاقتراحات التلقائية أثناء الكتابة في بعض الحقول مثل مربعات البحث وإدخالات النماذج. تعطيله يمكن أن يقلل من التشتت ولكن قد يبطئ سير العمل.</value>
+  </data>
+  <data name="Feature_CrashDump.Header" xml:space="preserve">
+    <value>تعطيل تفريغ الأعطال</value>
+  </data>
+  <data name="Feature_CrashDump.Description" xml:space="preserve">
+    <value>يتحكم في ما إذا كان يتم إنشاء تقارير الأعطال وتفريغات الذاكرة عند تعطل التطبيقات. تعطيل هذه الميزة يمكن أن يساعد في الحفاظ على مساحة القرص، ولكنه قد يقلل من القدرة على تشخيص واستكشاف مشكلات التطبيقات.</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
+    <value>تعطيل المساعدة عن بُعد</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
+    <value>يُعطّل ميزات الدعم عن بُعد، مما يسمح للآخرين بمساعدتك عبر سطح المكتب البعيد. تعطيله يمكن أن يحسن الأمان ولكنه يحد من خيارات الدعم.</value>
+  </data>
+  <data name="Feature_WindowShake.Header" xml:space="preserve">
+    <value>تعطيل اهتزاز النوافذ</value>
+  </data>
+  <data name="Feature_WindowShake.Description" xml:space="preserve">
+    <value>يُعطّل ميزة اهتزاز النوافذ التي تقوم بتصغير جميع النوافذ المفتوحة عند اهتزاز نافذة. تعطيله يحسن التركيز ولكنه يزيل أداة مفيدة لإدارة النوافذ.</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
+    <value>إضافة قائمة السياق لنسخ/نقل الملفات</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
+    <value>يُفعل خيارات إضافية في قائمة السياق للملفات لنسخ أو نقل الملفات إلى موقع جديد بسهولة. تُبسط هذه الميزة إدارة الملفات من خلال توفير وصول سريع إلى هذه الوظائف مباشرة من قائمة النقر بالزر الأيمن.</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
+    <value>تعديل مهلات المهام</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
+    <value>يُعدّل إعدادات المهلة للمهام النظامية. تعديلها يمكن أن يحسن الأداء في بعض السيناريوهات ولكن قد يتسبب في فشل المهام في ظروف معينة.</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
+    <value>تمكين فحص المساحة المنخفضة على القرص</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
+    <value>يُفعّل الفحوصات التلقائية للمساحة المنخفضة على القرص لتجنب مشكلات الأداء. تعطيله قد يقلل من الإشعارات، لكنك قد تفوت تحذيرات التخزين الهامة.</value>
+  </data>
+  <data name="Feature_LinkResolve.Header" xml:space="preserve">
+    <value>تعطيل حل الروابط</value>
+  </data>
+  <data name="Feature_LinkResolve.Description" xml:space="preserve">
+    <value>يُعطّل حل الروابط المعطلة في الملفات والمجلدات. تعطيله يمكن أن يسرع العمليات ولكن قد يترك الروابط القديمة غير محلولة.</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
+    <value>تقليل مهلات الخدمات</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
+    <value>يُعدّل مهلات خدمات النظام. تقصيرها يمكن أن يحسن الأداء ولكن قد يتسبب في إنهاء الخدمات في وقت مبكر.</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
+    <value>تعطيل التسجيل عن بُعد</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
+    <value>يُعطّل الوصول إلى السجل عن بُعد. تعطيله يحسن الأمان ولكنه يمنع التكوين البعيد لإعدادات السجل.</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
+    <value>إخفاء الامتدادات والملفات المخفية</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
+    <value>يتحكم في ظهور امتدادات الملفات والملفات المخفية. تمكين هذه الميزة يقلل من الفوضى ولكن يخفي تفاصيل الملفات الهامة.</value>
+  </data>
+  <data name="Feature_SystemProfile.Header" xml:space="preserve">
+    <value>تحسين ملف النظام</value>
+  </data>
+  <data name="Feature_SystemProfile.Description" xml:space="preserve">
+    <value>يعزز أداء النظام عن طريق تعديل إعدادات ملف النظام. تُعطي هذه الميزة الأولوية للسرعة والكفاءة، مما يحسن استجابة النظام وإدارة الموارد بشكل عام.</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
+    <value>تحسين إعدادات GPU والأولوية</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
+    <value>يُحسن إعدادات GPU وأولويات العمليات لتعزيز الأداء، مما يضمن أفضل أداء للرسم البياني وتشغيل أكثر سلاسة للمهام التي تتطلب موارد كبيرة مثل الألعاب والمهام المتعددة.</value>
+  </data>
+  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
+    <value>تعطيل وضع خادم الإطار</value>
+  </data>
+  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
+    <value>يُعطّل وضع خادم الإطار للتشفير الفيديو المتقدم. تعطيله يحسن الأداء ولكنه قد يقلل من جودة الفيديو في بعض الحالات.</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
+    <value>تعديل إعدادات GPU منخفضة الكمون</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
+    <value>يُعدّل إعدادات GPU لتقليل الكمون، مما يحسن أداء الألعاب أو الفيديو.</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
+    <value>تحديد حد العمليات غير الأفضل</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
+    <value>يُحدد حدًا للعمليات غير الأفضل. تمكينه يمكن أن يعطي الأولوية للأداء ولكنه قد يقلل من مرونة النظام في بعض الحالات.</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>مفعل</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>معطل</value>
+  </data>
+  <data name="LoadingWindowText.Text" xml:space="preserve">
+    <value>جاري التحميل...</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>تفعيل قائمة السياق الكلاسيكية</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>يستعيد نمط قائمة السياق الكلاسيكية لويندوز 10، مما يوفر تجربة مألوفة عند النقر بزر الفأرة الأيمن مع عرض جميع الخيارات مباشرة</value>
+  </data>
+  <data name="DoNotShowCheckBox" xml:space="preserve">
+    <value>لا تعرض هذه الرسالة مرة أخرى</value>
+  </data>
+  <data name="RestorePointDialogTitle" xml:space="preserve">
+    <value>إنشاء نقطة استعادة</value>
+  </data>
+  <data name="RestorePointDialogText" xml:space="preserve">
+    <value>يُنصح بشدة بإنشاء نقطة استعادة قبل إجراء أي تغييرات على نظامك.
+هل ترغب في إنشاء نقطة استعادة للنظام قبل المتابعة؟</value>
+  </data>
+  <data name="CreatingRestorePoint" xml:space="preserve">
+    <value>جاري إنشاء نقطة استعادة</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>تم إنشاء نقطة الاستعادة</value>
+  </data>
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>تم إنشاء نقطة استعادة للنظام بنجاح.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>فشل في إنشاء نقطة الاستعادة</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>تراجع عن التغييرات</value>
+  </data>
+  <data name="Settings_RevertChanges.Header" xml:space="preserve">
+    <value>التراجع عن كل التغييرات</value>
+  </data>
+  <data name="Settings_RevertChanges.Description" xml:space="preserve">
+    <value>يتراجع عن كل التغييرات التي أجراها RyTuneX على نظامك، بما في ذلك نقطة الاستعادة</value>
+  </data>
+  <data name="RevertingChanges" xml:space="preserve">
+    <value>جاري التراجع عن التغييرات...</value>
+  </data>
+  <data name="RevertChangesDialogText" xml:space="preserve">
+    <value>أنت على وشك التراجع عن جميع التغييرات التي أجراها RyTuneX على نظامك (باستثناء التطبيقات التي تم إلغاء تثبيتها) وإعادة تعيين تفضيلات التطبيق.
+
+هل أنت متأكد أنك تريد المتابعة؟</value>
+  </data>
+  <data name="NoChangesFound" xml:space="preserve">
+    <value>لم يتم العثور على تغييرات ملحوظة.</value>
+  </data>
+  <data name="OperationStopped" xml:space="preserve">
+    <value>تم إيقاف العملية</value>
+  </data>
+  <data name="ReportSaved" xml:space="preserve">
+    <value>تم حفظ التقرير على سطح المكتب</value>
+  </data>
+  <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
+    <value>تشخيص الذاكرة</value>
+  </data>
+  <data name="MemoryDiagnosticDialogText" xml:space="preserve">
+    <value>قد تتسبب مشاكل الذاكرة في فقدان الكمبيوتر للمعلومات أو توقفه عن العمل.
+
+افحص جهاز الكمبيوتر الخاص بك بحثًا عن مشاكل في الذاكرة</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>إعادة التشغيل الآن</value>
+  </data>
+  <data name="ScheduleLater" xml:space="preserve">
+    <value>جدولة لاحقًا</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="ScheduledLater" xml:space="preserve">
+    <value>تمت الجدولة لإعادة التشغيل القادمة</value>
+  </data>
+  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
+    <value>فحص</value>
+  </data>
+  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
+    <value>إصلاح</value>
+  </data>
+  <data name="RepairPage_StopButton.Content" xml:space="preserve">
+    <value>إيقاف</value>
+  </data>
+  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>اختر على الأقل خيارًا واحدًا للفحص/الإصلاح</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
+    <value>حالة البطارية</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
+    <value>سيتم إنشاء تقرير كامل عن حالة بطاريتك</value>
+  </data>
+  <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
+    <value>توليد</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
+    <value>تشخيص الذاكرة</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
+    <value>قم بتحليل ذاكرة نظامك لمشاكل محتملة وتحسين الاستقرار</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
+    <value>تشخيص</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
+    <value>تحسينات القرص</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
+    <value>سيتم تحسين جهاز التخزين الخاص بك عن طريق تجزئته (إذا كان HDD) أو إعادة ترتيبه (إذا كان SSD)</value>
+  </data>
+  <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+    <value>تحسين</value>
+  </data>
+  <data name="RepairPage_EventViewer.Header" xml:space="preserve">
+    <value>عارض الأحداث</value>
+  </data>
+  <data name="RepairPage_EventViewer.Description" xml:space="preserve">
+    <value>سيتم عرض سجلات الأحداث الأخيرة للنظام لأغراض استكشاف الأخطاء وإصلاحها</value>
+  </data>
+  <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
+    <value>خيارات الإصلاح</value>
+  </data>
+  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
+    <value>خيارات التشخيص</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>اكتملت العملية</value>
+  </data>
+  <data name="RestorePointTitle_ar-tn" xml:space="preserve">
+    <value>نقطة الاستعادة</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>تحذير</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>تعطيل استعادة النظام سيؤدي إلى حذف جميع نقاط الاستعادة بما في ذلك تلك التي أنشأها RyTuneX.
+
+هل أنت متأكد أنك تريد المتابعة؟</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>معلومات الجهاز</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>إعدادات الإعلانات</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>إعدادات القياس عن بعد</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>إعدادات أخرى</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>تحسينات النظام الأساسية</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>تحسينات النظام المتقدمة</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>لا توجد تطبيقات تطابق بحثك</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>ابحث عن التطبيقات...</value>
   </data>
 </root>

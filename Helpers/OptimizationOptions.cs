@@ -1,22 +1,30 @@
 ﻿using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Management.Automation;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Win32;
+using System.Text.Json;
+using Windows.Storage;
+using Microsoft.UI.Xaml;
 
 namespace RyTuneX.Helpers;
 internal class OptimizationOptions
 {
     [DllImport("psapi.dll")]
     public static extern bool EmptyWorkingSet(IntPtr hProcess);
-
-    public static List<KeyValuePair<string, string>> GetUWPApps(bool uninstallableOnly)
+    public static List<Tuple<string, string, bool>> GetInstalledApps(bool uninstallableOnly)
     {
-        var installedApps = new List<KeyValuePair<string, string>>();
+        var installedApps = new List<Tuple<string, string, bool>>();
 
-        string command = uninstallableOnly
-            ? @"powershell.exe -Command ""Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation"""
-            : @"powershell.exe -Command ""Get-AppxPackage | Select-Object Name,InstallLocation""";
+        // Get UWP apps
+        var command = uninstallableOnly
+            ? @"Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation | Format-List"
+            : @"Get-AppxPackage | Select-Object Name,InstallLocation | Format-List";
 
         try
         {
@@ -24,8 +32,8 @@ internal class OptimizationOptions
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "cmd.exe",
-                    Arguments = $"/C {command}",
+                    FileName = "powershell.exe",
+                    Arguments = $"-NoProfile -Command \"{command}\"",
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
@@ -33,15 +41,37 @@ internal class OptimizationOptions
             };
             process.Start();
 
-            // Read the output directly
-            while (!process.StandardOutput.EndOfStream)
+            var output = process.StandardOutput.ReadToEnd();
+            string? currentName = null;
+            string? currentLocation = null;
+
+            foreach (var line in output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
-                var line = process.StandardOutput.ReadLine();
-                var parts = line?.Split(new[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries);
-                if (parts?.Length == 2 && !installedApps.Exists(i => i.Key == parts[0]))
+                if (line.StartsWith("Name"))
                 {
-                    installedApps.Add(new KeyValuePair<string, string>(parts[0], parts[1]));
+                    if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
+                    {
+                        var logoPath = ExtractLogoPath(currentLocation);
+                        installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
+                    }
+
+                    currentName = line.Split(new[] { ':' }, 2)[1].Trim();
+                    currentLocation = null;
                 }
+                else if (line.StartsWith("InstallLocation"))
+                {
+                    currentLocation = line.Split(new[] { ':' }, 2)[1].Trim();
+                }
+                else if (!string.IsNullOrWhiteSpace(currentLocation) && line.StartsWith(" "))
+                {
+                    currentLocation += " " + line.Trim();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
+            {
+                var logoPath = ExtractLogoPath(currentLocation);
+                installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
             }
 
             process.WaitForExit();
@@ -51,8 +81,173 @@ internal class OptimizationOptions
             Debug.WriteLine(ex.Message);
         }
 
-        LogHelper.Log("Returning Installed Apps [GetUWPApps]");
+        // Load Win32 apps
+        installedApps.AddRange(GetWin32Apps());
+
+        // Remove duplicates by app name
+        installedApps = installedApps
+            .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
+            .OrderBy(app => app.Item1)     // Sort the apps alphabetically by name
+            .ToList();
+
+        LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
         return installedApps;
+    }
+
+    private static List<Tuple<string, string, bool>> GetWin32Apps()
+    {
+        var win32Apps = new List<Tuple<string, string, bool>>();
+
+        // Registry paths to check for installed Win32 apps
+        var registryPaths = new string[]
+        {
+        @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+        @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WOW6432Node"
+        };
+
+        foreach (var registryPath in registryPaths)
+        {
+            try
+            {
+                using var key = Registry.LocalMachine.OpenSubKey(registryPath);
+                if (key != null)
+                {
+                    foreach (var subKeyName in key.GetSubKeyNames())
+                    {
+                        using var subKey = key.OpenSubKey(subKeyName);
+                        var displayName = subKey?.GetValue("DisplayName")?.ToString();
+                        var installLocation = subKey?.GetValue("InstallLocation")?.ToString();
+
+                        if (!string.IsNullOrEmpty(displayName) && !string.IsNullOrEmpty(installLocation) && !displayName.ToLower().Contains("edge"))
+                        {
+                            var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
+                            win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to load Win32 apps: {ex.Message}");
+            }
+        }
+
+        return win32Apps;
+    }
+
+    private static string ExtractLogoPath(string installLocation, bool isWin32 = false)
+    {
+        if (!isWin32)
+        {
+            try
+            {
+                // Check for the specific packages, default logos are not 1:1
+                var packageName = Path.GetFileName(installLocation).ToLower();
+                if (packageName.Contains("sechealth"))
+                {
+                    return Path.Combine(installLocation, "Assets", "WindowsSecurityAppList.targetsize-48.png");
+                }
+                else if (packageName.Contains("edge"))
+                {
+                    return Path.Combine(installLocation, "SmallLogo.png");
+                }
+
+                string[] possibleManifestPaths = {
+                Path.Combine(installLocation, "AppxManifest.xml"),
+                Path.Combine(installLocation, "appxmanifest.xml")
+            };
+
+                var manifestPath = possibleManifestPaths.FirstOrDefault(File.Exists);
+
+                if (manifestPath != null)
+                {
+                    var doc = XDocument.Load(manifestPath);
+                    XNamespace ns = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
+
+                    var logoElement = doc.Descendants(ns + "Logo").FirstOrDefault();
+                    if (logoElement != null)
+                    {
+                        var relativeLogoPath = logoElement.Value.Replace('/', '\\');
+                        var baseLogoName = Path.GetFileNameWithoutExtension(relativeLogoPath);
+                        var logoDirectory = Path.Combine(installLocation, Path.GetDirectoryName(relativeLogoPath) ?? "");
+
+                        if (Directory.Exists(logoDirectory))
+                        {
+                            var exactLogoPath = Path.Combine(logoDirectory, relativeLogoPath);
+                            if (File.Exists(exactLogoPath))
+                            {
+                                return exactLogoPath;
+                            }
+
+                            var logoFiles = Directory.GetFiles(logoDirectory, $"{baseLogoName}.Scale-*.png");
+                            var selectedLogoFile = logoFiles
+                                .OrderBy(f => Math.Abs(GetScaleFromFileName(f) - 200))
+                                .FirstOrDefault();
+
+                            if (!string.IsNullOrEmpty(selectedLogoFile) && File.Exists(selectedLogoFile))
+                            {
+                                Debug.WriteLine($"Selected logo: {selectedLogoFile}");
+                                return selectedLogoFile;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to extract logo path: {ex.Message}");
+            }
+        }
+        else
+        {
+            try
+            {
+                // Attempt to get the logo for Win32 apps by extracting the .exe file's icon
+                if (Directory.Exists(installLocation))
+                {
+                    // Find the first .exe file in the install location
+                    var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
+                    if (!string.IsNullOrEmpty(exeFile))
+                    {
+                        // Extract the icon from the .exe file using ExtractAssociatedIcon
+                        using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
+                        if (icon != null)
+                        {
+                            // Save the icon as a PNG file
+                            var iconPath = Path.Combine(installLocation, "icon.png");
+                            SaveIconAsPng(icon, iconPath);
+                            return iconPath;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to extract logo for Win32 app: {ex.Message}");
+            }
+        }
+
+        return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
+    }
+
+    // Save the extracted icon as a PNG file
+    private static void SaveIconAsPng(System.Drawing.Icon icon, string filePath)
+    {
+        using var stream = new MemoryStream();
+        // Convert the icon to a bitmap and then save it as PNG
+        using (var bitmap = new Bitmap(icon.ToBitmap()))
+        {
+            bitmap.Save(stream, ImageFormat.Png);
+        }
+
+        // Write the stream to the file
+        File.WriteAllBytes(filePath, stream.ToArray());
+    }
+
+    private static int GetScaleFromFileName(string fileName)
+    {
+        var match = Regex.Match(fileName, @"Scale-(\d+)");
+        return match.Success ? int.Parse(match.Groups[1].Value) : 100;
     }
 
     internal static bool ServiceExists(string serviceName)
@@ -82,7 +277,7 @@ internal class OptimizationOptions
 
             if (!File.Exists(scriptFilePath))
             {
-                await LogHelper.Log($"Script file not found: {scriptFilePath}");
+                await LogHelper.LogError($"Script file not found: {scriptFilePath}");
                 return;
             }
 
@@ -105,7 +300,7 @@ internal class OptimizationOptions
             {
                 foreach (var error in PowerShellInstance.Streams.Error)
                 {
-                    await LogHelper.Log($"PowerShell Error: {error}");
+                    await LogHelper.LogError($"PowerShell Error: {error}");
                 }
             }
             else
@@ -115,24 +310,9 @@ internal class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.Log($"Error: {ex.Message}");
+            await LogHelper.LogError($"Error executing batch file: {ex.Message}");
         }
     }
-
-    internal static void RestartExplorer()
-    {
-        var ExplorerProcess = Process.GetProcessesByName("explorer");
-        foreach (var p in ExplorerProcess)
-        {
-            p.Kill();
-        }
-        ExplorerProcess = Process.GetProcessesByName("explorer");
-        if (ExplorerProcess.Length == 0)
-        {
-            Process.Start("explorer.exe");
-        }
-    }
-
     internal static async Task<int> StartInCmd(string command)
     {
         try
@@ -141,7 +321,9 @@ internal class OptimizationOptions
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "cmd.exe",
+                    FileName = Environment.Is64BitOperatingSystem
+                    ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                    : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
                     Arguments = $"/C {command}",
                     CreateNoWindow = true,
                     UseShellExecute = true,
@@ -193,620 +375,1507 @@ internal class OptimizationOptions
         }
     }
 
-    public static void XamlSwitches(ToggleSwitch toggleSwitch, bool isAutomated = true)
+    private static void SaveRevertAction(string action)
     {
-        if (!isAutomated && toggleSwitch != null && toggleSwitch.Tag != null)
+        // Get the current revert list
+        var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
+        var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
+    
+        // Add the action if it's not already present
+        if (!revertList.Contains(action))
+        {
+            revertList.Add(action);
+            ApplicationData.Current.LocalSettings.Values["RevertList"] = JsonSerializer.Serialize(revertList);
+        }
+    }
+    
+    private static void RemoveRevertAction(string action)
+    {
+        // Get the current revert list
+        var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
+        var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
+    
+        // Remove the action if it's present
+        if (revertList.Contains(action))
+        {
+            revertList.Remove(action);
+            ApplicationData.Current.LocalSettings.Values["RevertList"] = JsonSerializer.Serialize(revertList);
+        }
+    }
+
+    public static async Task RevertAllChanges()
+    {
+        var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
+        var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
+
+        // Execute each action asynchronously
+        foreach (var action in revertList)
+        {
+            await Task.Run(() =>
+            {
+                switch (action)
+                {
+                    case "EnableMenuShowDelay":
+                        OptimizeSystemHelper.EnableMenuShowDelay();
+                        break;
+                    case "EnableMouseHoverTime":
+                        OptimizeSystemHelper.EnableMouseHoverTime();
+                        break;
+                    case "EnableAutoComplete":
+                        OptimizeSystemHelper.EnableAutoComplete();
+                        break;
+                    case "DisableCrashDump":
+                        OptimizeSystemHelper.DisableCrashDump();
+                        break;
+                    case "EnableRemoteAssistance":
+                        OptimizeSystemHelper.EnableRemoteAssistance();
+                        break;
+                    case "EnableWindowShake":
+                        OptimizeSystemHelper.EnableWindowShake();
+                        break;
+                    case "RemoveCopyMoveContextMenu":
+                        OptimizeSystemHelper.RemoveCopyMoveContextMenu();
+                        break;
+                    case "IncreaseTaskTimeouts":
+                        OptimizeSystemHelper.IncreaseTaskTimeouts();
+                        break;
+                    case "DisableLowDiskSpaceChecks":
+                        OptimizeSystemHelper.DisableLowDiskSpaceChecks();
+                        break;
+                    case "EnableLinkResolve":
+                        OptimizeSystemHelper.EnableLinkResolve();
+                        break;
+                    case "RevertServiceTimeouts":
+                        OptimizeSystemHelper.RevertServiceTimeouts();
+                        break;
+                    case "EnableRemoteRegistry":
+                        OptimizeSystemHelper.EnableRemoteRegistry();
+                        break;
+                    case "ShowFileExtensionsAndHiddenFiles":
+                        OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles();
+                        break;
+                    case "RevertSystemProfile":
+                        OptimizeSystemHelper.RevertSystemProfile();
+                        break;
+                    case "RevertGPUAndPrioritySettings":
+                        OptimizeSystemHelper.RevertGPUAndPrioritySettings();
+                        break;
+                    case "EnableFrameServerMode":
+                        OptimizeSystemHelper.EnableFrameServerMode();
+                        break;
+                    case "RevertLowLatencyGPUSettings":
+                        OptimizeSystemHelper.RevertLowLatencyGPUSettings();
+                        break;
+                    case "RevertNonBestEffortLimit":
+                        OptimizeSystemHelper.RevertNonBestEffortLimit();
+                        break;
+                    case "EnableTelemetryServices":
+                        OptimizeSystemHelper.EnableTelemetryServices();
+                        break;
+                    case "EnableHomeGroup":
+                        OptimizeSystemHelper.EnableHomeGroup();
+                        break;
+                    case "EnablePrintService":
+                        OptimizeSystemHelper.EnablePrintService();
+                        break;
+                    case "EnableSysMain":
+                        OptimizeSystemHelper.EnableSysMain();
+                        break;
+                    case "EnableCompatibilityAssistant":
+                        OptimizeSystemHelper.EnableCompatibilityAssistant();
+                        break;
+                    case "EnableSystemRestore":
+                        OptimizeSystemHelper.EnableSystemRestore();
+                        break;
+                    case "DisableVerboseLogon":
+                        OptimizeSystemHelper.DisableVerboseLogon();
+                        break;
+                    case "DisableClassicContextMenu":
+                        OptimizeSystemHelper.DisableClassicContextMenu();
+                        break;
+                    case "EnableSearch":
+                        OptimizeSystemHelper.EnableSearch();
+                        break;
+                    case "EnableBiometrics":
+                        OptimizeSystemHelper.EnableBiometrics();
+                        break;
+                    case "EnableSMB(\"1\")":
+                        OptimizeSystemHelper.EnableSMB("1");
+                        break;
+                    case "EnableSMB(\"2\")":
+                        OptimizeSystemHelper.EnableSMB("2");
+                        break;
+                    case "EnableNTFSTimeStamp":
+                        OptimizeSystemHelper.EnableNTFSTimeStamp();
+                        break;
+                    case "EnableErrorReporting":
+                        OptimizeSystemHelper.EnableErrorReporting();
+                        break;
+                    case "EnableCortana":
+                        OptimizeSystemHelper.EnableCortana();
+                        break;
+                    case "DisableGamingMode":
+                        OptimizeSystemHelper.DisableGamingMode();
+                        break;
+                    case "EnableAutomaticUpdates":
+                        OptimizeSystemHelper.EnableAutomaticUpdates();
+                        break;
+                    case "EnableStoreUpdates":
+                        OptimizeSystemHelper.EnableStoreUpdates();
+                        break;
+                    case "EnableOneDrive":
+                        OptimizeSystemHelper.EnableOneDrive();
+                        break;
+                    case "EnableSensorServices":
+                        OptimizeSystemHelper.EnableSensorServices();
+                        break;
+                    case "EnableNewsAndInterests":
+                        OptimizeSystemHelper.EnableNewsAndInterests();
+                        break;
+                    case "EnableSpotlightFeatures":
+                        OptimizeSystemHelper.EnableSpotlightFeatures();
+                        break;
+                    case "EnableTailoredExperiences":
+                        OptimizeSystemHelper.EnableTailoredExperiences();
+                        break;
+                    case "EnableCloudOptimizedContent":
+                        OptimizeSystemHelper.EnableCloudOptimizedContent();
+                        break;
+                    case "EnableFeedbackNotifications":
+                        OptimizeSystemHelper.EnableFeedbackNotifications();
+                        break;
+                    case "EnableAdvertisingID":
+                        OptimizeSystemHelper.EnableAdvertisingID();
+                        break;
+                    case "EnableBluetoothAdvertising":
+                        OptimizeSystemHelper.EnableBluetoothAdvertising();
+                        break;
+                    case "EnableAutomaticRestartSignOn":
+                        OptimizeSystemHelper.EnableAutomaticRestartSignOn();
+                        break;
+                    case "EnableHandwritingDataSharing":
+                        OptimizeSystemHelper.EnableHandwritingDataSharing();
+                        break;
+                    case "EnableTextInputDataCollection":
+                        OptimizeSystemHelper.EnableTextInputDataCollection();
+                        break;
+                    case "EnableInputPersonalization":
+                        OptimizeSystemHelper.EnableInputPersonalization();
+                        break;
+                    case "EnableSafeSearchMode":
+                        OptimizeSystemHelper.EnableSafeSearchMode();
+                        break;
+                    case "EnableActivityUploads":
+                        OptimizeSystemHelper.EnableActivityUploads();
+                        break;
+                    case "EnableClipboardSync":
+                        OptimizeSystemHelper.EnableClipboardSync();
+                        break;
+                    case "EnableMessageSync":
+                        OptimizeSystemHelper.EnableMessageSync();
+                        break;
+                    case "EnableSettingSync":
+                        OptimizeSystemHelper.EnableSettingSync();
+                        break;
+                    case "EnableVoiceActivation":
+                        OptimizeSystemHelper.EnableVoiceActivation();
+                        break;
+                    case "EnableFindMyDevice":
+                        OptimizeSystemHelper.EnableFindMyDevice();
+                        break;
+                    case "EnableActivityFeed":
+                        OptimizeSystemHelper.EnableActivityFeed();
+                        break;
+                    case "EnableCdp":
+                        OptimizeSystemHelper.EnableCdp();
+                        break;
+                    case "EnableDiagnosticsToast":
+                        OptimizeSystemHelper.EnableDiagnosticsToast();
+                        break;
+                    case "EnableOnlineSpeechPrivacy":
+                        OptimizeSystemHelper.EnableOnlineSpeechPrivacy();
+                        break;
+                    case "EnableLocationFeatures":
+                        OptimizeSystemHelper.EnableLocationFeatures();
+                        break;
+                    case "EnableGameBar":
+                        OptimizeSystemHelper.EnableGameBar();
+                        break;
+                    case "EnableQuickAccessHistory":
+                        OptimizeSystemHelper.EnableQuickAccessHistory();
+                        break;
+                    case "EnableMyPeople":
+                        OptimizeSystemHelper.EnableMyPeople();
+                        break;
+                    case "IncludeDrivers":
+                        OptimizeSystemHelper.IncludeDrivers();
+                        break;
+                    case "EnableWindowsInk":
+                        OptimizeSystemHelper.EnableWindowsInk();
+                        break;
+                    case "EnableSpellingAndTypingFeatures":
+                        OptimizeSystemHelper.EnableSpellingAndTypingFeatures();
+                        break;
+                    case "EnableFaxService":
+                        OptimizeSystemHelper.EnableFaxService();
+                        break;
+                    case "EnableInsiderService":
+                        OptimizeSystemHelper.EnableInsiderService();
+                        break;
+                    case "EnableSmartScreen":
+                        OptimizeSystemHelper.EnableSmartScreen();
+                        break;
+                    case "EnableCloudClipboard":
+                        OptimizeSystemHelper.EnableCloudClipboard();
+                        break;
+                    case "EnableStickyKeys":
+                        OptimizeSystemHelper.EnableStickyKeys();
+                        break;
+                    case "AddCastToDevice":
+                        OptimizeSystemHelper.AddCastToDevice();
+                        break;
+                    case "EnableVBS":
+                        OptimizeSystemHelper.EnableVBS();
+                        break;
+                    case "AlignTaskbarToCenter":
+                        OptimizeSystemHelper.AlignTaskbarToCenter();
+                        break;
+                    case "EnableSnapAssist":
+                        OptimizeSystemHelper.EnableSnapAssist();
+                        break;
+                    case "EnableWidgets":
+                        OptimizeSystemHelper.EnableWidgets();
+                        break;
+                    case "EnableChat":
+                        OptimizeSystemHelper.EnableChat();
+                        break;
+                    case "DisableFilesCompactMode":
+                        OptimizeSystemHelper.DisableFilesCompactMode();
+                        break;
+                    case "EnableStickers":
+                        OptimizeSystemHelper.EnableStickers();
+                        break;
+                    case "EnableEdgeDiscoverBar":
+                        OptimizeSystemHelper.EnableEdgeDiscoverBar();
+                        break;
+                    case "EnableEdgeTelemetry":
+                        OptimizeSystemHelper.EnableEdgeTelemetry();
+                        break;
+                    case "EnableCoPilotAI":
+                        OptimizeSystemHelper.EnableCoPilotAI();
+                        break;
+                    case "EnableVisualStudioTelemetry":
+                        OptimizeSystemHelper.EnableVisualStudioTelemetry();
+                        break;
+                    case "EnableNvidiaTelemetry":
+                        OptimizeSystemHelper.EnableNvidiaTelemetry();
+                        break;
+                    case "EnableChromeTelemetry":
+                        OptimizeSystemHelper.EnableChromeTelemetry();
+                        break;
+                    case "EnableFirefoxTelemetry":
+                        OptimizeSystemHelper.EnableFirefoxTelemetry();
+                        break;
+                    case "EnableHibernation":
+                        OptimizeSystemHelper.EnableHibernation();
+                        break;
+                    case "DisableEndTask":
+                        OptimizeSystemHelper.DisableEndTask();
+                        break;
+                }
+            });
+        }
+    }
+    public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)
+    {
+        if (toggleSwitch != null && toggleSwitch.Tag != null)
         {
             switch (toggleSwitch.Tag)
             {
-                case "PerformanceTweaks":
+                case "MenuShowDelay":
                     if (toggleSwitch.IsOn)
                     {
-                        OptimizeSystemHelper.EnablePerformanceTweaks();
-
+                        OptimizeSystemHelper.DisableMenuShowDelay();
+                        SaveRevertAction("EnableMenuShowDelay");
                     }
                     else
                     {
-                        OptimizeSystemHelper.DisablePerformanceTweaks();
-
+                        OptimizeSystemHelper.EnableMenuShowDelay();
+                        RemoveRevertAction("EnableMenuShowDelay");
                     }
                     break;
+
+                case "MouseHoverTime":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableMouseHoverTime();
+                        SaveRevertAction("EnableMouseHoverTime");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableMouseHoverTime();
+                        RemoveRevertAction("EnableMouseHoverTime");
+                    }
+                    break;
+
+                case "AutoComplete":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableAutoComplete();
+                        SaveRevertAction("EnableAutoComplete");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableAutoComplete();
+                        RemoveRevertAction("EnableAutoComplete");
+                    }
+                    break;
+
+                case "CrashDump":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableCrashDump();
+                        SaveRevertAction("DisableCrashDump");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableCrashDump();
+                        RemoveRevertAction("DisableCrashDump");
+                    }
+                    break;
+
+                case "RemoteAssistance":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableRemoteAssistance();
+                        SaveRevertAction("EnableRemoteAssistance");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableRemoteAssistance();
+                        RemoveRevertAction("EnableRemoteAssistance");
+                    }
+                    break;
+
+                case "WindowShake":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableWindowShake();
+                        SaveRevertAction("EnableWindowShake");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableWindowShake();
+                        RemoveRevertAction("EnableWindowShake");
+                    }
+                    break;
+
+                case "CopyMoveContextMenu":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.AddCopyMoveContextMenu();
+                        SaveRevertAction("RemoveCopyMoveContextMenu");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.RemoveCopyMoveContextMenu();
+                        RemoveRevertAction("RemoveCopyMoveContextMenu");
+                    }
+                    break;
+
+                case "TaskTimeouts":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.AdjustTaskTimeouts();
+                        SaveRevertAction("IncreaseTaskTimeouts");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.IncreaseTaskTimeouts();
+                        RemoveRevertAction("IncreaseTaskTimeouts");
+                    }
+                    break;
+
+                case "LowDiskSpaceChecks":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableLowDiskSpaceChecks();
+                        SaveRevertAction("DisableLowDiskSpaceChecks");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableLowDiskSpaceChecks();
+                        RemoveRevertAction("DisableLowDiskSpaceChecks");
+                    }
+                    break;
+
+                case "LinkResolve":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableLinkResolve();
+                        SaveRevertAction("EnableLinkResolve");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableLinkResolve();
+                        RemoveRevertAction("EnableLinkResolve");
+                    }
+                    break;
+
+                case "ServiceTimeouts":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DecreaseServiceTimeouts();
+                        SaveRevertAction("RevertServiceTimeouts");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.RevertServiceTimeouts();
+                        RemoveRevertAction("RevertServiceTimeouts");
+                    }
+                    break;
+
+                case "RemoteRegistry":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableRemoteRegistry();
+                        SaveRevertAction("EnableRemoteRegistry");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableRemoteRegistry();
+                        RemoveRevertAction("EnableRemoteRegistry");
+                    }
+                    break;
+
+                case "FileExtensionsAndHiddenFiles":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.HideFileExtensionsAndHiddenFiles();
+                        SaveRevertAction("ShowFileExtensionsAndHiddenFiles");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles();
+                        RemoveRevertAction("ShowFileExtensionsAndHiddenFiles");
+                    }
+                    break;
+
+                case "SystemProfile":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.OptimizeSystemProfile();
+                        SaveRevertAction("RevertSystemProfile");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.RevertSystemProfile();
+                        RemoveRevertAction("RevertSystemProfile");
+                    }
+                    break;
+
+                case "GPUAndPrioritySettings":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.SetGPUAndPrioritySettings();
+                        SaveRevertAction("RevertGPUAndPrioritySettings");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.RevertGPUAndPrioritySettings();
+                        RemoveRevertAction("RevertGPUAndPrioritySettings");
+                    }
+                    break;
+
+                case "FrameServerMode":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableFrameServerMode();
+                        SaveRevertAction("EnableFrameServerMode");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableFrameServerMode();
+                        RemoveRevertAction("EnableFrameServerMode");
+                    }
+                    break;
+
+                case "LowLatencyGPUSettings":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.SetLowLatencyGPUSettings();
+                        SaveRevertAction("RevertLowLatencyGPUSettings");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.RevertLowLatencyGPUSettings();
+                        RemoveRevertAction("RevertLowLatencyGPUSettings");
+                    }
+                    break;
+
+                case "NonBestEffortLimit":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.SetNonBestEffortLimit();
+                        SaveRevertAction("RevertNonBestEffortLimit");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.RevertNonBestEffortLimit();
+                        RemoveRevertAction("RevertNonBestEffortLimit");
+                    }
+                    break;
+
                 case "TelemetryServices":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableTelemetryServices();
-
+                        SaveRevertAction("EnableTelemetryServices");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableTelemetryServices();
-
+                        RemoveRevertAction("EnableTelemetryServices");
                     }
                     break;
+
                 case "HomeGroup":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableHomeGroup();
-
+                        SaveRevertAction("EnableHomeGroup");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableHomeGroup();
-
+                        RemoveRevertAction("EnableHomeGroup");
                     }
                     break;
+
                 case "PrintService":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisablePrintService();
-
+                        SaveRevertAction("EnablePrintService");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnablePrintService();
-
+                        RemoveRevertAction("EnablePrintService");
                     }
                     break;
-                case "Superfetch":
+
+                case "SysMain":
                     if (toggleSwitch.IsOn)
                     {
-                        OptimizeSystemHelper.DisableSuperfetch();
-
+                        OptimizeSystemHelper.DisableSysMain();
+                        SaveRevertAction("EnableSysMain");
                     }
                     else
                     {
-                        OptimizeSystemHelper.EnableSuperfetch();
-
+                        OptimizeSystemHelper.EnableSysMain();
+                        RemoveRevertAction("EnableSysMain");
                     }
                     break;
+
                 case "CompatibilityAssistant":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableCompatibilityAssistant();
-
+                        SaveRevertAction("EnableCompatibilityAssistant");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableCompatibilityAssistant();
-
+                        RemoveRevertAction("EnableCompatibilityAssistant");
                     }
                     break;
+
                 case "SystemRestore":
                     if (toggleSwitch.IsOn)
                     {
-                        OptimizeSystemHelper.DisableSystemRestore();
-
+                        var restoreWarning = new ContentDialog
+                        {
+                            XamlRoot = App.MainWindow.Content.XamlRoot,
+                            Title = "Warning".GetLocalized(),
+                            Content = "RestoreWarningDialogText".GetLocalized(),
+                            PrimaryButtonText = "Continue".GetLocalized(),
+                            CloseButtonText = "Cancel".GetLocalized(),
+                            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
+                        };
+                        var dialogResult = await restoreWarning.ShowAsync();
+                        if (dialogResult == ContentDialogResult.Primary)
+                        {
+                            OptimizeSystemHelper.DisableSystemRestore();
+                            SaveRevertAction("EnableSystemRestore");
+                        }
+                        else
+                        {
+                            toggleSwitch.IsOn = false;
+                        }
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableSystemRestore();
-
+                        RemoveRevertAction("EnableSystemRestore");
                     }
                     break;
+
                 case "VerboseLogon":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.EnableVerboseLogon();
-
+                        SaveRevertAction("DisableVerboseLogon");
                     }
                     else
                     {
                         OptimizeSystemHelper.DisableVerboseLogon();
-
+                        RemoveRevertAction("DisableVerboseLogon");
                     }
                     break;
+
                 case "ClassicContextMenu":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.EnableClassicContextMenu();
-
+                        SaveRevertAction("DisableClassicContextMenu");
                     }
                     else
                     {
                         OptimizeSystemHelper.DisableClassicContextMenu();
-
+                        RemoveRevertAction("DisableClassicContextMenu");
                     }
                     break;
+
                 case "Search":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableSearch();
-
+                        SaveRevertAction("EnableSearch");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableSearch();
-
+                        RemoveRevertAction("EnableSearch");
                     }
                     break;
+
                 case "Biometrics":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableBiometrics();
-
+                        SaveRevertAction("EnableBiometrics");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableBiometrics();
-
+                        RemoveRevertAction("EnableBiometrics");
                     }
                     break;
+
                 case "SMBv1":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableSMB("1");
-
+                        SaveRevertAction("EnableSMB(\"1\")");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableSMB("1");
-
+                        RemoveRevertAction("EnableSMB(\"1\")");
                     }
                     break;
+
                 case "SMBv2":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableSMB("2");
-
+                        SaveRevertAction("EnableSMB(\"2\")");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableSMB("2");
-
+                        RemoveRevertAction("EnableSMB(\"2\")");
                     }
                     break;
                 case "NTFSTimeStamp":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableNTFSTimeStamp();
-
+                        SaveRevertAction("EnableNTFSTimeStamp");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableNTFSTimeStamp();
-
+                        RemoveRevertAction("EnableNTFSTimeStamp");
                     }
                     break;
+
                 case "ErrorReporting":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableErrorReporting();
-
+                        SaveRevertAction("EnableErrorReporting");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableErrorReporting();
-
+                        RemoveRevertAction("EnableErrorReporting");
                     }
                     break;
+
                 case "Cortana":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableCortana();
-
+                        SaveRevertAction("EnableCortana");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableCortana();
-
+                        RemoveRevertAction("EnableCortana");
                     }
                     break;
+
                 case "GamingMode":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.EnableGamingMode();
-
+                        SaveRevertAction("DisableGamingMode");
                     }
                     else
                     {
                         OptimizeSystemHelper.DisableGamingMode();
-
+                        RemoveRevertAction("DisableGamingMode");
                     }
                     break;
+
                 case "AutomaticUpdates":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableAutomaticUpdates();
-
+                        SaveRevertAction("EnableAutomaticUpdates");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableAutomaticUpdates();
-
+                        RemoveRevertAction("EnableAutomaticUpdates");
                     }
                     break;
+
                 case "StoreUpdates":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableStoreUpdates();
-
+                        SaveRevertAction("EnableStoreUpdates");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableStoreUpdates();
-
+                        RemoveRevertAction("EnableStoreUpdates");
                     }
                     break;
+
                 case "OneDrive":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableOneDrive();
-
+                        SaveRevertAction("EnableOneDrive");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableOneDrive();
-
+                        RemoveRevertAction("EnableOneDrive");
                     }
                     break;
+
                 case "SensorServices":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableSensorServices();
-
+                        SaveRevertAction("EnableSensorServices");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableSensorServices();
-
+                        RemoveRevertAction("EnableSensorServices");
                     }
                     break;
-                case "Privacy":
+
+                case "NewsAndInterests":
                     if (toggleSwitch.IsOn)
                     {
-                        OptimizeSystemHelper.EnhancePrivacy();
-
+                        OptimizeSystemHelper.DisableNewsAndInterests();
+                        SaveRevertAction("EnableNewsAndInterests");
                     }
                     else
                     {
-                        OptimizeSystemHelper.CompromisePrivacy();
-
+                        OptimizeSystemHelper.EnableNewsAndInterests();
+                        RemoveRevertAction("EnableNewsAndInterests");
                     }
                     break;
+
+                case "SpotlightFeatures":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableSpotlightFeatures();
+                        SaveRevertAction("EnableSpotlightFeatures");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableSpotlightFeatures();
+                        RemoveRevertAction("EnableSpotlightFeatures");
+                    }
+                    break;
+
+                case "TailoredExperiences":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableTailoredExperiences();
+                        SaveRevertAction("EnableTailoredExperiences");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableTailoredExperiences();
+                        RemoveRevertAction("EnableTailoredExperiences");
+                    }
+                    break;
+
+                case "CloudOptimizedContent":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableCloudOptimizedContent();
+                        SaveRevertAction("EnableCloudOptimizedContent");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableCloudOptimizedContent();
+                        RemoveRevertAction("EnableCloudOptimizedContent");
+                    }
+                    break;
+
+                case "FeedbackNotifications":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableFeedbackNotifications();
+                        SaveRevertAction("EnableFeedbackNotifications");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableFeedbackNotifications();
+                        RemoveRevertAction("EnableFeedbackNotifications");
+                    }
+                    break;
+
+                case "AdvertisingID":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableAdvertisingID();
+                        SaveRevertAction("EnableAdvertisingID");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableAdvertisingID();
+                        RemoveRevertAction("EnableAdvertisingID");
+                    }
+                    break;
+
+                case "BluetoothAdvertising":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableBluetoothAdvertising();
+                        SaveRevertAction("EnableBluetoothAdvertising");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableBluetoothAdvertising();
+                        RemoveRevertAction("EnableBluetoothAdvertising");
+                    }
+                    break;
+
+                case "AutomaticRestartSignOn":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableAutomaticRestartSignOn();
+                        SaveRevertAction("EnableAutomaticRestartSignOn");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableAutomaticRestartSignOn();
+                        RemoveRevertAction("EnableAutomaticRestartSignOn");
+                    }
+                    break;
+
+                case "HandwritingDataSharing":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableHandwritingDataSharing();
+                        SaveRevertAction("EnableHandwritingDataSharing");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableHandwritingDataSharing();
+                        RemoveRevertAction("EnableHandwritingDataSharing");
+                    }
+                    break;
+
+                case "TextInputDataCollection":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableTextInputDataCollection();
+                        SaveRevertAction("EnableTextInputDataCollection");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableTextInputDataCollection();
+                        RemoveRevertAction("EnableTextInputDataCollection");
+                    }
+                    break;
+
+                case "InputPersonalization":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableInputPersonalization();
+                        SaveRevertAction("EnableInputPersonalization");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableInputPersonalization();
+                        RemoveRevertAction("EnableInputPersonalization");
+                    }
+                    break;
+
+                case "SafeSearchMode":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableSafeSearchMode();
+                        SaveRevertAction("EnableSafeSearchMode");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableSafeSearchMode();
+                        RemoveRevertAction("EnableSafeSearchMode");
+                    }
+                    break;
+
+                case "ActivityUploads":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableActivityUploads();
+                        SaveRevertAction("EnableActivityUploads");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableActivityUploads();
+                        RemoveRevertAction("EnableActivityUploads");
+                    }
+                    break;
+
+                case "ClipboardSync":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableClipboardSync();
+                        SaveRevertAction("EnableClipboardSync");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableClipboardSync();
+                        RemoveRevertAction("EnableClipboardSync");
+                    }
+                    break;
+
+                case "MessageSync":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableMessageSync();
+                        SaveRevertAction("EnableMessageSync");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableMessageSync();
+                        RemoveRevertAction("EnableMessageSync");
+                    }
+                    break;
+
+                case "SettingSync":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableSettingSync();
+                        SaveRevertAction("EnableSettingSync");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableSettingSync();
+                        RemoveRevertAction("EnableSettingSync");
+                    }
+                    break;
+
+                case "VoiceActivation":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableVoiceActivation();
+                        SaveRevertAction("EnableVoiceActivation");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableVoiceActivation();
+                        RemoveRevertAction("EnableVoiceActivation");
+                    }
+                    break;
+
+                case "FindMyDevice":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableFindMyDevice();
+                        SaveRevertAction("EnableFindMyDevice");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableFindMyDevice();
+                        RemoveRevertAction("EnableFindMyDevice");
+                    }
+                    break;
+
+                case "ActivityFeed":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableActivityFeed();
+                        SaveRevertAction("EnableActivityFeed");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableActivityFeed();
+                        RemoveRevertAction("EnableActivityFeed");
+                    }
+                    break;
+
+                case "Cdp":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableCdp();
+                        SaveRevertAction("EnableCdp");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableCdp();
+                        RemoveRevertAction("EnableCdp");
+                    }
+                    break;
+
+                case "DiagnosticsToast":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableDiagnosticsToast();
+                        SaveRevertAction("EnableDiagnosticsToast");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableDiagnosticsToast();
+                        RemoveRevertAction("EnableDiagnosticsToast");
+                    }
+                    break;
+
+                case "OnlineSpeechPrivacy":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableOnlineSpeechPrivacy();
+                        SaveRevertAction("EnableOnlineSpeechPrivacy");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableOnlineSpeechPrivacy();
+                        RemoveRevertAction("EnableOnlineSpeechPrivacy");
+                    }
+                    break;
+
+                case "LocationAccess":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableLocationFeatures();
+                        SaveRevertAction("EnableLocationFeatures");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableLocationFeatures();
+                        RemoveRevertAction("EnableLocationFeatures");
+                    }
+                    break;
+
+                case "LocationFeatures":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableLocationFeatures();
+                        SaveRevertAction("EnableLocationFeatures");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableLocationFeatures();
+                        RemoveRevertAction("EnableLocationFeatures");
+                    }
+                    break;
+
                 case "GameBar":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableGameBar();
-
+                        SaveRevertAction("EnableGameBar");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableGameBar();
-
+                        RemoveRevertAction("EnableGameBar");
                     }
                     break;
+
                 case "QuickAccessHistory":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableQuickAccessHistory();
-
+                        SaveRevertAction("EnableQuickAccessHistory");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableQuickAccessHistory();
-
+                        RemoveRevertAction("EnableQuickAccessHistory");
                     }
                     break;
+
                 case "MyPeople":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableMyPeople();
-
+                        SaveRevertAction("EnableMyPeople");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableMyPeople();
-
+                        RemoveRevertAction("EnableMyPeople");
                     }
                     break;
+
                 case "Drivers":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.ExcludeDrivers();
-
+                        SaveRevertAction("IncludeDrivers");
                     }
                     else
                     {
                         OptimizeSystemHelper.IncludeDrivers();
-
+                        RemoveRevertAction("IncludeDrivers");
                     }
                     break;
+
                 case "WindowsInk":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableWindowsInk();
-
+                        SaveRevertAction("EnableWindowsInk");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableWindowsInk();
-
+                        RemoveRevertAction("EnableWindowsInk");
                     }
                     break;
+
                 case "SpellingAndTypingFeatures":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableSpellingAndTypingFeatures();
-
+                        SaveRevertAction("EnableSpellingAndTypingFeatures");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableSpellingAndTypingFeatures();
-
+                        RemoveRevertAction("EnableSpellingAndTypingFeatures");
                     }
                     break;
+
                 case "FaxService":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableFaxService();
-
+                        SaveRevertAction("EnableFaxService");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableFaxService();
-
+                        RemoveRevertAction("EnableFaxService");
                     }
                     break;
+
                 case "InsiderService":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableInsiderService();
-
+                        SaveRevertAction("EnableInsiderService");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableInsiderService();
-
+                        RemoveRevertAction("EnableInsiderService");
                     }
                     break;
+
                 case "SmartScreen":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableSmartScreen();
-
+                        SaveRevertAction("EnableSmartScreen");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableSmartScreen();
-
+                        RemoveRevertAction("EnableSmartScreen");
                     }
                     break;
+
                 case "CloudClipboard":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableCloudClipboard();
-
+                        SaveRevertAction("EnableCloudClipboard");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableCloudClipboard();
-
+                        RemoveRevertAction("EnableCloudClipboard");
                     }
                     break;
+
                 case "StickyKeys":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableStickyKeys();
-
+                        SaveRevertAction("EnableStickyKeys");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableStickyKeys();
-
+                        RemoveRevertAction("EnableStickyKeys");
                     }
                     break;
+
                 case "CastToDevice":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.RemoveCastToDevice();
-
+                        SaveRevertAction("AddCastToDevice");
                     }
                     else
                     {
                         OptimizeSystemHelper.AddCastToDevice();
-
+                        RemoveRevertAction("AddCastToDevice");
                     }
                     break;
+
                 case "VBS":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableVBS();
-
+                        SaveRevertAction("EnableVBS");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableVBS();
-
+                        RemoveRevertAction("EnableVBS");
                     }
                     break;
+
                 case "TaskbarToLeft":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.AlignTaskbarToLeft();
-
+                        SaveRevertAction("AlignTaskbarToCenter");
                     }
                     else
                     {
                         OptimizeSystemHelper.AlignTaskbarToCenter();
-
+                        RemoveRevertAction("AlignTaskbarToCenter");
                     }
                     break;
+
                 case "SnapAssist":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableSnapAssist();
-
+                        SaveRevertAction("EnableSnapAssist");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableSnapAssist();
-
+                        RemoveRevertAction("EnableSnapAssist");
                     }
                     break;
+
                 case "Widgets":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableWidgets();
-
+                        SaveRevertAction("EnableWidgets");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableWidgets();
-
+                        RemoveRevertAction("EnableWidgets");
                     }
                     break;
+
                 case "Chat":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableChat();
-
+                        SaveRevertAction("EnableChat");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableChat();
-
+                        RemoveRevertAction("EnableChat");
                     }
                     break;
+
                 case "FilesCompactMode":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.EnableFilesCompactMode();
-
+                        SaveRevertAction("DisableFilesCompactMode");
                     }
                     else
                     {
                         OptimizeSystemHelper.DisableFilesCompactMode();
-
+                        RemoveRevertAction("DisableFilesCompactMode");
                     }
                     break;
+
                 case "Stickers":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableStickers();
-
+                        SaveRevertAction("EnableStickers");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableStickers();
-
+                        RemoveRevertAction("EnableStickers");
                     }
                     break;
+
                 case "EdgeDiscoverBar":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableEdgeDiscoverBar();
-
+                        SaveRevertAction("EnableEdgeDiscoverBar");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableEdgeDiscoverBar();
-
+                        RemoveRevertAction("EnableEdgeDiscoverBar");
                     }
                     break;
+
                 case "EdgeTelemetry":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableEdgeTelemetry();
-
+                        SaveRevertAction("EnableEdgeTelemetry");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableEdgeTelemetry();
-
+                        RemoveRevertAction("EnableEdgeTelemetry");
                     }
                     break;
+
                 case "CoPilotAI":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableCoPilotAI();
-
+                        SaveRevertAction("EnableCoPilotAI");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableCoPilotAI();
-
+                        RemoveRevertAction("EnableCoPilotAI");
                     }
                     break;
+
                 case "VisualStudioTelemetry":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableVisualStudioTelemetry();
-
+                        SaveRevertAction("EnableVisualStudioTelemetry");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableVisualStudioTelemetry();
-
+                        RemoveRevertAction("EnableVisualStudioTelemetry");
                     }
                     break;
+
                 case "NvidiaTelemetry":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableNvidiaTelemetry();
-
+                        SaveRevertAction("EnableNvidiaTelemetry");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableNvidiaTelemetry();
-
+                        RemoveRevertAction("EnableNvidiaTelemetry");
                     }
                     break;
+
                 case "ChromeTelemetry":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableChromeTelemetry();
-
+                        SaveRevertAction("EnableChromeTelemetry");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableChromeTelemetry();
-
+                        RemoveRevertAction("EnableChromeTelemetry");
                     }
                     break;
+
                 case "FirefoxTelemetry":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableFirefoxTelemetry();
-
+                        SaveRevertAction("EnableFirefoxTelemetry");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableFirefoxTelemetry();
-
+                        RemoveRevertAction("EnableFirefoxTelemetry");
                     }
                     break;
+
                 case "Hibernation":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.DisableHibernation();
-
+                        SaveRevertAction("EnableHibernation");
                     }
                     else
                     {
                         OptimizeSystemHelper.EnableHibernation();
-
+                        RemoveRevertAction("EnableHibernation");
                     }
                     break;
+
                 case "EndTask":
                     if (toggleSwitch.IsOn)
                     {
                         OptimizeSystemHelper.EnableEndTask();
-
+                        SaveRevertAction("DisableEndTask");
                     }
                     else
                     {
                         OptimizeSystemHelper.DisableEndTask();
-
-                    }
-                    break;
-                case "CleanMemory":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.EnableMemClean();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.DisableMemClean();
+                        RemoveRevertAction("DisableEndTask");
                     }
                     break;
             }

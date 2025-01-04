@@ -17,76 +17,208 @@
         </Style>
     </Page.Resources>
     <Grid x:Name="ContentArea">
-        <ScrollViewer Padding="-24,10,24,0" Margin="0,0,-56,0">
-            <StackPanel Padding="0,0,0,40" Spacing="{StaticResource SettingsCardSpacing}">
+        <ScrollViewer Padding="24,14,24,0">
+            <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
 
-                <!-- System Optimization Toggles -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        x:Uid="OptimizeBasic"/>
-                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/basic.html">
-                        <FontIcon FontSize="15"
-                            Glyph="&#xE946;" />
-                    </HyperlinkButton>
-                </StackPanel>
-                <controls:SettingsCard x:Uid="Feature_PerformanceTweaks">
-                    <ToggleSwitch x:Name="PerformanceTweaks" Tag="PerformanceTweaks" Toggled="ToggleSwitch_Toggled"/>
-                    <controls:SettingsCard.Description>
-                        <HyperlinkButton x:Uid="Feature_LearnButtonLink"
-                                         NavigateUri="https://rayenghanmi.github.io/rytunex/performance.html" />
-                    </controls:SettingsCard.Description>
+                <!-- Basic System Optimization Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="OptimizeSystemPage_BasicOptimization"/>
+                <controls:SettingsCard x:Uid="Feature_MenuShowDelay">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xF182;"/>
+                </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="MenuShowDelay" Tag="MenuShowDelay"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_CleanMemory">
-                    <ToggleSwitch x:Name="CleanMemory" Tag="CleanMemory" Toggled="ToggleSwitch_Toggled"/>
+                <controls:SettingsCard x:Uid="Feature_MouseHoverTime">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8B0;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="MouseHoverTime" Tag="MouseHoverTime"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableSuperfetch">
-                    <ToggleSwitch x:Name="Superfetch" Tag="Superfetch" Toggled="ToggleSwitch_Toggled"/>
+                <controls:SettingsCard x:Uid="Feature_AutoComplete">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8A1;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="AutoComplete" Tag="AutoComplete"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_CrashDump">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE74D;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="CrashDump" Tag="CrashDump"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_RemoteAssistance">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8AF;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="RemoteAssistance" Tag="RemoteAssistance"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_WindowShake">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE746;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="WindowShake" Tag="WindowShake"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_CopyMoveContextMenu">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8C8;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="CopyMoveContextMenu" Tag="CopyMoveContextMenu"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_TaskTimeouts">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE916;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="TaskTimeouts" Tag="TaskTimeouts"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_LowDiskSpaceChecks">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE73E;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="LowDiskSpaceChecks" Tag="LowDiskSpaceChecks"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_LinkResolve">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8F5;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="LinkResolve" Tag="LinkResolve"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_ServiceTimeouts">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE823;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="ServiceTimeouts" Tag="ServiceTimeouts"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_RemoteRegistry">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xED5C;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="RemoteRegistry" Tag="RemoteRegistry"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_FileExtensionsAndHiddenFiles">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xED1A;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="FileExtensionsAndHiddenFiles" Tag="FileExtensionsAndHiddenFiles"/>
+                </controls:SettingsCard>
+
+                <!-- Advanced System Optimization Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="OptimizeSystemPage_AdvancedOptimization"/>
+                <controls:SettingsCard x:Uid="Feature_SystemProfile">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE9F5;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="SystemProfile" Tag="SystemProfile"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_GPUAndPrioritySettings">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF211;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="GPUAndPrioritySettings" Tag="GPUAndPrioritySettings"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_FrameServerMode">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE714;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="FrameServerMode" Tag="FrameServerMode"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_LowLatencyGPUSettings">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE835;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="LowLatencyGPUSettings" Tag="LowLatencyGPUSettings"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_NonBestEffortLimit">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8D0;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="NonBestEffortLimit" Tag="NonBestEffortLimit"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableSysMain">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEC4A;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="SysMain" Tag="SysMain"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableNTFSTimestamp">
-                    <ToggleSwitch x:Name="NTFSTimeStamp" Tag="NTFSTimeStamp" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEDA2;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="NTFSTimeStamp" Tag="NTFSTimeStamp"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_EnableGamingMode">
-                    <ToggleSwitch x:Name="GamingMode" Tag="GamingMode" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE7FC;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="GamingMode" Tag="GamingMode"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_ExcludeDriversFromWindowsUpdates">
-                    <ToggleSwitch x:Name="Drivers" Tag="Drivers" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE772;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="Drivers" Tag="Drivers"/>
                 </controls:SettingsCard>
 
-                <!-- Advanced System Optimizations -->
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="6"
-                        Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                        x:Uid="OptimizeAdvanced"/>
-                    <HyperlinkButton NavigateUri="https://rayenghanmi.github.io/rytunex/advanced.html">
-                        <FontIcon FontSize="15"
-                            Glyph="&#xE946;" />
-                    </HyperlinkButton>
-                </StackPanel>
-
+                <!-- Other System Optimization Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="OtherSettings"/>
                 <controls:SettingsCard x:Uid="Feature_DisableSystemRestore">
-                    <ToggleSwitch x:Name="SystemRestore" Tag="SystemRestore" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE777;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="SystemRestore" Tag="SystemRestore"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableCortana">
-                    <ToggleSwitch x:Name="Cortana" Tag="Cortana" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xED66;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="Cortana" Tag="Cortana"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableStoreUpdates">
-                    <ToggleSwitch x:Name="StoreUpdates" Tag="StoreUpdates" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE719;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="StoreUpdates" Tag="StoreUpdates"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableAutomaticUpdates">
-                    <ToggleSwitch x:Name="AutomaticUpdates" Tag="AutomaticUpdates" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8D8;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="AutomaticUpdates" Tag="AutomaticUpdates"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableSmartScreen">
-                    <ToggleSwitch x:Name="SmartScreen" Tag="SmartScreen" Toggled="ToggleSwitch_Toggled"/>
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF8A5;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="SmartScreen" Tag="SmartScreen"/>
                 </controls:SettingsCard>
 
             </StackPanel>

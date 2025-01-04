@@ -124,16 +124,13 @@
     <value>Aufblähen</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>Systeminformationen</value>
+    <value>Gerät</value>
   </data>
-  <data name="Shell_ReportBug.Content" xml:space="preserve">
-    <value>Fehler melden</value>
+  <data name="Shell_Issue.Content" xml:space="preserve">
+    <value>Bericht</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>System optimieren</value>
-  </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>Personalisierung</value>
+    <value>Optimieren</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>Thema</value>
@@ -162,15 +159,6 @@
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Sprache</value>
   </data>
-  <data name="HomePage_Title1.Text" xml:space="preserve">
-    <value>1. Optimierte Systemdienste:</value>
-  </data>
-  <data name="HomePage_Title2.Text" xml:space="preserve">
-    <value>2. Fein abgestimmte Registry-Optimierung:</value>
-  </data>
-  <data name="HomePage_Title3.Text" xml:space="preserve">
-    <value>3. Blähungsfreie Leistung:</value>
-  </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>Daten für installierte Apps werden abgerufen...</value>
   </data>
@@ -190,16 +178,13 @@
     <value>Wählen Sie Apps aus, die Sie entfernen möchten, und klicken Sie auf Deinstallieren</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>Windows-Funktionen</value>
+    <value>Funktionen</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
-    <value>Privatsphäre</value>
+    <value>Datenschutz</value>
   </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
     <value>Treten Sie unserem Server bei</value>
-  </data>
-  <data name="HomePage_IssueButton.Text" xml:space="preserve">
-    <value>Problem melden</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
     <value>Schauen Sie sich RyTuneX an</value>
@@ -219,9 +204,6 @@
   <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
     <value>Widder</value>
   </data>
-  <data name="SystemInfoPage_ReloadButton.Text" xml:space="preserve">
-    <value>auffrischen</value>
-  </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
     <value>Lagerung</value>
   </data>
@@ -232,10 +214,10 @@
     <value>Durch die Deinstallation einiger dieser Apps werden sie möglicherweise nicht vollständig entfernt.</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>Fehler bei der Deinstallation</value>
+    <value>Fehler beim Deinstallieren der folgenden App(s)</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>Erfolgreich deinstalliert</value>
+    <value>Erfolgreich deinstallierte(r) folgende(n) App(s)</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
     <value>Temporäre Dateien entfernen</value>
@@ -299,9 +281,6 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="OSName" xml:space="preserve">
-    <value>Name des Betriebssystems</value>
   </data>
   <data name="RAMModule" xml:space="preserve">
     <value>RAM-Modul</value>
@@ -540,11 +519,11 @@
   <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
     <value>Leistungsoptimierungen</value>
   </data>
-  <data name="Feature_DisableSuperfetch.Header" xml:space="preserve">
-    <value>Superfetch deaktivieren</value>
+  <data name="Feature_DisableSysMain.Header" xml:space="preserve">
+    <value>SysMain deaktivieren</value>
   </data>
-  <data name="Feature_DisableSuperfetch.Description" xml:space="preserve">
-    <value>Deaktiviert Superfetch, welches häufig genutzte Anwendungen für einen schnelleren Start vorlädt. Kann die Startzeiten einiger Programme beeinflussen, wenn HDD verwendet wird.</value>
+  <data name="Feature_DisableSysMain.Description" xml:space="preserve">
+    <value>Deaktiviert SysMain, welches häufig genutzte Anwendungen für einen schnelleren Start vorlädt. Kann die Startzeiten einiger Programme beeinflussen, wenn HDD verwendet wird.</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
     <value>NTFS-Zeitstempel deaktivieren</value>
@@ -593,12 +572,6 @@
   </data>
   <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
     <value>Deaktiviert automatische Windows-Updates und erfordert manuelle Installationen. Sehr abgeraten. Dies kann Ihr System anfällig für Sicherheitslücken und Fehlerbehebungen machen.</value>
-  </data>
-  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
-    <value>SmartScreen deaktivieren</value>
-  </data>
-  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>Deaktiviert den SmartScreen-Filter, der Sie vor potenziell unsicheren Apps und Dateien aus dem Internet warnt. Aus Sicherheitsgründen nicht empfohlen. Das Deaktivieren dieser Funktion erhöht das Risiko einer Malware-Infektion.</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>Telemetrie</value>
@@ -703,7 +676,7 @@
     <value>Not set</value>
   </data>
   <data name="Shell_Network.Content" xml:space="preserve">
-    <value>Netzwerken</value>
+    <value>Netzwerk</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
     <value>(adult filter)</value>
@@ -719,12 +692,6 @@
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneX ist ein hochmodernes Optimierungstool, das mit dem WinUI 3-Framework entwickelt wurde und darauf abzielt, die Leistung von Windows-Geräten zu steigern. Entwickelt für Windows 10 und 11, ermöglicht RyTuneX den Benutzern, hartnäckige vorinstallierte Apps mühelos zu entfernen und Systemressourcen zu optimieren</value>
-  </data>
-  <data name="Feature_CleanMemory.Description" xml:space="preserve">
-    <value>Aktiviert den rytunexsvc, der regelmäßig die RAM-Auslastung überprüft und ihn leert, wenn sie 80% überschreitet</value>
-  </data>
-  <data name="Feature_CleanMemory.Header" xml:space="preserve">
-    <value>RAM-Reiniger aktivieren</value>
   </data>
   <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
     <value>Nach Updates suchen</value>
@@ -753,8 +720,8 @@
   <data name="Update" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
-  <data name="HomePage_SupportButton.Text" xml:space="preserve">
-    <value>Unterstütze uns</value>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>Unterstützung</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Netzwerk</value>
@@ -776,5 +743,516 @@
   </data>
   <data name="Chemistry" xml:space="preserve">
     <value>Chemische Zusammensetzung</value>
+  </data>
+  <data name="Shell_Security.Content" xml:space="preserve">
+    <value>Sicherheit</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Es ist ein unerwarteter Fehler aufgetreten</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>Protokolle anzeigen</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>Gesamt: {0} App(s)</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>Leistung</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>Firewall- und Netzwerkschutz</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>Echtzeitschutz</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>Sicherheitsstatus</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>Benutzerkontensteuerung (UAC)</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>Schutz vor Viren und Bedrohungen</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>Windows Update</value>
+  </data>
+  <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>Reparatur</value>
+  </data>
+  <data name="ConfirmRemoveApps" xml:space="preserve">
+    <value>Sie sind dabei, die folgenden Apps vollständig von Ihrem System zu entfernen:</value>
+  </data>
+  <data name="ConfirmContinue" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie fortfahren möchten?</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="HomePage_cpuUsage.Text" xml:space="preserve">
+    <value>CPU-Auslastung</value>
+  </data>
+  <data name="HomePage_ramUsage.Text" xml:space="preserve">
+    <value>RAM-Auslastung</value>
+  </data>
+  <data name="HomePage_gpuUsage.Text" xml:space="preserve">
+    <value>GPU-Auslastung</value>
+  </data>
+  <data name="HomePage_diskUsage.Text" xml:space="preserve">
+    <value>Festplattenauslastung</value>
+  </data>
+  <data name="HomePage_networkUsage.Text" xml:space="preserve">
+    <value>Netzwerkauslastung</value>
+  </data>
+  <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
+    <value>Installierte Apps</value>
+  </data>
+  <data name="HomePage_processesCount.Text" xml:space="preserve">
+    <value>Prozesse</value>
+  </data>
+  <data name="HomePage_servicesCount.Text" xml:space="preserve">
+    <value>Dienste</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>Smart Screen deaktivieren</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>Deaktiviert den SmartScreen-Filter, der Sie vor potenziell unsicheren Apps und Dateien warnt, die aus dem Internet heruntergeladen wurden. Das Deaktivieren dieser Funktion erhöht das Risiko einer Malware-Infektion.</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
+    <value>Nachrichten und Interessen deaktivieren</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
+    <value>Deaktiviert den Nachrichten- und Interessen-Feed in der Taskleiste, der Nachrichten, Wetter und andere Updates anzeigt. Das Deaktivieren dieser Funktion kann die Systemleistung verbessern.</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
+    <value>Spotlight-Funktionen deaktivieren</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
+    <value>Deaktiviert die Spotlight-Funktion, die personalisierte Inhalte und Empfehlungen auf dem Sperrbildschirm anzeigt. Das Deaktivieren dieser Funktion kann helfen, die Privatsphäre zu schützen.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
+    <value>Personalisierte Erlebnisse deaktivieren</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
+    <value>Deaktiviert personalisierte Erlebnisse über Apps und Dienste hinweg, sodass Windows Ihre Präferenzen und Aktivitätsdaten nicht mehr sammelt.</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
+    <value>Cloud-optimierte Inhalte deaktivieren</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
+    <value>Deaktiviert cloud-optimierte Inhalte, die App-Updates und Dateisynchronisierung umfassen können. Dies kann die Internet-Bandbreitennutzung verringern, jedoch die Funktionalität einschränken.</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
+    <value>Feedback-Benachrichtigungen deaktivieren</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
+    <value>Verhindert, dass Windows Feedback-Benachrichtigungen zu Ihrer Erfahrung mit dem Betriebssystem anzeigt. Das Deaktivieren dieser Funktion kann Unterbrechungen verringern.</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
+    <value>Werbe-ID deaktivieren</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
+    <value>Deaktiviert die Werbe-ID, wodurch Windows Ihre Aktivitäten nicht mehr für zielgerichtete Werbung verfolgt. Dies kann die Privatsphäre erhöhen, aber die App-Erfahrungen beeinträchtigen.</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
+    <value>Bluetooth-Werbung deaktivieren</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
+    <value>Deaktiviert die Bluetooth-Werbung, die die Anwesenheit Ihres Geräts an andere nahegelegene Geräte sendet. Das Deaktivieren dieser Funktion kann die Privatsphäre verbessern.</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
+    <value>Automatische Anmeldung nach Neustart deaktivieren</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
+    <value>Deaktiviert die automatische Anmeldung nach einem Neustart, sodass Sie Ihre Anmeldedaten manuell eingeben müssen. Dies kann die Sicherheit erhöhen, aber einen zusätzlichen Schritt beim Anmelden hinzufügen.</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
+    <value>Handschrift-Datenfreigabe deaktivieren</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
+    <value>Deaktiviert die Freigabe von Handschrift-Daten mit Microsoft-Diensten, was die Privatsphäre verbessert, aber einige Funktionen zur Handschriftenerkennung reduziert.</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
+    <value>Text-Eingabedaten-Sammlung deaktivieren</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
+    <value>Deaktiviert das Sammeln von Text-Eingabedaten, sodass Windows nicht mehr speichert und analysiert, was Sie eingeben. Dies schützt die Privatsphäre, kann jedoch Verbesserungen in der Tippgenauigkeit beeinträchtigen.</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
+    <value>Personalisierung der Eingabe deaktivieren</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
+    <value>Deaktiviert die Personalisierung von Eingabemethoden, einschließlich vorausschauendem Text und Autokorrektur. Dies kann die Leistung des Systems in Bezug auf Texteingaben verringern.</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
+    <value>Safe Search-Modus deaktivieren</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
+    <value>Deaktiviert den Safe Search-Modus, der potenziell schädliche oder unangemessene Inhalte aus den Suchergebnissen filtert. Das Deaktivieren erhöht das Risiko, unsicheren Inhalten ausgesetzt zu werden.</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
+    <value>Aktivität-Uploads deaktivieren</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
+    <value>Deaktiviert das Hochladen von Aktivitätsdaten, wodurch Microsoft Ihre Nutzungsdaten nicht mehr sammelt, um Dienste zu verbessern. Dies hilft, die Privatsphäre zu wahren.</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
+    <value>Zwischenablage-Synchronisierung deaktivieren</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
+    <value>Deaktiviert die Synchronisierung der Zwischenablage über Ihre Geräte hinweg, sodass Ihre kopierten Daten lokal bleiben und nicht mit anderen Geräten geteilt werden.</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
+    <value>Nachrichtensynchronisierung deaktivieren</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
+    <value>Verhindert, dass Nachrichten auf mehreren Geräten synchronisiert werden, sodass Ihre Textnachrichten und Benachrichtigungen nur auf dem Gerät verfügbar sind, das Sie gerade verwenden.</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
+    <value>Einstellungssynchronisierung deaktivieren</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
+    <value>Deaktiviert die Synchronisierung von Systemeinstellungen über Geräte hinweg. Dadurch wird verhindert, dass Ihre Geräteeinstellungen, Designs und andere Konfigurationen geteilt werden.</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
+    <value>Sprachaktivierung deaktivieren</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
+    <value>Deaktiviert Sprachaktivierungsfunktionen wie Cortana, sodass der Assistent nicht mehr auf Ihre Sprachbefehle hört. Dies kann die Privatsphäre verbessern, reduziert jedoch die Funktionalität der Sprachbefehle.</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
+    <value>Mein Gerät finden deaktivieren</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
+    <value>Deaktiviert die Funktion „Mein Gerät finden“, die Ihnen hilft, Ihr Gerät zu lokalisieren, wenn es verloren geht. Das Deaktivieren reduziert Ihre Fähigkeit, ein verlorenes Gerät wiederzufinden, verbessert jedoch die Privatsphäre.</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
+    <value>Aktivitäts-Feed deaktivieren</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
+    <value>Deaktiviert den Aktivitäts-Feed, der Ihre letzten Aktivitäten anzeigt, um Ihre Privatsphäre zu schützen und zu verhindern, dass andere sehen, was Sie auf Ihrem Gerät getan haben.</value>
+  </data>
+  <data name="Feature_DisableCdp.Header" xml:space="preserve">
+    <value>CDP deaktivieren</value>
+  </data>
+  <data name="Feature_DisableCdp.Description" xml:space="preserve">
+    <value>Deaktiviert das Cloud Data Platform (CDP) für Microsoft und verhindert, dass Ihre Daten für Analysen und Werbung verwendet werden.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
+    <value>Maßgeschneiderte Erlebnisse in der Privatsphäre deaktivieren</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
+    <value>Deaktiviert die Funktion für maßgeschneiderte Erlebnisse in den Datenschutzeinstellungen, wodurch Windows davon abgehalten wird, Ihre Daten zu verwenden, um Ihre Erlebnisse anzupassen. Dies kann die Personalisierungsfunktionen verringern.</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
+    <value>Diagnosetoast deaktivieren</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
+    <value>Schaltet die Diagnosetoast-Benachrichtigungen aus, sodass Windows keine Hinweise auf Systemgesundheit oder Fehler anzeigt. Dies kann Ablenkungen reduzieren.</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
+    <value>Online-Sprachdatenschutz deaktivieren</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
+    <value>Deaktiviert den Online-Sprachdatenschutz und verhindert, dass Windows Sprachbefehle speichert oder verarbeitet. Dies erhöht die Privatsphäre, schränkt jedoch Sprachfunktionen wie Sprachsuche und -befehle ein.</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
+    <value>Standortzugriff deaktivieren</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
+    <value>Schaltet den Standortzugriff für Apps und Dienste aus, wodurch diese den GPS- oder Netzwerkstandort Ihres Geräts nicht verwenden können. Dies verbessert die Privatsphäre, kann jedoch standortbasierte Dienste einschränken.</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
+    <value>Standortfunktionen deaktivieren</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
+    <value>Deaktiviert alle standortbasierten Funktionen auf Ihrem Gerät, einschließlich der Standortdienste für Apps und Sicherheitsfunktionen. Dies kann die Privatsphäre erhöhen, aber die Funktionalität standortabhängiger Dienste verringern.</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
+    <value>Menüanzeige-Verzögerung deaktivieren</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
+    <value>Steuert die Verzögerung, bevor Menüs nach einem Hover-Ereignis angezeigt werden. Das Deaktivieren dieser Funktion kann dazu führen, dass Menüs sofort geöffnet werden, was die Reaktionsfähigkeit verbessert, aber die Benutzersteuerung einschränken kann.</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
+    <value>Hover-Zeit für Maus deaktivieren</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
+    <value>Passt die Zeit an, die das System wartet, bevor ein Hover-Ereignis ausgelöst wird. Das Deaktivieren kann Interaktionen beschleunigen, jedoch zu unbeabsichtigten Aktivierungen führen.</value>
+  </data>
+  <data name="Feature_AutoComplete.Header" xml:space="preserve">
+    <value>Automatische Vervollständigung deaktivieren</value>
+  </data>
+  <data name="Feature_AutoComplete.Description" xml:space="preserve">
+    <value>Deaktiviert automatische Vorschläge beim Tippen in bestimmten Feldern wie Suchfeldern und Formulareingaben. Das Deaktivieren kann Ablenkungen verringern, jedoch den Arbeitsfluss verlangsamen.</value>
+  </data>
+  <data name="Feature_CrashDump.Header" xml:space="preserve">
+    <value>Absturz-Dump deaktivieren</value>
+  </data>
+  <data name="Feature_CrashDump.Description" xml:space="preserve">
+    <value>Steuert, ob bei Anwendungsabstürzen Crash-Berichte und Speicherdumps generiert werden. Das Deaktivieren dieser Funktion kann dazu beitragen, Speicherplatz zu sparen, verringert jedoch die Fähigkeit, Anwendungsprobleme zu diagnostizieren und zu beheben.</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
+    <value>Remote-Unterstützung deaktivieren</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
+    <value>Deaktiviert Remote-Support-Funktionen, die es anderen ermöglichen, Ihnen über Remote-Desktop zu helfen. Das Deaktivieren kann die Sicherheit erhöhen, schränkt jedoch die Support-Optionen ein.</value>
+  </data>
+  <data name="Feature_WindowShake.Header" xml:space="preserve">
+    <value>Fenster-Schütteln deaktivieren</value>
+  </data>
+  <data name="Feature_WindowShake.Description" xml:space="preserve">
+    <value>Deaktiviert die Fenster-Schütteln-Funktion, die alle offenen Fenster minimiert, wenn Sie ein Fenster schütteln. Das Deaktivieren verbessert die Konzentration, entfernt jedoch ein praktisches Fensterverwaltungs-Tool.</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
+    <value>Copy/Move Kontextmenü hinzufügen</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
+    <value>Fügt zusätzliche Optionen im Dateikontextmenü hinzu, um Dateien schnell an einen neuen Ort zu kopieren oder zu verschieben. Diese Funktion optimiert die Dateiverwaltung, indem sie direkten Zugriff auf diese Funktionen über das Rechtsklick-Menü ermöglicht.</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
+    <value>Task-Timeouts anpassen</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
+    <value>Ändert die Timeout-Einstellungen für Systemaufgaben. Das Anpassen kann die Leistung in bestimmten Szenarien verbessern, jedoch dazu führen, dass Aufgaben unter bestimmten Bedingungen fehlschlagen.</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
+    <value>Überprüfungen des verfügbaren Speicherplatzes aktivieren</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
+    <value>Aktiviert automatische Überprüfungen des verfügbaren Speicherplatzes, um Leistungsprobleme zu vermeiden. Das Deaktivieren könnte Benachrichtigungen reduzieren, aber wichtige Speicherwarnungen übersehen lassen.</value>
+  </data>
+  <data name="Feature_LinkResolve.Header" xml:space="preserve">
+    <value>Linkauflösung deaktivieren</value>
+  </data>
+  <data name="Feature_LinkResolve.Description" xml:space="preserve">
+    <value>Deaktiviert die Auflösung defekter Links in Dateien und Ordnern. Das Deaktivieren kann Vorgänge beschleunigen, lässt jedoch veraltete Links ungelöst.</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
+    <value>Service-Timeouts verkürzen</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
+    <value>Passt die Timeouts für Systemdienste an. Das Verkürzen dieser kann die Leistung verbessern, aber dazu führen, dass Dienste vorzeitig beendet werden.</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
+    <value>Remote-Registry deaktivieren</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
+    <value>Deaktiviert den Zugriff auf die Registry aus der Ferne. Das Deaktivieren verbessert die Sicherheit, verhindert jedoch die Fernkonfiguration von Registry-Einstellungen.</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
+    <value>Dateierweiterungen und versteckte Dateien ausblenden</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
+    <value>Steuert die Sichtbarkeit von Dateierweiterungen und versteckten Dateien. Das Aktivieren reduziert Unordnung, verbirgt jedoch wichtige Dateiinformationen.</value>
+  </data>
+  <data name="Feature_SystemProfile.Header" xml:space="preserve">
+    <value>Systemprofil optimieren</value>
+  </data>
+  <data name="Feature_SystemProfile.Description" xml:space="preserve">
+    <value>Verbessert die Leistung Ihres Systems, indem es die Systemeinstellungen des Profils anpasst. Diese Funktion priorisiert Geschwindigkeit und Effizienz, wodurch die Systemreaktionsfähigkeit und Ressourcenverwaltung verbessert wird.</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
+    <value>GPU- und Prioritätseinstellungen verbessern</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
+    <value>Optimiert die GPU-Konfigurationen und Prozessprioritäten, um die Leistung zu steigern und eine bessere Grafikdarstellung sowie eine flüssigere Ausführung ressourcenintensiver Aufgaben wie Gaming und Multitasking zu gewährleisten.</value>
+  </data>
+  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
+    <value>Frame Server Mode deaktivieren</value>
+  </data>
+  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
+    <value>Deaktiviert den Frame Server Mode für fortgeschrittene Video-Codierung. Das Deaktivieren verbessert die Leistung, kann jedoch die Videoqualität unter bestimmten Bedingungen verringern.</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
+    <value>Low Latency GPU-Einstellungen anpassen</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
+    <value>Passt GPU-Einstellungen an, um die Latenz zu minimieren, was die Leistung bei Gaming oder Videoanwendungen verbessert.</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
+    <value>Non-Best Effort Limit festlegen</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
+    <value>Legt ein Limit für Non-Best-Effort-Prozesse fest. Das Aktivieren kann die Leistung priorisieren, reduziert jedoch die Flexibilität des Systems in einigen Fällen.</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Aktiviert</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Deaktiviert</value>
+  </data>
+  <data name="LoadingWindowText.Text" xml:space="preserve">
+    <value>Laden...</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>Klassisches Kontextmenü aktivieren</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>Stellt den klassischen Kontextmenüstil von Windows 10 wieder her und bietet eine vertraute Rechtsklick-Menüerfahrung, bei der alle Optionen sofort angezeigt werden</value>
+  </data>
+  <data name="DoNotShowCheckBox" xml:space="preserve">
+    <value>Diese Nachricht nicht mehr anzeigen</value>
+  </data>
+  <data name="RestorePointDialogTitle" xml:space="preserve">
+    <value>Wiederherstellungspunkt erstellen</value>
+  </data>
+  <data name="RestorePointDialogText" xml:space="preserve">
+    <value>Es wird dringend empfohlen, einen Wiederherstellungspunkt zu erstellen, bevor Sie Änderungen an Ihrem System vornehmen.
+Möchten Sie vor dem Fortfahren einen Systemwiederherstellungspunkt erstellen?</value>
+  </data>
+  <data name="CreatingRestorePoint" xml:space="preserve">
+    <value>Wiederherstellungspunkt wird erstellt</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>Wiederherstellungspunkt erstellt</value>
+  </data>
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>Ein Systemwiederherstellungspunkt wurde erfolgreich erstellt.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>Wiederherstellungspunkt konnte nicht erstellt werden</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Änderungen rückgängig machen</value>
+  </data>
+  <data name="Settings_RevertChanges.Header" xml:space="preserve">
+    <value>Alle Änderungen rückgängig machen</value>
+  </data>
+  <data name="Settings_RevertChanges.Description" xml:space="preserve">
+    <value>Macht alle Änderungen rückgängig, die RyTuneX an Ihrem System vorgenommen hat, einschließlich des Wiederherstellungspunkts</value>
+  </data>
+  <data name="RevertingChanges" xml:space="preserve">
+    <value>Änderungen werden rückgängig gemacht...</value>
+  </data>
+  <data name="RevertChangesDialogText" xml:space="preserve">
+    <value>Sie sind dabei, alle Änderungen, die RyTuneX an Ihrem System vorgenommen hat (außer deinstallierte Apps), rückgängig zu machen und die Einstellungen der App zurückzusetzen.
+
+Sind Sie sicher, dass Sie fortfahren möchten?</value>
+  </data>
+  <data name="NoChangesFound" xml:space="preserve">
+    <value>Keine bemerkenswerten Änderungen gefunden.</value>
+  </data>
+  <data name="OperationStopped" xml:space="preserve">
+    <value>Vorgang gestoppt</value>
+  </data>
+  <data name="ReportSaved" xml:space="preserve">
+    <value>Bericht auf Ihrem Desktop gespeichert</value>
+  </data>
+  <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
+    <value>Speicherdiagnose</value>
+  </data>
+  <data name="MemoryDiagnosticDialogText" xml:space="preserve">
+    <value>Speicherprobleme können dazu führen, dass Ihr Computer Informationen verliert oder nicht mehr funktioniert.
+
+Überprüfen Sie Ihren Computer auf Speicherprobleme</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Jetzt neu starten</value>
+  </data>
+  <data name="ScheduleLater" xml:space="preserve">
+    <value>Für später planen</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ScheduledLater" xml:space="preserve">
+    <value>Für den nächsten Neustart geplant</value>
+  </data>
+  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
+    <value>Scannen</value>
+  </data>
+  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
+    <value>Reparieren</value>
+  </data>
+  <data name="RepairPage_StopButton.Content" xml:space="preserve">
+    <value>Stoppen</value>
+  </data>
+  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>Wählen Sie mindestens eine Option zum Scannen/Reparieren</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
+    <value>Batteriezustand</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
+    <value>Dies wird einen vollständigen Bericht über den Zustand Ihrer Batterie erstellen</value>
+  </data>
+  <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
+    <value>Speicherdiagnose</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
+    <value>Analysieren Sie den Speicher Ihres Systems auf mögliche Probleme und verbessern Sie die Stabilität</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
+    <value>Diagnostizieren</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
+    <value>Festplattenoptimierung</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
+    <value>Dies wird Ihr Speichergerät durch Defragmentierung (bei HDD) oder erneutes Trimmen (bei SSD) optimieren</value>
+  </data>
+  <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+    <value>Optimieren</value>
+  </data>
+  <data name="RepairPage_EventViewer.Header" xml:space="preserve">
+    <value>Ereignisanzeige</value>
+  </data>
+  <data name="RepairPage_EventViewer.Description" xml:space="preserve">
+    <value>Dies zeigt die neuesten Systemereignisprotokolle zur Fehlerbehebung an</value>
+  </data>
+  <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
+    <value>Reparaturoptionen</value>
+  </data>
+  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
+    <value>Diagnoseoptionen</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>Vorgang abgeschlossen</value>
+  </data>
+  <data name="RestorePointTitle_de-de" xml:space="preserve">
+    <value>Wiederherstellungspunkt</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warnung</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>Das Deaktivieren der Systemwiederherstellung löscht alle Wiederherstellungspunkte, einschließlich der von RyTuneX erstellten.
+
+ Sind Sie sicher, dass Sie fortfahren möchten?</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>Geräteinformationen</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>Werbungseinstellungen</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>Telemetrieeinstellungen</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>Weitere Einstellungen</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>Grundlegende Systemoptimierungen</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>Erweiterte Systemoptimierungen</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>Keine Apps entsprechen Ihrer Suche</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>Apps suchen...</value>
   </data>
 </root>
