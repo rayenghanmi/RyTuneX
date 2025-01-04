@@ -19,7 +19,7 @@
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	<AppxBundle>Never</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-    <PackageCertificateThumbprint>68F15F2E2995C98E753050430DFB4AB2C22CA7EE</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>F329AE9211F4B74AD40A5F7065EFE59AA503BBAE</PackageCertificateThumbprint>
     <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
