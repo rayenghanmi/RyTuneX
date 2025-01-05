@@ -1,10 +1,8 @@
 ﻿using System.Management;
-using System.Runtime.InteropServices;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using RyTuneX.Helpers;
 using Windows.Storage.Pickers;
-using Windows.Storage;
 using WinRT.Interop;
 
 namespace RyTuneX.Views;
@@ -305,7 +303,7 @@ public sealed partial class SystemInfoPage : Page
         var hwnd = WindowNative.GetWindowHandle(App.MainWindow);
         InitializeWithWindow.Initialize(folderPicker, hwnd);
 
-        StorageFolder folder = await folderPicker.PickSingleFolderAsync();
+        var folder = await folderPicker.PickSingleFolderAsync();
         if (folder != null)
         {
             FolderPathText.Text = folder.Path;

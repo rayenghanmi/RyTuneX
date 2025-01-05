@@ -171,8 +171,8 @@ public sealed partial class SettingsPage : Page
     {
         try
         {
-            StorageFolder tempFolder = ApplicationData.Current.TemporaryFolder;
-            StorageFile logFile = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
+            var tempFolder = ApplicationData.Current.TemporaryFolder;
+            var logFile = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
 
             if (logFile != null)
             {
@@ -374,7 +374,7 @@ public sealed partial class SettingsPage : Page
             // Run the setup file with the --silent argument
             UpdateStatusText.Text = "Installing...";
             Debug.WriteLine("Running RyTuneX Setup.exe...");
-            Process setupProcess = new Process
+            var setupProcess = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
@@ -429,14 +429,14 @@ public sealed partial class SettingsPage : Page
         {
             try
             {
-                ProgressRing progressRing = new ProgressRing
+                var progressRing = new ProgressRing
                 {
                     IsActive = true,
                     Width = 50,
                     Height = 50
                 };
 
-                TextBlock textBlock = new TextBlock
+                var textBlock = new TextBlock
                 {
                     Text = "RevertingChanges".GetLocalized(),
                     TextWrapping = TextWrapping.Wrap,

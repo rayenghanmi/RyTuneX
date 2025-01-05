@@ -3,15 +3,13 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.ViewModels;
 using Windows.ApplicationModel;
-using Windows.System;
-using Windows.UI;
 using Windows.Storage;
-using Microsoft.UI.Xaml.Media.Imaging;
+using Windows.System;
 using Windows.UI.ViewManagement;
 
 namespace RyTuneX.Views;
@@ -202,7 +200,7 @@ public sealed partial class ShellPage : Page
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
                 }.ShowAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 progressDialog.Hide();
                 await new ContentDialog

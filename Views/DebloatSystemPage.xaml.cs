@@ -457,7 +457,7 @@ public sealed partial class DebloatSystemPage : Page
     }
     public async Task<ContentDialogResult> ShowUninstallConfirmationDialog(TreeView appTreeView)
     {
-        StringBuilder selectedItemsText = new StringBuilder();
+        var selectedItemsText = new StringBuilder();
 
         foreach (var item in appTreeView.SelectedItems.OfType<Tuple<string, string, bool>>())
         {
@@ -467,7 +467,7 @@ public sealed partial class DebloatSystemPage : Page
         var firstLine = RyTuneX.Helpers.ResourceExtensions.GetLocalized("ConfirmRemoveApps");
         var lastLine = RyTuneX.Helpers.ResourceExtensions.GetLocalized("ConfirmContinue");
 
-        TextBlock firstLineTextBlock = new TextBlock
+        var firstLineTextBlock = new TextBlock
         {
             Text = firstLine,
             Margin = new Thickness(0, 10, 0, 20),
@@ -475,7 +475,7 @@ public sealed partial class DebloatSystemPage : Page
             VerticalAlignment = VerticalAlignment.Top,
         };
 
-        TextBlock lastLineTextBlock = new TextBlock
+        var lastLineTextBlock = new TextBlock
         {
             Text = lastLine,
             Margin = new Thickness(0, 20, 0, 10),
@@ -483,7 +483,7 @@ public sealed partial class DebloatSystemPage : Page
             VerticalAlignment = VerticalAlignment.Bottom
         };
 
-        TextBlock selectedAppsTextBlock = new TextBlock
+        var selectedAppsTextBlock = new TextBlock
         {
             Text = selectedItemsText.ToString(),
             TextWrapping = TextWrapping.Wrap,
@@ -491,7 +491,7 @@ public sealed partial class DebloatSystemPage : Page
             Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"]
         };
 
-        ScrollViewer scrollViewer = new ScrollViewer
+        var scrollViewer = new ScrollViewer
         {
             Content = selectedAppsTextBlock,
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
@@ -499,7 +499,7 @@ public sealed partial class DebloatSystemPage : Page
             MaxHeight = 400
         };
 
-        StackPanel contentStackPanel = new StackPanel
+        var contentStackPanel = new StackPanel
         {
             Orientation = Orientation.Vertical,
             Children = { firstLineTextBlock, scrollViewer, lastLineTextBlock }

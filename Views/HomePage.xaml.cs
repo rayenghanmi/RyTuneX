@@ -1,11 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Management;
-using Microsoft.UI.Xaml.Controls;
-using Windows.Networking.Connectivity;
-using Microsoft.UI.Xaml;
 using System.ServiceProcess;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using RyTuneX.Helpers;
-using System.Threading;
+using Windows.Networking.Connectivity;
 
 namespace RyTuneX.Views;
 
@@ -113,8 +112,8 @@ public sealed partial class HomePage : Page
 
     private int GetRamUsage()
     {
-        ObjectQuery wql = new ObjectQuery("SELECT FreePhysicalMemory, TotalVisibleMemorySize FROM Win32_OperatingSystem");
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher(wql);
+        var wql = new ObjectQuery("SELECT FreePhysicalMemory, TotalVisibleMemorySize FROM Win32_OperatingSystem");
+        var searcher = new ManagementObjectSearcher(wql);
         foreach (ManagementObject queryObj in searcher.Get())
         {
             var freeMemory = Convert.ToUInt64(queryObj["FreePhysicalMemory"]);
@@ -132,7 +131,7 @@ public sealed partial class HomePage : Page
 
     private int GetNetworkUsage()
     {
-        ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
+        var profile = NetworkInformation.GetInternetConnectionProfile();
         if (profile != null)
         {
             var usageStates = new NetworkUsageStates
@@ -185,7 +184,7 @@ public sealed partial class HomePage : Page
             {
                 if (counterName.EndsWith("engtype_3D"))
                 {
-                    foreach (PerformanceCounter counter in category.GetCounters(counterName))
+                    foreach (var counter in category.GetCounters(counterName))
                     {
                         if (counter.CounterName == "Utilization Percentage")
                         {

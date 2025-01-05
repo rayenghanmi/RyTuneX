@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.Win32;
-using Windows.ApplicationModel;
+﻿using Microsoft.Win32;
 
 namespace RyTuneX.Helpers;
 internal class OptimizeSystemHelper

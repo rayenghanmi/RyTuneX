@@ -3,7 +3,6 @@ using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using Windows.Storage;
 

@@ -1,14 +1,10 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using RyTuneX.Contracts.Services;
-using RyTuneX.Helpers;
-using RyTuneX.Services;
-using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
 
@@ -128,7 +124,7 @@ public sealed partial class RepairPage : Page
     {
         if (string.IsNullOrEmpty(data)) return;
 
-        int percentage = 0;
+        var percentage = 0;
 
         try
         {
@@ -221,12 +217,12 @@ public sealed partial class RepairPage : Page
             await OptimizationOptions.StartInCmd("bcdedit /bootsequence {memdiag}");
         };
         await memDialog.ShowAsync();
-        
+
     }
 
     private async void EventViewerSettingsCard_Click(object sender, RoutedEventArgs e)
     {
-        await OptimizationOptions.StartInCmd("eventvwr.msc"); 
+        await OptimizationOptions.StartInCmd("eventvwr.msc");
     }
     private async void DiskOptimizationsButton_Click(object sender, RoutedEventArgs e)
     {

@@ -4,13 +4,13 @@ using System.Drawing.Imaging;
 using System.Management.Automation;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
-using System.Text.Json;
 using Windows.Storage;
-using Microsoft.UI.Xaml;
 
 namespace RyTuneX.Helpers;
 internal class OptimizationOptions
@@ -380,7 +380,7 @@ internal class OptimizationOptions
         // Get the current revert list
         var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
         var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
-    
+
         // Add the action if it's not already present
         if (!revertList.Contains(action))
         {
@@ -388,13 +388,13 @@ internal class OptimizationOptions
             ApplicationData.Current.LocalSettings.Values["RevertList"] = JsonSerializer.Serialize(revertList);
         }
     }
-    
+
     private static void RemoveRevertAction(string action)
     {
         // Get the current revert list
         var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
         var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
-    
+
         // Remove the action if it's present
         if (revertList.Contains(action))
         {
