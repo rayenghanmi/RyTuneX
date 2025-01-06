@@ -1,136 +1,109 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/bc2beddd-99fe-4a50-b85f-0806b754a176" alt="RyTuneX Logo" width="128">
+  <img src="https://github.com/user-attachments/assets/bc2beddd-99fe-4a50-b85f-0806b754a176" alt="RyTuneX Logo" width="120">
 </div>
 
-<h1 align="center">RyTuneX 🚀</h1>
+<h1 align="center" style="font-family: 'Segoe UI', sans-serif; font-weight: 600; color: #0078D4;">RyTuneX</h1>
 
-<p align="center">
-  <strong>Enhance your Windows 10 and 11 experience with RyTuneX – your go-to optimizer by Rayen Ghanmi 🛠️.</strong>
+<p align="center" style="font-size: 1.1rem; color: #555;">
+  <strong>Streamline. Optimize. Dominate.</strong><br>
+  Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
 </p>
 
+<div align="center" style="margin: 20px 0;">
+  <a href="https://www.buymeacoffee.com/rayen.ghanmi.22"><img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee" style="margin-right: 10px;"></a>
+  <a href="https://github.com/sponsors/rayenghanmi"><img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white" alt="Github Sponsor" style="margin-right: 10px;"></a>
+  <a href="https://rayenghanmi.github.io/rytunex"><img src="https://img.shields.io/badge/Get%20Started-RyTuneX-blue?style=for-the-badge" alt="Get Started"></a>
+</div>
 
+### Why Choose RyTuneX?
+- **Effortless Optimization**: Instantly boost your system's speed and reliability.
+- **Smart Features**: From app removal to privacy protection, we've got you covered.
 
-<p align="center">
-  <a href="https://www.buymeacoffee.com/rayen.ghanmi.22"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=rayen.ghanmi.22&button_colour=f177a6&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=FFDD00" /></a>
-<br>
-<br>
-  <a href="https://techforpalestine.org/learn-more">
-    <img src="https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/StandWithPalestine.svg" alt="Ceasefire Now">
-  </a>
-</p>
+<div align="center" style="margin: 20px 0;">
+  <a href="https://youtube.com/@rayen.ghanmi.23?sub_confirmation=1"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"></a>
+  <a href="https://twitter.com/rayen_ghanmi_23"><img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X Follow"></a>
+  <a href="mailto:ghanmirayen12@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"></a>
+  <a href="https://www.facebook.com/rayen.ghanmi.23"><img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook"></a>
+  <a href="https://www.instagram.com/rayen.ghanmi.23"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"></a>
+  <a href="https://discord.gg/gyBzyd364t"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
+</div>
 
-<p align="center">
-  <a href="https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-AGPL%20v3.0-blue.svg" alt="License: AGPL v3.0"></a>
-  <a href="https://github.com/rayenghanmi/RyTuneX/stargazers"><img src="https://img.shields.io/github/stars/rayenghanmi/RyTuneX.svg" alt="GitHub stars"></a>
-  <a href="https://github.com/rayenghanmi/RyTuneX/issues"><img src="https://img.shields.io/github/issues/rayenghanmi/RyTuneX.svg" alt="GitHub issues"></a>
-  <a href="https://github.com/rayenghanmi/RyTuneX/network"><img src="https://img.shields.io/github/forks/rayenghanmi/RyTuneX.svg" alt="GitHub forks"></a>
-</p>
+### Join the Community
+Get the most out of RyTuneX by connecting with fellow users and sharing your experiences. Have questions or feedback? Let’s make RyTuneX even better together!
 
-<p align="center">
-  <a href="https://youtube.com/@rayen.ghanmi.23?sub_confirmation=1"><img src="https://img.shields.io/badge/YouTube-RyTuneX-red" alt="YouTube"></a>
-  <a href="https://twitter.com/rayen_ghanmi_23"><img src="https://img.shields.io/twitter/follow/rayen_ghanmi_23.svg?style=social" alt="Twitter Follow"></a>
-  <a href="https://www.facebook.com/rayen.ghanmi.23"><img src="https://img.shields.io/badge/Facebook-rayen.ghanmi.23-blue" alt="Facebook"></a>
-  <a href="https://discord.gg/gyBzyd364t"><img src="https://img.shields.io/badge/Discord-Join%20Us-blue" alt="Discord"></a>
-  <a href="https://rayenghanmi.github.io/rytunex"><img src="https://img.shields.io/badge/Website-RyTuneX-blue" alt="Website"></a>
-</p>
+---
 
-## 📝 About
+## About
 
-RyTuneX is a cutting-edge optimizer built with the WinUI 3 framework, designed to amplify the performance of Windows devices 🚀. Crafted for Windows 10 and 11, RyTuneX empowers users to effortlessly remove stubborn pre-installed apps and optimize system resources 🛠️.
+RyTuneX is a comprehensive system optimization tool designed to **enhance** the **performance**, **privacy**, and **usability** of Windows systems. Built with the **WinUI 3** framework and leveraging **.NET 8**, RyTuneX provides a modern and responsive user experience. It is crafted specifically for **Windows 10 (21H2 and up)** and **Windows 11**. whether you're **a gamer** or **an advanced user**, RyTuneX allows you to remove **pre-installed apps**, manage **system settings**, and optimize **performance**.
 
-## 🚀 Features
+<div align="center" style="margin: 20px 0;">
+  <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
+  <img src="https://img.shields.io/badge/Windows_10-0078d7?style=for-the-badge&logo=windows-10&logoColor=white" alt="Windows 10 Badge" />
+  <img src="https://img.shields.io/badge/Windows_11-0078d4?style=for-the-badge&logo=windows-11&logoColor=white" alt="Windows 11 Badge" />
+</div>
 
-- **Selective App Removal**: Uninstall unwanted pre-installed apps with ease 🗑️.
-- **Background Service Management**: Streamline your system by disabling unnecessary services ⚙️.
-- **Privacy Enhancements**: Fortify your privacy by blocking telemetry and data collection 🔒.
-- **Modern Design**: Enjoy a sleek and intuitive interface powered by WinUI 3 🎨.
-- **Cross-Compatible**: Experience seamless performance optimization on both Windows 10 and 11 🖥️.
+## Features
 
-## 📸 Screenshots
+- **Selective App Removal**: Uninstall unwanted pre-installed apps with ease. This feature allows users to debloat their system by removing bloatware and unnecessary applications that come pre-installed with Windows. By doing so, users can free up valuable system resources and improve overall performance.
 
-![version 1.0.1](https://github.com/rayenghanmi/RyTuneX/assets/108760398/8e2141a6-fe98-44fc-be91-0b15328ab08e)
-![1.0.1 setup](https://github.com/rayenghanmi/RyTuneX/assets/108760398/85be5acc-753b-4b25-85ae-cc41312961ad)
+- **System Optimizations**: Streamline your system by reducing resource usage, and improving overall system efficiency. Choose from a range of basic and advanced options for both beginner and expert users.
 
-## 🛠 Installation
+- **Privacy Enhancements**: Enhance your privacy by blocking telemetry and data collection. RyTuneX provides tools to enhance user privacy by disabling tracking and data collection features inherent in Windows. This ensures that users have greater control over their personal data and can protect their privacy more effectively.
 
-1. **Download**: Get the latest installation package:
-    [![Download Latest Release](https://img.shields.io/badge/Download-Latest%20Release-brightgreen)](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+- **Modern Design**: Enjoy a sleek and intuitive interface powered by WinUI 3. The application boasts a modern design that is both user-friendly and visually appealing, making system optimization tasks straightforward. The interface is designed to be clean and easy to navigate, allowing users to quickly access the features they need.
 
+- **Cross-Compatible**: RyTuneX is compatible with both **Windows 10 (21H2 and up)** and **Windows 11**, ensuring seamless performance optimization across different Windows versions. The app delivers a consistent experience, allowing users to fully benefit from its features regardless of their operating system version.
+
+## UI Preview
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/e8d2ad64-0401-4b1f-b7c9-c4fc09979459" />
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/86448dc8-49f8-4f80-ab6b-7c8da26e2d2f" />
+    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/e8d2ad64-0401-4b1f-b7c9-c4fc09979459" />
+  </picture>
+  <p><em>RyTuneX - Clean, Modern, and Intuitive Interface</em></p>
+</div>
+
+## Installation
+
+1. **Download**: Get the latest [installation setup](https://github.com/rayenghanmi/RyTuneX/releases/latest)
 2. **Install**: Run the downloaded setup and follow the prompts to install RyTuneX.
 
-> [!IMPORTANT]
-> Always download RyTuneX from the official [GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety 🔒.
+> [!IMPORTANT]  
+> Always download RyTuneX from the official [GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety.
 
-## 📖 Usage
+## Usage
 
-### System Optimizations 🛠️
+### System Optimizations
+To optimize your system, go to the **Optimize** tab and toggle the available options based on your needs. Changes will take effect after a system restart.
 
-1. **Navigate to "Optimize System" Tab**: Find and click on the "Optimize System" tab in the RyTuneX interface.
+### Debloat Unwanted Apps
+In the **Debloat** tab, you can view a list of installed apps. Select the ones you want to remove and click **Uninstall selected App(s)**. A restart may be required to complete the process.
 
-2. **Customize Optimization Settings**: Toggle switches to activate or deactivate optimization features. Hover over options for more info. Remember to restart your system to apply changes 🔄.
+### Privacy Enhancements
+Head to the **Privacy** tab to configure your privacy settings. Toggle the switches to enable or disable features that impact telemetry, advertising, and more. Changes will take effect after a restart.
 
-### Debloat Unwanted Apps 🗑️
+### Windows Features Management
+Use the **Features** tab to modify specific Windows features. Toggle the switches to adjust the settings, and restart your system to apply the changes.
 
-1. **Visit the "Debloat" Tab**: Go to the "Debloat" tab to manage unnecessary apps.
+### System Information
+The **Device** page provides a comprehensive view of your system’s hardware and OS. This helps you understand your setup and make more informed decisions about optimizations.
 
-2. **Select Apps for Removal**: Browse the app list and select the ones you wish to remove.
+## Get Involved
 
-3. **Uninstall Selected Apps**: Hit "Uninstall Apps" to begin the removal process and restart your system after completion 🔄.
+RyTuneX is an open-source project. Contributions are welcome!  
+Check out the [contribution guide](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md) to get started.
 
-### Privacy Enhancements 🔒
+### Contribution Guidelines
 
-1. **Navigate to "Privacy" Tab**: Find and click on the "Privacy" tab in RyTuneX.
+- Ensure your code follows the project's coding style.
+- Write clear and concise commit messages.
+- Include documentation for any new features or changes.
+- Test your changes thoroughly before submitting a pull request.
 
-2. **Customize Privacy Settings**: Toggle switches to activate or deactivate privacy features. Hover over options for more details. Restart your system for changes to take effect 🔄.
-
-### Windows Features Management ⚙️
-
-1. **Navigate to "Windows Features" Tab**: Find and click on the "Windows Features" tab in RyTuneX.
-
-2. **Customize Windows Feature Settings**: Toggle switches to activate or deactivate specific Windows features. Hover over options for more details. Restart your system for changes to take effect 🔄.
-
-### System Information 🖥️
-
-This page offers detailed insights into your system's hardware and OS. Familiarize yourself with your system's specs for informed optimization and maintenance.
-
-#### Operating System
-
-- **OS Name**: Display your OS version.
-- **Build Number**: Show your OS build number.
-
-#### CPU Information
-
-- **Name**: Reveal your CPU model.
-- **Cores**: Show the number of CPU cores.
-- **Max Speed**: Display your CPU's max speed.
-
-#### GPU Information
-
-- **GPU Model**: Show your GPU details.
-- **GPU Memory**: Indicate GPU memory size (in bytes).
-
-#### RAM Information
-
-- **Capacity**: Display total RAM (in MB).
-- **Speed**: Show RAM speed (in MHz).
-
-#### Storage Information
-
-- **Size**: Reveal the total disk capacity.
-- **Model**: Show disk model.
-
-#### Driver Extraction
-
-- **Extract Drivers**: Extract current system drivers for convenient backup and restoration 📦.
-
-> [!NOTE]
-> Driver extraction aids in backups and reinstalls. Always backup drivers before making system changes 🔒.
-
-## 🤝 Contributing
-
-We value your contributions! Please submit all pull requests to the `testing` branch. Contributions to `main` will not be accepted.
-
-## 🌐 Translation
+## Translation
 
 If you're interested in contributing translations, please follow these steps:
 
@@ -141,17 +114,16 @@ If you're interested in contributing translations, please follow these steps:
 
 Thank you for your help in making RyTuneX accessible to more people!
 
-## 📝 License
+## License
 
 This project is licensed under the [GNU Affero General Public License v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
 
-## 📞 Contact
+## Contact
 
 - Email: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
 - Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
 - Facebook: [rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
 - Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
 - Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
-- GitHub: [rayenghanmi](https://github.com/rayenghanmi)
 
-Feel free to reach out with any questions or suggestions! 📣
+We’re here to support and listen to your feedback!
