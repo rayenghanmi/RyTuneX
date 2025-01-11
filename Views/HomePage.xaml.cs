@@ -26,7 +26,7 @@ public sealed partial class HomePage : Page
 
         _cancellationTokenSource = new CancellationTokenSource();
         _ = UpdateSystemStatsAsync(_cancellationTokenSource.Token);
-        this.Unloaded += HomePage_Unloaded;
+        Unloaded += HomePage_Unloaded;
     }
 
     private async Task UpdateSystemStatsAsync(CancellationToken cancellationToken)
@@ -34,9 +34,9 @@ public sealed partial class HomePage : Page
         try
         {
             // Fetch static values once at the beginning
-            var installedAppsCount = await Task.Run(() => GetInstalledAppsCount());
-            var servicesCount = await Task.Run(() => GetServicesCount());
-            var processesCount = await Task.Run(() => GetProcessesCount());
+            var installedAppsCount = await Task.Run(() => GetInstalledAppsCount()).ConfigureAwait(false);
+            var servicesCount = await Task.Run(() => GetServicesCount()).ConfigureAwait(false);
+            var processesCount = await Task.Run(() => GetProcessesCount()).ConfigureAwait(false);
 
             while (!cancellationToken.IsCancellationRequested)
             {
@@ -47,7 +47,7 @@ public sealed partial class HomePage : Page
                 var networkUsageTask = Task.Run(() => GetNetworkUsage());
                 var gpuUsageTask = Task.Run(() => GetGpuUsage());
 
-                await Task.WhenAll(cpuUsageTask, ramUsageTask, diskUsageTask, networkUsageTask, gpuUsageTask);
+                await Task.WhenAll(cpuUsageTask, ramUsageTask, diskUsageTask, networkUsageTask, gpuUsageTask).ConfigureAwait(false);
 
                 var cpuUsage = cpuUsageTask.Result;
                 var ramUsage = ramUsageTask.Result;
@@ -87,7 +87,7 @@ public sealed partial class HomePage : Page
                     }
                 });
 
-                await Task.Delay(1000, cancellationToken);
+                await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
             }
         }
         catch (OperationCanceledException)
@@ -99,6 +99,7 @@ public sealed partial class HomePage : Page
             Debug.WriteLine($"Unexpected error: {ex.Message}");
         }
     }
+
 
     private void HomePage_Unloaded(object sender, RoutedEventArgs e)
     {
@@ -156,8 +157,26 @@ public sealed partial class HomePage : Page
 
     private int GetInstalledAppsCount()
     {
-        var apps = OptimizationOptions.GetInstalledApps(false);
-        return apps.Count() - 3;
+        try
+        {
+            using var process = Process.Start(new ProcessStartInfo
+            {
+                FileName = "powershell",
+                Arguments = "-Command \"(Get-AppxPackage).Count\"",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            });
+
+            return process != null && int.TryParse(process.StandardOutput.ReadToEnd().Trim(), out var appCount)
+                ? appCount
+                : 0;
+        }
+        catch (Exception ex)
+        {
+            LogHelper.LogError($"Failed to count Installed apps: {ex.Message}");
+            return 0;
+        }
     }
 
     private int GetProcessesCount()
