@@ -73,6 +73,7 @@ public sealed partial class RepairPage : Page
         ScanRepairPanel.Visibility = Visibility.Visible;
         StopButton.Visibility = Visibility.Collapsed;
         PercentageTextBlock.Text = "0%";
+        ProgressBar.Value = 0;
     }
 
     private async Task RunCommandAsync(string name, string args)
