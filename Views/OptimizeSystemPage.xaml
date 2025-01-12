@@ -38,6 +38,13 @@
                     <ToggleSwitch x:Name="MouseHoverTime" Tag="MouseHoverTime"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Feature_BackgroundApps">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8BE;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="BackgroundApps" Tag="BackgroundApps"/>
+                </controls:SettingsCard>
+                
                 <controls:SettingsCard x:Uid="Feature_AutoComplete">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE8A1;"/>

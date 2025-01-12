@@ -1256,4 +1256,10 @@
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>アプリを検索...</value>
   </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>バックグラウンドアプリを無効化</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>アプリがバックグラウンドで実行されるのを防ぎ, 一部のケースでパフォーマンスが向上します.</value>
+  </data>
 </root>

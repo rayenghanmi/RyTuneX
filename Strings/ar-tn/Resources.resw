@@ -1258,4 +1258,10 @@
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>ابحث عن التطبيقات...</value>
   </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>تعطيل التطبيقات الخلفية</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>يمنع التطبيقات من العمل في الخلفية، مما يؤدي إلى تحسين الأداء في بعض الحالات.</value>
+  </data>
 </root>

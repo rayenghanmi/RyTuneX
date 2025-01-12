@@ -1258,4 +1258,10 @@ Are you sure you want to continue?</value>
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>Search apps...</value>
   </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>Disable Background Apps</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>Prevents the apps from running in the background, leading to enhanced performance in some cases.</value>
+  </data>
 </root>

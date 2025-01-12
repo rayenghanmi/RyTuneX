@@ -13,6 +13,11 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseHoverTime /t REG_SZ /d 0 /f");
     }
 
+    public static async void DisableBackgroundApps()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications\" /v GlobalUserDisabled /t REG_DWORD /d 1 /f");
+    }
+
     public static async void EnableAutoComplete()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoComplete\" /v \"Append Completion\" /t REG_SZ /d yes /f");
@@ -118,6 +123,11 @@ internal class OptimizeSystemHelper
     public static async void EnableMouseHoverTime()
     {
         await OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseHoverTime /f");
+    }
+
+    public static async void EnableBackgroundApps()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications\" /v GlobalUserDisabled /t REG_DWORD /d 0 /f");
     }
 
     public static async void DisableAutoComplete()

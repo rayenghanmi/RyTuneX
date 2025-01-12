@@ -1258,4 +1258,10 @@
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>搜索应用...</value>
   </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>禁用后台应用</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>防止应用程序在后台运行, 在某些情况下可以提高性能.</value>
+  </data>
 </root>

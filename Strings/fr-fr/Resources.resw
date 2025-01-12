@@ -1255,4 +1255,10 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>Chercher des applications...</value>
   </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>Désactiver les applications en arrière-plan</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>Empêche les applications de s'exécuter en arrière-plan, ce qui améliore les performances dans certains cas.</value>
+  </data>
 </root>

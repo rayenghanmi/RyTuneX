@@ -1255,4 +1255,10 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>Apps suchen...</value>
   </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>Hintergrund-Apps deaktivieren</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>Verhindert, dass Apps im Hintergrund ausgeführt werden, was in einigen Fällen zu einer verbesserten Leistung führt.</value>
+  </data>
 </root>

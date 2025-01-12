@@ -450,6 +450,9 @@ internal class OptimizationOptions
                     case "EnableMouseHoverTime":
                         OptimizeSystemHelper.EnableMouseHoverTime();
                         break;
+                    case "EnableBackgroundApps":
+                        OptimizeSystemHelper.EnableBackgroundApps();
+                        break;
                     case "EnableAutoComplete":
                         OptimizeSystemHelper.EnableAutoComplete();
                         break;
@@ -744,6 +747,19 @@ internal class OptimizationOptions
                     {
                         OptimizeSystemHelper.EnableMouseHoverTime();
                         RemoveRevertAction("EnableMouseHoverTime");
+                    }
+                    break;
+
+                case "BackgroundApps":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableBackgroundApps();
+                        SaveRevertAction("EnableBackgroundApps");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableBackgroundApps();
+                        RemoveRevertAction("EnableBackgroundApps");
                     }
                     break;
 
