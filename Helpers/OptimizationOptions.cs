@@ -15,6 +15,14 @@ using Windows.Storage;
 namespace RyTuneX.Helpers;
 internal class OptimizationOptions
 {
+    private static readonly string CacheFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "iconCache.json");
+    private static Dictionary<string, string> iconCache = [];
+
+    static OptimizationOptions()
+    {
+        LoadIconCache();
+    }
+
     [DllImport("psapi.dll")]
     public static extern bool EmptyWorkingSet(IntPtr hProcess);
     public static List<Tuple<string, string, bool>> GetInstalledApps(bool uninstallableOnly)
@@ -45,7 +53,7 @@ internal class OptimizationOptions
             string? currentName = null;
             string? currentLocation = null;
 
-            foreach (var line in output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var line in output.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries))
             {
                 if (line.StartsWith("Name"))
                 {
@@ -55,12 +63,12 @@ internal class OptimizationOptions
                         installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
                     }
 
-                    currentName = line.Split(new[] { ':' }, 2)[1].Trim();
+                    currentName = line.Split([':'], 2)[1].Trim();
                     currentLocation = null;
                 }
                 else if (line.StartsWith("InstallLocation"))
                 {
-                    currentLocation = line.Split(new[] { ':' }, 2)[1].Trim();
+                    currentLocation = line.Split([':'], 2)[1].Trim();
                 }
                 else if (!string.IsNullOrWhiteSpace(currentLocation) && line.StartsWith(" "))
                 {
@@ -85,10 +93,9 @@ internal class OptimizationOptions
         installedApps.AddRange(GetWin32Apps());
 
         // Remove duplicates by app name
-        installedApps = installedApps
+        installedApps = [.. installedApps
             .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
-            .OrderBy(app => app.Item1)     // Sort the apps alphabetically by name
-            .ToList();
+            .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
 
         LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
         return installedApps;
@@ -101,8 +108,8 @@ internal class OptimizationOptions
         // Registry paths to check for installed Win32 apps
         var registryPaths = new string[]
         {
-        @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-        @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WOW6432Node"
+            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WOW6432Node"
         };
 
         foreach (var registryPath in registryPaths)
@@ -118,7 +125,7 @@ internal class OptimizationOptions
                         var displayName = subKey?.GetValue("DisplayName")?.ToString();
                         var installLocation = subKey?.GetValue("InstallLocation")?.ToString();
 
-                        if (!string.IsNullOrEmpty(displayName) && !string.IsNullOrEmpty(installLocation) && !displayName.ToLower().Contains("edge"))
+                        if (!string.IsNullOrEmpty(displayName) && !string.IsNullOrEmpty(installLocation) && !displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
                         {
                             var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
                             win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
@@ -137,7 +144,42 @@ internal class OptimizationOptions
 
     private static string ExtractLogoPath(string installLocation, bool isWin32 = false)
     {
-        if (!isWin32)
+        if (isWin32)
+        {
+            if (iconCache.TryGetValue(installLocation, out var cachedIconPath))
+            {
+                return cachedIconPath;
+            }
+
+            try
+            {
+                // Attempt to get the logo for Win32 apps by extracting the .exe file's icon
+                if (Directory.Exists(installLocation))
+                {
+                    // Find the first .exe file in the install location
+                    var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
+                    if (!string.IsNullOrEmpty(exeFile))
+                    {
+                        // Extract the icon from the .exe file using ExtractAssociatedIcon
+                        using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
+                        if (icon != null)
+                        {
+                            // Save the icon as a PNG file
+                            var iconPath = Path.Combine(installLocation, "icon.png");
+                            SaveIconAsPng(icon, iconPath);
+                            iconCache[installLocation] = iconPath;
+                            SaveIconCache();
+                            return iconPath;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to extract logo for Win32 app: {ex.Message}");
+            }
+        }
+        else
         {
             try
             {
@@ -153,9 +195,9 @@ internal class OptimizationOptions
                 }
 
                 string[] possibleManifestPaths = {
-                Path.Combine(installLocation, "AppxManifest.xml"),
-                Path.Combine(installLocation, "appxmanifest.xml")
-            };
+                    Path.Combine(installLocation, "AppxManifest.xml"),
+                    Path.Combine(installLocation, "appxmanifest.xml")
+                };
 
                 var manifestPath = possibleManifestPaths.FirstOrDefault(File.Exists);
 
@@ -196,34 +238,6 @@ internal class OptimizationOptions
             catch (Exception ex)
             {
                 Debug.WriteLine($"Failed to extract logo path: {ex.Message}");
-            }
-        }
-        else
-        {
-            try
-            {
-                // Attempt to get the logo for Win32 apps by extracting the .exe file's icon
-                if (Directory.Exists(installLocation))
-                {
-                    // Find the first .exe file in the install location
-                    var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
-                    if (!string.IsNullOrEmpty(exeFile))
-                    {
-                        // Extract the icon from the .exe file using ExtractAssociatedIcon
-                        using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
-                        if (icon != null)
-                        {
-                            // Save the icon as a PNG file
-                            var iconPath = Path.Combine(installLocation, "icon.png");
-                            SaveIconAsPng(icon, iconPath);
-                            return iconPath;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to extract logo for Win32 app: {ex.Message}");
             }
         }
 
@@ -322,8 +336,8 @@ internal class OptimizationOptions
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = Environment.Is64BitOperatingSystem
-                    ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                    : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
                     Arguments = $"/C {command}",
                     CreateNoWindow = true,
                     UseShellExecute = true,
@@ -379,7 +393,7 @@ internal class OptimizationOptions
     {
         // Get the current revert list
         var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
 
         // Add the action if it's not already present
         if (!revertList.Contains(action))
@@ -393,7 +407,7 @@ internal class OptimizationOptions
     {
         // Get the current revert list
         var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
 
         // Remove the action if it's present
         if (revertList.Contains(action))
@@ -403,10 +417,25 @@ internal class OptimizationOptions
         }
     }
 
+    private static void LoadIconCache()
+    {
+        if (File.Exists(CacheFilePath))
+        {
+            var json = File.ReadAllText(CacheFilePath);
+            iconCache = JsonSerializer.Deserialize<Dictionary<string, string>>(json) ?? new Dictionary<string, string>();
+        }
+    }
+
+    private static void SaveIconCache()
+    {
+        var json = JsonSerializer.Serialize(iconCache);
+        File.WriteAllText(CacheFilePath, json);
+    }
+
     public static async Task RevertAllChanges()
     {
         var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
 
         // Execute each action asynchronously
         foreach (var action in revertList)
