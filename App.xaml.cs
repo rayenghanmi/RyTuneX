@@ -115,6 +115,10 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
+        // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
+        MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+        MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
+        
         if (ApplicationData.Current.LocalSettings.Values.TryGetValue("JustUpdated", out var value))
         {
             ApplicationData.Current.LocalSettings.Values["JustUpdated"] = false;
