@@ -26,7 +26,7 @@
                     x:Uid="DebloatSystemPage_SearchBar"
                     Grid.Row="0"
                     HorizontalAlignment="Left"
-                    Width="300"
+                    Width="260"
                     Height="32"
                     Visibility="Collapsed"
                     QueryIcon="Zoom"
@@ -45,17 +45,17 @@
 
                 <TextBlock Margin="10,6" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="installedAppsCount" Visibility="Collapsed"/>
 
-                <controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="12" Grid.Row="1">
+                <controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
                     <StackPanel x:Name="appsFilterText" Visibility="Collapsed" Orientation="Horizontal">
                         <FontIcon Glyph="&#xE71C;" FontSize="{StaticResource TextBoxIconFontSize}"/>
                         <TextBlock x:Uid="DebloatSystemPage_AppsFilter" Style="{StaticResource DetailBodyBaseMediumStyle}" Margin="6,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <ComboBox Width="130" x:Name="appsFilter" Margin="18,0" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
+                    <ComboBox Width="130" x:Name="appsFilter" Margin="18,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
                         <ComboBoxItem Tag="Apps" Content="Apps"/>
                         <ComboBoxItem Tag="System" Content="System Apps"/>
                     </ComboBox>
-                    
-                    <Button x:Uid="DebloatSystemPage_UninstallButton" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}"/>
+
+                    <Button x:Uid="DebloatSystemPage_UninstallButton"  Margin="12" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}"/>
                 </controls:WrapPanel>
 
                 <TextBlock x:Uid="DebloatSystemPage_NoAppFound" Grid.Row="2" x:Name="noAppFoundText" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
