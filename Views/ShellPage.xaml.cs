@@ -3,6 +3,7 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
@@ -33,7 +34,6 @@ public sealed partial class ShellPage : Page
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
-        AppTitleBarText.Text = "RyTuneX";
 
         // Subscribe to the ActualThemeChanged event
         this.ActualThemeChanged += ShellPage_ActualThemeChanged;
@@ -121,20 +121,6 @@ public sealed partial class ShellPage : Page
         });
     }
 
-    private async void NavigationViewItem_PointerPressed(object sender, PointerRoutedEventArgs e)
-    {
-        await new ContentDialog
-        {
-            XamlRoot = XamlRoot,
-            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-            Title = "Restart",
-            Content = "Some of the applied optimizations require a device restart to take effect.",
-            PrimaryButtonText = "Restart",
-            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-            CloseButtonText = "Cancel"
-        }.ShowAsync();
-    }
-
     private async Task ShowRestorePointDialogAsync()
     {
         var neverShowAgain = new CheckBox
@@ -165,7 +151,8 @@ public sealed partial class ShellPage : Page
             CloseButtonText = "Close".GetLocalized(),
             XamlRoot = this.Content.XamlRoot,
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
         };
 
         var result = await dialog.ShowAsync();
@@ -197,7 +184,8 @@ public sealed partial class ShellPage : Page
                     CloseButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
                     PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 }.ShowAsync();
             }
             catch (Exception)
@@ -210,7 +198,8 @@ public sealed partial class ShellPage : Page
                     CloseButtonText = "OK",
                     XamlRoot = Content.XamlRoot,
                     PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 }.ShowAsync();
             }
         }

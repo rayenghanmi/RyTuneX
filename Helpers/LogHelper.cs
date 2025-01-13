@@ -2,6 +2,7 @@
 using System.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Windows.Storage;
 
 internal class LogHelper
@@ -26,6 +27,7 @@ internal class LogHelper
             {
                 Title = "Error",
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 Content = errorMessage,
                 CloseButtonText = "Close",
                 PrimaryButtonText = "Open Logs File",

@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
 using Windows.Storage;
 
@@ -1047,6 +1048,7 @@ internal class OptimizationOptions
                             PrimaryButtonText = "Continue".GetLocalized(),
                             CloseButtonText = "Cancel".GetLocalized(),
                             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
                         };
                         var dialogResult = await restoreWarning.ShowAsync();

@@ -26,6 +26,7 @@
                     Width="22"
                     Height="22" />
                 <TextBlock x:Name="AppTitleBarText"
+                Text="RyTuneX"
                 VerticalAlignment="Center"
                 Margin="16,0,0,0"
                 TextWrapping="NoWrap"
@@ -103,14 +104,6 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem x:Name="RestartItem" Visibility="Collapsed" Content="Restart" SelectsOnInvoked="False" PointerPressed="NavigationViewItem_PointerPressed">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource SystemFillColorCaution}" Glyph="&#xE777;"/>
-                    </NavigationViewItem.Icon>
-                    <NavigationViewItem.InfoBadge>
-                        <InfoBadge Style="{StaticResource CautionDotInfoBadgeStyle}" VerticalAlignment="Center"/>
-                    </NavigationViewItem.InfoBadge>
-                </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_Issue" SelectsOnInvoked="False" PointerPressed="IssueButton_Click">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEBE8;"/>

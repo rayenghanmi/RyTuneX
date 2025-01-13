@@ -7,6 +7,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Newtonsoft.Json.Linq;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
@@ -236,6 +237,7 @@ public sealed partial class SettingsPage : Page
             {
                 XamlRoot = xaml,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 Title = "UpdateTitle".GetLocalized(),
                 Content = "NetworkError".GetLocalized(),
                 CloseButtonText = "Close".GetLocalized()
@@ -257,6 +259,7 @@ public sealed partial class SettingsPage : Page
                 {
                     XamlRoot = XamlRoot,
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                     Title = "UpdateTitle".GetLocalized(),
                     Content = "UnavailableUpdate0".GetLocalized() + latestVersionString + "UnavailableUpdate1".GetLocalized(),
                     CloseButtonText = "Close".GetLocalized()
@@ -269,6 +272,7 @@ public sealed partial class SettingsPage : Page
                 {
                     XamlRoot = XamlRoot,
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                     Title = "UpdateTitle".GetLocalized(),
                     Content = "AvailableUpdateContent0".GetLocalized() + latestVersionString + "AvailableUpdateContent1".GetLocalized(),
                     CloseButtonText = "Close".GetLocalized(),
@@ -418,6 +422,7 @@ public sealed partial class SettingsPage : Page
         {
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "RyTuneX",
             Content = "RevertChangesDialogText".GetLocalized(),
             CloseButtonText = "Close".GetLocalized(),

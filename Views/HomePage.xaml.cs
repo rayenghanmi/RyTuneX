@@ -55,12 +55,12 @@ public sealed partial class HomePage : Page
                 var networkUsage = networkUsageTask.Result;
                 var gpuUsage = gpuUsageTask.Result;
 
-                // Update the UI on the main thread
-                DispatcherQueue.TryEnqueue(() =>
+                try
                 {
-                    if (this.Visibility == Visibility.Visible)
+                    // Update the UI on the main thread
+                    DispatcherQueue.TryEnqueue(() =>
                     {
-                        try
+                        if (this.Visibility == Visibility.Visible)
                         {
                             cpuUsageText.Text = $"{cpuUsage}%";
                             ramUsageText.Text = $"{ramUsage}%";
@@ -80,13 +80,12 @@ public sealed partial class HomePage : Page
                             servicesCountText.Visibility = Visibility.Visible;
                             gpuUsageText.Visibility = Visibility.Visible;
                         }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine($"Error updating UI: {ex.Message}");
-                        }
-                    }
-                });
-
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error updating UI: {ex.Message}");
+                }
                 await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
             }
         }

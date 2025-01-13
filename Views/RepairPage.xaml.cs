@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
@@ -199,6 +200,7 @@ public sealed partial class RepairPage : Page
         {
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             SecondaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             Title = "MemoryDiagnosticDialogTitle".GetLocalized(),

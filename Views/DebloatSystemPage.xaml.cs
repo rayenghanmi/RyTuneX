@@ -4,6 +4,7 @@ using System.Text;
 using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
@@ -44,7 +45,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.IsEnabled = false;
                 uninstallingStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallTip");
                 uninstallingStatusBar.Opacity = 0;
-                showAll.IsEnabled = false;
+                appsFilter.IsEnabled = false;
             });
 
             await LogHelper.Log("Loading InstalledApps");
@@ -69,8 +70,9 @@ public sealed partial class DebloatSystemPage : Page
 
                 installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), numberOfInstalledApps);
                 installedAppsCount.Visibility = Visibility.Visible;
-                showAll.IsEnabled = true;
-                showAll.Visibility = Visibility.Visible;
+                appsFilter.IsEnabled = true;
+                appsFilter.Visibility = Visibility.Visible;
+                appsFilterText.Visibility = Visibility.Visible;
                 uninstallButton.Visibility = Visibility.Visible;
                 appTreeView.Visibility = Visibility.Visible;
                 appTreeView.IsEnabled = true;
@@ -111,7 +113,7 @@ public sealed partial class DebloatSystemPage : Page
         }
 
         uninstallButton.IsEnabled = false;
-        showAll.IsEnabled = false;
+        appsFilter.IsEnabled = false;
         appTreeView.IsEnabled = false;
 
         var failedUninstalls = new List<string>();
@@ -217,7 +219,7 @@ public sealed partial class DebloatSystemPage : Page
             {
                 uninstallingStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallTip");
                 uninstallButton.IsEnabled = true;
-                showAll.IsEnabled = true;
+                appsFilter.IsEnabled = true;
                 appTreeView.IsEnabled = true;
             });
         }
@@ -361,15 +363,19 @@ public sealed partial class DebloatSystemPage : Page
         }
     }
 
-    private void ShowAll_Checked(object sender, RoutedEventArgs e)
+    private void appsFilter_SelectionChanged(object sender, RoutedEventArgs e)
     {
-        uninstallableOnly = false;
-        LoadInstalledApps(uninstallableOnly, cancellationTokenSource.Token);
-    }
-    private void ShowAll_Unchecked(object sender, RoutedEventArgs e)
-    {
-        uninstallableOnly = true;
-        LoadInstalledApps(uninstallableOnly, cancellationTokenSource.Token);
+        switch (appsFilter.SelectedIndex)
+        {
+            case 0:
+                uninstallableOnly = true;
+                LoadInstalledApps(uninstallableOnly, cancellationTokenSource.Token);
+                break;
+            case 1:
+                uninstallableOnly = false;
+                LoadInstalledApps(uninstallableOnly, cancellationTokenSource.Token);
+                break;
+        }
     }
     private static CommunityToolkit.WinUI.Behaviors.Notification NotificationContent(string title, string message, InfoBarSeverity severity, int duration)
     {
@@ -509,6 +515,7 @@ public sealed partial class DebloatSystemPage : Page
         {
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
             Content = contentStackPanel,
             CloseButtonText = RyTuneX.Helpers.ResourceExtensions.GetLocalized("Close"),

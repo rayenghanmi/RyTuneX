@@ -162,8 +162,8 @@
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>Récupération des données des applications installées...</value>
   </data>
-  <data name="DebloatSystemPage_ShowAll.Content" xml:space="preserve">
-    <value>Afficher tout</value>
+  <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
+    <value>Filtrer par:</value>
   </data>
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
     <value>Désinstaller l'application(s) sélectionnée(s)</value>
