@@ -14,7 +14,6 @@ namespace RyTuneX.Views;
 
 public sealed partial class DebloatSystemPage : Page
 {
-    private bool uninstallableOnly = true;
     public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
     private List<Tuple<string, string, bool>> allApps = new();
@@ -420,8 +419,7 @@ public sealed partial class DebloatSystemPage : Page
         switch (appsFilter.SelectedIndex)
         {
             case 0:
-                uninstallableOnly = true;
-                LoadInstalledApps(uninstallableOnly, false, cancellationTokenSource.Token);
+                LoadInstalledApps(true, false, cancellationTokenSource.Token);
                 break;
             case 1:
                 // Show warning message when all apps are showing in the NotificationQueue
@@ -434,11 +432,10 @@ public sealed partial class DebloatSystemPage : Page
                 var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
                 showStoryboard.Begin();
                 // Show all apps
-                uninstallableOnly = false;
-                LoadInstalledApps(uninstallableOnly, false, cancellationTokenSource.Token);
+                LoadInstalledApps(false, false, cancellationTokenSource.Token);
                 break;
             case 2:
-                LoadInstalledApps(uninstallableOnly, true, cancellationTokenSource.Token);
+                LoadInstalledApps(false, true, cancellationTokenSource.Token);
                 break;
         }
     }
@@ -460,7 +457,6 @@ public sealed partial class DebloatSystemPage : Page
         try
         {
             TempStack.Visibility = Visibility.Visible;
-            TempProgress.ShowError = false;
             TempProgress.Visibility = Visibility.Visible;
             TempButton.Visibility = Visibility.Collapsed;
             TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeligTemp") + "...";
@@ -475,21 +471,51 @@ public sealed partial class DebloatSystemPage : Page
                 "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
                 "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\Download\\*\"",
                 "del /F /S /Q \"C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\*\"",
-                "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\DeliveryOptimization\\*\""
+                "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\DeliveryOptimization\\*\"",
+                "del /F /S /Q \"C:\\Windows\\Prefetch\\*\"",
+                "del /F /S /Q \"C:\\Windows\\Logs\\CBS\\*\"",
+                "del /F /S /Q \"C:\\Windows\\Temp\\WindowsUpdate.log\"",
+                "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Temp\\*\"",
+                "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Windows\\WER\\ReportArchive\\*\"",
+                "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Windows\\INetCache\\*\"",
+                "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
+                "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
+                "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\*\\cache2\\*' -Recurse -Force\"",
+                "CLEANMGR /verylowdisk",
             };
 
             var tempTasks = tempCommands.AsParallel().Select(cmd => OptimizationOptions.StartInCmd(cmd));
             await Task.WhenAll(tempTasks);
 
-            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc");
+            TempStack.Visibility = Visibility.Collapsed;
             TempProgress.Visibility = Visibility.Collapsed;
-        }
-        catch (Exception ex)
-        {
-            await LogHelper.LogError($"Error removing temporary files: {ex.Message}\nStack Trace: {ex.StackTrace}");
-            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel");
             TempButton.Visibility = Visibility.Visible;
-            TempProgress.ShowError = true;
+
+            // Show success message when temp deletion succeed
+            NotificationQueue.Show(NotificationContent(
+                RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc"),
+                InfoBarSeverity.Success, 5000));
+
+            // Trigger animation for showing the notification
+            var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
+            showStoryboard.Begin();
+        }
+        catch (Exception)
+        {
+            TempStack.Visibility = Visibility.Collapsed;
+            TempProgress.Visibility = Visibility.Collapsed;
+            TempButton.Visibility = Visibility.Visible;
+
+            // Show error message when temp deletion fail
+            NotificationQueue.Show(NotificationContent(
+                RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel"),
+                InfoBarSeverity.Error, 5000));
+
+            // Trigger animation for showing the notification
+            var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
+            showStoryboard.Begin();
         }
     }
     private void AppSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

@@ -16,14 +16,6 @@ using Windows.Storage;
 namespace RyTuneX.Helpers;
 internal partial class OptimizationOptions
 {
-    private static readonly string CacheFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "iconCache.json");
-    private static Dictionary<string, string> iconCache = [];
-
-    static OptimizationOptions()
-    {
-        LoadIconCache();
-    }
-
     [DllImport("psapi.dll")]
     public static extern bool EmptyWorkingSet(IntPtr hProcess);
 
@@ -136,7 +128,17 @@ internal partial class OptimizationOptions
 
                         if (!string.IsNullOrEmpty(displayName) && !string.IsNullOrEmpty(installLocation) && !displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
+                            var logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
+
+                            // Exception for discord installation path (more will be added)
+                            if (displayName.Contains("discord", StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                installLocation = Directory.GetDirectories(installLocation, "app-*").FirstOrDefault();
+                            }
+                            if (!string.IsNullOrEmpty(installLocation))
+                            {
+                                logoPath = ExtractLogoPath(installLocation, true); // true for Win32
+                            }
                             win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
                         }
                     }
@@ -156,11 +158,6 @@ internal partial class OptimizationOptions
 
     private static string ExtractLogoPath(string installLocation, bool isWin32 = false)
     {
-        if (iconCache.TryGetValue(installLocation, out var cachedIconPath))
-        {
-            return cachedIconPath;
-        }
-
         var logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
 
         if (isWin32)
@@ -169,15 +166,22 @@ internal partial class OptimizationOptions
             {
                 if (Directory.Exists(installLocation))
                 {
-                    var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
-                    if (!string.IsNullOrEmpty(exeFile))
+                    var iconPath = Path.Combine(installLocation, "icon.png");
+                    if (File.Exists(iconPath))
                     {
-                        using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
-                        if (icon != null)
+                        logoPath = iconPath;
+                    }
+                    else
+                    {
+                        var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
+                        if (!string.IsNullOrEmpty(exeFile))
                         {
-                            var iconPath = Path.Combine(installLocation, "icon.png");
-                            SaveIconAsPng(icon, iconPath);
-                            logoPath = iconPath;
+                            using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
+                            if (icon != null)
+                            {
+                                SaveIconAsPng(icon, iconPath);
+                                logoPath = iconPath;
+                            }
                         }
                     }
                 }
@@ -250,8 +254,6 @@ internal partial class OptimizationOptions
                 Debug.WriteLine($"Failed to extract logo path: {ex.Message}");
             }
         }
-        iconCache[installLocation] = logoPath;
-        SaveIconCache();
         return logoPath;
     }
 
@@ -426,21 +428,6 @@ internal partial class OptimizationOptions
             revertList.Remove(action);
             ApplicationData.Current.LocalSettings.Values["RevertList"] = JsonSerializer.Serialize(revertList);
         }
-    }
-
-    private static void LoadIconCache()
-    {
-        if (File.Exists(CacheFilePath))
-        {
-            var json = File.ReadAllText(CacheFilePath);
-            iconCache = JsonSerializer.Deserialize<Dictionary<string, string>>(json) ?? new Dictionary<string, string>();
-        }
-    }
-
-    private static void SaveIconCache()
-    {
-        var json = JsonSerializer.Serialize(iconCache);
-        File.WriteAllText(CacheFilePath, json);
     }
 
     public static async Task RevertAllChanges()
