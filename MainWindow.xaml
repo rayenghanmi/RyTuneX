@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:windowex="using:WinUIEx"
-    MinWidth="500"
+    MinWidth="620"
     MinHeight="500"
     PersistenceId="MainWindow"
     mc:Ignorable="d">

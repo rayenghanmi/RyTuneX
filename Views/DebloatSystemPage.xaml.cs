@@ -50,7 +50,7 @@ public sealed partial class DebloatSystemPage : Page
         }
     }
 
-    private async void LoadInstalledApps(bool uninstallableOnly = true, CancellationToken cancellationToken = default)
+    private async void LoadInstalledApps(bool uninstallableOnly = true, bool win32Only = false, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -68,13 +68,18 @@ public sealed partial class DebloatSystemPage : Page
 
             await LogHelper.Log("Loading InstalledApps");
 
-            var installedApps = await Task.Run(() => OptimizationOptions.GetInstalledApps(uninstallableOnly));
-            var numberOfInstalledApps = installedApps.Count - 3;
+            List<Tuple<string, string, bool>> installedApps;
+            if (win32Only)
+            {
+                installedApps = await Task.Run(OptimizationOptions.GetWin32Apps);
+            }
+            else
+            {
+                installedApps = await Task.Run(() => OptimizationOptions.GetInstalledApps(uninstallableOnly));
+            }
 
             var filteredApps = installedApps.AsParallel().Where(app =>
                 !app.Item1.Contains("Rayen.RyTuneX") &&
-                !app.Item1.Contains("----") &&
-                !app.Item1.Contains("Name") &&
                 !(app.Item1.Contains("Edge") && IsEdgeUninstalled())).ToList();
 
             DispatcherQueue.TryEnqueue(() =>
@@ -86,7 +91,7 @@ public sealed partial class DebloatSystemPage : Page
                     AppList.Add(app);
                 }
 
-                installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), numberOfInstalledApps);
+                installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), AppList.Count);
                 installedAppsCount.Visibility = Visibility.Visible;
                 appsFilter.IsEnabled = true;
                 appsFilter.Visibility = Visibility.Visible;
@@ -179,8 +184,8 @@ public sealed partial class DebloatSystemPage : Page
                 });
             }
 
-            // Reload installed apps after successful uninstallation
-            LoadInstalledApps(uninstallableOnly);
+            // Reload installed apps after successful uninstallation and keep the list filtered
+            appsFilter_SelectionChanged(appsFilter, e);
 
             // Show notifications
             if (successfulUninstalls.Count > 0)
@@ -315,27 +320,47 @@ public sealed partial class DebloatSystemPage : Page
         {
             try
             {
-                // Define the registry key to query for installed programs
-                var registryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-
-                // Query the registry for the uninstall string
-                string? uninstallString = null;
-
-                using (var registryKeyObj = Registry.LocalMachine.OpenSubKey(registryKey))
+                // Define the registry paths for installed programs
+                var registryKeys = new[]
                 {
-                    if (registryKeyObj != null)
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",            // 64-bit on 64-bit systems, 32-bit on 32-bit systems
+                    @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" // 32-bit on 64-bit systems
+                };
+
+                string? uninstallString = null;
+                foreach (var registryKey in registryKeys)
+                {
+                    // Open the registry keys from both LocalMachine and CurrentUser
+                    using (var keyLocalMachine = Registry.LocalMachine.OpenSubKey(registryKey))
+                    using (var keyCurrentUser = Registry.CurrentUser.OpenSubKey(registryKey))
                     {
-                        // Loop through subkeys to find the app
-                        foreach (var subKeyName in registryKeyObj.GetSubKeyNames())
+                        if (keyLocalMachine != null || keyCurrentUser != null)
                         {
-                            using var subKey = registryKeyObj.OpenSubKey(subKeyName);
-                            if (subKey?.GetValue("DisplayName") is string displayName && displayName.Equals(appName, StringComparison.OrdinalIgnoreCase))
+                            var subKeyNames = keyLocalMachine?.GetSubKeyNames().Concat(keyCurrentUser?.GetSubKeyNames() ?? Enumerable.Empty<string>()) ?? Enumerable.Empty<string>();
+
+                            // Loop through the combined subkeys
+                            foreach (var subKeyName in subKeyNames)
                             {
-                                uninstallString = subKey.GetValue("UninstallString") as string;
-                                break;
+                                using var subKey = keyLocalMachine?.OpenSubKey(subKeyName) ?? keyCurrentUser?.OpenSubKey(subKeyName);
+                                var displayName = subKey?.GetValue("DisplayName")?.ToString();
+
+                                // Check if the display name matches the app name
+                                if (!string.IsNullOrEmpty(displayName) && displayName.Equals(appName, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    uninstallString = subKey?.GetValue("QuietUninstallString") as string;
+
+                                    // If no QuietUninstallString found, try UninstallString
+                                    if (string.IsNullOrEmpty(uninstallString))
+                                    {
+                                        uninstallString = subKey?.GetValue("UninstallString") as string;
+                                    }
+                                    break;
+                                }
                             }
                         }
                     }
+                    // If the uninstall string is found, break out of the loop
+                    if (!string.IsNullOrEmpty(uninstallString)) break;
                 }
 
                 if (string.IsNullOrEmpty(uninstallString))
@@ -343,8 +368,17 @@ public sealed partial class DebloatSystemPage : Page
                     throw new Exception($"Uninstall string for {appName} not found in registry.");
                 }
 
-                // Start the process to run the uninstallation command
-                var processInfo = new ProcessStartInfo(uninstallString)
+                // If the uninstall string contains spaces, ensure it's quoted properly
+                if (!uninstallString.StartsWith("\"") && !uninstallString.EndsWith("\""))
+                {
+                    uninstallString = $"\"{uninstallString}\"";
+                }
+
+                // Execute the uninstall command using cmd
+                var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                        $"/c {uninstallString}")
                 {
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
@@ -387,11 +421,24 @@ public sealed partial class DebloatSystemPage : Page
         {
             case 0:
                 uninstallableOnly = true;
-                LoadInstalledApps(uninstallableOnly, cancellationTokenSource.Token);
+                LoadInstalledApps(uninstallableOnly, false, cancellationTokenSource.Token);
                 break;
             case 1:
+                // Show warning message when all apps are showing in the NotificationQueue
+                NotificationQueue.Show(NotificationContent(
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("DebloatPage_NotificationBody"),
+                    InfoBarSeverity.Warning, 5000));
+
+                // Trigger animation for showing the notification
+                var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
+                showStoryboard.Begin();
+                // Show all apps
                 uninstallableOnly = false;
-                LoadInstalledApps(uninstallableOnly, cancellationTokenSource.Token);
+                LoadInstalledApps(uninstallableOnly, false, cancellationTokenSource.Token);
+                break;
+            case 2:
+                LoadInstalledApps(uninstallableOnly, true, cancellationTokenSource.Token);
                 break;
         }
     }
@@ -462,6 +509,7 @@ public sealed partial class DebloatSystemPage : Page
         {
             noAppFoundText.Visibility = Visibility.Visible;
         }
+        installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), AppList.Count);
     }
 
     private void AppSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)

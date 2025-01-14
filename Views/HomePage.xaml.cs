@@ -161,7 +161,7 @@ public sealed partial class HomePage : Page
             using var process = Process.Start(new ProcessStartInfo
             {
                 FileName = "powershell",
-                Arguments = "-Command \"(Get-AppxPackage).Count\"",
+                Arguments = "-Command \"(Get-AppxPackage -AllUsers | Select-Object -Unique Name).Count\"",
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true

@@ -15,7 +15,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ScrollViewer Padding="24,14,24,0" Grid.Row="0" Height="auto">
+        <ScrollViewer Padding="24,14,24,0" Grid.Row="0">
             <Grid Margin="0,0,0,38">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -27,7 +27,7 @@
                     Grid.Row="0"
                     HorizontalAlignment="Left"
                     Width="260"
-                    Height="32"
+                    Height="34"
                     Visibility="Collapsed"
                     QueryIcon="Zoom"
                     TextChanged="AppSearchBox_TextChanged" 
@@ -50,9 +50,10 @@
                         <FontIcon Glyph="&#xE71C;" FontSize="{StaticResource TextBoxIconFontSize}"/>
                         <TextBlock x:Uid="DebloatSystemPage_AppsFilter" Style="{StaticResource DetailBodyBaseMediumStyle}" Margin="6,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <ComboBox Width="130" x:Name="appsFilter" Margin="18,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
+                    <ComboBox Width="142" x:Name="appsFilter" Margin="18,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
                         <ComboBoxItem Tag="Apps" Content="Standard Apps"/>
                         <ComboBoxItem Tag="System" Content="System Apps"/>
+                        <ComboBoxItem Tag="Win32" Content="Win32 Apps"/>
                     </ComboBox>
 
                     <Button x:Uid="DebloatSystemPage_UninstallButton"  Margin="12" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}"/>

@@ -14,7 +14,7 @@ using Microsoft.Win32;
 using Windows.Storage;
 
 namespace RyTuneX.Helpers;
-internal class OptimizationOptions
+internal partial class OptimizationOptions
 {
     private static readonly string CacheFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "iconCache.json");
     private static Dictionary<string, string> iconCache = [];
@@ -26,11 +26,27 @@ internal class OptimizationOptions
 
     [DllImport("psapi.dll")]
     public static extern bool EmptyWorkingSet(IntPtr hProcess);
-    public static List<Tuple<string, string, bool>> GetInstalledApps(bool uninstallableOnly)
+
+    public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
+    {
+        var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
+        var win32AppsTask = Task.Run(GetWin32Apps);
+
+        await Task.WhenAll(uwpAppsTask, win32AppsTask);
+
+        var installedApps = uwpAppsTask.Result.Concat(win32AppsTask.Result).ToList();
+
+        installedApps = [.. installedApps
+            .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
+            .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
+
+        await LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
+        return installedApps;
+    }
+
+    private static List<Tuple<string, string, bool>> GetUwpApps(bool uninstallableOnly)
     {
         var installedApps = new List<Tuple<string, string, bool>>();
-
-        // Get UWP apps
         var command = uninstallableOnly
             ? @"Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation | Format-List"
             : @"Get-AppxPackage | Select-Object Name,InstallLocation | Format-List";
@@ -90,39 +106,31 @@ internal class OptimizationOptions
             Debug.WriteLine(ex.Message);
         }
 
-        // Load Win32 apps
-        installedApps.AddRange(GetWin32Apps());
-
-        // Remove duplicates by app name
-        installedApps = [.. installedApps
-            .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
-            .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
-
-        LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
         return installedApps;
     }
 
-    private static List<Tuple<string, string, bool>> GetWin32Apps()
+    public static List<Tuple<string, string, bool>> GetWin32Apps()
     {
         var win32Apps = new List<Tuple<string, string, bool>>();
 
-        // Registry paths to check for installed Win32 apps
         var registryPaths = new string[]
         {
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WOW6432Node"
+            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",            // 64-bit on 64-bit systems, 32-bit on 32-bit systems
+            @"SOFTWARE\Wow6432node\Microsoft\Windows\CurrentVersion\Uninstall" // 32-bit on 64-bit systems
         };
 
         foreach (var registryPath in registryPaths)
         {
             try
             {
-                using var key = Registry.LocalMachine.OpenSubKey(registryPath);
-                if (key != null)
+                using var machineKey = Registry.LocalMachine.OpenSubKey(registryPath);
+                using var userKey = Registry.CurrentUser.OpenSubKey(registryPath);
+
+                if (machineKey != null || userKey != null)
                 {
-                    foreach (var subKeyName in key.GetSubKeyNames())
+                    foreach (var subKeyName in machineKey?.GetSubKeyNames().Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>()) ?? Enumerable.Empty<string>())
                     {
-                        using var subKey = key.OpenSubKey(subKeyName);
+                        using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
                         var displayName = subKey?.GetValue("DisplayName")?.ToString();
                         var installLocation = subKey?.GetValue("InstallLocation")?.ToString();
 
@@ -133,6 +141,7 @@ internal class OptimizationOptions
                         }
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -140,37 +149,35 @@ internal class OptimizationOptions
             }
         }
 
-        return win32Apps;
+        return [.. win32Apps
+            .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
+            .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
     }
 
     private static string ExtractLogoPath(string installLocation, bool isWin32 = false)
     {
+        if (iconCache.TryGetValue(installLocation, out var cachedIconPath))
+        {
+            return cachedIconPath;
+        }
+
+        var logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
+
         if (isWin32)
         {
-            if (iconCache.TryGetValue(installLocation, out var cachedIconPath))
-            {
-                return cachedIconPath;
-            }
-
             try
             {
-                // Attempt to get the logo for Win32 apps by extracting the .exe file's icon
                 if (Directory.Exists(installLocation))
                 {
-                    // Find the first .exe file in the install location
                     var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
                     if (!string.IsNullOrEmpty(exeFile))
                     {
-                        // Extract the icon from the .exe file using ExtractAssociatedIcon
                         using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
                         if (icon != null)
                         {
-                            // Save the icon as a PNG file
                             var iconPath = Path.Combine(installLocation, "icon.png");
                             SaveIconAsPng(icon, iconPath);
-                            iconCache[installLocation] = iconPath;
-                            SaveIconCache();
-                            return iconPath;
+                            logoPath = iconPath;
                         }
                     }
                 }
@@ -184,53 +191,55 @@ internal class OptimizationOptions
         {
             try
             {
-                // Check for the specific packages, default logos are not 1:1
                 var packageName = Path.GetFileName(installLocation).ToLower();
                 if (packageName.Contains("sechealth"))
                 {
-                    return Path.Combine(installLocation, "Assets", "WindowsSecurityAppList.targetsize-48.png");
+                    logoPath = Path.Combine(installLocation, "Assets", "WindowsSecurityAppList.targetsize-48.png");
                 }
                 else if (packageName.Contains("edge"))
                 {
-                    return Path.Combine(installLocation, "SmallLogo.png");
+                    logoPath = Path.Combine(installLocation, "SmallLogo.png");
                 }
-
-                string[] possibleManifestPaths = {
-                    Path.Combine(installLocation, "AppxManifest.xml"),
-                    Path.Combine(installLocation, "appxmanifest.xml")
-                };
-
-                var manifestPath = possibleManifestPaths.FirstOrDefault(File.Exists);
-
-                if (manifestPath != null)
+                else
                 {
-                    var doc = XDocument.Load(manifestPath);
-                    XNamespace ns = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
+                    string[] possibleManifestPaths = {
+                        Path.Combine(installLocation, "AppxManifest.xml"),
+                        Path.Combine(installLocation, "appxmanifest.xml")
+                    };
 
-                    var logoElement = doc.Descendants(ns + "Logo").FirstOrDefault();
-                    if (logoElement != null)
+                    var manifestPath = possibleManifestPaths.FirstOrDefault(File.Exists);
+
+                    if (manifestPath != null)
                     {
-                        var relativeLogoPath = logoElement.Value.Replace('/', '\\');
-                        var baseLogoName = Path.GetFileNameWithoutExtension(relativeLogoPath);
-                        var logoDirectory = Path.Combine(installLocation, Path.GetDirectoryName(relativeLogoPath) ?? "");
+                        var doc = XDocument.Load(manifestPath);
+                        XNamespace ns = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
 
-                        if (Directory.Exists(logoDirectory))
+                        var logoElement = doc.Descendants(ns + "Logo").FirstOrDefault();
+                        if (logoElement != null)
                         {
-                            var exactLogoPath = Path.Combine(logoDirectory, relativeLogoPath);
-                            if (File.Exists(exactLogoPath))
-                            {
-                                return exactLogoPath;
-                            }
+                            var relativeLogoPath = logoElement.Value.Replace('/', '\\');
+                            var baseLogoName = Path.GetFileNameWithoutExtension(relativeLogoPath);
+                            var logoDirectory = Path.Combine(installLocation, Path.GetDirectoryName(relativeLogoPath) ?? "");
 
-                            var logoFiles = Directory.GetFiles(logoDirectory, $"{baseLogoName}.Scale-*.png");
-                            var selectedLogoFile = logoFiles
-                                .OrderBy(f => Math.Abs(GetScaleFromFileName(f) - 200))
-                                .FirstOrDefault();
-
-                            if (!string.IsNullOrEmpty(selectedLogoFile) && File.Exists(selectedLogoFile))
+                            if (Directory.Exists(logoDirectory))
                             {
-                                Debug.WriteLine($"Selected logo: {selectedLogoFile}");
-                                return selectedLogoFile;
+                                var exactLogoPath = Path.Combine(logoDirectory, relativeLogoPath);
+                                if (File.Exists(exactLogoPath))
+                                {
+                                    logoPath = exactLogoPath;
+                                }
+                                else
+                                {
+                                    var logoFiles = Directory.GetFiles(logoDirectory, $"{baseLogoName}.Scale-*.png");
+                                    var selectedLogoFile = logoFiles
+                                        .OrderBy(f => Math.Abs(GetScaleFromFileName(f) - 200))
+                                        .FirstOrDefault();
+
+                                    if (!string.IsNullOrEmpty(selectedLogoFile) && File.Exists(selectedLogoFile))
+                                    {
+                                        logoPath = selectedLogoFile;
+                                    }
+                                }
                             }
                         }
                     }
@@ -241,8 +250,9 @@ internal class OptimizationOptions
                 Debug.WriteLine($"Failed to extract logo path: {ex.Message}");
             }
         }
-
-        return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
+        iconCache[installLocation] = logoPath;
+        SaveIconCache();
+        return logoPath;
     }
 
     // Save the extracted icon as a PNG file
