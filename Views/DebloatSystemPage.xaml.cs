@@ -32,6 +32,24 @@ public sealed partial class DebloatSystemPage : Page
         args.Cancel = true;
     }
 
+    // Select the treeview item when pressed
+    private void appTreeView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
+    {
+        if (args.InvokedItem is Tuple<string, string, bool> app)
+        {
+            if (sender.SelectedItems.Contains(app))
+            {
+                // If the item is already selected, remove it
+                sender.SelectedItems.Remove(app);
+            }
+            else
+            {
+                // If the item is not selected, add it
+                sender.SelectedItems.Add(app);
+            }
+        }
+    }
+
     private async void LoadInstalledApps(bool uninstallableOnly = true, CancellationToken cancellationToken = default)
     {
         try

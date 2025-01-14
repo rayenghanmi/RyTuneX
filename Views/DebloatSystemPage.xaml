@@ -51,7 +51,7 @@
                         <TextBlock x:Uid="DebloatSystemPage_AppsFilter" Style="{StaticResource DetailBodyBaseMediumStyle}" Margin="6,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                     <ComboBox Width="130" x:Name="appsFilter" Margin="18,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
-                        <ComboBoxItem Tag="Apps" Content="Apps"/>
+                        <ComboBoxItem Tag="Apps" Content="Standard Apps"/>
                         <ComboBoxItem Tag="System" Content="System Apps"/>
                     </ComboBox>
 
@@ -65,7 +65,7 @@
                     <TextBlock x:Uid="DebloatSystemPage_FetchingInstalledApps" HorizontalAlignment="Center" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                 </StackPanel>
 
-                <TreeView x:Name="appTreeView" Grid.Row="2" Visibility="Collapsed" ItemsSource="{x:Bind AppList}" SelectionMode="Multiple" DragItemsStarting="AppTreeView_DragItemsStarting" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                <TreeView x:Name="appTreeView" Grid.Row="2" Visibility="Collapsed" ItemsSource="{x:Bind AppList}" SelectionMode="Multiple" DragItemsStarting="AppTreeView_DragItemsStarting" ItemInvoked="appTreeView_ItemInvoked" VirtualizingStackPanel.VirtualizationMode="Recycling">
                     <TreeView.ItemContainerStyle>
                         <Style TargetType="TreeViewItem">
                             <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
@@ -112,17 +112,17 @@
             <muxc:InfoBar.Resources>
                 <Storyboard x:Key="ShowNotificationStoryboard">
                     <DoubleAnimation
-                Storyboard.TargetName="infoBar"
-                Storyboard.TargetProperty="(UIElement.Opacity)"
-                From="0"
-                To="1"
-                Duration="0:0:0.3" />
+                        Storyboard.TargetName="infoBar"
+                        Storyboard.TargetProperty="(UIElement.Opacity)"
+                        From="0"
+                        To="1"
+                        Duration="0:0:0.3" />
                     <DoubleAnimation
-                Storyboard.TargetName="infoBar"
-                Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)"
-                From="50"
-                To="0"
-                Duration="0:0:0.3" />
+                        Storyboard.TargetName="infoBar"
+                        Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)"
+                        From="50"
+                        To="0"
+                        Duration="0:0:0.3" />
                 </Storyboard>
             </muxc:InfoBar.Resources>
 
