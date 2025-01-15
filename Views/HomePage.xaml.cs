@@ -3,7 +3,6 @@ using System.Management;
 using System.ServiceProcess;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using RyTuneX.Helpers;
 using Windows.Networking.Connectivity;
 
 namespace RyTuneX.Views;

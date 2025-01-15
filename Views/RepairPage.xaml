@@ -49,10 +49,7 @@
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xF5FC;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="BatteryStatusText" Margin="14,0" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center"/>
-                        <Button x:Uid="RepairPage_BatteryHealthGenerate" Click="BatteryHealthButton_Click"/>
-                    </StackPanel>
+                    <Button x:Uid="RepairPage_BatteryHealthGenerate" Click="BatteryHealthButton_Click"/>
                 </controls:SettingsCard>
                 <controls:SettingsCard
                     x:Uid="RepairPage_MemoryDiagnostic">

@@ -44,6 +44,9 @@ public partial class App : Application
         get;
     }
 
+    public static void ShowNotification(string title, string message, Microsoft.UI.Xaml.Controls.InfoBarSeverity severity, int duration) =>
+        ShellPage.ShowNotification(title, message, severity, duration);
+
     public static T GetService<T>()
         where T : class
     {
@@ -118,7 +121,7 @@ public partial class App : Application
         // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
         MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
         MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
-        
+
         if (ApplicationData.Current.LocalSettings.Values.TryGetValue("JustUpdated", out var value))
         {
             ApplicationData.Current.LocalSettings.Values["JustUpdated"] = false;

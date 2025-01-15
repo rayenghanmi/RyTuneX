@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Media.Imaging;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
@@ -17,6 +18,10 @@ namespace RyTuneX.Views;
 
 public sealed partial class ShellPage : Page
 {
+    public static ShellPage? Current
+    {
+        get; private set;
+    } // Static reference to the current ShellPage
     public ShellViewModel ViewModel
     {
         get;
@@ -26,6 +31,7 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = viewModel;
         InitializeComponent();
+        Current = this;
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
@@ -255,5 +261,28 @@ public sealed partial class ShellPage : Page
         ShellTitleBarImage.Source = new BitmapImage(new Uri(Path.Combine(AppContext.BaseDirectory, iconPath)));
     }
 
+    public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration)
+    {
+        Current?.ShowNotificationInstance(title, message, severity, duration);
+    }
 
+    private void ShowNotificationInstance(string title, string message, InfoBarSeverity severity, int duration)
+    {
+        // Show notification in the NotificationQueue
+        NotificationQueue.Show(new CommunityToolkit.WinUI.Behaviors.Notification
+        {
+            Title = title,
+            Message = message,
+            Severity = severity,
+            Duration = TimeSpan.FromMilliseconds(duration)
+        });
+
+        // Trigger animation for showing the notification
+        var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
+        showStoryboard.Begin();
+
+        // Start ProgressBar animation
+        var progressBarAnimationStoryboard = (Storyboard)infoBar.Resources["ProgressBarAnimationStoryboard"];
+        progressBarAnimationStoryboard.Begin();
+    }
 }

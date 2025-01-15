@@ -5,9 +5,6 @@
     xmlns:local="using:RyTuneX.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:behaviors="using:CommunityToolkit.WinUI.Behaviors"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d">
     <Grid>
@@ -52,7 +49,7 @@
                     </StackPanel>
                     <ComboBox Width="142" x:Name="appsFilter" Margin="18,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
                         <ComboBoxItem Tag="Apps" Content="Standard Apps"/>
-                        <ComboBoxItem Tag="System" Content="System Apps"/>
+                        <ComboBoxItem Tag="System" Content="All Apps"/>
                         <ComboBoxItem Tag="Win32" Content="Win32 Apps"/>
                     </ComboBox>
 
@@ -102,39 +99,6 @@
                 </TreeView>
             </Grid>
         </ScrollViewer>
-        
-        <muxc:InfoBar
-            x:Name="infoBar"
-            Grid.Row="0"
-            MaxWidth="600"
-            Margin="16"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom">
-            <muxc:InfoBar.Resources>
-                <Storyboard x:Key="ShowNotificationStoryboard">
-                    <DoubleAnimation
-                        Storyboard.TargetName="infoBar"
-                        Storyboard.TargetProperty="(UIElement.Opacity)"
-                        From="0"
-                        To="1"
-                        Duration="0:0:0.3" />
-                    <DoubleAnimation
-                        Storyboard.TargetName="infoBar"
-                        Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)"
-                        From="50"
-                        To="0"
-                        Duration="0:0:0.3" />
-                </Storyboard>
-            </muxc:InfoBar.Resources>
-
-            <muxc:InfoBar.RenderTransform>
-                <TranslateTransform Y="0" />
-            </muxc:InfoBar.RenderTransform>
-
-            <interactivity:Interaction.Behaviors>
-                <behaviors:StackedNotificationsBehavior x:Name="NotificationQueue" />
-            </interactivity:Interaction.Behaviors>
-        </muxc:InfoBar>
         
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

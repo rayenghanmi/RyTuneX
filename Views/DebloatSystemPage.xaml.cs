@@ -5,7 +5,6 @@ using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
 using Windows.Storage;
@@ -191,28 +190,20 @@ public sealed partial class DebloatSystemPage : Page
             {
                 var successMessage = string.Join("\n", successfulUninstalls);
                 // Show success message with animation
-                NotificationQueue.Show(NotificationContent(
+                App.ShowNotification(
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallationSuccess") + $":\n{successMessage}",
-                    InfoBarSeverity.Success, 5000));
-
-                // Trigger animation for showing the notification
-                var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-                showStoryboard.Begin();
+                    InfoBarSeverity.Success, 5000);
             }
 
             if (failedUninstalls.Count > 0)
             {
                 var errorMessage = string.Join("\n", failedUninstalls);
                 // Show error message with animation
-                NotificationQueue.Show(NotificationContent(
+                App.ShowNotification(
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallationError") + $":\n{errorMessage}",
-                    InfoBarSeverity.Error, 5000));
-
-                // Trigger animation for showing the notification
-                var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-                showStoryboard.Begin();
+                    InfoBarSeverity.Error, 5000);
             }
 
         }
@@ -222,14 +213,10 @@ public sealed partial class DebloatSystemPage : Page
             await LogHelper.LogError($"Error during uninstallation process: {ex.Message}\nStack Trace: {ex.StackTrace}");
 
             // Show error message in the NotificationQueue
-            NotificationQueue.Show(NotificationContent(
+            App.ShowNotification(
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("UnexpectedError"),
-                InfoBarSeverity.Error, 5000));
-
-            // Trigger the animation for showing the error notification
-            var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-            showStoryboard.Begin();
+                InfoBarSeverity.Error, 5000);
         }
         finally
         {
@@ -423,14 +410,11 @@ public sealed partial class DebloatSystemPage : Page
                 break;
             case 1:
                 // Show warning message when all apps are showing in the NotificationQueue
-                NotificationQueue.Show(NotificationContent(
+                App.ShowNotification(
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("DebloatPage_NotificationBody"),
-                    InfoBarSeverity.Warning, 5000));
+                    InfoBarSeverity.Warning, 5000);
 
-                // Trigger animation for showing the notification
-                var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-                showStoryboard.Begin();
                 // Show all apps
                 LoadInstalledApps(false, false, cancellationTokenSource.Token);
                 break;
@@ -492,14 +476,10 @@ public sealed partial class DebloatSystemPage : Page
             TempButton.Visibility = Visibility.Visible;
 
             // Show success message when temp deletion succeed
-            NotificationQueue.Show(NotificationContent(
+            App.ShowNotification(
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc"),
-                InfoBarSeverity.Success, 5000));
-
-            // Trigger animation for showing the notification
-            var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-            showStoryboard.Begin();
+                InfoBarSeverity.Success, 5000);
         }
         catch (Exception)
         {
@@ -508,14 +488,10 @@ public sealed partial class DebloatSystemPage : Page
             TempButton.Visibility = Visibility.Visible;
 
             // Show error message when temp deletion fail
-            NotificationQueue.Show(NotificationContent(
+            App.ShowNotification(
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel"),
-                InfoBarSeverity.Error, 5000));
-
-            // Trigger animation for showing the notification
-            var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-            showStoryboard.Begin();
+                InfoBarSeverity.Error, 5000);
         }
     }
     private void AppSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

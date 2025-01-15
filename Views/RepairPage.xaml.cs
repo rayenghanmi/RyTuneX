@@ -191,7 +191,7 @@ public sealed partial class RepairPage : Page
     private async void BatteryHealthButton_Click(object sender, RoutedEventArgs e)
     {
         await OptimizationOptions.StartInCmd($"powercfg /batteryreport /output \"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\batteryreport.html\"");
-        BatteryStatusText.Text = "ReportSaved".GetLocalized();
+        App.ShowNotification("BatteryStatus".GetLocalized(), "ReportSaved".GetLocalized(), InfoBarSeverity.Informational, 5000);
     }
 
     private async void MemoryHealthButton_Click(object sender, RoutedEventArgs e)
@@ -215,7 +215,7 @@ public sealed partial class RepairPage : Page
         };
         memDialog.SecondaryButtonClick += async (sender, args) =>
         {
-            MemStatusText.Text = "ScheduledLater".GetLocalized();
+            App.ShowNotification("MemoryDiagnosticDialogTitle".GetLocalized(), "ScheduledLater".GetLocalized(), InfoBarSeverity.Informational, 5000);
             MemCheckButton.IsEnabled = false;
             await OptimizationOptions.StartInCmd("bcdedit /bootsequence {memdiag}");
         };
