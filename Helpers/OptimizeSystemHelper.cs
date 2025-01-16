@@ -1412,33 +1412,57 @@ internal class OptimizeSystemHelper
 
     public static async Task<bool> RemoveTempFiles()
     {
+        // Stop Explorer
+        await Task.Run(() => OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe"));
+
         try
         {
+
+            // List of commands to remove temporary files
             var tempCommands = new[]
             {
-            "del /F /S /Q \"C:\\*.tmp\"",
+            "del /F /S /Q C:\\*.tmp",
+            "del /F /S /Q %windir%\\Temp\\*",
+            "del /F /S /Q %windir%\\SoftwareDistribution\\Download\\*",
+            "del /F /S /Q %windir%\\SoftwareDistribution\\DeliveryOptimization\\*",
+            "del /F /S /Q %windir%\\Prefetch\\*",
+            "del /F /S /Q %windir%\\Logs\\CBS\\*",
+            "del /F /S /Q %windir%\\Temp\\WindowsUpdate.log",
+            "del /F /S /Q %programdata%\\Microsoft\\Windows\\WER\\ReportQueue\\*",
+            "del /F /S /Q %localappdata%\\Temp\\*",
+            "del /F /S /Q %localappdata%\\Microsoft\\Windows\\WER\\ReportArchive\\*",
+            "del /F /S /Q %localappdata%\\Microsoft\\Windows\\INetCache\\*",
+            "del /F /S /Q %systemdrive%\\*.tmp",
+            "del /F /S /Q %systemdrive%\\*._mp",
+            "del /F /S /Q %systemdrive%\\*.log",
+            "del /F /S /Q %systemdrive%\\*.gid",
+            "del /F /S /Q %systemdrive%\\*.chk",
+            "del /F /S /Q %systemdrive%\\*.old",
+            "del /F /S /Q %systemdrive%\\recycled\\*.*",
+            "del /F /S /Q %systemdrive%\\$Recycle.Bin\\*.*",
+            "del /F /S /Q %windir%\\prefetch\\*.*",
+            "del /F /S /Q %userprofile%\\cookies\\*.*",
+            "del /F /S /Q %userprofile%\\recent\\*.*",
+            "del /F /S /Q \"%userprofile%\\Local Settings\\Temporary Internet Files\\*.*\"",
+            "del /F /S /Q \"%userprofile%\\Local Settings\\Temp\\*.*\"",
+            "del /F /S /Q \"%userprofile%\\recent\\*.*\"",
+            "del /F /S /Q /A %localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache_*.db",
             "rd /S /Q \"%TEMP%\"",
-            "del /F /S /Q \"C:\\Windows\\Temp\\*\"",
             "PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"",
             "PowerShell.exe -NoProfile -Command \"wevtutil cl System\"",
             "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
-            "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\Download\\*\"",
-            "del /F /S /Q \"C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\*\"",
-            "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\DeliveryOptimization\\*\"",
-            "del /F /S /Q \"C:\\Windows\\Prefetch\\*\"",
-            "del /F /S /Q \"C:\\Windows\\Logs\\CBS\\*\"",
-            "del /F /S /Q \"C:\\Windows\\Temp\\WindowsUpdate.log\"",
-            "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Temp\\*\"",
-            "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Windows\\WER\\ReportArchive\\*\"",
-            "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Windows\\INetCache\\*\"",
             "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
             "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
             "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\*\\cache2\\*' -Recurse -Force\"",
             "CLEANMGR /verylowdisk",
-        };
+            };
 
+            // Execute all commands
             var tempTasks = tempCommands.AsParallel().Select(cmd => OptimizationOptions.StartInCmd(cmd));
             await Task.WhenAll(tempTasks);
+
+            // Start explorer
+            await Task.Run(() => OptimizationOptions.StartInCmd("start explorer.exe"));
 
             return true;
         }
