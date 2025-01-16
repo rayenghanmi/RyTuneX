@@ -39,7 +39,7 @@ public sealed partial class RepairPage : Page
             ProgressBar.Value = 0;
             StopButton.Visibility = Visibility.Collapsed;
             ScanRepairPanel.Visibility = Visibility.Visible;
-            PercentageTextBlock.Text = "0%";
+            PercentageTextBlock.Text = string.Empty;
         }
     }
 
@@ -65,7 +65,6 @@ public sealed partial class RepairPage : Page
                 current++;
                 StatusTextBlock.Text = $"{current} of {selectedCount}: {name} {(isRepair ? "repair" : "scan")} in progress...";
                 ProgressBar.Value = 0;
-                PercentageTextBlock.Text = string.Empty;
                 await RunCommandAsync(name, args);
             }
         }
@@ -73,7 +72,7 @@ public sealed partial class RepairPage : Page
         StatusTextBlock.Text = "OperationCompleted".GetLocalized();
         ScanRepairPanel.Visibility = Visibility.Visible;
         StopButton.Visibility = Visibility.Collapsed;
-        PercentageTextBlock.Text = "0%";
+        PercentageTextBlock.Text = string.Empty;
         ProgressBar.Value = 0;
     }
 

@@ -26,7 +26,7 @@
                         <CheckBox x:Name="SfcCheckBox" Content="SFC" Checked="CheckBox_Changed" Unchecked="CheckBox_Changed" Margin="0,0,0,10"/>
                         <CheckBox x:Name="ChkdskCheckBox" Content="CHKDSK" Checked="CheckBox_Changed" Unchecked="CheckBox_Changed" Margin="0,0,0,10"/>
                     </StackPanel>
-                    <Grid>
+                    <Grid Margin="0,10,0,0">
                         <StackPanel x:Name="ScanRepairPanel" Orientation="Horizontal">
                             <Button x:Uid="RepairPage_ScanButton" Click="OnScanButtonClick" Margin="0,0,10,0"/>
                             <Button x:Uid="RepairPage_RepairButton" Click="OnRepairButtonClick"/>
@@ -38,8 +38,8 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <ProgressBar x:Name="ProgressBar" Grid.Column="0" Maximum="100" Minimum="0"/>
-                        <TextBlock x:Name="PercentageTextBlock" Text="0%" Grid.Column="1" Padding="4,0" Style="{StaticResource CaptionTextBlockStyle}"/>
+                        <ProgressBar x:Name="ProgressBar" Background="Transparent" Grid.Column="0" Maximum="100" Minimum="0"/>
+                        <TextBlock x:Name="PercentageTextBlock" Grid.Column="1" Padding="4,0" Style="{StaticResource CaptionTextBlockStyle}"/>
                     </Grid>
                     <TextBlock x:Uid="RepairPage_StatusTextBlock" x:Name="StatusTextBlock" Style="{StaticResource CaptionTextBlockStyle}"/>
                 </StackPanel>

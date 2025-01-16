@@ -7,6 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d">
+    <Page.Resources>
+        <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -63,7 +66,13 @@
                     <TextBlock x:Uid="DebloatSystemPage_FetchingInstalledApps" HorizontalAlignment="Center" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                 </StackPanel>
 
-                <TreeView x:Name="appTreeView" Grid.Row="2" Visibility="Collapsed" ItemsSource="{x:Bind AppList}" SelectionMode="Multiple" DragItemsStarting="AppTreeView_DragItemsStarting" ItemInvoked="appTreeView_ItemInvoked" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                <TreeView x:Name="appTreeView"
+                    Grid.Row="2" Visibility="Collapsed"
+                    ItemsSource="{x:Bind AppList}"
+                    SelectionMode="Multiple"
+                    DragItemsStarting="AppTreeView_DragItemsStarting"
+                    ItemInvoked="appTreeView_ItemInvoked"
+                    VirtualizingStackPanel.VirtualizationMode="Recycling">
                     <TreeView.ItemContainerStyle>
                         <Style TargetType="TreeViewItem">
                             <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
@@ -76,11 +85,6 @@
                             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
                         </Style>
                     </TreeView.ItemContainerStyle>
-                    <TreeView.ItemContainerTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition/>
-                        </TransitionCollection>
-                    </TreeView.ItemContainerTransitions>
                     <TreeView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -89,7 +93,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" Orientation="Horizontal" Padding="5">
-                                    <Image Source="{Binding Item2}" Width="32" Height="32" Margin="-30,0,18,0" />
+                                    <Image Source="{Binding Item2}" Width="32" Height="32" Margin="-30,0,18,0" Visibility="{Binding Item2, Converter={StaticResource NullToVisibilityConverter}}" />
                                     <TextBlock Text="{Binding Item1}" VerticalAlignment="Center" />
                                 </StackPanel>
                                 <TextBlock VerticalAlignment="Center" Visibility="{Binding Item3}" Opacity="0.7" HorizontalAlignment="Right" Style="{StaticResource CaptionTextBlockStyle}" Text="win32" Grid.Column="1"/>

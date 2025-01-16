@@ -4,6 +4,7 @@ using System.Text;
 using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
@@ -594,4 +595,17 @@ public sealed partial class DebloatSystemPage : Page
         return await confirmationDialog.ShowAsync();
     }
 
+}
+public class NullToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, string language)
+    {
+        // Convert null to Collapsed and non-null to Visible
+        return value == null ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
+    {
+        throw new NotImplementedException();
+    }
 }
