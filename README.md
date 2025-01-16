@@ -102,13 +102,6 @@ The **Device** page provides a comprehensive view of your system’s hardware an
 RyTuneX is an open-source project. Contributions are welcome!  
 Check out the [contribution guide](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md) to get started.
 
-### Contribution Guidelines
-
-- Ensure your code follows the project's coding style.
-- Write clear and concise commit messages.
-- Include documentation for any new features or changes.
-- Test your changes thoroughly before submitting a pull request.
-
 ## Translation
 
 If you're interested in contributing translations, please follow these steps:
