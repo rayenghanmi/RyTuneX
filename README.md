@@ -108,10 +108,10 @@ If you're interested in contributing translations, please follow these steps:
 
 1. **Clone the File**: Clone the [Resources.resw](../testing/Strings/en-us/Resources.resw) file.
 2. **Translate the File**: Translate its contents into your desired language.
-3. **Save and Structure**: Save the translated file with the name `Resources.resw` inside a new folder named with your language code (e.g., `fr-fr` for French).
-4. **Create Pull Request**: Submit a pull request to the `testing` branch, ensuring the new `resw` file is included in the correct language folder within the `Strings` directory.
+3. **Save and Structure**: Save the translated file as `Resources.resw` inside a new folder named with your language code (e.g., `fr-fr` for French).
+4. **Create a Pull Request**: Submit a pull request to the `testing` branch, ensuring the new `resw` file is included in the correct language folder within the `Strings` directory.
 
-Thank you for your help in making RyTuneX accessible to more people!
+Thank you for helping make RyTuneX accessible to more people!
 
 ## License
 
