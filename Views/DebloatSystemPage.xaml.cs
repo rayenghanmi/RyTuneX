@@ -14,9 +14,9 @@ namespace RyTuneX.Views;
 
 public sealed partial class DebloatSystemPage : Page
 {
-    public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
+    public ObservableCollection<Tuple<string, string, bool, string>> AppList { get; set; } = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
-    private List<Tuple<string, string, bool>> allApps = new();
+    private List<Tuple<string, string, bool, string>> allApps = new();
 
     public DebloatSystemPage()
     {
@@ -34,7 +34,7 @@ public sealed partial class DebloatSystemPage : Page
     // Select the treeview item when pressed
     private void appTreeView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
     {
-        if (args.InvokedItem is Tuple<string, string, bool> app)
+        if (args.InvokedItem is Tuple<string, string, bool, string> app)
         {
             if (sender.SelectedItems.Contains(app))
             {
@@ -67,7 +67,7 @@ public sealed partial class DebloatSystemPage : Page
 
             await LogHelper.Log("Loading InstalledApps");
 
-            List<Tuple<string, string, bool>> installedApps;
+            List<Tuple<string, string, bool, string>> installedApps;
             if (win32Only)
             {
                 installedApps = await Task.Run(OptimizationOptions.GetWin32Apps);
@@ -77,15 +77,15 @@ public sealed partial class DebloatSystemPage : Page
                 installedApps = await Task.Run(() => OptimizationOptions.GetInstalledApps(uninstallableOnly));
             }
 
-            var filteredApps = installedApps.AsParallel().Where(app =>
-                !app.Item1.Contains("Rayen.RyTuneX") &&
-                !(app.Item1.Contains("Edge") && IsEdgeUninstalled())).ToList();
-
             DispatcherQueue.TryEnqueue(() =>
             {
                 AppList.Clear();
-                allApps = filteredApps;
-                foreach (var app in filteredApps)
+
+                allApps = installedApps.AsParallel().Where(app =>
+                !app.Item1.Contains("rytunex", StringComparison.CurrentCultureIgnoreCase) &&
+                !(app.Item1.Contains("edge.stable", StringComparison.CurrentCultureIgnoreCase) && IsEdgeUninstalled())).ToList();
+
+                foreach (var app in allApps)
                 {
                     AppList.Add(app);
                 }
@@ -154,9 +154,10 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallingStatusBar.Opacity = 1;
             });
 
-            foreach (var appInfo in appTreeView.SelectedItems.OfType<Tuple<string, string, bool>>())
+            foreach (var appInfo in appTreeView.SelectedItems.OfType<Tuple<string, string, bool, string>>())
             {
                 var selectedAppName = appInfo.Item1;
+                var selectedAppFullName = appInfo.Item4;
                 var isWin32App = appInfo.Item3;
 
                 await DispatcherQueue.EnqueueAsync(() =>
@@ -166,7 +167,7 @@ public sealed partial class DebloatSystemPage : Page
 
                 try
                 {
-                    await UninstallApps(selectedAppName, isWin32App);
+                    await UninstallApps(selectedAppName, isWin32App, selectedAppFullName);
                     successfulUninstalls.Add(selectedAppName);
                 }
                 catch (Exception ex)
@@ -235,37 +236,60 @@ public sealed partial class DebloatSystemPage : Page
         }
     }
 
-    private static async Task UninstallApps(string appName, bool isWin32App)
+    private static async Task UninstallApps(string appName, bool isWin32App, string fullName)
     {
         await LogHelper.Log($"Uninstalling: {appName}");
 
         if (!isWin32App)
         {
-            if (!appName.Contains("MicrosoftEdge"))
+            if (!appName.Contains("edge.stable", StringComparison.CurrentCultureIgnoreCase))
             {
-                var cmdCommand = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
+                var cmdCommandRemoveProvisioned = $"powershell -Command \"Remove-AppxProvisionedPackage -Online -PackageName \"{fullName}\"\"";
+                var cmdCommandRemoveAppxPackage = $"powershell -Command \"Remove-AppxPackage -Package \"{fullName}\" -AllUsers\"";
 
-                var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                // Create the process to try running Remove-AppxProvisionedPackage first
+                var processInfoProvisioned = new ProcessStartInfo(Environment.Is64BitOperatingSystem
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommand}")
+                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveProvisioned}")
                 {
-                    RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
                 };
 
-                using var process = new Process { StartInfo = processInfo };
+                using var processProvisioned = new Process { StartInfo = processInfoProvisioned };
                 {
-                    process.Start();
+                    processProvisioned.Start();
 
-                    var output = await process.StandardOutput.ReadToEndAsync();
-                    var error = await process.StandardError.ReadToEndAsync();
+                    var errorProvisioned = await processProvisioned.StandardError.ReadToEndAsync();
 
-                    if (!string.IsNullOrEmpty(error))
+                    // Log errors but ignore them and proceed to the second command
+                    if (!string.IsNullOrEmpty(errorProvisioned))
                     {
-                        await LogHelper.LogError(error);
-                        throw new Exception(error);
+                        await LogHelper.LogError(errorProvisioned);
+                    }
+                }
+
+                // Run Remove-AppxPackage
+                var processInfoAppxPackage = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveAppxPackage}")
+                {
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using var processAppxPackage = new Process { StartInfo = processInfoAppxPackage };
+                {
+                    processAppxPackage.Start();
+
+                    var errorAppxPackage = await processAppxPackage.StandardError.ReadToEndAsync();
+
+                    if (!string.IsNullOrEmpty(errorAppxPackage))
+                    {
+                        await LogHelper.LogError(errorAppxPackage);
+                        throw new Exception(errorAppxPackage);
                     }
                 }
             }
@@ -279,7 +303,6 @@ public sealed partial class DebloatSystemPage : Page
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
                         : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommand}")
                 {
-                    RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
@@ -289,7 +312,6 @@ public sealed partial class DebloatSystemPage : Page
                 {
                     process.Start();
 
-                    var output = await process.StandardOutput.ReadToEndAsync();
                     var error = await process.StandardError.ReadToEndAsync();
 
                     ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"] = true;
@@ -367,7 +389,6 @@ public sealed partial class DebloatSystemPage : Page
                         : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
                         $"/c {uninstallString}")
                 {
-                    RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
@@ -376,8 +397,7 @@ public sealed partial class DebloatSystemPage : Page
                 using var process = new Process { StartInfo = processInfo };
                 process.Start();
 
-                // Read the output and error streams asynchronously
-                var output = await process.StandardOutput.ReadToEndAsync();
+                // Read the error stream asynchronously
                 var error = await process.StandardError.ReadToEndAsync();
 
                 if (!string.IsNullOrEmpty(error))
@@ -424,117 +444,102 @@ public sealed partial class DebloatSystemPage : Page
                 break;
         }
     }
-    private static CommunityToolkit.WinUI.Behaviors.Notification NotificationContent(string title, string message, InfoBarSeverity severity, int duration)
-    {
-        var notification = new CommunityToolkit.WinUI.Behaviors.Notification
-        {
-            Title = title,
-            Message = message,
-            Severity = severity,
-            Duration = TimeSpan.FromMilliseconds(duration)
-        };
-        LogHelper.Log("Returning Debloat Notification");
-        return notification;
-    }
 
-    private async void RemoveTempFiles(object sender, RoutedEventArgs e)
+    private async void TempButton_Click(object sender, RoutedEventArgs e)
     {
         try
         {
+            // Update UI to show progress
             TempStack.Visibility = Visibility.Visible;
             TempProgress.Visibility = Visibility.Visible;
             TempButton.Visibility = Visibility.Collapsed;
             TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeligTemp") + "...";
 
-            var tempCommands = new[]
-            {
-                "del /F /S /Q \"C:\\*.tmp\"",
-                "rd /S /Q \"%TEMP%\"",
-                "del /F /S /Q \"C:\\Windows\\Temp\\*\"",
-                "PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"",
-                "PowerShell.exe -NoProfile -Command \"wevtutil cl System\"",
-                "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
-                "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\Download\\*\"",
-                "del /F /S /Q \"C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\*\"",
-                "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\DeliveryOptimization\\*\"",
-                "del /F /S /Q \"C:\\Windows\\Prefetch\\*\"",
-                "del /F /S /Q \"C:\\Windows\\Logs\\CBS\\*\"",
-                "del /F /S /Q \"C:\\Windows\\Temp\\WindowsUpdate.log\"",
-                "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Temp\\*\"",
-                "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Windows\\WER\\ReportArchive\\*\"",
-                "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Windows\\INetCache\\*\"",
-                "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
-                "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
-                "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\*\\cache2\\*' -Recurse -Force\"",
-                "CLEANMGR /verylowdisk",
-            };
+            // Execute temp removal commands
+            var result = await OptimizeSystemHelper.RemoveTempFiles();
 
-            var tempTasks = tempCommands.AsParallel().Select(cmd => OptimizationOptions.StartInCmd(cmd));
-            await Task.WhenAll(tempTasks);
-
+            // Reset UI after task completion
             TempStack.Visibility = Visibility.Collapsed;
             TempProgress.Visibility = Visibility.Collapsed;
             TempButton.Visibility = Visibility.Visible;
 
-            // Show success message when temp deletion succeed
-            App.ShowNotification(
-                RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
-                RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc"),
-                InfoBarSeverity.Success, 5000);
+            if (result)
+            {
+                // Show success notification
+                App.ShowNotification(
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc"),
+                    InfoBarSeverity.Success, 5000);
+            }
+            else
+            {
+                // Show error notification
+                App.ShowNotification(
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel"),
+                    InfoBarSeverity.Error, 5000);
+            }
         }
         catch (Exception)
         {
+            // Restore UI in case of unexpected error
             TempStack.Visibility = Visibility.Collapsed;
             TempProgress.Visibility = Visibility.Collapsed;
             TempButton.Visibility = Visibility.Visible;
 
-            // Show error message when temp deletion fail
+            // Show error notification
             App.ShowNotification(
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel"),
                 InfoBarSeverity.Error, 5000);
         }
     }
-    private void AppSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-    {
-        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-        {
-            noAppFoundText.Visibility = Visibility.Collapsed;
-            var query = sender.Text.ToLower();
-            var filteredApps = allApps.AsParallel().Where(app => app.Item1.ToLower().Contains(query)).OrderBy(app => app.Item1).ToList();
-            AppList.Clear();
-            foreach (var app in filteredApps)
-            {
-                AppList.Add(app);
-            }
-        }
-        if (AppList.Count == 0)
-        {
-            noAppFoundText.Visibility = Visibility.Visible;
-        }
-        installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), AppList.Count);
-    }
 
-    private void AppSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    private void SearchApps(string query)
     {
         noAppFoundText.Visibility = Visibility.Collapsed;
-        var query = args.QueryText.ToLower();
-        var filteredApps = allApps.AsParallel().Where(app => app.Item1.ToLower().Contains(query)).OrderBy(app => app.Item1).ToList();
+
+        // Search and sort apps
+        var filteredApps = allApps.AsParallel()
+                                  .Where(app => app.Item1.Contains(query, StringComparison.CurrentCultureIgnoreCase))
+                                  .OrderBy(app => app.Item1)
+                                  .ToList();
+
+        // Update the AppList
         AppList.Clear();
         foreach (var app in filteredApps)
         {
             AppList.Add(app);
         }
+
+        // Show "no app found" text if no results
         if (AppList.Count == 0)
         {
             noAppFoundText.Visibility = Visibility.Visible;
         }
+
+        // Update the installed apps count
+        installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), AppList.Count);
     }
+
+    private void AppSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+        {
+            SearchApps(sender.Text.ToLower());
+        }
+    }
+
+    private void AppSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    {
+        SearchApps(args.QueryText.ToLower());
+    }
+
     public async Task<ContentDialogResult> ShowUninstallConfirmationDialog(TreeView appTreeView)
     {
         var selectedItemsText = new StringBuilder();
 
-        foreach (var item in appTreeView.SelectedItems.OfType<Tuple<string, string, bool>>())
+        foreach (var item in appTreeView.SelectedItems.OfType<Tuple<string, string, bool, string>>())
         {
             selectedItemsText.AppendLine(item.Item1);
         }

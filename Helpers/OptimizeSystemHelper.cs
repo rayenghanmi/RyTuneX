@@ -1409,4 +1409,42 @@ internal class OptimizeSystemHelper
     {
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings /v TaskbarEndTask /t REG_DWORD /d 0 /f");
     }
+
+    public static async Task<bool> RemoveTempFiles()
+    {
+        try
+        {
+            var tempCommands = new[]
+            {
+            "del /F /S /Q \"C:\\*.tmp\"",
+            "rd /S /Q \"%TEMP%\"",
+            "del /F /S /Q \"C:\\Windows\\Temp\\*\"",
+            "PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"",
+            "PowerShell.exe -NoProfile -Command \"wevtutil cl System\"",
+            "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
+            "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\Download\\*\"",
+            "del /F /S /Q \"C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\*\"",
+            "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\DeliveryOptimization\\*\"",
+            "del /F /S /Q \"C:\\Windows\\Prefetch\\*\"",
+            "del /F /S /Q \"C:\\Windows\\Logs\\CBS\\*\"",
+            "del /F /S /Q \"C:\\Windows\\Temp\\WindowsUpdate.log\"",
+            "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Temp\\*\"",
+            "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Windows\\WER\\ReportArchive\\*\"",
+            "del /F /S /Q \"C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Windows\\INetCache\\*\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\*\\cache2\\*' -Recurse -Force\"",
+            "CLEANMGR /verylowdisk",
+        };
+
+            var tempTasks = tempCommands.AsParallel().Select(cmd => OptimizationOptions.StartInCmd(cmd));
+            await Task.WhenAll(tempTasks);
+
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

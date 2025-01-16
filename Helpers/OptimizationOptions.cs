@@ -19,7 +19,7 @@ internal partial class OptimizationOptions
     [DllImport("psapi.dll")]
     public static extern bool EmptyWorkingSet(IntPtr hProcess);
 
-    public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
+    public static async Task<List<Tuple<string, string, bool, string>>> GetInstalledApps(bool uninstallableOnly)
     {
         var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
         var win32AppsTask = Task.Run(GetWin32Apps);
@@ -36,12 +36,12 @@ internal partial class OptimizationOptions
         return installedApps;
     }
 
-    private static List<Tuple<string, string, bool>> GetUwpApps(bool uninstallableOnly)
+    private static List<Tuple<string, string, bool, string>> GetUwpApps(bool uninstallableOnly)
     {
-        var installedApps = new List<Tuple<string, string, bool>>();
+        var installedApps = new List<Tuple<string, string, bool, string>>();
         var command = uninstallableOnly
-            ? @"Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation | Format-List"
-            : @"Get-AppxPackage | Select-Object Name,InstallLocation | Format-List";
+            ? @"Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation,PackageFullName | Format-List"
+            : @"Get-AppxPackage -AllUsers | Select-Object Name,InstallLocation,PackageFullName | Format-List";
 
         try
         {
@@ -61,15 +61,16 @@ internal partial class OptimizationOptions
             var output = process.StandardOutput.ReadToEnd();
             string? currentName = null;
             string? currentLocation = null;
+            string? fullName = null;
 
             foreach (var line in output.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries))
             {
                 if (line.StartsWith("Name"))
                 {
-                    if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
+                    if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation) && !string.IsNullOrEmpty(fullName))
                     {
                         var logoPath = ExtractLogoPath(currentLocation);
-                        installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
+                        installedApps.Add(new Tuple<string, string, bool, string>(currentName, logoPath, false, fullName)); // false for UWP
                     }
 
                     currentName = line.Split([':'], 2)[1].Trim();
@@ -83,12 +84,20 @@ internal partial class OptimizationOptions
                 {
                     currentLocation += " " + line.Trim();
                 }
+                else if (line.StartsWith("PackageFullName"))
+                {
+                    fullName = line.Split([':'], 2)[1].Trim();
+                }
+                else if (!string.IsNullOrWhiteSpace(fullName) && line.StartsWith(" "))
+                {
+                    fullName += " " + line.Trim();
+                }
             }
 
-            if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
+            if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation) && !string.IsNullOrEmpty(fullName))
             {
                 var logoPath = ExtractLogoPath(currentLocation);
-                installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
+                installedApps.Add(new Tuple<string, string, bool, string>(currentName, logoPath, false, fullName)); // false for UWP
             }
 
             process.WaitForExit();
@@ -101,9 +110,9 @@ internal partial class OptimizationOptions
         return installedApps;
     }
 
-    public static List<Tuple<string, string, bool>> GetWin32Apps()
+    public static List<Tuple<string, string, bool, string>> GetWin32Apps()
     {
-        var win32Apps = new List<Tuple<string, string, bool>>();
+        var win32Apps = new List<Tuple<string, string, bool, string>>();
 
         var registryPaths = new string[]
         {
@@ -139,7 +148,7 @@ internal partial class OptimizationOptions
                             {
                                 logoPath = ExtractLogoPath(installLocation, true); // true for Win32
                             }
-                            win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
+                            win32Apps.Add(new Tuple<string, string, bool, string>(displayName, logoPath, true, displayName));
                         }
                     }
                 }
