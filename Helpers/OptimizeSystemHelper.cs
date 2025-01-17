@@ -1421,13 +1421,16 @@ internal class OptimizeSystemHelper
             // List of commands to remove temporary files
             var tempCommands = new[]
             {
-            "del /F /S /Q C:\\*.tmp",
             "del /F /S /Q %windir%\\Temp\\*",
             "del /F /S /Q %windir%\\SoftwareDistribution\\Download\\*",
             "del /F /S /Q %windir%\\SoftwareDistribution\\DeliveryOptimization\\*",
             "del /F /S /Q %windir%\\Prefetch\\*",
             "del /F /S /Q %windir%\\Logs\\CBS\\*",
             "del /F /S /Q %windir%\\Temp\\WindowsUpdate.log",
+            "del /F /S /Q %windir%\\MEMORY.DMP",
+            "del /F /S /Q %windir%\\Minidump\\*.dmp",
+            "del /F /S /Q %windir%\\Setup\\Temp\\*",
+            "del /F /S /Q %windir%\\Downloaded Program Files\\*",
             "del /F /S /Q %programdata%\\Microsoft\\Windows\\WER\\ReportQueue\\*",
             "del /F /S /Q %localappdata%\\Temp\\*",
             "del /F /S /Q %localappdata%\\Microsoft\\Windows\\WER\\ReportArchive\\*",
@@ -1438,14 +1441,14 @@ internal class OptimizeSystemHelper
             "del /F /S /Q %systemdrive%\\*.gid",
             "del /F /S /Q %systemdrive%\\*.chk",
             "del /F /S /Q %systemdrive%\\*.old",
-            "del /F /S /Q %systemdrive%\\recycled\\*.*",
-            "del /F /S /Q %systemdrive%\\$Recycle.Bin\\*.*",
-            "del /F /S /Q %windir%\\prefetch\\*.*",
+            "del /F /S /Q %systemdrive%\\found.*",
             "del /F /S /Q %userprofile%\\cookies\\*.*",
             "del /F /S /Q %userprofile%\\recent\\*.*",
             "del /F /S /Q \"%userprofile%\\Local Settings\\Temporary Internet Files\\*.*\"",
             "del /F /S /Q \"%userprofile%\\Local Settings\\Temp\\*.*\"",
             "del /F /S /Q \"%userprofile%\\recent\\*.*\"",
+            "del /A /Q \"%localappdata%\\Microsoft\\Windows\\Explorer\\iconcache*\"",
+            "del /A /Q \"%localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache*\"",
             "del /F /S /Q /A %localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache_*.db",
             "rd /S /Q \"%TEMP%\"",
             "PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"",
@@ -1454,7 +1457,6 @@ internal class OptimizeSystemHelper
             "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
             "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
             "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\*\\cache2\\*' -Recurse -Force\"",
-            "CLEANMGR /verylowdisk",
             };
 
             // Execute all commands
