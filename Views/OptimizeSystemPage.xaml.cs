@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Management.Automation.Runspaces;
 using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -86,5 +87,80 @@ public sealed partial class OptimizeSystemPage : Page
         {
             await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
+    }
+
+    private async Task<string> StartTask(string command)
+    {
+        using var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = Environment.Is64BitOperatingSystem
+                            ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                            : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                Arguments = $"/C \"{command}\"",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            }
+        };
+
+        process.Start();
+
+        // Read output asynchronously
+        var output = await process.StandardOutput.ReadToEndAsync();
+
+        // Wait for the process to exit asynchronously
+        await process.WaitForExitAsync();
+
+        return output;
+    }
+
+    private async void CompressOSButton_Click(object sender, RoutedEventArgs e)
+    {
+        // Get the current compression status
+        var status = await StartTask("compact.exe /compactos:query");
+
+        // Create a dialog to show the compression status and options
+        var compressDialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
+            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
+            SecondaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
+            Title = "SystemCompressionTitle".GetLocalized(),
+            Content = status,
+            PrimaryButtonText = "Compress".GetLocalized(),
+            SecondaryButtonText = "Decompress".GetLocalized(),
+            CloseButtonText = "Cancel".GetLocalized()
+        };
+
+        // Handle the Compress button click by setting UI elements and running the command
+        compressDialog.PrimaryButtonClick += async (sender, args) =>
+        {
+            CompressOSButton.Visibility = Visibility.Collapsed;
+            CompressOSProgressRing.Visibility = Visibility.Visible;
+            CompressOSProgressText.Text = "Compressing".GetLocalized();
+            var result = await StartTask("compact.exe /compactos:always");
+            App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
+            CompressOSButton.Visibility = Visibility.Visible;
+            CompressOSProgressRing.Visibility = Visibility.Collapsed;
+            CompressOSProgressText.Text = string.Empty;
+        };
+
+        // Handle the Decompress button click by setting UI elements and running the command
+        compressDialog.SecondaryButtonClick += async (sender, args) =>
+        {
+            CompressOSButton.Visibility = Visibility.Collapsed;
+            CompressOSProgressRing.Visibility = Visibility.Visible;
+            CompressOSProgressText.Text = "Decompressing".GetLocalized();
+            var result = await StartTask("compact.exe /compactos:never");
+            App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
+            CompressOSButton.Visibility = Visibility.Visible;
+            CompressOSProgressRing.Visibility = Visibility.Collapsed;
+            CompressOSProgressText.Text = string.Empty;
+        };
+        await compressDialog.ShowAsync();
     }
 }

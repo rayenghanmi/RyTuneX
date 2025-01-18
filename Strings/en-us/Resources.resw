@@ -1244,7 +1244,7 @@ Are you sure you want to continue?</value>
     <value>Telemetry Settings</value>
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
-    <value>OtherSettings</value>
+    <value>Other Settings</value>
   </data>
   <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
     <value>Basic System Optimizations</value>
@@ -1284,5 +1284,29 @@ Are you sure you want to continue?</value>
   </data>
   <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
     <value>Win32 Apps</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>Compress OS</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+    <value>Enable operating system compression to reduce disk space usage. This feature is particularly useful for devices with limited storage capacity but may slightly affect system performance on lower-end hardware</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+    <value>Compressing system binaries...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+    <value>Decompressing system binaries...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+    <value>Check Compression</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compress</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+    <value>Decompress</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+    <value>System Compression</value>
   </data>
 </root>

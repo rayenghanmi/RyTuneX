@@ -28,7 +28,7 @@
 
                 <controls:SettingsCard x:Uid="Feature_DisableWindowsTransparency">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xEB1D;"/>
+                        <FontIcon Glyph="&#xEABC;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="WindowsTransparency" Tag="WindowsTransparency"/>
                 </controls:SettingsCard>

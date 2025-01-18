@@ -189,6 +189,20 @@
                     <ToggleSwitch x:Name="Drivers" Tag="Drivers"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard
+                    x:Uid="OptimizePage_CompressOS">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEB05;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="CompressOSProgressText" Margin="0,0,32,0" Style="{StaticResource CaptionTextBlockStyle}"/>
+                        <Grid>
+                            <Button x:Name="CompressOSButton" x:Uid="OptimizePage_CompressOSButton" Click="CompressOSButton_Click"/>
+                            <ProgressRing x:Name="CompressOSProgressRing" Margin="0,0,12,0" Width="18" Height="18" Visibility="Collapsed"/>
+                        </Grid>
+                    </StackPanel>
+                </controls:SettingsCard>
+                
                 <!-- Other System Optimization Section -->
                 <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"

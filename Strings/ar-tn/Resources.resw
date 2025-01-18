@@ -1285,4 +1285,28 @@
   <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
     <value>تطبيقات Win32</value>
   </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>ضغط النظام</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+      <value>تمكين ضغط نظام التشغيل لتقليل استخدام مساحة القرص. هذه الميزة مفيدة بشكل خاص للأجهزة ذات السعة التخزينية المحدودة، لكنها قد تؤثر قليلاً على أداء النظام في الأجهزة ذات المواصفات المنخفضة</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+      <value>جاري ضغط ملفات النظام...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+      <value>جاري فك ضغط ملفات النظام...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+      <value>تحقق من الضغط</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+      <value>ضغط</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+      <value>فك الضغط</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+      <value>ضغط النظام</value>
+  </data>
 </root>

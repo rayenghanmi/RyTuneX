@@ -1268,13 +1268,13 @@
     <value>启用 Windows 暗黑模式</value>
   </data>
   <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
-    <value>启用整个系统的暗黑模式，无需激活 Windows</value>
+    <value>启用整个系统的暗黑模式, 无需激活 Windows</value>
   </data>
   <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
     <value>禁用 Windows 透明效果</value>
   </data>
   <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
-    <value>禁用系统 UI 元素（如任务栏和窗口）中的透明效果，提高性能</value>
+    <value>禁用系统 UI 元素（如任务栏和窗口）中的透明效果, 提高性能</value>
   </data>
   <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
     <value>标准应用</value>
@@ -1284,5 +1284,29 @@
   </data>
   <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
     <value>Win32 应用</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>压缩操作系统</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+      <value>启用操作系统压缩以减少磁盘空间的使用. 此功能对于存储空间有限的设备特别有用, 但可能会略微影响低端硬件的系统性能.</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+      <value>正在压缩系统文件...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+      <value>正在解压系统文件...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+      <value>检查压缩</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+      <value>压缩</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+      <value>解压</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+      <value>系统压缩</value>
   </data>
 </root>

@@ -1283,4 +1283,28 @@
   <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
     <value>Win32 アプリ</value>
   </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>OSの圧縮</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+      <value>ディスク容量を削減するために、オペレーティングシステムの圧縮を有効にします. この機能は、ストレージ容量が限られたデバイスに特に役立ちますが、低スペックなハードウェアではシステムのパフォーマンスにわずかな影響を与える可能性があります</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+      <value>システムのバイナリを圧縮しています...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+      <value>システムのバイナリを解凍しています...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+      <value>圧縮状態を確認</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+      <value>圧縮</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+      <value>解凍</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+      <value>システム圧縮</value>
+  </data>
 </root>

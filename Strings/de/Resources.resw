@@ -1282,4 +1282,28 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
     <value>Win32-Apps</value>
   </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>System komprimieren</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+      <value>Aktivieren Sie die Kompression des Betriebssystems, um den Festplattenspeicher zu reduzieren. Diese Funktion ist besonders nützlich für Geräte mit begrenztem Speicherplatz, kann jedoch die Systemleistung auf Geräten mit niedrigerer Hardware leicht beeinträchtigen</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+      <value>Systemdateien werden komprimiert...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+      <value>Systemdateien werden dekomprimiert...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+      <value>Kompression prüfen</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+      <value>Komprimieren</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+      <value>Dekomprimieren</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+      <value>Systemkompression</value>
+  </data>
 </root>
