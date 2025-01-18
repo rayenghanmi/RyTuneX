@@ -46,14 +46,14 @@
                 <TextBlock Margin="10,6" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="installedAppsCount" Visibility="Collapsed"/>
 
                 <controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
-                    <StackPanel x:Name="appsFilterText" Visibility="Collapsed" Orientation="Horizontal">
+                    <StackPanel x:Name="appsFilterText" Margin="0,6,0,6" Visibility="Collapsed" Orientation="Horizontal">
                         <FontIcon Glyph="&#xE71C;" FontSize="{StaticResource TextBoxIconFontSize}"/>
                         <TextBlock x:Uid="DebloatSystemPage_AppsFilter" Style="{StaticResource DetailBodyBaseMediumStyle}" Margin="6,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <ComboBox Width="142" x:Name="appsFilter" Margin="18,0,0,0" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
-                        <ComboBoxItem Tag="Apps" Content="Standard Apps"/>
-                        <ComboBoxItem Tag="System" Content="All Apps"/>
-                        <ComboBoxItem Tag="Win32" Content="Win32 Apps"/>
+                    <ComboBox Width="190" x:Name="appsFilter" Margin="4,6,0,6" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
+                        <ComboBoxItem x:Uid="DebloatSystemPage_StandardApps" Tag="Standard"/>
+                        <ComboBoxItem x:Uid="DebloatSystemPage_AllApps" Tag="All"/>
+                        <ComboBoxItem x:Uid="DebloatSystemPage_Win32Apps" Tag="Win32"/>
                     </ComboBox>
 
                     <Button x:Uid="DebloatSystemPage_UninstallButton"  Margin="12" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}"/>

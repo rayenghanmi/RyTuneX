@@ -1261,4 +1261,25 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="Feature_BackgroundApps.Description" xml:space="preserve">
     <value>Verhindert, dass Apps im Hintergrund ausgeführt werden, was in einigen Fällen zu einer verbesserten Leistung führt.</value>
   </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>Windows Dunkelmodus aktivieren</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>Aktivieren Sie den Dunkelmodus für das gesamte System, ohne Windows aktivieren zu müssen</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>Windows-Transparenz deaktivieren</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>Deaktiviert transparente Effekte in System-UI-Elementen wie der Taskleiste und Fenstern, was die Leistung verbessert</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>Standard-Apps</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>Alle Apps</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>Win32-Apps</value>
+  </data>
 </root>

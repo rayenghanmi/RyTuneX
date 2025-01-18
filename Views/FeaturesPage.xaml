@@ -25,6 +25,21 @@
                 <TextBlock Margin="6"
                     x:Uid="FeaturesPage_SysFeat"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+
+                <controls:SettingsCard x:Uid="Feature_DisableWindowsTransparency">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEB1D;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="WindowsTransparency" Tag="WindowsTransparency"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_EnableWindowsDarkMode">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE790;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="WindowsDarkMode" Tag="WindowsDarkMode"/>
+                </controls:SettingsCard>
+                
                 <controls:SettingsCard x:Uid="Feature_EnableVerboseLogon">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE946;"/>

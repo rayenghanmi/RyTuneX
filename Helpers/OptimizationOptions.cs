@@ -526,6 +526,12 @@ internal partial class OptimizationOptions
                     case "EnableSystemRestore":
                         OptimizeSystemHelper.EnableSystemRestore();
                         break;
+                    case "DisableWindowsDarkMode":
+                        OptimizeSystemHelper.DisableWindowsDarkMode();
+                        break;
+                    case "EnableWindowsTransparency":
+                        OptimizeSystemHelper.EnableWindowsTransparency();
+                        break;
                     case "DisableVerboseLogon":
                         OptimizeSystemHelper.DisableVerboseLogon();
                         break;
@@ -1072,6 +1078,32 @@ internal partial class OptimizationOptions
                     {
                         OptimizeSystemHelper.EnableSystemRestore();
                         RemoveRevertAction("EnableSystemRestore");
+                    }
+                    break;
+
+                case "WindowsTransparency":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableWindowsTransparency();
+                        SaveRevertAction("EnableWindowsTransparency");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableWindowsTransparency();
+                        RemoveRevertAction("EnableWindowsTransparency");
+                    }
+                    break;
+
+                case "WindowsDarkMode":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableWindowsDarkMode();
+                        SaveRevertAction("DisableWindowsDarkMode");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableWindowsDarkMode();
+                        RemoveRevertAction("DisableWindowsDarkMode");
                     }
                     break;
 

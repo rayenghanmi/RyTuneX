@@ -1264,4 +1264,25 @@
   <data name="Feature_BackgroundApps.Description" xml:space="preserve">
     <value>يمنع التطبيقات من العمل في الخلفية، مما يؤدي إلى تحسين الأداء في بعض الحالات.</value>
   </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>تفعيل وضع الظلام في ويندوز</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>تمكين وضع الظلام لكامل النظام دون الحاجة لتفعيل ويندوز</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>تعطيل شفافية ويندوز</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>يعطل التأثيرات الشفافة في عناصر واجهة النظام مثل شريط المهام والنوافذ، مما يحسن الأداء</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>التطبيقات القياسية</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>جميع التطبيقات</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>تطبيقات Win32</value>
+  </data>
 </root>

@@ -1264,4 +1264,25 @@ Are you sure you want to continue?</value>
   <data name="Feature_BackgroundApps.Description" xml:space="preserve">
     <value>Prevents the apps from running in the background, leading to enhanced performance in some cases.</value>
   </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>Enable Windows Dark Mode</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>Enables dark mode for the entire system without the need to activate Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>Disable Windows Transparency</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>Disables transparent effects in system UI elements like the taskbar and windows, improving performance</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>Standard Apps</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>All Apps</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>Win32 Apps</value>
+  </data>
 </root>

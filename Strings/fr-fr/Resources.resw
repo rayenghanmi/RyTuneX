@@ -1261,4 +1261,25 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="Feature_BackgroundApps.Description" xml:space="preserve">
     <value>Empêche les applications de s'exécuter en arrière-plan, ce qui améliore les performances dans certains cas.</value>
   </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>Activer le mode sombre de Windows</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>Activer le mode sombre pour l'ensemble du système sans avoir besoin d'activer Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>Désactiver la transparence de Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>Désactive les effets transparents dans les éléments de l'interface utilisateur du système comme la barre des tâches et les fenêtres, améliorant ainsi les performances</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>Applications standard</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>Toutes les applications</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>Applications Win32</value>
+  </data>
 </root>
