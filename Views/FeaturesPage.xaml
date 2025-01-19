@@ -28,7 +28,7 @@
 
                 <controls:SettingsCard x:Uid="Feature_DisableWindowsTransparency">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xEABC;"/>
+                        <FontIcon Glyph="&#xF5ED;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="WindowsTransparency" Tag="WindowsTransparency"/>
                 </controls:SettingsCard>
@@ -192,7 +192,7 @@
 
                 <controls:SettingsCard x:Uid="Feature_MoveTaskbarToLeft">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE64E;"/>
+                        <FontIcon Glyph="&#xE112;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="TaskbarToLeft" Tag="TaskbarToLeft"/>
                 </controls:SettingsCard>
@@ -206,7 +206,7 @@
 
                 <controls:SettingsCard x:Uid="Feature_DisableWidgets">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE66B;"/>
+                        <FontIcon Glyph="&#xE1AC;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="Widgets" Tag="Widgets"/>
                 </controls:SettingsCard>

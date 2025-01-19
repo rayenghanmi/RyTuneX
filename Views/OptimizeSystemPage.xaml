@@ -117,7 +117,7 @@
 
                 <controls:SettingsCard x:Uid="Feature_FileExtensionsAndHiddenFiles">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xED1A;"/>
+                        <FontIcon Glyph="&#xF19D;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="FileExtensionsAndHiddenFiles" Tag="FileExtensionsAndHiddenFiles"/>
                 </controls:SettingsCard>

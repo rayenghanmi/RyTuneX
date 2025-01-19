@@ -58,7 +58,7 @@
                 <controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <!-- CPU Usage Block -->
                     <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
-                        <FontIcon Glyph="&#xEEA1;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <FontIcon Glyph="&#xE950;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_cpuUsage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
                         <TextBlock x:Name="cpuUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
                     </Grid>
