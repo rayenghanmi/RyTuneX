@@ -14,9 +14,9 @@ namespace RyTuneX.Views;
 
 public sealed partial class DebloatSystemPage : Page
 {
-    public ObservableCollection<Tuple<string, string, bool, string>> AppList { get; set; } = new();
+    public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
-    private List<Tuple<string, string, bool, string>> allApps = new();
+    private List<Tuple<string, string, bool>> allApps = new();
 
     public DebloatSystemPage()
     {
@@ -34,7 +34,7 @@ public sealed partial class DebloatSystemPage : Page
     // Select the treeview item when pressed
     private void appTreeView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
     {
-        if (args.InvokedItem is Tuple<string, string, bool, string> app)
+        if (args.InvokedItem is Tuple<string, string, bool> app)
         {
             if (sender.SelectedItems.Contains(app))
             {
@@ -67,7 +67,7 @@ public sealed partial class DebloatSystemPage : Page
 
             await LogHelper.Log("Loading InstalledApps");
 
-            List<Tuple<string, string, bool, string>> installedApps;
+            List<Tuple<string, string, bool>> installedApps;
             if (win32Only)
             {
                 installedApps = await Task.Run(OptimizationOptions.GetWin32Apps);
@@ -154,10 +154,9 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallingStatusBar.Opacity = 1;
             });
 
-            foreach (var appInfo in appTreeView.SelectedItems.OfType<Tuple<string, string, bool, string>>())
+            foreach (var appInfo in appTreeView.SelectedItems.OfType<Tuple<string, string, bool>>())
             {
                 var selectedAppName = appInfo.Item1;
-                var selectedAppFullName = appInfo.Item4;
                 var isWin32App = appInfo.Item3;
 
                 await DispatcherQueue.EnqueueAsync(() =>
@@ -167,7 +166,7 @@ public sealed partial class DebloatSystemPage : Page
 
                 try
                 {
-                    await UninstallApps(selectedAppName, isWin32App, selectedAppFullName);
+                    await UninstallApps(selectedAppName, isWin32App);
                     successfulUninstalls.Add(selectedAppName);
                 }
                 catch (Exception ex)
@@ -236,7 +235,7 @@ public sealed partial class DebloatSystemPage : Page
         }
     }
 
-    private static async Task UninstallApps(string appName, bool isWin32App, string fullName)
+    private static async Task UninstallApps(string appName, bool isWin32App)
     {
         await LogHelper.Log($"Uninstalling: {appName}");
 
@@ -244,8 +243,8 @@ public sealed partial class DebloatSystemPage : Page
         {
             if (!appName.Contains("edge.stable", StringComparison.CurrentCultureIgnoreCase))
             {
-                var cmdCommandRemoveProvisioned = $"powershell -Command \"Remove-AppxProvisionedPackage -Online -PackageName \"{fullName}\"\"";
-                var cmdCommandRemoveAppxPackage = $"powershell -Command \"Remove-AppxPackage -Package \"{fullName}\" -AllUsers\"";
+                var cmdCommandRemoveProvisioned = $"powershell -Command \"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.DisplayName -eq '{appName}' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }}\"";
+                var cmdCommandRemoveAppxPackage = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
 
                 // Create the process to try running Remove-AppxProvisionedPackage first
                 var processInfoProvisioned = new ProcessStartInfo(Environment.Is64BitOperatingSystem
@@ -539,7 +538,7 @@ public sealed partial class DebloatSystemPage : Page
     {
         var selectedItemsText = new StringBuilder();
 
-        foreach (var item in appTreeView.SelectedItems.OfType<Tuple<string, string, bool, string>>())
+        foreach (var item in appTreeView.SelectedItems.OfType<Tuple<string, string, bool>>())
         {
             selectedItemsText.AppendLine(item.Item1);
         }
