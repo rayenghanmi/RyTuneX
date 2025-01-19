@@ -1223,7 +1223,7 @@
   <data name="OperationCompleted" xml:space="preserve">
     <value>操作完成</value>
   </data>
-  <data name="RestorePointTitle_zh-Hans" xml:space="preserve">
+  <data name="RestorePointTitle" xml:space="preserve">
     <value>恢复点</value>
   </data>
   <data name="Warning" xml:space="preserve">
@@ -1289,24 +1289,24 @@
     <value>压缩操作系统</value>
   </data>
   <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
-      <value>启用操作系统压缩以减少磁盘空间的使用. 此功能对于存储空间有限的设备特别有用, 但可能会略微影响低端硬件的系统性能.</value>
+    <value>启用操作系统压缩以减少磁盘空间的使用. 此功能对于存储空间有限的设备特别有用, 但可能会略微影响低端硬件的系统性能.</value>
   </data>
   <data name="Compressing" xml:space="preserve">
-      <value>正在压缩系统文件...</value>
+    <value>正在压缩系统文件...</value>
   </data>
   <data name="Decompressing" xml:space="preserve">
-      <value>正在解压系统文件...</value>
+    <value>正在解压系统文件...</value>
   </data>
   <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
-      <value>检查压缩</value>
+    <value>检查压缩</value>
   </data>
   <data name="Compress" xml:space="preserve">
-      <value>压缩</value>
+    <value>压缩</value>
   </data>
   <data name="Decompress" xml:space="preserve">
-      <value>解压</value>
+    <value>解压</value>
   </data>
   <data name="SystemCompressionTitle" xml:space="preserve">
-      <value>系统压缩</value>
+    <value>系统压缩</value>
   </data>
 </root>

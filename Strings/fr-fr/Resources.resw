@@ -1220,7 +1220,7 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="OperationCompleted" xml:space="preserve">
     <value>Opération terminée</value>
   </data>
-  <data name="RestorePointTitle_fr-fr" xml:space="preserve">
+  <data name="RestorePointTitle" xml:space="preserve">
     <value>Point de restauration</value>
   </data>
   <data name="Warning" xml:space="preserve">
@@ -1286,24 +1286,24 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
     <value>Compresser le système</value>
   </data>
   <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
-      <value>Activez la compression du système d'exploitation pour réduire l'utilisation de l'espace disque. Cette fonctionnalité est particulièrement utile pour les appareils disposant d'un espace de stockage limité, mais peut légèrement affecter les performances du système sur les matériels moins puissants</value>
+    <value>Activez la compression du système d'exploitation pour réduire l'utilisation de l'espace disque. Cette fonctionnalité est particulièrement utile pour les appareils disposant d'un espace de stockage limité, mais peut légèrement affecter les performances du système sur les matériels moins puissants</value>
   </data>
   <data name="Compressing" xml:space="preserve">
-      <value>Compression des fichiers système...</value>
+    <value>Compression des fichiers système...</value>
   </data>
   <data name="Decompressing" xml:space="preserve">
-      <value>Décompression des fichiers système...</value>
+    <value>Décompression des fichiers système...</value>
   </data>
   <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
-      <value>Vérifier la compression</value>
+    <value>Vérifier la compression</value>
   </data>
   <data name="Compress" xml:space="preserve">
-      <value>Compresser</value>
+    <value>Compresser</value>
   </data>
   <data name="Decompress" xml:space="preserve">
-      <value>Décompresser</value>
+    <value>Décompresser</value>
   </data>
   <data name="SystemCompressionTitle" xml:space="preserve">
-      <value>Compression du système</value>
+    <value>Compression du système</value>
   </data>
 </root>

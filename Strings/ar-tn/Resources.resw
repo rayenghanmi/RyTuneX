@@ -1223,7 +1223,7 @@
   <data name="OperationCompleted" xml:space="preserve">
     <value>اكتملت العملية</value>
   </data>
-  <data name="RestorePointTitle_ar-tn" xml:space="preserve">
+  <data name="RestorePointTitle" xml:space="preserve">
     <value>نقطة الاستعادة</value>
   </data>
   <data name="Warning" xml:space="preserve">
@@ -1289,24 +1289,24 @@
     <value>ضغط النظام</value>
   </data>
   <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
-      <value>تمكين ضغط نظام التشغيل لتقليل استخدام مساحة القرص. هذه الميزة مفيدة بشكل خاص للأجهزة ذات السعة التخزينية المحدودة، لكنها قد تؤثر قليلاً على أداء النظام في الأجهزة ذات المواصفات المنخفضة</value>
+    <value>تمكين ضغط نظام التشغيل لتقليل استخدام مساحة القرص. هذه الميزة مفيدة بشكل خاص للأجهزة ذات السعة التخزينية المحدودة، لكنها قد تؤثر قليلاً على أداء النظام في الأجهزة ذات المواصفات المنخفضة</value>
   </data>
   <data name="Compressing" xml:space="preserve">
-      <value>جاري ضغط ملفات النظام...</value>
+    <value>جاري ضغط ملفات النظام...</value>
   </data>
   <data name="Decompressing" xml:space="preserve">
-      <value>جاري فك ضغط ملفات النظام...</value>
+    <value>جاري فك ضغط ملفات النظام...</value>
   </data>
   <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
-      <value>تحقق من الضغط</value>
+    <value>تحقق من الضغط</value>
   </data>
   <data name="Compress" xml:space="preserve">
-      <value>ضغط</value>
+    <value>ضغط</value>
   </data>
   <data name="Decompress" xml:space="preserve">
-      <value>فك الضغط</value>
+    <value>فك الضغط</value>
   </data>
   <data name="SystemCompressionTitle" xml:space="preserve">
-      <value>ضغط النظام</value>
+    <value>ضغط النظام</value>
   </data>
 </root>

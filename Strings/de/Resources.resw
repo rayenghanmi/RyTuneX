@@ -1220,7 +1220,7 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="OperationCompleted" xml:space="preserve">
     <value>Vorgang abgeschlossen</value>
   </data>
-  <data name="RestorePointTitle_de-de" xml:space="preserve">
+  <data name="RestorePointTitle" xml:space="preserve">
     <value>Wiederherstellungspunkt</value>
   </data>
   <data name="Warning" xml:space="preserve">
@@ -1286,24 +1286,24 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
     <value>System komprimieren</value>
   </data>
   <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
-      <value>Aktivieren Sie die Kompression des Betriebssystems, um den Festplattenspeicher zu reduzieren. Diese Funktion ist besonders nützlich für Geräte mit begrenztem Speicherplatz, kann jedoch die Systemleistung auf Geräten mit niedrigerer Hardware leicht beeinträchtigen</value>
+    <value>Aktivieren Sie die Kompression des Betriebssystems, um den Festplattenspeicher zu reduzieren. Diese Funktion ist besonders nützlich für Geräte mit begrenztem Speicherplatz, kann jedoch die Systemleistung auf Geräten mit niedrigerer Hardware leicht beeinträchtigen</value>
   </data>
   <data name="Compressing" xml:space="preserve">
-      <value>Systemdateien werden komprimiert...</value>
+    <value>Systemdateien werden komprimiert...</value>
   </data>
   <data name="Decompressing" xml:space="preserve">
-      <value>Systemdateien werden dekomprimiert...</value>
+    <value>Systemdateien werden dekomprimiert...</value>
   </data>
   <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
-      <value>Kompression prüfen</value>
+    <value>Kompression prüfen</value>
   </data>
   <data name="Compress" xml:space="preserve">
-      <value>Komprimieren</value>
+    <value>Komprimieren</value>
   </data>
   <data name="Decompress" xml:space="preserve">
-      <value>Dekomprimieren</value>
+    <value>Dekomprimieren</value>
   </data>
   <data name="SystemCompressionTitle" xml:space="preserve">
-      <value>Systemkompression</value>
+    <value>Systemkompression</value>
   </data>
 </root>
