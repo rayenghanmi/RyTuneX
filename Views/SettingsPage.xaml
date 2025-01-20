@@ -32,6 +32,7 @@
                             <ComboBoxItem Content="English (US)" Tag="en-us"/>
                             <ComboBoxItem Content="Français (France)" Tag="fr-fr"/>
                             <ComboBoxItem Content="العربية (تونس)" Tag="ar-tn"/>
+                            <ComboBoxItem Content="Русский (Россия)" Tag="ru-ru"/>
                             <ComboBoxItem Content="中文 (简体)" Tag="zh-hans"/>
                             <ComboBoxItem Content="Deutsch (Deutschland)" Tag="de"/>
                             <ComboBoxItem Content="日本語 (日本)" Tag="ja-jp"/>
