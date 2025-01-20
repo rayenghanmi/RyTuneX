@@ -442,6 +442,9 @@ internal partial class OptimizationOptions
             {
                 switch (action)
                 {
+                    case "EnableServiceHostSplitting":
+                        OptimizeSystemHelper.EnableServiceHostSplitting();
+                        break;
                     case "EnableMenuShowDelay":
                         OptimizeSystemHelper.EnableMenuShowDelay();
                         break;
@@ -728,6 +731,19 @@ internal partial class OptimizationOptions
         {
             switch (toggleSwitch.Tag)
             {
+                case "ServiceHostSplitting":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableServiceHostSplitting();
+                        SaveRevertAction("EnableServiceHostSplitting");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableServiceHostSplitting();
+                        RemoveRevertAction("EnableServiceHostSplitting");
+                    }
+                    break;
+
                 case "MenuShowDelay":
                     if (toggleSwitch.IsOn)
                     {

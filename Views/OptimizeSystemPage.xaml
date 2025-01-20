@@ -24,6 +24,14 @@
                 <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                     x:Uid="OptimizeSystemPage_BasicOptimization"/>
+
+                <controls:SettingsCard x:Uid="Feature_ServiceHostSplitting">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE15E;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="ServiceHostSplitting" Tag="ServiceHostSplitting"/>
+                </controls:SettingsCard>
+                
                 <controls:SettingsCard x:Uid="Feature_MenuShowDelay">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xF182;"/>

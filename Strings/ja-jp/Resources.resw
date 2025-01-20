@@ -1307,4 +1307,10 @@
   <data name="SystemCompressionTitle" xml:space="preserve">
     <value>システム圧縮</value>
   </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>サービスホストの分割を無効化</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+    <value>サービスホストの分割を無効化し、RAM使用量とプロセス数を大幅に削減します.</value>
+  </data>
 </root>

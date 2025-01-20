@@ -1309,4 +1309,10 @@
   <data name="SystemCompressionTitle" xml:space="preserve">
     <value>系统压缩</value>
   </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>禁用服务主机拆分</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+      <value>禁用服务主机拆分以显著降低内存使用量和进程数.</value>
+  </data>
 </root>

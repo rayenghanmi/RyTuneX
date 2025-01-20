@@ -1306,4 +1306,10 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="SystemCompressionTitle" xml:space="preserve">
     <value>Compression du système</value>
   </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>Désactiver le fractionnement de l'hôte de service</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+      <value>Désactive le fractionnement de l'hôte de service pour une utilisation beaucoup plus faible de la RAM et un nombre de processus réduit.</value>
+  </data>
 </root>

@@ -1306,4 +1306,10 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="SystemCompressionTitle" xml:space="preserve">
     <value>Systemkompression</value>
   </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>Service-Host-Splitting deaktivieren</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+      <value>Deaktiviert das Service-Host-Splitting, um den RAM-Verbrauch und die Prozessanzahl erheblich zu reduzieren.</value>
+  </data>
 </root>

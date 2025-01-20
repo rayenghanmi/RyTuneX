@@ -1309,4 +1309,10 @@ Are you sure you want to continue?</value>
   <data name="SystemCompressionTitle" xml:space="preserve">
     <value>System Compression</value>
   </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>Disable Service Host Splitting</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+    <value>Disables Service Host splitting for much lower RAM usage and process count.</value>
+  </data>
 </root>

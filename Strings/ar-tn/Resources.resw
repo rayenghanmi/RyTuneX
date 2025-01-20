@@ -1309,4 +1309,10 @@
   <data name="SystemCompressionTitle" xml:space="preserve">
     <value>ضغط النظام</value>
   </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>تعطيل تقسيم مستضيف الخدمة</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+      <value>يقوم بتعطيل تقسيم مستضيف الخدمة لتقليل استخدام ذاكرة الوصول العشوائي وعدد العمليات.</value>
+  </data>
 </root>
