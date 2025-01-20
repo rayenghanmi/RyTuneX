@@ -2,6 +2,34 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 1.2.0 - Released
+
+### Added
+
+- Introduced a toggle in the `Optimize` page to disable Service Host splitting for improved performance.
+- Added options in the `Features` page to enable or disable Dark Mode and transparency effects without the need to activate Windows.
+- Implemented an option in the `Optimize` page to reduce system binary sizes for freeing up disk space.
+- Added a switch to disable background apps in the `Optimize`.
+- Integrated lazy loading to improve performance when displaying app icons in the `appsTreeView`.
+
+### Fixes
+
+- Resolved issues where certain apps could not be uninstalled.
+- Fixed minor translation issues to enhance language support.
+- Corrected an issue where Snap Assist wasn't disabled when toggling the corresponding option.
+- Fixed a bug causing the taskbar search to be hidden when toggling `Disable Quick History Access`.
+- Addressed missing icons on Windows 10 for better visual consistency.
+- Resolved an issue where the repair progress bar did not reset after operation completion.
+
+### Changes
+
+- Updated the UI to fallback to Acrylic when Mica material is not supported (Windows 10).
+- Optimized the process for retrieving installed apps and improved app removal performance.
+- Increased the speed of fetching installed apps to reduce load times.
+- Expanded and improved commands for clearing temporary files.
+- Enhanced the user experience on the `Debloat` page for better usability.
+
+
 ## 1.0.1 - Released
 
 ### Added

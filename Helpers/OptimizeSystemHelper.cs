@@ -1,10 +1,18 @@
-﻿using System.Diagnostics;
-using Microsoft.Win32;
-using Windows.ApplicationModel;
+﻿using Microsoft.Win32;
 
 namespace RyTuneX.Helpers;
 internal class OptimizeSystemHelper
 {
+    public static async void DisableServiceHostSplitting()
+    {
+        await OptimizationOptions.StartInCmd("Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services' | Where-Object { $_.Name -notmatch 'Xbl|Xbox' } | Foreach-Object { if ($null -ne (Get-ItemProperty -Path \"Registry::$_\" -EA 0).Start) { Set-ItemProperty -Path \"Registry::$_\" -Name 'SvcHostSplitDisable' -Type DWORD -Value 1 -Force -EA 0 } }");
+    }
+
+    public static async void EnableServiceHostSplitting()
+    {
+        await OptimizationOptions.StartInCmd("Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services' | Where-Object { $_.Name -notmatch 'Xbl|Xbox' } | Foreach-Object { if (Test-Path -Path \"Registry::$_\") { Remove-ItemProperty -Path \"Registry::$_\" -Name 'SvcHostSplitDisable' -ErrorAction SilentlyContinue } }");
+    }
+
     public static async void DisableMenuShowDelay()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v MenuShowDelay /t REG_SZ /d 0 /f");
@@ -13,6 +21,12 @@ internal class OptimizeSystemHelper
     public static async void DisableMouseHoverTime()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseHoverTime /t REG_SZ /d 0 /f");
+    }
+
+    public static async void DisableBackgroundApps()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications\" /v GlobalUserDisabled /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Search\" /v BackgroundAppGlobalToggle /t REG_DWORD /d 1 /f");
     }
 
     public static async void EnableAutoComplete()
@@ -120,6 +134,12 @@ internal class OptimizeSystemHelper
     public static async void EnableMouseHoverTime()
     {
         await OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseHoverTime /f");
+    }
+
+    public static async void EnableBackgroundApps()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications\" /v GlobalUserDisabled /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg delete \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Search\" /v BackgroundAppGlobalToggle /f");
     }
 
     public static async void DisableAutoComplete()
@@ -352,6 +372,30 @@ internal class OptimizeSystemHelper
     {
         OptimizationOptions.StopService("PcaSvc");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\PcaSvc\" /v Start /t REG_DWORD /d 4 /f");
+    }
+
+    internal static async void DisableWindowsTransparency()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v EnableTransparency /t REG_DWORD /d 0 /f");
+    }
+    internal static async void EnableWindowsTransparency()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v EnableTransparency /t REG_DWORD /d 1 /f");
+    }
+
+    internal static async void EnableWindowsDarkMode()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v AppsUseLightTheme /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("taskkill /f /im explorer.exe");
+        await OptimizationOptions.StartInCmd("start explorer.exe");
+    }
+    internal static async void DisableWindowsDarkMode()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v AppsUseLightTheme /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v SystemUsesLightTheme /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("taskkill /f /im explorer.exe");
+        await OptimizationOptions.StartInCmd("start explorer.exe");
     }
 
     internal static async void EnableVerboseLogon()
@@ -878,8 +922,6 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds /v ShellFeedsTaskbarViewMode /t REG_DWORD /d 2 /f");
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds /v IsFeedsAvailable /t REG_DWORD /d 0 /f");
 
-        await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search /v SearchboxTaskbarMode /t REG_DWORD /d 0 /f");
-
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /v ShowTaskViewButton /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\OperationStatusManager /v EnthusiastMode /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /v ShowSyncProviderNotifications /t REG_DWORD /d 0 /f");
@@ -921,6 +963,7 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v SubscribedContent-88000326Enabled /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\UserProfileEngagement /v ScoobeSystemSettingEnabled /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v ContentDeliveryAllowed /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v RemediationRequired /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v PreInstalledAppsEverEnabled /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v SilentInstalledAppsEnabled /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v SubscribedContent-314559Enabled /t REG_DWORD /d 0 /f");
@@ -946,6 +989,7 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v SubscribedContent-88000326Enabled /f");
         await OptimizationOptions.StartInCmd("reg delete HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\UserProfileEngagement /v ScoobeSystemSettingEnabled /f");
         await OptimizationOptions.StartInCmd("reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v ContentDeliveryAllowed /f");
+        await OptimizationOptions.StartInCmd("reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v RemediationRequired /f");
         await OptimizationOptions.StartInCmd("reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v PreInstalledAppsEverEnabled /f");
         await OptimizationOptions.StartInCmd("reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v SilentInstalledAppsEnabled /f");
         await OptimizationOptions.StartInCmd("reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v SubscribedContent-314559Enabled /f");
@@ -984,6 +1028,9 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Update\\ExcludeWUDriversInQualityUpdate /v value /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Update /v ExcludeWUDriversInQualityUpdate /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Update /v ExcludeWUDriversInQualityUpdate /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Device Metadata /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching /v SearchOrderConfig /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching /v DontSearchWindowsUpdate /t REG_DWORD /d 1 /f");
     }
 
     internal static async void IncludeDrivers()
@@ -993,6 +1040,9 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Update\\ExcludeWUDriversInQualityUpdate /v value /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Update /v ExcludeWUDriversInQualityUpdate /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Update /v ExcludeWUDriversInQualityUpdate /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Device Metadata /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching /v SearchOrderConfig /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching /v DontSearchWindowsUpdate /t REG_DWORD /d 0 /f");
     }
 
 
@@ -1049,12 +1099,20 @@ internal class OptimizeSystemHelper
     {
         Registry.SetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\wisvc", "Start", "3", RegistryValueKind.DWord);
         await OptimizationOptions.StartInCmd("sc start wisvc");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v AllowBuildPreview /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableConfigFlighting /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableExperimentation /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg delete HKLM\\SOFTWARE\\Microsoft\\WindowsSelfHost\\UI\\Visibility /v HideInsiderPage /f");
     }
 
-    internal static void DisableInsiderService()
+    internal static async void DisableInsiderService()
     {
         OptimizationOptions.StopService("wisvc");
         Registry.SetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\wisvc", "Start", "4", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v AllowBuildPreview /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableConfigFlighting /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableExperimentation /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Microsoft\\WindowsSelfHost\\UI\\Visibility /v HideInsiderPage /t REG_DWORD /d 1 /f");
     }
 
 
@@ -1151,12 +1209,14 @@ internal class OptimizeSystemHelper
     internal static async void DisableSnapAssist()
     {
         await OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V EnableSnapAssistFlyout /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V EnableSnapBar /T REG_DWORD /D 0 /F");
         await OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /V DockMoving /T REG_SZ /D 0 /F");
     }
 
     internal static async void EnableSnapAssist()
     {
         await OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V EnableSnapAssistFlyout /T REG_DWORD /D 1 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V EnableSnapBar /T REG_DWORD /D 1 /F");
         await OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /V DockMoving /T REG_SZ /D 1 /F");
     }
 
@@ -1400,5 +1460,70 @@ internal class OptimizeSystemHelper
     internal static async void DisableEndTask()
     {
         await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings /v TaskbarEndTask /t REG_DWORD /d 0 /f");
+    }
+
+    public static async Task<bool> RemoveTempFiles()
+    {
+        // Stop Explorer
+        await Task.Run(() => OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe"));
+
+        try
+        {
+
+            // List of commands to remove temporary files
+            var tempCommands = new[]
+            {
+            "del /F /S /Q %windir%\\Temp\\*",
+            "del /F /S /Q %windir%\\SoftwareDistribution\\Download\\*",
+            "del /F /S /Q %windir%\\SoftwareDistribution\\DeliveryOptimization\\*",
+            "del /F /S /Q %windir%\\Prefetch\\*",
+            "del /F /S /Q %windir%\\Logs\\CBS\\*",
+            "del /F /S /Q %windir%\\Temp\\WindowsUpdate.log",
+            "del /F /S /Q %windir%\\MEMORY.DMP",
+            "del /F /S /Q %windir%\\Minidump\\*.dmp",
+            "del /F /S /Q %windir%\\Setup\\Temp\\*",
+            "del /F /S /Q %windir%\\Downloaded Program Files\\*",
+            "del /F /S /Q %programdata%\\Microsoft\\Windows\\WER\\ReportQueue\\*",
+            "del /F /S /Q %localappdata%\\Temp\\*",
+            "del /F /S /Q %localappdata%\\Microsoft\\Windows\\WER\\ReportArchive\\*",
+            "del /F /S /Q %localappdata%\\Microsoft\\Windows\\INetCache\\*",
+            "del /F /S /Q %systemdrive%\\*.tmp",
+            "del /F /S /Q %systemdrive%\\*._mp",
+            "del /F /S /Q %systemdrive%\\*.log",
+            "del /F /S /Q %systemdrive%\\*.gid",
+            "del /F /S /Q %systemdrive%\\*.chk",
+            "del /F /S /Q %systemdrive%\\*.old",
+            "del /F /S /Q %systemdrive%\\found.*",
+            "del /F /S /Q %userprofile%\\cookies\\*.*",
+            "del /F /S /Q %userprofile%\\recent\\*.*",
+            "del /F /S /Q \"%userprofile%\\Local Settings\\Temporary Internet Files\\*.*\"",
+            "del /F /S /Q \"%userprofile%\\Local Settings\\Temp\\*.*\"",
+            "del /F /S /Q \"%userprofile%\\recent\\*.*\"",
+            "del /A /Q \"%localappdata%\\Microsoft\\Windows\\Explorer\\iconcache*\"",
+            "del /A /Q \"%localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache*\"",
+            "del /F /S /Q /A %localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache_*.db",
+            "rd /S /Q \"%TEMP%\"",
+            "PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"",
+            "PowerShell.exe -NoProfile -Command \"wevtutil cl System\"",
+            "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\*\\cache2\\*' -Recurse -Force\"",
+            "ipconfig /flushdns",
+            };
+
+            // Execute all commands
+            var tempTasks = tempCommands.AsParallel().Select(cmd => OptimizationOptions.StartInCmd(cmd));
+            await Task.WhenAll(tempTasks);
+
+            // Start explorer
+            await Task.Run(() => OptimizationOptions.StartInCmd("start explorer.exe"));
+
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

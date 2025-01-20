@@ -162,8 +162,8 @@
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>Fetching Installed Apps Data...</value>
   </data>
-  <data name="DebloatSystemPage_ShowAll.Content" xml:space="preserve">
-    <value>Show All</value>
+  <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
+    <value>Filter by:</value>
   </data>
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
     <value>Uninstall Selected App(s)</value>
@@ -1244,7 +1244,7 @@ Are you sure you want to continue?</value>
     <value>Telemetry Settings</value>
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
-    <value>OtherSettings</value>
+    <value>Other Settings</value>
   </data>
   <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
     <value>Basic System Optimizations</value>
@@ -1257,5 +1257,62 @@ Are you sure you want to continue?</value>
   </data>
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>Search apps...</value>
+  </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>Disable Background Apps</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>Prevents the apps from running in the background, leading to enhanced performance in some cases.</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>Enable Windows Dark Mode</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>Enables dark mode for the entire system without the need to activate Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>Disable Windows Transparency</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>Disables transparent effects in system UI elements like the taskbar and windows, improving performance</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>Standard Apps</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>All Apps</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>Win32 Apps</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>Compress OS</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+    <value>Enable operating system compression to reduce disk space usage. This feature is particularly useful for devices with limited storage capacity but may slightly affect system performance on lower-end hardware</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+    <value>Compressing system binaries...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+    <value>Decompressing system binaries...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+    <value>Check Compression</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compress</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+    <value>Decompress</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+    <value>System Compression</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>Disable Service Host Splitting</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+    <value>Disables Service Host splitting for much lower RAM usage and process count.</value>
   </data>
 </root>

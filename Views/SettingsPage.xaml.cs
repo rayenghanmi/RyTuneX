@@ -7,6 +7,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Newtonsoft.Json.Linq;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
@@ -171,8 +172,8 @@ public sealed partial class SettingsPage : Page
     {
         try
         {
-            StorageFolder tempFolder = ApplicationData.Current.TemporaryFolder;
-            StorageFile logFile = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
+            var tempFolder = ApplicationData.Current.TemporaryFolder;
+            var logFile = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
 
             if (logFile != null)
             {
@@ -236,6 +237,7 @@ public sealed partial class SettingsPage : Page
             {
                 XamlRoot = xaml,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 Title = "UpdateTitle".GetLocalized(),
                 Content = "NetworkError".GetLocalized(),
                 CloseButtonText = "Close".GetLocalized()
@@ -257,6 +259,7 @@ public sealed partial class SettingsPage : Page
                 {
                     XamlRoot = XamlRoot,
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                     Title = "UpdateTitle".GetLocalized(),
                     Content = "UnavailableUpdate0".GetLocalized() + latestVersionString + "UnavailableUpdate1".GetLocalized(),
                     CloseButtonText = "Close".GetLocalized()
@@ -269,6 +272,7 @@ public sealed partial class SettingsPage : Page
                 {
                     XamlRoot = XamlRoot,
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                     Title = "UpdateTitle".GetLocalized(),
                     Content = "AvailableUpdateContent0".GetLocalized() + latestVersionString + "AvailableUpdateContent1".GetLocalized(),
                     CloseButtonText = "Close".GetLocalized(),
@@ -374,7 +378,7 @@ public sealed partial class SettingsPage : Page
             // Run the setup file with the --silent argument
             UpdateStatusText.Text = "Installing...";
             Debug.WriteLine("Running RyTuneX Setup.exe...");
-            Process setupProcess = new Process
+            var setupProcess = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
@@ -418,6 +422,7 @@ public sealed partial class SettingsPage : Page
         {
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "RyTuneX",
             Content = "RevertChangesDialogText".GetLocalized(),
             CloseButtonText = "Close".GetLocalized(),
@@ -429,14 +434,14 @@ public sealed partial class SettingsPage : Page
         {
             try
             {
-                ProgressRing progressRing = new ProgressRing
+                var progressRing = new ProgressRing
                 {
                     IsActive = true,
                     Width = 50,
                     Height = 50
                 };
 
-                TextBlock textBlock = new TextBlock
+                var textBlock = new TextBlock
                 {
                     Text = "RevertingChanges".GetLocalized(),
                     TextWrapping = TextWrapping.Wrap,

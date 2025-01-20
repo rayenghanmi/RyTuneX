@@ -1,13 +1,13 @@
 ﻿using RyTuneX.Helpers;
-
 using Windows.UI.ViewManagement;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Composition.SystemBackdrops;
 
 namespace RyTuneX;
 
 public sealed partial class MainWindow : WindowEx
 {
     private readonly Microsoft.UI.Dispatching.DispatcherQueue dispatcherQueue;
-
     private readonly UISettings settings;
 
     public MainWindow()
@@ -22,9 +22,24 @@ public sealed partial class MainWindow : WindowEx
         dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
         settings = new UISettings();
         settings.ColorValuesChanged += Settings_ColorValuesChanged; // cannot use FrameworkElement.ActualThemeChanged event
+
+        // Set the appropriate backdrop
+        SetBackdrop();
     }
 
-    // this handles updating the caption button colors correctly when indows system theme is changed
+    private void SetBackdrop()
+    {
+        if (MicaController.IsSupported())
+        {
+            SystemBackdrop = new MicaBackdrop();
+        }
+        else
+        {
+            SystemBackdrop = new DesktopAcrylicBackdrop();
+        }
+    }
+
+    // this handles updating the caption button colors correctly when windows system theme is changed
     // while the app is open
     private void Settings_ColorValuesChanged(UISettings sender, object args)
     {

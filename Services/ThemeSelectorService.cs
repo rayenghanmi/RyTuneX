@@ -1,10 +1,7 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media.Imaging;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
-using RyTuneX.Views;
-using System.IO;
 using Windows.UI.ViewManagement;
 
 namespace RyTuneX.Services;

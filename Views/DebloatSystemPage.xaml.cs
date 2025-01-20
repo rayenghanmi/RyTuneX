@@ -4,7 +4,8 @@ using System.Text;
 using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
 using Windows.Storage;
@@ -13,7 +14,6 @@ namespace RyTuneX.Views;
 
 public sealed partial class DebloatSystemPage : Page
 {
-    private bool uninstallableOnly = true;
     public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
     private List<Tuple<string, string, bool>> allApps = new();
@@ -31,7 +31,25 @@ public sealed partial class DebloatSystemPage : Page
         args.Cancel = true;
     }
 
-    private async void LoadInstalledApps(bool uninstallableOnly = true, CancellationToken cancellationToken = default)
+    // Select the treeview item when pressed
+    private void appTreeView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
+    {
+        if (args.InvokedItem is Tuple<string, string, bool> app)
+        {
+            if (sender.SelectedItems.Contains(app))
+            {
+                // If the item is already selected, remove it
+                sender.SelectedItems.Remove(app);
+            }
+            else
+            {
+                // If the item is not selected, add it
+                sender.SelectedItems.Add(app);
+            }
+        }
+    }
+
+    private async void LoadInstalledApps(bool uninstallableOnly = true, bool win32Only = false, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -44,33 +62,39 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.IsEnabled = false;
                 uninstallingStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallTip");
                 uninstallingStatusBar.Opacity = 0;
-                showAll.IsEnabled = false;
+                appsFilter.IsEnabled = false;
             });
 
             await LogHelper.Log("Loading InstalledApps");
 
-            var installedApps = await Task.Run(() => OptimizationOptions.GetInstalledApps(uninstallableOnly));
-            var numberOfInstalledApps = installedApps.Count - 3;
-
-            var filteredApps = installedApps.AsParallel().Where(app =>
-                !app.Item1.Contains("Rayen.RyTuneX") &&
-                !app.Item1.Contains("----") &&
-                !app.Item1.Contains("Name") &&
-                !(app.Item1.Contains("Edge") && IsEdgeUninstalled())).ToList();
+            List<Tuple<string, string, bool>> installedApps;
+            if (win32Only)
+            {
+                installedApps = await Task.Run(OptimizationOptions.GetWin32Apps);
+            }
+            else
+            {
+                installedApps = await Task.Run(() => OptimizationOptions.GetInstalledApps(uninstallableOnly));
+            }
 
             DispatcherQueue.TryEnqueue(() =>
             {
                 AppList.Clear();
-                allApps = filteredApps;
-                foreach (var app in filteredApps)
+
+                allApps = installedApps.AsParallel().Where(app =>
+                !app.Item1.Contains("rytunex", StringComparison.CurrentCultureIgnoreCase) &&
+                !(app.Item1.Contains("edge.stable", StringComparison.CurrentCultureIgnoreCase) && IsEdgeUninstalled())).ToList();
+
+                foreach (var app in allApps)
                 {
                     AppList.Add(app);
                 }
 
-                installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), numberOfInstalledApps);
+                installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), AppList.Count);
                 installedAppsCount.Visibility = Visibility.Visible;
-                showAll.IsEnabled = true;
-                showAll.Visibility = Visibility.Visible;
+                appsFilter.IsEnabled = true;
+                appsFilter.Visibility = Visibility.Visible;
+                appsFilterText.Visibility = Visibility.Visible;
                 uninstallButton.Visibility = Visibility.Visible;
                 appTreeView.Visibility = Visibility.Visible;
                 appTreeView.IsEnabled = true;
@@ -111,7 +135,7 @@ public sealed partial class DebloatSystemPage : Page
         }
 
         uninstallButton.IsEnabled = false;
-        showAll.IsEnabled = false;
+        appsFilter.IsEnabled = false;
         appTreeView.IsEnabled = false;
 
         var failedUninstalls = new List<string>();
@@ -159,36 +183,28 @@ public sealed partial class DebloatSystemPage : Page
                 });
             }
 
-            // Reload installed apps after successful uninstallation
-            LoadInstalledApps(uninstallableOnly);
+            // Reload installed apps after successful uninstallation and keep the list filtered
+            appsFilter_SelectionChanged(appsFilter, e);
 
             // Show notifications
             if (successfulUninstalls.Count > 0)
             {
                 var successMessage = string.Join("\n", successfulUninstalls);
                 // Show success message with animation
-                NotificationQueue.Show(NotificationContent(
+                App.ShowNotification(
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallationSuccess") + $":\n{successMessage}",
-                    InfoBarSeverity.Success, 5000));
-
-                // Trigger animation for showing the notification
-                var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-                showStoryboard.Begin();
+                    InfoBarSeverity.Success, 5000);
             }
 
             if (failedUninstalls.Count > 0)
             {
                 var errorMessage = string.Join("\n", failedUninstalls);
                 // Show error message with animation
-                NotificationQueue.Show(NotificationContent(
+                App.ShowNotification(
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallationError") + $":\n{errorMessage}",
-                    InfoBarSeverity.Error, 5000));
-
-                // Trigger animation for showing the notification
-                var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-                showStoryboard.Begin();
+                    InfoBarSeverity.Error, 5000);
             }
 
         }
@@ -198,14 +214,10 @@ public sealed partial class DebloatSystemPage : Page
             await LogHelper.LogError($"Error during uninstallation process: {ex.Message}\nStack Trace: {ex.StackTrace}");
 
             // Show error message in the NotificationQueue
-            NotificationQueue.Show(NotificationContent(
+            App.ShowNotification(
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("UnexpectedError"),
-                InfoBarSeverity.Error, 5000));
-
-            // Trigger the animation for showing the error notification
-            var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-            showStoryboard.Begin();
+                InfoBarSeverity.Error, 5000);
         }
         finally
         {
@@ -217,7 +229,7 @@ public sealed partial class DebloatSystemPage : Page
             {
                 uninstallingStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallTip");
                 uninstallButton.IsEnabled = true;
-                showAll.IsEnabled = true;
+                appsFilter.IsEnabled = true;
                 appTreeView.IsEnabled = true;
             });
         }
@@ -229,31 +241,54 @@ public sealed partial class DebloatSystemPage : Page
 
         if (!isWin32App)
         {
-            if (!appName.Contains("MicrosoftEdge"))
+            if (!appName.Contains("edge.stable", StringComparison.CurrentCultureIgnoreCase))
             {
-                var cmdCommand = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
+                var cmdCommandRemoveProvisioned = $"powershell -Command \"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.DisplayName -eq '{appName}' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }}\"";
+                var cmdCommandRemoveAppxPackage = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
 
-                var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                // Create the process to try running Remove-AppxProvisionedPackage first
+                var processInfoProvisioned = new ProcessStartInfo(Environment.Is64BitOperatingSystem
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommand}")
+                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveProvisioned}")
                 {
-                    RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
                 };
 
-                using var process = new Process { StartInfo = processInfo };
+                using var processProvisioned = new Process { StartInfo = processInfoProvisioned };
                 {
-                    process.Start();
+                    processProvisioned.Start();
 
-                    var output = await process.StandardOutput.ReadToEndAsync();
-                    var error = await process.StandardError.ReadToEndAsync();
+                    var errorProvisioned = await processProvisioned.StandardError.ReadToEndAsync();
 
-                    if (!string.IsNullOrEmpty(error))
+                    // Log errors but ignore them and proceed to the second command
+                    if (!string.IsNullOrEmpty(errorProvisioned))
                     {
-                        await LogHelper.LogError(error);
-                        throw new Exception(error);
+                        await LogHelper.LogError(errorProvisioned);
+                    }
+                }
+
+                // Run Remove-AppxPackage
+                var processInfoAppxPackage = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveAppxPackage}")
+                {
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using var processAppxPackage = new Process { StartInfo = processInfoAppxPackage };
+                {
+                    processAppxPackage.Start();
+
+                    var errorAppxPackage = await processAppxPackage.StandardError.ReadToEndAsync();
+
+                    if (!string.IsNullOrEmpty(errorAppxPackage))
+                    {
+                        await LogHelper.LogError(errorAppxPackage);
+                        throw new Exception(errorAppxPackage);
                     }
                 }
             }
@@ -267,7 +302,6 @@ public sealed partial class DebloatSystemPage : Page
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
                         : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommand}")
                 {
-                    RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
@@ -277,7 +311,6 @@ public sealed partial class DebloatSystemPage : Page
                 {
                     process.Start();
 
-                    var output = await process.StandardOutput.ReadToEndAsync();
                     var error = await process.StandardError.ReadToEndAsync();
 
                     ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"] = true;
@@ -295,27 +328,47 @@ public sealed partial class DebloatSystemPage : Page
         {
             try
             {
-                // Define the registry key to query for installed programs
-                var registryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-
-                // Query the registry for the uninstall string
-                string? uninstallString = null;
-
-                using (var registryKeyObj = Registry.LocalMachine.OpenSubKey(registryKey))
+                // Define the registry paths for installed programs
+                var registryKeys = new[]
                 {
-                    if (registryKeyObj != null)
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",            // 64-bit on 64-bit systems, 32-bit on 32-bit systems
+                    @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" // 32-bit on 64-bit systems
+                };
+
+                string? uninstallString = null;
+                foreach (var registryKey in registryKeys)
+                {
+                    // Open the registry keys from both LocalMachine and CurrentUser
+                    using (var keyLocalMachine = Registry.LocalMachine.OpenSubKey(registryKey))
+                    using (var keyCurrentUser = Registry.CurrentUser.OpenSubKey(registryKey))
                     {
-                        // Loop through subkeys to find the app
-                        foreach (var subKeyName in registryKeyObj.GetSubKeyNames())
+                        if (keyLocalMachine != null || keyCurrentUser != null)
                         {
-                            using var subKey = registryKeyObj.OpenSubKey(subKeyName);
-                            if (subKey?.GetValue("DisplayName") is string displayName && displayName.Equals(appName, StringComparison.OrdinalIgnoreCase))
+                            var subKeyNames = keyLocalMachine?.GetSubKeyNames().Concat(keyCurrentUser?.GetSubKeyNames() ?? Enumerable.Empty<string>()) ?? Enumerable.Empty<string>();
+
+                            // Loop through the combined subkeys
+                            foreach (var subKeyName in subKeyNames)
                             {
-                                uninstallString = subKey.GetValue("UninstallString") as string;
-                                break;
+                                using var subKey = keyLocalMachine?.OpenSubKey(subKeyName) ?? keyCurrentUser?.OpenSubKey(subKeyName);
+                                var displayName = subKey?.GetValue("DisplayName")?.ToString();
+
+                                // Check if the display name matches the app name
+                                if (!string.IsNullOrEmpty(displayName) && displayName.Equals(appName, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    uninstallString = subKey?.GetValue("QuietUninstallString") as string;
+
+                                    // If no QuietUninstallString found, try UninstallString
+                                    if (string.IsNullOrEmpty(uninstallString))
+                                    {
+                                        uninstallString = subKey?.GetValue("UninstallString") as string;
+                                    }
+                                    break;
+                                }
                             }
                         }
                     }
+                    // If the uninstall string is found, break out of the loop
+                    if (!string.IsNullOrEmpty(uninstallString)) break;
                 }
 
                 if (string.IsNullOrEmpty(uninstallString))
@@ -323,10 +376,18 @@ public sealed partial class DebloatSystemPage : Page
                     throw new Exception($"Uninstall string for {appName} not found in registry.");
                 }
 
-                // Start the process to run the uninstallation command
-                var processInfo = new ProcessStartInfo(uninstallString)
+                // If the uninstall string contains spaces, ensure it's quoted properly
+                if (!uninstallString.StartsWith("\"") && !uninstallString.EndsWith("\""))
                 {
-                    RedirectStandardOutput = true,
+                    uninstallString = $"\"{uninstallString}\"";
+                }
+
+                // Execute the uninstall command using cmd
+                var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                        $"/c {uninstallString}")
+                {
                     RedirectStandardError = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
@@ -335,8 +396,7 @@ public sealed partial class DebloatSystemPage : Page
                 using var process = new Process { StartInfo = processInfo };
                 process.Start();
 
-                // Read the output and error streams asynchronously
-                var output = await process.StandardOutput.ReadToEndAsync();
+                // Read the error stream asynchronously
                 var error = await process.StandardError.ReadToEndAsync();
 
                 if (!string.IsNullOrEmpty(error))
@@ -361,103 +421,122 @@ public sealed partial class DebloatSystemPage : Page
         }
     }
 
-    private void ShowAll_Checked(object sender, RoutedEventArgs e)
+    private void appsFilter_SelectionChanged(object sender, RoutedEventArgs e)
     {
-        uninstallableOnly = false;
-        LoadInstalledApps(uninstallableOnly, cancellationTokenSource.Token);
-    }
-    private void ShowAll_Unchecked(object sender, RoutedEventArgs e)
-    {
-        uninstallableOnly = true;
-        LoadInstalledApps(uninstallableOnly, cancellationTokenSource.Token);
-    }
-    private static CommunityToolkit.WinUI.Behaviors.Notification NotificationContent(string title, string message, InfoBarSeverity severity, int duration)
-    {
-        var notification = new CommunityToolkit.WinUI.Behaviors.Notification
+        switch (appsFilter.SelectedIndex)
         {
-            Title = title,
-            Message = message,
-            Severity = severity,
-            Duration = TimeSpan.FromMilliseconds(duration)
-        };
-        LogHelper.Log("Returning Debloat Notification");
-        return notification;
+            case 0:
+                LoadInstalledApps(true, false, cancellationTokenSource.Token);
+                break;
+            case 1:
+                // Show warning message when all apps are showing in the NotificationQueue
+                App.ShowNotification(
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("DebloatPage_NotificationBody"),
+                    InfoBarSeverity.Warning, 5000);
+
+                // Show all apps
+                LoadInstalledApps(false, false, cancellationTokenSource.Token);
+                break;
+            case 2:
+                LoadInstalledApps(false, true, cancellationTokenSource.Token);
+                break;
+        }
     }
 
-    private async void RemoveTempFiles(object sender, RoutedEventArgs e)
+    private async void TempButton_Click(object sender, RoutedEventArgs e)
     {
         try
         {
+            // Update UI to show progress
             TempStack.Visibility = Visibility.Visible;
-            TempProgress.ShowError = false;
             TempProgress.Visibility = Visibility.Visible;
             TempButton.Visibility = Visibility.Collapsed;
             TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeligTemp") + "...";
 
-            var tempCommands = new[]
-            {
-                "del /F /S /Q \"C:\\*.tmp\"",
-                "rd /S /Q \"%TEMP%\"",
-                "del /F /S /Q \"C:\\Windows\\Temp\\*\"",
-                "PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"",
-                "PowerShell.exe -NoProfile -Command \"wevtutil cl System\"",
-                "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
-                "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\Download\\*\"",
-                "del /F /S /Q \"C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\*\"",
-                "del /F /S /Q \"C:\\Windows\\SoftwareDistribution\\DeliveryOptimization\\*\""
-            };
+            // Execute temp removal commands
+            var result = await OptimizeSystemHelper.RemoveTempFiles();
 
-            var tempTasks = tempCommands.AsParallel().Select(cmd => OptimizationOptions.StartInCmd(cmd));
-            await Task.WhenAll(tempTasks);
-
-            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc");
+            // Reset UI after task completion
+            TempStack.Visibility = Visibility.Collapsed;
             TempProgress.Visibility = Visibility.Collapsed;
-        }
-        catch (Exception ex)
-        {
-            await LogHelper.LogError($"Error removing temporary files: {ex.Message}\nStack Trace: {ex.StackTrace}");
-            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel");
             TempButton.Visibility = Visibility.Visible;
-            TempProgress.ShowError = true;
-        }
-    }
-    private void AppSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-    {
-        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-        {
-            noAppFoundText.Visibility = Visibility.Collapsed;
-            var query = sender.Text.ToLower();
-            var filteredApps = allApps.AsParallel().Where(app => app.Item1.ToLower().Contains(query)).OrderBy(app => app.Item1).ToList();
-            AppList.Clear();
-            foreach (var app in filteredApps)
+
+            if (result)
             {
-                AppList.Add(app);
+                // Show success notification
+                App.ShowNotification(
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc"),
+                    InfoBarSeverity.Success, 5000);
+            }
+            else
+            {
+                // Show error notification
+                App.ShowNotification(
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel"),
+                    InfoBarSeverity.Error, 5000);
             }
         }
-        if (AppList.Count == 0)
+        catch (Exception)
         {
-            noAppFoundText.Visibility = Visibility.Visible;
+            // Restore UI in case of unexpected error
+            TempStack.Visibility = Visibility.Collapsed;
+            TempProgress.Visibility = Visibility.Collapsed;
+            TempButton.Visibility = Visibility.Visible;
+
+            // Show error notification
+            App.ShowNotification(
+                RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel"),
+                InfoBarSeverity.Error, 5000);
         }
     }
 
-    private void AppSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    private void SearchApps(string query)
     {
         noAppFoundText.Visibility = Visibility.Collapsed;
-        var query = args.QueryText.ToLower();
-        var filteredApps = allApps.AsParallel().Where(app => app.Item1.ToLower().Contains(query)).OrderBy(app => app.Item1).ToList();
+
+        // Search and sort apps
+        var filteredApps = allApps.AsParallel()
+                                  .Where(app => app.Item1.Contains(query, StringComparison.CurrentCultureIgnoreCase))
+                                  .OrderBy(app => app.Item1)
+                                  .ToList();
+
+        // Update the AppList
         AppList.Clear();
         foreach (var app in filteredApps)
         {
             AppList.Add(app);
         }
+
+        // Show "no app found" text if no results
         if (AppList.Count == 0)
         {
             noAppFoundText.Visibility = Visibility.Visible;
         }
+
+        // Update the installed apps count
+        installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), AppList.Count);
     }
+
+    private void AppSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+        {
+            SearchApps(sender.Text.ToLower());
+        }
+    }
+
+    private void AppSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    {
+        SearchApps(args.QueryText.ToLower());
+    }
+
     public async Task<ContentDialogResult> ShowUninstallConfirmationDialog(TreeView appTreeView)
     {
-        StringBuilder selectedItemsText = new StringBuilder();
+        var selectedItemsText = new StringBuilder();
 
         foreach (var item in appTreeView.SelectedItems.OfType<Tuple<string, string, bool>>())
         {
@@ -467,7 +546,7 @@ public sealed partial class DebloatSystemPage : Page
         var firstLine = RyTuneX.Helpers.ResourceExtensions.GetLocalized("ConfirmRemoveApps");
         var lastLine = RyTuneX.Helpers.ResourceExtensions.GetLocalized("ConfirmContinue");
 
-        TextBlock firstLineTextBlock = new TextBlock
+        var firstLineTextBlock = new TextBlock
         {
             Text = firstLine,
             Margin = new Thickness(0, 10, 0, 20),
@@ -475,7 +554,7 @@ public sealed partial class DebloatSystemPage : Page
             VerticalAlignment = VerticalAlignment.Top,
         };
 
-        TextBlock lastLineTextBlock = new TextBlock
+        var lastLineTextBlock = new TextBlock
         {
             Text = lastLine,
             Margin = new Thickness(0, 20, 0, 10),
@@ -483,7 +562,7 @@ public sealed partial class DebloatSystemPage : Page
             VerticalAlignment = VerticalAlignment.Bottom
         };
 
-        TextBlock selectedAppsTextBlock = new TextBlock
+        var selectedAppsTextBlock = new TextBlock
         {
             Text = selectedItemsText.ToString(),
             TextWrapping = TextWrapping.Wrap,
@@ -491,7 +570,7 @@ public sealed partial class DebloatSystemPage : Page
             Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"]
         };
 
-        ScrollViewer scrollViewer = new ScrollViewer
+        var scrollViewer = new ScrollViewer
         {
             Content = selectedAppsTextBlock,
             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
@@ -499,7 +578,7 @@ public sealed partial class DebloatSystemPage : Page
             MaxHeight = 400
         };
 
-        StackPanel contentStackPanel = new StackPanel
+        var contentStackPanel = new StackPanel
         {
             Orientation = Orientation.Vertical,
             Children = { firstLineTextBlock, scrollViewer, lastLineTextBlock }
@@ -509,6 +588,7 @@ public sealed partial class DebloatSystemPage : Page
         {
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
             Content = contentStackPanel,
             CloseButtonText = RyTuneX.Helpers.ResourceExtensions.GetLocalized("Close"),
@@ -519,4 +599,17 @@ public sealed partial class DebloatSystemPage : Page
         return await confirmationDialog.ShowAsync();
     }
 
+}
+public class NullToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, string language)
+    {
+        // Convert null to Collapsed and non-null to Visible
+        return value == null ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
+    {
+        throw new NotImplementedException();
+    }
 }

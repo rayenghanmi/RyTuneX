@@ -162,8 +162,8 @@
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>Récupération des données des applications installées...</value>
   </data>
-  <data name="DebloatSystemPage_ShowAll.Content" xml:space="preserve">
-    <value>Afficher tout</value>
+  <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
+    <value>Filtrer par:</value>
   </data>
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
     <value>Désinstaller l'application(s) sélectionnée(s)</value>
@@ -1220,7 +1220,7 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="OperationCompleted" xml:space="preserve">
     <value>Opération terminée</value>
   </data>
-  <data name="RestorePointTitle_fr-fr" xml:space="preserve">
+  <data name="RestorePointTitle" xml:space="preserve">
     <value>Point de restauration</value>
   </data>
   <data name="Warning" xml:space="preserve">
@@ -1254,5 +1254,62 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   </data>
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>Chercher des applications...</value>
+  </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>Désactiver les applications en arrière-plan</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>Empêche les applications de s'exécuter en arrière-plan, ce qui améliore les performances dans certains cas.</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>Activer le mode sombre de Windows</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>Activer le mode sombre pour l'ensemble du système sans avoir besoin d'activer Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>Désactiver la transparence de Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>Désactive les effets transparents dans les éléments de l'interface utilisateur du système comme la barre des tâches et les fenêtres, améliorant ainsi les performances</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>Applications standard</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>Toutes les applications</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>Applications Win32</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>Compresser le système</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+    <value>Activez la compression du système d'exploitation pour réduire l'utilisation de l'espace disque. Cette fonctionnalité est particulièrement utile pour les appareils disposant d'un espace de stockage limité, mais peut légèrement affecter les performances du système sur les matériels moins puissants</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+    <value>Compression des fichiers système...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+    <value>Décompression des fichiers système...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+    <value>Vérifier la compression</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compresser</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+    <value>Décompresser</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+    <value>Compression du système</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>Désactiver le fractionnement de l'hôte de service</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+      <value>Désactive le fractionnement de l'hôte de service pour une utilisation beaucoup plus faible de la RAM et un nombre de processus réduit.</value>
   </data>
 </root>

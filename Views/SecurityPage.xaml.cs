@@ -1,7 +1,6 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Management;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
-using System.Management;
 using Microsoft.Win32;
 using NetFwTypeLib;
 using RyTuneX.Helpers;
@@ -31,7 +30,7 @@ public sealed partial class SecurityPage : Page
         SmartScreenStatus.Text = smartscreen ? "Enabled".GetLocalized() : "Disabled".GetLocalized();
         RealTimeProtectionStatus.Text = realTimeProtection ? "Enabled".GetLocalized() : "Disabled".GetLocalized();
         UACStatus.Text = uac ? "Enabled".GetLocalized() : "Disabled".GetLocalized();
-        
+
         UpdateSecurityImage(virusThreatProtection, firewallProtection, windowsUpdate, smartscreen, uac, realTimeProtection);
     }
 
@@ -110,7 +109,7 @@ public sealed partial class SecurityPage : Page
         catch { }
         return false;
     }
-    
+
     private bool IsUACEnabled()
     {
         try

@@ -7,6 +7,9 @@
     xmlns:helpers="using:RyTuneX.Helpers"
     xmlns:behaviors="using:RyTuneX.Behaviors"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:winbehaviors="using:CommunityToolkit.WinUI.Behaviors"
     Loaded="OnLoaded">
 
     <Grid>
@@ -26,6 +29,7 @@
                     Width="22"
                     Height="22" />
                 <TextBlock x:Name="AppTitleBarText"
+                Text="RyTuneX"
                 VerticalAlignment="Center"
                 Margin="16,0,0,0"
                 TextWrapping="NoWrap"
@@ -103,14 +107,6 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem x:Name="RestartItem" Visibility="Collapsed" Content="Restart" SelectsOnInvoked="False" PointerPressed="NavigationViewItem_PointerPressed">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource SystemFillColorCaution}" Glyph="&#xE777;"/>
-                    </NavigationViewItem.Icon>
-                    <NavigationViewItem.InfoBadge>
-                        <InfoBadge Style="{StaticResource CautionDotInfoBadgeStyle}" VerticalAlignment="Center"/>
-                    </NavigationViewItem.InfoBadge>
-                </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_Issue" SelectsOnInvoked="False" PointerPressed="IssueButton_Click">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEBE8;"/>
@@ -147,6 +143,53 @@
             </i:Interaction.Behaviors>
             <Grid>
                 <Frame x:Name="NavigationFrame"/>
+                <muxc:InfoBar
+                    x:Name="infoBar"
+                    Grid.Row="0"
+                    MaxWidth="600"
+                    Margin="32"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+                    <muxc:InfoBar.Resources>
+                        <!-- Storyboard for InfoBar Animation -->
+                        <Storyboard x:Key="ShowNotificationStoryboard">
+                            <DoubleAnimation
+                                Storyboard.TargetName="infoBar"
+                                Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)"
+                                From="50"
+                                To="0"
+                                Duration="0:0:0.3" />
+                        </Storyboard>
+                        <!-- Storyboard for ProgressBar Animation -->
+                        <Storyboard x:Key="ProgressBarAnimationStoryboard">
+                            <DoubleAnimation
+                                Storyboard.TargetName="progressBar"
+                                Storyboard.TargetProperty="Value"
+                                From="0"
+                                To="100"
+                                Duration="0:0:5"
+                                EnableDependentAnimation="True" />
+                        </Storyboard>
+                    </muxc:InfoBar.Resources>
+                    <muxc:InfoBar.RenderTransform>
+                        <TranslateTransform Y="50" />
+                    </muxc:InfoBar.RenderTransform>
+                    <muxc:InfoBar.Content>
+                        <StackPanel>
+                            <ProgressBar
+                                x:Name="progressBar"
+                                Margin="-48,0"
+                                Background="Transparent"
+                                HorizontalAlignment="Stretch"
+                                Minimum="0"
+                                Maximum="100"
+                                Value="0" />
+                        </StackPanel>
+                    </muxc:InfoBar.Content>
+                    <interactivity:Interaction.Behaviors>
+                        <winbehaviors:StackedNotificationsBehavior x:Name="NotificationQueue" />
+                    </interactivity:Interaction.Behaviors>
+                </muxc:InfoBar>
             </Grid>
         </NavigationView>
     </Grid>

@@ -1,14 +1,11 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using RyTuneX.Contracts.Services;
-using RyTuneX.Helpers;
-using RyTuneX.Services;
-using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
 
@@ -42,7 +39,7 @@ public sealed partial class RepairPage : Page
             ProgressBar.Value = 0;
             StopButton.Visibility = Visibility.Collapsed;
             ScanRepairPanel.Visibility = Visibility.Visible;
-            PercentageTextBlock.Text = "0%";
+            PercentageTextBlock.Text = string.Empty;
         }
     }
 
@@ -68,7 +65,6 @@ public sealed partial class RepairPage : Page
                 current++;
                 StatusTextBlock.Text = $"{current} of {selectedCount}: {name} {(isRepair ? "repair" : "scan")} in progress...";
                 ProgressBar.Value = 0;
-                PercentageTextBlock.Text = string.Empty;
                 await RunCommandAsync(name, args);
             }
         }
@@ -76,7 +72,8 @@ public sealed partial class RepairPage : Page
         StatusTextBlock.Text = "OperationCompleted".GetLocalized();
         ScanRepairPanel.Visibility = Visibility.Visible;
         StopButton.Visibility = Visibility.Collapsed;
-        PercentageTextBlock.Text = "0%";
+        PercentageTextBlock.Text = string.Empty;
+        ProgressBar.Value = 0;
     }
 
     private async Task RunCommandAsync(string name, string args)
@@ -128,7 +125,7 @@ public sealed partial class RepairPage : Page
     {
         if (string.IsNullOrEmpty(data)) return;
 
-        int percentage = 0;
+        var percentage = 0;
 
         try
         {
@@ -193,7 +190,7 @@ public sealed partial class RepairPage : Page
     private async void BatteryHealthButton_Click(object sender, RoutedEventArgs e)
     {
         await OptimizationOptions.StartInCmd($"powercfg /batteryreport /output \"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\batteryreport.html\"");
-        BatteryStatusText.Text = "ReportSaved".GetLocalized();
+        App.ShowNotification("BatteryStatus".GetLocalized(), "ReportSaved".GetLocalized(), InfoBarSeverity.Informational, 5000);
     }
 
     private async void MemoryHealthButton_Click(object sender, RoutedEventArgs e)
@@ -202,6 +199,7 @@ public sealed partial class RepairPage : Page
         {
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             SecondaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             Title = "MemoryDiagnosticDialogTitle".GetLocalized(),
@@ -216,17 +214,17 @@ public sealed partial class RepairPage : Page
         };
         memDialog.SecondaryButtonClick += async (sender, args) =>
         {
-            MemStatusText.Text = "ScheduledLater".GetLocalized();
+            App.ShowNotification("MemoryDiagnosticDialogTitle".GetLocalized(), "ScheduledLater".GetLocalized(), InfoBarSeverity.Informational, 5000);
             MemCheckButton.IsEnabled = false;
             await OptimizationOptions.StartInCmd("bcdedit /bootsequence {memdiag}");
         };
         await memDialog.ShowAsync();
-        
+
     }
 
     private async void EventViewerSettingsCard_Click(object sender, RoutedEventArgs e)
     {
-        await OptimizationOptions.StartInCmd("eventvwr.msc"); 
+        await OptimizationOptions.StartInCmd("eventvwr.msc");
     }
     private async void DiskOptimizationsButton_Click(object sender, RoutedEventArgs e)
     {

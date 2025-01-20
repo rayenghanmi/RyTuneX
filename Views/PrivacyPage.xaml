@@ -26,7 +26,7 @@
                     x:Uid="PrivacyPage_AdvertisingSettings"/>
                 <controls:SettingsCard x:Uid="Feature_DisableAdvertisingID">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xF427;"/>
+                        <FontIcon Glyph="&#xEE57;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="AdvertisingID" Tag="AdvertisingID"/>
                 </controls:SettingsCard>
@@ -149,7 +149,7 @@
 
                 <controls:SettingsCard x:Uid="Feature_DisableLocationFeatures">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE37A;"/>
+                        <FontIcon Glyph="&#xE809;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="LocationFeatures" Tag="LocationFeatures"/>
                 </controls:SettingsCard>

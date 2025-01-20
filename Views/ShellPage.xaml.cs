@@ -4,20 +4,24 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Media.Imaging;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.ViewModels;
 using Windows.ApplicationModel;
-using Windows.System;
-using Windows.UI;
 using Windows.Storage;
-using Microsoft.UI.Xaml.Media.Imaging;
+using Windows.System;
 using Windows.UI.ViewManagement;
 
 namespace RyTuneX.Views;
 
 public sealed partial class ShellPage : Page
 {
+    public static ShellPage? Current
+    {
+        get; private set;
+    } // Static reference to the current ShellPage
     public ShellViewModel ViewModel
     {
         get;
@@ -27,6 +31,7 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = viewModel;
         InitializeComponent();
+        Current = this;
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
@@ -35,7 +40,6 @@ public sealed partial class ShellPage : Page
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
-        AppTitleBarText.Text = "RyTuneX";
 
         // Subscribe to the ActualThemeChanged event
         this.ActualThemeChanged += ShellPage_ActualThemeChanged;
@@ -123,20 +127,6 @@ public sealed partial class ShellPage : Page
         });
     }
 
-    private async void NavigationViewItem_PointerPressed(object sender, PointerRoutedEventArgs e)
-    {
-        await new ContentDialog
-        {
-            XamlRoot = XamlRoot,
-            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-            Title = "Restart",
-            Content = "Some of the applied optimizations require a device restart to take effect.",
-            PrimaryButtonText = "Restart",
-            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-            CloseButtonText = "Cancel"
-        }.ShowAsync();
-    }
-
     private async Task ShowRestorePointDialogAsync()
     {
         var neverShowAgain = new CheckBox
@@ -167,7 +157,8 @@ public sealed partial class ShellPage : Page
             CloseButtonText = "Close".GetLocalized(),
             XamlRoot = this.Content.XamlRoot,
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
         };
 
         var result = await dialog.ShowAsync();
@@ -199,10 +190,11 @@ public sealed partial class ShellPage : Page
                     CloseButtonText = "OK",
                     XamlRoot = this.Content.XamlRoot,
                     PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 }.ShowAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 progressDialog.Hide();
                 await new ContentDialog
@@ -212,7 +204,8 @@ public sealed partial class ShellPage : Page
                     CloseButtonText = "OK",
                     XamlRoot = Content.XamlRoot,
                     PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
+                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 }.ShowAsync();
             }
         }
@@ -268,5 +261,28 @@ public sealed partial class ShellPage : Page
         ShellTitleBarImage.Source = new BitmapImage(new Uri(Path.Combine(AppContext.BaseDirectory, iconPath)));
     }
 
+    public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration)
+    {
+        Current?.ShowNotificationInstance(title, message, severity, duration);
+    }
 
+    private void ShowNotificationInstance(string title, string message, InfoBarSeverity severity, int duration)
+    {
+        // Show notification in the NotificationQueue
+        NotificationQueue.Show(new CommunityToolkit.WinUI.Behaviors.Notification
+        {
+            Title = title,
+            Message = message,
+            Severity = severity,
+            Duration = TimeSpan.FromMilliseconds(duration)
+        });
+
+        // Trigger animation for showing the notification
+        var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
+        showStoryboard.Begin();
+
+        // Start ProgressBar animation
+        var progressBarAnimationStoryboard = (Storyboard)infoBar.Resources["ProgressBarAnimationStoryboard"];
+        progressBarAnimationStoryboard.Begin();
+    }
 }

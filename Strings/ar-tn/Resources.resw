@@ -162,8 +162,8 @@
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
     <value>جلب بيانات التطبيقات المثبتة...</value>
   </data>
-  <data name="DebloatSystemPage_ShowAll.Content" xml:space="preserve">
-    <value>عرض الكل</value>
+  <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
+    <value>تصفية حسب:</value>
   </data>
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
     <value>إلغاء تثبيت التطبيق(ات) المحدد(ة)</value>
@@ -1223,7 +1223,7 @@
   <data name="OperationCompleted" xml:space="preserve">
     <value>اكتملت العملية</value>
   </data>
-  <data name="RestorePointTitle_ar-tn" xml:space="preserve">
+  <data name="RestorePointTitle" xml:space="preserve">
     <value>نقطة الاستعادة</value>
   </data>
   <data name="Warning" xml:space="preserve">
@@ -1257,5 +1257,62 @@
   </data>
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>ابحث عن التطبيقات...</value>
+  </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>تعطيل التطبيقات الخلفية</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>يمنع التطبيقات من العمل في الخلفية، مما يؤدي إلى تحسين الأداء في بعض الحالات.</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>تفعيل وضع الظلام في ويندوز</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>تمكين وضع الظلام لكامل النظام دون الحاجة لتفعيل ويندوز</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>تعطيل شفافية ويندوز</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>يعطل التأثيرات الشفافة في عناصر واجهة النظام مثل شريط المهام والنوافذ، مما يحسن الأداء</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>التطبيقات القياسية</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>جميع التطبيقات</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>تطبيقات Win32</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>ضغط النظام</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+    <value>تمكين ضغط نظام التشغيل لتقليل استخدام مساحة القرص. هذه الميزة مفيدة بشكل خاص للأجهزة ذات السعة التخزينية المحدودة، لكنها قد تؤثر قليلاً على أداء النظام في الأجهزة ذات المواصفات المنخفضة</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+    <value>جاري ضغط ملفات النظام...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+    <value>جاري فك ضغط ملفات النظام...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+    <value>تحقق من الضغط</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>ضغط</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+    <value>فك الضغط</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+    <value>ضغط النظام</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>تعطيل تقسيم مستضيف الخدمة</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+      <value>يقوم بتعطيل تقسيم مستضيف الخدمة لتقليل استخدام ذاكرة الوصول العشوائي وعدد العمليات.</value>
   </data>
 </root>

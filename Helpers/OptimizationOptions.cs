@@ -4,27 +4,44 @@ using System.Drawing.Imaging;
 using System.Management.Automation;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.Win32;
-using System.Text.Json;
-using Windows.Storage;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.Win32;
+using Windows.Storage;
 
 namespace RyTuneX.Helpers;
-internal class OptimizationOptions
+internal partial class OptimizationOptions
 {
     [DllImport("psapi.dll")]
     public static extern bool EmptyWorkingSet(IntPtr hProcess);
-    public static List<Tuple<string, string, bool>> GetInstalledApps(bool uninstallableOnly)
+
+    public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
+    {
+        var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
+        var win32AppsTask = Task.Run(GetWin32Apps);
+
+        await Task.WhenAll(uwpAppsTask, win32AppsTask);
+
+        var installedApps = uwpAppsTask.Result.Concat(win32AppsTask.Result).ToList();
+
+        installedApps = [.. installedApps
+            .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
+            .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
+
+        await LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
+        return installedApps;
+    }
+
+    private static List<Tuple<string, string, bool>> GetUwpApps(bool uninstallableOnly)
     {
         var installedApps = new List<Tuple<string, string, bool>>();
-
-        // Get UWP apps
         var command = uninstallableOnly
-            ? @"Get-AppxPackage | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation | Format-List"
-            : @"Get-AppxPackage | Select-Object Name,InstallLocation | Format-List";
+            ? @"Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation,PackageFullName | Format-List"
+            : @"Get-AppxPackage -AllUsers | Select-Object Name,InstallLocation,PackageFullName | Format-List";
 
         try
         {
@@ -45,7 +62,7 @@ internal class OptimizationOptions
             string? currentName = null;
             string? currentLocation = null;
 
-            foreach (var line in output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var line in output.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries))
             {
                 if (line.StartsWith("Name"))
                 {
@@ -55,12 +72,12 @@ internal class OptimizationOptions
                         installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
                     }
 
-                    currentName = line.Split(new[] { ':' }, 2)[1].Trim();
+                    currentName = line.Split([':'], 2)[1].Trim();
                     currentLocation = null;
                 }
                 else if (line.StartsWith("InstallLocation"))
                 {
-                    currentLocation = line.Split(new[] { ':' }, 2)[1].Trim();
+                    currentLocation = line.Split([':'], 2)[1].Trim();
                 }
                 else if (!string.IsNullOrWhiteSpace(currentLocation) && line.StartsWith(" "))
                 {
@@ -81,50 +98,52 @@ internal class OptimizationOptions
             Debug.WriteLine(ex.Message);
         }
 
-        // Load Win32 apps
-        installedApps.AddRange(GetWin32Apps());
-
-        // Remove duplicates by app name
-        installedApps = installedApps
-            .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
-            .OrderBy(app => app.Item1)     // Sort the apps alphabetically by name
-            .ToList();
-
-        LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
         return installedApps;
     }
 
-    private static List<Tuple<string, string, bool>> GetWin32Apps()
+    public static List<Tuple<string, string, bool>> GetWin32Apps()
     {
         var win32Apps = new List<Tuple<string, string, bool>>();
 
-        // Registry paths to check for installed Win32 apps
         var registryPaths = new string[]
         {
-        @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-        @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\WOW6432Node"
+            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",            // 64-bit on 64-bit systems, 32-bit on 32-bit systems
+            @"SOFTWARE\Wow6432node\Microsoft\Windows\CurrentVersion\Uninstall" // 32-bit on 64-bit systems
         };
 
         foreach (var registryPath in registryPaths)
         {
             try
             {
-                using var key = Registry.LocalMachine.OpenSubKey(registryPath);
-                if (key != null)
+                using var machineKey = Registry.LocalMachine.OpenSubKey(registryPath);
+                using var userKey = Registry.CurrentUser.OpenSubKey(registryPath);
+
+                if (machineKey != null || userKey != null)
                 {
-                    foreach (var subKeyName in key.GetSubKeyNames())
+                    foreach (var subKeyName in machineKey?.GetSubKeyNames().Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>()) ?? Enumerable.Empty<string>())
                     {
-                        using var subKey = key.OpenSubKey(subKeyName);
+                        using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
                         var displayName = subKey?.GetValue("DisplayName")?.ToString();
                         var installLocation = subKey?.GetValue("InstallLocation")?.ToString();
 
-                        if (!string.IsNullOrEmpty(displayName) && !string.IsNullOrEmpty(installLocation) && !displayName.ToLower().Contains("edge"))
+                        if (!string.IsNullOrEmpty(displayName) && !string.IsNullOrEmpty(installLocation) && !displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
+                            var logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
+
+                            // Exception for discord installation path (more will be added)
+                            if (displayName.Contains("discord", StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                installLocation = Directory.GetDirectories(installLocation, "app-*").FirstOrDefault();
+                            }
+                            if (!string.IsNullOrEmpty(installLocation))
+                            {
+                                logoPath = ExtractLogoPath(installLocation, true); // true for Win32
+                            }
                             win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
                         }
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -132,62 +151,99 @@ internal class OptimizationOptions
             }
         }
 
-        return win32Apps;
+        return [.. win32Apps
+            .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
+            .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
     }
 
     private static string ExtractLogoPath(string installLocation, bool isWin32 = false)
     {
-        if (!isWin32)
+        var logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
+
+        if (isWin32)
         {
             try
             {
-                // Check for the specific packages, default logos are not 1:1
+                if (Directory.Exists(installLocation))
+                {
+                    var iconPath = Path.Combine(installLocation, "icon.png");
+                    if (File.Exists(iconPath))
+                    {
+                        logoPath = iconPath;
+                    }
+                    else
+                    {
+                        var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
+                        if (!string.IsNullOrEmpty(exeFile))
+                        {
+                            using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
+                            if (icon != null)
+                            {
+                                SaveIconAsPng(icon, iconPath);
+                                logoPath = iconPath;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to extract logo for Win32 app: {ex.Message}");
+            }
+        }
+        else
+        {
+            try
+            {
                 var packageName = Path.GetFileName(installLocation).ToLower();
                 if (packageName.Contains("sechealth"))
                 {
-                    return Path.Combine(installLocation, "Assets", "WindowsSecurityAppList.targetsize-48.png");
+                    logoPath = Path.Combine(installLocation, "Assets", "WindowsSecurityAppList.targetsize-48.png");
                 }
                 else if (packageName.Contains("edge"))
                 {
-                    return Path.Combine(installLocation, "SmallLogo.png");
+                    logoPath = Path.Combine(installLocation, "SmallLogo.png");
                 }
-
-                string[] possibleManifestPaths = {
-                Path.Combine(installLocation, "AppxManifest.xml"),
-                Path.Combine(installLocation, "appxmanifest.xml")
-            };
-
-                var manifestPath = possibleManifestPaths.FirstOrDefault(File.Exists);
-
-                if (manifestPath != null)
+                else
                 {
-                    var doc = XDocument.Load(manifestPath);
-                    XNamespace ns = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
+                    string[] possibleManifestPaths = {
+                        Path.Combine(installLocation, "AppxManifest.xml"),
+                        Path.Combine(installLocation, "appxmanifest.xml")
+                    };
 
-                    var logoElement = doc.Descendants(ns + "Logo").FirstOrDefault();
-                    if (logoElement != null)
+                    var manifestPath = possibleManifestPaths.FirstOrDefault(File.Exists);
+
+                    if (manifestPath != null)
                     {
-                        var relativeLogoPath = logoElement.Value.Replace('/', '\\');
-                        var baseLogoName = Path.GetFileNameWithoutExtension(relativeLogoPath);
-                        var logoDirectory = Path.Combine(installLocation, Path.GetDirectoryName(relativeLogoPath) ?? "");
+                        var doc = XDocument.Load(manifestPath);
+                        XNamespace ns = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
 
-                        if (Directory.Exists(logoDirectory))
+                        var logoElement = doc.Descendants(ns + "Logo").FirstOrDefault();
+                        if (logoElement != null)
                         {
-                            var exactLogoPath = Path.Combine(logoDirectory, relativeLogoPath);
-                            if (File.Exists(exactLogoPath))
-                            {
-                                return exactLogoPath;
-                            }
+                            var relativeLogoPath = logoElement.Value.Replace('/', '\\');
+                            var baseLogoName = Path.GetFileNameWithoutExtension(relativeLogoPath);
+                            var logoDirectory = Path.Combine(installLocation, Path.GetDirectoryName(relativeLogoPath) ?? "");
 
-                            var logoFiles = Directory.GetFiles(logoDirectory, $"{baseLogoName}.Scale-*.png");
-                            var selectedLogoFile = logoFiles
-                                .OrderBy(f => Math.Abs(GetScaleFromFileName(f) - 200))
-                                .FirstOrDefault();
-
-                            if (!string.IsNullOrEmpty(selectedLogoFile) && File.Exists(selectedLogoFile))
+                            if (Directory.Exists(logoDirectory))
                             {
-                                Debug.WriteLine($"Selected logo: {selectedLogoFile}");
-                                return selectedLogoFile;
+                                var exactLogoPath = Path.Combine(logoDirectory, relativeLogoPath);
+                                if (File.Exists(exactLogoPath))
+                                {
+                                    logoPath = exactLogoPath;
+                                }
+                                else
+                                {
+                                    var logoFiles = Directory.GetFiles(logoDirectory, $"{baseLogoName}.Scale-*.png");
+                                    var selectedLogoFile = logoFiles
+                                        .OrderBy(f => Math.Abs(GetScaleFromFileName(f) - 200))
+                                        .FirstOrDefault();
+
+                                    if (!string.IsNullOrEmpty(selectedLogoFile) && File.Exists(selectedLogoFile))
+                                    {
+                                        logoPath = selectedLogoFile;
+                                    }
+                                }
                             }
                         }
                     }
@@ -198,36 +254,7 @@ internal class OptimizationOptions
                 Debug.WriteLine($"Failed to extract logo path: {ex.Message}");
             }
         }
-        else
-        {
-            try
-            {
-                // Attempt to get the logo for Win32 apps by extracting the .exe file's icon
-                if (Directory.Exists(installLocation))
-                {
-                    // Find the first .exe file in the install location
-                    var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
-                    if (!string.IsNullOrEmpty(exeFile))
-                    {
-                        // Extract the icon from the .exe file using ExtractAssociatedIcon
-                        using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
-                        if (icon != null)
-                        {
-                            // Save the icon as a PNG file
-                            var iconPath = Path.Combine(installLocation, "icon.png");
-                            SaveIconAsPng(icon, iconPath);
-                            return iconPath;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to extract logo for Win32 app: {ex.Message}");
-            }
-        }
-
-        return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
+        return logoPath;
     }
 
     // Save the extracted icon as a PNG file
@@ -322,8 +349,8 @@ internal class OptimizationOptions
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = Environment.Is64BitOperatingSystem
-                    ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                    : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
                     Arguments = $"/C {command}",
                     CreateNoWindow = true,
                     UseShellExecute = true,
@@ -379,8 +406,8 @@ internal class OptimizationOptions
     {
         // Get the current revert list
         var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
-    
+        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
+
         // Add the action if it's not already present
         if (!revertList.Contains(action))
         {
@@ -388,13 +415,13 @@ internal class OptimizationOptions
             ApplicationData.Current.LocalSettings.Values["RevertList"] = JsonSerializer.Serialize(revertList);
         }
     }
-    
+
     private static void RemoveRevertAction(string action)
     {
         // Get the current revert list
         var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
-    
+        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
+
         // Remove the action if it's present
         if (revertList.Contains(action))
         {
@@ -406,7 +433,7 @@ internal class OptimizationOptions
     public static async Task RevertAllChanges()
     {
         var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? new List<string>() : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
 
         // Execute each action asynchronously
         foreach (var action in revertList)
@@ -415,11 +442,17 @@ internal class OptimizationOptions
             {
                 switch (action)
                 {
+                    case "EnableServiceHostSplitting":
+                        OptimizeSystemHelper.EnableServiceHostSplitting();
+                        break;
                     case "EnableMenuShowDelay":
                         OptimizeSystemHelper.EnableMenuShowDelay();
                         break;
                     case "EnableMouseHoverTime":
                         OptimizeSystemHelper.EnableMouseHoverTime();
+                        break;
+                    case "EnableBackgroundApps":
+                        OptimizeSystemHelper.EnableBackgroundApps();
                         break;
                     case "EnableAutoComplete":
                         OptimizeSystemHelper.EnableAutoComplete();
@@ -486,6 +519,12 @@ internal class OptimizationOptions
                         break;
                     case "EnableSystemRestore":
                         OptimizeSystemHelper.EnableSystemRestore();
+                        break;
+                    case "DisableWindowsDarkMode":
+                        OptimizeSystemHelper.DisableWindowsDarkMode();
+                        break;
+                    case "EnableWindowsTransparency":
+                        OptimizeSystemHelper.EnableWindowsTransparency();
                         break;
                     case "DisableVerboseLogon":
                         OptimizeSystemHelper.DisableVerboseLogon();
@@ -692,6 +731,19 @@ internal class OptimizationOptions
         {
             switch (toggleSwitch.Tag)
             {
+                case "ServiceHostSplitting":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableServiceHostSplitting();
+                        SaveRevertAction("EnableServiceHostSplitting");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableServiceHostSplitting();
+                        RemoveRevertAction("EnableServiceHostSplitting");
+                    }
+                    break;
+
                 case "MenuShowDelay":
                     if (toggleSwitch.IsOn)
                     {
@@ -715,6 +767,19 @@ internal class OptimizationOptions
                     {
                         OptimizeSystemHelper.EnableMouseHoverTime();
                         RemoveRevertAction("EnableMouseHoverTime");
+                    }
+                    break;
+
+                case "BackgroundApps":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableBackgroundApps();
+                        SaveRevertAction("EnableBackgroundApps");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableBackgroundApps();
+                        RemoveRevertAction("EnableBackgroundApps");
                     }
                     break;
 
@@ -1002,6 +1067,7 @@ internal class OptimizationOptions
                             PrimaryButtonText = "Continue".GetLocalized(),
                             CloseButtonText = "Cancel".GetLocalized(),
                             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
                         };
                         var dialogResult = await restoreWarning.ShowAsync();
@@ -1019,6 +1085,32 @@ internal class OptimizationOptions
                     {
                         OptimizeSystemHelper.EnableSystemRestore();
                         RemoveRevertAction("EnableSystemRestore");
+                    }
+                    break;
+
+                case "WindowsTransparency":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableWindowsTransparency();
+                        SaveRevertAction("EnableWindowsTransparency");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableWindowsTransparency();
+                        RemoveRevertAction("EnableWindowsTransparency");
+                    }
+                    break;
+
+                case "WindowsDarkMode":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableWindowsDarkMode();
+                        SaveRevertAction("DisableWindowsDarkMode");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableWindowsDarkMode();
+                        RemoveRevertAction("DisableWindowsDarkMode");
                     }
                     break;
 
