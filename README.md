@@ -104,6 +104,27 @@ Check out the [contribution guide](https://github.com/rayenghanmi/RyTuneX/blob/m
 
 ## Translation
 
+#### These are the currently supported languages by RyTuneX:
+
+| Language                   | Translation status |
+| -------------------------- | ------------------ |
+| English (United States)    | 100%               |
+| French (France)            | 100%               |
+| Arabic (Tunisia)           | 100%               |
+| Simplified Chinese (China) | 100%               |
+| German (Germany)           | 100%               |
+| Japanese (Japan)           | 100%               |
+| *Russian (Russia)          | 100%               |
+| *Spanish (Spain)           | 100%               |
+| *Korean (South Korea)      | 100%               |
+| *Portuguese (Brazil)       | 100%               |
+| *Italian (Italy)           | 100%               |
+| *Turkish (Turkey)          | 100%               |
+
+*: Translation will be shipped with the next version
+
+#### Want to add your language?
+
 If you're interested in contributing translations, please follow these steps:
 
 1. **Clone the File**: Clone the [Resources.resw](../testing/Strings/en-us/Resources.resw) file.
