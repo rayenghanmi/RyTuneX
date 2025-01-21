@@ -1189,11 +1189,19 @@ internal class OptimizeSystemHelper
     internal static async void DisableVBS()
     {
         await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\" /V EnableVirtualizationBasedSecurity /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity\" /V Enabled /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\KernelShadowStacks\" /V Enabled /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\CredentialGuard\" /V Enabled /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /V RunAsPPL /T REG_DWORD /D 0 /F");
     }
 
     internal static async void EnableVBS()
     {
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\" /V EnableVirtualizationBasedSecurity /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\" /V EnableVirtualizationBasedSecurity /T REG_DWORD /D 1 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity\" /V Enabled /T REG_DWORD /D 1 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\KernelShadowStacks\" /V Enabled /T REG_DWORD /D 1 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\CredentialGuard\" /V Enabled /T REG_DWORD /D 1 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /V RunAsPPL /T REG_DWORD /D 1 /F");
     }
 
     internal static async void AlignTaskbarToLeft()
@@ -1223,11 +1231,15 @@ internal class OptimizeSystemHelper
     internal static async void DisableWidgets()
     {
         await OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V TaskbarDa /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds\" /V EnableFeeds /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\" /V AllowNewsAndInterests /T REG_DWORD /D 0 /F");
     }
 
     internal static async void EnableWidgets()
     {
         await OptimizationOptions.StartInCmd("REG Delete \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V TaskbarDa /F");
+        await OptimizationOptions.StartInCmd("REG Delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds\" /V EnableFeeds /F");
+        await OptimizationOptions.StartInCmd("REG Delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\" /V AllowNewsAndInterests /F");
     }
 
     internal static async void DisableChat()
@@ -1321,11 +1333,13 @@ internal class OptimizeSystemHelper
     internal static async void DisableCoPilotAI()
     {
         await OptimizationOptions.StartInCmd("REG ADD \"HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /T REG_DWORD /D 1 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V ShowCopilotButton /T REG_DWORD /D 0 /F");
     }
 
     internal static async void EnableCoPilotAI()
     {
         await OptimizationOptions.StartInCmd("REG Delete \"HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V ShowCopilotButton /T REG_DWORD /D 1 /F");
     }
 
 

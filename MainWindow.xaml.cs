@@ -1,7 +1,7 @@
-﻿using RyTuneX.Helpers;
-using Windows.UI.ViewManagement;
+﻿using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Composition.SystemBackdrops;
+using RyTuneX.Helpers;
+using Windows.UI.ViewManagement;
 
 namespace RyTuneX;
 
