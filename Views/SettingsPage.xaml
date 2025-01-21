@@ -36,6 +36,7 @@
                             <ComboBoxItem Content="中文 (简体)" Tag="zh-hans"/>
                             <ComboBoxItem Content="Deutsch (Deutschland)" Tag="de"/>
                             <ComboBoxItem Content="日本語 (日本)" Tag="ja-jp"/>
+                            <ComboBoxItem Content="Español (España)" Tag="es-es"/>
                         </ComboBox>
                     </controls:SettingsCard>
 

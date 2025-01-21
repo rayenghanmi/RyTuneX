@@ -5,7 +5,10 @@ All notable changes to this branch will be documented in this file.
 
 ## 1.3.0 - Unreleased
 
+### Added
 
+- Implemented Russian language translation.
+- Added Spanish language translation.
 
 
 ## 1.2.0 - Released
