@@ -138,7 +138,7 @@ RyTuneX 是一个开源项目。欢迎贡献！
 3.  **保存和结构**：将翻译后的文件另存为`Resources.resw`在以您的语言代码命名的新文件夹中（例如，`fr-fr`对于法语）。
 4.  **创建拉取请求**：向`testing`分行，确保新`resw`文件包含在正确的语言文件夹中`Strings`目录。
 
-Thank you for helping make RyTuneX accessible to more people!
+感谢您帮助更多人使用 RyTuneX！
 
 ## 执照
 
