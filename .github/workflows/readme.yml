@@ -15,10 +15,6 @@ jobs:
         with:
           node-version: 12.x
       # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages  
-      - name: Adding README - Hindi
-        uses: dephraiim/translate-readme@main
-        with:
-          LANG: hi
       - name: Adding README - Arabic
         uses: dephraiim/translate-readme@main
         with:
