@@ -9,6 +9,20 @@
   Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
 </p>
 
+<div align="center" style="margin: 20px 0; text-align: center;">
+  <a href="README.fr.md" style="margin: 0 10px;">Français</a>
+  <a href="README.ar.md" style="margin: 0 10px;">العربية</a>
+  <a href="README.zh-CN.md" style="margin: 0 10px;">简体中文</a>
+  <a href="README.de.md" style="margin: 0 10px;">Deutsch</a>
+  <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
+  <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
+  <a href="README.es.md" style="margin: 0 10px;">Español</a>
+  <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
+  <a href="README.pt.md" style="margin: 0 10px;">Português</a>
+  <a href="README.tr.md" style="margin: 0 10px;">Türkçe</a>
+  <a href="README.it.md" style="margin: 0 10px;">Italiano</a>
+</div><br>
+
 <div align="center" style="margin: 20px 0;">
   
   [![Downloads@latest](https://img.shields.io/github/downloads/rayenghanmi/rytunex/total?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip)
@@ -108,11 +122,11 @@ Le**Appareil**La page fournit une vue complète du matériel et du système d’
 RyTuneX est un projet open source. Les contributions sont les bienvenues !  
 Découvrez le[guide des contributions](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)pour commencer.
 
-## Traduction
+## Translation
 
 #### Voici les langues actuellement prises en charge par RyTuneX :
 
-| Langue                    | Statut de la traduction |
+| Language                  | Statut de la traduction |
 | ------------------------- | ----------------------- |
 | Anglais (États-Unis)      | 100%                    |
 | Français (France)         | 100%                    |
@@ -129,7 +143,7 @@ Découvrez le[guide des contributions](https://github.com/rayenghanmi/RyTuneX/bl
 
 \* : La traduction sera livrée avec la prochaine version
 
-#### Vous souhaitez ajouter votre langue ?
+#### Voulez-vous ajouter votre langue?
 
 Si vous souhaitez contribuer aux traductions, veuillez suivre ces étapes :
 
