@@ -42,7 +42,7 @@
 
 ## 에 대한
 
-RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입니다.**향상시키다**그만큼**성능**,**은둔**, 그리고**유용성**Windows 시스템의 내장**WinUI 3**프레임워크 및 활용**.NET 8**, RyTuneX는 현대적이고 반응이 빠른 사용자 경험을 제공합니다. 위해 특별히 제작되었습니다.**Windows 10 (21H2 and up)**그리고**윈도우 11**. 당신이 있든 없든**게이머**또는**고급 사용자**, RyTuneX를 사용하면 제거할 수 있습니다.**사전 설치된 앱**, 관리하다**시스템 설정**, 그리고 최적화**성능**.
+RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입니다.**향상시키다**그만큼**성능**,**은둔**, 그리고**유용성**Windows 시스템의 내장**WinUI 3**프레임워크 및 활용**.NET 8**, RyTuneX는 현대적이고 반응이 빠른 사용자 경험을 제공합니다. 위해 특별히 제작되었습니다.**Windows 10(21H2 이상)**그리고**윈도우 11**. 당신이 있든 없든**게이머**또는**고급 사용자**, RyTuneX를 사용하면 제거할 수 있습니다.**사전 설치된 앱**, 관리하다**시스템 설정**, 그리고 최적화**성능**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -75,13 +75,13 @@ RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입
 
 ## 설치
 
-1.  **다운로드**: 최신 정보 받기[설치 설정](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+1.  **다운로드**: Get the latest [설치 설정](https://github.com/rayenghanmi/RyTuneX/releases/latest)
 2.  **설치하다**: 다운로드한 설치 프로그램을 실행하고 안내에 따라 RyTuneX를 설치하세요.
 
 > [!중요한]  
-> 항상 공식 사이트에서 RyTuneX를 다운로드하세요.[GitHub 릴리스 페이지](https://github.com/rayenghanmi/RyTuneX/releases)정품성과 안전성을 보장합니다.
+> 항상 공식 사이트에서 RyTuneX를 다운로드하세요.[GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases)정품성과 안전성을 보장합니다.
 
-## 용법
+## Usage
 
 ### 시스템 최적화
 
@@ -101,7 +101,7 @@ RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입
 
 ### 시스템 정보
 
-그만큼**장치**페이지에서는 시스템 하드웨어 및 OS에 대한 포괄적인 보기를 제공합니다. 이를 통해 설정을 이해하고 최적화에 대해 더 많은 정보를 바탕으로 결정을 내릴 수 있습니다.
+그만큼**장치** page provides a comprehensive view of your system’s hardware and OS. This helps you understand your setup and make more informed decisions about optimizations.
 
 ## 참여하기
 
@@ -131,7 +131,7 @@ RyTuneX는 오픈 소스 프로젝트입니다. 기여를 환영합니다!
 
 #### 언어를 추가하고 싶으신가요?
 
-번역에 참여하고 싶다면 다음 단계를 따르세요.
+If you're interested in contributing translations, please follow these steps:
 
 1.  **파일 복제**: 복제[리소스.resw](../testing/Strings/en-us/Resources.resw)파일.
 2.  **파일 번역**: 내용을 원하는 언어로 번역합니다.
