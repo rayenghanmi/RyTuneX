@@ -47,10 +47,10 @@ jobs:
         uses: dephraiim/translate-readme@main
         with:
           LANG: ko
-      - name: Adding README - Portuguese (Brazil)
+      - name: Adding README - Portuguese
         uses: dephraiim/translate-readme@main
         with:
-          LANG: pt-BR
+          LANG: pt
       - name: Adding README - Italian
         uses: dephraiim/translate-readme@main
         with:
