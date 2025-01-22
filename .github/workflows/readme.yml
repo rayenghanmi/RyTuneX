@@ -1,0 +1,65 @@
+name: Translate README
+
+on:
+  push:
+    branches:
+      - main
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages  
+      - name: Adding README - Hindi
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: hi
+      - name: Adding README - Arabic
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: ar
+      - name: Adding README - French
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: fr
+      - name: Adding README - Chinese Simplified
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: zh-CN
+      - name: Adding README - German
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: de
+      - name: Adding README - Japanese
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: ja
+      - name: Adding README - Russian
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: ru
+      - name: Adding README - Spanish
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: es
+      - name: Adding README - Korean
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: ko
+      - name: Adding README - Portuguese (Brazil)
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: pt-BR
+      - name: Adding README - Italian
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: it
+      - name: Adding README - Turkish
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: tr
