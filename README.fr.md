@@ -79,7 +79,7 @@ RyTuneX est un outil complet d'optimisation du système conçu pour**améliorer*
 2.  **Installer**: Exécutez la configuration téléchargée et suivez les invites pour installer RyTuneX.
 
 > [!IMPORTANT]  
-> Always download RyTuneX from the official [Page des versions de GitHub](https://github.com/rayenghanmi/RyTuneX/releases)pour garantir son authenticité et sa sécurité.
+> Téléchargez toujours RyTuneX depuis le site officiel[Page des versions de GitHub](https://github.com/rayenghanmi/RyTuneX/releases)pour garantir son authenticité et sa sécurité.
 
 ## Usage
 
