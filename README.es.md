@@ -9,6 +9,20 @@
   Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
 </p>
 
+<div align="center" style="margin: 20px 0; text-align: center;">
+  <a href="README.fr.md" style="margin: 0 10px;">Français</a>
+  <a href="README.ar.md" style="margin: 0 10px;">العربية</a>
+  <a href="README.zh-CN.md" style="margin: 0 10px;">简体中文</a>
+  <a href="README.de.md" style="margin: 0 10px;">Deutsch</a>
+  <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
+  <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
+  <a href="README.es.md" style="margin: 0 10px;">Español</a>
+  <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
+  <a href="README.pt.md" style="margin: 0 10px;">Português</a>
+  <a href="README.tr.md" style="margin: 0 10px;">Türkçe</a>
+  <a href="README.it.md" style="margin: 0 10px;">Italiano</a>
+</div><br>
+
 <div align="center" style="margin: 20px 0;">
   
   [![Downloads@latest](https://img.shields.io/github/downloads/rayenghanmi/rytunex/total?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip)
@@ -42,7 +56,7 @@ Aproveche RyTuneX al máximo conectándose con otros usuarios y compartiendo sus
 
 ## Acerca de
 
-RyTuneX es una herramienta integral de optimización del sistema diseñada para**mejorar**el**actuación**,**privacidad**, y**usabilidad**de los sistemas Windows. Construido con el**WinUI 3**marco y aprovechamiento**.NET 8**, RyTuneX proporciona una experiencia de usuario moderna y receptiva. Está diseñado específicamente para**Windows 10 (21H2 y superiores)**y**Windows 11**. si eres**un jugador**o**un usuario avanzado**, RyTuneX le permite eliminar**aplicaciones preinstaladas**, administrar**configuración del sistema**y optimizar**actuación**.
+RyTuneX es una herramienta integral de optimización del sistema diseñada para**mejorar**el**actuación**,**privacidad**, y**usabilidad**de los sistemas Windows. Construido con el**WinUI 3**marco y aprovechamiento**.NET 8**, RyTuneX proporciona una experiencia de usuario moderna y receptiva. Está diseñado específicamente para**Windows 10 (21H2 y superiores)**y**ventanas 11**. si eres**un jugador**o**un usuario avanzado**, RyTuneX le permite eliminar**aplicaciones preinstaladas**, administrar**configuración del sistema**y optimizar**actuación**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -60,7 +74,7 @@ RyTuneX es una herramienta integral de optimización del sistema diseñada para*
 
 -   **Diseño moderno**: Disfrute de una interfaz elegante e intuitiva impulsada por WinUI 3. La aplicación cuenta con un diseño moderno que es fácil de usar y visualmente atractivo, lo que simplifica las tareas de optimización del sistema. La interfaz está diseñada para ser limpia y fácil de navegar, lo que permite a los usuarios acceder rápidamente a las funciones que necesitan.
 
--   **Compatibilidad cruzada**: RyTuneX es compatible con ambos**Windows 10 (21H2 y superiores)**y**Windows 11**, lo que garantiza una optimización perfecta del rendimiento en diferentes versiones de Windows. La aplicación ofrece una experiencia coherente, lo que permite a los usuarios beneficiarse plenamente de sus funciones independientemente de la versión de su sistema operativo.
+-   **Compatibilidad cruzada**: RyTuneX es compatible con ambos**Windows 10 (21H2 y superiores)**y**ventanas 11**, lo que garantiza una optimización perfecta del rendimiento en diferentes versiones de Windows. La aplicación ofrece una experiencia coherente, lo que permite a los usuarios beneficiarse plenamente de sus funciones independientemente de la versión de su sistema operativo.
 
 ## Vista previa de la interfaz de usuario
 
@@ -85,7 +99,7 @@ RyTuneX es una herramienta integral de optimización del sistema diseñada para*
 
 ### Optimizaciones del sistema
 
-Para optimizar su sistema, vaya a la**Optimizar**y alterne las opciones disponibles según sus necesidades. Los cambios entrarán en vigor después de reiniciar el sistema.
+To optimize your system, go to the **Optimizar**y alterne las opciones disponibles según sus necesidades. Los cambios entrarán en vigor después de reiniciar el sistema.
 
 ### Desbloquear aplicaciones no deseadas
 
@@ -93,7 +107,7 @@ En el**Desinflamar**pestaña, puede ver una lista de aplicaciones instaladas. Se
 
 ### Mejoras de privacidad
 
-Dirígete al**Privacidad** tab to configure your privacy settings. Toggle the switches to enable or disable features that impact telemetry, advertising, and more. Changes will take effect after a restart.
+Dirígete al**Privacidad**pestaña para configurar sus ajustes de privacidad. Cambie los interruptores para habilitar o deshabilitar funciones que afectan la telemetría, la publicidad y más. Los cambios entrarán en vigor después de reiniciar.
 
 ### Gestión de características de Windows
 
