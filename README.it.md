@@ -9,6 +9,20 @@
   Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
 </p>
 
+<div align="center" style="margin: 20px 0; text-align: center;">
+  <a href="README.fr.md" style="margin: 0 10px;">Français</a>
+  <a href="README.ar.md" style="margin: 0 10px;">العربية</a>
+  <a href="README.zh-CN.md" style="margin: 0 10px;">简体中文</a>
+  <a href="README.de.md" style="margin: 0 10px;">Deutsch</a>
+  <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
+  <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
+  <a href="README.es.md" style="margin: 0 10px;">Español</a>
+  <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
+  <a href="README.pt.md" style="margin: 0 10px;">Português</a>
+  <a href="README.tr.md" style="margin: 0 10px;">Türkçe</a>
+  <a href="README.it.md" style="margin: 0 10px;">Italiano</a>
+</div><br>
+
 <div align="center" style="margin: 20px 0;">
   
   [![Downloads@latest](https://img.shields.io/github/downloads/rayenghanmi/rytunex/total?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip)
@@ -85,7 +99,7 @@ RyTuneX è uno strumento completo di ottimizzazione del sistema progettato per**
 
 ### Ottimizzazioni del sistema
 
-Per ottimizzare il tuo sistema, vai al**Ottimizzare**scheda e attiva le opzioni disponibili in base alle tue esigenze. Le modifiche avranno effetto dopo il riavvio del sistema.
+Per ottimizzare il tuo sistema, vai al**Ottimizzare**scheda e attiva/disattiva le opzioni disponibili in base alle tue esigenze. Le modifiche avranno effetto dopo il riavvio del sistema.
 
 ### Debloat delle app indesiderate
 
@@ -114,7 +128,7 @@ Dai un'occhiata a[guida ai contributi](https://github.com/rayenghanmi/RyTuneX/bl
 
 | Lingua                     | Stato della traduzione |
 | -------------------------- | ---------------------- |
-| Inglese (Stati Uniti)      | 100%                   |
+| English (United States)    | 100%                   |
 | Francese (Francia)         | 100%                   |
 | Arabo (Tunisia)            | 100%                   |
 | Cinese semplificato (Cina) | 100%                   |
@@ -135,7 +149,7 @@ Se sei interessato a contribuire alle traduzioni, segui questi passaggi:
 
 1.  **Clona il file**: Clona il[Risorse.resw](../testing/Strings/en-us/Resources.resw)file.
 2.  **Traduci il file**: Traduci i suoi contenuti nella lingua desiderata.
-3.  **Salva e struttura**: salva il file tradotto con nome`Resources.resw`all'interno di una nuova cartella denominata con il codice della lingua (ad esempio,`fr-fr`per il francese).
+3.  **Salva e struttura**: salva il file tradotto con nome`Resources.resw`all'interno di una nuova cartella denominata con il codice della lingua (ad esempio,`fr-fr` for French).
 4.  **Crea una richiesta di pull**: invia una richiesta pull a`testing`filiale, garantendo il nuovo`resw`il file è incluso nella cartella della lingua corretta all'interno del file`Strings`directory.
 
 Grazie per aver contribuito a rendere RyTuneX accessibile a più persone!
