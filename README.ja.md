@@ -9,6 +9,20 @@
   Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
 </p>
 
+<div align="center" style="margin: 20px 0; text-align: center;">
+  <a href="README.fr.md" style="margin: 0 10px;">Français</a>
+  <a href="README.ar.md" style="margin: 0 10px;">العربية</a>
+  <a href="README.zh-CN.md" style="margin: 0 10px;">简体中文</a>
+  <a href="README.de.md" style="margin: 0 10px;">Deutsch</a>
+  <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
+  <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
+  <a href="README.es.md" style="margin: 0 10px;">Español</a>
+  <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
+  <a href="README.pt.md" style="margin: 0 10px;">Português</a>
+  <a href="README.tr.md" style="margin: 0 10px;">Türkçe</a>
+  <a href="README.it.md" style="margin: 0 10px;">Italiano</a>
+</div><br>
+
 <div align="center" style="margin: 20px 0;">
   
   [![Downloads@latest](https://img.shields.io/github/downloads/rayenghanmi/rytunex/total?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip)
@@ -85,7 +99,7 @@ RyTuneX は、次の目的で設計された包括的なシステム最適化ツ
 
 ### システムの最適化
 
-システムを最適化するには、次のサイトにアクセスしてください。**最適化する**タブをクリックして、ニーズに応じて利用可能なオプションを切り替えます。変更はシステムの再起動後に有効になります。
+システムを最適化するには、次のサイトにアクセスしてください。**最適化する**タブをクリックして、必要に応じて利用可能なオプションを切り替えます。変更はシステムの再起動後に有効になります。
 
 ### 不要なアプリを削除する
 
@@ -105,7 +119,7 @@ RyTuneX は、次の目的で設計された包括的なシステム最適化ツ
 
 ## 参加してみよう
 
-RyTuneX はオープンソース プロジェクトです。貢献は大歓迎です!  
+RyTuneX はオープンソース プロジェクトです。貢献は大歓迎です！  
 をチェックしてください[貢献ガイド](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)始めるために。
 
 ## 翻訳
