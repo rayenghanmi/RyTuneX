@@ -9,6 +9,20 @@
   Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
 </p>
 
+<div align="center" style="margin: 20px 0; text-align: center;">
+  <a href="README.fr.md" style="margin: 0 10px;">Français</a>
+  <a href="README.ar.md" style="margin: 0 10px;">العربية</a>
+  <a href="README.zh-CN.md" style="margin: 0 10px;">简体中文</a>
+  <a href="README.de.md" style="margin: 0 10px;">Deutsch</a>
+  <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
+  <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
+  <a href="README.es.md" style="margin: 0 10px;">Español</a>
+  <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
+  <a href="README.pt.md" style="margin: 0 10px;">Português</a>
+  <a href="README.tr.md" style="margin: 0 10px;">Türkçe</a>
+  <a href="README.it.md" style="margin: 0 10px;">Italiano</a>
+</div><br>
+
 <div align="center" style="margin: 20px 0;">
   
   [![Downloads@latest](https://img.shields.io/github/downloads/rayenghanmi/rytunex/total?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip)
@@ -97,7 +111,7 @@ RyTuneX 是一款综合性系统优化工具，旨在**提高**这**表现**,**�
 
 ### Windows 功能管理
 
-使用**特征**选项卡修改特定的 Windows 功能。切换开关以调整设置，然后重新启动系统以应用更改。
+使用**特征** tab to modify specific Windows features. Toggle the switches to adjust the settings, and restart your system to apply the changes.
 
 ### 系统信息
 
@@ -112,20 +126,20 @@ RyTuneX 是一个开源项目。欢迎贡献！
 
 #### 这些是 RyTuneX 目前支持的语言：
 
-| 语言          | 翻译状态 |
-| ----------- | ---- |
-| 英语（美国）      | 100% |
-| 法语（法国）      | 100% |
-| 阿拉伯语（突尼斯）   | 100% |
-| 简体中文（中国）    | 100% |
-| 德语（德国）      | 100% |
-| 日语（日本）      | 100% |
-| \*俄语（俄罗斯）   | 100% |
-| \*西班牙语（西班牙） | 100% |
-| \*韩语（韩国）    | 100% |
-| \*葡萄牙语（巴西）  | 100% |
-| \*意大利语（意大利） | 100% |
-| \*土耳其语（土耳其） | 100% |
+| 语言                 | 翻译状态 |
+| ------------------ | ---- |
+| 英语（美国）             | 100% |
+| 法语（法国）             | 100% |
+| 阿拉伯语（突尼斯）          | 100% |
+| 简体中文（中国）           | 100% |
+| 德语（德国）             | 100% |
+| 日语（日本）             | 100% |
+| \*俄语（俄罗斯）          | 100% |
+| \*西班牙语（西班牙）        | 100% |
+| \*韩语（韩国）           | 100% |
+| \*葡萄牙语（巴西）         | 100% |
+| \*意大利语（意大利）        | 100% |
+| \*Turkish (Turkey) | 100% |
 
 \*：翻译将随下一版本一起提供
 
