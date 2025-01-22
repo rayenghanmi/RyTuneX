@@ -93,7 +93,7 @@ En el**Desinflamar**pestaña, puede ver una lista de aplicaciones instaladas. Se
 
 ### Mejoras de privacidad
 
-Dirígete al**Privacidad**pestaña para configurar sus ajustes de privacidad. Cambie los interruptores para habilitar o deshabilitar funciones que afectan la telemetría, la publicidad y más. Los cambios entrarán en vigor después de reiniciar.
+Dirígete al**Privacidad** tab to configure your privacy settings. Toggle the switches to enable or disable features that impact telemetry, advertising, and more. Changes will take effect after a restart.
 
 ### Gestión de características de Windows
 
