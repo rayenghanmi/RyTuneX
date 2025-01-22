@@ -9,6 +9,20 @@
   Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
 </p>
 
+<div align="center" style="margin: 20px 0; text-align: center;">
+  <a href="README.fr.md" style="margin: 0 10px;">Français</a>
+  <a href="README.ar.md" style="margin: 0 10px;">العربية</a>
+  <a href="README.zh-CN.md" style="margin: 0 10px;">简体中文</a>
+  <a href="README.de.md" style="margin: 0 10px;">Deutsch</a>
+  <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
+  <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
+  <a href="README.es.md" style="margin: 0 10px;">Español</a>
+  <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
+  <a href="README.pt.md" style="margin: 0 10px;">Português</a>
+  <a href="README.tr.md" style="margin: 0 10px;">Türkçe</a>
+  <a href="README.it.md" style="margin: 0 10px;">Italiano</a>
+</div><br>
+
 <div align="center" style="margin: 20px 0;">
   
   [![Downloads@latest](https://img.shields.io/github/downloads/rayenghanmi/rytunex/total?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip)
@@ -58,7 +72,7 @@ RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입
 
 -   **개인 정보 보호 강화**: 원격 측정 및 데이터 수집을 차단하여 개인 정보 보호를 강화합니다. RyTuneX는 Windows 고유의 추적 및 데이터 수집 기능을 비활성화하여 사용자 개인 정보 보호를 강화하는 도구를 제공합니다. 이를 통해 사용자는 자신의 개인 데이터에 대한 통제력을 강화하고 개인 정보를 보다 효과적으로 보호할 수 있습니다.
 
--   **현대적인 디자인**: WinUI 3이 제공하는 세련되고 직관적인 인터페이스를 즐겨보세요. 이 애플리케이션은 사용자 친화적이면서도 시각적으로 매력적인 현대적인 디자인을 자랑하므로 시스템 최적화 작업이 간단해집니다. 인터페이스는 깔끔하고 탐색하기 쉽도록 설계되어 사용자가 필요한 기능에 빠르게 액세스할 수 있습니다.
+-   **현대적인 디자인**: WinUI 3을 기반으로 하는 매끄럽고 직관적인 인터페이스를 즐겨보세요. 이 애플리케이션은 사용자 친화적이고 시각적으로 매력적인 현대적인 디자인을 자랑하므로 시스템 최적화 작업이 간단해집니다. 인터페이스는 깔끔하고 탐색하기 쉽도록 설계되어 사용자가 필요한 기능에 빠르게 액세스할 수 있습니다.
 
 -   **상호 호환 가능**: RyTuneX는 둘 다 호환됩니다.**Windows 10(21H2 이상)**그리고**윈도우 11**, 다양한 Windows 버전에서 원활한 성능 최적화를 보장합니다. 이 앱은 일관된 경험을 제공하므로 사용자는 운영 체제 버전에 관계없이 해당 기능을 최대한 활용할 수 있습니다.
 
@@ -75,13 +89,13 @@ RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입
 
 ## 설치
 
-1.  **다운로드**: Get the latest [설치 설정](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+1.  **다운로드**: 최신 정보 받기[설치 설정](https://github.com/rayenghanmi/RyTuneX/releases/latest)
 2.  **설치하다**: 다운로드한 설치 프로그램을 실행하고 안내에 따라 RyTuneX를 설치하세요.
 
 > [!중요한]  
-> 항상 공식 사이트에서 RyTuneX를 다운로드하세요.[GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases)정품성과 안전성을 보장합니다.
+> 항상 공식 사이트에서 RyTuneX를 다운로드하세요.[GitHub 릴리스 페이지](https://github.com/rayenghanmi/RyTuneX/releases)정품성과 안전성을 보장합니다.
 
-## Usage
+## 용법
 
 ### 시스템 최적화
 
@@ -101,14 +115,14 @@ RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입
 
 ### 시스템 정보
 
-그만큼**장치** page provides a comprehensive view of your system’s hardware and OS. This helps you understand your setup and make more informed decisions about optimizations.
+그만큼**장치**페이지에서는 시스템 하드웨어 및 OS에 대한 포괄적인 보기를 제공합니다. 이를 통해 설정을 이해하고 최적화에 대해 더 많은 정보를 바탕으로 결정을 내릴 수 있습니다.
 
 ## 참여하기
 
 RyTuneX는 오픈 소스 프로젝트입니다. 기여를 환영합니다!  
 확인해 보세요[기부 가이드](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)시작하려면.
 
-## 번역
+## Translation
 
 #### 현재 RyTuneX에서 지원되는 언어는 다음과 같습니다.
 
@@ -131,7 +145,7 @@ RyTuneX는 오픈 소스 프로젝트입니다. 기여를 환영합니다!
 
 #### 언어를 추가하고 싶으신가요?
 
-If you're interested in contributing translations, please follow these steps:
+번역에 참여하고 싶다면 다음 단계를 따르세요.
 
 1.  **파일 복제**: 복제[리소스.resw](../testing/Strings/en-us/Resources.resw)파일.
 2.  **파일 번역**: 내용을 원하는 언어로 번역합니다.
@@ -142,7 +156,7 @@ If you're interested in contributing translations, please follow these steps:
 
 ## 특허
 
-이 프로젝트는 다음 라이선스에 따라 라이선스가 부여됩니다.[GNU 일반 공중 라이선스 v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
+이 프로젝트는 다음에 따라 라이센스가 부여됩니다.[GNU 일반 공중 라이선스 v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
 
 ## 연락하다
 
