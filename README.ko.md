@@ -5,8 +5,8 @@
 <h1 align="center" style="font-family: 'Segoe UI', sans-serif; font-weight: 600; color: #0078D4;">RyTuneX</h1>
 
 <p align="center" style="font-size: 1.1rem; color: #555;">
-  <strong>Streamline. Optimize. Dominate.</strong><br>
-  Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
+  <strong>간소화. 최적화. 지배.</strong><br>
+  Windows 10과 11을 향상시키기 위한 원스톱 솔루션. 정밀하게 구축되고 성능을 위해 설계되었습니다.
 </p>
 
 <div align="center" style="margin: 20px 0; text-align: center;">
@@ -17,7 +17,7 @@
   <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
   <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
   <a href="README.es.md" style="margin: 0 10px;">Español</a>
-  <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
+  <a href="README.md" style="margin: 0 10px;">English</a>
   <a href="README.pt.md" style="margin: 0 10px;">Português</a>
   <a href="README.tr.md" style="margin: 0 10px;">Türkçe</a>
   <a href="README.it.md" style="margin: 0 10px;">Italiano</a>
@@ -56,7 +56,7 @@
 
 ## 에 대한
 
-RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입니다.**향상시키다**그만큼**성능**,**은둔**, 그리고**유용성**Windows 시스템의 내장**WinUI 3**프레임워크 및 활용**.NET 8**, RyTuneX는 현대적이고 반응이 빠른 사용자 경험을 제공합니다. 위해 특별히 제작되었습니다.**Windows 10(21H2 이상)**그리고**윈도우 11**. 당신이 있든 없든**게이머**또는**고급 사용자**, RyTuneX를 사용하면 제거할 수 있습니다.**사전 설치된 앱**, 관리하다**시스템 설정**, 그리고 최적화**성능**.
+RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입니다. **향상시키다** 그만큼 **성능**, **은둔**, 그리고 **유용성** Windows 시스템의 내장 **WinUI 3** 프레임워크 및 활용 **.NET 8**, RyTuneX는 현대적이고 반응이 빠른 사용자 경험을 제공합니다. 위해 특별히 제작되었습니다. **Windows 10 (20H1 이상)** 그리고 **Windows 11**. 당신이 있든 없든 **게이머** 또는 **고급 사용자**, RyTuneX를 사용하면 제거할 수 있습니다. **사전 설치된 앱**, 관리하다 **시스템 설정**, 그리고 최적화 **성능**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -74,7 +74,7 @@ RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입
 
 -   **현대적인 디자인**: WinUI 3이 제공하는 세련되고 직관적인 인터페이스를 즐겨보세요. 이 애플리케이션은 사용자 친화적이면서도 시각적으로 매력적인 현대적인 디자인을 자랑하므로 시스템 최적화 작업이 간단해집니다. 인터페이스는 깔끔하고 탐색하기 쉽도록 설계되어 사용자가 필요한 기능에 빠르게 액세스할 수 있습니다.
 
--   **상호 호환 가능**: RyTuneX는 둘 다 호환됩니다.**Windows 10(21H2 이상)**그리고**윈도우 11**, 다양한 Windows 버전에서 원활한 성능 최적화를 보장합니다. 이 앱은 일관된 경험을 제공하므로 사용자는 운영 체제 버전에 관계없이 해당 기능을 최대한 활용할 수 있습니다.
+-   **상호 호환 가능**: RyTuneX는 둘 다 호환됩니다. **Windows 10 (20H1 이상)** 그리고 **Windows 11**, 다양한 Windows 버전에서 원활한 성능 최적화를 보장합니다. 이 앱은 일관된 경험을 제공하므로 사용자는 운영 체제 버전에 관계없이 해당 기능을 최대한 활용할 수 있습니다.
 
 ## UI 미리보기
 
@@ -89,11 +89,11 @@ RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입
 
 ## 설치
 
-1.  **다운로드**: 최신 정보 받기[설치 설정](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+1.  **다운로드**: 최신 정보 받기 [설치 설정](https://github.com/rayenghanmi/RyTuneX/releases/latest)
 2.  **설치하다**: 다운로드한 설치 프로그램을 실행하고 안내에 따라 RyTuneX를 설치하세요.
 
-> [!중요한]  
-> 항상 공식 사이트에서 RyTuneX를 다운로드하세요.[GitHub 릴리스 페이지](https://github.com/rayenghanmi/RyTuneX/releases)정품성과 안전성을 보장합니다.
+> [!IMPORTANT]  
+> 항상 공식 사이트에서 RyTuneX를 다운로드하세요. [GitHub 릴리스 페이지](https://github.com/rayenghanmi/RyTuneX/releases) 정품성과 안전성을 보장합니다.
 
 ## 용법
 
@@ -103,24 +103,24 @@ RyTuneX는 다음을 위해 설계된 포괄적인 시스템 최적화 도구입
 
 ### 원치 않는 앱 제거
 
-에서**디블로트**탭에서는 설치된 앱 목록을 볼 수 있습니다. 제거하려는 항목을 선택하고 클릭하십시오.**선택한 앱 제거)**. 프로세스를 완료하려면 다시 시작해야 할 수도 있습니다.
+에서 **디블로트** 탭에서는 설치된 앱 목록을 볼 수 있습니다. 제거하려는 항목을 선택하고 클릭하십시오. **선택한 앱 제거**. 프로세스를 완료하려면 다시 시작해야 할 수도 있습니다.
 
 ### 개인 정보 보호 강화
 
-다음으로 향하세요.**은둔**개인 정보 설정을 구성하려면 탭을 클릭하세요. 스위치를 토글하여 원격 측정, 광고 등에 영향을 미치는 기능을 활성화하거나 비활성화합니다. 변경 사항은 다시 시작한 후에 적용됩니다.
+다음으로 향하세요. **은둔** 개인 정보 설정을 구성하려면 탭을 클릭하세요. 스위치를 토글하여 원격 측정, 광고 등에 영향을 미치는 기능을 활성화하거나 비활성화합니다. 변경 사항은 다시 시작한 후에 적용됩니다.
 
 ### Windows 기능 관리
 
-사용**특징**탭을 사용하여 특정 Windows 기능을 수정할 수 있습니다. 스위치를 전환하여 설정을 조정하고 시스템을 다시 시작하여 변경 사항을 적용합니다.
+사용 **특징** 탭을 사용하여 특정 Windows 기능을 수정할 수 있습니다. 스위치를 전환하여 설정을 조정하고 시스템을 다시 시작하여 변경 사항을 적용합니다.
 
 ### 시스템 정보
 
-그만큼**장치**페이지에서는 시스템 하드웨어 및 OS에 대한 포괄적인 보기를 제공합니다. 이를 통해 설정을 이해하고 최적화에 대해 더 많은 정보를 바탕으로 결정을 내릴 수 있습니다.
+그만큼 **장치** 페이지에서는 시스템 하드웨어 및 OS에 대한 포괄적인 보기를 제공합니다. 이를 통해 설정을 이해하고 최적화에 대해 더 많은 정보를 바탕으로 결정을 내릴 수 있습니다.
 
 ## 참여하기
 
 RyTuneX는 오픈 소스 프로젝트입니다. 기여를 환영합니다!  
-확인해 보세요[기부 가이드](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)시작하려면.
+확인해 보세요 [기부 가이드](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md) 시작하려면.
 
 ## 번역
 
@@ -147,23 +147,23 @@ RyTuneX는 오픈 소스 프로젝트입니다. 기여를 환영합니다!
 
 번역에 참여하고 싶다면 다음 단계를 따르세요.
 
-1.  **파일 복제**: 복제[리소스.resw](../testing/Strings/en-us/Resources.resw)파일.
+1.  **파일 복제**: 복제 [Resources.resw](../testing/Strings/en-us/Resources.resw) 파일.
 2.  **파일 번역**: 내용을 원하는 언어로 번역합니다.
-3.  **저장 및 구조**: 번역된 파일을 다음과 같이 저장합니다.`Resources.resw`언어 코드로 이름이 지정된 새 폴더(예:`fr-fr`프랑스어의 경우).
-4.  **끌어오기 요청 만들기**: 풀 요청을`testing`지점, 새로운 보장`resw`파일은 다음 내의 올바른 언어 폴더에 포함되어 있습니다.`Strings`예배 규칙서.
+3.  **저장 및 구조**: 번역된 파일을 다음과 같이 저장합니다. `Resources.resw` 언어 코드로 이름이 지정된 새 폴더(예: `fr-fr` 프랑스어의 경우).
+4.  **끌어오기 요청 만들기**: 풀 요청을 `testing` 지점, 새로운 보장 `resw` 파일은 다음 내의 올바른 언어 폴더에 포함되어 있습니다. `Strings` 예배 규칙서.
 
 더 많은 사람들이 RyTuneX에 접근할 수 있도록 도와주셔서 감사합니다!
 
 ## 특허
 
-이 프로젝트는 다음 라이선스에 따라 라이선스가 부여됩니다.[GNU 일반 공중 라이선스 v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
+이 프로젝트는 다음 라이선스에 따라 라이선스가 부여됩니다. [GNU 일반 공중 라이선스 v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
 
 ## 연락하다
 
--   이메일:[ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
--   지저귀다:[@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
--   페이스북:[레이엔.23.](https://www.facebook.com/rayen.ghanmi.23)
--   불화:[RyTuneX](https://discord.gg/gyBzyd364t)
--   인스타그램:[@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
+-   E-mail: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
+-   Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
+-   Facebook: [@rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
+-   Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
+-   Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
 
 우리는 여러분의 피드백을 지원하고 듣기 위해 왔습니다!
