@@ -5,8 +5,8 @@
 <h1 align="center" style="font-family: 'Segoe UI', sans-serif; font-weight: 600; color: #0078D4;">RyTuneX</h1>
 
 <p align="center" style="font-size: 1.1rem; color: #555;">
-  <strong>Streamline. Optimize. Dominate.</strong><br>
-  Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
+  <strong>Racionalize. Otimize. Domine.</strong><br>
+  Sua solução completa para aprimorar o Windows 10 e 11. Construído com precisão, projetado para desempenho.
 </p>
 
 <div align="center" style="margin: 20px 0; text-align: center;">
@@ -18,7 +18,7 @@
   <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
   <a href="README.es.md" style="margin: 0 10px;">Español</a>
   <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
-  <a href="README.pt.md" style="margin: 0 10px;">Português</a>
+  <a href="README.md" style="margin: 0 10px;">English</a>
   <a href="README.tr.md" style="margin: 0 10px;">Türkçe</a>
   <a href="README.it.md" style="margin: 0 10px;">Italiano</a>
 </div><br>
@@ -56,7 +56,7 @@ Aproveite ao máximo o RyTuneX conectando-se com outros usuários e compartilhan
 
 ## Sobre
 
-RyTuneX é uma ferramenta abrangente de otimização de sistema projetada para**melhorar**o**desempenho**,**privacidade**, e**usabilidade**de sistemas Windows. Construído com o**WinUI3**enquadramento e aproveitamento**.NET 8**, RyTuneX oferece uma experiência de usuário moderna e responsiva. É elaborado especificamente para**Windows 10 (21H2 e superior)**e**Janelas 11**. se você está**um jogador**ou**um usuário avançado**, RyTuneX permite remover**aplicativos pré-instalados**, gerenciar**configurações do sistema**e otimizar**desempenho**.
+RyTuneX é uma ferramenta abrangente de otimização de sistema projetada para **melhorar** o **desempenho**, **privacidade**, e **usabilidade** de sistemas Windows. Construído com o **WinUI3** enquadramento e aproveitamento **.NET 8**, RyTuneX oferece uma experiência de usuário moderna e responsiva. É elaborado especificamente para **Windows 10 (20H1 e superior)** e **Windows 11**. se você está **um jogador** ou **um usuário avançado**, RyTuneX permite remover **aplicativos pré-instalados**, gerenciar **configurações do sistema** e otimizar **desempenho**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -74,7 +74,7 @@ RyTuneX é uma ferramenta abrangente de otimização de sistema projetada para**
 
 -   **Design Moderno**: Desfrute de uma interface elegante e intuitiva alimentada por WinUI 3. O aplicativo possui um design moderno que é fácil de usar e visualmente atraente, tornando as tarefas de otimização do sistema simples. A interface foi projetada para ser limpa e fácil de navegar, permitindo que os usuários acessem rapidamente os recursos de que precisam.
 
--   **Compatibilidade cruzada**: RyTuneX é compatível com ambos**Windows 10 (21H2 e superior)**e**Janelas 11**, garantindo otimização de desempenho perfeita em diferentes versões do Windows. O aplicativo oferece uma experiência consistente, permitindo que os usuários aproveitem totalmente seus recursos, independentemente da versão do sistema operacional.
+-   **Compatibilidade cruzada**: RyTuneX é compatível com ambos **Windows 10 (20H1 e superior)** e **Windows 11**, garantindo otimização de desempenho perfeita em diferentes versões do Windows. O aplicativo oferece uma experiência consistente, permitindo que os usuários aproveitem totalmente seus recursos, independentemente da versão do sistema operacional.
 
 ## Visualização da IU
 
@@ -89,38 +89,38 @@ RyTuneX é uma ferramenta abrangente de otimização de sistema projetada para**
 
 ## Instalação
 
-1.  **Download**: Receba as últimas[configuração de instalação](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+1.  **Download**: Receba as últimas [configuração de instalação](https://github.com/rayenghanmi/RyTuneX/releases/latest)
 2.  **Instalar**: Execute a configuração baixada e siga as instruções para instalar o RyTuneX.
 
-> [!IMPORTANTE]  
-> Sempre baixe o RyTuneX do site oficial[Página de lançamentos do GitHub](https://github.com/rayenghanmi/RyTuneX/releases)para garantir sua autenticidade e segurança.
+> [!IMPORTANT]  
+> Sempre baixe o RyTuneX do site oficial [Página de lançamentos do GitHub](https://github.com/rayenghanmi/RyTuneX/releases) para garantir sua autenticidade e segurança.
 
 ## Uso
 
 ### Otimizações do sistema
 
-Para otimizar seu sistema, vá para o**Otimizar**guia e alterne as opções disponíveis com base em suas necessidades. As alterações entrarão em vigor após a reinicialização do sistema.
+Para otimizar seu sistema, vá para o **Otimizar** guia e alterne as opções disponíveis com base em suas necessidades. As alterações entrarão em vigor após a reinicialização do sistema.
 
 ### Desbloqueie aplicativos indesejados
 
-No**Debloat**guia, você pode ver uma lista de aplicativos instalados. Selecione aqueles que deseja remover e clique**Desinstalar aplicativos selecionados)**. Uma reinicialização pode ser necessária para concluir o processo.
+No **Debloat** guia, você pode ver uma lista de aplicativos instalados. Selecione aqueles que deseja remover e clique **Desinstalar aplicativos selecionados**. Uma reinicialização pode ser necessária para concluir o processo.
 
 ### Melhorias de privacidade
 
-Vá para o**Privacidade**guia para definir suas configurações de privacidade. Alterne os interruptores para ativar ou desativar recursos que afetam a telemetria, a publicidade e muito mais. As alterações entrarão em vigor após a reinicialização.
+Vá para o **Privacidade** guia para definir suas configurações de privacidade. Alterne os interruptores para ativar ou desativar recursos que afetam a telemetria, a publicidade e muito mais. As alterações entrarão em vigor após a reinicialização.
 
 ### Gerenciamento de recursos do Windows
 
-Use o**Características**guia para modificar recursos específicos do Windows. Alterne as opções para ajustar as configurações e reinicie o sistema para aplicar as alterações.
+Use o **Características** guia para modificar recursos específicos do Windows. Alterne as opções para ajustar as configurações e reinicie o sistema para aplicar as alterações.
 
 ### Informações do sistema
 
-O**Dispositivo**página fornece uma visão abrangente do hardware e sistema operacional do seu sistema. Isso ajuda você a entender sua configuração e a tomar decisões mais informadas sobre otimizações.
+O **Dispositivo** página fornece uma visão abrangente do hardware e sistema operacional do seu sistema. Isso ajuda você a entender sua configuração e a tomar decisões mais informadas sobre otimizações.
 
 ## Envolva-se
 
 RyTuneX is an open-source project. Contributions are welcome!  
-Confira o[guia de contribuição](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)para começar.
+Confira o [guia de contribuição](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md) para começar.
 
 ## Tradução
 
@@ -147,23 +147,23 @@ Confira o[guia de contribuição](https://github.com/rayenghanmi/RyTuneX/blob/ma
 
 Se você estiver interessado em contribuir com traduções, siga estas etapas:
 
-1.  **Clonar o arquivo**: Clonar o[Recursos.resw](../testing/Strings/en-us/Resources.resw)arquivo.
+1.  **Clonar o arquivo**: Clonar o [Resources.resw](../testing/Strings/en-us/Resources.resw) arquivo.
 2.  **Traduzir o arquivo**: traduza seu conteúdo para o idioma desejado.
-3.  **Salvar e estruturar**: Salve o arquivo traduzido como`Resources.resw`dentro de uma nova pasta nomeada com o código do seu idioma (por exemplo,`fr-fr`para francês).
-4.  **Crie uma solicitação pull**: envie uma solicitação pull para o`testing`filial, garantindo o novo`resw`arquivo está incluído na pasta do idioma correto dentro do`Strings`diretório.
+3.  **Salvar e estruturar**: Salve o arquivo traduzido como `Resources.resw` dentro de uma nova pasta nomeada com o código do seu idioma (por exemplo, `fr-fr` para francês).
+4.  **Crie uma solicitação pull**: envie uma solicitação pull para o `testing` filial, garantindo o novo `resw` arquivo está incluído na pasta do idioma correto dentro do `Strings` diretório.
 
 Obrigado por ajudar a tornar o RyTuneX acessível a mais pessoas!
 
 ## Licença
 
-Este projeto está licenciado sob o[Licença Pública Geral GNU v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
+Este projeto está licenciado sob o [Licença Pública Geral GNU v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
 
 ## Contato
 
--   E-mail:[ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
--   Twitter:[@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
--   Facebook:[Rayen.](https://www.facebook.com/rayen.ghanmi.23)
--   Discórdia:[RyTuneX](https://discord.gg/gyBzyd364t)
--   Instagram:[@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
+-   E-mail: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
+-   Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
+-   Facebook: [@rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
+-   Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
+-   Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
 
 Estamos aqui para apoiar e ouvir seus comentários!
