@@ -119,7 +119,7 @@ O**Dispositivo**página fornece uma visão abrangente do hardware e sistema oper
 
 ## Envolva-se
 
-RyTuneX é um projeto de código aberto. Contribuições são bem-vindas!  
+RyTuneX is an open-source project. Contributions are welcome!  
 Confira o[guia de contribuição](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)para começar.
 
 ## Tradução
