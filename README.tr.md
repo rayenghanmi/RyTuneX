@@ -93,7 +93,7 @@ RyTuneX, kapsamlı bir sistem optimizasyon aracıdır.**genişletmek**the**perfo
 2.  **Düzenlemek**: İndirilen kurulumu çalıştırın ve RyTuneX'i yüklemek için talimatları izleyin.
 
 > [!ÖNEMLİ]  
-> RyTuneX'i her zaman resmi siteden indirin[GitHub sayfası yayınlanıyor](https://github.com/rayenghanmi/RyTuneX/releases)özgünlüğünü ve güvenliğini sağlamak için.
+> RyTuneX'i her zaman resmi siteden indirin[GitHub sayfası yayınlanıyor](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety.
 
 ## Kullanım
 
@@ -147,7 +147,7 @@ RyTuneX açık kaynaklı bir projedir. Katkılarınızı bekliyoruz!
 
 Çevirilere katkıda bulunmak istiyorsanız lütfen şu adımları izleyin:
 
-1.  **Dosyayı Klonla**: Klonlayın[Kaynaklar.resw](../testing/Strings/en-us/Resources.resw)dosya.
+1.  **Dosyayı Klonla**: Clone the [Kaynaklar.resw](../testing/Strings/en-us/Resources.resw)dosya.
 2.  **Dosyayı Çevir**: İçeriğini istediğiniz dile çevirin.
 3.  **Kaydet ve Yapılandır**: Çevrilen dosyayı farklı kaydet`Resources.resw`dil kodunuzla adlandırılan yeni bir klasörün içinde (ör.`fr-fr`Fransızca için).
 4.  **Çekme İsteği Oluşturun**: Bir çekme isteği gönderin`testing`şube, yenisini sağlamak`resw`dosyanın doğru dil klasörüne dahil edilmesi`Strings`dizin.
