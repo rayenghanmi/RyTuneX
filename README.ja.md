@@ -5,8 +5,8 @@
 <h1 align="center" style="font-family: 'Segoe UI', sans-serif; font-weight: 600; color: #0078D4;">RyTuneX</h1>
 
 <p align="center" style="font-size: 1.1rem; color: #555;">
-  <strong>Streamline. Optimize. Dominate.</strong><br>
-  Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
+  <strong>効率化。最適化。支配。</strong><br>
+  Windows 10および11を強化するためのワンストップソリューション。精密に構築され、パフォーマンスのために設計されています。
 </p>
 
 <div align="center" style="margin: 20px 0; text-align: center;">
@@ -14,7 +14,7 @@
   <a href="README.ar.md" style="margin: 0 10px;">العربية</a>
   <a href="README.zh-CN.md" style="margin: 0 10px;">简体中文</a>
   <a href="README.de.md" style="margin: 0 10px;">Deutsch</a>
-  <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
+  <a href="README.md" style="margin: 0 10px;">English</a>
   <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
   <a href="README.es.md" style="margin: 0 10px;">Español</a>
   <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
@@ -50,13 +50,13 @@
 
 ### コミュニティに参加する
 
-他のユーザーとつながり、経験を共有することで、RyTuneX を最大限に活用してください。ご質問やフィードバックがありますか?一緒にRyTuneXをさらに良くしていきましょう！
+他のユーザーとつながり、経験を共有することで、RyTuneX を最大限に活用してください。ご質問やフィードバックがありますか?一緒に RyTuneX をさらに良くしていきましょう！
 
 * * *
 
 ## について
 
-RyTuneX は、次の目的で設計された包括的なシステム最適化ツールです。**強化する**の**パフォーマンス**,**プライバシー**、 そして**使いやすさ**Windows システムの。で構築されました**WinUI3**フレームワークと活用**.NET 8**, RyTuneX は、最新の応答性の高いユーザー エクスペリエンスを提供します。のために特別に作られています**Windows 10 (21H2 以降)**そして**Windows 11**。あなたがそうかどうか**ゲーマー**または**上級ユーザー**, RyTuneX を使用すると削除できます。**プリインストールされたアプリ**、 管理**システム設定**、最適化します**パフォーマンス**.
+RyTuneX は、次の目的で設計された包括的なシステム最適化ツールです。**強化する** の **パフォーマンス**, **プライバシー**、 そして **使いやすさ** Windows システムの。で構築されました **WinUI3** フレームワークと活用 **.NET 8**, RyTuneX は、最新の応答性の高いユーザー エクスペリエンスを提供します。のために特別に作られています **Windows 10 (20H1 以降)** そして **Windows 11**。あなたがそうかどうか **ゲーマー** または **上級ユーザー**, RyTuneX を使用すると削除できます。**プリインストールされたアプリ**、 管理 **システム設定**、最適化します **パフォーマンス**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -74,7 +74,7 @@ RyTuneX は、次の目的で設計された包括的なシステム最適化ツ
 
 -   **モダンなデザイン**: WinUI 3 を活用した洗練された直感的なインターフェイスをお楽しみください。このアプリケーションは、ユーザーフレンドリーで視覚的に魅力的な最新のデザインを誇り、システム最適化タスクを簡単にします。インターフェイスはすっきりしていて操作しやすいように設計されており、ユーザーは必要な機能にすぐにアクセスできます。
 
--   **相互互換性**: RyTuneX は両方に互換性があります**Windows 10 (21H2 以降)**そして**Windows 11**、異なる Windows バージョン間でシームレスなパフォーマンスの最適化を保証します。このアプリは一貫したエクスペリエンスを提供し、ユーザーはオペレーティング システムのバージョンに関係なく、その機能を最大限に活用できます。
+-   **相互互換性**: RyTuneX は両方に互換性があります **Windows 10 (20H1 以降)** そして **Windows 11**、異なる Windows バージョン間でシームレスなパフォーマンスの最適化を保証します。このアプリは一貫したエクスペリエンスを提供し、ユーザーはオペレーティング システムのバージョンに関係なく、その機能を最大限に活用できます。
 
 ## UIプレビュー
 
@@ -89,38 +89,38 @@ RyTuneX は、次の目的で設計された包括的なシステム最適化ツ
 
 ## インストール
 
-1.  **ダウンロード**: 最新情報を入手[インストールのセットアップ](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+1.  **ダウンロード**: 最新情報を入手 [インストールのセットアップ](https://github.com/rayenghanmi/RyTuneX/releases/latest)
 2.  **インストール**: ダウンロードしたセットアップを実行し、プロンプトに従って RyTuneX をインストールします。
 
-> [！重要!]  
-> RyTuneX は必ず公式からダウンロードしてください[GitHub リリースページ](https://github.com/rayenghanmi/RyTuneX/releases)その信頼性と安全性を確保するために。
+> [!IMPORTANT]  
+> RyTuneX は必ず公式からダウンロードしてください [GitHub リリースページ](https://github.com/rayenghanmi/RyTuneX/releases) その信頼性と安全性を確保するために。
 
 ## 使用法
 
 ### システムの最適化
 
-システムを最適化するには、次のサイトにアクセスしてください。**最適化する**タブをクリックして、ニーズに応じて利用可能なオプションを切り替えます。変更はシステムの再起動後に有効になります。
+システムを最適化するには、次のサイトにアクセスしてください。**最適化する** タブをクリックして、ニーズに応じて利用可能なオプションを切り替えます。変更はシステムの再起動後に有効になります。
 
 ### 不要なアプリを削除する
 
-で**デブロート**タブでは、インストールされているアプリのリストを表示できます。削除したいものを選択してクリックします**選択したアプリをアンインストールします)**。プロセスを完了するには再起動が必要な場合があります。
+で **デブロート** タブでは、インストールされているアプリのリストを表示できます。削除したいものを選択してクリックします **選択したアプリをアンインストールします**。プロセスを完了するには再起動が必要な場合があります。
 
 ### プライバシーの強化
 
-に向かう**プライバシー**タブをクリックしてプライバシー設定を構成します。スイッチを切り替えて、テレメトリ、広告などに影響を与える機能を有効または無効にします。変更は再起動後に有効になります。
+に向かう **プライバシー** タブをクリックしてプライバシー設定を構成します。スイッチを切り替えて、テレメトリ、広告などに影響を与える機能を有効または無効にします。変更は再起動後に有効になります。
 
 ### Windows 機能管理
 
-を使用します。**特徴**タブをクリックして、特定の Windows 機能を変更します。スイッチを切り替えて設定を調整し、システムを再起動して変更を適用します。
+を使用します。**特徴** タブをクリックして、特定の Windows 機能を変更します。スイッチを切り替えて設定を調整し、システムを再起動して変更を適用します。
 
 ### システム情報
 
-の**デバイス**このページには、システムのハードウェアと OS の包括的なビューが表示されます。これは、設定を理解し、最適化についてより多くの情報に基づいた決定を下すのに役立ちます。
+の **デバイス** このページには、システムのハードウェアと OS の包括的なビューが表示されます。これは、設定を理解し、最適化についてより多くの情報に基づいた決定を下すのに役立ちます。
 
 ## 参加してみよう
 
 RyTuneX はオープンソース プロジェクトです。貢献は大歓迎です!  
-をチェックしてください[貢献ガイド](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)始めるために。
+をチェックしてください [貢献ガイド](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md) 始めるために。
 
 ## 翻訳
 
@@ -147,23 +147,23 @@ RyTuneX はオープンソース プロジェクトです。貢献は大歓迎�
 
 翻訳に貢献することに興味がある場合は、次の手順に従ってください。
 
-1.  **ファイルのクローンを作成する**: クローンを作成します[リソース.resw](../testing/Strings/en-us/Resources.resw)ファイル。
+1.  **ファイルのクローンを作成する**: クローンを作成します [Resources.resw](../testing/Strings/en-us/Resources.resw) ファイル。
 2.  **ファイルを翻訳する**: 内容を希望の言語に翻訳します。
-3.  **保存して構造化する**: 翻訳したファイルを名前を付けて保存します`Resources.resw`言語コードで名前を付けた新しいフォルダー内 (例:`fr-fr`フランス語の場合）。
-4.  **プルリクエストを作成する**: プル リクエストを`testing`ブランチ、新しいものを確保する`resw`ファイルは、正しい言語フォルダーに含まれています。`Strings`ディレクトリ。
+3.  **保存して構造化する**: 翻訳したファイルを名前を付けて保存します `Resources.resw` 言語コードで名前を付けた新しいフォルダー内 (例: `fr-fr` フランス語の場合）。
+4.  **プルリクエストを作成する**: プル リクエストを `testing` ブランチ、新しいものを確保する `resw` ファイルは、正しい言語フォルダーに含まれています。`Strings` ディレクトリ。
 
 RyTuneX をより多くの人が利用できるようにご協力いただきありがとうございます。
 
 ## ライセンス
 
-このプロジェクトは以下に基づいてライセンスされています[GNU 一般公衆利用許諾書 v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
+このプロジェクトは以下に基づいてライセンスされています [GNU 一般公衆利用許諾書 v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
 
 ## 接触
 
--   電子メール:[ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
--   ツイッター:[@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
--   フェイスブック:[ガンミ 23](https://www.facebook.com/rayen.ghanmi.23)
--   不和：[RyTuneX](https://discord.gg/gyBzyd364t)
--   インスタグラム:[@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
+-   E-mail: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
+-   Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
+-   Facebook: [@rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
+-   Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
+-   Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
 
 私たちはあなたのフィードバックをサポートし、耳を傾けるためにここにいます!
