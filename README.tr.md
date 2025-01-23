@@ -5,8 +5,8 @@
 <h1 align="center" style="font-family: 'Segoe UI', sans-serif; font-weight: 600; color: #0078D4;">RyTuneX</h1>
 
 <p align="center" style="font-size: 1.1rem; color: #555;">
-  <strong>Streamline. Optimize. Dominate.</strong><br>
-  Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
+  <strong>Yalınlaştırın. Optimize Edin. Hükmedin.</strong><br>
+  Windows 10 ve 11'i geliştirmek için tek durak çözümünüz. Hassasiyetle inşa edildi, performans için tasarlandı.
 </p>
 
 <div align="center" style="margin: 20px 0; text-align: center;">
@@ -19,7 +19,7 @@
   <a href="README.es.md" style="margin: 0 10px;">Español</a>
   <a href="README.ko.md" style="margin: 0 10px;">한국어</a>
   <a href="README.pt.md" style="margin: 0 10px;">Português</a>
-  <a href="README.tr.md" style="margin: 0 10px;">Türkçe</a>
+  <a href="README.md" style="margin: 0 10px;">English</a>
   <a href="README.it.md" style="margin: 0 10px;">Italiano</a>
 </div><br>
 
@@ -56,7 +56,7 @@ Diğer kullanıcılarla bağlantı kurarak ve deneyimlerinizi paylaşarak RyTune
 
 ## Hakkında
 
-RyTuneX, kapsamlı bir sistem optimizasyon aracıdır.**genişletmek**the**performans**,**mahremiyet**, Ve**kullanılabilirlik**Windows sistemlerinden. İle inşa edildi**WinUI 3**çerçeve ve yararlanma**.NET8**RyTuneX, modern ve duyarlı bir kullanıcı deneyimi sağlar. Özel olarak hazırlanmış**Windows 10 (21H2 ve üzeri)**Ve**Windows 11**. sen misin**bir oyuncu**veya**ileri düzey bir kullanıcı**, RyTuneX kaldırmanıza olanak tanır**önceden yüklenmiş uygulamalar**, üstesinden gelmek**sistem ayarları**ve optimize edin**performans**.
+RyTuneX, kapsamlı bir sistem optimizasyon aracıdır.**genişletmek** the **performans**, **mahremiyet**, Ve **kullanılabilirlik** Windows sistemlerinden. İle inşa edildi **WinUI 3** çerçeve ve yararlanma **.NET8**, RyTuneX modern ve duyarlı bir kullanıcı deneyimi sağlar. Özel olarak hazırlanmış **Windows 10 (20H1 ve üzeri)** Ve **Windows 11**. sen misin **bir oyuncu** veya **ileri düzey bir kullanıcı**, RyTuneX kaldırmanıza olanak tanır **önceden yüklenmiş uygulamalar**, üstesinden gelmek **sistem ayarları** ve optimize edin **performans**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -74,7 +74,7 @@ RyTuneX, kapsamlı bir sistem optimizasyon aracıdır.**genişletmek**the**perfo
 
 -   **Modern Tasarım**: WinUI 3 tarafından desteklenen şık ve sezgisel bir arayüzün keyfini çıkarın. Uygulama, hem kullanıcı dostu hem de görsel olarak çekici olan modern bir tasarıma sahiptir ve sistem optimizasyon görevlerini basitleştirir. Arayüz temiz ve gezinmesi kolay olacak şekilde tasarlanmış olup kullanıcıların ihtiyaç duydukları özelliklere hızlı bir şekilde erişmelerine olanak tanır.
 
--   **Çapraz Uyumlu**: RyTuneX her ikisiyle de uyumludur**Windows 10 (21H2 ve üzeri)**Ve**Windows 11**farklı Windows sürümlerinde kusursuz performans optimizasyonu sağlar. Uygulama, tutarlı bir deneyim sunarak kullanıcıların işletim sistemi sürümüne bakılmaksızın uygulamanın özelliklerinden tam olarak yararlanmasına olanak tanır.
+-   **Çapraz Uyumlu**: RyTuneX her ikisiyle de uyumludur **Windows 10 (20H1 ve üzeri)** Ve **Windows 11**, farklı Windows sürümlerinde kusursuz performans optimizasyonu sağlar. Uygulama, tutarlı bir deneyim sunarak kullanıcıların işletim sistemi sürümüne bakılmaksızın uygulamanın özelliklerinden tam olarak yararlanmasına olanak tanır.
 
 ## Kullanıcı Arayüzü Önizlemesi
 
@@ -89,38 +89,38 @@ RyTuneX, kapsamlı bir sistem optimizasyon aracıdır.**genişletmek**the**perfo
 
 ## Kurulum
 
-1.  **İndirmek**: En son haberleri alın[kurulum kurulumu](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+1.  **İndirmek**: En son haberleri alın [kurulum kurulumu](https://github.com/rayenghanmi/RyTuneX/releases/latest)
 2.  **Düzenlemek**: İndirilen kurulumu çalıştırın ve RyTuneX'i yüklemek için talimatları izleyin.
 
-> [!ÖNEMLİ]  
-> RyTuneX'i her zaman resmi siteden indirin[GitHub sayfası yayınlanıyor](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety.
+> [!IMPORTANT]  
+> Her zaman RyTuneX'i resmi [GitHub sürümleri sayfasından](https://github.com/rayenghanmi/RyTuneX/releases) indirin, böylece doğruluğundan ve güvenliğinden emin olabilirsiniz.
 
 ## Kullanım
 
 ### Sistem Optimizasyonları
 
-Sisteminizi optimize etmek için şuraya gidin:**Optimize et**sekmesine gidin ve ihtiyaçlarınıza göre mevcut seçenekler arasında geçiş yapın. Değişiklikler sistem yeniden başlatıldıktan sonra geçerli olacaktır.
+Sisteminizi optimize etmek için şuraya gidin: **Optimize** et sekmesine gidin ve ihtiyaçlarınıza göre mevcut seçenekler arasında geçiş yapın. Değişiklikler sistem yeniden başlatıldıktan sonra geçerli olacaktır.
 
 ### İstenmeyen Uygulamaları Kaldır
 
-içinde**Şişmeyi giderme**sekmesinde yüklü uygulamaların listesini görüntüleyebilirsiniz. Kaldırmak istediklerinizi seçin ve tıklayın**Seçili Uygulamaları kaldır)**. İşlemi tamamlamak için yeniden başlatma gerekebilir.
+içinde **Şişmeyi giderme** sekmesinde yüklü uygulamaların listesini görüntüleyebilirsiniz. Kaldırmak istediklerinizi seçin ve tıklayın **Seçili Uygulamaları kaldır**. İşlemi tamamlamak için yeniden başlatma gerekebilir.
 
 ### Gizlilik Geliştirmeleri
 
-Şuraya gidin:**Mahremiyet**Gizlilik ayarlarınızı yapılandırmak için sekmeyi tıklayın. Telemetriyi, reklamları ve daha fazlasını etkileyen özellikleri etkinleştirmek veya devre dışı bırakmak için anahtarları değiştirin. Değişiklikler yeniden başlatmanın ardından etkili olacaktır.
+Şuraya gidin: **Mahremiyet** Gizlilik ayarlarınızı yapılandırmak için sekmeyi tıklayın. Telemetriyi, reklamları ve daha fazlasını etkileyen özellikleri etkinleştirmek veya devre dışı bırakmak için anahtarları değiştirin. Değişiklikler yeniden başlatmanın ardından etkili olacaktır.
 
 ### Windows Özellikleri Yönetimi
 
-Kullanın**Özellikler**Belirli Windows özelliklerini değiştirmek için sekme. Ayarları yapmak için anahtarları değiştirin ve değişiklikleri uygulamak için sisteminizi yeniden başlatın.
+Kullanın **Özellikler** Belirli Windows özelliklerini değiştirmek için sekme. Ayarları yapmak için anahtarları değiştirin ve değişiklikleri uygulamak için sisteminizi yeniden başlatın.
 
 ### Sistem Bilgileri
 
-**Cihaz**sayfası, sisteminizin donanımı ve işletim sistemi hakkında kapsamlı bir görünüm sağlar. Bu, kurulumunuzu anlamanıza ve optimizasyonlar hakkında daha bilinçli kararlar vermenize yardımcı olur.
+**Cihaz** sayfası, sisteminizin donanımı ve işletim sistemi hakkında kapsamlı bir görünüm sağlar. Bu, kurulumunuzu anlamanıza ve optimizasyonlar hakkında daha bilinçli kararlar vermenize yardımcı olur.
 
 ## Katılın
 
 RyTuneX açık kaynaklı bir projedir. Katkılarınızı bekliyoruz!  
-Şuna göz atın:[katkı kılavuzu](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)Başlamak için.
+Şuna göz atın: [katkı kılavuzu](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md) Başlamak için.
 
 ## Çeviri
 
@@ -147,23 +147,23 @@ RyTuneX açık kaynaklı bir projedir. Katkılarınızı bekliyoruz!
 
 Çevirilere katkıda bulunmak istiyorsanız lütfen şu adımları izleyin:
 
-1.  **Dosyayı Klonla**: Clone the [Kaynaklar.resw](../testing/Strings/en-us/Resources.resw)dosya.
+1.  **Dosyayı Klonla**: Clone the [Resources.resw](../testing/Strings/en-us/Resources.resw) dosya.
 2.  **Dosyayı Çevir**: İçeriğini istediğiniz dile çevirin.
-3.  **Kaydet ve Yapılandır**: Çevrilen dosyayı farklı kaydet`Resources.resw`dil kodunuzla adlandırılan yeni bir klasörün içinde (ör.`fr-fr`Fransızca için).
-4.  **Çekme İsteği Oluşturun**: Bir çekme isteği gönderin`testing`şube, yenisini sağlamak`resw`dosyanın doğru dil klasörüne dahil edilmesi`Strings`dizin.
+3.  **Kaydet ve Yapılandır**: Çevrilen dosyayı farklı kaydet `Resources.resw` dil kodunuzla adlandırılan yeni bir klasörün içinde (ör. `fr-fr` Fransızca için).
+4.  **Çekme İsteği Oluşturun**: Bir çekme isteği gönderin `testing` şube, yenisini sağlamak `resw` dosyanın doğru dil klasörüne dahil edilmesi `Strings` dizin.
 
 RyTuneX'in daha fazla kişi tarafından erişilebilir olmasına yardımcı olduğunuz için teşekkür ederiz!
 
 ## Lisans
 
-Bu proje kapsamında lisanslıdır.[GNU Genel Kamu Lisansı v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
+Bu proje kapsamında lisanslıdır. [GNU Genel Kamu Lisansı v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
 
 ## Temas etmek
 
--   E-posta:[ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
--   Twitter'da:[@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
--   Facebook:[Rayen.](https://www.facebook.com/rayen.ghanmi.23)
--   Anlaşmazlık:[RyTuneX](https://discord.gg/gyBzyd364t)
--   Instagram'da:[@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
+-   E-mail: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
+-   Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
+-   Facebook: [@rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
+-   Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
+-   Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
 
 Geri bildiriminizi desteklemek ve dinlemek için buradayız!
