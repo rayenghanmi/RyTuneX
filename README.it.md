@@ -99,7 +99,7 @@ RyTuneX è uno strumento completo di ottimizzazione del sistema progettato per**
 
 ### Ottimizzazioni del sistema
 
-Per ottimizzare il tuo sistema, vai al**Ottimizzare**scheda e attiva/disattiva le opzioni disponibili in base alle tue esigenze. Le modifiche avranno effetto dopo il riavvio del sistema.
+Per ottimizzare il tuo sistema, vai al**Ottimizzare**scheda e attiva le opzioni disponibili in base alle tue esigenze. Le modifiche avranno effetto dopo il riavvio del sistema.
 
 ### Debloat delle app indesiderate
 
@@ -128,7 +128,7 @@ Dai un'occhiata a[guida ai contributi](https://github.com/rayenghanmi/RyTuneX/bl
 
 | Lingua                     | Stato della traduzione |
 | -------------------------- | ---------------------- |
-| English (United States)    | 100%                   |
+| Inglese (Stati Uniti)      | 100%                   |
 | Francese (Francia)         | 100%                   |
 | Arabo (Tunisia)            | 100%                   |
 | Cinese semplificato (Cina) | 100%                   |
@@ -149,7 +149,7 @@ Se sei interessato a contribuire alle traduzioni, segui questi passaggi:
 
 1.  **Clona il file**: Clona il[Risorse.resw](../testing/Strings/en-us/Resources.resw)file.
 2.  **Traduci il file**: Traduci i suoi contenuti nella lingua desiderata.
-3.  **Salva e struttura**: salva il file tradotto con nome`Resources.resw`all'interno di una nuova cartella denominata con il codice della lingua (ad esempio,`fr-fr` for French).
+3.  **Salva e struttura**: salva il file tradotto con nome`Resources.resw`all'interno di una nuova cartella denominata con il codice della lingua (ad esempio,`fr-fr`per il francese).
 4.  **Crea una richiesta di pull**: invia una richiesta pull a`testing`filiale, garantendo il nuovo`resw`il file è incluso nella cartella della lingua corretta all'interno del file`Strings`directory.
 
 Grazie per aver contribuito a rendere RyTuneX accessibile a più persone!
