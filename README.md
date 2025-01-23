@@ -73,7 +73,7 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
 
 - **Modern Design**: Enjoy a sleek and intuitive interface powered by WinUI 3. The application boasts a modern design that is both user-friendly and visually appealing, making system optimization tasks straightforward. The interface is designed to be clean and easy to navigate, allowing users to quickly access the features they need.
 
-- **Cross-Compatible**: RyTuneX is compatible with both **Windows 10 (21H2 and up)** and **Windows 11**, ensuring seamless performance optimization across different Windows versions. The app delivers a consistent experience, allowing users to fully benefit from its features regardless of their operating system version.
+- **Cross-Compatible**: RyTuneX is compatible with both **Windows 10 (20H1 and up)** and **Windows 11**, ensuring seamless performance optimization across different Windows versions. The app delivers a consistent experience, allowing users to fully benefit from its features regardless of their operating system version.
 
 ## UI Preview
 
