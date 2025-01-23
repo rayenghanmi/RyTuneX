@@ -55,7 +55,7 @@ Get the most out of RyTuneX by connecting with fellow users and sharing your exp
 
 ## About
 
-RyTuneX is a comprehensive system optimization tool designed to **enhance** the **performance**, **privacy**, and **usability** of Windows systems. Built with the **WinUI 3** framework and leveraging **.NET 8**, RyTuneX provides a modern and responsive user experience. It is crafted specifically for **Windows 10 (21H2 and up)** and **Windows 11**. whether you're **a gamer** or **an advanced user**, RyTuneX allows you to remove **pre-installed apps**, manage **system settings**, and optimize **performance**.
+RyTuneX is a comprehensive system optimization tool designed to **enhance** the **performance**, **privacy**, and **usability** of Windows systems. Built with the **WinUI 3** framework and leveraging **.NET 8**, RyTuneX provides a modern and responsive user experience. It is crafted specifically for **Windows 10 (20H1 and up)** and **Windows 11**. whether you're **a gamer** or **an advanced user**, RyTuneX allows you to remove **pre-installed apps**, manage **system settings**, and optimize **performance**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -154,10 +154,10 @@ This project is licensed under the [GNU Affero General Public License v3.0](http
 
 ## Contact
 
-- Email: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
-- Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
-- Facebook: [rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
-- Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
-- Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
+-   E-mail: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
+-   Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
+-   Facebook: [@rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
+-   Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
+-   Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
 
 We’re here to support and listen to your feedback!
