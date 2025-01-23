@@ -56,7 +56,7 @@ Aproveche RyTuneX al máximo conectándose con otros usuarios y compartiendo sus
 
 ## Acerca de
 
-RyTuneX es una herramienta integral de optimización del sistema diseñada para**mejorar**el**actuación**,**privacidad**, y**usabilidad**de los sistemas Windows. Construido con el**WinUI 3**marco y aprovechamiento**.NET 8**, RyTuneX proporciona una experiencia de usuario moderna y receptiva. Está diseñado específicamente para**Windows 10 (21H2 y superiores)**y**ventanas 11**. si eres**un jugador**o**un usuario avanzado**, RyTuneX le permite eliminar**aplicaciones preinstaladas**, administrar**configuración del sistema**y optimizar**actuación**.
+RyTuneX es una herramienta integral de optimización del sistema diseñada para**mejorar** the **actuación**,**privacidad**, y**usabilidad**de los sistemas Windows. Construido con el**WinUI 3**marco y aprovechamiento**.NET 8**, RyTuneX proporciona una experiencia de usuario moderna y receptiva. Está diseñado específicamente para**Windows 10 (21H2 and up)**y**ventanas 11**. si eres**un jugador**o**un usuario avanzado**, RyTuneX le permite eliminar**aplicaciones preinstaladas**, administrar**configuración del sistema**y optimizar**actuación**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -99,7 +99,7 @@ RyTuneX es una herramienta integral de optimización del sistema diseñada para*
 
 ### Optimizaciones del sistema
 
-To optimize your system, go to the **Optimizar**y alterne las opciones disponibles según sus necesidades. Los cambios entrarán en vigor después de reiniciar el sistema.
+Para optimizar su sistema, vaya a la**Optimizar**y alterne las opciones disponibles según sus necesidades. Los cambios entrarán en vigor después de reiniciar el sistema.
 
 ### Desbloquear aplicaciones no deseadas
 
@@ -126,7 +126,7 @@ Mira el[guía de contribución](https://github.com/rayenghanmi/RyTuneX/blob/main
 
 #### Estos son los idiomas admitidos actualmente por RyTuneX:
 
-| Idioma                     | Estado de traducción |
+| Language                   | Estado de traducción |
 | -------------------------- | -------------------- |
 | Inglés (Estados Unidos)    | 100%                 |
 | Francés (Francia)          | 100%                 |
