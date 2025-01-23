@@ -5,15 +5,15 @@
 <h1 align="center" style="font-family: 'Segoe UI', sans-serif; font-weight: 600; color: #0078D4;">RyTuneX</h1>
 
 <p align="center" style="font-size: 1.1rem; color: #555;">
-  <strong>Optimieren. Beschleunigen. Dominieren.</strong><br>
-  Ihre All-in-One-Lösung zur Verbesserung von Windows 10 und 11. Präzise entwickelt, auf Leistung ausgelegt.
+  <strong>Streamline. Optimize. Dominate.</strong><br>
+  Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
 </p>
 
 <div align="center" style="margin: 20px 0; text-align: center;">
   <a href="README.fr.md" style="margin: 0 10px;">Français</a>
   <a href="README.ar.md" style="margin: 0 10px;">العربية</a>
   <a href="README.zh-CN.md" style="margin: 0 10px;">简体中文</a>
-  <a href="README.md" style="margin: 0 10px;">English</a>
+  <a href="README.de.md" style="margin: 0 10px;">Deutsch</a>
   <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
   <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
   <a href="README.es.md" style="margin: 0 10px;">Español</a>
@@ -56,7 +56,7 @@ Holen Sie das Beste aus RyTuneX heraus, indem Sie sich mit anderen Benutzern ver
 
 ## Um
 
-RyTuneX ist ein umfassendes Systemoptimierungstool, das dafür entwickelt wurde **erweitern** Die **Leistung**, **Privatsphäre**, Und **Benutzerfreundlichkeit** von Windows-Systemen. Gebaut mit dem **WinUI 3** Rahmen und Hebelwirkung **.NET 8** RyTuneX bietet ein modernes und reaktionsfähiges Benutzererlebnis. Es wurde speziell für hergestellt **Windows 10 (21H2 und höher)** Und **Windows 11**. ob du es bist **ein Spieler** oder **ein fortgeschrittener Benutzer**, RyTuneX ermöglicht Ihnen das Entfernen **vorinstallierte Apps**, verwalten **Systemeinstellungen**, und optimieren **Leistung**.
+RyTuneX ist ein umfassendes Systemoptimierungstool, das dafür entwickelt wurde**erweitern**Die**Leistung**,**Privatsphäre**, Und**Benutzerfreundlichkeit**von Windows-Systemen. Gebaut mit dem**WinUI 3**Rahmen und Hebelwirkung**.NET 8**RyTuneX bietet ein modernes und reaktionsfähiges Benutzererlebnis. Es wurde speziell für hergestellt**Windows 10 (21H2 und höher)**Und**Windows 11**. ob du es bist**ein Spieler** or **ein fortgeschrittener Benutzer**, RyTuneX ermöglicht Ihnen das Entfernen**vorinstallierte Apps**, verwalten**Systemeinstellungen**, und optimieren**Leistung**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -74,7 +74,7 @@ RyTuneX ist ein umfassendes Systemoptimierungstool, das dafür entwickelt wurde 
 
 -   **Modernes Design**: Genießen Sie eine elegante und intuitive Benutzeroberfläche mit WinUI 3. Die Anwendung verfügt über ein modernes Design, das sowohl benutzerfreundlich als auch optisch ansprechend ist und Systemoptimierungsaufgaben unkompliziert macht. Die Benutzeroberfläche ist übersichtlich und einfach zu navigieren, sodass Benutzer schnell auf die benötigten Funktionen zugreifen können.
 
--   **Kreuzkompatibel**: RyTuneX ist mit beiden kompatibel **Windows 10 (21H2 und höher)** Und **Windows 11**, wodurch eine nahtlose Leistungsoptimierung über verschiedene Windows-Versionen hinweg gewährleistet wird. Die App bietet ein konsistentes Erlebnis, sodass Benutzer unabhängig von der Version ihres Betriebssystems in vollem Umfang von ihren Funktionen profitieren können.
+-   **Kreuzkompatibel**: RyTuneX ist mit beiden kompatibel**Windows 10 (21H2 und höher)**Und**Windows 11**, wodurch eine nahtlose Leistungsoptimierung über verschiedene Windows-Versionen hinweg gewährleistet wird. Die App bietet ein konsistentes Erlebnis, sodass Benutzer unabhängig von der Version ihres Betriebssystems in vollem Umfang von ihren Funktionen profitieren können.
 
 ## UI-Vorschau
 
@@ -89,38 +89,38 @@ RyTuneX ist ein umfassendes Systemoptimierungstool, das dafür entwickelt wurde 
 
 ## Installation
 
-1.  **Herunterladen**: Holen Sie sich das Neueste [Installations-Setup](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+1.  **Herunterladen**: Holen Sie sich das Neueste[Installations-Setup](https://github.com/rayenghanmi/RyTuneX/releases/latest)
 2.  **Installieren**: Führen Sie das heruntergeladene Setup aus und befolgen Sie die Anweisungen zur Installation von RyTuneX.
 
-> [!IMPORTANT]  
-> Laden Sie RyTuneX immer vom offiziellen Anbieter herunter [GitHub-Veröffentlichungsseite](https://github.com/rayenghanmi/RyTuneX/releases) um seine Authentizität und Sicherheit zu gewährleisten.
+> [!WICHTIG]  
+> Laden Sie RyTuneX immer vom offiziellen Anbieter herunter[GitHub-Veröffentlichungsseite](https://github.com/rayenghanmi/RyTuneX/releases)um seine Authentizität und Sicherheit zu gewährleisten.
 
 ## Verwendung
 
 ### Systemoptimierungen
 
-Um Ihr System zu optimieren, gehen Sie zu **Optimieren** Klicken Sie auf die Registerkarte und schalten Sie die verfügbaren Optionen entsprechend Ihren Anforderungen um. Änderungen werden nach einem Systemneustart wirksam.
+Um Ihr System zu optimieren, gehen Sie zu**Optimieren**Klicken Sie auf die Registerkarte und schalten Sie die verfügbaren Optionen entsprechend Ihren Anforderungen um. Änderungen werden nach einem Systemneustart wirksam.
 
 ### Entfernen Sie unerwünschte Apps
 
-Im **Debloat** Auf der Registerkarte können Sie eine Liste der installierten Apps anzeigen. Wählen Sie diejenigen aus, die Sie entfernen möchten, und klicken Sie auf**Ausgewählte Apps deinstallieren)**. Möglicherweise ist ein Neustart erforderlich, um den Vorgang abzuschließen.
+Im**Debloat**Auf der Registerkarte können Sie eine Liste der installierten Apps anzeigen. Wählen Sie diejenigen aus, die Sie entfernen möchten, und klicken Sie auf**Ausgewählte Apps deinstallieren)**. Möglicherweise ist ein Neustart erforderlich, um den Vorgang abzuschließen.
 
 ### Datenschutzverbesserungen
 
-Gehen Sie zum **Privatsphäre** Klicken Sie auf die Registerkarte, um Ihre Datenschutzeinstellungen zu konfigurieren. Schalten Sie die Schalter um, um Funktionen zu aktivieren oder zu deaktivieren, die sich auf Telemetrie, Werbung und mehr auswirken. Änderungen werden nach einem Neustart wirksam.
+Gehen Sie zum**Privatsphäre**Klicken Sie auf die Registerkarte, um Ihre Datenschutzeinstellungen zu konfigurieren. Schalten Sie die Schalter um, um Funktionen zu aktivieren oder zu deaktivieren, die sich auf Telemetrie, Werbung und mehr auswirken. Änderungen werden nach einem Neustart wirksam.
 
 ### Windows-Funktionsverwaltung
 
-Benutzen Sie die **Merkmale** Klicken Sie auf die Registerkarte, um bestimmte Windows-Funktionen zu ändern. Schalten Sie die Schalter um, um die Einstellungen anzupassen, und starten Sie Ihr System neu, um die Änderungen zu übernehmen.
+Benutzen Sie die**Merkmale**Klicken Sie auf die Registerkarte, um bestimmte Windows-Funktionen zu ändern. Schalten Sie die Schalter um, um die Einstellungen anzupassen, und starten Sie Ihr System neu, um die Änderungen zu übernehmen.
 
 ### Systeminformationen
 
-Der **Gerät** Die Seite bietet einen umfassenden Überblick über die Hardware und das Betriebssystem Ihres Systems. Dies hilft Ihnen, Ihr Setup zu verstehen und fundiertere Entscheidungen über Optimierungen zu treffen.
+Der**Gerät**Die Seite bietet einen umfassenden Überblick über die Hardware und das Betriebssystem Ihres Systems. Dies hilft Ihnen, Ihr Setup zu verstehen und fundiertere Entscheidungen über Optimierungen zu treffen.
 
 ## Machen Sie mit
 
 RyTuneX ist ein Open-Source-Projekt. Beiträge sind willkommen!  
-Schauen Sie sich das an [Beitragsleitfaden](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)um loszulegen.
+Schauen Sie sich die an[Beitragsleitfaden](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)um loszulegen.
 
 ## Übersetzung
 
@@ -147,23 +147,23 @@ Schauen Sie sich das an [Beitragsleitfaden](https://github.com/rayenghanmi/RyTun
 
 Wenn Sie daran interessiert sind, Übersetzungen beizutragen, befolgen Sie bitte diese Schritte:
 
-1.  **Klonen Sie die Datei**: Klonen Sie die [Ressources.resw](../testing/Strings/en-us/Resources.resw) Datei.
+1.  **Klonen Sie die Datei**: Klonen Sie die[Ressourcen.resw](../testing/Strings/en-us/Resources.resw)Datei.
 2.  **Übersetzen Sie die Datei**: Übersetzen Sie den Inhalt in die gewünschte Sprache.
-3.  **Speichern und strukturieren**: Speichern Sie die übersetzte Datei unter `Resources.resw` in einem neuen Ordner mit dem Namen Ihres Sprachcodes (z. B. `fr-fr` für Französisch).
-4.  **Erstellen Sie eine Pull-Anfrage**: Senden Sie eine Pull-Anfrage an die `testing` Zweig, der das Neue gewährleistet `resw` Die Datei befindet sich im richtigen Sprachordner innerhalb der `Strings` Verzeichnis.
+3.  **Speichern und strukturieren**: Speichern Sie die übersetzte Datei unter`Resources.resw`in einem neuen Ordner mit dem Namen Ihres Sprachcodes (z. B.`fr-fr`für Französisch).
+4.  **Erstellen Sie eine Pull-Anfrage**: Senden Sie eine Pull-Anfrage an die`testing`Zweig, der das Neue gewährleistet`resw`Die Datei befindet sich im richtigen Sprachordner innerhalb der`Strings`Verzeichnis.
 
 Vielen Dank, dass Sie dazu beigetragen haben, RyTuneX für mehr Menschen zugänglich zu machen!
 
 ## Lizenz
 
-Dieses Projekt ist unter der Lizenz lizenziert [GNU General Public License v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
+Dieses Projekt ist unter der Lizenz lizenziert[GNU General Public License v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
 
 ## Kontakt
 
--   E-Mail: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
--   Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
--   Facebook: [@rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
--   Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
--   Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
+-   E-Mail:[ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
+-   Twitter:[@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
+-   Facebook:[Rayen. Ghanmi 23](https://www.facebook.com/rayen.ghanmi.23)
+-   Zwietracht:[RyTuneX](https://discord.gg/gyBzyd364t)
+-   Instagram:[@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
 
 Wir sind hier, um Sie zu unterstützen und auf Ihr Feedback zu hören!
