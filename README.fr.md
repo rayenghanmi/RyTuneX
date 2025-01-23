@@ -122,11 +122,11 @@ Le**Appareil**La page fournit une vue complète du matériel et du système d’
 RyTuneX est un projet open source. Les contributions sont les bienvenues !  
 Découvrez le[guide des contributions](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)pour commencer.
 
-## Translation
+## Traduction
 
 #### Voici les langues actuellement prises en charge par RyTuneX :
 
-| Language                  | Statut de la traduction |
+| Langue                    | Statut de la traduction |
 | ------------------------- | ----------------------- |
 | Anglais (États-Unis)      | 100%                    |
 | Français (France)         | 100%                    |
@@ -143,13 +143,13 @@ Découvrez le[guide des contributions](https://github.com/rayenghanmi/RyTuneX/bl
 
 \* : La traduction sera livrée avec la prochaine version
 
-#### Voulez-vous ajouter votre langue?
+#### Vous souhaitez ajouter votre langue ?
 
 Si vous souhaitez contribuer aux traductions, veuillez suivre ces étapes :
 
 1.  **Cloner le fichier**: Cloner le[Ressources.resw](../testing/Strings/en-us/Resources.resw)déposer.
 2.  **Traduire le fichier**: Traduisez son contenu dans la langue de votre choix.
-3.  **Enregistrer et structurer**: Enregistrez le fichier traduit sous`Resources.resw`dans un nouveau dossier nommé avec votre code de langue (par exemple,`fr-fr`pour le français).
+3.  **Enregistrer et structurer**: Enregistrez le fichier traduit sous`Resources.resw` inside a new folder named with your language code (e.g., `fr-fr`pour le français).
 4.  **Créer une demande de tirage** : Soumettez une pull request au`testing`succursale, assurant la nouvelle`resw`Le fichier est inclus dans le dossier de langue correct dans le`Strings`annuaire.
 
 Merci d'avoir contribué à rendre RyTuneX accessible à plus de personnes !
