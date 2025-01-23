@@ -5,14 +5,14 @@
 <h1 align="center" style="font-family: 'Segoe UI', sans-serif; font-weight: 600; color: #0078D4;">RyTuneX</h1>
 
 <p align="center" style="font-size: 1.1rem; color: #555;">
-  <strong>Streamline. Optimize. Dominate.</strong><br>
-  Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
+  <strong>精简。优化。主宰。</strong><br>
+  您的一站式解决方案，用于提升 Windows 10 和 11 的性能。精确构建，专为性能设计。
 </p>
 
 <div align="center" style="margin: 20px 0; text-align: center;">
   <a href="README.fr.md" style="margin: 0 10px;">Français</a>
   <a href="README.ar.md" style="margin: 0 10px;">العربية</a>
-  <a href="README.zh-CN.md" style="margin: 0 10px;">简体中文</a>
+  <a href="README.md" style="margin: 0 10px;">English</a>
   <a href="README.de.md" style="margin: 0 10px;">Deutsch</a>
   <a href="README.ja.md" style="margin: 0 10px;">日本語</a>
   <a href="README.ru.md" style="margin: 0 10px;">Русский</a>
@@ -34,7 +34,7 @@
 
 </div>
 
-### 为什么选择RyTuneX？
+### 为什么选择 RyTuneX？
 
 -   **轻松优化**：立即提高系统的速度和可靠性。
 -   **智能功能**：从应用程序删除到隐私保护，我们都能满足您的需求。
@@ -56,7 +56,7 @@
 
 ## 关于
 
-RyTuneX 是一款综合性系统优化工具，旨在**提高**这**表现**,**隐私**， 和**可用性**Windows 系统的。建造与**用户界面3**框架和利用**.NET 8**，RyTuneX 提供现代且响应迅速的用户体验。它是专门为**Windows 10（21H2 及更高版本）**和**视窗11**。无论你是**一个游戏玩家**或者**高级用户**, RyTuneX 允许您删除**预装应用程序**， 管理**系统设置**，并优化**表现**.
+RyTuneX 是一款综合性系统优化工具，旨在 **提高** 这 **表现**, **隐私**, 和 **可用性** Windows 系统的。建造与 **用户界面3** 框架和利用 **.NET 8**，RyTuneX 提供现代且响应迅速的用户体验. 它是专门为 **Windows 10 (20H1 及更高版本)** 和 **Windows 11**. 无论你是 **一个游戏玩家** 或者 **高级用户**, RyTuneX 允许您删除 **预装应用程序**, 管理 **系统设置**, 并优化 **表现**.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -74,7 +74,7 @@ RyTuneX 是一款综合性系统优化工具，旨在**提高**这**表现**,**�
 
 -   **现代设计**：享受由 WinUI 3 提供支持的时尚直观的界面。该应用程序拥有现代设计，既用户友好又具有视觉吸引力，使系统优化任务变得简单。该界面设计简洁且易于导航，使用户能够快速访问他们需要的功能。
 
--   **交叉兼容**：RyTuneX 与两者兼容**Windows 10（21H2 及更高版本）**和**视窗11**，确保跨不同 Windows 版本的无缝性能优化。该应用程序提供一致的体验，使用户能够充分受益于其功能，无论其操作系统版本如何。
+-   **交叉兼容**：RyTuneX 与两者兼容 **Windows 10 (20H1 及更高版本)** 和 **Windows 11**，确保跨不同 Windows 版本的无缝性能优化。该应用程序提供一致的体验，使用户能够充分受益于其功能，无论其操作系统版本如何。
 
 ## 界面预览
 
@@ -89,38 +89,38 @@ RyTuneX 是一款综合性系统优化工具，旨在**提高**这**表现**,**�
 
 ## 安装
 
-1.  **下载**: 获取最新的[安装设置](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+1.  **下载**: 获取最新的 [安装设置](https://github.com/rayenghanmi/RyTuneX/releases/latest)
 2.  **安装**：运行下载的安装程序并按照提示安装 RyTuneX。
 
-> [！重要的!]  
-> 始终从官方下载 RyTuneX[GitHub 发布页面](https://github.com/rayenghanmi/RyTuneX/releases)以确保其真实性和安全性。
+> [!IMPORTANT]  
+> 始终从官方下载 RyTuneX [GitHub 发布页面](https://github.com/rayenghanmi/RyTuneX/releases) 以确保其真实性和安全性。
 
 ## 用法
 
 ### 系统优化
 
-要优化您的系统，请访问**优化**选项卡并根据您的需要切换可用选项。更改将在系统重新启动后生效。
+要优化您的系统，请访问 **优化** 选项卡并根据您的需要切换可用选项。更改将在系统重新启动后生效。
 
 ### 消除不需要的应用程序
 
-在**膨胀**选项卡，您可以查看已安装的应用程序列表。选择您要删除的并单击**卸载选定的应用程序）**。可能需要重新启动才能完成该过程。
+在 **膨胀** 选项卡，您可以查看已安装的应用程序列表。选择您要删除的并单击 **卸载选定的应用程序**。可能需要重新启动才能完成该过程。
 
 ### 隐私增强
 
-前往**隐私**选项卡来配置您的隐私设置。切换开关以启用或禁用影响遥测、广告等的功能。更改将在重新启动后生效。
+前往 **隐私** 选项卡来配置您的隐私设置。切换开关以启用或禁用影响遥测、广告等的功能。更改将在重新启动后生效。
 
 ### Windows 功能管理
 
-使用**特征**选项卡修改特定的 Windows 功能。切换开关以调整设置，然后重新启动系统以应用更改。
+使用 **特征** 选项卡修改特定的 Windows 功能。切换开关以调整设置，然后重新启动系统以应用更改。
 
 ### 系统信息
 
-这**设备**页面提供系统硬件和操作系统的全面视图。这可以帮助您了解您的设置并就优化做出更明智的决策。
+这 **设备** 页面提供系统硬件和操作系统的全面视图。这可以帮助您了解您的设置并就优化做出更明智的决策。
 
 ## 介入
 
 RyTuneX 是一个开源项目。欢迎贡献！  
-查看[贡献指南](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)开始吧。
+查看 [贡献指南](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md)开始吧。
 
 ## 翻译
 
@@ -147,23 +147,23 @@ RyTuneX 是一个开源项目。欢迎贡献！
 
 如果您有兴趣贡献翻译，请按照以下步骤操作：
 
-1.  **克隆文件**：克隆[资源.resw](../testing/Strings/en-us/Resources.resw)文件。
+1.  **克隆文件**：克隆 [Resources.resw](../testing/Strings/en-us/Resources.resw) 文件。
 2.  **翻译文件**：将其内容翻译成您想要的语言。
-3.  **保存和结构**：将翻译后的文件另存为`Resources.resw`在以您的语言代码命名的新文件夹中（例如，`fr-fr`对于法语）。
-4.  **创建拉取请求**：向`testing`分行，确保新`resw`文件包含在正确的语言文件夹中`Strings`目录。
+3.  **保存和结构**：将翻译后的文件另存为 `Resources.resw` 在以您的语言代码命名的新文件夹中（例如，`fr-fr` 对于法语）。
+4.  **创建拉取请求**：向 `testing` 分行，确保新 `resw` 文件包含在正确的语言文件夹中 `Strings` 目录。
 
 感谢您帮助更多人使用 RyTuneX！
 
 ## 执照
 
-该项目已获得许可[GNU 通用公共许可证 v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
+该项目已获得许可 [GNU 通用公共许可证 v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
 
 ## 接触
 
--   电子邮件：[ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
--   叽叽喳喳：[@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
--   Facebook：[23 甘米。](https://www.facebook.com/rayen.ghanmi.23)
--   不和谐：[RyTuneX](https://discord.gg/gyBzyd364t)
--   Instagram：[@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
+-   E-mail: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
+-   Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
+-   Facebook: [@rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
+-   Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
+-   Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
 
 我们随时为您提供支持并倾听您的​​反馈！
