@@ -1313,6 +1313,36 @@
     <value>禁用服务主机拆分</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
-      <value>禁用服务主机拆分以显著降低内存使用量和进程数.</value>
+    <value>禁用服务主机拆分以显著降低内存使用量和进程数.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>启用传统启动菜单</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>切换到传统启动菜单以加快启动速度。</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>优化 NTFS 设置</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>调整 NTFS 设置以提升性能并增强隐私。</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>禁用分页</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>禁用内存分页以实现最大性能。</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>优化前台应用性能</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>通过优先处理前台任务来提升活动应用的性能。</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>禁用 WPBT 执行</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>阻止固件在启动过程中运行程序（例如 OEM 预装软件）。</value>
   </data>
 </root>

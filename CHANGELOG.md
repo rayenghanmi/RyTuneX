@@ -9,6 +9,16 @@ All notable changes to this branch will be documented in this file.
 
 - Implemented Russian language translation.
 - Added Spanish language translation.
+- Introduced new optimization options:
+  - `WPBT Execution Settings`
+  - `Foreground Applications Prioritization`
+  - `Paging Settings`
+  - `NTFS Optimization`
+  - `Legacy Boot Menu`
+
+### Fixes
+
+- Resolverd an issue where the `Revert All Changes` in the `Settings` page did not work as expected.
 
 
 ## 1.2.0 - Released

@@ -1316,4 +1316,34 @@ Verifica si hay problemas de memoria en tu computadora</value>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
     <value>Deshabilita las divisiones del Host de Servicio para un uso de RAM y una cantidad de procesos mucho más bajos.</value>
   </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>Habilitar menú de arranque clásico</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>Cambiar al menú de arranque clásico para un inicio más rápido.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>Optimizar configuraciones de NTFS</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>Ajustar configuraciones de NTFS para mejorar el rendimiento y la privacidad.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>Desactivar paginación</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>Desactivar la paginación de memoria para maximizar el rendimiento.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>Optimizar rendimiento de aplicaciones en primer plano</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>Mejorar el rendimiento de las aplicaciones activas priorizando las tareas en primer plano.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>Desactivar ejecución de WPBT</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>Evitar que el firmware ejecute programas (por ejemplo, bloatware OEM) durante el inicio.</value>
+  </data>
 </root>

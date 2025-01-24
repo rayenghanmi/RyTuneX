@@ -1310,6 +1310,36 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
     <value>Service-Host-Splitting deaktivieren</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
-      <value>Deaktiviert das Service-Host-Splitting, um den RAM-Verbrauch und die Prozessanzahl erheblich zu reduzieren.</value>
+    <value>Deaktiviert das Service-Host-Splitting, um den RAM-Verbrauch und die Prozessanzahl erheblich zu reduzieren.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>Legacy-Bootmenü aktivieren</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>Zum Legacy-Bootmenü wechseln, um den Startvorgang zu beschleunigen.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>NTFS-Einstellungen optimieren</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>NTFS-Einstellungen anpassen, um die Leistung zu verbessern und die Privatsphäre zu erhöhen.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>Speicherpaginierung deaktivieren</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>Speicherpaginierung deaktivieren, um maximale Leistung zu erzielen.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>Leistung von Vordergrundanwendungen optimieren</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>Verbessert die Leistung aktiver Anwendungen, indem Vordergrundaufgaben priorisiert werden.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>WPBT-Ausführung deaktivieren</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>Verhindert, dass Firmware Programme (z. B. OEM-Bloatware) beim Start ausführt.</value>
   </data>
 </root>

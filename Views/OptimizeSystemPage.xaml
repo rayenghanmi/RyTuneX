@@ -25,13 +25,6 @@
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                     x:Uid="OptimizeSystemPage_BasicOptimization"/>
 
-                <controls:SettingsCard x:Uid="Feature_ServiceHostSplitting">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE15E;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="ServiceHostSplitting" Tag="ServiceHostSplitting"/>
-                </controls:SettingsCard>
-                
                 <controls:SettingsCard x:Uid="Feature_MenuShowDelay">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xF182;"/>
@@ -210,7 +203,49 @@
                         </Grid>
                     </StackPanel>
                 </controls:SettingsCard>
-                
+
+                <controls:SettingsCard x:Uid="Feature_ServiceHostSplitting">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE15E;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="ServiceHostSplitting" Tag="ServiceHostSplitting"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_LegacyBootMenu">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF16A;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="LegacyBootMenu" Tag="LegacyBootMenu"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_OptimizeNTFS">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE9F3;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="OptimizeNTFS" Tag="OptimizeNTFS"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_PagingSettings">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE9F5;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="PagingSettings" Tag="PagingSettings"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_PrioritizeForegroundApplications">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE9D9;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="PrioritizeForegroundApplications" Tag="PrioritizeForegroundApplications"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_WPBT">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE9E9;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="WPBT" Tag="WPBT"/>
+                </controls:SettingsCard>
+
                 <!-- Other System Optimization Section -->
                 <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"

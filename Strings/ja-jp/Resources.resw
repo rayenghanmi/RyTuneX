@@ -1313,4 +1313,34 @@
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
     <value>サービスホストの分割を無効化し、RAM使用量とプロセス数を大幅に削減します.</value>
   </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>レガシーブートメニューを有効化</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>レガシーブートメニューに切り替えて、起動を高速化します。</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>NTFS設定を最適化</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>パフォーマンスとプライバシーを向上させるためにNTFS設定を調整します。</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>ページングを無効化</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>メモリページングを無効化して、最大のパフォーマンスを実現します。</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>フォアグラウンドアプリのパフォーマンスを最適化</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>フォアグラウンドタスクを優先することでアクティブなアプリケーションのパフォーマンスを向上させます。</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>WPBT実行を無効化</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>ファームウェアが起動時にプログラム（例: OEMの不要なソフトウェア）を実行するのを防ぎます。</value>
+  </data>
 </root>

@@ -1310,6 +1310,36 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
     <value>Désactiver le fractionnement de l'hôte de service</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
-      <value>Désactive le fractionnement de l'hôte de service pour une utilisation beaucoup plus faible de la RAM et un nombre de processus réduit.</value>
+    <value>Désactive le fractionnement de l'hôte de service pour une utilisation beaucoup plus faible de la RAM et un nombre de processus réduit.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>Activer le menu de démarrage classique</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>Passer au menu de démarrage classique pour un démarrage plus rapide.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>Optimiser les paramètres NTFS</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>Ajuster les paramètres NTFS pour améliorer les performances et la confidentialité.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>Désactiver la pagination</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>Désactiver la pagination de la mémoire pour des performances maximales.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>Optimiser les performances des applications au premier plan</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>Améliore les performances des applications actives en priorisant les tâches au premier plan.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>Désactiver l'exécution de WPBT</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>Empêche le firmware d'exécuter des programmes (par ex., logiciels OEM préinstallés) au démarrage.</value>
   </data>
 </root>

@@ -2,9 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Management.Automation;
-using System.Runtime.InteropServices;
 using System.ServiceProcess;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Microsoft.UI.Xaml;
@@ -16,9 +14,6 @@ using Windows.Storage;
 namespace RyTuneX.Helpers;
 internal partial class OptimizationOptions
 {
-    [DllImport("psapi.dll")]
-    public static extern bool EmptyWorkingSet(IntPtr hProcess);
-
     public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
     {
         var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
@@ -382,58 +377,42 @@ internal partial class OptimizationOptions
         }
     }
 
-    internal static void ClearWorkingSet()
-    {
-        // Clear the working set for the current process
-        EmptyWorkingSet(Process.GetCurrentProcess().Handle);
-
-        // Get all running processes
-        foreach (var process in Process.GetProcesses())
-        {
-            try
-            {
-                // Clear the working set for each process
-                EmptyWorkingSet(process.Handle);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogError(ex.Message);
-            }
-        }
-    }
-
     private static void SaveRevertAction(string action)
     {
-        // Get the current revert list
-        var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        // Get the current revert list as a delimited string
+        var revertListString = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
+        var revertList = string.IsNullOrEmpty(revertListString)
+            ? new HashSet<string>()
+            : new HashSet<string>(revertListString.Split('|'));
 
         // Add the action if it's not already present
-        if (!revertList.Contains(action))
+        if (revertList.Add(action))
         {
-            revertList.Add(action);
-            ApplicationData.Current.LocalSettings.Values["RevertList"] = JsonSerializer.Serialize(revertList);
+            ApplicationData.Current.LocalSettings.Values["RevertList"] = string.Join("|", revertList);
         }
     }
 
     private static void RemoveRevertAction(string action)
     {
-        // Get the current revert list
-        var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        // Get the current revert list as a delimited string
+        var revertListString = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
+        var revertList = string.IsNullOrEmpty(revertListString)
+            ? new HashSet<string>()
+            : new HashSet<string>(revertListString.Split('|'));
 
         // Remove the action if it's present
-        if (revertList.Contains(action))
+        if (revertList.Remove(action))
         {
-            revertList.Remove(action);
-            ApplicationData.Current.LocalSettings.Values["RevertList"] = JsonSerializer.Serialize(revertList);
+            ApplicationData.Current.LocalSettings.Values["RevertList"] = string.Join("|", revertList);
         }
     }
 
     public static async Task RevertAllChanges()
     {
-        var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        var revertListString = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
+        var revertList = string.IsNullOrEmpty(revertListString)
+            ? Array.Empty<string>()
+            : revertListString.Split('|');
 
         // Execute each action asynchronously
         foreach (var action in revertList)
@@ -442,6 +421,21 @@ internal partial class OptimizationOptions
             {
                 switch (action)
                 {
+                    case "DisableLegacyBootMenu":
+                        OptimizeSystemHelper.DisableLegacyBootMenu();
+                        break;
+                    case "DisableOptimizeNTFS":
+                        OptimizeSystemHelper.DisableOptimizeNTFS();
+                        break;
+                    case "EnablePagingSettings":
+                        OptimizeSystemHelper.EnablePagingSettings();
+                        break;
+                    case "DisablePrioritizeForegroundApplications":
+                        OptimizeSystemHelper.DisablePrioritizeForegroundApplications();
+                        break;
+                    case "EnableWPBT":
+                        OptimizeSystemHelper.EnableWPBT();
+                        break;
                     case "EnableServiceHostSplitting":
                         OptimizeSystemHelper.EnableServiceHostSplitting();
                         break;
@@ -731,6 +725,71 @@ internal partial class OptimizationOptions
         {
             switch (toggleSwitch.Tag)
             {
+                case "LegacyBootMenu":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableLegacyBootMenu();
+                        SaveRevertAction("DisableLegacyBootMenu");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableLegacyBootMenu();
+                        RemoveRevertAction("DisableLegacyBootMenu");
+                    }
+                    break;
+
+                case "OptimizeNTFS":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableOptimizeNTFS();
+                        SaveRevertAction("DisableOptimizeNTFS");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableOptimizeNTFS();
+                        RemoveRevertAction("DisableOptimizeNTFS");
+                    }
+                    break;
+
+                case "PagingSettings":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisablePagingSettings();
+                        SaveRevertAction("EnablePagingSettings");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnablePagingSettings();
+                        RemoveRevertAction("EnablePagingSettings");
+                    }
+                    break;
+
+                case "PrioritizeForegroundApplications":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnablePrioritizeForegroundApplications();
+                        SaveRevertAction("DisablePrioritizeForegroundApplications");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisablePrioritizeForegroundApplications();
+                        RemoveRevertAction("DisablePrioritizeForegroundApplications");
+                    }
+                    break;
+
+                case "WPBT":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableWPBT();
+                        SaveRevertAction("EnableWPBT");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableWPBT();
+                        RemoveRevertAction("EnableWPBT");
+                    }
+                    break;
+
                 case "ServiceHostSplitting":
                     if (toggleSwitch.IsOn)
                     {

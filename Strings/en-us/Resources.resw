@@ -1316,4 +1316,34 @@ Are you sure you want to continue?</value>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
     <value>Disables Service Host splitting for much lower RAM usage and process count.</value>
   </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>Enable Legacy Boot Menu</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>Switch to the legacy boot menu for faster startup.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>Optimize NTFS Settings</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>Tune NTFS settings to improve performance and enhance privacy.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>Disable Paging</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>Turn off memory paging for maximum performance.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>Optimize Foreground App Performance</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>Boosts performance for active applications by prioritizing foreground tasks.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>Disable WPBT Execution</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>Stop firmware from running programs (e.g., OEM bloatware) during startup.</value>
+  </data>
 </root>

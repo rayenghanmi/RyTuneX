@@ -1314,4 +1314,34 @@
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
     <value>Отключает разделение хостов службы для значительного снижения использования оперативной памяти и количества процессов.</value>
   </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>Включить классическое меню загрузки</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>Переключитесь на классическое меню загрузки для более быстрого запуска.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>Оптимизировать настройки NTFS</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>Настройте параметры NTFS для повышения производительности и улучшения конфиденциальности.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>Отключить пагинацию</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>Отключите пагинацию памяти для максимальной производительности.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>Оптимизировать производительность приложений на переднем плане</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>Улучшает производительность активных приложений, отдавая приоритет задачам на переднем плане.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>Отключить выполнение WPBT</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>Предотвращает запуск программ (например, предустановленного OEM-программного обеспечения) прошивкой при запуске.</value>
+  </data>
 </root>
