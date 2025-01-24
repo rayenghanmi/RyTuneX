@@ -1,0 +1,1348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Shell_Home.Content" xml:space="preserve">
+    <value>RyTuneX</value>
+  </data>
+  <data name="Shell_Debloat.Content" xml:space="preserve">
+    <value>디블로트</value>
+  </data>
+  <data name="Shell_SystemInfo.Content" xml:space="preserve">
+    <value>장치</value>
+  </data>
+  <data name="Shell_Issue.Content" xml:space="preserve">
+    <value>보고서</value>
+  </data>
+  <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
+    <value>최적화</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>테마</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>밝음</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>어둠</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>기본값</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>이 애플리케이션에 대한 정보</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>Rayen Ghanmi가 만든 Windows 10 및 11 최적화 프로그램인 RyTuneX는 선택한 소프트웨어를 선택적으로 제거하고 불필요한 서비스를 비활성화하여 시스템 성능과 효율성을 향상하도록 설계되었습니다.</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+    <value>AGPL v3.0</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
+    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
+  </data>
+  <data name="Settings_Language.Text" xml:space="preserve">
+    <value>언어</value>
+  </data>
+  <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
+    <value>설치된 앱 데이터를 가져오는 중...</value>
+  </data>
+  <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
+    <value>필터링 기준:</value>
+  </data>
+  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+    <value>선택한 앱 제거</value>
+  </data>
+  <data name="완료" xml:space="preserve">
+    <value>완료</value>
+  </data>
+  <data name="제거 중" xml:space="preserve">
+    <value>제거</value>
+  </data>
+  <data name="UninstallTip" xml:space="preserve">
+    <value>제거하려는 앱을 선택하고 제거를 누르세요.</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>기능</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>개인정보 보호</value>
+  </data>
+  <data name="HomePage_DiscordButton.Text" xml:space="preserve">
+    <value>저희 서버에 가입하세요.</value>
+  </data>
+  <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
+    <value>RyTuneX를 확인하세요.</value>
+  </data>
+  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
+    <value>피드백 보내기</value>
+  </data>
+  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
+    <value>프로세서</value>
+  </data>
+  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
+    <value>그래픽 카드</value>
+  </data>
+  <data name="SystemInfoPage_OS.Text" xml:space="preserve">
+    <value>운영 체제</value>
+  </data>
+  <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
+    <value>저장소</value>
+  </data>
+  <data name="Debloat" xml:space="preserve">
+    <value>Debloat</value>
+  </data>
+  <data name="DebloatPage_NotificationBody" xml:space="preserve">
+    <value>이러한 앱 중 일부를 제거해도 완전히 제거되지 않을 수 있습니다.</value>
+  </data>
+  <data name="UninstallationError" xml:space="preserve">
+    <value>다음 앱을 제거하는 중 오류 발생</value>
+  </data>
+  <data name="UninstallationSuccess" xml:space="preserve">
+    <value>다음 앱을 성공적으로 제거했습니다.</value>
+  </data>
+  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+    <value>임시 파일 제거</value>
+  </data>
+  <data name="AdapterRAM" xml:space="preserve">
+    <value>어댑터 RAM</value>
+  </data>
+  <data name="Architecture" xml:space="preserve">
+    <value>아키텍처</value>
+  </data>
+  <data name="BuildNumber" xml:space="preserve">
+    <value>빌드 번호</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>용량</value>
+  </data>
+  <data name="Caption" xml:space="preserve">
+    <value>캡션</value>
+  </data>
+  <data name="Cores" xml:space="preserve">
+    <value>코어</value>
+  </data>
+  <data name="DeviceLocator" xml:space="preserve">
+    <value>장치 로케이터</value>
+  </data>
+  <data name="DriverVersion" xml:space="preserve">
+    <value>드라이버 버전</value>
+  </data>
+  <data name="ErrDriversExtract" xml:space="preserve">
+    <value>드라이버를 추출하는 동안 오류가 발생했습니다.</value>
+  </data>
+  <data name="ExtractingDrivers" xml:space="preserve">
+    <value>드라이버 추출</value>
+  </data>
+  <data name="GPU" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="InstallDate" xml:space="preserve">
+    <value>설치 날짜</value>
+  </data>
+  <data name="InterfaceType" xml:space="preserve">
+    <value>인터페이스 유형</value>
+  </data>
+  <data name="L2Cache" xml:space="preserve">
+    <value>L2 캐시 크기</value>
+  </data>
+  <data name="L3Cache" xml:space="preserve">
+    <value>L3 캐시 크기</value>
+  </data>
+  <data name="LastBoot" xml:space="preserve">
+    <value>마지막 부팅 시간</value>
+  </data>
+  <data name="LogicalProcessors" xml:space="preserve">
+    <value>논리 프로세서</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>제조업체</value>
+  </data>
+  <data name="MaxSpeed" xml:space="preserve">
+    <value>최대 속도</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="OSName" xml:space="preserve">
+    <value>OS 이름</value>
+  </data>
+  <data name="RAMModule" xml:space="preserve">
+    <value>RAM 모듈</value>
+  </data>
+  <data name="RegisteredUser" xml:space="preserve">
+    <value>등록된 사용자</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>크기</value>
+  </data>
+  <data name="SocketDesignation" xml:space="preserve">
+    <value>소켓 지정</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>속도</value>
+  </data>
+  <data name="SystemDirectory" xml:space="preserve">
+    <value>시스템 디렉토리</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>버전</value>
+  </data>
+  <data name="VideoArchitecture" xml:space="preserve">
+    <value>비디오 아키텍처</value>
+  </data>
+  <data name="WindowsDirectory" xml:space="preserve">
+    <value>Windows 디렉터리</value>
+  </data>
+  <data name="DeligTemp" xml:space="preserve">
+    <value>임시 파일 삭제</value>
+  </data>
+  <data name="ErrTempDel" xml:space="preserve">
+    <value>임시 파일 삭제 오류</value>
+  </data>
+  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
+    <value>시스템 기능</value>
+  </data>
+  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
+    <value>Windows 11 Exclusive</value>
+  </data>
+  <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
+    <value>폴더 선택</value>
+  </data>
+  <data name="TempDelSucc" xml:space="preserve">
+    <value>임시 파일이 성공적으로 삭제되었습니다!</value>
+  </data>
+  <data name="Disk" xml:space="preserve">
+    <value>디스크</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>모델</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
+    <value>더 나은 시스템 모니터링 및 문제 해결을 위해 자세한 로그온 메시지를 활성화합니다. 일상적인 사용에는 사용자 친화적이지 않을 수 있음</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
+    <value>자세한 로그온 사용</value>
+  </data>
+  <data name="SelecFold" xml:space="preserve">
+    <value>폴더 선택</value>
+  </data>
+  <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
+    <value>드라이버</value>
+  </data>
+  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
+    <value>추출</value>
+  </data>
+  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
+    <value>손쉬운 백업을 위해 드라이버를 외부 폴더로 추출</value>
+  </data>
+  <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
+    <value>드라이버 추출</value>
+  </data>
+  <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="Feature_DisableHibernation.Header" xml:space="preserve">
+    <value>최대 절전 모드 비활성화</value>
+  </data>
+  <data name="Feature_DisableHibernation.Description" xml:space="preserve">
+    <value>최대 절전 모드를 꺼서 전원을 절약하고 컴퓨터가 절전 모드로 전환되는 것을 방지합니다. 노트북에는 권장되지 않습니다.</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
+    <value>홈 그룹 비활성화</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
+    <value>네트워크의 다른 기기와 파일 및 프린터를 공유하지 않도록 홈 그룹을 끕니다.</value>
+  </data>
+  <data name="Feature_DisablePrintService.Header" xml:space="preserve">
+    <value>인쇄 서비스 비활성화</value>
+  </data>
+  <data name="Feature_DisablePrintService.Description" xml:space="preserve">
+    <value>인쇄 서비스를 비활성화하여 인쇄 관련 기능을 차단합니다.</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
+    <value>호환성 비활성화 Assistant</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
+    <value>호환성 어시스턴트를 끄고 프로그램에 대한 자동 호환성 검사를 비활성화합니다.</value>
+  </data>
+  <data name="Feature_DisableSearch.Header" xml:space="preserve">
+    <value>검색 비활성화</value>
+  </data>
+  <data name="Feature_DisableSearch.Description" xml:space="preserve">
+    <value>시스템 전체 검색 기능을 끕니다.</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
+    <value>오류 보고 비활성화</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
+    <value>오류 보고를 끄고 오류 보고서가 자동으로 전송되지 않도록 합니다. Microsoft</value>
+  </data>
+  <data name="Feature_DisableGameBar.Header" xml:space="preserve">
+    <value>게임 바 비활성화</value>
+  </data>
+  <data name="Feature_DisableGameBar.Description" xml:space="preserve">
+    <value>게임 바와 관련 기능을 끕니다</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
+    <value>빠른 액세스 기록 비활성화</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
+    <value>빠른 액세스 기록의 기록 및 표시 비활성화</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
+    <value>내 사람 비활성화</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
+    <value>작업 표시줄에서 내 사람 기능 끄기</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
+    <value>센서 서비스 비활성화</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
+    <value>개인 정보 보호 및 절전을 위해 센서 서비스를 끕니다. 관련 센서가 있는 노트북에는 권장되지 않습니다.</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
+    <value>Windows Ink 비활성화</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
+    <value>Windows Ink Workspace 및 관련 기능을 끕니다. 스타일러스가 있는 기기에는 권장되지 않음</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
+    <value>맞춤법 및 타이핑 기능 비활성화</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
+    <value>맞춤법 및 타이핑 제안 비활성화</value>
+  </data>
+  <data name="Feature_DisableFaxService.Header" xml:space="preserve">
+    <value>팩스 서비스 비활성화</value>
+  </data>
+  <data name="Feature_DisableFaxService.Description" xml:space="preserve">
+    <value>Windows에서 팩스 서비스 비활성화</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
+    <value>Insider Service 비활성화</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
+    <value>Windows Insider Program에서 옵트아웃하고 미리보기 빌드 수신 중단</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
+    <value>클라우드 클립보드 비활성화</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
+    <value>기기 간 클립보드 공유를 위한 클라우드 클립보드 기능 비활성화</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
+    <value>스티키 키 비활성화</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
+    <value>스티키 키 접근성 기능을 비활성화합니다. 실수로 여러 키를 동시에 누르는 사람에게 유용합니다.</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
+    <value>장치에 캐스트 비활성화</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
+    <value>Windows에서 장치에 캐스트 기능을 비활성화합니다. 다른 장치에서 프레젠테이션이나 미디어를 공유하는 데 유용합니다.</value>
+  </data>
+  <data name="Feature_DisableVBS.Header" xml:space="preserve">
+    <value>VBS 비활성화</value>
+  </data>
+  <data name="Feature_DisableVBS.Description" xml:space="preserve">
+    <value>고급 보안 기능을 위해 가상화 기반 보안(VBS)을 비활성화합니다. 높은 보안 환경에는 권장되지 않습니다.</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
+    <value>작업 표시줄을 왼쪽으로 이동</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
+    <value>작업 표시줄을 기본 하단 위치에서 화면 왼쪽으로 이동합니다. 개인적 선호도</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
+    <value>스냅 어시스트 비활성화</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
+    <value>드래그할 때 열려 있는 창을 자동으로 정렬하는 스냅 어시스트를 비활성화합니다. 멀티태스킹에 유용하지만 일부 사용자는 수동 창 관리를 선호합니다.</value>
+  </data>
+  <data name="Feature_DisableWidgets.Header" xml:space="preserve">
+    <value>위젯 비활성화</value>
+  </data>
+  <data name="Feature_DisableWidgets.Description" xml:space="preserve">
+    <value>Windows 11 작업 표시줄에서 위젯 기능을 비활성화합니다. 위젯이 빠른 업데이트에 유용하다고 생각되면 고려하세요(Windows 11 전용)</value>
+  </data>
+  <data name="Feature_DisableChat.Header" xml:space="preserve">
+    <value>채팅 비활성화</value>
+  </data>
+  <data name="Feature_DisableChat.Description" xml:space="preserve">
+    <value>Windows 11 작업 표시줄에서 채팅 기능을 비활성화합니다. 채팅 기능을 통신에 사용하지 않는 경우에만 권장(Windows 11 전용)</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
+    <value>파일 압축 모드 사용</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
+    <value>작은 썸네일로 파일을 탐색할 수 있도록 컴팩트 모드를 활성화합니다. 저해상도 디스플레이나 큰 폴더 관리에 유용합니다.</value>
+  </data>
+  <data name="Feature_DisableStickers.Header" xml:space="preserve">
+    <value>스티커 비활성화</value>
+  </data>
+  <data name="Feature_DisableStickers.Description" xml:space="preserve">
+    <value>Windows 11 메시징 앱에서 스티커 기능을 비활성화합니다. 커뮤니케이션에 스티커를 사용하지 않는 경우에만 권장됩니다(Windows 11 전용)</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
+    <value>Edge Discover Bar 비활성화</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
+    <value>Microsoft Edge에서 Discover Bar 기능을 비활성화합니다. 산만하거나 더 깔끔한 브라우저 인터페이스를 선호하는 경우 유용합니다.</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
+    <value>CoPilot AI 비활성화</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
+    <value>코드 작성을 지원하기 위해 Windows에서 CoPilot AI 기능을 비활성화합니다. 개발자에게 권장되지 않음</value>
+  </data>
+  <data name="OptimizeBasic.Text" xml:space="preserve">
+    <value>기본 최적화</value>
+  </data>
+  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
+    <value>성능 조정</value>
+  </data>
+  <data name="Feature_DisableSysMain.Header" xml:space="preserve">
+    <value>SysMain 비활성화</value>
+  </data>
+  <data name="Feature_DisableSysMain.Description" xml:space="preserve">
+    <value>더 빠른 시작을 위해 자주 사용되는 애플리케이션을 미리 로드하는 SysMain을 끕니다. HDD를 사용하는 경우 일부 프로그램의 시작 시간에 영향을 줄 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
+    <value>NTFS 타임스탬프 비활성화</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
+    <value>파일 작업에 대한 NTFS 타임스탬프 업데이트를 비활성화합니다. 정확한 타임스탬프에 의존하는 프로그램의 기능에 영향을 줄 수 있습니다.</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
+    <value>게임 모드 활성화</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
+    <value>더욱 원활한 게임 환경을 위해 시스템 리소스를 최적화하는 게임 모드를 활성화합니다. 백그라운드 프로세스에 영향을 미칠 수 있습니다.</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
+    <value>Windows 업데이트에서 드라이버 제외</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
+    <value>Windows 업데이트에서 드라이버 업데이트를 제외합니다. 잠재적인 보안 위험이나 호환성 문제가 있는 오래된 드라이버로 이어질 수 있습니다. 주의해서 사용하세요.</value>
+  </data>
+  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
+    <value>비활성화되는 내용에 대해 자세히 알아보세요.</value>
+  </data>
+  <data name="OptimizeAdvanced.Text" xml:space="preserve">
+    <value>고급 최적화</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
+    <value>시스템 복원 비활성화</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
+    <value>문제가 발생할 경우 시스템을 이전 상태로 되돌리기 위한 복원 지점을 만드는 시스템 복원을 비활성화합니다. 권장하지 않습니다. 이 기능을 비활성화하면 잠재적인 시스템 문제에서 쉽게 복구할 수 있는 기능이 제거됩니다.</value>
+  </data>
+  <data name="Feature_DisableCortana.Header" xml:space="preserve">
+    <value>Cortana 비활성화</value>
+  </data>
+  <data name="Feature_DisableCortana.Description" xml:space="preserve">
+    <value>질문에 답하고 작업을 완료할 수 있는 가상 비서인 Cortana를 비활성화합니다. 음성 검색 및 일부 생산성 기능에 영향을 미칠 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
+    <value>Store 업데이트 비활성화</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
+    <value>Microsoft Store에서 다운로드한 앱에 대한 자동 업데이트를 비활성화합니다. 앱이 보안 위험에 취약하거나 새로운 기능이 부족할 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
+    <value>자동 업데이트 비활성화</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
+    <value>수동 설치가 필요한 자동 Windows 업데이트를 끕니다. 권장하지 않습니다. 이렇게 하면 시스템이 보안 악용 및 버그 수정에 취약해질 수 있습니다.</value>
+  </data>
+  <data name="Privacy_Telemetry.Text" xml:space="preserve">
+    <value>원격 분석</value>
+  </data>
+  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
+    <value>개인 정보 보호 강화</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
+    <value>SMBv1 비활성화</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
+    <value>보안 강화를 위해 Server Message Block 버전 1(SMBv1)을 비활성화합니다. 권장</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
+    <value>SMBv2 비활성화</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
+    <value>보안 강화를 위해 Server Message Block 버전 2(SMBv2)를 비활성화합니다. 네트워크 파일 공유 기능을 손상시킬 수 있으므로 주의해서 사용하세요.</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
+    <value>원격 측정 서비스 비활성화</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
+    <value>운영 체제에서 사용 데이터를 수집하고 전송하지 못하도록 원격 측정 서비스를 끕니다.</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
+    <value>Edge 원격 측정 사용 안 함</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
+    <value>Microsoft Edge에서 원격 측정 데이터 수집을 사용 안 함</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
+    <value>Visual Studio 원격 측정 사용 안 함</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
+    <value>사용 안 함 Visual Studio에서 원격 측정 데이터 수집.</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
+    <value>Nvidia 원격 측정 비활성화</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
+    <value>Nvidia 드라이버에서 원격 측정 데이터 수집을 비활성화합니다.</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
+    <value>Chrome 원격 측정 비활성화</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
+    <value>Google Chrome에서 원격 측정 데이터 수집을 비활성화합니다.</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
+    <value>Firefox 원격 측정 비활성화</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
+    <value>Mozilla Firefox에서 원격 측정 데이터 수집을 비활성화합니다.</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
+    <value>기본 언어 선택</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
+    <value>언어 변경</value>
+  </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>네트워킹</value>
+  </data>
+  <data name="Feature_EnableEndTask.Description" xml:space="preserve">
+    <value>활성화 작업 표시줄에서 앱 아이콘을 마우스 오른쪽 버튼으로 클릭할 때 사용할 수 있는 옵션으로, 작업 관리자를 열지 않고도 응답하지 않는 애플리케이션을 빠르게 종료할 수 있습니다.</value>
+  </data>
+  <data name="Feature_EnableEndTask.Header" xml:space="preserve">
+    <value>EndTask 사용</value>
+  </data>
+  <data name="Network_ApplyDNS.Content" xml:space="preserve">
+    <value>DNS 적용</value>
+  </data>
+  <data name="Network_IPv4Title.Text" xml:space="preserve">
+    <value>IPv4 DNS 서버</value>
+  </data>
+  <data name="Network_IPv6Title.Text" xml:space="preserve">
+    <value>IPv6 DNS 서버</value>
+  </data>
+  <data name="Network_NicTitle.Text" xml:space="preserve">
+    <value>네트워크 인터페이스</value>
+  </data>
+  <data name="Network_Primary.Text" xml:space="preserve">
+    <value>기본</value>
+  </data>
+  <data name="Network_ResetDNS.Content" xml:space="preserve">
+    <value>기본 DNS 재설정</value>
+  </data>
+  <data name="Network_Secondary.Text" xml:space="preserve">
+    <value>보조</value>
+  </data>
+  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
+    <value>사용자 지정 DNS 설정</value>
+  </data>
+  <data name="NoIPv4" xml:space="preserve">
+    <value>IPv4 DNS 주소를 찾을 수 없음</value>
+  </data>
+  <data name="NoIPv6" xml:space="preserve">
+    <value>IPv6 DNS 주소를 찾을 수 없음</value>
+  </data>
+  <data name="NoNic" xml:space="preserve">
+    <value>네트워크 인터페이스가 선택되지 않음</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>설정되지 않음</value>
+  </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>(성인 필터)</value>
+  </data>
+  <data name="자동" xml:space="preserve">
+    <value>자동</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
+    <value>지문이나 얼굴 인식과 같은 인증을 위한 생체 인식 사용을 비활성화합니다.</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
+    <value>생체 인식 기능 비활성화</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX는 WinUI 3 프레임워크로 구축된 최첨단 최적화 프로그램으로,Windows 기기의 성능을 향상시킵니다. Windows 10과 11 모두를 위해 제작된 RyTuneX는 사용자가 완고한 사전 설치된 앱을 손쉽게 제거하고 시스템 리소스를 최적화할 수 있도록 지원합니다.</value>
+  </data>
+  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
+    <value>업데이트 확인</value>
+  </data>
+  <data name="AvailableUpdateContent0" xml:space="preserve">
+    <value>최신 버전(</value>
+  </data>
+  <data name="AvailableUpdateContent1" xml:space="preserve">
+    <value>)을 사용할 수 있습니다. 최신 버전으로 업데이트하여 새로운 기능과 개선 사항을 즐기세요.</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>RyTuneX 업데이트</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>오류가 발생했습니다. 인터넷 연결을 확인하고 나중에 다시 시도하세요.</value>
+  </data>
+  <data name="UnavailableUpdate0" xml:space="preserve">
+    <value>이미 최신 버전을 실행하고 있습니다(</value>
+  </data>
+  <data name="UnavailableUpdate1" xml:space="preserve">
+    <value>). 현재 업데이트가 없습니다.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>업데이트</value>
+  </data>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>지원</value>
+  </data>
+  <data name="SystemInfoPage_Network.Text" xml:space="preserve">
+    <value>네트워크</value>
+  </data>
+  <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
+    <value>배터리</value>
+  </data>
+  <data name="MACAddress" xml:space="preserve">
+    <value>MAC 주소</value>
+  </data>
+  <data name="AdapterType" xml:space="preserve">
+    <value>어댑터 유형</value>
+  </data>
+  <data name="EstimatedChargeRemaining" xml:space="preserve">
+    <value>남은 예상 충전량</value>
+  </data>
+  <data name="BatteryStatus" xml:space="preserve">
+    <value>배터리 상태</value>
+  </data>
+  <data name="Chemistry" xml:space="preserve">
+    <value>화학</value>
+  </data>
+  <data name="Shell_Security.Content" xml:space="preserve">
+    <value>보안</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>예상치 못한 오류가 발생했습니다.</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>로그 보기</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>총: {0}개의 앱</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>성능</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>활성화됨</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>비활성화됨</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>보안 상태</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>바이러스 및 위협 보호</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>방화벽 및 네트워크 보호</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>Windows 업데이트</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>실시간 보호</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>사용자 계정 컨트롤(UAC)</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>세부 정보</value>
+  </data>
+  <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>복구</value>
+  </data>
+  <data name="ConfirmRemoveApps" xml:space="preserve">
+    <value>시스템에서 다음 앱을 완전히 제거하려고 합니다.</value>
+  </data>
+  <data name="ConfirmContinue" xml:space="preserve">
+    <value>계속하시겠습니까?</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>계속</value>
+  </data>
+  <data name="HomePage_cpuUsage.Text" xml:space="preserve">
+    <value>CPU 사용량</value>
+  </data>
+  <data name="HomePage_ramUsage.Text" xml:space="preserve">
+    <value>RAM 사용량</value>
+  </data>
+  <data name="HomePage_gpuUsage.Text" xml:space="preserve">
+    <value>GPU 사용량</value>
+  </data>
+  <data name="HomePage_diskUsage.Text" xml:space="preserve">
+    <value>디스크 사용량</value>
+  </data>
+  <data name="HomePage_networkUsage.Text" xml:space="preserve">
+    <value>네트워크 사용량</value>
+  </data>
+  <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
+    <value>설치된 앱</value>
+  </data>
+  <data name="HomePage_processesCount.Text" xml:space="preserve">
+    <value>프로세스</value>
+  </data>
+  <data name="HomePage_servicesCount.Text" xml:space="preserve">
+    <value>서비스</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>스마트 화면 비활성화</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>인터넷에서 다운로드한 잠재적으로 안전하지 않은 앱과 파일에 대해 경고하는 SmartScreen 필터를 끕니다. 이 기능을 비활성화하면 맬웨어 감염 위험이 커집니다.</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
+    <value>뉴스 및 관심사 비활성화</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
+    <value>뉴스, 날씨 및 기타 업데이트를 표시하는 작업 표시줄의 뉴스 및 관심사 피드를 비활성화합니다. 이 기능을 비활성화하면 시스템 성능이 향상될 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
+    <value>Spotlight 기능 비활성화</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
+    <value>잠금 화면에 개인화된 콘텐츠와 추천을 표시하는 Spotlight 기능을 끕니다. 이 기능을 비활성화하면 개인 정보를 보호하는 데 도움이 될 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
+    <value>맞춤형 환경 비활성화</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
+    <value>앱과 서비스에서 맞춤형 환경을 비활성화하여 Windows가 기본 설정 및 활동 데이터를 수집하지 못하도록 합니다.</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
+    <value>클라우드 최적화 콘텐츠 비활성화</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
+    <value>앱 업데이트 및 파일 동기화를 포함할 수 있는 클라우드 최적화 콘텐츠를 비활성화합니다. 이렇게 하면 인터넷 대역폭 사용량은 줄어들지만 기능이 제한될 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
+    <value>피드백 알림 비활성화</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
+    <value>Windows에서 OS 사용 경험과 관련된 피드백 알림을 표시하지 않도록 합니다. 이 기능을 비활성화하면 중단이 줄어들 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
+    <value>광고 ID 비활성화</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
+    <value>광고 ID를 비활성화하여 Windows에서 타겟 광고를 위해 사용자의 활동을 추적하지 못하도록 합니다. 이렇게 하면 개인 정보 보호가 강화되지만 앱 경험에 영향을 미칠 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
+    <value>Bluetooth 광고 비활성화</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
+    <value>근처의 다른 기기에 기기의 존재를 브로드캐스트하는 Bluetooth 광고를 끕니다. 이 기능을 비활성화하면 개인 정보 보호 위험을 줄일 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
+    <value>자동 재시작 로그인 비활성화</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
+    <value>다시 시작한 후 자동 로그인을 비활성화하여 자격 증명을 수동으로 입력해야 합니다. 이렇게 하면 보안이 강화되지만 로그인에 추가 단계가 추가됩니다.</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
+    <value>필기 데이터 공유 비활성화</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
+    <value>Microsoft 서비스와의 필기 데이터 공유를 해제하여 개인 정보 보호는 향상되지만 필기 인식과 관련된 일부 기능은 감소합니다.</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
+    <value>텍스트 입력 데이터 수집 비활성화</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
+    <value>텍스트 입력 데이터 수집을 비활성화하여 Windows에서 사용자가 입력한 내용을 저장하고 분석하지 못하도록 합니다. 이렇게 하면 개인 정보를 보호하는 데 도움이 되지만 타이핑 정확도가 떨어질 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
+    <value>입력 개인화 비활성화</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
+    <value>예측 텍스트 및 자동 수정 기능을 포함한 입력 방법의 개인화를 비활성화합니다. 이렇게 하면 텍스트 입력에서 시스템 성능이 떨어질 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
+    <value>안전 검색 모드 비활성화</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
+    <value>안전한 검색 모드를 해제하여 검색 결과에서 잠재적으로 유해하거나 부적절한 콘텐츠를 걸러냅니다. 이 기능을 해제하면 안전하지 않은 콘텐츠에 노출될 위험이 커집니다.</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
+    <value>활동 업로드 비활성화</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
+    <value>활동 데이터 업로드를 비활성화하여 Microsoft가 서비스 개선을 위해 사용 데이터를 수집하지 못하도록 합니다. 이렇게 하면 개인 정보 보호에 도움이 됩니다.</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
+    <value>클립보드 동기화 비활성화</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
+    <value>장치 간에 클립보드 동기화를 비활성화하여 복사한 데이터가 로컬에 유지되고 다른 장치와 데이터가 공유되는 것을 방지합니다.</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
+    <value>메시지 동기화 비활성화</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
+    <value>장치 간에 메시지가 동기화되는 것을 방지하여 문자 메시지와 알림이 사용 중인 장치에서만 사용 가능하도록 합니다.</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
+    <value>설정 동기화 비활성화</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
+    <value>장치 간 시스템 설정 동기화를 비활성화합니다. 이렇게 하면 장치 설정, 테마 및 기타 구성이 공유되지 않습니다.</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
+    <value>음성 활성화 비활성화</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
+    <value>Cortana와 같은 음성 활성화 기능을 비활성화하여 어시스턴트가 음성 명령을 수신하지 못하도록 합니다. 이렇게 하면 개인 정보 보호가 향상되지만 음성 명령 기능이 감소합니다.</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
+    <value>내 기기 찾기 비활성화</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
+    <value>분실 시 기기를 찾는 데 도움이 되는 내 기기 찾기 기능을 비활성화합니다. 이 기능을 비활성화하면 분실한 기기를 복구하는 기능이 감소하지만 개인 정보 보호가 향상됩니다.</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
+    <value>활동 피드 비활성화</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
+    <value>최근 활동을 보여주는 활동 피드를 끄면 다른 사람이 기기에서 수행한 작업을 보지 못하도록 하여 개인 정보를 보호하는 데 도움이 됩니다.</value>
+  </data>
+  <data name="Feature_DisableCdp.Header" xml:space="preserve">
+    <value>CDP(고객 데이터 플랫폼) 비활성화</value>
+  </data>
+  <data name="Feature_DisableCdp.Description" xml:space="preserve">
+    <value>CDP를 비활성화하면 고객 데이터 플랫폼에서 분석 및 타겟팅된 권장 사항을 위해 데이터를 수집하고 사용하는 것을 방지할 수 있습니다. 이렇게 하면 개인 정보 보호가 향상되지만 개인 설정이 제한될 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
+    <value>개인 정보 보호에서 맞춤형 경험 비활성화</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
+    <value>개인 정보 보호 설정에서 맞춤형 경험 기능을 비활성화하여 Windows가 사용자 데이터를 사용하여 사용자 경험을 사용자 지정하는 것을 막습니다. 이렇게 하면 개인화 기능이 감소할 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
+    <value>진단 토스트 비활성화</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
+    <value>진단 토스트 알림을 끄면 Windows에서 시스템 상태나 오류와 관련된 메시지를 표시하지 않습니다. 이렇게 하면 방해 요소를 줄이는 데 도움이 될 수 있습니다.</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
+    <value>온라인 음성 개인 정보 보호 비활성화</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
+    <value>온라인 음성 개인 정보 보호 기능을 비활성화하면 Windows에서 음성 명령을 저장하거나 처리하지 않습니다. 이렇게 하면 개인 정보 보호가 향상되지만 음성 검색 및 명령과 같은 음성 기능이 제한됩니다.</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
+    <value>위치 액세스 비활성화</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
+    <value>앱 및 서비스에 대한 위치 액세스를 끄고 기기의 GPS 또는 네트워크 위치를 사용하지 못하도록 합니다. 이렇게 하면 개인 정보 보호가 향상되지만 위치가 제한될 수 있습니다.-기반 서비스.</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
+    <value>위치 기능 비활성화</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
+    <value>앱의 위치 서비스와 보안 기능을 포함하여 기기의 모든 위치 기반 기능을 비활성화합니다. 이렇게 하면 개인 정보 보호가 강화되지만 위치 기반 서비스의 기능이 저하될 수 있습니다.</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
+    <value>메뉴 표시 지연 비활성화</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
+    <value>마우스를 호버한 후 메뉴가 나타나기 전 지연 시간을 제어합니다. 이 기능을 비활성화하면 메뉴가 즉시 열려 반응성이 향상되지만 사용자 제어가 감소할 수 있습니다.</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
+    <value>마우스 호버 시간 비활성화</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
+    <value>호버 이벤트를 트리거하기 전에 시스템이 대기하는 시간을 조정합니다. 이 기능을 비활성화하면 상호 작용 속도가 빨라질 수 있지만 의도치 않은 활성화로 이어질 수 있습니다.</value>
+  </data>
+  <data name="Feature_AutoComplete.Header" xml:space="preserve">
+    <value>자동 완성 비활성화</value>
+  </data>
+  <data name="Feature_AutoComplete.Description" xml:space="preserve">
+    <value>검색 상자 및 양식 입력과 같은 특정 필드에 입력하는 동안 자동 제안을 비활성화합니다. 비활성화하면 방해 요소를 줄일 수 있지만 워크플로가 느려질 수 있습니다.</value>
+  </data>
+  <data name="Feature_CrashDump.Header" xml:space="preserve">
+    <value>크래시 덤프 비활성화</value>
+  </data>
+  <data name="Feature_CrashDump.Description" xml:space="preserve">
+    <value>애플리케이션이 충돌할 때 충돌 보고서와 메모리 덤프를 생성할지 여부를 제어합니다. 이 기능을 비활성화하면 디스크 공간을 보존하는 데 도움이 되지만 애플리케이션 문제를 진단하고 해결하는 기능이 저하될 수 있습니다.</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
+    <value>원격 지원 비활성화</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
+    <value>원격 지원 기능을 비활성화하여 다른 사람이 원격 데스크톱을 통해 사용자를 지원할 수 있도록 합니다. 비활성화하면 보안이 향상되지만 지원 옵션이 제한됩니다.</value>
+  </data>
+  <data name="Feature_WindowShake.Header" xml:space="preserve">
+    <value>창 흔들기 비활성화</value>
+  </data>
+  <data name="Feature_WindowShake.Description" xml:space="preserve">
+    <value>창을 흔들 때 열려 있는 모든 창을 최소화하는 창 흔들기 기능을 비활성화합니다. 비활성화하면 초점이 향상되지만 편리한 창 관리 도구가 제거됩니다.</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
+    <value>복사/이동 컨텍스트 메뉴 추가</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
+    <value>파일 컨텍스트 메뉴에서 추가 옵션을 활성화하여 파일을 새 위치로 쉽게 복사하거나 이동합니다. 이 기능은 마우스 오른쪽 클릭 메뉴에서 바로 이러한 기능에 빠르게 액세스할 수 있도록 하여 파일 관리를 간소화합니다.</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
+    <value>작업 시간 초과 조정</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
+    <value>시스템 작업에 대한 시간 초과 설정을 수정합니다. 이를 조정하면 일부 시나리오에서 성능이 향상될 수 있지만 특정 조건에서 작업이 실패할 수 있습니다.</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
+    <value>디스크 공간 부족 검사 사용</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
+    <value>성능 문제를 방지하기 위해 디스크 공간 부족에 대한 자동 검사를 활성화합니다. 비활성화하면 알림이 줄어들 수 있지만 중요한 저장소 경고를 놓칠 수 있습니다.</value>
+  </data>
+  <data name="Feature_LinkResolve.Header" xml:space="preserve">
+    <value>링크 확인 비활성화</value>
+  </data>
+  <data name="Feature_LinkResolve.Description" xml:space="preserve">
+    <value>파일과 폴더에서 끊어진 링크의 확인을 비활성화합니다. 비활성화하면 작업 속도가 빨라지지만 오래된 링크는 확인되지 않을 수 있습니다.</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
+    <value>서비스 시간 초과 감소</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
+    <value>시스템 서비스의 시간 초과를 조정합니다. 이를 단축하면 성능이 향상되지만 서비스가 조기에 종료될 수 있습니다.</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
+    <value>원격 레지스트리 비활성화</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
+    <value>원격으로 레지스트리에 대한 액세스를 비활성화합니다. 비활성화하면 보안이 향상되지만레지스트리 설정의 원격 구성을 방지합니다.</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
+    <value>파일 확장자 및 숨겨진 파일 숨기기</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
+    <value>파일 확장자 및 숨겨진 파일의 가시성을 제어합니다. 이 기능을 활성화하면 잡동사니가 줄어들지만 중요한 파일 세부 정보가 숨겨집니다.</value>
+  </data>
+  <data name="Feature_SystemProfile.Header" xml:space="preserve">
+    <value>시스템 프로필 최적화</value>
+  </data>
+  <data name="Feature_SystemProfile.Description" xml:space="preserve">
+    <value>시스템 프로필 설정을 조정하여 시스템 성능을 향상합니다. 이 기능은 속도와 효율성을 우선시하여 전반적인 시스템 응답성과 리소스 관리를 개선합니다.</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
+    <value>GPU 및 우선 순위 설정 향상</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
+    <value>GPU 구성과 프로세스 우선 순위를 최적화하여 성능을 높이고, 게임 및 멀티태스킹과 같은 리소스 집약적 작업에 대한 더 나은 그래픽 렌더링과 더 원활한 작동을 보장합니다.</value>
+  </data>
+  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
+    <value>프레임 서버 모드 비활성화</value>
+  </data>
+  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
+    <value>고급 비디오 인코딩을 위한 프레임 서버 모드를 비활성화합니다. 비활성화하면 성능이 향상되지만 특정 조건에서 비디오 품질이 떨어질 수 있습니다.</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
+    <value>Low Latency GPU 설정 조정</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
+    <value>GPU 설정을 조정하여 지연 시간을 최소화하고 게임이나 비디오 성능을 개선합니다.</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
+    <value>비최선 노력 한계 설정</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
+    <value>비최선 노력 프로세스에 대한 한계를 설정합니다. 이를 활성화하면 성능을 우선시할 수 있지만 어떤 경우에는 시스템 유연성이 떨어질 수 있습니다.</value>
+  </data>
+  <data name="LoadingWindowText.Text" xml:space="preserve">
+    <value>로딩 중...</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>장치 정보</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>클래식 컨텍스트 메뉴 사용</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>Windows 10의 클래식 컨텍스트 메뉴 스타일을 복원하여 모든 옵션이 즉시 표시되는 친숙한 마우스 오른쪽 클릭 메뉴 환경을 제공합니다.</value>
+  </data>
+  <data name="DoNotShowCheckBox" xml:space="preserve">
+    <value>이 메시지를 다시 표시하지 않음</value>
+  </data>
+  <data name="RestorePointDialogTitle" xml:space="preserve">
+    <value>복원 지점 만들기</value>
+  </data>
+  <data name="RestorePointDialogText" xml:space="preserve">
+    <value>시스템을 변경하기 전에 복원 지점을 만드는 것이 좋습니다.
+
+계속하기 전에 시스템 복원 지점을 만드시겠습니까?</value>
+  </data>
+  <data name="CreatingRestorePoint" xml:space="preserve">
+    <value>복원 지점 생성 중</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>복원 지점 생성됨</value>
+  </data>
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>시스템 복원 지점이 성공적으로 생성되었습니다.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>복원 지점을 만들지 못했습니다.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>변경 사항 되돌리기</value>
+  </data>
+  <data name="Settings_RevertChanges.Header" xml:space="preserve">
+    <value>모든 변경 사항 되돌리기</value>
+  </data>
+  <data name="Settings_RevertChanges.Description" xml:space="preserve">
+    <value>복원 지점을 포함하여 RyTuneX가 시스템에 적용한 모든 변경 사항을 되돌립니다.</value>
+  </data>
+  <data name="RevertingChanges" xml:space="preserve">
+    <value>현재 변경 사항을 되돌리는 중...</value>
+  </data>
+  <data name="RevertChangesDialogText" xml:space="preserve">
+    <value>RyTuneX가 시스템에 적용한 모든 변경 사항을 되돌리고(제거된 앱 제외) 앱의 기본 설정을 재설정하려고 합니다.
+
+계속하시겠습니까?</value>
+  </data>
+  <data name="NoChangesFound" xml:space="preserve">
+    <value>주목할 만한 변경 사항이 없습니다.</value>
+  </data>
+  <data name="OperationStopped" xml:space="preserve">
+    <value>작업이 중지되었습니다.</value>
+  </data>
+  <data name="ReportSaved" xml:space="preserve">
+    <value>보고서가 저장되었습니다.데스크톱</value>
+  </data>
+  <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
+    <value>메모리 진단</value>
+  </data>
+  <data name="MemoryDiagnosticDialogText" xml:space="preserve">
+    <value>메모리 문제로 인해 컴퓨터가 정보를 잃거나 작동이 중단될 수 있습니다.
+
+컴퓨터의 메모리 문제를 확인하세요</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>지금 다시 시작</value>
+  </data>
+  <data name="ScheduleLater" xml:space="preserve">
+    <value>나중에 예약</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="ScheduledLater" xml:space="preserve">
+    <value>다음 재시작을 위해 예약됨</value>
+  </data>
+  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
+    <value>스캔</value>
+  </data>
+  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
+    <value>복구</value>
+  </data>
+  <data name="RepairPage_StopButton.Content" xml:space="preserve">
+    <value>중지</value>
+  </data>
+  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>최소 한 개의 옵션을 선택하여 검사/수리</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
+    <value>배터리 상태</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
+    <value>이렇게 하면 배터리 상태에 대한 전체 통계가 생성됩니다.</value>
+  </data>
+  <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
+    <value>생성</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
+    <value>메모리 진단</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
+    <value>시스템 메모리를 분석하여 잠재적인 문제를 파악하고 안정성을 개선합니다.</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
+    <value>진단</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
+    <value>디스크 최적화</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
+    <value>이렇게 하면 디스크 조각 모으기(HDD인 경우) 또는 다시 트리밍하여 스토리지 장치를 최적화합니다. (SSD인 경우)</value>
+  </data>
+  <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+    <value>최적화</value>
+  </data>
+  <data name="RepairPage_EventViewer.Header" xml:space="preserve">
+    <value>이벤트 뷰어</value>
+  </data>
+  <data name="RepairPage_EventViewer.Description" xml:space="preserve">
+    <value>문제 해결을 위해 최근 시스템 이벤트 로그를 표시합니다.</value>
+  </data>
+  <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
+    <value>복구 옵션</value>
+  </data>
+  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
+    <value>진단 옵션</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>작업 완료</value>
+  </data>
+  <data name="RestorePointTitle" xml:space="preserve">
+    <value>복원 지점</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>경고</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>시스템 복원을 비활성화하면 RyTuneX에서 만든 복원 지점을 포함한 모든 복원 지점이 삭제됩니다.
+
+계속하시겠습니까?</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>광고 설정</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>원격 측정 설정</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>기타 설정</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>기본 시스템 최적화</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>고급 시스템 최적화</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>검색과 일치하는 앱이 없습니다.</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>앱 검색...</value>
+  </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>백그라운드 앱 비활성화</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>앱이 백그라운드에서 실행되는 것을 방지하여 어떤 경우에는 성능이 향상됩니다.</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>Windows 다크 모드 활성화</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>Windows를 활성화할 필요 없이 전체 시스템에 다크 모드를 활성화합니다.</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">    <value>Windows 투명도 비활성화</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>작업 표시줄 및 창과 같은 시스템 UI 요소에서 투명 효과를 비활성화하여 성능을 개선합니다.</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>표준 앱</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>모든 앱</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>Win32 앱</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>압축 OS</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+    <value>디스크 공간 사용량을 줄이기 위해 운영 체제 압축을 활성화합니다. 이 기능은 저장 용량이 제한된 기기에 특히 유용하지만 하위 하드웨어에서는 시스템 성능에 약간 영향을 미칠 수 있습니다.</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+    <value>시스템 바이너리 압축 중...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+    <value>시스템 바이너리 압축 해제 중...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+    <value>압축 확인</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>압축</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+    <value>압축 해제</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+    <value>시스템 압축</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>서비스 호스트 분할 비활성화</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+    <value>훨씬 낮은 RAM 사용량과 프로세스 수를 위해 서비스 호스트 분할을 비활성화합니다.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>레거시 부팅 메뉴 활성화</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>더 빠른 시작을 위해 레거시 부팅 메뉴로 전환합니다.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>NTFS 최적화 설정</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>성능을 개선하고 개인 정보 보호를 강화하기 위해 NTFS 설정을 조정합니다.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>페이징 비활성화</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>최대 성능을 위해 메모리 페이징을 끕니다.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>포그라운드 앱 성능 최적화</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>우선순위를 지정하여 활성 애플리케이션의 성능을 높입니다. 포그라운드 작업.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>WPBT 실행 비활성화</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>시작하는 동안 펌웨어가 프로그램(예: OEM 블로트웨어)을 실행하는 것을 중지합니다.</value>
+  </data>
+</root>

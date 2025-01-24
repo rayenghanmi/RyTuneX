@@ -37,6 +37,10 @@
                             <ComboBoxItem Content="Deutsch (Deutschland)" Tag="de"/>
                             <ComboBoxItem Content="日本語 (日本)" Tag="ja-jp"/>
                             <ComboBoxItem Content="Español (España)" Tag="es-es"/>
+                            <ComboBoxItem Content="한국어 (한국)" Tag="ko-kr"/>
+                            <ComboBoxItem Content="Português (Brasil)" Tag="pt-br"/>
+                            <ComboBoxItem Content="Italiano (Italia)" Tag="it-it"/>
+                            <ComboBoxItem Content="Türkçe (Türkiye)" Tag="tr-tr"/>
                         </ComboBox>
                     </controls:SettingsCard>
 

@@ -1109,6 +1109,7 @@
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>システムに変更を加える前に、復元ポイントを作成することを強くお勧めします. 
+
 続行する前にシステムの復元ポイントを作成しますか?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">

@@ -1,0 +1,1349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Shell_Home.Content" xml:space="preserve">
+    <value>RyTuneX</value>
+  </data>
+  <data name="Shell_Debloat.Content" xml:space="preserve">
+    <value>Debloat</value>
+  </data>
+  <data name="Shell_SystemInfo.Content" xml:space="preserve">
+    <value>Cihaz</value>
+  </data>
+  <data name="Shell_Issue.Content" xml:space="preserve">
+    <value>Rapor</value>
+  </data>
+  <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
+    <value>Optimize</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>Açık</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>Koyu</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>Varsayılan</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>Bu uygulama hakkında</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>Rayen Ghanmi tarafından oluşturulan bir Windows 10 ve 11 iyileştiricisi olan RyTuneX, seçilen yazılımları seçici bir şekilde kaldırarak ve gereksiz hizmetleri devre dışı bırakarak sistem performansını ve verimliliğini artırmak için tasarlanmıştır.</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+    <value>AGPL v3.0</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
+    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
+  </data>
+  <data name="Settings_Language.Text" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
+    <value>Yüklü Uygulama Verileri Alınıyor...</value>
+  </data>
+  <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
+    <value>Şuna göre filtrele:</value>
+  </data>
+  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+    <value>Seçili Uygulamayı/Uygulamaları Kaldır</value>
+  </data>
+  <data name="Tamamlandı" xml:space="preserve">
+    <value>Tamamlandı</value>
+  </data>
+  <data name="Kaldırılıyor" xml:space="preserve">
+    <value>Kaldırılıyor</value>
+  </data>
+  <data name="Kaldırmaİpucu" xml:space="preserve">
+    <value>Kaldırmak istediğiniz uygulamaları seçin ve kaldır'a tıklayın</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>Özellikler</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>Gizlilik</value>
+  </data>
+  <data name="HomePage_DiscordButton.Text" xml:space="preserve">
+    <value>Sunucumuza Katılın</value>
+  </data>
+  <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
+    <value>RyTuneX'i inceleyin</value>
+  </data>
+  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
+    <value>Geri bildirim gönder</value>
+  </data>
+  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
+    <value>İşlemci</value>
+  </data>
+  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
+    <value>Grafik Kartı</value>
+  </data>
+  <data name="SystemInfoPage_OS.Text" xml:space="preserve">
+    <value>İşletim Sistemi</value>
+  </data>
+  <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
+    <value>Depolama</value>
+  </data>
+  <data name="Debloat" xml:space="preserve">
+    <value>Debloat</value>
+  </data>
+  <data name="DebloatPage_NotificationBody" xml:space="preserve">
+    <value>Bu uygulamalardan bazılarını kaldırmak onları tamamen kaldırmayabilir.</value>
+  </data>
+  <data name="UninstallationError" xml:space="preserve">
+    <value>Aşağıdaki uygulama(lar) kaldırılırken hata oluştu</value>
+  </data>
+  <data name="UninstallationSuccess" xml:space="preserve">
+    <value>Aşağıdaki uygulama(lar) başarıyla kaldırıldı</value>
+  </data>
+  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+    <value>Temp Dosyalarını Kaldır</value>
+  </data>
+  <data name="AdapterRAM" xml:space="preserve">
+    <value>Adaptör RAM</value>
+  </data>
+  <data name="Architecture" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="BuildNumber" xml:space="preserve">
+    <value>Build Number</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="Caption" xml:space="preserve">
+    <value>Caption</value>
+  </data>
+  <data name="Cores" xml:space="preserve">
+    <value>Cores</value>
+  </data>
+  <data name="DeviceLocator" xml:space="preserve">
+    <value>Device Locator</value>
+  </data>
+  <data name="DriverVersion" xml:space="preserve">
+    <value>Sürücü Sürümü</value>
+  </data>
+  <data name="ErrDriversExtract" xml:space="preserve">
+    <value>Sürücüler çıkarılırken bir hata oluştu</value>
+  </data>
+  <data name="ExtractingDrivers" xml:space="preserve">
+    <value>Sürücüleri Çıkarma</value>
+  </data>
+  <data name="GPU" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="InstallDate" xml:space="preserve">
+    <value>D'yi Yükleate</value>
+  </data>
+  <data name="InterfaceType" xml:space="preserve">
+    <value>Arayüz Türü</value>
+  </data>
+  <data name="L2Cache" xml:space="preserve">
+    <value>L2 Önbellek Boyutu</value>
+  </data>
+  <data name="L3Cache" xml:space="preserve">
+    <value>L3 Önbellek Boyutu</value>
+  </data>
+  <data name="LastBoot" xml:space="preserve">
+    <value>Son Önyükleme Süresi</value>
+  </data>
+  <data name="LogicalProcessors" xml:space="preserve">
+    <value>Mantıksal İşlemciler</value>
+  </data>
+  <data name="Üretici" xml:space="preserve">
+    <value>Üretici</value>
+  </data>
+  <data name="MaxSpeed" xml:space="preserve">
+    <value>Maksimum Hız</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="OSName" xml:space="preserve">
+    <value>İşletim Sistemi Adı</value>
+  </data>
+  <data name="RAMModule" xml:space="preserve">
+    <value>RAM Modülü</value>
+  </data>
+  <data name="RegisteredUser" xml:space="preserve">
+    <value>Kayıtlı Kullanıcı</value>
+  </data>
+  <data name="Boyut" xml:space="preserve">
+    <value>Boyut</value>
+  </data>
+  <data name="SocketDesignation" xml:space="preserve">
+    <value>Soket Tanımı</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="SystemDirectory" xml:space="preserve">
+    <value>System Directory</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="VideoArchitecture" xml:space="preserve">
+    <value>Video Architecture</value>
+  </data>
+  <data name="WindowsDirectory" xml:space="preserve">
+    <value>Windows Directory</value>
+  </data>
+  <data name="DeligTemp" xml:space="preserve">
+    <value>Temp Dosyalarını Silme</value>
+  </data>
+  <data name="ErrTempDel" xml:space="preserve">
+    <value>Temp Dosyalarını Silerken Hata</value>
+  </data>
+  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
+    <value>Sistem Özellikleri</value>
+  </data>
+  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
+    <value>Windows 11'e Özel</value>
+  </data>
+  <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
+    <value>Bir klasör seçin</value>
+  </data>
+  <data name="TempDelSucc" xml:space="preserve">
+    <value>Temp Dosyaları Başarıyla Silindi!</value>
+  </data>
+  <data name="Disk" xml:space="preserve">
+    <value>Disk</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
+    <value>Daha iyi sistem izleme ve sorun giderme için ayrıntılı oturum açma mesajlarını etkinleştirin. Günlük kullanım için kullanıcı dostu olmayabilir</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
+    <value>Ayrıntılı Oturum Açmayı Etkinleştir</value>
+  </data>
+  <data name="SelecFold" xml:space="preserve">
+    <value>Bir klasör seçin</value>
+  </data>
+  <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
+    <value>Sürücüler</value>
+  </data>
+  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
+    <value>Çıkart</value>
+  </data>
+  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
+    <value>Kolay yedekleme için sürücülerinizi harici bir klasöre çıkarın</value>
+  </data>
+  <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
+    <value>Sürücüler Çıkarılıyor</value>
+  </data>
+  <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
+    <value>Seç</value>
+  </data>
+  <data name="Feature_DisableHibernation.Header" xml:space="preserve">
+    <value>Hazırda Bekletmeyi Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableHibernation.Description" xml:space="preserve">
+    <value>Güç tasarrufu yapmak ve bilgisayarın uyku moduna girmesini önlemek için hazırda bekletmeyi kapatın. Dizüstü bilgisayarlar için önerilmez</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
+    <value>Ev Grubunu Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
+    <value>Ağdaki diğer cihazlarla dosya ve yazıcı paylaşımını durdurmak için Ev Grubunu kapatır</value>
+  </data>
+  <data name="Feature_DisablePrintService.Header" xml:space="preserve">
+    <value>Yazdırma Hizmetini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisablePrintService.Description" xml:space="preserve">
+    <value>Yazdırma hizmetini devre dışı bırakarak yazdırmayla ilgili işlevleri engeller</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
+    <value>Uyumluluk Yardımcısını Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
+    <value>Programlar için otomatik uyumluluk kontrollerini devre dışı bırakmak üzere Uyumluluk Yardımcısını kapatır</value>
+  </data>
+  <data name="Feature_DisableSearch.Header" xml:space="preserve">
+    <value>Aramayı Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableSearch.Description" xml:space="preserve">
+    <value>System-wide arama işlevi</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
+    <value>Hata Bildirimini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
+    <value>Microsoft'a otomatik olarak hata raporu gönderilmesini önlemek için hata bildirimini kapatır</value>
+  </data>
+  <data name="Feature_DisableGameBar.Header" xml:space="preserve">
+    <value>Oyun Çubuğunu Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableGameBar.Description" xml:space="preserve">
+    <value>Oyun Çubuğunu ve ilişkili özelliklerini kapatır</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
+    <value>Hızlı Erişim Geçmişini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
+    <value>Hızlı Erişim geçmişinin kaydedilmesini ve görüntülenmesini devre dışı bırakır</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
+    <value>Kişilerimi Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
+    <value>Görev çubuğundaki Kişilerim özelliğini kapatır</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
+    <value>Sensör Hizmetlerini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
+    <value>Gizlilik ve güç tasarrufu için sensör hizmetlerini kapatır. İlgili sensörlere sahip dizüstü bilgisayarlar için önerilmez</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
+    <value>Windows Ink'i devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
+    <value>Windows Ink Workspace'i ve ilgili özellikleri kapatır. Kalemli cihazlar için önerilmez</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
+    <value>Yazım ve Yazma Özelliklerini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
+    <value>Yazım ve yazma önerilerini devre dışı bırakır</value>
+  </data>
+  <data name="Feature_DisableFaxService.Header" xml:space="preserve">
+    <value>Faks Hizmetini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableFaxService.Description" xml:space="preserve">
+    <value>Windows'ta Faks hizmetini devre dışı bırakır</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
+    <value>Insider Hizmetini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
+    <value>Windows Insider Programından çık ve önizleme sürümlerini almayı durdur</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
+    <value>Bulut Panosunu Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
+    <value>Cihazlar arası pano paylaşımı için Bulut Panosu özelliğini devre dışı bırakır</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
+    <value>Devre Dışı Bırak Yapışkan Tuşlar</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
+    <value>Yapışkan Tuşlar erişilebilirlik özelliğini devre dışı bırakır. Yanlışlıkla aynı anda birden fazla tuşa basan kişiler için yararlıdır</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
+    <value>Cihaza Yayınlamayı Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
+    <value>Windows'ta Cihaza Yayınlama özelliğini devre dışı bırakır. Diğer cihazlarda sunumlar veya medya paylaşımı için kullanışlıdır</value>
+  </data>
+  <data name="Feature_DisableVBS.Header" xml:space="preserve">
+    <value>VBS'yi devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableVBS.Description" xml:space="preserve">
+    <value>Gelişmiş güvenlik özellikleri için Sanallaştırma Tabanlı Güvenliği (VBS) devre dışı bırakır. Yüksek güvenlikli ortamlar için önerilmez</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
+    <value>Görev Çubuğunu Sola Taşı</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
+    <value>Görev çubuğunu varsayılan alt konumdan ekranın sol tarafına taşır. Kişisel tercih</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
+    <value>Snap Assist'i devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
+    <value>Sürükleme sırasında açık pencereleri otomatik olarak düzenleyen Snap Assist'i devre dışı bırakır. Çoklu görev için kullanışlıdır ancak bazı kullanıcılar manuel pencere yönetimini tercih eder</value>
+  </data>
+  <data name="Feature_DisableWidgets.Header" xml:space="preserve">
+    <value>Widget'ları devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableWidgets.Description" xml:space="preserve">
+    <value>Windows 11 görev çubuğundaki Widget'lar özelliğini devre dışı bırakır.Widget'ları hızlı güncellemeler için yararlı buluyorsunuz (yalnızca Windows 11)</value>
+  </data>
+  <data name="Feature_DisableChat.Header" xml:space="preserve">
+    <value>Sohbeti Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableChat.Description" xml:space="preserve">
+    <value>Windows 11 görev çubuğundaki Sohbet özelliğini devre dışı bırakır. Yalnızca iletişim için sohbet özelliğini kullanmıyorsanız önerilir (yalnızca Windows 11)</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
+    <value>Dosyaları Sıkıştırılmış Modunu Etkinleştir</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
+    <value>Daha küçük küçük resimlerle dosya tarama için Sıkıştırılmış Modu etkinleştirir. Düşük çözünürlüklü ekranlar veya büyük klasörleri yönetmek için kullanışlıdır</value>
+  </data>
+  <data name="Feature_DisableStickers.Header" xml:space="preserve">
+    <value>Etiketleri Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableStickers.Description" xml:space="preserve">
+    <value>Windows 11 mesajlaşma uygulamasında Etiketler özelliğini devre dışı bırakır. Yalnızca iletişim için çıkartma kullanmıyorsanız önerilir (yalnızca Windows 11)</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
+    <value>Edge Discover Bar'ı devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
+    <value>Microsoft Edge'deki Discover Bar özelliğini devre dışı bırakır. Dikkat dağıttığını düşünüyorsanız veya daha temiz bir tarayıcı arayüzü tercih ediyorsanız kullanışlıdır</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
+    <value>CoPilot AI'yı devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
+    <value>Kod yazma konusunda yardım için Windows'daki CoPilot AI özelliğini devre dışı bırakır. Geliştiriciler için önerilmez</value>
+  </data>
+  <data name="OptimizeBasic.Text" xml:space="preserve">
+    <value>Temel Optimizasyonlar</value>
+  </data>
+  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
+    <value>Performans Ayarlamaları</value>
+  </data>
+  <data name="Feature_DisableSysMain.Header" xml:space="preserve">
+    <value>SysMain'i devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableSysMain.Description" xml:space="preserve">
+    <value>Daha hızlı başlatma için sık kullanılan uygulamaları önceden yükleyen SysMain'i kapatır. HDD kullanıyorsanız bazı programların başlatma sürelerini etkileyebilir.</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
+    <value>NTFS Zaman Damgasını Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
+    <value>Dosya işlemleri için NTFS zaman damgalarındaki güncellemeleri devre dışı bırakır. Kesin zaman damgalarına dayanan programların işlevselliğini etkileyebilir.</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
+    <value>Oyun Modunu Etkinleştir</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
+    <value>Daha akıcı bir oyun deneyimi için sistem kaynaklarını optimize eden Oyun Modunu etkinleştirir. Arka plan işlemlerini etkileyebilir.</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
+    <value>Sürücüleri Windows Güncelleştirmelerinden Hariç Tut</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
+    <value>Sürücü güncelleştirmelerini Windows Güncelleştirmesinden hariç tutar. Güncel olmayan sürücülere ve potansiyel güvenlik risklerine veya uyumluluk sorunlarına yol açabilir. Dikkatli kullanın.</value>
+  </data>
+  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
+    <value>Neyin devre dışı bırakıldığı hakkında daha fazla bilgi edinin</value>
+  </data>
+  <data name="OptimizeAdvanced.Text" xml:space="preserve">
+    <value>Gelişmiş Optimizasyonlar</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
+    <value>Sistem Geri Yüklemeyi Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
+    <value>Sorun olması durumunda sistemi önceki bir duruma geri döndürmek için geri yükleme noktaları oluşturan Sistem Geri Yüklemeyi devre dışı bırakır. Önerilmez. Bu özelliği devre dışı bırakmak, olası sistem sorunlarından kolayca kurtulma yeteneğini ortadan kaldırır.</value>
+  </data>
+  <data name="Feature_DisableCortana.Header" xml:space="preserve">
+    <value>Cortana'yı devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableCortana.Description" xml:space="preserve">
+    <value>Soruları yanıtlayabilen ve görevleri tamamlayabilen sanal asistan Cortana'yı devre dışı bırakır. Sesli aramayı ve bazı üretkenlik özelliklerini etkileyebilir.</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
+    <value>Mağaza Güncellemelerini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
+    <value>Microsoft Store'dan indirilen uygulamalar için otomatik güncellemeleri devre dışı bırakır. Uygulamaları güvenlik risklerine karşı savunmasız bırakabilir veya yeni özelliklerden yoksun bırakabilir.</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
+    <value>Otomatik Güncellemeleri Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
+    <value>Otomatik Windows güncellemelerini kapatır ve manuel kurulum gerektirir. Kesinlikle önerilmez. Bu, sisteminizi güvenlik açıklarına ve hata düzeltmelerine karşı savunmasız bırakabilir.</value>
+  </data>
+  <data name="Privacy_Telemetry.Text" xml:space="preserve">
+    <value>Telemetri</value>
+  </data>
+  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
+    <value>Gizliliği Geliştir</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
+    <value>Devre Dışı Bırak SMBv1</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
+    <value>Gelişmiş güvenlik için Sunucu İleti Bloğu sürüm 1'i (SMBv1) devre dışı bırakır. Önerilen</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
+    <value>SMBv2'yi devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
+    <value>Gelişmiş güvenlik için Sunucu İleti Bloğu sürüm 2'yi (SMBv2) devre dışı bırakır. Dikkatli kullanın, çünkü ağ dosya paylaşım işlevlerini bozabilir.</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
+    <value>Telemetri Hizmetlerini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
+    <value>İşletim sistemi tarafından kullanım verilerinin toplanmasını ve iletilmesini önlemek için telemetri hizmetlerini kapatır.</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
+    <value>Edge Telemetrisini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
+    <value>Microsoft Edge'de telemetri veri toplamayı devre dışı bırakır.</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
+    <value>Visual Studio Telemetrisini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
+    <value>Visual Studio'da telemetri veri toplamayı devre dışı bırakır.</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
+    <value>Nvidia Telemetrisini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
+    <value>Nvidia sürücüleri tarafından telemetri veri toplamayı devre dışı bırakır.</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
+    <value>Chrome Telemetrisini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
+    <value>Google Chrome'da telemetri veri toplamayı devre dışı bırakır.</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
+    <value>Firefox Telemetrisini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
+    <value>Mozilla Firefox'ta telemetri veri toplamayı devre dışı bırakır.</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
+    <value>Varsayılan dilinizi seçin</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
+    <value>Dili Değiştir</value>
+  </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>Ağ Oluşturma</value>
+  </data>
+  <data name="Feature_EnableEndTask.Description" xml:space="preserve">
+    <value>Görev çubuğundaki uygulama simgelerine sağ tıklandığında bir seçeneği etkinleştirir ve Görev Yöneticisi'ni açmadan yanıt vermeyen uygulamaları hızla sonlandırmanıza olanak tanır.</value>
+  </data>
+  <data name="Feature_EnableEndTask.Header" xml:space="preserve">
+    <value>Son Görevi Etkinleştir</value>
+  </data>
+  <data name="Network_ApplyDNS.Content" xml:space="preserve">
+    <value>DNS'yi Uygula</value>
+  </data>
+  <data name="Network_IPv4Title.Text" xml:space="preserve">
+    <value>IPv4 DNS Sunucuları</value>
+  </data>
+  <data name="Network_IPv6Title.Text" xml:space="preserve">
+    <value>IPv6 DNS Sunucuları</value>
+  </data>
+  <data name="Network_NicTitle.Text" xml:space="preserve">
+    <value>Ağ Arayüzü</value>
+  </data>
+  <data name="Network_Primary.Text" xml:space="preserve">
+    <value>Birincil</value>
+  </data>
+  <data name="Network_ResetDNS.Content" xml:space="preserve">
+    <value>Varsayılan DNS'yi Sıfırla</value>
+  </data>
+  <data name="Network_Secondary.Text" xml:space="preserve">
+    <value>İkincil</value>
+  </data>
+  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
+    <value>Özel DNS Ayarla</value>
+  </data>
+  <data name="NoIPv4" xml:space="preserve">
+    <value>IPv4 DNS adresi bulunamadı</value>
+  </data>
+  <data name="NoIPv6" xml:space="preserve">
+    <value>IPv6 DNS adresi bulunamadı</value>
+  </data>
+  <data name="NoNic" xml:space="preserve">
+    <value>Ağ arabirimi seçilmedi</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>Ayarlanmadı</value>
+  </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>(yetişkin filtresi)</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
+    <value>Parmak izi veya yüz tanıma gibi kimlik doğrulama için biyometrik kullanımını devre dışı bırakır.</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
+    <value>Biyometrik özelliklerini devre dışı bırak</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX, Windows cihazlarının performansını artırmak için tasarlanmış, WinUI 3 çerçevesiyle oluşturulmuş son teknoloji bir iyileştiricidir. Hem Windows 10 hem de 11, RyTuneX kullanıcıların inatçı önceden yüklenmiş uygulamaları zahmetsizce kaldırmasını ve sistem kaynaklarını optimize etmesini sağlar</value>
+  </data>
+  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
+    <value>Güncellemeleri kontrol et</value>
+  </data>
+  <data name="AvailableUpdateContent0" xml:space="preserve">
+    <value>Daha yeni bir sürüm (</value>
+  </data>
+  <data name="AvailableUpdateContent1" xml:space="preserve">
+    <value>) mevcuttur. Lütfen yeni özelliklerden ve iyileştirmelerden yararlanmak için en son sürüme güncelleyin.</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>RyTuneX güncellemeleri</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Bir hata oluştu. İnternet bağlantınızı kontrol ettiğinizden ve daha sonra tekrar denediğinizden emin olun.</value>
+  </data>
+  <data name="UnavailableUpdate0" xml:space="preserve">
+    <value>Zaten en son sürümü çalıştırıyorsunuz (</value>
+  </data>
+  <data name="UnavailableUpdate1" xml:space="preserve">
+    <value>). Şu anda hiçbir güncelleme mevcut değil.</value>
+  </data>
+  <data name="Kapat" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="Güncelleme" xml:space="preserve">
+    <value>Güncelleme</value>
+  </data>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>Destek</value>
+  </data>
+  <data name="SystemInfoPage_Network.Text" xml:space="preserve">
+    <value>Ağ</value>
+  </data>
+  <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
+    <value>Pil</value>
+  </data>
+  <data name="MACAddress" xml:space="preserve">
+    <value>MAC Adres</value>
+  </data>
+  <data name="AdapterType" xml:space="preserve">
+    <value>Adapter Type</value>
+  </data>
+  <data name="EstimatedChargeRemaining" xml:space="preserve">
+    <value>Estimated Charge Remaining</value>
+  </data>
+  <data name="BatteryStatus" xml:space="preserve">
+    <value>Battery Status</value>
+  </data>
+  <data name="Chemistry" xml:space="preserve">
+    <value>Chemistry</value>
+  </data>
+  <data name="Shell_Security.Content" xml:space="preserve">
+    <value>Security</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Şu vardı beklenmeyen bir hata</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>Günlükleri Görüntüle</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>Toplam: {0} Uygulama</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>Performans</value>
+  </data>
+  <data name="Etkinleştirildi" xml:space="preserve">
+    <value>Etkinleştirildi</value>
+  </data>
+  <data name="Devre Dışı Bırakıldı" xml:space="preserve">
+    <value>Devre Dışı Bırakıldı</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>Güvenlik Durumu</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>Virüs ve Tehdit Koruması</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>Güvenlik Duvarı ve Ağ Koruması</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>Windows Update</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>Gerçek Zamanlı Koruma</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>Kullanıcı Hesabı Denetimi (UAC)</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>Ayrıntılar</value>
+  </data>
+  <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>Onar</value>
+  </data>
+  <data name="ConfirmRemoveApps" xml:space="preserve">
+    <value>Aşağıdaki uygulamaları sisteminizden tamamen kaldırmak üzeresiniz:</value>
+  </data>
+  <data name="ConfirmContinue" xml:space="preserve">
+    <value>Devam etmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Devam</value>
+  </data>
+  <data name="HomePage_cpuUsage.Text" xml:space="preserve">
+    <value>CPU Kullanımı</value>
+  </data>
+  <data name="HomePage_ramUsage.Text" xml:space="preserve">
+    <value>RAM Kullanım</value>
+  </data>
+  <data name="HomePage_gpuUsage.Text" xml:space="preserve">
+    <value>GPU Kullanımı</value>
+  </data>
+  <data name="HomePage_diskUsage.Text" xml:space="preserve">
+    <value>Disk Kullanımı</value>
+  </data>
+  <data name="HomePage_networkUsage.Text" xml:space="preserve">
+    <value>Ağ Kullanımı</value>
+  </data>
+  <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
+    <value>Yüklenen Uygulamalar</value>
+  </data>
+  <data name="HomePage_processesCount.Text" xml:space="preserve">
+    <value>İşlemler</value>
+  </data>
+  <data name="HomePage_servicesCount.Text" xml:space="preserve">
+    <value>Hizmetler</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>Akıllı Ekranı Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>İnternetten indirilen potansiyel olarak güvenli olmayan uygulamalar ve dosyalar hakkında sizi uyaran Akıllı Ekran Filtresi'ni kapatır. Bu özelliği devre dışı bırakmak kötü amaçlı yazılım bulaşma riskini artırır.</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
+    <value>Haberleri ve İlgi Alanlarını Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
+    <value>Görev çubuğundaki Haber ve İlgi Alanları beslemesini devre dışı bırakır; bu besleme haberler, hava durumu ve diğer güncellemeleri görüntüler. Bunu devre dışı bırakmak sistem performansını iyileştirebilir.</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
+    <value>Spotlight Özelliklerini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
+    <value>Kilit ekranınızda kişiselleştirilmiş içerik ve öneriler gösteren Spotlight özelliğini kapatır. Bu özelliği devre dışı bırakmak gizliliği korumaya yardımcı olabilir.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
+    <value>Kişiye Özel Deneyimleri Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
+    <value>Uygulamalar ve hizmetler genelinde kişiye özel deneyimleri devre dışı bırakarak Windows'un tercihlerinizi ve etkinlik verilerinizi toplamasını önler.</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
+    <value>Bulut İçin Optimize Edilmiş İçeriği Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
+    <value>Uygulama güncellemelerini ve dosya senkronizasyonu. Bu, internet bant genişliği kullanımını azaltabilir ancak işlevselliği sınırlayabilir.</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
+    <value>Geri Bildirim Bildirimlerini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
+    <value>Windows'un işletim sistemiyle ilgili deneyiminizle ilgili geri bildirim bildirimleri göstermesini engeller. Bu özelliği devre dışı bırakmak kesintileri azaltabilir.</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
+    <value>Reklam Kimliğini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
+    <value>Reklam Kimliğini devre dışı bırakarak Windows'un hedefli reklamcılık faaliyetlerinizi izlemesini engeller. Bu, gizliliği artırabilir ancak uygulama deneyimlerini etkileyebilir.</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
+    <value>Bluetooth Reklamcılığını Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
+    <value>Cihazınızın varlığını yakındaki diğer cihazlara yayınlayan Bluetooth reklamcılığını kapatır. Bunu devre dışı bırakmak gizlilik risklerini azaltabilir.</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
+    <value>Otomatik Yeniden Başlatma Oturum Açmayı Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
+    <value>Yeniden başlatmadan sonra otomatik oturum açmayı devre dışı bırakır ve kimlik bilgilerinizi manuel olarak girmenizi gerektirir. Bu, güvenliği artırabilir ancak oturum açmaya fazladan bir adım ekler.</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
+    <value>El Yazısı Veri Paylaşımını Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
+    <value>El yazısı verilerinin Microsoft hizmetleriyle paylaşılmasını kapatır, gizliliği artırır ancak el yazısı tanıma ile ilgili bazı özellikleri azaltır.</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
+    <value>Metin Girişi Veri Toplanmasını Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
+    <value>Metin girişi toplanmasını devre dışı bırakır verileri, Windows'un yazdıklarınızı depolamasını ve analiz etmesini engeller. Bu, gizliliği korumaya yardımcı olur ancak yazım doğruluğunu azaltabiliriyileştirmeler.</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
+    <value>Giriş Kişiselleştirmeyi Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
+    <value>Tahmini metin ve otomatik düzeltme özellikleri dahil olmak üzere giriş yöntemlerinin kişiselleştirilmesini devre dışı bırakır. Bu, metin girişindeki sistem performansı iyileştirmelerini azaltabilir.</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
+    <value>Güvenli Arama Modunu Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
+    <value>Potansiyel olarak zararlı veya uygunsuz içeriği arama sonuçlarından filtreleyen Güvenli Arama Modunu kapatır. Bunu devre dışı bırakmak güvenli olmayan içeriğe maruz kalma riskini artırır.</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
+    <value>Etkinlik Yüklemelerini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
+    <value>Etkinlik verilerinin yüklenmesini devre dışı bırakarak Microsoft'un hizmetleri iyileştirmek için kullanım verilerinizi toplamasını engeller. Bu, gizliliğin korunmasına yardımcı olur.</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
+    <value>Pano Senkronizasyonunu Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
+    <value>Cihazlarınız arasında pano senkronizasyonunu devre dışı bırakarak kopyalanan verilerinizin yerel kalmasını ve verilerin diğer cihazlarla paylaşılmasını önler.</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
+    <value>Mesaj Senkronizasyonunu Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
+    <value>Mesajların cihazlar arasında senkronize edilmesini önleyerek kısa mesajlarınızın ve bildirimlerinizin yalnızca kullandığınız cihazda kullanılabilir olmasını sağlar. using.</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
+    <value>Ayar Senkronizasyonunu Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
+    <value>Cihazlar arasında sistem ayarlarının senkronizasyonunu devre dışı bırakır. Bu, cihaz ayarlarınızın, temalarınızın ve diğer yapılandırmalarınızın paylaşılmasını önler.</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
+    <value>Sesli Etkinleştirmeyi Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
+    <value>Cortana gibi sesli etkinleştirme özelliklerini devre dışı bırakarak asistanın sesli komutlarınızı dinlemesini engeller. Bu gizliliği artırabilir ancak sesli komut işlevselliğini azaltır.</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
+    <value>Cihazımı Bul özelliğini devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
+    <value>Cihazınızı kaybettiğinizde bulmanıza yardımcı olan Cihazımı Bul özelliğini devre dışı bırakır. Bunu devre dışı bırakmak, kaybolan bir cihazı kurtarma yeteneğinizi azaltır ancak gizliliği artırır.</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
+    <value>Etkinlik Akışını Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
+    <value>Son etkinliklerinizi gösteren etkinlik akışını kapatır ve başkalarının cihazınızda ne yaptığınızı görmesini önleyerek gizliliğinizi korumaya yardımcı olur.</value>
+  </data>
+  <data name="Feature_DisableCdp.Header" xml:space="preserve">
+    <value>CDP'yi (Müşteri Veri Platformu) Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableCdp.Description" xml:space="preserve">
+    <value>CDP'yi devre dışı bırakarak Müşteri veri platformu tarafından analiz ve hedefli öneriler için verilerinizin toplanması ve kullanılması. Bu, gizliliği artırır ancak kişiselleştirmeyi sınırlayabilir.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
+    <value>Gizlilikteki Kişiye Özel Deneyimleri Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
+    <value>Gizlilik ayarlarında kişiye özel deneyimler özelliğini devre dışı bırakır ve Windows'un deneyimlerinizi özelleştirmek için verilerinizi kullanmasını engeller. Bu, kişiselleştirme özelliklerini azaltabilir.</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
+    <value>Tanılama Bildirimlerini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
+    <value>Tanılama bildirimlerini kapatır ve Windows'un size sistem sağlığı veya hatalarla ilgili istemleri göstermesini engeller. Bu, dikkat dağıtıcı unsurları azaltmaya yardımcı olabilir.</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
+    <value>Çevrimiçi Konuşma Gizliliğini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
+    <value>Çevrimiçi konuşma gizliliğini devre dışı bırakarak Windows'un sesli komutları depolamasını veya işlemesini engeller. Bu, gizliliği artırır ancak sesli arama ve komutlar gibi ses özelliklerini sınırlar.</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
+    <value>Konum Erişimini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
+    <value>Uygulamalar ve hizmetler için konum erişimini kapatır ve bunların cihazınızın GPS veya ağ konumunu kullanmasını engeller. Bu, gizliliği artırır ancak konuma dayalı hizmetleri sınırlayabilir.</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
+    <value>Konum Özelliklerini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
+    <value>Uygulamalar için konum servisleri ve güvenlik özellikleri dahil olmak üzere cihazınızdaki tüm konum tabanlı özellikleri devre dışı bırakır. Bu, gizliliği artırabilir ancak konuma bağlı servislerin işlevselliğini azaltabilir.</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
+    <value>Menü Gösterim Gecikmesini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
+    <value>Fareyle üzerine gelindiğinde menülerin görünmesinden önceki gecikmeyi kontrol eder. Bu özelliği devre dışı bırakmak, menülerin anında açılmasını sağlayarak tepkiselliği iyileştirebilir ancak kullanıcı kontrolünü azaltabilir.</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
+    <value>Fare Üzerine Gelme Süresini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
+    <value>Sistemin bir üzerine gelme olayını tetiklemeden önce beklediği süreyi ayarlar. Bunu devre dışı bırakmak etkileşimleri hızlandırabilir ancak istem dışı etkinleştirmelere yol açabilir.</value>
+  </data>
+  <data name="Feature_AutoComplete.Header" xml:space="preserve">
+    <value>Otomatik Tamamlamayı Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_AutoComplete.Description" xml:space="preserve">
+    <value>Arama kutuları ve form girdileri gibi belirli alanlara yazarken otomatik önerileri devre dışı bırakır. Devre dışı bırakmak dikkat dağıtıcı unsurları azaltabilir ancak iş akışını yavaşlatabilir.</value>
+  </data>
+  <data name="Feature_CrashDump.Header" xml:space="preserve">
+    <value>Çökme Dökümünü Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_CrashDump.Description" xml:space="preserve">
+    <value>Uygulamalar çöktüğünde çökme raporlarının ve bellek dökümlerinin oluşturulup oluşturulmayacağını kontrol eder. Bu özelliği devre dışı bırakmak disk alanını korumaya yardımcı olabilir, ancak uygulama sorunlarını teşhis etme ve giderme yeteneğini azaltabilir.</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
+    <value>Uzaktan Yardımı Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
+    <value>Uzaktan destek özelliklerini devre dışı bırakarak başkalarının size uzak masaüstü aracılığıyla yardımcı olmasına olanak tanır. Devre dışı bırakmak güvenliği artırabilir ancak destek seçeneklerini sınırlar.</value>
+  </data>
+  <data name="Feature_WindowShake.Header" xml:space="preserve">
+    <value>Pencere Sallamayı Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_WindowShake.Description" xml:space="preserve">
+    <value>Bir pencereyi salladığınızda tüm açık pencereleri en aza indiren pencere sallama özelliğini devre dışı bırakır. Devre dışı bırakmak odaklanmayı iyileştirir ancak kullanışlı bir pencere yönetim aracını kaldırır.</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
+    <value>Kopyala/Taşı Bağlam Menüsü Ekle</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
+    <value>Dosyaları yeni bir konuma kolayca kopyalamak veya taşımak için dosya bağlam menüsünde ek seçenekleri etkinleştirir. Bu özellik, bu işlevlere doğrudan sağ tıklama menüsünden hızlı erişim sağlayarak dosya yönetimini kolaylaştırır.</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
+    <value>Görev Zaman Aşımlarını Ayarla</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
+    <value>Sistem görevleri için zaman aşımı ayarlarını değiştirir. Ayarlamak bazı senaryolarda performansı iyileştirebilir ancak belirli koşullar altında görevlerin başarısız olmasına neden olabilir.</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
+    <value>Düşük Disk Alanı Kontrollerini Etkinleştir</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
+    <value>Performans sorunlarını önlemek için düşük disk alanı için otomatik kontrolleri etkinleştirir. Devre dışı bırakmak bildirimleri azaltabilir, ancak kritik depolama uyarılarını kaçırabilirsiniz.</value>
+  </data>
+  <data name="Feature_LinkResolve.Header" xml:space="preserve">
+    <value>Bağlantı Çözümünü Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_LinkResolve.Description" xml:space="preserve">
+    <value>Dosya ve klasörlerdeki bozuk bağlantıların çözümlenmesini devre dışı bırakır. Devre dışı bırakmak işlemleri hızlandırabilir, ancak güncel olmayan bağlantıları çözümsüz bırakabilir.</value>
+  </data> 
+  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
+    <value>Hizmet Zaman Aşımlarını Azaltır</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
+    <value>Sistem hizmetleri için zaman aşımlarını ayarlar. Bunları kısaltmak performansı iyileştirebilir ancak hizmetlerin erken sonlanmasına neden olabilir.</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
+    <value>Uzak Kayıt Defterini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
+    <value>Kayıt defterine uzaktan erişimi devre dışı bırakır. Devre dışı bırakmak güvenliği artırır ancak kayıt defteri ayarlarının uzaktan yapılandırılmasını engeller.</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
+    <value>Dosya Uzantılarını ve Gizli Dosyaları Gizle</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
+    <value>Dosya uzantılarının ve gizli dosyaların görünürlüğünü kontrol eder. Bunu etkinleştirmek karmaşayı azaltır ancak önemli dosya ayrıntılarını gizler.</value>
+  </data>
+  <data name="Feature_SystemProfile.Header" xml:space="preserve">
+    <value>Sistem Profilini Optimize Et</value>
+  </data>
+  <data name="Feature_SystemProfile.Description" xml:space="preserve">
+    <value>Sistem profili ayarlarını düzenleyerek sisteminizin performansını artırır. Bu özellik, genel sistem yanıt hızını ve kaynak yönetimini iyileştirerek hız ve verimliliği önceliklendirir.</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
+    <value>GPU ve Öncelik Ayarlarını Geliştir</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
+    <value>GPU yapılandırmalarını ve işlem önceliklerini optimize ederek performansı artırır, oyun ve çoklu görev gibi kaynak yoğun görevler için daha iyi grafik oluşturma ve daha sorunsuz çalışma sağlar.</value>
+  </data>
+  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
+    <value>Çerçeve Sunucu Modunu Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
+    <value>Gelişmiş video kodlaması için kare sunucusu modunu devre dışı bırakır. Devre dışı bırakmak performansı artırır ancak belirli koşullar altında video kalitesini düşürebilir.</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
+    <value>Düşük Gecikmeli GPU Ayarlarını Ayarla</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
+    <value>Gecikmeyi en aza indirmek için GPU ayarlarını ayarlayarak oyun veya video performansını iyileştirir.</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
+    <value>En İyi Olmayan Çaba Sınırını Ayarla</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
+    <value>En iyi olmayan çaba süreçleri için bir sınır belirler. Etkinleştirmek performansı önceliklendirebilir ancak bazı durumlarda sistem esnekliğini azaltabilir.</value>
+  </data>
+  <data name="LoadingWindowText.Text" xml:space="preserve">
+    <value>Yükleniyor...</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>Cihaz Bilgileri</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>Klasik Bağlam Menüsünü Etkinleştir</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>Windows 10'un klasik bağlam menüsü stilini geri yükler ve tüm seçeneklerin hemen görüntülendiği tanıdık bir sağ tıklama menüsü deneyimi sağlar</value>
+  </data>
+  <data name="DoNotShowCheckBox" xml:space="preserve">
+    <value>Bu mesajı bir daha gösterme</value>
+  </data>
+  <data name="RestorePointDialogTitle" xml:space="preserve">
+    <value>Geri Yükleme Noktası Oluştur</value>
+  </data>
+  <data name="RestorePointDialogText" xml:space="preserve">
+    <value>Sisteminizde herhangi bir değişiklik yapmadan önce bir geri yükleme noktası oluşturmanız şiddetle önerilir.
+
+Devam etmeden önce bir sistem geri yükleme noktası oluşturmak ister misiniz?</value>
+  </data>
+  <data name="CreatingRestorePoint" xml:space="preserve">
+    <value>Geri Yükleme Noktası Oluşturuluyor</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>Geri Yükleme Noktası Oluşturuldu</value>
+  </data>
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>Bir sistem geri yükleme noktası başarıyla oluşturuldu.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>Geri yükleme noktası oluşturulamadı</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Geri Yükle değişiklikler</value>
+  </data>
+  <data name="Settings_RevertChanges.Header" xml:space="preserve">
+    <value>Tüm değişiklikleri geri al</value>
+  </data>
+  <data name="Settings_RevertChanges.Description" xml:space="preserve">
+    <value>RyTuneX'in sisteminizde yaptığı tüm değişiklikleri, geri yükleme noktası dahil olmak üzere geri alır</value>
+  </data>
+  <data name="RevertingChanges" xml:space="preserve">
+    <value>Şu anda değişiklikler geri alınıyor...</value>
+  </data>
+  <data name="RevertChangesDialogText" xml:space="preserve">
+    <value>RyTuneX tarafından sisteminizde yapılan tüm değişiklikleri (kaldırılan uygulamalar hariç) geri almak ve uygulamanın tercihlerini sıfırlamak üzeresiniz.
+
+Devam etmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="NoChangesFound" xml:space="preserve">
+    <value>Önemli bir değişiklik bulunamadı.</value>
+  </data>
+  <data name="OperationStopped" xml:space="preserve">
+    <value>İşlem durduruldu</value>
+  </data>
+  <data name="ReportSaved" xml:space="preserve">
+    <value>Rapor Masaüstünüze kaydedildi</value>
+  </data>
+  <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
+    <value>Bellek Tanılama</value>
+  </data>
+  <data name="MemoryDiagnosticDialogText" xml:space="preserve">
+    <value>Bellek sorunları bilgisayarınızın bilgi kaybetmesine veya çalışmamasına neden olabilir.
+
+Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Şimdi yeniden başlat</value>
+  </data>
+  <data name="ScheduleLater" xml:space="preserve">
+    <value>Daha sonra zamanlamak için planla</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ScheduledLater" xml:space="preserve">
+    <value>Bir sonraki yeniden başlatma için planlandı</value>
+  </data>
+  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
+    <value>Tara</value>
+  </data>
+  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
+    <value>Onar</value>
+  </data>
+  <data name="RepairPage_StopButton.Content" xml:space="preserve">
+    <value>Durdur</value>
+  </data>
+  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>Tarama/onarım için en az bir seçenek belirleyin</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
+    <value>Pil Sağlığı</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
+    <value>Bu, pilinizin sağlığı hakkında eksiksiz bir istatistik üretecektir</value>
+  </data>
+  <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
+    <value>Oluştur</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
+    <value>Bellek Tanılama</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
+    <value>Sisteminizin belleğini olası sorunlar açısından analiz edin ve kararlılığı artırın</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
+    <value>Tanıla</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
+    <value>Disk Optimizasyonları</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
+    <value>Bu, depolama aygıtınızı birleştirerek (HDD ise) veya yeniden kırparak (SSD ise) optimize edecektir</value>
+  </data>
+  <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+    <value>Optimize</value>
+  </data>
+  <data name="RepairPage_EventViewer.Header" xml:space="preserve">
+    <value>Olay Görüntüleyici</value>
+  </data>
+  <data name="RepairPage_EventViewer.Description" xml:space="preserve">
+    <value>Bu, sorun giderme için son sistem olay günlüklerini görüntüler</value>
+  </data>
+  <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
+    <value>Onarım Seçenekleri</value>
+  </data>
+  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
+    <value>Tanı Seçenekleri</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>İşlem Tamamlandı</value>
+  </data>
+  <data name="RestorePointTitle" xml:space="preserve">
+    <value>Geri Yükleme Noktası</value>
+  </data>
+  <data name="Uyarı" xml:space="preserve">
+    <value>Uyarı</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>Sistem Geri Yükleme'yi devre dışı bırakmak, RyTuneX tarafından oluşturulanlar da dahil olmak üzere tüm geri yükleme noktalarını silecektir.
+
+Devam etmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>Reklam Ayarları</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>Telemetri Ayarları</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>Diğer Ayarlar</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>Temel Sistem Optimizasyonları</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>Gelişmiş Sistem Optimizasyonlar</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>Aramanızla eşleşen uygulama yok</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>Uygulamaları ara...</value>
+  </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>Arka Plan Uygulamalarını Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>Bazı durumlarda gelişmiş performansa yol açan uygulamaların arka planda çalışmasını önler.</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>Windows Koyu Modunu Etkinleştir</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>Windows'u etkinleştirmeye gerek kalmadan tüm sistem için koyu modu etkinleştirir</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>Windows Şeffaflığını Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>Görev çubuğu ve pencereler gibi sistem kullanıcı arayüzü öğelerindeki şeffaf efektleri devre dışı bırakarak performansı artırır</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>Standart Uygulamalar</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>Tüm Uygulamalar</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>Win32 Uygulamaları</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>İşletim Sistemini Sıkıştır</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+    <value>Disk alanı kullanımını azaltmak için işletim sistemi sıkıştırmasını etkinleştirin. Bu özellik, sınırlı depolama kapasitesine sahip aygıtlar için özellikle yararlıdır ancak düşük uçlu donanımlarda sistem performansını biraz etkileyebilir</value>
+  </data>
+  <data name="Sıkıştırılıyor" xml:space="preserve">
+    <value>Sistem ikili dosyaları sıkıştırılıyor...</value>
+  </data>
+  <data name="Sıkıştırılıyor" xml:space="preserve">
+    <value>Sistem ikili dosyaları sıkıştırılıyor...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+    <value>Sıkıştırma Kontrolü</value>
+  </data>
+  <data name="Sıkıştır" xml:space="preserve">
+    <value>Sıkıştır</value>
+  </data>
+  <data name="Sıkıştırmayı Kaldır" xml:space="preserve">
+    <value>Sıkıştırmayı Kaldır</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+    <value>Sistem Sıkıştırma</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>Hizmet Ana Bilgisayarı Bölmeyi Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+    <value>Çok daha düşük RAM kullanımı ve işlem sayısı için Hizmet Ana Bilgisayarı bölmeyi devre dışı bırakır.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>Eski Önyükleme Menüsünü Etkinleştir</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>Daha hızlı başlatma için eski önyükleme menüsüne geçin.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>NTFS Ayarlarını Optimize Et</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>Performansı iyileştirmek ve gizliliği artırmak için NTFS ayarlarını ayarlayın.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>Sayfalamayı Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>Maksimum performans için bellek sayfalamasını kapatın.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>Ön Plan Uygulama Performansını Optimize Et</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>Ön plandaki görevlere öncelik vererek etkin uygulamaların performansını artırır.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>WPBT Yürütmesini Devre Dışı Bırak</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>Başlatma sırasında aygıt yazılımının programları (örneğin, OEM bloatware) çalıştırmasını durdurun.</value>
+  </data>
+</root>
