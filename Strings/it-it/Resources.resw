@@ -1112,6 +1112,7 @@
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>Si consiglia vivamente di creare un punto di ripristino prima di apportare modifiche al sistema.
 
+
 Vuoi creare un punto di ripristino del sistema prima di procedere?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
@@ -1141,6 +1142,7 @@ Vuoi creare un punto di ripristino del sistema prima di procedere?</value>
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>Stai per ripristinare tutte le modifiche apportate da RyTuneX al tuo sistema (ad eccezione delle app disinstallate) e reimpostare le preferenze dell'app.
 
+
 Sei sicuro di voler continuare?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
@@ -1157,6 +1159,7 @@ Sei sicuro di voler continuare?</value>
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>I problemi di memoria possono causare la perdita di informazioni o l'interruzione del funzionamento del computer.
+
 
 Controlla se il computer presenta problemi di memoria</value>
   </data>
@@ -1234,6 +1237,7 @@ Controlla se il computer presenta problemi di memoria</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
     <value>La disattivazione di Ripristino configurazione di sistema eliminerà tutti i punti di ripristino, inclusi quelli creati da RyTuneX.
+
 
 Vuoi continuare?</value>
   </data>

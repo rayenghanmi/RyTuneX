@@ -1109,6 +1109,8 @@
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>يُنصح بشدة بإنشاء نقطة استعادة قبل إجراء أي تغييرات على نظامك.
+
+
 هل ترغب في إنشاء نقطة استعادة للنظام قبل المتابعة؟</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
@@ -1138,6 +1140,7 @@
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>أنت على وشك التراجع عن جميع التغييرات التي أجراها RyTuneX على نظامك (باستثناء التطبيقات التي تم إلغاء تثبيتها) وإعادة تعيين تفضيلات التطبيق.
 
+
 هل أنت متأكد أنك تريد المتابعة؟</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
@@ -1154,6 +1157,7 @@
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>قد تتسبب مشاكل الذاكرة في فقدان الكمبيوتر للمعلومات أو توقفه عن العمل.
+
 
 افحص جهاز الكمبيوتر الخاص بك بحثًا عن مشاكل في الذاكرة</value>
   </data>
@@ -1231,6 +1235,7 @@
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
     <value>تعطيل استعادة النظام سيؤدي إلى حذف جميع نقاط الاستعادة بما في ذلك تلك التي أنشأها RyTuneX.
+
 
 هل أنت متأكد أنك تريد المتابعة؟</value>
   </data>

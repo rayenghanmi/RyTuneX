@@ -1113,6 +1113,7 @@
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>It's highly recommended to create a restore point before making any changes to your system.
 
+
 Would you like to create a system restore point before proceeding?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
@@ -1142,6 +1143,7 @@ Would you like to create a system restore point before proceeding?</value>
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>You're about to revert all the changes made by RyTuneX to your system (Except for uninstalled apps) and reset the app's preferences.
 
+
 Are you sure you want to continue?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
@@ -1158,6 +1160,7 @@ Are you sure you want to continue?</value>
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>Memory problems can cause your computer to lose information or stop working.
+
 
 Check your computer for memory problems</value>
   </data>
@@ -1235,6 +1238,7 @@ Check your computer for memory problems</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
     <value>Disabling System Restore will delete all restore points including those created by RyTuneX.
+
 
 Are you sure you want to continue?</value>
   </data>

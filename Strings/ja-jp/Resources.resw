@@ -1110,6 +1110,7 @@
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>システムに変更を加える前に、復元ポイントを作成することを強くお勧めします. 
 
+
 続行する前にシステムの復元ポイントを作成しますか?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
@@ -1139,6 +1140,7 @@
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>RyTuneX によってシステムに加えられたすべての変更（アンインストールされたアプリを除く）を元に戻し、アプリの設定をリセットしようとしています. 
 
+
 本当に続行してよろしいですか?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
@@ -1155,6 +1157,7 @@
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>メモリの問題があると、コンピューターが情報を失ったり、動作を停止したりする可能性があります. 
+
 
 メモリの問題を確認してください. </value>
   </data>
@@ -1231,7 +1234,10 @@
     <value>警告</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value />
+    <value>システムの復元を無効にすると、RyTuneX が作成したものを含め、すべての復元ポイントが削除されます。
+
+
+続行してもよろしいですか？</value>
   </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>デバイス情報</value>

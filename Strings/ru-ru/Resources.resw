@@ -1140,7 +1140,8 @@
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>Вы собираетесь отменить все изменения, внесенные RyTuneX в вашу систему (кроме удаленных приложений), а также сбросить настройки приложения.
 
-  Вы уверены, что хотите продолжить?</value>
+
+Вы уверены, что хотите продолжить?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
     <value>Значительных изменений не найдено.</value>
@@ -1157,7 +1158,8 @@
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>Проблемы с памятью могут привести к потере данных или сбоям в работе вашего компьютера.
 
-  Проверьте ваш компьютер на наличие проблем с памятью</value>
+
+Проверьте ваш компьютер на наличие проблем с памятью</value>
   </data>
   <data name="RestartNow" xml:space="preserve">
     <value>Перезагрузить сейчас</value>
@@ -1234,7 +1236,8 @@
   <data name="RestoreWarningDialogText" xml:space="preserve">
     <value>Отключение восстановления системы приведет к удалению всех точек восстановления, включая созданные RyTuneX.
 
-  Вы уверены, что хотите продолжить?</value>
+
+Вы уверены, что хотите продолжить?</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Настройки рекламы</value>

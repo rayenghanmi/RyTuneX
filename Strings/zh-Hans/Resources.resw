@@ -1108,7 +1108,9 @@
     <value>创建还原点</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
-    <value>强烈建议在对系统进行任何更改之前创建一个还原点. 
+    <value>强烈建议在对系统进行任何更改之前创建一个还原点.
+
+
 在继续之前, 是否要创建一个系统还原点?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
@@ -1138,6 +1140,7 @@
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>您将还原 RyTuneX 对系统所做的所有更改（已卸载的应用程序除外）并重置应用程序的首选项. 
 
+
 您确定要继续吗?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
@@ -1154,6 +1157,7 @@
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>内存问题可能会导致计算机丢失信息或停止工作. 
+
 
 检查计算机的内存问题</value>
   </data>
@@ -1231,6 +1235,7 @@
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
     <value>禁用系统还原将删除所有还原点, 包括由RyTuneX创建的还原点.
+
 
 您确定要继续吗?</value>
   </data>

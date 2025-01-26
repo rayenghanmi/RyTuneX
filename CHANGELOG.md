@@ -7,7 +7,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Added
 
-- Added translations for Russian, Spanish, Korean, Portuguese, Italian, and Turkish languages.
+- Added translations for Russian, Spanish, Korean, Portuguese, Italian, and Turkish (thanks to @Vzxor) languages.
 - Introduced new optimization options:
   - `WPBT Execution Settings`
   - `Foreground Applications Prioritization`

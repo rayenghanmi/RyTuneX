@@ -1106,6 +1106,8 @@
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>Il est fortement recommandé de créer un point de restauration avant d'apporter des modifications à votre système.
+
+
 Souhaitez-vous créer un point de restauration système avant de continuer ?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
@@ -1135,6 +1137,7 @@ Souhaitez-vous créer un point de restauration système avant de continuer ?</va
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>Vous êtes sur le point d'annuler toutes les modifications apportées à votre système par RyTuneX (à l'exception des applications désinstallées) et de réinitialiser les préférences de l'application.
 
+
 Êtes-vous sûr de vouloir continuer ?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
@@ -1151,6 +1154,7 @@ Souhaitez-vous créer un point de restauration système avant de continuer ?</va
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>Les problèmes de mémoire peuvent entraîner une perte d'informations ou un dysfonctionnement de votre ordinateur.
+
 
 Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</value>
   </data>
@@ -1228,6 +1232,7 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
     <value>Désactiver la restauration du système supprimera tous les points de restauration, y compris ceux créés par RyTuneX.
+
 
 Êtes-vous sûr de vouloir continuer ?</value>
   </data>
