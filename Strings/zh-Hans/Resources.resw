@@ -484,13 +484,13 @@
     <value>禁用小部件</value>
   </data>
   <data name="Feature_DisableWidgets.Description" xml:space="preserve">
-    <value>禁用 Windows 11 任务栏上的小部件功能.  考虑一下您是否发现这些小部件对于快速更新有用（仅限 Windows 11）</value>
+    <value>禁用 Windows 11 任务栏上的小部件功能.  考虑一下您是否发现这些小部件对于快速更新有用 (仅限 Windows 11) </value>
   </data>
   <data name="Feature_DisableChat.Header" xml:space="preserve">
     <value>禁用聊天</value>
   </data>
   <data name="Feature_DisableChat.Description" xml:space="preserve">
-    <value>禁用 Windows 11 任务栏上的聊天功能.  仅在您不使用聊天功能进行通信时推荐（仅限 Windows 11）</value>
+    <value>禁用 Windows 11 任务栏上的聊天功能.  仅在您不使用聊天功能进行通信时推荐 (仅限 Windows 11) </value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
     <value>启用文件紧凑模式</value>
@@ -502,7 +502,7 @@
     <value>禁用贴纸</value>
   </data>
   <data name="Feature_DisableStickers.Description" xml:space="preserve">
-    <value>禁用 Windows 11 消息应用程序中的贴纸功能.  仅在您不使用贴纸进行交流时推荐（仅限 Windows 11）</value>
+    <value>禁用 Windows 11 消息应用程序中的贴纸功能.  仅在您不使用贴纸进行交流时推荐 (仅限 Windows 11) </value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
     <value>禁用 Edge 发现栏</value>
@@ -682,7 +682,7 @@
     <value>网络</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
-    <value>（成人过滤器）</value>
+    <value> (成人过滤器) </value>
   </data>
   <data name="Automatic" xml:space="preserve">
     <value>自动</value>
@@ -943,7 +943,7 @@
     <value>关闭显示您最近活动的活动反馈, 有助于通过防止他人看到您在设备上做了什么来保护您的隐私. </value>
   </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
-    <value>禁用CDP（客户数据平台）</value>
+    <value>禁用CDP (客户数据平台) </value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
     <value>禁用CDP, 防止客户数据平台收集和使用您的数据进行分析和定向推荐. 这可以提高隐私性, 但可能会限制个性化功能. </value>
@@ -994,7 +994,7 @@
     <value>禁用自动完成</value>
   </data>
   <data name="Feature_AutoComplete.Description" xml:space="preserve">
-    <value>禁用在某些字段（如搜索框和表单输入）中的自动建议. 禁用此功能可以减少干扰, 但可能会减慢工作流. </value>
+    <value>禁用在某些字段 (如搜索框和表单输入) 中的自动建议. 禁用此功能可以减少干扰, 但可能会减慢工作流. </value>
   </data>
   <data name="Feature_CrashDump.Header" xml:space="preserve">
     <value>禁用崩溃转储</value>
@@ -1138,7 +1138,7 @@
     <value>正在还原更改...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>您将还原 RyTuneX 对系统所做的所有更改（已卸载的应用程序除外）并重置应用程序的首选项. 
+    <value>您将还原 RyTuneX 对系统所做的所有更改 (已卸载的应用程序除外) 并重置应用程序的首选项. 
 
 
 您确定要继续吗?</value>
@@ -1279,7 +1279,7 @@
     <value>禁用 Windows 透明效果</value>
   </data>
   <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
-    <value>禁用系统 UI 元素（如任务栏和窗口）中的透明效果, 提高性能</value>
+    <value>禁用系统 UI 元素 (如任务栏和窗口) 中的透明效果, 提高性能</value>
   </data>
   <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
     <value>标准应用</value>
@@ -1324,30 +1324,36 @@
     <value>启用传统启动菜单</value>
   </data>
   <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
-    <value>切换到传统启动菜单以加快启动速度。</value>
+    <value>切换到传统启动菜单以加快启动速度.</value>
   </data>
   <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
     <value>优化 NTFS 设置</value>
   </data>
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
-    <value>调整 NTFS 设置以提升性能并增强隐私。</value>
+    <value>调整 NTFS 设置以提升性能并增强隐私.</value>
   </data>
   <data name="Feature_PagingSettings.Header" xml:space="preserve">
     <value>禁用分页</value>
   </data>
   <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>禁用内存分页以实现最大性能。</value>
+    <value>禁用内存分页以实现最大性能.</value>
   </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>优化前台应用性能</value>
   </data>
   <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
-    <value>通过优先处理前台任务来提升活动应用的性能。</value>
+    <value>通过优先处理前台任务来提升活动应用的性能.</value>
   </data>
   <data name="Feature_WPBT.Header" xml:space="preserve">
     <value>禁用 WPBT 执行</value>
   </data>
   <data name="Feature_WPBT.Description" xml:space="preserve">
-    <value>阻止固件在启动过程中运行程序（例如 OEM 预装软件）。</value>
+    <value>阻止固件在启动过程中运行程序 (例如 OEM 预装软件).</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
+    <value>禁用不必要的服务</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
+      <value>通过禁用对设备运行非必需的后台服务来优化系统性能.这有助于释放系统资源并提高整体效率.</value>
   </data>
 </root>

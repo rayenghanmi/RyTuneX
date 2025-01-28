@@ -1349,4 +1349,10 @@ Tem certeza de que deseja continuar?</value>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Impedir que o firmware execute programas (por exemplo, bloatware OEM) durante a inicialização.</value>
   </data>
+  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
+    <value>Desativar serviços desnecessários</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
+      <value>Otimize o desempenho do sistema desativando serviços em segundo plano que não são essenciais para a operação do dispositivo. Isso ajuda a liberar recursos do sistema e melhora a eficiência geral.</value>
+  </data>
 </root>

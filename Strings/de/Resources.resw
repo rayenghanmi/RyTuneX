@@ -1347,4 +1347,10 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Verhindert, dass Firmware Programme (z. B. OEM-Bloatware) beim Start ausführt.</value>
   </data>
+  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
+    <value>Deaktivieren Sie unnötige Dienste</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
+      <value>Optimieren Sie die Systemleistung, indem Sie Hintergrunddienste deaktivieren, die für den Betrieb Ihres Geräts nicht erforderlich sind. Dies hilft, Systemressourcen freizugeben und die Gesamtleistung zu verbessern.</value>
+  </data>
 </root>

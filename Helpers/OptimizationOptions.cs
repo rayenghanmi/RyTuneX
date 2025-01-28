@@ -421,6 +421,9 @@ internal partial class OptimizationOptions
             {
                 switch (action)
                 {
+                    case "EnableUnnecessaryServices":
+                        OptimizeSystemHelper.EnableUnnecessaryServices();
+                        break;
                     case "DisableLegacyBootMenu":
                         OptimizeSystemHelper.DisableLegacyBootMenu();
                         break;
@@ -735,6 +738,19 @@ internal partial class OptimizationOptions
                     {
                         OptimizeSystemHelper.DisableLegacyBootMenu();
                         RemoveRevertAction("DisableLegacyBootMenu");
+                    }
+                    break;
+
+                case "UnnecessaryServices":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableUnnecessaryServices();
+                        SaveRevertAction("EnableUnnecessaryServices");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableUnnecessaryServices();
+                        RemoveRevertAction("EnableUnnecessaryServices");
                     }
                     break;
 

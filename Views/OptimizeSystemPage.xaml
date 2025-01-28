@@ -127,6 +127,14 @@
                 <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                     x:Uid="OptimizeSystemPage_AdvancedOptimization"/>
+
+                <controls:SettingsCard x:Uid="Feature_UnnecessaryServices">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE71D;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="UnnecessaryServices" Tag="UnnecessaryServices"/>
+                </controls:SettingsCard>
+                
                 <controls:SettingsCard x:Uid="Feature_SystemProfile">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE9F5;"/>
