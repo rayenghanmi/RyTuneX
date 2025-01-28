@@ -451,7 +451,7 @@ public sealed partial class DebloatSystemPage : Page
             // Update UI to show progress
             TempStack.Visibility = Visibility.Visible;
             TempProgress.Visibility = Visibility.Visible;
-            TempButton.Visibility = Visibility.Collapsed;
+            TempButtonStack.Visibility = Visibility.Collapsed;
             TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeligTemp") + "...";
 
             // Execute temp removal commands
@@ -460,7 +460,7 @@ public sealed partial class DebloatSystemPage : Page
             // Reset UI after task completion
             TempStack.Visibility = Visibility.Collapsed;
             TempProgress.Visibility = Visibility.Collapsed;
-            TempButton.Visibility = Visibility.Visible;
+            TempButtonStack.Visibility = Visibility.Visible;
 
             if (result)
             {
@@ -484,7 +484,7 @@ public sealed partial class DebloatSystemPage : Page
             // Restore UI in case of unexpected error
             TempStack.Visibility = Visibility.Collapsed;
             TempProgress.Visibility = Visibility.Collapsed;
-            TempButton.Visibility = Visibility.Visible;
+            TempButtonStack.Visibility = Visibility.Visible;
 
             // Show error notification
             App.ShowNotification(

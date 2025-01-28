@@ -35,7 +35,10 @@
 
                 <StackPanel x:Name="TempStackButtonTextBar" Grid.Row="0" Margin="12,0" HorizontalAlignment="Right" Orientation="Vertical" VerticalAlignment="Center" Visibility="Collapsed">
                     <Grid>
-                        <Button x:Uid="DebloatSystemPage_TempButton" x:Name="TempButton" Click="TempButton_Click"/>
+                        <StackPanel Orientation="Horizontal" x:Name="TempButtonStack">
+                            <FontIcon Glyph="&#xEA99;" Margin="0,0,12,0"/>
+                            <Button x:Uid="DebloatSystemPage_TempButton" Click="TempButton_Click"/>
+                        </StackPanel>
                         <StackPanel x:Name="TempStack" Visibility="Collapsed">
                             <ProgressBar x:Name="TempProgress" Margin="3" IsIndeterminate="True" Visibility="Collapsed"/>
                             <TextBlock x:Name="TempStatusText" Style="{StaticResource CaptionTextBlockStyle}"/>
@@ -92,8 +95,10 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Orientation="Horizontal" Padding="5">
-                                    <Image Source="{Binding Item2}" Width="32" Height="32" Margin="-30,0,18,0" Visibility="{Binding Item2, Converter={StaticResource NullToVisibilityConverter}}" />
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Padding="5,0,5,0">
+                                    <Grid Background="{ThemeResource CardBackgroundFillColorDefault}" BorderBrush="{ThemeResource CircleElevationBorderBrush}" BorderThickness="1" CornerRadius="4" Margin="-30,0,18,0" Width="48" Height="48">
+                                        <Image Source="{Binding Item2}" Width="38" Height="38" Visibility="{Binding Item2, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    </Grid>
                                     <TextBlock Text="{Binding Item1}" VerticalAlignment="Center" />
                                 </StackPanel>
                                 <TextBlock VerticalAlignment="Center" Visibility="{Binding Item3}" Opacity="0.7" HorizontalAlignment="Right" Style="{StaticResource CaptionTextBlockStyle}" Text="win32" Grid.Column="1"/>

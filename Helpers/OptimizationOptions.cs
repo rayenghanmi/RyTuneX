@@ -123,17 +123,7 @@ internal partial class OptimizationOptions
 
                         if (!string.IsNullOrEmpty(displayName) && !string.IsNullOrEmpty(installLocation) && !displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            var logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
-
-                            // Exception for discord installation path (more will be added)
-                            if (displayName.Contains("discord", StringComparison.CurrentCultureIgnoreCase))
-                            {
-                                installLocation = Directory.GetDirectories(installLocation, "app-*").FirstOrDefault();
-                            }
-                            if (!string.IsNullOrEmpty(installLocation))
-                            {
-                                logoPath = ExtractLogoPath(installLocation, true); // true for Win32
-                            }
+                            var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
                             win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
                         }
                     }
@@ -161,10 +151,17 @@ internal partial class OptimizationOptions
             {
                 if (Directory.Exists(installLocation))
                 {
-                    var iconPath = Path.Combine(installLocation, "icon.png");
-                    if (File.Exists(iconPath))
+                    var iconIcoPath = Path.Combine(installLocation, "app.ico");
+                    var iconPngPath = Path.Combine(installLocation, "icon.png");
+
+                    // Exception for discord icon path (more will be added)
+                    if (File.Exists(iconIcoPath))
                     {
-                        logoPath = iconPath;
+                        logoPath = iconIcoPath;
+                    }
+                    else if (File.Exists(iconPngPath))
+                    {
+                        logoPath = iconPngPath;
                     }
                     else
                     {
@@ -174,8 +171,8 @@ internal partial class OptimizationOptions
                             using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
                             if (icon != null)
                             {
-                                SaveIconAsPng(icon, iconPath);
-                                logoPath = iconPath;
+                                SaveIconAsPng(icon, iconPngPath);
+                                logoPath = iconPngPath;
                             }
                         }
                     }
