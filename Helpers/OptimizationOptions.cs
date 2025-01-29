@@ -113,22 +113,39 @@ internal partial class OptimizationOptions
                 using var machineKey = Registry.LocalMachine.OpenSubKey(registryPath);
                 using var userKey = Registry.CurrentUser.OpenSubKey(registryPath);
 
-                if (machineKey != null || userKey != null)
+                var allSubKeys = (machineKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
+                    .Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
+                    .Distinct();
+
+                foreach (var subKeyName in allSubKeys)
                 {
-                    foreach (var subKeyName in machineKey?.GetSubKeyNames().Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>()) ?? Enumerable.Empty<string>())
+                    using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
+
+                    if (subKey == null)
                     {
-                        using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
-                        var displayName = subKey?.GetValue("DisplayName")?.ToString();
-                        var installLocation = subKey?.GetValue("InstallLocation")?.ToString();
-
-                        if (!string.IsNullOrEmpty(displayName) && !string.IsNullOrEmpty(installLocation) && !displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
-                        {
-                            var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
-                            win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
-                        }
+                        continue;
                     }
-                }
 
+                    var displayName = subKey.GetValue("DisplayName") as string;
+                    var installLocation = subKey.GetValue("InstallLocation") as string;
+                    var uninstallString = subKey.GetValue("UninstallString") as string;
+                    var systemComponent = subKey.GetValue("SystemComponent") as int?; // Returns 1 if the app is marked as system components
+
+                    // Skip entries without names or marked as system components
+                    if (string.IsNullOrEmpty(displayName) || systemComponent == 1)
+                    {
+                        continue;
+                    }
+
+                    // Exclude Microsoft Edge
+                    if (displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
+                    win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
+                }
             }
             catch (Exception ex)
             {
