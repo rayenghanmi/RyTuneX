@@ -1623,6 +1623,7 @@ internal class OptimizeSystemHelper
             "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
             "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\*\\cache2\\*' -Recurse -Force\"",
             "ipconfig /flushdns",
+            "dism /Online /Cleanup-Image /StartComponentCleanup",
             };
 
             // Execute all commands

@@ -128,7 +128,19 @@ internal partial class OptimizationOptions
 
                     var displayName = subKey.GetValue("DisplayName") as string;
                     var installLocation = subKey.GetValue("InstallLocation") as string;
+                    if (!string.IsNullOrEmpty(installLocation))
+                    {
+                        installLocation = installLocation.Replace("\"", ""); // Remove all double quotes
+                        if (installLocation.Contains(".exe")) // If it contains a file extension
+                            installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
+                    }
+
                     var uninstallString = subKey.GetValue("UninstallString") as string;
+                    if (!string.IsNullOrEmpty(uninstallString))
+                    {
+                        uninstallString = uninstallString.Replace("\"", ""); // Remove all double quotes
+                    }
+
                     var systemComponent = subKey.GetValue("SystemComponent") as int?; // Returns 1 if the app is marked as system components
 
                     // Skip entries without names or marked as system components
@@ -137,7 +149,21 @@ internal partial class OptimizationOptions
                         continue;
                     }
 
-                    // Exclude Microsoft Edge
+                    // Some apps don't have InstallLocation but have an UninstallString
+                    if (string.IsNullOrEmpty(installLocation) && !string.IsNullOrEmpty(uninstallString))
+                    {
+                        Debug.WriteLine(uninstallString);
+                        installLocation = Path.GetDirectoryName(uninstallString);
+                        if (!string.IsNullOrEmpty(installLocation))
+                        {
+                            if (installLocation.Contains(".exe")) // If it contains a file extension
+                            {
+                                installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
+                            }
+                        }
+                    }
+
+                    // Exclude Win32 Microsoft Edge
                     if (displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
                     {
                         continue;
