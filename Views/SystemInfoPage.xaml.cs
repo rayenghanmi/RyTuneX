@@ -53,21 +53,8 @@ public sealed partial class SystemInfoPage : Page
                     network.Text = networkInformation;
                     battery.Text = batteryInformation;
 
-                    os.Visibility = Visibility.Visible;
-                    cpu.Visibility = Visibility.Visible;
-                    gpu.Visibility = Visibility.Visible;
-                    ram.Visibility = Visibility.Visible;
-                    disk.Visibility = Visibility.Visible;
-                    network.Visibility = Visibility.Visible;
-                    battery.Visibility = Visibility.Visible;
-
-                    osProgressRing.Visibility = Visibility.Collapsed;
-                    cpuProgressRing.Visibility = Visibility.Collapsed;
-                    gpuProgressRing.Visibility = Visibility.Collapsed;
-                    ramProgressRing.Visibility = Visibility.Collapsed;
-                    diskProgressRing.Visibility = Visibility.Collapsed;
-                    networkProgressRing.Visibility = Visibility.Collapsed;
-                    batteryProgressRing.Visibility = Visibility.Collapsed;
+                    loadingProgressRing.Visibility = Visibility.Collapsed;
+                    infoPanel.Visibility = Visibility.Visible;
                 });
             }
             catch (Exception ex)

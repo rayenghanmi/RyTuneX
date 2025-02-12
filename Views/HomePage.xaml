@@ -56,6 +56,10 @@
             <StackPanel Grid.Row="1" Orientation="Vertical">
                 <TextBlock x:Uid="HomePage_Performance" Margin="0,20,0,10" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
                 <controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <controls:WrapPanel.ChildrenTransitions>
+                        <EntranceThemeTransition FromVerticalOffset="50" />
+                        <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    </controls:WrapPanel.ChildrenTransitions>
                     <!-- CPU Usage Block -->
                     <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                         <FontIcon Glyph="&#xE950;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>

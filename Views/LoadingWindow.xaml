@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <ProgressRing IsActive="True" Width="100" Height="100"/>
-            <TextBlock x:Uid="LoadingWindowText" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+            <TextBlock x:Uid="LoadingWindowText" HorizontalAlignment="Center" Margin="0,20,0,0" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

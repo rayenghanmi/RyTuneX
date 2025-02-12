@@ -21,7 +21,10 @@
                 <TextBlock x:Uid="SecurityPage_Details" Margin="0,20,0,10" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
                 <ScrollView>
                     <controls:WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-
+                        <controls:WrapPanel.ChildrenTransitions>
+                            <EntranceThemeTransition FromVerticalOffset="50" />
+                            <RepositionThemeTransition IsStaggeringEnabled="False" />
+                        </controls:WrapPanel.ChildrenTransitions>
                         <Grid Padding="10" Width="380" Height="120" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xEA18;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBlock x:Name="VirusThreatProtectionStatus" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
