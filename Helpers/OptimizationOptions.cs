@@ -100,83 +100,75 @@ internal partial class OptimizationOptions
     {
         var win32Apps = new List<Tuple<string, string, bool>>();
 
-        var registryPaths = new string[]
+        var registryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+        try
         {
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",            // 64-bit on 64-bit systems, 32-bit on 32-bit systems
-            @"SOFTWARE\Wow6432node\Microsoft\Windows\CurrentVersion\Uninstall" // 32-bit on 64-bit systems
-        };
+            using var machineKey = Registry.LocalMachine.OpenSubKey(registryPath);
+            using var userKey = Registry.CurrentUser.OpenSubKey(registryPath);
 
-        foreach (var registryPath in registryPaths)
-        {
-            try
+            var allSubKeys = (machineKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
+                .Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
+                .Distinct();
+
+            foreach (var subKeyName in allSubKeys)
             {
-                using var machineKey = Registry.LocalMachine.OpenSubKey(registryPath);
-                using var userKey = Registry.CurrentUser.OpenSubKey(registryPath);
+                using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
 
-                var allSubKeys = (machineKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
-                    .Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
-                    .Distinct();
-
-                foreach (var subKeyName in allSubKeys)
+                if (subKey == null)
                 {
-                    using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
+                    Debug.WriteLine($"Failed to open subkey {subKeyName}");
+                    continue;
+                }
 
-                    if (subKey == null)
-                    {
-                        continue;
-                    }
+                var displayName = subKey.GetValue("DisplayName") as string;
+                var installLocation = subKey.GetValue("InstallLocation") as string;
+                if (!string.IsNullOrEmpty(installLocation))
+                {
+                    installLocation = installLocation.Replace("\"", ""); // Remove all double quotes
+                    if (installLocation.Contains(".exe")) // If it contains a file extension
+                        installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
+                }
 
-                    var displayName = subKey.GetValue("DisplayName") as string;
-                    var installLocation = subKey.GetValue("InstallLocation") as string;
+                var uninstallString = subKey.GetValue("UninstallString") as string;
+                if (!string.IsNullOrEmpty(uninstallString))
+                {
+                    uninstallString = uninstallString.Replace("\"", ""); // Remove all double quotes
+                }
+
+                var systemComponent = subKey.GetValue("SystemComponent") as int?; // Returns 1 if the app is marked as system components
+
+                // Skip entries without names or marked as system components
+                if (string.IsNullOrEmpty(displayName) || systemComponent == 1)
+                {
+                    continue;
+                }
+
+                // Some apps don't have InstallLocation but have an UninstallString
+                if (string.IsNullOrEmpty(installLocation) && !string.IsNullOrEmpty(uninstallString))
+                {
+                    installLocation = Path.GetDirectoryName(uninstallString);
                     if (!string.IsNullOrEmpty(installLocation))
                     {
-                        installLocation = installLocation.Replace("\"", ""); // Remove all double quotes
                         if (installLocation.Contains(".exe")) // If it contains a file extension
-                            installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
-                    }
-
-                    var uninstallString = subKey.GetValue("UninstallString") as string;
-                    if (!string.IsNullOrEmpty(uninstallString))
-                    {
-                        uninstallString = uninstallString.Replace("\"", ""); // Remove all double quotes
-                    }
-
-                    var systemComponent = subKey.GetValue("SystemComponent") as int?; // Returns 1 if the app is marked as system components
-
-                    // Skip entries without names or marked as system components
-                    if (string.IsNullOrEmpty(displayName) || systemComponent == 1)
-                    {
-                        continue;
-                    }
-
-                    // Some apps don't have InstallLocation but have an UninstallString
-                    if (string.IsNullOrEmpty(installLocation) && !string.IsNullOrEmpty(uninstallString))
-                    {
-                        Debug.WriteLine(uninstallString);
-                        installLocation = Path.GetDirectoryName(uninstallString);
-                        if (!string.IsNullOrEmpty(installLocation))
                         {
-                            if (installLocation.Contains(".exe")) // If it contains a file extension
-                            {
-                                installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
-                            }
+                            installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
                         }
                     }
-
-                    // Exclude Win32 Microsoft Edge
-                    if (displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        continue;
-                    }
-
-                    var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
-                    win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
                 }
+
+                // Exclude Win32 Microsoft Edge
+                if (displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    continue;
+                }
+
+                var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
+                win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to load Win32 apps: {ex.Message}");
-            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to load Win32 apps: {ex.Message}");
         }
 
         return [.. win32Apps

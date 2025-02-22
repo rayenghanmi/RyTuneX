@@ -15,7 +15,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ScrollViewer Padding="24,14,24,0" Grid.Row="0">
+        <ScrollViewer Padding="24,14,24,0" Grid.Row="0" VerticalScrollBarVisibility="Auto">
             <Grid Margin="0,0,0,38">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
