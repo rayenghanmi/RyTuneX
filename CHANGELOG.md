@@ -14,11 +14,19 @@ All notable changes to this branch will be documented in this file.
   - `Paging Settings`
   - `NTFS Optimization`
   - `Legacy Boot Menu`
+  - `Disable Unnecessary Services`
 
 ### Fixes
 
 - Resolverd an issue where the `Revert All Changes` in the `Settings` page did not work as expected.
+- Better `VBS` and `Widgets` disabling.
+- Fixed an issue where the disc and network usage were not displayed correctly in the `Home` page.
 
+### Changes
+
+- Improved the `Home` page by spacing the usage tiles for better readability.
+- Better UX for the `Device` page.
+- Enhanced Win32 apps fetching and better icon generation for most apps.
 
 ## 1.2.0 - Released
 
