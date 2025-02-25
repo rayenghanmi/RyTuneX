@@ -375,7 +375,7 @@ internal partial class OptimizationOptions
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = Environment.Is64BitOperatingSystem
+                    FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
                         : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
                     Arguments = $"/C {command}",
