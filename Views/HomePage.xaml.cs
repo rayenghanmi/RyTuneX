@@ -4,7 +4,6 @@ using System.Net.NetworkInformation;
 using System.ServiceProcess;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Windows.Networking.Connectivity;
 
 namespace RyTuneX.Views;
 
@@ -128,7 +127,6 @@ public sealed partial class HomePage : Page
         var firstBytes = GetTotalBytesReceived(); // Get total bytes received at a point in time
         Thread.Sleep(500); // Sleep for 500ms
         var secondBytes = GetTotalBytesReceived(); // Get total bytes received after the 500ms
-        Debug.WriteLine($"Download: {secondBytes - firstBytes}");
         return (int)((secondBytes - firstBytes) / 1024); // Convert Bytes to KB
     }
 
@@ -138,7 +136,6 @@ public sealed partial class HomePage : Page
         var firstBytes = GetTotalBytesSent();
         Thread.Sleep(500);
         var secondBytes = GetTotalBytesSent();
-        Debug.WriteLine($"Upload: {secondBytes - firstBytes}");
         return (int)((secondBytes - firstBytes) / 1024);
     }
 

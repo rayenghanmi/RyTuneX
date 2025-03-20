@@ -143,15 +143,15 @@ public sealed partial class ShellPage : Page
             Content = new StackPanel
             {
                 Children =
+            {
+                new TextBlock
                 {
-                    new TextBlock
-                    {
-                        Text = "RestorePointDialogText".GetLocalized(),
-                        TextWrapping = TextWrapping.Wrap,
-                        Margin = new Thickness(0, 0, 0, 10)
-                    },
-                    neverShowAgain
-                }
+                    Text = "RestorePointDialogText".GetLocalized(),
+                    TextWrapping = TextWrapping.Wrap,
+                    Margin = new Thickness(0, 0, 0, 10)
+                },
+                neverShowAgain
+            }
             },
             PrimaryButtonText = "Continue".GetLocalized(),
             CloseButtonText = "Close".GetLocalized(),
@@ -160,7 +160,7 @@ public sealed partial class ShellPage : Page
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
         };
-
+        await LogHelper.Log("Showing Restore Point Dialog");
         var result = await dialog.ShowAsync();
         if (neverShowAgain.IsChecked == true)
         {
@@ -174,15 +174,19 @@ public sealed partial class ShellPage : Page
                 Content = new ProgressRing { IsActive = true, Width = 50, Height = 50 },
                 XamlRoot = Content.XamlRoot,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 IsPrimaryButtonEnabled = false
             };
 
-            await progressDialog.ShowAsync();
+            await LogHelper.Log($"Showing Restore Point Loading Dialog. CheckBox is checked: {neverShowAgain.IsChecked}");
 
+            // Show the progress dialog in a separate task
+            _ = progressDialog.ShowAsync().AsTask();
             try
             {
                 await CreateRestorePointAsync();
                 progressDialog.Hide();
+                await LogHelper.Log("Showing Restore Point Creation Success");
                 await new ContentDialog
                 {
                     Title = "RestorePointCreated".GetLocalized(),
@@ -194,9 +198,10 @@ public sealed partial class ShellPage : Page
                     BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 }.ShowAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 progressDialog.Hide();
+                await LogHelper.Log("Showing Restore Point Creation Error");
                 await new ContentDialog
                 {
                     Title = "UnexpectedError".GetLocalized(),
@@ -207,6 +212,7 @@ public sealed partial class ShellPage : Page
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 }.ShowAsync();
+                await LogHelper.LogError(ex.Message);
             }
         }
     }
@@ -216,7 +222,7 @@ public sealed partial class ShellPage : Page
         var processInfo = new ProcessStartInfo
         {
             FileName = "powershell.exe",
-            Arguments = "-Command \"Checkpoint-Computer -Description 'RyTuneX Restore Point' -RestorePointType 'MODIFY_SETTINGS'\"",
+            Arguments = "-Command \"Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; Checkpoint-Computer -Description 'RyTuneX Restore Point' -RestorePointType 'MODIFY_SETTINGS'\"",
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
@@ -224,14 +230,16 @@ public sealed partial class ShellPage : Page
         };
 
         using var process = new Process { StartInfo = processInfo };
+        await LogHelper.Log("Starting Restore Point Creation Process");
         process.Start();
 
         var output = await process.StandardOutput.ReadToEndAsync();
         var error = await process.StandardError.ReadToEndAsync();
 
-        if (!string.IsNullOrEmpty(error))
+        if (process.ExitCode != 0 || !string.IsNullOrEmpty(error))
         {
-            await LogHelper.LogError(error);
+            await LogHelper.Log(error);
+            throw new Exception($"Restore Point Creation Process exited with code {process.ExitCode}");
         }
     }
 
