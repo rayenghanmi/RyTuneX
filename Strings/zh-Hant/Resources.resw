@@ -20,10 +20,10 @@
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
     <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
+      <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
     <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+      <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -484,13 +484,13 @@
     <value>禁用小部件</value>
   </data>
   <data name="Feature_DisableWidgets.Description" xml:space="preserve">
-    <value>禁用 Windows 11 工作列上的小部件功能.  考慮一下您是否發現這些小部件對於快速更新有用（僅限 Windows 11）</value>
+    <value>禁用 Windows 11 工作列上的小部件功能.  考慮一下您是否發現這些小部件對於快速更新有用(僅限 Windows 11)</value>
   </data>
   <data name="Feature_DisableChat.Header" xml:space="preserve">
     <value>禁用聊天</value>
   </data>
   <data name="Feature_DisableChat.Description" xml:space="preserve">
-    <value>禁用 Windows 11 工作列上的聊天功能.  僅在您不使用聊天功能進行通訊時推薦（僅限 Windows 11）</value>
+    <value>禁用 Windows 11 工作列上的聊天功能.  僅在您不使用聊天功能進行通訊時推薦(僅限 Windows 11)</value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
     <value>啟用檔案緊湊模式</value>
@@ -502,7 +502,7 @@
     <value>禁用貼紙</value>
   </data>
   <data name="Feature_DisableStickers.Description" xml:space="preserve">
-    <value>禁用 Windows 11 訊息應用程式中的貼紙功能.  僅在您不使用貼紙進行交流時推薦（僅限 Windows 11）</value>
+    <value>禁用 Windows 11 訊息應用程式中的貼紙功能.  僅在您不使用貼紙進行交流時推薦(僅限 Windows 11)</value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
     <value>禁用 Edge 發現欄</value>
@@ -682,7 +682,7 @@
     <value>網路</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
-    <value>（成人過濾器）</value>
+    <value>(成人過濾器)</value>
   </data>
   <data name="Automatic" xml:space="preserve">
     <value>自動</value>
@@ -943,7 +943,7 @@
     <value>關閉顯示您最近活動的活動反饋, 有助於通過防止他人看到您在裝置上做了什麼來保護您的隱私. </value>
   </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
-    <value>禁用CDP（客戶資料平臺）</value>
+    <value>禁用CDP(客戶資料平臺)</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
     <value>禁用CDP, 防止客戶資料平臺收集和使用您的資料進行分析和定向推薦. 這可以提高隱私性, 但可能會限制個性化功能. </value>
@@ -994,7 +994,7 @@
     <value>禁用自動完成</value>
   </data>
   <data name="Feature_AutoComplete.Description" xml:space="preserve">
-    <value>禁用在某些欄位（如搜尋框和表單輸入）中的自動建議. 禁用此功能可以減少干擾, 但可能會減慢工作流. </value>
+    <value>禁用在某些欄位(如搜尋框和表單輸入)中的自動建議. 禁用此功能可以減少干擾, 但可能會減慢工作流. </value>
   </data>
   <data name="Feature_CrashDump.Header" xml:space="preserve">
     <value>禁用崩潰轉儲</value>
@@ -1136,7 +1136,7 @@
     <value>正在還原更改...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>您將還原 RyTuneX 對系統所做的所有更改（已解除安裝的應用程式除外）並重置應用程式的首選項. 
+    <value>您將還原 RyTuneX 對系統所做的所有更改(已解除安裝的應用程式除外)並重置應用程式的首選項. 
 
 您確定要繼續嗎?</value>
   </data>
@@ -1274,7 +1274,7 @@
     <value>禁用 Windows 透明效果</value>
   </data>
   <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
-    <value>禁用系統 UI 元素（如工作列和視窗）中的透明效果, 提高效能</value>
+    <value>禁用系統 UI 元素(如工作列和視窗)中的透明效果, 提高效能</value>
   </data>
   <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
     <value>標準應用</value>
@@ -1313,6 +1313,42 @@
     <value>禁用服務主機拆分</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
-      <value>禁用服務主機拆分以顯著降低記憶體使用量和程序數.</value>
+    <value>禁用服務主機拆分以顯著降低記憶體使用量和程序數.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>啟用傳統啟動選單</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>切換到傳統啟動選單以加快啟動速度.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>優化 NTFS 設定</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>調整 NTFS 設定以提升效能並增強隱私.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>停用分頁檔</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>關閉記憶體分頁以獲得最大效能.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>優化前景應用程式效能</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>通過優先處理前景任務來提升當前應用程式的效能.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>停用 WPBT 執行</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>阻止韌體在啟動時運行程式(例如, OEM 預裝軟體).</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
+    <value>停用不必要的服務</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
+    <value>通過停用對設備運行非必要的背景服務來優化系統效能.這有助於釋放系統資源並提高整體效率.</value>
   </data>
 </root>
