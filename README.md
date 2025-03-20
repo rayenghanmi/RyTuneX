@@ -126,14 +126,15 @@ Check out the [contribution guide](https://github.com/rayenghanmi/RyTuneX/blob/m
 | French (France)            | 100%               |
 | Arabic (Tunisia)           | 100%               |
 | Simplified Chinese (China) | 100%               |
+| Traditional Chinese (China)| 100%               |
 | German (Germany)           | 100%               |
 | Japanese (Japan)           | 100%               |
-| *Russian (Russia)          | 100%               |
-| *Spanish (Spain)           | 100%               |
-| *Korean (South Korea)      | 100%               |
-| *Portuguese (Brazil)       | 100%               |
-| *Italian (Italy)           | 100%               |
-| *Turkish (Turkey)          | 100%               |
+| Russian (Russia)           | 100%               |
+| Spanish (Spain)            | 100%               |
+| Korean (South Korea)       | 100%               |
+| Portuguese (Brazil)        | 100%               |
+| Italian (Italy)            | 100%               |
+| Turkish (Turkey)           | 100%               |
 
 *: Translation will be shipped with the next version
 
