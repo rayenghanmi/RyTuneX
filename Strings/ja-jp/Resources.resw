@@ -1109,6 +1109,8 @@
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>システムに変更を加える前に、復元ポイントを作成することを強くお勧めします. 
+
+
 続行する前にシステムの復元ポイントを作成しますか?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
@@ -1138,6 +1140,7 @@
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>RyTuneX によってシステムに加えられたすべての変更（アンインストールされたアプリを除く）を元に戻し、アプリの設定をリセットしようとしています. 
 
+
 本当に続行してよろしいですか?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
@@ -1154,6 +1157,7 @@
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>メモリの問題があると、コンピューターが情報を失ったり、動作を停止したりする可能性があります. 
+
 
 メモリの問題を確認してください. </value>
   </data>
@@ -1230,7 +1234,10 @@
     <value>警告</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value />
+    <value>システムの復元を無効にすると、RyTuneX が作成したものを含め、すべての復元ポイントが削除されます。
+
+
+続行してもよろしいですか？</value>
   </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>デバイス情報</value>
@@ -1312,5 +1319,41 @@
   </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
     <value>サービスホストの分割を無効化し、RAM使用量とプロセス数を大幅に削減します.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>レガシーブートメニューを有効化</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>レガシーブートメニューに切り替えて、起動を高速化します。</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>NTFS設定を最適化</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>パフォーマンスとプライバシーを向上させるためにNTFS設定を調整します。</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>ページングを無効化</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>メモリページングを無効化して、最大のパフォーマンスを実現します。</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>フォアグラウンドアプリのパフォーマンスを最適化</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>フォアグラウンドタスクを優先することでアクティブなアプリケーションのパフォーマンスを向上させます。</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>WPBT実行を無効化</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>ファームウェアが起動時にプログラム (例: OEMの不要なソフトウェア) を実行するのを防ぎます。</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
+    <value>不要なサービスを無効にする</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
+      <value>デバイスの動作に不要なバックグラウンドサービスを無効にすることで、システムパフォーマンスを最適化します。これにより、システムリソースが解放され、全体的な効率が向上します。</value>
   </data>
 </root>

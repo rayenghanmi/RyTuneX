@@ -1106,6 +1106,8 @@
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>Es wird dringend empfohlen, einen Wiederherstellungspunkt zu erstellen, bevor Sie Änderungen an Ihrem System vornehmen.
+
+
 Möchten Sie vor dem Fortfahren einen Systemwiederherstellungspunkt erstellen?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
@@ -1135,6 +1137,7 @@ Möchten Sie vor dem Fortfahren einen Systemwiederherstellungspunkt erstellen?</
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>Sie sind dabei, alle Änderungen, die RyTuneX an Ihrem System vorgenommen hat (außer deinstallierte Apps), rückgängig zu machen und die Einstellungen der App zurückzusetzen.
 
+
 Sind Sie sicher, dass Sie fortfahren möchten?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
@@ -1151,6 +1154,7 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>Speicherprobleme können dazu führen, dass Ihr Computer Informationen verliert oder nicht mehr funktioniert.
+
 
 Überprüfen Sie Ihren Computer auf Speicherprobleme</value>
   </data>
@@ -1228,6 +1232,7 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
     <value>Das Deaktivieren der Systemwiederherstellung löscht alle Wiederherstellungspunkte, einschließlich der von RyTuneX erstellten.
+
 
  Sind Sie sicher, dass Sie fortfahren möchten?</value>
   </data>
@@ -1310,6 +1315,42 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
     <value>Service-Host-Splitting deaktivieren</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
-      <value>Deaktiviert das Service-Host-Splitting, um den RAM-Verbrauch und die Prozessanzahl erheblich zu reduzieren.</value>
+    <value>Deaktiviert das Service-Host-Splitting, um den RAM-Verbrauch und die Prozessanzahl erheblich zu reduzieren.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>Legacy-Bootmenü aktivieren</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>Zum Legacy-Bootmenü wechseln, um den Startvorgang zu beschleunigen.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>NTFS-Einstellungen optimieren</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>NTFS-Einstellungen anpassen, um die Leistung zu verbessern und die Privatsphäre zu erhöhen.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>Speicherpaginierung deaktivieren</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>Speicherpaginierung deaktivieren, um maximale Leistung zu erzielen.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>Leistung von Vordergrundanwendungen optimieren</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>Verbessert die Leistung aktiver Anwendungen, indem Vordergrundaufgaben priorisiert werden.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>WPBT-Ausführung deaktivieren</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>Verhindert, dass Firmware Programme (z. B. OEM-Bloatware) beim Start ausführt.</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
+    <value>Deaktivieren Sie unnötige Dienste</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
+      <value>Optimieren Sie die Systemleistung, indem Sie Hintergrunddienste deaktivieren, die für den Betrieb Ihres Geräts nicht erforderlich sind. Dies hilft, Systemressourcen freizugeben und die Gesamtleistung zu verbessern.</value>
   </data>
 </root>

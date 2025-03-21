@@ -51,7 +51,7 @@
             IsSettingsVisible="True"
             ExpandedModeThresholdWidth="800"
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
-            OpenPaneLength="180"
+            OpenPaneLength="220"
             Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
             <NavigationView.Resources>
                 <SolidColorBrush

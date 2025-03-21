@@ -24,7 +24,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>Rayen Ghanmi</Authors>
   </PropertyGroup>
   <ItemGroup>
@@ -65,38 +65,8 @@
 	  <PackageReference Include="System.Management.Automation" Version="7.4.6" />
   </ItemGroup>
 
-<ItemGroup>
-		<Folder Include="Models\" />
-	</ItemGroup>
   <ItemGroup>
-
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-
-    <Page Update="Views\LoadingWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-
-    <Page Update="Views\RepairPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="Views\DebloatSystemPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="Views\SecurityPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\FeaturesPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-    <Page Update="Views\NetworkPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\PrivacyPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

@@ -1109,6 +1109,8 @@
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>يُنصح بشدة بإنشاء نقطة استعادة قبل إجراء أي تغييرات على نظامك.
+
+
 هل ترغب في إنشاء نقطة استعادة للنظام قبل المتابعة؟</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
@@ -1138,6 +1140,7 @@
   <data name="RevertChangesDialogText" xml:space="preserve">
     <value>أنت على وشك التراجع عن جميع التغييرات التي أجراها RyTuneX على نظامك (باستثناء التطبيقات التي تم إلغاء تثبيتها) وإعادة تعيين تفضيلات التطبيق.
 
+
 هل أنت متأكد أنك تريد المتابعة؟</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
@@ -1154,6 +1157,7 @@
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
     <value>قد تتسبب مشاكل الذاكرة في فقدان الكمبيوتر للمعلومات أو توقفه عن العمل.
+
 
 افحص جهاز الكمبيوتر الخاص بك بحثًا عن مشاكل في الذاكرة</value>
   </data>
@@ -1231,6 +1235,7 @@
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
     <value>تعطيل استعادة النظام سيؤدي إلى حذف جميع نقاط الاستعادة بما في ذلك تلك التي أنشأها RyTuneX.
+
 
 هل أنت متأكد أنك تريد المتابعة؟</value>
   </data>
@@ -1313,6 +1318,42 @@
     <value>تعطيل تقسيم مستضيف الخدمة</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
-      <value>يقوم بتعطيل تقسيم مستضيف الخدمة لتقليل استخدام ذاكرة الوصول العشوائي وعدد العمليات.</value>
+    <value>يقوم بتعطيل تقسيم مستضيف الخدمة لتقليل استخدام ذاكرة الوصول العشوائي وعدد العمليات.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>تفعيل قائمة التمهيد القديمة</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>التحويل إلى قائمة التمهيد القديمة لتسريع بدء التشغيل.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>تحسين إعدادات NTFS</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>ضبط إعدادات NTFS لتحسين الأداء وتعزيز الخصوصية.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>تعطيل تقسيم الذاكرة</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>إيقاف تقسيم الذاكرة لتحقيق أفضل أداء.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>تحسين أداء التطبيقات النشطة</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>زيادة أداء التطبيقات النشطة عن طريق إعطاء الأولوية للمهام في المقدمة.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>تعطيل تنفيذ WPBT</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>إيقاف تشغيل البرامج من البرامج الثابتة (مثل البرامج المثبتة مسبقاً) أثناء بدء التشغيل.</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
+    <value>تعطيل الخدمات غير الضرورية</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
+      <value>قم بتحسين أداء النظام عن طريق تعطيل الخدمات الخلفية التي ليست ضرورية لتشغيل جهازك. يساعد هذا في تحرير موارد النظام وتحسين الكفاءة العامة.</value>
   </data>
 </root>

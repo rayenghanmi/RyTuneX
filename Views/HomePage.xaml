@@ -56,60 +56,77 @@
             <StackPanel Grid.Row="1" Orientation="Vertical">
                 <TextBlock x:Uid="HomePage_Performance" Margin="0,20,0,10" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
                 <controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <controls:WrapPanel.ChildrenTransitions>
+                        <EntranceThemeTransition FromVerticalOffset="50" />
+                        <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    </controls:WrapPanel.ChildrenTransitions>
                     <!-- CPU Usage Block -->
-                    <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                         <FontIcon Glyph="&#xE950;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_cpuUsage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="cpuUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                        <TextBlock x:Name="cpuUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                     </Grid>
 
                     <!-- RAM Usage Block -->
-                    <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                         <FontIcon Glyph="&#xE964;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_ramUsage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="ramUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                        <TextBlock x:Name="ramUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                     </Grid>
 
                     <!-- Disk Usage Block -->
-                    <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                         <FontIcon Glyph="&#xEDA2;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_diskUsage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="diskUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                        <TextBlock x:Name="diskUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                     </Grid>
 
                     <!-- Network Usage Block -->
-                    <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                         <FontIcon Glyph="&#xEDA3;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_networkUsage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="networkUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                        <StackPanel Spacing="8" x:Name="networkUsagePanel" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
+                            <StackPanel.ChildrenTransitions>
+                                <EntranceThemeTransition FromVerticalOffset="50" />
+                                <RepositionThemeTransition IsStaggeringEnabled="False" />
+                            </StackPanel.ChildrenTransitions>
+                            <StackPanel Spacing="2" Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE64C;" FontSize="12"/>
+                                <TextBlock x:Name="networkUploadUsageText" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+                            </StackPanel>
+                            <StackPanel Spacing="2" Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE64B;" FontSize="12"/>
+                                <TextBlock x:Name="networkDownloadUsageText" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
                     </Grid>
 
                     <!-- GPU Usage Block -->
-                    <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                         <FontIcon Glyph="&#xF211;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_gpuUsage" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="gpuUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                        <TextBlock x:Name="gpuUsageText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                     </Grid>
                     
                     <!-- Installed Apps Count Block -->
-                    <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                         <FontIcon Glyph="&#xE71D;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_installedAppsCount" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="installedAppsCountText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                        <TextBlock x:Name="installedAppsCountText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                     </Grid>
 
                     <!-- Processes Count Block -->
-                    <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                         <FontIcon Glyph="&#xECAA;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_processesCount" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="processesCountText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                        <TextBlock x:Name="processesCountText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                     </Grid>
 
                     <!-- Services Count Block -->
-                    <Grid Padding="10" Width="200" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                         <FontIcon Glyph="&#xEA86;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_servicesCount" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="servicesCountText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}" Visibility="Collapsed"/>
+                        <TextBlock x:Name="servicesCountText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                     </Grid>
                 </controls:WrapPanel>
             </StackPanel>

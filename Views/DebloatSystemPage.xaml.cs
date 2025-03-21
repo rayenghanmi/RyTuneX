@@ -247,7 +247,7 @@ public sealed partial class DebloatSystemPage : Page
                 var cmdCommandRemoveAppxPackage = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
 
                 // Create the process to try running Remove-AppxProvisionedPackage first
-                var processInfoProvisioned = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                var processInfoProvisioned = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
                         : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveProvisioned}")
                 {
@@ -270,7 +270,7 @@ public sealed partial class DebloatSystemPage : Page
                 }
 
                 // Run Remove-AppxPackage
-                var processInfoAppxPackage = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                var processInfoAppxPackage = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
                         : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveAppxPackage}")
                 {
@@ -298,7 +298,7 @@ public sealed partial class DebloatSystemPage : Page
 
                 var cmdCommand = $"powershell.exe -ExecutionPolicy Bypass -File \"{scriptFilePath}\"";
 
-                var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
                         : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommand}")
                 {
@@ -383,7 +383,7 @@ public sealed partial class DebloatSystemPage : Page
                 }
 
                 // Execute the uninstall command using cmd
-                var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem
+                var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
                         : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
                         $"/c {uninstallString}")
@@ -451,7 +451,7 @@ public sealed partial class DebloatSystemPage : Page
             // Update UI to show progress
             TempStack.Visibility = Visibility.Visible;
             TempProgress.Visibility = Visibility.Visible;
-            TempButton.Visibility = Visibility.Collapsed;
+            TempButtonStack.Visibility = Visibility.Collapsed;
             TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeligTemp") + "...";
 
             // Execute temp removal commands
@@ -460,7 +460,7 @@ public sealed partial class DebloatSystemPage : Page
             // Reset UI after task completion
             TempStack.Visibility = Visibility.Collapsed;
             TempProgress.Visibility = Visibility.Collapsed;
-            TempButton.Visibility = Visibility.Visible;
+            TempButtonStack.Visibility = Visibility.Visible;
 
             if (result)
             {
@@ -484,7 +484,7 @@ public sealed partial class DebloatSystemPage : Page
             // Restore UI in case of unexpected error
             TempStack.Visibility = Visibility.Collapsed;
             TempProgress.Visibility = Visibility.Collapsed;
-            TempButton.Visibility = Visibility.Visible;
+            TempButtonStack.Visibility = Visibility.Visible;
 
             // Show error notification
             App.ShowNotification(

@@ -2,9 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Management.Automation;
-using System.Runtime.InteropServices;
 using System.ServiceProcess;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Microsoft.UI.Xaml;
@@ -16,9 +14,6 @@ using Windows.Storage;
 namespace RyTuneX.Helpers;
 internal partial class OptimizationOptions
 {
-    [DllImport("psapi.dll")]
-    public static extern bool EmptyWorkingSet(IntPtr hProcess);
-
     public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
     {
         var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
@@ -105,50 +100,75 @@ internal partial class OptimizationOptions
     {
         var win32Apps = new List<Tuple<string, string, bool>>();
 
-        var registryPaths = new string[]
+        var registryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+        try
         {
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",            // 64-bit on 64-bit systems, 32-bit on 32-bit systems
-            @"SOFTWARE\Wow6432node\Microsoft\Windows\CurrentVersion\Uninstall" // 32-bit on 64-bit systems
-        };
+            using var machineKey = Registry.LocalMachine.OpenSubKey(registryPath);
+            using var userKey = Registry.CurrentUser.OpenSubKey(registryPath);
 
-        foreach (var registryPath in registryPaths)
-        {
-            try
+            var allSubKeys = (machineKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
+                .Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
+                .Distinct();
+
+            foreach (var subKeyName in allSubKeys)
             {
-                using var machineKey = Registry.LocalMachine.OpenSubKey(registryPath);
-                using var userKey = Registry.CurrentUser.OpenSubKey(registryPath);
+                using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
 
-                if (machineKey != null || userKey != null)
+                if (subKey == null)
                 {
-                    foreach (var subKeyName in machineKey?.GetSubKeyNames().Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>()) ?? Enumerable.Empty<string>())
+                    Debug.WriteLine($"Failed to open subkey {subKeyName}");
+                    continue;
+                }
+
+                var displayName = subKey.GetValue("DisplayName") as string;
+                var installLocation = subKey.GetValue("InstallLocation") as string;
+                if (!string.IsNullOrEmpty(installLocation))
+                {
+                    installLocation = installLocation.Replace("\"", ""); // Remove all double quotes
+                    if (installLocation.Contains(".exe")) // If it contains a file extension
+                        installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
+                }
+
+                var uninstallString = subKey.GetValue("UninstallString") as string;
+                if (!string.IsNullOrEmpty(uninstallString))
+                {
+                    uninstallString = uninstallString.Replace("\"", ""); // Remove all double quotes
+                }
+
+                var systemComponent = subKey.GetValue("SystemComponent") as int?; // Returns 1 if the app is marked as system components
+
+                // Skip entries without names or marked as system components
+                if (string.IsNullOrEmpty(displayName) || systemComponent == 1)
+                {
+                    continue;
+                }
+
+                // Some apps don't have InstallLocation but have an UninstallString
+                if (string.IsNullOrEmpty(installLocation) && !string.IsNullOrEmpty(uninstallString))
+                {
+                    installLocation = Path.GetDirectoryName(uninstallString);
+                    if (!string.IsNullOrEmpty(installLocation))
                     {
-                        using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
-                        var displayName = subKey?.GetValue("DisplayName")?.ToString();
-                        var installLocation = subKey?.GetValue("InstallLocation")?.ToString();
-
-                        if (!string.IsNullOrEmpty(displayName) && !string.IsNullOrEmpty(installLocation) && !displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
+                        if (installLocation.Contains(".exe")) // If it contains a file extension
                         {
-                            var logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
-
-                            // Exception for discord installation path (more will be added)
-                            if (displayName.Contains("discord", StringComparison.CurrentCultureIgnoreCase))
-                            {
-                                installLocation = Directory.GetDirectories(installLocation, "app-*").FirstOrDefault();
-                            }
-                            if (!string.IsNullOrEmpty(installLocation))
-                            {
-                                logoPath = ExtractLogoPath(installLocation, true); // true for Win32
-                            }
-                            win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
+                            installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
                         }
                     }
                 }
 
+                // Exclude Win32 Microsoft Edge
+                if (displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    continue;
+                }
+
+                var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
+                win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to load Win32 apps: {ex.Message}");
-            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to load Win32 apps: {ex.Message}");
         }
 
         return [.. win32Apps
@@ -166,10 +186,17 @@ internal partial class OptimizationOptions
             {
                 if (Directory.Exists(installLocation))
                 {
-                    var iconPath = Path.Combine(installLocation, "icon.png");
-                    if (File.Exists(iconPath))
+                    var iconIcoPath = Path.Combine(installLocation, "app.ico");
+                    var iconPngPath = Path.Combine(installLocation, "icon.png");
+
+                    // Exception for discord icon path (more will be added)
+                    if (File.Exists(iconIcoPath))
                     {
-                        logoPath = iconPath;
+                        logoPath = iconIcoPath;
+                    }
+                    else if (File.Exists(iconPngPath))
+                    {
+                        logoPath = iconPngPath;
                     }
                     else
                     {
@@ -179,8 +206,8 @@ internal partial class OptimizationOptions
                             using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
                             if (icon != null)
                             {
-                                SaveIconAsPng(icon, iconPath);
-                                logoPath = iconPath;
+                                SaveIconAsPng(icon, iconPngPath);
+                                logoPath = iconPngPath;
                             }
                         }
                     }
@@ -348,7 +375,7 @@ internal partial class OptimizationOptions
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = Environment.Is64BitOperatingSystem
+                    FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
                         : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
                     Arguments = $"/C {command}",
@@ -382,58 +409,42 @@ internal partial class OptimizationOptions
         }
     }
 
-    internal static void ClearWorkingSet()
-    {
-        // Clear the working set for the current process
-        EmptyWorkingSet(Process.GetCurrentProcess().Handle);
-
-        // Get all running processes
-        foreach (var process in Process.GetProcesses())
-        {
-            try
-            {
-                // Clear the working set for each process
-                EmptyWorkingSet(process.Handle);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogError(ex.Message);
-            }
-        }
-    }
-
     private static void SaveRevertAction(string action)
     {
-        // Get the current revert list
-        var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        // Get the current revert list as a delimited string
+        var revertListString = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
+        var revertList = string.IsNullOrEmpty(revertListString)
+            ? new HashSet<string>()
+            : new HashSet<string>(revertListString.Split('|'));
 
         // Add the action if it's not already present
-        if (!revertList.Contains(action))
+        if (revertList.Add(action))
         {
-            revertList.Add(action);
-            ApplicationData.Current.LocalSettings.Values["RevertList"] = JsonSerializer.Serialize(revertList);
+            ApplicationData.Current.LocalSettings.Values["RevertList"] = string.Join("|", revertList);
         }
     }
 
     private static void RemoveRevertAction(string action)
     {
-        // Get the current revert list
-        var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        // Get the current revert list as a delimited string
+        var revertListString = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
+        var revertList = string.IsNullOrEmpty(revertListString)
+            ? new HashSet<string>()
+            : new HashSet<string>(revertListString.Split('|'));
 
         // Remove the action if it's present
-        if (revertList.Contains(action))
+        if (revertList.Remove(action))
         {
-            revertList.Remove(action);
-            ApplicationData.Current.LocalSettings.Values["RevertList"] = JsonSerializer.Serialize(revertList);
+            ApplicationData.Current.LocalSettings.Values["RevertList"] = string.Join("|", revertList);
         }
     }
 
     public static async Task RevertAllChanges()
     {
-        var revertListJson = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
-        var revertList = string.IsNullOrEmpty(revertListJson) ? [] : JsonSerializer.Deserialize<List<string>>(revertListJson);
+        var revertListString = ApplicationData.Current.LocalSettings.Values["RevertList"] as string;
+        var revertList = string.IsNullOrEmpty(revertListString)
+            ? Array.Empty<string>()
+            : revertListString.Split('|');
 
         // Execute each action asynchronously
         foreach (var action in revertList)
@@ -442,6 +453,24 @@ internal partial class OptimizationOptions
             {
                 switch (action)
                 {
+                    case "EnableUnnecessaryServices":
+                        OptimizeSystemHelper.EnableUnnecessaryServices();
+                        break;
+                    case "DisableLegacyBootMenu":
+                        OptimizeSystemHelper.DisableLegacyBootMenu();
+                        break;
+                    case "DisableOptimizeNTFS":
+                        OptimizeSystemHelper.DisableOptimizeNTFS();
+                        break;
+                    case "EnablePagingSettings":
+                        OptimizeSystemHelper.EnablePagingSettings();
+                        break;
+                    case "DisablePrioritizeForegroundApplications":
+                        OptimizeSystemHelper.DisablePrioritizeForegroundApplications();
+                        break;
+                    case "EnableWPBT":
+                        OptimizeSystemHelper.EnableWPBT();
+                        break;
                     case "EnableServiceHostSplitting":
                         OptimizeSystemHelper.EnableServiceHostSplitting();
                         break;
@@ -731,6 +760,84 @@ internal partial class OptimizationOptions
         {
             switch (toggleSwitch.Tag)
             {
+                case "LegacyBootMenu":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableLegacyBootMenu();
+                        SaveRevertAction("DisableLegacyBootMenu");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableLegacyBootMenu();
+                        RemoveRevertAction("DisableLegacyBootMenu");
+                    }
+                    break;
+
+                case "UnnecessaryServices":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableUnnecessaryServices();
+                        SaveRevertAction("EnableUnnecessaryServices");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableUnnecessaryServices();
+                        RemoveRevertAction("EnableUnnecessaryServices");
+                    }
+                    break;
+
+                case "OptimizeNTFS":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnableOptimizeNTFS();
+                        SaveRevertAction("DisableOptimizeNTFS");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisableOptimizeNTFS();
+                        RemoveRevertAction("DisableOptimizeNTFS");
+                    }
+                    break;
+
+                case "PagingSettings":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisablePagingSettings();
+                        SaveRevertAction("EnablePagingSettings");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnablePagingSettings();
+                        RemoveRevertAction("EnablePagingSettings");
+                    }
+                    break;
+
+                case "PrioritizeForegroundApplications":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.EnablePrioritizeForegroundApplications();
+                        SaveRevertAction("DisablePrioritizeForegroundApplications");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.DisablePrioritizeForegroundApplications();
+                        RemoveRevertAction("DisablePrioritizeForegroundApplications");
+                    }
+                    break;
+
+                case "WPBT":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableWPBT();
+                        SaveRevertAction("EnableWPBT");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableWPBT();
+                        RemoveRevertAction("EnableWPBT");
+                    }
+                    break;
+
                 case "ServiceHostSplitting":
                     if (toggleSwitch.IsOn)
                     {

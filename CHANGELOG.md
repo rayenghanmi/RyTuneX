@@ -2,6 +2,33 @@
 
 All notable changes to this branch will be documented in this file.
 
+
+## 1.3.0 - Released
+
+### Added
+
+- Added translations for Russian, Spanish, Korean, Portuguese, Italian, Turkish (thanks to @Vzxor) and Traditional Chinese (thanks to @OrStudio) languages.
+- Introduced new optimization options:
+  - `WPBT Execution Settings`
+  - `Foreground Applications Prioritization`
+  - `Paging Settings`
+  - `NTFS Optimization`
+  - `Legacy Boot Menu`
+  - `Disable Unnecessary Services`
+
+### Fixes
+
+- Fixed an issue that was causing the restore point creation process to load indefinitely without creating any restore points.
+- Resolved an issue where the `Revert All Changes` in the `Settings` page did not work as expected.
+- Better `VBS` and `Widgets` disabling.
+- Fixed an issue where the disc and network usage were not displayed correctly in the `Home` page.
+
+### Changes
+
+- Improved the `Home` page by spacing the usage tiles for better readability.
+- Better UX for the `Device` page.
+- Enhanced Win32 apps fetching and better icon generation for most apps.
+
 ## 1.2.0 - Released
 
 ### Added

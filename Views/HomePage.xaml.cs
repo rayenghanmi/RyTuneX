@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Management;
+using System.Net.NetworkInformation;
 using System.ServiceProcess;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Windows.Networking.Connectivity;
 
 namespace RyTuneX.Views;
 
@@ -43,15 +43,17 @@ public sealed partial class HomePage : Page
                 var cpuUsageTask = Task.Run(() => GetCpuUsage());
                 var ramUsageTask = Task.Run(() => GetRamUsage());
                 var diskUsageTask = Task.Run(() => GetDiskUsage());
-                var networkUsageTask = Task.Run(() => GetNetworkUsage());
+                var networkUploadUsageTask = Task.Run(() => GetNetworkUploadUsage());
+                var networkDownloadUsageTask = Task.Run(() => GetNetworkDownloadUsage());
                 var gpuUsageTask = Task.Run(() => GetGpuUsage());
 
-                await Task.WhenAll(cpuUsageTask, ramUsageTask, diskUsageTask, networkUsageTask, gpuUsageTask).ConfigureAwait(false);
+                await Task.WhenAll(cpuUsageTask, ramUsageTask, diskUsageTask, networkUploadUsageTask, networkDownloadUsageTask, gpuUsageTask).ConfigureAwait(false);
 
                 var cpuUsage = cpuUsageTask.Result;
                 var ramUsage = ramUsageTask.Result;
                 var diskUsage = diskUsageTask.Result;
-                var networkUsage = networkUsageTask.Result;
+                var networkUploadUsage = networkUploadUsageTask.Result;
+                var networkDownloadUsage = networkDownloadUsageTask.Result;
                 var gpuUsage = gpuUsageTask.Result;
 
                 try
@@ -64,20 +66,12 @@ public sealed partial class HomePage : Page
                             cpuUsageText.Text = $"{cpuUsage}%";
                             ramUsageText.Text = $"{ramUsage}%";
                             diskUsageText.Text = $"{diskUsage}%";
-                            networkUsageText.Text = $"{networkUsage}%";
+                            networkUploadUsageText.Text = $"{networkUploadUsage} KB";
+                            networkDownloadUsageText.Text = $"{networkDownloadUsage} KB";
                             installedAppsCountText.Text = installedAppsCount.ToString();
                             processesCountText.Text = processesCount.ToString();
                             servicesCountText.Text = servicesCount.ToString();
                             gpuUsageText.Text = $"{gpuUsage}%";
-
-                            cpuUsageText.Visibility = Visibility.Visible;
-                            ramUsageText.Visibility = Visibility.Visible;
-                            diskUsageText.Visibility = Visibility.Visible;
-                            networkUsageText.Visibility = Visibility.Visible;
-                            installedAppsCountText.Visibility = Visibility.Visible;
-                            processesCountText.Visibility = Visibility.Visible;
-                            servicesCountText.Visibility = Visibility.Visible;
-                            gpuUsageText.Visibility = Visibility.Visible;
                         }
                     });
                 }
@@ -85,7 +79,7 @@ public sealed partial class HomePage : Page
                 {
                     Debug.WriteLine($"Error updating UI: {ex.Message}");
                 }
-                await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
+                await Task.Delay(500, cancellationToken).ConfigureAwait(false);
             }
         }
         catch (OperationCanceledException)
@@ -125,32 +119,40 @@ public sealed partial class HomePage : Page
 
     private int GetDiskUsage()
     {
-        return (int)diskCounter.NextValue();
+        return (int)Math.Min(diskCounter.NextValue(), 100);
     }
 
-    private int GetNetworkUsage()
+    private static int GetNetworkDownloadUsage()
     {
-        var profile = NetworkInformation.GetInternetConnectionProfile();
-        if (profile != null)
-        {
-            var usageStates = new NetworkUsageStates
-            {
-                Roaming = TriStates.DoNotCare,
-                Shared = TriStates.DoNotCare
-            };
+        var firstBytes = GetTotalBytesReceived(); // Get total bytes received at a point in time
+        Thread.Sleep(500); // Sleep for 500ms
+        var secondBytes = GetTotalBytesReceived(); // Get total bytes received after the 500ms
+        return (int)((secondBytes - firstBytes) / 1024); // Convert Bytes to KB
+    }
 
-            var usageDetails = profile.GetNetworkUsageAsync(
-                DateTime.Now.AddMinutes(-1),
-                DateTime.Now,
-                DataUsageGranularity.PerMinute,
-                usageStates).GetAwaiter().GetResult();
+    // Similar to GetNetworkDownloadUsage but for upload
+    private static int GetNetworkUploadUsage()
+    {
+        var firstBytes = GetTotalBytesSent();
+        Thread.Sleep(500);
+        var secondBytes = GetTotalBytesSent();
+        return (int)((secondBytes - firstBytes) / 1024);
+    }
 
-            foreach (var usage in usageDetails)
-            {
-                return (int)((usage.BytesReceived / 60) / 1024);
-            }
-        }
-        return 0;
+    // Get total bytes received by all network interfaces
+    private static long GetTotalBytesReceived()
+    {
+        return NetworkInterface.GetAllNetworkInterfaces()
+            .Where(ni => ni.OperationalStatus == OperationalStatus.Up)
+            .Sum(ni => ni.GetIPv4Statistics().BytesReceived);
+    }
+
+    // Same as GetTotalBytesReceived but for sent bytes
+    private static long GetTotalBytesSent()
+    {
+        return NetworkInterface.GetAllNetworkInterfaces()
+            .Where(ni => ni.OperationalStatus == OperationalStatus.Up)
+            .Sum(ni => ni.GetIPv4Statistics().BytesSent);
     }
 
     private int GetInstalledAppsCount()

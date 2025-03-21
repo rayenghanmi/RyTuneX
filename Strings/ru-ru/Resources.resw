@@ -1,0 +1,1356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Shell_Home.Content" xml:space="preserve">
+    <value>RyTuneX</value>
+  </data>
+  <data name="Shell_Debloat.Content" xml:space="preserve">
+    <value>Удаление ненужного</value>
+  </data>
+  <data name="Shell_SystemInfo.Content" xml:space="preserve">
+    <value>Устройство</value>
+  </data>
+  <data name="Shell_Issue.Content" xml:space="preserve">
+    <value>Сообщить</value>
+  </data>
+  <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
+    <value>Оптимизация</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>Светлая</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>Темная</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>По умолчанию</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>Об этом приложении</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>RyTuneX, оптимизатор для Windows 10 и 11, созданный Рейеном Ганми, предназначен для повышения производительности и эффективности системы за счет удаления выбранного программного обеспечения и отключения ненужных служб.</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+    <value>AGPL v3.0</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
+    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
+  </data>
+  <data name="Settings_Language.Text" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
+    <value>Загрузка данных об установленных приложениях...</value>
+  </data>
+  <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
+    <value>Фильтровать по:</value>
+  </data>
+  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+    <value>Удалить выбранные приложения</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="Uninstalling" xml:space="preserve">
+    <value>Удаляется</value>
+  </data>
+  <data name="UninstallTip" xml:space="preserve">
+    <value>Выберите приложения, которые хотите удалить, и нажмите "Удалить"</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>Особенности</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>Конфиденциальность</value>
+  </data>
+  <data name="HomePage_DiscordButton.Text" xml:space="preserve">
+    <value>Присоединяйтесь к нашему серверу</value>
+  </data>
+  <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
+    <value>Посетите RyTuneX</value>
+  </data>
+  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
+    <value>Отправить отзыв</value>
+  </data>
+  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
+    <value>Процессор</value>
+  </data>
+  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
+    <value>Графическая карта</value>
+  </data>
+  <data name="SystemInfoPage_OS.Text" xml:space="preserve">
+    <value>Операционная система</value>
+  </data>
+  <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
+    <value>Оперативная память</value>
+  </data>
+  <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
+    <value>Хранение</value>
+  </data>
+  <data name="Debloat" xml:space="preserve">
+    <value>Удаление ненужного</value>
+  </data>
+  <data name="DebloatPage_NotificationBody" xml:space="preserve">
+    <value>Удаление некоторых из этих приложений может не полностью их удалить.</value>
+  </data>
+  <data name="UninstallationError" xml:space="preserve">
+    <value>Ошибка при удалении следующих приложений</value>
+  </data>
+  <data name="UninstallationSuccess" xml:space="preserve">
+    <value>Успешно удалены следующие приложения</value>
+  </data>
+  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+    <value>Удалить временные файлы</value>
+  </data>
+  <data name="AdapterRAM" xml:space="preserve">
+    <value>Память адаптера</value>
+  </data>
+  <data name="Architecture" xml:space="preserve">
+    <value>Архитектура</value>
+  </data>
+  <data name="BuildNumber" xml:space="preserve">
+    <value>Номер сборки</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>Ёмкость</value>
+  </data>
+  <data name="Caption" xml:space="preserve">
+    <value>Заголовок</value>
+  </data>
+  <data name="Cores" xml:space="preserve">
+    <value>Ядра</value>
+  </data>
+  <data name="DeviceLocator" xml:space="preserve">
+    <value>Поиск устройства</value>
+  </data>
+  <data name="DriverVersion" xml:space="preserve">
+    <value>Версия драйвера</value>
+  </data>
+  <data name="ErrDriversExtract" xml:space="preserve">
+    <value>Ошибка при извлечении драйверов</value>
+  </data>
+  <data name="ExtractingDrivers" xml:space="preserve">
+    <value>Извлечение драйверов</value>
+  </data>
+  <data name="GPU" xml:space="preserve">
+    <value>ГПУ</value>
+  </data>
+  <data name="InstallDate" xml:space="preserve">
+    <value>Дата установки</value>
+  </data>
+  <data name="InterfaceType" xml:space="preserve">
+    <value>Тип интерфейса</value>
+  </data>
+  <data name="L2Cache" xml:space="preserve">
+    <value>Размер кэша L2</value>
+  </data>
+  <data name="L3Cache" xml:space="preserve">
+    <value>Размер кэша L3</value>
+  </data>
+  <data name="LastBoot" xml:space="preserve">
+    <value>Время последней загрузки</value>
+  </data>
+  <data name="LogicalProcessors" xml:space="preserve">
+    <value>Логические процессоры</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>Производитель</value>
+  </data>
+  <data name="MaxSpeed" xml:space="preserve">
+    <value>Макс. скорость</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="OSName" xml:space="preserve">
+    <value>Название ОС</value>
+  </data>
+  <data name="RAMModule" xml:space="preserve">
+    <value>Модуль ОЗУ</value>
+  </data>
+  <data name="RegisteredUser" xml:space="preserve">
+    <value>Зарегистрированный пользователь</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Размер</value>
+  </data>
+  <data name="SocketDesignation" xml:space="preserve">
+    <value>Обозначение сокета</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Скорость</value>
+  </data>
+  <data name="SystemDirectory" xml:space="preserve">
+    <value>Системная папка</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="VideoArchitecture" xml:space="preserve">
+    <value>Видеоструктура</value>
+  </data>
+  <data name="WindowsDirectory" xml:space="preserve">
+    <value>Папка Windows</value>
+  </data>
+  <data name="DeligTemp" xml:space="preserve">
+    <value>Удаление временных файлов</value>
+  </data>
+  <data name="ErrTempDel" xml:space="preserve">
+    <value>Ошибка при удалении временных файлов</value>
+  </data>
+  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
+    <value>Системные характеристики</value>
+  </data>
+  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
+    <value>Эксклюзив Windows 11</value>
+  </data>
+  <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
+    <value>Выберите папку</value>
+  </data>
+  <data name="TempDelSucc" xml:space="preserve">
+    <value>Временные файлы успешно удалены!</value>
+  </data>
+  <data name="Disk" xml:space="preserve">
+    <value>Диск</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Модель</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
+    <value>Включите подробные сообщения о входе в систему для лучшего мониторинга и устранения неполадок. Может быть неудобным для повседневного использования</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
+    <value>Включить подробный вход</value>
+  </data>
+  <data name="SelecFold" xml:space="preserve">
+    <value>Выберите папку</value>
+  </data>
+  <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
+    <value>Драйверы</value>
+  </data>
+  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
+    <value>Извлечь</value>
+  </data>
+  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
+    <value>Извлеките ваши драйверы в внешнюю папку для удобного резервного копирования</value>
+  </data>
+  <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
+    <value>Извлечение драйверов</value>
+  </data>
+  <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
+    <value>Выбрать</value>
+  </data>
+  <data name="Feature_DisableHibernation.Header" xml:space="preserve">
+    <value>Отключить гибернацию</value>
+  </data>
+  <data name="Feature_DisableHibernation.Description" xml:space="preserve">
+    <value>Отключите гибернацию, чтобы сэкономить энергию и предотвратить переход компьютера в спящий режим. Не рекомендуется для ноутбуков</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
+    <value>Отключить домашнюю группу</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
+    <value>Отключает домашнюю группу, чтобы прекратить обмен файлами и принтерами с другими устройствами в сети</value>
+  </data>
+  <data name="Feature_DisablePrintService.Header" xml:space="preserve">
+    <value>Отключить службу печати</value>
+  </data>
+  <data name="Feature_DisablePrintService.Description" xml:space="preserve">
+    <value>Отключает службу печати, предотвращая печать</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
+    <value>Отключить помощника по совместимости</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
+    <value>Отключает помощника по совместимости, чтобы отключить автоматические проверки совместимости для программ</value>
+  </data>
+  <data name="Feature_DisableSearch.Header" xml:space="preserve">
+    <value>Отключить поиск</value>
+  </data>
+  <data name="Feature_DisableSearch.Description" xml:space="preserve">
+    <value>Отключает функциональность поиска по системе</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
+    <value>Отключить отчеты об ошибках</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
+    <value>Отключает отправку отчетов об ошибках в Microsoft</value>
+  </data>
+  <data name="Feature_DisableGameBar.Header" xml:space="preserve">
+    <value>Отключить игровую панель</value>
+  </data>
+  <data name="Feature_DisableGameBar.Description" xml:space="preserve">
+    <value>Отключает игровую панель и связанные с ней функции</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
+    <value>Отключить историю быстрого доступа</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
+    <value>Отключает запись и отображение истории быстрого доступа</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
+    <value>Отключить My People</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
+    <value>Отключает функцию My People на панели задач</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
+    <value>Отключить службы сенсоров</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
+    <value>Отключает службы сенсоров для повышения конфиденциальности и экономии энергии. Не рекомендуется для ноутбуков с соответствующими сенсорами</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
+    <value>Отключить Windows Ink</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
+    <value>Отключает рабочее пространство Windows Ink и связанные функции. Не рекомендуется для устройств с пером</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
+    <value>Отключить функции орфографии и ввода</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
+    <value>Отключает предложения по орфографии и вводу</value>
+  </data>
+  <data name="Feature_DisableFaxService.Header" xml:space="preserve">
+    <value>Отключить службу факса</value>
+  </data>
+  <data name="Feature_DisableFaxService.Description" xml:space="preserve">
+    <value>Отключает службу факса в Windows</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
+    <value>Отключить службу Insider</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
+    <value>Отказаться от участия в программе Windows Insider и прекратить получение предварительных сборок</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
+    <value>Отключить облачный буфер обмена</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
+    <value>Отключает функцию облачного буфера обмена для обмена данными между устройствами</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
+    <value>Отключить залипшие клавиши</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
+    <value>Отключает функцию залипших клавиш для людей, которые случайно нажимают несколько клавиш одновременно</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
+    <value>Отключить Cast to Device</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
+    <value>Отключает функцию Cast to Device в Windows. Полезно для презентаций или обмена медиа с другими устройствами</value>
+  </data>
+  <data name="Feature_DisableVBS.Header" xml:space="preserve">
+    <value>Отключить VBS</value>
+  </data>
+  <data name="Feature_DisableVBS.Description" xml:space="preserve">
+    <value>Отключает Virtualization-Based Security (VBS) для продвинутых функций безопасности. Не рекомендуется для высокозащищенных сред</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
+    <value>Переместить панель задач влево</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
+    <value>Перемещает панель задач с нижнего положения на левую сторону экрана. Личное предпочтение</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
+    <value>Отключить Snap Assist</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
+    <value>Отключает Snap Assist, который автоматически упорядочивает открытые окна при перетаскивании. Полезно для многозадачности, но некоторые пользователи предпочитают ручное управление окнами</value>
+  </data>
+  <data name="Feature_DisableWidgets.Header" xml:space="preserve">
+    <value>Отключить виджеты</value>
+  </data>
+  <data name="Feature_DisableWidgets.Description" xml:space="preserve">
+    <value>Отключает функцию виджетов на панели задач Windows 11. Рекомендуется, если вы не находите виджеты полезными для быстрых обновлений (только для Windows 11)</value>
+  </data>
+  <data name="Feature_DisableChat.Header" xml:space="preserve">
+    <value>Отключить чат</value>
+  </data>
+  <data name="Feature_DisableChat.Description" xml:space="preserve">
+    <value>Отключает функцию чата на панели задач Windows 11. Рекомендуется только если вы не используете чат для общения (только для Windows 11)</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
+    <value>Включить компактный режим файлов</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
+    <value>Включает компактный режим для просмотра файлов с меньшими эскизами. Полезно для экранов с низким разрешением или при работе с большими папками</value>
+  </data>
+  <data name="Feature_DisableStickers.Header" xml:space="preserve">
+    <value>Отключить стикеры</value>
+  </data>
+  <data name="Feature_DisableStickers.Description" xml:space="preserve">
+    <value>Отключает функцию стикеров в приложении сообщений Windows 11. Рекомендуется только если вы не используете стикеры для общения (только для Windows 11)</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
+    <value>Отключить панель Discover в Edge</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
+    <value>Отключает функцию панели Discover в Microsoft Edge. Полезно, если она вам мешает или если вы предпочитаете более чистый интерфейс браузера</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
+    <value>Отключить CoPilot AI</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
+    <value>Отключает функцию CoPilot AI в Windows для помощи в написании кода. Не рекомендуется для разработчиков</value>
+  </data>
+  <data name="OptimizeBasic.Text" xml:space="preserve">
+    <value>Основные оптимизации</value>
+  </data>
+  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
+    <value>Настройки производительности</value>
+  </data>
+  <data name="Feature_DisableSysMain.Header" xml:space="preserve">
+    <value>Отключить SysMain</value>
+  </data>
+  <data name="Feature_DisableSysMain.Description" xml:space="preserve">
+    <value>Отключает SysMain, который предварительно загружает часто используемые приложения для более быстрого запуска. Может повлиять на время запуска некоторых программ, если вы используете HDD.</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
+    <value>Отключить метки времени NTFS</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
+    <value>Отключает обновления меток времени NTFS для операций с файлами. Может повлиять на функциональность программ, которые зависят от точных меток времени.</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
+    <value>Включить игровой режим</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
+    <value>Включает игровой режим, который оптимизирует ресурсы системы для более плавного игрового опыта. Может повлиять на фоновые процессы.</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
+    <value>Исключить драйвера из обновлений Windows</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
+    <value>Исключает обновления драйверов из Windows Update. Может привести к устаревшим драйверам с возможными рисками безопасности или проблемами совместимости. Используйте с осторожностью.</value>
+  </data>
+  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
+    <value>Узнайте больше о том, что отключается</value>
+  </data>
+  <data name="OptimizeAdvanced.Text" xml:space="preserve">
+    <value>Продвинутые оптимизации</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
+    <value>Отключить восстановление системы</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
+    <value>Отключает восстановление системы, которое создает точки восстановления для возврата системы в предыдущее состояние в случае проблем. Не рекомендуется. Отключение этой функции удаляет возможность легко восстанавливать систему после возможных сбоев.</value>
+  </data>
+  <data name="Feature_DisableCortana.Header" xml:space="preserve">
+    <value>Отключить Cortana</value>
+  </data>
+  <data name="Feature_DisableCortana.Description" xml:space="preserve">
+    <value>Отключает Cortana, виртуального помощника, который может отвечать на вопросы и выполнять задачи. Может повлиять на голосовой поиск и некоторые функции производительности.</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
+    <value>Отключить обновления магазина</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
+    <value>Отключает автоматические обновления для приложений, загруженных из Microsoft Store. Может оставить приложения уязвимыми для рисков безопасности или лишить новых функций.</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
+    <value>Отключить автоматические обновления</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
+    <value>Отключает автоматические обновления Windows, требуя их ручной установки. Настоятельно не рекомендуется. Это может оставить вашу систему уязвимой для угроз безопасности и исправлений ошибок.</value>
+  </data>
+  <data name="Privacy_Telemetry.Text" xml:space="preserve">
+    <value>Телеметрия</value>
+  </data>
+  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
+    <value>Усилить конфиденциальность</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
+    <value>Отключить SMBv1</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
+    <value>Отключает версию 1 протокола Server Message Block (SMBv1) для повышения безопасности. Рекомендуется</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
+    <value>Отключить SMBv2</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
+    <value>Отключает версию 2 протокола Server Message Block (SMBv2) для повышения безопасности. Используйте с осторожностью, так как это может нарушить функциональность сетевого обмена файлами.</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
+    <value>Отключить службы телеметрии</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
+    <value>Отключает службы телеметрии, чтобы предотвратить сбор и передачу данных о использовании операционной системой.</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
+    <value>Отключить телеметрию Edge</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
+    <value>Отключает сбор данных телеметрии в Microsoft Edge.</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
+    <value>Отключить телеметрию Visual Studio</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
+    <value>Отключает сбор данных телеметрии в Visual Studio.</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
+    <value>Отключить телеметрию Nvidia</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
+    <value>Отключает сбор данных телеметрии драйверами Nvidia.</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
+    <value>Отключить телеметрию Chrome</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
+    <value>Отключает сбор данных телеметрии в Google Chrome.</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
+    <value>Отключить телеметрию Firefox</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
+    <value>Отключает сбор данных телеметрии в Mozilla Firefox.</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
+    <value>Выберите ваш язык по умолчанию</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
+    <value>Изменить язык</value>
+  </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>Сетевые настройки</value>
+  </data>
+  <data name="Feature_EnableEndTask.Description" xml:space="preserve">
+    <value>Включает опцию при щелчке правой кнопкой мыши на значках приложений на панели задач, позволяя быстро завершить не отвечающие приложения без открытия Диспетчера задач.</value>
+  </data>
+  <data name="Feature_EnableEndTask.Header" xml:space="preserve">
+    <value>Включить завершение задач</value>
+  </data>
+  <data name="Network_ApplyDNS.Content" xml:space="preserve">
+    <value>Применить DNS</value>
+  </data>
+  <data name="Network_IPv4Title.Text" xml:space="preserve">
+    <value>DNS-серверы IPv4</value>
+  </data>
+  <data name="Network_IPv6Title.Text" xml:space="preserve">
+    <value>DNS-серверы IPv6</value>
+  </data>
+  <data name="Network_NicTitle.Text" xml:space="preserve">
+    <value>Сетевой интерфейс</value>
+  </data>
+  <data name="Network_Primary.Text" xml:space="preserve">
+    <value>Основной</value>
+  </data>
+  <data name="Network_ResetDNS.Content" xml:space="preserve">
+    <value>Сбросить DNS по умолчанию</value>
+  </data>
+  <data name="Network_Secondary.Text" xml:space="preserve">
+    <value>Вторичный</value>
+  </data>
+  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
+    <value>Установить собственный DNS</value>
+  </data>
+  <data name="NoIPv4" xml:space="preserve">
+    <value>Не найдены адреса DNS IPv4</value>
+  </data>
+  <data name="NoIPv6" xml:space="preserve">
+    <value>Не найдены адреса DNS IPv6</value>
+  </data>
+  <data name="NoNic" xml:space="preserve">
+    <value>Не выбран сетевой интерфейс</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>Не установлено</value>
+  </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>(фильтр для взрослых)</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>Автоматически</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
+    <value>Отключает использование биометрических данных для аутентификации, таких как отпечатки пальцев или распознавание лиц.</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
+    <value>Отключить биометрические функции</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX — это передовой оптимизатор, разработанный на основе фреймворка WinUI 3, предназначенный для повышения производительности устройств на Windows. Созданный для Windows 10 и 11, RyTuneX позволяет пользователям легко удалять упрямые предустановленные приложения и оптимизировать системные ресурсы.</value>
+  </data>
+  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
+    <value>Проверить обновления</value>
+  </data>
+  <data name="AvailableUpdateContent0" xml:space="preserve">
+    <value>Доступна новая версия (</value>
+  </data>
+  <data name="AvailableUpdateContent1" xml:space="preserve">
+    <value>) Пожалуйста, обновитесь до последней версии, чтобы наслаждаться новыми функциями и улучшениями.</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>Обновления RyTuneX</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Произошла ошибка. Убедитесь, что ваше интернет-соединение работает, и попробуйте позже.</value>
+  </data>
+  <data name="UnavailableUpdate0" xml:space="preserve">
+    <value>Вы уже используете последнюю версию (</value>
+  </data>
+  <data name="UnavailableUpdate1" xml:space="preserve">
+    <value>). На данный момент обновления недоступны.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>Поддержка</value>
+  </data>
+  <data name="SystemInfoPage_Network.Text" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
+  <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
+    <value>Аккумулятор</value>
+  </data>
+  <data name="MACAddress" xml:space="preserve">
+    <value>MAC-адрес</value>
+  </data>
+  <data name="AdapterType" xml:space="preserve">
+    <value>Тип адаптера</value>
+  </data>
+  <data name="EstimatedChargeRemaining" xml:space="preserve">
+    <value>Оставшийся заряд (оценка)</value>
+  </data>
+  <data name="BatteryStatus" xml:space="preserve">
+    <value>Состояние аккумулятора</value>
+  </data>
+  <data name="Chemistry" xml:space="preserve">
+    <value>Химический состав</value>
+  </data>
+  <data name="Shell_Security.Content" xml:space="preserve">
+    <value>Безопасность</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Произошла непредвиденная ошибка</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>Просмотреть логи</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>Всего: {0} приложений</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>Производительность</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Включено</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Отключено</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>Статус безопасности</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>Защита от вирусов и угроз</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>Защита межсетевого экрана и сети</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>Обновление Windows</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>Защита в реальном времени</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>Контроль учетных записей пользователей (UAC)</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>Детали</value>
+  </data>
+  <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>Ремонт</value>
+  </data>
+  <data name="ConfirmRemoveApps" xml:space="preserve">
+    <value>Вы собираетесь полностью удалить следующие приложения с вашего устройства:</value>
+  </data>
+  <data name="ConfirmContinue" xml:space="preserve">
+    <value>Вы уверены, что хотите продолжить?</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Продолжить</value>
+  </data>
+  <data name="HomePage_cpuUsage.Text" xml:space="preserve">
+    <value>Процессор</value>
+  </data>
+  <data name="HomePage_ramUsage.Text" xml:space="preserve">
+    <value>Память</value>
+  </data>
+  <data name="HomePage_gpuUsage.Text" xml:space="preserve">
+    <value>ГПУ</value>
+  </data>
+  <data name="HomePage_diskUsage.Text" xml:space="preserve">
+    <value>Диск</value>
+  </data>
+  <data name="HomePage_networkUsage.Text" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
+  <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
+    <value>Программы</value>
+  </data>
+  <data name="HomePage_processesCount.Text" xml:space="preserve">
+    <value>Процессы</value>
+  </data>
+  <data name="HomePage_servicesCount.Text" xml:space="preserve">
+    <value>Службы</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>Отключить Smart Screen</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>Выключает фильтр SmartScreen, который предупреждает о потенциально небезопасных приложениях и файлах, загруженных из Интернета. Отключение этой функции увеличивает риск заражения вирусами.</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
+    <value>Отключить новости и интересы</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
+    <value>Отключает ленту новостей и интересов на панели задач, которая отображает новости, погоду и другие обновления. Отключение этого может улучшить производительность системы.</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
+    <value>Отключить функции Spotlight</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
+    <value>Отключает функцию Spotlight, которая показывает персонализированный контент и рекомендации на экране блокировки. Отключение этой функции может помочь защитить конфиденциальность.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
+    <value>Отключить индивидуальные настройки</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
+    <value>Отключает индивидуальные настройки для приложений и сервисов, предотвращая сбор предпочтений и данных о действиях пользователей в Windows.</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
+    <value>Отключить контент, оптимизированный для облака</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
+    <value>Отключает контент, оптимизированный для облака, который может включать обновления приложений и синхронизацию файлов. Это может уменьшить использование интернет-канала, но ограничить функциональность.</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
+    <value>Отключить уведомления о отзывах</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
+    <value>Предотвращает показ уведомлений об отзывах, связанных с вашим опытом использования ОС. Отключение этой функции может уменьшить количество прерываний.</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
+    <value>Отключить рекламный ID</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
+    <value>Отключает рекламный ID, предотвращая отслеживание ваших действий для целевой рекламы. Это может повысить конфиденциальность, но повлияет на взаимодействие с приложениями.</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
+    <value>Отключить Bluetooth-рекламу</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
+    <value>Отключает Bluetooth-рекламу, которая передает информацию о вашем устройстве другим близлежащим устройствам. Отключение этого может снизить риски для конфиденциальности.</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
+    <value>Отключить автоматический вход после перезагрузки</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
+    <value>Отключает автоматический вход после перезагрузки, требуя ввода ваших данных вручную. Это может повысить безопасность, но добавляет дополнительный шаг при входе.</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
+    <value>Отключить передачу данных о рукописном вводе</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
+    <value>Отключает передачу данных о рукописном вводе в сервисы Microsoft, улучшая конфиденциальность, но ограничивает некоторые функции распознавания рукописного ввода.</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
+    <value>Отключить сбор данных о текстовом вводе</value>
+  </data>
+    <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
+    <value>Отключает сбор данных о вводе текста, предотвращая сохранение и анализ того, что вы вводите, в Windows. Это помогает защитить конфиденциальность, но может уменьшить улучшения точности ввода текста.</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
+    <value>Отключить персонализацию ввода</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
+    <value>Отключает персонализацию методов ввода, включая предсказание текста и функции автокоррекции. Это может снизить улучшения производительности системы при вводе текста.</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
+    <value>Отключить безопасный режим поиска</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
+    <value>Отключает безопасный режим поиска, который фильтрует потенциально опасный или неподобающий контент в результатах поиска. Отключение этого увеличивает риск попадания на небезопасный контент.</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
+    <value>Отключить загрузку данных активности</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
+    <value>Отключает загрузку данных активности, предотвращая сбор данных о вашем использовании для улучшения сервисов Microsoft. Это помогает сохранить конфиденциальность.</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
+    <value>Отключить синхронизацию буфера обмена</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
+    <value>Отключает синхронизацию буфера обмена между вашими устройствами, гарантируя, что скопированные данные останутся локальными и не будут переданы другим устройствам.</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
+    <value>Отключить синхронизацию сообщений</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
+    <value>Предотвращает синхронизацию сообщений между устройствами, гарантируя, что текстовые сообщения и уведомления будут доступны только на том устройстве, которое вы используете.</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
+    <value>Отключить синхронизацию настроек</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
+    <value>Отключает синхронизацию системных настроек между устройствами. Это предотвращает обмен настройками устройства, темами и другими конфигурациями.</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
+    <value>Отключить голосовую активацию</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
+    <value>Отключает функции голосовой активации, такие как Cortana, предотвращая помощника от прослушивания ваших голосовых команд. Это может улучшить конфиденциальность, но уменьшает функциональность голосовых команд.</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
+    <value>Отключить функцию поиска устройства</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
+    <value>Отключает функцию поиска устройства, которая помогает найти ваше устройство в случае потери. Отключение этого уменьшает возможности восстановления устройства, но улучшает конфиденциальность.</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
+    <value>Отключить ленту активности</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
+    <value>Отключает ленту активности, которая показывает ваши недавние действия, помогая защитить вашу конфиденциальность, предотвращая других от просмотра того, что вы делаете на устройстве.</value>
+  </data>
+  <data name="Feature_DisableCdp.Header" xml:space="preserve">
+    <value>Отключить CDP (Платформа данных клиентов)</value>
+  </data>
+  <data name="Feature_DisableCdp.Description" xml:space="preserve">
+    <value>Отключает CDP, предотвращая сбор и использование ваших данных платформой данных клиентов для анализа и таргетированных рекомендаций. Это повышает конфиденциальность, но может ограничить персонализацию.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
+    <value>Отключить персонализированные настройки конфиденциальности</value>
+  </data>
+    <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
+    <value>Отключает функцию персонализированных рекомендаций в настройках конфиденциальности, не позволяя Windows использовать ваши данные для настройки пользовательского опыта. Это может уменьшить персонализацию.</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
+    <value>Отключить уведомления о диагностике</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
+    <value>Отключает уведомления о диагностике, не позволяя Windows показывать подсказки о состоянии системы или ошибках. Это может помочь уменьшить отвлекающие факторы.</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
+    <value>Отключить конфиденциальность онлайн-голоса</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
+    <value>Отключает конфиденциальность онлайн-голоса, не позволяя Windows хранить или обрабатывать голосовые команды. Это увеличивает конфиденциальность, но ограничивает возможности голосового поиска и команд.</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
+    <value>Отключить доступ к местоположению</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
+    <value>Отключает доступ к местоположению для приложений и сервисов, предотвращая использование GPS или сетевого местоположения вашего устройства. Это улучшает конфиденциальность, но может ограничить местные сервисы.</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
+    <value>Отключить функции местоположения</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
+    <value>Отключает все функции, связанные с местоположением, включая сервисы для приложений и функции безопасности. Это повышает конфиденциальность, но может снизить функциональность сервисов, зависящих от местоположения.</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
+    <value>Отключить задержку отображения меню</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
+    <value>Управляет задержкой перед появлением меню после наведения мыши. Отключение этой функции позволяет меню открываться мгновенно, улучшая отзывчивость, но может уменьшить контроль пользователя.</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
+    <value>Отключить время наведения мыши</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
+    <value>Регулирует время ожидания перед активацией события наведения мыши. Отключение этого может ускорить взаимодействие, но приведет к непреднамеренным активациям.</value>
+  </data>
+  <data name="Feature_AutoComplete.Header" xml:space="preserve">
+    <value>Отключить автозаполнение</value>
+  </data>
+  <data name="Feature_AutoComplete.Description" xml:space="preserve">
+    <value>Отключает автоматические подсказки при вводе в некоторых полях, таких как поисковые строки и формы. Отключение этой функции снижает отвлекающие факторы, но может замедлить рабочий процесс.</value>
+  </data>
+  <data name="Feature_CrashDump.Header" xml:space="preserve">
+    <value>Отключить дампы после сбоя</value>
+  </data>
+  <data name="Feature_CrashDump.Description" xml:space="preserve">
+    <value>Управляет генерацией отчетов о сбоях и дампов памяти при сбоях приложений. Отключение этой функции может помочь сэкономить место на диске, но снизит способность к диагностике и устранению неполадок.</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
+    <value>Отключить удаленную помощь</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
+    <value>Отключает функции удаленной поддержки, позволяя другим помогать вам через удаленный рабочий стол. Отключение этой функции улучшает безопасность, но ограничивает варианты поддержки.</value>
+  </data>
+  <data name="Feature_WindowShake.Header" xml:space="preserve">
+    <value>Отключить встряхивание окна</value>
+  </data>
+  <data name="Feature_WindowShake.Description" xml:space="preserve">
+    <value>Отключает функцию встряхивания окна, которая минимизирует все открытые окна при встряхивании. Отключение этой функции улучшает фокусировку, но убирает удобный инструмент управления окнами.</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
+    <value>Добавить контекстное меню для копирования/перемещения</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
+    <value>Включает дополнительные опции в контекстное меню файла для быстрого копирования или перемещения файлов в новое место. Эта функция упрощает управление файлами, предоставляя быстрый доступ к этим функциям прямо из контекстного меню.</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
+    <value>Настроить таймауты задач</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
+    <value>Изменяет настройки таймаутов для системных задач. Настройка может улучшить производительность в некоторых случаях, но может привести к сбоям задач при определенных условиях.</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
+    <value>Включить проверки низкого места на диске</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
+    <value>Включает автоматические проверки на низкое место на диске для предотвращения проблем с производительностью. Отключение этой функции может снизить количество уведомлений, но вы можете пропустить важные предупреждения о нехватке места.</value>
+  </data>
+    <data name="Feature_LinkResolve.Header" xml:space="preserve">
+    <value>Отключить разрешение ссылок</value>
+  </data>
+  <data name="Feature_LinkResolve.Description" xml:space="preserve">
+    <value>Отключает разрешение неработающих ссылок в файлах и папках. Отключение этой функции может ускорить операции, но может оставить устаревшие ссылки неразрешёнными.</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
+    <value>Сократить время ожидания сервисов</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
+    <value>Настроить время ожидания для системных сервисов. Уменьшение времени ожидания может улучшить производительность, но привести к преждевременному завершению работы сервисов.</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
+    <value>Отключить удалённый реестр</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
+    <value>Отключает доступ к реестру удалённо. Отключение улучшает безопасность, но препятствует удалённой настройке параметров реестра.</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
+    <value>Скрыть расширения файлов и скрытые файлы</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
+    <value>Управляет видимостью расширений файлов и скрытых файлов. Включение этой функции уменьшает беспорядок, но скрывает важные детали файлов.</value>
+  </data>
+  <data name="Feature_SystemProfile.Header" xml:space="preserve">
+    <value>Оптимизация профиля системы</value>
+  </data>
+  <data name="Feature_SystemProfile.Description" xml:space="preserve">
+    <value>Улучшает производительность системы, настраивая параметры профиля системы. Эта функция приоритетирует скорость и эффективность, улучшая общую отзывчивость системы и управление ресурсами.</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
+    <value>Улучшение настроек GPU и приоритетов</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
+    <value>Оптимизирует настройки GPU и приоритеты процессов для повышения производительности, обеспечивая лучшую графику и более плавную работу для ресурсоёмких задач, таких как игры и многозадачность.</value>
+  </data>
+  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
+    <value>Отключить режим серверного кадра</value>
+  </data>
+  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
+    <value>Отключает режим серверного кадра для расширенной видеокодировки. Отключение этой функции улучшает производительность, но может снизить качество видео в определённых условиях.</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
+    <value>Настроить настройки GPU для низкой задержки</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
+    <value>Настроить параметры GPU для минимизации задержки, улучшая производительность в играх или при просмотре видео.</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
+    <value>Установить предел для процессов с низким приоритетом</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
+    <value>Устанавливает предел для процессов с низким приоритетом. Включение этой функции может повысить производительность, но снизить гибкость системы в некоторых случаях.</value>
+  </data>
+  <data name="LoadingWindowText.Text" xml:space="preserve">
+    <value>Загрузка...</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>Информация о устройстве</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>Включить классическое контекстное меню</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>Восстанавливает классический стиль контекстного меню Windows 10, предоставляя привычный опыт правого клика с отображением всех опций сразу</value>
+  </data>
+  <data name="DoNotShowCheckBox" xml:space="preserve">
+    <value>Больше не показывать это сообщение</value>
+  </data>
+  <data name="RestorePointDialogTitle" xml:space="preserve">
+    <value>Создать точку восстановления</value>
+  </data>
+  <data name="RestorePointDialogText" xml:space="preserve">
+    <value>Рекомендуется создать точку восстановления перед внесением изменений в систему. Хотите создать точку восстановления перед продолжением?</value>
+  </data>
+  <data name="CreatingRestorePoint" xml:space="preserve">
+    <value>Создание точки восстановления</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>Точка восстановления создана</value>
+  </data>
+    <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>Точка восстановления системы успешно создана.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>Не удалось создать точку восстановления</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Отменить изменения</value>
+  </data>
+  <data name="Settings_RevertChanges.Header" xml:space="preserve">
+    <value>Отменить все изменения</value>
+  </data>
+  <data name="Settings_RevertChanges.Description" xml:space="preserve">
+    <value>Отменяет все изменения, которые RyTuneX внес в вашу систему, включая точку восстановления</value>
+  </data>
+  <data name="RevertingChanges" xml:space="preserve">
+    <value>В данный момент отменяются изменения...</value>
+  </data>
+  <data name="RevertChangesDialogText" xml:space="preserve">
+    <value>Вы собираетесь отменить все изменения, внесенные RyTuneX в вашу систему (кроме удаленных приложений), а также сбросить настройки приложения.
+
+
+Вы уверены, что хотите продолжить?</value>
+  </data>
+  <data name="NoChangesFound" xml:space="preserve">
+    <value>Значительных изменений не найдено.</value>
+  </data>
+  <data name="OperationStopped" xml:space="preserve">
+    <value>Операция остановлена</value>
+  </data>
+  <data name="ReportSaved" xml:space="preserve">
+    <value>Отчет сохранен на вашем рабочем столе</value>
+  </data>
+  <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
+    <value>Диагностика памяти</value>
+  </data>
+  <data name="MemoryDiagnosticDialogText" xml:space="preserve">
+    <value>Проблемы с памятью могут привести к потере данных или сбоям в работе вашего компьютера.
+
+
+Проверьте ваш компьютер на наличие проблем с памятью</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Перезагрузить сейчас</value>
+  </data>
+    <data name="ScheduleLater" xml:space="preserve">
+    <value>Запланировать на позже</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ScheduledLater" xml:space="preserve">
+    <value>Запланировано на следующую перезагрузку</value>
+  </data>
+  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
+    <value>Сканировать</value>
+  </data>
+  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
+    <value>Восстановить</value>
+  </data>
+  <data name="RepairPage_StopButton.Content" xml:space="preserve">
+    <value>Остановить</value>
+  </data>
+  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>Выберите хотя бы один параметр для сканирования/восстановления</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
+    <value>Состояние батареи</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
+    <value>Это создаст полный отчет о состоянии вашей батареи</value>
+  </data>
+  <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
+    <value>Диагностика памяти</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
+    <value>Проанализирует память вашей системы на возможные проблемы и улучшит стабильность</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
+    <value>Диагностировать</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
+    <value>Оптимизация диска</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
+    <value>Оптимизирует ваше хранилище, дефрагментируя его (если HDD) или перетриммируя (если SSD)</value>
+  </data>
+    <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+    <value>Оптимизировать</value>
+  </data>
+  <data name="RepairPage_EventViewer.Header" xml:space="preserve">
+    <value>Просмотр событий</value>
+  </data>
+  <data name="RepairPage_EventViewer.Description" xml:space="preserve">
+    <value>Это отобразит недавние системные журналы событий для устранения неполадок</value>
+  </data>
+  <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
+    <value>Опции восстановления</value>
+  </data>
+  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
+    <value>Опции диагностики</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>Операция завершена</value>
+  </data>
+  <data name="RestorePointTitle" xml:space="preserve">
+    <value>Точка восстановления</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>Отключение восстановления системы приведет к удалению всех точек восстановления, включая созданные RyTuneX.
+
+
+Вы уверены, что хотите продолжить?</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>Настройки рекламы</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>Настройки телеметрии</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>Другие настройки</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>Основные системные оптимизации</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>Продвинутые системные оптимизации</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>Программы, соответствующие вашему запросу, не найдены</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>Поиск программ...</value>
+  </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>Отключить фоновое приложение</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>Предотвращает запуск приложений в фоновом режиме, что может улучшить производительность в некоторых случаях.</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>Включить темный режим Windows</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>Включает темный режим для всей системы без необходимости активации Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>Отключить прозрачность Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>Отключает прозрачные эффекты в системных элементах интерфейса, таких как панель задач и окна, улучшая производительность</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>Стандартные приложения</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>Все приложения</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>Программы Win32</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>Сжать ОС</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+    <value>Включает сжатие операционной системы для уменьшения использования дискового пространства. Эта функция полезна для устройств с ограниченной памятью, но может немного повлиять на производительность на старых устройствах</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+    <value>Сжатие системных бинарников...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+    <value>Декомпрессия системных бинарников...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+    <value>Проверить сжатие</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Сжать</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+    <value>Рассжать</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+    <value>Сжатие системы</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>Отключить разделение хостов службы</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+    <value>Отключает разделение хостов службы для значительного снижения использования оперативной памяти и количества процессов.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>Включить классическое меню загрузки</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>Переключитесь на классическое меню загрузки для более быстрого запуска.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>Оптимизировать настройки NTFS</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>Настройте параметры NTFS для повышения производительности и улучшения конфиденциальности.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>Отключить пагинацию</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>Отключите пагинацию памяти для максимальной производительности.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>Оптимизировать производительность приложений на переднем плане</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>Улучшает производительность активных приложений, отдавая приоритет задачам на переднем плане.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>Отключить выполнение WPBT</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>Предотвращает запуск программ (например, предустановленного OEM-программного обеспечения) прошивкой при запуске.</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
+    <value>Отключение ненужных служб</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
+      <value>Оптимизируйте производительность системы, отключив фоновые службы, которые не являются необходимыми для работы вашего устройства. Это поможет освободить системные ресурсы и повысить общую эффективность.</value>
+  </data>
+</root>
