@@ -18,8 +18,8 @@ All notable changes to this branch will be documented in this file.
 
 ### Fixes
 
-- Fixed an issue that was causing the restore point creation process to load undefinetly without creating any restore points.
-- Resolverd an issue where the `Revert All Changes` in the `Settings` page did not work as expected.
+- Fixed an issue that was causing the restore point creation process to load indefinitely without creating any restore points.
+- Resolved an issue where the `Revert All Changes` in the `Settings` page did not work as expected.
 - Better `VBS` and `Widgets` disabling.
 - Fixed an issue where the disc and network usage were not displayed correctly in the `Home` page.
 
