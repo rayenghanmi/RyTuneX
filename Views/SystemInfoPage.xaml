@@ -34,7 +34,7 @@
                                 <TextBox x:Uid="SystemInfoPage_FolderPathText" x:Name="FolderPathText" IsReadOnly="True"/>
                             </ScrollViewer>
                             <Button x:Uid="SystemInfoPage_SelectButton" Margin="15,15,0,15" Click="SelectPathButton_Click"/>
-                            <Button x:Uid="SystemInfoPage_ExtractButton" Margin="15,15,0,15" x:Name="ExtractButton" Click="ExtractButton_Click"/>
+                            <Button x:Uid="SystemInfoPage_ExtractButton" Margin="15,15,0,15" x:Name="ExtractButton" Click="ExtractButton_Click" Visibility="Collapsed"/>
                         </StackPanel>
                         <StackPanel x:Name="ExtractingStatus" Visibility="Collapsed">
                             <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_ExtractingStatusText" x:Name="ExtractingStatusText" Margin="3"/>
