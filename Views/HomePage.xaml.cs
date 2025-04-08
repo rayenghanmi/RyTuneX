@@ -61,7 +61,7 @@ public sealed partial class HomePage : Page
                     // Update the UI on the main thread
                     DispatcherQueue.TryEnqueue(() =>
                     {
-                        if (this.Visibility == Visibility.Visible)
+                        if (this.Visibility == Visibility.Visible && !cancellationToken.IsCancellationRequested)
                         {
                             cpuUsageText.Text = $"{cpuUsage}%";
                             ramUsageText.Text = $"{ramUsage}%";
@@ -122,19 +122,19 @@ public sealed partial class HomePage : Page
         return (int)Math.Min(diskCounter.NextValue(), 100);
     }
 
-    private static int GetNetworkDownloadUsage()
+    private static async Task<int> GetNetworkDownloadUsage()
     {
         var firstBytes = GetTotalBytesReceived(); // Get total bytes received at a point in time
-        Thread.Sleep(500); // Sleep for 500ms
+        await Task.Delay(500); // Non-blocking delay
         var secondBytes = GetTotalBytesReceived(); // Get total bytes received after the 500ms
         return (int)((secondBytes - firstBytes) / 1024); // Convert Bytes to KB
     }
 
     // Similar to GetNetworkDownloadUsage but for upload
-    private static int GetNetworkUploadUsage()
+    private static async Task<int> GetNetworkUploadUsage()
     {
         var firstBytes = GetTotalBytesSent();
-        Thread.Sleep(500);
+        await Task.Delay(500); // Non-blocking delay
         var secondBytes = GetTotalBytesSent();
         return (int)((secondBytes - firstBytes) / 1024);
     }
@@ -179,9 +179,9 @@ public sealed partial class HomePage : Page
         }
     }
 
-    private int GetProcessesCount()
+    private async Task<int> GetProcessesCount()
     {
-        return Process.GetProcesses().Length;
+        return await Task.Run(() => Process.GetProcesses().Length);
     }
 
     private int GetServicesCount()

@@ -3,6 +3,12 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.3.1 - Unreleased
+
+### Fixes
+
+- Resolved an issue where the app would crash upon attempting to close it while the `Home` page was actively updating system usage statistics.
+
 ## 1.3.0 - Released
 
 ### Added
