@@ -74,8 +74,26 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
 
 ## Installation
 
-1. **Download**: Get the latest [installation setup](https://github.com/rayenghanmi/RyTuneX/releases/latest)
-2. **Install**: Run the downloaded setup and follow the prompts to install RyTuneX.
+### Option 1: Automatic Installation (Recommended)
+
+1. Open a terminal (cmd, PowerShell, or Windows Terminal).
+
+2. Run the following command:
+
+```
+winget install rytunex
+```
+
+### Option 2: Manual Installation
+
+1. Download:
+    - Get the latest [RyTuneX.Setup.zip](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+2. Extract:
+    - Extract the downloaded `.zip` file to a location of your choice.
+3. Run Installer:
+    - Navigate to the extracted folder and double-click on `RyTuneX.Setup.exe` to start the installation.
+4. Follow Prompts:
+    - Complete the installation by following the on-screen instructions.
 
 > [!IMPORTANT]  
 > Always download RyTuneX from the official [GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety.
