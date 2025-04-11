@@ -87,7 +87,7 @@ winget install rytunex
 ### Option 2: Manual Installation
 
 1. Download:
-    - Get the latest [RyTuneX.Setup.zip](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+    - Get the latest [RyTuneX.Setup.zip](https://github.com/rayenghanmi/RyTuneX/releases/latest/download/RyTuneX.Setup.zip)
 2. Extract:
     - Extract the downloaded `.zip` file to a location of your choice.
 3. Run Installer:
