@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Management.Automation;
+using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -14,8 +15,17 @@ using Windows.Storage;
 namespace RyTuneX.Helpers;
 internal partial class OptimizationOptions
 {
+    [DllImport("Shell32.dll", CharSet = CharSet.Auto)]
+    public static extern int ExtractIconEx(string lpszFile, int nIconIndex, IntPtr[] phiconLarge, IntPtr[]? phiconSmall, int nIcons);
+
     public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
     {
+        var largeIcons = new IntPtr[1];
+        ExtractIconEx(@"C:\Windows\System32\imageres.dll", 152, largeIcons, null, 1);
+        var extractedIcon = System.Drawing.Icon.FromHandle(largeIcons[0]);
+        var bmp = extractedIcon.ToBitmap();
+        bmp.Save(Path.Combine(Path.GetTempPath(), "defaulticon.png"), ImageFormat.Png);
+
         var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
         var win32AppsTask = Task.Run(GetWin32Apps);
 
@@ -178,7 +188,7 @@ internal partial class OptimizationOptions
 
     private static string ExtractLogoPath(string installLocation, bool isWin32 = false)
     {
-        var logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "StoreLogo.backup.png");
+        var logoPath = Path.Combine(Path.GetTempPath(), "defaulticon.png");
 
         if (isWin32)
         {

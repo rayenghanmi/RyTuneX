@@ -8,6 +8,7 @@ All notable changes to this branch will be documented in this file.
 ### Fixes
 
 - Resolved an issue where the app would crash upon attempting to close it while the `Home` page was actively updating system usage statistics.
+- Fixed an issue where some failed apps were being displayed as successfully uninstalled.
 
 ## 1.3.0 - Released
 
