@@ -3,13 +3,15 @@ using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.Win32;
 using RyTuneX.Helpers;
-using Windows.Storage;
 
 namespace RyTuneX.Views;
 
 public sealed partial class OptimizeSystemPage : Page
 {
+    private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\OptimizeSystemPage";
+
     public OptimizeSystemPage()
     {
         InitializeComponent();
@@ -17,27 +19,28 @@ public sealed partial class OptimizeSystemPage : Page
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += (sender, e) => InitializeToggleSwitchesAsync();
     }
+
     private async void InitializeToggleSwitchesAsync()
     {
         await LogHelper.Log("Initializing Toggle Switches");
         try
         {
-            var tasks = FindVisualChildren<ToggleSwitch>(this).Select(async control =>
+            foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
             {
-                if (control.Tag != null && control.Tag is string tagName)
+                if (toggleSwitch.Tag is string tagName)
                 {
-                    // Set the initial state based on the stored value in LocalSettings
-                    var settingValueObj = ApplicationData.Current.LocalSettings.Values[tagName];
-
-                    if (settingValueObj != null && settingValueObj is bool settingValue)
+                    // Retrieve the state from the registry
+                    using var key = Registry.CurrentUser.OpenSubKey(RegistryBaseKey);
+                    Debug.WriteLine(key);
+                    if (key != null && key.GetValue(tagName) is int state)
                     {
-                        // Subscribe to the Toggled event
-                        control.IsOn = settingValue;
+                        toggleSwitch.IsOn = state == 1;
                     }
-                    control.Toggled += ToggleSwitch_Toggled;
+
+                    // Subscribe to the Toggled event
+                    toggleSwitch.Toggled += ToggleSwitch_Toggled;
                 }
-            });
-            await Task.WhenAll(tasks);
+            }
         }
         catch (Exception ex)
         {
@@ -79,15 +82,18 @@ public sealed partial class OptimizeSystemPage : Page
         {
             var toggleSwitch = (ToggleSwitch)sender;
             Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+
+            // Save the state to the registry
+            using var key = Registry.CurrentUser.CreateSubKey(RegistryBaseKey);
+            key?.SetValue((string)toggleSwitch.Tag, toggleSwitch.IsOn ? 1 : 0, RegistryValueKind.DWord);
+
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
-            ApplicationData.Current.LocalSettings.Values[(string)toggleSwitch.Tag] = toggleSwitch.IsOn;
         }
         catch (Exception ex)
         {
             await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
         }
     }
-
     private async Task<string> StartTask(string command)
     {
         using var process = new Process
