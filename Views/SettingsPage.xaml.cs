@@ -13,6 +13,8 @@ using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using Windows.ApplicationModel;
 using Windows.Storage;
+using Windows.Storage.Pickers;
+using WinRT.Interop;
 
 namespace RyTuneX.Views;
 
@@ -487,4 +489,21 @@ public sealed partial class SettingsPage : Page
             }
         }
     }
+    
+    private async void ImportButton_Click(object sender, RoutedEventArgs e)
+    {
+        var picker = new DevWinUI.FilePicker(WindowNative.GetWindowHandle(App.MainWindow));
+        picker.FileTypeChoices.Add("Reg File", ["*.reg"]);
+        picker.DefaultFileExtension = "*.reg";
+        picker.ShowAllFilesOption = false;
+        picker.SuggestedStartLocation = PickerLocationId.Downloads;
+
+        var file = await picker.PickSingleFileAsync();
+        if (file != null)
+        {
+            Debug.WriteLine(file.Path);
+        }
+
+    }
+
 }

@@ -20,10 +20,10 @@
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
     <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>[base64 mime encoded serialized .NET Framework object]</value>
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
     <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -168,10 +168,10 @@
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
     <value>Desinstalar aplicativo(s) selecionado(s)</value>
   </data>
-  <data name="Concluído" xml:space="preserve">
-    <value>Concluído</value>
+  <data name="Done" xml:space="preserve">
+    <value>Feito</value>
   </data>
-  <data name="Desinstalando" xml:space="preserve">
+  <data name="Uninstalling" xml:space="preserve">
     <value>Desinstalando</value>
   </data>
   <data name="UninstallTip" xml:space="preserve">
@@ -282,28 +282,28 @@
   <data name="Name" xml:space="preserve">
     <value>Nome</value>
   </data>
-  <data name="NomeSO" xml:space="preserve">
-    <value>NomeSO</value>
+  <data name="OSName" xml:space="preserve">
+    <value>Nome do SO</value>
   </data>
-  <data name="MóduloRAM" xml:space="preserve">
-    <value>MóduloRAM</value>
+  <data name="RAMModule" xml:space="preserve">
+    <value>Módulo de RAM</value>
   </data>
-  <data name="UsuárioRegistrado" xml:espaço="preserve">
+  <data name="RegisteredUser" xml:space="preserve">
     <value>Usuário Registrado</value>
   </data>
-  <data name="Tamanho" xml:espaço="preserve">
+  <data name="Size" xml:space="preserve">
     <value>Tamanho</value>
   </data>
-  <data name="DesignaçãoSocket" xml:espaço="preserve">
-    <value>DesignaçãoSocket</value>
+  <data name="SocketDesignation" xml:space="preserve">
+    <value>Designação de soquete</value>
   </data>
-  <data name="Velocidade" xml:espaço="preserve">
+  <data name="Speed" xml:space="preserve">
     <value>Velocidade</value>
   </data>
-  <data name="DiretórioSistema" xml:espaço="preserve">
-    <value>Diretório do Sistema</value>
+  <data name="SystemDirectory" xml:space="preserve">
+    <value>Diretório do sistema</value>
   </data>
-  <data name="Versão" xml:space="preserve">
+  <data name="Version" xml:space="preserve">
     <value>Versão</value>
   </data>
   <data name="VideoArchitecture" xml:space="preserve">
@@ -330,10 +330,10 @@
   <data name="TempDelSucc" xml:space="preserve">
     <value>Arquivos temporários excluídos com sucesso!</value>
   </data>
-  <data name="Disco" xml:space="preserve">
+  <data name="Disk" xml:space="preserve">
     <value>Disco</value>
   </data>
-  <data name="Modelo" xml:space="preserve">
+  <data name="Model" xml:space="preserve">
     <value>Modelo</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
@@ -546,9 +546,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Exclui atualizações de driver do Windows Update. Pode levar a drivers desatualizados com potenciais riscos de segurança ou problemas de compatibilidade. Use com cautela.</value>
   </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>Saiba mais sobre o que está sendo desabilitado</value>
-  </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>Otimizações avançadas</value>
   </data>
@@ -717,10 +714,10 @@
   <data name="UnavailableUpdate1" xml:space="preserve">
     <value>). Nenhuma atualização está disponível no momento.</value>
   </data>
-  <data name="Fechar" xml:space="preserve">
+  <data name="Close" xml:space="preserve">
     <value>Fechar</value>
   </data>
-  <data name="Atualizar" xml:space="preserve">
+  <data name="Update" xml:space="preserve">
     <value>Atualizar</value>
   </data>
   <data name="Shell_Support.Content" xml:space="preserve">
@@ -1128,9 +1125,6 @@ Gostaria de criar um ponto de restauração do sistema antes de prosseguir?</val
   <data name="RestorePointCreationError" xml:space="preserve">
     <value>Falha ao criar um ponto de restauração</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Reverter alterações</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Reverter todas as alterações</value>
   </data>
@@ -1170,7 +1164,7 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="ScheduleLater" xml:space="preserve">
     <value>Agendar para mais tarde</value>
   </data>
-  <data name="Cancelar" xml:space="preserve">
+  <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
   <data name="ScheduledLater" xml:space="preserve">
@@ -1263,7 +1257,8 @@ Tem certeza de que deseja continuar?</value>
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
     <value>Pesquisar aplicativos...</value>
   </data>
-  <data name="Feature_BackgroundApps.Header" xml:space="preserve">    <value>Desabilitar aplicativos em segundo plano</value>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>Desabilitar aplicativos em segundo plano</value>
   </data>
   <data name="Feature_BackgroundApps.Description" xml:space="preserve">
     <value>Evita que os aplicativos sejam executados em segundo plano, resultando em melhor desempenho em alguns casos.</value>
@@ -1298,8 +1293,8 @@ Tem certeza de que deseja continuar?</value>
   <data name="Compressing" xml:space="preserve">
     <value>Comprimindo binários do sistema...</value>
   </data>
-  <data name="Descomprimindo" xml:space="preserve">
-    <value>Descomprimindo binários do sistema...</value>
+  <data name="Decompressing" xml:space="preserve">
+    <value>Descomprimindo</value>
   </data>
   <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
     <value>Verificar compactação</value>
@@ -1307,7 +1302,7 @@ Tem certeza de que deseja continuar?</value>
   <data name="Compress" xml:space="preserve">
     <value>Compactar</value>
   </data>
-  <data name="Descompress" xml:space="preserve">
+  <data name="Decompress" xml:space="preserve">
     <value>Descomprimir</value>
   </data>
   <data name="SystemCompressionTitle" xml:space="preserve">
@@ -1353,6 +1348,21 @@ Tem certeza de que deseja continuar?</value>
     <value>Desativar serviços desnecessários</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-      <value>Otimize o desempenho do sistema desativando serviços em segundo plano que não são essenciais para a operação do dispositivo. Isso ajuda a liberar recursos do sistema e melhora a eficiência geral.</value>
+    <value>Otimize o desempenho do sistema desativando serviços em segundo plano que não são essenciais para a operação do dispositivo. Isso ajuda a liberar recursos do sistema e melhora a eficiência geral.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Reverter alterações</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value />
   </data>
 </root>

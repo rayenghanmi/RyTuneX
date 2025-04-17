@@ -168,10 +168,10 @@
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
     <value>Disinstalla App selezionate</value>
   </data>
-  <data name="Fatto" xml:space="preserve">
+  <data name="Done" xml:space="preserve">
     <value>Fatto</value>
   </data>
-  <data name="Disinstallazione" xml:space="preserve">
+  <data name="Uninstalling" xml:space="preserve">
     <value>Disinstallazione</value>
   </data>
   <data name="UninstallTip" xml:space="preserve">
@@ -237,8 +237,8 @@
   <data name="Caption" xml:space="preserve">
     <value>Caption</value>
   </data>
-  <data name="Core" xml:space="preserve">
-    <value>Core</value>
+  <data name="Cores" xml:space="preserve">
+    <value>Nuclei</value>
   </data>
   <data name="DeviceLocator" xml:space="preserve">
     <value>Localizzatore dispositivo</value>
@@ -273,34 +273,34 @@
   <data name="LogicalProcessors" xml:space="preserve">
     <value>Processori logici</value>
   </data>
-  <data name="Produttore" xml:space="preserve">
+  <data name="Manufacturer" xml:space="preserve">
     <value>Produttore</value>
   </data>
   <data name="MaxSpeed" xml:space="preserve">
     <value>Velocità massima</value>
   </data>
-  <data name="Nome" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Nome</value>
   </data>
-  <data name="NomeOS" xml:space="preserve">
-    <value>Nome OS</value>
+  <data name="OSName" xml:space="preserve">
+    <value>OS Nome</value>
   </data>
-  <data name="ModuloRAM" xml:space="preserve">
+  <data name="RAMModule" xml:space="preserve">
     <value>Modulo RAM</value>
   </data>
-  <data name="UtenteRegistrato" xml:space="preserve">
-    <value>Utente Registrato</value>
+  <data name="RegisteredUser" xml:space="preserve">
+    <value>Utente registrato</value>
   </data>
-  <data name="Dimensione" xml:space="preserve">
-    <value>Dimensione</value>
+  <data name="Size" xml:space="preserve">
+    <value>Misurare</value>
   </data>
-  <data name="DesignazioneSocket" xml:space="preserve">
-    <value>DesignazioneSocket</value>
+  <data name="SocketDesignation" xml:space="preserve">
+    <value>Designazione della presa</value>
   </data>
-  <data name="Velocità" xml:space="preserve">
+  <data name="Speed" xml:space="preserve">
     <value>Velocità</value>
   </data>
-  <data name="DirectorySistema" xml:space="preserve">
+  <data name="SystemDirectory" xml:space="preserve">
     <value>Directory di sistema</value>
   </data>
   <data name="Version" xml:space="preserve">
@@ -330,10 +330,10 @@
   <data name="TempDelSucc" xml:space="preserve">
     <value>File temporanei eliminati correttamente!</value>
   </data>
-  <data name="Disco" xml:space="preserve">
+  <data name="Disk" xml:space="preserve">
     <value>Disco</value>
   </data>
-  <data name="Modello" xml:space="preserve">
+  <data name="Model" xml:space="preserve">
     <value>Modello</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
@@ -546,9 +546,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Esclude gli aggiornamenti dei driver da Windows Update. Potrebbe causare driver obsoleti con potenziali rischi per la sicurezza o problemi di compatibilità. Usare con cautela.</value>
   </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>Scopri di più su cosa è stato disabilitato</value>
-  </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>Ottimizzazioni avanzate</value>
   </data>
@@ -717,11 +714,11 @@
   <data name="UnavailableUpdate1" xml:space="preserve">
     <value>). Al momento non sono disponibili aggiornamenti.</value>
   </data>
-  <data name="Chiudi" xml:space="preserve">
-    <value>Chiudi</value>
+  <data name="Close" xml:space="preserve">
+    <value>Vicino</value>
   </data>
-  <data name="Aggiorna" xml:space="preserve">
-    <value>Aggiorna</value>
+  <data name="Update" xml:space="preserve">
+    <value>Aggiornamento</value>
   </data>
   <data name="Shell_Support.Content" xml:space="preserve">
     <value>Supporto</value>
@@ -762,11 +759,11 @@
   <data name="HomePage_Performance.Text" xml:space="preserve">
     <value>Prestazioni</value>
   </data>
-  <data name="Abilitato" xml:space="preserve">
-    <value>Abilitato</value>
+  <data name="Enabled" xml:space="preserve">
+    <value>Abilitata</value>
   </data>
-  <data name="Disabilitato" xml:space="preserve">
-    <value>Disabilitato</value>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabili</value>
   </data>
   <data name="SecurityPage_Status.Text" xml:space="preserve">
     <value>Stato di sicurezza</value>
@@ -1043,7 +1040,8 @@
   </data>
   <data name="Feature_LinkResolve.Description" xml:space="preserve">
     <value>Disabilita la risoluzione dei link interrotti in file e cartelle. Disabilitandolo puoi velocizzare le operazioni, ma potresti lasciare i link obsoleti irrisolti.</value>
-  </data>  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
+  </data>
+  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
     <value>Riduci timeout servizio</value>
   </data>
   <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
@@ -1127,9 +1125,6 @@ Vuoi creare un punto di ripristino del sistema prima di procedere?</value>
   <data name="RestorePointCreationError" xml:space="preserve">
     <value>Impossibile creare un punto di ripristino</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Annulla modifiche</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Annulla tutte le modifiche</value>
   </data>
@@ -1169,8 +1164,8 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="ScheduleLater" xml:space="preserve">
     <value>Pianifica per dopo</value>
   </data>
-  <data name="Annulla" xml:space="preserve">
-    <value>Annulla</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancellare</value>
   </data>
   <data name="ScheduledLater" xml:space="preserve">
     <value>Pianificato per il prossimo riavvio</value>
@@ -1298,7 +1293,7 @@ Vuoi continuare?</value>
   <data name="Compressing" xml:space="preserve">
     <value>Compressione dei file binari di sistema...</value>
   </data>
-  <data name="DeCompressing" xml:space="preserve">
+  <data name="Decompressing" xml:space="preserve">
     <value>Decompressione dei file binari di sistema...</value>
   </data>
   <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
@@ -1353,6 +1348,21 @@ Vuoi continuare?</value>
     <value>Disabilita i servizi non necessari</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-      <value>Ottimizza le prestazioni del sistema disabilitando i servizi in background che non sono essenziali per il funzionamento del dispositivo. Questo aiuta a liberare risorse di sistema e a migliorare l'efficienza complessiva.</value>
+    <value>Ottimizza le prestazioni del sistema disabilitando i servizi in background che non sono essenziali per il funzionamento del dispositivo. Questo aiuta a liberare risorse di sistema e a migliorare l'efficienza complessiva.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Annulla modifiche</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value />
   </data>
 </root>

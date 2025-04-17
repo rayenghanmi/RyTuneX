@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -515,7 +515,6 @@
   </data>
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
     <value>Kod yazma konusunda yardım için Windows'daki CoPilot AI özelliğini devre dışı bırakır. Geliştiriciler için önerilmez</value>
-    <comment></comment>
   </data>
   <data name="OptimizeBasic.Text" xml:space="preserve">
     <value>Temel Optimizasyonlar</value>
@@ -546,9 +545,6 @@
   </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Sürücü güncelleştirmelerini Windows Update'ten hariç tutar. Olası güvenlik riskleri veya uyumluluk sorunları olan güncel olmayan sürücülere yol açabilir. Dikkatli kullanın.</value>
-  </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>Nelerin devre dışı bırakıldığı hakkında daha fazla bilgi edinin</value>
   </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>Gelişmiş Optimizasyonlar</value>
@@ -1129,9 +1125,6 @@ Devam etmeden önce bir sistem geri yükleme noktası oluşturmak ister misiniz?
   <data name="RestorePointCreationError" xml:space="preserve">
     <value>Bir geri yükleme noktası oluşturulamadı</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Değişiklikleri geri al</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Tüm değişiklikleri geri al</value>
   </data>
@@ -1355,6 +1348,21 @@ Devam etmek istediğine emin misin?</value>
     <value>Gereksiz Hizmetleri Devre Dışı Bırak</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-      <value>Cihazınızın çalışması için gerekli olmayan arka plan hizmetlerini devre dışı bırakarak sistem performansını optimize edin. Bu, sistem kaynaklarını serbest bırakmaya ve genel verimliliği artırmaya yardımcı olur.</value>
+    <value>Cihazınızın çalışması için gerekli olmayan arka plan hizmetlerini devre dışı bırakarak sistem performansını optimize edin. Bu, sistem kaynaklarını serbest bırakmaya ve genel verimliliği artırmaya yardımcı olur.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Değişiklikleri geri al</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value />
   </data>
 </root>

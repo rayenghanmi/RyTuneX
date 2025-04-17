@@ -546,9 +546,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>يُستبعد تحديثات السائقين من تحديث ويندوز. قد يؤدي إلى سائقين قديمين مع مخاطر أمان محتملة أو مشكلات التوافق. استخدم بحذر</value>
   </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>تعرف على المزيد عما يتم تعطيله</value>
-  </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>التحسينات المتقدمة</value>
   </data>
@@ -636,6 +633,9 @@
   <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
     <value>تغيير اللغة</value>
   </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>الشبكات</value>
+  </data>
   <data name="Feature_EnableEndTask.Description" xml:space="preserve">
     <value>تمكين خيار عند النقر بزر الماوس الأيمن على رموز التطبيقات في شريط المهام، مما يتيح لك إنهاء التطبيقات التي لا تستجيب بسرعة دون الحاجة إلى فتح مدير المهام.</value>
   </data>
@@ -677,9 +677,6 @@
   </data>
   <data name="NotSet" xml:space="preserve">
     <value>لم يتم التعيين</value>
-  </data>
-  <data name="Shell_Network.Content" xml:space="preserve">
-    <value>الشبكات</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
     <value>(فلتر للبالغين)</value>
@@ -726,11 +723,11 @@
   <data name="Shell_Support.Content" xml:space="preserve">
     <value>الدعم</value>
   </data>
-  <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
-    <value>البطارية</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>الشبكة</value>
+  </data>
+  <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
+    <value>البطارية</value>
   </data>
   <data name="MACAddress" xml:space="preserve">
     <value>عنوان ماك</value>
@@ -762,29 +759,35 @@
   <data name="HomePage_Performance.Text" xml:space="preserve">
     <value>الأداء</value>
   </data>
-  <data name="SecurityPage_Details.Text" xml:space="preserve">
-    <value>التفاصيل</value>
+  <data name="Enabled" xml:space="preserve">
+    <value>مفعل</value>
   </data>
-  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
-    <value>حماية الجدار الناري والشبكة</value>
-  </data>
-  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>الحماية في الوقت الحقيقي</value>
-  </data>
-  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
-    <value>الشاشة الذكية (SmartScreen)</value>
+  <data name="Disabled" xml:space="preserve">
+    <value>معطل</value>
   </data>
   <data name="SecurityPage_Status.Text" xml:space="preserve">
     <value>حالة الأمان</value>
   </data>
-  <data name="SecurityPage_UAC.Text" xml:space="preserve">
-    <value>التحكم في حساب المستخدم (UAC)</value>
-  </data>
   <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
     <value>الحماية من الفيروسات والتهديدات</value>
   </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>حماية الجدار الناري والشبكة</value>
+  </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
     <value>تحديثات ويندوز</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>الشاشة الذكية (SmartScreen)</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>الحماية في الوقت الحقيقي</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>التحكم في حساب المستخدم (UAC)</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>التفاصيل</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
     <value>اصلاح</value>
@@ -1086,14 +1089,11 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>يُحدد حدًا للعمليات غير الأفضل. تمكينه يمكن أن يعطي الأولوية للأداء ولكنه قد يقلل من مرونة النظام في بعض الحالات.</value>
   </data>
-  <data name="Enabled" xml:space="preserve">
-    <value>مفعل</value>
-  </data>
-  <data name="Disabled" xml:space="preserve">
-    <value>معطل</value>
-  </data>
   <data name="LoadingWindowText.Text" xml:space="preserve">
     <value>جاري التحميل...</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>معلومات الجهاز</value>
   </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>تفعيل قائمة السياق الكلاسيكية</value>
@@ -1124,9 +1124,6 @@
   </data>
   <data name="RestorePointCreationError" xml:space="preserve">
     <value>فشل في إنشاء نقطة الاستعادة</value>
-  </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>تراجع عن التغييرات</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>التراجع عن كل التغييرات</value>
@@ -1238,9 +1235,6 @@
 
 
 هل أنت متأكد أنك تريد المتابعة؟</value>
-  </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>معلومات الجهاز</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>إعدادات الإعلانات</value>
@@ -1354,6 +1348,21 @@
     <value>تعطيل الخدمات غير الضرورية</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-      <value>قم بتحسين أداء النظام عن طريق تعطيل الخدمات الخلفية التي ليست ضرورية لتشغيل جهازك. يساعد هذا في تحرير موارد النظام وتحسين الكفاءة العامة.</value>
+    <value>قم بتحسين أداء النظام عن طريق تعطيل الخدمات الخلفية التي ليست ضرورية لتشغيل جهازك. يساعد هذا في تحرير موارد النظام وتحسين الكفاءة العامة.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>تراجع عن التغييرات</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value />
   </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System.Management;
+using System.Runtime.InteropServices;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using RyTuneX.Helpers;
@@ -280,15 +281,10 @@ public sealed partial class SystemInfoPage : Page
 
     private async void SelectPathButton_Click(object sender, RoutedEventArgs e)
     {
-        var folderPicker = new FolderPicker
+        var folderPicker = new DevWinUI.FolderPicker(WindowNative.GetWindowHandle(App.MainWindow))
         {
             SuggestedStartLocation = PickerLocationId.Desktop
         };
-        folderPicker.FileTypeFilter.Add("*");
-
-        // Get the current window's HWND
-        var hwnd = WindowNative.GetWindowHandle(App.MainWindow);
-        InitializeWithWindow.Initialize(folderPicker, hwnd);
 
         var folder = await folderPicker.PickSingleFolderAsync();
         if (folder != null)

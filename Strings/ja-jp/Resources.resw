@@ -546,9 +546,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Windowsアップデートからドライバーの更新を除外します. セキュリティリスクや互換性の問題が発生する可能性があるため、注意して使用してください. </value>
   </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>無効にされる内容について詳しく知る</value>
-  </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>高度な最適化</value>
   </data>
@@ -762,29 +759,35 @@
   <data name="HomePage_Performance.Text" xml:space="preserve">
     <value>パフォーマンス</value>
   </data>
-  <data name="SecurityPage_Details.Text" xml:space="preserve">
-    <value>詳細</value>
+  <data name="Enabled" xml:space="preserve">
+    <value>有効</value>
   </data>
-  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
-    <value>ファイアウォールとネットワークの保護</value>
-  </data>
-  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>リアルタイム保護</value>
-  </data>
-  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
-    <value>SmartScreen</value>
+  <data name="Disabled" xml:space="preserve">
+    <value>無効</value>
   </data>
   <data name="SecurityPage_Status.Text" xml:space="preserve">
     <value>セキュリティの状態</value>
   </data>
-  <data name="SecurityPage_UAC.Text" xml:space="preserve">
-    <value>ユーザー アカウント制御 (UAC)</value>
-  </data>
   <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
     <value>ウイルスと脅威の防御</value>
   </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>ファイアウォールとネットワークの保護</value>
+  </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
     <value>Windows Update</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>リアルタイム保護</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>ユーザー アカウント制御 (UAC)</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>詳細</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
     <value>修理</value>
@@ -1086,14 +1089,11 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>最適化でないプロセスに制限を設定します. これによりパフォーマンスが優先されますが、場合によってはシステムの柔軟性が低下することがあります. </value>
   </data>
-  <data name="Enabled" xml:space="preserve">
-    <value>有効</value>
-  </data>
-  <data name="Disabled" xml:space="preserve">
-    <value>無効</value>
-  </data>
   <data name="LoadingWindowText.Text" xml:space="preserve">
     <value>読み込み中...</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>デバイス情報</value>
   </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>クラシックコンテキストメニューを有効にする</value>
@@ -1124,9 +1124,6 @@
   </data>
   <data name="RestorePointCreationError" xml:space="preserve">
     <value>復元ポイントの作成に失敗しました</value>
-  </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>変更を元に戻す</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>すべての変更を元に戻す</value>
@@ -1238,9 +1235,6 @@
 
 
 続行してもよろしいですか？</value>
-  </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>デバイス情報</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>広告設定</value>
@@ -1354,6 +1348,21 @@
     <value>不要なサービスを無効にする</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-      <value>デバイスの動作に不要なバックグラウンドサービスを無効にすることで、システムパフォーマンスを最適化します。これにより、システムリソースが解放され、全体的な効率が向上します。</value>
+    <value>デバイスの動作に不要なバックグラウンドサービスを無効にすることで、システムパフォーマンスを最適化します。これにより、システムリソースが解放され、全体的な効率が向上します。</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>変更を元に戻す</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value />
   </data>
 </root>
