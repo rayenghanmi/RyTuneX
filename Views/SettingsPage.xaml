@@ -83,7 +83,7 @@
                     HeaderIcon="{ui:FontIcon Glyph=&#xE174;}">
                     <controls:WrapPanel Orientation="Horizontal" HorizontalSpacing="8">
                         <Button x:Uid="SettingsPageImportButton" x:Name="ImportButton" Click="ImportButton_Click"/>
-                        <Button x:Uid="SettingsPageExportButton" x:Name="ExportButton"/>
+                        <Button x:Uid="SettingsPageExportButton" x:Name="ExportButton" Click="ExportButton_Click"/>
                     </controls:WrapPanel>
                 </controls:SettingsCard>
 

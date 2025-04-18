@@ -489,21 +489,27 @@ public sealed partial class SettingsPage : Page
             }
         }
     }
-    
+
+    private async void ExportButton_Click(object sender, RoutedEventArgs e)
+    {
+        var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        await OptimizationOptions.StartInCmd($"REG EXPORT HKLM\\SOFTWARE\\RyTuneX\\Optimizations \"{path}\\RyTuneX_Backup_{DateTime.Now:yyyy-MM-dd}.reg\"");
+        App.ShowNotification("Settings", $"Exported To:\n{path}", InfoBarSeverity.Success, 5000);
+    }
+
     private async void ImportButton_Click(object sender, RoutedEventArgs e)
     {
         var picker = new DevWinUI.FilePicker(WindowNative.GetWindowHandle(App.MainWindow));
         picker.FileTypeChoices.Add("Reg File", ["*.reg"]);
         picker.DefaultFileExtension = "*.reg";
         picker.ShowAllFilesOption = false;
-        picker.SuggestedStartLocation = PickerLocationId.Downloads;
+        picker.SuggestedStartLocation = PickerLocationId.Desktop;
 
         var file = await picker.PickSingleFileAsync();
         if (file != null)
         {
-            Debug.WriteLine(file.Path);
+            var regeditProcess = Process.Start("regedit.exe", $"/s {file.Path}");
+            regeditProcess.WaitForExit();
         }
-
     }
-
 }

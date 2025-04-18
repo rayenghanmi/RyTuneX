@@ -1,59 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Text;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
+using RyTuneX;
+using RyTuneX.Helpers;
 using Windows.Storage;
 
 internal class LogHelper
 {
     private static readonly SemaphoreSlim LogSemaphore = new(1, 1);
-
-    public static async Task ShowErrorMessageAndLog(Exception ex, XamlRoot xamlRoot)
-    {
-        var errorMessage = $"{ex.Message}\nStack Trace: {ex.StackTrace}";
-
-        await LogError(errorMessage);
-
-        await InitializeErrorMessage(errorMessage, xamlRoot);
-    }
-
-    private static async Task InitializeErrorMessage(string errorMessage, XamlRoot xamlRoot)
-    {
-        await LogSemaphore.WaitAsync();
-        try
-        {
-            var errorDialog = new ContentDialog
-            {
-                Title = "Error",
-                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                Content = errorMessage,
-                CloseButtonText = "Close",
-                PrimaryButtonText = "Open Logs File",
-                XamlRoot = xamlRoot
-            };
-
-            errorDialog.PrimaryButtonClick += async (sender, args) =>
-            {
-                var tempFolder = ApplicationData.Current.TemporaryFolder;
-                var logFile = await tempFolder.GetFileAsync($"ErrorLogs_{DateTime.Now:yyyy-MM-dd}.txt");
-                if (logFile != null)
-                {
-                    var options = new Windows.System.LauncherOptions
-                    {
-                        DisplayApplicationPicker = false
-                    };
-                    await Windows.System.Launcher.LaunchFileAsync(logFile, options);
-                }
-            };
-            await errorDialog.ShowAsync();
-        }
-        finally
-        {
-            LogSemaphore.Release();
-        }
-    }
 
     private static async Task LogToFile(string message, string fileName)
     {
@@ -84,5 +38,9 @@ internal class LogHelper
     }
 
     public static Task Log(string message) => LogToFile($"[DEBUG] {message}", "Logs");
-    public static Task LogError(string message) => LogToFile($"[ERROR] {message}", "Logs");
+    public static async Task LogError(string message)
+    {
+        await LogToFile($"[ERROR] {message}", "Logs");
+        App.ShowNotification("UnexpectedError".GetLocalized(), message, InfoBarSeverity.Error, 5000);
+    }
 }

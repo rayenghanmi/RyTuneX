@@ -10,7 +10,7 @@ namespace RyTuneX.Views;
 
 public sealed partial class OptimizeSystemPage : Page
 {
-    private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\OptimizeSystemPage";
+    private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
 
     public OptimizeSystemPage()
     {
@@ -30,8 +30,8 @@ public sealed partial class OptimizeSystemPage : Page
                 if (toggleSwitch.Tag is string tagName)
                 {
                     // Retrieve the state from the registry
-                    using var key = Registry.CurrentUser.OpenSubKey(RegistryBaseKey);
-                    Debug.WriteLine(key);
+                    using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64)
+                                       .OpenSubKey(RegistryBaseKey);
                     if (key != null && key.GetValue(tagName) is int state)
                     {
                         toggleSwitch.IsOn = state == 1;
@@ -83,15 +83,16 @@ public sealed partial class OptimizeSystemPage : Page
             var toggleSwitch = (ToggleSwitch)sender;
             Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
 
-            // Save the state to the registry
-            using var key = Registry.CurrentUser.CreateSubKey(RegistryBaseKey);
+            // Save the state to the 64-bit registry
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64)
+                                       .CreateSubKey(RegistryBaseKey);
             key?.SetValue((string)toggleSwitch.Tag, toggleSwitch.IsOn ? 1 : 0, RegistryValueKind.DWord);
 
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }
         catch (Exception ex)
         {
-            await LogHelper.ShowErrorMessageAndLog(ex, XamlRoot);
+            await LogHelper.LogError(ex.Message);
         }
     }
     private async Task<string> StartTask(string command)
