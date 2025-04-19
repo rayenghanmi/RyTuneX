@@ -1365,4 +1365,10 @@ Are you sure you want to continue?</value>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
     <value>Export your current optimizations or import them for an easier and automated optimization</value>
   </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Settings imported and applied successfully</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Settings exported successfully to:</value>
+  </data>
 </root>

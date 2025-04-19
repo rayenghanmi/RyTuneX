@@ -1351,15 +1351,21 @@
     <value>Отменить изменения</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>Импорт</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>Экспорт</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>Экспорт/импорт оптимизаций</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>Экспортируйте текущие оптимизации или импортируйте их для более простой и автоматизированной оптимизации.</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Настройки импортированы и успешно применены.</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Настройки успешно экспортированы в:</value>
   </data>
 </root>

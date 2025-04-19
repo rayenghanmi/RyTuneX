@@ -1354,15 +1354,21 @@ Vuoi continuare?</value>
     <value>Annulla modifiche</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>Importare</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>Esportare</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>Esporta/Importa le ottimizzazioni</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>Esporta le tue ottimizzazioni attuali o importale per un'ottimizzazione più semplice e automatizzata</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Impostazioni importate e applicate correttamente</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Impostazioni esportate correttamente in:</value>
   </data>
 </root>

@@ -1354,15 +1354,21 @@
     <value>変更を元に戻す</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>輸入</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>輸出</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>最適化のエクスポート/インポート</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>現在の最適化をエクスポートするか、インポートしてより簡単かつ自動化された最適化を実現します。</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>設定が正常にインポートされ、適用されました</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>設定は正常にエクスポートされました:</value>
   </data>
 </root>

@@ -1354,15 +1354,21 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
     <value>Änderungen rückgängig machen</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>Import</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>Export</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>Export-/Importoptimierungen</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>Exportieren Sie Ihre aktuellen Optimierungen oder importieren Sie sie für eine einfachere und automatisierte Optimierung</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Einstellungen erfolgreich importiert und angewendet</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Einstellungen erfolgreich exportiert nach:</value>
   </data>
 </root>

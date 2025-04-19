@@ -1354,15 +1354,21 @@
     <value>변경 사항 되돌리기</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>수입</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>내보내다</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>최적화 내보내기/가져오기</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>현재 최적화를 내보내거나 더 쉽고 자동화된 최적화를 위해 가져오십시오.</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>설정을 성공적으로 가져와서 적용했습니다.</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>설정이 다음으로 성공적으로 내보내졌습니다:</value>
   </data>
 </root>

@@ -1354,15 +1354,21 @@ Devam etmek istediğine emin misin?</value>
     <value>Değişiklikleri geri al</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>İçe aktarmak</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>İhracat</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>Optimizasyonları Dışa Aktar/İçe Aktar</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>Mevcut optimizasyonlarınızı dışa aktarın veya daha kolay ve otomatik optimizasyon için içe aktarın</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Ayarlar başarıyla içe aktarıldı ve uygulandı</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Ayarlar başarıyla şuraya aktarıldı:</value>
   </data>
 </root>

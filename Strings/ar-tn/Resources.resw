@@ -1354,15 +1354,21 @@
     <value>تراجع عن التغييرات</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>استيراد</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>تصدير</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>تصدير/استيراد التحسينات</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>قم بتصدير تحسيناتك الحالية أو استيرادها لتحسين أسهل وأكثر أتمتة</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>تم استيراد الإعدادات وتطبيقها بنجاح</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>تم تصدير الإعدادات بنجاح إلى:</value>
   </data>
 </root>

@@ -1354,15 +1354,21 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
     <value>Annuler les modifications</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>Importer</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>Exporter</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>Exporter/Importer les optimisations</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>Exportez vos optimisations actuelles ou importez-les pour une optimisation plus simple et automatisée</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Paramètres importés et appliqués avec succès</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Paramètres exportés avec succès vers :</value>
   </data>
 </root>

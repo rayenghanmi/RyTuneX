@@ -1354,15 +1354,21 @@
     <value>还原更改</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>进口</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>出口</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>导出/导入优化</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>导出您当前的优化或导入它们以实现更轻松、更自动化的优化</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>已成功导入并应用设置</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>设置已成功导出至：</value>
   </data>
 </root>

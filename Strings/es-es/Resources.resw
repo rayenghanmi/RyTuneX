@@ -1354,15 +1354,21 @@ Verifica si hay problemas de memoria en tu computadora</value>
     <value>Revertir cambios</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>Importar</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>Exportar</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>Exportar/Importar las optimizaciones</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>Exporte sus optimizaciones actuales o impórtelas para una optimización más fácil y automatizada</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Configuraciones importadas y aplicadas exitosamente</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Configuración exportada exitosamente a:</value>
   </data>
 </root>

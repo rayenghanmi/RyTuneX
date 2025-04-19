@@ -1354,15 +1354,21 @@ Tem certeza de que deseja continuar?</value>
     <value>Reverter alterações</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>Importar</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>Exportar</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>Exportar/Importar as Otimizações</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>Exporte suas otimizações atuais ou importe-as para uma otimização mais fácil e automatizada</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Configurações importadas e aplicadas com sucesso</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Configurações exportadas com sucesso para:</value>
   </data>
 </root>

@@ -1349,15 +1349,21 @@
     <value>還原更改</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value />
+    <value>進口</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value />
+    <value>出口</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value />
+    <value>匯出/導入最佳化</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value />
+    <value>匯出您目前的最佳化或匯入它們以實現更輕鬆、更自動化的最佳化</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>已成功導入並套用設定</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>設定已成功匯出至：</value>
   </data>
 </root>

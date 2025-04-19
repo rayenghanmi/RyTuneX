@@ -473,10 +473,20 @@ public sealed partial class SettingsPage : Page
 
                 // Execute the revert operation
                 await OptimizationOptions.RevertAllChanges();
+                await LogHelper.Log("Reverted all changes.");
 
                 // Clear all local settings
                 var localSettings = ApplicationData.Current.LocalSettings;
                 localSettings.Values.Clear();
+                await LogHelper.Log("Cleared all local settings.");
+
+                // Delete all registry keys
+                using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                            ? RegistryView.Registry64
+                            : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX");
+                key.DeleteSubKeyTree(@"SOFTWARE\RyTuneX", throwOnMissingSubKey: false);
+                await LogHelper.Log("Deleted all registry keys.");
 
                 // Wait for a small delay for the operations to complete
                 await Task.Delay(1000);
@@ -495,7 +505,8 @@ public sealed partial class SettingsPage : Page
     {
         var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         await OptimizationOptions.StartInCmd($"REG EXPORT HKLM\\SOFTWARE\\RyTuneX\\Optimizations \"{path}\\RyTuneX_Backup_{DateTime.Now:yyyy-MM-dd}.reg\"");
-        App.ShowNotification("Settings", $"Exported To:\n{path}", InfoBarSeverity.Success, 5000);
+        await LogHelper.Log($"Exported registry settings to {path}\\RyTuneX_Backup_{DateTime.Now:yyyy-MM-dd}.reg");
+        App.ShowNotification(String.Empty, "SettingsExported".GetLocalized() + $"\n{path}", InfoBarSeverity.Success, 5000);
     }
 
     private async void ImportButton_Click(object sender, RoutedEventArgs e)
@@ -511,6 +522,7 @@ public sealed partial class SettingsPage : Page
         {
             // Import the registry file
             await OptimizationOptions.StartInCmd($"regedit.exe /s {file.Path}");
+            await LogHelper.Log($"Imported registry settings from {file.Path}");
         }
 
         // Apply all the optimizations present in the registry key
@@ -536,8 +548,11 @@ public sealed partial class SettingsPage : Page
                     };
 
                     await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
+                    await LogHelper.Log($"Applied optimization: {valueName}");
                 }
             }
         }
+        await LogHelper.Log("Applied all optimizations from the registry key.");
+        App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
     }
 }
