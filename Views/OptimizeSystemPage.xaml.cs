@@ -29,9 +29,11 @@ public sealed partial class OptimizeSystemPage : Page
             {
                 if (toggleSwitch.Tag is string tagName)
                 {
-                    // Retrieve the state from the registry
-                    using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64)
-                                       .OpenSubKey(RegistryBaseKey);
+                    // Retrieve the state from the 64-bit registry with 32-bit app
+                    using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                            ? RegistryView.Registry64
+                            : RegistryView.Default).CreateSubKey(RegistryBaseKey);
                     if (key != null && key.GetValue(tagName) is int state)
                     {
                         toggleSwitch.IsOn = state == 1;
@@ -83,9 +85,11 @@ public sealed partial class OptimizeSystemPage : Page
             var toggleSwitch = (ToggleSwitch)sender;
             Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
 
-            // Save the state to the 64-bit registry
-            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64)
-                                       .CreateSubKey(RegistryBaseKey);
+            // Save the state to the 64-bit registry with 32-bit app
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default).CreateSubKey(RegistryBaseKey);
             key?.SetValue((string)toggleSwitch.Tag, toggleSwitch.IsOn ? 1 : 0, RegistryValueKind.DWord);
 
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);

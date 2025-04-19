@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
@@ -508,8 +509,35 @@ public sealed partial class SettingsPage : Page
         var file = await picker.PickSingleFileAsync();
         if (file != null)
         {
-            var regeditProcess = Process.Start("regedit.exe", $"/s {file.Path}");
-            regeditProcess.WaitForExit();
+            // Import the registry file
+            await OptimizationOptions.StartInCmd($"regedit.exe /s {file.Path}");
+        }
+
+        // Apply all the optimizations present in the registry key
+        using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
+
+        if (key != null)
+        {
+            foreach (var valueName in key.GetValueNames())
+            {
+                var value = key.GetValue(valueName);
+                var kind = key.GetValueKind(valueName);
+
+                if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
+                {
+                    // Simulate the toggle being on
+                    var simulatedToggle = new ToggleSwitch
+                    {
+                        Tag = valueName,
+                        IsOn = true
+                    };
+
+                    await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
+                }
+            }
         }
     }
 }
