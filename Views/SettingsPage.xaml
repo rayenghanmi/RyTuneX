@@ -41,6 +41,8 @@
                         <ComboBoxItem Content="Italiano (Italia)" Tag="it-it"/>
                         <ComboBoxItem Content="Türkçe (Türkiye)" Tag="tr-tr"/>
                     </ComboBox>
+                        <ComboBoxItem Content="Tiếng Việt (Việt Nam)" Tag="vi-vn"/>
+                    </ComboBox>
                 </controls:SettingsCard>
 
                 <TextBlock x:Uid="Settings_Theme" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
