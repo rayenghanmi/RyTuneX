@@ -288,7 +288,7 @@ public sealed partial class DebloatSystemPage : Page
                     if (!string.IsNullOrEmpty(errorAppxPackage))
                     {
                         await LogHelper.LogError(errorAppxPackage);
-                        throw new Exception(errorAppxPackage);
+                        throw new Exception($"Failed to remove Appx package for {appName}: {errorAppxPackage}");
                     }
                 }
             }
@@ -319,7 +319,6 @@ public sealed partial class DebloatSystemPage : Page
                     if (!string.IsNullOrEmpty(error))
                     {
                         await LogHelper.LogError(error);
-                        throw new Exception(error);
                     }
                 }
             }
@@ -373,7 +372,7 @@ public sealed partial class DebloatSystemPage : Page
 
                 if (string.IsNullOrEmpty(uninstallString))
                 {
-                    throw new Exception($"Uninstall string for {appName} not found in registry.");
+                    await LogHelper.LogError($"Uninstall string for {appName} not found in registry.");
                 }
 
                 // If the uninstall string contains spaces, ensure it's quoted properly
@@ -402,13 +401,11 @@ public sealed partial class DebloatSystemPage : Page
                 if (!string.IsNullOrEmpty(error))
                 {
                     await LogHelper.LogError(error);
-                    throw new Exception(error);
                 }
 
                 if (process.ExitCode != 0)
                 {
                     await LogHelper.LogError($"Uninstallation failed with exit code: {process.ExitCode}");
-                    throw new Exception($"Uninstallation failed with exit code: {process.ExitCode}");
                 }
 
                 await LogHelper.Log($"Successfully uninstalled {appName}");
@@ -416,7 +413,6 @@ public sealed partial class DebloatSystemPage : Page
             catch (Exception ex)
             {
                 await LogHelper.LogError($"Error uninstalling {appName}: {ex.Message}");
-                throw;
             }
         }
     }

@@ -91,11 +91,11 @@
                                 <RepositionThemeTransition IsStaggeringEnabled="False" />
                             </StackPanel.ChildrenTransitions>
                             <StackPanel Spacing="2" Orientation="Horizontal">
-                                <FontIcon Glyph="&#xE64C;" FontSize="12"/>
+                                <FontIcon Glyph="&#xE650;" FontSize="12"/>
                                 <TextBlock x:Name="networkUploadUsageText" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                             </StackPanel>
                             <StackPanel Spacing="2" Orientation="Horizontal">
-                                <FontIcon Glyph="&#xE64B;" FontSize="12"/>
+                                <FontIcon Glyph="&#xE64F;" FontSize="12"/>
                                 <TextBlock x:Name="networkDownloadUsageText" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                             </StackPanel>
                         </StackPanel>

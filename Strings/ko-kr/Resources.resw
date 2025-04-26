@@ -168,11 +168,11 @@
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
     <value>선택한 앱 제거</value>
   </data>
-  <data name="완료" xml:space="preserve">
+  <data name="Done" xml:space="preserve">
     <value>완료</value>
   </data>
-  <data name="제거 중" xml:space="preserve">
-    <value>제거</value>
+  <data name="Uninstalling" xml:space="preserve">
+    <value>제거 중</value>
   </data>
   <data name="UninstallTip" xml:space="preserve">
     <value>제거하려는 앱을 선택하고 제거를 누르세요.</value>
@@ -546,9 +546,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Windows 업데이트에서 드라이버 업데이트를 제외합니다. 잠재적인 보안 위험이나 호환성 문제가 있는 오래된 드라이버로 이어질 수 있습니다. 주의해서 사용하세요.</value>
   </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>비활성화되는 내용에 대해 자세히 알아보세요.</value>
-  </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>고급 최적화</value>
   </data>
@@ -684,8 +681,8 @@
   <data name="AdultFilter" xml:space="preserve">
     <value>(성인 필터)</value>
   </data>
-  <data name="자동" xml:space="preserve">
-    <value>자동</value>
+  <data name="Automatic" xml:space="preserve">
+    <value>오토매틱</value>
   </data>
   <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
     <value>지문이나 얼굴 인식과 같은 인증을 위한 생체 인식 사용을 비활성화합니다.</value>
@@ -1128,9 +1125,6 @@
   <data name="RestorePointCreationError" xml:space="preserve">
     <value>복원 지점을 만들지 못했습니다.</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>변경 사항 되돌리기</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>모든 변경 사항 되돌리기</value>
   </data>
@@ -1275,7 +1269,8 @@
   <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
     <value>Windows를 활성화할 필요 없이 전체 시스템에 다크 모드를 활성화합니다.</value>
   </data>
-  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">    <value>Windows 투명도 비활성화</value>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>Windows 투명도 비활성화</value>
   </data>
   <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
     <value>작업 표시줄 및 창과 같은 시스템 UI 요소에서 투명 효과를 비활성화하여 성능을 개선합니다.</value>
@@ -1353,6 +1348,27 @@
     <value>불필요한 서비스 비활성화</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-      <value>장치 작동에 필수적이지 않은 백그라운드 서비스를 비활성화하여 시스템 성능을 최적화합니다. 이를 통해 시스템 리소스를 확보하고 전반적인 효율성을 향상시킬 수 있습니다.</value>
+    <value>장치 작동에 필수적이지 않은 백그라운드 서비스를 비활성화하여 시스템 성능을 최적화합니다. 이를 통해 시스템 리소스를 확보하고 전반적인 효율성을 향상시킬 수 있습니다.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>변경 사항 되돌리기</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value>수입</value>
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value>내보내다</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value>최적화 내보내기/가져오기</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value>현재 최적화를 내보내거나 더 쉽고 자동화된 최적화를 위해 가져오십시오.</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>설정을 성공적으로 가져와서 적용했습니다.</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>설정이 다음으로 성공적으로 내보내졌습니다:</value>
   </data>
 </root>

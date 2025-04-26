@@ -22,32 +22,28 @@
     </Page.Resources>
     <ScrollView Padding="24,14,24,0">
         <StackPanel x:Name="ContentArea" Margin="0,0,0,38">
-            <StackPanel>
-                <StackPanel>
-                    <TextBlock x:Uid="Settings_Language" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-                    <controls:SettingsCard x:Name="LanguageSettingsCard"
+            <TextBlock x:Uid="Settings_Language" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+                <controls:SettingsCard x:Name="LanguageSettingsCard"
                                x:Uid="Settings_LanguageSettingsCard"
                                HeaderIcon="{ui:FontIcon Glyph=&#xF2B7;}">
-                        <ComboBox VerticalAlignment="Center" x:Name="LanguageComboBox" PlaceholderText="System Language" SelectionChanged="LanguageComboBox_SelectionChanged">
-                            <ComboBoxItem Content="English (US)" Tag="en-us"/>
-                            <ComboBoxItem Content="Français (France)" Tag="fr-fr"/>
-                            <ComboBoxItem Content="العربية (تونس)" Tag="ar-tn"/>
-                            <ComboBoxItem Content="Русский (Россия)" Tag="ru-ru"/>
-                            <ComboBoxItem Content="中文 (简体)" Tag="zh-hans"/>
-                            <ComboBoxItem Content="中文 (繁體)" Tag="zh-hant"/>
-                            <ComboBoxItem Content="Deutsch (Deutschland)" Tag="de"/>
-                            <ComboBoxItem Content="日本語 (日本)" Tag="ja-jp"/>
-                            <ComboBoxItem Content="Español (España)" Tag="es-es"/>
-                            <ComboBoxItem Content="한국어 (한국)" Tag="ko-kr"/>
-                            <ComboBoxItem Content="Português (Brasil)" Tag="pt-br"/>
-                            <ComboBoxItem Content="Italiano (Italia)" Tag="it-it"/>
-                            <ComboBoxItem Content="Türkçe (Türkiye)" Tag="tr-tr"/>
-                        </ComboBox>
-                    </controls:SettingsCard>
+                <ComboBox VerticalAlignment="Center" x:Name="LanguageComboBox" PlaceholderText="System Language" SelectionChanged="LanguageComboBox_SelectionChanged">
+                    <ComboBoxItem Content="English (US)" Tag="en-us"/>
+                    <ComboBoxItem Content="Français (France)" Tag="fr-fr"/>
+                    <ComboBoxItem Content="العربية (تونس)" Tag="ar-tn"/>
+                    <ComboBoxItem Content="Русский (Россия)" Tag="ru-ru"/>
+                    <ComboBoxItem Content="中文 (简体)" Tag="zh-hans"/>
+                    <ComboBoxItem Content="中文 (繁體)" Tag="zh-hant"/>
+                    <ComboBoxItem Content="Deutsch (Deutschland)" Tag="de"/>
+                    <ComboBoxItem Content="日本語 (日本)" Tag="ja-jp"/>
+                    <ComboBoxItem Content="Español (España)" Tag="es-es"/>
+                    <ComboBoxItem Content="한국어 (한국)" Tag="ko-kr"/>
+                    <ComboBoxItem Content="Português (Brasil)" Tag="pt-br"/>
+                    <ComboBoxItem Content="Italiano (Italia)" Tag="it-it"/>
+                    <ComboBoxItem Content="Türkçe (Türkiye)" Tag="tr-tr"/>
+                    <ComboBoxItem Content="Tiếng Việt (Việt Nam)" Tag="vi-vn"/>
+                </ComboBox>
+            </controls:SettingsCard>
 
-                </StackPanel>
-            </StackPanel>
-            <StackPanel>
                 <TextBlock x:Uid="Settings_Theme" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
                 <StackPanel>
                     <RadioButton
@@ -81,16 +77,25 @@
                         </RadioButton.CommandParameter>
                     </RadioButton>
                 </StackPanel>
-            </StackPanel>
 
-            <TextBlock x:Uid="Settings_RevertTitle" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-            <controls:SettingsCard x:Uid="Settings_RevertChanges"
-                IsClickEnabled="True"
-                Click="RevertChanges_Click">
-                <controls:SettingsCard.HeaderIcon>
-                    <FontIcon Glyph="&#xE777;"/>
-                </controls:SettingsCard.HeaderIcon>
-            </controls:SettingsCard>
+            <TextBlock x:Uid="OtherSettings" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+            <StackPanel Spacing="6">
+                <controls:SettingsCard x:Uid="Settings_ExportOptimizations"
+                    HeaderIcon="{ui:FontIcon Glyph=&#xE174;}">
+                    <controls:WrapPanel Orientation="Horizontal" HorizontalSpacing="8">
+                        <Button x:Uid="SettingsPageImportButton" x:Name="ImportButton" Click="ImportButton_Click"/>
+                        <Button x:Uid="SettingsPageExportButton" x:Name="ExportButton" Click="ExportButton_Click"/>
+                    </controls:WrapPanel>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Settings_RevertChanges"
+                    IsClickEnabled="True"
+                    Click="RevertChanges_Click">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE777;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                </controls:SettingsCard>
+            </StackPanel>
 
             <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                 x:Uid="Settings_About" />

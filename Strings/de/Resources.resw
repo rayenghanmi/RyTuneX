@@ -282,6 +282,9 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="OSName" xml:space="preserve">
+    <value>Betriebssystemname</value>
+  </data>
   <data name="RAMModule" xml:space="preserve">
     <value>RAM-Modul</value>
   </data>
@@ -543,9 +546,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Schließt Treiberupdates von Windows Update aus. Kann zu veralteten Treibern mit potenziellen Sicherheitsrisiken oder Kompatibilitätsproblemen führen. Mit Vorsicht verwenden.</value>
   </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>Erfahren Sie mehr darüber, was deaktiviert wird</value>
-  </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>Erweiterte Optimierungen</value>
   </data>
@@ -633,6 +633,9 @@
   <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
     <value>Sprache ändern</value>
   </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>Netzwerk</value>
+  </data>
   <data name="Feature_EnableEndTask.Description" xml:space="preserve">
     <value>Enables an option when right clicking on apps' icons in the taskbar, allowing you to quickly terminate unresponsive applications without opening Task Manager.</value>
   </data>
@@ -674,9 +677,6 @@
   </data>
   <data name="NotSet" xml:space="preserve">
     <value>Not set</value>
-  </data>
-  <data name="Shell_Network.Content" xml:space="preserve">
-    <value>Netzwerk</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
     <value>(adult filter)</value>
@@ -759,29 +759,35 @@
   <data name="HomePage_Performance.Text" xml:space="preserve">
     <value>Leistung</value>
   </data>
-  <data name="SecurityPage_Details.Text" xml:space="preserve">
-    <value>Details</value>
+  <data name="Enabled" xml:space="preserve">
+    <value>Aktiviert</value>
   </data>
-  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
-    <value>Firewall- und Netzwerkschutz</value>
-  </data>
-  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>Echtzeitschutz</value>
-  </data>
-  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
-    <value>SmartScreen</value>
+  <data name="Disabled" xml:space="preserve">
+    <value>Deaktiviert</value>
   </data>
   <data name="SecurityPage_Status.Text" xml:space="preserve">
     <value>Sicherheitsstatus</value>
   </data>
-  <data name="SecurityPage_UAC.Text" xml:space="preserve">
-    <value>Benutzerkontensteuerung (UAC)</value>
-  </data>
   <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
     <value>Schutz vor Viren und Bedrohungen</value>
   </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>Firewall- und Netzwerkschutz</value>
+  </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
     <value>Windows Update</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>Echtzeitschutz</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>Benutzerkontensteuerung (UAC)</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>Details</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
     <value>Reparatur</value>
@@ -1083,14 +1089,11 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>Legt ein Limit für Non-Best-Effort-Prozesse fest. Das Aktivieren kann die Leistung priorisieren, reduziert jedoch die Flexibilität des Systems in einigen Fällen.</value>
   </data>
-  <data name="Enabled" xml:space="preserve">
-    <value>Aktiviert</value>
-  </data>
-  <data name="Disabled" xml:space="preserve">
-    <value>Deaktiviert</value>
-  </data>
   <data name="LoadingWindowText.Text" xml:space="preserve">
     <value>Laden...</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>Geräteinformationen</value>
   </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>Klassisches Kontextmenü aktivieren</value>
@@ -1121,9 +1124,6 @@ Möchten Sie vor dem Fortfahren einen Systemwiederherstellungspunkt erstellen?</
   </data>
   <data name="RestorePointCreationError" xml:space="preserve">
     <value>Wiederherstellungspunkt konnte nicht erstellt werden</value>
-  </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Änderungen rückgängig machen</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Alle Änderungen rückgängig machen</value>
@@ -1235,9 +1235,6 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
 
 
  Sind Sie sicher, dass Sie fortfahren möchten?</value>
-  </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>Geräteinformationen</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Werbungseinstellungen</value>
@@ -1351,6 +1348,27 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
     <value>Deaktivieren Sie unnötige Dienste</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-      <value>Optimieren Sie die Systemleistung, indem Sie Hintergrunddienste deaktivieren, die für den Betrieb Ihres Geräts nicht erforderlich sind. Dies hilft, Systemressourcen freizugeben und die Gesamtleistung zu verbessern.</value>
+    <value>Optimieren Sie die Systemleistung, indem Sie Hintergrunddienste deaktivieren, die für den Betrieb Ihres Geräts nicht erforderlich sind. Dies hilft, Systemressourcen freizugeben und die Gesamtleistung zu verbessern.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Änderungen rückgängig machen</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value>Export-/Importoptimierungen</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value>Exportieren Sie Ihre aktuellen Optimierungen oder importieren Sie sie für eine einfachere und automatisierte Optimierung</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Einstellungen erfolgreich importiert und angewendet</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Einstellungen erfolgreich exportiert nach:</value>
   </data>
 </root>

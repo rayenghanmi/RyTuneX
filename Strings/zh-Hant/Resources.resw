@@ -20,10 +20,10 @@
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
     <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-      <value>[base64 mime encoded serialized .NET Framework object]</value>
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
     <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-      <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -546,9 +546,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>不包括來自 Windows Update 的驅動程式更新.  可能會導致過時的驅動程式存在潛在的安全風險或相容性問題.  謹慎使用. </value>
   </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>詳細瞭解被禁用的內容</value>
-  </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>高階優化</value>
   </data>
@@ -636,6 +633,9 @@
   <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
     <value>更改語言</value>
   </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>網路</value>
+  </data>
   <data name="Feature_EnableEndTask.Description" xml:space="preserve">
     <value>在工作列上右鍵點選應用程式圖示時啟用一個選項, 允許您快速終止無響應的應用程式, 無需開啟工作管理員. </value>
   </data>
@@ -677,9 +677,6 @@
   </data>
   <data name="NotSet" xml:space="preserve">
     <value>未設定</value>
-  </data>
-  <data name="Shell_Network.Content" xml:space="preserve">
-    <value>網路</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
     <value>(成人過濾器)</value>
@@ -762,29 +759,35 @@
   <data name="HomePage_Performance.Text" xml:space="preserve">
     <value>效能</value>
   </data>
-  <data name="SecurityPage_Details.Text" xml:space="preserve">
-    <value>詳細資訊</value>
+  <data name="Enabled" xml:space="preserve">
+    <value>已啟用</value>
   </data>
-  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
-    <value>防火牆和網路保護</value>
-  </data>
-  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>實時保護</value>
-  </data>
-  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
-    <value>SmartScreen</value>
+  <data name="Disabled" xml:space="preserve">
+    <value>已禁用</value>
   </data>
   <data name="SecurityPage_Status.Text" xml:space="preserve">
     <value>安全狀態</value>
   </data>
-  <data name="SecurityPage_UAC.Text" xml:space="preserve">
-    <value>使用者帳戶控制 (UAC)</value>
-  </data>
   <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
     <value>病毒和威脅防護</value>
   </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>防火牆和網路保護</value>
+  </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
     <value>Windows 更新</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>實時保護</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>使用者帳戶控制 (UAC)</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>詳細資訊</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
     <value>修理</value>
@@ -1086,14 +1089,11 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>為非最佳努力程序設定限制. 啟用此功能可以優先提高效能, 但可能會在某些情況下減少系統靈活性. </value>
   </data>
-  <data name="Enabled" xml:space="preserve">
-    <value>已啟用</value>
-  </data>
-  <data name="Disabled" xml:space="preserve">
-    <value>已禁用</value>
-  </data>
   <data name="LoadingWindowText.Text" xml:space="preserve">
     <value>載入中...</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>裝置資訊</value>
   </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>啟用經典上下文選單</value>
@@ -1122,9 +1122,6 @@
   </data>
   <data name="RestorePointCreationError" xml:space="preserve">
     <value>建立還原點失敗</value>
-  </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>還原更改</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>還原所有更改</value>
@@ -1233,9 +1230,6 @@
     <value>禁用系統還原將刪除所有還原點, 包括由RyTuneX建立的還原點.
 
 您確定要繼續嗎?</value>
-  </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>裝置資訊</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>廣告設定</value>
@@ -1350,5 +1344,26 @@
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
     <value>通過停用對設備運行非必要的背景服務來優化系統效能.這有助於釋放系統資源並提高整體效率.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>還原更改</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value>進口</value>
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value>出口</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value>匯出/導入最佳化</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value>匯出您目前的最佳化或匯入它們以實現更輕鬆、更自動化的最佳化</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>已成功導入並套用設定</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>設定已成功匯出至：</value>
   </data>
 </root>

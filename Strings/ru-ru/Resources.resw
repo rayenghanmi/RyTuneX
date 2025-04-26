@@ -546,9 +546,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Исключает обновления драйверов из Windows Update. Может привести к устаревшим драйверам с возможными рисками безопасности или проблемами совместимости. Используйте с осторожностью.</value>
   </data>
-  <data name="Feature_LearnButtonLink.Content" xml:space="preserve">
-    <value>Узнайте больше о том, что отключается</value>
-  </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
     <value>Продвинутые оптимизации</value>
   </data>
@@ -891,7 +888,7 @@
   <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
     <value>Отключить сбор данных о текстовом вводе</value>
   </data>
-    <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
+  <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
     <value>Отключает сбор данных о вводе текста, предотвращая сохранение и анализ того, что вы вводите, в Windows. Это помогает защитить конфиденциальность, но может уменьшить улучшения точности ввода текста.</value>
   </data>
   <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
@@ -957,7 +954,7 @@
   <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
     <value>Отключить персонализированные настройки конфиденциальности</value>
   </data>
-    <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
     <value>Отключает функцию персонализированных рекомендаций в настройках конфиденциальности, не позволяя Windows использовать ваши данные для настройки пользовательского опыта. Это может уменьшить персонализацию.</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
@@ -1038,7 +1035,7 @@
   <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
     <value>Включает автоматические проверки на низкое место на диске для предотвращения проблем с производительностью. Отключение этой функции может снизить количество уведомлений, но вы можете пропустить важные предупреждения о нехватке места.</value>
   </data>
-    <data name="Feature_LinkResolve.Header" xml:space="preserve">
+  <data name="Feature_LinkResolve.Header" xml:space="preserve">
     <value>Отключить разрешение ссылок</value>
   </data>
   <data name="Feature_LinkResolve.Description" xml:space="preserve">
@@ -1119,14 +1116,11 @@
   <data name="RestorePointCreated" xml:space="preserve">
     <value>Точка восстановления создана</value>
   </data>
-    <data name="RestorePointCreationSuccess" xml:space="preserve">
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
     <value>Точка восстановления системы успешно создана.</value>
   </data>
   <data name="RestorePointCreationError" xml:space="preserve">
     <value>Не удалось создать точку восстановления</value>
-  </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Отменить изменения</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Отменить все изменения</value>
@@ -1164,7 +1158,7 @@
   <data name="RestartNow" xml:space="preserve">
     <value>Перезагрузить сейчас</value>
   </data>
-    <data name="ScheduleLater" xml:space="preserve">
+  <data name="ScheduleLater" xml:space="preserve">
     <value>Запланировать на позже</value>
   </data>
   <data name="Cancel" xml:space="preserve">
@@ -1209,7 +1203,7 @@
   <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
     <value>Оптимизирует ваше хранилище, дефрагментируя его (если HDD) или перетриммируя (если SSD)</value>
   </data>
-    <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+  <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
     <value>Оптимизировать</value>
   </data>
   <data name="RepairPage_EventViewer.Header" xml:space="preserve">
@@ -1351,6 +1345,27 @@
     <value>Отключение ненужных служб</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-      <value>Оптимизируйте производительность системы, отключив фоновые службы, которые не являются необходимыми для работы вашего устройства. Это поможет освободить системные ресурсы и повысить общую эффективность.</value>
+    <value>Оптимизируйте производительность системы, отключив фоновые службы, которые не являются необходимыми для работы вашего устройства. Это поможет освободить системные ресурсы и повысить общую эффективность.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>Отменить изменения</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value>Импорт</value>
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value>Экспорт/импорт оптимизаций</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value>Экспортируйте текущие оптимизации или импортируйте их для более простой и автоматизированной оптимизации.</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>Настройки импортированы и успешно применены.</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>Настройки успешно экспортированы в:</value>
   </data>
 </root>

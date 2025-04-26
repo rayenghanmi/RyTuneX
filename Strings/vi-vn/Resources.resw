@@ -121,34 +121,34 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>Désencombrer</value>
+    <value>Debloat</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>Appareil</value>
+    <value>Thiết bị</value>
   </data>
   <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Signaler</value>
+    <value>Báo cáo</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>Optimiser</value>
+    <value>Tối ưu</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>Thème</value>
+    <value>Giao diện</value>
   </data>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>Clair</value>
+    <value>Sáng</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>Sombre</value>
+    <value>Tối</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>Par défaut</value>
+    <value>Mặc định</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>À propos de cette application</value>
+    <value>Về ứng dụng</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>RyTuneX, un optimiseur pour Windows 10 et 11 créé par Rayen Ghanmi, est conçu pour améliorer les performances et l'efficacité du système en supprimant sélectivement certains logiciels et en désactivant des services inutiles.</value>
+    <value>RyTuneX, công cụ tối ưu Windows 10 và 11 được tạo bởi Rayen Ghanmi, được thiết kế để tối ưu hiệu suất và hiệu quả của hệ thống bằng cách loại bỏ có chọn lọc phần mềm đã chọn và vô hiệu hóa các dịch vụ không cần thiết.</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
     <value>AGPL v3.0</value>
@@ -157,1218 +157,1218 @@
     <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
-    <value>Langue</value>
+    <value>Ngôn ngữ</value>
   </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
-    <value>Récupération des données des applications installées...</value>
+    <value>Đang nạp các ứng dụng đã cài đặt...</value>
   </data>
   <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
-    <value>Filtrer par:</value>
+    <value>Lọc theo:</value>
   </data>
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
-    <value>Désinstaller l'application(s) sélectionnée(s)</value>
+    <value>Gỡ (các) ứng dụng đã chọn</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Terminé</value>
+    <value>Xong</value>
   </data>
   <data name="Uninstalling" xml:space="preserve">
-    <value>Désinstallation en cours</value>
+    <value>Đang gỡ cài đặt</value>
   </data>
   <data name="UninstallTip" xml:space="preserve">
-    <value>Sélectionnez les applications que vous souhaitez supprimer et cliquez sur désinstaller</value>
+    <value>Chọn ứng dụng bạn muốn xoá và ấn gỡ cài đặt</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>Fonctionnalités</value>
+    <value>Tính năng</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
-    <value>Confidentialité</value>
+    <value>Bảo mật</value>
   </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
-    <value>Rejoindre notre serveur</value>
+    <value>Tham gia máy chủ của chúng tôi</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>Découvrir RyTuneX</value>
+    <value>Xem RyTuneX</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>Envoyer un retour</value>
+    <value>Gửi phản hồi</value>
   </data>
   <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>Processeur</value>
+    <value>Bộ vi xử lý</value>
   </data>
   <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>Carte graphique</value>
+    <value>Card đồ hoạ</value>
   </data>
   <data name="SystemInfoPage_OS.Text" xml:space="preserve">
-    <value>Système d'exploitation</value>
+    <value>Hệ điều hành</value>
   </data>
   <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
     <value>RAM</value>
   </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
-    <value>Stockage</value>
+    <value>Ổ đĩa</value>
   </data>
   <data name="Debloat" xml:space="preserve">
-    <value>Désencombrer</value>
+    <value>Debloat</value>
   </data>
   <data name="DebloatPage_NotificationBody" xml:space="preserve">
-    <value>La désinstallation de certaines de ces applications peut ne pas les supprimer complètement.</value>
+    <value>Gỡ cài đặt một số ứng dụng này có thể không loại bỏ chúng hoàn toàn</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>Erreur lors de la désinstallation de l'application(s) suivante(s)</value>
+    <value>Đã có lỗi khi gỡ cài đặt (các) ứng dụng sau</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>L'application(s) suivante(s) a/ont été désinstallée(s) avec succès</value>
+    <value>Thành công gỡ cài đặt (các) ứng dụng sau</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Supprimer les fichiers temporaires</value>
+    <value>Xoá tệp tin tạm thời</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
-    <value>RAM de l'adaptateur</value>
+    <value>Adapter RAM</value>
   </data>
   <data name="Architecture" xml:space="preserve">
-    <value>Architecture</value>
+    <value>Kiến trúc</value>
   </data>
   <data name="BuildNumber" xml:space="preserve">
-    <value>Numéro de build</value>
+    <value>Mã dựng</value>
   </data>
   <data name="Capacity" xml:space="preserve">
-    <value>Capacité</value>
+    <value>Dung lượng</value>
   </data>
   <data name="Caption" xml:space="preserve">
-    <value>Légende</value>
+    <value>Tên</value>
   </data>
   <data name="Cores" xml:space="preserve">
-    <value>Cœurs</value>
+    <value>Lõi</value>
   </data>
   <data name="DeviceLocator" xml:space="preserve">
-    <value>Emplacement du périphérique</value>
+    <value>Vị trí</value>
   </data>
   <data name="DriverVersion" xml:space="preserve">
-    <value>Version du pilote</value>
+    <value>Phiên bản driver</value>
   </data>
   <data name="ErrDriversExtract" xml:space="preserve">
-    <value>Une erreur s'est produite lors de l'extraction des pilotes</value>
+    <value>Đã có lỗi khi trích xuất drivers</value>
   </data>
   <data name="ExtractingDrivers" xml:space="preserve">
-    <value>Extraction des pilotes en cours</value>
+    <value>Đang trích xuất drivers</value>
   </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
   </data>
   <data name="InstallDate" xml:space="preserve">
-    <value>Date d'installation</value>
+    <value>Ngày cài đặt</value>
   </data>
   <data name="InterfaceType" xml:space="preserve">
-    <value>Type d'interface</value>
+    <value>Loại giao diện</value>
   </data>
   <data name="L2Cache" xml:space="preserve">
-    <value>Taille du cache L2</value>
+    <value>Kích thước L2 Cache</value>
   </data>
   <data name="L3Cache" xml:space="preserve">
-    <value>Taille du cache L3</value>
+    <value>Kích thước L3 Cache</value>
   </data>
   <data name="LastBoot" xml:space="preserve">
-    <value>Dernière heure de démarrage</value>
+    <value>Lần khởi động cuối cùng</value>
   </data>
   <data name="LogicalProcessors" xml:space="preserve">
-    <value>Processeurs logiques</value>
+    <value>Bộ xử lý logic</value>
   </data>
   <data name="Manufacturer" xml:space="preserve">
-    <value>Fabricant</value>
+    <value>Nhà sản xuất</value>
   </data>
   <data name="MaxSpeed" xml:space="preserve">
-    <value>Vitesse maximale</value>
+    <value>Tốc độ tối đa</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Nom</value>
+    <value>Tên</value>
   </data>
   <data name="OSName" xml:space="preserve">
-    <value>Nom du SE</value>
+    <value>Tên HĐH</value>
   </data>
   <data name="RAMModule" xml:space="preserve">
-    <value>Module RAM</value>
+    <value>Mô-đun RAM</value>
   </data>
   <data name="RegisteredUser" xml:space="preserve">
-    <value>Utilisateur enregistré</value>
+    <value>Người đăng ký</value>
   </data>
   <data name="Size" xml:space="preserve">
-    <value>Taille</value>
+    <value>Kích thước</value>
   </data>
   <data name="SocketDesignation" xml:space="preserve">
-    <value>Désignation du socket</value>
+    <value>Vị trí socket</value>
   </data>
   <data name="Speed" xml:space="preserve">
-    <value>Vitesse</value>
+    <value>Tốc độ</value>
   </data>
   <data name="SystemDirectory" xml:space="preserve">
-    <value>Répertoire système</value>
+    <value>Thư mục hệ thống</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version</value>
+    <value>Phiên bản</value>
   </data>
   <data name="VideoArchitecture" xml:space="preserve">
-    <value>Architecture vidéo</value>
+    <value>Kiến trúc xử lý video</value>
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
-    <value>Répertoire Windows</value>
+    <value>Thư mục Windows</value>
   </data>
   <data name="DeligTemp" xml:space="preserve">
-    <value>Suppression des fichiers temporaires</value>
+    <value>Đang xoá tệp tin tạm thời</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
-    <value>Erreur lors de la suppression des fichiers temporaires</value>
+    <value>Có lỗi khi xoá tệp tin tạm thời</value>
   </data>
   <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>Fonctionnalités du système</value>
+    <value>Tính năng hệ thống</value>
   </data>
   <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>Exclusivité Windows 11</value>
+    <value>Độc quyền cho Windows 11</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
-    <value>Sélectionnez un dossier</value>
+    <value>Chọn thư mục</value>
   </data>
   <data name="TempDelSucc" xml:space="preserve">
-    <value>Suppression des fichiers temporaires réussie !</value>
+    <value>Tệp tin tạm thời đã xoá thành công!</value>
   </data>
   <data name="Disk" xml:space="preserve">
-    <value>Disque</value>
+    <value>Ổ đĩa</value>
   </data>
   <data name="Model" xml:space="preserve">
-    <value>Modèle</value>
+    <value>Model</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
-    <value>Activer les messages de connexion détaillés pour une meilleure surveillance et résolution des problèmes système. Peut ne pas être convivial pour une utilisation quotidienne.</value>
+    <value>Bật verbose logon để quản lý và khắc phục sự cố hệ thống tốt hơn. Có thể không thân thiện với người dùng hẳng ngày</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
-    <value>Activer la Connexion Détaillée</value>
+    <value>Bật Verbose Logon</value>
   </data>
   <data name="SelecFold" xml:space="preserve">
-    <value>Sélectionnez un dossier</value>
+    <value>Chọn thư mục</value>
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
-    <value>Pilotes</value>
+    <value>Drivers</value>
   </data>
   <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>Extraire</value>
+    <value>Trích xuất</value>
   </data>
   <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>Extrayez vos pilotes vers un dossier externe pour une sauvegarde facile</value>
+    <value>Trích xuất driver của bạn ra thư mục ngoài để sao lưu dễ dàng hơn</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
-    <value>Extraction des Pilotes</value>
+    <value>Đang trích xuất driver</value>
   </data>
   <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
-    <value>Sélectionner</value>
+    <value>Chọn</value>
   </data>
   <data name="Feature_DisableHibernation.Header" xml:space="preserve">
-    <value>Désactiver l'Hibernation</value>
+    <value>Vô hiệu hoá Hibernation</value>
   </data>
   <data name="Feature_DisableHibernation.Description" xml:space="preserve">
-    <value>Désactive l'hibernation pour économiser de l'énergie et empêcher l'ordinateur d'entrer en mode veille. Non recommandé pour les ordinateurs portables.</value>
+    <value>Tắt ngủ đông để tiết kiệm năng lượng và giữ cho máy tính không vào trạng thái sleep. Không khuyến khích cho laptop</value>
   </data>
   <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
-    <value>Désactiver le Groupe Domestique</value>
+    <value>Vô hiệu hoá Home Group</value>
   </data>
   <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
-    <value>Désactive le Groupe Domestique pour arrêter le partage de fichiers et d'imprimantes avec d'autres appareils sur le réseau.</value>
+    <value>Tắt Home Group để dừng chia sẻ tệp tin và máy in với các thiết bị khác trên mạng</value>
   </data>
   <data name="Feature_DisablePrintService.Header" xml:space="preserve">
-    <value>Désactiver le Service d'Impression</value>
+    <value>Vô hiệu hoá Print Service</value>
   </data>
   <data name="Feature_DisablePrintService.Description" xml:space="preserve">
-    <value>Désactive le service d'impression, empêchant les fonctionnalités liées à l'impression.</value>
+    <value>Vô hiệu hoá dịch vụ in nhưng vẫn giữ lại các chức năng liên quan tới máy in</value>
   </data>
   <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
-    <value>Désactiver l'Assistant de Compatibilité</value>
+    <value>Vô hiệu hoá Compatibility Assistant</value>
   </data>
   <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
-    <value>Désactive l'Assistant de Compatibilité pour désactiver les vérifications automatiques de compatibilité des programmes.</value>
+    <value>Tắt Compatibility Assistant để bỏ chức năng kiểm tra tương thích của chương trình</value>
   </data>
   <data name="Feature_DisableSearch.Header" xml:space="preserve">
-    <value>Désactiver la Recherche</value>
+    <value>Vô hiệu hoá Search</value>
   </data>
   <data name="Feature_DisableSearch.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité de recherche à l'échelle du système.</value>
+    <value>Vô hiệu hoá chức năng tìm kiếm trên toàn hệ thống</value>
   </data>
   <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
-    <value>Désactiver le Rapport d'Erreurs</value>
+    <value>Vô hiệu hoá Error Reporting</value>
   </data>
   <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
-    <value>Désactive le rapport d'erreurs pour empêcher l'envoi automatique de rapports d'erreurs à Microsoft.</value>
+    <value>Tắt báo cáo lỗi để tránh gửi thông tin lỗi tới Microsoft</value>
   </data>
   <data name="Feature_DisableGameBar.Header" xml:space="preserve">
-    <value>Désactiver la Barre de Jeu</value>
+    <value>Vô hiệu hoá Game Bar</value>
   </data>
   <data name="Feature_DisableGameBar.Description" xml:space="preserve">
-    <value>Désactive la Barre de Jeu et ses fonctionnalités associées.</value>
+    <value>Tắt Game Bar và các tính năng liên quan</value>
   </data>
   <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
-    <value>Désactiver l'Histoire d'Accès Rapide</value>
+    <value>Vô hiệu hoá Quick Access History</value>
   </data>
   <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
-    <value>Désactive l'enregistrement et l'affichage de l'historique d'accès rapide.</value>
+    <value>Vô hiệu hoá khả năng ghi lại lịch sử và hiển thị của Quick Access History</value>
   </data>
   <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
-    <value>Désactiver Mes Contacts</value>
+    <value>Vô hiệu hoá My People</value>
   </data>
   <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité Mes Contacts dans la barre des tâches.</value>
+    <value>Tắt tính năng My People trên taskbar</value>
   </data>
   <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
-    <value>Désactiver les Services de Capteur</value>
+    <value>Vô hiệu hoá Sensor Services</value>
   </data>
   <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
-    <value>Désactive les services de capteur pour la confidentialité et l'économie d'énergie. Non recommandé pour les ordinateurs portables avec des capteurs pertinents.</value>
+    <value>Tắt service liên quan tới sensor để bảo mật và tiết kiệm năng lượng. Không khuyến khích với laptop có sensor</value>
   </data>
   <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
-    <value>Désactiver Windows Ink</value>
+    <value>Vô hiệu hoá Windows Ink</value>
   </data>
   <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
-    <value>Désactive l'Espace de Travail Windows Ink et les fonctionnalités associées. Non recommandé pour les appareils avec un stylet.</value>
+    <value>Tắt Windows Ink Workspace và các tính năng liên quan. Không khuyến khích với các thiết bị cảm ứng</value>
   </data>
   <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
-    <value>Désactiver les Fonctionnalités d'Orthographe et de Saisie</value>
+    <value>Vô hiệu hoá Spelling and Typing</value>
   </data>
   <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
-    <value>Désactive les suggestions d'orthographe et de saisie.</value>
+    <value>Vô hiệu hoá đánh vần và gợi ý khi viết</value>
   </data>
   <data name="Feature_DisableFaxService.Header" xml:space="preserve">
-    <value>Désactiver le Service de Fax</value>
+    <value>Vô hiệu hoá Fax Service</value>
   </data>
   <data name="Feature_DisableFaxService.Description" xml:space="preserve">
-    <value>Désactive le service de fax dans Windows.</value>
+    <value>Vô hiệu hoá Fax service trên Windows</value>
   </data>
   <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
-    <value>Désactiver le Service Insider</value>
+    <value>Vô hiệu hoá Insider Service</value>
   </data>
   <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
-    <value>Se désinscrire du programme Windows Insider et cesser de recevoir des versions de prévisualisation.</value>
+    <value>Từ chối Windows Insider Program và ngừng nhận các bản dựng xem trước</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
-    <value>Désactiver le Presse-Papiers Cloud</value>
+    <value>Vô hiệu hoá Cloud Clipboard</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité Presse-Papiers Cloud pour le partage du presse-papiers entre appareils.</value>
+    <value>Vô hiệu hoá tính năng Cloud Clipboard cho phép chia sẻ clipboard giữa các thiết bị</value>
   </data>
   <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
-    <value>Désactiver les Touches Verrouillées</value>
+    <value>Vô hiệu hoá Sticky Keys</value>
   </data>
   <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité d'accessibilité Touches Verrouillées. Utile pour les personnes qui appuient accidentellement sur plusieurs touches à la fois.</value>
+    <value>Vô hiệu hoá tính năng Sticky Key. Hữu ích với những người nhấn nhiều phím trong 1 lần</value>
   </data>
   <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
-    <value>Désactiver le Cast sur Appareil</value>
+    <value>Vô hiệu hoá Cast to Device</value>
   </data>
   <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité de Cast sur Appareil dans Windows. Utile pour les présentations ou le partage de médias sur d'autres appareils.</value>
+    <value>Vô hiệu hoá tính năng Cast to Device trên Windows. Hữu ích với trình chiếu hoặc chia sẻ phương tiền trên các thiết bị khác</value>
   </data>
   <data name="Feature_DisableVBS.Header" xml:space="preserve">
-    <value>Désactiver VBS</value>
+    <value>Vô hiệu hoá VBS</value>
   </data>
   <data name="Feature_DisableVBS.Description" xml:space="preserve">
-    <value>Désactive la Sécurité Basée sur la Virtualisation (VBS) pour des fonctionnalités de sécurité avancées. Non recommandé pour les environnements à haute sécurité.</value>
+    <value>Vô hiệu hoá tính năng bảo mật nâng cao Virtualization-Based Security (VBS). Không khuyến khích với các môi trường bảo mật cao</value>
   </data>
   <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
-    <value>Déplacer la Barre des Tâches à Gauche</value>
+    <value>Di Chuyển Taskbar Qua Trái</value>
   </data>
   <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
-    <value>Déplace la barre des tâches de la position par défaut en bas vers le côté gauche de l'écran. Préférence personnelle.</value>
+    <value>Di chuyển taskbar từ bên dưới qua bên trái màn hình. Tuỳ sở thích cá nhân</value>
   </data>
   <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
-    <value>Désactiver l'Assistance Snap</value>
+    <value>Vô hiệu hoá Snap Assist</value>
   </data>
   <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
-    <value>Désactive l'Assistance Snap, qui organise automatiquement les fenêtres ouvertes lors du déplacement. Utile pour le multitâche, mais certains utilisateurs préfèrent la gestion manuelle des fenêtres.</value>
+    <value>Vô hiệu hoá Snap Assist, tự động sắp xếp các cửa sổ khi kéo. Hữu ích cho đa nhiệm nhưng đa số thích quản lý thủ công</value>
   </data>
   <data name="Feature_DisableWidgets.Header" xml:space="preserve">
-    <value>Désactiver les Widgets</value>
+    <value>Vô hiệu hoá Widgets</value>
   </data>
   <data name="Feature_DisableWidgets.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité Widgets sur la barre des tâches de Windows 11. À considérer si vous trouvez les widgets utiles pour les mises à jour rapides (Windows 11 uniquement).</value>
+    <value>Vô hiệu hoá tính năng Widgets trên taskbar Windows 11. Hãy cân nhắc nếu bạn thấy widgets hữu ích cho việc cập nhật (Chỉ Windows 11)</value>
   </data>
   <data name="Feature_DisableChat.Header" xml:space="preserve">
-    <value>Désactiver le Chat</value>
+    <value>Vô hiệu hoá Chat</value>
   </data>
   <data name="Feature_DisableChat.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité Chat sur la barre des tâches de Windows 11. Recommandé uniquement si vous n'utilisez pas la fonctionnalité chat pour la communication (Windows 11 uniquement).</value>
+    <value>Vô hiệu hoá tính năng Chat trên Windows 11 taskbar. Chỉ khuyến khích nếu bạn không dùng tính năng này để trò chuyện (Chỉ Windows 11)</value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
-    <value>Activer le Mode Compact des Fichiers</value>
+    <value>Bật Files Compact Mode</value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
-    <value>Active le Mode Compact pour la navigation dans les fichiers avec de plus petites vignettes. Utile pour les affichages de faible résolution ou la gestion de grands dossiers.</value>
+    <value>Bật chế độ compact cho phép tìm kiếm tệp tin với thumbnail nhỏ hơn. Hữu ích cho màn hình có độ phân giải thấp hoặc quản lý nhiều thư mục</value>
   </data>
   <data name="Feature_DisableStickers.Header" xml:space="preserve">
-    <value>Désactiver les Autocollants</value>
+    <value>Vô hiệu hoá Stickers</value>
   </data>
   <data name="Feature_DisableStickers.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité Autocollants dans l'application de messagerie de Windows 11. Recommandé uniquement si vous n'utilisez pas les autocollants pour la communication (Windows 11 uniquement).</value>
+    <value>Vô hiệu hoá tính năng Stickers trên ứng dụng nhắn tin của Windows 11. Chỉ khuyến khích nếu bạn không dùng stickets để trò chuyện (Chỉ Windows 11)</value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
-    <value>Désactiver la Barre de Découverte Edge</value>
+    <value>Vô hiệu hoá Edge Discover Bar</value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité Barre de Découverte dans Microsoft Edge. Utile si vous la trouvez distrayante ou si vous préférez une interface de navigateur plus épurée.</value>
+    <value>Vô hiệu hoá tính năng Discover Bar trên Microsoft Edge. Hữu ích nếu bạn thấy khó chịu hoặc thích giao diện trình duyệt gọn gàng hơn</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
-    <value>Désactiver CoPilot AI</value>
+    <value>Vô hiệu hoá CoPilot AI</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité CoPilot AI dans Windows pour l'assistance à la rédaction de code. Non recommandé pour les développeurs.</value>
+    <value>Vô hiệu hoá tính năng CoPilot AI trên Windows để hỗ trợ viết code. Không khuyến khích với nhà phát triển</value>
   </data>
   <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>Optimisations de Base</value>
+    <value>Các tối ưu cơ bản</value>
   </data>
   <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>Optimisations de Performance</value>
+    <value>Điều chỉnh hiệu năng</value>
   </data>
   <data name="Feature_DisableSysMain.Header" xml:space="preserve">
-    <value>Désactiver SysMain</value>
+    <value>Vô hiệu hoá SysMain</value>
   </data>
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
-    <value>Désactive SysMain, qui précharge les applications fréquemment utilisées pour un démarrage plus rapide. Peut affecter les temps de démarrage pour certains programmes si vous utilisez un HDD.</value>
+    <value>Tắt SysMain, tải trước các ứng dụng thường được sử dụng để khởi động nhanh hơn. Có thể tác động đến thời gian khởi động với một số chương trình nếu bạn đang sử dụng HDD.</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>Désactiver le Timestamp NTFS</value>
+    <value>Vô hiệu hoá NTFS Timestamp</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>Désactive les mises à jour des timestamps NTFS pour les opérations de fichiers. Peut affecter les fonctionnalités des programmes qui dépendent de timestamps précis.</value>
+    <value>Vô hiệu hoá cập nhật NTFS timestamps cho tệp tin của hệ điều hành. Có thể ảnh hưởng đến chức năng của chương trình phụ thuộc vào độ chính xác của timestamps</value>
   </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
-    <value>Activer le Mode Jeu</value>
+    <value>Bật Gaming Mode</value>
   </data>
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
-    <value>Active le Mode Jeu, qui optimise les ressources du système pour une expérience de jeu plus fluide. Peut affecter les processus en arrière-plan.</value>
+    <value>Bật Gaming Mode, tối ưu tài nguyên hệ thống với trải nghiệm chơi game mượt mà. Có thể ảnh hưởng đến tác vụ trong nền</value>
   </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
-    <value>Exclure les Pilotes des Mises à Jour Windows</value>
+    <value>Không bao gồm Drivers từ Windows Updates</value>
   </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
-    <value>Exclut les mises à jour de pilotes de Windows Update. Peut entraîner des pilotes obsolètes avec des risques de sécurité potentiels ou des problèmes de compatibilité. Utilisez avec prudence.</value>
+    <value>Không bao gồm cập nhật driver từ Windows Update. Có thể dẫn đến các trình điều khiển lỗi thời với các rủi ro bảo mật tiềm ẩn hoặc các vấn đề tương thích. Sử dụng cẩn thận</value>
   </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>Optimisations Avancées</value>
+    <value>Các tối ưu nâng cao</value>
   </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
-    <value>Désactiver la Restauration du Système</value>
+    <value>Vô hiệu hoá System Restore</value>
   </data>
   <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
-    <value>Désactive la Restauration du Système, qui crée des points de restauration pour revenir à un état précédent en cas de problèmes. Non recommandé. Désactiver cette fonctionnalité supprime la capacité de récupérer facilement d'éventuels problèmes système.</value>
+    <value>Vô hiệu hoá System Restore, tính năng tạo các điểm khôi phục để quay về tình trạng trước đó của hệ thống nếu như gặp lỗi. Không khuyến khích. Việc vô hiệu hoá tính năng này sẽ loại bỏ khả năng khôi phục dễ dàng từ các vấn đề tiềm ẩn của hệ thống.</value>
   </data>
   <data name="Feature_DisableCortana.Header" xml:space="preserve">
-    <value>Désactiver Cortana</value>
+    <value>Vô hiệu hoá Cortana</value>
   </data>
   <data name="Feature_DisableCortana.Description" xml:space="preserve">
-    <value>Désactive Cortana, l'assistant virtuel qui peut répondre aux questions et effectuer des tâches. Peut affecter la recherche vocale et certaines fonctionnalités de productivité.</value>
+    <value>Vô hiệu hoá Cortana, trợ lý ảo có thể trả lời câu hỏi và hoàn thành các task. Có thể tác động tới tìm kiếm bằng giọng nói và một số tính năng liên quan tới đời sống.</value>
   </data>
   <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
-    <value>Désactiver les Mises à Jour du Store</value>
+    <value>Vô hiệu hoá Store Updates</value>
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
-    <value>Désactive les mises à jour automatiques pour les applications téléchargées depuis le Microsoft Store. Peut rendre les applications vulnérables aux risques de sécurité ou manquantes de nouvelles fonctionnalités.</value>
+    <value>Vô hiệu hoá tự động cập nhật ứng dụng đã tải từ Microsoft Store. Có thể khiến ứng dụng dễ bị rủi ro bảo mật hoặc thiếu các tính năng mới.</value>
   </data>
   <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>Désactiver les Mises à Jour Automatiques</value>
+    <value>Vô hiệu hoá tự động cập nhật</value>
   </data>
   <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>Désactive les mises à jour automatiques de Windows, nécessitant une installation manuelle. Fortement déconseillé. Cela peut rendre votre système vulnérable aux exploits de sécurité et aux correctifs de bugs.</value>
+    <value>Tắt tự động cập nhật của Windows, yêu cầu cài đặt thủ công. Rất không khuyến khích. Điều này có thể khiến hệ thống của bạn dễ bị tấn công bảo mật và thiếu các bản sửa lỗi.</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>Télémétrie</value>
+    <value>Telemetry</value>
   </data>
   <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>Améliorer la Confidentialité</value>
+    <value>Cải thiện quyền riêng tư</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
-    <value>Désactiver SMBv1</value>
+    <value>Vô hiệu hoá SMBv1</value>
   </data>
   <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
-    <value>Désactive le protocole SMB version 1 (SMBv1) pour une sécurité renforcée. Recommandé</value>
+    <value>Vô hiệu hoá Server Message Block version 1 (SMBv1) để tăng cường bảo mật. Khuyến khích</value>
   </data>
   <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
-    <value>Désactiver SMBv2</value>
+    <value>Vô hiệu hoá SMBv2</value>
   </data>
   <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
-    <value>Désactive le protocole SMB version 2 (SMBv2) pour une sécurité renforcée. Utilisez avec prudence car cela pourrait interrompre les fonctionnalités de partage de fichiers réseau.</value>
+    <value>Vô hiệu hóa Server Message Block version 2 (SMBv2) để tăng cường bảo mật. Sử dụng cẩn thận vì nó có thể làm gián đoạn chức năng chia sẻ tệp qua mạng.</value>
   </data>
   <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
-    <value>Désactiver les Services de Télémétrie</value>
+    <value>Vô hiệu hoá Telemetry Services</value>
   </data>
   <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
-    <value>Désactive les services de télémétrie pour empêcher la collecte et la transmission des données d'utilisation par le système d'exploitation.</value>
+    <value>Tắt telemetry service để ngăn hệ điều hành thu thập và gửi dữ liệu sử dụng.</value>
   </data>
   <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
-    <value>Désactiver la Télémétrie Edge</value>
+    <value>Vô hiệu hoá Telemetry của Edge</value>
   </data>
   <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
-    <value>Désactive la collecte de données de télémétrie dans Microsoft Edge.</value>
+    <value>Vô hiệu hoá thu thập dữ liệu từ xa trên Microsoft Edge.</value>
   </data>
   <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
-    <value>Désactiver la Télémétrie Visual Studio</value>
+    <value>Vô hiệu hoá Telemetry của Visual Studio</value>
   </data>
   <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
-    <value>Désactive la collecte de données de télémétrie dans Visual Studio.</value>
+    <value>Vô hiệu hoá thu thập dữ liệu từ xa trên Visual Studio.</value>
   </data>
   <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
-    <value>Désactiver la Télémétrie Nvidia</value>
+    <value>Vô hiệu hoá Telemetry của Nvidia</value>
   </data>
   <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
-    <value>Désactive la collecte de données de télémétrie par les pilotes Nvidia.</value>
+    <value>Vô hiệu hoá thu thập dữ liệu từ xa bởi driver của Nvidia.</value>
   </data>
   <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
-    <value>Désactiver la Télémétrie Chrome</value>
+    <value>Vô hiệu hoá Telemetry của Chrome</value>
   </data>
   <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
-    <value>Désactive la collecte de données de télémétrie dans Google Chrome.</value>
+    <value>Vô hiệu hoá thu thập dữ liệu từ xa trên Google Chrome.</value>
   </data>
   <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
-    <value>Désactiver la Télémétrie Firefox</value>
+    <value>Vô hiệu hoá Telemetry Firefox</value>
   </data>
   <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
-    <value>Désactive la collecte de données de télémétrie dans Mozilla Firefox.</value>
+    <value>Vô hiệu hoá thu thập dữ liệu từ xa trên Mozilla Firefox.</value>
   </data>
   <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
-    <value>Choisissez votre langue par défaut</value>
+    <value>Chọn ngôn ngữ mặc định</value>
   </data>
   <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
-    <value>Changer de langue</value>
+    <value>Chọn ngôn ngữ</value>
   </data>
   <data name="Shell_Network.Content" xml:space="preserve">
-    <value>Réseau</value>
+    <value>Mạng</value>
   </data>
   <data name="Feature_EnableEndTask.Description" xml:space="preserve">
-    <value>Active une option lors d'un clic droit sur les icônes des applications dans la barre des tâches, vous permettant de mettre fin rapidement aux applications qui ne répondent pas sans ouvrir le Gestionnaire des tâches.</value>
+    <value>Bật tùy chọn khi nhấp chuột phải vào biểu tượng ứng dụng trên taskbar, cho phép nhanh chóng đóng các ứng dụng không phản hồi mà không cần mở Task Manager.</value>
   </data>
   <data name="Feature_EnableEndTask.Header" xml:space="preserve">
-    <value>Activer Fin de tâche</value>
+    <value>Bật EndTask</value>
   </data>
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
-    <value>Appliquer DNS</value>
+    <value>Áp dụng DNS</value>
   </data>
   <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>Serveurs DNS IPv4</value>
+    <value>Máy chủ DNS IPv4</value>
   </data>
   <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>Serveurs DNS IPv6</value>
+    <value>Máy chủ DNS IPv6 DNS</value>
   </data>
   <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>Interface réseau</value>
+    <value>Kết nối mạng</value>
   </data>
   <data name="Network_Primary.Text" xml:space="preserve">
-    <value>Primaire</value>
+    <value>Chính</value>
   </data>
   <data name="Network_ResetDNS.Content" xml:space="preserve">
-    <value>Réinitialiser DNS par défaut</value>
+    <value>Khôi phục DNS mặc định</value>
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
-    <value>Secondaire</value>
+    <value>Phụ</value>
   </data>
   <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>Appliquer DNS personnalisé</value>
+    <value>Đặt DNS tùy chỉnh</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
-    <value>Aucune adresse DNS IPv4 trouvée</value>
+    <value>Không tìm thấy địa chỉ DNS IPv4</value>
   </data>
   <data name="NoIPv6" xml:space="preserve">
-    <value>Aucune adresse DNS IPv6 trouvée</value>
+    <value>Không tìm thấy địa chỉ DNS IPv6</value>
   </data>
   <data name="NoNic" xml:space="preserve">
-    <value>Aucune interface réseau sélectionnée</value>
+    <value>Kết nối mạng chưa được chọn</value>
   </data>
   <data name="NotSet" xml:space="preserve">
-    <value>Non défini</value>
+    <value>Chưa thiết lập</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
-    <value>(filtre adulte)</value>
+    <value>(bộ lọc nội dung nhạy cảm)</value>
   </data>
   <data name="Automatic" xml:space="preserve">
-    <value>Automatique</value>
+    <value>Tự động</value>
   </data>
   <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
-    <value>Désactive l'utilisation des méthodes biométriques pour l'authentification, telles que la reconnaissance des empreintes digitales ou faciale.</value>
+    <value>Vô hiệu hoá sinh trắc học để xác thực, như vân tay hoặc nhận diện khuôn mặt</value>
   </data>
   <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
-    <value>Désactiver les fonctionnalités biométriques</value>
+    <value>Vô hiệu hoá tính năng sinh trắc học</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>RyTuneX est un optimiseur de pointe construit avec le framework WinUI 3, conçu pour amplifier les performances des appareils Windows. Conçu pour Windows 10 et 11, RyTuneX permet aux utilisateurs de supprimer facilement les applications préinstallées indésirables et d'optimiser les ressources système</value>
+    <value>RyTuneX là công cụ tối ưu hóa hiện đại sử dụng công nghệ WinUI 3, được thiết kế để giúp nâng cao hiệu suất cho các thiết bị Windows. Được thiết kế cho cả Windows 10 và 11, RyTuneX cho phép người dùng dễ dàng gỡ bỏ các ứng dụng cài sẵn khó chịu và tối ưu hóa tài nguyên hệ thống một cách hiệu quả.</value>
   </data>
   <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>Vérifier les mises à jour</value>
+    <value>Kiểm tra cập nhật</value>
   </data>
   <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>Une nouvelle version (</value>
+    <value>Phiên bản mới (</value>
   </data>
   <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>) est disponible. Veuillez mettre à jour vers la dernière version pour profiter des nouvelles fonctionnalités et améliorations.</value>
+    <value>) đang có sẵn. Vui lòng cập nhật phiên bản mới nhất để sử dụng tính năng và các cải tiến mới.</value>
   </data>
   <data name="UpdateTitle" xml:space="preserve">
-    <value>Mises à jour RyTuneX</value>
+    <value>Cập nhật RyTuneX</value>
   </data>
   <data name="NetworkError" xml:space="preserve">
-    <value>Une erreur s'est produite. Vérifiez votre connexion Internet et réessayez plus tard.</value>
+    <value>Đã có lỗi xảy ra. Vui lòng kiểm tra kết nối mạng và thử lại sau.</value>
   </data>
   <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>Vous utilisez déjà la dernière version (</value>
+    <value>Bạn đang sử dụng phiên bản mới nhất (</value>
   </data>
   <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>). Aucune mise à jour n'est disponible pour le moment.</value>
+    <value>). Không có bản cập nhật mới nào ngay bây giờ</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Fermer</value>
+    <value>Đóng</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>Mettre à jour</value>
+    <value>Cập nhật</value>
   </data>
   <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Support</value>
+    <value>Hỗ trợ</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
-    <value>Réseau</value>
+    <value>Mạng</value>
   </data>
   <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
-    <value>Batterie</value>
+    <value>Pin</value>
   </data>
   <data name="MACAddress" xml:space="preserve">
-    <value>Adresse MAC</value>
+    <value>Địa chỉ MAC</value>
   </data>
   <data name="AdapterType" xml:space="preserve">
-    <value>Type d'adaptateur</value>
+    <value>Loại Adapter</value>
   </data>
   <data name="EstimatedChargeRemaining" xml:space="preserve">
-    <value>Charge restante estimée</value>
+    <value>Ước tính thời lượng pin còn lại</value>
   </data>
   <data name="BatteryStatus" xml:space="preserve">
-    <value>État de la batterie</value>
+    <value>Tình trạng pin</value>
   </data>
   <data name="Chemistry" xml:space="preserve">
-    <value>Composition chimique</value>
+    <value>Công nghệ</value>
   </data>
   <data name="Shell_Security.Content" xml:space="preserve">
-    <value>Sécurité</value>
+    <value>Bảo mật</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
-    <value>Une erreur inattendue est survenue</value>
+    <value>Đã có lỗi không xác định</value>
   </data>
   <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>Afficher les journaux</value>
+    <value>Xem nhật ký</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
-    <value>Total : {0} application(s)</value>
+    <value>Tổng cộng: {0} ứng dụng</value>
   </data>
   <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Performance</value>
+    <value>Hiệu suất</value>
   </data>
   <data name="Enabled" xml:space="preserve">
-    <value>Activé</value>
+    <value>Bật</value>
   </data>
   <data name="Disabled" xml:space="preserve">
-    <value>Désactivé</value>
+    <value>Tắt</value>
   </data>
   <data name="SecurityPage_Status.Text" xml:space="preserve">
-    <value>État de la sécurité</value>
+    <value>Tình trạng bảo mật</value>
   </data>
   <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
-    <value>Protection contre les virus</value>
+    <value>Bảo vệ khỏi vi-rút &amp; mối đe dọa</value>
   </data>
   <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
-    <value>Protection du pare-feu et réseau</value>
+    <value>Tường lửa &amp; bảo vệ mạng</value>
   </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
-    <value>Mise à jour Windows</value>
+    <value>Windows Update</value>
   </data>
   <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
     <value>SmartScreen</value>
   </data>
   <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>Protection en temps réel</value>
+    <value>Bảo vệ theo thời gian thực</value>
   </data>
   <data name="SecurityPage_UAC.Text" xml:space="preserve">
-    <value>Contrôle de compte utilisateur</value>
+    <value>Kiểm soát tài khoản người dùng (UAC)</value>
   </data>
   <data name="SecurityPage_Details.Text" xml:space="preserve">
-    <value>Détails</value>
+    <value>Chi tiết</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
-    <value>Réparation</value>
+    <value>Sửa chửa</value>
   </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
-    <value>Vous êtes sur le point de supprimer complètement les applications suivantes de votre système:</value>
+    <value>Bạn sắp gỡ bỏ hoàn toàn các ứng dụng sau khỏi hệ thống:</value>
   </data>
   <data name="ConfirmContinue" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir continuer?</value>
+    <value>Bạn có muốn tiếp tục?</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continuer</value>
+    <value>Tiếp tục</value>
   </data>
   <data name="HomePage_cpuUsage.Text" xml:space="preserve">
-    <value>Utilisation du CPU</value>
+    <value>Mức sử dụng CPU</value>
   </data>
   <data name="HomePage_ramUsage.Text" xml:space="preserve">
-    <value>Utilisation de la RAM</value>
+    <value>Mức sử dụng RAM</value>
   </data>
   <data name="HomePage_gpuUsage.Text" xml:space="preserve">
-    <value>Utilisation du GPU</value>
+    <value>Mức sử dụng GPU</value>
   </data>
   <data name="HomePage_diskUsage.Text" xml:space="preserve">
-    <value>Utilisation du disque</value>
+    <value>Mức sử dụng Ổ đĩa</value>
   </data>
   <data name="HomePage_networkUsage.Text" xml:space="preserve">
-    <value>Utilisation du réseau</value>
+    <value>Mức sử dụng Mạng</value>
   </data>
   <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
-    <value>Applications installées</value>
+    <value>Ứng dụng đã cài đặt</value>
   </data>
   <data name="HomePage_processesCount.Text" xml:space="preserve">
-    <value>Processus</value>
+    <value>Tiến trình</value>
   </data>
   <data name="HomePage_servicesCount.Text" xml:space="preserve">
-    <value>Services</value>
+    <value>Dịch vụ</value>
   </data>
   <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
-    <value>Désactiver Smart Screen</value>
+    <value>Vô hiệu hoá Smart Screen</value>
   </data>
   <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>Désactive le filtre SmartScreen, qui vous avertit des applications et fichiers potentiellement dangereux téléchargés depuis Internet. Désactiver cette fonctionnalité augmente le risque d'infection par des malwares.</value>
+    <value>Tắt filter SmartScreen, tính năng cảnh báo bạn về các ứng dụng và tệp tải về từ internet có thể không an toàn. Vô hiệu hoá tính năng này làm tăng nguy cơ nhiễm phần mềm độc hại.</value>
   </data>
   <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
-    <value>Désactiver Actualités et Intérêts</value>
+    <value>Vô hiệu hoá News and Interests</value>
   </data>
   <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
-    <value>Désactive le fil d'actualités et d'intérêts sur la barre des tâches, qui affiche des actualités, la météo et d'autres mises à jour. Désactiver cette fonctionnalité peut améliorer la performance du système.</value>
+    <value>Vô hiệu hoá News and Interests trên thanh taskbar, dùng để hiển thị tin tức, thời tiết, và các cập nhật khác. Vô hiệu hoá có thể tăng hiệu suất hệ thống.</value>
   </data>
   <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
-    <value>Désactiver les fonctionnalités Spotlight</value>
+    <value>Vô hiệu hoá Spotlight</value>
   </data>
   <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité Spotlight qui affiche du contenu personnalisé et des recommandations sur votre écran de verrouillage. Désactiver cette fonctionnalité peut aider à protéger votre vie privée.</value>
+    <value>Tắt tính năng Spotlight giúp tuỳ biến nội dung và gợi ý trên màn hình khoá của bạn. Vô hiệu hoá tính năng này có thể giúp bảo vệ quyền riêng tư.</value>
   </data>
   <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
-    <value>Désactiver les expériences personnalisées</value>
+    <value>Vô hiệu hoá trải nghiệm cá nhân hóa</value>
   </data>
   <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
-    <value>Désactive les expériences personnalisées à travers les applications et services, empêchant Windows de collecter vos préférences et données d'activité.</value>
+    <value>Vô hiệu hoá các trải nghiệm cá nhân hóa trên các ứng dụng và dịch vụ, ngừng việc Windows thu thập dữ liệu sở thích và hoạt động của bạn.</value>
   </data>
   <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
-    <value>Désactiver le contenu optimisé pour le cloud</value>
+    <value>Vô hiệu hoá tối ưu nội dung đám mây</value>
   </data>
   <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
-    <value>Désactive le contenu optimisé pour le cloud, qui peut inclure les mises à jour des applications et la synchronisation des fichiers. Cela peut réduire l'utilisation de la bande passante Internet, mais peut limiter certaines fonctionnalités.</value>
+    <value>Vô hiệu hoá nội dung được tối ưu trên đám mây, bao gồm các bản cập nhật ứng dụng và đồng bộ hóa tệp. Điều này có thể giảm băng thông internet sử dụng nhưng cũng có thể hạn chế một số chức năng.</value>
   </data>
   <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
-    <value>Désactiver les notifications de commentaires</value>
+    <value>Vô hiệu hoá thông báo phản hồi</value>
   </data>
   <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
-    <value>Empêche Windows d'afficher des notifications de commentaires liées à votre expérience avec le système d'exploitation. Désactiver cette fonctionnalité peut réduire les interruptions.</value>
+    <value>Ngăn Windows hiển thị thông báo phản hồi liên quan tới trải nghiệm của bạn với hệ điều hành. Vô hiệu hoá tính năng này có thể giảm thiểu sự làm phiền.</value>
   </data>
   <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
-    <value>Désactiver l'ID de publicité</value>
+    <value>Vô hiệu hoá Advertising ID</value>
   </data>
   <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
-    <value>Désactive l'ID de publicité, empêchant Windows de suivre vos activités à des fins de publicité ciblée. Cela peut améliorer la confidentialité mais peut affecter l'expérience des applications.</value>
+    <value>Vô hiệu hoá Advertising ID, ngăn Windows theo dõi hoạt động của bạn cho mục đích quảng cáo. Điều này có thể tăng cường quyền riêng tư nhưng cũng có thể ảnh hưởng tới trải nghiệm của ứng dụng.</value>
   </data>
   <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
-    <value>Désactiver la publicité Bluetooth</value>
+    <value>Vô hiệu hoá Bluetooth Advertising</value>
   </data>
   <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
-    <value>Désactive la publicité Bluetooth, qui diffuse la présence de votre appareil aux autres appareils à proximité. Désactiver cette fonctionnalité peut réduire les risques pour la vie privée.</value>
+    <value>Tắt Bluetooth advertising, ngăn thiết bị của bạn hiển thị với các thiết bị lân cận. Vô hiệu hoá tính năng này có thể giảm rủi ro liên quan đến quyền riêng tư.</value>
   </data>
   <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
-    <value>Désactiver la connexion automatique après redémarrage</value>
+    <value>Vô hiệu hoá tự động đăng nhập khi khởi động lại</value>
   </data>
   <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
-    <value>Désactive la connexion automatique après un redémarrage, vous obligeant à entrer vos identifiants manuellement. Cela peut améliorer la sécurité, mais ajoute une étape supplémentaire pour se connecter.</value>
+    <value>Vô hiệu hoá tự động đăng nhập sau khi khởi động lại, yêu cầu bạn nhập thông tin xác thực thủ công. Điều này có thể tăng cường bảo mật nhưng sẽ thêm 1 bước khi đăng nhập.</value>
   </data>
   <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
-    <value>Désactiver le partage des données de saisie manuscrite</value>
+    <value>Vô hiệu hoá chia sẻ dữ liệu viết tay</value>
   </data>
   <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
-    <value>Désactive le partage des données de saisie manuscrite avec les services Microsoft, améliorant ainsi la confidentialité mais réduisant certaines fonctionnalités liées à la reconnaissance de l'écriture manuscrite.</value>
+    <value>Tắt việc chia sẻ dữ liệu viết tay với các dịch vụ của Microsoft, giúp tăng cường quyền riêng tư nhưng giảm một số tính năng liên quan đến nhận diện chữ viết tay.</value>
   </data>
   <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
-    <value>Désactiver la collecte des données de saisie de texte</value>
+    <value>Vô hiệu hoá thu thập dữ liệu nhập liệu</value>
   </data>
   <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
-    <value>Désactive la collecte des données de saisie de texte, empêchant Windows de stocker et d'analyser ce que vous tapez. Cela aide à protéger la confidentialité mais peut réduire les améliorations de la précision de la saisie.</value>
+    <value>Vô hiệu hoá việc thu thập dữ liệu nhập từ bàn phím, ngăn Windows lưu trữ và phân tích những gì bạn gõ. Điều này giúp bảo vệ quyền riêng tư nhưng có thể làm giảm khả năng cải thiện độ chính xác khi nhập.</value>
   </data>
   <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
-    <value>Désactiver la personnalisation de la saisie</value>
+    <value>Vô hiệu hoá cá nhân hoá nhập liệu</value>
   </data>
   <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
-    <value>Désactive la personnalisation des méthodes de saisie, y compris le texte prédictif et les fonctionnalités de correction automatique. Cela peut réduire les améliorations des performances du système pour la saisie de texte.</value>
+    <value>Vô hiệu hoá cá nhân hoá phương thức nhập, bao gồm tính năng dự đoán từ và tự động sửa lỗi. Điều này có thể làm giảm khả năng tối ưu hiệu suất nhập liệu của hệ thống.</value>
   </data>
   <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
-    <value>Désactiver le mode de recherche sécurisée</value>
+    <value>Vô hiệu hoá chế độ tìm kiếm an toàn</value>
   </data>
   <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
-    <value>Désactive le mode de recherche sécurisée, qui filtre les contenus potentiellement nuisibles ou inappropriés dans les résultats de recherche. Désactiver cette fonctionnalité augmente le risque d'exposition à du contenu dangereux.</value>
+    <value>Tắt chế độ tìm kiếm an toàn, vốn giúp lọc nội dung có thể gây hại hoặc không phù hợp khỏi kết quả tìm kiếm. Vô hiệu hoá có thể gia tăng nguy cơ tiếp xúc với nội dung không an toàn.</value>
   </data>
   <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
-    <value>Désactiver les téléchargements d'activités</value>
+    <value>Vô hiệu hoá tải lên dữ liệu</value>
   </data>
   <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
-    <value>Désactive le téléchargement des données d'activités, empêchant Microsoft de collecter vos données d'utilisation pour améliorer les services. Cela aide à maintenir la confidentialité.</value>
+    <value>Vô hiệu hoá việc tải lên dữ liệu hoạt động, ngừng thu thập dữ liệu sử dụng để tối ưu dịch vụ của Microsoft. Điều này giúp bảo vệ quyền riêng tư của bạn.</value>
   </data>
   <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
-    <value>Désactiver la synchronisation du presse-papiers</value>
+    <value>Vô hiệu hoá đồng bộ clipboard</value>
   </data>
   <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
-    <value>Désactive la synchronisation du presse-papiers entre vos appareils, garantissant que vos données copiées restent locales et empêchent leur partage avec d'autres appareils.</value>
+    <value>Vô hiệu hoá việc đồng bộ clipboard giữa các thiết bị của bạn, đảm bảo dữ liệu bạn đã sao chép chỉ tồn tại trên thiết bị này và không bị chia sẻ với các thiết bị khác.</value>
   </data>
   <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
-    <value>Désactiver la synchronisation des messages</value>
+    <value>Vô hiệu hoá đồng bộ tin nhắn</value>
   </data>
   <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
-    <value>Empêche la synchronisation des messages entre appareils, garantissant que vos messages texte et notifications ne sont disponibles que sur l'appareil que vous utilisez.</value>
+    <value>Ngừng đồng bộ tin nhắn giữa các thiết bị, đảm bảo tin nhắn và thông báo chỉ xuất hiện trên thiết bị bạn đang sử dụng.</value>
   </data>
   <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
-    <value>Désactiver la synchronisation des paramètres</value>
+    <value>Vô hiệu hoá đồng bộ cài đặt</value>
   </data>
   <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
-    <value>Désactive la synchronisation des paramètres système entre appareils. Cela empêche vos paramètres d'appareil, thèmes et autres configurations d'être partagés.</value>
+    <value>Ngừng đồng bộ cài đặt hệ thống giữa các thiết bị. Điều này đảm bảo các thiết lập, giao diện và tuỳ chọn khác của bạn không bị chia sẻ.</value>
   </data>
   <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
-    <value>Désactiver l'activation vocale</value>
+    <value>Vô hiệu hoá kích hoạt bằng giọng nói</value>
   </data>
   <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
-    <value>Désactive les fonctionnalités d'activation vocale comme Cortana, empêchant l'assistant d'écouter vos commandes vocales. Cela peut améliorer la confidentialité mais réduit la fonctionnalité des commandes vocales.</value>
+    <value>Vô hiệu hoá tính năng kích hoạt bằng giọng nói như Cortana, ngừng việc lắng nghe lệnh bằng giọng nói. Điều này có thể tăng cường quyền riêng tư nhưng làm giảm khả năng nhận diện giọng nói.</value>
   </data>
   <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
-    <value>Désactiver la fonction Localiser mon appareil</value>
+    <value>Vô hiêu hoá Find My Device</value>
   </data>
   <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
-    <value>Désactive la fonction Localiser mon appareil, qui aide à localiser votre appareil en cas de perte. Désactiver cette fonctionnalité réduit vos capacités de récupération d'un appareil perdu mais améliore la confidentialité.</value>
+    <value>Vô hiệu hoá tính năng Find My Device, vốn hỗ trợ bạn tìm lại thiết bị khi bị thất lạc. Vô hiệu hoá sẽ giảm khả năng truy tìm thiết bị nhưng giúp tăng cường quyền riêng tư.</value>
   </data>
   <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>Désactiver le fil d'activités</value>
+    <value>Vô hiệu hoá Activity Feed</value>
   </data>
   <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>Désactive le fil d'activités qui affiche vos activités récentes, aidant à protéger votre vie privée en empêchant les autres de voir ce que vous avez fait sur votre appareil.</value>
+    <value>Tắt activity feed, bảng hiển thị các hoạt động gần đây của bạn, giúp tăng cường quyền riêng tư bằng cách ngăn người khác theo dõi bạn đã làm gì trên thiết bị.</value>
   </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
-    <value>Désactiver le CDP (Customer Data Platform)</value>
+    <value>Vô hiệu hoá CDP (Customer Data Platform)</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
-    <value>Désactive la collecte de données client pour la plateforme CDP de Microsoft, empêchant la collecte de vos informations à des fins d'amélioration des services et de personnalisation.</value>
+    <value>Vô hiệu hoá CDP, ngăn chặn việc thu thập và sử dụng dữ liệu của bạn bởi nền tảng này cho mục đích phân tích và gợi ý theo mục tiêu. Điều này giúp tăng cường quyền riêng tư nhưng có thể hạn chế khả năng cá nhân hoá.</value>
   </data>
   <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>Désactiver les expériences personnalisées dans la confidentialité</value>
+    <value>Vô hiệu hoá cá nhân hoá trải nghiệm trong quyền riêng tư</value>
   </data>
   <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité des expériences personnalisées dans les paramètres de confidentialité, empêchant Windows d'utiliser vos données pour personnaliser vos expériences. Cela peut réduire les fonctionnalités de personnalisation.</value>
+    <value>Vô hiệu hoá tính năng cá nhân hoá trải nghiệm trong phần cài đặt quyền riêng tư, ngăn Windows sử dụng dữ liệu của bạn để tuỳ biến trải nghiệm. Điều này có thể làm giảm mức độ cá nhân hoá.</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
-    <value>Désactiver les notifications de diagnostic</value>
+    <value>Vô hiệu hoá Diagnostics Toast</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
-    <value>Désactive les notifications toast de diagnostic, empêchant Windows de vous montrer des invites liées à la santé du système ou aux erreurs. Cela peut aider à réduire les distractions.</value>
+    <value>Tắt thông báo chẩn đoán dạng nổi, ngăn Windows hiển thị thông báo liên quan tới tình trạng hệ thống hoặc lỗi. Điều này giúp giảm phân tâm.</value>
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
-    <value>Désactiver la confidentialité de la parole en ligne</value>
+    <value>Vô hiệu hoá Online Speech Privacy</value>
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
-    <value>Désactive la confidentialité de la parole en ligne, empêchant Windows de stocker ou de traiter les commandes vocales. Cela augmente la confidentialité, mais limite les fonctionnalités vocales comme la recherche et les commandes vocales.</value>
+    <value>Vô hiệu hoá quyền riêng tư cho giọng nói trực tuyến, ngăn Windows lưu trữ hoặc xử lý các lệnh bằng giọng nói. Điều này giúp tăng cường quyền riêng tư nhưng có thể hạn chế các tính năng như tìm kiếm hoặc điều khiển bằng giọng nói.</value>
   </data>
   <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>Désactiver l'accès à la localisation</value>
+    <value>Vô hiệu hoá quyền truy cập vị trí</value>
   </data>
   <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>Désactive l'accès à la localisation pour les applications et services, les empêchant d'utiliser le GPS ou la localisation réseau de votre appareil. Cela améliore la confidentialité, mais peut limiter les services basés sur la localisation.</value>
+    <value>Tắt quyền truy cập vị trí của ứng dụng và dịch vụ, ngăn việc sử dụng GPS hoặc vị trí mạng từ thiết bị. Điều này giúp tăng cường quyền riêng tư nhưng có thể hạn chế các dịch vụ dựa trên vị trí.</value>
   </data>
   <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
-    <value>Désactiver les fonctionnalités de localisation</value>
+    <value>Vô hiệu hoá các tính năng định vị</value>
   </data>
   <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
-    <value>Désactive toutes les fonctionnalités basées sur la localisation sur votre appareil, y compris les services de localisation pour les applications et les fonctionnalités de sécurité. Cela peut améliorer la confidentialité, mais réduire la fonctionnalité des services dépendants de la localisation.</value>
+    <value>Vô hiệu hoá tất cả tính năng định vị trên thiết bị, bao gồm dịch vụ định vị cho ứng dụng hoặc các chức năng bảo mật. Điều này có thể giúp bảo vệ quyền riêng tư nhưng cũng làm giảm khả năng hoạt động của các dịch vụ phụ thuộc vào định vị.</value>
   </data>
   <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
-    <value>Désactiver le délai d'affichage des menus</value>
+    <value>Vô hiệu hoá độ trễ hiện menu</value>
   </data>
   <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
-    <value>Contrôle le délai avant l'apparition des menus après un survol de la souris. Désactiver cette fonctionnalité peut faire apparaître les menus instantanément, améliorant la réactivité, mais peut réduire le contrôle de l'utilisateur.</value>
+    <value>Tuỳ chỉnh độ trễ khi menu xuất hiện sau khi di chuột. Vô hiệu hoá tính năng này có thể giúp menu mở ngay lập tức, tăng độ phản hồi nhưng có thể làm giảm khả năng kiểm soát của người dùng.</value>
   </data>
   <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
-    <value>Désactiver le temps de survol de la souris</value>
+    <value>Vô hiệu hoá thời gian di chuột</value>
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
-    <value>Ajuste le temps que le système attend avant de déclencher un événement de survol. Désactiver cette fonctionnalité peut accélérer les interactions, mais peut entraîner des activations non intentionnelles.</value>
+    <value>Tuỳ chỉnh thời gian hệ thống chờ trước khi kích hoạt sự kiện di chuột. Vô hiệu hoá có thể tăng tốc độ phản hồi nhưng dễ dẫn đến các kích hoạt ngoài ý muốn.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
-    <value>Désactiver la saisie semi-automatique</value>
+    <value>Vô hiệu hoá tự động hoàn thành</value>
   </data>
   <data name="Feature_AutoComplete.Description" xml:space="preserve">
-    <value>Désactive les suggestions automatiques lors de la saisie dans certains champs, tels que les zones de recherche et les formulaires. Désactiver cette fonctionnalité peut réduire les distractions, mais peut ralentir le flux de travail.</value>
+    <value>Vô hiệu hoá tự động gợi ý khi nhập liệu, như hộp tìm kiếm hoặc biểu mẫu. Điều này giúp giảm phân tâm nhưng có thể làm chậm quy trình làm việc.</value>
   </data>
   <data name="Feature_CrashDump.Header" xml:space="preserve">
-    <value>Désactiver les vidages de mémoire lors des plantages</value>
+    <value>Vô hiệu hoá Crash Dump</value>
   </data>
   <data name="Feature_CrashDump.Description" xml:space="preserve">
-    <value>Contrôle si les rapports de plantage et les vidages de mémoire sont générés lors des plantages d'applications. Désactiver cette fonctionnalité peut aider à préserver l'espace disque, mais peut réduire la capacité à diagnostiquer et résoudre les problèmes des applications.</value>
+    <value>Tuỳ chỉnh việc tạo báo cáo sự cố và dump bộ nhớ được tạo ra khi ứng dụng crash. Vô hiệu hoá tính năng này có tiết kiệm dung lượng ổ đĩa nhưng có thể làm giảm khả năng phân tích và khắc phục sự cố.</value>
   </data>
   <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
-    <value>Désactiver l'assistance à distance</value>
+    <value>Vô hiệu hoá Remote Assistance</value>
   </data>
   <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
-    <value>Désactive les fonctionnalités d'assistance à distance, permettant à d'autres de vous aider via le bureau à distance. Désactiver cette fonctionnalité peut améliorer la sécurité, mais limite les options de support.</value>
+    <value>Vô hiệu hoá tính năng hỗ trợ từ xa, cho phép người khác truy cập và hỗ trợ bạn thông qua remote desktop. Vô hiệu hoá tính năng này có thể tăng cường bảo mật nhưng hạn chế khả năng nhận hỗ trợ.</value>
   </data>
   <data name="Feature_WindowShake.Header" xml:space="preserve">
-    <value>Désactiver le secouage de fenêtre</value>
+    <value>Vô hiệu hoá Window Shake</value>
   </data>
   <data name="Feature_WindowShake.Description" xml:space="preserve">
-    <value>Désactive la fonctionnalité de secouage de fenêtre qui minimise toutes les fenêtres ouvertes lorsque vous secouez une fenêtre. Désactiver cette fonctionnalité améliore la concentration, mais supprime un outil pratique de gestion des fenêtres.</value>
+    <value>Vô hiệu hoá tính năng lắc cửa sổ để thu nhỏ tất cả cửa sổ khác khi bạn lắc một cửa sổ. Vô hiệu hoá tính năng này giúp tăng khả năng tập trung nhưng loại bỏ một công cụ quản lý cửa sổ tiện lợi.</value>
   </data>
   <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
-    <value>Ajouter au menu contextuel Copier/Déplacer</value>
+    <value>Thêm Copy/Move vào menu chuột phải</value>
   </data>
   <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
-    <value>Active des options supplémentaires dans le menu contextuel des fichiers pour copier ou déplacer facilement des fichiers vers un nouvel emplacement. Cette fonctionnalité simplifie la gestion des fichiers en offrant un accès rapide à ces fonctions directement depuis le menu clic droit.</value>
+    <value>Thêm một tuỳ chọn vào menu chuột phải của file để dễ dàng sao chép hoặc di chuyển tới vị trí mới. Tính năng này giúp quản lý tệp hiệu quả hơn bằng cách cung cấp quyền truy cập nhanh vào các chức năng ngay từ menu chuột phải.</value>
   </data>
   <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
-    <value>Ajuster les délais d'attente des tâches</value>
+    <value>Điều chỉnh thời gian chờ của tác vụ</value>
   </data>
   <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
-    <value>Modifie les paramètres de délai d'attente pour les tâches système. L'ajustement peut améliorer les performances dans certains scénarios, mais peut provoquer l'échec des tâches dans certaines conditions.</value>
+    <value>Tuỳ chỉnh cài đặt thời gian chờ cho các tác vụ hệ thống. Việc điều chỉnh có thể cải thiện hiệu suất trong một số trường hợp nhưng cũng có thể khiến tác vụ thất bại trong những điều kiện nhất định.</value>
   </data>
   <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
-    <value>Activer les vérifications de faible espace disque</value>
+    <value>Kiểm tra ổ đĩa dung lượng thấp</value>
   </data>
   <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
-    <value>Active les vérifications automatiques de l'espace disque faible pour prévenir les problèmes de performances. Désactiver cette fonctionnalité peut réduire les notifications, mais vous risquez de manquer des avertissements critiques concernant le stockage.</value>
+    <value>Bật tự đồng kiểm tra dung lượng ổ đĩa thấp để ngăn ngừa vấn đề hiệu năng. Vô hiệu hoá tính năng này có thể giảm thông báo, nhưng bạn có thể bỏ lỡ các cảnh báo lưu trữ quan trọng.</value>
   </data>
   <data name="Feature_LinkResolve.Header" xml:space="preserve">
-    <value>Désactiver la résolution des liens</value>
+    <value>Vô hiệu hoá Link Resolve</value>
   </data>
   <data name="Feature_LinkResolve.Description" xml:space="preserve">
-    <value>Désactive la résolution des liens brisés dans les fichiers et dossiers. Désactiver cette fonctionnalité peut accélérer les opérations, mais peut laisser des liens obsolètes non résolus.</value>
+    <value>Vô hiệu hoá việc tự động tìm lại các liên kết bị hỏng trong tệp và thư mục. Vô hiệu hoá tính năng này có thể tăng tốc hoạt động nhưng có thể để lại các liên kết lỗi không được xử lý.</value>
   </data>
   <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
-    <value>Réduire les délais d'attente des services</value>
+    <value>Giảm thời gian chờ dịch vụ</value>
   </data>
   <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
-    <value>Ajuste les délais d'attente pour les services système. Les réduire peut améliorer les performances, mais peut provoquer l'arrêt prématuré des services.</value>
+    <value>Điều chỉnh thời gian chờ của các dịch vụ hệ thống. Giảm thời gian chờ có thể cải thiện hiệu suất nhưng cũng có thể khiến dịch vụ bị tắt sớm.</value>
   </data>
   <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
-    <value>Désactiver le registre à distance</value>
+    <value>Vô hiệu hoá truy cập registry từ xa</value>
   </data>
   <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
-    <value>Désactive l'accès distant au registre. Désactiver cette fonctionnalité améliore la sécurité, mais empêche la configuration à distance des paramètres du registre.</value>
+    <value>Vô hiệu hoá quyền truy cập registry từ xa. Vô hiệu hoá tính năng có thể tăng cường bảo mật nhưng cũng ngăn chặn việc cấu hình registry từ xa.</value>
   </data>
   <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
-    <value>Masquer les extensions de fichiers et les fichiers cachés</value>
+    <value>Ẩn phần mở rộng của tệp tin và tệp ẩn</value>
   </data>
   <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
-    <value>Contrôle la visibilité des extensions de fichiers et des fichiers cachés. Activer cette fonctionnalité réduit l'encombrement, mais masque des détails importants des fichiers.</value>
+    <value>Tuỳ chỉnh việc hiển thị phần mở rộng của tệp tin và các tệp ẩn. Bật tính năng này có thể làm giảm sự lộn xộn nhưng sẽ ẩn đi các thông tin quan trọng của tệp.</value>
   </data>
   <data name="Feature_SystemProfile.Header" xml:space="preserve">
-    <value>Optimiser le profil système</value>
+    <value>Tối ưu hệ thống</value>
   </data>
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
-    <value>Améliore les performances de votre système en ajustant les paramètres du profil système. Cette fonctionnalité priorise la vitesse et l'efficacité, améliorant la réactivité générale du système et la gestion des ressources.</value>
+    <value>Cải thiện hiệu suất hệ thống bằng cách điều chỉnh các thiết lập của hệ thống. Tính năng này ưu tiên tốc độ và hiệu quả, tối ưu phản hồi tổng hệ của hệ thống và quản lý tài nguyên.</value>
   </data>
   <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>Optimiser les paramètres GPU et de priorité</value>
+    <value>Cải thiện GPU và cài đặt ưu tiên</value>
   </data>
   <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>Optimise les configurations GPU et les priorités des processus pour améliorer les performances, assurant un meilleur rendu graphique et des opérations plus fluides pour les tâches gourmandes en ressources comme le jeu et le multitâche.</value>
+    <value>Tối ưu cấu hình GPU và ưu tiên tiến trình để tăng cường hiệu suất, đảm bảo đồ hoạ render tối hơn và vận hành mượt mà cho các tác vụ tốn nhiều tài nguyên như chơi game và đa nhiệm.</value>
   </data>
   <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>Désactiver le mode serveur de trames</value>
+    <value>Vô hiệu hoá Frame Server</value>
   </data>
   <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>Désactive le mode serveur de trames pour l'encodage vidéo avancé. Désactiver cette fonctionnalité améliore les performances, mais peut réduire la qualité vidéo dans certaines conditions.</value>
+    <value>Vô hiêu hoá chế độ frame server dùng cho mã hoá video nâng cao. Vô hiệu hoá tính năng này có thể cải thiện hiệu năng nhưng sẽ giảm chất lượng video trong một số trường hợp.</value>
   </data>
   <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>Ajuster les paramètres GPU à faible latence</value>
+    <value>Tuỳ chỉnh cài đặt độ trễ GPU</value>
   </data>
   <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>Ajuste les paramètres GPU pour minimiser la latence, améliorant les performances de jeu ou vidéo.</value>
+    <value>Điều chỉnh cài đặt của GPU để giảm độ trễ, cải thiện hiệu suất chơi game hoặc xử lý video.</value>
   </data>
   <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>Définir une limite d'effort non optimal</value>
+    <value>Đặt giới hạn cho tiến trình không ưu tiên</value>
   </data>
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>Définit une limite pour les processus non optimisés. L'activer peut prioriser les performances, mais peut réduire la flexibilité du système dans certains cas.</value>
+    <value>Thiết lập giới hạn cho các tiến trình không thuộc loại ưu tiên cao. Bật tính năng này có thể ưu tiên hiệu suất nhưng làm giảm tính linh hoạt của hệ thống.</value>
   </data>
   <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>Chargement...</value>
+    <value>Đang tải...</value>
   </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>Informations sur l'appareil</value>
+    <value>Thông tin thiết bị</value>
   </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
-    <value>Activer le menu contextuel classique</value>
+    <value>Bật menu chuột phải cổ điển</value>
   </data>
   <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
-    <value>Restaure le style du menu contextuel classique de Windows 10, offrant une expérience familière de clic droit avec toutes les options affichées immédiatement</value>
+    <value>Khôi phục kiểu menu chuột phải cổ điển của Windows 10, mang lại trải nghiệm quen thuộc với tất cả tuỳ chọn hiển thị ngay lập tức</value>
   </data>
   <data name="DoNotShowCheckBox" xml:space="preserve">
-    <value>Ne plus afficher ce message</value>
+    <value>Không hiển thị lại thông báo này</value>
   </data>
   <data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>Créer un point de restauration</value>
+    <value>Tạo điểm khôi phục</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
-    <value>Il est fortement recommandé de créer un point de restauration avant d'apporter des modifications à votre système.
+    <value>Khuyến khích bạn tạo một điểm khôi phục trước khi thực hiện bất kỳ thay đổi nào đối với hệ thống.
 
 
-Souhaitez-vous créer un point de restauration système avant de continuer ?</value>
+Bạn có muốn tạo điểm khôi phục hệ thống trước khi tiếp tục không?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
-    <value>Création d'un point de restauration</value>
+    <value>Đang tạo điểm khôi phục</value>
   </data>
   <data name="RestorePointCreated" xml:space="preserve">
-    <value>Point de restauration créé</value>
+    <value>Đã tạo điểm khôi phục</value>
   </data>
   <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>Un point de restauration système a été créé avec succès.</value>
+    <value>Điểm khôi phục đã tạo hoàn tất.</value>
   </data>
   <data name="RestorePointCreationError" xml:space="preserve">
-    <value>Échec de la création du point de restauration</value>
+    <value>Thất bại khi tạo điểm khôi phục</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
-    <value>Annuler toutes les modifications</value>
+    <value>Hoàn tác thay đổi</value>
   </data>
   <data name="Settings_RevertChanges.Description" xml:space="preserve">
-    <value>Annule toutes les modifications apportées à votre système par RyTuneX, y compris le point de restauration</value>
+    <value>Hoàn tác tất cả thay đổi mà RyTuneX đã làm với hệ thống của bạn, bao gồm cả điểm khôi phục</value>
   </data>
   <data name="RevertingChanges" xml:space="preserve">
-    <value>Annulation des modifications en cours...</value>
+    <value>Đang hoàn tác thay đổi...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>Vous êtes sur le point d'annuler toutes les modifications apportées à votre système par RyTuneX (à l'exception des applications désinstallées) et de réinitialiser les préférences de l'application.
+    <value>Bạn sắp hoàn tác tất cả các thay đổi do RyTuneX thực hiện trên hệ thống của bạn (ngoại trừ các ứng dụng đã gỡ cài đặt) và đặt lại các tuỳ chọn của ứng dụng.
 
 
-Êtes-vous sûr de vouloir continuer ?</value>
+Bạn có chắc chắn muốn tiếp tục không?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
-    <value>Aucun changement notable trouvé.</value>
+    <value>Không có thay đổi nào đáng chú ý được tìm thấy.</value>
   </data>
   <data name="OperationStopped" xml:space="preserve">
-    <value>Opération arrêtée</value>
+    <value>Tác vụ đã dừng</value>
   </data>
   <data name="ReportSaved" xml:space="preserve">
-    <value>Rapport enregistré sur votre bureau</value>
+    <value>Báo cáo đã lưu vào Desktop của bạn</value>
   </data>
   <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
-    <value>Diagnostic de la mémoire</value>
+    <value>Chẩn đoán bộ nhớ</value>
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
-    <value>Les problèmes de mémoire peuvent entraîner une perte d'informations ou un dysfonctionnement de votre ordinateur.
+    <value>Các sự cố về bộ nhớ có thể khiến máy tính của bạn mất dữ liệu hoặc ngừng hoạt động.
 
 
-Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</value>
+Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="RestartNow" xml:space="preserve">
-    <value>Redémarrer maintenant</value>
+    <value>Khởi động lại ngay</value>
   </data>
   <data name="ScheduleLater" xml:space="preserve">
-    <value>Planifier pour plus tard</value>
+    <value>Đặt lịch khởi động lại</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
+    <value>Huỷ</value>
   </data>
   <data name="ScheduledLater" xml:space="preserve">
-    <value>Planifié pour le prochain redémarrage</value>
+    <value>Đặt lịch cho lần khởi động tiếp theo</value>
   </data>
   <data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>Analyser</value>
+    <value>Quét</value>
   </data>
   <data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>Réparer</value>
+    <value>Sửa chữa</value>
   </data>
   <data name="RepairPage_StopButton.Content" xml:space="preserve">
-    <value>Arrêter</value>
+    <value>Dừng</value>
   </data>
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>Sélectionnez au moins une option pour analyser/réparer</value>
+    <value>Chọn tối thiểu một tuỳ chọn để quét/sửa chửa</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
-    <value>État de la batterie</value>
+    <value>Tình trạng pin</value>
   </data>
   <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
-    <value>Cela générera un rapport complet sur l'état de santé de votre batterie</value>
+    <value>Điều này sẽ tạo ra một thống kê đầy đủ về tình trạng pin của máy</value>
   </data>
   <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
-    <value>Générer</value>
+    <value>Tạo</value>
   </data>
   <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
-    <value>Diagnostic de la mémoire</value>
+    <value>Chẩn đoán bộ nhớ</value>
   </data>
   <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
-    <value>Analysez la mémoire de votre système pour détecter d'éventuels problèmes et améliorer sa stabilité</value>
+    <value>Phân tích bộ nhớ hệ thống của bạn để phát hiện các vấn đề tiềm ẩn và cải thiện sự ổn định</value>
   </data>
   <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
-    <value>Diagnostiquer</value>
+    <value>Phân tích</value>
   </data>
   <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
-    <value>Optimisations du disque</value>
+    <value>Tối ưu ổ đĩa</value>
   </data>
   <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
-    <value>Optimise votre périphérique de stockage en le défragmentant (si HDD) ou en le retrimant (si SSD)</value>
+    <value>Điều này sẽ tối ưu hóa thiết bị lưu trữ của bạn bằng cách chống phân mảnh (với HDD) hoặc tối ưu lại dung lượng (với SSD)</value>
   </data>
   <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
-    <value>Optimiser</value>
+    <value>Tối ưu</value>
   </data>
   <data name="RepairPage_EventViewer.Header" xml:space="preserve">
-    <value>Observateur d'événements</value>
+    <value>Event Viewer</value>
   </data>
   <data name="RepairPage_EventViewer.Description" xml:space="preserve">
-    <value>Affiche les journaux des événements système récents pour le dépannage</value>
+    <value>Điều này sẽ hiển thị nhật kí sự kiện gần đây của hệ thống để xử lý sự cố</value>
   </data>
   <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
-    <value>Options de réparation</value>
+    <value>Tuỳ chọn sửa chửa</value>
   </data>
   <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>Options de diagnostic</value>
+    <value>Tuỳ chọn phân tích</value>
   </data>
   <data name="OperationCompleted" xml:space="preserve">
-    <value>Opération terminée</value>
+    <value>Hoàn thành tác vụ</value>
   </data>
   <data name="RestorePointTitle" xml:space="preserve">
-    <value>Point de restauration</value>
+    <value>Điểm khôi phục</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>Avertissement</value>
+    <value>Lưu ý</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Désactiver la restauration du système supprimera tous les points de restauration, y compris ceux créés par RyTuneX.
+    <value>Vô hiệu hoá khôi phục hệ thống sẽ xóa tất cả các điểm khôi phục hiện có bao gôm cả những gì được tạo bởi RyTuneX.
 
 
-Êtes-vous sûr de vouloir continuer ?</value>
+Bạn có chắc chắn muốn tiếp tục không?</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
-    <value>Paramètres de publicité</value>
+    <value>Cài đặt quảng cáo</value>
   </data>
   <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
-    <value>Paramètres de télémétrie</value>
+    <value>Cài đặt Telemetry</value>
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
-    <value>Autres paramètres</value>
+    <value>Cài đặt khác</value>
   </data>
   <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>Optimisations système de base</value>
+    <value>Tối ưu hệ thống cơ bản</value>
   </data>
   <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>Optimisations système avancées</value>
+    <value>Tối ưu hệ thống nâng cao</value>
   </data>
   <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
-    <value>Aucune application ne correspond à votre recherche</value>
+    <value>Không có ứng dụng nào khớp với tìm kiếm</value>
   </data>
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
-    <value>Chercher des applications...</value>
+    <value>Tìm ứng dụng...</value>
   </data>
   <data name="Feature_BackgroundApps.Header" xml:space="preserve">
-    <value>Désactiver les applications en arrière-plan</value>
+    <value>Vô hiệu hoá ứng dụng trong nền</value>
   </data>
   <data name="Feature_BackgroundApps.Description" xml:space="preserve">
-    <value>Empêche les applications de s'exécuter en arrière-plan, ce qui améliore les performances dans certains cas.</value>
+    <value>Ngăn không cho ứng dụng chạy trong nền, tối ưu hệ thông trong một vài trường hợp.</value>
   </data>
   <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
-    <value>Activer le mode sombre de Windows</value>
+    <value>Bật Windows Dark Mode</value>
   </data>
   <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
-    <value>Activer le mode sombre pour l'ensemble du système sans avoir besoin d'activer Windows</value>
+    <value>Bật chế độ tối cho toàn bộ hệ thống mà không cần kích hoạt Windows</value>
   </data>
   <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
-    <value>Désactiver la transparence de Windows</value>
+    <value>Vô hiệu hoá độ trong suốt của Windows</value>
   </data>
   <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
-    <value>Désactive les effets transparents dans les éléments de l'interface utilisateur du système comme la barre des tâches et les fenêtres, améliorant ainsi les performances</value>
+    <value>Vô hiệu hoá hiệu ứng trong suốt của các thành phần UI trong hệ thống như taskbar và cửa sổ, giúp cải thiện hiệu năng</value>
   </data>
   <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
-    <value>Applications standard</value>
+    <value>Ứng dụng tiêu chuẩn</value>
   </data>
   <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
-    <value>Toutes les applications</value>
+    <value>Tất cả ứng dụng</value>
   </data>
   <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
-    <value>Applications Win32</value>
+    <value>Ứng dụng Win32</value>
   </data>
   <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
-    <value>Compresser le système</value>
+    <value>Nén HĐH</value>
   </data>
   <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
-    <value>Activez la compression du système d'exploitation pour réduire l'utilisation de l'espace disque. Cette fonctionnalité est particulièrement utile pour les appareils disposant d'un espace de stockage limité, mais peut légèrement affecter les performances du système sur les matériels moins puissants</value>
+    <value>Bật nén hệ điều hành để giảm dung lượng sử dụng trên ổ đĩa. Tính năng này đặc biệt hữu ích cho các thiết bị có dung lượng lưu trữ hạn chế, nhưng có thể ảnh hưởng nhẹ đến hiệu suất hệ thống trên phần cứng cấu hình thấp</value>
   </data>
   <data name="Compressing" xml:space="preserve">
-    <value>Compression des fichiers système...</value>
+    <value>Đang nén các tệp nhị phân hệ thống...</value>
   </data>
   <data name="Decompressing" xml:space="preserve">
-    <value>Décompression des fichiers système...</value>
+    <value>Đang giải nén các tệp nhị phân hệ thống...</value>
   </data>
   <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
-    <value>Vérifier la compression</value>
+    <value>Kiểm tra tình trạng nén</value>
   </data>
   <data name="Compress" xml:space="preserve">
-    <value>Compresser</value>
+    <value>Nén</value>
   </data>
   <data name="Decompress" xml:space="preserve">
-    <value>Décompresser</value>
+    <value>Giải nén</value>
   </data>
   <data name="SystemCompressionTitle" xml:space="preserve">
-    <value>Compression du système</value>
+    <value>Nén hệ thống</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
-    <value>Désactiver le fractionnement de l'hôte de service</value>
+    <value>Vô hiệu hoá Service Host Splitting</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
-    <value>Désactive le fractionnement de l'hôte de service pour une utilisation beaucoup plus faible de la RAM et un nombre de processus réduit.</value>
+    <value>Vô hiệu hoá Service Host splitting để giảm RAM sử dụng và tiến trình.</value>
   </data>
   <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
-    <value>Activer le menu de démarrage classique</value>
+    <value>Bật Legacy Boot Menu</value>
   </data>
   <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
-    <value>Passer au menu de démarrage classique pour un démarrage plus rapide.</value>
+    <value>Sử dụng boot menu cổ điển để khởi động nhanh hơn.</value>
   </data>
   <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
-    <value>Optimiser les paramètres NTFS</value>
+    <value>Tối ưu cài đặt NTFS</value>
   </data>
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
-    <value>Ajuster les paramètres NTFS pour améliorer les performances et la confidentialité.</value>
+    <value>Tối ưu cài đặt NTFS để cải thiện hiệu suất và tăng cường bảo mật.</value>
   </data>
   <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>Désactiver la pagination</value>
+    <value>Vô hiệu hoá Paging</value>
   </data>
   <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>Désactiver la pagination de la mémoire pour des performances maximales.</value>
+    <value>Tắt paging bộ nhớ để tăng hiệu suất tối đa.</value>
   </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
-    <value>Optimiser les performances des applications au premier plan</value>
+    <value>Tối ưu hiệu suất ứng dụng đang hoạt động</value>
   </data>
   <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
-    <value>Améliore les performances des applications actives en priorisant les tâches au premier plan.</value>
+    <value>Tăng cường hiệu suất cho các ứng dụng đang hoạt động bằng cách ưu tiên các tác vụ ở nền trước.</value>
   </data>
   <data name="Feature_WPBT.Header" xml:space="preserve">
-    <value>Désactiver l'exécution de WPBT</value>
+    <value>Vô hiệu hoá WPBT</value>
   </data>
   <data name="Feature_WPBT.Description" xml:space="preserve">
-    <value>Empêche le firmware d'exécuter des programmes (par ex., logiciels OEM préinstallés) au démarrage.</value>
+    <value>Dừng phần cứng khỏi việc chạy các chương trình (ví dụ: bloatware của OEM) khi khởi động.</value>
   </data>
   <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>Désactiver les services inutiles</value>
+    <value>Vô hiệu hoá dịch vụ không cần thiết</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>Optimisez les performances du système en désactivant les services d'arrière-plan qui ne sont pas essentiels au fonctionnement de votre appareil. Cela permet de libérer des ressources système et d'améliorer l'efficacité globale.</value>
+    <value>Tối ưu hiệu suất hệ thống bằng cách vô hiệu hóa các dịch vụ nền không cần thiết cho hoạt động của thiết bị. Điều này giúp giải phóng tài nguyên hệ thống và cải thiện hiệu quả tổng thể.</value>
   </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Annuler les modifications</value>
+    <value>Hoàn tác thay đổi</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value>Importer</value>
+    <value>Nhập</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value>Exporter</value>
+    <value>Xuất</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value>Exporter/Importer les optimisations</value>
+    <value>Tối ưu hoá nhập/xuất</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value>Exportez vos optimisations actuelles ou importez-les pour une optimisation plus simple et automatisée</value>
+    <value>Xuất các tối ưu hóa hiện tại của bạn hoặc nhập cài đặt có sẵn để tối ưu hóa tự động và dễ dàng hơn</value>
   </data>
   <data name="SettingsImported" xml:space="preserve">
-    <value>Paramètres importés et appliqués avec succès</value>
+    <value>Cài đặt đã được nhập và áp dụng thành công</value>
   </data>
   <data name="SettingsExported" xml:space="preserve">
-    <value>Paramètres exportés avec succès vers :</value>
+    <value>Cài đặt đã được xuất thành công tới:</value>
   </data>
 </root>

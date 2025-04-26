@@ -90,7 +90,8 @@
                     </TreeView.ItemContainerStyle>
                     <TreeView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <!--<For some reason the tooltip does not show unless a background is specified -->
+                            <Grid Background="Transparent" ToolTipService.ToolTip="{Binding Item1}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>

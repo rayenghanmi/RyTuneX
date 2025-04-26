@@ -3,6 +3,23 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.3.1 - Released
+
+### Added
+
+- Implemented a new way to export and import settings, allowing users to save their settings in a `.reg` file and import them later #28. This feature is available in the `Settings` page.
+- Added vi-vn (Vietnamese) language support, contributed by @kleqing #29.
+
+### Fixes
+
+- Resolved an issue where the app would crash upon attempting to close it while the `Home` page was actively updating system usage statistics.
+- Fixed an issue where some failed apps were being displayed as successfully uninstalled.
+
+### Changes
+
+- Updated the toggle switch state management in `FeaturesPage`, `OptimizeSystemPage`, and `PrivacyPage` to use Windows Registry entries instead of `LocalSettings` for saving and retrieving states.
+- Improved Error Logging by displaying the error message in a notification before logging it.
+
 ## 1.3.0 - Released
 
 ### Added
