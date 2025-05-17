@@ -1371,4 +1371,10 @@ Tem certeza de que deseja continuar?</value>
   <data name="SettingsExported" xml:space="preserve">
     <value>Configurações exportadas com sucesso para:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>Desativar a seção Recomendado no menu Iniciar</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>Remove a seção "Recomendado" do menu Iniciar para proporcionar um layout mais limpo e focado.</value>
+  </data>
 </root>

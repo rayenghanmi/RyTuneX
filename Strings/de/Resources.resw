@@ -1371,4 +1371,10 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="SettingsExported" xml:space="preserve">
     <value>Einstellungen erfolgreich exportiert nach:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>Empfohlenen Bereich im Startmenü deaktivieren</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>Entfernt den Bereich "Empfohlen" aus dem Startmenü, um ein aufgeräumteres und fokussierteres Layout bereitzustellen.</value>
+  </data>
 </root>

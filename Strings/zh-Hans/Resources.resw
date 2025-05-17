@@ -1371,4 +1371,10 @@
   <data name="SettingsExported" xml:space="preserve">
     <value>设置已成功导出至：</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>禁用开始菜单中的“推荐”部分</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>从开始菜单中移除“推荐”部分, 以提供更简洁、更专注的布局.</value>
+  </data>
 </root>

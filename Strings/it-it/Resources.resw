@@ -1371,4 +1371,10 @@ Vuoi continuare?</value>
   <data name="SettingsExported" xml:space="preserve">
     <value>Impostazioni esportate correttamente in:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>Disattiva la sezione Consigliati nel menu Start</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>Rimuove la sezione "Consigliati" dal menu Start per offrire un layout più pulito e mirato.</value>
+  </data>
 </root>

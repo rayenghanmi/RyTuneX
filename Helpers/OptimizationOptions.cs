@@ -463,6 +463,9 @@ internal partial class OptimizationOptions
             {
                 switch (action)
                 {
+                    case "EnableRecommendedSectionStartMenu":
+                        OptimizeSystemHelper.EnableRecommendedSectionStartMenu();
+                        break;
                     case "EnableUnnecessaryServices":
                         OptimizeSystemHelper.EnableUnnecessaryServices();
                         break;
@@ -770,6 +773,19 @@ internal partial class OptimizationOptions
         {
             switch (toggleSwitch.Tag)
             {
+                case "RecommendedSectionStartMenu":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableRecommendedSectionStartMenu();
+                        SaveRevertAction("EnableRecommendedSectionStartMenu");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableRecommendedSectionStartMenu();
+                        RemoveRevertAction("EnableRecommendedSectionStartMenu");
+                    }
+                    break;
+
                 case "LegacyBootMenu":
                     if (toggleSwitch.IsOn)
                     {

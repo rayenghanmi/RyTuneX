@@ -1371,4 +1371,10 @@ Bạn có chắc chắn muốn tiếp tục không?</value>
   <data name="SettingsExported" xml:space="preserve">
     <value>Cài đặt đã được xuất thành công tới:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value />
+  </data>
 </root>

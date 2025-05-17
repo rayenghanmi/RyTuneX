@@ -1368,4 +1368,10 @@
   <data name="SettingsExported" xml:space="preserve">
     <value>Настройки успешно экспортированы в:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>Отключить раздел «Рекомендуется» в меню «Пуск»</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>Удаляет раздел «Рекомендуется» из меню «Пуск» для более чистого и сфокусированного интерфейса.</value>
+  </data>
 </root>

@@ -1366,4 +1366,10 @@
   <data name="SettingsExported" xml:space="preserve">
     <value>設定已成功匯出至：</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>停用開始功能表中的「推薦」區段</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>從開始功能表中移除「推薦」區段, 以提供更清爽且更專注的佈局.</value>
+  </data>
 </root>

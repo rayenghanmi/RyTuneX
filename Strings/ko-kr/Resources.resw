@@ -1371,4 +1371,10 @@
   <data name="SettingsExported" xml:space="preserve">
     <value>설정이 다음으로 성공적으로 내보내졌습니다:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>시작 메뉴에서 추천 섹션 비활성화</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>시작 메뉴에서 '추천' 섹션을 제거하여 더 깔끔하고 집중된 레이아웃을 제공합니다.</value>
+  </data>
 </root>

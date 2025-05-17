@@ -1371,4 +1371,10 @@ Are you sure you want to continue?</value>
   <data name="SettingsExported" xml:space="preserve">
     <value>Settings exported successfully to:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>Disable Recommended Section In Start Menu</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>Removes the "Recommended" section from the Start Menu to provide a cleaner and more focused layout.</value>
+  </data>
 </root>
