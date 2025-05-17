@@ -15,7 +15,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
-- Changed Edge removal to use @he3als EdgeRemover instead of the curret one for better performance and reliability #32.
+- Changed Edge removal to use @he3als EdgeRemover instead of the current one for better performance and reliability #32.
 
 ## 1.3.1 - Released
 
