@@ -3,11 +3,11 @@
 All notable changes to this branch will be documented in this file.
 
 
-## 1.3.2 - Unreleased
+## 1.3.2 - Released
 
 ### Added
 
-- Added a new `Disable Start Menu Recommended Section` option in the `Features`, suggested be @XMontech1337X #31.
+- Added a new `Disable Recommended Section In Start Menu` option in the `Features` page, suggested by @XMontech1337X #31.
 
 ### Fixes
 
