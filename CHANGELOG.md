@@ -3,6 +3,20 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.3.2 - Released
+
+### Added
+
+- Added a new `Disable Recommended Section In Start Menu` option in the `Features` page, suggested by @XMontech1337X #31.
+
+### Fixes
+
+- Fixed an error showing up when loading installed apps on for the first time #30.
+
+### Changes
+
+- Changed Edge removal to use @he3als EdgeRemover instead of the curret one for better performance and reliability #32.
+
 ## 1.3.1 - Released
 
 ### Added

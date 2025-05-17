@@ -1371,4 +1371,10 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="SettingsExported" xml:space="preserve">
     <value>Paramètres exportés avec succès vers :</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>Désactiver la section Recommandé dans le menu Démarrer</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>Supprime la section "Recommandé" du menu Démarrer pour une interface plus épurée et ciblée.</value>
+  </data>
 </root>

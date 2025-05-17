@@ -1371,4 +1371,10 @@ Verifica si hay problemas de memoria en tu computadora</value>
   <data name="SettingsExported" xml:space="preserve">
     <value>Configuración exportada exitosamente a:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>Desactivar la sección recomendada en el menú de inicio</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>Elimina la sección "Recomendado" del menú de inicio para ofrecer un diseño más limpio y enfocado.</value>
+  </data>
 </root>

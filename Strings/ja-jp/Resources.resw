@@ -1371,4 +1371,10 @@
   <data name="SettingsExported" xml:space="preserve">
     <value>設定は正常にエクスポートされました:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>スタートメニューのおすすめセクションを無効にする</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>スタートメニューから「おすすめ」セクションを削除し、よりすっきりと集中したレイアウトにします。</value>
+  </data>
 </root>

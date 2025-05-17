@@ -1371,4 +1371,10 @@ Devam etmek istediğine emin misin?</value>
   <data name="SettingsExported" xml:space="preserve">
     <value>Ayarlar başarıyla şuraya aktarıldı:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>Başlat menüsünde Önerilen bölümünü devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>Başlat menüsünden "Önerilen" bölümünü kaldırarak daha sade ve odaklanmış bir düzen sağlar.</value>
+  </data>
 </root>

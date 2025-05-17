@@ -82,8 +82,7 @@ public sealed partial class DebloatSystemPage : Page
                 AppList.Clear();
 
                 allApps = installedApps.AsParallel().Where(app =>
-                !app.Item1.Contains("rytunex", StringComparison.CurrentCultureIgnoreCase) &&
-                !(app.Item1.Contains("edge.stable", StringComparison.CurrentCultureIgnoreCase) && IsEdgeUninstalled())).ToList();
+                !app.Item1.Contains("rytunex", StringComparison.CurrentCultureIgnoreCase)).ToList();
 
                 foreach (var app in allApps)
                 {
@@ -107,18 +106,12 @@ public sealed partial class DebloatSystemPage : Page
         }
         catch (OperationCanceledException ex)
         {
-            await LogHelper.LogError($"Operation canceled: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            await LogHelper.Log($"Operation canceled: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            await LogHelper.Log($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
-    }
-
-    private bool IsEdgeUninstalled()
-    {
-        var settingsEdgeUninstalled = ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"];
-        return settingsEdgeUninstalled != null && settingsEdgeUninstalled is bool settingValue && settingValue;
     }
 
     private async void UninstallSelectedApp_Click(object sender, RoutedEventArgs e)
@@ -241,7 +234,7 @@ public sealed partial class DebloatSystemPage : Page
 
         if (!isWin32App)
         {
-            if (!appName.Contains("edge.stable", StringComparison.CurrentCultureIgnoreCase))
+            if (!appName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
             {
                 var cmdCommandRemoveProvisioned = $"powershell -Command \"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.DisplayName -eq '{appName}' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }}\"";
                 var cmdCommandRemoveAppxPackage = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
@@ -294,9 +287,12 @@ public sealed partial class DebloatSystemPage : Page
             }
             else
             {
+                // Remove Edge using @he3als EdgeRemover script
+                // Link: https://github.com/he3als/EdgeRemover/blob/main/RemoveEdge.ps1
+
                 var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
 
-                var cmdCommand = $"powershell.exe -ExecutionPolicy Bypass -File \"{scriptFilePath}\"";
+                var cmdCommand = $"powershell.exe -ExecutionPolicy Bypass -File \"{scriptFilePath}\" -UninstallEdge -RemoveEdgeData -NonInteractive";
 
                 var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                         ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
@@ -312,9 +308,6 @@ public sealed partial class DebloatSystemPage : Page
                     process.Start();
 
                     var error = await process.StandardError.ReadToEndAsync();
-
-                    ApplicationData.Current.LocalSettings.Values["isEdgeUninstalled"] = true;
-                    await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start explorer");
 
                     if (!string.IsNullOrEmpty(error))
                     {

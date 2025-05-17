@@ -484,7 +484,7 @@ public sealed partial class SettingsPage : Page
                 using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
                         Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                             ? RegistryView.Registry64
-                            : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX");
+                            : RegistryView.Default);
                 key.DeleteSubKeyTree(@"SOFTWARE\RyTuneX", throwOnMissingSubKey: false);
                 await LogHelper.Log("Deleted all registry keys.");
 

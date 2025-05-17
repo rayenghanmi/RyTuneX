@@ -190,6 +190,13 @@
                     <ToggleSwitch x:Name="ClassicContextMenu" Tag="ClassicContextMenu"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Feature_DisableRecommendedSectionStartMenu">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8FC;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="RecommendedSectionStartMenu" Tag="RecommendedSectionStartMenu"/>
+                </controls:SettingsCard>
+
                 <controls:SettingsCard x:Uid="Feature_MoveTaskbarToLeft">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE112;"/>

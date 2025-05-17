@@ -1371,4 +1371,10 @@
   <data name="SettingsExported" xml:space="preserve">
     <value>تم تصدير الإعدادات بنجاح إلى:</value>
   </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>تعطيل قسم المقترحة في قائمة ابدأ</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>يزيل قسم "المقترحة" من قائمة ابدأ لتوفير واجهة أنظف وأكثر تركيزًا.</value>
+  </data>
 </root>
