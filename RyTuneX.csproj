@@ -24,7 +24,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <Version>1.3.2</Version>
+    <Version>1.4.0</Version>
     <Authors>Rayen Ghanmi</Authors>
   </PropertyGroup>
   <ItemGroup>

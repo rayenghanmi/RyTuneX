@@ -3,6 +3,17 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.4.0 - Unreleased
+
+### Fixes
+
+- Fixed some wrong translations in the `zh-Hans` language, contributed by @wumingshiali #37.
+
+### Changes
+
+- Didn't add the Hebrew language support #36.
+
+
 ## 1.3.2 - Released
 
 ### Added

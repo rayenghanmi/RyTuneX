@@ -514,7 +514,7 @@
     <value>禁用 CoPilot AI</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
-    <value>禁用 Windows 中的 CoPilot AI 功能以帮助编写代码.  不建议开发者使用</value>
+    <value>禁用 Windows 中的 CoPilot AI 功能，以帮助编写代码。不建议开发者使用。</value>
   </data>
   <data name="OptimizeBasic.Text" xml:space="preserve">
     <value>基本优化</value>
@@ -826,10 +826,10 @@
     <value>服务</value>
   </data>
   <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
-    <value>禁用智能屏幕</value>
+    <value>禁用 SmartScreen</value>
   </data>
   <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>关闭智能屏幕过滤器, 该过滤器会警告您下载自互联网的潜在不安全应用和文件. 禁用此功能会增加恶意软件感染的风险. </value>
+    <value>关闭 SmartScreen 过滤器，该过滤器会在您从互联网下载潜在不安全的应用和文件时发出警告。禁用此功能会增加恶意软件感染的风险。</value>
   </data>
   <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
     <value>禁用新闻和兴趣</value>
