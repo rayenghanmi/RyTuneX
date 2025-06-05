@@ -31,6 +31,15 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = viewModel;
         InitializeComponent();
+        this.FlowDirection = App.FlowDirectionSetting;
+
+        // Temporary fix for RTL layout issue with the overlap of NavigationViewControl and caption buttons
+        if (FlowDirection == FlowDirection.RightToLeft)
+        {
+            NavigationViewControl.Margin = new Thickness(0, 40, 0, 0);
+            AppTitleBar.Padding = new Thickness(120, 0, 0, 0);
+        }
+
         Current = this;
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;

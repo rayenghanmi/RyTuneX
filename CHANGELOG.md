@@ -5,6 +5,10 @@ All notable changes to this branch will be documented in this file.
 
 ## 1.4.0 - Unreleased
 
+### Added
+
+- Added RTL (Right-to-Left) support for Arabic like languages, allowing the app to display correctly in these languages.
+
 ### Fixes
 
 - Fixed some wrong translations in the `zh-Hans` language, contributed by @wumingshiali #37.
@@ -13,7 +17,6 @@ All notable changes to this branch will be documented in this file.
 
 - Didn't add the Hebrew language support #36.
 - Changed the restore point creation process to use the default System Restore `SystemPropertiesProtection` #41.
-
 
 ## 1.3.2 - Released
 

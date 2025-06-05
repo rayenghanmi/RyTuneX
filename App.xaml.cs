@@ -141,4 +141,18 @@ public partial class App : Application
         }
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
+
+    // Sets flow direction based on the current language.
+
+    public static Microsoft.UI.Xaml.FlowDirection FlowDirectionSetting
+    {
+        get
+        {
+            var lang = ApplicationData.Current.LocalSettings.Values["SelectedLanguage"].ToString();
+            if (lang.StartsWith("ar", StringComparison.OrdinalIgnoreCase))
+                return Microsoft.UI.Xaml.FlowDirection.RightToLeft;
+            return Microsoft.UI.Xaml.FlowDirection.LeftToRight;
+        }
+    }
+
 }
