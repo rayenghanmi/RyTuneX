@@ -100,6 +100,9 @@ winget install rytunex
 
 ## Usage
 
+> [!WARNING]  
+> Always create a restore point before applying any optimizations.
+
 ### System Optimizations
 To optimize your system, go to the **Optimize** tab and toggle the available options based on your needs. Changes will take effect after a system restart.
 
