@@ -1113,15 +1113,6 @@
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>Создание точки восстановления</value>
   </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>Точка восстановления создана</value>
-  </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>Точка восстановления системы успешно создана.</value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>Не удалось создать точку восстановления</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Отменить все изменения</value>
   </data>

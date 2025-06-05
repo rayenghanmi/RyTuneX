@@ -1116,15 +1116,6 @@ Devam etmeden önce bir sistem geri yükleme noktası oluşturmak ister misiniz?
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>Geri Yükleme Noktası Oluştur</value>
   </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>Geri Yükleme Noktası Oluşturuldu</value>
-  </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>Sistem geri yükleme noktası başarıyla oluşturuldu.</value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>Bir geri yükleme noktası oluşturulamadı</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Tüm değişiklikleri geri al</value>
   </data>

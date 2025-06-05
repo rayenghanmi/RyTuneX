@@ -1116,15 +1116,6 @@
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>復元ポイントを作成中</value>
   </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>復元ポイントが作成されました</value>
-  </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>システムの復元ポイントが正常に作成されました. </value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>復元ポイントの作成に失敗しました</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>すべての変更を元に戻す</value>
   </data>

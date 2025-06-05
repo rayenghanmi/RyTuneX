@@ -1116,15 +1116,6 @@
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>복원 지점 생성 중</value>
   </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>복원 지점 생성됨</value>
-  </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>시스템 복원 지점이 성공적으로 생성되었습니다.</value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>복원 지점을 만들지 못했습니다.</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>모든 변경 사항 되돌리기</value>
   </data>

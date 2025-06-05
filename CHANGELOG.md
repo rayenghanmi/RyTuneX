@@ -12,6 +12,7 @@ All notable changes to this branch will be documented in this file.
 ### Changes
 
 - Didn't add the Hebrew language support #36.
+- Changed the restore point creation process to use the default System Restore `SystemPropertiesProtection` #41.
 
 
 ## 1.3.2 - Released

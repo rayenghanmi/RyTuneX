@@ -1116,15 +1116,6 @@
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>جاري إنشاء نقطة استعادة</value>
   </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>تم إنشاء نقطة الاستعادة</value>
-  </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>تم إنشاء نقطة استعادة للنظام بنجاح.</value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>فشل في إنشاء نقطة الاستعادة</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>التراجع عن كل التغييرات</value>
   </data>
