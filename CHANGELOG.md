@@ -8,6 +8,7 @@ All notable changes to this branch will be documented in this file.
 ### Added
 
 - Added RTL (Right-to-Left) support for Arabic like languages, allowing the app to display correctly in these languages.
+- Introduced a `ContentDialog` to display scan results on the `Repair` page #44.
 
 ### Fixes
 
@@ -17,6 +18,7 @@ All notable changes to this branch will be documented in this file.
 
 - Didn't add the Hebrew language support #36.
 - Changed the restore point creation process to use the default System Restore `SystemPropertiesProtection` #41.
+- Enhance telemetry disabling and temp file cleanup.
 
 ## 1.3.2 - Released
 

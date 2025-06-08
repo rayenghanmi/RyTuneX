@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -11,6 +12,13 @@ namespace RyTuneX.Views;
 
 public sealed partial class RepairPage : Page
 {
+    private readonly Dictionary<string, StringBuilder> _scanResults = new()
+    {
+        { "DISM", new StringBuilder() },
+        { "SFC", new StringBuilder() },
+        { "CHKDSK", new StringBuilder() }
+    };
+    private int _sfcNonProgressLineCount = 0;
     private Process? _runningProcess;
     public int selectedCount = 0;
     public RepairPage()
@@ -58,11 +66,13 @@ public sealed partial class RepairPage : Page
         };
 
         var current = 0;
+        var selectedNames = new List<string>();
         foreach (var (checkBox, name, args) in commands)
         {
             if (checkBox.IsChecked == true)
             {
                 current++;
+                selectedNames.Add(name);
                 StatusTextBlock.Text = $"{current} of {selectedCount}: {name} {(isRepair ? "repair" : "scan")} in progress...";
                 ProgressBar.Value = 0;
                 await RunCommandAsync(name, args);
@@ -74,10 +84,15 @@ public sealed partial class RepairPage : Page
         StopButton.Visibility = Visibility.Collapsed;
         PercentageTextBlock.Text = string.Empty;
         ProgressBar.Value = 0;
+
+        // Show results dialog
+        await ShowScanResultsDialogAsync(selectedNames);
     }
 
     private async Task RunCommandAsync(string name, string args)
     {
+        _scanResults[name].Clear();
+
         var processStartInfo = new ProcessStartInfo
         {
             FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
@@ -93,7 +108,6 @@ public sealed partial class RepairPage : Page
                             : Encoding.UTF8    // UTF-8 for other commands
         };
 
-
         _runningProcess = new Process { StartInfo = processStartInfo, EnableRaisingEvents = true };
 
         _runningProcess.OutputDataReceived += (sender, e) =>
@@ -102,15 +116,39 @@ public sealed partial class RepairPage : Page
             {
                 LogHelper.Log($"Output: {e.Data}");
                 UpdateProgress(name, e.Data);
-            }
-        };
 
-        _runningProcess.ErrorDataReceived += (sender, e) =>
-        {
-            if (!string.IsNullOrEmpty(e.Data))
-            {
-                LogHelper.Log($"Error: {e.Data}");
-                UpdateProgress(name, e.Data);
+                var isProgress = false;
+                if (name == "DISM")
+                {
+                    isProgress = Regex.IsMatch(e.Data, @"\[\s*[= ]*\s*(\d+(\.\d+)?)%\s*[= ]*\]");
+                }
+                else if (name == "SFC")
+                {
+                    isProgress = Regex.IsMatch(e.Data, @"(\d+)%", RegexOptions.IgnoreCase);
+                }
+                else if (name == "CHKDSK")
+                {
+                    isProgress = Regex.IsMatch(e.Data, @"Total:\s*(\d+)%", RegexOptions.IgnoreCase);
+                }
+
+                if (!isProgress)
+                {
+                    if (name == "SFC")
+                    {
+                        if (_sfcNonProgressLineCount < 2)
+                        {
+                            _sfcNonProgressLineCount++;
+                        }
+                        else
+                        {
+                            _scanResults[name].AppendLine(e.Data);
+                        }
+                    }
+                    else
+                    {
+                        _scanResults[name].AppendLine(e.Data);
+                    }
+                }
             }
         };
 
@@ -147,7 +185,6 @@ public sealed partial class RepairPage : Page
                 if (match.Success)
                 {
                     percentage = int.Parse(match.Groups[1].Value);
-                    LogHelper.Log($"SFC Progress: {percentage}%");
                 }
                 else
                 {
@@ -185,6 +222,48 @@ public sealed partial class RepairPage : Page
         {
             LogHelper.Log($"Error updating progress: {ex.Message}");
         }
+    }
+
+    private async Task ShowScanResultsDialogAsync(List<string> selectedNames)
+    {
+        var stackPanel = new StackPanel();
+
+        foreach (var name in selectedNames)
+        {
+            stackPanel.Children.Add(new TextBlock
+            {
+                Text = $"{name}:",
+                FontWeight = FontWeights.Bold,
+                Margin = new Thickness(0, 16, 0, 8)
+            });
+            stackPanel.Children.Add(new TextBlock
+            {
+                Text = _scanResults[name].ToString(),
+                TextWrapping = TextWrapping.Wrap,
+                MinHeight = 100,
+                MaxHeight = 200,
+                Margin = new Thickness(0, 0, 0, 8)
+            });
+        }
+
+        var scrollViewer = new ScrollViewer
+        {
+            Content = stackPanel,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            MaxHeight = 400
+        };
+
+        var dialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
+            Title = "Scan Results",
+            Content = scrollViewer,
+            CloseButtonText = "Close".GetLocalized()
+        };
+
+        await dialog.ShowAsync();
     }
 
     private async void BatteryHealthButton_Click(object sender, RoutedEventArgs e)
