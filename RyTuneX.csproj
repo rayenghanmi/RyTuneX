@@ -68,6 +68,7 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Strings\he-il\" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

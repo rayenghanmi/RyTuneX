@@ -149,7 +149,8 @@ public partial class App : Application
         get
         {
             var lang = ApplicationData.Current.LocalSettings.Values["SelectedLanguage"].ToString();
-            if (lang.StartsWith("ar", StringComparison.OrdinalIgnoreCase))
+            if (lang.StartsWith("ar", StringComparison.OrdinalIgnoreCase) ||
+                lang.StartsWith("he", StringComparison.OrdinalIgnoreCase))
                 return Microsoft.UI.Xaml.FlowDirection.RightToLeft;
             return Microsoft.UI.Xaml.FlowDirection.LeftToRight;
         }

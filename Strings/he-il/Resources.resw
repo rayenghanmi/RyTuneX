@@ -1,0 +1,1380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Shell_Home.Content" xml:space="preserve">
+    <value>RyTuneX</value>
+  </data>
+  <data name="Shell_Debloat.Content" xml:space="preserve">
+    <value>הסרת תוכנות מיותרות</value>
+  </data>
+  <data name="Shell_SystemInfo.Content" xml:space="preserve">
+    <value>התקן</value>
+  </data>
+  <data name="Shell_Issue.Content" xml:space="preserve">
+    <value>דיווח</value>
+  </data>
+  <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
+    <value>מיטוב</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>ערכת נושא</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>בהיר</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>כהה</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>ברירת מחדל</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>אודות יישום זה</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>RyTuneX, כלי אופטימיזציה עבור Windows 10 ו-11 שנוצר על ידי Rayen Ghanmi, נועד לשפר את ביצועי המערכת ויעילותה על ידי הסרה סלקטיבית של תוכנות נבחרות והשבתת שירותים מיותרים.</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+    <value>AGPL v3.0</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
+    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
+  </data>
+  <data name="Settings_Language.Text" xml:space="preserve">
+    <value>שפה</value>
+  </data>
+  <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
+    <value>מאחזר נתוני יישומים מותקנים...</value>
+  </data>
+  <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
+    <value>סנן לפי:</value>
+  </data>
+  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+    <value>הסר יישום(ים) נבחר(ים)</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>בוצע</value>
+  </data>
+  <data name="Uninstalling" xml:space="preserve">
+    <value>מסיר התקנה</value>
+  </data>
+  <data name="UninstallTip" xml:space="preserve">
+    <value>בחר יישומים שברצונך להסיר ולחץ על הסר התקנה</value>
+  </data>
+  <data name="Shell_Features.Content" xml:space="preserve">
+    <value>תכונות</value>
+  </data>
+  <data name="Shell_Privacy.Content" xml:space="preserve">
+    <value>פרטיות</value>
+  </data>
+  <data name="HomePage_DiscordButton.Text" xml:space="preserve">
+    <value>הצטרף לשרת שלנו</value>
+  </data>
+  <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
+    <value>בדוק את RyTuneX</value>
+  </data>
+  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
+    <value>שלח משוב</value>
+  </data>
+  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
+    <value>מעבד</value>
+  </data>
+  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
+    <value>כרטיס גרפי</value>
+  </data>
+  <data name="SystemInfoPage_OS.Text" xml:space="preserve">
+    <value>מערכת הפעלה</value>
+  </data>
+  <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
+    <value>זיכרון RAM</value>
+  </data>
+  <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
+    <value>אחסון</value>
+  </data>
+  <data name="Debloat" xml:space="preserve">
+    <value>הסרת תוכנות מיותרות</value>
+  </data>
+  <data name="DebloatPage_NotificationBody" xml:space="preserve">
+    <value>הסרת התקנה של חלק מהיישומים הללו עשויה שלא להסיר אותם לחלוטין.</value>
+  </data>
+  <data name="UninstallationError" xml:space="preserve">
+    <value>שגיאה בהסרת היישום(ים) הבא(ים)</value>
+  </data>
+  <data name="UninstallationSuccess" xml:space="preserve">
+    <value>היישום(ים) הבא(ים) הוסר(ו) בהצלחה</value>
+  </data>
+  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+    <value>הסר קבצים זמניים</value>
+  </data>
+  <data name="AdapterRAM" xml:space="preserve">
+    <value>זיכרון RAM של המתאם</value>
+  </data>
+  <data name="Architecture" xml:space="preserve">
+    <value>ארכיטקטורה</value>
+  </data>
+  <data name="BuildNumber" xml:space="preserve">
+    <value>מספר גרסת Build</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>קיבולת</value>
+  </data>
+  <data name="Caption" xml:space="preserve">
+    <value>כותרת</value>
+  </data>
+  <data name="Cores" xml:space="preserve">
+    <value>ליבות</value>
+  </data>
+  <data name="DeviceLocator" xml:space="preserve">
+    <value>מאתר התקנים</value>
+  </data>
+  <data name="DriverVersion" xml:space="preserve">
+    <value>גרסת מנהל התקן</value>
+  </data>
+  <data name="ErrDriversExtract" xml:space="preserve">
+    <value>אירעה שגיאה בעת חילוץ מנהלי התקנים</value>
+  </data>
+  <data name="ExtractingDrivers" xml:space="preserve">
+    <value>מחלץ מנהלי התקנים</value>
+  </data>
+  <data name="GPU" xml:space="preserve">
+    <value>מעבד גרפי (GPU)</value>
+  </data>
+  <data name="InstallDate" xml:space="preserve">
+    <value>תאריך התקנה</value>
+  </data>
+  <data name="InterfaceType" xml:space="preserve">
+    <value>סוג ממשק</value>
+  </data>
+  <data name="L2Cache" xml:space="preserve">
+    <value>גודל מטמון L2</value>
+  </data>
+  <data name="L3Cache" xml:space="preserve">
+    <value>גודל מטמון L3</value>
+  </data>
+  <data name="LastBoot" xml:space="preserve">
+    <value>זמן אתחול אחרון</value>
+  </data>
+  <data name="LogicalProcessors" xml:space="preserve">
+    <value>מעבדים לוגיים</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>יצרן</value>
+  </data>
+  <data name="MaxSpeed" xml:space="preserve">
+    <value>מהירות מרבית</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>שם</value>
+  </data>
+  <data name="OSName" xml:space="preserve">
+    <value>שם מערכת הפעלה</value>
+  </data>
+  <data name="RAMModule" xml:space="preserve">
+    <value>מודול RAM</value>
+  </data>
+  <data name="RegisteredUser" xml:space="preserve">
+    <value>משתמש רשום</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>גודל</value>
+  </data>
+  <data name="SocketDesignation" xml:space="preserve">
+    <value>ייעוד תושבת</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>מהירות</value>
+  </data>
+  <data name="SystemDirectory" xml:space="preserve">
+    <value>ספריית מערכת</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>גרסה</value>
+  </data>
+  <data name="VideoArchitecture" xml:space="preserve">
+    <value>ארכיטקטורת וידאו</value>
+  </data>
+  <data name="WindowsDirectory" xml:space="preserve">
+    <value>ספריית Windows</value>
+  </data>
+  <data name="DeligTemp" xml:space="preserve">
+    <value>מוחק קבצים זמניים</value>
+  </data>
+  <data name="ErrTempDel" xml:space="preserve">
+    <value>שגיאה במחיקת קבצים זמניים</value>
+  </data>
+  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
+    <value>תכונות מערכת</value>
+  </data>
+  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
+    <value>בלעדי ל-Windows 11</value>
+  </data>
+  <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
+    <value>בחר תיקייה</value>
+  </data>
+  <data name="TempDelSucc" xml:space="preserve">
+    <value>קבצים זמניים נמחקו בהצלחה!</value>
+  </data>
+  <data name="Disk" xml:space="preserve">
+    <value>דיסק</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>דגם</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
+    <value>אפשר הודעות כניסה מפורטות לניטור ופתרון בעיות מערכת טובים יותר. עשוי להיות פחות ידידותי למשתמש לשימוש יומיומי.</value>
+  </data>
+  <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
+    <value>אפשר רישום מפורט בכניסה</value>
+  </data>
+  <data name="SelecFold" xml:space="preserve">
+    <value>בחר תיקייה</value>
+  </data>
+  <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
+    <value>מנהלי התקנים</value>
+  </data>
+  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
+    <value>חלץ</value>
+  </data>
+  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
+    <value>חלץ את מנהלי ההתקנים שלך לתיקייה חיצונית לגיבוי קל</value>
+  </data>
+  <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
+    <value>מחלץ מנהלי התקנים</value>
+  </data>
+  <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
+    <value>בחר</value>
+  </data>
+  <data name="Feature_DisableHibernation.Header" xml:space="preserve">
+    <value>השבת מצב שינה (Hibernation)</value>
+  </data>
+  <data name="Feature_DisableHibernation.Description" xml:space="preserve">
+    <value>כבה מצב שינה (Hibernation) כדי לחסוך בחשמל ולמנוע מהמחשב להיכנס למצב שינה. לא מומלץ למחשבים ניידים.</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
+    <value>השבת קבוצה ביתית</value>
+  </data>
+  <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
+    <value>מכבה את הקבוצה הביתית כדי להפסיק שיתוף קבצים ומדפסות עם התקנים אחרים ברשת.</value>
+  </data>
+  <data name="Feature_DisablePrintService.Header" xml:space="preserve">
+    <value>השבת שירות הדפסה</value>
+  </data>
+  <data name="Feature_DisablePrintService.Description" xml:space="preserve">
+    <value>משבית את שירות ההדפסה, ומונע פונקציונליות הקשורה להדפסה.</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
+    <value>השבת מסייע תאימות</value>
+  </data>
+  <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
+    <value>מכבה את מסייע התאימות כדי להשבית בדיקות תאימות אוטומטיות עבור תוכניות.</value>
+  </data>
+  <data name="Feature_DisableSearch.Header" xml:space="preserve">
+    <value>השבת חיפוש</value>
+  </data>
+  <data name="Feature_DisableSearch.Description" xml:space="preserve">
+    <value>מכבה את פונקציונליות החיפוש ברחבי המערכת.</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
+    <value>השבת דיווח שגיאות</value>
+  </data>
+  <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
+    <value>מכבה את דיווח השגיאות כדי למנוע שליחה אוטומטית של דוחות שגיאה למיקרוסופט.</value>
+  </data>
+  <data name="Feature_DisableGameBar.Header" xml:space="preserve">
+    <value>השבת סרגל המשחקים</value>
+  </data>
+  <data name="Feature_DisableGameBar.Description" xml:space="preserve">
+    <value>מכבה את סרגל המשחקים והתכונות המשויכות אליו.</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
+    <value>השבת היסטוריית גישה מהירה</value>
+  </data>
+  <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
+    <value>משבית הקלטה והצגה של היסטוריית גישה מהירה.</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
+    <value>השבת 'האנשים שלי'</value>
+  </data>
+  <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
+    <value>מכבה את תכונת 'האנשים שלי' בשורת המשימות.</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
+    <value>השבת שירותי חיישנים</value>
+  </data>
+  <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
+    <value>מכבה שירותי חיישנים לפרטיות וחיסכון בחשמל. לא מומלץ למחשבים ניידים עם חיישנים רלוונטיים.</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
+    <value>השבת Windows Ink</value>
+  </data>
+  <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
+    <value>מכבה את סביבת העבודה של Windows Ink ותכונות קשורות. לא מומלץ למכשירים עם עט אלקטרוני.</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
+    <value>השבת תכונות איות והקלדה</value>
+  </data>
+  <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
+    <value>משבית הצעות איות והקלדה.</value>
+  </data>
+  <data name="Feature_DisableFaxService.Header" xml:space="preserve">
+    <value>השבת שירות פקס</value>
+  </data>
+  <data name="Feature_DisableFaxService.Description" xml:space="preserve">
+    <value>משבית את שירות הפקס ב-Windows.</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
+    <value>השבת שירות Insider</value>
+  </data>
+  <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
+    <value>בטל הרשמה לתוכנית Windows Insider והפסק לקבל גרסאות Build של תצוגה מקדימה.</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
+    <value>השבת לוח ענן</value>
+  </data>
+  <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
+    <value>משבית את תכונת לוח הענן לשיתוף לוח בין מכשירים.</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
+    <value>השבת מקשים דביקים</value>
+  </data>
+  <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
+    <value>משבית את תכונת הנגישות 'מקשים דביקים'. שימושי לאנשים שלוחצים בטעות על מספר מקשים בו-זמנית.</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
+    <value>השבת 'הקרן להתקן'</value>
+  </data>
+  <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
+    <value>משבית את תכונת 'הקרן להתקן' ב-Windows. שימושי למצגות או שיתוף מדיה בהתקנים אחרים.</value>
+  </data>
+  <data name="Feature_DisableVBS.Header" xml:space="preserve">
+    <value>השבת VBS</value>
+  </data>
+  <data name="Feature_DisableVBS.Description" xml:space="preserve">
+    <value>משבית אבטחה מבוססת וירטואליזציה (VBS) לתכונות אבטחה מתקדמות. לא מומלץ לסביבות אבטחה גבוהה.</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
+    <value>העבר את שורת המשימות שמאלה</value>
+  </data>
+  <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
+    <value>מעביר את שורת המשימות מהמיקום התחתון המוגדר כברירת מחדל לצד השמאלי של המסך. העדפה אישית.</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
+    <value>השבת Snap Assist</value>
+  </data>
+  <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
+    <value>משבית את Snap Assist, אשר מסדר חלונות פתוחים באופן אוטומטי בעת גרירה. שימושי לריבוי משימות אך חלק מהמשתמשים מעדיפים ניהול חלונות ידני.</value>
+  </data>
+  <data name="Feature_DisableWidgets.Header" xml:space="preserve">
+    <value>השבת יישומונים (Widgets)</value>
+  </data>
+  <data name="Feature_DisableWidgets.Description" xml:space="preserve">
+    <value>משבית את תכונת היישומונים (Widgets) בשורת המשימות של Windows 11. שקול אם אתה מוצא את היישומונים שימושיים לעדכונים מהירים (Windows 11 בלבד).</value>
+  </data>
+  <data name="Feature_DisableChat.Header" xml:space="preserve">
+    <value>השבת צ'אט</value>
+  </data>
+  <data name="Feature_DisableChat.Description" xml:space="preserve">
+    <value>משבית את תכונת הצ'אט בשורת המשימות של Windows 11. מומלץ רק אם אינך משתמש בתכונת הצ'אט לתקשורת (Windows 11 בלבד).</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
+    <value>אפשר מצב קומפקטי לקבצים</value>
+  </data>
+  <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
+    <value>מאפשר מצב קומפקטי לגלישה בקבצים עם תמונות ממוזערות קטנות יותר. שימושי לתצוגות ברזולוציה נמוכה או לניהול תיקיות גדולות.</value>
+  </data>
+  <data name="Feature_DisableStickers.Header" xml:space="preserve">
+    <value>השבת מדבקות</value>
+  </data>
+  <data name="Feature_DisableStickers.Description" xml:space="preserve">
+    <value>משבית את תכונת המדבקות באפליקציית ההודעות של Windows 11. מומלץ רק אם אינך משתמש במדבקות לתקשורת (Windows 11 בלבד).</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
+    <value>השבת סרגל Discover ב-Edge</value>
+  </data>
+  <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
+    <value>משבית את תכונת סרגל Discover ב-Microsoft Edge. שימושי אם אתה מוצא אותו מסיח דעת או מעדיף ממשק דפדפן נקי יותר.</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
+    <value>השבת CoPilot AI</value>
+  </data>
+  <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
+    <value>משבית את תכונת CoPilot AI ב-Windows לסיוע בכתיבת קוד. לא מומלץ למפתחים.</value>
+  </data>
+  <data name="OptimizeBasic.Text" xml:space="preserve">
+    <value>אופטימיזציות בסיסיות</value>
+  </data>
+  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
+    <value>התאמות ביצועים</value>
+  </data>
+  <data name="Feature_DisableSysMain.Header" xml:space="preserve">
+    <value>השבת SysMain</value>
+  </data>
+  <data name="Feature_DisableSysMain.Description" xml:space="preserve">
+    <value>מכבה את SysMain, הטוען מראש יישומים בשימוש תכוף להפעלה מהירה יותר. עשוי להשפיע על זמני ההפעלה של תוכניות מסוימות אם אתה משתמש בכונן קשיח (HDD).</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
+    <value>השבת חותמת זמן NTFS</value>
+  </data>
+  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
+    <value>משבית עדכונים לחותמות זמן NTFS עבור פעולות קבצים. עשוי להשפיע על פונקציונליות של תוכניות המסתמכות על חותמות זמן מדויקות.</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
+    <value>אפשר מצב משחק</value>
+  </data>
+  <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
+    <value>מאפשר מצב משחק, הממטב את משאבי המערכת לחוויית משחק חלקה יותר. עשוי להשפיע על תהליכי רקע.</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
+    <value>מנע עדכון מנהלי התקנים מ-Windows Updates</value>
+  </data>
+  <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
+    <value>מונע עדכון מנהלי התקנים מ-Windows Update. עלול להוביל למנהלי התקנים מיושנים עם סיכוני אבטחה פוטנציאליים או בעיות תאימות. השתמש בזהירות.</value>
+  </data>
+  <data name="OptimizeAdvanced.Text" xml:space="preserve">
+    <value>אופטימיזציות מתקדמות</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
+    <value>השבת שחזור מערכת</value>
+  </data>
+  <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
+    <value>משבית את שחזור המערכת, היוצר נקודות שחזור כדי להחזיר את המערכת למצב קודם במקרה של בעיות. לא מומלץ. השבתת תכונה זו מסירה את היכולת להתאושש בקלות מבעיות מערכת פוטנציאליות.</value>
+  </data>
+  <data name="Feature_DisableCortana.Header" xml:space="preserve">
+    <value>השבת Cortana</value>
+  </data>
+  <data name="Feature_DisableCortana.Description" xml:space="preserve">
+    <value>משבית את Cortana, העוזרת הווירטואלית שיכולה לענות על שאלות ולהשלים משימות. עשוי להשפיע על חיפוש קולי וכמה תכונות פרודוקטיביות.</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
+    <value>השבת עדכוני חנות</value>
+  </data>
+  <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
+    <value>משבית עדכונים אוטומטיים ליישומים שהורדו מחנות Microsoft. עלול להשאיר יישומים פגיעים לסיכוני אבטחה או חסרי תכונות חדשות.</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
+    <value>השבת עדכונים אוטומטיים</value>
+  </data>
+  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
+    <value>מכבה עדכוני Windows אוטומטיים, הדורשים התקנה ידנית. מאוד לא מומלץ. זה יכול להשאיר את המערכת שלך פגיעה לפרצות אבטחה ותיקוני באגים.</value>
+  </data>
+  <data name="Privacy_Telemetry.Text" xml:space="preserve">
+    <value>טלמטריה</value>
+  </data>
+  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
+    <value>שפר פרטיות</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
+    <value>השבת SMBv1</value>
+  </data>
+  <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
+    <value>משבית Server Message Block גרסה 1 (SMBv1) לאבטחה משופרת. מומלץ.</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
+    <value>השבת SMBv2</value>
+  </data>
+  <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
+    <value>משבית Server Message Block גרסה 2 (SMBv2) לאבטחה משופרת. השתמש בזהירות מכיוון שזה עלול לשבור פונקציונליות של שיתוף קבצים ברשת.</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
+    <value>השבת שירותי טלמטריה</value>
+  </data>
+  <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
+    <value>מכבה שירותי טלמטריה כדי למנוע איסוף והעברת נתוני שימוש על ידי מערכת ההפעלה.</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
+    <value>השבת טלמטריית Edge</value>
+  </data>
+  <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
+    <value>משבית איסוף נתוני טלמטריה ב-Microsoft Edge.</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
+    <value>השבת טלמטריית Visual Studio</value>
+  </data>
+  <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
+    <value>משבית איסוף נתוני טלמטריה ב-Visual Studio.</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
+    <value>השבת טלמטריית Nvidia</value>
+  </data>
+  <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
+    <value>משבית איסוף נתוני טלמטריה על ידי מנהלי התקנים של Nvidia.</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
+    <value>השבת טלמטריית Chrome</value>
+  </data>
+  <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
+    <value>משבית איסוף נתוני טלמטריה ב-Google Chrome.</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
+    <value>השבת טלמטריית Firefox</value>
+  </data>
+  <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
+    <value>משבית איסוף נתוני טלמטריה ב-Mozilla Firefox.</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
+    <value>בחר את שפת ברירת המחדל שלך</value>
+  </data>
+  <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
+    <value>שנה שפה</value>
+  </data>
+  <data name="Shell_Network.Content" xml:space="preserve">
+    <value>רשת</value>
+  </data>
+  <data name="Feature_EnableEndTask.Description" xml:space="preserve">
+    <value>מאפשר אפשרות בעת לחיצה ימנית על סמלי יישומים בשורת המשימות, המאפשרת לך לסיים במהירות יישומים שאינם מגיבים מבלי לפתוח את מנהל המשימות.</value>
+  </data>
+  <data name="Feature_EnableEndTask.Header" xml:space="preserve">
+    <value>אפשר סיום משימה (EndTask)</value>
+  </data>
+  <data name="Network_ApplyDNS.Content" xml:space="preserve">
+    <value>החל DNS</value>
+  </data>
+  <data name="Network_IPv4Title.Text" xml:space="preserve">
+    <value>שרתי DNS IPv4</value>
+  </data>
+  <data name="Network_IPv6Title.Text" xml:space="preserve">
+    <value>שרתי DNS IPv6</value>
+  </data>
+  <data name="Network_NicTitle.Text" xml:space="preserve">
+    <value>ממשק רשת</value>
+  </data>
+  <data name="Network_Primary.Text" xml:space="preserve">
+    <value>ראשי</value>
+  </data>
+  <data name="Network_ResetDNS.Content" xml:space="preserve">
+    <value>אפס DNS ברירת מחדל</value>
+  </data>
+  <data name="Network_Secondary.Text" xml:space="preserve">
+    <value>משני</value>
+  </data>
+  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
+    <value>הגדר DNS מותאם אישית</value>
+  </data>
+  <data name="NoIPv4" xml:space="preserve">
+    <value>לא נמצאו כתובות DNS IPv4</value>
+  </data>
+  <data name="NoIPv6" xml:space="preserve">
+    <value>לא נמצאו כתובות DNS IPv6</value>
+  </data>
+  <data name="NoNic" xml:space="preserve">
+    <value>לא נבחר ממשק רשת</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>לא מוגדר</value>
+  </data>
+  <data name="AdultFilter" xml:space="preserve">
+    <value>(מסנן תכנים למבוגרים)</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>אוטומטי</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
+    <value>משבית את השימוש בביומטריה לאימות, כגון טביעת אצבע או זיהוי פנים.</value>
+  </data>
+  <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
+    <value>השבת תכונות ביומטריות</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>RyTuneX הוא כלי אופטימיזציה חדשני שנבנה עם מסגרת WinUI 3, שנועד להגביר את ביצועי מכשירי Windows. RyTuneX, שעוצב עבור Windows 10 ו-11 כאחד, מאפשר למשתמשים להסיר ללא מאמץ יישומים עקשניים שהותקנו מראש ולמטב את משאבי המערכת.</value>
+  </data>
+  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
+    <value>בדוק עדכונים</value>
+  </data>
+  <data name="AvailableUpdateContent0" xml:space="preserve">
+    <value>גרסה חדשה יותר (</value>
+  </data>
+  <data name="AvailableUpdateContent1" xml:space="preserve">
+    <value>) זמינה. אנא עדכן לגרסה האחרונה כדי ליהנות מתכונות ושיפורים חדשים.</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>עדכוני RyTuneX</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>אירעה שגיאה. ודא שאתה מחובר לאינטרנט ונסה שוב מאוחר יותר.</value>
+  </data>
+  <data name="UnavailableUpdate0" xml:space="preserve">
+    <value>אתה כבר מריץ את הגרסה האחרונה (</value>
+  </data>
+  <data name="UnavailableUpdate1" xml:space="preserve">
+    <value>). אין עדכונים זמינים כרגע.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>סגור</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>עדכן</value>
+  </data>
+  <data name="Shell_Support.Content" xml:space="preserve">
+    <value>תמיכה</value>
+  </data>
+  <data name="SystemInfoPage_Network.Text" xml:space="preserve">
+    <value>רשת</value>
+  </data>
+  <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
+    <value>סוללה</value>
+  </data>
+  <data name="MACAddress" xml:space="preserve">
+    <value>כתובת MAC</value>
+  </data>
+  <data name="AdapterType" xml:space="preserve">
+    <value>סוג מתאם</value>
+  </data>
+  <data name="EstimatedChargeRemaining" xml:space="preserve">
+    <value>טעינה משוערת שנותרה</value>
+  </data>
+  <data name="BatteryStatus" xml:space="preserve">
+    <value>מצב סוללה</value>
+  </data>
+  <data name="Chemistry" xml:space="preserve">
+    <value>כימיה</value>
+  </data>
+  <data name="Shell_Security.Content" xml:space="preserve">
+    <value>אבטחה</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>אירעה שגיאה בלתי צפויה</value>
+  </data>
+  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
+    <value>הצג יומנים</value>
+  </data>
+  <data name="TotalApps" xml:space="preserve">
+    <value>סה"כ: {0} יישום(ים)</value>
+  </data>
+  <data name="HomePage_Performance.Text" xml:space="preserve">
+    <value>ביצועים</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>מופעל</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>מושבת</value>
+  </data>
+  <data name="SecurityPage_Status.Text" xml:space="preserve">
+    <value>מצב אבטחה</value>
+  </data>
+  <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
+    <value>הגנה מפני וירוסים ואיומים</value>
+  </data>
+  <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
+    <value>חומת אש והגנת רשת</value>
+  </data>
+  <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
+    <value>Windows Update</value>
+  </data>
+  <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
+    <value>SmartScreen</value>
+  </data>
+  <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
+    <value>הגנה בזמן אמת</value>
+  </data>
+  <data name="SecurityPage_UAC.Text" xml:space="preserve">
+    <value>בקרת חשבון משתמש (UAC)</value>
+  </data>
+  <data name="SecurityPage_Details.Text" xml:space="preserve">
+    <value>פרטים</value>
+  </data>
+  <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>תיקון</value>
+  </data>
+  <data name="ConfirmRemoveApps" xml:space="preserve">
+    <value>אתה עומד להסיר לחלוטין את היישומים הבאים מהמערכת שלך:</value>
+  </data>
+  <data name="ConfirmContinue" xml:space="preserve">
+    <value>האם אתה בטוח שברצונך להמשיך?</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>המשך</value>
+  </data>
+  <data name="HomePage_cpuUsage.Text" xml:space="preserve">
+    <value>שימוש במעבד</value>
+  </data>
+  <data name="HomePage_ramUsage.Text" xml:space="preserve">
+    <value>שימוש בזיכרון RAM</value>
+  </data>
+  <data name="HomePage_gpuUsage.Text" xml:space="preserve">
+    <value>שימוש במעבד גרפי</value>
+  </data>
+  <data name="HomePage_diskUsage.Text" xml:space="preserve">
+    <value>שימוש בדיסק</value>
+  </data>
+  <data name="HomePage_networkUsage.Text" xml:space="preserve">
+    <value>שימוש ברשת</value>
+  </data>
+  <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
+    <value>יישומים מותקנים</value>
+  </data>
+  <data name="HomePage_processesCount.Text" xml:space="preserve">
+    <value>תהליכים</value>
+  </data>
+  <data name="HomePage_servicesCount.Text" xml:space="preserve">
+    <value>שירותים</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
+    <value>השבת SmartScreen</value>
+  </data>
+  <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
+    <value>מכבה את מסנן SmartScreen, המתריע על יישומים וקבצים שעלולים להיות לא בטוחים שהורדו מהאינטרנט. השבתת תכונה זו מגדילה את הסיכון להדבקה בתוכנות זדוניות.</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
+    <value>השבת 'חדשות ותחומי עניין'</value>
+  </data>
+  <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
+    <value>משבית את עדכון 'חדשות ותחומי עניין' בשורת המשימות, המציג חדשות, מזג אוויר ועדכונים אחרים. השבתה זו עשויה לשפר את ביצועי המערכת.</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
+    <value>השבת תכונות Spotlight</value>
+  </data>
+  <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
+    <value>מכבה את תכונת Spotlight המציגה תוכן והמלצות מותאמים אישית במסך הנעילה שלך. השבתת תכונה זו יכולה לעזור להגן על הפרטיות.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
+    <value>השבת חוויות מותאמות אישית</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
+    <value>משבית חוויות מותאמות אישית ביישומים ושירותים, ומונע מ-Windows לאסוף את העדפותיך ונתוני הפעילות שלך.</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
+    <value>השבת תוכן ממוטב ענן</value>
+  </data>
+  <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
+    <value>משבית תוכן ממוטב ענן, שעשוי לכלול עדכוני יישומים וסנכרון קבצים. זה יכול להפחית את השימוש ברוחב פס אינטרנט אך עלול להגביל פונקציונליות.</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
+    <value>השבת התראות משוב</value>
+  </data>
+  <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
+    <value>מונע מ-Windows להציג התראות משוב הקשורות לחוויה שלך עם מערכת ההפעלה. השבתת תכונה זו עשויה להפחית הפרעות.</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
+    <value>השבת מזהה פרסום</value>
+  </data>
+  <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
+    <value>משבית את מזהה הפרסום, ומונע מ-Windows לעקוב אחר פעילויותיך לצורך פרסום ממוקד. זה יכול לשפר את הפרטיות אך עלול להשפיע על חוויות יישומים.</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
+    <value>השבת פרסום Bluetooth</value>
+  </data>
+  <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
+    <value>מכבה פרסום Bluetooth, המשדר את נוכחות המכשיר שלך למכשירים סמוכים אחרים. השבתה זו יכולה להפחית סיכוני פרטיות.</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
+    <value>השבת כניסה אוטומטית לאחר הפעלה מחדש</value>
+  </data>
+  <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
+    <value>משבית כניסה אוטומטית לאחר הפעלה מחדש, ומחייב אותך להזין את האישורים שלך באופן ידני. זה עשוי לשפר את האבטחה אך מוסיף שלב נוסף לכניסה.</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
+    <value>השבת שיתוף נתוני כתב יד</value>
+  </data>
+  <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
+    <value>מכבה את שיתוף נתוני כתב היד עם שירותי Microsoft, משפר את הפרטיות אך מפחית כמה תכונות הקשורות לזיהוי כתב יד.</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
+    <value>השבת איסוף נתוני קלט טקסט</value>
+  </data>
+  <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
+    <value>משבית את איסוף נתוני קלט הטקסט, ומונע מ-Windows לאחסן ולנתח את מה שאתה מקליד. זה עוזר להגן על הפרטיות אך עשוי להפחית שיפורי דיוק הקלדה.</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
+    <value>השבת התאמה אישית של קלט</value>
+  </data>
+  <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
+    <value>משבית התאמה אישית של שיטות קלט, כולל טקסט חזוי ותכונות תיקון אוטומטי. זה עשוי להפחית שיפורי ביצועי מערכת בקלט טקסט.</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
+    <value>השבת מצב חיפוש בטוח</value>
+  </data>
+  <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
+    <value>מכבה את מצב חיפוש בטוח, המסנן תוכן שעלול להיות מזיק או בלתי הולם מתוצאות החיפוש. השבתה זו מגדילה את הסיכון לחשיפה לתוכן לא בטוח.</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
+    <value>השבת העלאות פעילות</value>
+  </data>
+  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
+    <value>משבית את העלאת נתוני הפעילות, ומונע ממיקרוסופט לאסוף את נתוני השימוש שלך לשיפור שירותים. זה עוזר לשמור על הפרטיות.</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
+    <value>השבת סנכרון לוח</value>
+  </data>
+  <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
+    <value>משבית סנכרון לוח בין המכשירים שלך, ומבטיח שהנתונים המועתקים שלך יישארו מקומיים ומונע שיתוף נתונים עם מכשירים אחרים.</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
+    <value>השבת סנכרון הודעות</value>
+  </data>
+  <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
+    <value>מונע סנכרון הודעות בין מכשירים, ומבטיח שהודעות הטקסט וההתראות שלך זמינות רק במכשיר שבו אתה משתמש.</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
+    <value>השבת סנכרון הגדרות</value>
+  </data>
+  <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
+    <value>משבית סנכרון של הגדרות מערכת בין מכשירים. זה מונע שיתוף של הגדרות המכשיר, ערכות הנושא ותצורות אחרות שלך.</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
+    <value>השבת הפעלה קולית</value>
+  </data>
+  <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
+    <value>משבית תכונות הפעלה קולית כמו Cortana, ומונע מהעוזר להאזין לפקודות הקוליות שלך. זה יכול לשפר את הפרטיות אך מפחית את פונקציונליות הפקודות הקוליות.</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
+    <value>השבת 'מצא את ההתקן שלי'</value>
+  </data>
+  <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
+    <value>משבית את תכונת 'מצא את ההתקן שלי', המסייעת לאתר את המכשיר שלך אם אבד. השבתה זו מפחיתה את יכולתך לשחזר מכשיר שאבד אך משפרת את הפרטיות.</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
+    <value>השבת עדכון פעילות</value>
+  </data>
+  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
+    <value>מכבה את עדכון הפעילות המציג את הפעילויות האחרונות שלך, ועוזר להגן על פרטיותך על ידי מניעת מאחרים לראות מה עשית במכשירך.</value>
+  </data>
+  <data name="Feature_DisableCdp.Header" xml:space="preserve">
+    <value>השבת CDP (פלטפורמת נתוני לקוחות)</value>
+  </data>
+  <data name="Feature_DisableCdp.Description" xml:space="preserve">
+    <value>משבית CDP, ומונע איסוף ושימוש בנתונים שלך על ידי פלטפורמת נתוני הלקוחות לצורך ניתוח והמלצות ממוקדות. זה מגביר את הפרטיות אך עלול להגביל התאמה אישית.</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
+    <value>השבת חוויות מותאמות אישית בפרטיות</value>
+  </data>
+  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
+    <value>משבית את תכונת החוויות המותאמות אישית בהגדרות הפרטיות, ועוצר את Windows מלהשתמש בנתונים שלך להתאמה אישית של החוויות שלך. זה עשוי להפחית תכונות התאמה אישית.</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
+    <value>השבת התראות אבחון (Toast)</value>
+  </data>
+  <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
+    <value>מכבה התראות אבחון (Toast), ומונע מ-Windows להציג לך הנחיות הקשורות לבריאות המערכת או שגיאות. זה יכול לעזור להפחית הסחות דעת.</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
+    <value>השבת פרטיות דיבור מקוון</value>
+  </data>
+  <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
+    <value>משבית פרטיות דיבור מקוון, ומונע מ-Windows לאחסן או לעבד פקודות קוליות. זה מגביר את הפרטיות אך מגביל תכונות קוליות כמו חיפוש קולי ופקודות.</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
+    <value>השבת גישה למיקום</value>
+  </data>
+  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
+    <value>מכבה גישה למיקום ליישומים ושירותים, ומונע מהם להשתמש ב-GPS או במיקום הרשת של המכשיר שלך. זה משפר את הפרטיות אך עלול להגביל שירותים מבוססי מיקום.</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
+    <value>השבת תכונות מיקום</value>
+  </data>
+  <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
+    <value>משבית את כל התכונות מבוססות המיקום במכשירך, כולל שירותי מיקום ליישומים ותכונות אבטחה. זה יכול לשפר את הפרטיות אך להפחית את הפונקציונליות של שירותים תלויי מיקום.</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
+    <value>בטל עיכוב בהצגת תפריט</value>
+  </data>
+  <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
+    <value>שולט בעיכוב לפני הופעת תפריטים לאחר ריחוף עכבר. השבתת תכונה זו יכולה לגרום לתפריטים להיפתח באופן מיידי, ולשפר את התגובתיות אך עשויה להפחית את שליטת המשתמש.</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
+    <value>בטל זמן ריחוף עכבר</value>
+  </data>
+  <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
+    <value>מתאים את הזמן שהמערכת ממתינה לפני הפעלת אירוע ריחוף. השבתה זו עשויה להאיץ אינטראקציות אך עלולה להוביל להפעלות לא מכוונות.</value>
+  </data>
+  <data name="Feature_AutoComplete.Header" xml:space="preserve">
+    <value>השבת השלמה אוטומטית</value>
+  </data>
+  <data name="Feature_AutoComplete.Description" xml:space="preserve">
+    <value>משבית הצעות אוטומטיות בעת הקלדה בשדות מסוימים, כגון תיבות חיפוש וקלט טפסים. השבתה זו יכולה להפחית הסחות דעת אך עשויה להאט את זרימת העבודה.</value>
+  </data>
+  <data name="Feature_CrashDump.Header" xml:space="preserve">
+    <value>השבת יצירת קובץ קריסה (Crash Dump)</value>
+  </data>
+  <data name="Feature_CrashDump.Description" xml:space="preserve">
+    <value>קובע אם דוחות קריסה וקובצי זיכרון נוצרים כאשר יישומים קורסים. השבתת תכונה זו יכולה לעזור לחסוך מקום בדיסק, אך עשויה להפחית את היכולת לאבחן ולפתור בעיות יישומים.</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
+    <value>השבת סיוע מרחוק</value>
+  </data>
+  <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
+    <value>משבית תכונות תמיכה מרחוק, המאפשרות לאחרים לסייע לך באמצעות שולחן עבודה מרוחק. השבתה זו יכולה לשפר את האבטחה אך מגבילה את אפשרויות התמיכה.</value>
+  </data>
+  <data name="Feature_WindowShake.Header" xml:space="preserve">
+    <value>השבת ניעור חלון (Window Shake)</value>
+  </data>
+  <data name="Feature_WindowShake.Description" xml:space="preserve">
+    <value>משבית את תכונת ניעור החלון שממזערת את כל החלונות הפתוחים כשמנערים חלון. השבתה זו משפרת את המיקוד אך מסירה כלי שימושי לניהול חלונות.</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
+    <value>הוסף תפריט הקשר 'העתק/העבר'</value>
+  </data>
+  <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
+    <value>מאפשר אפשרויות נוספות בתפריט ההקשר של הקובץ להעתקה או העברה קלה של קבצים למיקום חדש. תכונה זו מייעלת את ניהול הקבצים על ידי מתן גישה מהירה לפונקציות אלו ישירות מתפריט הלחיצה הימנית.</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
+    <value>התאם זמני קצוב למשימות</value>
+  </data>
+  <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
+    <value>משנה את הגדרות הזמן הקצוב למשימות מערכת. התאמה זו יכולה לשפר ביצועים בתרחישים מסוימים אך עלולה לגרום למשימות להיכשל בתנאים מסוימים.</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
+    <value>אפשר בדיקות שטח דיסק נמוך</value>
+  </data>
+  <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
+    <value>מאפשר בדיקות אוטומטיות לשטח דיסק נמוך כדי למנוע בעיות ביצועים. השבתה זו עשויה להפחית התראות, אך אתה עלול לפספס אזהרות אחסון קריטיות.</value>
+  </data>
+  <data name="Feature_LinkResolve.Header" xml:space="preserve">
+    <value>השבת פתרון קישורים</value>
+  </data>
+  <data name="Feature_LinkResolve.Description" xml:space="preserve">
+    <value>משבית את פתרון הקישורים השבורים בקבצים ותיקיות. השבתה זו יכולה להאיץ פעולות אך עלולה להשאיר קישורים מיושנים ללא פתרון.</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
+    <value>הקטן זמני קצוב לשירותים</value>
+  </data>
+  <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
+    <value>מתאים את זמני הקצוב לשירותי מערכת. קיצורם יכול לשפר ביצועים אך עלול לגרום לשירותים להסתיים בטרם עת.</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
+    <value>השבת רישום מרוחק</value>
+  </data>
+  <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
+    <value>משבית גישה לרישום מרחוק. השבתה זו משפרת את האבטחה אך מונעת תצורה מרחוק של הגדרות הרישום.</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
+    <value>הסתר סיומות קבצים וקבצים מוסתרים</value>
+  </data>
+  <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
+    <value>שולט בנראות של סיומות קבצים וקבצים מוסתרים. הפעלה זו מפחיתה עומס אך מסתירה פרטי קבצים חשובים.</value>
+  </data>
+  <data name="Feature_SystemProfile.Header" xml:space="preserve">
+    <value>מטב פרופיל מערכת</value>
+  </data>
+  <data name="Feature_SystemProfile.Description" xml:space="preserve">
+    <value>משפר את ביצועי המערכת שלך על ידי התאמת הגדרות פרופיל המערכת. תכונה זו נותנת עדיפות למהירות ויעילות, ומשפרת את התגובתיות הכוללת של המערכת וניהול המשאבים.</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
+    <value>שפר הגדרות GPU ועדיפות</value>
+  </data>
+  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
+    <value>ממטב תצורות GPU ועדיפויות תהליכים כדי להגביר ביצועים, ומבטיח רינדור גרפי טוב יותר ותפעול חלק יותר למשימות עתירות משאבים כמו משחקים וריבוי משימות.</value>
+  </data>
+  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
+    <value>השבת מצב שרת פריימים</value>
+  </data>
+  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
+    <value>משבית מצב שרת פריימים לקידוד וידאו מתקדם. השבתה זו משפרת ביצועים אך עשויה להפחית את איכות הווידאו בתנאים מסוימים.</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
+    <value>התאם הגדרות GPU עם השהיה נמוכה</value>
+  </data>
+  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
+    <value>מתאים הגדרות GPU כדי למזער השהיה, ומשפר ביצועי משחקים או וידאו.</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
+    <value>הגדר מגבלת Non-Best Effort</value>
+  </data>
+  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
+    <value>מגדיר מגבלה לתהליכי non-best effort. הפעלה זו יכולה לתעדף ביצועים אך עשויה להפחית את גמישות המערכת במקרים מסוימים.</value>
+  </data>
+  <data name="LoadingWindowText.Text" xml:space="preserve">
+    <value>טוען...</value>
+  </data>
+  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
+    <value>פרטי התקן</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
+    <value>אפשר תפריט הקשר קלאסי</value>
+  </data>
+  <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
+    <value>משחזר את סגנון תפריט ההקשר הקלאסי של Windows 10, ומספק חוויית תפריט לחיצה ימנית מוכרת עם כל האפשרויות המוצגות באופן מיידי.</value>
+  </data>
+  <data name="DoNotShowCheckBox" xml:space="preserve">
+    <value>אל תציג הודעה זו שוב</value>
+  </data>
+  <data name="RestorePointDialogTitle" xml:space="preserve">
+    <value>צור נקודת שחזור</value>
+  </data>
+  <data name="RestorePointDialogText" xml:space="preserve">
+    <value>מומלץ מאוד ליצור נקודת שחזור לפני ביצוע שינויים כלשהם במערכת שלך.
+
+
+האם תרצה ליצור נקודת שחזור מערכת לפני שתמשיך?</value>
+  </data>
+  <data name="CreatingRestorePoint" xml:space="preserve">
+    <value>יוצר נקודת שחזור</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>נקודת שחזור נוצרה</value>
+  </data>
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>נקודת שחזור מערכת נוצרה בהצלחה.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>יצירת נקודת שחזור נכשלה</value>
+  </data>
+  <data name="Settings_RevertChanges.Header" xml:space="preserve">
+    <value>בטל את כל השינויים</value>
+  </data>
+  <data name="Settings_RevertChanges.Description" xml:space="preserve">
+    <value>מבטל את כל השינויים ש-RyTuneX ביצע במערכת שלך, כולל נקודת השחזור.</value>
+  </data>
+  <data name="RevertingChanges" xml:space="preserve">
+    <value>מבטל שינויים כעת...</value>
+  </data>
+  <data name="RevertChangesDialogText" xml:space="preserve">
+    <value>אתה עומד לבטל את כל השינויים שבוצעו על ידי RyTuneX במערכת שלך (למעט יישומים שהוסרו) ולאפס את העדפות היישום.
+
+
+האם אתה בטוח שברצונך להמשיך?</value>
+  </data>
+  <data name="NoChangesFound" xml:space="preserve">
+    <value>לא נמצאו שינויים משמעותיים.</value>
+  </data>
+  <data name="OperationStopped" xml:space="preserve">
+    <value>הפעולה הופסקה</value>
+  </data>
+  <data name="ReportSaved" xml:space="preserve">
+    <value>דוח נשמר בשולחן העבודה שלך</value>
+  </data>
+  <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
+    <value>אבחון זיכרון</value>
+  </data>
+  <data name="MemoryDiagnosticDialogText" xml:space="preserve">
+    <value>בעיות זיכרון עלולות לגרום למחשב שלך לאבד מידע או להפסיק לעבוד.
+
+
+בדוק את המחשב שלך לאיתור בעיות זיכרון</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>הפעל מחדש כעת</value>
+  </data>
+  <data name="ScheduleLater" xml:space="preserve">
+    <value>תזמן למועד מאוחר יותר</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>בטל</value>
+  </data>
+  <data name="ScheduledLater" xml:space="preserve">
+    <value>תוזמן להפעלה מחדש הבאה</value>
+  </data>
+  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
+    <value>סרוק</value>
+  </data>
+  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
+    <value>תקן</value>
+  </data>
+  <data name="RepairPage_StopButton.Content" xml:space="preserve">
+    <value>עצור</value>
+  </data>
+  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>בחר לפחות אפשרות אחת לסריקה/תיקון</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
+    <value>בריאות סוללה</value>
+  </data>
+  <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
+    <value>זה ייצור סטטיסטיקה מלאה על בריאות הסוללה שלך</value>
+  </data>
+  <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
+    <value>צור</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
+    <value>אבחון זיכרון</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
+    <value>נתח את זיכרון המערכת שלך לאיתור בעיות פוטנציאליות ושפר את היציבות</value>
+  </data>
+  <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
+    <value>אבחן</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
+    <value>אופטימיזציות דיסק</value>
+  </data>
+  <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
+    <value>זה ימטב את התקן האחסון שלך על ידי איחוי (אם HDD) או ריטרימינג (אם SSD)</value>
+  </data>
+  <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
+    <value>מטב</value>
+  </data>
+  <data name="RepairPage_EventViewer.Header" xml:space="preserve">
+    <value>מציג אירועים</value>
+  </data>
+  <data name="RepairPage_EventViewer.Description" xml:space="preserve">
+    <value>זה יציג יומני אירועים אחרונים של המערכת לצורך פתרון בעיות</value>
+  </data>
+  <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
+    <value>אפשרויות תיקון</value>
+  </data>
+  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
+    <value>אפשרויות אבחון</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>הפעולה הושלמה</value>
+  </data>
+  <data name="RestorePointTitle" xml:space="preserve">
+    <value>נקודת שחזור</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>אזהרה</value>
+  </data>
+  <data name="RestoreWarningDialogText" xml:space="preserve">
+    <value>השבתת שחזור המערכת תמחק את כל נקודות השחזור, כולל אלו שנוצרו על ידי RyTuneX.
+
+
+האם אתה בטוח שברצונך להמשיך?</value>
+  </data>
+  <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
+    <value>הגדרות פרסום</value>
+  </data>
+  <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
+    <value>הגדרות טלמטריה</value>
+  </data>
+  <data name="OtherSettings.Text" xml:space="preserve">
+    <value>הגדרות אחרות</value>
+  </data>
+  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
+    <value>אופטימיזציות מערכת בסיסיות</value>
+  </data>
+  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
+    <value>אופטימיזציות מערכת מתקדמות</value>
+  </data>
+  <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
+    <value>אין יישומים התואמים לחיפוש שלך</value>
+  </data>
+  <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
+    <value>חפש יישומים...</value>
+  </data>
+  <data name="Feature_BackgroundApps.Header" xml:space="preserve">
+    <value>השבת יישומי רקע</value>
+  </data>
+  <data name="Feature_BackgroundApps.Description" xml:space="preserve">
+    <value>מונע מיישומים לפעול ברקע, מה שמוביל לביצועים משופרים במקרים מסוימים.</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
+    <value>אפשר מצב כהה של Windows</value>
+  </data>
+  <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
+    <value>מאפשר מצב כהה לכל המערכת ללא צורך בהפעלת Windows.</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
+    <value>השבת שקיפות Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
+    <value>משבית אפקטים שקופים באלמנטים של ממשק המשתמש של המערכת כמו שורת המשימות וחלונות, ומשפר את הביצועים.</value>
+  </data>
+  <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
+    <value>יישומים סטנדרטיים</value>
+  </data>
+  <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
+    <value>כל היישומים</value>
+  </data>
+  <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
+    <value>יישומי Win32</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
+    <value>דחוס מערכת הפעלה</value>
+  </data>
+  <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
+    <value>אפשר דחיסת מערכת הפעלה כדי להפחית את השימוש בשטח דיסק. תכונה זו שימושית במיוחד למכשירים עם קיבולת אחסון מוגבלת אך עשויה להשפיע קלות על ביצועי המערכת בחומרה פשוטה יותר.</value>
+  </data>
+  <data name="Compressing" xml:space="preserve">
+    <value>דוחס קבצים בינאריים של המערכת...</value>
+  </data>
+  <data name="Decompressing" xml:space="preserve">
+    <value>פורס קבצים בינאריים של המערכת...</value>
+  </data>
+  <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
+    <value>בדוק דחיסה</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>דחוס</value>
+  </data>
+  <data name="Decompress" xml:space="preserve">
+    <value>פרוס</value>
+  </data>
+  <data name="SystemCompressionTitle" xml:space="preserve">
+    <value>דחיסת מערכת</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
+    <value>השבת פיצול Service Host</value>
+  </data>
+  <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
+    <value>משבית פיצול Service Host לשימוש נמוך משמעותית ב-RAM ובספירת תהליכים.</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
+    <value>אפשר תפריט אתחול מדור קודם</value>
+  </data>
+  <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
+    <value>עבור לתפריט האתחול מדור קודם להפעלה מהירה יותר.</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
+    <value>מיטוב הגדרות NTFS</value>
+  </data>
+  <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
+    <value>כוונן הגדרות NTFS לשיפור ביצועים והגברת הפרטיות.</value>
+  </data>
+  <data name="Feature_PagingSettings.Header" xml:space="preserve">
+    <value>השבת החלפה (Paging)</value>
+  </data>
+  <data name="Feature_PagingSettings.Description" xml:space="preserve">
+    <value>כבה החלפת זיכרון (Paging) לביצועים מרביים.</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
+    <value>מיטוב ביצועי יישומים בחזית</value>
+  </data>
+  <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
+    <value>מגביר ביצועים ליישומים פעילים על ידי תעדוף משימות בחזית.</value>
+  </data>
+  <data name="Feature_WPBT.Header" xml:space="preserve">
+    <value>השבת ביצוע WPBT</value>
+  </data>
+  <data name="Feature_WPBT.Description" xml:space="preserve">
+    <value>מנע מקושחה להריץ תוכניות (למשל, תוכנות מיותרות של יצרן מקורי) במהלך האתחול.</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
+    <value>השבת שירותים מיותרים</value>
+  </data>
+  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
+    <value>מטב את ביצועי המערכת על ידי השבתת שירותי רקע שאינם חיוניים לפעולת המכשיר שלך. זה עוזר לפנות משאבי מערכת ומשפר את היעילות הכוללת.</value>
+  </data>
+  <data name="Settings_RevertTitle.Text" xml:space="preserve">
+    <value>בטל שינויים</value>
+  </data>
+  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+    <value>ייבוא</value>
+  </data>
+  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+    <value>ייצוא</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
+    <value>ייצוא/ייבוא אופטימיזציות</value>
+  </data>
+  <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
+    <value>יצא את האופטימיזציות הנוכחיות שלך או יבא אותן לאופטימיזציה קלה ואוטומטית יותר.</value>
+  </data>
+  <data name="SettingsImported" xml:space="preserve">
+    <value>הגדרות יובאו והוחלו בהצלחה</value>
+  </data>
+  <data name="SettingsExported" xml:space="preserve">
+    <value>הגדרות יוצאו בהצלחה אל:</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
+    <value>השבת אזור 'מומלץ' בתפריט 'התחל'</value>
+  </data>
+  <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
+    <value>מסיר את האזור "מומלץ" מתפריט 'התחל' כדי לספק פריסה נקייה וממוקדת יותר.</value>
+  </data>
+</root>

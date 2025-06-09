@@ -41,6 +41,7 @@
                     <ComboBoxItem Content="Italiano (Italia)" Tag="it-it"/>
                     <ComboBoxItem Content="Türkçe (Türkiye)" Tag="tr-tr"/>
                     <ComboBoxItem Content="Tiếng Việt (Việt Nam)" Tag="vi-vn"/>
+                    <ComboBoxItem Content="עברית (ישראל)" Tag="he-il"/>
                 </ComboBox>
             </controls:SettingsCard>
 
