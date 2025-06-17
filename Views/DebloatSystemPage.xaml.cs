@@ -8,7 +8,6 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
-using Windows.Storage;
 
 namespace RyTuneX.Views;
 

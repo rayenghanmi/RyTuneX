@@ -357,55 +357,100 @@ internal class OptimizeSystemHelper
         OptimizationOptions.StopService("diagnosticshub.standardcollector.service");
         OptimizationOptions.StopService("dmwappushservice");
         OptimizationOptions.StopService("DcpSvc");
+        OptimizationOptions.StopService("WdiServiceHost");
+        OptimizationOptions.StopService("WdiSystemHost");
 
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\DiagTrack\" /v Start /t REG_DWORD /d 4 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service\" /v Start /t REG_DWORD /d 4 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\dmwappushservice\" /v Start /t REG_DWORD /d 4 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\DcpSvc\" /v Start /t REG_DWORD /d 4 /f");
+        string[] services = {
+        "DiagTrack",
+        "diagnosticshub.standardcollector.service",
+        "dmwappushservice",
+        "DcpSvc",
+        "WdiServiceHost",
+        "WdiSystemHost"
+        };
 
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\Software\\Microsoft\\PolicyManager\\default\\WiFi\\AllowAutoConnectToWiFiSenseHotspots\" /v value /t REG_DWORD /d 0 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\Software\\Microsoft\\PolicyManager\\default\\WiFi\\AllowWiFiHotSpotReporting\" /v value /t REG_DWORD /d 0 /f");
-
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v DisableEngine /t REG_DWORD /d 1 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v SbEnable /t REG_DWORD /d 0 /f");
-
-        if (Environment.Is64BitOperatingSystem)
+        foreach (var svc in services)
         {
-            await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Wow6432Node\\Policies\\Microsoft\\Windows\\AppCompat\" /v DisableEngine /t REG_DWORD /d 1 /f");
-            await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Wow6432Node\\Policies\\Microsoft\\Windows\\AppCompat\" /v SbEnable /t REG_DWORD /d 0 /f");
-            await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Wow6432Node\\Policies\\Microsoft\\Windows\\AppCompat\" /v DisablePCA /t REG_DWORD /d 1 /f");
+            await OptimizationOptions.StartInCmd($"reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\{svc}\" /v Start /t REG_DWORD /d 4 /f");
         }
 
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System\" /v PublishUserActivities /t REG_DWORD /d 0 /f");
+        string[] appCompatKeys = {
+        "DisableEngine", "SbEnable", "AITEnable",
+        "DisableInventory", "DisablePCA", "DisableUAR"
+        };
+        int[] appCompatValues = { 1, 0, 0, 1, 1, 1 };
+
+        for (var i = 0; i < appCompatKeys.Length; i++)
+        {
+            await OptimizationOptions.StartInCmd($"reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v {appCompatKeys[i]} /t REG_DWORD /d {appCompatValues[i]} /f");
+            if (Environment.Is64BitOperatingSystem)
+            {
+                await OptimizationOptions.StartInCmd($"reg add \"HKLM\\SOFTWARE\\Wow6432Node\\Policies\\Microsoft\\Windows\\AppCompat\" /v {appCompatKeys[i]} /t REG_DWORD /d {appCompatValues[i]} /f");
+            }
+        }
+
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v AllowTelemetry /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\SQMClient\\Windows\" /v CEIPEnable /t REG_DWORD /d 0 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v AITEnable /t REG_DWORD /d 0 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v DisableInventory /t REG_DWORD /d 1 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v DisablePCA /t REG_DWORD /d 1 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v DisableUAR /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Siuf\\Rules\" /v NumberOfSIUFInPeriod /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\Software\\Microsoft\\PolicyManager\\default\\WiFi\\AllowAutoConnectToWiFiSenseHotspots\" /v value /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\Software\\Microsoft\\PolicyManager\\default\\WiFi\\AllowWiFiHotSpotReporting\" /v value /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Device Metadata\" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\MRT\" /v DontOfferThroughWUAU /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\AutoLogger\\SQMLogger\" /v Start /t REG_DWORD /d 0 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\System\" /v AllowExperimentation /d 0 /f");
-        await OptimizationOptions.StartInCmd("sc config WdiServiceHost start= disabled");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\System\" /v AllowExperimentation /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System\" /v PublishUserActivities /t REG_DWORD /d 0 /f");
 
+        string[] tasks = {
+        "Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser",
+        "Microsoft\\Windows\\Application Experience\\ProgramDataUpdater",
+        "Microsoft\\Windows\\Autochk\\Proxy",
+        "Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator",
+        "Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip",
+        "Microsoft\\Windows\\Customer Experience Improvement Program\\BthSQM",
+        "Microsoft\\Windows\\DiskDiagnostic\\Microsoft-Windows-DiskDiagnosticDataCollector"
+        };
 
+        foreach (var task in tasks)
+        {
+            await OptimizationOptions.StartInCmd($"schtasks /Change /TN \"{task}\" /Disable");
+        }
     }
 
     internal static async void EnableTelemetryServices()
     {
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\DiagTrack\" /v Start /t REG_DWORD /d 2 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service\" /v Start /t REG_DWORD /d 2 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\dmwappushservice\" /v Start /t REG_DWORD /d 2 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\DcpSvc\" /v Start /t REG_DWORD /d 2 /f");
+        string[] services = {
+        "DiagTrack",
+        "diagnosticshub.standardcollector.service",
+        "dmwappushservice",
+        "DcpSvc",
+        "WdiSystemHost",
+        "WdiServiceHost"
+        };
 
-        await OptimizationOptions.StartInCmd("sc config WdiSystemHost start= auto");
-        await OptimizationOptions.StartInCmd("sc config WdiServiceHost start= auto");
+        foreach (var svc in services)
+        {
+            await OptimizationOptions.StartInCmd($"reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\{svc}\" /v Start /t REG_DWORD /d 2 /f");
+            await OptimizationOptions.StartInCmd($"sc start {svc}");
+        }
 
-        await OptimizationOptions.StartInCmd("sc start DiagTrack");
-        await OptimizationOptions.StartInCmd("sc start diagnosticshub.standardcollector.service");
-        await OptimizationOptions.StartInCmd("sc start dmwappushservice");
-        await OptimizationOptions.StartInCmd("sc start DcpSvc");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v AllowTelemetry /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\SQMClient\\Windows\" /v CEIPEnable /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System\" /v PublishUserActivities /t REG_DWORD /d 1 /f");
 
+        string[] tasks = {
+        "Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser",
+        "Microsoft\\Windows\\Application Experience\\ProgramDataUpdater",
+        "Microsoft\\Windows\\Autochk\\Proxy",
+        "Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator",
+        "Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip",
+        "Microsoft\\Windows\\Customer Experience Improvement Program\\BthSQM",
+        "Microsoft\\Windows\\DiskDiagnostic\\Microsoft-Windows-DiskDiagnosticDataCollector"
+        };
+
+        foreach (var task in tasks)
+        {
+            await OptimizationOptions.StartInCmd($"schtasks /Change /TN \"{task}\" /Enable");
+        }
     }
 
     internal static async void DisableMediaPlayerSharing()
@@ -1591,7 +1636,7 @@ internal class OptimizeSystemHelper
     public static async Task<bool> RemoveTempFiles()
     {
         // Stop Explorer
-        await Task.Run(() => OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe"));
+        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe");
 
         try
         {
@@ -1599,44 +1644,40 @@ internal class OptimizeSystemHelper
             // List of commands to remove temporary files
             var tempCommands = new[]
             {
-            "del /F /S /Q %windir%\\Temp\\*",
-            "del /F /S /Q %windir%\\SoftwareDistribution\\Download\\*",
-            "del /F /S /Q %windir%\\SoftwareDistribution\\DeliveryOptimization\\*",
-            "del /F /S /Q %windir%\\Prefetch\\*",
+            "rd /S /Q %windir%\\Temp",
+            "rd /S /Q %TEMP%",
+            "rd /S /Q %localappdata%\\Temp",
+            "rd /S /Q %windir%\\SoftwareDistribution\\Download",
+            "rd /S /Q %windir%\\SoftwareDistribution\\DeliveryOptimization",
             "del /F /S /Q %windir%\\Logs\\CBS\\*",
-            "del /F /S /Q %windir%\\Temp\\WindowsUpdate.log",
             "del /F /S /Q %windir%\\MEMORY.DMP",
             "del /F /S /Q %windir%\\Minidump\\*.dmp",
-            "del /F /S /Q %windir%\\Setup\\Temp\\*",
-            "del /F /S /Q %windir%\\Downloaded Program Files\\*",
-            "del /F /S /Q %programdata%\\Microsoft\\Windows\\WER\\ReportQueue\\*",
-            "del /F /S /Q %localappdata%\\Temp\\*",
-            "del /F /S /Q %localappdata%\\Microsoft\\Windows\\WER\\ReportArchive\\*",
-            "del /F /S /Q %localappdata%\\Microsoft\\Windows\\INetCache\\*",
+            "del /F /S /Q %windir%\\Temp\\WindowsUpdate.log",
+            "rd /S /Q %windir%\\Prefetch",
+            "rd /S /Q %programdata%\\Microsoft\\Windows\\WER\\ReportQueue",
+            "rd /S /Q %localappdata%\\Microsoft\\Windows\\WER\\ReportArchive",
+            "rd /S /Q %localappdata%\\Microsoft\\Windows\\INetCache",
+            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\iconcache*",
+            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache*",
+            "rd /S /Q %systemdrive%\\Windows.old",
+            "rd /S /Q %systemdrive%\\MSOCache",
             "del /F /S /Q %systemdrive%\\*.tmp",
             "del /F /S /Q %systemdrive%\\*._mp",
             "del /F /S /Q %systemdrive%\\*.log",
-            "del /F /S /Q %systemdrive%\\*.gid",
             "del /F /S /Q %systemdrive%\\*.chk",
             "del /F /S /Q %systemdrive%\\*.old",
             "del /F /S /Q %systemdrive%\\found.*",
-            "del /F /S /Q %userprofile%\\cookies\\*.*",
             "del /F /S /Q %userprofile%\\recent\\*.*",
             "del /F /S /Q \"%userprofile%\\Local Settings\\Temporary Internet Files\\*.*\"",
-            "del /F /S /Q \"%userprofile%\\Local Settings\\Temp\\*.*\"",
-            "del /F /S /Q \"%userprofile%\\recent\\*.*\"",
-            "del /A /Q \"%localappdata%\\Microsoft\\Windows\\Explorer\\iconcache*\"",
-            "del /A /Q \"%localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache*\"",
-            "del /F /S /Q /A %localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache_*.db",
-            "rd /S /Q \"%TEMP%\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path $env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\* -Include 'Cache', 'Cookies', 'History', 'Visited Links', 'Archived History', 'Web Data', 'Current Session', 'Last Session' -Recurse -Force -ErrorAction SilentlyContinue\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path $env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Cache -Recurse -Force -ErrorAction SilentlyContinue\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path $env:APPDATA\\Mozilla\\Firefox\\Profiles\\*\\cache2 -Recurse -Force -ErrorAction SilentlyContinue\"",
+            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path $env:APPDATA\\Moonchild Productions\\Pale Moon\\Profiles\\*\\cache2\\entries -Recurse -Force -ErrorAction SilentlyContinue\"",
             "PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"",
             "PowerShell.exe -NoProfile -Command \"wevtutil cl System\"",
             "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
-            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
-            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Cache\\*' -Recurse -Force\"",
-            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path 'C:\\Users\\%USERNAME%\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\*\\cache2\\*' -Recurse -Force\"",
             "ipconfig /flushdns",
-            "dism /Online /Cleanup-Image /StartComponentCleanup",
+            "dism /Online /Cleanup-Image /StartComponentCleanup"
             };
 
             // Execute all commands
@@ -1644,7 +1685,7 @@ internal class OptimizeSystemHelper
             await Task.WhenAll(tempTasks);
 
             // Start explorer
-            await Task.Run(() => OptimizationOptions.StartInCmd("start explorer.exe"));
+            await OptimizationOptions.StartInCmd("start explorer.exe");
 
             return true;
         }

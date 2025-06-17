@@ -1116,15 +1116,6 @@ Bạn có muốn tạo điểm khôi phục hệ thống trước khi tiếp t�
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>Đang tạo điểm khôi phục</value>
   </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>Đã tạo điểm khôi phục</value>
-  </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>Điểm khôi phục đã tạo hoàn tất.</value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>Thất bại khi tạo điểm khôi phục</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Hoàn tác thay đổi</value>
   </data>

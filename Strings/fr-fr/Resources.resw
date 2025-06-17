@@ -1116,15 +1116,6 @@ Souhaitez-vous créer un point de restauration système avant de continuer ?</va
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>Création d'un point de restauration</value>
   </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>Point de restauration créé</value>
-  </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>Un point de restauration système a été créé avec succès.</value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>Échec de la création du point de restauration</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Annuler toutes les modifications</value>
   </data>

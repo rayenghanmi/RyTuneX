@@ -1114,15 +1114,6 @@
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>正在建立還原點</value>
   </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>還原點已建立</value>
-  </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>系統還原點已成功建立. </value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>建立還原點失敗</value>
-  </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>還原所有更改</value>
   </data>

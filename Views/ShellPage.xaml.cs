@@ -31,6 +31,15 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = viewModel;
         InitializeComponent();
+        this.FlowDirection = App.FlowDirectionSetting;
+
+        // Temporary fix for RTL layout issue with the overlap of NavigationViewControl and caption buttons
+        if (FlowDirection == FlowDirection.RightToLeft)
+        {
+            NavigationViewControl.Margin = new Thickness(0, 40, 0, 0);
+            AppTitleBar.Padding = new Thickness(120, 0, 0, 0);
+        }
+
         Current = this;
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;
@@ -168,78 +177,15 @@ public sealed partial class ShellPage : Page
         }
         if (result == ContentDialogResult.Primary)
         {
-            var progressDialog = new ContentDialog
-            {
-                Title = "CreatingRestorePoint".GetLocalized(),
-                Content = new ProgressRing { IsActive = true, Width = 50, Height = 50 },
-                XamlRoot = Content.XamlRoot,
-                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                IsPrimaryButtonEnabled = false
-            };
-
-            await LogHelper.Log($"Showing Restore Point Loading Dialog. CheckBox is checked: {neverShowAgain.IsChecked}");
-
-            // Show the progress dialog in a separate task
-            _ = progressDialog.ShowAsync().AsTask();
             try
             {
-                await CreateRestorePointAsync();
-                progressDialog.Hide();
-                await LogHelper.Log("Showing Restore Point Creation Success");
-                await new ContentDialog
-                {
-                    Title = "RestorePointCreated".GetLocalized(),
-                    Content = "RestorePointCreationSuccess".GetLocalized(),
-                    CloseButtonText = "OK",
-                    XamlRoot = this.Content.XamlRoot,
-                    PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                }.ShowAsync();
+                await LogHelper.Log("Opening SystemPropertiesProtection");
+                await OptimizationOptions.StartInCmd("SystemPropertiesProtection");
             }
             catch (Exception ex)
             {
-                progressDialog.Hide();
-                await LogHelper.Log("Showing Restore Point Creation Error");
-                await new ContentDialog
-                {
-                    Title = "UnexpectedError".GetLocalized(),
-                    Content = $"RestorePointCreationError".GetLocalized(),
-                    CloseButtonText = "OK",
-                    XamlRoot = Content.XamlRoot,
-                    PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                }.ShowAsync();
-                await LogHelper.LogError(ex.Message);
+                await LogHelper.LogError($"Failed to open System Properties Protection: {ex.Message}");
             }
-        }
-    }
-
-    private async Task CreateRestorePointAsync()
-    {
-        var processInfo = new ProcessStartInfo
-        {
-            FileName = "powershell.exe",
-            Arguments = "-Command \"Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; Checkpoint-Computer -Description 'RyTuneX Restore Point' -RestorePointType 'MODIFY_SETTINGS'\"",
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        };
-
-        using var process = new Process { StartInfo = processInfo };
-        await LogHelper.Log("Starting Restore Point Creation Process");
-        process.Start();
-
-        var output = await process.StandardOutput.ReadToEndAsync();
-        var error = await process.StandardError.ReadToEndAsync();
-
-        if (process.ExitCode != 0 || !string.IsNullOrEmpty(error))
-        {
-            await LogHelper.Log(error);
-            throw new Exception($"Restore Point Creation Process exited with code {process.ExitCode}");
         }
     }
 

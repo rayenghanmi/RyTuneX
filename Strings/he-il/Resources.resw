@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -121,34 +121,34 @@
     <value>RyTuneX</value>
   </data>
   <data name="Shell_Debloat.Content" xml:space="preserve">
-    <value>デブロート</value>
+    <value>הסרת תוכנות מיותרות</value>
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
-    <value>デバイス</value>
+    <value>התקן</value>
   </data>
   <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>バグを報告</value>
+    <value>דיווח</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
-    <value>最適化</value>
+    <value>מיטוב</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>テーマ</value>
+    <value>ערכת נושא</value>
   </data>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>ライト</value>
+    <value>בהיר</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>ダーク</value>
+    <value>כהה</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>デフォルト</value>
+    <value>ברירת מחדל</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>このアプリケーションについて</value>
+    <value>אודות יישום זה</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>RyTuneXは、Rayen Ghanmiによって作成されたWindows 10および11の最適化ツールで、選択したソフトウェアを削除し、不要なサービスを無効にすることでシステムのパフォーマンスと効率を向上させることを目的としています. </value>
+    <value>RyTuneX, כלי אופטימיזציה עבור Windows 10 ו-11 שנוצר על ידי Rayen Ghanmi, נועד לשפר את ביצועי המערכת ויעילותה על ידי הסרה סלקטיבית של תוכנות נבחרות והשבתת שירותים מיותרים.</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
     <value>AGPL v3.0</value>
@@ -157,622 +157,622 @@
     <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
-    <value>言語</value>
+    <value>שפה</value>
   </data>
   <data name="DebloatSystemPage_FetchingInstalledApps.Text" xml:space="preserve">
-    <value>インストールされたアプリデータを取得中...</value>
+    <value>מאחזר נתוני יישומים מותקנים...</value>
   </data>
   <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
-    <value>フィルター条件:</value>
+    <value>סנן לפי:</value>
   </data>
   <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
-    <value>選択したアプリをアンインストール</value>
+    <value>הסר יישום(ים) נבחר(ים)</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>完了</value>
+    <value>בוצע</value>
   </data>
   <data name="Uninstalling" xml:space="preserve">
-    <value>アンインストール中</value>
+    <value>מסיר התקנה</value>
   </data>
   <data name="UninstallTip" xml:space="preserve">
-    <value>削除したいアプリを選択してアンインストールをクリック</value>
+    <value>בחר יישומים שברצונך להסיר ולחץ על הסר התקנה</value>
   </data>
   <data name="Shell_Features.Content" xml:space="preserve">
-    <value>機能</value>
+    <value>תכונות</value>
   </data>
   <data name="Shell_Privacy.Content" xml:space="preserve">
-    <value>プライバシー</value>
+    <value>פרטיות</value>
   </data>
   <data name="HomePage_DiscordButton.Text" xml:space="preserve">
-    <value>サーバーに参加</value>
+    <value>הצטרף לשרת שלנו</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>RyTuneXをチェック</value>
+    <value>בדוק את RyTuneX</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>フィードバックを送信</value>
+    <value>שלח משוב</value>
   </data>
   <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>プロセッサ</value>
+    <value>מעבד</value>
   </data>
   <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>グラフィックスカード</value>
+    <value>כרטיס גרפי</value>
   </data>
   <data name="SystemInfoPage_OS.Text" xml:space="preserve">
-    <value>オペレーティングシステム</value>
+    <value>מערכת הפעלה</value>
   </data>
   <data name="SystemInfoPage_RAM.Text" xml:space="preserve">
-    <value>RAM</value>
+    <value>זיכרון RAM</value>
   </data>
   <data name="SystemInfoPage_Storage.Text" xml:space="preserve">
-    <value>ストレージ</value>
+    <value>אחסון</value>
   </data>
   <data name="Debloat" xml:space="preserve">
-    <value>デブロート</value>
+    <value>הסרת תוכנות מיותרות</value>
   </data>
   <data name="DebloatPage_NotificationBody" xml:space="preserve">
-    <value>これらのアプリの一部をアンインストールしても完全に削除されない場合があります. </value>
+    <value>הסרת התקנה של חלק מהיישומים הללו עשויה שלא להסיר אותם לחלוטין.</value>
   </data>
   <data name="UninstallationError" xml:space="preserve">
-    <value>以下のアプリのアンインストール中にエラーが発生しました</value>
+    <value>שגיאה בהסרת היישום(ים) הבא(ים)</value>
   </data>
   <data name="UninstallationSuccess" xml:space="preserve">
-    <value>以下のアプリが正常にアンインストールされました</value>
+    <value>היישום(ים) הבא(ים) הוסר(ו) בהצלחה</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>一時ファイルを削除</value>
+    <value>הסר קבצים זמניים</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
-    <value>アダプターRAM</value>
+    <value>זיכרון RAM של המתאם</value>
   </data>
   <data name="Architecture" xml:space="preserve">
-    <value>アーキテクチャ</value>
+    <value>ארכיטקטורה</value>
   </data>
   <data name="BuildNumber" xml:space="preserve">
-    <value>ビルド番号</value>
+    <value>מספר גרסת Build</value>
   </data>
   <data name="Capacity" xml:space="preserve">
-    <value>容量</value>
+    <value>קיבולת</value>
   </data>
   <data name="Caption" xml:space="preserve">
-    <value>キャプション</value>
+    <value>כותרת</value>
   </data>
   <data name="Cores" xml:space="preserve">
-    <value>コア</value>
+    <value>ליבות</value>
   </data>
   <data name="DeviceLocator" xml:space="preserve">
-    <value>デバイスロケータ</value>
+    <value>מאתר התקנים</value>
   </data>
   <data name="DriverVersion" xml:space="preserve">
-    <value>ドライバーバージョン</value>
+    <value>גרסת מנהל התקן</value>
   </data>
   <data name="ErrDriversExtract" xml:space="preserve">
-    <value>ドライバーの抽出中にエラーが発生しました</value>
+    <value>אירעה שגיאה בעת חילוץ מנהלי התקנים</value>
   </data>
   <data name="ExtractingDrivers" xml:space="preserve">
-    <value>ドライバーを抽出中</value>
+    <value>מחלץ מנהלי התקנים</value>
   </data>
   <data name="GPU" xml:space="preserve">
-    <value>GPU</value>
+    <value>מעבד גרפי (GPU)</value>
   </data>
   <data name="InstallDate" xml:space="preserve">
-    <value>インストール日</value>
+    <value>תאריך התקנה</value>
   </data>
   <data name="InterfaceType" xml:space="preserve">
-    <value>インターフェイスタイプ</value>
+    <value>סוג ממשק</value>
   </data>
   <data name="L2Cache" xml:space="preserve">
-    <value>L2キャッシュサイズ</value>
+    <value>גודל מטמון L2</value>
   </data>
   <data name="L3Cache" xml:space="preserve">
-    <value>L3キャッシュサイズ</value>
+    <value>גודל מטמון L3</value>
   </data>
   <data name="LastBoot" xml:space="preserve">
-    <value>最終起動時間</value>
+    <value>זמן אתחול אחרון</value>
   </data>
   <data name="LogicalProcessors" xml:space="preserve">
-    <value>論理プロセッサ</value>
+    <value>מעבדים לוגיים</value>
   </data>
   <data name="Manufacturer" xml:space="preserve">
-    <value>製造元</value>
+    <value>יצרן</value>
   </data>
   <data name="MaxSpeed" xml:space="preserve">
-    <value>最大速度</value>
+    <value>מהירות מרבית</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>名前</value>
+    <value>שם</value>
   </data>
   <data name="OSName" xml:space="preserve">
-    <value>OS名</value>
+    <value>שם מערכת הפעלה</value>
   </data>
   <data name="RAMModule" xml:space="preserve">
-    <value>RAMモジュール</value>
+    <value>מודול RAM</value>
   </data>
   <data name="RegisteredUser" xml:space="preserve">
-    <value>登録ユーザー</value>
+    <value>משתמש רשום</value>
   </data>
   <data name="Size" xml:space="preserve">
-    <value>サイズ</value>
+    <value>גודל</value>
   </data>
   <data name="SocketDesignation" xml:space="preserve">
-    <value>ソケット指定</value>
+    <value>ייעוד תושבת</value>
   </data>
   <data name="Speed" xml:space="preserve">
-    <value>速度</value>
+    <value>מהירות</value>
   </data>
   <data name="SystemDirectory" xml:space="preserve">
-    <value>システムディレクトリ</value>
+    <value>ספריית מערכת</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>バージョン</value>
+    <value>גרסה</value>
   </data>
   <data name="VideoArchitecture" xml:space="preserve">
-    <value>ビデオアーキテクチャ</value>
+    <value>ארכיטקטורת וידאו</value>
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
-    <value>Windowsディレクトリ</value>
+    <value>ספריית Windows</value>
   </data>
   <data name="DeligTemp" xml:space="preserve">
-    <value>一時ファイルを削除中</value>
+    <value>מוחק קבצים זמניים</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
-    <value>一時ファイルの削除エラー</value>
+    <value>שגיאה במחיקת קבצים זמניים</value>
   </data>
   <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>システム機能</value>
+    <value>תכונות מערכת</value>
   </data>
   <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>Windows 11専用</value>
+    <value>בלעדי ל-Windows 11</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
-    <value>フォルダーを選択</value>
+    <value>בחר תיקייה</value>
   </data>
   <data name="TempDelSucc" xml:space="preserve">
-    <value>一時ファイルが正常に削除されました！</value>
+    <value>קבצים זמניים נמחקו בהצלחה!</value>
   </data>
   <data name="Disk" xml:space="preserve">
-    <value>ディスク</value>
+    <value>דיסק</value>
   </data>
   <data name="Model" xml:space="preserve">
-    <value>モデル</value>
+    <value>דגם</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
-    <value>詳細なログオンメッセージを有効にして、システムの監視とトラブルシューティングを改善します. 日常使用には適していない場合があります. </value>
+    <value>אפשר הודעות כניסה מפורטות לניטור ופתרון בעיות מערכת טובים יותר. עשוי להיות פחות ידידותי למשתמש לשימוש יומיומי.</value>
   </data>
   <data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
-    <value>詳細なログオンを有効にする</value>
+    <value>אפשר רישום מפורט בכניסה</value>
   </data>
   <data name="SelecFold" xml:space="preserve">
-    <value>フォルダーを選択</value>
+    <value>בחר תיקייה</value>
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
-    <value>ドライバー</value>
+    <value>מנהלי התקנים</value>
   </data>
   <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>抽出</value>
+    <value>חלץ</value>
   </data>
   <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>ドライバーを外部フォルダーに抽出して簡単にバックアップ</value>
+    <value>חלץ את מנהלי ההתקנים שלך לתיקייה חיצונית לגיבוי קל</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
-    <value>ドライバーを抽出中</value>
+    <value>מחלץ מנהלי התקנים</value>
   </data>
   <data name="SystemInfoPage_SelectButton.Content" xml:space="preserve">
-    <value>選択</value>
+    <value>בחר</value>
   </data>
   <data name="Feature_DisableHibernation.Header" xml:space="preserve">
-    <value>休止状態を無効にする</value>
+    <value>השבת מצב שינה (Hibernation)</value>
   </data>
   <data name="Feature_DisableHibernation.Description" xml:space="preserve">
-    <value>休止状態を無効にして電力を節約し、コンピューターがスリープモードに入るのを防ぎます. ノートパソコンには推奨されません. </value>
+    <value>כבה מצב שינה (Hibernation) כדי לחסוך בחשמל ולמנוע מהמחשב להיכנס למצב שינה. לא מומלץ למחשבים ניידים.</value>
   </data>
   <data name="Feature_DisableHomeGroup.Header" xml:space="preserve">
-    <value>ホームグループを無効にする</value>
+    <value>השבת קבוצה ביתית</value>
   </data>
   <data name="Feature_DisableHomeGroup.Description" xml:space="preserve">
-    <value>ホームグループを無効にして、ネットワーク上の他のデバイスとファイルやプリンターを共有しないようにします. </value>
+    <value>מכבה את הקבוצה הביתית כדי להפסיק שיתוף קבצים ומדפסות עם התקנים אחרים ברשת.</value>
   </data>
   <data name="Feature_DisablePrintService.Header" xml:space="preserve">
-    <value>印刷サービスを無効にする</value>
+    <value>השבת שירות הדפסה</value>
   </data>
   <data name="Feature_DisablePrintService.Description" xml:space="preserve">
-    <value>印刷サービスを無効にして、印刷関連の機能を停止します. </value>
+    <value>משבית את שירות ההדפסה, ומונע פונקציונליות הקשורה להדפסה.</value>
   </data>
   <data name="Feature_DisableCompatibilityAssistant.Header" xml:space="preserve">
-    <value>互換性アシスタントを無効にする</value>
+    <value>השבת מסייע תאימות</value>
   </data>
   <data name="Feature_DisableCompatibilityAssistant.Description" xml:space="preserve">
-    <value>互換性アシスタントを無効にして、プログラムの自動互換性チェックを停止します. </value>
+    <value>מכבה את מסייע התאימות כדי להשבית בדיקות תאימות אוטומטיות עבור תוכניות.</value>
   </data>
   <data name="Feature_DisableSearch.Header" xml:space="preserve">
-    <value>検索を無効にする</value>
+    <value>השבת חיפוש</value>
   </data>
   <data name="Feature_DisableSearch.Description" xml:space="preserve">
-    <value>システム全体の検索機能を無効にします. </value>
+    <value>מכבה את פונקציונליות החיפוש ברחבי המערכת.</value>
   </data>
   <data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
-    <value>エラー報告を無効にする</value>
+    <value>השבת דיווח שגיאות</value>
   </data>
   <data name="Feature_DisableErrorReporting.Description" xml:space="preserve">
-    <value>エラー報告を無効にして、エラー報告を自動的にMicrosoftに送信しないようにします. </value>
+    <value>מכבה את דיווח השגיאות כדי למנוע שליחה אוטומטית של דוחות שגיאה למיקרוסופט.</value>
   </data>
   <data name="Feature_DisableGameBar.Header" xml:space="preserve">
-    <value>ゲームバーを無効にする</value>
+    <value>השבת סרגל המשחקים</value>
   </data>
   <data name="Feature_DisableGameBar.Description" xml:space="preserve">
-    <value>ゲームバーとその関連機能を無効にします. </value>
+    <value>מכבה את סרגל המשחקים והתכונות המשויכות אליו.</value>
   </data>
   <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
-    <value>クイックアクセス履歴を無効にする</value>
+    <value>השבת היסטוריית גישה מהירה</value>
   </data>
   <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
-    <value>クイックアクセス履歴の記録と表示を無効にします. </value>
+    <value>משבית הקלטה והצגה של היסטוריית גישה מהירה.</value>
   </data>
   <data name="Feature_DisableMyPeople.Header" xml:space="preserve">
-    <value>My Peopleを無効にする</value>
+    <value>השבת 'האנשים שלי'</value>
   </data>
   <data name="Feature_DisableMyPeople.Description" xml:space="preserve">
-    <value>タスクバーのMy People機能を無効にします. </value>
+    <value>מכבה את תכונת 'האנשים שלי' בשורת המשימות.</value>
   </data>
   <data name="Feature_DisableSensorServices.Header" xml:space="preserve">
-    <value>センサーサービスを無効にする</value>
+    <value>השבת שירותי חיישנים</value>
   </data>
   <data name="Feature_DisableSensorServices.Description" xml:space="preserve">
-    <value>プライバシーと電力節約のためにセンサーサービスを無効にします. 関連するセンサーを持つノートパソコンには推奨されません. </value>
+    <value>מכבה שירותי חיישנים לפרטיות וחיסכון בחשמל. לא מומלץ למחשבים ניידים עם חיישנים רלוונטיים.</value>
   </data>
   <data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
-    <value>Windows Inkを無効にする</value>
+    <value>השבת Windows Ink</value>
   </data>
   <data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
-    <value>Windows Inkワークスペースと関連機能を無効にします. スタイラスを使用するデバイスには推奨されません. </value>
+    <value>מכבה את סביבת העבודה של Windows Ink ותכונות קשורות. לא מומלץ למכשירים עם עט אלקטרוני.</value>
   </data>
   <data name="Feature_DisableSpellingAndTypingFeatures.Header" xml:space="preserve">
-    <value>スペルとタイピング機能を無効にする</value>
+    <value>השבת תכונות איות והקלדה</value>
   </data>
   <data name="Feature_DisableSpellingAndTypingFeatures.Description" xml:space="preserve">
-    <value>スペルとタイピングの提案を無効にします. </value>
+    <value>משבית הצעות איות והקלדה.</value>
   </data>
   <data name="Feature_DisableFaxService.Header" xml:space="preserve">
-    <value>ファクスサービスを無効にする</value>
+    <value>השבת שירות פקס</value>
   </data>
   <data name="Feature_DisableFaxService.Description" xml:space="preserve">
-    <value>Windowsのファクスサービスを無効にします. </value>
+    <value>משבית את שירות הפקס ב-Windows.</value>
   </data>
   <data name="Feature_DisableInsiderService.Header" xml:space="preserve">
-    <value>インサイダーサービスを無効にする</value>
+    <value>השבת שירות Insider</value>
   </data>
   <data name="Feature_DisableInsiderService.Description" xml:space="preserve">
-    <value>Windowsインサイダープログラムからオプトアウトし、プレビュー版の受信を停止します. </value>
+    <value>בטל הרשמה לתוכנית Windows Insider והפסק לקבל גרסאות Build של תצוגה מקדימה.</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
-    <value>クラウドクリップボードを無効にする</value>
+    <value>השבת לוח ענן</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
-    <value>デバイス間でクリップボードを共有するクラウドクリップボード機能を無効にします. </value>
+    <value>משבית את תכונת לוח הענן לשיתוף לוח בין מכשירים.</value>
   </data>
   <data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
-    <value>スティッキーキーを無効にする</value>
+    <value>השבת מקשים דביקים</value>
   </data>
   <data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
-    <value>スティッキーキーのアクセシビリティ機能を無効にします. 複数のキーを同時に押してしまう人に便利です. </value>
+    <value>משבית את תכונת הנגישות 'מקשים דביקים'. שימושי לאנשים שלוחצים בטעות על מספר מקשים בו-זמנית.</value>
   </data>
   <data name="Feature_DisableCastToDevice.Header" xml:space="preserve">
-    <value>デバイスへのキャストを無効にする</value>
+    <value>השבת 'הקרן להתקן'</value>
   </data>
   <data name="Feature_DisableCastToDevice.Description" xml:space="preserve">
-    <value>Windowsのデバイスへのキャスト機能を無効にします. プレゼンテーションや他のデバイスでメディアを共有するのに便利です. </value>
+    <value>משבית את תכונת 'הקרן להתקן' ב-Windows. שימושי למצגות או שיתוף מדיה בהתקנים אחרים.</value>
   </data>
   <data name="Feature_DisableVBS.Header" xml:space="preserve">
-    <value>VBSを無効にする</value>
+    <value>השבת VBS</value>
   </data>
   <data name="Feature_DisableVBS.Description" xml:space="preserve">
-    <value>高度なセキュリティ機能のための仮想化ベースのセキュリティ（VBS）を無効にします. 高セキュリティ環境には推奨されません. </value>
+    <value>משבית אבטחה מבוססת וירטואליזציה (VBS) לתכונות אבטחה מתקדמות. לא מומלץ לסביבות אבטחה גבוהה.</value>
   </data>
   <data name="Feature_MoveTaskbarToLeft.Header" xml:space="preserve">
-    <value>タスクバーを左に移動</value>
+    <value>העבר את שורת המשימות שמאלה</value>
   </data>
   <data name="Feature_MoveTaskbarToLeft.Description" xml:space="preserve">
-    <value>タスクバーをデフォルトの下部位置から画面の左側に移動します. 個人の好みによります. </value>
+    <value>מעביר את שורת המשימות מהמיקום התחתון המוגדר כברירת מחדל לצד השמאלי של המסך. העדפה אישית.</value>
   </data>
   <data name="Feature_DisableSnapAssist.Header" xml:space="preserve">
-    <value>スナップアシストを無効にする</value>
+    <value>השבת Snap Assist</value>
   </data>
   <data name="Feature_DisableSnapAssist.Description" xml:space="preserve">
-    <value>ドラッグ時に開いているウィンドウを自動的に配置するスナップアシストを無効にします. マルチタスクに便利ですが、一部のユーザーは手動でウィンドウを管理することを好みます. </value>
+    <value>משבית את Snap Assist, אשר מסדר חלונות פתוחים באופן אוטומטי בעת גרירה. שימושי לריבוי משימות אך חלק מהמשתמשים מעדיפים ניהול חלונות ידני.</value>
   </data>
   <data name="Feature_DisableWidgets.Header" xml:space="preserve">
-    <value>ウィジェットを無効にする</value>
+    <value>השבת יישומונים (Widgets)</value>
   </data>
   <data name="Feature_DisableWidgets.Description" xml:space="preserve">
-    <value>Windows 11のタスクバーのウィジェット機能を無効にします. ウィジェットが便利であれば無効にしないでください（Windows 11のみ）. </value>
+    <value>משבית את תכונת היישומונים (Widgets) בשורת המשימות של Windows 11. שקול אם אתה מוצא את היישומונים שימושיים לעדכונים מהירים (Windows 11 בלבד).</value>
   </data>
   <data name="Feature_DisableChat.Header" xml:space="preserve">
-    <value>チャットを無効にする</value>
+    <value>השבת צ'אט</value>
   </data>
   <data name="Feature_DisableChat.Description" xml:space="preserve">
-    <value>Windows 11のタスクバーのチャット機能を無効にします. コミュニケーションにチャット機能を使用しない場合にのみ推奨されます（Windows 11のみ）. </value>
+    <value>משבית את תכונת הצ'אט בשורת המשימות של Windows 11. מומלץ רק אם אינך משתמש בתכונת הצ'אט לתקשורת (Windows 11 בלבד).</value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Header" xml:space="preserve">
-    <value>ファイルのコンパクトモードを有効にする</value>
+    <value>אפשר מצב קומפקטי לקבצים</value>
   </data>
   <data name="Feature_EnableFilesCompactMode.Description" xml:space="preserve">
-    <value>小さなサムネイルでファイルを閲覧するためのコンパクトモードを有効にします. 低解像度のディスプレイや大きなフォルダーを管理するのに便利です. </value>
+    <value>מאפשר מצב קומפקטי לגלישה בקבצים עם תמונות ממוזערות קטנות יותר. שימושי לתצוגות ברזולוציה נמוכה או לניהול תיקיות גדולות.</value>
   </data>
   <data name="Feature_DisableStickers.Header" xml:space="preserve">
-    <value>ステッカーを無効にする</value>
+    <value>השבת מדבקות</value>
   </data>
   <data name="Feature_DisableStickers.Description" xml:space="preserve">
-    <value>Windows 11のメッセージングアプリのステッカー機能を無効にします. コミュニケーションにステッカーを使用しない場合にのみ推奨されます（Windows 11のみ）. </value>
+    <value>משבית את תכונת המדבקות באפליקציית ההודעות של Windows 11. מומלץ רק אם אינך משתמש במדבקות לתקשורת (Windows 11 בלבד).</value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Header" xml:space="preserve">
-    <value>Edge Discover Barを無効にする</value>
+    <value>השבת סרגל Discover ב-Edge</value>
   </data>
   <data name="Feature_DisableEdgeDiscoverBar.Description" xml:space="preserve">
-    <value>Microsoft EdgeのDiscover Bar機能を無効にします. 気が散る場合やクリーンなブラウザーインターフェースを好む場合に便利です. </value>
+    <value>משבית את תכונת סרגל Discover ב-Microsoft Edge. שימושי אם אתה מוצא אותו מסיח דעת או מעדיף ממשק דפדפן נקי יותר.</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Header" xml:space="preserve">
-    <value>CoPilot AIを無効にする</value>
+    <value>השבת CoPilot AI</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
-    <value>コード作成の支援のためのWindowsのCoPilot AI機能を無効にします. 開発者には推奨されません. </value>
+    <value>משבית את תכונת CoPilot AI ב-Windows לסיוע בכתיבת קוד. לא מומלץ למפתחים.</value>
   </data>
   <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>基本的な最適化</value>
+    <value>אופטימיזציות בסיסיות</value>
   </data>
   <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>パフォーマンスの調整</value>
+    <value>התאמות ביצועים</value>
   </data>
   <data name="Feature_DisableSysMain.Header" xml:space="preserve">
-    <value>SysMainを無効にする</value>
+    <value>השבת SysMain</value>
   </data>
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
-    <value>頻繁に使用するアプリケーションを事前に読み込むSysMainを無効にします. HDDを使用している場合、一部のプログラムの起動時間に影響を与える可能性があります. </value>
+    <value>מכבה את SysMain, הטוען מראש יישומים בשימוש תכוף להפעלה מהירה יותר. עשוי להשפיע על זמני ההפעלה של תוכניות מסוימות אם אתה משתמש בכונן קשיח (HDD).</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>NTFSタイムスタンプを無効にする</value>
+    <value>השבת חותמת זמן NTFS</value>
   </data>
   <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>ファイル操作のためのNTFSタイムスタンプの更新を無効にします. 正確なタイムスタンプに依存するプログラムの機能に影響を与える可能性があります. </value>
+    <value>משבית עדכונים לחותמות זמן NTFS עבור פעולות קבצים. עשוי להשפיע על פונקציונליות של תוכניות המסתמכות על חותמות זמן מדויקות.</value>
   </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
-    <value>ゲームモードを有効にする</value>
+    <value>אפשר מצב משחק</value>
   </data>
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
-    <value>システムリソースを最適化してスムーズなゲーム体験を提供するゲームモードを有効にします. バックグラウンドプロセスに影響を与える可能性があります. </value>
+    <value>מאפשר מצב משחק, הממטב את משאבי המערכת לחוויית משחק חלקה יותר. עשוי להשפיע על תהליכי רקע.</value>
   </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
-    <value>Windowsアップデートからドライバーを除外</value>
+    <value>מנע עדכון מנהלי התקנים מ-Windows Updates</value>
   </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
-    <value>Windowsアップデートからドライバーの更新を除外します. セキュリティリスクや互換性の問題が発生する可能性があるため、注意して使用してください. </value>
+    <value>מונע עדכון מנהלי התקנים מ-Windows Update. עלול להוביל למנהלי התקנים מיושנים עם סיכוני אבטחה פוטנציאליים או בעיות תאימות. השתמש בזהירות.</value>
   </data>
   <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>高度な最適化</value>
+    <value>אופטימיזציות מתקדמות</value>
   </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
-    <value>システムの復元を無効にする</value>
+    <value>השבת שחזור מערכת</value>
   </data>
   <data name="Feature_DisableSystemRestore.Description" xml:space="preserve">
-    <value>問題が発生した場合にシステムを以前の状態に戻すための復元ポイントを作成するシステムの復元を無効にします. 推奨されません. この機能を無効にすると、潜在的なシステム問題から簡単に回復する能力が失われます. </value>
+    <value>משבית את שחזור המערכת, היוצר נקודות שחזור כדי להחזיר את המערכת למצב קודם במקרה של בעיות. לא מומלץ. השבתת תכונה זו מסירה את היכולת להתאושש בקלות מבעיות מערכת פוטנציאליות.</value>
   </data>
   <data name="Feature_DisableCortana.Header" xml:space="preserve">
-    <value>Cortanaを無効にする</value>
+    <value>השבת Cortana</value>
   </data>
   <data name="Feature_DisableCortana.Description" xml:space="preserve">
-    <value>質問に答えたりタスクを完了したりする仮想アシスタントであるCortanaを無効にします. 音声検索や一部の生産性機能に影響を与える可能性があります. </value>
+    <value>משבית את Cortana, העוזרת הווירטואלית שיכולה לענות על שאלות ולהשלים משימות. עשוי להשפיע על חיפוש קולי וכמה תכונות פרודוקטיביות.</value>
   </data>
   <data name="Feature_DisableStoreUpdates.Header" xml:space="preserve">
-    <value>ストアの更新を無効にする</value>
+    <value>השבת עדכוני חנות</value>
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
-    <value>Microsoft Storeからダウンロードしたアプリの自動更新を無効にします. アプリがセキュリティリスクにさらされたり、新機能が欠けたりする可能性があります. </value>
+    <value>משבית עדכונים אוטומטיים ליישומים שהורדו מחנות Microsoft. עלול להשאיר יישומים פגיעים לסיכוני אבטחה או חסרי תכונות חדשות.</value>
   </data>
   <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>自動更新を無効にする</value>
+    <value>השבת עדכונים אוטומטיים</value>
   </data>
   <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>自動Windows更新を無効にし、手動でのインストールを必要とします. 強く推奨されません. これにより、システムがセキュリティの脆弱性やバグ修正にさらされる可能性があります. </value>
+    <value>מכבה עדכוני Windows אוטומטיים, הדורשים התקנה ידנית. מאוד לא מומלץ. זה יכול להשאיר את המערכת שלך פגיעה לפרצות אבטחה ותיקוני באגים.</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>テレメトリ</value>
+    <value>טלמטריה</value>
   </data>
   <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>プライバシーを強化</value>
+    <value>שפר פרטיות</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
-    <value>SMBv1を無効にする</value>
+    <value>השבת SMBv1</value>
   </data>
   <data name="Feature_DisableSMBv1.Description" xml:space="preserve">
-    <value>セキュリティを強化するためにServer Message Blockバージョン1（SMBv1）を無効にします. 推奨されます. </value>
+    <value>משבית Server Message Block גרסה 1 (SMBv1) לאבטחה משופרת. מומלץ.</value>
   </data>
   <data name="Feature_DisableSMBv2.Header" xml:space="preserve">
-    <value>SMBv2を無効にする</value>
+    <value>השבת SMBv2</value>
   </data>
   <data name="Feature_DisableSMBv2.Description" xml:space="preserve">
-    <value>セキュリティを強化するためにServer Message Blockバージョン2（SMBv2）を無効にします. ネットワークファイル共有機能が壊れる可能性があるため、注意して使用してください. </value>
+    <value>משבית Server Message Block גרסה 2 (SMBv2) לאבטחה משופרת. השתמש בזהירות מכיוון שזה עלול לשבור פונקציונליות של שיתוף קבצים ברשת.</value>
   </data>
   <data name="Feature_DisableTelemetryServices.Header" xml:space="preserve">
-    <value>テレメトリサービスを無効にする</value>
+    <value>השבת שירותי טלמטריה</value>
   </data>
   <data name="Feature_DisableTelemetryServices.Description" xml:space="preserve">
-    <value>オペレーティングシステムによる使用データの収集と送信を防ぐためにテレメトリサービスを無効にします. </value>
+    <value>מכבה שירותי טלמטריה כדי למנוע איסוף והעברת נתוני שימוש על ידי מערכת ההפעלה.</value>
   </data>
   <data name="Feature_DisableEdgeTelemetry.Header" xml:space="preserve">
-    <value>Edgeテレメトリを無効にする</value>
+    <value>השבת טלמטריית Edge</value>
   </data>
   <data name="Feature_DisableEdgeTelemetry.Description" xml:space="preserve">
-    <value>Microsoft Edgeのテレメトリデータ収集を無効にします. </value>
+    <value>משבית איסוף נתוני טלמטריה ב-Microsoft Edge.</value>
   </data>
   <data name="Feature_DisableVisualStudioTelemetry.Header" xml:space="preserve">
-    <value>Visual Studioテレメトリを無効にする</value>
+    <value>השבת טלמטריית Visual Studio</value>
   </data>
   <data name="Feature_DisableVisualStudioTelemetry.Description" xml:space="preserve">
-    <value>Visual Studioのテレメトリデータ収集を無効にします. </value>
+    <value>משבית איסוף נתוני טלמטריה ב-Visual Studio.</value>
   </data>
   <data name="Feature_DisableNvidiaTelemetry.Header" xml:space="preserve">
-    <value>Nvidiaテレメトリを無効にする</value>
+    <value>השבת טלמטריית Nvidia</value>
   </data>
   <data name="Feature_DisableNvidiaTelemetry.Description" xml:space="preserve">
-    <value>Nvidiaドライバーによるテレメトリデータ収集を無効にします. </value>
+    <value>משבית איסוף נתוני טלמטריה על ידי מנהלי התקנים של Nvidia.</value>
   </data>
   <data name="Feature_DisableChromeTelemetry.Header" xml:space="preserve">
-    <value>Chromeテレメトリを無効にする</value>
+    <value>השבת טלמטריית Chrome</value>
   </data>
   <data name="Feature_DisableChromeTelemetry.Description" xml:space="preserve">
-    <value>Google Chromeのテレメトリデータ収集を無効にします. </value>
+    <value>משבית איסוף נתוני טלמטריה ב-Google Chrome.</value>
   </data>
   <data name="Feature_DisableFirefoxTelemetry.Header" xml:space="preserve">
-    <value>Firefoxテレメトリを無効にする</value>
+    <value>השבת טלמטריית Firefox</value>
   </data>
   <data name="Feature_DisableFirefoxTelemetry.Description" xml:space="preserve">
-    <value>Mozilla Firefoxのテレメトリデータ収集を無効にします. </value>
+    <value>משבית איסוף נתוני טלמטריה ב-Mozilla Firefox.</value>
   </data>
   <data name="Settings_LanguageSettingsCard.Description" xml:space="preserve">
-    <value>デフォルトの言語を選択</value>
+    <value>בחר את שפת ברירת המחדל שלך</value>
   </data>
   <data name="Settings_LanguageSettingsCard.Header" xml:space="preserve">
-    <value>言語を変更</value>
+    <value>שנה שפה</value>
   </data>
   <data name="Shell_Network.Content" xml:space="preserve">
-    <value>ネットワーク</value>
+    <value>רשת</value>
   </data>
   <data name="Feature_EnableEndTask.Description" xml:space="preserve">
-    <value>タスクバーのアプリアイコンを右クリックすると、タスクマネージャーを開かずに応答しないアプリケーションをすばやく終了するオプションが有効になります. </value>
+    <value>מאפשר אפשרות בעת לחיצה ימנית על סמלי יישומים בשורת המשימות, המאפשרת לך לסיים במהירות יישומים שאינם מגיבים מבלי לפתוח את מנהל המשימות.</value>
   </data>
   <data name="Feature_EnableEndTask.Header" xml:space="preserve">
-    <value>EndTaskを有効にする</value>
+    <value>אפשר סיום משימה (EndTask)</value>
   </data>
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
-    <value>DNSを適用</value>
+    <value>החל DNS</value>
   </data>
   <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>IPv4 DNSサーバー</value>
+    <value>שרתי DNS IPv4</value>
   </data>
   <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>IPv6 DNSサーバー</value>
+    <value>שרתי DNS IPv6</value>
   </data>
   <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>ネットワークインターフェース</value>
+    <value>ממשק רשת</value>
   </data>
   <data name="Network_Primary.Text" xml:space="preserve">
-    <value>プライマリ</value>
+    <value>ראשי</value>
   </data>
   <data name="Network_ResetDNS.Content" xml:space="preserve">
-    <value>デフォルトDNSにリセット</value>
+    <value>אפס DNS ברירת מחדל</value>
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
-    <value>セカンダリ</value>
+    <value>משני</value>
   </data>
   <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>カスタムDNSを設定</value>
+    <value>הגדר DNS מותאם אישית</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
-    <value>IPv4 DNSアドレスが見つかりません</value>
+    <value>לא נמצאו כתובות DNS IPv4</value>
   </data>
   <data name="NoIPv6" xml:space="preserve">
-    <value>IPv6 DNSアドレスが見つかりません</value>
+    <value>לא נמצאו כתובות DNS IPv6</value>
   </data>
   <data name="NoNic" xml:space="preserve">
-    <value>ネットワークインターフェースが選択されていません</value>
+    <value>לא נבחר ממשק רשת</value>
   </data>
   <data name="NotSet" xml:space="preserve">
-    <value>設定されていません</value>
+    <value>לא מוגדר</value>
   </data>
   <data name="AdultFilter" xml:space="preserve">
-    <value>（アダルトフィルター）</value>
+    <value>(מסנן תכנים למבוגרים)</value>
   </data>
   <data name="Automatic" xml:space="preserve">
-    <value>自動</value>
+    <value>אוטומטי</value>
   </data>
   <data name="Feature_DisableBiometrics.Description" xml:space="preserve">
-    <value>指紋認証や顔認証などの生体認証の使用を無効にします. </value>
+    <value>משבית את השימוש בביומטריה לאימות, כגון טביעת אצבע או זיהוי פנים.</value>
   </data>
   <data name="Feature_DisableBiometrics.Header" xml:space="preserve">
-    <value>生体認証機能を無効にする</value>
+    <value>השבת תכונות ביומטריות</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>RyTuneXは、WinUI 3フレームワークで構築された最先端の最適化ツールで、Windowsデバイスのパフォーマンスを向上させます. Windows 10および11の両方に対応し、ユーザーが頑固なプリインストールアプリを簡単に削除し、システムリソースを最適化できるようにします. </value>
+    <value>RyTuneX הוא כלי אופטימיזציה חדשני שנבנה עם מסגרת WinUI 3, שנועד להגביר את ביצועי מכשירי Windows. RyTuneX, שעוצב עבור Windows 10 ו-11 כאחד, מאפשר למשתמשים להסיר ללא מאמץ יישומים עקשניים שהותקנו מראש ולמטב את משאבי המערכת.</value>
   </data>
   <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>更新を確認</value>
+    <value>בדוק עדכונים</value>
   </data>
   <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>新しいバージョン（</value>
+    <value>גרסה חדשה יותר (</value>
   </data>
   <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>）が利用可能です. 新機能と改善を楽しむために最新バージョンに更新してください. </value>
+    <value>) זמינה. אנא עדכן לגרסה האחרונה כדי ליהנות מתכונות ושיפורים חדשים.</value>
   </data>
   <data name="UpdateTitle" xml:space="preserve">
-    <value>RyTuneXの更新</value>
+    <value>עדכוני RyTuneX</value>
   </data>
   <data name="NetworkError" xml:space="preserve">
-    <value>エラーが発生しました. インターネット接続を確認し、後でもう一度お試しください. </value>
+    <value>אירעה שגיאה. ודא שאתה מחובר לאינטרנט ונסה שוב מאוחר יותר.</value>
   </data>
   <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>最新バージョン（</value>
+    <value>אתה כבר מריץ את הגרסה האחרונה (</value>
   </data>
   <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>）を既に使用しています. 現在、更新は利用できません. </value>
+    <value>). אין עדכונים זמינים כרגע.</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>閉じる</value>
+    <value>סגור</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>更新</value>
+    <value>עדכן</value>
   </data>
   <data name="Shell_Support.Content" xml:space="preserve">
-    <value>サポート</value>
+    <value>תמיכה</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
-    <value>ネットワーク</value>
+    <value>רשת</value>
   </data>
   <data name="SystemInfoPage_Battery.Text" xml:space="preserve">
-    <value>バッテリー</value>
+    <value>סוללה</value>
   </data>
   <data name="MACAddress" xml:space="preserve">
-    <value>MACアドレス</value>
+    <value>כתובת MAC</value>
   </data>
   <data name="AdapterType" xml:space="preserve">
-    <value>アダプタータイプ</value>
+    <value>סוג מתאם</value>
   </data>
   <data name="EstimatedChargeRemaining" xml:space="preserve">
-    <value>推定残量</value>
+    <value>טעינה משוערת שנותרה</value>
   </data>
   <data name="BatteryStatus" xml:space="preserve">
-    <value>バッテリーステータス</value>
+    <value>מצב סוללה</value>
   </data>
   <data name="Chemistry" xml:space="preserve">
-    <value>化学</value>
+    <value>כימיה</value>
   </data>
   <data name="Shell_Security.Content" xml:space="preserve">
-    <value>セキュリティ</value>
+    <value>אבטחה</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
-    <value>予期しないエラーが発生しました</value>
+    <value>אירעה שגיאה בלתי צפויה</value>
   </data>
   <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>ログを表示</value>
+    <value>הצג יומנים</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
-    <value>合計: {0} アプリ</value>
+    <value>סה"כ: {0} יישום(ים)</value>
   </data>
   <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>パフォーマンス</value>
+    <value>ביצועים</value>
   </data>
   <data name="Enabled" xml:space="preserve">
-    <value>有効</value>
+    <value>מופעל</value>
   </data>
   <data name="Disabled" xml:space="preserve">
-    <value>無効</value>
+    <value>מושבת</value>
   </data>
   <data name="SecurityPage_Status.Text" xml:space="preserve">
-    <value>セキュリティの状態</value>
+    <value>מצב אבטחה</value>
   </data>
   <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
-    <value>ウイルスと脅威の防御</value>
+    <value>הגנה מפני וירוסים ואיומים</value>
   </data>
   <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
-    <value>ファイアウォールとネットワークの保護</value>
+    <value>חומת אש והגנת רשת</value>
   </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
     <value>Windows Update</value>
@@ -781,591 +781,600 @@
     <value>SmartScreen</value>
   </data>
   <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>リアルタイム保護</value>
+    <value>הגנה בזמן אמת</value>
   </data>
   <data name="SecurityPage_UAC.Text" xml:space="preserve">
-    <value>ユーザー アカウント制御 (UAC)</value>
+    <value>בקרת חשבון משתמש (UAC)</value>
   </data>
   <data name="SecurityPage_Details.Text" xml:space="preserve">
-    <value>詳細</value>
+    <value>פרטים</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
-    <value>修理</value>
+    <value>תיקון</value>
   </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
-    <value>これから以下のアプリをシステムから完全に削除します:</value>
+    <value>אתה עומד להסיר לחלוטין את היישומים הבאים מהמערכת שלך:</value>
   </data>
   <data name="ConfirmContinue" xml:space="preserve">
-    <value>続行してもよろしいですか?</value>
+    <value>האם אתה בטוח שברצונך להמשיך?</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>続ける</value>
+    <value>המשך</value>
   </data>
   <data name="HomePage_cpuUsage.Text" xml:space="preserve">
-    <value>CPU使用率</value>
+    <value>שימוש במעבד</value>
   </data>
   <data name="HomePage_ramUsage.Text" xml:space="preserve">
-    <value>RAM使用率</value>
+    <value>שימוש בזיכרון RAM</value>
   </data>
   <data name="HomePage_gpuUsage.Text" xml:space="preserve">
-    <value>GPU使用率</value>
+    <value>שימוש במעבד גרפי</value>
   </data>
   <data name="HomePage_diskUsage.Text" xml:space="preserve">
-    <value>ディスク使用率</value>
+    <value>שימוש בדיסק</value>
   </data>
   <data name="HomePage_networkUsage.Text" xml:space="preserve">
-    <value>ネットワーク使用率</value>
+    <value>שימוש ברשת</value>
   </data>
   <data name="HomePage_installedAppsCount.Text" xml:space="preserve">
-    <value>インストール済みアプリ</value>
+    <value>יישומים מותקנים</value>
   </data>
   <data name="HomePage_processesCount.Text" xml:space="preserve">
-    <value>プロセス</value>
+    <value>תהליכים</value>
   </data>
   <data name="HomePage_servicesCount.Text" xml:space="preserve">
-    <value>サービス</value>
+    <value>שירותים</value>
   </data>
   <data name="Feature_DisableSmartScreen.Header" xml:space="preserve">
-    <value>スマートスクリーンを無効化</value>
+    <value>השבת SmartScreen</value>
   </data>
   <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>インターネットからダウンロードした潜在的に安全でないアプリやファイルについて警告するスマートスクリーンフィルターをオフにします. この機能を無効にすると、マルウェア感染のリスクが高まります. </value>
+    <value>מכבה את מסנן SmartScreen, המתריע על יישומים וקבצים שעלולים להיות לא בטוחים שהורדו מהאינטרנט. השבתת תכונה זו מגדילה את הסיכון להדבקה בתוכנות זדוניות.</value>
   </data>
   <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
-    <value>ニュースと興味を無効化</value>
+    <value>השבת 'חדשות ותחומי עניין'</value>
   </data>
   <data name="Feature_DisableNewsAndInterests.Description" xml:space="preserve">
-    <value>ニュース、天気、その他の更新を表示するタスクバーのニュースと興味のフィードを無効にします. これを無効にすると、システムのパフォーマンスが向上する可能性があります. </value>
+    <value>משבית את עדכון 'חדשות ותחומי עניין' בשורת המשימות, המציג חדשות, מזג אוויר ועדכונים אחרים. השבתה זו עשויה לשפר את ביצועי המערכת.</value>
   </data>
   <data name="Feature_DisableSpotlightFeatures.Header" xml:space="preserve">
-    <value>スポットライト機能を無効化</value>
+    <value>השבת תכונות Spotlight</value>
   </data>
   <data name="Feature_DisableSpotlightFeatures.Description" xml:space="preserve">
-    <value>ロック画面に表示される個別化されたコンテンツや推奨を表示するスポットライト機能をオフにします. この機能を無効にすると、プライバシー保護に役立ちます. </value>
+    <value>מכבה את תכונת Spotlight המציגה תוכן והמלצות מותאמים אישית במסך הנעילה שלך. השבתת תכונה זו יכולה לעזור להגן על הפרטיות.</value>
   </data>
   <data name="Feature_DisableTailoredExperiences.Header" xml:space="preserve">
-    <value>個別化された体験を無効化</value>
+    <value>השבת חוויות מותאמות אישית</value>
   </data>
   <data name="Feature_DisableTailoredExperiences.Description" xml:space="preserve">
-    <value>アプリとサービスの個別化体験を無効にし、Windowsがあなたの好みやアクティビティデータを収集しないようにします. </value>
+    <value>משבית חוויות מותאמות אישית ביישומים ושירותים, ומונע מ-Windows לאסוף את העדפותיך ונתוני הפעילות שלך.</value>
   </data>
   <data name="Feature_DisableCloudOptimizedContent.Header" xml:space="preserve">
-    <value>クラウド最適化コンテンツを無効化</value>
+    <value>השבת תוכן ממוטב ענן</value>
   </data>
   <data name="Feature_DisableCloudOptimizedContent.Description" xml:space="preserve">
-    <value>アプリの更新やファイルの同期など、クラウド最適化コンテンツを無効にします. これにより、インターネット帯域幅の使用が削減される可能性がありますが、機能が制限される場合があります. </value>
+    <value>משבית תוכן ממוטב ענן, שעשוי לכלול עדכוני יישומים וסנכרון קבצים. זה יכול להפחית את השימוש ברוחב פס אינטרנט אך עלול להגביל פונקציונליות.</value>
   </data>
   <data name="Feature_DisableFeedbackNotifications.Header" xml:space="preserve">
-    <value>フィードバック通知を無効化</value>
+    <value>השבת התראות משוב</value>
   </data>
   <data name="Feature_DisableFeedbackNotifications.Description" xml:space="preserve">
-    <value>WindowsがOSに関する体験のフィードバック通知を表示しないようにします. この機能を無効にすると、通知が減少します. </value>
+    <value>מונע מ-Windows להציג התראות משוב הקשורות לחוויה שלך עם מערכת ההפעלה. השבתת תכונה זו עשויה להפחית הפרעות.</value>
   </data>
   <data name="Feature_DisableAdvertisingID.Header" xml:space="preserve">
-    <value>広告IDを無効化</value>
+    <value>השבת מזהה פרסום</value>
   </data>
   <data name="Feature_DisableAdvertisingID.Description" xml:space="preserve">
-    <value>広告IDを無効にし、Windowsがターゲット広告のためにあなたのアクティビティを追跡しないようにします. これにより、プライバシーが強化されますが、アプリの体験に影響を与える可能性があります. </value>
+    <value>משבית את מזהה הפרסום, ומונע מ-Windows לעקוב אחר פעילויותיך לצורך פרסום ממוקד. זה יכול לשפר את הפרטיות אך עלול להשפיע על חוויות יישומים.</value>
   </data>
   <data name="Feature_DisableBluetoothAdvertising.Header" xml:space="preserve">
-    <value>Bluetooth広告を無効化</value>
+    <value>השבת פרסום Bluetooth</value>
   </data>
   <data name="Feature_DisableBluetoothAdvertising.Description" xml:space="preserve">
-    <value>Bluetooth広告をオフにし、他の近くのデバイスにあなたのデバイスの存在を通知しないようにします. これにより、プライバシーリスクが低減します. </value>
+    <value>מכבה פרסום Bluetooth, המשדר את נוכחות המכשיר שלך למכשירים סמוכים אחרים. השבתה זו יכולה להפחית סיכוני פרטיות.</value>
   </data>
   <data name="Feature_DisableAutomaticRestartSignOn.Header" xml:space="preserve">
-    <value>自動再起動サインオンを無効化</value>
+    <value>השבת כניסה אוטומטית לאחר הפעלה מחדש</value>
   </data>
   <data name="Feature_DisableAutomaticRestartSignOn.Description" xml:space="preserve">
-    <value>再起動後に自動サインインを無効にし、手動で資格情報を入力する必要があります. これにより、セキュリティが強化されますが、ログイン手順が増えます. </value>
+    <value>משבית כניסה אוטומטית לאחר הפעלה מחדש, ומחייב אותך להזין את האישורים שלך באופן ידני. זה עשוי לשפר את האבטחה אך מוסיף שלב נוסף לכניסה.</value>
   </data>
   <data name="Feature_DisableHandwritingDataSharing.Header" xml:space="preserve">
-    <value>手書きデータの共有を無効化</value>
+    <value>השבת שיתוף נתוני כתב יד</value>
   </data>
   <data name="Feature_DisableHandwritingDataSharing.Description" xml:space="preserve">
-    <value>手書きデータのMicrosoftサービスとの共有を無効にします. これにより、プライバシーが向上しますが、手書き認識に関連する機能が制限されます. </value>
+    <value>מכבה את שיתוף נתוני כתב היד עם שירותי Microsoft, משפר את הפרטיות אך מפחית כמה תכונות הקשורות לזיהוי כתב יד.</value>
   </data>
   <data name="Feature_DisableTextInputDataCollection.Header" xml:space="preserve">
-    <value>テキスト入力データの収集を無効化</value>
+    <value>השבת איסוף נתוני קלט טקסט</value>
   </data>
   <data name="Feature_DisableTextInputDataCollection.Description" xml:space="preserve">
-    <value>テキスト入力データの収集を無効にし、Windowsがあなたが入力する内容を保存・分析しないようにします. これにより、プライバシーが保護されますが、入力精度の改善が制限される場合があります. </value>
+    <value>משבית את איסוף נתוני קלט הטקסט, ומונע מ-Windows לאחסן ולנתח את מה שאתה מקליד. זה עוזר להגן על הפרטיות אך עשוי להפחית שיפורי דיוק הקלדה.</value>
   </data>
   <data name="Feature_DisableInputPersonalization.Header" xml:space="preserve">
-    <value>入力の個別化を無効化</value>
+    <value>השבת התאמה אישית של קלט</value>
   </data>
   <data name="Feature_DisableInputPersonalization.Description" xml:space="preserve">
-    <value>予測テキストや自動修正機能を含む入力方法の個別化を無効にします. これにより、テキスト入力のシステムパフォーマンス改善が減少する可能性があります. </value>
+    <value>משבית התאמה אישית של שיטות קלט, כולל טקסט חזוי ותכונות תיקון אוטומטי. זה עשוי להפחית שיפורי ביצועי מערכת בקלט טקסט.</value>
   </data>
   <data name="Feature_DisableSafeSearchMode.Header" xml:space="preserve">
-    <value>セーフサーチモードを無効化</value>
+    <value>השבת מצב חיפוש בטוח</value>
   </data>
   <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
-    <value>有害または不適切なコンテンツを検索結果からフィルタリングするセーフサーチモードを無効にします. これを無効にすると、安全でないコンテンツに触れるリスクが高まります. </value>
+    <value>מכבה את מצב חיפוש בטוח, המסנן תוכן שעלול להיות מזיק או בלתי הולם מתוצאות החיפוש. השבתה זו מגדילה את הסיכון לחשיפה לתוכן לא בטוח.</value>
   </data>
   <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
-    <value>アクティビティのアップロードを無効化</value>
+    <value>השבת העלאות פעילות</value>
   </data>
   <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
-    <value>アクティビティデータのアップロードを無効にし、Microsoftがサービスの改善のために使用データを収集しないようにします. これにより、プライバシーが保護されます. </value>
+    <value>משבית את העלאת נתוני הפעילות, ומונע ממיקרוסופט לאסוף את נתוני השימוש שלך לשיפור שירותים. זה עוזר לשמור על הפרטיות.</value>
   </data>
   <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
-    <value>クリップボードの同期を無効化</value>
+    <value>השבת סנכרון לוח</value>
   </data>
   <data name="Feature_DisableClipboardSync.Description" xml:space="preserve">
-    <value>デバイス間でのクリップボード同期を無効にし、コピーしたデータがローカルに留まり、他のデバイスと共有されないようにします. </value>
+    <value>משבית סנכרון לוח בין המכשירים שלך, ומבטיח שהנתונים המועתקים שלך יישארו מקומיים ומונע שיתוף נתונים עם מכשירים אחרים.</value>
   </data>
   <data name="Feature_DisableMessageSync.Header" xml:space="preserve">
-    <value>メッセージ同期の無効化</value>
+    <value>השבת סנכרון הודעות</value>
   </data>
   <data name="Feature_DisableMessageSync.Description" xml:space="preserve">
-    <value>デバイス間でメッセージが同期されないようにします. これにより、テキストメッセージや通知は使用しているデバイスのみで利用可能となります. </value>
+    <value>מונע סנכרון הודעות בין מכשירים, ומבטיח שהודעות הטקסט וההתראות שלך זמינות רק במכשיר שבו אתה משתמש.</value>
   </data>
   <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
-    <value>設定の同期無効化</value>
+    <value>השבת סנכרון הגדרות</value>
   </data>
   <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
-    <value>システム設定のデバイス間での同期を無効にします. これにより、デバイスの設定やテーマ、その他の構成が共有されなくなります. </value>
+    <value>משבית סנכרון של הגדרות מערכת בין מכשירים. זה מונע שיתוף של הגדרות המכשיר, ערכות הנושא ותצורות אחרות שלך.</value>
   </data>
   <data name="Feature_DisableVoiceActivation.Header" xml:space="preserve">
-    <value>音声起動の無効化</value>
+    <value>השבת הפעלה קולית</value>
   </data>
   <data name="Feature_DisableVoiceActivation.Description" xml:space="preserve">
-    <value>Cortanaなどの音声起動機能を無効にし、音声コマンドの受付を停止します. これによりプライバシーが向上しますが、音声コマンド機能は制限されます. </value>
+    <value>משבית תכונות הפעלה קולית כמו Cortana, ומונע מהעוזר להאזין לפקודות הקוליות שלך. זה יכול לשפר את הפרטיות אך מפחית את פונקציונליות הפקודות הקוליות.</value>
   </data>
   <data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
-    <value>デバイスの検索無効化</value>
+    <value>השבת 'מצא את ההתקן שלי'</value>
   </data>
   <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
-    <value>デバイス紛失時にデバイスを探す機能「Find My Device」を無効にします. これにより、デバイスを見つける能力が低下しますが、プライバシーが向上します. </value>
+    <value>משבית את תכונת 'מצא את ההתקן שלי', המסייעת לאתר את המכשיר שלך אם אבד. השבתה זו מפחיתה את יכולתך לשחזר מכשיר שאבד אך משפרת את הפרטיות.</value>
   </data>
   <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>アクティビティフィードの無効化</value>
+    <value>השבת עדכון פעילות</value>
   </data>
   <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>最近のアクティビティを表示するフィードを無効にします. これにより、他の人があなたのデバイスで何をしているかを見えなくし、プライバシーを保護します. </value>
+    <value>מכבה את עדכון הפעילות המציג את הפעילויות האחרונות שלך, ועוזר להגן על פרטיותך על ידי מניעת מאחרים לראות מה עשית במכשירך.</value>
   </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
-    <value>CDP（顧客データプラットフォーム）の無効化</value>
+    <value>השבת CDP (פלטפורמת נתוני לקוחות)</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
-    <value>顧客データプラットフォームによるデータの収集と分析を無効にします. これによりプライバシーが向上しますが、パーソナライズ機能が制限される可能性があります. </value>
+    <value>משבית CDP, ומונע איסוף ושימוש בנתונים שלך על ידי פלטפורמת נתוני הלקוחות לצורך ניתוח והמלצות ממוקדות. זה מגביר את הפרטיות אך עלול להגביל התאמה אישית.</value>
   </data>
   <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>プライバシー設定のカスタマイズ体験無効化</value>
+    <value>השבת חוויות מותאמות אישית בפרטיות</value>
   </data>
   <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>プライバシー設定でのカスタマイズ体験機能を無効にします. これにより、Windowsがデータを使って体験をカスタマイズすることが止まります. これにより、パーソナライズ機能が低下する可能性があります. </value>
+    <value>משבית את תכונת החוויות המותאמות אישית בהגדרות הפרטיות, ועוצר את Windows מלהשתמש בנתונים שלך להתאמה אישית של החוויות שלך. זה עשוי להפחית תכונות התאמה אישית.</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
-    <value>診断トースト通知の無効化</value>
+    <value>השבת התראות אבחון (Toast)</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
-    <value>システムの健全性やエラーに関する診断トースト通知を無効にします. これにより、気を散らす通知が減少します. </value>
+    <value>מכבה התראות אבחון (Toast), ומונע מ-Windows להציג לך הנחיות הקשורות לבריאות המערכת או שגיאות. זה יכול לעזור להפחית הסחות דעת.</value>
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
-    <value>オンライン音声プライバシーの無効化</value>
+    <value>השבת פרטיות דיבור מקוון</value>
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
-    <value>音声コマンドの保存や処理を無効にします. これによりプライバシーが向上しますが、音声検索やコマンド機能が制限されます. </value>
+    <value>משבית פרטיות דיבור מקוון, ומונע מ-Windows לאחסן או לעבד פקודות קוליות. זה מגביר את הפרטיות אך מגביל תכונות קוליות כמו חיפוש קולי ופקודות.</value>
   </data>
   <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>位置情報アクセスの無効化</value>
+    <value>השבת גישה למיקום</value>
   </data>
   <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>アプリやサービスがデバイスのGPSやネットワーク位置情報を使用しないようにします. これによりプライバシーが向上しますが、位置情報に依存するサービスが制限されます. </value>
+    <value>מכבה גישה למיקום ליישומים ושירותים, ומונע מהם להשתמש ב-GPS או במיקום הרשת של המכשיר שלך. זה משפר את הפרטיות אך עלול להגביל שירותים מבוססי מיקום.</value>
   </data>
   <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
-    <value>位置情報機能の無効化</value>
+    <value>השבת תכונות מיקום</value>
   </data>
   <data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
-    <value>デバイス上の位置情報関連機能をすべて無効にします. これによりプライバシーが向上しますが、位置情報に依存するサービスの機能が低下します. </value>
+    <value>משבית את כל התכונות מבוססות המיקום במכשירך, כולל שירותי מיקום ליישומים ותכונות אבטחה. זה יכול לשפר את הפרטיות אך להפחית את הפונקציונליות של שירותים תלויי מיקום.</value>
   </data>
   <data name="Feature_MenuShowDelay.Header" xml:space="preserve">
-    <value>メニュー表示遅延の無効化</value>
+    <value>בטל עיכוב בהצגת תפריט</value>
   </data>
   <data name="Feature_MenuShowDelay.Description" xml:space="preserve">
-    <value>マウスホバー後のメニュー表示遅延を制御します. この機能を無効にすると、メニューが即座に表示され、レスポンスが向上しますが、ユーザーの制御が減少する可能性があります. </value>
+    <value>שולט בעיכוב לפני הופעת תפריטים לאחר ריחוף עכבר. השבתת תכונה זו יכולה לגרום לתפריטים להיפתח באופן מיידי, ולשפר את התגובתיות אך עשויה להפחית את שליטת המשתמש.</value>
   </data>
   <data name="Feature_MouseHoverTime.Header" xml:space="preserve">
-    <value>マウスホバー時間の無効化</value>
+    <value>בטל זמן ריחוף עכבר</value>
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
-    <value>システムがホバーイベントをトリガーするまでの時間を調整します. これを無効にすると、インタラクションが速くなりますが、意図しないアクティベーションが発生する可能性があります. </value>
+    <value>מתאים את הזמן שהמערכת ממתינה לפני הפעלת אירוע ריחוף. השבתה זו עשויה להאיץ אינטראקציות אך עלולה להוביל להפעלות לא מכוונות.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
-    <value>自動補完の無効化</value>
+    <value>השבת השלמה אוטומטית</value>
   </data>
   <data name="Feature_AutoComplete.Description" xml:space="preserve">
-    <value>検索ボックスやフォーム入力などでの自動補完機能を無効にします. これを無効にすると、気を散らすことなく作業できますが、ワークフローが遅くなる可能性があります. </value>
+    <value>משבית הצעות אוטומטיות בעת הקלדה בשדות מסוימים, כגון תיבות חיפוש וקלט טפסים. השבתה זו יכולה להפחית הסחות דעת אך עשויה להאט את זרימת העבודה.</value>
   </data>
   <data name="Feature_CrashDump.Header" xml:space="preserve">
-    <value>クラッシュダンプの無効化</value>
+    <value>השבת יצירת קובץ קריסה (Crash Dump)</value>
   </data>
   <data name="Feature_CrashDump.Description" xml:space="preserve">
-    <value>アプリケーションがクラッシュした際のクラッシュレポートやメモリダンプの生成を制御します. これを無効にするとディスクスペースが節約できますが、アプリケーションの問題の診断とトラブルシューティングが難しくなる可能性があります. </value>
+    <value>קובע אם דוחות קריסה וקובצי זיכרון נוצרים כאשר יישומים קורסים. השבתת תכונה זו יכולה לעזור לחסוך מקום בדיסק, אך עשויה להפחית את היכולת לאבחן ולפתור בעיות יישומים.</value>
   </data>
   <data name="Feature_RemoteAssistance.Header" xml:space="preserve">
-    <value>リモート支援の無効化</value>
+    <value>השבת סיוע מרחוק</value>
   </data>
   <data name="Feature_RemoteAssistance.Description" xml:space="preserve">
-    <value>リモートデスクトップを使用した他者による支援を無効にします. これによりセキュリティが向上しますが、サポートオプションが制限されます. </value>
+    <value>משבית תכונות תמיכה מרחוק, המאפשרות לאחרים לסייע לך באמצעות שולחן עבודה מרוחק. השבתה זו יכולה לשפר את האבטחה אך מגבילה את אפשרויות התמיכה.</value>
   </data>
   <data name="Feature_WindowShake.Header" xml:space="preserve">
-    <value>ウィンドウシェイクの無効化</value>
+    <value>השבת ניעור חלון (Window Shake)</value>
   </data>
   <data name="Feature_WindowShake.Description" xml:space="preserve">
-    <value>ウィンドウをシェイクするとすべてのウィンドウを最小化する機能を無効にします. これにより、集中力が向上しますが、ウィンドウ管理ツールがなくなります. </value>
+    <value>משבית את תכונת ניעור החלון שממזערת את כל החלונות הפתוחים כשמנערים חלון. השבתה זו משפרת את המיקוד אך מסירה כלי שימושי לניהול חלונות.</value>
   </data>
   <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
-    <value>コピー/移動コンテキストメニューの追加</value>
+    <value>הוסף תפריט הקשר 'העתק/העבר'</value>
   </data>
   <data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
-    <value>ファイルのコンテキストメニューに、ファイルを新しい場所にコピーまたは移動するオプションを追加します. この機能により、右クリックメニューからこれらの機能に迅速にアクセスでき、ファイル管理が効率化されます. </value>
+    <value>מאפשר אפשרויות נוספות בתפריט ההקשר של הקובץ להעתקה או העברה קלה של קבצים למיקום חדש. תכונה זו מייעלת את ניהול הקבצים על ידי מתן גישה מהירה לפונקציות אלו ישירות מתפריט הלחיצה הימנית.</value>
   </data>
   <data name="Feature_TaskTimeouts.Header" xml:space="preserve">
-    <value>タスクのタイムアウト設定</value>
+    <value>התאם זמני קצוב למשימות</value>
   </data>
   <data name="Feature_TaskTimeouts.Description" xml:space="preserve">
-    <value>システムタスクのタイムアウト設定を変更します. これにより、特定のシナリオでパフォーマンスが向上する場合がありますが、タスクが失敗する可能性もあります. </value>
+    <value>משנה את הגדרות הזמן הקצוב למשימות מערכת. התאמה זו יכולה לשפר ביצועים בתרחישים מסוימים אך עלולה לגרום למשימות להיכשל בתנאים מסוימים.</value>
   </data>
   <data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
-    <value>低ディスク容量チェックの有効化</value>
+    <value>אפשר בדיקות שטח דיסק נמוך</value>
   </data>
   <data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
-    <value>ディスク容量が不足している場合に自動的にチェックし、パフォーマンス問題を防止します. これを無効にすると通知が減りますが、重要なストレージ警告を見逃す可能性があります. </value>
+    <value>מאפשר בדיקות אוטומטיות לשטח דיסק נמוך כדי למנוע בעיות ביצועים. השבתה זו עשויה להפחית התראות, אך אתה עלול לפספס אזהרות אחסון קריטיות.</value>
   </data>
   <data name="Feature_LinkResolve.Header" xml:space="preserve">
-    <value>リンク解決の無効化</value>
+    <value>השבת פתרון קישורים</value>
   </data>
   <data name="Feature_LinkResolve.Description" xml:space="preserve">
-    <value>ファイルやフォルダ内で壊れたリンクの解決を無効にします. これを無効にすると、操作が高速化されますが、古いリンクが解決されなくなる可能性があります. </value>
+    <value>משבית את פתרון הקישורים השבורים בקבצים ותיקיות. השבתה זו יכולה להאיץ פעולות אך עלולה להשאיר קישורים מיושנים ללא פתרון.</value>
   </data>
   <data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
-    <value>サービスタイムアウトの短縮</value>
+    <value>הקטן זמני קצוב לשירותים</value>
   </data>
   <data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
-    <value>システムサービスのタイムアウトを調整します. これを短縮するとパフォーマンスが向上しますが、サービスが早期に終了する可能性があります. </value>
+    <value>מתאים את זמני הקצוב לשירותי מערכת. קיצורם יכול לשפר ביצועים אך עלול לגרום לשירותים להסתיים בטרם עת.</value>
   </data>
   <data name="Feature_RemoteRegistry.Header" xml:space="preserve">
-    <value>リモートレジストリの無効化</value>
+    <value>השבת רישום מרוחק</value>
   </data>
   <data name="Feature_RemoteRegistry.Description" xml:space="preserve">
-    <value>レジストリへのリモートアクセスを無効にします. これによりセキュリティが向上しますが、レジストリ設定のリモート構成が制限されます. </value>
+    <value>משבית גישה לרישום מרחוק. השבתה זו משפרת את האבטחה אך מונעת תצורה מרחוק של הגדרות הרישום.</value>
   </data>
   <data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
-    <value>ファイル拡張子と隠しファイルの表示の無効化</value>
+    <value>הסתר סיומות קבצים וקבצים מוסתרים</value>
   </data>
   <data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
-    <value>ファイル拡張子や隠しファイルの表示を制御します. これを有効にすると、クリーンで整理された表示になりますが、重要なファイルの詳細が隠れる場合があります. </value>
+    <value>שולט בנראות של סיומות קבצים וקבצים מוסתרים. הפעלה זו מפחיתה עומס אך מסתירה פרטי קבצים חשובים.</value>
   </data>
   <data name="Feature_SystemProfile.Header" xml:space="preserve">
-    <value>システムプロファイルの最適化</value>
+    <value>מטב פרופיל מערכת</value>
   </data>
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
-    <value>システムプロファイル設定を調整して、システムのパフォーマンスを向上させます. この機能により、速度と効率が優先され、システムの全体的なレスポンスとリソース管理が改善されます. </value>
+    <value>משפר את ביצועי המערכת שלך על ידי התאמת הגדרות פרופיל המערכת. תכונה זו נותנת עדיפות למהירות ויעילות, ומשפרת את התגובתיות הכוללת של המערכת וניהול המשאבים.</value>
   </data>
   <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>GPUと優先設定の強化</value>
+    <value>שפר הגדרות GPU ועדיפות</value>
   </data>
   <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>GPU設定とプロセス優先度を最適化し、パフォーマンスを向上させます. これにより、ゲームやマルチタスクなど、リソースを多く使う作業がスムーズに行えます. </value>
+    <value>ממטב תצורות GPU ועדיפויות תהליכים כדי להגביר ביצועים, ומבטיח רינדור גרפי טוב יותר ותפעול חלק יותר למשימות עתירות משאבים כמו משחקים וריבוי משימות.</value>
   </data>
   <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>フレームサーバーモードの無効化</value>
+    <value>השבת מצב שרת פריימים</value>
   </data>
   <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>高度なビデオエンコーディングのためにフレームサーバーモードを無効にします. これによりパフォーマンスが向上しますが、特定の条件下ではビデオ品質が低下する可能性があります. </value>
+    <value>משבית מצב שרת פריימים לקידוד וידאו מתקדם. השבתה זו משפרת ביצועים אך עשויה להפחית את איכות הווידאו בתנאים מסוימים.</value>
   </data>
   <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>低遅延GPU設定の調整</value>
+    <value>התאם הגדרות GPU עם השהיה נמוכה</value>
   </data>
   <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>GPU設定を調整して遅延を最小限に抑え、ゲームやビデオパフォーマンスを向上させます. </value>
+    <value>מתאים הגדרות GPU כדי למזער השהיה, ומשפר ביצועי משחקים או וידאו.</value>
   </data>
   <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>最適化でないプロセスの制限</value>
+    <value>הגדר מגבלת Non-Best Effort</value>
   </data>
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>最適化でないプロセスに制限を設定します. これによりパフォーマンスが優先されますが、場合によってはシステムの柔軟性が低下することがあります. </value>
+    <value>מגדיר מגבלה לתהליכי non-best effort. הפעלה זו יכולה לתעדף ביצועים אך עשויה להפחית את גמישות המערכת במקרים מסוימים.</value>
   </data>
   <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>読み込み中...</value>
+    <value>טוען...</value>
   </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>デバイス情報</value>
+    <value>פרטי התקן</value>
   </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
-    <value>クラシックコンテキストメニューを有効にする</value>
+    <value>אפשר תפריט הקשר קלאסי</value>
   </data>
   <data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
-    <value>Windows 10のクラシックコンテキストメニュースタイルを復元し、すべてのオプションが即座に表示される馴染みのある右クリックメニュー体験を提供します</value>
+    <value>משחזר את סגנון תפריט ההקשר הקלאסי של Windows 10, ומספק חוויית תפריט לחיצה ימנית מוכרת עם כל האפשרויות המוצגות באופן מיידי.</value>
   </data>
   <data name="DoNotShowCheckBox" xml:space="preserve">
-    <value>このメッセージを再表示しない</value>
+    <value>אל תציג הודעה זו שוב</value>
   </data>
   <data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>復元ポイントの作成</value>
+    <value>צור נקודת שחזור</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
-    <value>システムに変更を加える前に、復元ポイントを作成することを強くお勧めします. 
+    <value>מומלץ מאוד ליצור נקודת שחזור לפני ביצוע שינויים כלשהם במערכת שלך.
 
 
-続行する前にシステムの復元ポイントを作成しますか?</value>
+האם תרצה ליצור נקודת שחזור מערכת לפני שתמשיך?</value>
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
-    <value>復元ポイントを作成中</value>
+    <value>יוצר נקודת שחזור</value>
+  </data>
+  <data name="RestorePointCreated" xml:space="preserve">
+    <value>נקודת שחזור נוצרה</value>
+  </data>
+  <data name="RestorePointCreationSuccess" xml:space="preserve">
+    <value>נקודת שחזור מערכת נוצרה בהצלחה.</value>
+  </data>
+  <data name="RestorePointCreationError" xml:space="preserve">
+    <value>יצירת נקודת שחזור נכשלה</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
-    <value>すべての変更を元に戻す</value>
+    <value>בטל את כל השינויים</value>
   </data>
   <data name="Settings_RevertChanges.Description" xml:space="preserve">
-    <value>RyTuneX がシステムに加えたすべての変更を元に戻し、復元ポイントを含みます. </value>
+    <value>מבטל את כל השינויים ש-RyTuneX ביצע במערכת שלך, כולל נקודת השחזור.</value>
   </data>
   <data name="RevertingChanges" xml:space="preserve">
-    <value>変更を元に戻しています...</value>
+    <value>מבטל שינויים כעת...</value>
   </data>
   <data name="RevertChangesDialogText" xml:space="preserve">
-    <value>RyTuneX によってシステムに加えられたすべての変更（アンインストールされたアプリを除く）を元に戻し、アプリの設定をリセットしようとしています. 
+    <value>אתה עומד לבטל את כל השינויים שבוצעו על ידי RyTuneX במערכת שלך (למעט יישומים שהוסרו) ולאפס את העדפות היישום.
 
 
-本当に続行してよろしいですか?</value>
+האם אתה בטוח שברצונך להמשיך?</value>
   </data>
   <data name="NoChangesFound" xml:space="preserve">
-    <value>注目すべき変更は見つかりませんでした. </value>
+    <value>לא נמצאו שינויים משמעותיים.</value>
   </data>
   <data name="OperationStopped" xml:space="preserve">
-    <value>操作が停止されました</value>
+    <value>הפעולה הופסקה</value>
   </data>
   <data name="ReportSaved" xml:space="preserve">
-    <value>デスクトップにレポートが保存されました</value>
+    <value>דוח נשמר בשולחן העבודה שלך</value>
   </data>
   <data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
-    <value>メモリ診断</value>
+    <value>אבחון זיכרון</value>
   </data>
   <data name="MemoryDiagnosticDialogText" xml:space="preserve">
-    <value>メモリの問題があると、コンピューターが情報を失ったり、動作を停止したりする可能性があります. 
+    <value>בעיות זיכרון עלולות לגרום למחשב שלך לאבד מידע או להפסיק לעבוד.
 
 
-メモリの問題を確認してください. </value>
+בדוק את המחשב שלך לאיתור בעיות זיכרון</value>
   </data>
   <data name="RestartNow" xml:space="preserve">
-    <value>今すぐ再起動</value>
+    <value>הפעל מחדש כעת</value>
   </data>
   <data name="ScheduleLater" xml:space="preserve">
-    <value>後でスケジュール</value>
+    <value>תזמן למועד מאוחר יותר</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>キャンセル</value>
+    <value>בטל</value>
   </data>
   <data name="ScheduledLater" xml:space="preserve">
-    <value>次回の再起動時にスケジュール済み</value>
+    <value>תוזמן להפעלה מחדש הבאה</value>
   </data>
   <data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>スキャン</value>
+    <value>סרוק</value>
   </data>
   <data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>修復</value>
+    <value>תקן</value>
   </data>
   <data name="RepairPage_StopButton.Content" xml:space="preserve">
-    <value>停止</value>
+    <value>עצור</value>
   </data>
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>スキャン/修復するには少なくとも 1 つのオプションを選択してください</value>
+    <value>בחר לפחות אפשרות אחת לסריקה/תיקון</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
-    <value>バッテリーの健康状態</value>
+    <value>בריאות סוללה</value>
   </data>
   <data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
-    <value>バッテリーの健康状態に関する完全な統計を生成します</value>
+    <value>זה ייצור סטטיסטיקה מלאה על בריאות הסוללה שלך</value>
   </data>
   <data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
-    <value>生成する</value>
+    <value>צור</value>
   </data>
   <data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
-    <value>メモリ診断</value>
+    <value>אבחון זיכרון</value>
   </data>
   <data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
-    <value>システムのメモリを分析して潜在的な問題を特定し、安定性を向上させます</value>
+    <value>נתח את זיכרון המערכת שלך לאיתור בעיות פוטנציאליות ושפר את היציבות</value>
   </data>
   <data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
-    <value>診断</value>
+    <value>אבחן</value>
   </data>
   <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
-    <value>ディスクの最適化</value>
+    <value>אופטימיזציות דיסק</value>
   </data>
   <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
-    <value>HDDの場合はデフラグを、SSDの場合はリトリムを実行してストレージデバイスを最適化します</value>
+    <value>זה ימטב את התקן האחסון שלך על ידי איחוי (אם HDD) או ריטרימינג (אם SSD)</value>
   </data>
   <data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
-    <value>最適化</value>
+    <value>מטב</value>
   </data>
   <data name="RepairPage_EventViewer.Header" xml:space="preserve">
-    <value>イベントビューアー</value>
+    <value>מציג אירועים</value>
   </data>
   <data name="RepairPage_EventViewer.Description" xml:space="preserve">
-    <value>トラブルシューティングのために最近のシステムイベントログを表示します</value>
+    <value>זה יציג יומני אירועים אחרונים של המערכת לצורך פתרון בעיות</value>
   </data>
   <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
-    <value>修復オプション</value>
+    <value>אפשרויות תיקון</value>
   </data>
   <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>診断オプション</value>
+    <value>אפשרויות אבחון</value>
   </data>
   <data name="OperationCompleted" xml:space="preserve">
-    <value>操作が完了しました</value>
+    <value>הפעולה הושלמה</value>
   </data>
   <data name="RestorePointTitle" xml:space="preserve">
-    <value>復元ポイント</value>
+    <value>נקודת שחזור</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>警告</value>
+    <value>אזהרה</value>
   </data>
   <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>システムの復元を無効にすると、RyTuneX が作成したものを含め、すべての復元ポイントが削除されます。
+    <value>השבתת שחזור המערכת תמחק את כל נקודות השחזור, כולל אלו שנוצרו על ידי RyTuneX.
 
 
-続行してもよろしいですか？</value>
+האם אתה בטוח שברצונך להמשיך?</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
-    <value>広告設定</value>
+    <value>הגדרות פרסום</value>
   </data>
   <data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
-    <value>テレメトリ設定</value>
+    <value>הגדרות טלמטריה</value>
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
-    <value>その他の設定</value>
+    <value>הגדרות אחרות</value>
   </data>
   <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>基本的なシステムの最適化</value>
+    <value>אופטימיזציות מערכת בסיסיות</value>
   </data>
   <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>高度なシステムの最適化</value>
+    <value>אופטימיזציות מערכת מתקדמות</value>
   </data>
   <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
-    <value>検索に一致するアプリはありません</value>
+    <value>אין יישומים התואמים לחיפוש שלך</value>
   </data>
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
-    <value>アプリを検索...</value>
+    <value>חפש יישומים...</value>
   </data>
   <data name="Feature_BackgroundApps.Header" xml:space="preserve">
-    <value>バックグラウンドアプリを無効化</value>
+    <value>השבת יישומי רקע</value>
   </data>
   <data name="Feature_BackgroundApps.Description" xml:space="preserve">
-    <value>アプリがバックグラウンドで実行されるのを防ぎ, 一部のケースでパフォーマンスが向上します.</value>
+    <value>מונע מיישומים לפעול ברקע, מה שמוביל לביצועים משופרים במקרים מסוימים.</value>
   </data>
   <data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
-    <value>Windowsダークモードを有効にする</value>
+    <value>אפשר מצב כהה של Windows</value>
   </data>
   <data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
-    <value>Windowsを有効化することなくシステム全体でダークモードを有効にする</value>
+    <value>מאפשר מצב כהה לכל המערכת ללא צורך בהפעלת Windows.</value>
   </data>
   <data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
-    <value>Windowsの透明効果を無効にする</value>
+    <value>השבת שקיפות Windows</value>
   </data>
   <data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
-    <value>タスクバーやウィンドウなど、システムUI要素の透明効果を無効にし、パフォーマンスを向上させます</value>
+    <value>משבית אפקטים שקופים באלמנטים של ממשק המשתמש של המערכת כמו שורת המשימות וחלונות, ומשפר את הביצועים.</value>
   </data>
   <data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
-    <value>標準アプリ</value>
+    <value>יישומים סטנדרטיים</value>
   </data>
   <data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
-    <value>すべてのアプリ</value>
+    <value>כל היישומים</value>
   </data>
   <data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
-    <value>Win32 アプリ</value>
+    <value>יישומי Win32</value>
   </data>
   <data name="OptimizePage_CompressOS.Header" xml:space="preserve">
-    <value>OSの圧縮</value>
+    <value>דחוס מערכת הפעלה</value>
   </data>
   <data name="OptimizePage_CompressOS.Description" xml:space="preserve">
-    <value>ディスク容量を削減するために、オペレーティングシステムの圧縮を有効にします. この機能は、ストレージ容量が限られたデバイスに特に役立ちますが、低スペックなハードウェアではシステムのパフォーマンスにわずかな影響を与える可能性があります</value>
+    <value>אפשר דחיסת מערכת הפעלה כדי להפחית את השימוש בשטח דיסק. תכונה זו שימושית במיוחד למכשירים עם קיבולת אחסון מוגבלת אך עשויה להשפיע קלות על ביצועי המערכת בחומרה פשוטה יותר.</value>
   </data>
   <data name="Compressing" xml:space="preserve">
-    <value>システムのバイナリを圧縮しています...</value>
+    <value>דוחס קבצים בינאריים של המערכת...</value>
   </data>
   <data name="Decompressing" xml:space="preserve">
-    <value>システムのバイナリを解凍しています...</value>
+    <value>פורס קבצים בינאריים של המערכת...</value>
   </data>
   <data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
-    <value>圧縮状態を確認</value>
+    <value>בדוק דחיסה</value>
   </data>
   <data name="Compress" xml:space="preserve">
-    <value>圧縮</value>
+    <value>דחוס</value>
   </data>
   <data name="Decompress" xml:space="preserve">
-    <value>解凍</value>
+    <value>פרוס</value>
   </data>
   <data name="SystemCompressionTitle" xml:space="preserve">
-    <value>システム圧縮</value>
+    <value>דחיסת מערכת</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
-    <value>サービスホストの分割を無効化</value>
+    <value>השבת פיצול Service Host</value>
   </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
-    <value>サービスホストの分割を無効化し、RAM使用量とプロセス数を大幅に削減します.</value>
+    <value>משבית פיצול Service Host לשימוש נמוך משמעותית ב-RAM ובספירת תהליכים.</value>
   </data>
   <data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
-    <value>レガシーブートメニューを有効化</value>
+    <value>אפשר תפריט אתחול מדור קודם</value>
   </data>
   <data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
-    <value>レガシーブートメニューに切り替えて、起動を高速化します。</value>
+    <value>עבור לתפריט האתחול מדור קודם להפעלה מהירה יותר.</value>
   </data>
   <data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
-    <value>NTFS設定を最適化</value>
+    <value>מיטוב הגדרות NTFS</value>
   </data>
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
-    <value>パフォーマンスとプライバシーを向上させるためにNTFS設定を調整します。</value>
+    <value>כוונן הגדרות NTFS לשיפור ביצועים והגברת הפרטיות.</value>
   </data>
   <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>ページングを無効化</value>
+    <value>השבת החלפה (Paging)</value>
   </data>
   <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>メモリページングを無効化して、最大のパフォーマンスを実現します。</value>
+    <value>כבה החלפת זיכרון (Paging) לביצועים מרביים.</value>
   </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
-    <value>フォアグラウンドアプリのパフォーマンスを最適化</value>
+    <value>מיטוב ביצועי יישומים בחזית</value>
   </data>
   <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
-    <value>フォアグラウンドタスクを優先することでアクティブなアプリケーションのパフォーマンスを向上させます。</value>
+    <value>מגביר ביצועים ליישומים פעילים על ידי תעדוף משימות בחזית.</value>
   </data>
   <data name="Feature_WPBT.Header" xml:space="preserve">
-    <value>WPBT実行を無効化</value>
+    <value>השבת ביצוע WPBT</value>
   </data>
   <data name="Feature_WPBT.Description" xml:space="preserve">
-    <value>ファームウェアが起動時にプログラム (例: OEMの不要なソフトウェア) を実行するのを防ぎます。</value>
+    <value>מנע מקושחה להריץ תוכניות (למשל, תוכנות מיותרות של יצרן מקורי) במהלך האתחול.</value>
   </data>
   <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>不要なサービスを無効にする</value>
+    <value>השבת שירותים מיותרים</value>
   </data>
   <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>デバイスの動作に不要なバックグラウンドサービスを無効にすることで、システムパフォーマンスを最適化します。これにより、システムリソースが解放され、全体的な効率が向上します。</value>
+    <value>מטב את ביצועי המערכת על ידי השבתת שירותי רקע שאינם חיוניים לפעולת המכשיר שלך. זה עוזר לפנות משאבי מערכת ומשפר את היעילות הכוללת.</value>
   </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>変更を元に戻す</value>
+    <value>בטל שינויים</value>
   </data>
   <data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value>輸入</value>
+    <value>ייבוא</value>
   </data>
   <data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value>輸出</value>
+    <value>ייצוא</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value>最適化のエクスポート/インポート</value>
+    <value>ייצוא/ייבוא אופטימיזציות</value>
   </data>
   <data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value>現在の最適化をエクスポートするか、インポートしてより簡単かつ自動化された最適化を実現します。</value>
+    <value>יצא את האופטימיזציות הנוכחיות שלך או יבא אותן לאופטימיזציה קלה ואוטומטית יותר.</value>
   </data>
   <data name="SettingsImported" xml:space="preserve">
-    <value>設定が正常にインポートされ、適用されました</value>
+    <value>הגדרות יובאו והוחלו בהצלחה</value>
   </data>
   <data name="SettingsExported" xml:space="preserve">
-    <value>設定は正常にエクスポートされました:</value>
+    <value>הגדרות יוצאו בהצלחה אל:</value>
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
-    <value>スタートメニューのおすすめセクションを無効にする</value>
+    <value>השבת אזור 'מומלץ' בתפריט 'התחל'</value>
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
-    <value>スタートメニューから「おすすめ」セクションを削除し、よりすっきりと集中したレイアウトにします。</value>
+    <value>מסיר את האזור "מומלץ" מתפריט 'התחל' כדי לספק פריסה נקייה וממוקדת יותר.</value>
   </data>
 </root>
