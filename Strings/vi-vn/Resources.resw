@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>Thiết lập giới hạn cho các tiến trình không thuộc loại ưu tiên cao. Bật tính năng này có thể ưu tiên hiệu suất nhưng làm giảm tính linh hoạt của hệ thống.</value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>Đang tải...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Thông tin thiết bị</value>
   </data>
@@ -1334,12 +1331,6 @@ Bạn có chắc chắn muốn tiếp tục không?</value>
   </data>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Dừng phần cứng khỏi việc chạy các chương trình (ví dụ: bloatware của OEM) khi khởi động.</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>Vô hiệu hoá dịch vụ không cần thiết</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>Tối ưu hiệu suất hệ thống bằng cách vô hiệu hóa các dịch vụ nền không cần thiết cho hoạt động của thiết bị. Điều này giúp giải phóng tài nguyên hệ thống và cải thiện hiệu quả tổng thể.</value>
   </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Hoàn tác thay đổi</value>

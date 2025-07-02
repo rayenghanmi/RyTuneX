@@ -22,23 +22,10 @@ public class ActivationService : IActivationService
 
     public async Task ActivateAsync(object activationArgs)
     {
-        // Show the LoadingWindow
-        var loadingWindow = new LoadingWindow();
-        App.MainWindow.Content = loadingWindow;
-        App.MainWindow.Activate();
-
-        // Add a small delay to ensure the LoadingWindow is rendered
-        await Task.Delay(500);
-
-        // Execute tasks before activation.
         await InitializeAsync();
 
-        // Set the MainWindow Content.
-        if (App.MainWindow.Content == loadingWindow)
-        {
-            _shell = App.GetService<ShellPage>();
-            App.MainWindow.Content = _shell ?? new Frame();
-        }
+        _shell = App.GetService<ShellPage>();
+        App.MainWindow.Content = _shell ?? new Frame();
 
         // Handle activation via ActivationHandlers.
         await HandleActivationAsync(activationArgs);

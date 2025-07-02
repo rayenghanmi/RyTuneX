@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>Establece un límite para los procesos de no mejor esfuerzo. Activarlo puede priorizar el rendimiento, pero puede reducir la flexibilidad del sistema en algunos casos.</value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>Cargando...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Información del Dispositivo</value>
   </data>
@@ -1334,12 +1331,6 @@ Verifica si hay problemas de memoria en tu computadora</value>
   </data>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Evitar que el firmware ejecute programas (por ejemplo, bloatware OEM) durante el inicio.</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>Deshabilitar servicios innecesarios</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>Optimiza el rendimiento del sistema deshabilitando servicios en segundo plano que no son esenciales para el funcionamiento de tu dispositivo. Esto ayuda a liberar recursos del sistema y mejora la eficiencia general.</value>
   </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Revertir cambios</value>

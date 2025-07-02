@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>En iyi olmayan çaba süreçleri için bir sınır belirler. Bunu etkinleştirmek performansı önceliklendirebilir ancak bazı durumlarda sistem esnekliğini azaltabilir.</value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>Yükleniyor...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Aygıt Bilgileri</value>
   </data>
@@ -1334,12 +1331,6 @@ Devam etmek istediğine emin misin?</value>
   </data>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Başlatma sırasında donanım yazılımının programları (örneğin OEM bloatware) çalıştırmasını durdurun.</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>Gereksiz Hizmetleri Devre Dışı Bırak</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>Cihazınızın çalışması için gerekli olmayan arka plan hizmetlerini devre dışı bırakarak sistem performansını optimize edin. Bu, sistem kaynaklarını serbest bırakmaya ve genel verimliliği artırmaya yardımcı olur.</value>
   </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Değişiklikleri geri al</value>

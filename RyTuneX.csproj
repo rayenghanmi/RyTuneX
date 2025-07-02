@@ -19,12 +19,12 @@
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	<AppxBundle>Never</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-    <PackageCertificateThumbprint>F329AE9211F4B74AD40A5F7065EFE59AA503BBAE</PackageCertificateThumbprint>
-    <StartupObject>RyTuneX.Program</StartupObject>
+	<PackageCertificateThumbprint>953E3900D6095107A760D46C96156DA557D4F889</PackageCertificateThumbprint>
+	<StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <Version>1.4.0</Version>
+    <Version>1.4.1</Version>
     <Authors>Rayen Ghanmi</Authors>
   </PropertyGroup>
   <ItemGroup>
@@ -39,7 +39,6 @@
     <None Remove="Assets\WindowIcon.ico" />
     <None Remove="Views\DebloatSystemPage.xaml" />
     <None Remove="Views\FeaturesPage.xaml" />
-    <None Remove="Views\LoadingWindow.xaml" />
     <None Remove="Views\NetworkPage.xaml" />
     <None Remove="Views\PrivacyPage.xaml" />
     <None Remove="Views\RepairPage.xaml" />

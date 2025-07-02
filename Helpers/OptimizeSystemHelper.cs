@@ -16,54 +16,6 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer\" /v HideRecommendedSection /f");
     }
 
-    // Unnecessary services to disable
-    private static readonly (string Name, string StartupType)[] services =
-    [
-        ("CertPropSvc", "Manual"),
-        ("DiagTrack", "Auto"),
-        ("DPS", "Auto"),
-        ("dmwappushservice", "Manual"),
-        ("iphlpsvc", "Auto"),
-        ("lfsvc", "Manual"),
-        ("lmhosts", "Manual"),
-        ("MapsBroker", "Auto"),
-        ("MSiSCSI", "Manual"),
-        ("Netlogon", "Manual"),
-        ("PcaSvc", "Auto"),
-        ("RemoteRegistry", "Disabled"),
-        ("RemoteAccess", "Disabled"),
-        ("RpcLocator", "Manual"),
-        ("SCardSvr", "Manual"),
-        ("SCPolicySvc", "Manual"),
-        ("SharedAccess", "Manual"),
-        ("SNMPTRAP", "Manual"),
-        ("Spooler", "Auto"),
-        ("stisvc", "Auto"),
-        ("TrkWks", "Auto"),
-        ("WbioSrvc", "Manual"),
-        ("XblAuthManager", "Auto"),
-        ("XblGameSave", "Manual"),
-        ("XboxGipSvc", "Auto"),
-        ("XboxNetApiSvc", "Auto"),
-        ("WiaRpc", "Manual"),
-        ("PhoneSvc", "Manual"),
-        ("WdiServiceHost", "Manual"),
-        ("WdiSystemHost", "Manual"),
-    ];
-
-    public static async void DisableUnnecessaryServices()
-    {
-        // Disable all services
-        var servicesTask = services.AsParallel().Select(service => OptimizationOptions.StartInCmd($"powershell.exe \"Get-Service -Name {service.Name} | Set-Service -StartupType Disabled\""));
-        await Task.WhenAll(servicesTask);
-    }
-    public static async void EnableUnnecessaryServices()
-    {
-        // Restore default state of all services
-        var servicesTask = services.AsParallel().Select(service => OptimizationOptions.StartInCmd($"powershell.exe \"Get-Service -Name {service.Name} | Set-Service -StartupType {service.StartupType}\""));
-        await Task.WhenAll(servicesTask);
-    }
-
     public static async void DisableWPBT()
     {
         await OptimizationOptions.StartInCmd("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\" /v DisableWpbtExecution /t REG_DWORD /d 1 /f");

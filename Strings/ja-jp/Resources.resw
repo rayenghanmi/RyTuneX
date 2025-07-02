@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>最適化でないプロセスに制限を設定します. これによりパフォーマンスが優先されますが、場合によってはシステムの柔軟性が低下することがあります. </value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>読み込み中...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>デバイス情報</value>
   </data>
@@ -1334,12 +1331,6 @@
   </data>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>ファームウェアが起動時にプログラム (例: OEMの不要なソフトウェア) を実行するのを防ぎます。</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>不要なサービスを無効にする</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>デバイスの動作に不要なバックグラウンドサービスを無効にすることで、システムパフォーマンスを最適化します。これにより、システムリソースが解放され、全体的な効率が向上します。</value>
   </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>変更を元に戻す</value>

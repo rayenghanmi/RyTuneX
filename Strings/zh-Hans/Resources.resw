@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>为对延迟敏感的网络流量设置专用带宽比例。启用此功能可提升关键应用的网络稳定性，但可能减少普通应用可动态使用的带宽总量。 </value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>加载中...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>设备信息</value>
   </data>
@@ -1334,12 +1331,6 @@
   </data>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>阻止固件在启动过程中运行程序 (例如 OEM 预装软件).</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>禁用不必要的服务</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>通过禁用对设备运行非必需的后台服务来优化系统性能.这有助于释放系统资源并提高整体效率.</value>
   </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>还原更改</value>

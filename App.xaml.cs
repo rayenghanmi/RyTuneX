@@ -20,16 +20,13 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 
 using RyTuneX.Activation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Core.Contracts.Services;
 using RyTuneX.Core.Services;
-using RyTuneX.Helpers;
 using RyTuneX.Models;
-using RyTuneX.Notifications;
 using RyTuneX.Services;
 using RyTuneX.ViewModels;
 using RyTuneX.Views;
@@ -77,11 +74,7 @@ public partial class App : Application
             // Default Activation Handler
             services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
-            // Other Activation Handlers
-            services.AddTransient<IActivationHandler, AppNotificationActivationHandler>();
-
             // Services
-            services.AddSingleton<IAppNotificationService, AppNotificationService>();
             services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
             services.AddTransient<INavigationViewService, NavigationViewService>();
@@ -109,9 +102,6 @@ public partial class App : Application
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
         Build();
-
-        //App.GetService<IAppNotificationService>().Initialize();
-
     }
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
@@ -121,24 +111,6 @@ public partial class App : Application
         // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
         MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
         MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
-
-        if (ApplicationData.Current.LocalSettings.Values.TryGetValue("JustUpdated", out var value))
-        {
-            ApplicationData.Current.LocalSettings.Values["JustUpdated"] = false;
-            if ((bool)value == true)
-            {
-                await OptimizationOptions.StartInCmd("rd /S /Q \"%TEMP%\"");
-                if (ApplicationData.Current.LocalSettings.Values.TryGetValue("DoneUpdating", out var isDoneUpdating)
-                    && ApplicationData.Current.LocalSettings.Values.TryGetValue("latestChanges", out var latestChanges))
-                {
-                    App.MainWindow.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, () =>
-                    {
-                        App.MainWindow.ShowMessageDialogAsync((string)latestChanges, "UpdateTitle".GetLocalized());
-                    });
-                    ApplicationData.Current.LocalSettings.Values["DoneUpdating"] = false;
-                }
-            }
-        }
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
 

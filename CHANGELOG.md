@@ -3,6 +3,13 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.4.1 - Unreleased
+
+### Changes
+
+- Removed the `Disable Unnecessary Services` option from the `Optimize` page due to its inconvinience.
+- Removed the `Loading Window` at app startup to improve speed.
+
 ## 1.4.0 - Released
 
 ### Added

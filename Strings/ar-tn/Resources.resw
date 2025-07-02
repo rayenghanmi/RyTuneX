@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>يُحدد حدًا للعمليات غير الأفضل. تمكينه يمكن أن يعطي الأولوية للأداء ولكنه قد يقلل من مرونة النظام في بعض الحالات.</value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>جاري التحميل...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>معلومات الجهاز</value>
   </data>
@@ -1334,12 +1331,6 @@
   </data>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>إيقاف تشغيل البرامج من البرامج الثابتة (مثل البرامج المثبتة مسبقاً) أثناء بدء التشغيل.</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>تعطيل الخدمات غير الضرورية</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>قم بتحسين أداء النظام عن طريق تعطيل الخدمات الخلفية التي ليست ضرورية لتشغيل جهازك. يساعد هذا في تحرير موارد النظام وتحسين الكفاءة العامة.</value>
   </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>تراجع عن التغييرات</value>
