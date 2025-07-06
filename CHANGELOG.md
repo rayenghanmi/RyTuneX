@@ -5,6 +5,10 @@ All notable changes to this branch will be documented in this file.
 
 ## 1.4.1 - Unreleased
 
+### Added
+
+- Added a new `Disable Windows Recall` option in the `Features` page.
+
 ### Changes
 
 - Removed the `Disable Unnecessary Services` option from the `Optimize` page due to its inconvinience.

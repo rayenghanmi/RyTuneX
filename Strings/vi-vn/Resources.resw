@@ -1359,4 +1359,10 @@ Bạn có chắc chắn muốn tiếp tục không?</value>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value />
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Tắt Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Vô hiệu hóa Windows Recall, tính năng ghi lại hoạt động trên màn hình để phục vụ tìm kiếm bằng AI. Khuyến nghị cho người dùng quan tâm đến quyền riêng tư và môi trường bảo mật.</value>
+  </data>
 </root>

@@ -1359,4 +1359,10 @@
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>يزيل قسم "المقترحة" من قائمة ابدأ لتوفير واجهة أنظف وأكثر تركيزًا.</value>
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>تعطيل ميزة Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>يعطّل ميزة Windows Recall، التي تلتقط النشاط الظاهر على الشاشة للبحث المدعوم بالذكاء الاصطناعي. يُنصح به للمستخدمين الحريصين على الخصوصية والبيئات الآمنة.</value>
+  </data>
 </root>

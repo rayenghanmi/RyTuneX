@@ -1359,4 +1359,10 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>Supprime la section "Recommandé" du menu Démarrer pour une interface plus épurée et ciblée.</value>
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Désactiver Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Désactive Windows Recall, qui enregistre l'activité à l'écran pour la recherche assistée par l'IA. Recommandé pour les utilisateurs soucieux de leur vie privée et les environnements sécurisés.</value>
+  </data>
 </root>

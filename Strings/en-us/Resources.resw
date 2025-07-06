@@ -1359,4 +1359,10 @@ Are you sure you want to continue?</value>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>Removes the "Recommended" section from the Start Menu to provide a cleaner and more focused layout.</value>
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Disable Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Disables Windows Recall, which captures on-screen activity for AI-powered search. Recommended for privacy-conscious users and secure environments.</value>
+  </data>
 </root>

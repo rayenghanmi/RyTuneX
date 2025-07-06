@@ -1354,4 +1354,10 @@
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>從開始功能表中移除「推薦」區段, 以提供更清爽且更專注的佈局.</value>
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>停用 Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value />
+  </data>
 </root>

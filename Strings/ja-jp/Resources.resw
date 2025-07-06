@@ -1359,4 +1359,10 @@
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>スタートメニューから「おすすめ」セクションを削除し、よりすっきりと集中したレイアウトにします。</value>
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Windows Recall を無効にする</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Windows Recall を無効にします。これは、AI を活用した検索のために画面上の操作を記録します。プライバシーを重視するユーザーや安全な環境に推奨されます。</value>
+  </data>
 </root>

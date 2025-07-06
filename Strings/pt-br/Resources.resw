@@ -1359,4 +1359,10 @@ Tem certeza de que deseja continuar?</value>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>Remove a seção "Recomendado" do menu Iniciar para proporcionar um layout mais limpo e focado.</value>
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Desativar o Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Desativa o Windows Recall, que captura a atividade na tela para buscas com inteligência artificial. Recomendado para usuários preocupados com privacidade e ambientes seguros.</value>
+  </data>
 </root>

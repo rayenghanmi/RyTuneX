@@ -3,6 +3,15 @@
 namespace RyTuneX.Helpers;
 internal class OptimizeSystemHelper
 {
+    public static async void DisableWindowsRecall()
+    {
+        await OptimizationOptions.StartInCmd("powershell Disable-WindowsOptionalFeature -FeatureName \"Recall\" -Online -NoRestart");
+    }
+    public static async void EnableWindowsRecall()
+    {
+        await OptimizationOptions.StartInCmd("powershell Enable-WindowsOptionalFeature -FeatureName \"Recall\" -Online -NoRestart");
+    }
+
     public static async void DisableRecommendedSectionStartMenu()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Start\" /v HideRecommendedSection /t REG_DWORD /d 1 /f");

@@ -1359,13 +1359,10 @@
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>מסיר את האזור "מומלץ" מתפריט 'התחל' כדי לספק פריסה נקייה וממוקדת יותר.</value>
   </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>נקודת שחזור נוצרה</value>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>השבת את Windows Recall</value>
   </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>נקודת שחזור מערכת נוצרה בהצלחה.</value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>יצירת נקודת שחזור נכשלה</value>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>משבית את Windows Recall, אשר מקליט פעילות על המסך לצורך חיפוש מבוסס בינה מלאכותית. מומלץ למשתמשים שדואגים לפרטיותם ולסביבות מאובטחות.</value>
   </data>
 </root>

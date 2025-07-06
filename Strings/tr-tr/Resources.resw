@@ -1359,4 +1359,10 @@ Devam etmek istediğine emin misin?</value>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>Başlat menüsünden "Önerilen" bölümünü kaldırarak daha sade ve odaklanmış bir düzen sağlar.</value>
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Windows Recall'ı devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Ekrandaki etkinlikleri yapay zekâ destekli arama için kaydeden Windows Recall'ı devre dışı bırakır. Gizliliğe önem veren kullanıcılar ve güvenli ortamlar için önerilir.</value>
+  </data>
 </root>

@@ -1359,4 +1359,10 @@
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>시작 메뉴에서 '추천' 섹션을 제거하여 더 깔끔하고 집중된 레이아웃을 제공합니다.</value>
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Windows Recall 비활성화</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>AI 기반 검색을 위해 화면 활동을 캡처하는 Windows Recall을 비활성화합니다. 개인 정보 보호를 중시하는 사용자와 보안 환경에 권장됩니다.</value>
+  </data>
 </root>

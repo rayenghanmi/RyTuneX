@@ -742,6 +742,9 @@ internal partial class OptimizationOptions
                     case "EnableCoPilotAI":
                         OptimizeSystemHelper.EnableCoPilotAI();
                         break;
+                    case "EnableWindowsRecall":
+                        OptimizeSystemHelper.EnableWindowsRecall();
+                        break;
                     case "EnableVisualStudioTelemetry":
                         OptimizeSystemHelper.EnableVisualStudioTelemetry();
                         break;
@@ -2007,6 +2010,19 @@ internal partial class OptimizationOptions
                     {
                         OptimizeSystemHelper.EnableCoPilotAI();
                         RemoveRevertAction("EnableCoPilotAI");
+                    }
+                    break;
+
+                case "WindowsRecall":
+                    if (toggleSwitch.IsOn)
+                    {
+                        OptimizeSystemHelper.DisableWindowsRecall();
+                        SaveRevertAction("EnableWindowsRecall");
+                    }
+                    else
+                    {
+                        OptimizeSystemHelper.EnableWindowsRecall();
+                        RemoveRevertAction("EnableWindowsRecall");
                     }
                     break;
 

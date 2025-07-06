@@ -1359,4 +1359,10 @@ Vuoi continuare?</value>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>Rimuove la sezione "Consigliati" dal menu Start per offrire un layout più pulito e mirato.</value>
   </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Disattiva Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Disattiva Windows Recall, che registra l'attività sullo schermo per la ricerca tramite intelligenza artificiale. Consigliato per utenti attenti alla privacy e ambienti sicuri.</value>
+  </data>
 </root>
