@@ -11,8 +11,9 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
-- Removed the `Disable Unnecessary Services` option from the `Optimize` page due to its inconvinience.
+- Removed the `Disable Unnecessary Services` option from the `Optimize` page due to its inconvenience.
 - Removed the `Loading Window` at app startup to improve speed.
+- Changed the text of the `Remove Temp Files` to `Clear System Temp` in the `Debloat` page for a better clarity.
 
 ## 1.4.0 - Released
 

@@ -220,7 +220,7 @@
     <value>Thành công gỡ cài đặt (các) ứng dụng sau</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Xoá tệp tin tạm thời</value>
+    <value>Xóa temp hệ thống</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>Adapter RAM</value>

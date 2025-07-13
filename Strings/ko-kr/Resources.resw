@@ -220,7 +220,7 @@
     <value>다음 앱을 성공적으로 제거했습니다.</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>임시 파일 제거</value>
+    <value>시스템 임시 파일 삭제</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>어댑터 RAM</value>

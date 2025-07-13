@@ -220,7 +220,7 @@
     <value>Успешно удалены следующие приложения</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Удалить временные файлы</value>
+    <value>Удалить системный Temp</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>Память адаптера</value>

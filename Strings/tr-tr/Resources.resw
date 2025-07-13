@@ -220,7 +220,7 @@
     <value>Aşağıdaki uygulamalar başarıyla kaldırıldı</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Temp Dosyalarını Kaldır</value>
+    <value>Sistem temp’ini temizle</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>Adaptör RAM</value>

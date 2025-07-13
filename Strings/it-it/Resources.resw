@@ -220,7 +220,7 @@
     <value>Disinstallazione delle seguenti app</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Rimuovi Temp File</value>
+    <value>Rimuovi temp di sistema</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>RAM adattatore</value>

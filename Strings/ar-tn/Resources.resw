@@ -220,7 +220,7 @@
     <value>تم إلغاء تثبيت التطبيق(التطبيقات) التالية بنجاح</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>إزالة الملفات المؤقتة</value>
+    <value>حذف الملفات المؤقتة للنظام</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>RAM للمحول</value>

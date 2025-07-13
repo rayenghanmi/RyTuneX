@@ -220,7 +220,7 @@
     <value>以下のアプリが正常にアンインストールされました</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>一時ファイルを削除</value>
+    <value>システムの一時ファイルを削除</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>アダプターRAM</value>

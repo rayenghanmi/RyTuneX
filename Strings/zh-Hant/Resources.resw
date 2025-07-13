@@ -220,7 +220,7 @@
     <value>成功解除安裝了以下應用</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>刪除臨時檔案</value>
+    <value>刪除系統暫存檔案</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>介面卡記憶體</value>

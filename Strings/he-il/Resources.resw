@@ -220,7 +220,7 @@
     <value>היישום(ים) הבא(ים) הוסר(ו) בהצלחה</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>הסר קבצים זמניים</value>
+    <value>מחיקת טמפ מערכת</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>זיכרון RAM של המתאם</value>

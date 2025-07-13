@@ -220,7 +220,7 @@
     <value>成功卸载了以下应用</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>删除临时文件</value>
+    <value>删除系统临时文件</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>适配器内存</value>

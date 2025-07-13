@@ -220,7 +220,7 @@
     <value>Os seguintes aplicativos foram desinstalados com sucesso</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Remover arquivos temporários</value>
+    <value>Limpar temp do sistema</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>RAM do adaptador</value>
