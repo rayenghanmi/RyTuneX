@@ -1202,20 +1202,20 @@ internal class OptimizeSystemHelper
     }
 
 
-    internal static void EnableFaxService()
+    internal static async void EnableFaxService()
     {
-        Registry.SetValue("HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax", "Start", "3", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax /v Start /t REG_DWORD /d 3 /f");
     }
 
-    internal static void DisableFaxService()
+    internal static async void DisableFaxService()
     {
         OptimizationOptions.StopService("Fax");
-        Registry.SetValue("HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax", "Start", "4", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd(@"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax /v Start /t REG_DWORD /d 4 /f");
     }
 
     internal static async void EnableInsiderService()
     {
-        Registry.SetValue("HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc", "Start", "3", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc /v Start /t REG_DWORD /d 3 /f");
         await OptimizationOptions.StartInCmd("sc start wisvc");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v AllowBuildPreview /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableConfigFlighting /t REG_DWORD /d 1 /f");
@@ -1226,7 +1226,7 @@ internal class OptimizeSystemHelper
     internal static async void DisableInsiderService()
     {
         OptimizationOptions.StopService("wisvc");
-        Registry.SetValue("HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc", "Start", "4", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc /v Start /t REG_DWORD /d 4 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v AllowBuildPreview /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableConfigFlighting /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableExperimentation /t REG_DWORD /d 0 /f");
@@ -1258,12 +1258,12 @@ internal class OptimizeSystemHelper
 
     }
 
-    internal static void DisableCloudClipboard()
+    internal static async void DisableCloudClipboard()
     {
-        Registry.SetValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "AllowClipboardHistory", "0", RegistryValueKind.DWord);
-        Registry.SetValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "AllowCrossDeviceClipboard", "0", RegistryValueKind.DWord);
-        Registry.SetValue(@"HKCU\Software\Microsoft\Clipboard", "EnableClipboardHistory", "0", RegistryValueKind.DWord);
-        Registry.SetValue(@"HKLM\Software\Microsoft\Clipboard", "EnableClipboardHistory", "0", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v AllowClipboardHistory /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v AllowCrossDeviceClipboard /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Clipboard /v EnableClipboardHistory /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\Software\\Microsoft\\Clipboard /v EnableClipboardHistory /t REG_DWORD /d 0 /f");
     }
 
     internal static async void EnableCloudClipboard()

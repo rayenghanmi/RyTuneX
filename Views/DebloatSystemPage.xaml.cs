@@ -233,7 +233,7 @@ public sealed partial class DebloatSystemPage : Page
 
         if (!isWin32App)
         {
-            if (!appName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
+            if (!appName.Contains("microsoft.edge.stable", StringComparison.CurrentCultureIgnoreCase))
             {
                 var cmdCommandRemoveProvisioned = $"powershell -Command \"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.DisplayName -eq '{appName}' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }}\"";
                 var cmdCommandRemoveAppxPackage = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
