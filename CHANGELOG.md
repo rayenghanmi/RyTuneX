@@ -9,6 +9,10 @@ All notable changes to this branch will be documented in this file.
 
 - Added a new `Disable Windows Recall` option in the `Features` page.
 
+### Fixes
+
+- Fixed the `Debloat` page uninstallation and error notifications.
+
 ### Changes
 
 - Removed the `Disable Unnecessary Services` option from the `Optimize` page due to its inconvenience.

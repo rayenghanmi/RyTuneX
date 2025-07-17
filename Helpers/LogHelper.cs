@@ -41,6 +41,5 @@ internal class LogHelper
     public static async Task LogError(string message)
     {
         await LogToFile($"[ERROR] {message}", "Logs");
-        App.ShowNotification("UnexpectedError".GetLocalized(), message, InfoBarSeverity.Error, 5000);
     }
 }
