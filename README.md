@@ -11,7 +11,7 @@
 
 <div align="center" style="margin: 20px 0;">
   
-  [![Downloads@latest](https://img.shields.io/github/downloads/rayenghanmi/rytunex/total?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip)
+  [![Downloads@latest](https://img.shields.io/github/downloads/rayenghanmi/rytunex/total?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/releases)
   [![Release Version Badge](https://img.shields.io/github/v/release/rayenghanmi/rytunex?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/releases)
   [![Issues Badge](https://img.shields.io/github/issues/rayenghanmi/rytunex?style=for-the-badge)](https://github.com/rayenghanmi/rytunex/issues)
   [![Closed Issues Badge](https://img.shields.io/github/issues-closed/rayenghanmi/rytunex?color=%238256d0&style=for-the-badge)](https://github.com/rayenghanmi/rytunex/issues?q=is%3Aissue+is%3Aclosed)<br>
