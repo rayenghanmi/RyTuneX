@@ -175,9 +175,6 @@ public sealed partial class DebloatSystemPage : Page
                 });
             }
 
-            // Reload installed apps after successful uninstallation and keep the list filtered
-            appsFilter_SelectionChanged(appsFilter, e);
-
             // Show notifications
             if (successfulUninstalls.Count > 0)
             {
@@ -199,17 +196,14 @@ public sealed partial class DebloatSystemPage : Page
                     InfoBarSeverity.Error, 5000);
             }
 
+            // Reload installed apps after uninstallation and keep the list filtered
+            appsFilter_SelectionChanged(appsFilter, e);
+
         }
         catch (Exception ex)
         {
             // Log the error
             await LogHelper.LogError($"Error during uninstallation process: {ex.Message}\nStack Trace: {ex.StackTrace}");
-
-            // Show error message in the NotificationQueue
-            App.ShowNotification(
-                RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
-                RyTuneX.Helpers.ResourceExtensions.GetLocalized("UnexpectedError"),
-                InfoBarSeverity.Error, 5000);
         }
         finally
         {
@@ -233,7 +227,7 @@ public sealed partial class DebloatSystemPage : Page
 
         if (!isWin32App)
         {
-            if (!appName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
+            if (!appName.Contains("microsoft.edge.stable", StringComparison.CurrentCultureIgnoreCase))
             {
                 var cmdCommandRemoveProvisioned = $"powershell -Command \"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.DisplayName -eq '{appName}' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }}\"";
                 var cmdCommandRemoveAppxPackage = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";

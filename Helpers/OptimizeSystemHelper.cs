@@ -3,6 +3,15 @@
 namespace RyTuneX.Helpers;
 internal class OptimizeSystemHelper
 {
+    public static async void DisableWindowsRecall()
+    {
+        await OptimizationOptions.StartInCmd("powershell Disable-WindowsOptionalFeature -FeatureName \"Recall\" -Online -NoRestart");
+    }
+    public static async void EnableWindowsRecall()
+    {
+        await OptimizationOptions.StartInCmd("powershell Enable-WindowsOptionalFeature -FeatureName \"Recall\" -Online -NoRestart");
+    }
+
     public static async void DisableRecommendedSectionStartMenu()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Start\" /v HideRecommendedSection /t REG_DWORD /d 1 /f");
@@ -14,54 +23,6 @@ internal class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Start\" /v HideRecommendedSection /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\PolicyManager\\current\\device\\Education\" /v IsEducationEnvironment /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer\" /v HideRecommendedSection /f");
-    }
-
-    // Unnecessary services to disable
-    private static readonly (string Name, string StartupType)[] services =
-    [
-        ("CertPropSvc", "Manual"),
-        ("DiagTrack", "Auto"),
-        ("DPS", "Auto"),
-        ("dmwappushservice", "Manual"),
-        ("iphlpsvc", "Auto"),
-        ("lfsvc", "Manual"),
-        ("lmhosts", "Manual"),
-        ("MapsBroker", "Auto"),
-        ("MSiSCSI", "Manual"),
-        ("Netlogon", "Manual"),
-        ("PcaSvc", "Auto"),
-        ("RemoteRegistry", "Disabled"),
-        ("RemoteAccess", "Disabled"),
-        ("RpcLocator", "Manual"),
-        ("SCardSvr", "Manual"),
-        ("SCPolicySvc", "Manual"),
-        ("SharedAccess", "Manual"),
-        ("SNMPTRAP", "Manual"),
-        ("Spooler", "Auto"),
-        ("stisvc", "Auto"),
-        ("TrkWks", "Auto"),
-        ("WbioSrvc", "Manual"),
-        ("XblAuthManager", "Auto"),
-        ("XblGameSave", "Manual"),
-        ("XboxGipSvc", "Auto"),
-        ("XboxNetApiSvc", "Auto"),
-        ("WiaRpc", "Manual"),
-        ("PhoneSvc", "Manual"),
-        ("WdiServiceHost", "Manual"),
-        ("WdiSystemHost", "Manual"),
-    ];
-
-    public static async void DisableUnnecessaryServices()
-    {
-        // Disable all services
-        var servicesTask = services.AsParallel().Select(service => OptimizationOptions.StartInCmd($"powershell.exe \"Get-Service -Name {service.Name} | Set-Service -StartupType Disabled\""));
-        await Task.WhenAll(servicesTask);
-    }
-    public static async void EnableUnnecessaryServices()
-    {
-        // Restore default state of all services
-        var servicesTask = services.AsParallel().Select(service => OptimizationOptions.StartInCmd($"powershell.exe \"Get-Service -Name {service.Name} | Set-Service -StartupType {service.StartupType}\""));
-        await Task.WhenAll(servicesTask);
     }
 
     public static async void DisableWPBT()
@@ -1241,20 +1202,20 @@ internal class OptimizeSystemHelper
     }
 
 
-    internal static void EnableFaxService()
+    internal static async void EnableFaxService()
     {
-        Registry.SetValue("HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax", "Start", "3", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax /v Start /t REG_DWORD /d 3 /f");
     }
 
-    internal static void DisableFaxService()
+    internal static async void DisableFaxService()
     {
         OptimizationOptions.StopService("Fax");
-        Registry.SetValue("HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax", "Start", "4", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd(@"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax /v Start /t REG_DWORD /d 4 /f");
     }
 
     internal static async void EnableInsiderService()
     {
-        Registry.SetValue("HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc", "Start", "3", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc /v Start /t REG_DWORD /d 3 /f");
         await OptimizationOptions.StartInCmd("sc start wisvc");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v AllowBuildPreview /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableConfigFlighting /t REG_DWORD /d 1 /f");
@@ -1265,7 +1226,7 @@ internal class OptimizeSystemHelper
     internal static async void DisableInsiderService()
     {
         OptimizationOptions.StopService("wisvc");
-        Registry.SetValue("HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc", "Start", "4", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc /v Start /t REG_DWORD /d 4 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v AllowBuildPreview /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableConfigFlighting /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableExperimentation /t REG_DWORD /d 0 /f");
@@ -1297,12 +1258,12 @@ internal class OptimizeSystemHelper
 
     }
 
-    internal static void DisableCloudClipboard()
+    internal static async void DisableCloudClipboard()
     {
-        Registry.SetValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "AllowClipboardHistory", "0", RegistryValueKind.DWord);
-        Registry.SetValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "AllowCrossDeviceClipboard", "0", RegistryValueKind.DWord);
-        Registry.SetValue(@"HKCU\Software\Microsoft\Clipboard", "EnableClipboardHistory", "0", RegistryValueKind.DWord);
-        Registry.SetValue(@"HKLM\Software\Microsoft\Clipboard", "EnableClipboardHistory", "0", RegistryValueKind.DWord);
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v AllowClipboardHistory /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v AllowCrossDeviceClipboard /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKCU\\Software\\Microsoft\\Clipboard /v EnableClipboardHistory /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\Software\\Microsoft\\Clipboard /v EnableClipboardHistory /t REG_DWORD /d 0 /f");
     }
 
     internal static async void EnableCloudClipboard()

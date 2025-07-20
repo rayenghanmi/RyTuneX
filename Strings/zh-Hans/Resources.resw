@@ -220,7 +220,7 @@
     <value>成功卸载了以下应用</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>删除临时文件</value>
+    <value>删除系统临时文件</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>适配器内存</value>
@@ -484,7 +484,7 @@
     <value>禁用小部件</value>
   </data>
   <data name="Feature_DisableWidgets.Description" xml:space="preserve">
-    <value>禁用 Windows 11 任务栏上的小部件功能.  如果您觉得小工具能方便您快速获取信息，可以考虑使用（仅限 Windows 11） </value>
+    <value>禁用 Windows 11 任务栏上的小部件功能.  如果您觉得小工具能方便您快速获取信息, 可以考虑使用（仅限 Windows 11） </value>
   </data>
   <data name="Feature_DisableChat.Header" xml:space="preserve">
     <value>禁用聊天</value>
@@ -514,7 +514,7 @@
     <value>禁用 CoPilot AI</value>
   </data>
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
-    <value>禁用 Windows 中的 Copilot AI 功能，以帮助编写代码. 不建议开发者使用</value>
+    <value>禁用 Windows 中的 Copilot AI 功能, 以帮助编写代码. 不建议开发者使用</value>
   </data>
   <data name="OptimizeBasic.Text" xml:space="preserve">
     <value>基本优化</value>
@@ -829,7 +829,7 @@
     <value>禁用 SmartScreen</value>
   </data>
   <data name="Feature_DisableSmartScreen.Description" xml:space="preserve">
-    <value>关闭 SmartScreen 过滤器，该过滤器会在您从互联网下载潜在不安全的应用和文件时发出警告。禁用此功能会增加被恶意软件感染的风险。</value>
+    <value>关闭 SmartScreen 过滤器, 该过滤器会在您从互联网下载潜在不安全的应用和文件时发出警告。禁用此功能会增加被恶意软件感染的风险。</value>
   </data>
   <data name="Feature_DisableNewsAndInterests.Header" xml:space="preserve">
     <value>禁用新闻和兴趣</value>
@@ -1015,7 +1015,7 @@
     <value>禁用窗口摇晃</value>
   </data>
   <data name="Feature_WindowShake.Description" xml:space="preserve">
-    <value>禁用窗口摇晃功能, 该功能会在摇晃窗口时最小化所有打开的窗口. 关闭后可减少干扰，但会失去一个便捷的窗口管理工具. </value>
+    <value>禁用窗口摇晃功能, 该功能会在摇晃窗口时最小化所有打开的窗口. 关闭后可减少干扰, 但会失去一个便捷的窗口管理工具. </value>
   </data>
   <data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
     <value>添加复制/移动上下文菜单</value>
@@ -1069,7 +1069,7 @@
     <value>增强 GPU 和优先级设置</value>
   </data>
   <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>优化 GPU 配置与进程优先级以提升性能，确保在游戏或多任务等高负载场景下实现更佳的图形渲染与流畅运行. </value>
+    <value>优化 GPU 配置与进程优先级以提升性能, 确保在游戏或多任务等高负载场景下实现更佳的图形渲染与流畅运行. </value>
   </data>
   <data name="Feature_FrameServerMode.Header" xml:space="preserve">
     <value>禁用帧服务器模式</value>
@@ -1087,10 +1087,7 @@
     <value>设置关键流量带宽限制</value>
   </data>
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>为对延迟敏感的网络流量设置专用带宽比例。启用此功能可提升关键应用的网络稳定性，但可能减少普通应用可动态使用的带宽总量。 </value>
-  </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>加载中...</value>
+    <value>为对延迟敏感的网络流量设置专用带宽比例。启用此功能可提升关键应用的网络稳定性, 但可能减少普通应用可动态使用的带宽总量。 </value>
   </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>设备信息</value>
@@ -1335,12 +1332,6 @@
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>阻止固件在启动过程中运行程序 (例如 OEM 预装软件).</value>
   </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>禁用不必要的服务</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>通过禁用对设备运行非必需的后台服务来优化系统性能.这有助于释放系统资源并提高整体效率.</value>
-  </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>还原更改</value>
   </data>
@@ -1367,5 +1358,11 @@
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>从开始菜单中移除“推荐”部分, 以提供更简洁、更专注的布局.</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>禁用 Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>禁用 Windows Recall, 此功能会捕捉屏幕活动以支持 AI 搜索。推荐给注重隐私的用户和安全环境中使用。</value>
   </data>
 </root>

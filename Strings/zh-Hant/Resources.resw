@@ -220,7 +220,7 @@
     <value>成功解除安裝了以下應用</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>刪除臨時檔案</value>
+    <value>刪除系統暫存檔案</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>介面卡記憶體</value>
@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>為非最佳努力程序設定限制. 啟用此功能可以優先提高效能, 但可能會在某些情況下減少系統靈活性. </value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>載入中...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>裝置資訊</value>
   </data>
@@ -1330,12 +1327,6 @@
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>阻止韌體在啟動時運行程式(例如, OEM 預裝軟體).</value>
   </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>停用不必要的服務</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>通過停用對設備運行非必要的背景服務來優化系統效能.這有助於釋放系統資源並提高整體效率.</value>
-  </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>還原更改</value>
   </data>
@@ -1362,5 +1353,11 @@
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>從開始功能表中移除「推薦」區段, 以提供更清爽且更專注的佈局.</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>停用 Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value />
   </data>
 </root>

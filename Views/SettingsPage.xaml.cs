@@ -2,7 +2,6 @@
 using System.IO.Compression;
 using System.Net;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
@@ -220,10 +219,6 @@ public sealed partial class SettingsPage : Page
                 // Parse the latest version string into a Version object
                 var latestVersion = new Version(latestVersionString);
 
-                // Log both versions for debugging
-                Debug.WriteLine($"Current version: {currentVersion}");
-                Debug.WriteLine($"Parsed latest version: {latestVersion}");
-
                 // Compare versions: check if the latest version is greater than the current version
                 var isUpdateAvailable = latestVersion > currentVersion;
 
@@ -289,7 +284,6 @@ public sealed partial class SettingsPage : Page
                 if (result == ContentDialogResult.Primary)
                 {
                     // Run the installation module
-                    ApplicationData.Current.LocalSettings.Values["JustUpdated"] = true;
                     var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip";
                     await InstallRyTuneX(downloadUrl);
                 }
@@ -301,40 +295,12 @@ public sealed partial class SettingsPage : Page
         }
     }
 
-    static string ExtractLatestVersionChanges(string changelog)
-    {
-        try
-        {
-            // Regex to match the latest version section
-            var match = Regex.Match(changelog, @"## (\d+\.\d+\.\d+) - Released\n((.|\n)*?)(?=\n## |$)");
-            if (match.Success)
-            {
-                var latestChanges = match.Groups[2].Value.Trim();
-                latestChanges = Regex.Replace(latestChanges, @"^###\s+", "", RegexOptions.Multiline);
-                latestChanges = Regex.Replace(latestChanges, @"^>\s+", "", RegexOptions.Multiline);
-                latestChanges = Regex.Replace(latestChanges, @"\[\!(.*?)\]", match => match.Groups[1].Value);
-
-                return latestChanges;
-            }
-            else
-            {
-                return "NoChangesFound".GetLocalized();
-            }
-        }
-        catch (Exception ex)
-        {
-            LogHelper.LogError($"Error extracting latest version changes: {ex.Message}\nStack Trace: {ex.StackTrace}");
-            return "Error extracting latest version changes.";
-        }
-    }
-
     public async Task InstallRyTuneX(string downloadUrl)
     {
         var tempPath = Path.GetTempPath();
         var zipFilePath = Path.Combine(tempPath, "RyTuneX.Setup.zip");
         var extractionPath = Path.Combine(tempPath, "RyTuneX");
         var setupFilePath = Path.Combine(extractionPath, "RyTuneXSetup.exe");
-        var changelogUrl = "https://raw.githubusercontent.com/rayenghanmi/RyTuneX/refs/heads/main/CHANGELOG.md";
 
         try
         {
@@ -350,15 +316,6 @@ public sealed partial class SettingsPage : Page
                 await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), zipFilePath);
                 Debug.WriteLine("Download complete.");
             }
-
-            string changelogContent;
-            using (var webClient = new WebClient())
-            {
-                changelogContent = await webClient.DownloadStringTaskAsync(new Uri(changelogUrl));
-                Debug.WriteLine("Changelog download complete.");
-            }
-
-            ApplicationData.Current.LocalSettings.Values["latestChanges"] = ExtractLatestVersionChanges(changelogContent);
 
             // Extract the ZIP file
             Debug.WriteLine("Extracting files...");
@@ -411,7 +368,6 @@ public sealed partial class SettingsPage : Page
             {
                 Directory.Delete(extractionPath, true);
             }
-            ApplicationData.Current.LocalSettings.Values["DoneUpdating"] = true;
             UpdateStatusText.Text = "Done".GetLocalized();
             UpdateButton.Visibility = Visibility.Visible;
             UpdateStack.Visibility = Visibility.Collapsed;

@@ -220,7 +220,7 @@
     <value>L'application(s) suivante(s) a/ont été désinstallée(s) avec succès</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Supprimer les fichiers temporaires</value>
+    <value>Effacer temp système</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>RAM de l'adaptateur</value>
@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>Définit une limite pour les processus non optimisés. L'activer peut prioriser les performances, mais peut réduire la flexibilité du système dans certains cas.</value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>Chargement...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Informations sur l'appareil</value>
   </data>
@@ -1335,12 +1332,6 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Empêche le firmware d'exécuter des programmes (par ex., logiciels OEM préinstallés) au démarrage.</value>
   </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>Désactiver les services inutiles</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>Optimisez les performances du système en désactivant les services d'arrière-plan qui ne sont pas essentiels au fonctionnement de votre appareil. Cela permet de libérer des ressources système et d'améliorer l'efficacité globale.</value>
-  </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Annuler les modifications</value>
   </data>
@@ -1367,5 +1358,11 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>Supprime la section "Recommandé" du menu Démarrer pour une interface plus épurée et ciblée.</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Désactiver Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Désactive Windows Recall, qui enregistre l'activité à l'écran pour la recherche assistée par l'IA. Recommandé pour les utilisateurs soucieux de leur vie privée et les environnements sécurisés.</value>
   </data>
 </root>

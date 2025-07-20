@@ -3,6 +3,22 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.4.1 - Released
+
+### Added
+
+- Added a new `Disable Windows Recall` option in the `Features` page.
+
+### Fixes
+
+- Fixed the `Debloat` page uninstallation and error notifications.
+
+### Changes
+
+- Removed the `Disable Unnecessary Services` option from the `Optimize` page due to its inconvenience.
+- Removed the `Loading Window` at app startup to improve speed.
+- Changed the text of the `Remove Temp Files` to `Clear System Temp` in the `Debloat` page for a better clarity.
+
 ## 1.4.0 - Released
 
 ### Added

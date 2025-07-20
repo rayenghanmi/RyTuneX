@@ -220,7 +220,7 @@
     <value>Successfully uninstalled the following app(s)</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Remove Temp Files</value>
+    <value>Clear System Temp</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>Adapter RAM</value>
@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>Sets a limit for non-best effort processes. Enabling it can prioritize performance but may reduce system flexibility in some cases.</value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>Loading...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Device Information</value>
   </data>
@@ -1335,12 +1332,6 @@ Are you sure you want to continue?</value>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Stop firmware from running programs (e.g., OEM bloatware) during startup.</value>
   </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>Disable Unnecessary Services</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>Optimize system performance by disabling background services that are not essential for your device's operation. This helps free up system resources and improves overall efficiency.</value>
-  </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Revert changes</value>
   </data>
@@ -1367,5 +1358,11 @@ Are you sure you want to continue?</value>
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>Removes the "Recommended" section from the Start Menu to provide a cleaner and more focused layout.</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Disable Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Disables Windows Recall, which captures on-screen activity for AI-powered search. Recommended for privacy-conscious users and secure environments.</value>
   </data>
 </root>

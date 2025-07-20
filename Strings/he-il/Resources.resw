@@ -220,7 +220,7 @@
     <value>היישום(ים) הבא(ים) הוסר(ו) בהצלחה</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>הסר קבצים זמניים</value>
+    <value>מחיקת טמפ מערכת</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>זיכרון RAM של המתאם</value>
@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>מגדיר מגבלה לתהליכי non-best effort. הפעלה זו יכולה לתעדף ביצועים אך עשויה להפחית את גמישות המערכת במקרים מסוימים.</value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>טוען...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>פרטי התקן</value>
   </data>
@@ -1115,15 +1112,6 @@
   </data>
   <data name="CreatingRestorePoint" xml:space="preserve">
     <value>יוצר נקודת שחזור</value>
-  </data>
-  <data name="RestorePointCreated" xml:space="preserve">
-    <value>נקודת שחזור נוצרה</value>
-  </data>
-  <data name="RestorePointCreationSuccess" xml:space="preserve">
-    <value>נקודת שחזור מערכת נוצרה בהצלחה.</value>
-  </data>
-  <data name="RestorePointCreationError" xml:space="preserve">
-    <value>יצירת נקודת שחזור נכשלה</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>בטל את כל השינויים</value>
@@ -1344,12 +1332,6 @@
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>מנע מקושחה להריץ תוכניות (למשל, תוכנות מיותרות של יצרן מקורי) במהלך האתחול.</value>
   </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>השבת שירותים מיותרים</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>מטב את ביצועי המערכת על ידי השבתת שירותי רקע שאינם חיוניים לפעולת המכשיר שלך. זה עוזר לפנות משאבי מערכת ומשפר את היעילות הכוללת.</value>
-  </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>בטל שינויים</value>
   </data>
@@ -1376,5 +1358,11 @@
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>מסיר את האזור "מומלץ" מתפריט 'התחל' כדי לספק פריסה נקייה וממוקדת יותר.</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>השבת את Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>משבית את Windows Recall, אשר מקליט פעילות על המסך לצורך חיפוש מבוסס בינה מלאכותית. מומלץ למשתמשים שדואגים לפרטיותם ולסביבות מאובטחות.</value>
   </data>
 </root>

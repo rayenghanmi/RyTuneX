@@ -220,7 +220,7 @@
     <value>Успешно удалены следующие приложения</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
-    <value>Удалить временные файлы</value>
+    <value>Удалить системный Temp</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>Память адаптера</value>
@@ -1089,9 +1089,6 @@
   <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
     <value>Устанавливает предел для процессов с низким приоритетом. Включение этой функции может повысить производительность, но снизить гибкость системы в некоторых случаях.</value>
   </data>
-  <data name="LoadingWindowText.Text" xml:space="preserve">
-    <value>Загрузка...</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Информация о устройстве</value>
   </data>
@@ -1332,12 +1329,6 @@
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Предотвращает запуск программ (например, предустановленного OEM-программного обеспечения) прошивкой при запуске.</value>
   </data>
-  <data name="Feature_UnnecessaryServices.Header" xml:space="preserve">
-    <value>Отключение ненужных служб</value>
-  </data>
-  <data name="Feature_UnnecessaryServices.Description" xml:space="preserve">
-    <value>Оптимизируйте производительность системы, отключив фоновые службы, которые не являются необходимыми для работы вашего устройства. Это поможет освободить системные ресурсы и повысить общую эффективность.</value>
-  </data>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Отменить изменения</value>
   </data>
@@ -1364,5 +1355,11 @@
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
     <value>Удаляет раздел «Рекомендуется» из меню «Пуск» для более чистого и сфокусированного интерфейса.</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
+    <value>Отключить Windows Recall</value>
+  </data>
+  <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
+    <value>Отключает Windows Recall, который фиксирует действия на экране для поиска с ИИ. Рекомендуется для пользователей, заботящихся о конфиденциальности, и защищённых сред.</value>
   </data>
 </root>

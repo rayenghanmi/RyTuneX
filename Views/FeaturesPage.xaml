@@ -253,6 +253,13 @@
                     <ToggleSwitch x:Name="CoPilotAI" Tag="CoPilotAI"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Feature_DisableWindowsRecall">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE82F;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="WindowsRecall" Tag="WindowsRecall"/>
+                </controls:SettingsCard>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>
