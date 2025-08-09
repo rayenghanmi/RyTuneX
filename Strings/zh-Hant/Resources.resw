@@ -1214,11 +1214,6 @@
   <data name="Warning" xml:space="preserve">
     <value>警告</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>禁用系統還原將刪除所有還原點, 包括由RyTuneX建立的還原點.
-
-您確定要繼續嗎?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>廣告設定</value>
   </data>

@@ -1218,12 +1218,6 @@ Check your computer for memory problems</value>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Disabling System Restore will delete all restore points including those created by RyTuneX.
-
-
-Are you sure you want to continue?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Advertising Settings</value>
   </data>

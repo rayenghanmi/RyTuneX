@@ -1218,12 +1218,6 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="Warning" xml:space="preserve">
     <value>Aviso</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Desabilitar a restauração do sistema excluirá todos os pontos de restauração, incluindo aqueles criados pelo RyTuneX.
-
-
-Tem certeza de que deseja continuar?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Configurações de publicidade</value>
   </data>

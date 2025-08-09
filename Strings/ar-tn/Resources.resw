@@ -1218,12 +1218,6 @@
   <data name="Warning" xml:space="preserve">
     <value>تحذير</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>تعطيل استعادة النظام سيؤدي إلى حذف جميع نقاط الاستعادة بما في ذلك تلك التي أنشأها RyTuneX.
-
-
-هل أنت متأكد أنك تريد المتابعة؟</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>إعدادات الإعلانات</value>
   </data>

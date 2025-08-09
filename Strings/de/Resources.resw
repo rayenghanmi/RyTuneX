@@ -1218,12 +1218,6 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="Warning" xml:space="preserve">
     <value>Warnung</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Das Deaktivieren der Systemwiederherstellung löscht alle Wiederherstellungspunkte, einschließlich der von RyTuneX erstellten.
-
-
- Sind Sie sicher, dass Sie fortfahren möchten?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Werbungseinstellungen</value>
   </data>

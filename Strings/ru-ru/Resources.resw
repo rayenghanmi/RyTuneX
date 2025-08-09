@@ -1215,12 +1215,6 @@
   <data name="Warning" xml:space="preserve">
     <value>Предупреждение</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Отключение восстановления системы приведет к удалению всех точек восстановления, включая созданные RyTuneX.
-
-
-Вы уверены, что хотите продолжить?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Настройки рекламы</value>
   </data>

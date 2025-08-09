@@ -1218,12 +1218,6 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="Warning" xml:space="preserve">
     <value>Avertissement</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Désactiver la restauration du système supprimera tous les points de restauration, y compris ceux créés par RyTuneX.
-
-
-Êtes-vous sûr de vouloir continuer ?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Paramètres de publicité</value>
   </data>

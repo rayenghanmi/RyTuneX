@@ -1,7 +1,5 @@
-﻿using Microsoft.Win32;
-
-namespace RyTuneX.Helpers;
-internal class OptimizeSystemHelper
+﻿namespace RyTuneX.Helpers;
+public static partial class OptimizeSystemHelper
 {
     public static async void DisableWindowsRecall()
     {
@@ -76,12 +74,12 @@ internal class OptimizeSystemHelper
 
     public static async void DisableServiceHostSplitting()
     {
-        await OptimizationOptions.StartInCmd("Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services' | Where-Object { $_.Name -notmatch 'Xbl|Xbox' } | Foreach-Object { if ($null -ne (Get-ItemProperty -Path \"Registry::$_\" -EA 0).Start) { Set-ItemProperty -Path \"Registry::$_\" -Name 'SvcHostSplitDisable' -Type DWORD -Value 1 -Force -EA 0 } }");
+        await OptimizationOptions.StartInCmd("Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services' | Where-Object { $_.Name -notmatch 'Xbl|Xbox' } | ForEach-Object { if ((Get-ItemProperty -Path $_.PSPath -ErrorAction SilentlyContinue).Start -ne $null) { Set-ItemProperty -Path $_.PSPath -Name 'SvcHostSplitDisable' -Value 1 -Type DWord -Force -ErrorAction SilentlyContinue } }");
     }
 
     public static async void EnableServiceHostSplitting()
     {
-        await OptimizationOptions.StartInCmd("Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services' | Where-Object { $_.Name -notmatch 'Xbl|Xbox' } | Foreach-Object { if (Test-Path -Path \"Registry::$_\") { Remove-ItemProperty -Path \"Registry::$_\" -Name 'SvcHostSplitDisable' -ErrorAction SilentlyContinue } }");
+        await OptimizationOptions.StartInCmd("Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services' | Where-Object { $_.Name -notmatch 'Xbl|Xbox' } | ForEach-Object { if (Test-Path $_.PSPath) { Remove-ItemProperty -Path $_.PSPath -Name 'SvcHostSplitDisable' -ErrorAction SilentlyContinue } }");
     }
 
     public static async void DisableMenuShowDelay()
@@ -187,7 +185,7 @@ internal class OptimizeSystemHelper
 
     public static async void SetLowLatencyGPUSettings()
     {
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"GPU Priority\" /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"GPU Priority\" /t REG_DWORD /d 8 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v Priority /t REG_DWORD /d 8 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"Scheduling Category\" /t REG_SZ /d Medium /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Low Latency\" /v \"SFIO Priority\" /t REG_SZ /d High /f");
@@ -1452,12 +1450,14 @@ internal class OptimizeSystemHelper
     {
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /T REG_DWORD /D 1 /F");
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V ShowCopilotButton /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage *Copilot* | Remove-AppxPackage\"");
     }
 
     internal static async void EnableCoPilotAI()
     {
         await OptimizationOptions.StartInCmd("REG Delete \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /F");
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V ShowCopilotButton /T REG_DWORD /D 1 /F");
+        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage *Copilot* | Add-AppxPackage\"");
     }
 
 
@@ -1573,14 +1573,10 @@ internal class OptimizeSystemHelper
     internal static async void DisableHibernation()
     {
         await OptimizationOptions.StartInCmd("powercfg -h off");
-        await OptimizationOptions.StartInCmd("powercfg -h off");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v HibernateEnabled /t REG_DWORD /d 0 /f");
     }
 
     internal static async void EnableHibernation()
     {
-        await OptimizationOptions.StartInCmd("powercfg -h on");
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v HibernateEnabled /f");
         await OptimizationOptions.StartInCmd("powercfg -h on");
     }
 

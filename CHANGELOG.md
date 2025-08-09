@@ -3,6 +3,17 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.5.0 - Unreleased
+
+### Added
+
+- Added a new toggle switches state management that reflect the current system state rather than a user defined keys #50.
+
+### Changes
+
+- Enhanced the app's internal architecture for better performance and reliability.
+- Improved the `Revert All Changes` functionality to work with the new registry state management.
+
 ## 1.4.1 - Released
 
 ### Added

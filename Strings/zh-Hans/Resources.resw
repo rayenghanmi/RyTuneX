@@ -1218,12 +1218,6 @@
   <data name="Warning" xml:space="preserve">
     <value>警告</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>禁用系统还原将删除所有还原点, 包括由RyTuneX创建的还原点.
-
-
-您确定要继续吗?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>广告设置</value>
   </data>

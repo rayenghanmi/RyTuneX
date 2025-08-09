@@ -1218,12 +1218,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Warning" xml:space="preserve">
     <value>Lưu ý</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Vô hiệu hoá khôi phục hệ thống sẽ xóa tất cả các điểm khôi phục hiện có bao gôm cả những gì được tạo bởi RyTuneX.
-
-
-Bạn có chắc chắn muốn tiếp tục không?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Cài đặt quảng cáo</value>
   </data>

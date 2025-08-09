@@ -1218,12 +1218,6 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="Warning" xml:space="preserve">
     <value>Uyarı</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Sistem Geri Yüklemenin devre dışı bırakılması, RyTuneX tarafından oluşturulanlar dahil tüm geri yükleme noktalarının silinmesine neden olacaktır.
-
-
-Devam etmek istediğine emin misin?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Reklam Ayarları</value>
   </data>

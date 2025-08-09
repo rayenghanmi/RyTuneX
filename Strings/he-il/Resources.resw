@@ -1218,12 +1218,6 @@
   <data name="Warning" xml:space="preserve">
     <value>אזהרה</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>השבתת שחזור המערכת תמחק את כל נקודות השחזור, כולל אלו שנוצרו על ידי RyTuneX.
-
-
-האם אתה בטוח שברצונך להמשיך?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>הגדרות פרסום</value>
   </data>

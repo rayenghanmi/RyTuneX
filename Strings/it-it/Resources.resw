@@ -1218,12 +1218,6 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>La disattivazione di Ripristino configurazione di sistema eliminerà tutti i punti di ripristino, inclusi quelli creati da RyTuneX.
-
-
-Vuoi continuare?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Impostazioni pubblicitarie</value>
   </data>

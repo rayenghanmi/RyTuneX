@@ -1218,12 +1218,6 @@
   <data name="Warning" xml:space="preserve">
     <value>경고</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>시스템 복원을 비활성화하면 RyTuneX에서 만든 복원 지점을 포함한 모든 복원 지점이 삭제됩니다.
-
-
-계속하시겠습니까?</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>광고 설정</value>
   </data>

@@ -1218,12 +1218,6 @@
   <data name="Warning" xml:space="preserve">
     <value>警告</value>
   </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>システムの復元を無効にすると、RyTuneX が作成したものを含め、すべての復元ポイントが削除されます。
-
-
-続行してもよろしいですか？</value>
-  </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>広告設定</value>
   </data>
