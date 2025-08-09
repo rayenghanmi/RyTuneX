@@ -13,17 +13,24 @@ namespace RyTuneX.Helpers;
 internal partial class OptimizationOptions
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
+    private static readonly string IconCacheDirectory = Path.Combine(Path.GetTempPath(), "RyTuneX_AppIcons");
 
     [DllImport("Shell32.dll", CharSet = CharSet.Auto)]
     public static extern int ExtractIconEx(string lpszFile, int nIconIndex, IntPtr[] phiconLarge, IntPtr[]? phiconSmall, int nIcons);
 
     public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
     {
+        // Ensure the icon cache directory exists
+        if (!Directory.Exists(IconCacheDirectory))
+        {
+            Directory.CreateDirectory(IconCacheDirectory);
+        }
+
         var largeIcons = new IntPtr[1];
         ExtractIconEx(@"C:\Windows\System32\imageres.dll", 152, largeIcons, null, 1);
         var extractedIcon = System.Drawing.Icon.FromHandle(largeIcons[0]);
         var bmp = extractedIcon.ToBitmap();
-        bmp.Save(Path.Combine(Path.GetTempPath(), "defaulticon.png"), ImageFormat.Png);
+        bmp.Save(Path.Combine(IconCacheDirectory, "defaulticon.png"), ImageFormat.Png);
 
         var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
         var win32AppsTask = Task.Run(GetWin32Apps);
@@ -40,7 +47,24 @@ internal partial class OptimizationOptions
         return installedApps;
     }
 
-    private static List<Tuple<string, string, bool>> GetUwpApps(bool uninstallableOnly)
+    private static string GetSafeIconFileName(string appName, string extension = ".png")
+    {
+        // Remove invalid filename characters and limit length
+        var invalidChars = Path.GetInvalidFileNameChars();
+        var safeName = string.Concat(appName.Where(c => !invalidChars.Contains(c)));
+        
+        // Limit length to prevent long filenames
+        if (safeName.Length > 50)
+        {
+            safeName = safeName.Substring(0, 50);
+        }
+        
+        // Add timestamp hash to ensure uniqueness if needed
+        var hash = Math.Abs(appName.GetHashCode()).ToString();
+        return $"{safeName}_{hash}{extension}";
+    }
+
+    private static async Task<List<Tuple<string, string, bool>>> GetUwpApps(bool uninstallableOnly)
     {
         var installedApps = new List<Tuple<string, string, bool>>();
         var command = uninstallableOnly
@@ -72,7 +96,7 @@ internal partial class OptimizationOptions
                 {
                     if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
                     {
-                        var logoPath = ExtractLogoPath(currentLocation);
+                        var logoPath = await ExtractLogoPath(currentLocation, false, currentName);
                         installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
                     }
 
@@ -91,7 +115,7 @@ internal partial class OptimizationOptions
 
             if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
             {
-                var logoPath = ExtractLogoPath(currentLocation);
+                var logoPath = await ExtractLogoPath(currentLocation, false, currentName);
                 installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
             }
 
@@ -99,13 +123,13 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex.Message);
+            await LogHelper.LogError(ex.Message);
         }
 
         return installedApps;
     }
 
-    public static List<Tuple<string, string, bool>> GetWin32Apps()
+    public static async Task<List<Tuple<string, string, bool>>> GetWin32Apps()
     {
         var win32Apps = new List<Tuple<string, string, bool>>();
 
@@ -125,7 +149,7 @@ internal partial class OptimizationOptions
 
                 if (subKey == null)
                 {
-                    Debug.WriteLine($"Failed to open subkey {subKeyName}");
+                    await LogHelper.LogError($"Failed to open subkey {subKeyName}");
                     continue;
                 }
 
@@ -171,13 +195,13 @@ internal partial class OptimizationOptions
                     continue;
                 }
 
-                var logoPath = ExtractLogoPath(installLocation, true); // true for Win32
+                var logoPath = await ExtractLogoPath(installLocation, true, displayName); // true for Win32, pass displayName
                 win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
             }
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Failed to load Win32 apps: {ex.Message}");
+            await LogHelper.LogError($"Failed to load Win32 apps: {ex.Message}");
         }
 
         return [.. win32Apps
@@ -185,38 +209,86 @@ internal partial class OptimizationOptions
             .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
     }
 
-    private static string ExtractLogoPath(string installLocation, bool isWin32 = false)
+    private static async Task<string> ExtractLogoPath(string installLocation, bool isWin32 = false, string? appName = null)
     {
-        var logoPath = Path.Combine(Path.GetTempPath(), "defaulticon.png");
+        var logoPath = Path.Combine(IconCacheDirectory, "defaulticon.png");
 
         if (isWin32)
         {
             try
             {
-                if (Directory.Exists(installLocation))
+                if (!string.IsNullOrEmpty(installLocation) && Directory.Exists(installLocation))
                 {
+                    // Use the provided app name or fallback to directory name
+                    var nameForIcon = appName ?? Path.GetFileName(installLocation) ?? "Unknown";
+                    var cachedIconPath = Path.Combine(IconCacheDirectory, GetSafeIconFileName(nameForIcon));
+                    
+                    // Check if icon already exists in cache and is valid
+                    if (File.Exists(cachedIconPath) && new FileInfo(cachedIconPath).Length > 0)
+                    {
+                        return cachedIconPath;
+                    }
+
+                    // Ensure cache directory exists before trying to save
+                    if (!Directory.Exists(IconCacheDirectory))
+                    {
+                        Directory.CreateDirectory(IconCacheDirectory);
+                    }
+
+                    // Look for existing icons in the app directory
                     var iconIcoPath = Path.Combine(installLocation, "app.ico");
                     var iconPngPath = Path.Combine(installLocation, "icon.png");
 
-                    // Exception for discord icon path (more will be added)
+                    // If existing icons are found, copy them to cache
                     if (File.Exists(iconIcoPath))
                     {
-                        logoPath = iconIcoPath;
+                        try
+                        {
+                            // Copy the existing .ico file to cache as .png
+                            using var icon = new System.Drawing.Icon(iconIcoPath);
+                            await SaveIconAsPng(icon, cachedIconPath);
+                            logoPath = cachedIconPath;
+                        }
+                        catch (Exception ex)
+                        {
+                            await LogHelper.LogError($"Failed to copy existing .ico file: {ex.Message}");
+                            // Fall back to original path if copying fails
+                            logoPath = iconIcoPath;
+                        }
                     }
                     else if (File.Exists(iconPngPath))
                     {
-                        logoPath = iconPngPath;
+                        try
+                        {
+                            // Copy the existing icon.png file to cache
+                            File.Copy(iconPngPath, cachedIconPath, true);
+                            logoPath = cachedIconPath;
+                        }
+                        catch (Exception ex)
+                        {
+                            await LogHelper.LogError($"Failed to copy existing .png file: {ex.Message}");
+                            // Fall back to original path if copying fails
+                            logoPath = iconPngPath;
+                        }
                     }
                     else
                     {
+                        // Extract icon from executable and save to temp cache directory
                         var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
                         if (!string.IsNullOrEmpty(exeFile))
                         {
-                            using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
-                            if (icon != null)
+                            try
                             {
-                                SaveIconAsPng(icon, iconPngPath);
-                                logoPath = iconPngPath;
+                                using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
+                                if (icon != null)
+                                {
+                                    await SaveIconAsPng(icon, cachedIconPath);
+                                    logoPath = cachedIconPath;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                await LogHelper.LogError($"Failed to extract icon from executable: {ex.Message}");
                             }
                         }
                     }
@@ -224,7 +296,7 @@ internal partial class OptimizationOptions
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Failed to extract logo for Win32 app: {ex.Message}");
+                await LogHelper.LogError($"Failed to extract logo for Win32 app: {ex.Message}");
             }
         }
         else
@@ -287,24 +359,38 @@ internal partial class OptimizationOptions
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Failed to extract logo path: {ex.Message}");
+                await LogHelper.LogError($"Failed to extract logo path: {ex.Message}");
             }
         }
         return logoPath;
     }
 
     // Save the extracted icon as a PNG file
-    private static void SaveIconAsPng(System.Drawing.Icon icon, string filePath)
+    private static async Task SaveIconAsPng(System.Drawing.Icon icon, string filePath)
     {
-        using var stream = new MemoryStream();
-        // Convert the icon to a bitmap and then save it as PNG
-        using (var bitmap = new Bitmap(icon.ToBitmap()))
+        try
         {
-            bitmap.Save(stream, ImageFormat.Png);
-        }
+            // Ensure the directory exists
+            var directory = Path.GetDirectoryName(filePath);
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
 
-        // Write the stream to the file
-        File.WriteAllBytes(filePath, stream.ToArray());
+            using var stream = new MemoryStream();
+            // Convert the icon to a bitmap and then save it as PNG
+            using (var bitmap = new Bitmap(icon.ToBitmap()))
+            {
+                bitmap.Save(stream, ImageFormat.Png);
+            }
+
+            // Write the stream to the file
+            File.WriteAllBytes(filePath, stream.ToArray());
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Failed to save icon as PNG to {filePath}: {ex.Message}");
+        }
     }
 
     private static int GetScaleFromFileName(string fileName)
@@ -403,7 +489,7 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error running command: {ex.Message}");
+            await LogHelper.LogError($"Error running command: {ex.Message}");
             throw;
         }
     }

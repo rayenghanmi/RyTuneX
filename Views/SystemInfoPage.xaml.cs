@@ -25,13 +25,13 @@ public sealed partial class SystemInfoPage : Page
             {
                 await LogHelper.Log("Updating SystemInfo");
 
-                var osTask = Task.Run(() => GetOsInformation());
-                var cpuTask = Task.Run(() => GetCpuInformation());
-                var gpuTask = Task.Run(() => GetGpuInformation());
-                var ramTask = Task.Run(() => GetRamInformation());
-                var diskTask = Task.Run(() => GetDiskInformation());
-                var networkTask = Task.Run(() => GetNetworkInformation());
-                var batteryTask = Task.Run(() => GetBatteryInformation());
+                var osTask = Task.Run(GetOsInformation);
+                var cpuTask = Task.Run(GetCpuInformation);
+                var gpuTask = Task.Run(GetGpuInformation);
+                var ramTask = Task.Run(GetRamInformation);
+                var diskTask = Task.Run(GetDiskInformation);
+                var networkTask = Task.Run(GetNetworkInformation);
+                var batteryTask = Task.Run(GetBatteryInformation);
 
                 await Task.WhenAll(osTask, cpuTask, gpuTask, ramTask, diskTask, networkTask, batteryTask).ConfigureAwait(false);
 
@@ -64,11 +64,11 @@ public sealed partial class SystemInfoPage : Page
         });
     }
 
-    private static string GetCpuInformation()
+    private static async Task<string> GetCpuInformation()
     {
         try
         {
-            LogHelper.Log("Getting CPU Info");
+            await LogHelper.Log("Getting CPU Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
             var collection = searcher.Get();
             var cpuInfoLines = collection.Cast<ManagementObject>().Select(cpu =>
@@ -86,16 +86,16 @@ public sealed partial class SystemInfoPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error getting CPU info: {ex}");
+            await LogHelper.LogError($"Error getting CPU info: {ex}");
             return string.Empty;
         }
     }
 
-    private static string GetGpuInformation()
+    private static async Task<string> GetGpuInformation()
     {
         try
         {
-            LogHelper.Log("Getting GPU Info");
+            await LogHelper.Log("Getting GPU Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
             var collection = searcher.Get();
             var gpuNumber = 0;
@@ -115,16 +115,16 @@ public sealed partial class SystemInfoPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error getting GPU info: {ex}");
+            await LogHelper.LogError($"Error getting GPU info: {ex}");
             return string.Empty;
         }
     }
 
-    private static string GetRamInformation()
+    private static async Task<string> GetRamInformation()
     {
         try
         {
-            LogHelper.Log("Getting RAM Info");
+            await LogHelper.Log("Getting RAM Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
             var collection = searcher.Get();
 
@@ -139,16 +139,16 @@ public sealed partial class SystemInfoPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error getting RAM info: {ex}");
+            await LogHelper.LogError($"Error getting RAM info: {ex}");
             return string.Empty;
         }
     }
 
-    private static string GetDiskInformation()
+    private static async Task<string> GetDiskInformation()
     {
         try
         {
-            LogHelper.Log("Getting Disks Info");
+            await LogHelper.Log("Getting Disks Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
             var collection = searcher.Get();
             var diskNumber = 0;
@@ -168,16 +168,16 @@ public sealed partial class SystemInfoPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error getting Disk info: {ex}");
+            await LogHelper.LogError($"Error getting Disk info: {ex}");
             return string.Empty;
         }
     }
 
-    private static string GetOsInformation()
+    private static async Task<string> GetOsInformation()
     {
         try
         {
-            LogHelper.Log("Getting OS Info");
+            await LogHelper.Log("Getting OS Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
             var collection = searcher.Get();
 
@@ -196,16 +196,16 @@ public sealed partial class SystemInfoPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error getting OS info: {ex}");
+            await LogHelper.LogError($"Error getting OS info: {ex}");
             return string.Empty;
         }
     }
 
-    private static string GetNetworkInformation()
+    private static async Task<string> GetNetworkInformation()
     {
         try
         {
-            LogHelper.Log("Getting Network Info");
+            await LogHelper.Log("Getting Network Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE NetEnabled = TRUE");
             var collection = searcher.Get();
 
@@ -219,16 +219,16 @@ public sealed partial class SystemInfoPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error getting Network info: {ex}");
+            await LogHelper.LogError($"Error getting Network info: {ex}");
             return "Error retrieving network information.";
         }
     }
 
-    private static string GetBatteryInformation()
+    private static async Task<string> GetBatteryInformation()
     {
         try
         {
-            LogHelper.Log("Getting Battery Info");
+            await LogHelper.Log("Getting Battery Info");
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Battery");
             var collection = searcher.Get();
 
@@ -242,7 +242,7 @@ public sealed partial class SystemInfoPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error getting Battery info: {ex}");
+            await LogHelper.LogError($"Error getting Battery info: {ex}");
             return "Error retrieving battery information.";
         }
     }

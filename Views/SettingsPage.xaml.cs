@@ -56,7 +56,7 @@ public sealed partial class SettingsPage : Page
             });
     }
 
-    private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedLanguage = (ComboBoxItem)LanguageComboBox.SelectedItem;
 
@@ -74,7 +74,7 @@ public sealed partial class SettingsPage : Page
             }
             else
             {
-                LogHelper.LogError("Invalid language tag");
+                await LogHelper.LogError("Invalid language tag");
                 throw new Exception($"Invalid language tag");
             }
         }

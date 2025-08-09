@@ -13,6 +13,7 @@ All notable changes to this branch will be documented in this file.
 
 - Enhanced the app's internal architecture for better performance and reliability.
 - Improved the `Revert All Changes` functionality to work with the new registry state management.
+- All extracted icons are now stored exclusively in a dedicated temp folder `%temp%\RyTuneX_AppIcons` instead of individual program folders. This prevents permission issues, keeps the system cleaner.
 
 ## 1.4.1 - Released
 
