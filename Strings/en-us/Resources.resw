@@ -1359,4 +1359,7 @@ Check your computer for memory problems</value>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Disables Windows Recall, which captures on-screen activity for AI-powered search. Recommended for privacy-conscious users and secure environments.</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>Keep app data</value>
+  </data>
 </root>

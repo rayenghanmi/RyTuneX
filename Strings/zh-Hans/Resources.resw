@@ -1359,4 +1359,7 @@
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>禁用 Windows Recall, 此功能会捕捉屏幕活动以支持 AI 搜索。推荐给注重隐私的用户和安全环境中使用。</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>保留应用数据</value>
+  </data>
 </root>

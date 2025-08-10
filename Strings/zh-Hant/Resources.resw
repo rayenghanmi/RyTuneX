@@ -1355,4 +1355,7 @@
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value />
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>保留應用程式資料</value>
+  </data>
 </root>

@@ -1359,4 +1359,7 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Vô hiệu hóa Windows Recall, tính năng ghi lại hoạt động trên màn hình để phục vụ tìm kiếm bằng AI. Khuyến nghị cho người dùng quan tâm đến quyền riêng tư và môi trường bảo mật.</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>Giữ lại dữ liệu ứng dụng</value>
+  </data>
 </root>

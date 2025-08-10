@@ -1359,4 +1359,7 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Disattiva Windows Recall, che registra l'attività sullo schermo per la ricerca tramite intelligenza artificiale. Consigliato per utenti attenti alla privacy e ambienti sicuri.</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>Mantieni i dati dell'app</value>
+  </data>
 </root>

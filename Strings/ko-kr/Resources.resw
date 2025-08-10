@@ -1359,4 +1359,7 @@
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>AI 기반 검색을 위해 화면 활동을 캡처하는 Windows Recall을 비활성화합니다. 개인 정보 보호를 중시하는 사용자와 보안 환경에 권장됩니다.</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>앱 데이터를 유지</value>
+  </data>
 </root>

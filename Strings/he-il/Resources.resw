@@ -1359,4 +1359,7 @@
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>משבית את Windows Recall, אשר מקליט פעילות על המסך לצורך חיפוש מבוסס בינה מלאכותית. מומלץ למשתמשים שדואגים לפרטיותם ולסביבות מאובטחות.</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>שמור נתוני אפליקציה</value>
+  </data>
 </root>

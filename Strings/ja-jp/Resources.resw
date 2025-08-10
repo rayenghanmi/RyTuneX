@@ -1359,4 +1359,7 @@
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Windows Recall を無効にします。これは、AI を活用した検索のために画面上の操作を記録します。プライバシーを重視するユーザーや安全な環境に推奨されます。</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>アプリのデータを保持する</value>
+  </data>
 </root>

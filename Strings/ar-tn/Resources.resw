@@ -1359,4 +1359,7 @@
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>يعطّل ميزة Windows Recall، التي تلتقط النشاط الظاهر على الشاشة للبحث المدعوم بالذكاء الاصطناعي. يُنصح به للمستخدمين الحريصين على الخصوصية والبيئات الآمنة.</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>احتفظ ببيانات التطبيق</value>
+  </data>
 </root>

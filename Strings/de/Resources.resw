@@ -1359,4 +1359,7 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Deaktiviert Windows Recall, das Bildschirmaktivitäten für KI-gestützte Suche aufzeichnet. Empfohlen für datenschutzbewusste Nutzer und sichere Umgebungen.</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>App-Daten behalten</value>
+  </data>
 </root>

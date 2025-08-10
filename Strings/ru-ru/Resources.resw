@@ -1356,4 +1356,7 @@
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Отключает Windows Recall, который фиксирует действия на экране для поиска с ИИ. Рекомендуется для пользователей, заботящихся о конфиденциальности, и защищённых сред.</value>
   </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>Сохранить данные приложения</value>
+  </data>
 </root>
