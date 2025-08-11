@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Management.Automation;
 using System.Runtime.InteropServices;
-using System.ServiceProcess;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Microsoft.UI.Xaml.Controls;
@@ -52,13 +51,13 @@ internal partial class OptimizationOptions
         // Remove invalid filename characters and limit length
         var invalidChars = Path.GetInvalidFileNameChars();
         var safeName = string.Concat(appName.Where(c => !invalidChars.Contains(c)));
-        
+
         // Limit length to prevent long filenames
         if (safeName.Length > 50)
         {
             safeName = safeName.Substring(0, 50);
         }
-        
+
         // Add timestamp hash to ensure uniqueness if needed
         var hash = Math.Abs(appName.GetHashCode()).ToString();
         return $"{safeName}_{hash}{extension}";
@@ -222,7 +221,7 @@ internal partial class OptimizationOptions
                     // Use the provided app name or fallback to directory name
                     var nameForIcon = appName ?? Path.GetFileName(installLocation) ?? "Unknown";
                     var cachedIconPath = Path.Combine(IconCacheDirectory, GetSafeIconFileName(nameForIcon));
-                    
+
                     // Check if icon already exists in cache and is valid
                     if (File.Exists(cachedIconPath) && new FileInfo(cachedIconPath).Length > 0)
                     {
@@ -399,24 +398,6 @@ internal partial class OptimizationOptions
         return match.Success ? int.Parse(match.Groups[1].Value) : 100;
     }
 
-    internal static bool ServiceExists(string serviceName)
-    {
-        return Array.Exists(ServiceController.GetServices(), serviceController => serviceController.ServiceName.Equals(serviceName));
-    }
-
-    internal static void StopService(string serviceName)
-    {
-        if (ServiceExists(serviceName))
-        {
-            LogHelper.Log($"Stopping svc: {serviceName}");
-            var sc = new ServiceController(serviceName);
-            if (sc.CanStop)
-            {
-                sc.Stop();
-            }
-        }
-    }
-
     internal static async Task ExecuteBatchFileAsync()
     {
         try
@@ -491,16 +472,6 @@ internal partial class OptimizationOptions
         {
             await LogHelper.LogError($"Error running command: {ex.Message}");
             throw;
-        }
-    }
-
-    internal static void StartService(string serviceName)
-    {
-        if (ServiceExists(serviceName))
-        {
-            LogHelper.Log($"Starting svc: {serviceName}");
-            var sc = new ServiceController(serviceName);
-            sc.Start();
         }
     }
     public static async Task RevertAllChanges()

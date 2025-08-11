@@ -312,12 +312,12 @@ public static partial class OptimizeSystemHelper
 
     internal static async void DisableTelemetryServices()
     {
-        OptimizationOptions.StopService("DiagTrack");
-        OptimizationOptions.StopService("diagnosticshub.standardcollector.service");
-        OptimizationOptions.StopService("dmwappushservice");
-        OptimizationOptions.StopService("DcpSvc");
-        OptimizationOptions.StopService("WdiServiceHost");
-        OptimizationOptions.StopService("WdiSystemHost");
+        await OptimizationOptions.StartInCmd("sc stop DiagTrack");
+        await OptimizationOptions.StartInCmd("sc stop diagnosticshub.standardcollector.service");
+        await OptimizationOptions.StartInCmd("sc stop dmwappushservice");
+        await OptimizationOptions.StartInCmd("sc stop DcpSvc");
+        await OptimizationOptions.StartInCmd("sc stop WdiServiceHost");
+        await OptimizationOptions.StartInCmd("sc stop WdiSystemHost");
 
         string[] services = {
         "DiagTrack",
@@ -414,7 +414,7 @@ public static partial class OptimizeSystemHelper
 
     internal static async void DisableMediaPlayerSharing()
     {
-        OptimizationOptions.StopService("WMPNetworkSvc");
+        await OptimizationOptions.StartInCmd("sc stop WMPNetworkSvc");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\WMPNetworkSvc\" /v Start /t REG_DWORD /d 4 /f");
 
     }
@@ -428,8 +428,8 @@ public static partial class OptimizeSystemHelper
 
     internal static async void DisableHomeGroup()
     {
-        OptimizationOptions.StopService("HomeGroupListener");
-        OptimizationOptions.StopService("HomeGroupProvider");
+        await OptimizationOptions.StartInCmd("sc stop HomeGroupListener");
+        await OptimizationOptions.StartInCmd("sc stop HomeGroupProvider");
 
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\HomeGroup\" /v DisableHomeGroup /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\HomeGroupListener\" /v Start /t REG_DWORD /d 4 /f");
@@ -448,7 +448,7 @@ public static partial class OptimizeSystemHelper
 
     internal static async void DisablePrintService()
     {
-        OptimizationOptions.StopService("Spooler");
+        await OptimizationOptions.StartInCmd("sc stop Spooler");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\Spooler\" /v Start /t REG_DWORD /d 3 /f");
     }
 
@@ -460,7 +460,7 @@ public static partial class OptimizeSystemHelper
 
     internal static async void DisableSysMain()
     {
-        OptimizationOptions.StopService("SysMain");
+        await OptimizationOptions.StartInCmd("sc stop SysMain");
 
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\SysMain\" /v Start /t REG_DWORD /d 4 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters\" /v EnableSuperfetch /t REG_DWORD /d 0 /f");
@@ -475,18 +475,18 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters\" /v EnablePrefetcher /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters\" /v SfTracingState /f");
 
-        OptimizationOptions.StartService("SysMain");
+        await OptimizationOptions.StartInCmd("sc start SysMain");
     }
 
     internal static async void EnableCompatibilityAssistant()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\PcaSvc\" /v Start /t REG_DWORD /d 2 /f");
-        OptimizationOptions.StartService("PcaSvc");
+        await OptimizationOptions.StartInCmd("sc start PcaSvc");
     }
 
     internal static async void DisableCompatibilityAssistant()
     {
-        OptimizationOptions.StopService("PcaSvc");
+        await OptimizationOptions.StartInCmd("sc stop PcaSvc");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\PcaSvc\" /v Start /t REG_DWORD /d 4 /f");
     }
 
@@ -539,7 +539,7 @@ public static partial class OptimizeSystemHelper
     internal static async void DisableSystemRestore()
     {
         await OptimizationOptions.StartInCmd("vssadmin delete shadows /for=c: /all /quiet");
-        OptimizationOptions.StopService("VSS");
+        await OptimizationOptions.StartInCmd("sc stop VSS");
 
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\SystemRestore\" /v DisableSR /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\SystemRestore\" /v DisableConfig /t REG_DWORD /d 1 /f");
@@ -550,19 +550,19 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\SystemRestore\" /v DisableSR /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\SystemRestore\" /v DisableConfig /f");
 
-        OptimizationOptions.StartService("VSS");
+        await OptimizationOptions.StartInCmd("sc start VSS");
     }
 
     internal static async void DisableSearch()
     {
-        OptimizationOptions.StopService("WSearch");
+        await OptimizationOptions.StartInCmd("sc stop WSearch");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch\" /v Start /t REG_DWORD /d 4 /f");
     }
 
     internal static async void EnableSearch()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch\" /v Start /t REG_DWORD /d 2 /f");
-        OptimizationOptions.StartService("WSearch");
+        await OptimizationOptions.StartInCmd("sc start WSearch");
     }
 
     internal static async void DisableSMB(string v)
@@ -591,8 +591,8 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\PCHealth\\ErrorReporting\" /v DoReport /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting\" /v Disabled /t REG_DWORD /d 1 /f");
 
-        OptimizationOptions.StopService("WerSvc");
-        OptimizationOptions.StopService("wercplsupport");
+        await OptimizationOptions.StartInCmd("sc stop WerSvc");
+        await OptimizationOptions.StartInCmd("sc stop wercplsupport");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\WerSvc\" /v Start /t REG_DWORD /d 4 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\wercplsupport\" /v Start /t REG_DWORD /d 4 /f");
     }
@@ -605,8 +605,8 @@ public static partial class OptimizeSystemHelper
 
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\wercplsupport\" /v Start /t REG_DWORD /d 3 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\WerSvc\" /v Start /t REG_DWORD /d 2 /f");
-        OptimizationOptions.StartService("WerSvc");
-        OptimizationOptions.StartService("wercplsupport");
+        await OptimizationOptions.StartInCmd("sc start WerSvc");
+        await OptimizationOptions.StartInCmd("sc start wercplsupport");
     }
 
     internal static async void EnableLegacyVolumeSlider()
@@ -671,31 +671,49 @@ public static partial class OptimizeSystemHelper
 
     internal static async void DisableAutomaticUpdates()
     {
-        await OptimizationOptions.StartInCmd("reg add \"HKEY_USERS\\S-1-5-20\\Software\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Settings\" /v DownloadMode /t REG_DWORD /d 0 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings\" /v UxOption /t REG_DWORD /d 1 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoUpdate /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoUpdate /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DoNotConnectToWindowsUpdateInternetLocations /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v AUOptions /t REG_DWORD /d 2 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoRebootWithLoggedOnUsers /t REG_DWORD /d 1 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config\" /v DODownloadMode /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\DoSvc\" /v Start /t REG_DWORD /d 4 /f");
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Speech\" /v AllowSpeechModelUpdate /t REG_DWORD /d 0 /f");
-
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\" /v MaintenanceDisabled /t REG_DWORD /d 1 /f");
-        OptimizationOptions.StopService("DoSvc");
+
+        await OptimizationOptions.StartInCmd("sc config wuauserv start= disabled");
+        await OptimizationOptions.StartInCmd("sc config UsoSvc start= disabled");
+        await OptimizationOptions.StartInCmd("sc config BITS start= disabled");
+        await OptimizationOptions.StartInCmd("sc config WaaSMedicSvc start= disabled");
+        await OptimizationOptions.StartInCmd("sc config DoSvc start= disabled");
+
+        await OptimizationOptions.StartInCmd("sc stop wuauserv");
+        await OptimizationOptions.StartInCmd("sc stop UsoSvc");
+        await OptimizationOptions.StartInCmd("sc stop BITS");
+        await OptimizationOptions.StartInCmd("sc stop WaaSMedicSvc");
+        await OptimizationOptions.StartInCmd("sc stop DoSvc");
     }
 
     internal static async void EnableAutomaticUpdates()
     {
-        await OptimizationOptions.StartInCmd("reg delete \"HKEY_USERS\\S-1-5-20\\Software\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Settings\" /v DownloadMode /f");
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings\" /v UxOption /f");
+        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DoNotConnectToWindowsUpdateInternetLocations /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v AUOptions /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoUpdate /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoRebootWithLoggedOnUsers /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config\" /v DODownloadMode /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Speech\" /v AllowSpeechModelUpdate /f");
-
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\DoSvc\" /v Start /t REG_DWORD /d 3 /f");
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\" /v MaintenanceDisabled /f");
+
+        await OptimizationOptions.StartInCmd("sc config wuauserv start= demand");
+        await OptimizationOptions.StartInCmd("sc config UsoSvc start= demand");
+        await OptimizationOptions.StartInCmd("sc config BITS start= demand");
+        await OptimizationOptions.StartInCmd("sc config WaaSMedicSvc start= demand");
+        await OptimizationOptions.StartInCmd("sc config DoSvc start= demand");
+
+        await OptimizationOptions.StartInCmd("sc start wuauserv");
+        await OptimizationOptions.StartInCmd("sc start UsoSvc");
+        await OptimizationOptions.StartInCmd("sc start BITS");
+        await OptimizationOptions.StartInCmd("sc start WaaSMedicSvc");
+        await OptimizationOptions.StartInCmd("sc start DoSvc");
     }
 
     internal static async void DisableStoreUpdates()
@@ -1207,7 +1225,7 @@ public static partial class OptimizeSystemHelper
 
     internal static async void DisableFaxService()
     {
-        OptimizationOptions.StopService("Fax");
+        await OptimizationOptions.StartInCmd("sc stop Fax");
         await OptimizationOptions.StartInCmd(@"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax /v Start /t REG_DWORD /d 4 /f");
     }
 
@@ -1223,7 +1241,7 @@ public static partial class OptimizeSystemHelper
 
     internal static async void DisableInsiderService()
     {
-        OptimizationOptions.StopService("wisvc");
+        await OptimizationOptions.StartInCmd("sc stop wisvc");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc /v Start /t REG_DWORD /d 4 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v AllowBuildPreview /t REG_DWORD /d 0 /f");
         await OptimizationOptions.StartInCmd("reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds /v EnableConfigFlighting /t REG_DWORD /d 0 /f");
