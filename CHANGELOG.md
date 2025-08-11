@@ -10,6 +10,11 @@ All notable changes to this branch will be documented in this file.
 - Added a new toggle switches state management that reflect the current system state rather than a user defined keys #50.
 - Added a "Keep app data" checkbox to the `Revert All Changes` dialog, allowing users to preserve their application settings (language preferences, theme selection, and first-run dialog preferences) when reverting system optimizations.
 
+### Fixes
+
+- Fixed an issue where Windows auto updates were not being disabled correctly when the `Disable Automatic Updates` option was toggled in the `Optimiza` page.
+- Replaced the Upload/Download icons in the `Home` page with new icons that are visible in Windows 10.
+
 ### Changes
 
 - Enhanced the app's internal architecture for better performance and reliability.
