@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>Désactive SysMain, qui précharge les applications fréquemment utilisées pour un démarrage plus rapide. Peut affecter les temps de démarrage pour certains programmes si vous utilisez un HDD.</value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>Désactiver le Timestamp NTFS</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>Désactive les mises à jour des timestamps NTFS pour les opérations de fichiers. Peut affecter les fonctionnalités des programmes qui dépendent de timestamps précis.</value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>Activer le Mode Jeu</value>
   </data>
@@ -1064,30 +1058,6 @@
   </data>
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>Améliore les performances de votre système en ajustant les paramètres du profil système. Cette fonctionnalité priorise la vitesse et l'efficacité, améliorant la réactivité générale du système et la gestion des ressources.</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>Optimiser les paramètres GPU et de priorité</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>Optimise les configurations GPU et les priorités des processus pour améliorer les performances, assurant un meilleur rendu graphique et des opérations plus fluides pour les tâches gourmandes en ressources comme le jeu et le multitâche.</value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>Désactiver le mode serveur de trames</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>Désactive le mode serveur de trames pour l'encodage vidéo avancé. Désactiver cette fonctionnalité améliore les performances, mais peut réduire la qualité vidéo dans certaines conditions.</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>Ajuster les paramètres GPU à faible latence</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>Ajuste les paramètres GPU pour minimiser la latence, améliorant les performances de jeu ou vidéo.</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>Définir une limite d'effort non optimal</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>Définit une limite pour les processus non optimisés. L'activer peut prioriser les performances, mais peut réduire la flexibilité du système dans certains cas.</value>
   </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Informations sur l'appareil</value>

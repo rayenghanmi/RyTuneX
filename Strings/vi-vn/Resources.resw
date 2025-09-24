@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>Tắt SysMain, tải trước các ứng dụng thường được sử dụng để khởi động nhanh hơn. Có thể tác động đến thời gian khởi động với một số chương trình nếu bạn đang sử dụng HDD.</value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>Vô hiệu hoá NTFS Timestamp</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>Vô hiệu hoá cập nhật NTFS timestamps cho tệp tin của hệ điều hành. Có thể ảnh hưởng đến chức năng của chương trình phụ thuộc vào độ chính xác của timestamps</value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>Bật Gaming Mode</value>
   </data>
@@ -1064,30 +1058,6 @@
   </data>
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>Cải thiện hiệu suất hệ thống bằng cách điều chỉnh các thiết lập của hệ thống. Tính năng này ưu tiên tốc độ và hiệu quả, tối ưu phản hồi tổng hệ của hệ thống và quản lý tài nguyên.</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>Cải thiện GPU và cài đặt ưu tiên</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>Tối ưu cấu hình GPU và ưu tiên tiến trình để tăng cường hiệu suất, đảm bảo đồ hoạ render tối hơn và vận hành mượt mà cho các tác vụ tốn nhiều tài nguyên như chơi game và đa nhiệm.</value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>Vô hiệu hoá Frame Server</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>Vô hiêu hoá chế độ frame server dùng cho mã hoá video nâng cao. Vô hiệu hoá tính năng này có thể cải thiện hiệu năng nhưng sẽ giảm chất lượng video trong một số trường hợp.</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>Tuỳ chỉnh cài đặt độ trễ GPU</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>Điều chỉnh cài đặt của GPU để giảm độ trễ, cải thiện hiệu suất chơi game hoặc xử lý video.</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>Đặt giới hạn cho tiến trình không ưu tiên</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>Thiết lập giới hạn cho các tiến trình không thuộc loại ưu tiên cao. Bật tính năng này có thể ưu tiên hiệu suất nhưng làm giảm tính linh hoạt của hệ thống.</value>
   </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Thông tin thiết bị</value>

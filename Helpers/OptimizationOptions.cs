@@ -775,50 +775,6 @@ internal partial class OptimizationOptions
                     }
                     break;
 
-                case "GPUAndPrioritySettings":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.SetGPUAndPrioritySettings();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.RevertGPUAndPrioritySettings();
-                    }
-                    break;
-
-                case "FrameServerMode":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisableFrameServerMode();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnableFrameServerMode();
-                    }
-                    break;
-
-                case "LowLatencyGPUSettings":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.SetLowLatencyGPUSettings();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.RevertLowLatencyGPUSettings();
-                    }
-                    break;
-
-                case "NonBestEffortLimit":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.SetNonBestEffortLimit();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.RevertNonBestEffortLimit();
-                    }
-                    break;
-
                 case "TelemetryServices":
                     if (toggleSwitch.IsOn)
                     {
@@ -970,16 +926,6 @@ internal partial class OptimizationOptions
                     else
                     {
                         OptimizeSystemHelper.EnableSMB("2");
-                    }
-                    break;
-                case "NTFSTimeStamp":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisableNTFSTimeStamp();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnableNTFSTimeStamp();
                     }
                     break;
 

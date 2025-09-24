@@ -14,12 +14,15 @@ All notable changes to this branch will be documented in this file.
 
 - Fixed an issue where Windows auto updates were not being disabled correctly when the `Disable Automatic Updates` option was toggled in the `Optimiza` page.
 - Replaced the Upload/Download icons in the `Home` page with new icons that are visible in Windows 10.
+- Fixed the `Legacy Volume Slider` toggle to set the correct registry values.
+- Toggle state detection now reflects correct values.
 
 ### Changes
 
 - Enhanced the app's internal architecture for better performance and reliability.
 - Improved the `Revert All Changes` functionality to work with the new registry state management.
 - All extracted icons are now stored exclusively in a dedicated temp folder `%temp%\RyTuneX_AppIcons` instead of individual program folders. This prevents permission issues, keeps the system cleaner.
+- Removed the following deprecated options from the `Optimize` page: `GPU and Priority Settings`, `Frame Server Mode`, `Low Latency GPU Settings`, `Non-Best Effort Limit`, and `Disable NTFS Timestamp`.
 
 ## 1.4.1 - Released
 

@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>關閉 SysMain, 它會預載入常用的應用程式以加快啟動速度.  如果您使用 HDD, 可能會影響某些程式的啟動時間. </value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>禁用 NTFS 時間戳</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>禁用對檔案操作的 NTFS 時間戳的更新.  可能會影響依賴精確時間戳的程式的功能. </value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>啟用遊戲模式</value>
   </data>
@@ -1064,30 +1058,6 @@
   </data>
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>通過調整系統配置檔案設定來增強系統性能. 此功能優先考慮速度和效率, 提高整體系統響應能力和資源管理. </value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>增強GPU和優先順序設定</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>優化GPU配置和程序優先順序, 以提高效能, 確保更好的圖形渲染和更流暢的資源密集型任務操作, 如遊戲和多工處理. </value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>禁用幀伺服器模式</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>禁用用於高階視訊編碼的幀伺服器模式. 禁用此功能可以提高效能, 但在某些情況下可能會降低視訊質量. </value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>調整低延遲GPU設定</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>調整GPU設定以減少延遲, 提高遊戲或視訊效能. </value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>設定非最佳努力限制</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>為非最佳努力程序設定限制. 啟用此功能可以優先提高效能, 但可能會在某些情況下減少系統靈活性. </value>
   </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>裝置資訊</value>

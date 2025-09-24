@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>关闭 SysMain（用于预加载常用的应用程序以加快启动速度的服务）.  如果您使用 HDD（机械硬盘）, 可能会影响某些程序的启动时间.</value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>禁用 NTFS 时间戳</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>禁用对文件操作的 NTFS 时间戳的更新.  可能会影响依赖精确时间戳的程序的功能. </value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>启用游戏模式</value>
   </data>
@@ -1064,30 +1058,6 @@
   </data>
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>通过调整系统配置文件设置来增强系统性能. 此功能优先考虑速度和效率, 提高整体系统响应能力和资源管理. </value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>增强 GPU 和优先级设置</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>优化 GPU 配置与进程优先级以提升性能, 确保在游戏或多任务等高负载场景下实现更佳的图形渲染与流畅运行. </value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>禁用帧服务器模式</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>禁用用于高级视频编码的帧服务器模式. 禁用此功能可以提高性能, 但在某些情况下可能会降低视频质量. </value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>调整低延迟GPU设置</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>调整GPU设置以减少延迟, 提高游戏或视频性能. </value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>设置关键流量带宽限制</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>为对延迟敏感的网络流量设置专用带宽比例。启用此功能可提升关键应用的网络稳定性, 但可能减少普通应用可动态使用的带宽总量。 </value>
   </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>设备信息</value>
