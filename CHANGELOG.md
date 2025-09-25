@@ -16,6 +16,7 @@ All notable changes to this branch will be documented in this file.
 - Replaced the Upload/Download icons in the `Home` page with new icons that are visible in Windows 10.
 - Fixed the `Legacy Volume Slider` toggle to set the correct registry values.
 - Toggle state detection now reflects correct values.
+- Fixed incorrect Edge SmartScreen registry keys when disabling Edge telemetry.
 
 ### Changes
 

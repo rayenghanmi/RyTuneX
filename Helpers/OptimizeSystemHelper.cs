@@ -1180,7 +1180,7 @@ public static partial class OptimizeSystemHelper
     internal static async void DisableFaxService()
     {
         await OptimizationOptions.StartInCmd("sc stop Fax");
-        await OptimizationOptions.StartInCmd(@"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax /v Start /t REG_DWORD /d 4 /f");
+        await OptimizationOptions.StartInCmd("reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\Fax /v Start /t REG_DWORD /d 4 /f");
     }
 
     internal static async void EnableInsiderService()
@@ -1395,16 +1395,16 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V MetricsReportingEnabled /T REG_DWORD /D 0 /F");
         await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\BooksLibrary\" /V EnableExtendedBooksTelemetry /T REG_DWORD /D 0 /F");
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\BooksLibrary\" /V EnableExtendedBooksTelemetry /T REG_DWORD /D 0 /F");
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Edge\\SmartScreenEnabled\" /V \"\" /T REG_DWORD /D 0 /F");
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Edge\\SmartScreenPuaEnabled\" /V \"\" /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Edge\" /V SmartScreenEnabled /T REG_DWORD /D 0 /F");
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Edge\" /V SmartScreenPuaEnabled /T REG_DWORD /D 0 /F");
         await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V SpotlightExperiencesAndRecommendationsEnabled /T REG_DWORD /D 0 /F");
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V SpotlightExperiencesAndRecommendationsEnabled /T REG_DWORD /D 0 /F");
     }
 
     internal static async void EnableEdgeTelemetry()
     {
-        await OptimizationOptions.StartInCmd("REG Delete \"HKCU\\Software\\Microsoft\\Edge\\SmartScreenEnabled\" /V \"\" /F");
-        await OptimizationOptions.StartInCmd("REG Delete \"HKCU\\Software\\Microsoft\\Edge\\SmartScreenPuaEnabled\" /V \"\" /F");
+        await OptimizationOptions.StartInCmd("REG Delete \"HKCU\\Software\\Microsoft\\Edge\" /V SmartScreenEnabled /F");
+        await OptimizationOptions.StartInCmd("REG Delete \"HKCU\\Software\\Microsoft\\Edge\" /V SmartScreenPuaEnabled /F");
         await OptimizationOptions.StartInCmd("REG Delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V MetricsReportingEnabled /F");
         await OptimizationOptions.StartInCmd("REG Delete \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V MetricsReportingEnabled /F");
         await OptimizationOptions.StartInCmd("REG Delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\BooksLibrary\" /V EnableExtendedBooksTelemetry /F");
@@ -1501,7 +1501,7 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("schtasks.exe /change /tn NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8} /enable");
         await OptimizationOptions.StartInCmd("schtasks.exe /change /tn NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8} /enable");
         await OptimizationOptions.StartInCmd("net.exe start NvTelemetryContainer");
-        await OptimizationOptions.StartInCmd("sc.exe config NvTelemetryContainer start= enabled");
+        await OptimizationOptions.StartInCmd("sc.exe config NvTelemetryContainer start= auto");
         await OptimizationOptions.StartInCmd("sc.exe start NvTelemetryContainer");
     }
 
