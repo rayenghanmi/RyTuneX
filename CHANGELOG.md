@@ -17,6 +17,7 @@ All notable changes to this branch will be documented in this file.
 - Fixed the `Legacy Volume Slider` toggle to set the correct registry values.
 - Toggle state detection now reflects correct values.
 - Fixed incorrect Edge SmartScreen registry keys when disabling Edge telemetry.
+- Resolved an issue where the setup would throw an error when trying to install the app on some systems #61.
 
 ### Changes
 
@@ -24,6 +25,7 @@ All notable changes to this branch will be documented in this file.
 - Improved the `Revert All Changes` functionality to work with the new registry state management.
 - All extracted icons are now stored exclusively in a dedicated temp folder `%temp%\RyTuneX_AppIcons` instead of individual program folders. This prevents permission issues, keeps the system cleaner.
 - Removed the following deprecated options from the `Optimize` page: `GPU and Priority Settings`, `Frame Server Mode`, `Low Latency GPU Settings`, `Non-Best Effort Limit`, and `Disable NTFS Timestamp`.
+- Improved `DisableTelemetryServices` by adding safe Microsoft telemetry host blocking while keeping updates, Store, and activation fully functional.
 
 ## 1.4.1 - Released
 

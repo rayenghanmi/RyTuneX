@@ -13,13 +13,10 @@ public static partial class OptimizeSystemHelper
             switch (tagName)
             {
                 case "WindowsRecall":
-                    using (var ryTuneXKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? RegistryView.Registry64
-                            : RegistryView.Default).OpenSubKey(RegistryBaseKey))
+                    using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsAI"))
                     {
-                        var savedState = ryTuneXKey?.GetValue("WindowsRecall");
-                        return savedState is int v && v == 1;
+                        var value = key?.GetValue("DisableAIDataAnalysis");
+                        return value is int v && v == 1;
                     }
                 case "RecommendedSectionStartMenu":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\PolicyManager\current\device\Start"))
@@ -62,13 +59,10 @@ public static partial class OptimizeSystemHelper
                         return savedState is int v && v == 1;
                     }
                 case "ServiceHostSplitting":
-                    using (var ryTuneXKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? RegistryView.Registry64
-                            : RegistryView.Default).OpenSubKey(RegistryBaseKey))
+                    using (var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control"))
                     {
-                        var savedState = ryTuneXKey?.GetValue("ServiceHostSplitting");
-                        return savedState is int v && v == 1;
+                        var value = key?.GetValue("SvcHostSplitThresholdInKB");
+                        return value is long v && v == 4294967295;
                     }
                 case "MenuShowDelay":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop"))
