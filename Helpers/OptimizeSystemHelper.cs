@@ -424,7 +424,7 @@ public static partial class OptimizeSystemHelper
         {
             await OptimizationOptions.StartInCmd($"schtasks /Change /TN \"{task}\" /Enable");
         }
-        var hostsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System),@"drivers\etc\hosts");
+        var hostsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"drivers\etc\hosts");
 
         string[] safeTelemetryHosts = {
         "vortex-win.data.microsoft.com",
@@ -493,7 +493,7 @@ public static partial class OptimizeSystemHelper
     internal static async Task DisablePrintService()
     {
         await OptimizationOptions.StartInCmd("sc stop Spooler");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\Spooler\" /v Start /t REG_DWORD /d 3 /f");
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\Spooler\" /v Start /t REG_DWORD /d 4 /f");
     }
 
     internal static async Task EnablePrintService()

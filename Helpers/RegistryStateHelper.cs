@@ -39,15 +39,20 @@ public static partial class OptimizeSystemHelper
                 case "PagingSettings":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"))
                     {
-                        var value = key?.GetValue("DisablePagingExecutive");
-                        return value is int v && v == 1;
+                        var pagingExecutive = key?.GetValue("DisablePagingExecutive");
+                        var pageCombining = key?.GetValue("DisablePageCombining");
+                        return (pagingExecutive is int v1 && v1 == 1) && (pageCombining is int v2 && v2 == 1);
                     }
                 case "OptimizeNTFS":
-                    using (var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\FileSystem"))
+                    try
                     {
-                        var lastAccess = key?.GetValue("NtfsDisableLastAccessUpdate");
-                        var dot3 = key?.GetValue("NtfsDisable8dot3NameCreation");
-                        return (lastAccess is int v1 && v1 == 1) && (dot3 is int v2 && v2 == 1);
+                        using var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\FileSystem");
+                        var mftZone = key?.GetValue("NtfsMftZoneReservation");
+                        return mftZone is int v && v == 2;
+                    }
+                    catch
+                    {
+                        return false;
                     }
                 case "LegacyBootMenu":
                     using (var ryTuneXKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
@@ -85,14 +90,14 @@ public static partial class OptimizeSystemHelper
                 case "AutoComplete":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete"))
                     {
-                        var value = key?.GetValue("Append Completion");
-                        return value?.ToString() == "no";
+                        var appendCompletion = key?.GetValue("Append Completion");
+                        return key == null || appendCompletion == null;
                     }
                 case "CrashDump":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\CrashControl"))
                     {
                         var value = key?.GetValue("CrashDumpEnabled");
-                        return value is int v && v == 0;
+                        return value == null;
                     }
                 case "RemoteAssistance":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Remote Assistance"))
@@ -107,7 +112,7 @@ public static partial class OptimizeSystemHelper
                         return value is int v && v == 1;
                     }
                 case "CopyMoveContextMenu":
-                    using (var key = Registry.ClassesRoot.OpenSubKey(@"AllFilesystemObjects\shellex\ContextMenuHandlers\Copy To"))
+                    using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Classes\AllFilesystemObjects\shellex\ContextMenuHandlers\Copy To"))
                     {
                         return key != null;
                     }
@@ -144,8 +149,9 @@ public static partial class OptimizeSystemHelper
                 case "FileExtensionsAndHiddenFiles":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced"))
                     {
-                        var value = key?.GetValue("HideFileExt");
-                        return value is int v && v == 1;
+                        var hideFileExt = key?.GetValue("HideFileExt");
+                        var hidden = key?.GetValue("Hidden");
+                        return (hideFileExt is int v1 && v1 == 1) && (hidden is int v2 && v2 == 1);
                     }
                 case "SystemProfile":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile"))
@@ -154,13 +160,26 @@ public static partial class OptimizeSystemHelper
                         return value is int v && v == 1;
                     }
                 case "TelemetryServices":
-                    using (var ryTuneXKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? RegistryView.Registry64
-                            : RegistryView.Default).OpenSubKey(RegistryBaseKey))
                     {
-                        var savedState = ryTuneXKey?.GetValue("TelemetryServices");
-                        return savedState is int v && v == 1;
+                        string[] services = {
+                        "DiagTrack",
+                        "diagnosticshub.standardcollector.service",
+                        "dmwappushservice",
+                        "DcpSvc",
+                        "WdiServiceHost",
+                        "WdiSystemHost",
+                        "WerSvc",
+                        "PcaSvc",
+                        "RetailDemo"
+                        };
+
+                        foreach (var svc in services)
+                        {
+                            using var key = Registry.LocalMachine.OpenSubKey($@"SYSTEM\CurrentControlSet\Services\{svc}");
+                            var value = key?.GetValue("Start");
+                            if (!(value is int v && v == 4)) { return false; }
+                        }
+                        return true;
                     }
                 case "HomeGroup":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\HomeGroup"))
@@ -207,8 +226,9 @@ public static partial class OptimizeSystemHelper
                 case "QuickAccessHistory":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer"))
                     {
-                        var value = key?.GetValue("ShowRecent");
-                        return value is int v && v == 0;
+                        var showRecent = key?.GetValue("ShowRecent");
+                        var showFrequent = key?.GetValue("ShowFrequent");
+                        return (showRecent is int v1 && v1 == 0) && (showFrequent is int v2 && v2 == 0);
                     }
                 case "MyPeople":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People"))
@@ -231,8 +251,9 @@ public static partial class OptimizeSystemHelper
                 case "SpellingAndTypingFeatures":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\TabletTip\1.7"))
                     {
-                        var value = key?.GetValue("EnableAutocorrection");
-                        return value is int v && v == 0;
+                        var autocorrection = key?.GetValue("EnableAutocorrection");
+                        var spellcheck = key?.GetValue("EnableSpellchecking");
+                        return (autocorrection is int v1 && v1 == 0) && (spellcheck is int v2 && v2 == 0);
                     }
                 case "FaxService":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\Fax"))
@@ -249,8 +270,9 @@ public static partial class OptimizeSystemHelper
                 case "CloudClipboard":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\System"))
                     {
-                        var value = key?.GetValue("AllowClipboardHistory");
-                        return value is int v && v == 0;
+                        var clipboardHistory = key?.GetValue("AllowClipboardHistory");
+                        var crossDeviceClipboard = key?.GetValue("AllowCrossDeviceClipboard");
+                        return (clipboardHistory is int v1 && v1 == 0) && (crossDeviceClipboard is int v2 && v2 == 0);
                     }
                 case "StickyKeys":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Accessibility\StickyKeys"))
@@ -290,8 +312,9 @@ public static partial class OptimizeSystemHelper
                 case "SnapAssist":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"))
                     {
-                        var value = key?.GetValue("EnableSnapAssistFlyout");
-                        return value is int v && v == 0;
+                        var snapAssistFlyout = key?.GetValue("EnableSnapAssistFlyout");
+                        var snapBar = key?.GetValue("EnableSnapBar");
+                        return (snapAssistFlyout is int v1 && v1 == 0) && (snapBar is int v2 && v2 == 0);
                     }
                 case "Widgets":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"))
@@ -315,7 +338,7 @@ public static partial class OptimizeSystemHelper
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\PolicyManager\current\device\Stickers"))
                     {
                         var value = key?.GetValue("EnableStickers");
-                        return value == null || (value is int v && v == 0);
+                        return key == null || (value is int v && v != 1);
                     }
                 case "EdgeDiscoverBar":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Edge"))
@@ -560,8 +583,9 @@ public static partial class OptimizeSystemHelper
                 case "WindowsDarkMode":
                     using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
                     {
-                        var value = key?.GetValue("AppsUseLightTheme");
-                        return value is int v && v == 0;
+                        var appsLightTheme = key?.GetValue("AppsUseLightTheme");
+                        var systemLightTheme = key?.GetValue("SystemUsesLightTheme");
+                        return (appsLightTheme is int v1 && v1 == 0) && (systemLightTheme is int v2 && v2 == 0);
                     }
                 case "VerboseLogon":
                     using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"))
@@ -574,6 +598,42 @@ public static partial class OptimizeSystemHelper
                     {
                         var value = key?.GetValue("HibernateEnabled");
                         return value is int v && v == 0;
+                    }
+                case "OneDrive":
+                    using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\OneDrive"))
+                    {
+                        var value = key?.GetValue("DisableFileSyncNGSC");
+                        return value is int v && v == 1;
+                    }
+                case "GamingMode":
+                    using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\GameBar"))
+                    {
+                        var value = key?.GetValue("AutoGameModeEnabled");
+                        return (value is int v1 && v1 == 1 || value == null);
+                    }
+                case "StartMenuAds":
+                    using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"))
+                    {
+                        var subscribedContent = key?.GetValue("SubscribedContent-88000326Enabled");
+                        var contentDelivery = key?.GetValue("ContentDeliveryAllowed");
+                        return (subscribedContent is int v1 && v1 == 0) && (contentDelivery is int v2 && v2 == 0);
+                    }
+                case "ShowMoreOptions":
+                    using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32"))
+                    {
+                        return key != null;
+                    }
+                case "MediaPlayerSharing":
+                    using (var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\WMPNetworkSvc"))
+                    {
+                        var value = key?.GetValue("Start");
+                        return value is int v && v == 4;
+                    }
+                case "LegacyVolumeSlider":
+                    using (var key = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\MTCUVC"))
+                    {
+                        var value = key?.GetValue("EnableMtcUvc");
+                        return value is int v && v == 1;
                     }
                 default:
                     return false;
