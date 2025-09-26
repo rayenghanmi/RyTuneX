@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
-using System.Management;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -10,18 +10,24 @@ namespace RyTuneX.Views;
 public sealed partial class HomePage : Page
 {
     private readonly string _versionDescription;
-    private readonly PerformanceCounter cpuCounter;
-    private readonly PerformanceCounter diskCounter;
     private readonly CancellationTokenSource _cancellationTokenSource;
+
+    // CPU sampling state
+    private ulong _prevIdleTime = 0;
+    private ulong _prevKernelTime = 0;
+    private ulong _prevUserTime = 0;
+    private bool _cpuInitialized = false;
+
+    // Network sampling state
+    private long _prevBytesReceived = 0;
+    private long _prevBytesSent = 0;
+    private DateTime _lastSampleTime = DateTime.UtcNow;
 
     public HomePage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing HomePage");
         _versionDescription = "Version " + SettingsPage.GetVersionDescription();
-        // Initialize performance counters
-        cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-        diskCounter = new PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total");
 
         _cancellationTokenSource = new CancellationTokenSource();
         _ = UpdateSystemStatsAsync(_cancellationTokenSource.Token);
@@ -37,24 +43,25 @@ public sealed partial class HomePage : Page
             var servicesCount = await Task.Run(() => GetServicesCount()).ConfigureAwait(false);
             var processesCount = await Task.Run(() => GetProcessesCount()).ConfigureAwait(false);
 
+            // Initialize network counters
+            _prevBytesReceived = GetTotalBytesReceived();
+            _prevBytesSent = GetTotalBytesSent();
+            _lastSampleTime = DateTime.UtcNow;
+
             while (!cancellationToken.IsCancellationRequested)
             {
-                // Fetch real-time usage values concurrently
-                var cpuUsageTask = Task.Run(() => GetCpuUsage());
-                var ramUsageTask = Task.Run(() => GetRamUsage());
-                var diskUsageTask = Task.Run(() => GetDiskUsage());
-                var networkUploadUsageTask = Task.Run(() => GetNetworkUploadUsage());
-                var networkDownloadUsageTask = Task.Run(() => GetNetworkDownloadUsage());
+                // Sample fast values synchronously
+                var cpuUsage = GetCpuUsage();
+                var ramUsage = GetRamUsage();
+                var diskUsage = GetDiskUsage();
+
+                // Network throughput computed based on previous sample and elapsed time
+                var (networkUploadUsage, networkDownloadUsage) = GetNetworkThroughputKbps();
+
+                // GPU usage remains somewhat heavier; run it without blocking UI but don't await long inside samplers
                 var gpuUsageTask = Task.Run(() => GetGpuUsage());
 
-                await Task.WhenAll(cpuUsageTask, ramUsageTask, diskUsageTask, networkUploadUsageTask, networkDownloadUsageTask, gpuUsageTask).ConfigureAwait(false);
-
-                var cpuUsage = cpuUsageTask.Result;
-                var ramUsage = ramUsageTask.Result;
-                var diskUsage = diskUsageTask.Result;
-                var networkUploadUsage = networkUploadUsageTask.Result;
-                var networkDownloadUsage = networkDownloadUsageTask.Result;
-                var gpuUsage = gpuUsageTask.Result;
+                var gpuUsage = await gpuUsageTask.ConfigureAwait(false);
 
                 try
                 {
@@ -66,8 +73,8 @@ public sealed partial class HomePage : Page
                             cpuUsageText.Text = $"{cpuUsage}%";
                             ramUsageText.Text = $"{ramUsage}%";
                             diskUsageText.Text = $"{diskUsage}%";
-                            networkUploadUsageText.Text = $"{networkUploadUsage} KB";
-                            networkDownloadUsageText.Text = $"{networkDownloadUsage} KB";
+                            networkUploadUsageText.Text = $"{networkUploadUsage} Kbps";
+                            networkDownloadUsageText.Text = $"{networkDownloadUsage} Kbps";
                             installedAppsCountText.Text = installedAppsCount.ToString();
                             processesCountText.Text = processesCount.ToString();
                             servicesCountText.Text = servicesCount.ToString();
@@ -79,6 +86,8 @@ public sealed partial class HomePage : Page
                 {
                     Debug.WriteLine($"Error updating UI: {ex.Message}");
                 }
+
+                // Small delay between samples
                 await Task.Delay(500, cancellationToken).ConfigureAwait(false);
             }
         }
@@ -100,43 +109,112 @@ public sealed partial class HomePage : Page
 
     private int GetCpuUsage()
     {
-        return (int)cpuCounter.NextValue();
+        if (!GetSystemTimes(out var idleTime, out var kernelTime, out var userTime))
+        {
+            return 0;
+        }
+
+        var idle = FileTimeToUInt64(idleTime);
+        var kernel = FileTimeToUInt64(kernelTime);
+        var user = FileTimeToUInt64(userTime);
+
+        if (!_cpuInitialized)
+        {
+            _prevIdleTime = idle;
+            _prevKernelTime = kernel;
+            _prevUserTime = user;
+            _cpuInitialized = true;
+            return 0; // first sample can't determine usage
+        }
+
+        var idleDiff = idle - _prevIdleTime;
+        var kernelDiff = kernel - _prevKernelTime;
+        var userDiff = user - _prevUserTime;
+
+        // kernel includes idle time on Windows, so subtract idle from kernel
+        var system = kernelDiff + userDiff;
+        var total = system;
+
+        var usage = 0.0;
+        if (total > 0)
+        {
+            usage = (double)(system - idleDiff) * 100.0 / total;
+        }
+
+        _prevIdleTime = idle;
+        _prevKernelTime = kernel;
+        _prevUserTime = user;
+
+        return (int)Math.Clamp(usage, 0, 100);
+    }
+
+    private static ulong FileTimeToUInt64(FILETIME ft)
+    {
+        return ((ulong)ft.dwHighDateTime << 32) | ft.dwLowDateTime;
     }
 
     private int GetRamUsage()
     {
-        var wql = new ObjectQuery("SELECT FreePhysicalMemory, TotalVisibleMemorySize FROM Win32_OperatingSystem");
-        var searcher = new ManagementObjectSearcher(wql);
-        foreach (ManagementObject queryObj in searcher.Get())
+        var memStatus = new MEMORYSTATUSEX();
+        if (!GlobalMemoryStatusEx(ref memStatus))
         {
-            var freeMemory = Convert.ToUInt64(queryObj["FreePhysicalMemory"]);
-            var totalMemory = Convert.ToUInt64(queryObj["TotalVisibleMemorySize"]);
-            var usedMemory = totalMemory - freeMemory;
-            return (int)((usedMemory * 100) / totalMemory);
+            return 0;
         }
-        return 0;
+
+        return (int)memStatus.dwMemoryLoad;
     }
 
     private int GetDiskUsage()
     {
-        return (int)Math.Min(diskCounter.NextValue(), 100);
+        try
+        {
+            var systemDrive = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System)) ?? "C:\\";
+            var di = new DriveInfo(systemDrive);
+            if (!di.IsReady)
+                return 0;
+
+            var total = di.TotalSize;
+            var free = di.TotalFreeSpace;
+            var used = total - free;
+            var percent = total == 0 ? 0 : (int)((used * 100L) / total);
+            return Math.Clamp(percent, 0, 100);
+        }
+        catch
+        {
+            return 0;
+        }
     }
 
-    private static async Task<int> GetNetworkDownloadUsage()
+    // Network throughput (Kbps) computed from previous sample
+    private (int uploadKbps, int downloadKbps) GetNetworkThroughputKbps()
     {
-        var firstBytes = GetTotalBytesReceived(); // Get total bytes received at a point in time
-        await Task.Delay(500); // Non-blocking delay
-        var secondBytes = GetTotalBytesReceived(); // Get total bytes received after the 500ms
-        return (int)((secondBytes - firstBytes) / 1024); // Convert Bytes to KB
-    }
+        try
+        {
+            var now = DateTime.UtcNow;
+            var elapsed = (now - _lastSampleTime).TotalSeconds;
+            if (elapsed <= 0)
+                elapsed = 0.5; // fallback
 
-    // Similar to GetNetworkDownloadUsage but for upload
-    private static async Task<int> GetNetworkUploadUsage()
-    {
-        var firstBytes = GetTotalBytesSent();
-        await Task.Delay(500); // Non-blocking delay
-        var secondBytes = GetTotalBytesSent();
-        return (int)((secondBytes - firstBytes) / 1024);
+            var currentReceived = GetTotalBytesReceived();
+            var currentSent = GetTotalBytesSent();
+
+            var deltaReceived = currentReceived - _prevBytesReceived;
+            var deltaSent = currentSent - _prevBytesSent;
+
+            // KB/s
+            var downloadKbps = (int)(deltaReceived / 1024.0 / elapsed);
+            var uploadKbps = (int)(deltaSent / 1024.0 / elapsed);
+
+            _prevBytesReceived = currentReceived;
+            _prevBytesSent = currentSent;
+            _lastSampleTime = now;
+
+            return (uploadKbps, downloadKbps);
+        }
+        catch
+        {
+            return (0, 0);
+        }
     }
 
     // Get total bytes received by all network interfaces
@@ -144,15 +222,15 @@ public sealed partial class HomePage : Page
     {
         return NetworkInterface.GetAllNetworkInterfaces()
             .Where(ni => ni.OperationalStatus == OperationalStatus.Up)
-            .Sum(ni => ni.GetIPv4Statistics().BytesReceived);
+            .Sum(ni => (long)ni.GetIPv4Statistics().BytesReceived);
     }
 
-    // Same as GetTotalBytesReceived but for sent bytes
+    // Get total bytes sent
     private static long GetTotalBytesSent()
     {
         return NetworkInterface.GetAllNetworkInterfaces()
             .Where(ni => ni.OperationalStatus == OperationalStatus.Up)
-            .Sum(ni => ni.GetIPv4Statistics().BytesSent);
+            .Sum(ni => (long)ni.GetIPv4Statistics().BytesSent);
     }
 
     private int GetInstalledAppsCount()
@@ -172,9 +250,8 @@ public sealed partial class HomePage : Page
                 ? appCount
                 : 0;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            LogHelper.LogError($"Failed to count Installed apps: {ex.Message}");
             return 0;
         }
     }
@@ -213,16 +290,10 @@ public sealed partial class HomePage : Page
                 }
             }
 
-            gpuCounters.ForEach(x =>
-            {
-                _ = x.NextValue();
-            });
-            await Task.Delay(1000);
-            gpuCounters.ForEach(x =>
-            {
-                result += x.NextValue();
-            });
-            return (int)result;
+            gpuCounters.ForEach(x => _ = x.NextValue());
+            await Task.Delay(200);
+            gpuCounters.ForEach(x => result += x.NextValue());
+            return (int)Math.Clamp(result, 0, 100);
         }
         catch
         {
@@ -246,5 +317,45 @@ public sealed partial class HomePage : Page
             FileName = "https://discord.gg/gyBzyd364t",
             UseShellExecute = true
         });
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GetSystemTimes(out FILETIME lpIdleTime, out FILETIME lpKernelTime, out FILETIME lpUserTime);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct FILETIME
+    {
+        public uint dwLowDateTime;
+        public uint dwHighDateTime;
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GlobalMemoryStatusEx(ref MEMORYSTATUSEX lpBuffer);
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    private struct MEMORYSTATUSEX
+    {
+        public uint dwLength;
+        public uint dwMemoryLoad;
+        public ulong ullTotalPhys;
+        public ulong ullAvailPhys;
+        public ulong ullTotalPageFile;
+        public ulong ullAvailPageFile;
+        public ulong ullTotalVirtual;
+        public ulong ullAvailVirtual;
+        public ulong ullAvailExtendedVirtual;
+
+        public MEMORYSTATUSEX()
+        {
+            dwLength = (uint)Marshal.SizeOf(typeof(MEMORYSTATUSEX));
+            dwMemoryLoad = 0;
+            ullTotalPhys = 0;
+            ullAvailPhys = 0;
+            ullTotalPageFile = 0;
+            ullAvailPageFile = 0;
+            ullTotalVirtual = 0;
+            ullAvailVirtual = 0;
+            ullAvailExtendedVirtual = 0;
+        }
     }
 }

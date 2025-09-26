@@ -26,6 +26,7 @@ All notable changes to this branch will be documented in this file.
 - All extracted icons are now stored exclusively in a dedicated temp folder `%temp%\RyTuneX_AppIcons` instead of individual program folders. This prevents permission issues, keeps the system cleaner.
 - Removed the following deprecated options from the `Optimize` page: `GPU and Priority Settings`, `Frame Server Mode`, `Low Latency GPU Settings`, `Non-Best Effort Limit`, and `Disable NTFS Timestamp`.
 - Improved `DisableTelemetryServices` by adding safe Microsoft telemetry host blocking while keeping updates, Store, and activation fully functional.
+- Refactored system monitoring to use native Windows APIs.
 
 ## 1.4.1 - Released
 
