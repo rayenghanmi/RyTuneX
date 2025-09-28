@@ -25,14 +25,12 @@ public class ThemeSelectorService : IThemeSelectorService
     public async Task InitializeAsync()
     {
         Theme = await LoadThemeFromSettingsAsync();
-        await SetRequestedThemeAsync(); // Ensure the theme is set on startup
         await Task.CompletedTask;
     }
 
     public async Task SetThemeAsync(ElementTheme theme)
     {
         Theme = theme;
-
         await SetRequestedThemeAsync();
         await SaveThemeInSettingsAsync(Theme);
     }
@@ -44,7 +42,7 @@ public class ThemeSelectorService : IThemeSelectorService
             rootElement.RequestedTheme = Theme;
 
             TitleBarHelper.UpdateTitleBar(Theme);
-            UpdateWindowIcon(Theme); // Update the window icon based on the theme
+            UpdateWindowIcon(Theme);
         }
 
         await Task.CompletedTask;

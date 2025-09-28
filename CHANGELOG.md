@@ -27,6 +27,7 @@ All notable changes to this branch will be documented in this file.
 - Removed the following deprecated options from the `Optimize` page: `GPU and Priority Settings`, `Frame Server Mode`, `Low Latency GPU Settings`, `Non-Best Effort Limit`, and `Disable NTFS Timestamp`.
 - Improved `DisableTelemetryServices` by adding safe Microsoft telemetry host blocking while keeping updates, Store, and activation fully functional.
 - Refactored system monitoring to use native Windows APIs.
+- Improved the app's startup time by optimizing the loading process (79.6% faster) #59.
 
 ## 1.4.1 - Released
 
