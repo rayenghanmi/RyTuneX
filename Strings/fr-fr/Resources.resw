@@ -1332,4 +1332,10 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="KeepAppData" xml:space="preserve">
     <value>Conserver les données de l'application</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Vous êtes en mode administrateur</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Redémarrez l'application en tant qu'administrateur pour appliquer les changements</value>
+  </data>
 </root>

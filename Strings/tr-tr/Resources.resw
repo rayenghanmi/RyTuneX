@@ -1332,4 +1332,10 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="KeepAppData" xml:space="preserve">
     <value>Uygulama verilerini koru</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Yönetici olarak çalıştırıyorsunuz</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Değişikliklerin geçerli olması için uygulamayı yönetici olarak yeniden başlatın</value>
+  </data>
 </root>

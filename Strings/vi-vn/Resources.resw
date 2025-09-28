@@ -1332,4 +1332,10 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="KeepAppData" xml:space="preserve">
     <value>Giữ lại dữ liệu ứng dụng</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Bạn đang chạy với quyền quản trị</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Khởi động lại ứng dụng với quyền quản trị để các thay đổi có hiệu lực</value>
+  </data>
 </root>

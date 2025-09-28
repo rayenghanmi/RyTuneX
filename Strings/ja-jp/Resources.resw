@@ -1332,4 +1332,10 @@
   <data name="KeepAppData" xml:space="preserve">
     <value>アプリのデータを保持する</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>管理者として実行しています</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>変更を反映させるには、アプリを管理者として再起動してください</value>
+  </data>
 </root>

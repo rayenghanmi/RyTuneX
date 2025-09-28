@@ -9,6 +9,7 @@ All notable changes to this branch will be documented in this file.
 
 - Added a new toggle switches state management that reflect the current system state rather than a user defined keys #50.
 - Added a "Keep app data" checkbox to the `Revert All Changes` dialog, allowing users to preserve their application settings (language preferences, theme selection, and first-run dialog preferences) when reverting system optimizations.
+- Added a new elevated (Admin) shield icon in the title bar to clearly indicate when the app is running with administrator privileges.
 
 ### Fixes
 

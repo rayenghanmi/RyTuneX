@@ -1332,4 +1332,10 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="KeepAppData" xml:space="preserve">
     <value>Manter os dados do app</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Você está executando como administrador</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Reinicie o app como administrador para que suas alterações tenham efeito</value>
+  </data>
 </root>

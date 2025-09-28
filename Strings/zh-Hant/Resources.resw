@@ -1328,4 +1328,10 @@
   <data name="KeepAppData" xml:space="preserve">
     <value>保留應用程式資料</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>您正在以管理員身份執行</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>請以管理員身份重新啟動應用程式以使更改生效</value>
+  </data>
 </root>

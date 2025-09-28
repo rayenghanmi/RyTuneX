@@ -1329,4 +1329,10 @@
   <data name="KeepAppData" xml:space="preserve">
     <value>Сохранить данные приложения</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Вы запущены от имени администратора</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Перезапустите приложение от имени администратора, чтобы изменения вступили в силу</value>
+  </data>
 </root>

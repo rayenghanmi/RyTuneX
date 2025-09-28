@@ -1332,4 +1332,10 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="KeepAppData" xml:space="preserve">
     <value>App-Daten behalten</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sie führen die App als Administrator aus</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Starten Sie die App als Administrator neu, damit Ihre Änderungen wirksam werden</value>
+  </data>
 </root>

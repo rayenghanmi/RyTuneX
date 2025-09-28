@@ -1332,4 +1332,10 @@
   <data name="KeepAppData" xml:space="preserve">
     <value>שמור נתוני אפליקציה</value>
   </data>
+	<data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+  <value>אתה מפעיל כמנהל</value>
+  </data>
+	<data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+  <value>הפעל מחדש את האפליקציה כמנהל כדי שהשינויים ייכנסו לתוקף</value>
+  </data>
 </root>

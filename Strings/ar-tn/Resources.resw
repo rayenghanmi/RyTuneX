@@ -1332,4 +1332,10 @@
   <data name="KeepAppData" xml:space="preserve">
     <value>احتفظ ببيانات التطبيق</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>أنت تعمل كمشرف (مدير)</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>أعد تشغيل التطبيق كمسؤول لتطبيق التغييرات</value>
+  </data>
 </root>

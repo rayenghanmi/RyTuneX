@@ -1332,4 +1332,10 @@ Check your computer for memory problems</value>
   <data name="KeepAppData" xml:space="preserve">
     <value>Keep app data</value>
   </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>You're running as admin</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Restart the app as admin for your changes to take effect</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Security.Principal;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -27,6 +28,8 @@ public sealed partial class ShellPage : Page
         get;
     }
 
+    readonly bool isAdmin = new WindowsPrincipal(WindowsIdentity.GetCurrent())
+                  .IsInRole(WindowsBuiltInRole.Administrator);
     public ShellPage(ShellViewModel viewModel)
     {
         ViewModel = viewModel;
@@ -49,6 +52,14 @@ public sealed partial class ShellPage : Page
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
+
+        // Set corresponding visibility of Admin Icon based on administrator rights
+
+        IsAdminIcon.Visibility = isAdmin ? Microsoft.UI.Xaml.Visibility.Visible
+                                     : Microsoft.UI.Xaml.Visibility.Collapsed;
+
+        NotAdminIcon.Visibility = isAdmin ? Microsoft.UI.Xaml.Visibility.Collapsed
+                                          : Microsoft.UI.Xaml.Visibility.Visible;
 
         // Subscribe to the ActualThemeChanged event
         this.ActualThemeChanged += ShellPage_ActualThemeChanged;
