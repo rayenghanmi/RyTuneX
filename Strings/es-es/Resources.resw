@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>Desactiva SysMain, que precarga aplicaciones de uso frecuente para un inicio más rápido. Puede afectar los tiempos de inicio de algunos programas si usas un HDD.</value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>Desactivar Marca de Tiempo NTFS</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>Desactiva las actualizaciones de las marcas de tiempo NTFS para las operaciones de archivos. Puede afectar la funcionalidad de los programas que dependen de marcas de tiempo precisas.</value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>Activar Modo Juego</value>
   </data>
@@ -1065,30 +1059,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>Mejora el rendimiento de tu sistema ajustando la configuración del perfil del sistema. Esta característica prioriza la velocidad y eficiencia, mejorando la capacidad de respuesta y la gestión de recursos del sistema.</value>
   </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>Mejorar Configuraciones de GPU y Prioridad</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>Optimiza las configuraciones de la GPU y las prioridades de los procesos para mejorar el rendimiento, asegurando un mejor renderizado gráfico y una operación más fluida en tareas intensivas como juegos y multitarea.</value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>Deshabilitar Modo de Servidor de Cuadros</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>Desactiva el modo de servidor de cuadros para la codificación avanzada de video. Deshabilitarlo mejora el rendimiento, pero puede reducir la calidad del video bajo ciertas condiciones.</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>Ajustar Configuraciones de GPU de Baja Latencia</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>Ajusta las configuraciones de la GPU para minimizar la latencia, mejorando el rendimiento en juegos o videos.</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>Establecer Límite de No Mejor Esfuerzo</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>Establece un límite para los procesos de no mejor esfuerzo. Activarlo puede priorizar el rendimiento, pero puede reducir la flexibilidad del sistema en algunos casos.</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Información del Dispositivo</value>
   </data>
@@ -1217,12 +1187,6 @@ Verifica si hay problemas de memoria en tu computadora</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Advertencia</value>
-  </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Deshabilitar la Restauración del Sistema eliminará todos los puntos de restauración, incluidos los creados por RyTuneX.
-
-
-¿Está seguro de que desea continuar?</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Ajustes de Publicidad</value>
@@ -1364,5 +1328,14 @@ Verifica si hay problemas de memoria en tu computadora</value>
   </data>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Desactiva Windows Recall, que captura la actividad en pantalla para búsquedas con inteligencia artificial. Recomendado para usuarios preocupados por la privacidad y entornos seguros.</value>
+  </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>Conservar los datos de la app</value>
+  </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Estás ejecutando como administrador</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Reinicia la aplicación como administrador para que los cambios surtan efecto</value>
   </data>
 </root>

@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>מכבה את SysMain, הטוען מראש יישומים בשימוש תכוף להפעלה מהירה יותר. עשוי להשפיע על זמני ההפעלה של תוכניות מסוימות אם אתה משתמש בכונן קשיח (HDD).</value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>השבת חותמת זמן NTFS</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>משבית עדכונים לחותמות זמן NTFS עבור פעולות קבצים. עשוי להשפיע על פונקציונליות של תוכניות המסתמכות על חותמות זמן מדויקות.</value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>אפשר מצב משחק</value>
   </data>
@@ -1065,30 +1059,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>משפר את ביצועי המערכת שלך על ידי התאמת הגדרות פרופיל המערכת. תכונה זו נותנת עדיפות למהירות ויעילות, ומשפרת את התגובתיות הכוללת של המערכת וניהול המשאבים.</value>
   </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>שפר הגדרות GPU ועדיפות</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>ממטב תצורות GPU ועדיפויות תהליכים כדי להגביר ביצועים, ומבטיח רינדור גרפי טוב יותר ותפעול חלק יותר למשימות עתירות משאבים כמו משחקים וריבוי משימות.</value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>השבת מצב שרת פריימים</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>משבית מצב שרת פריימים לקידוד וידאו מתקדם. השבתה זו משפרת ביצועים אך עשויה להפחית את איכות הווידאו בתנאים מסוימים.</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>התאם הגדרות GPU עם השהיה נמוכה</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>מתאים הגדרות GPU כדי למזער השהיה, ומשפר ביצועי משחקים או וידאו.</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>הגדר מגבלת Non-Best Effort</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>מגדיר מגבלה לתהליכי non-best effort. הפעלה זו יכולה לתעדף ביצועים אך עשויה להפחית את גמישות המערכת במקרים מסוימים.</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>פרטי התקן</value>
   </data>
@@ -1217,12 +1187,6 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>אזהרה</value>
-  </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>השבתת שחזור המערכת תמחק את כל נקודות השחזור, כולל אלו שנוצרו על ידי RyTuneX.
-
-
-האם אתה בטוח שברצונך להמשיך?</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>הגדרות פרסום</value>
@@ -1364,5 +1328,14 @@
   </data>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>משבית את Windows Recall, אשר מקליט פעילות על המסך לצורך חיפוש מבוסס בינה מלאכותית. מומלץ למשתמשים שדואגים לפרטיותם ולסביבות מאובטחות.</value>
+  </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>שמור נתוני אפליקציה</value>
+  </data>
+	<data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+  <value>אתה מפעיל כמנהל</value>
+  </data>
+	<data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+  <value>הפעל מחדש את האפליקציה כמנהל כדי שהשינויים ייכנסו לתוקף</value>
   </data>
 </root>

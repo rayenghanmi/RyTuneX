@@ -56,7 +56,7 @@ public sealed partial class SettingsPage : Page
             });
     }
 
-    private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedLanguage = (ComboBoxItem)LanguageComboBox.SelectedItem;
 
@@ -74,7 +74,7 @@ public sealed partial class SettingsPage : Page
             }
             else
             {
-                LogHelper.LogError("Invalid language tag");
+                await LogHelper.LogError("Invalid language tag");
                 throw new Exception($"Invalid language tag");
             }
         }
@@ -377,13 +377,38 @@ public sealed partial class SettingsPage : Page
 
     private async void RevertChanges_Click(object sender, RoutedEventArgs e)
     {
+        // Checkbox for keeping app data
+        var keepAppDataCheckBox = new CheckBox
+        {
+            Content = "KeepAppData".GetLocalized(),
+            IsChecked = true, // Checked by default
+            Margin = new Thickness(0, 10, 0, 0),
+            HorizontalAlignment = HorizontalAlignment.Left
+        };
+
+        // Stack panel to hold the original text and the checkbox
+        var contentPanel = new StackPanel
+        {
+            Orientation = Orientation.Vertical,
+            Children =
+            {
+                new TextBlock
+                {
+                    Text = "RevertChangesDialogText".GetLocalized(),
+                    TextWrapping = TextWrapping.Wrap,
+                    Margin = new Thickness(0, 0, 0, 10)
+                },
+                keepAppDataCheckBox
+            }
+        };
+
         var revertDialog = new ContentDialog()
         {
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "RyTuneX",
-            Content = "RevertChangesDialogText".GetLocalized(),
+            Content = contentPanel,
             CloseButtonText = "Close".GetLocalized(),
             PrimaryButtonText = "Continue".GetLocalized(),
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
@@ -431,10 +456,18 @@ public sealed partial class SettingsPage : Page
                 await OptimizationOptions.RevertAllChanges();
                 await LogHelper.Log("Reverted all changes.");
 
-                // Clear all local settings
-                var localSettings = ApplicationData.Current.LocalSettings;
-                localSettings.Values.Clear();
-                await LogHelper.Log("Cleared all local settings.");
+                // Clear local settings if the checkbox is not checked
+                if (keepAppDataCheckBox.IsChecked != true)
+                {
+                    // Clear all local settings
+                    var localSettings = ApplicationData.Current.LocalSettings;
+                    localSettings.Values.Clear();
+                    await LogHelper.Log("Cleared all local settings.");
+                }
+                else
+                {
+                    await LogHelper.Log("Kept app data as requested by user.");
+                }
 
                 // Delete all registry keys
                 using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,

@@ -1,8 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Text;
-using Microsoft.UI.Xaml.Controls;
-using RyTuneX;
-using RyTuneX.Helpers;
 using Windows.Storage;
 
 internal class LogHelper

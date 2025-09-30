@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>Отключает SysMain, который предварительно загружает часто используемые приложения для более быстрого запуска. Может повлиять на время запуска некоторых программ, если вы используете HDD.</value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>Отключить метки времени NTFS</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>Отключает обновления меток времени NTFS для операций с файлами. Может повлиять на функциональность программ, которые зависят от точных меток времени.</value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>Включить игровой режим</value>
   </data>
@@ -1065,30 +1059,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>Улучшает производительность системы, настраивая параметры профиля системы. Эта функция приоритетирует скорость и эффективность, улучшая общую отзывчивость системы и управление ресурсами.</value>
   </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>Улучшение настроек GPU и приоритетов</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>Оптимизирует настройки GPU и приоритеты процессов для повышения производительности, обеспечивая лучшую графику и более плавную работу для ресурсоёмких задач, таких как игры и многозадачность.</value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>Отключить режим серверного кадра</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>Отключает режим серверного кадра для расширенной видеокодировки. Отключение этой функции улучшает производительность, но может снизить качество видео в определённых условиях.</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>Настроить настройки GPU для низкой задержки</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>Настроить параметры GPU для минимизации задержки, улучшая производительность в играх или при просмотре видео.</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>Установить предел для процессов с низким приоритетом</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>Устанавливает предел для процессов с низким приоритетом. Включение этой функции может повысить производительность, но снизить гибкость системы в некоторых случаях.</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Информация о устройстве</value>
   </data>
@@ -1214,12 +1184,6 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Предупреждение</value>
-  </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Отключение восстановления системы приведет к удалению всех точек восстановления, включая созданные RyTuneX.
-
-
-Вы уверены, что хотите продолжить?</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Настройки рекламы</value>
@@ -1361,5 +1325,14 @@
   </data>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Отключает Windows Recall, который фиксирует действия на экране для поиска с ИИ. Рекомендуется для пользователей, заботящихся о конфиденциальности, и защищённых сред.</value>
+  </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>Сохранить данные приложения</value>
+  </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Вы запущены от имени администратора</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Перезапустите приложение от имени администратора, чтобы изменения вступили в силу</value>
   </data>
 </root>

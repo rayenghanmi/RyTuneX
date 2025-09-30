@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>頻繁に使用するアプリケーションを事前に読み込むSysMainを無効にします. HDDを使用している場合、一部のプログラムの起動時間に影響を与える可能性があります. </value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>NTFSタイムスタンプを無効にする</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>ファイル操作のためのNTFSタイムスタンプの更新を無効にします. 正確なタイムスタンプに依存するプログラムの機能に影響を与える可能性があります. </value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>ゲームモードを有効にする</value>
   </data>
@@ -1065,30 +1059,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>システムプロファイル設定を調整して、システムのパフォーマンスを向上させます. この機能により、速度と効率が優先され、システムの全体的なレスポンスとリソース管理が改善されます. </value>
   </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>GPUと優先設定の強化</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>GPU設定とプロセス優先度を最適化し、パフォーマンスを向上させます. これにより、ゲームやマルチタスクなど、リソースを多く使う作業がスムーズに行えます. </value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>フレームサーバーモードの無効化</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>高度なビデオエンコーディングのためにフレームサーバーモードを無効にします. これによりパフォーマンスが向上しますが、特定の条件下ではビデオ品質が低下する可能性があります. </value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>低遅延GPU設定の調整</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>GPU設定を調整して遅延を最小限に抑え、ゲームやビデオパフォーマンスを向上させます. </value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>最適化でないプロセスの制限</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>最適化でないプロセスに制限を設定します. これによりパフォーマンスが優先されますが、場合によってはシステムの柔軟性が低下することがあります. </value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>デバイス情報</value>
   </data>
@@ -1217,12 +1187,6 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>警告</value>
-  </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>システムの復元を無効にすると、RyTuneX が作成したものを含め、すべての復元ポイントが削除されます。
-
-
-続行してもよろしいですか？</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>広告設定</value>
@@ -1364,5 +1328,14 @@
   </data>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Windows Recall を無効にします。これは、AI を活用した検索のために画面上の操作を記録します。プライバシーを重視するユーザーや安全な環境に推奨されます。</value>
+  </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>アプリのデータを保持する</value>
+  </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>管理者として実行しています</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>変更を反映させるには、アプリを管理者として再起動してください</value>
   </data>
 </root>

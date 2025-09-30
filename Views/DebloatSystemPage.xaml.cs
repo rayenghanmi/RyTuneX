@@ -22,7 +22,6 @@ public sealed partial class DebloatSystemPage : Page
         InitializeComponent();
         LogHelper.Log("Initializing DebloatSystemPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
-        LoadInstalledApps();
     }
 
     private void AppTreeView_DragItemsStarting(TreeView sender, TreeViewDragItemsStartingEventArgs args)

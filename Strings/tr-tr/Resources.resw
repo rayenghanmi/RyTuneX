@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>Sık kullanılan uygulamaları daha hızlı başlatma için önceden yükleyen SysMain'i kapatır. HDD kullanıyorsanız bazı programların başlatma sürelerini etkileyebilir.</value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>NTFS Zaman Damgasını Devre Dışı Bırak</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>Dosya işlemleri için NTFS zaman damgalarına yönelik güncellemeleri devre dışı bırakır. Kesin zaman damgalarına dayanan programların işlevselliğini etkileyebilir.</value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>Oyun Modunu Etkinleştir</value>
   </data>
@@ -1065,30 +1059,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>Sistem profil ayarlarını düzenleyerek sisteminizin performansını artırır. Bu özellik hız ve verimliliği önceliklendirerek genel sistem yanıt verme hızını ve kaynak yönetimini iyileştirir.</value>
   </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>GPU ve Öncelik Ayarlarını Geliştirin</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>Oyun ve çoklu görev gibi kaynak yoğun görevlerde daha iyi grafik oluşturma ve daha sorunsuz çalışma sağlamak için GPU yapılandırmalarını ve işlem önceliklerini optimize ederek performansı artırır.</value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>Çerçeve Sunucu Modunu Devre Dışı Bırak</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>Gelişmiş video kodlaması için çerçeve sunucusu modunu devre dışı bırakır. Devre dışı bırakılması performansı iyileştirir ancak belirli koşullar altında video kalitesini düşürebilir.</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>Düşük Gecikmeli GPU Ayarlarını Ayarlayın</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>Gecikmeyi en aza indirmek için GPU ayarlarını düzenler, oyun veya video performansını iyileştirir.</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>En İyi Olmayan Çaba Sınırını Belirle</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>En iyi olmayan çaba süreçleri için bir sınır belirler. Bunu etkinleştirmek performansı önceliklendirebilir ancak bazı durumlarda sistem esnekliğini azaltabilir.</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>Aygıt Bilgileri</value>
   </data>
@@ -1217,12 +1187,6 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Uyarı</value>
-  </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>Sistem Geri Yüklemenin devre dışı bırakılması, RyTuneX tarafından oluşturulanlar dahil tüm geri yükleme noktalarının silinmesine neden olacaktır.
-
-
-Devam etmek istediğine emin misin?</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>Reklam Ayarları</value>
@@ -1364,5 +1328,14 @@ Devam etmek istediğine emin misin?</value>
   </data>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>Ekrandaki etkinlikleri yapay zekâ destekli arama için kaydeden Windows Recall'ı devre dışı bırakır. Gizliliğe önem veren kullanıcılar ve güvenli ortamlar için önerilir.</value>
+  </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>Uygulama verilerini koru</value>
+  </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Yönetici olarak çalıştırıyorsunuz</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Değişikliklerin geçerli olması için uygulamayı yönetici olarak yeniden başlatın</value>
   </data>
 </root>

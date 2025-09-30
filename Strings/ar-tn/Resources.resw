@@ -528,12 +528,6 @@
   <data name="Feature_DisableSysMain.Description" xml:space="preserve">
     <value>يُوقف SysMain، الذي يُسبق تحميل التطبيقات المستخدمة بشكل متكرر لبدء أسرع. قد يؤثر على أوقات البدء لبعض البرامج إذا كنت تستخدم HDD</value>
   </data>
-  <data name="Feature_DisableNTFSTimestamp.Header" xml:space="preserve">
-    <value>تعطيل الطابع الزمني NTFS</value>
-  </data>
-  <data name="Feature_DisableNTFSTimestamp.Description" xml:space="preserve">
-    <value>يُوقف تحديثات الطابع الزمني NTFS لعمليات الملفات. قد يؤثر على وظائف البرامج التي تعتمد على الطوابع الزمنية الدقيقة</value>
-  </data>
   <data name="Feature_EnableGamingMode.Header" xml:space="preserve">
     <value>تمكين وضع اللعب</value>
   </data>
@@ -1065,30 +1059,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>يعزز أداء النظام عن طريق تعديل إعدادات ملف النظام. تُعطي هذه الميزة الأولوية للسرعة والكفاءة، مما يحسن استجابة النظام وإدارة الموارد بشكل عام.</value>
   </data>
-  <data name="Feature_GPUAndPrioritySettings.Header" xml:space="preserve">
-    <value>تحسين إعدادات GPU والأولوية</value>
-  </data>
-  <data name="Feature_GPUAndPrioritySettings.Description" xml:space="preserve">
-    <value>يُحسن إعدادات GPU وأولويات العمليات لتعزيز الأداء، مما يضمن أفضل أداء للرسم البياني وتشغيل أكثر سلاسة للمهام التي تتطلب موارد كبيرة مثل الألعاب والمهام المتعددة.</value>
-  </data>
-  <data name="Feature_FrameServerMode.Header" xml:space="preserve">
-    <value>تعطيل وضع خادم الإطار</value>
-  </data>
-  <data name="Feature_FrameServerMode.Description" xml:space="preserve">
-    <value>يُعطّل وضع خادم الإطار للتشفير الفيديو المتقدم. تعطيله يحسن الأداء ولكنه قد يقلل من جودة الفيديو في بعض الحالات.</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Header" xml:space="preserve">
-    <value>تعديل إعدادات GPU منخفضة الكمون</value>
-  </data>
-  <data name="Feature_LowLatencyGPUSettings.Description" xml:space="preserve">
-    <value>يُعدّل إعدادات GPU لتقليل الكمون، مما يحسن أداء الألعاب أو الفيديو.</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Header" xml:space="preserve">
-    <value>تحديد حد العمليات غير الأفضل</value>
-  </data>
-  <data name="Feature_NonBestEffortLimit.Description" xml:space="preserve">
-    <value>يُحدد حدًا للعمليات غير الأفضل. تمكينه يمكن أن يعطي الأولوية للأداء ولكنه قد يقلل من مرونة النظام في بعض الحالات.</value>
-  </data>
   <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
     <value>معلومات الجهاز</value>
   </data>
@@ -1217,12 +1187,6 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>تحذير</value>
-  </data>
-  <data name="RestoreWarningDialogText" xml:space="preserve">
-    <value>تعطيل استعادة النظام سيؤدي إلى حذف جميع نقاط الاستعادة بما في ذلك تلك التي أنشأها RyTuneX.
-
-
-هل أنت متأكد أنك تريد المتابعة؟</value>
   </data>
   <data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
     <value>إعدادات الإعلانات</value>
@@ -1364,5 +1328,14 @@
   </data>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
     <value>يعطّل ميزة Windows Recall، التي تلتقط النشاط الظاهر على الشاشة للبحث المدعوم بالذكاء الاصطناعي. يُنصح به للمستخدمين الحريصين على الخصوصية والبيئات الآمنة.</value>
+  </data>
+  <data name="KeepAppData" xml:space="preserve">
+    <value>احتفظ ببيانات التطبيق</value>
+  </data>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>أنت تعمل كمشرف (مدير)</value>
+  </data>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>أعد تشغيل التطبيق كمسؤول لتطبيق التغييرات</value>
   </data>
 </root>

@@ -24,10 +24,25 @@
                 <ColumnDefinition Width="128"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Grid>
+                    <FontIcon x:Name="IsAdminIcon"
+                    x:Uid="IsAdminIcon"
+                    Glyph="&#xEA18;"
+                    VerticalAlignment="Center"
+                    Opacity="0.75"
+                    FontSize="18"/>
+                    <FontIcon x:Name="NotAdminIcon"
+                    x:Uid="NotAdminIcon"
+                    Glyph="&#xE1DE;"
+                    VerticalAlignment="Center"
+                    Opacity="0.75"
+                    FontSize="18"/>
+                </Grid>
                 <Image x:Name="ShellTitleBarImage" Source="/Assets/WindowIcon.ico"
                     HorizontalAlignment="Left"
                     Width="22"
-                    Height="22" />
+                    Height="22"
+                    Margin="16,0,0,0"/>
                 <TextBlock x:Name="AppTitleBarText"
                 Text="RyTuneX"
                 VerticalAlignment="Center"

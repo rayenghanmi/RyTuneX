@@ -3,6 +3,33 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.5.0 - Released
+
+### Added
+
+- Added a new toggle switches state management that reflect the current system state rather than a user defined keys #50.
+- Added a "Keep app data" checkbox to the `Revert All Changes` dialog, allowing users to preserve their application settings (language preferences, theme selection, and first-run dialog preferences) when reverting system optimizations.
+- Added a new elevated (Admin) shield icon in the title bar to clearly indicate when the app is running with administrator privileges.
+
+### Fixes
+
+- Fixed an issue where Windows auto updates were not being disabled correctly when the `Disable Automatic Updates` option was toggled in the `Optimiza` page.
+- Replaced the Upload/Download icons in the `Home` page with new icons that are visible in Windows 10.
+- Fixed the `Legacy Volume Slider` toggle to set the correct registry values.
+- Toggle state detection now reflects correct values.
+- Fixed incorrect Edge SmartScreen registry keys when disabling Edge telemetry.
+- Resolved an issue where the setup would throw an error when trying to install the app on some systems #61.
+
+### Changes
+
+- Enhanced the app's internal architecture for better performance and reliability.
+- Improved the `Revert All Changes` functionality to work with the new registry state management.
+- All extracted icons are now stored exclusively in a dedicated temp folder `%temp%\RyTuneX_AppIcons` instead of individual program folders. This prevents permission issues, keeps the system cleaner.
+- Removed the following deprecated options from the `Optimize` page: `GPU and Priority Settings`, `Frame Server Mode`, `Low Latency GPU Settings`, `Non-Best Effort Limit`, and `Disable NTFS Timestamp`.
+- Improved `DisableTelemetryServices` by adding safe Microsoft telemetry host blocking while keeping updates, Store, and activation fully functional.
+- Refactored system monitoring to use native Windows APIs.
+- Improved the app's startup time by optimizing the loading process (79.6% faster) #59.
+
 ## 1.4.1 - Released
 
 ### Added
