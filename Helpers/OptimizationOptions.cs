@@ -5,11 +5,8 @@ using System.Management.Automation;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
-using Windows.Storage;
 
 namespace RyTuneX.Helpers;
 internal partial class OptimizationOptions
@@ -520,7 +517,7 @@ internal partial class OptimizationOptions
         {
             try
             {
-                // Save the state to RyTuneX registry first
+                // Save the state to RyTuneX registry first (64-bit registry with 32-bit app)
                 using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
                     Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                         ? RegistryView.Registry64
