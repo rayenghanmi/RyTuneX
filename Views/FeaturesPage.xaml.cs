@@ -1,13 +1,17 @@
-﻿using CommunityToolkit.WinUI.Controls;
+﻿using System.Diagnostics;
+using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.Win32;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
 
 public sealed partial class FeaturesPage : Page
 {
+    private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
+
     public FeaturesPage()
     {
         InitializeComponent();
@@ -25,7 +29,17 @@ public sealed partial class FeaturesPage : Page
             {
                 if (toggleSwitch.Tag is string tagName)
                 {
-                    toggleSwitch.IsOn = OptimizeSystemHelper.GetFeatureState(tagName);
+                    // Retrieve the state from the 64-bit registry with 32-bit app
+                    using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                            ? RegistryView.Registry64
+                            : RegistryView.Default).CreateSubKey(RegistryBaseKey);
+                    if (key != null && key.GetValue(tagName) is int state)
+                    {
+                        toggleSwitch.IsOn = state == 1;
+                    }
+
+                    // Subscribe to the Toggled event
                     toggleSwitch.Toggled += ToggleSwitch_Toggled;
                 }
             }
@@ -35,7 +49,6 @@ public sealed partial class FeaturesPage : Page
             await LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
-
     // Helper method to find all children of a specific type in the visual tree
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
     {
@@ -70,6 +83,15 @@ public sealed partial class FeaturesPage : Page
         try
         {
             var toggleSwitch = (ToggleSwitch)sender;
+            Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+
+            // Save the state to the 64-bit registry with 32-bit app
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default).CreateSubKey(RegistryBaseKey);
+            key?.SetValue((string)toggleSwitch.Tag, toggleSwitch.IsOn ? 1 : 0, RegistryValueKind.DWord);
+
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }
         catch (Exception ex)
