@@ -1278,12 +1278,6 @@
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>パフォーマンスとプライバシーを向上させるためにNTFS設定を調整します。</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>ページングを無効化</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>メモリページングを無効化して、最大のパフォーマンスを実現します。</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>フォアグラウンドアプリのパフォーマンスを最適化</value>
   </data>

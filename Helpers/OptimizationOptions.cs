@@ -508,7 +508,7 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error during RevertAllChanges: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            await LogHelper.LogError($"RevertAllChanges: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
     public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)
@@ -517,7 +517,7 @@ internal partial class OptimizationOptions
         {
             try
             {
-                // Save the state to RyTuneX registry first
+                // Save the state to RyTuneX registry first (64-bit registry with 32-bit app)
                 using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
                     Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                         ? RegistryView.Registry64
@@ -563,17 +563,6 @@ internal partial class OptimizationOptions
                     else
                     {
                         OptimizeSystemHelper.DisableOptimizeNTFS();
-                    }
-                    break;
-
-                case "PagingSettings":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisablePagingSettings();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnablePagingSettings();
                     }
                     break;
 

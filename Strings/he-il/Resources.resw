@@ -1278,12 +1278,6 @@
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>כוונן הגדרות NTFS לשיפור ביצועים והגברת הפרטיות.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>השבת החלפה (Paging)</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>כבה החלפת זיכרון (Paging) לביצועים מרביים.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>מיטוב ביצועי יישומים בחזית</value>
   </data>
@@ -1332,10 +1326,10 @@
   <data name="KeepAppData" xml:space="preserve">
     <value>שמור נתוני אפליקציה</value>
   </data>
-	<data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-  <value>אתה מפעיל כמנהל</value>
+  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>אתה מפעיל כמנהל</value>
   </data>
-	<data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-  <value>הפעל מחדש את האפליקציה כמנהל כדי שהשינויים ייכנסו לתוקף</value>
+  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>הפעל מחדש את האפליקציה כמנהל כדי שהשינויים ייכנסו לתוקף</value>
   </data>
 </root>

@@ -3,6 +3,16 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.5.1 - Released
+
+### Fixes
+
+- Removed duplicate toggle switches state saving in Registry.
+
+### Changes
+
+- Removed the newly added toggle switches state management as it was causing more issues than it was solving. The app will revert to using `LocalSettings` for saving and retrieving toggle states.
+
 ## 1.5.0 - Released
 
 ### Added

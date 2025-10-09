@@ -1274,12 +1274,6 @@
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>調整 NTFS 設定以提升效能並增強隱私.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>停用分頁檔</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>關閉記憶體分頁以獲得最大效能.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>優化前景應用程式效能</value>
   </data>

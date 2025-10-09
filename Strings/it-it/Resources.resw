@@ -1278,12 +1278,6 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>Ottimizza le impostazioni NTFS per migliorare le prestazioni e la privacy.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>Disattiva paging</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>Disattiva il paging della memoria per ottenere le massime prestazioni.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>Ottimizza le prestazioni delle app in primo piano</value>
   </data>
