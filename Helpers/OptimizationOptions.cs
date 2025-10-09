@@ -566,17 +566,6 @@ internal partial class OptimizationOptions
                     }
                     break;
 
-                case "PagingSettings":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisablePagingSettings();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnablePagingSettings();
-                    }
-                    break;
-
                 case "PrioritizeForegroundApplications":
                     if (toggleSwitch.IsOn)
                     {

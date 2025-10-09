@@ -1278,12 +1278,6 @@
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>调整 NTFS 设置以提升性能并增强隐私.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>禁用页面文件</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>禁用内存分页以实现最大性能.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>优化前台应用性能</value>
   </data>

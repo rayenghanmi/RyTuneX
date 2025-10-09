@@ -1278,12 +1278,6 @@ Verifica si hay problemas de memoria en tu computadora</value>
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>Ajustar configuraciones de NTFS para mejorar el rendimiento y la privacidad.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>Desactivar paginación</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>Desactivar la paginación de memoria para maximizar el rendimiento.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>Optimizar rendimiento de aplicaciones en primer plano</value>
   </data>

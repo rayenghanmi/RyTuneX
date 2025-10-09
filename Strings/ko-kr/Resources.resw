@@ -1278,12 +1278,6 @@
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>성능을 개선하고 개인 정보 보호를 강화하기 위해 NTFS 설정을 조정합니다.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>페이징 비활성화</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>최대 성능을 위해 메모리 페이징을 끕니다.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>포그라운드 앱 성능 최적화</value>
   </data>

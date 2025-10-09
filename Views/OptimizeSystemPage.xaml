@@ -191,13 +191,6 @@
                     <ToggleSwitch x:Name="OptimizeNTFS" Tag="OptimizeNTFS"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_PagingSettings">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE9F5;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="PagingSettings" Tag="PagingSettings"/>
-                </controls:SettingsCard>
-
                 <controls:SettingsCard x:Uid="Feature_PrioritizeForegroundApplications">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE9D9;"/>

@@ -47,18 +47,6 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\" /v Win32PrioritySeparation /t REG_DWORD /d 2 /f");
     }
 
-    public static async void DisablePagingSettings()
-    {
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\" /v DisablePagingExecutive /t REG_DWORD /d 1 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\" /v DisablePageCombining /t REG_DWORD /d 1 /f");
-    }
-
-    public static async void EnablePagingSettings()
-    {
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\" /v DisablePagingExecutive /t REG_DWORD /d 0 /f");
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\" /v DisablePageCombining /t REG_DWORD /d 0 /f");
-    }
-
     public static async void EnableOptimizeNTFS()
     {
         await OptimizationOptions.StartInCmd("fsutil behavior set disablelastaccess 1");
@@ -85,12 +73,12 @@ public static partial class OptimizeSystemHelper
 
     public static async void DisableServiceHostSplitting()
     {
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\" /v SvcHostSplitThresholdInKB /t REG_DWORD /d 4294967295 /f");
+        await OptimizationOptions.StartInCmd("Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services' | Where-Object { $_.Name -notmatch 'Xbl|Xbox' } | ForEach-Object { if ((Get-ItemProperty -Path $_.PSPath -ErrorAction SilentlyContinue).Start -ne $null) { Set-ItemProperty -Path $_.PSPath -Name 'SvcHostSplitDisable' -Value 1 -Type DWord -Force -ErrorAction SilentlyContinue } }");
     }
 
     public static async void EnableServiceHostSplitting()
     {
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SYSTEM\\CurrentControlSet\\Control\" /v SvcHostSplitThresholdInKB /f");
+        await OptimizationOptions.StartInCmd("Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services' | Where-Object { $_.Name -notmatch 'Xbl|Xbox' } | ForEach-Object { if (Test-Path $_.PSPath) { Remove-ItemProperty -Path $_.PSPath -Name 'SvcHostSplitDisable' -ErrorAction SilentlyContinue } }");
     }
 
     public static async void DisableMenuShowDelay()

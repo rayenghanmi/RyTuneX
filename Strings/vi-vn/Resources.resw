@@ -1278,12 +1278,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>Tối ưu cài đặt NTFS để cải thiện hiệu suất và tăng cường bảo mật.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>Vô hiệu hoá Paging</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>Tắt paging bộ nhớ để tăng hiệu suất tối đa.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>Tối ưu hiệu suất ứng dụng đang hoạt động</value>
   </data>

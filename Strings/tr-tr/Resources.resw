@@ -1278,12 +1278,6 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>Performansı iyileştirmek ve gizliliği artırmak için NTFS ayarlarını yapın.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>Sayfalamayı devre dışı bırak</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>Maksimum performans için bellek sayfalamasını kapatın.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>Ön Plan Uygulama Performansını Optimize Edin</value>
   </data>

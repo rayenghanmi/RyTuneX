@@ -3,7 +3,11 @@
 All notable changes to this branch will be documented in this file.
 
 
-## 1.5.1 - Unreleased
+## 1.5.1 - Released
+
+### Fixes
+
+- Removed duplicate toggle switches state saving in Registry.
 
 ### Changes
 

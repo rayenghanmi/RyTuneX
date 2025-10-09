@@ -1275,12 +1275,6 @@
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>Настройте параметры NTFS для повышения производительности и улучшения конфиденциальности.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>Отключить пагинацию</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>Отключите пагинацию памяти для максимальной производительности.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>Оптимизировать производительность приложений на переднем плане</value>
   </data>

@@ -1278,12 +1278,6 @@ Check your computer for memory problems</value>
   <data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
     <value>Tune NTFS settings to improve performance and enhance privacy.</value>
   </data>
-  <data name="Feature_PagingSettings.Header" xml:space="preserve">
-    <value>Disable Paging</value>
-  </data>
-  <data name="Feature_PagingSettings.Description" xml:space="preserve">
-    <value>Turn off memory paging for maximum performance.</value>
-  </data>
   <data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
     <value>Optimize Foreground App Performance</value>
   </data>
