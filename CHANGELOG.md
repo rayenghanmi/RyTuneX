@@ -11,7 +11,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
-- Removed the newly added toggle switches state management as it was causing more issues than it was solving. The app will revert to using `LocalSettings` for saving and retrieving toggle states.
+- Removed the newly added toggle switches state management as it was causing more issues than it was solving. The app will revert to using the old method for saving and retrieving toggle states.
 
 ## 1.5.0 - Released
 
