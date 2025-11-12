@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
 
 namespace RyTuneX.Helpers;
+
 internal partial class OptimizationOptions
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";

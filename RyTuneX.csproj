@@ -24,7 +24,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <Version>1.5.1</Version>
+    <Version>1.5.2</Version>
     <Authors>Rayen Ghanmi</Authors>
   </PropertyGroup>
   <ItemGroup>
@@ -53,21 +53,24 @@
 	  <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.250402" />
 	  <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.250402" />
 	  <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.250402" />
-	  <PackageReference Include="DevWinUI" Version="8.2.0" />
-	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
-	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250401001" />
-	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.4" />
-	  <PackageReference Include="System.Drawing.Common" Version="9.0.4" />
-	  <PackageReference Include="System.Management" Version="9.0.4" />
-	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.4" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251003001" />
+	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.10" />
+	  <PackageReference Include="System.Drawing.Common" Version="9.0.10" />
+	  <PackageReference Include="System.Management" Version="9.0.10" />
+	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.10" />
 	  <PackageReference Include="vocaluxe.dependencies.netfwtypelib" Version="1.0.1" />
-	  <PackageReference Include="WinUIEx" Version="2.5.1" />
+	  <PackageReference Include="WinUIEx" Version="2.9.0" />
 	  <PackageReference Include="System.Management.Automation" Version="7.4.6" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
   </ItemGroup>
+
+  <PropertyGroup Label="Globals">
+    <WebView2EnableCsWinRTProjection>False</WebView2EnableCsWinRTProjection>
+  </PropertyGroup>
 
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>

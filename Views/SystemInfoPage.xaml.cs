@@ -1,9 +1,8 @@
 ﻿using System.Management;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Helpers;
-using Windows.Storage.Pickers;
-using WinRT.Interop;
 
 namespace RyTuneX.Views;
 
@@ -280,7 +279,7 @@ public sealed partial class SystemInfoPage : Page
 
     private async void SelectPathButton_Click(object sender, RoutedEventArgs e)
     {
-        var folderPicker = new DevWinUI.FolderPicker(WindowNative.GetWindowHandle(App.MainWindow))
+        var folderPicker = new FolderPicker(App.MainWindow.AppWindow.Id)
         {
             SuggestedStartLocation = PickerLocationId.Desktop
         };

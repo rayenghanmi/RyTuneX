@@ -3,6 +3,17 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.5.2 - Unreleased
+
+### Fixes
+
+- Fixed the Disable News and Interests toggle to set the correct registry values.
+
+### Changes
+
+- Redesigned the setup for higher scaling quality on high DPI displays.
+- Improved file/folder picker logic to use Microsoft.Windows.Storage.Pickers and removed DevWinUI.
+
 ## 1.5.1 - Released
 
 ### Fixes

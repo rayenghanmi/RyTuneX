@@ -8,13 +8,12 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
+using Microsoft.Windows.Storage.Pickers;
 using Newtonsoft.Json.Linq;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using Windows.ApplicationModel;
 using Windows.Storage;
-using Windows.Storage.Pickers;
-using WinRT.Interop;
 
 namespace RyTuneX.Views;
 
@@ -500,11 +499,11 @@ public sealed partial class SettingsPage : Page
 
     private async void ImportButton_Click(object sender, RoutedEventArgs e)
     {
-        var picker = new DevWinUI.FilePicker(WindowNative.GetWindowHandle(App.MainWindow));
-        picker.FileTypeChoices.Add("Reg File", ["*.reg"]);
-        picker.DefaultFileExtension = "*.reg";
-        picker.ShowAllFilesOption = false;
-        picker.SuggestedStartLocation = PickerLocationId.Desktop;
+        var picker = new FileOpenPicker(App.MainWindow.AppWindow.Id)
+        {
+            SuggestedStartLocation = PickerLocationId.Desktop
+        };
+        picker.FileTypeFilter.Add(".reg");
 
         var file = await picker.PickSingleFileAsync();
         if (file != null)
@@ -512,36 +511,35 @@ public sealed partial class SettingsPage : Page
             // Import the registry file
             await OptimizationOptions.StartInCmd($"regedit.exe /s {file.Path}");
             await LogHelper.Log($"Imported registry settings from {file.Path}");
-        }
+            // Apply all the optimizations present in the registry key
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                    Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                        ? RegistryView.Registry64
+                        : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
 
-        // Apply all the optimizations present in the registry key
-        using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                    ? RegistryView.Registry64
-                    : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
-
-        if (key != null)
-        {
-            foreach (var valueName in key.GetValueNames())
+            if (key != null)
             {
-                var value = key.GetValue(valueName);
-                var kind = key.GetValueKind(valueName);
-
-                if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
+                foreach (var valueName in key.GetValueNames())
                 {
-                    // Simulate the toggle being on
-                    var simulatedToggle = new ToggleSwitch
-                    {
-                        Tag = valueName,
-                        IsOn = true
-                    };
+                    var value = key.GetValue(valueName);
+                    var kind = key.GetValueKind(valueName);
 
-                    await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
-                    await LogHelper.Log($"Applied optimization: {valueName}");
+                    if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
+                    {
+                        // Simulate the toggle being on
+                        var simulatedToggle = new ToggleSwitch
+                        {
+                            Tag = valueName,
+                            IsOn = true
+                        };
+
+                        await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
+                        await LogHelper.Log($"Applied optimization: {valueName}");
+                    }
                 }
             }
+            await LogHelper.Log("Applied all optimizations from the registry key.");
+            App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
         }
-        await LogHelper.Log("Applied all optimizations from the registry key.");
-        App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
     }
 }

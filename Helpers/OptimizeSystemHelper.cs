@@ -1,4 +1,5 @@
 ﻿namespace RyTuneX.Helpers;
+
 public static partial class OptimizeSystemHelper
 {
     public static async void DisableWindowsRecall()
@@ -786,8 +787,7 @@ public static partial class OptimizeSystemHelper
 
     public static async void DisableNewsAndInterests()
     {
-        await OptimizationOptions.StartInCmd("REG ADD HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds /v EnableFeeds /t REG_DWORD /d 0 /f");
-        await OptimizationOptions.StartInCmd("REG ADD HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\NewsAndInterests\\AllowNewsAndInterests /v value /t REG_DWORD /d 0 /f");
+        await OptimizationOptions.StartInCmd("REG ADD HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds /v ShellFeedsTaskbarViewMode /t REG_DWORD /d 2 /f");
     }
 
     public static async void DisableSpotlightFeatures()
@@ -913,8 +913,7 @@ public static partial class OptimizeSystemHelper
 
     public static async void EnableNewsAndInterests()
     {
-        await OptimizationOptions.StartInCmd("REG ADD HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds /v EnableFeeds /t REG_DWORD /d 1 /f");
-        await OptimizationOptions.StartInCmd("REG ADD HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\NewsAndInterests\\AllowNewsAndInterests /v value /t REG_DWORD /d 1 /f");
+        await OptimizationOptions.StartInCmd("REG ADD HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds /v ShellFeedsTaskbarViewMode /t REG_DWORD /d 0 /f");
     }
 
     public static async void EnableSpotlightFeatures()
