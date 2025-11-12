@@ -23,6 +23,7 @@ public sealed partial class RepairPage : Page
     public int selectedCount = 0;
     public RepairPage()
     {
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         InitializeComponent();
     }
 
@@ -92,6 +93,16 @@ public sealed partial class RepairPage : Page
     private async Task RunCommandAsync(string name, string args)
     {
         _scanResults[name].Clear();
+        if (name.Equals("SFC", StringComparison.OrdinalIgnoreCase))
+        {
+            // Reset SFC non-progress line skipping for each run
+            _sfcNonProgressLineCount = 0;
+        }
+
+        // Use the OEM code page for DISM and CHKDSK (Not tested yet but it's a possible fix for #73)
+        var outputEncoding = name.Equals("SFC", StringComparison.OrdinalIgnoreCase)
+            ? Encoding.Unicode
+            : Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
 
         var processStartInfo = new ProcessStartInfo
         {
@@ -103,9 +114,8 @@ public sealed partial class RepairPage : Page
             RedirectStandardError = true,
             UseShellExecute = false,
             CreateNoWindow = true,
-            StandardOutputEncoding = name.Equals("SFC", StringComparison.OrdinalIgnoreCase)
-                            ? Encoding.Unicode // UTF-16LE for SFC
-                            : Encoding.UTF8    // UTF-8 for other commands
+            StandardOutputEncoding = outputEncoding,
+            StandardErrorEncoding = outputEncoding
         };
 
         _runningProcess = new Process { StartInfo = processStartInfo, EnableRaisingEvents = true };

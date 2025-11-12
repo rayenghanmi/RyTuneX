@@ -8,6 +8,7 @@ All notable changes to this branch will be documented in this file.
 ### Fixes
 
 - Fixed the Disable News and Interests toggle to set the correct registry values.
+- Enhanced `Repair` page encoding handling for console output (Possible fix for #73).
 
 ### Changes
 
