@@ -18,6 +18,9 @@ internal partial class OptimizationOptions
     [DllImport("Shell32.dll", CharSet = CharSet.Auto)]
     public static extern int ExtractIconEx(string lpszFile, int nIconIndex, IntPtr[] phiconLarge, IntPtr[]? phiconSmall, int nIcons);
 
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern bool DestroyIcon(IntPtr hIcon);
+
     public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
     {
         // Ensure the icon cache directory exists
@@ -28,9 +31,16 @@ internal partial class OptimizationOptions
 
         var largeIcons = new IntPtr[1];
         ExtractIconEx(@"C:\Windows\System32\imageres.dll", 152, largeIcons, null, 1);
-        var extractedIcon = System.Drawing.Icon.FromHandle(largeIcons[0]);
-        var bmp = extractedIcon.ToBitmap();
-        bmp.Save(Path.Combine(IconCacheDirectory, "defaulticon.png"), ImageFormat.Png);
+        var hIcon = largeIcons[0];
+        if (hIcon != IntPtr.Zero)
+        {
+            // Clone the icon from handle so the original HICON can be safely destroyed
+            using var clonedIcon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(hIcon).Clone();
+            DestroyIcon(hIcon);
+
+            using var bmp = clonedIcon.ToBitmap();
+            bmp.Save(Path.Combine(IconCacheDirectory, "defaulticon.png"), ImageFormat.Png);
+        }
 
         var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
         var win32AppsTask = Task.Run(GetWin32Apps);
@@ -509,7 +519,7 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"RevertAllChanges: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            await LogHelper.LogError($"RevertAllChanges: {ex.Message}\n Stack Trace: {ex.StackTrace}");
         }
     }
     public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)

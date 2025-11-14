@@ -12,8 +12,9 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
-- Redesigned the setup for higher scaling quality on high DPI displays.
+- Redesigned the setup for higher scaling quality on high DPI displays #71.
 - Improved file/folder picker logic to use Microsoft.Windows.Storage.Pickers and removed DevWinUI.
+- Pinned primary action buttons in the `Debloat` page to keep them visible while scrolling (suggested in #74).
 
 ## 1.5.1 - Released
 

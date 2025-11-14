@@ -12,65 +12,97 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ScrollViewer Padding="24,14,24,0" Grid.Row="0" VerticalScrollBarVisibility="Auto">
+
+        <Grid Grid.Row="0" Padding="24,6,24,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <AutoSuggestBox x:Name="AppSearchBox"
+                            x:Uid="DebloatSystemPage_SearchBar"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Stretch"
+                            MinWidth="80"
+                            MaxWidth="720"
+                            Height="34"
+                            Visibility="Collapsed"
+                            QueryIcon="Zoom"
+                            TextChanged="AppSearchBox_TextChanged"
+                            QuerySubmitted="AppSearchBox_QuerySubmitted"/>
+
+            <StackPanel x:Name="TempStackButtonTextBar"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="12,0,0,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" x:Name="TempButtonStack">
+                        <FontIcon Glyph="&#xEA99;" Margin="0,0,12,0"/>
+                        <Button x:Uid="DebloatSystemPage_TempButton" Click="TempButton_Click"/>
+                    </StackPanel>
+                    <StackPanel x:Name="TempStack" Visibility="Collapsed">
+                        <ProgressBar x:Name="TempProgress" Margin="3" IsIndeterminate="True" Visibility="Collapsed"/>
+                        <TextBlock x:Name="TempStatusText" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="0,6,12,6"
+                       x:Name="installedAppsCount"
+                       Visibility="Collapsed"
+                       TextWrapping="Wrap"/>
+
+            <controls:WrapPanel Grid.Row="1"
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                <StackPanel x:Name="appsFilterText" Margin="0,6,0,6" Visibility="Collapsed" Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE71C;" FontSize="{StaticResource TextBoxIconFontSize}"/>
+                    <TextBlock x:Uid="DebloatSystemPage_AppsFilter" Style="{StaticResource DetailBodyBaseMediumStyle}" Margin="6,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <ComboBox Width="190" x:Name="appsFilter" Margin="8,6,0,6" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
+                    <ComboBoxItem x:Uid="DebloatSystemPage_StandardApps" Tag="Standard"/>
+                    <ComboBoxItem x:Uid="DebloatSystemPage_AllApps" Tag="All"/>
+                    <ComboBoxItem x:Uid="DebloatSystemPage_Win32Apps" Tag="Win32"/>
+                </ComboBox>
+
+                <Button x:Uid="DebloatSystemPage_UninstallButton"  Margin="12,6,0,6" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}"/>
+            </controls:WrapPanel>
+        </Grid>
+
+        <ScrollViewer Padding="24,14,24,0" Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <Grid Margin="0,0,0,38">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <AutoSuggestBox x:Name="AppSearchBox"
-                    x:Uid="DebloatSystemPage_SearchBar"
-                    Grid.Row="0"
-                    HorizontalAlignment="Left"
-                    Width="260"
-                    Height="34"
-                    Visibility="Collapsed"
-                    QueryIcon="Zoom"
-                    TextChanged="AppSearchBox_TextChanged" 
-                    QuerySubmitted="AppSearchBox_QuerySubmitted"/>
 
-                <StackPanel x:Name="TempStackButtonTextBar" Grid.Row="0" Margin="12,0" HorizontalAlignment="Right" Orientation="Vertical" VerticalAlignment="Center" Visibility="Collapsed">
-                    <Grid>
-                        <StackPanel Orientation="Horizontal" x:Name="TempButtonStack">
-                            <FontIcon Glyph="&#xEA99;" Margin="0,0,12,0"/>
-                            <Button x:Uid="DebloatSystemPage_TempButton" Click="TempButton_Click"/>
-                        </StackPanel>
-                        <StackPanel x:Name="TempStack" Visibility="Collapsed">
-                            <ProgressBar x:Name="TempProgress" Margin="3" IsIndeterminate="True" Visibility="Collapsed"/>
-                            <TextBlock x:Name="TempStatusText" Style="{StaticResource CaptionTextBlockStyle}"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
+                <TextBlock x:Uid="DebloatSystemPage_NoAppFound" Grid.Row="1" x:Name="noAppFoundText" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
 
-                <TextBlock Margin="10,6" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="installedAppsCount" Visibility="Collapsed"/>
-
-                <controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
-                    <StackPanel x:Name="appsFilterText" Margin="0,6,0,6" Visibility="Collapsed" Orientation="Horizontal">
-                        <FontIcon Glyph="&#xE71C;" FontSize="{StaticResource TextBoxIconFontSize}"/>
-                        <TextBlock x:Uid="DebloatSystemPage_AppsFilter" Style="{StaticResource DetailBodyBaseMediumStyle}" Margin="6,0,0,0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <ComboBox Width="190" x:Name="appsFilter" Margin="4,6,0,6" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
-                        <ComboBoxItem x:Uid="DebloatSystemPage_StandardApps" Tag="Standard"/>
-                        <ComboBoxItem x:Uid="DebloatSystemPage_AllApps" Tag="All"/>
-                        <ComboBoxItem x:Uid="DebloatSystemPage_Win32Apps" Tag="Win32"/>
-                    </ComboBox>
-
-                    <Button x:Uid="DebloatSystemPage_UninstallButton"  Margin="12" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}"/>
-                </controls:WrapPanel>
-
-                <TextBlock x:Uid="DebloatSystemPage_NoAppFound" Grid.Row="2" x:Name="noAppFoundText" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
-
-                <StackPanel Margin="10" x:Name="gettingAppsLoading" Grid.Row="2" VerticalAlignment="Center" Visibility="Visible">
+                <StackPanel Margin="10" x:Name="gettingAppsLoading" Grid.Row="1" VerticalAlignment="Center" Visibility="Visible">
                     <ProgressRing Margin="20" Width="100" Height="100" IsIndeterminate="True"/>
                     <TextBlock x:Uid="DebloatSystemPage_FetchingInstalledApps" HorizontalAlignment="Center" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                 </StackPanel>
 
                 <TreeView x:Name="appTreeView"
-                    Grid.Row="2" Visibility="Collapsed"
+                    Grid.Row="1" Visibility="Collapsed"
                     ItemsSource="{x:Bind AppList}"
                     SelectionMode="Multiple"
                     DragItemsStarting="AppTreeView_DragItemsStarting"
@@ -99,7 +131,7 @@
                                     <Grid Background="{ThemeResource CardBackgroundFillColorDefault}" BorderBrush="{ThemeResource CircleElevationBorderBrush}" BorderThickness="1" CornerRadius="4" Margin="-30,0,18,0" Width="48" Height="48">
                                         <Image Source="{Binding Item2}" Width="38" Height="38" Visibility="{Binding Item2, Converter={StaticResource NullToVisibilityConverter}}" />
                                     </Grid>
-                                    <TextBlock Text="{Binding Item1}" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Item1}" VerticalAlignment="Center" TextWrapping="WrapWholeWords" />
                                 </StackPanel>
                                 <TextBlock VerticalAlignment="Center" Visibility="{Binding Item3}" Opacity="0.7" HorizontalAlignment="Right" Style="{StaticResource CaptionTextBlockStyle}" Text="win32" Grid.Column="1"/>
                             </Grid>
@@ -109,12 +141,12 @@
             </Grid>
         </ScrollViewer>
         
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="uninstallingStatusText" Margin="36,6" Grid.Column="0" Style="{StaticResource CaptionTextBlockStyle}" Visibility="Collapsed"/>
+            <TextBlock x:Name="uninstallingStatusText" Margin="36,6" Grid.Column="0" Style="{StaticResource CaptionTextBlockStyle}" Visibility="Collapsed" TextWrapping="Wrap"/>
             <ProgressBar x:Name="uninstallingStatusBar" Margin="0,0,36,0" Grid.Column="1" Width="Auto" Minimum="0" Maximum="100"/>
         </Grid>
     </Grid>

@@ -138,7 +138,7 @@ public sealed partial class HomePage : Page
         var usage = 0.0;
         if (total > 0)
         {
-            usage = (double)(system - idleDiff) * 100.0 / total;
+            usage = (system - idleDiff) * 100.0 / total;
         }
 
         _prevIdleTime = idle;
@@ -222,7 +222,7 @@ public sealed partial class HomePage : Page
     {
         return NetworkInterface.GetAllNetworkInterfaces()
             .Where(ni => ni.OperationalStatus == OperationalStatus.Up)
-            .Sum(ni => (long)ni.GetIPv4Statistics().BytesReceived);
+            .Sum(ni => ni.GetIPv4Statistics().BytesReceived);
     }
 
     // Get total bytes sent
@@ -230,7 +230,7 @@ public sealed partial class HomePage : Page
     {
         return NetworkInterface.GetAllNetworkInterfaces()
             .Where(ni => ni.OperationalStatus == OperationalStatus.Up)
-            .Sum(ni => (long)ni.GetIPv4Statistics().BytesSent);
+            .Sum(ni => ni.GetIPv4Statistics().BytesSent);
     }
 
     private int GetInstalledAppsCount()
