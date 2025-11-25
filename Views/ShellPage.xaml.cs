@@ -47,8 +47,7 @@ public sealed partial class ShellPage : Page
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
-        var packageVersion = Package.Current.Id.Version;
-        AppTitleBarVersion.Text = $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}";
+        AppTitleBarVersion.Text = SettingsPage.GetVersionDescription();
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;

@@ -25,7 +25,7 @@
 	</Properties>
 
 	<Dependencies>
-		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" />
 	</Dependencies>
 
 	<Resources>
@@ -50,10 +50,6 @@
 
 	<Capabilities>
 		<rescap:Capability Name="runFullTrust"/>
-		<rescap:Capability Name="allowElevation"/>
-		<rescap:Capability Name="registry"/>
-		<rescap:Capability Name="packageManagement"/>
-		<rescap:Capability Name="packageQuery"/>
 	</Capabilities>
 
 	<genTemplate:Metadata>
