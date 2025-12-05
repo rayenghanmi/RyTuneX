@@ -5,6 +5,17 @@ All notable changes to this branch will be documented in this file.
 
 ## 1.5.2 - Unreleased
 
+### Added
+
+- Redesigned the `Security` page with comprehensive security monitoring:
+  - Added real-time security status checks with auto-refresh every 30 seconds.
+  - Added detection for Antivirus, Firewall, Windows Update, SmartScreen, Real-Time Protection, UAC, Tamper Protection, Controlled Folder Access, BitLocker, and Windows Defender Service.
+  - Added Quick Scan functionality to run Windows Defender quick scans directly from the app.
+  - Added Defender signature update functionality.
+  - Added direct links to Windows Security settings pages for disabled features.
+  - Added antivirus product name display and signature update date.
+  - Improved performance by running security checks in parallel on background threads.
+
 ### Fixes
 
 - Fixed the Disable News and Interests toggle to set the correct registry values.

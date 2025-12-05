@@ -1332,4 +1332,85 @@
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>أعد تشغيل التطبيق كمسؤول لتطبيق التغييرات</value>
   </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>فتح أمان Windows</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>فحص سريع</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>فحص سريع</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>تحديث التعريفات</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>تحديث التعريفات</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>تفعيل</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>حماية من العبث</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>وصول مجلدات محكوم</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>تشفير محرك BitLocker</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>خدمة Microsoft Defender</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>فحص البرامج الضارة النشط</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>يمنع الوصول الشبكي غير المصرح به</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>تصحيحات الأمان وتحديثات الميزات</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>يتحكم في مطالبات وصول المسؤول</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>يمنع التغييرات غير المصرح بها في إعدادات الأمان</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>حماية المجلدات من التغييرات غير المصرح بها (حماية من الفدية)</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>حالة تشفير المحرك</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>حالة خدمة الأمان الأساسية</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>آخر تحديث</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>آخر تحديث</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>اكتمل الفحص السريع</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>فشل الفحص السريع</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>تم تحديث التعريفات</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>فشل تحديث التعريفات</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>لا شيء</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>يحميك على الويب وفي التطبيقات</value>
+  </data>
 </root>

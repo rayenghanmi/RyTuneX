@@ -1332,4 +1332,85 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>Starten Sie die App als Administrator neu, damit Ihre Änderungen wirksam werden</value>
   </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>Windows-Sicherheit öffnen</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>Schnellüberprüfung</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>Schnellüberprüfung</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>Definitionen aktualisieren</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>Definitionen aktualisieren</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>Aktivieren</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>Manipulationsschutz</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>Überwachter Ordnerzugriff</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>BitLocker-Laufwerkverschlüsselung</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>Microsoft Defender-Dienst</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>Aktive Malwareüberprüfung</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>Blockiert unbefugten Netzwerkzugriff</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>Sicherheitsupdates und Funktionsupdates</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>Steuert Administratorabfragen</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>Verhindert unbefugte Änderungen an Sicherheitseinstellungen</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>Ordner vor unbefugten Änderungen schützen (Ransomware-Schutz)</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>Status der Laufwerksverschlüsselung</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>Status des Sicherheitskerndienstes</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>Zuletzt aktualisiert</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>Zuletzt aktualisiert</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>Schnellüberprüfung abgeschlossen</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>Schnellüberprüfung fehlgeschlagen</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>Definitionen aktualisiert</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>Aktualisierung der Definitionen fehlgeschlagen</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Keine</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>Schützt im Web und in Apps</value>
+  </data>
 </root>

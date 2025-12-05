@@ -772,10 +772,10 @@
     <value>Windows 更新</value>
   </data>
   <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
-    <value>SmartScreen</value>
+    <value>SmartScreen 智能筛选</value>
   </data>
   <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>实时保护</value>
+    <value>实时防护</value>
   </data>
   <data name="SecurityPage_UAC.Text" xml:space="preserve">
     <value>用户帐户控制 (UAC)</value>
@@ -1331,5 +1331,86 @@
   </data>
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>请以管理员身份重新启动应用以使更改生效</value>
+  </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>打开 Windows 安全中心</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>快速扫描</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>快速扫描</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>更新定义</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>更新定义</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>防篡改保护</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>受控文件夹访问</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>BitLocker 驱动器加密</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>Microsoft Defender 服务</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>主动恶意软件扫描</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>阻止未授权的网络访问</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>安全补丁和功能更新</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>控制管理员访问提示</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>防止未经授权更改安全设置</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>防止 ransomware 未经授权更改文件夹</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>驱动器加密状态</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>核心安全服务状态</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>上次更新</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>上次刷新</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>快速扫描已完成</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>快速扫描失败</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>定义已更新</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>定义更新失败</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>保护您在网页和应用中的安全</value>
   </data>
 </root>

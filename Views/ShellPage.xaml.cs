@@ -10,7 +10,6 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.ViewModels;
-using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.ViewManagement;

@@ -1332,4 +1332,85 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>Redémarrez l'application en tant qu'administrateur pour appliquer les changements</value>
   </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>Ouvrir Sécurité Windows</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>Analyse rapide</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>Analyse rapide</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>Mettre à jour les définitions</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>Mettre à jour les définitions</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>Activer</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>Protection contre les altérations</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>Accès contrôlé aux dossiers</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>Chiffrement de lecteur BitLocker</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>Service Microsoft Defender</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>Analyse active des logiciels malveillants</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>Bloque les accès réseau non autorisés</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>Correctifs de sécurité et mises à jour de fonctionnalités</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>Contrôle des demandes d’accès administrateur</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>Empêche les modifications non autorisées des paramètres de sécurité</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>Protéger les dossiers contre les modifications non autorisées (protection contre les rançongiciels)</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>État du chiffrement du lecteur</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>État du service de sécurité principal</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>Dernière mise à jour</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>Dernier rafraîchissement</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>Analyse rapide terminée</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>Échec de l’analyse rapide</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>Définitions mises à jour</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>Échec de la mise à jour des définitions</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>Vous protège sur le web et dans les applications</value>
+  </data>
 </root>

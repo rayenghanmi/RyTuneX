@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1331,5 +1331,86 @@ Check your computer for memory problems</value>
   </data>
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>Restart the app as admin for your changes to take effect</value>
+  </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>Open Windows Security</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>Quick scan</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>Quick scan</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>Update definitions</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>Update definitions</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>Tamper Protection</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>Controlled folder access</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>BitLocker drive encryption</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>Microsoft Defender service</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>Active malware scanning</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>Blocks unauthorized network access</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>Security patches and feature updates</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>Controls administrative access prompts</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>Prevents unauthorized changes to security settings</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>Protect folders from unauthorized changes (ransomware protection)</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>Drive encryption status</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>Core security service status</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>Last updated</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>Last refreshed</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>Quick scan completed</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>Quick scan failed</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>Definitions updated</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>Definitions update failed</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>Protects you on the web and in apps</value>
   </data>
 </root>

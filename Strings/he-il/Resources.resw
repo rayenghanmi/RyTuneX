@@ -1332,4 +1332,85 @@
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>הפעל מחדש את האפליקציה כמנהל כדי שהשינויים ייכנסו לתוקף</value>
   </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>רענן</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>פתח את אבטחת Windows</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>סריקה מהירה</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>סריקה מהירה</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>עדכן הגדרות</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>עדכן הגדרות</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>הפעל</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>הגנה מפני זלזול/שיבוש</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>גישה לתיקיות מבוקרת</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>הצפנת כונן BitLocker</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>שירות Microsoft Defender</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>סריקת תוכנות זדוניות פעילה</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>חוסם גישה לרשת לא מורשית</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>עדכוני אבטחה ותכונות</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>שולט בבקשות הרשאות מנהל</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>מונע שינויים לא מורשים בהגדרות אבטחה</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>מגן על תיקיות מפני שינויים לא מורשים (הגנה מפני כופרה)</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>מצב הצפנת הכונן</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>מצב שירות האבטחה המרכזי</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>עודכן לאחרונה</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>רענון לאחרון</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>הסריקה המהירה הושלמה</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>הסריקה המהירה נכשלה</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>ההגדרות עודכנו</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>עדכון ההגדרות נכשל</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>אין</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>מגן עבורך ברשת וביישומים</value>
+  </data>
 </root>
