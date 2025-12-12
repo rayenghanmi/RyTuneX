@@ -7,6 +7,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Added
 
+- Introduced a new search bar to the title bar for quick navigation between toggles.
 - Redesigned the `Security` page with comprehensive security monitoring:
   - Added real-time security status checks with auto-refresh every 30 seconds.
   - Added detection for Antivirus, Firewall, Windows Update, SmartScreen, Real-Time Protection, UAC, Tamper Protection, Controlled Folder Access, BitLocker, and Windows Defender Service.

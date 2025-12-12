@@ -3,6 +3,7 @@ using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
 
@@ -11,16 +12,38 @@ namespace RyTuneX.Views;
 public sealed partial class PrivacyPage : Page
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
+    private string? _pendingScrollTarget;
 
     public PrivacyPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing PrivacyPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
-        Loaded += (sender, e) => InitializeToggleSwitchesAsync();
+        Loaded += PrivacyPage_Loaded;
     }
 
-    private async void InitializeToggleSwitchesAsync()
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
+        {
+            _pendingScrollTarget = optionTag;
+        }
+    }
+
+    private async void PrivacyPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        await InitializeToggleSwitchesAsync();
+
+        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
+    }
+
+    private async Task InitializeToggleSwitchesAsync()
     {
         await LogHelper.Log("Initializing Toggle Switches");
         try

@@ -3,6 +3,7 @@ using System.Management;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using NetFwTypeLib;
 using RyTuneX.Helpers;
@@ -14,6 +15,7 @@ public sealed partial class SecurityPage : Page
     private DispatcherTimer? _refreshTimer;
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _isCheckInProgress;
+    private string? _pendingScrollTarget;
 
     public SecurityPage()
     {
@@ -40,6 +42,27 @@ public sealed partial class SecurityPage : Page
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
         };
+
+        Loaded += SecurityPage_Loaded;
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
+        {
+            _pendingScrollTarget = optionTag;
+        }
+    }
+
+    private async void SecurityPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
     }
 
     private async Task CheckSecurityStatusAsync(CancellationToken cancellationToken = default)

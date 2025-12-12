@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
 using Newtonsoft.Json.Linq;
@@ -24,6 +25,8 @@ public sealed partial class SettingsPage : Page
 
     private ElementTheme _elementTheme;
     private string _versionDescription;
+    private string? _pendingScrollTarget;
+
     public ICommand SwitchThemeCommand
     {
         get;
@@ -53,6 +56,27 @@ public sealed partial class SettingsPage : Page
                     await _themeSelectorService.SetThemeAsync(param);
                 }
             });
+
+        Loaded += SettingsPage_Loaded;
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
+        {
+            _pendingScrollTarget = optionTag;
+        }
+    }
+
+    private async void SettingsPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
     }
 
     private async void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

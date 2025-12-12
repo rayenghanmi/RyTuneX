@@ -6,6 +6,7 @@ using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
@@ -21,10 +22,32 @@ public sealed partial class RepairPage : Page
     private int _sfcNonProgressLineCount = 0;
     private Process? _runningProcess;
     public int selectedCount = 0;
+    private string? _pendingScrollTarget;
+
     public RepairPage()
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         InitializeComponent();
+        Loaded += RepairPage_Loaded;
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
+        {
+            _pendingScrollTarget = optionTag;
+        }
+    }
+
+    private async void RepairPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
     }
 
     private async void OnScanButtonClick(object sender, RoutedEventArgs e)

@@ -10,6 +10,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:winbehaviors="using:CommunityToolkit.WinUI.Behaviors"
+    xmlns:models="using:RyTuneX.Models"
     Loaded="OnLoaded">
 
     <Grid>
@@ -19,6 +20,8 @@
               IsHitTestVisible="True"
               VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="128"/>
@@ -56,6 +59,46 @@
                 FontSize="11"
                 Opacity="0.75"/>
             </StackPanel>
+            
+            <!-- Search Box in Title Bar -->
+            <AutoSuggestBox x:Name="TitleBarSearchBox"
+                            Grid.Column="2"
+                            Width="280"
+                            MaxWidth="400"
+                            MinWidth="200"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            PlaceholderText="Search settings..."
+                            QueryIcon="Find"
+                            TextMemberPath="DisplayName"
+                            TextChanged="TitleBarSearchBox_TextChanged"
+                            SuggestionChosen="TitleBarSearchBox_SuggestionChosen"
+                            QuerySubmitted="TitleBarSearchBox_QuerySubmitted">
+                <AutoSuggestBox.ItemTemplate>
+                    <DataTemplate x:DataType="models:SearchableItem">
+                        <Grid Padding="4,8" ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Grid.Column="0" 
+                                      Glyph="{x:Bind Glyph}" 
+                                      FontSize="16"
+                                      VerticalAlignment="Center"
+                                      Opacity="0.8"/>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="{x:Bind DisplayName}" 
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="{x:Bind Category}" 
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Opacity="0.6"
+                                           TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </AutoSuggestBox.ItemTemplate>
+            </AutoSuggestBox>
         </Grid>
         <NavigationView
             x:Name="NavigationViewControl"
