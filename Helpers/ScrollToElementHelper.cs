@@ -138,14 +138,14 @@ public static class ScrollToElementHelper
         {
             var child = VisualTreeHelper.GetChild(parent, i);
 
-            if (child is FrameworkElement element && element.Tag is string elementTag && 
+            if (child is FrameworkElement element && element.Tag is string elementTag &&
                 elementTag.Equals(tag, StringComparison.OrdinalIgnoreCase))
             {
                 return element;
             }
 
             // Also check x:Name
-            if (child is FrameworkElement namedElement && 
+            if (child is FrameworkElement namedElement &&
                 namedElement.Name.Equals(tag, StringComparison.OrdinalIgnoreCase))
             {
                 return namedElement;

@@ -13,6 +13,7 @@ public sealed partial class FeaturesPage : Page
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
     private string? _pendingScrollTarget;
+    private static readonly StringComparer ToggleKeyComparer = StringComparer.OrdinalIgnoreCase;
 
     public FeaturesPage()
     {
@@ -48,21 +49,19 @@ public sealed partial class FeaturesPage : Page
         await LogHelper.Log("Initializing Toggle Switches");
         try
         {
+            var toggleStates = await Task.Run(ReadToggleStates);
+
             foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
             {
                 if (toggleSwitch.Tag is string tagName)
                 {
-                    // Retrieve the state from the 64-bit registry with 32-bit app
-                    using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? RegistryView.Registry64
-                            : RegistryView.Default).CreateSubKey(RegistryBaseKey);
-                    if (key != null && key.GetValue(tagName) is int state)
+                    if (toggleStates.TryGetValue(tagName, out var currentState))
                     {
-                        toggleSwitch.IsOn = state == 1;
+                        toggleSwitch.IsOn = currentState;
                     }
 
                     // Subscribe to the Toggled event
+                    toggleSwitch.Toggled -= ToggleSwitch_Toggled;
                     toggleSwitch.Toggled += ToggleSwitch_Toggled;
                 }
             }
@@ -72,6 +71,7 @@ public sealed partial class FeaturesPage : Page
             await LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
+
     // Helper method to find all children of a specific type in the visual tree
     private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
     {
@@ -113,5 +113,37 @@ public sealed partial class FeaturesPage : Page
         {
             await LogHelper.LogError(ex.Message);
         }
+    }
+
+    private static Dictionary<string, bool> ReadToggleStates()
+    {
+        var states = new Dictionary<string, bool>(ToggleKeyComparer);
+        using var key = OpenOptimizationsKey(writable: false) ?? OpenOptimizationsKey(writable: true);
+        if (key == null)
+        {
+            return states;
+        }
+
+        foreach (var valueName in key.GetValueNames())
+        {
+            if (key.GetValue(valueName) is int state)
+            {
+                states[valueName] = state == 1;
+            }
+        }
+
+        return states;
+    }
+
+    private static RegistryKey? OpenOptimizationsKey(bool writable)
+    {
+        var registryView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+            ? RegistryView.Registry64
+            : RegistryView.Default;
+
+        var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView);
+        return writable
+            ? baseKey.CreateSubKey(RegistryBaseKey)
+            : baseKey.OpenSubKey(RegistryBaseKey, writable);
     }
 }

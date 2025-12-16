@@ -535,7 +535,7 @@ public sealed partial class SecurityPage : Page
         };
 
         SecurityStatusImage.Source = new BitmapImage(new Uri(imageUri));
-        
+
         // Hide loading ring and show the image
         SecurityStatusLoadingRing.IsActive = false;
         SecurityStatusLoadingRing.Visibility = Visibility.Collapsed;

@@ -133,7 +133,8 @@ public static class AppSearchService
         ("Settings", "RyTuneX.Views.SettingsPage", "\uE713")
     ];
 
-    private static List<SearchableItem>? _cachedItems;
+    private static readonly object CacheLock = new();
+    private static SearchableItem[]? _cachedItems;
 
     // Initializes the search cache from resource strings.
     public static void InitializeCache()
@@ -143,7 +144,25 @@ public static class AppSearchService
             return;
         }
 
-        _cachedItems = [];
+        SearchableItem[]? initializedItems = null;
+        lock (CacheLock)
+        {
+            if (_cachedItems == null)
+            {
+                initializedItems = BuildCache();
+                Volatile.Write(ref _cachedItems, initializedItems);
+            }
+        }
+
+        if (initializedItems != null)
+        {
+            _ = LogHelper.Log($"Search cache initialized with {initializedItems.Length} items");
+        }
+    }
+
+    private static SearchableItem[] BuildCache()
+    {
+        var items = new List<SearchableItem>(NavigationPages.Count + FeatureMap.Count);
 
         // Add navigation pages
         foreach (var (resourceKey, pageTypeName, glyph) in NavigationPages)
@@ -156,7 +175,7 @@ public static class AppSearchService
                 displayName = pageTypeName.Split('.').Last().Replace("Page", "");
             }
 
-            _cachedItems.Add(new SearchableItem
+            items.Add(new SearchableItem
             {
                 DisplayName = displayName,
                 Glyph = glyph,
@@ -171,7 +190,7 @@ public static class AppSearchService
             // WinUI x:Uid resources use slash format: "Feature_MenuShowDelay/Header"
             // but ResourceLoader.GetString uses dot format: "Feature_MenuShowDelay.Header"
             var header = $"{resourceKeyPrefix}/Header".TryGetLocalized();
-            
+
             // If slash format fails, try dot format
             if (string.IsNullOrEmpty(header))
             {
@@ -180,7 +199,7 @@ public static class AppSearchService
 
             if (string.IsNullOrEmpty(header))
             {
-                LogHelper.Log($"Resource not found for: {resourceKeyPrefix}");
+                _ = LogHelper.Log($"Resource not found for: {resourceKeyPrefix}");
                 continue;
             }
 
@@ -190,7 +209,7 @@ public static class AppSearchService
                 description = $"{resourceKeyPrefix}.Description".TryGetLocalized();
             }
 
-            _cachedItems.Add(new SearchableItem
+            items.Add(new SearchableItem
             {
                 DisplayName = header,
                 Description = description,
@@ -201,20 +220,27 @@ public static class AppSearchService
             });
         }
 
-        LogHelper.Log($"Search cache initialized with {_cachedItems.Count} items");
+        return items.ToArray();
     }
 
     // Searches for items matching the query.
     public static IEnumerable<SearchableItem> Search(string query)
     {
-        if (string.IsNullOrWhiteSpace(query) || _cachedItems == null)
+        if (string.IsNullOrWhiteSpace(query))
         {
-            return [];
+            return Array.Empty<SearchableItem>();
+        }
+
+        InitializeCache();
+        var cachedItems = _cachedItems;
+        if (cachedItems == null || cachedItems.Length == 0)
+        {
+            return Array.Empty<SearchableItem>();
         }
 
         var queryLower = query.ToLowerInvariant();
 
-        return _cachedItems
+        return cachedItems
             .Select(item => new
             {
                 Item = item,

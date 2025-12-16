@@ -27,6 +27,9 @@ All notable changes to this branch will be documented in this file.
 - Redesigned the setup for higher scaling quality on high DPI displays #71.
 - Improved file/folder picker logic to use Microsoft.Windows.Storage.Pickers and removed DevWinUI.
 - Pinned primary action buttons in the `Debloat` page to keep them visible while scrolling (suggested in #74).
+- Updated the app's target framework to .NET 9 and Windows SDK 10.0.26100.0.
+- Made navigation smoother by preloading search data, toggles, and system info.
+- Prevented navigation stack crashes when clearing history.
 
 ## 1.5.1 - Released
 

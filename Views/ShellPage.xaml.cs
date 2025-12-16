@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Media.Imaging;
-using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
@@ -85,8 +84,8 @@ public sealed partial class ShellPage : Page
         };
         KeyboardAccelerators.Add(searchAccelerator);
 
-        // Initialize search cache from resources (instant, no navigation needed)
-        AppSearchService.InitializeCache();
+        // Initialize search cache without blocking the UI thread
+        WarmUpSearchCache();
 
         // Show restore point dialog if it's the first run
         if (!ApplicationData.Current.LocalSettings.Values.ContainsKey("FirstRun"))
@@ -101,6 +100,21 @@ public sealed partial class ShellPage : Page
                 DispatcherQueue.TryEnqueue(async () => await ShowRestorePointDialogAsync());
             }
         }
+    }
+
+    private static void WarmUpSearchCache()
+    {
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                AppSearchService.InitializeCache();
+            }
+            catch (Exception ex)
+            {
+                await LogHelper.LogError($"Search cache warmup failed: {ex.Message}");
+            }
+        });
     }
 
     #region Title Bar Search
@@ -191,8 +205,8 @@ public sealed partial class ShellPage : Page
         };
 
         // Adjust search box visibility based on display mode
-        TitleBarSearchBox.Visibility = sender.DisplayMode == NavigationViewDisplayMode.Minimal 
-            ? Visibility.Collapsed 
+        TitleBarSearchBox.Visibility = sender.DisplayMode == NavigationViewDisplayMode.Minimal
+            ? Visibility.Collapsed
             : Visibility.Visible;
     }
 
