@@ -16,6 +16,7 @@ All notable changes to this branch will be documented in this file.
   - Added direct links to Windows Security settings pages for disabled features.
   - Added antivirus product name display and signature update date.
   - Improved performance by running security checks in parallel on background threads.
+- Added the ability to install the app using Powershell script `irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/install.ps1" | iex`.
 
 ### Fixes
 
