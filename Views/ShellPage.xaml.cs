@@ -9,8 +9,8 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Media.Imaging;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
+using RyTuneX.Models;
 using RyTuneX.ViewModels;
-using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.ViewManagement;
@@ -22,7 +22,7 @@ public sealed partial class ShellPage : Page
     public static ShellPage? Current
     {
         get; private set;
-    } // Static reference to the current ShellPage
+    }
     public ShellViewModel ViewModel
     {
         get;
@@ -30,6 +30,7 @@ public sealed partial class ShellPage : Page
 
     readonly bool isAdmin = new WindowsPrincipal(WindowsIdentity.GetCurrent())
                   .IsInRole(WindowsBuiltInRole.Administrator);
+
     public ShellPage(ShellViewModel viewModel)
     {
         ViewModel = viewModel;
@@ -47,19 +48,14 @@ public sealed partial class ShellPage : Page
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
-        var packageVersion = Package.Current.Id.Version;
-        AppTitleBarVersion.Text = $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}";
+        AppTitleBarVersion.Text = SettingsPage.GetVersionDescription();
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
 
         // Set corresponding visibility of Admin Icon based on administrator rights
-
-        IsAdminIcon.Visibility = isAdmin ? Microsoft.UI.Xaml.Visibility.Visible
-                                     : Microsoft.UI.Xaml.Visibility.Collapsed;
-
-        NotAdminIcon.Visibility = isAdmin ? Microsoft.UI.Xaml.Visibility.Collapsed
-                                          : Microsoft.UI.Xaml.Visibility.Visible;
+        IsAdminIcon.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+        NotAdminIcon.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
 
         // Subscribe to the ActualThemeChanged event
         this.ActualThemeChanged += ShellPage_ActualThemeChanged;
@@ -68,12 +64,28 @@ public sealed partial class ShellPage : Page
         UpdateWindowIcon();
     }
 
-    private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
 
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
+
+        // Add Ctrl+K keyboard accelerator for search focus
+        var searchAccelerator = new KeyboardAccelerator
+        {
+            Key = VirtualKey.K,
+            Modifiers = VirtualKeyModifiers.Control
+        };
+        searchAccelerator.Invoked += (s, args) =>
+        {
+            TitleBarSearchBox.Focus(FocusState.Programmatic);
+            args.Handled = true;
+        };
+        KeyboardAccelerators.Add(searchAccelerator);
+
+        // Initialize search cache without blocking the UI thread
+        WarmUpSearchCache();
 
         // Show restore point dialog if it's the first run
         if (!ApplicationData.Current.LocalSettings.Values.ContainsKey("FirstRun"))
@@ -82,18 +94,104 @@ public sealed partial class ShellPage : Page
         }
         else
         {
-            // Show restore point dialog if he setting is set to true
+            // Show restore point dialog if the setting is set to true
             if ((bool)ApplicationData.Current.LocalSettings.Values["FirstRun"] != false)
             {
                 DispatcherQueue.TryEnqueue(async () => await ShowRestorePointDialogAsync());
             }
-
         }
     }
 
+    private static void WarmUpSearchCache()
+    {
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                AppSearchService.InitializeCache();
+            }
+            catch (Exception ex)
+            {
+                await LogHelper.LogError($"Search cache warmup failed: {ex.Message}");
+            }
+        });
+    }
+
+    #region Title Bar Search
+
+    private void TitleBarSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+        {
+            var query = sender.Text;
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                sender.ItemsSource = null;
+                return;
+            }
+
+            var results = AppSearchService.Search(query).ToList();
+            sender.ItemsSource = results;
+        }
+    }
+
+    private void TitleBarSearchBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+    {
+        // TextMemberPath handles text update automatically
+        // This handler can be used for any additional actions when a suggestion is highlighted
+    }
+
+    private void TitleBarSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    {
+        SearchableItem? selectedItem = null;
+
+        if (args.ChosenSuggestion is SearchableItem item)
+        {
+            selectedItem = item;
+        }
+        else if (!string.IsNullOrWhiteSpace(args.QueryText))
+        {
+            // If user pressed Enter without selecting, pick the first result
+            var results = AppSearchService.Search(args.QueryText).ToList();
+            selectedItem = results.FirstOrDefault();
+        }
+
+        if (selectedItem != null)
+        {
+            NavigateToSearchResult(selectedItem);
+        }
+
+        // Clear the search box after navigation
+        sender.Text = string.Empty;
+        sender.ItemsSource = null;
+    }
+
+    private void NavigateToSearchResult(SearchableItem item)
+    {
+        try
+        {
+            var pageType = Type.GetType(item.PageTypeName);
+            if (pageType != null)
+            {
+                var navigationService = App.GetService<INavigationService>();
+
+                // Navigate to the page, passing the option tag as parameter if available
+                navigationService.NavigateTo(item.PageTypeName, item.OptionTag);
+
+                LogHelper.Log($"Search navigation to: {item.PageTypeName}, Option: {item.OptionTag ?? "none"}");
+            }
+        }
+        catch (Exception ex)
+        {
+            LogHelper.LogError($"Error navigating to search result: {ex.Message}");
+        }
+    }
+
+    #endregion
+
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {
-        App.AppTitlebar = AppTitleBarText as UIElement;
+        App.AppTitlebar = AppTitleBarText;
     }
 
     private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
@@ -105,6 +203,11 @@ public sealed partial class ShellPage : Page
             Right = AppTitleBar.Margin.Right,
             Bottom = AppTitleBar.Margin.Bottom
         };
+
+        // Adjust search box visibility based on display mode
+        TitleBarSearchBox.Visibility = sender.DisplayMode == NavigationViewDisplayMode.Minimal
+            ? Visibility.Collapsed
+            : Visibility.Visible;
     }
 
     private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null)

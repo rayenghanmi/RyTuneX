@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
 
@@ -16,12 +17,33 @@ public sealed partial class DebloatSystemPage : Page
     public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
     private List<Tuple<string, string, bool>> allApps = new();
+    private string? _pendingScrollTarget;
 
     public DebloatSystemPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing DebloatSystemPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        Loaded += DebloatSystemPage_Loaded;
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
+        {
+            _pendingScrollTarget = optionTag;
+        }
+    }
+
+    private async void DebloatSystemPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
     }
 
     private void AppTreeView_DragItemsStarting(TreeView sender, TreeViewDragItemsStartingEventArgs args)

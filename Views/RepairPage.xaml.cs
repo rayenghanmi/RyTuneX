@@ -6,6 +6,7 @@ using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
@@ -21,9 +22,32 @@ public sealed partial class RepairPage : Page
     private int _sfcNonProgressLineCount = 0;
     private Process? _runningProcess;
     public int selectedCount = 0;
+    private string? _pendingScrollTarget;
+
     public RepairPage()
     {
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         InitializeComponent();
+        Loaded += RepairPage_Loaded;
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
+        {
+            _pendingScrollTarget = optionTag;
+        }
+    }
+
+    private async void RepairPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
     }
 
     private async void OnScanButtonClick(object sender, RoutedEventArgs e)
@@ -92,6 +116,16 @@ public sealed partial class RepairPage : Page
     private async Task RunCommandAsync(string name, string args)
     {
         _scanResults[name].Clear();
+        if (name.Equals("SFC", StringComparison.OrdinalIgnoreCase))
+        {
+            // Reset SFC non-progress line skipping for each run
+            _sfcNonProgressLineCount = 0;
+        }
+
+        // Use the OEM code page for DISM and CHKDSK (Not tested yet but it's a possible fix for #73)
+        var outputEncoding = name.Equals("SFC", StringComparison.OrdinalIgnoreCase)
+            ? Encoding.Unicode
+            : Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
 
         var processStartInfo = new ProcessStartInfo
         {
@@ -103,9 +137,8 @@ public sealed partial class RepairPage : Page
             RedirectStandardError = true,
             UseShellExecute = false,
             CreateNoWindow = true,
-            StandardOutputEncoding = name.Equals("SFC", StringComparison.OrdinalIgnoreCase)
-                            ? Encoding.Unicode // UTF-16LE for SFC
-                            : Encoding.UTF8    // UTF-8 for other commands
+            StandardOutputEncoding = outputEncoding,
+            StandardErrorEncoding = outputEncoding
         };
 
         _runningProcess = new Process { StartInfo = processStartInfo, EnableRaisingEvents = true };

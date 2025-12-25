@@ -1,9 +1,9 @@
 ﻿using System.Management;
+using System.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Helpers;
-using Windows.Storage.Pickers;
-using WinRT.Interop;
 
 namespace RyTuneX.Views;
 
@@ -14,79 +14,80 @@ public sealed partial class SystemInfoPage : Page
         InitializeComponent();
         LogHelper.Log("Initializing SystemInfoPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
-        UpdateSystemInfoAsync();
+        _ = UpdateSystemInfoAsync();
     }
 
-    private async void UpdateSystemInfoAsync()
+    private async Task UpdateSystemInfoAsync()
     {
-        await Task.Run(async () =>
+        try
         {
-            try
+            await LogHelper.Log("Updating SystemInfo");
+
+            var osTask = Task.Run(GetOsInformation);
+            var cpuTask = Task.Run(GetCpuInformation);
+            var gpuTask = Task.Run(GetGpuInformation);
+            var ramTask = Task.Run(GetRamInformation);
+            var diskTask = Task.Run(GetDiskInformation);
+            var networkTask = Task.Run(GetNetworkInformation);
+            var batteryTask = Task.Run(GetBatteryInformation);
+
+            await Task.WhenAll(osTask, cpuTask, gpuTask, ramTask, diskTask, networkTask, batteryTask).ConfigureAwait(false);
+
+            var osInformation = await osTask.ConfigureAwait(false);
+            var cpuInformation = await cpuTask.ConfigureAwait(false);
+            var gpuInformation = await gpuTask.ConfigureAwait(false);
+            var ramInformation = await ramTask.ConfigureAwait(false);
+            var diskInformation = await diskTask.ConfigureAwait(false);
+            var networkInformation = await networkTask.ConfigureAwait(false);
+            var batteryInformation = await batteryTask.ConfigureAwait(false);
+
+            DispatcherQueue.TryEnqueue(() =>
             {
-                await LogHelper.Log("Updating SystemInfo");
+                os.Text = osInformation;
+                cpu.Text = cpuInformation;
+                gpu.Text = gpuInformation;
+                ram.Text = ramInformation;
+                disk.Text = diskInformation;
+                network.Text = networkInformation;
+                battery.Text = batteryInformation;
 
-                var osTask = Task.Run(GetOsInformation);
-                var cpuTask = Task.Run(GetCpuInformation);
-                var gpuTask = Task.Run(GetGpuInformation);
-                var ramTask = Task.Run(GetRamInformation);
-                var diskTask = Task.Run(GetDiskInformation);
-                var networkTask = Task.Run(GetNetworkInformation);
-                var batteryTask = Task.Run(GetBatteryInformation);
-
-                await Task.WhenAll(osTask, cpuTask, gpuTask, ramTask, diskTask, networkTask, batteryTask).ConfigureAwait(false);
-
-                var osInformation = await osTask.ConfigureAwait(false);
-                var cpuInformation = await cpuTask.ConfigureAwait(false);
-                var gpuInformation = await gpuTask.ConfigureAwait(false);
-                var ramInformation = await ramTask.ConfigureAwait(false);
-                var diskInformation = await diskTask.ConfigureAwait(false);
-                var networkInformation = await networkTask.ConfigureAwait(false);
-                var batteryInformation = await batteryTask.ConfigureAwait(false);
-
-                DispatcherQueue.TryEnqueue(() =>
-                {
-                    os.Text = osInformation;
-                    cpu.Text = cpuInformation;
-                    gpu.Text = gpuInformation;
-                    ram.Text = ramInformation;
-                    disk.Text = diskInformation;
-                    network.Text = networkInformation;
-                    battery.Text = batteryInformation;
-
-                    loadingProgressRing.Visibility = Visibility.Collapsed;
-                    infoPanel.Visibility = Visibility.Visible;
-                });
-            }
-            catch (Exception ex)
-            {
-                await LogHelper.LogError($"Error updating system information: {ex}");
-            }
-        });
+                loadingProgressRing.Visibility = Visibility.Collapsed;
+                infoPanel.Visibility = Visibility.Visible;
+            });
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error updating system information: {ex}");
+        }
     }
 
     private static async Task<string> GetCpuInformation()
     {
         try
         {
-            await LogHelper.Log("Getting CPU Info");
+            await LogHelper.Log("Getting CPU Info").ConfigureAwait(false);
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            var collection = searcher.Get();
-            var cpuInfoLines = collection.Cast<ManagementObject>().Select(cpu =>
-            "Name".GetLocalized() + $": {cpu["Name"]}\n" +
-            "Manufacturer".GetLocalized() + $": {cpu["Manufacturer"]}\n" +
-            "Architecture".GetLocalized() + $": {cpu["Architecture"]}\n" +
-            "Cores".GetLocalized() + $": {cpu["NumberOfCores"]}\n" +
-            "LogicalProcessors".GetLocalized() + $": {cpu["NumberOfLogicalProcessors"]}\n" +
-            "MaxSpeed".GetLocalized() + $": {cpu["MaxClockSpeed"]} MHz\n" +
-            "SocketDesignation".GetLocalized() + $": {cpu["SocketDesignation"]}\n" +
-            "L2Cache".GetLocalized() + $": {cpu["L2CacheSize"]} KB\n" +
-            "L3Cache".GetLocalized() + $": {cpu["L3CacheSize"]} KB");
+            using var collection = searcher.Get();
 
-            return string.Join(Environment.NewLine, cpuInfoLines);
+            var sb = new StringBuilder(512);
+            foreach (var cpu in collection.Cast<ManagementObject>())
+            {
+                sb.Append("Name".GetLocalized()).Append(": ").Append(cpu["Name"]).AppendLine()
+                  .Append("Manufacturer".GetLocalized()).Append(": ").Append(cpu["Manufacturer"]).AppendLine()
+                  .Append("Architecture".GetLocalized()).Append(": ").Append(cpu["Architecture"]).AppendLine()
+                  .Append("Cores".GetLocalized()).Append(": ").Append(cpu["NumberOfCores"]).AppendLine()
+                  .Append("LogicalProcessors".GetLocalized()).Append(": ").Append(cpu["NumberOfLogicalProcessors"]).AppendLine()
+                  .Append("MaxSpeed".GetLocalized()).Append(": ").Append(cpu["MaxClockSpeed"]).Append(" MHz").AppendLine()
+                  .Append("SocketDesignation".GetLocalized()).Append(": ").Append(cpu["SocketDesignation"]).AppendLine()
+                  .Append("L2Cache".GetLocalized()).Append(": ").Append(cpu["L2CacheSize"]).Append(" KB").AppendLine()
+                  .Append("L3Cache".GetLocalized()).Append(": ").Append(cpu["L3CacheSize"]).Append(" KB");
+            }
+
+            return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting CPU info: {ex}");
+            await LogHelper.LogError($"Error getting CPU info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -95,27 +96,31 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting GPU Info");
+            await LogHelper.Log("Getting GPU Info").ConfigureAwait(false);
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
-            var collection = searcher.Get();
+            using var collection = searcher.Get();
+
+            var sb = new StringBuilder(512);
             var gpuNumber = 0;
-            var gpuInfoLines = collection.Cast<ManagementObject>().Select(gpu =>
+
+            foreach (var gpu in collection.Cast<ManagementObject>())
             {
-                var gpuInfo = "GPU".GetLocalized() + $" {gpuNumber}:\n" +
-                              "   " + "Name".GetLocalized() + $": {gpu["Caption"]}\n" +
-                              "   " + "AdapterRAM".GetLocalized() + $": {gpu["AdapterRAM"]} bytes\n" +
-                              "   " + "DriverVersion".GetLocalized() + $": {gpu["DriverVersion"]}\n" +
-                              "   " + "VideoArchitecture".GetLocalized() + $": {gpu["VideoArchitecture"]}";
+                if (gpuNumber > 0) sb.AppendLine();
+
+                sb.Append("GPU".GetLocalized()).Append(' ').Append(gpuNumber).AppendLine(":")
+                  .Append("   ").Append("Name".GetLocalized()).Append(": ").Append(gpu["Caption"]).AppendLine()
+                  .Append("   ").Append("AdapterRAM".GetLocalized()).Append(": ").Append(gpu["AdapterRAM"]).Append(" bytes").AppendLine()
+                  .Append("   ").Append("DriverVersion".GetLocalized()).Append(": ").Append(gpu["DriverVersion"]).AppendLine()
+                  .Append("   ").Append("VideoArchitecture".GetLocalized()).Append(": ").Append(gpu["VideoArchitecture"]);
 
                 gpuNumber++;
-                return gpuInfo;
-            });
+            }
 
-            return string.Join(Environment.NewLine, gpuInfoLines);
+            return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting GPU info: {ex}");
+            await LogHelper.LogError($"Error getting GPU info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -124,22 +129,32 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting RAM Info");
+            await LogHelper.Log("Getting RAM Info").ConfigureAwait(false);
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
-            var collection = searcher.Get();
+            using var collection = searcher.Get();
 
-            var ramInfoLines = collection.Cast<ManagementObject>().Select((ram, i) =>
-                "RAMModule".GetLocalized() + $" {i + 1}:\n" +
-                "   " + "DeviceLocator".GetLocalized() + $": {ram["DeviceLocator"]}\n" +
-                "   " + "Capacity".GetLocalized() + $": {((ulong)ram["Capacity"]) / (1024 * 1024)} MB\n" +
-                "   " + "Speed".GetLocalized() + $": {ram["Speed"]} MHz\n" +
-                "   " + "Manufacturer".GetLocalized() + $": {ram["Manufacturer"]}");
+            var sb = new StringBuilder(512);
+            var moduleNumber = 1;
 
-            return string.Join(Environment.NewLine, ramInfoLines);
+            foreach (var ram in collection.Cast<ManagementObject>())
+            {
+                if (moduleNumber > 1) sb.AppendLine();
+
+                var capacityMB = ((ulong)ram["Capacity"]) / (1024 * 1024);
+                sb.Append("RAMModule".GetLocalized()).Append(' ').Append(moduleNumber).AppendLine(":")
+                  .Append("   ").Append("DeviceLocator".GetLocalized()).Append(": ").Append(ram["DeviceLocator"]).AppendLine()
+                  .Append("   ").Append("Capacity".GetLocalized()).Append(": ").Append(capacityMB).Append(" MB").AppendLine()
+                  .Append("   ").Append("Speed".GetLocalized()).Append(": ").Append(ram["Speed"]).Append(" MHz").AppendLine()
+                  .Append("   ").Append("Manufacturer".GetLocalized()).Append(": ").Append(ram["Manufacturer"]);
+
+                moduleNumber++;
+            }
+
+            return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting RAM info: {ex}");
+            await LogHelper.LogError($"Error getting RAM info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -148,27 +163,32 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting Disks Info");
+            await LogHelper.Log("Getting Disks Info").ConfigureAwait(false);
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-            var collection = searcher.Get();
+            using var collection = searcher.Get();
+
+            var sb = new StringBuilder(512);
             var diskNumber = 0;
-            var diskInfoLines = collection.Cast<ManagementObject>().Select(disk =>
+
+            foreach (var disk in collection.Cast<ManagementObject>())
             {
-                var diskInfo = "Disk".GetLocalized() + $" {diskNumber}:\n" +
-                               "   " + "Caption".GetLocalized() + $": {disk["Caption"]}\n" +
-                               "   " + "Size".GetLocalized() + $": {disk["Size"]} bytes\n" +
-                               "   " + "InterfaceType".GetLocalized() + $": {disk["InterfaceType"]}\n" +
-                               "   " + "Manufacturer".GetLocalized() + $": {disk["Manufacturer"]}\n" +
-                               "   " + "Model".GetLocalized() + $": {disk["Model"]}";
+                if (diskNumber > 0) sb.AppendLine();
+
+                sb.Append("Disk".GetLocalized()).Append(' ').Append(diskNumber).AppendLine(":")
+                  .Append("   ").Append("Caption".GetLocalized()).Append(": ").Append(disk["Caption"]).AppendLine()
+                  .Append("   ").Append("Size".GetLocalized()).Append(": ").Append(disk["Size"]).Append(" bytes").AppendLine()
+                  .Append("   ").Append("InterfaceType".GetLocalized()).Append(": ").Append(disk["InterfaceType"]).AppendLine()
+                  .Append("   ").Append("Manufacturer".GetLocalized()).Append(": ").Append(disk["Manufacturer"]).AppendLine()
+                  .Append("   ").Append("Model".GetLocalized()).Append(": ").Append(disk["Model"]);
 
                 diskNumber++;
-                return diskInfo;
-            });
-            return string.Join(Environment.NewLine, diskInfoLines);
+            }
+
+            return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting Disk info: {ex}");
+            await LogHelper.LogError($"Error getting Disk info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -177,26 +197,29 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting OS Info");
+            await LogHelper.Log("Getting OS Info").ConfigureAwait(false);
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
-            var collection = searcher.Get();
+            using var collection = searcher.Get();
 
-            var osInfoLines = collection.Cast<ManagementObject>().Select(os =>
-                "OSName".GetLocalized() + $": {os["Caption"]}\n" +
-                "Version".GetLocalized() + $": {os["Version"]}\n" +
-                "BuildNumber".GetLocalized() + $": {os["BuildNumber"]}\n" +
-                "Architecture".GetLocalized() + $": {os["OSArchitecture"]}\n" +
-                "InstallDate".GetLocalized() + $": {os["InstallDate"]}\n" +
-                "RegisteredUser".GetLocalized() + $": {os["RegisteredUser"]}\n" +
-                "WindowsDirectory".GetLocalized() + $": {os["WindowsDirectory"]}\n" +
-                "SystemDirectory".GetLocalized() + $": {os["SystemDirectory"]}\n" +
-                "LastBoot".GetLocalized() + $": {os["LastBootUpTime"]}");
+            var sb = new StringBuilder(512);
+            foreach (var os in collection.Cast<ManagementObject>())
+            {
+                sb.Append("OSName".GetLocalized()).Append(": ").Append(os["Caption"]).AppendLine()
+                  .Append("Version".GetLocalized()).Append(": ").Append(os["Version"]).AppendLine()
+                  .Append("BuildNumber".GetLocalized()).Append(": ").Append(os["BuildNumber"]).AppendLine()
+                  .Append("Architecture".GetLocalized()).Append(": ").Append(os["OSArchitecture"]).AppendLine()
+                  .Append("InstallDate".GetLocalized()).Append(": ").Append(os["InstallDate"]).AppendLine()
+                  .Append("RegisteredUser".GetLocalized()).Append(": ").Append(os["RegisteredUser"]).AppendLine()
+                  .Append("WindowsDirectory".GetLocalized()).Append(": ").Append(os["WindowsDirectory"]).AppendLine()
+                  .Append("SystemDirectory".GetLocalized()).Append(": ").Append(os["SystemDirectory"]).AppendLine()
+                  .Append("LastBoot".GetLocalized()).Append(": ").Append(os["LastBootUpTime"]);
+            }
 
-            return string.Join(Environment.NewLine, osInfoLines);
+            return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting OS info: {ex}");
+            await LogHelper.LogError($"Error getting OS info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -205,21 +228,29 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting Network Info");
+            await LogHelper.Log("Getting Network Info").ConfigureAwait(false);
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE NetEnabled = TRUE");
-            var collection = searcher.Get();
+            using var collection = searcher.Get();
 
-            var networkInfoLines = collection.Cast<ManagementObject>().Select(network =>
-                "Name".GetLocalized() + $": {network["Name"]}\n" +
-                "MACAddress".GetLocalized() + $": {network["MACAddress"]}\n" +
-                "Speed".GetLocalized() + $": {network["Speed"]} bps\n" +
-                "AdapterType".GetLocalized() + $": {network["AdapterType"]}");
+            var sb = new StringBuilder(512);
+            var first = true;
 
-            return string.Join(Environment.NewLine, networkInfoLines);
+            foreach (var network in collection.Cast<ManagementObject>())
+            {
+                if (!first) sb.AppendLine().AppendLine();
+                first = false;
+
+                sb.Append("Name".GetLocalized()).Append(": ").Append(network["Name"]).AppendLine()
+                  .Append("MACAddress".GetLocalized()).Append(": ").Append(network["MACAddress"]).AppendLine()
+                  .Append("Speed".GetLocalized()).Append(": ").Append(network["Speed"]).Append(" bps").AppendLine()
+                  .Append("AdapterType".GetLocalized()).Append(": ").Append(network["AdapterType"]);
+            }
+
+            return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting Network info: {ex}");
+            await LogHelper.LogError($"Error getting Network info: {ex}").ConfigureAwait(false);
             return "Error retrieving network information.";
         }
     }
@@ -228,21 +259,29 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting Battery Info");
+            await LogHelper.Log("Getting Battery Info").ConfigureAwait(false);
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Battery");
-            var collection = searcher.Get();
+            using var collection = searcher.Get();
 
-            var batteryInfoLines = collection.Cast<ManagementObject>().Select(battery =>
-                "Name".GetLocalized() + $": {battery["Name"]}\n" +
-                "EstimatedChargeRemaining".GetLocalized() + $": {battery["EstimatedChargeRemaining"]}%\n" +
-                "BatteryStatus".GetLocalized() + $": {battery["BatteryStatus"]}\n" +
-                "Chemistry".GetLocalized() + $": {battery["Chemistry"]}");
+            var sb = new StringBuilder(256);
+            var first = true;
 
-            return string.Join(Environment.NewLine, batteryInfoLines);
+            foreach (var battery in collection.Cast<ManagementObject>())
+            {
+                if (!first) sb.AppendLine().AppendLine();
+                first = false;
+
+                sb.Append("Name".GetLocalized()).Append(": ").Append(battery["Name"]).AppendLine()
+                  .Append("EstimatedChargeRemaining".GetLocalized()).Append(": ").Append(battery["EstimatedChargeRemaining"]).Append("%").AppendLine()
+                  .Append("BatteryStatus".GetLocalized()).Append(": ").Append(battery["BatteryStatus"]).AppendLine()
+                  .Append("Chemistry".GetLocalized()).Append(": ").Append(battery["Chemistry"]);
+            }
+
+            return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting Battery info: {ex}");
+            await LogHelper.LogError($"Error getting Battery info: {ex}").ConfigureAwait(false);
             return "Error retrieving battery information.";
         }
     }
@@ -280,7 +319,7 @@ public sealed partial class SystemInfoPage : Page
 
     private async void SelectPathButton_Click(object sender, RoutedEventArgs e)
     {
-        var folderPicker = new DevWinUI.FolderPicker(WindowNative.GetWindowHandle(App.MainWindow))
+        var folderPicker = new FolderPicker(App.MainWindow.AppWindow.Id)
         {
             SuggestedStartLocation = PickerLocationId.Desktop
         };

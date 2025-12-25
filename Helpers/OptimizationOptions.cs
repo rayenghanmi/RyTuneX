@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
 
 namespace RyTuneX.Helpers;
+
 internal partial class OptimizationOptions
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
@@ -16,6 +17,9 @@ internal partial class OptimizationOptions
 
     [DllImport("Shell32.dll", CharSet = CharSet.Auto)]
     public static extern int ExtractIconEx(string lpszFile, int nIconIndex, IntPtr[] phiconLarge, IntPtr[]? phiconSmall, int nIcons);
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern bool DestroyIcon(IntPtr hIcon);
 
     public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
     {
@@ -27,9 +31,16 @@ internal partial class OptimizationOptions
 
         var largeIcons = new IntPtr[1];
         ExtractIconEx(@"C:\Windows\System32\imageres.dll", 152, largeIcons, null, 1);
-        var extractedIcon = System.Drawing.Icon.FromHandle(largeIcons[0]);
-        var bmp = extractedIcon.ToBitmap();
-        bmp.Save(Path.Combine(IconCacheDirectory, "defaulticon.png"), ImageFormat.Png);
+        var hIcon = largeIcons[0];
+        if (hIcon != IntPtr.Zero)
+        {
+            // Clone the icon from handle so the original HICON can be safely destroyed
+            using var clonedIcon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(hIcon).Clone();
+            DestroyIcon(hIcon);
+
+            using var bmp = clonedIcon.ToBitmap();
+            bmp.Save(Path.Combine(IconCacheDirectory, "defaulticon.png"), ImageFormat.Png);
+        }
 
         var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
         var win32AppsTask = Task.Run(GetWin32Apps);
@@ -50,25 +61,26 @@ internal partial class OptimizationOptions
     {
         // Remove invalid filename characters and limit length
         var invalidChars = Path.GetInvalidFileNameChars();
-        var safeName = string.Concat(appName.Where(c => !invalidChars.Contains(c)));
+        var safeName = new string(appName.Where(c => !invalidChars.Contains(c)).ToArray());
 
         // Limit length to prevent long filenames
         if (safeName.Length > 50)
         {
-            safeName = safeName.Substring(0, 50);
+            safeName = safeName[..50];
         }
 
-        // Add timestamp hash to ensure uniqueness if needed
-        var hash = Math.Abs(appName.GetHashCode()).ToString();
-        return $"{safeName}_{hash}{extension}";
+        // Add timestamp hash to ensure uniqueness
+        return $"{safeName}_{Math.Abs(appName.GetHashCode())}{extension}";
     }
 
     private static async Task<List<Tuple<string, string, bool>>> GetUwpApps(bool uninstallableOnly)
     {
         var installedApps = new List<Tuple<string, string, bool>>();
+
+        // Use string interpolation with raw string literals for commands
         var command = uninstallableOnly
-            ? @"Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation,PackageFullName | Format-List"
-            : @"Get-AppxPackage -AllUsers | Select-Object Name,InstallLocation,PackageFullName | Format-List";
+            ? """Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation,PackageFullName | Format-List"""
+            : """Get-AppxPackage -AllUsers | Select-Object Name,InstallLocation,PackageFullName | Format-List""";
 
         try
         {
@@ -85,28 +97,30 @@ internal partial class OptimizationOptions
             };
             process.Start();
 
-            var output = process.StandardOutput.ReadToEnd();
+            var output = await process.StandardOutput.ReadToEndAsync().ConfigureAwait(false);
             string? currentName = null;
             string? currentLocation = null;
 
+            // Use collection expression for split separators
+            ReadOnlySpan<char> newLine = Environment.NewLine;
             foreach (var line in output.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries))
             {
-                if (line.StartsWith("Name"))
+                if (line.StartsWith("Name", StringComparison.Ordinal))
                 {
                     if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
                     {
-                        var logoPath = await ExtractLogoPath(currentLocation, false, currentName);
-                        installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
+                        var logoPath = await ExtractLogoPath(currentLocation, false, currentName).ConfigureAwait(false);
+                        installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false));
                     }
 
                     currentName = line.Split([':'], 2)[1].Trim();
                     currentLocation = null;
                 }
-                else if (line.StartsWith("InstallLocation"))
+                else if (line.StartsWith("InstallLocation", StringComparison.Ordinal))
                 {
                     currentLocation = line.Split([':'], 2)[1].Trim();
                 }
-                else if (!string.IsNullOrWhiteSpace(currentLocation) && line.StartsWith(" "))
+                else if (!string.IsNullOrWhiteSpace(currentLocation) && line.StartsWith(" ", StringComparison.Ordinal))
                 {
                     currentLocation += " " + line.Trim();
                 }
@@ -114,15 +128,15 @@ internal partial class OptimizationOptions
 
             if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
             {
-                var logoPath = await ExtractLogoPath(currentLocation, false, currentName);
-                installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false)); // false for UWP
+                var logoPath = await ExtractLogoPath(currentLocation, false, currentName).ConfigureAwait(false);
+                installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false));
             }
 
-            process.WaitForExit();
+            await process.WaitForExitAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError(ex.Message);
+            await LogHelper.LogError(ex.Message).ConfigureAwait(false);
         }
 
         return installedApps;
@@ -508,7 +522,7 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"RevertAllChanges: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            await LogHelper.LogError($"RevertAllChanges: {ex.Message}\n Stack Trace: {ex.StackTrace}");
         }
     }
     public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)
@@ -899,22 +913,22 @@ internal partial class OptimizationOptions
                 case "SMBv1":
                     if (toggleSwitch.IsOn)
                     {
-                        OptimizeSystemHelper.DisableSMB("1");
+                        OptimizeSystemHelper.DisableSMBAsync("1");
                     }
                     else
                     {
-                        OptimizeSystemHelper.EnableSMB("1");
+                        OptimizeSystemHelper.EnableSMBAsync("1");
                     }
                     break;
 
                 case "SMBv2":
                     if (toggleSwitch.IsOn)
                     {
-                        OptimizeSystemHelper.DisableSMB("2");
+                        OptimizeSystemHelper.DisableSMBAsync("2");
                     }
                     else
                     {
-                        OptimizeSystemHelper.EnableSMB("2");
+                        OptimizeSystemHelper.EnableSMBAsync("2");
                     }
                     break;
 

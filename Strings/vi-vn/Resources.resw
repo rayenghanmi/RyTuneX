@@ -760,10 +760,10 @@
     <value>Tắt</value>
   </data>
   <data name="SecurityPage_Status.Text" xml:space="preserve">
-    <value>Tình trạng bảo mật</value>
+    <value>Trạng thái bảo mật</value>
   </data>
   <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
-    <value>Bảo vệ khỏi vi-rút &amp; mối đe dọa</value>
+    <value>Bảo vệ khỏi virus và mối đe dọa</value>
   </data>
   <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
     <value>Tường lửa &amp; bảo vệ mạng</value>
@@ -775,10 +775,10 @@
     <value>SmartScreen</value>
   </data>
   <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>Bảo vệ theo thời gian thực</value>
+    <value>Bảo vệ thời gian thực</value>
   </data>
   <data name="SecurityPage_UAC.Text" xml:space="preserve">
-    <value>Kiểm soát tài khoản người dùng (UAC)</value>
+    <value>Kiểm soát Tài khoản Người dùng (UAC)</value>
   </data>
   <data name="SecurityPage_Details.Text" xml:space="preserve">
     <value>Chi tiết</value>
@@ -1331,5 +1331,86 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>Khởi động lại ứng dụng với quyền quản trị để các thay đổi có hiệu lực</value>
+  </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>Mở Bảo mật Windows</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>Quét nhanh</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>Quét nhanh</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>Cập nhật định nghĩa</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>Cập nhật định nghĩa</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>Bật</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>Bảo vệ chống can thiệp</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>Truy cập thư mục có kiểm soát</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>Mã hóa ổ BitLocker</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>Dịch vụ Microsoft Defender</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>Quét phần mềm độc hại chủ động</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>Chặn truy cập mạng trái phép</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>Bản vá bảo mật và cập nhật tính năng</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>Kiểm soát lời nhắc cấp quyền quản trị</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>Ngăn thay đổi trái phép đối với cài đặt bảo mật</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>Bảo vệ thư mục khỏi thay đổi trái phép (bảo vệ chống ransomware)</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>Trạng thái mã hóa ổ</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>Trạng thái dịch vụ bảo mật lõi</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>Cập nhật lần cuối</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>Làm mới lần cuối</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>Quét nhanh hoàn tất</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>Quét nhanh thất bại</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>Đã cập nhật định nghĩa</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>Cập nhật định nghĩa thất bại</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Không</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>Bảo vệ bạn trên web và trong ứng dụng</value>
   </data>
 </root>

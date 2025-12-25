@@ -778,7 +778,7 @@
     <value>실시간 보호</value>
   </data>
   <data name="SecurityPage_UAC.Text" xml:space="preserve">
-    <value>사용자 계정 컨트롤(UAC)</value>
+    <value>사용자 계정 컨트롤 (UAC)</value>
   </data>
   <data name="SecurityPage_Details.Text" xml:space="preserve">
     <value>세부 정보</value>
@@ -1331,5 +1331,86 @@
   </data>
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>변경 사항을 적용하려면 앱을 관리자 권한으로 다시 시작하세요</value>
+  </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>새로 고침</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>Windows 보안 열기</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>빠른 검사</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>빠른 검사</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>정의 업데이트</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>정의 업데이트</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>사용</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>변조 방지</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>제한된 폴더 액세스</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>BitLocker 드라이브 암호화</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>Microsoft Defender 서비스</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>활성 악성코드 검사</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>무단 네트워크 액세스 차단</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>보안 패치 및 기능 업데이트</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>관리자 권한 프롬프트 제어</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>보안 설정에 대한 무단 변경 방지</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>무단 변경으로부터 폴더 보호(랜섬웨어 방지)</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>드라이브 암호화 상태</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>핵심 보안 서비스 상태</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>마지막 업데이트</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>마지막 새로 고침</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>빠른 검사 완료</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>빠른 검사 실패</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>정의가 업데이트되었습니다</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>정의 업데이트 실패</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>없음</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>웹 및 앱에서 사용자를 보호합니다</value>
   </data>
 </root>

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.IO.Compression;
 using System.Net;
 using System.Reflection;
 using System.Windows.Input;
@@ -7,14 +6,14 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
+using Microsoft.Windows.Storage.Pickers;
 using Newtonsoft.Json.Linq;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using Windows.ApplicationModel;
 using Windows.Storage;
-using Windows.Storage.Pickers;
-using WinRT.Interop;
 
 namespace RyTuneX.Views;
 
@@ -25,6 +24,8 @@ public sealed partial class SettingsPage : Page
 
     private ElementTheme _elementTheme;
     private string _versionDescription;
+    private string? _pendingScrollTarget;
+
     public ICommand SwitchThemeCommand
     {
         get;
@@ -54,6 +55,27 @@ public sealed partial class SettingsPage : Page
                     await _themeSelectorService.SetThemeAsync(param);
                 }
             });
+
+        Loaded += SettingsPage_Loaded;
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
+        {
+            _pendingScrollTarget = optionTag;
+        }
+    }
+
+    private async void SettingsPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
     }
 
     private async void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -284,7 +306,7 @@ public sealed partial class SettingsPage : Page
                 if (result == ContentDialogResult.Primary)
                 {
                     // Run the installation module
-                    var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip";
+                    var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneXSetup.exe";
                     await InstallRyTuneX(downloadUrl);
                 }
             }
@@ -298,9 +320,7 @@ public sealed partial class SettingsPage : Page
     public async Task InstallRyTuneX(string downloadUrl)
     {
         var tempPath = Path.GetTempPath();
-        var zipFilePath = Path.Combine(tempPath, "RyTuneX.Setup.zip");
-        var extractionPath = Path.Combine(tempPath, "RyTuneX");
-        var setupFilePath = Path.Combine(extractionPath, "RyTuneXSetup.exe");
+        var setupFilePath = Path.Combine(tempPath, "RyTuneXSetup.exe");
 
         try
         {
@@ -310,34 +330,16 @@ public sealed partial class SettingsPage : Page
             UpdateProgress.Visibility = Visibility.Visible;
             UpdateStatusText.Text = "Downloading...";
 
-            // Download the ZIP file
+            // Download the setup file
             using (var webClient = new WebClient())
             {
-                await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), zipFilePath);
+                await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), setupFilePath);
                 Debug.WriteLine("Download complete.");
-            }
-
-            // Extract the ZIP file
-            Debug.WriteLine("Extracting files...");
-            UpdateStatusText.Text = "Extracting...";
-            if (Directory.Exists(extractionPath))
-            {
-                Directory.Delete(extractionPath, true);
-            }
-            ZipFile.ExtractToDirectory(zipFilePath, extractionPath);
-            Debug.WriteLine("Extraction complete.");
-
-            // Delete the ZIP file
-            Debug.WriteLine("Cleaning up...");
-            if (File.Exists(zipFilePath))
-            {
-                File.Delete(zipFilePath);
-                Debug.WriteLine("Deleted RyTuneX.Setup.zip.");
             }
 
             // Run the setup file with the --silent argument
             UpdateStatusText.Text = "Installing...";
-            Debug.WriteLine("Running RyTuneX Setup.exe...");
+            Debug.WriteLine("Running RyTuneXSetup.exe...");
             var setupProcess = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -363,10 +365,18 @@ public sealed partial class SettingsPage : Page
         }
         finally
         {
-            // Cleanup the extracted files
-            if (Directory.Exists(extractionPath))
+            // Cleanup the setup file
+            if (File.Exists(setupFilePath))
             {
-                Directory.Delete(extractionPath, true);
+                try
+                {
+                    File.Delete(setupFilePath);
+                    Debug.WriteLine("Deleted RyTuneXSetup.exe.");
+                }
+                catch (Exception ex)
+                {
+                    await LogHelper.LogError($"Error deleting setup file: {ex.Message}");
+                }
             }
             UpdateStatusText.Text = "Done".GetLocalized();
             UpdateButton.Visibility = Visibility.Visible;
@@ -500,11 +510,11 @@ public sealed partial class SettingsPage : Page
 
     private async void ImportButton_Click(object sender, RoutedEventArgs e)
     {
-        var picker = new DevWinUI.FilePicker(WindowNative.GetWindowHandle(App.MainWindow));
-        picker.FileTypeChoices.Add("Reg File", ["*.reg"]);
-        picker.DefaultFileExtension = "*.reg";
-        picker.ShowAllFilesOption = false;
-        picker.SuggestedStartLocation = PickerLocationId.Desktop;
+        var picker = new FileOpenPicker(App.MainWindow.AppWindow.Id)
+        {
+            SuggestedStartLocation = PickerLocationId.Desktop
+        };
+        picker.FileTypeFilter.Add(".reg");
 
         var file = await picker.PickSingleFileAsync();
         if (file != null)
@@ -512,36 +522,35 @@ public sealed partial class SettingsPage : Page
             // Import the registry file
             await OptimizationOptions.StartInCmd($"regedit.exe /s {file.Path}");
             await LogHelper.Log($"Imported registry settings from {file.Path}");
-        }
+            // Apply all the optimizations present in the registry key
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                    Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                        ? RegistryView.Registry64
+                        : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
 
-        // Apply all the optimizations present in the registry key
-        using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                    ? RegistryView.Registry64
-                    : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
-
-        if (key != null)
-        {
-            foreach (var valueName in key.GetValueNames())
+            if (key != null)
             {
-                var value = key.GetValue(valueName);
-                var kind = key.GetValueKind(valueName);
-
-                if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
+                foreach (var valueName in key.GetValueNames())
                 {
-                    // Simulate the toggle being on
-                    var simulatedToggle = new ToggleSwitch
-                    {
-                        Tag = valueName,
-                        IsOn = true
-                    };
+                    var value = key.GetValue(valueName);
+                    var kind = key.GetValueKind(valueName);
 
-                    await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
-                    await LogHelper.Log($"Applied optimization: {valueName}");
+                    if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
+                    {
+                        // Simulate the toggle being on
+                        var simulatedToggle = new ToggleSwitch
+                        {
+                            Tag = valueName,
+                            IsOn = true
+                        };
+
+                        await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
+                        await LogHelper.Log($"Applied optimization: {valueName}");
+                    }
                 }
             }
+            await LogHelper.Log("Applied all optimizations from the registry key.");
+            App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
         }
-        await LogHelper.Log("Applied all optimizations from the registry key.");
-        App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
     }
 }

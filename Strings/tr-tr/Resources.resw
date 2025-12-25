@@ -763,25 +763,25 @@
     <value>Güvenlik Durumu</value>
   </data>
   <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
-    <value>Virüs ve Tehdit Koruması</value>
+    <value>Virüs ve tehdit koruması</value>
   </data>
   <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
-    <value>Güvenlik Duvarı ve Ağ Koruması</value>
+    <value>Güvenlik duvarı ve ağ koruması</value>
   </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
-    <value>Windows Güncellemesi</value>
+    <value>Windows Update</value>
   </data>
   <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
-    <value>Akıllı Ekran</value>
+    <value>SmartScreen</value>
   </data>
   <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>Gerçek Zamanlı Koruma</value>
+    <value>Gerçek zamanlı koruma</value>
   </data>
   <data name="SecurityPage_UAC.Text" xml:space="preserve">
     <value>Kullanıcı Hesabı Denetimi (UAC)</value>
   </data>
   <data name="SecurityPage_Details.Text" xml:space="preserve">
-    <value>Detaylar</value>
+    <value>Ayrıntılar</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
     <value>Onar</value>
@@ -1331,5 +1331,86 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   </data>
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>Değişikliklerin geçerli olması için uygulamayı yönetici olarak yeniden başlatın</value>
+  </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>Yenile</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>Windows Güvenliğini Aç</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>Hızlı tara</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>Hızlı tara</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>Tanımları güncelle</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>Tanımları güncelle</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>Etkinleştir</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>Kurcalamaya karşı koruma</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>Denetimli klasör erişimi</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>BitLocker sürücü şifreleme</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>Microsoft Defender hizmeti</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>Aktif kötü amaçlı yazılım tarama</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>Yetkisiz ağ erişimini engeller</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>Güvenlik düzeltmeleri ve özellik güncellemeleri</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>Yönetici erişim istemlerini denetler</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>Yetkisiz değişiklikleri engeller</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>Klasörleri yetkisiz değişikliklere karşı korur (fidye yazılım koruması)</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>Sürücü şifreleme durumu</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>Çekirdek güvenlik hizmeti durumu</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>Son güncelleme</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>Son yenileme</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>Hızlı tarama tamamlandı</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>Hızlı tarama başarısız</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>Tanımlar güncellendi</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>Tanımlar güncellenemedi</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Yok</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>Web ve uygulamalarda sizi korur</value>
   </data>
 </root>

@@ -763,19 +763,19 @@
     <value>安全狀態</value>
   </data>
   <data name="SecurityPage_VirusThreatProtection.Text" xml:space="preserve">
-    <value>病毒和威脅防護</value>
+    <value>病毒與威脅防護</value>
   </data>
   <data name="SecurityPage_FirewallNetworkProtection.Text" xml:space="preserve">
-    <value>防火牆和網路保護</value>
+    <value>防火牆與網路保護</value>
   </data>
   <data name="SecurityPage_WindowsUpdate.Text" xml:space="preserve">
     <value>Windows 更新</value>
   </data>
   <data name="SecurityPage_SmartScreen.Text" xml:space="preserve">
-    <value>SmartScreen</value>
+    <value>SmartScreen 智慧篩選</value>
   </data>
   <data name="SecurityPage_RealTimeProtection.Text" xml:space="preserve">
-    <value>實時保護</value>
+    <value>即時防護</value>
   </data>
   <data name="SecurityPage_UAC.Text" xml:space="preserve">
     <value>使用者帳戶控制 (UAC)</value>
@@ -1317,7 +1317,7 @@
     <value>停用 Windows Recall</value>
   </data>
   <data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
-    <value />
+    <value>禁用 Windows Recall，此功能會截取螢幕活動以支援 AI 搜尋。建議注重隱私的使用者或在安全性要求較高的環境中使用。</value>
   </data>
   <data name="KeepAppData" xml:space="preserve">
     <value>保留應用程式資料</value>
@@ -1327,5 +1327,86 @@
   </data>
   <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
     <value>請以管理員身份重新啟動應用程式以使更改生效</value>
+  </data>
+  <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
+    <value>重新整理</value>
+  </data>
+  <data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
+    <value>開啟 Windows 安全性</value>
+  </data>
+  <data name="SecurityPage_QuickScan.Text" xml:space="preserve">
+    <value>快速掃描</value>
+  </data>
+  <data name="SecurityPage_QuickScanTitle" xml:space="preserve">
+    <value>快速掃描</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
+    <value>更新定義</value>
+  </data>
+  <data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
+    <value>更新定義</value>
+  </data>
+  <data name="SecurityPage_Enable.Content" xml:space="preserve">
+    <value>啟用</value>
+  </data>
+  <data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
+    <value>防竄改保護</value>
+  </data>
+  <data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
+    <value>受控資料夾存取</value>
+  </data>
+  <data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
+    <value>BitLocker 磁碟機加密</value>
+  </data>
+  <data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
+    <value>Microsoft Defender 服務</value>
+  </data>
+  <data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
+    <value>主動惡意軟體掃描</value>
+  </data>
+  <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
+    <value>封鎖未經授權的網路存取</value>
+  </data>
+  <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
+    <value>安全修補和功能更新</value>
+  </data>
+  <data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
+    <value>控制系統管理員權限提示</value>
+  </data>
+  <data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
+    <value>防止未經授權變更安全設定</value>
+  </data>
+  <data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
+    <value>保護資料夾避免 ransomware 未授權變更</value>
+  </data>
+  <data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
+    <value>磁碟機加密狀態</value>
+  </data>
+  <data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
+    <value>核心安全服務狀態</value>
+  </data>
+  <data name="SecurityPage_LastUpdated" xml:space="preserve">
+    <value>上次更新</value>
+  </data>
+  <data name="SecurityPage_LastRefreshed" xml:space="preserve">
+    <value>上次重新整理</value>
+  </data>
+  <data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
+    <value>快速掃描已完成</value>
+  </data>
+  <data name="SecurityPage_QuickScanFailed" xml:space="preserve">
+    <value>快速掃描失敗</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
+    <value>定義已更新</value>
+  </data>
+  <data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
+    <value>定義更新失敗</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>無</value>
+  </data>
+  <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
+    <value>保護您在網站與應用程式中的安全</value>
   </data>
 </root>

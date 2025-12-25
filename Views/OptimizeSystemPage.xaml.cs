@@ -3,6 +3,7 @@ using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
 
@@ -11,16 +12,40 @@ namespace RyTuneX.Views;
 public sealed partial class OptimizeSystemPage : Page
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
+    private string? _pendingScrollTarget;
 
     public OptimizeSystemPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing OptimizeSystemPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
-        Loaded += (sender, e) => InitializeToggleSwitchesAsync();
+        Loaded += OptimizeSystemPage_Loaded;
     }
 
-    private async void InitializeToggleSwitchesAsync()
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        // Store the navigation parameter for scrolling after the page is loaded
+        if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
+        {
+            _pendingScrollTarget = optionTag;
+        }
+    }
+
+    private async void OptimizeSystemPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        await InitializeToggleSwitchesAsync();
+
+        // Scroll to the target element if there's a pending scroll target
+        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
+    }
+
+    private async Task InitializeToggleSwitchesAsync()
     {
         await LogHelper.Log("Initializing Toggle Switches");
         try

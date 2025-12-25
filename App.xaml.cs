@@ -66,6 +66,13 @@ public partial class App : Application
     {
         InitializeComponent();
         LogHelper.Log("___________ New Session ___________");
+
+        // Catch unhandled exceptions early to avoid silent activation failures
+        UnhandledException += async (sender, e) =>
+        {
+            try { await LogHelper.LogError($"UnhandledException: {e.Exception}"); } catch { }
+        };
+
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).
@@ -109,8 +116,16 @@ public partial class App : Application
         base.OnLaunched(args);
 
         // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
-        MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
-        MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
+        try
+        {
+            MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+            MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"TitleBar init failed: {ex}");
+        }
+
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
 

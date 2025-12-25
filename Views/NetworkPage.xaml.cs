@@ -1,6 +1,8 @@
 ﻿using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
@@ -26,6 +28,7 @@ public sealed partial class NetworkPage : Page
     ];
 
     private string selectedInterfaceName = string.Empty;
+    private string? _pendingScrollTarget;
 
     public NetworkPage()
     {
@@ -35,7 +38,28 @@ public sealed partial class NetworkPage : Page
         PopulateNetworkInterfaces();
         DisplayNetworkInfo();
         cmbDNSOptions.SelectedIndex = 0;
+        Loaded += NetworkPage_Loaded;
     }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
+        {
+            _pendingScrollTarget = optionTag;
+        }
+    }
+
+    private async void NetworkPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
+    }
+
     private async void PopulateNetworkInterfaces()
     {
         try

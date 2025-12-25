@@ -3,6 +3,38 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.5.2 - Released
+
+> [!IMPORTANT]
+> The update process has been modified to download the installer directly instead of a ZIP archive. This change will cause the automatic update feature to fail on versions prior to 1.5.2. Users on older versions must manually download and install version 1.5.2 or later from the [releases page](https://github.com/rayenghanmi/rytunex/releases) to benefit from future automatic updates.
+
+### Added
+
+- Introduced a new search bar to the title bar for quick navigation between toggles.
+- Redesigned the `Security` page with comprehensive security monitoring:
+  - Added real-time security status checks with auto-refresh every 30 seconds.
+  - Added detection for Antivirus, Firewall, Windows Update, SmartScreen, Real-Time Protection, UAC, Tamper Protection, Controlled Folder Access, BitLocker, and Windows Defender Service.
+  - Added Quick Scan functionality to run Windows Defender quick scans directly from the app.
+  - Added Defender signature update functionality.
+  - Added direct links to Windows Security settings pages for disabled features.
+  - Added antivirus product name display and signature update date.
+  - Improved performance by running security checks in parallel on background threads.
+- Added the ability to install the app using Powershell script `irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/main/install.ps1" | iex`.
+
+### Fixes
+
+- Fixed the Disable News and Interests toggle to set the correct registry values.
+- Enhanced `Repair` page encoding handling for console output (Possible fix for #73).
+
+### Changes
+
+- Redesigned the setup for higher scaling quality on high DPI displays #71.
+- Improved file/folder picker logic to use Microsoft.Windows.Storage.Pickers and removed DevWinUI.
+- Pinned primary action buttons in the `Debloat` page to keep them visible while scrolling (suggested in #74).
+- Updated the app's target framework to .NET 9 and Windows SDK 10.0.26100.0.
+- Made navigation smoother by preloading search data, toggles, and system info.
+- Prevented navigation stack crashes when clearing history.
+
 ## 1.5.1 - Released
 
 ### Fixes
@@ -11,7 +43,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
-- Removed the newly added toggle switches state management as it was causing more issues than it was solving. The app will revert to using `LocalSettings` for saving and retrieving toggle states.
+- Removed the newly added toggle switches state management as it was causing more issues than it was solving. The app will revert to using the old method for saving and retrieving toggle states.
 
 ## 1.5.0 - Released
 
