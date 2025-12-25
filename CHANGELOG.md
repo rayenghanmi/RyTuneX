@@ -5,6 +5,9 @@ All notable changes to this branch will be documented in this file.
 
 ## 1.5.2 - Unreleased
 
+> [!IMPORTANT]
+> The update process has been modified to download the installer directly instead of a ZIP archive. This change will cause the automatic update feature to fail on versions prior to 1.5.2. Users on older versions must manually download and install version 1.5.2 or later from the [releases page](https://github.com/rayenghanmi/rytunex/releases) to benefit from future automatic updates.
+
 ### Added
 
 - Introduced a new search bar to the title bar for quick navigation between toggles.
@@ -16,7 +19,7 @@ All notable changes to this branch will be documented in this file.
   - Added direct links to Windows Security settings pages for disabled features.
   - Added antivirus product name display and signature update date.
   - Improved performance by running security checks in parallel on background threads.
-- Added the ability to install the app using Powershell script `irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/install.ps1" | iex`.
+- Added the ability to install the app using Powershell script `irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/main/install.ps1" | iex`.
 
 ### Fixes
 

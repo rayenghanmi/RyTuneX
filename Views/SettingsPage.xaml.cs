@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.IO.Compression;
 using System.Net;
 using System.Reflection;
 using System.Windows.Input;
@@ -307,7 +306,7 @@ public sealed partial class SettingsPage : Page
                 if (result == ContentDialogResult.Primary)
                 {
                     // Run the installation module
-                    var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneX.Setup.zip";
+                    var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneXSetup.exe";
                     await InstallRyTuneX(downloadUrl);
                 }
             }
@@ -321,9 +320,7 @@ public sealed partial class SettingsPage : Page
     public async Task InstallRyTuneX(string downloadUrl)
     {
         var tempPath = Path.GetTempPath();
-        var zipFilePath = Path.Combine(tempPath, "RyTuneX.Setup.zip");
-        var extractionPath = Path.Combine(tempPath, "RyTuneX");
-        var setupFilePath = Path.Combine(extractionPath, "RyTuneXSetup.exe");
+        var setupFilePath = Path.Combine(tempPath, "RyTuneXSetup.exe");
 
         try
         {
@@ -333,34 +330,16 @@ public sealed partial class SettingsPage : Page
             UpdateProgress.Visibility = Visibility.Visible;
             UpdateStatusText.Text = "Downloading...";
 
-            // Download the ZIP file
+            // Download the setup file
             using (var webClient = new WebClient())
             {
-                await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), zipFilePath);
+                await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), setupFilePath);
                 Debug.WriteLine("Download complete.");
-            }
-
-            // Extract the ZIP file
-            Debug.WriteLine("Extracting files...");
-            UpdateStatusText.Text = "Extracting...";
-            if (Directory.Exists(extractionPath))
-            {
-                Directory.Delete(extractionPath, true);
-            }
-            ZipFile.ExtractToDirectory(zipFilePath, extractionPath);
-            Debug.WriteLine("Extraction complete.");
-
-            // Delete the ZIP file
-            Debug.WriteLine("Cleaning up...");
-            if (File.Exists(zipFilePath))
-            {
-                File.Delete(zipFilePath);
-                Debug.WriteLine("Deleted RyTuneX.Setup.zip.");
             }
 
             // Run the setup file with the --silent argument
             UpdateStatusText.Text = "Installing...";
-            Debug.WriteLine("Running RyTuneX Setup.exe...");
+            Debug.WriteLine("Running RyTuneXSetup.exe...");
             var setupProcess = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -386,10 +365,18 @@ public sealed partial class SettingsPage : Page
         }
         finally
         {
-            // Cleanup the extracted files
-            if (Directory.Exists(extractionPath))
+            // Cleanup the setup file
+            if (File.Exists(setupFilePath))
             {
-                Directory.Delete(extractionPath, true);
+                try
+                {
+                    File.Delete(setupFilePath);
+                    Debug.WriteLine("Deleted RyTuneXSetup.exe.");
+                }
+                catch (Exception ex)
+                {
+                    await LogHelper.LogError($"Error deleting setup file: {ex.Message}");
+                }
             }
             UpdateStatusText.Text = "Done".GetLocalized();
             UpdateButton.Visibility = Visibility.Visible;
