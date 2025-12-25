@@ -7,23 +7,36 @@ $host.UI.RawUI.WindowTitle = "RyTuneX Installer"
 
 # --- Relaunch as Administrator ---
 function Ensure-Admin {
-    $isAdmin = ([Security.Principal.WindowsPrincipal] `
-        [Security.Principal.WindowsIdentity]::GetCurrent()
-    ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
-    if (-not $isAdmin) {
-        Write-Host "Restarting installer as Administrator..." -ForegroundColor Yellow
+    $identity  = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = [Security.Principal.WindowsPrincipal]::new($identity)
 
-        $encodedCommand = [Convert]::ToBase64String(
-            [Text.Encoding]::Unicode.GetBytes($MyInvocation.MyCommand.Definition)
-        )
-
-        Start-Process powershell.exe `
-            -ArgumentList "-NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedCommand" `
-            -Verb RunAs
-
-        exit
+    if ($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        return
     }
+
+    Write-Host "Restarting installer as Administrator..." -ForegroundColor Yellow
+
+    if ($PSCommandPath) {
+        # Local .ps1 execution
+        Start-Process powershell.exe -Verb RunAs -ArgumentList @(
+            "-NoExit",
+            "-ExecutionPolicy", "Bypass",
+            "-File", $PSCommandPath
+        )
+    }
+    else {
+        # Remote (irm | iex) execution
+        $url = "https://raw.githubusercontent.com/rayenghanmi/rytunex/main/install.ps1"
+
+        Start-Process powershell.exe -Verb RunAs -ArgumentList @(
+            "-NoExit",
+            "-ExecutionPolicy", "Bypass",
+            "-Command", "irm '$url' | iex"
+        )
+    }
+
+    exit
 }
 
 Ensure-Admin
