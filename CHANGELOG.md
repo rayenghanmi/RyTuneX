@@ -3,7 +3,7 @@
 All notable changes to this branch will be documented in this file.
 
 
-## 1.5.2 - Unreleased
+## 1.5.2 - Released
 
 > [!IMPORTANT]
 > The update process has been modified to download the installer directly instead of a ZIP archive. This change will cause the automatic update feature to fail on versions prior to 1.5.2. Users on older versions must manually download and install version 1.5.2 or later from the [releases page](https://github.com/rayenghanmi/rytunex/releases) to benefit from future automatic updates.
