@@ -21,6 +21,36 @@
   <a href="https://github.com/rayenghanmi/RyTuneX/wiki/Installation"><img src="https://img.shields.io/badge/Get%20Started-RyTuneX-blue?style=for-the-badge" alt="Get Started"></a>
 </div>
 
+## Installation
+
+### Option 1: Automatic Installation (Recommended)
+
+1. Install using Winget:
+
+```
+winget install rytunex
+```
+
+2. Install using Powershell:
+
+```shell
+irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/main/install.ps1" | iex
+```
+
+### Option 2: Manual Installation
+
+1. Download:
+    - Get the latest [Setup file](https://github.com/rayenghanmi/RyTuneX/releases/latest/download/RyTuneXSetup.exe)
+2. Run Installer:
+    - Navigate to where you donwloaded the excutable and double-click on it (`RyTuneXSetup.exe`) to start the installation.
+3. Follow Prompts:
+    - Complete the installation by following the on-screen instructions.
+
+> [!IMPORTANT]  
+> Always download RyTuneX from the official [GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety.
+
+---
+
 ### Why Choose RyTuneX?
 - **Effortless Optimization**: Instantly boost your system's speed and reliability.
 - **Smart Features**: From app removal to privacy protection, we've got you covered.
@@ -38,8 +68,6 @@
 
 ### Join the Community
 Get the most out of RyTuneX by connecting with fellow users and sharing your experiences. Have questions or feedback? Let’s make RyTuneX even better together!
-
----
 
 ## About
 
@@ -73,32 +101,6 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
   </picture>
   <p><em>RyTuneX - Clean, Modern, and Intuitive Interface</em></p>
 </div>
-
-## Installation
-
-### Option 1: Automatic Installation (Recommended)
-
-1. Open a terminal (cmd, PowerShell, or Windows Terminal).
-
-2. Run the following command:
-
-```
-winget install rytunex
-```
-
-### Option 2: Manual Installation
-
-1. Download:
-    - Get the latest [RyTuneX.Setup.zip](https://github.com/rayenghanmi/RyTuneX/releases/latest/download/RyTuneX.Setup.zip)
-2. Extract:
-    - Extract the downloaded `.zip` file to a location of your choice.
-3. Run Installer:
-    - Navigate to the extracted folder and double-click on `RyTuneX.Setup.exe` to start the installation.
-4. Follow Prompts:
-    - Complete the installation by following the on-screen instructions.
-
-> [!IMPORTANT]  
-> Always download RyTuneX from the official [GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety.
 
 ## Usage
 
