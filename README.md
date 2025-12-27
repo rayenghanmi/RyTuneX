@@ -25,10 +25,10 @@
 
 ### Option 1: Automatic Installation (Recommended)
 
-1. Install using Winget:
+1. Install using Winget (Delayed new releases):
 
 ```
-winget install rayenghanmi.rytunex
+winget install rayen.rytunex
 ```
 
 2. Install using Powershell:
