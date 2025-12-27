@@ -28,7 +28,7 @@
 1. Install using Winget:
 
 ```
-winget install rytunex
+winget install rayenghanmi.rytunex
 ```
 
 2. Install using Powershell:
