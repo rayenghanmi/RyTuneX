@@ -1409,4 +1409,37 @@
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>保護您在網站與應用程式中的安全</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>電池與電源</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>電源模式</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>選擇電源計劃以平衡效能和能源消耗</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>將隱藏的極致效能電源計畫新增至系統。</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>已成功新增極致效能計畫。</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>新增計畫</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>極致效能計畫已存在。</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>新增極致效能計畫</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>新增極致效能計畫</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>新增極致效能計畫</value>
+  </data>
 </root>
+
+
+

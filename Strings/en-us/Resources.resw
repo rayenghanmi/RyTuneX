@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1413,4 +1413,37 @@ Check your computer for memory problems</value>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Protects you on the web and in apps</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Battery &amp; Power</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Power Mode</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Select a power plan to balance performance and energy consumption</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Adds the hidden Ultimate Performance power plan to your system for maximum performance.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>Ultimate Performance power plan added successfully.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Add Plan</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>Ultimate Performance power plan already exists.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Add Ultimate Performance Plan</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Add Ultimate Performance Plan</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Add Ultimate Performance Plan</value>
+  </data>
 </root>
+
+
+

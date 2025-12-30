@@ -20,6 +20,29 @@
         <ScrollViewer Padding="24,14,24,0">
             <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
 
+                <!-- Battery & Power Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="OptimizeSystemPage_BatterySection"/>
+
+                <controls:SettingsCard x:Uid="Feature_PowerMode">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEBB7;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ComboBox x:Name="PowerModeComboBox" 
+                              MinWidth="200"
+                              SelectionChanged="PowerModeComboBox_SelectionChanged"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_AddUltimatePowerPlan">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE945;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <Button x:Name="AddUltimatePowerPlanButton" 
+                            x:Uid="Feature_AddUltimatePowerPlanButton"
+                            Click="AddUltimatePowerPlanButton_Click"/>
+                </controls:SettingsCard>
+
                 <!-- Basic System Optimization Section -->
                 <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"

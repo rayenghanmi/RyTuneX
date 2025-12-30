@@ -1,19 +1,16 @@
 ﻿using System.Diagnostics;
 using System.Security.Principal;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
-using Microsoft.UI.Xaml.Media.Imaging;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.ViewModels;
 using Windows.Storage;
 using Windows.System;
-using Windows.UI.ViewManagement;
 
 namespace RyTuneX.Views;
 
@@ -56,12 +53,6 @@ public sealed partial class ShellPage : Page
         // Set corresponding visibility of Admin Icon based on administrator rights
         IsAdminIcon.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
         NotAdminIcon.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
-
-        // Subscribe to the ActualThemeChanged event
-        this.ActualThemeChanged += ShellPage_ActualThemeChanged;
-
-        // Update the window icon based on the current theme
-        UpdateWindowIcon();
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -116,8 +107,6 @@ public sealed partial class ShellPage : Page
             }
         });
     }
-
-    #region Title Bar Search
 
     private void TitleBarSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
@@ -186,8 +175,6 @@ public sealed partial class ShellPage : Page
             LogHelper.LogError($"Error navigating to search result: {ex.Message}");
         }
     }
-
-    #endregion
 
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {
@@ -301,32 +288,6 @@ public sealed partial class ShellPage : Page
                 await LogHelper.LogError($"Failed to open System Properties Protection: {ex.Message}");
             }
         }
-    }
-
-    private void ShellPage_ActualThemeChanged(FrameworkElement sender, object args)
-    {
-        UpdateWindowIcon();
-    }
-
-    private void UpdateWindowIcon()
-    {
-        var themeSelectorService = App.GetService<IThemeSelectorService>();
-        var theme = themeSelectorService.Theme;
-
-        if (theme == ElementTheme.Default)
-        {
-            var uiSettings = new UISettings();
-            var background = uiSettings.GetColorValue(UIColorType.Background);
-            theme = background == Colors.White ? ElementTheme.Light : ElementTheme.Dark;
-        }
-
-        var iconPath = theme switch
-        {
-            ElementTheme.Light => "Assets/LightWindowIcon.ico",
-            _ => "Assets/WindowIcon.ico"
-        };
-
-        ShellTitleBarImage.Source = new BitmapImage(new Uri(Path.Combine(AppContext.BaseDirectory, iconPath)));
     }
 
     public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration)

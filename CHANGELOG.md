@@ -3,6 +3,14 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.6.0 - Unreleased
+
+### Added
+
+- Added Battery & Power section in the `Optimize` page for better power management:
+  - `Power Mode`
+  - `Add Ultimate Performance Plan`
+
 ## 1.5.2 - Released
 
 > [!IMPORTANT]

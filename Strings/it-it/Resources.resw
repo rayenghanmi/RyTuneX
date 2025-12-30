@@ -1413,4 +1413,37 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Ti protegge sul web e nelle app</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Batteria e alimentazione</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Modalità risparmio energia</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Seleziona una combinazione per il risparmio di energia per bilanciare prestazioni e consumo energetico</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Aggiunge il piano di alimentazione nascosto per prestazioni massime.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>Piano Prestazioni elevate aggiunto correttamente.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Aggiungi piano</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>Il piano Prestazioni elevate esiste già.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Aggiungi piano Prestazioni elevate</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Aggiungi piano Prestazioni elevate</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Aggiungi piano Prestazioni elevate</value>
+  </data>
 </root>
+
+
+

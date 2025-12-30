@@ -1413,4 +1413,37 @@
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Web とアプリ上で保護します</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>バッテリーと電源</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>電源モード</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>パフォーマンスと消費電力のバランスを取るために電源プランを選択してください</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>最大のパフォーマンスを得るため、非表示の究極のパフォーマンス電源プランを追加します。</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>究極のパフォーマンスプランを追加しました。</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>プランを追加</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>究極のパフォーマンスプランは既に存在します。</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>究極のパフォーマンスプランを追加</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>究極のパフォーマンスプランを追加</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>究極のパフォーマンスプランを追加</value>
+  </data>
 </root>
+
+
+

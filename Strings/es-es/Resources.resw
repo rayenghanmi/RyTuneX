@@ -1413,4 +1413,37 @@ Verifica si hay problemas de memoria en tu computadora</value>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Te protege en la web y en las aplicaciones</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Batería y energía</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Modo de energía</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Seleccione un plan de energía para equilibrar el rendimiento y el consumo de energía</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Agrega el plan de energía oculto de máximo rendimiento para un rendimiento máximo.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>Plan de máximo rendimiento agregado correctamente.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Agregar plan</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>El plan de máximo rendimiento ya existe.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Agregar plan de máximo rendimiento</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Agregar plan de máximo rendimiento</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Agregar plan de máximo rendimiento</value>
+  </data>
 </root>
+
+
+

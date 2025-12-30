@@ -1410,4 +1410,37 @@
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Защищает в Интернете и в приложениях</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Батарея и питание</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Режим питания</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Выберите схему электропитания для баланса между производительностью и энергопотреблением</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Добавляет скрытый план электропитания для максимальной производительности.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>План максимальной производительности успешно добавлен.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Добавить план</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>План максимальной производительности уже существует.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Добавить план максимальной производительности</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Добавить план максимальной производительности</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Добавить план максимальной производительности</value>
+  </data>
 </root>
+
+
+

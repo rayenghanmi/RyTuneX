@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -13,6 +14,7 @@ public sealed partial class OptimizeSystemPage : Page
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
     private string? _pendingScrollTarget;
+    private bool _isInitializingPowerMode;
 
     public OptimizeSystemPage()
     {
@@ -36,12 +38,120 @@ public sealed partial class OptimizeSystemPage : Page
     private async void OptimizeSystemPage_Loaded(object sender, RoutedEventArgs e)
     {
         await InitializeToggleSwitchesAsync();
+        await InitializePowerModeAsync();
 
         // Scroll to the target element if there's a pending scroll target
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
         {
             await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
             _pendingScrollTarget = null;
+        }
+    }
+
+    private async Task InitializePowerModeAsync()
+    {
+        _isInitializingPowerMode = true;
+        try
+        {
+            // Get all available power plans from the system
+            var powerPlans = await GetAvailablePowerPlansAsync();
+            var activePlanGuid = await GetActivePowerPlanGuidAsync();
+
+            PowerModeComboBox.Items.Clear();
+
+            foreach (var (guid, name) in powerPlans)
+            {
+                var item = new ComboBoxItem
+                {
+                    Content = name,
+                    Tag = guid
+                };
+                PowerModeComboBox.Items.Add(item);
+
+                // Select the active plan
+                if (!string.IsNullOrEmpty(activePlanGuid) && guid.Equals(activePlanGuid, StringComparison.OrdinalIgnoreCase))
+                {
+                    PowerModeComboBox.SelectedItem = item;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error initializing power mode: {ex.Message}");
+        }
+        finally
+        {
+            _isInitializingPowerMode = false;
+        }
+    }
+
+    // Gets all available power plans from the system using powercfg.
+    private async Task<List<(string Guid, string Name)>> GetAvailablePowerPlansAsync()
+    {
+        var powerPlans = new List<(string Guid, string Name)>();
+        try
+        {
+            var output = await StartTaskAsync("powercfg /list");
+            // Output format per line: "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced) *"
+            // The asterisk (*) indicates the active plan
+            var matches = Regex.Matches(output, @"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})\s+\(([^)]+)\)");
+            foreach (Match match in matches)
+            {
+                var guid = match.Groups[1].Value.ToLowerInvariant();
+                var name = match.Groups[2].Value.Trim();
+                powerPlans.Add((guid, name));
+            }
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error getting available power plans: {ex.Message}");
+        }
+        return powerPlans;
+    }
+
+    // Gets the GUID of the currently active power plan using powercfg.
+    private async Task<string?> GetActivePowerPlanGuidAsync()
+    {
+        try
+        {
+            var output = await StartTaskAsync("powercfg /getactivescheme");
+            // Output format: "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)"
+            var match = Regex.Match(output, @"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})");
+            if (match.Success)
+            {
+                return match.Groups[1].Value.ToLowerInvariant();
+            }
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error getting active power plan: {ex.Message}");
+        }
+        return null;
+    }
+
+    // Sets the active power plan using powercfg.
+    private async Task SetPowerPlanAsync(string guid)
+    {
+        try
+        {
+            await StartTaskAsync($"powercfg /setactive {guid}");
+            await LogHelper.Log($"Power plan set to: {guid}");
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error setting power plan: {ex.Message}");
+        }
+    }
+
+    private async void PowerModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // Skip if we're initializing the control
+        if (_isInitializingPowerMode)
+            return;
+
+        if (PowerModeComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is string guid)
+        {
+            await SetPowerPlanAsync(guid);
         }
     }
 
@@ -116,6 +226,33 @@ public sealed partial class OptimizeSystemPage : Page
             await LogHelper.LogError(ex.Message);
         }
     }
+    private async Task<string> StartTaskAsync(string command)
+    {
+        using var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                            ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
+                            : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                Arguments = $"/C \"{command}\"",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            }
+        };
+
+        process.Start();
+
+        // Read output asynchronously
+        var output = await process.StandardOutput.ReadToEndAsync();
+
+        // Wait for the process to exit asynchronously
+        await process.WaitForExitAsync();
+
+        return output;
+    }
+
     private async Task<string> StartTask(string command)
     {
         using var process = new Process
@@ -189,5 +326,58 @@ public sealed partial class OptimizeSystemPage : Page
             CompressOSProgressText.Text = string.Empty;
         };
         await compressDialog.ShowAsync();
+    }
+
+    private async void AddUltimatePowerPlanButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            AddUltimatePowerPlanButton.IsEnabled = false;
+
+            // Check if Ultimate Performance plan already exists
+            var powerPlans = await GetAvailablePowerPlansAsync();
+            var ultimateExists = powerPlans.Any(p =>
+                p.Guid.Equals("e9a42b02-d5df-448d-aa00-03f14749eb61", StringComparison.OrdinalIgnoreCase) ||
+                p.Name.Contains("Ultimate", StringComparison.OrdinalIgnoreCase));
+
+            var title = "AddUltimatePowerPlanTitle".GetLocalized();
+
+            if (ultimateExists)
+            {
+                App.ShowNotification(
+                    title,
+                    "UltimatePowerPlanExists".GetLocalized(),
+                    InfoBarSeverity.Success,
+                    3000);
+            }
+            else
+            {
+                // Add the Ultimate Performance power plan using powercfg
+                await StartTaskAsync("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
+                await LogHelper.Log("Added Ultimate Performance power plan");
+
+                // Refresh the power plans list
+                await InitializePowerModeAsync();
+
+                App.ShowNotification(
+                    title,
+                    "UltimatePowerPlanAdded".GetLocalized(),
+                    InfoBarSeverity.Success,
+                    3000);
+            }
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error adding Ultimate Performance power plan: {ex.Message}");
+            App.ShowNotification(
+                "AddUltimatePowerPlanTitle".GetLocalized(),
+                "UnexpectedError".GetLocalized(),
+                InfoBarSeverity.Error,
+                3000);
+        }
+        finally
+        {
+            AddUltimatePowerPlanButton.IsEnabled = true;
+        }
     }
 }

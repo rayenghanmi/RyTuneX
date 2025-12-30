@@ -1413,4 +1413,37 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Vous protège sur le web et dans les applications</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Batterie et alimentation</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Mode d'alimentation</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Sélectionnez un mode de gestion de l'alimentation pour équilibrer performances et consommation d'énergie</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Ajoute le plan d’alimentation Performances ultimes masqué pour des performances maximales.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>Le plan Performances ultimes a été ajouté avec succès.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Ajouter le plan</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>Le plan Performances ultimes existe déjà.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Ajouter le plan Performances ultimes</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Ajouter le plan Performances ultimes</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Ajouter le plan Performances ultimes</value>
+  </data>
 </root>
+
+
+

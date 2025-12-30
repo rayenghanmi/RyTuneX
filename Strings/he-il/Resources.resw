@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1413,4 +1413,37 @@
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>מגן עבורך ברשת וביישומים</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>סוללה וחשמל</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>מצב צריכת חשמל</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>בחר תוכנית צריכת חשמל לאיזון בין ביצועים לצריכת אנרגיה</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>מוסיף את תוכנית הביצועים המרביים הנסתרת למערכת.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>תוכנית הביצועים המרביים נוספה בהצלחה.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>הוסף תוכנית</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>תוכנית הביצועים המרביים כבר קיימת.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>הוספת תוכנית ביצועים מרביים</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>הוספת תוכנית ביצועים מרביים</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>הוספת תוכנית ביצועים מרביים</value>
+  </data>
 </root>
+
+
+

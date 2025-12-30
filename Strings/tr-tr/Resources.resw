@@ -1413,4 +1413,37 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Web ve uygulamalarda sizi korur</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Pil ve Güç</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Güç Modu</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Performans ve enerji tüketimini dengelemek için bir güç planı seçin</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Maksimum performans için gizli En Yüksek Performans güç planını ekler.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>En Yüksek Performans güç planı başarıyla eklendi.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Plan Ekle</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>En Yüksek Performans güç planı zaten mevcut.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>En Yüksek Performans Planını Ekle</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>En Yüksek Performans Planını Ekle</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>En Yüksek Performans Planını Ekle</value>
+  </data>
 </root>
+
+
+

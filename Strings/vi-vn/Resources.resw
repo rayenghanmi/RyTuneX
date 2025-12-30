@@ -1413,4 +1413,37 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Bảo vệ bạn trên web và trong ứng dụng</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Pin &amp; Nguồn</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Chế độ nguồn</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Chọn gói năng lượng để cân bằng hiệu suất và mức tiêu thụ năng lượng</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Thêm gói năng lượng hiệu suất tối đa ẩn để đạt hiệu năng cao nhất.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>Đã thêm gói hiệu suất tối đa thành công.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Thêm gói</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>Gói hiệu suất tối đa đã tồn tại.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Thêm gói hiệu suất tối đa</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Thêm gói hiệu suất tối đa</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Thêm gói hiệu suất tối đa</value>
+  </data>
 </root>
+
+
+

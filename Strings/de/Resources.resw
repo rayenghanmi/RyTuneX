@@ -1413,4 +1413,31 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Schützt im Web und in Apps</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Akku &amp; Energie</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Energiemodus</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Select a power plan to balance performance and energy consumption</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Fügt den versteckten Energiesparplan für maximale Leistung hinzu.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>Ultimativer Leistungsplan erfolgreich hinzugefügt.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Plan hinzufügen</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>Der ultimative Leistungsplan ist bereits vorhanden.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Ultimativen Leistungsplan hinzufügen</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Ultimativen Leistungsplan hinzufügen</value>
+  </data>
 </root>

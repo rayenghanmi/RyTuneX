@@ -1413,4 +1413,37 @@
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>保护您在网页和应用中的安全</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>电池和电源</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>电源模式</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>选择电源计划以平衡性能和能耗</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>将隐藏的极致性能电源计划添加到系统中。</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>已成功添加极致性能计划。</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>添加计划</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>极致性能计划已存在。</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>添加极致性能计划</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>添加极致性能计划</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>添加极致性能计划</value>
+  </data>
 </root>
+
+
+

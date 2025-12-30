@@ -1413,4 +1413,37 @@
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>يحميك على الويب وفي التطبيقات</value>
   </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>البطارية والطاقة</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>وضع الطاقة</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>اختر خطة طاقة لتحقيق التوازن بين الأداء واستهلاك الطاقة</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>تضيف خطة الأداء الفائق المخفية إلى النظام للحصول على أقصى أداء.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>تمت إضافة خطة الأداء الفائق بنجاح.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>إضافة الخطة</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>خطة الأداء الفائق موجودة بالفعل.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>إضافة خطة الأداء الفائق</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>إضافة خطة الأداء النهائي</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>إضافة خطة الأداء النهائي</value>
+  </data>
 </root>
+
+
+
