@@ -1,9 +1,7 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/bc2beddd-99fe-4a50-b85f-0806b754a176" alt="RyTuneX Logo" width="120">
+  <img src="https://github.com/user-attachments/assets/0a425dec-a7b2-41b6-8686-e5b916af5af9" alt="RyTuneX Logo" width="auto">
 </div>
-
-<h1 align="center" style="font-family: 'Segoe UI', sans-serif; font-weight: 600; color: #0078D4;">RyTuneX</h1>
-
+<br/>
 <p align="center" style="font-size: 1.1rem; color: #555;">
   <strong>Streamline. Optimize. Dominate.</strong><br>
   Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
@@ -95,9 +93,9 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/e8d2ad64-0401-4b1f-b7c9-c4fc09979459" />
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/86448dc8-49f8-4f80-ab6b-7c8da26e2d2f" />
-    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/e8d2ad64-0401-4b1f-b7c9-c4fc09979459" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/7e8f8449-9619-446a-a740-68dd78b003c4" />
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/52a79179-c957-4c6d-9582-9c8860d2b402" />
+    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/7e8f8449-9619-446a-a740-68dd78b003c4" />
   </picture>
   <p><em>RyTuneX - Clean, Modern, and Intuitive Interface</em></p>
 </div>
