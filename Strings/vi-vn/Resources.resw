@@ -1440,10 +1440,151 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Thêm gói hiệu suất tối đa</value>
   </data>
-  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
-    <value>Thêm gói hiệu suất tối đa</value>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>Tính năng này chỉ phát hiện các mục đăng ký được hỗ trợ bởi chính sách. Nó không phát hiện các thay đổi dịch vụ hoặc các điều chỉnh đăng ký không liên quan đến chính sách.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>Trang này phát hiện và cho phép bạn xóa các ghi đè chính sách nhóm cục bộ. Việc xóa ghi đè chính sách sẽ đưa nó về trạng thái Chưa cấu hình.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>Tóm tắt chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>Chính sách đã cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>Danh mục</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>Xóa đã chọn</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>Danh sách chính sách chi tiết</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>Chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>Xóa ghi đè</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>Không phát hiện ghi đè chính sách nào.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>Xóa tất cả ghi đè</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>Phát hiện ghi đè chính sách nhóm</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>Đang quét chính sách...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>Danh mục</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>Xóa đã chọn</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>Đang quét chính sách...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>Không phát hiện ghi đè chính sách nào.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>Tóm tắt chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>Chính sách đã cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>Xem và quản lý các ghi đè chính sách riêng lẻ</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>Xóa tất cả ghi đè</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>Trang này phát hiện và cho phép bạn xóa các ghi đè chính sách nhóm cục bộ. Việc xóa ghi đè chính sách sẽ đưa nó về trạng thái Chưa cấu hình.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>Tổng quan về các ghi đè chính sách đã phát hiện</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>Danh sách chính sách chi tiết</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} Đã cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>Lỗi khi quét chính sách: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>Xóa thất bại</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>Đã xóa thành công {0} ghi đè chính sách.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>Xóa chính sách danh mục</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>Chưa cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>Đã xóa chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} chính sách đã cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>Khởi động lại ngay</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>Để sau</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa {0} ghi đè chính sách đã chọn?</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>Đã xảy ra lỗi khi xóa ghi đè chính sách: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa tất cả {0} ghi đè chính sách trong danh mục '{1}'?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa tất cả {0} ghi đè chính sách? Hành động này không thể hoàn tác.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>Xóa một phần</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>Đang xóa chính sách...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>Đã xóa {0} trong số {1} ghi đè chính sách. Một số chính sách không thể xóa.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>Khởi động lại Explorer</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>Một số thay đổi chính sách yêu cầu khởi động lại Windows Explorer để có hiệu lực. Bạn có muốn khởi động lại Explorer ngay bây giờ không?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>Xóa tất cả ghi đè chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>Xóa chính sách đã chọn</value>
   </data>
 </root>
-
-
-

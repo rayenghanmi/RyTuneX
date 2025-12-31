@@ -1440,10 +1440,151 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>En Yüksek Performans Planını Ekle</value>
   </data>
-  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
-    <value>En Yüksek Performans Planını Ekle</value>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>Bu özellik yalnızca ilke destekli kayıt defteri girişlerini algılar. Hizmet değişikliklerini veya ilke dışı kayıt defteri düzenlemelerini algılamaz.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>Bu sayfa Yerel Grup İlkesi geçersiz kılmalarını algılar ve kaldırmanıza olanak tanır. Bir ilke geçersiz kılmasını kaldırmak, onu Yapılandırılmamış durumuna döndürür.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>İlke Özeti</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>Yapılandırılmış İlkeler</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>Seçilenleri Kaldır</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>Ayrıntılı İlke Listesi</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>İlkeler</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>Geçersiz Kılmaları Kaldır</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>İlke geçersiz kılma algılanmadı.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>Tüm Geçersiz Kılmaları Kaldır</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>Grup İlkesi Geçersiz Kılma Algılama</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>İlkeler taranıyor...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>Yenile</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>Seçilenleri Kaldır</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>İlkeler taranıyor...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>İlke geçersiz kılma algılanmadı.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>İlke Özeti</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>Bilgi</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>Yenile</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>Yapılandırılmış İlkeler</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>Bireysel ilke geçersiz kılmalarını görüntüle ve yönet</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>Tüm Geçersiz Kılmaları Kaldır</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>Bu sayfa Yerel Grup İlkesi geçersiz kılmalarını algılar ve kaldırmanıza olanak tanır. Bir ilke geçersiz kılmasını kaldırmak, onu Yapılandırılmamış durumuna döndürür.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>Algılanan ilke geçersiz kılmalarına genel bakış</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>Ayrıntılı İlke Listesi</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} Yapılandırılmış</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>İlkeler taranırken hata: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>Kaldırma Başarısız</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>{0} ilke geçersiz kılması başarıyla kaldırıldı.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>Kategori İlkelerini Kaldır</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>Yapılandırılmamış</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>İlkeler Kaldırıldı</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} yapılandırılmış ilke</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>Şimdi Yeniden Başlat</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>Daha Sonra</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>Seçilen {0} ilke geçersiz kılmasını kaldırmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>İlke geçersiz kılmaları kaldırılırken bir hata oluştu: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>'{1}' kategorisindeki tüm {0} ilke geçersiz kılmasını kaldırmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>Tüm {0} ilke geçersiz kılmasını kaldırmak istediğinizden emin misiniz? Bu işlem geri alınamaz.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>Kısmi Kaldırma</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>Kaldır</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>İlkeler kaldırılıyor...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>{1} ilke geçersiz kılmasından {0} tanesi kaldırıldı. Bazı ilkeler kaldırılamadı.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>Gezgini Yeniden Başlat</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>Bazı ilke değişikliklerinin etkili olması için Windows Gezgini'nin yeniden başlatılması gerekir. Gezgini şimdi yeniden başlatmak ister misiniz?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>Tüm İlke Geçersiz Kılmalarını Kaldır</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>Seçilen İlkeleri Kaldır</value>
   </data>
 </root>
-
-
-

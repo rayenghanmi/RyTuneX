@@ -10,6 +10,12 @@ All notable changes to this branch will be documented in this file.
 - Added Battery & Power section in the `Optimize` page for better power management:
   - `Power Mode`
   - `Add Ultimate Performance Plan`
+- Added a new `Policies` page for detecting and managing Local Group Policy overrides:
+  - Scans for configured Group Policy overrides across multiple categories (Windows Update, Privacy & Telemetry, Cortana & Search, Windows Store, OneDrive, Security, etc.).
+  - Displays a summary of configured policies by category.
+  - Allows removal of individual policy overrides, by category, or all at once.
+  - Returns removed policies to their default "Not Configured" state.
+  - Supports Windows version-specific policies (e.g., Windows Copilot, Windows Recall).
 
 ## 1.5.2 - Released
 

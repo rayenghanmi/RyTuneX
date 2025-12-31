@@ -1440,10 +1440,151 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Aggiungi piano Prestazioni elevate</value>
   </data>
-  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
-    <value>Aggiungi piano Prestazioni elevate</value>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>Questa funzione rileva solo le voci del Registro di sistema supportate dai criteri. Non rileva modifiche ai servizi o modifiche al Registro di sistema non correlate ai criteri.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>Questa pagina rileva e consente di rimuovere le sostituzioni dei Criteri di gruppo locali. La rimozione di una sostituzione dei criteri la riporta allo stato Non configurato.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>Riepilogo criteri</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>Criteri configurati</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>Categorie</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>Rimuovi selezionati</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>Elenco dettagliato dei criteri</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>Criteri</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>Rimuovi sostituzioni</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>Nessuna sostituzione dei criteri rilevata.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>Rimuovi tutte le sostituzioni</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>Rilevamento override Criteri di gruppo</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>Scansione criteri...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>Aggiorna</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>Categorie</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>Rimuovi selezionati</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>Scansione criteri...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>Nessuna sostituzione dei criteri rilevata.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>Riepilogo criteri</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>Informazioni</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>Aggiorna</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>Criteri configurati</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>Visualizza e gestisci le singole sostituzioni dei criteri</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>Rimuovi tutte le sostituzioni</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>Questa pagina rileva e consente di rimuovere le modifiche ai Criteri di Gruppo Locali. La rimozione di un criterio lo ripristina allo stato predefinito.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>Panoramica delle sostituzioni dei criteri rilevate</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>Elenco dettagliato dei criteri</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} Configurato</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>Errore durante la scansione dei criteri: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>Rimozione non riuscita</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>{0} sostituzioni dei criteri rimosse correttamente.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>Rimuovi criteri categoria</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>Non configurato</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>Criteri rimossi</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} criteri configurati</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>Riavvia ora</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>Più tardi</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>Rimuovere le {0} sostituzioni dei criteri selezionate?</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>Si è verificato un errore durante la rimozione delle sostituzioni dei criteri: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>Rimuovere tutte le {0} sostituzioni dei criteri nella categoria '{1}'?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>Rimuovere tutte le {0} sostituzioni dei criteri? Questa azione non può essere annullata.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>Rimozione parziale</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>Rimozione criteri...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>Rimosse {0} di {1} sostituzioni dei criteri. Alcuni criteri non possono essere rimossi.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>Riavvia Esplora risorse</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>Alcune modifiche ai criteri richiedono il riavvio di Esplora risorse. Riavviare Esplora risorse ora?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>Rimuovi tutte le sostituzioni dei criteri</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>Rimuovi criteri selezionati</value>
   </data>
 </root>
-
-
-

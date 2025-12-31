@@ -1440,10 +1440,151 @@
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>הוספת תוכנית ביצועים מרביים</value>
   </data>
-  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
-    <value>הוספת תוכנית ביצועים מרביים</value>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>תכונה זו מזהה רק ערכי רישום המגובים במדיניות. היא לא מזהה שינויים בשירותים או שינויים ברישום שאינם קשורים למדיניות.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>דף זה מזהה ומאפשר לך להסיר עקיפות מדיניות קבוצתית מקומית. הסרת עקיפת מדיניות מחזירה אותה למצב לא מוגדר.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>סיכום מדיניות</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>מדיניות מוגדרת</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>קטגוריות</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>הסר נבחרים</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>רשימת מדיניות מפורטת</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>מדיניות</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>הסר עקיפות</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>לא זוהו עקיפות מדיניות.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>הסר את כל העקיפות</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>זיהוי עקיפת מדיניות קבוצתית</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>סורק מדיניות...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>רענן</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>קטגוריות</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>הסר נבחרים</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>סורק מדיניות...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>לא זוהו עקיפות מדיניות.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>סיכום מדיניות</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>מידע</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>רענן</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>מדיניות מוגדרת</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>הצג ונהל עקיפות מדיניות בודדות</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>הסר את כל העקיפות</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>דף זה מזהה ומאפשר לך להסיר עקיפות מדיניות קבוצתית מקומית. הסרת עקיפת מדיניות מחזירה אותה למצב לא מוגדר.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>סקירה כללית של עקיפות מדיניות שזוהו</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>רשימת מדיניות מפורטת</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} מוגדר</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>שגיאה בסריקת מדיניות: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>ההסרה נכשלה</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>{0} עקיפות מדיניות הוסרו בהצלחה.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>הסר מדיניות קטגוריה</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>לא מוגדר</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>מדיניות הוסרה</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} מדיניות מוגדרת</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>הפעל מחדש כעת</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>מאוחר יותר</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>האם אתה בטוח שברצונך להסיר את {0} עקיפות המדיניות הנבחרות?</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>אירעה שגיאה בעת הסרת עקיפות מדיניות: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>האם אתה בטוח שברצונך להסיר את כל {0} עקיפות המדיניות בקטגוריה '{1}'?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>האם אתה בטוח שברצונך להסיר את כל {0} עקיפות המדיניות? לא ניתן לבטל פעולה זו.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>הסרה חלקית</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>הסר</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>מסיר מדיניות...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>הוסרו {0} מתוך {1} עקיפות מדיניות. לא ניתן היה להסיר חלק מהמדיניות.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>הפעל מחדש את הסייר</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>חלק משינויי המדיניות דורשים הפעלה מחדש של סייר Windows כדי להיכנס לתוקף. האם תרצה להפעיל מחדש את הסייר כעת?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>הסר את כל עקיפות המדיניות</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>הסר מדיניות נבחרת</value>
   </data>
 </root>
-
-
-

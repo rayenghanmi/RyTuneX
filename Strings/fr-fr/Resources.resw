@@ -1440,10 +1440,151 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Ajouter le plan Performances ultimes</value>
   </data>
-  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
-    <value>Ajouter le plan Performances ultimes</value>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>Cette fonctionnalité détecte uniquement les entrées de registre sauvegardées par des stratégies. Elle ne détecte pas les modifications de services ou les ajustements de registre non liés aux stratégies.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>Cette page détecte et vous permet de supprimer les remplacements de stratégie de groupe locale. La suppression d'un remplacement de stratégie le remet à l'état Non configuré.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>Résumé des stratégies</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>Stratégies configurées</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>Catégories</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>Supprimer la sélection</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>Liste détaillée des stratégies</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>Stratégies</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>Supprimer les remplacements</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>Aucun remplacement de stratégie détecté.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>Supprimer tous les remplacements</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>Détection des remplacements de stratégie de groupe</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>Analyse des stratégies...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>Catégories</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>Supprimer la sélection</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>Analyse des stratégies...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>Aucun remplacement de stratégie détecté.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>Résumé des stratégies</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>Stratégies configurées</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>Afficher et gérer les remplacements de stratégie individuels</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>Supprimer tous les remplacements</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>Cette page détecte et permet de supprimer les paramètres de stratégie de groupe locale modifiés. La suppression d’un paramètre le rétablit à l’état par défaut.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>Aperçu des remplacements de stratégie détectés</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>Liste détaillée des stratégies</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} Configuré</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>Erreur lors de l'analyse des stratégies : {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>Échec de la suppression</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>{0} remplacements de stratégie supprimés avec succès.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>Supprimer les stratégies de catégorie</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>Non configuré</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>Stratégies supprimées</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} stratégies configurées</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>Redémarrer maintenant</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>Plus tard</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer les {0} remplacements de stratégie sélectionnés ?</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>Une erreur s'est produite lors de la suppression des remplacements de stratégie : {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer les {0} remplacements de stratégie dans la catégorie '{1}' ?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer les {0} remplacements de stratégie ? Cette action est irréversible.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>Suppression partielle</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>Suppression des stratégies...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>{0} sur {1} remplacements de stratégie supprimés. Certaines stratégies n'ont pas pu être supprimées.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>Redémarrer l'Explorateur</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>Certaines modifications de stratégie nécessitent le redémarrage de l'Explorateur Windows. Voulez-vous redémarrer l'Explorateur maintenant ?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>Supprimer tous les remplacements de stratégie</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>Supprimer les stratégies sélectionnées</value>
   </data>
 </root>
-
-
-

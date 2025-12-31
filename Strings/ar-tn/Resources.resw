@@ -1440,10 +1440,151 @@
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>إضافة خطة الأداء النهائي</value>
   </data>
-  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
-    <value>إضافة خطة الأداء النهائي</value>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>تكتشف هذه الميزة فقط إدخالات السجل المدعومة بالسياسات. لا تكتشف تغييرات الخدمة أو تعديلات السجل غير المتعلقة بالسياسات.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>تكشف هذه الصفحة وتتيح لك إزالة تجاوزات سياسة المجموعة المحلية. تؤدي إزالة تجاوز السياسة إلى إرجاعها إلى حالة غير مهيأة.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>ملخص السياسة</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>السياسات المهيأة</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>الفئات</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>إزالة المحدد</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>قائمة السياسات المفصلة</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>السياسات</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>إزالة التجاوزات</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>لم يتم اكتشاف تجاوزات سياسة.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>إزالة جميع التجاوزات</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>كشف تجاوز سياسة المجموعة</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>جارٍ فحص السياسات...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>الفئات</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>إزالة المحدد</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>جارٍ فحص السياسات...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>لم يتم اكتشاف تجاوزات سياسة.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>ملخص السياسة</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>معلومات</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>السياسات المهيأة</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>عرض وإدارة تجاوزات السياسة الفردية</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>إزالة جميع التجاوزات</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>تكشف هذه الصفحة وتتيح لك إزالة تجاوزات سياسة المجموعة المحلية. تؤدي إزالة تجاوز السياسة إلى إرجاعها  للوضع الافتراضي.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>نظرة عامة على تجاوزات السياسة المكتشفة</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>قائمة السياسات المفصلة</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} مهيأ</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>خطأ في فحص السياسات: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>فشلت الإزالة</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>تمت إزالة {0} تجاوزات سياسة بنجاح.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>إزالة سياسات الفئة</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>غير مهيأ</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>تمت إزالة السياسات</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} سياسات مهيأة</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>إعادة التشغيل الآن</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>لاحقاً</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد إزالة تجاوزات السياسة المحددة البالغ عددها {0}؟</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>حدث خطأ أثناء إزالة تجاوزات السياسة: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد إزالة جميع تجاوزات السياسة البالغ عددها {0} في فئة '{1}'؟</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد إزالة جميع تجاوزات السياسة البالغ عددها {0}؟ لا يمكن التراجع عن هذا الإجراء.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>إزالة جزئية</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>إزالة</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>جارٍ إزالة السياسات...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>تمت إزالة {0} من {1} تجاوزات سياسة. لم يمكن إزالة بعض السياسات.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>إعادة تشغيل المستكشف</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>تتطلب بعض تغييرات السياسة إعادة تشغيل مستكشف Windows لتصبح سارية المفعول. هل ترغب في إعادة تشغيل المستكشف الآن؟</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>إزالة جميع تجاوزات السياسة</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>إزالة السياسات المحددة</value>
   </data>
 </root>
-
-
-
