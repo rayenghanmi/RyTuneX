@@ -380,4 +380,143 @@ public sealed partial class OptimizeSystemPage : Page
             AddUltimatePowerPlanButton.IsEnabled = true;
         }
     }
+
+    private async void CreatePowerPlanButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            // Create input for power plan name
+            var nameTextBox = new TextBox
+            {
+                PlaceholderText = "PowerPlanNamePlaceholder".GetLocalized(),
+                MaxLength = 50,
+                Margin = new Thickness(0, 8, 0, 16)
+            };
+
+            // Get available power plans for base plan selection
+            var powerPlans = await GetAvailablePowerPlansAsync();
+            var basePlanComboBox = new ComboBox
+            {
+                MinWidth = 250,
+                Margin = new Thickness(0, 8, 0, 0)
+            };
+
+            foreach (var (guid, name) in powerPlans)
+            {
+                basePlanComboBox.Items.Add(new ComboBoxItem
+                {
+                    Content = name,
+                    Tag = guid
+                });
+            }
+
+            if (basePlanComboBox.Items.Count > 0)
+            {
+                basePlanComboBox.SelectedIndex = 0;
+            }
+
+            var contentPanel = new StackPanel
+            {
+                Children =
+                {
+                    new TextBlock
+                    {
+                        Text = "PowerPlanNameLabel".GetLocalized(),
+                        Style = (Style)Application.Current.Resources["BodyStrongTextBlockStyle"]
+                    },
+                    nameTextBox,
+                    new TextBlock
+                    {
+                        Text = "BasePowerPlanLabel".GetLocalized(),
+                        Style = (Style)Application.Current.Resources["BodyStrongTextBlockStyle"]
+                    },
+                    basePlanComboBox
+                }
+            };
+
+            var createDialog = new ContentDialog
+            {
+                XamlRoot = XamlRoot,
+                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
+                Title = "CreatePowerPlanTitle".GetLocalized(),
+                Content = contentPanel,
+                PrimaryButtonText = "Create".GetLocalized(),
+                CloseButtonText = "Cancel".GetLocalized(),
+                PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
+                DefaultButton = ContentDialogButton.Primary
+            };
+
+            var result = await createDialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                var planName = nameTextBox.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(planName))
+                {
+                    App.ShowNotification(
+                        "CreatePowerPlanTitle".GetLocalized(),
+                        "PowerPlanNameRequired".GetLocalized(),
+                        InfoBarSeverity.Warning,
+                        3000);
+                    return;
+                }
+
+                if (basePlanComboBox.SelectedItem is not ComboBoxItem selectedItem || selectedItem.Tag is not string baseGuid)
+                {
+                    App.ShowNotification(
+                        "CreatePowerPlanTitle".GetLocalized(),
+                        "BasePowerPlanRequired".GetLocalized(),
+                        InfoBarSeverity.Warning,
+                        3000);
+                    return;
+                }
+
+                // Create the new power plan by duplicating the selected base plan
+                var createOutput = await StartTaskAsync($"powercfg /duplicatescheme {baseGuid}");
+
+                // Parse the new GUID from the output
+                var match = System.Text.RegularExpressions.Regex.Match(createOutput,
+                    @"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})");
+
+                if (match.Success)
+                {
+                    var newGuid = match.Groups[1].Value;
+
+                    // Rename the new power plan
+                    await StartTaskAsync($"powercfg /changename {newGuid} \"{planName}\"");
+
+                    await LogHelper.Log($"Created new power plan '{planName}' with GUID: {newGuid}");
+
+                    // Refresh the power plans list
+                    await InitializePowerModeAsync();
+
+                    App.ShowNotification(
+                        "CreatePowerPlanTitle".GetLocalized(),
+                        "PowerPlanCreated".GetLocalized(),
+                        InfoBarSeverity.Success,
+                        3000);
+                }
+                else
+                {
+                    await LogHelper.LogError($"Failed to parse new power plan GUID from output: {createOutput}");
+                    App.ShowNotification(
+                        "CreatePowerPlanTitle".GetLocalized(),
+                        "UnexpectedError".GetLocalized(),
+                        InfoBarSeverity.Error,
+                        3000);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error creating power plan: {ex.Message}");
+            App.ShowNotification(
+                "CreatePowerPlanTitle".GetLocalized(),
+                "UnexpectedError".GetLocalized(),
+                InfoBarSeverity.Error,
+                3000);
+        }
+    }
 }

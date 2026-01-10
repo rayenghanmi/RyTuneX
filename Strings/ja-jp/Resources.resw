@@ -1587,4 +1587,31 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>選択したポリシーを削除</value>
   </data>
+    <data name="Create" xml:space="preserve">
+    <value>作成</value>
+  </data>
+    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>電源プラン名を入力してください</value>
+  </data>
+    <data name="PowerPlanCreated" xml:space="preserve">
+    <value>電源プランが正常に作成されました。</value>
+  </data>
+    <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>電源プランの名前を入力してください。</value>
+  </data>
+    <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>電源プランの作成</value>
+  </data>
+    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>新規作成</value>
+  </data>
+    <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>基本電源プラン</value>
+  </data>
+    <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>電源プラン名</value>
+  </data>
+    <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>基本電源プランを選択してください。</value>
+  </data>
 </root>

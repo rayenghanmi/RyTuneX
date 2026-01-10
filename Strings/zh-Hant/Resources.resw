@@ -1583,4 +1583,31 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>移除選取的原則</value>
   </data>
+    <data name="Create" xml:space="preserve">
+    <value>建立</value>
+  </data>
+    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>輸入電源計劃名稱</value>
+  </data>
+    <data name="PowerPlanCreated" xml:space="preserve">
+    <value>電源計劃建立成功。</value>
+  </data>
+    <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>請輸入電源計劃的名稱。</value>
+  </data>
+    <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>建立電源計劃</value>
+  </data>
+    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>建立新的</value>
+  </data>
+    <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>基礎電源計劃</value>
+  </data>
+    <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>電源計劃名稱</value>
+  </data>
+    <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>請選擇一個基礎電源計劃。</value>
+  </data>
 </root>

@@ -4,6 +4,10 @@ using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using RyTuneX.Contracts.Services;
+using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
 
@@ -13,14 +17,14 @@ public sealed partial class HomePage : Page
     private readonly CancellationTokenSource _cancellationTokenSource;
 
     // CPU sampling state
-    private ulong _prevIdleTime = 0;
-    private ulong _prevKernelTime = 0;
-    private ulong _prevUserTime = 0;
-    private bool _cpuInitialized = false;
+    private ulong _prevIdleTime;
+    private ulong _prevKernelTime;
+    private ulong _prevUserTime;
+    private bool _cpuInitialized;
 
     // Network sampling state
-    private long _prevBytesReceived = 0;
-    private long _prevBytesSent = 0;
+    private long _prevBytesReceived;
+    private long _prevBytesSent;
     private DateTime _lastSampleTime = DateTime.UtcNow;
 
     public HomePage()
@@ -100,7 +104,6 @@ public sealed partial class HomePage : Page
             Debug.WriteLine($"Unexpected error: {ex.Message}");
         }
     }
-
 
     private void HomePage_Unloaded(object sender, RoutedEventArgs e)
     {
@@ -357,5 +360,44 @@ public sealed partial class HomePage : Page
             ullAvailVirtual = 0;
             ullAvailExtendedVirtual = 0;
         }
+    }
+
+    private void InteractiveBlock_PointerEntered(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is Grid grid)
+        {
+            grid.Background = (Brush)Application.Current.Resources["CardBackgroundFillColorSecondaryBrush"];
+            this.ProtectedCursor = Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Hand);
+        }
+    }
+
+    private void InteractiveBlock_PointerExited(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is Grid grid)
+        {
+            grid.Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
+            this.ProtectedCursor = null;
+        }
+    }
+
+    private void InstalledAppsBlock_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        // Navigate to the Debloat page
+        var navigationService = App.GetService<INavigationService>();
+        navigationService.NavigateTo(typeof(DebloatSystemPage).FullName!);
+    }
+
+    private void ProcessesBlock_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        // Navigate to the Processes page
+        var navigationService = App.GetService<INavigationService>();
+        navigationService.NavigateTo(typeof(ProcessesPage).FullName!);
+    }
+
+    private void ServicesBlock_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        // Navigate to the Services page
+        var navigationService = App.GetService<INavigationService>();
+        navigationService.NavigateTo(typeof(ServicesPage).FullName!);
     }
 }

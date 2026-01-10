@@ -1587,4 +1587,31 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Rimuovi criteri selezionati</value>
   </data>
+    <data name="Create" xml:space="preserve">
+    <value>Crea</value>
+  </data>
+    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Inserisci il nome della combinazione</value>
+  </data>
+    <data name="PowerPlanCreated" xml:space="preserve">
+    <value>Combinazione risparmio energia creata con successo.</value>
+  </data>
+    <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Inserisci un nome per la combinazione risparmio energia.</value>
+  </data>
+    <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Crea combinazione risparmio energia</value>
+  </data>
+    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Crea nuovo</value>
+  </data>
+    <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Combinazione di base</value>
+  </data>
+    <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Nome della combinazione</value>
+  </data>
+    <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Seleziona una combinazione di base.</value>
+  </data>
 </root>

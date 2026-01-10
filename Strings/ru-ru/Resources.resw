@@ -1584,4 +1584,31 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Удалить выбранные политики</value>
   </data>
+    <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Введите название схемы электропитания</value>
+  </data>
+    <data name="PowerPlanCreated" xml:space="preserve">
+    <value>Схема электропитания успешно создана.</value>
+  </data>
+    <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Пожалуйста, введите название схемы электропитания.</value>
+  </data>
+    <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Создать схему электропитания</value>
+  </data>
+    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+    <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Базовая схема электропитания</value>
+  </data>
+    <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Название схемы электропитания</value>
+  </data>
+    <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Пожалуйста, выберите базовую схему электропитания.</value>
+  </data>
 </root>

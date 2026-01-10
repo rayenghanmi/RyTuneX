@@ -20,6 +20,8 @@ public class PageService : IPageService
         Configure<GroupPolicyPage>();
         Configure<SystemInfoPage>();
         Configure<SettingsPage>();
+        Configure<ProcessesPage>();
+        Configure<ServicesPage>();
     }
 
     public Type GetPageType(string key)

@@ -29,9 +29,19 @@
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xEBB7;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ComboBox x:Name="PowerModeComboBox" 
-                              MinWidth="200"
-                              SelectionChanged="PowerModeComboBox_SelectionChanged"/>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Name="CreatePowerPlanButton"
+                                x:Uid="Feature_CreatePowerPlanButton"
+                                Click="CreatePowerPlanButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon Glyph="&#xE710;" FontSize="14"/>
+                                <TextBlock x:Uid="Feature_CreatePowerPlanButtonText"/>
+                            </StackPanel>
+                        </Button>
+                        <ComboBox x:Name="PowerModeComboBox" 
+                                  MinWidth="200"
+                                  SelectionChanged="PowerModeComboBox_SelectionChanged"/>
+                    </StackPanel>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_AddUltimatePowerPlan">

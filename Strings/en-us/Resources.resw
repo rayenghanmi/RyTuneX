@@ -1587,4 +1587,31 @@ Check your computer for memory problems</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Remove Selected Policies</value>
   </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Create Power Plan</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Power plan name</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Enter power plan name</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Base power plan</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Please enter a name for the power plan.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Please select a base power plan.</value>
+  </data>
+  <data name="PowerPlanCreated" xml:space="preserve">
+    <value>Power plan created successfully.</value>
+  </data>
 </root>

@@ -1587,4 +1587,31 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Xóa chính sách đã chọn</value>
   </data>
+    <data name="Create" xml:space="preserve">
+    <value>Tạo</value>
+  </data>
+    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Nhập tên gói nguồn điện</value>
+  </data>
+    <data name="PowerPlanCreated" xml:space="preserve">
+    <value>Đã tạo gói nguồn điện thành công.</value>
+  </data>
+    <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Vui lòng nhập tên cho gói nguồn điện.</value>
+  </data>
+    <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Tạo gói nguồn điện</value>
+  </data>
+    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Tạo mới</value>
+  </data>
+    <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Gói nguồn điện cơ sở</value>
+  </data>
+    <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Tên gói nguồn điện</value>
+  </data>
+    <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Vui lòng chọn một gói nguồn điện cơ sở.</value>
+  </data>
 </root>

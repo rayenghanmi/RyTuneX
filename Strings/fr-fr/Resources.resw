@@ -1587,4 +1587,31 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Supprimer les stratégies sélectionnées</value>
   </data>
+    <data name="Create" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Entrez le nom du mode d'alimentation</value>
+  </data>
+    <data name="PowerPlanCreated" xml:space="preserve">
+    <value>Mode d'alimentation créé avec succès.</value>
+  </data>
+    <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Veuillez entrer un nom pour le mode d'alimentation.</value>
+  </data>
+    <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Créer un mode de gestion d'alimentation</value>
+  </data>
+    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Créer nouveau</value>
+  </data>
+    <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Mode d'alimentation de base</value>
+  </data>
+    <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Nom du mode d'alimentation</value>
+  </data>
+    <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Veuillez sélectionner un mode d'alimentation de base.</value>
+  </data>
 </root>

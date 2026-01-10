@@ -42,6 +42,8 @@
     <None Remove="Views\NetworkPage.xaml" />
     <None Remove="Views\PrivacyPage.xaml" />
     <None Remove="Views\RepairPage.xaml" />
+    <None Remove="Views\ProcessesPage.xaml" />
+    <None Remove="Views\ServicesPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>

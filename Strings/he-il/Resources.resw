@@ -1587,4 +1587,31 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>הסר מדיניות נבחרת</value>
   </data>
+    <data name="Create" xml:space="preserve">
+    <value>צור</value>
+  </data>
+    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>הזן שם לתוכנית צריכת החשמל</value>
+  </data>
+    <data name="PowerPlanCreated" xml:space="preserve">
+    <value>תוכנית צריכת החשמל נוצרה בהצלחה.</value>
+  </data>
+    <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>נא להזין שם לתוכנית צריכת החשמל.</value>
+  </data>
+    <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>צור תוכנית צריכת חשמל</value>
+  </data>
+    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>צור חדש</value>
+  </data>
+    <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>תוכנית צריכת חשמל בסיסית</value>
+  </data>
+    <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>שם תוכנית צריכת החשמל</value>
+  </data>
+    <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>נא לבחור תוכנית צריכת חשמל בסיסית.</value>
+  </data>
 </root>

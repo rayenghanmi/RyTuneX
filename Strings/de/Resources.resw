@@ -1587,4 +1587,31 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Ausgewählte Richtlinien entfernen</value>
   </data>
+    <data name="Create" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Name des Energiesparplans eingeben</value>
+  </data>
+    <data name="PowerPlanCreated" xml:space="preserve">
+    <value>Energiesparplan erfolgreich erstellt.</value>
+  </data>
+    <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Bitte geben Sie einen Namen für den Energiesparplan ein.</value>
+  </data>
+    <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Energiesparplan erstellen</value>
+  </data>
+    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Neu erstellen</value>
+  </data>
+    <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Basis-Energiesparplan</value>
+  </data>
+    <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Name des Energiesparplans</value>
+  </data>
+    <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Bitte wählen Sie einen Basis-Energiesparplan aus.</value>
+  </data>
 </root>
