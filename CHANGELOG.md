@@ -26,6 +26,10 @@ All notable changes to this branch will be documented in this file.
   - Allows users to end individual processes.
   - Includes a search bar for quickly finding specific processes.
 
+### Fixes
+
+- Fixed an issue where the export settings feature did not work #80.
+
 ## 1.5.2 - Released
 
 > [!IMPORTANT]
