@@ -43,7 +43,6 @@
     <None Remove="Views\PrivacyPage.xaml" />
     <None Remove="Views\RepairPage.xaml" />
     <None Remove="Views\ProcessesPage.xaml" />
-    <None Remove="Views\ServicesPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,6 +67,12 @@
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\ServicesPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
   <PropertyGroup Label="Globals">
