@@ -244,7 +244,7 @@
                     x:Uid="OtherSettings"/>
                 <controls:SettingsCard x:Uid="Feature_DisableSystemRestore">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE777;"/>
+                        <FontIcon Glyph="&#xEBC4;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="SystemRestore" Tag="SystemRestore"/>
                 </controls:SettingsCard>
@@ -263,11 +263,18 @@
                     <ToggleSwitch x:Name="StoreUpdates" Tag="StoreUpdates"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableAutomaticUpdates">
+                <controls:SettingsCard x:Uid="Feature_WindowsUpdates">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE8D8;"/>
+                        <FontIcon Glyph="&#xE777;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="AutomaticUpdates" Tag="AutomaticUpdates"/>
+                    <ComboBox x:Name="WindowsUpdatesComboBox" 
+                              MinWidth="150"
+                              SelectionChanged="WindowsUpdatesComboBox_SelectionChanged">
+                        <ComboBoxItem x:Uid="Feature_WindowsUpdates_Default" Tag="Default"/>
+                        <ComboBoxItem x:Uid="Feature_WindowsUpdates_Security" Tag="Security"/>
+                        <ComboBoxItem x:Uid="Feature_WindowsUpdates_Manually" Tag="Manually"/>
+                        <ComboBoxItem x:Uid="Feature_WindowsUpdates_Disabled" Tag="Disabled"/>
+                    </ComboBox>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableSmartScreen">

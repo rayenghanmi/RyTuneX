@@ -2,7 +2,6 @@ using System.ServiceProcess;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
-using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
 
@@ -157,7 +156,7 @@ public sealed partial class ServicesPage : Page
     {
         if (sender is Button button && button.Tag is string column)
         {
-            _sortAscending = _currentSort == column ? !_sortAscending : true;
+            _sortAscending = _currentSort != column || !_sortAscending;
             _currentSort = column;
             ApplyFilterAndSort();
         }

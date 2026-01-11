@@ -15,6 +15,7 @@ public sealed partial class OptimizeSystemPage : Page
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
     private string? _pendingScrollTarget;
     private bool _isInitializingPowerMode;
+    private bool _isInitializingWindowsUpdates;
 
     public OptimizeSystemPage()
     {
@@ -39,6 +40,7 @@ public sealed partial class OptimizeSystemPage : Page
     {
         await InitializeToggleSwitchesAsync();
         await InitializePowerModeAsync();
+        await InitializeWindowsUpdatesAsync();
 
         // Scroll to the target element if there's a pending scroll target
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
@@ -152,6 +154,94 @@ public sealed partial class OptimizeSystemPage : Page
         if (PowerModeComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is string guid)
         {
             await SetPowerPlanAsync(guid);
+        }
+    }
+
+    private async Task InitializeWindowsUpdatesAsync()
+    {
+        _isInitializingWindowsUpdates = true;
+        try
+        {
+            // Retrieve the saved state from the registry
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default).OpenSubKey(RegistryBaseKey);
+
+            var savedMode = key?.GetValue("WindowsUpdatesMode") as string ?? "Default";
+
+            // Select the corresponding item in the ComboBox
+            foreach (ComboBoxItem item in WindowsUpdatesComboBox.Items)
+            {
+                if (item.Tag is string tag && tag.Equals(savedMode, StringComparison.OrdinalIgnoreCase))
+                {
+                    WindowsUpdatesComboBox.SelectedItem = item;
+                    break;
+                }
+            }
+
+            // If no selection was made, default to first item
+            if (WindowsUpdatesComboBox.SelectedItem == null && WindowsUpdatesComboBox.Items.Count > 0)
+            {
+                WindowsUpdatesComboBox.SelectedIndex = 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error initializing automatic updates: {ex.Message}");
+            // Default to first item on error
+            if (WindowsUpdatesComboBox.Items.Count > 0)
+            {
+                WindowsUpdatesComboBox.SelectedIndex = 0;
+            }
+        }
+        finally
+        {
+            _isInitializingWindowsUpdates = false;
+        }
+    }
+
+    private async void WindowsUpdatesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // Skip if we're initializing the control
+        if (_isInitializingWindowsUpdates)
+            return;
+
+        if (WindowsUpdatesComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is string mode)
+        {
+            try
+            {
+                // Save the selection to the registry
+                using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                    Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                        ? RegistryView.Registry64
+                        : RegistryView.Default).CreateSubKey(RegistryBaseKey);
+
+                key?.SetValue("WindowsUpdatesMode", mode, RegistryValueKind.String);
+
+                // Apply the selected mode
+                switch (mode)
+                {
+                    case "Default":
+                        await OptimizeSystemHelper.SetWindowsUpdatesDefault();
+                        break;
+                    case "Security":
+                        await OptimizeSystemHelper.SetWindowsUpdatesSecurityOnly();
+                        break;
+                    case "Manually":
+                        await OptimizeSystemHelper.SetWindowsUpdatesManually();
+                        break;
+                    case "Disabled":
+                        await OptimizeSystemHelper.SetWindowsUpdatesDisabled();
+                        break;
+                }
+
+                await LogHelper.Log($"Automatic updates mode set to: {mode}");
+            }
+            catch (Exception ex)
+            {
+                await LogHelper.LogError($"Error setting automatic updates mode: {ex.Message}");
+            }
         }
     }
 

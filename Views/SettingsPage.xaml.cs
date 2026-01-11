@@ -555,6 +555,32 @@ public sealed partial class SettingsPage : Page
                     var value = key.GetValue(valueName);
                     var kind = key.GetValueKind(valueName);
 
+                    // Handle Windows Updates mode separately
+                    if (valueName == "WindowsUpdatesMode" && kind == RegistryValueKind.String)
+                    {
+                        var mode = value as string;
+                        if (!string.IsNullOrEmpty(mode))
+                        {
+                            switch (mode)
+                            {
+                                case "Default":
+                                    await OptimizeSystemHelper.SetWindowsUpdatesDefault();
+                                    break;
+                                case "Security":
+                                    await OptimizeSystemHelper.SetWindowsUpdatesSecurityOnly();
+                                    break;
+                                case "Manually":
+                                    await OptimizeSystemHelper.SetWindowsUpdatesManually();
+                                    break;
+                                case "Disabled":
+                                    await OptimizeSystemHelper.SetWindowsUpdatesDisabled();
+                                    break;
+                            }
+                            await LogHelper.Log($"Applied Windows Updates mode: {mode}");
+                        }
+                        continue;
+                    }
+
                     if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
                     {
                         // Simulate the toggle being on

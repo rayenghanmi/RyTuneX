@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -560,12 +560,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Desabilita atualizações automáticas para aplicativos baixados da Microsoft Store. Pode deixar os aplicativos vulneráveis ​​a riscos de segurança ou sem novos recursos.</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>Desabilitar atualizações automáticas</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>Desativa atualizações automáticas do Windows, exigindo instalação manual. Altamente desencorajado. Isso pode deixar seu sistema vulnerável a explorações de segurança e correções de bugs.</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>Telemetria</value>
@@ -1587,31 +1581,31 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Remover políticas selecionadas</value>
   </data>
-    <data name="Create" xml:space="preserve">
+  <data name="Create" xml:space="preserve">
     <value>Criar</value>
   </data>
     <data name="PowerPlanNamePlaceholder" xml:space="preserve">
     <value>Digite o nome do plano de energia</value>
   </data>
-    <data name="PowerPlanCreated" xml:space="preserve">
+  <data name="PowerPlanCreated" xml:space="preserve">
     <value>Plano de energia criado com sucesso.</value>
   </data>
-    <data name="PowerPlanNameRequired" xml:space="preserve">
-    <value>Por favor, digite um nome para o plano de energia.</value>
+  <data name="Feature_WindowsUpdates.Description" xml:space="preserve">
+    <value>Configure como o Windows lida com atualizações automáticas. Escolha entre atualizações automáticas, apenas segurança, controle manual ou completamente desabilitado.</value>
   </data>
-    <data name="CreatePowerPlanTitle" xml:space="preserve">
-    <value>Criar plano de energia</value>
+  <data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
+    <value>Manualmente</value>
   </data>
-    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
-    <value>Criar novo</value>
+  <data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
+    <value>Apenas Segurança</value>
   </data>
-    <data name="BasePowerPlanLabel" xml:space="preserve">
-    <value>Plano de energia base</value>
+  <data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
+    <value>Desabilitado</value>
   </data>
-    <data name="PowerPlanNameLabel" xml:space="preserve">
-    <value>Nome do plano de energia</value>
+  <data name="Feature_WindowsUpdates.Header" xml:space="preserve">
+    <value>Atualizações do Windows</value>
   </data>
-    <data name="BasePowerPlanRequired" xml:space="preserve">
-    <value>Por favor, selecione um plano de energia base.</value>
+  <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
+    <value>Padrão</value>
   </data>
 </root>

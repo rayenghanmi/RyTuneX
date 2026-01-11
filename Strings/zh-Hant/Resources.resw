@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -560,12 +560,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>禁用從 Microsoft Store 下載的應用程式的自動更新.  可能會使應用程式容易受到安全風險或缺乏新功能. </value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>禁用自動更新</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>關閉自動 Windows 更新, 需要手動安裝.  非常沮喪.  這可能會使您的系統容易受到安全漏洞和錯誤修復的影響. </value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>遙測</value>
@@ -1583,31 +1577,31 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>移除選取的原則</value>
   </data>
-    <data name="Create" xml:space="preserve">
+  <data name="Create" xml:space="preserve">
     <value>建立</value>
   </data>
     <data name="PowerPlanNamePlaceholder" xml:space="preserve">
     <value>輸入電源計劃名稱</value>
   </data>
-    <data name="PowerPlanCreated" xml:space="preserve">
+  <data name="PowerPlanCreated" xml:space="preserve">
     <value>電源計劃建立成功。</value>
   </data>
-    <data name="PowerPlanNameRequired" xml:space="preserve">
-    <value>請輸入電源計劃的名稱。</value>
+  <data name="Feature_WindowsUpdates.Description" xml:space="preserve">
+    <value>設定 Windows 處理自動更新的方式。在自動更新、僅安全性更新、手動控制或完全停用之間進行選擇。</value>
   </data>
-    <data name="CreatePowerPlanTitle" xml:space="preserve">
-    <value>建立電源計劃</value>
+  <data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
+    <value>手動</value>
   </data>
-    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
-    <value>建立新的</value>
+  <data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
+    <value>僅安全性</value>
   </data>
-    <data name="BasePowerPlanLabel" xml:space="preserve">
-    <value>基礎電源計劃</value>
+  <data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
+    <value>已停用</value>
   </data>
-    <data name="PowerPlanNameLabel" xml:space="preserve">
-    <value>電源計劃名稱</value>
+  <data name="Feature_WindowsUpdates.Header" xml:space="preserve">
+    <value>Windows 更新</value>
   </data>
-    <data name="BasePowerPlanRequired" xml:space="preserve">
-    <value>請選擇一個基礎電源計劃。</value>
+  <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
+    <value>預設</value>
   </data>
 </root>

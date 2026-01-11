@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -560,12 +560,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Disattiva gli aggiornamenti automatici per le app scaricate da Microsoft Store. Potrebbe lasciare le app vulnerabili a rischi per la sicurezza o prive di nuove funzionalità.</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>Disabilita aggiornamenti automatici</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>Disattiva gli aggiornamenti automatici di Windows, richiedendo l'installazione manuale. Altamente sconsigliato. Ciò può rendere il sistema vulnerabile a exploit di sicurezza e correzioni di bug.</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>Telemetria</value>
@@ -1587,31 +1581,31 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Rimuovi criteri selezionati</value>
   </data>
-    <data name="Create" xml:space="preserve">
+  <data name="Create" xml:space="preserve">
     <value>Crea</value>
   </data>
     <data name="PowerPlanNamePlaceholder" xml:space="preserve">
     <value>Inserisci il nome della combinazione</value>
   </data>
-    <data name="PowerPlanCreated" xml:space="preserve">
+  <data name="PowerPlanCreated" xml:space="preserve">
     <value>Combinazione risparmio energia creata con successo.</value>
   </data>
-    <data name="PowerPlanNameRequired" xml:space="preserve">
-    <value>Inserisci un nome per la combinazione risparmio energia.</value>
+  <data name="Feature_WindowsUpdates.Description" xml:space="preserve">
+    <value>Configura come Windows gestisce gli aggiornamenti automatici. Scegli tra aggiornamenti automatici, solo sicurezza, controllo manuale o completamente disabilitato.</value>
   </data>
-    <data name="CreatePowerPlanTitle" xml:space="preserve">
-    <value>Crea combinazione risparmio energia</value>
+  <data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
+    <value>Manualmente</value>
   </data>
-    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
-    <value>Crea nuovo</value>
+  <data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
+    <value>Solo Sicurezza</value>
   </data>
-    <data name="BasePowerPlanLabel" xml:space="preserve">
-    <value>Combinazione di base</value>
+  <data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
+    <value>Disabilitato</value>
   </data>
-    <data name="PowerPlanNameLabel" xml:space="preserve">
-    <value>Nome della combinazione</value>
+  <data name="Feature_WindowsUpdates.Header" xml:space="preserve">
+    <value>Aggiornamenti di Windows</value>
   </data>
-    <data name="BasePowerPlanRequired" xml:space="preserve">
-    <value>Seleziona una combinazione di base.</value>
+  <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
+    <value>Predefinito</value>
   </data>
 </root>

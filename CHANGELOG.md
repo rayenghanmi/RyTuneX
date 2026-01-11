@@ -30,6 +30,14 @@ All notable changes to this branch will be documented in this file.
 
 - Fixed an issue where the export settings feature did not work #80.
 
+### Changes
+
+- Changed the Disable Windows Update toggle to a 4 options dropdown menu:
+  - Default
+  - Security Only
+  - Manually
+  - Disabled
+
 ## 1.5.2 - Released
 
 > [!IMPORTANT]

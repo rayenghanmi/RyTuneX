@@ -493,18 +493,30 @@ internal partial class OptimizationOptions
         try
         {
             // Get all toggle switches that have been applied (saved state == 1)
-            using var ryTuneXKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+            using var rytunexKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
                 Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                     ? RegistryView.Registry64
                     : RegistryView.Default).OpenSubKey(RegistryBaseKey);
 
-            if (ryTuneXKey != null)
+            if (rytunexKey != null)
             {
-                var valueNames = ryTuneXKey.GetValueNames();
+                var valueNames = rytunexKey.GetValueNames();
 
                 foreach (var valueName in valueNames)
                 {
-                    var savedState = ryTuneXKey.GetValue(valueName);
+                    // Handle Windows Updates mode separately
+                    if (valueName == "WindowsUpdatesMode")
+                    {
+                        var savedMode = rytunexKey.GetValue(valueName) as string;
+                        if (!string.IsNullOrEmpty(savedMode) && !savedMode.Equals("Default", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Revert Windows Updates to default
+                            await OptimizeSystemHelper.SetWindowsUpdatesDefault().ConfigureAwait(false);
+                        }
+                        continue;
+                    }
+
+                    var savedState = rytunexKey.GetValue(valueName);
                     if (savedState is int state && state == 1)
                     {
                         // Create a fake toggle switch to revert the optimization
@@ -962,17 +974,6 @@ internal partial class OptimizationOptions
                     else
                     {
                         OptimizeSystemHelper.DisableGamingMode();
-                    }
-                    break;
-
-                case "AutomaticUpdates":
-                    if (toggleSwitch.IsOn)
-                    {
-                        OptimizeSystemHelper.DisableAutomaticUpdates();
-                    }
-                    else
-                    {
-                        OptimizeSystemHelper.EnableAutomaticUpdates();
                     }
                     break;
 

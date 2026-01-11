@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -560,12 +560,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Microsoft Store에서 다운로드한 앱에 대한 자동 업데이트를 비활성화합니다. 앱이 보안 위험에 취약하거나 새로운 기능이 부족할 수 있습니다.</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>자동 업데이트 비활성화</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>수동 설치가 필요한 자동 Windows 업데이트를 끕니다. 권장하지 않습니다. 이렇게 하면 시스템이 보안 악용 및 버그 수정에 취약해질 수 있습니다.</value>
   </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>원격 분석</value>
@@ -1587,31 +1581,31 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>선택한 정책 제거</value>
   </data>
-    <data name="Create" xml:space="preserve">
+  <data name="Create" xml:space="preserve">
     <value>만들기</value>
   </data>
     <data name="PowerPlanNamePlaceholder" xml:space="preserve">
     <value>전원 관리 옵션 이름 입력</value>
   </data>
-    <data name="PowerPlanCreated" xml:space="preserve">
+  <data name="PowerPlanCreated" xml:space="preserve">
     <value>전원 관리 옵션이 성공적으로 생성되었습니다.</value>
   </data>
-    <data name="PowerPlanNameRequired" xml:space="preserve">
-    <value>전원 관리 옵션의 이름을 입력하세요.</value>
+  <data name="Feature_WindowsUpdates.Description" xml:space="preserve">
+    <value>Windows가 자동 업데이트를 처리하는 방법을 구성합니다. 자동 업데이트, 보안만, 수동 제어 또는 완전히 비활성화 중에서 선택하세요.</value>
   </data>
-    <data name="CreatePowerPlanTitle" xml:space="preserve">
-    <value>전원 관리 옵션 만들기</value>
+  <data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
+    <value>수동</value>
   </data>
-    <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
-    <value>새로 만들기</value>
+  <data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
+    <value>보안만</value>
   </data>
-    <data name="BasePowerPlanLabel" xml:space="preserve">
-    <value>기본 전원 관리 옵션</value>
+  <data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
+    <value>비활성화</value>
   </data>
-    <data name="PowerPlanNameLabel" xml:space="preserve">
-    <value>전원 관리 옵션 이름</value>
+  <data name="Feature_WindowsUpdates.Header" xml:space="preserve">
+    <value>Windows 업데이트</value>
   </data>
-    <data name="BasePowerPlanRequired" xml:space="preserve">
-    <value>기본 전원 관리 옵션을 선택하세요.</value>
+  <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
+    <value>기본값</value>
   </data>
 </root>

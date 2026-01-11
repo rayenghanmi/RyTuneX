@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
 
@@ -125,7 +124,7 @@ public sealed partial class ProcessesPage : Page
     {
         if (sender is Button button && button.Tag is string column)
         {
-            _sortAscending = _currentSort == column ? !_sortAscending : false;
+            _sortAscending = _currentSort == column && !_sortAscending;
             _currentSort = column;
             ApplyFilterAndSort();
         }
