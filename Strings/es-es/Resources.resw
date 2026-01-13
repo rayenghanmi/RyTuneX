@@ -1581,11 +1581,29 @@ Verifica si hay problemas de memoria en tu computadora</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Eliminar directivas seleccionadas</value>
   </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Crear nuevo</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Crear plan de energía</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Nombre del plan de energía</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Ingrese el nombre del plan de energía</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Plan de energía base</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Crear</value>
   </data>
-    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
-    <value>Ingrese el nombre del plan de energía</value>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Por favor, introduzca un nombre para el plan de energía.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Seleccione un plan de energía base.</value>
   </data>
   <data name="PowerPlanCreated" xml:space="preserve">
     <value>Plan de energía creado correctamente.</value>

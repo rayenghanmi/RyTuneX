@@ -1306,10 +1306,10 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
     <value>Cài đặt đã được xuất thành công tới:</value>
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
-    <value />
+    <value>Vô hiệu hóa phần Được đề xuất trong Menu Bắt đầu</value>
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
-    <value />
+    <value>Loại bỏ phần "Được đề xuất" khỏi Menu Bắt đầu để tạo bố cục gọn gàng và tập trung hơn.</value>
   </data>
   <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
     <value>Tắt Windows Recall</value>
@@ -1581,11 +1581,29 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Xóa chính sách đã chọn</value>
   </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Tạo mới</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Tạo kế hoạch năng lượng</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Tên kế hoạch năng lượng</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Nhập tên gói nguồn điện</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Kế hoạch năng lượng cơ bản</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Tạo</value>
   </data>
-    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
-    <value>Nhập tên gói nguồn điện</value>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Vui lòng nhập tên cho kế hoạch năng lượng.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Vui lòng chọn kế hoạch năng lượng cơ bản.</value>
   </data>
   <data name="PowerPlanCreated" xml:space="preserve">
     <value>Đã tạo gói nguồn điện thành công.</value>
@@ -1607,5 +1625,8 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>Mặc định</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>Kết quả quét</value>
   </data>
 </root>

@@ -1581,11 +1581,29 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Remover políticas selecionadas</value>
   </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Criar novo</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Criar plano de energia</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Nome do plano de energia</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Digite o nome do plano de energia</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Plano de energia base</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Criar</value>
   </data>
-    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
-    <value>Digite o nome do plano de energia</value>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Por favor, insira um nome para o plano de energia.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Por favor, selecione um plano de energia base.</value>
   </data>
   <data name="PowerPlanCreated" xml:space="preserve">
     <value>Plano de energia criado com sucesso.</value>
@@ -1607,5 +1625,8 @@ Verifique se há problemas de memória em seu computador</value>
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>Padrão</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>Resultados da verificação</value>
   </data>
 </root>

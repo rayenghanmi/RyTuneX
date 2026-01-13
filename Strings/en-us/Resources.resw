@@ -1626,4 +1626,7 @@ Check your computer for memory problems</value>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>Default</value>
   </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>Scan Results</value>
+  </data>
 </root>

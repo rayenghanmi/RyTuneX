@@ -721,14 +721,26 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Speech' -Name 'AllowSpeechModelUpdate' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance' -Name 'MaintenanceDisabled' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
 
-        // Clean up UX Settings that can also grey out the toggle
+        // Clean up UX Settings
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'AllowMUUpdateService' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'RestartNotificationsAllowed2' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'AllowOptionalContent' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'DeferFeatureUpdatesPeriodInDays' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'DeferQualityUpdatesPeriodInDays' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'IsContinuousInnovationOptedIn' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'IsExpedited' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
 
-        // Clean up empty policy keys (do this after removing individual values)
+        // Remove additional policy values
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'SetPolicyDrivenUpdateSourceForDriverUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'SetPolicyDrivenUpdateSourceForFeatureUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'SetPolicyDrivenUpdateSourceForQualityUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'SetPolicyDrivenUpdateSourceForOtherUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'ManagePreviewBuildsPolicyValue' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'BranchReadinessLevel' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'PauseFeatureUpdatesStartTime' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'PauseQualityUpdatesStartTime' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Clean up empty policy keys
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-Item 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Recurse -Force -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-Item 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Recurse -Force -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
 
@@ -761,6 +773,17 @@ public static partial class OptimizeSystemHelper
         // Re-enable Update Orchestrator and Windows Update scheduled tasks
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Get-ScheduledTask -TaskPath '\\Microsoft\\Windows\\UpdateOrchestrator\\*' -ErrorAction SilentlyContinue | Enable-ScheduledTask -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("PowerShell -Command \"Get-ScheduledTask -TaskPath '\\Microsoft\\Windows\\WindowsUpdate\\*' -ErrorAction SilentlyContinue | Enable-ScheduledTask -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Reset Windows Update components to clear any cached policy state
+        await OptimizationOptions.StartInCmd("net stop wuauserv").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net stop bits").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net stop cryptsvc").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net start cryptsvc").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net start bits").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net start wuauserv").ConfigureAwait(false);
+
+        // Force Group Policy refresh to clear cached policy state
+        await OptimizationOptions.StartInCmd("gpupdate /force").ConfigureAwait(false);
     }
 
     public static async Task SetWindowsUpdatesSecurityOnly()

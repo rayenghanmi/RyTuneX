@@ -1581,11 +1581,29 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>선택한 정책 제거</value>
   </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>새로 만들기</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>전원 계획 생성</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>전원 계획 이름</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>전원 관리 옵션 이름 입력</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>기본 전원 계획</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>만들기</value>
   </data>
-    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
-    <value>전원 관리 옵션 이름 입력</value>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>전원 계획의 이름을 입력하십시오.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>기본 전원 계획을 선택하십시오.</value>
   </data>
   <data name="PowerPlanCreated" xml:space="preserve">
     <value>전원 관리 옵션이 성공적으로 생성되었습니다.</value>
@@ -1607,5 +1625,8 @@
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>기본값</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>검사 결과</value>
   </data>
 </root>

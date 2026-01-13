@@ -1578,11 +1578,29 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Удалить выбранные политики</value>
   </data>
-    <data name="Create" xml:space="preserve">
-    <value>Создать</value>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Создать новый</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Создать план электропитания</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Название плана электропитания</value>
   </data>
   <data name="PowerPlanNamePlaceholder" xml:space="preserve">
     <value>Введите название схемы электропитания</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Базовый план электропитания</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Пожалуйста, введите название плана электропитания.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Пожалуйста, выберите базовый план электропитания.</value>
   </data>
   <data name="PowerPlanCreated" xml:space="preserve">
     <value>Схема электропитания успешно создана.</value>
@@ -1604,5 +1622,8 @@
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>По умолчанию</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>Результаты сканирования</value>
   </data>
 </root>

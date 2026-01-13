@@ -1581,11 +1581,29 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>إزالة السياسات المحددة</value>
   </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>إنشاء جديد</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>إنشاء خطة طاقة</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>اسم خطة الطاقة</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>أدخل اسم خطة الطاقة</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>خطة الطاقة الأساسية</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>إنشاء</value>
   </data>
-    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
-    <value>أدخل اسم خطة الطاقة</value>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>يرجى إدخال اسم خطة الطاقة.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>يرجى اختيار خطة الطاقة الأساسية.</value>
   </data>
   <data name="PowerPlanCreated" xml:space="preserve">
     <value>تم إنشاء خطة الطاقة بنجاح.</value>
@@ -1607,5 +1625,8 @@
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>افتراضي</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>نتائج الفحص</value>
   </data>
 </root>

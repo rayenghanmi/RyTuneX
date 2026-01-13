@@ -1581,11 +1581,29 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>הסר מדיניות נבחרת</value>
   </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>צור חדש</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>צור תוכנית חשמל</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>שם תוכנית החשמל</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>הזן שם לתוכנית צריכת החשמל</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>תוכנית חשמל בסיסית</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>צור</value>
   </data>
-    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
-    <value>הזן שם לתוכנית צריכת החשמל</value>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>אנא הזן שם עבור תוכנית החשמל.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>אנא בחר תוכנית חשמל בסיסית.</value>
   </data>
   <data name="PowerPlanCreated" xml:space="preserve">
     <value>תוכנית צריכת החשמל נוצרה בהצלחה.</value>
@@ -1607,5 +1625,8 @@
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>ברירת מחדל</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>תוצאות הסריקה</value>
   </data>
 </root>

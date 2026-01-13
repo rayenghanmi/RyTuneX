@@ -1581,11 +1581,29 @@
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>删除所选策略</value>
   </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>创建新建</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>创建电源计划</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>电源计划名称</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>输入电源计划名称</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>基础电源计划</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>创建</value>
   </data>
-    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
-    <value>输入电源计划名称</value>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>请输入电源计划的名称。</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>请选择基础电源计划。</value>
   </data>
   <data name="PowerPlanCreated" xml:space="preserve">
     <value>电源计划创建成功。</value>
@@ -1607,5 +1625,8 @@
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>默认</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>扫描结果</value>
   </data>
 </root>

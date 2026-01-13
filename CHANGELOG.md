@@ -29,6 +29,7 @@ All notable changes to this branch will be documented in this file.
 ### Fixes
 
 - Fixed an issue where the export settings feature did not work #80.
+- Resolved an issue where the sfc repairing method was failing to start.
 
 ### Changes
 
@@ -37,6 +38,7 @@ All notable changes to this branch will be documented in this file.
   - Security Only
   - Manually
   - Disabled
+- Reworked the repairing process to make it more reliable and efficient.
 
 ## 1.5.2 - Released
 

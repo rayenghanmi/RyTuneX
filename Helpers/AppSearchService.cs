@@ -42,7 +42,7 @@ public static class AppSearchService
         ("Feature_DisableSystemRestore", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE777", "SystemRestore"),
         ("Feature_DisableCortana", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uED66", "Cortana"),
         ("Feature_DisableStoreUpdates", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE719", "StoreUpdates"),
-        ("Feature_DisableAutomaticUpdates", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE8D8", "AutomaticUpdates"),
+        ("Feature_WindowsUpdates", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE8D8", "AutomaticUpdates"),
         ("Feature_DisableSmartScreen", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uF8A5", "SmartScreen"),
 
         // PrivacyPage - Advertising (glyphs match PrivacyPage.xaml)

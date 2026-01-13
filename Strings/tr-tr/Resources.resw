@@ -1581,11 +1581,29 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Seçilen İlkeleri Kaldır</value>
   </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Yeni oluştur</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Güç planı oluştur</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Güç planı adı</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Güç planı adını girin</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Temel güç planı</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Oluştur</value>
   </data>
-    <data name="PowerPlanNamePlaceholder" xml:space="preserve">
-    <value>Güç planı adını girin</value>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Lütfen güç planı için bir ad girin.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Lütfen temel güç planını seçin.</value>
   </data>
   <data name="PowerPlanCreated" xml:space="preserve">
     <value>Güç planı başarıyla oluşturuldu.</value>
@@ -1607,5 +1625,8 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>Varsayılan</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>Tara Sonuçları</value>
   </data>
 </root>
