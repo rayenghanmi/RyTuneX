@@ -30,6 +30,7 @@ All notable changes to this branch will be documented in this file.
 
 - Fixed an issue where the export settings feature did not work #80.
 - Resolved an issue where the sfc repairing method was failing to start.
+- Fixed an issue where notification progress would glitch on hover and notifications failed to auto-hide.
 
 ### Changes
 
