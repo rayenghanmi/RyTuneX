@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Diretório do Windows</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>Excluindo arquivos temporários</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">

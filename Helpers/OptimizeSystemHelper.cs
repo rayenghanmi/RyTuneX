@@ -539,14 +539,14 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v AppsUseLightTheme /t REG_DWORD /d 0 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("taskkill /f /im explorer.exe").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("start explorer.exe").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
     }
     public static async Task DisableWindowsDarkMode()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v AppsUseLightTheme /t REG_DWORD /d 1 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v SystemUsesLightTheme /t REG_DWORD /d 1 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("taskkill /f /im explorer.exe").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("start explorer.exe").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
     }
 
     public static async Task EnableVerboseLogon()
@@ -562,13 +562,13 @@ public static partial class OptimizeSystemHelper
     public static async Task EnableClassicContextMenu()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start explorer").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer").ConfigureAwait(false);
     }
 
     public static async Task DisableClassicContextMenu()
     {
         await OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\" /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start explorer").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer").ConfigureAwait(false);
     }
 
     public static async Task DisableSystemRestore()
@@ -1774,30 +1774,21 @@ public static partial class OptimizeSystemHelper
 
     public static async Task<bool> RemoveTempFiles()
     {
-        // Stop Explorer
-        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe");
-
         try
         {
-
             // List of commands to remove temporary files
             var tempCommands = new[]
             {
             "rd /S /Q %windir%\\Temp",
             "rd /S /Q %TEMP%",
-            "rd /S /Q %localappdata%\\Temp",
             "rd /S /Q %windir%\\SoftwareDistribution\\Download",
             "rd /S /Q %windir%\\SoftwareDistribution\\DeliveryOptimization",
             "del /F /S /Q %windir%\\Logs\\CBS\\*",
             "del /F /S /Q %windir%\\MEMORY.DMP",
             "del /F /S /Q %windir%\\Minidump\\*.dmp",
             "del /F /S /Q %windir%\\Temp\\WindowsUpdate.log",
-            "rd /S /Q %windir%\\Prefetch",
             "rd /S /Q %programdata%\\Microsoft\\Windows\\WER\\ReportQueue",
             "rd /S /Q %localappdata%\\Microsoft\\Windows\\WER\\ReportArchive",
-            "rd /S /Q %localappdata%\\Microsoft\\Windows\\INetCache",
-            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\iconcache*",
-            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache*",
             "rd /S /Q %systemdrive%\\Windows.old",
             "rd /S /Q %systemdrive%\\MSOCache",
             "del /F /S /Q %systemdrive%\\*.tmp",
@@ -1816,15 +1807,36 @@ public static partial class OptimizeSystemHelper
             "PowerShell.exe -NoProfile -Command \"wevtutil cl System\"",
             "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
             "ipconfig /flushdns",
-            "dism /Online /Cleanup-Image /StartComponentCleanup"
+            "dism /Online /Cleanup-Image /StartComponentCleanup /Quiet"
             };
 
-            // Execute all commands
-            var tempTasks = tempCommands.AsParallel().Select(cmd => OptimizationOptions.StartInCmd(cmd));
-            await Task.WhenAll(tempTasks).ConfigureAwait(false);
+            // Commands that require Explorer to be killed
+            var explorerDependentCommands = new[]
+            {
+            "rd /S /Q %localappdata%\\Temp",
+            "rd /S /Q %localappdata%\\Microsoft\\Windows\\INetCache",
+            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\iconcache*",
+            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache*",
+            "rd /S /Q %windir%\\Prefetch"
+            };
 
-            // Start explorer
-            await OptimizationOptions.StartInCmd("start explorer.exe").ConfigureAwait(false);
+            // Kill Explorer to release file locks
+            await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe").ConfigureAwait(false);
+
+            // Execute commands that depend on Explorer being closed
+            foreach (var cmd in explorerDependentCommands)
+            {
+                await OptimizationOptions.StartInCmd(cmd).ConfigureAwait(false);
+            }
+
+            // Restart Explorer immediately
+            await OptimizationOptions.StartInCmd("start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
+
+            // Execute remaining commands
+            foreach (var cmd in tempCommands)
+            {
+                await OptimizationOptions.StartInCmd(cmd).ConfigureAwait(false);
+            }
 
             return true;
         }

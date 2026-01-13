@@ -471,7 +471,6 @@ internal partial class OptimizationOptions
                     Arguments = $"/C {command}",
                     CreateNoWindow = true,
                     UseShellExecute = false,
-                    Verb = "runas",
                     WindowStyle = ProcessWindowStyle.Hidden,
                     RedirectStandardError = true
                 }

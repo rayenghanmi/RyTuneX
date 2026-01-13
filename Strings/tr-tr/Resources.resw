@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windows Dizini</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>Temp Dosyalarını Siliniyor</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">

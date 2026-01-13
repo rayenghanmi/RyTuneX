@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windows 目錄</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>刪除臨時檔案</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">

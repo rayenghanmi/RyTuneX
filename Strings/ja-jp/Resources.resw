@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windowsディレクトリ</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>一時ファイルを削除中</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">

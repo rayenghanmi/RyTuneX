@@ -1071,7 +1071,7 @@ public static class GroupPolicyHelper
         {
             await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe").ConfigureAwait(false);
             await Task.Delay(500).ConfigureAwait(false);
-            await OptimizationOptions.StartInCmd("start explorer.exe").ConfigureAwait(false);
+            await OptimizationOptions.StartInCmd("start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
             await LogHelper.Log("Explorer restarted to apply policy changes.");
         }
         catch (Exception ex)

@@ -455,7 +455,7 @@ public sealed partial class DebloatSystemPage : Page
             TempStack.Visibility = Visibility.Visible;
             TempProgress.Visibility = Visibility.Visible;
             TempButtonStack.Visibility = Visibility.Collapsed;
-            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeligTemp") + "...";
+            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeletingTemp") + "...";
 
             // Execute temp removal commands
             var result = await OptimizeSystemHelper.RemoveTempFiles();

@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Thư mục Windows</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>Đang xoá tệp tin tạm thời</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
