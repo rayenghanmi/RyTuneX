@@ -780,6 +780,9 @@
   <data name="Shell_Repair.Content" xml:space="preserve">
     <value>Sửa chửa</value>
   </data>
+  <data name="Repair" xml:space="preserve">
+    <value>Sửa chửa</value>
+  </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
     <value>Bạn sắp gỡ bỏ hoàn toàn các ứng dụng sau khỏi hệ thống:</value>
   </data>
@@ -1132,6 +1135,9 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
     <value>Dừng</value>
   </data>
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>Chọn tối thiểu một tuỳ chọn để quét/sửa chửa</value>
+  </data>
+  <data name="StatusTextBlockDefault" xml:space="preserve">
     <value>Chọn tối thiểu một tuỳ chọn để quét/sửa chửa</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">

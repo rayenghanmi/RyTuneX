@@ -32,6 +32,7 @@ All notable changes to this branch will be documented in this file.
 - Resolved an issue where the sfc repairing method was failing to start.
 - Fixed an issue where notification progress would glitch on hover and notifications failed to auto-hide.
 - Resolved an issue where the temp files cleanup was taking longer than expected.
+- Fixed an issue where the stop button in the `Repair` page did not work as expected.
 
 ### Changes
 

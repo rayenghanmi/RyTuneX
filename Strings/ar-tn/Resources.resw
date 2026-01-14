@@ -780,6 +780,9 @@
   <data name="Shell_Repair.Content" xml:space="preserve">
     <value>اصلاح</value>
   </data>
+  <data name="Repair" xml:space="preserve">
+    <value>اصلاح</value>
+  </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
     <value>أنت على وشك إزالة التطبيقات التالية من نظامك بالكامل:</value>
   </data>
@@ -1132,6 +1135,9 @@
     <value>إيقاف</value>
   </data>
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>اختر على الأقل خيارًا واحدًا للفحص/الإصلاح</value>
+  </data>
+  <data name="StatusTextBlockDefault" xml:space="preserve">
     <value>اختر على الأقل خيارًا واحدًا للفحص/الإصلاح</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">

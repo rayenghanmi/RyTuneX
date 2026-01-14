@@ -780,6 +780,9 @@
   <data name="Shell_Repair.Content" xml:space="preserve">
     <value>修理</value>
   </data>
+  <data name="Repair" xml:space="preserve">
+    <value>修理</value>
+  </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
     <value>これから以下のアプリをシステムから完全に削除します:</value>
   </data>
@@ -1132,6 +1135,9 @@
     <value>停止</value>
   </data>
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>スキャン/修復するには少なくとも 1 つのオプションを選択してください</value>
+  </data>
+  <data name="StatusTextBlockDefault" xml:space="preserve">
     <value>スキャン/修復するには少なくとも 1 つのオプションを選択してください</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">

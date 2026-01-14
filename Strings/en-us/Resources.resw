@@ -780,6 +780,9 @@
   <data name="Shell_Repair.Content" xml:space="preserve">
     <value>Repair</value>
   </data>
+  <data name="Repair" xml:space="preserve">
+    <value>Repair</value>
+  </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
     <value>You’re about to completely remove the following apps from your system:</value>
   </data>
@@ -1132,6 +1135,9 @@ Check your computer for memory problems</value>
     <value>Stop</value>
   </data>
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
+    <value>Select at least one option to scan/repair</value>
+  </data>
+  <data name="StatusTextBlockDefault" xml:space="preserve">
     <value>Select at least one option to scan/repair</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">

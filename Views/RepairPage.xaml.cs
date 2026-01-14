@@ -1,9 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -22,6 +20,8 @@ public sealed partial class RepairPage : Page
         { "CHKDSK", new StringBuilder() }
     };
     private Process? _runningProcess;
+    private CancellationTokenSource? _cancellationTokenSource;
+    private int _currentProcessId;
     public int selectedCount = 0;
     private string? _pendingScrollTarget;
 
@@ -64,17 +64,54 @@ public sealed partial class RepairPage : Page
         await RunCommandsAsync(isRepair: true);
     }
 
-    private void OnStopButtonClick(object sender, RoutedEventArgs e)
+    private async void OnStopButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_runningProcess != null && !_runningProcess.HasExited)
+        // Disable the stop button to prevent multiple clicks
+        StopButton.IsEnabled = false;
+
+        await StopCurrentOperationAsync();
+    }
+
+    private async Task StopCurrentOperationAsync()
+    {
+        // Cancel the operation via CancellationToken first
+        _cancellationTokenSource?.Cancel();
+
+        // Kill the process tree asynchronously
+        var processId = _currentProcessId;
+        if (processId > 0)
         {
-            _runningProcess.Kill(); // Stop the running process
-            StatusTextBlock.Text = "OperationStopped".GetLocalized();
+            await PseudoConsoleHelper.KillProcessTreeAsync(processId);
+        }
+
+        // Also handle the fallback process if it exists
+        if (_runningProcess != null)
+        {
+            try
+            {
+                if (!_runningProcess.HasExited)
+                {
+                    await PseudoConsoleHelper.KillProcessTreeAsync(_runningProcess.Id);
+                }
+            }
+            catch
+            {
+                // Ignore errors during cleanup
+            }
+        }
+    }
+
+    private void ResetUIState()
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            StatusTextBlock.Text = "StatusTextBlockDefault".GetLocalized();
             ProgressBar.Value = 0;
             StopButton.Visibility = Visibility.Collapsed;
+            StopButton.IsEnabled = true;
             ScanRepairPanel.Visibility = Visibility.Visible;
             PercentageTextBlock.Text = string.Empty;
-        }
+        });
     }
 
     private async Task RunCommandsAsync(bool isRepair)
@@ -82,7 +119,14 @@ public sealed partial class RepairPage : Page
         // Hide ScanRepair Panel while operation is in progress
         ScanRepairPanel.Visibility = Visibility.Collapsed;
         StopButton.Visibility = Visibility.Visible;
+        StopButton.IsEnabled = true;
         ProgressBar.Value = 0;
+        _currentProcessId = 0;
+
+        // Create a new CancellationTokenSource for this operation
+        _cancellationTokenSource?.Dispose();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var ct = _cancellationTokenSource.Token;
 
         var commands = new[]
         {
@@ -93,29 +137,81 @@ public sealed partial class RepairPage : Page
 
         var current = 0;
         var selectedNames = new List<string>();
-        foreach (var (checkBox, name, args) in commands)
+        var wasCancelled = false;
+        var hasError = false;
+
+        try
         {
-            if (checkBox.IsChecked == true)
+            foreach (var (checkBox, name, args) in commands)
             {
-                current++;
-                selectedNames.Add(name);
-                StatusTextBlock.Text = $"{current} / {selectedCount}: {name} {(isRepair ? "repair" : "scan")} in progress...";
-                ProgressBar.Value = 0;
-                await RunCommandAsync(name, args);
+                if (ct.IsCancellationRequested)
+                {
+                    wasCancelled = true;
+                    break;
+                }
+
+                if (checkBox.IsChecked == true)
+                {
+                    current++;
+                    selectedNames.Add(name);
+                    StatusTextBlock.Text = $"{current} / {selectedCount}: {name} {(isRepair ? "repair" : "scan")} in progress...";
+                    ProgressBar.Value = 0;
+
+                    try
+                    {
+                        await RunCommandAsync(name, args, ct);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        wasCancelled = true;
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        await LogHelper.Log($"Error running {name}: {ex.Message}");
+                        _scanResults[name].AppendLine($"Error: {ex.Message}");
+                        hasError = true;
+                        // Continue with next command unless cancelled
+                        if (ct.IsCancellationRequested)
+                        {
+                            wasCancelled = true;
+                            break;
+                        }
+                    }
+                }
             }
         }
+        finally
+        {
+            _currentProcessId = 0;
+            ResetUIState();
 
-        StatusTextBlock.Text = "OperationCompleted".GetLocalized();
-        ScanRepairPanel.Visibility = Visibility.Visible;
-        StopButton.Visibility = Visibility.Collapsed;
-        PercentageTextBlock.Text = string.Empty;
-        ProgressBar.Value = 0;
-
-        // Show results dialog
-        await ShowScanResultsDialogAsync(selectedNames);
+            if (wasCancelled)
+            {
+                App.ShowNotification("Repair".GetLocalized(), "OperationStopped".GetLocalized(), InfoBarSeverity.Error, 5000);
+            }
+            else if (hasError)
+            {
+                App.ShowNotification("Repair".GetLocalized(), "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
+                // Still show results dialog even if there were errors
+                if (selectedNames.Count > 0)
+                {
+                    await ShowScanResultsDialogAsync(selectedNames);
+                }
+            }
+            else
+            {
+                App.ShowNotification("Repair".GetLocalized(), "OperationCompleted".GetLocalized(), InfoBarSeverity.Success, 5000);
+                // Show results dialog
+                if (selectedNames.Count > 0)
+                {
+                    await ShowScanResultsDialogAsync(selectedNames);
+                }
+            }
+        }
     }
 
-    private async Task RunCommandAsync(string name, string args)
+    private async Task RunCommandAsync(string name, string args, CancellationToken ct)
     {
         _scanResults[name].Clear();
 
@@ -137,16 +233,23 @@ public sealed partial class RepairPage : Page
                 {
                     LogHelper.Log($"Output: {line}");
                     HandleOutputLine(name, line);
-                });
+                },
+                ct,
+                processId => _currentProcessId = processId);
+        }
+        catch (OperationCanceledException)
+        {
+            await LogHelper.Log($"Operation cancelled for {name}");
+            throw;
         }
         catch (Exception ex)
         {
             await LogHelper.Log($"ConPTY failed for {name}, falling back to standard: {ex.Message}");
-            await RunCommandStandardAsync(name, fileName, args);
+            await RunCommandStandardAsync(name, fileName, args, ct);
         }
     }
 
-    private async Task RunCommandStandardAsync(string name, string fileName, string args)
+    private async Task RunCommandStandardAsync(string name, string fileName, string args, CancellationToken ct)
     {
         var outputEncoding = name.Equals("SFC", StringComparison.OrdinalIgnoreCase)
             ? Encoding.Unicode
@@ -169,28 +272,56 @@ public sealed partial class RepairPage : Page
         try
         {
             _runningProcess.Start();
+            _currentProcessId = _runningProcess.Id;
 
-            var outputTask = ReadStreamAsync(_runningProcess.StandardOutput, name, isError: false);
-            var errorTask = ReadStreamAsync(_runningProcess.StandardError, name, isError: true);
+            var outputTask = ReadStreamAsync(_runningProcess.StandardOutput, name, isError: false, ct);
+            var errorTask = ReadStreamAsync(_runningProcess.StandardError, name, isError: true, ct);
 
-            await Task.WhenAll(_runningProcess.WaitForExitAsync(), outputTask, errorTask);
+            try
+            {
+                await Task.WhenAll(_runningProcess.WaitForExitAsync(ct), outputTask, errorTask);
+            }
+            catch (OperationCanceledException)
+            {
+                // Kill the process tree when cancelled
+                await PseudoConsoleHelper.KillProcessTreeAsync(_runningProcess.Id);
+                throw;
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
             await LogHelper.Log($"Failed to start {name}: {ex.Message}");
             _scanResults[name].AppendLine(ex.Message);
-            DispatcherQueue.TryEnqueue(() => StatusTextBlock.Text = $"Failed to start {name}");
+            throw;
+        }
+        finally
+        {
+            _runningProcess = null;
+            _currentProcessId = 0;
         }
     }
 
-    private async Task ReadStreamAsync(StreamReader reader, string name, bool isError)
+    private async Task ReadStreamAsync(StreamReader reader, string name, bool isError, CancellationToken ct)
     {
         var buffer = new char[256];
         var lineBuilder = new StringBuilder();
 
-        while (true)
+        while (!ct.IsCancellationRequested)
         {
-            var read = await reader.ReadAsync(buffer, 0, buffer.Length);
+            int read;
+            try
+            {
+                read = await reader.ReadAsync(buffer, 0, buffer.Length);
+            }
+            catch
+            {
+                break;
+            }
+
             if (read == 0)
             {
                 FlushLine(lineBuilder, name, isError);
@@ -294,7 +425,7 @@ public sealed partial class RepairPage : Page
                 {
                     percentage = int.Parse(match.Groups[1].Value);
                 }
-                else{}
+                else { }
             }
             else if (commandName == "CHKDSK")
             {
@@ -304,7 +435,7 @@ public sealed partial class RepairPage : Page
                 {
                     percentage = int.Parse(match.Groups[1].Value);
                 }
-                else{}
+                else { }
             }
 
             if (percentage > 0 && percentage <= 100)
