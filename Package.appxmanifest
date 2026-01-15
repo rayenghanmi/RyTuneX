@@ -50,6 +50,10 @@
 
 	<Capabilities>
 		<rescap:Capability Name="runFullTrust"/>
+		<rescap:Capability Name="allowElevation"/>
+		<rescap:Capability Name="registry"/>
+		<rescap:Capability Name="packageManagement"/>
+
 	</Capabilities>
 
 	<genTemplate:Metadata>

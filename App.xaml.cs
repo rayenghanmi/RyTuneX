@@ -18,8 +18,6 @@
  * Contact: ghanmirayen12@gmail.com
  */
 
-using System.Diagnostics;
-using System.Security.Principal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -113,45 +111,9 @@ public partial class App : Application
         }).
         Build();
     }
-    private static bool IsRunningAsAdministrator()
-    {
-        using var identity = WindowsIdentity.GetCurrent();
-        var principal = new WindowsPrincipal(identity);
-        return principal.IsInRole(WindowsBuiltInRole.Administrator);
-    }
-
-    private static void RestartElevated(string? arguments = null)
-    {
-        try
-        {
-            var exePath = Process.GetCurrentProcess().MainModule!.FileName!;
-
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = exePath,
-                Arguments = arguments ?? string.Empty,
-                UseShellExecute = true,
-                Verb = "runas" // triggers UAC
-            };
-
-            Process.Start(startInfo);
-        }
-        catch
-        {
-            // User cancelled UAC
-        }
-
-        Environment.Exit(0);
-    }
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        // Ensure admin
-        if (!IsRunningAsAdministrator())
-        {
-            RestartElevated();
-            return;
-        }
         base.OnLaunched(args);
 
         // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
