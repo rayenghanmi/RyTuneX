@@ -1,5 +1,4 @@
-﻿using Microsoft.UI;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using Windows.UI.ViewManagement;
@@ -19,7 +18,6 @@ public class ThemeSelectorService : IThemeSelectorService
     {
         _localSettingsService = localSettingsService;
         _uiSettings = new UISettings();
-        _uiSettings.ColorValuesChanged += UiSettings_ColorValuesChanged;
     }
 
     public async Task InitializeAsync()
@@ -42,7 +40,6 @@ public class ThemeSelectorService : IThemeSelectorService
             rootElement.RequestedTheme = Theme;
 
             TitleBarHelper.UpdateTitleBar(Theme);
-            UpdateWindowIcon(Theme);
         }
 
         await Task.CompletedTask;
@@ -63,33 +60,5 @@ public class ThemeSelectorService : IThemeSelectorService
     private async Task SaveThemeInSettingsAsync(ElementTheme theme)
     {
         await _localSettingsService.SaveSettingAsync(SettingsKey, theme.ToString());
-    }
-
-    private void UpdateWindowIcon(ElementTheme theme)
-    {
-        if (theme == ElementTheme.Default)
-        {
-            var background = _uiSettings.GetColorValue(UIColorType.Background);
-            theme = background == Colors.White ? ElementTheme.Light : ElementTheme.Dark;
-        }
-
-        var iconPath = theme switch
-        {
-            ElementTheme.Light => "Assets/LightWindowIcon.ico",
-            _ => "Assets/WindowIcon.ico"
-        };
-
-        App.MainWindow.AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, iconPath));
-    }
-
-    private void UiSettings_ColorValuesChanged(UISettings sender, object args)
-    {
-        App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-        {
-            if (Theme == ElementTheme.Default)
-            {
-                UpdateWindowIcon(Theme);
-            }
-        });
     }
 }

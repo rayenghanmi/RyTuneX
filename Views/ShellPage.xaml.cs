@@ -1,19 +1,16 @@
 ﻿using System.Diagnostics;
 using System.Security.Principal;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
-using Microsoft.UI.Xaml.Media.Imaging;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.ViewModels;
 using Windows.Storage;
 using Windows.System;
-using Windows.UI.ViewManagement;
 
 namespace RyTuneX.Views;
 
@@ -30,6 +27,10 @@ public sealed partial class ShellPage : Page
 
     readonly bool isAdmin = new WindowsPrincipal(WindowsIdentity.GetCurrent())
                   .IsInRole(WindowsBuiltInRole.Administrator);
+
+    // Track pointer state to defer hide animation while hovered
+    private bool _isPointerOver = false;
+    private bool _pendingHide = false;
 
     public ShellPage(ShellViewModel viewModel)
     {
@@ -57,11 +58,17 @@ public sealed partial class ShellPage : Page
         IsAdminIcon.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
         NotAdminIcon.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
 
-        // Subscribe to the ActualThemeChanged event
-        this.ActualThemeChanged += ShellPage_ActualThemeChanged;
+        // Attach pointer handlers for pausing/resuming notifications
+        Loaded += ShellPage_Loaded;
+    }
 
-        // Update the window icon based on the current theme
-        UpdateWindowIcon();
+    private void ShellPage_Loaded(object? sender, RoutedEventArgs e)
+    {
+        // Pointer events to pause/resume animations and the notification queue
+        infoBar.PointerEntered -= InfoBar_PointerEntered;
+        infoBar.PointerEntered += InfoBar_PointerEntered;
+        infoBar.PointerExited -= InfoBar_PointerExited;
+        infoBar.PointerExited += InfoBar_PointerExited;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -116,8 +123,6 @@ public sealed partial class ShellPage : Page
             }
         });
     }
-
-    #region Title Bar Search
 
     private void TitleBarSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
@@ -186,8 +191,6 @@ public sealed partial class ShellPage : Page
             LogHelper.LogError($"Error navigating to search result: {ex.Message}");
         }
     }
-
-    #endregion
 
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {
@@ -303,40 +306,25 @@ public sealed partial class ShellPage : Page
         }
     }
 
-    private void ShellPage_ActualThemeChanged(FrameworkElement sender, object args)
-    {
-        UpdateWindowIcon();
-    }
-
-    private void UpdateWindowIcon()
-    {
-        var themeSelectorService = App.GetService<IThemeSelectorService>();
-        var theme = themeSelectorService.Theme;
-
-        if (theme == ElementTheme.Default)
-        {
-            var uiSettings = new UISettings();
-            var background = uiSettings.GetColorValue(UIColorType.Background);
-            theme = background == Colors.White ? ElementTheme.Light : ElementTheme.Dark;
-        }
-
-        var iconPath = theme switch
-        {
-            ElementTheme.Light => "Assets/LightWindowIcon.ico",
-            _ => "Assets/WindowIcon.ico"
-        };
-
-        ShellTitleBarImage.Source = new BitmapImage(new Uri(Path.Combine(AppContext.BaseDirectory, iconPath)));
-    }
-
     public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration)
     {
         Current?.ShowNotificationInstance(title, message, severity, duration);
     }
 
+    private Storyboard? GetStoryboard(string key)
+    {
+        if (infoBar.Resources.TryGetValue(key, out var obj) && obj is Storyboard sb)
+        {
+            return sb;
+        }
+        return null;
+    }
+
     private void ShowNotificationInstance(string title, string message, InfoBarSeverity severity, int duration)
     {
-        // Show notification in the NotificationQueue
+        // Make visible and show notification content via behavior
+        infoBar.Visibility = Visibility.Visible;
+
         NotificationQueue.Show(new CommunityToolkit.WinUI.Behaviors.Notification
         {
             Title = title,
@@ -345,12 +333,94 @@ public sealed partial class ShellPage : Page
             Duration = TimeSpan.FromMilliseconds(duration)
         });
 
-        // Trigger animation for showing the notification
-        var showStoryboard = (Storyboard)infoBar.Resources["ShowNotificationStoryboard"];
-        showStoryboard.Begin();
+        // Start entrance animation
+        GetStoryboard("ShowNotificationStoryboard")?.Begin();
 
-        // Start ProgressBar animation
-        var progressBarAnimationStoryboard = (Storyboard)infoBar.Resources["ProgressBarAnimationStoryboard"];
-        progressBarAnimationStoryboard.Begin();
+        // Start progress animation and wire completion
+        var progressSb = GetStoryboard("ProgressBarAnimationStoryboard");
+        if (progressSb != null)
+        {
+            // Ensure single subscription
+            progressSb.Completed -= ProgressBarAnimationStoryboard_Completed;
+            progressSb.Completed += ProgressBarAnimationStoryboard_Completed;
+            progressSb.Begin();
+        }
+    }
+
+    private void ProgressBarAnimationStoryboard_Completed(object? sender, object e)
+    {
+        // If pointer is over infoBar, defer the hide until pointer exits
+        if (_isPointerOver)
+        {
+            _pendingHide = true;
+            return;
+        }
+
+        // Start hide animation
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            var hideSb = GetStoryboard("HideNotificationStoryboard");
+            if (hideSb != null)
+            {
+                hideSb.Completed -= HideNotificationStoryboard_Completed;
+                hideSb.Completed += HideNotificationStoryboard_Completed;
+                hideSb.Begin();
+            }
+            else
+            {
+                FinalizeHide();
+            }
+        });
+    }
+
+    private void HideNotificationStoryboard_Completed(object? sender, object e)
+    {
+        FinalizeHide();
+    }
+
+    private void FinalizeHide()
+    {
+        // Stop storyboards and reset state
+        GetStoryboard("ProgressBarAnimationStoryboard")?.Stop();
+        GetStoryboard("ShowNotificationStoryboard")?.Stop();
+        GetStoryboard("HideNotificationStoryboard")?.Stop();
+
+        progressBar.Value = 0;
+        infoBar.Visibility = Visibility.Collapsed;
+
+        _pendingHide = false;
+    }
+
+    private void InfoBar_PointerEntered(object sender, PointerRoutedEventArgs e)
+    {
+        _isPointerOver = true;
+
+        GetStoryboard("ProgressBarAnimationStoryboard")?.Pause();
+        GetStoryboard("ShowNotificationStoryboard")?.Pause();
+        GetStoryboard("HideNotificationStoryboard")?.Pause();
+    }
+
+    private void InfoBar_PointerExited(object sender, PointerRoutedEventArgs e)
+    {
+        _isPointerOver = false;
+
+        GetStoryboard("ProgressBarAnimationStoryboard")?.Resume();
+        GetStoryboard("ShowNotificationStoryboard")?.Resume();
+        GetStoryboard("HideNotificationStoryboard")?.Resume();
+
+        if (_pendingHide)
+        {
+            var hideSb = GetStoryboard("HideNotificationStoryboard");
+            if (hideSb != null)
+            {
+                hideSb.Completed -= HideNotificationStoryboard_Completed;
+                hideSb.Completed += HideNotificationStoryboard_Completed;
+                hideSb.Begin();
+            }
+            else
+            {
+                FinalizeHide();
+            }
+        }
     }
 }

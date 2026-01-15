@@ -2,6 +2,8 @@
 
 public static partial class OptimizeSystemHelper
 {
+    // Get OS build to handle version-specific behavior
+    private static readonly int build = Environment.OSVersion.Version.Build;
     public static async Task DisableWindowsRecall()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /v DisableAIDataAnalysis /t REG_DWORD /d 1 /f").ConfigureAwait(false);
@@ -537,14 +539,14 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v AppsUseLightTheme /t REG_DWORD /d 0 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("taskkill /f /im explorer.exe").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("start explorer.exe").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
     }
     public static async Task DisableWindowsDarkMode()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v AppsUseLightTheme /t REG_DWORD /d 1 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" /v SystemUsesLightTheme /t REG_DWORD /d 1 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("taskkill /f /im explorer.exe").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("start explorer.exe").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
     }
 
     public static async Task EnableVerboseLogon()
@@ -560,13 +562,13 @@ public static partial class OptimizeSystemHelper
     public static async Task EnableClassicContextMenu()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start explorer").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer").ConfigureAwait(false);
     }
 
     public static async Task DisableClassicContextMenu()
     {
         await OptimizationOptions.StartInCmd("reg delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\" /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start explorer").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer").ConfigureAwait(false);
     }
 
     public static async Task DisableSystemRestore()
@@ -691,39 +693,206 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_FSEBehaviorMode /t REG_DWORD /d 0 /f").ConfigureAwait(false);
     }
 
-    public static async Task DisableAutomaticUpdates()
+    public static async Task SetWindowsUpdatesDefault()
     {
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoUpdate /t REG_DWORD /d 1 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DoNotConnectToWindowsUpdateInternetLocations /t REG_DWORD /d 1 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v AUOptions /t REG_DWORD /d 2 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoRebootWithLoggedOnUsers /t REG_DWORD /d 1 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config\" /v DODownloadMode /t REG_DWORD /d 0 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\DoSvc\" /v Start /t REG_DWORD /d 4 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Speech\" /v AllowSpeechModelUpdate /t REG_DWORD /d 0 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\" /v MaintenanceDisabled /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+        // Remove all policy overrides to restore default behavior
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DoNotConnectToWindowsUpdateInternetLocations' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DisableWindowsUpdateAccess' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
 
-        await OptimizationOptions.StartInCmd("sc config wuauserv start= disabled").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("sc config UsoSvc start= disabled").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("sc config BITS start= disabled").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("sc config WaaSMedicSvc start= disabled").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("sc config DoSvc start= disabled").ConfigureAwait(false);
+        // Remove Automatic Updates policies
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Name 'AUOptions' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Name 'NoAutoUpdate' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Name 'NoAutoRebootWithLoggedOnUsers' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Remove deferral policies (feature + quality updates)
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DeferFeatureUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DeferFeatureUpdatesPeriodInDays' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DeferQualityUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DeferQualityUpdatesPeriodInDays' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Remove AllowOptionalContent / SetAllowOptionalContent
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'AllowOptionalContent' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'SetAllowOptionalContent' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Remove Delivery Optimization override
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config' -Name 'DODownloadMode' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Remove speech model update and maintenance blocks
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Speech' -Name 'AllowSpeechModelUpdate' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance' -Name 'MaintenanceDisabled' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Clean up UX Settings
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'AllowMUUpdateService' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'RestartNotificationsAllowed2' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'AllowOptionalContent' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'DeferFeatureUpdatesPeriodInDays' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'DeferQualityUpdatesPeriodInDays' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'IsContinuousInnovationOptedIn' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'IsExpedited' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Remove additional policy values
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'SetPolicyDrivenUpdateSourceForDriverUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'SetPolicyDrivenUpdateSourceForFeatureUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'SetPolicyDrivenUpdateSourceForQualityUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'SetPolicyDrivenUpdateSourceForOtherUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'ManagePreviewBuildsPolicyValue' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'BranchReadinessLevel' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'PauseFeatureUpdatesStartTime' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'PauseQualityUpdatesStartTime' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Clean up empty policy keys
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-Item 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Recurse -Force -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-Item 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Recurse -Force -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Restore Delivery Optimization service startup
+        await OptimizationOptions.StartInCmd("sc config DoSvc start= delayed-auto").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\DoSvc\" /v Start /t REG_DWORD /d 2 /f").ConfigureAwait(false);
+
+        // Restore Windows Update related services to default startup
+        await OptimizationOptions.StartInCmd("sc config wuauserv start= demand").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config UsoSvc start= demand").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config BITS start= delayed-auto").ConfigureAwait(false);
+
+        // Restore WaaSMedicSvc behavior
+        if (build >= 19041)
+        {
+            // Restore WaaSMedic service startup
+            await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\WaaSMedicSvc\" /v Start /t REG_DWORD /d 3 /f").ConfigureAwait(false);
+
+            // Restore original registry ACLs
+            await OptimizationOptions.StartInCmd("PowerShell -Command \"$acl = Get-Acl 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\WaaSMedicSvc'; $acl.SetAccessRuleProtection($false,$true); Set-Acl 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\WaaSMedicSvc' $acl\"").ConfigureAwait(false);
+
+            // Re-enable WaaSMedic scheduled tasks
+            await OptimizationOptions.StartInCmd("PowerShell -Command \"Get-ScheduledTask -TaskPath '\\Microsoft\\Windows\\WaaSMedic\\*' -ErrorAction SilentlyContinue | Enable-ScheduledTask -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        }
+        else
+        {
+            await OptimizationOptions.StartInCmd("sc config WaaSMedicSvc start= demand").ConfigureAwait(false);
+        }
+
+        // Re-enable Update Orchestrator and Windows Update scheduled tasks
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Get-ScheduledTask -TaskPath '\\Microsoft\\Windows\\UpdateOrchestrator\\*' -ErrorAction SilentlyContinue | Enable-ScheduledTask -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Get-ScheduledTask -TaskPath '\\Microsoft\\Windows\\WindowsUpdate\\*' -ErrorAction SilentlyContinue | Enable-ScheduledTask -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Reset Windows Update components to clear any cached policy state
+        await OptimizationOptions.StartInCmd("net stop wuauserv").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net stop bits").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net stop cryptsvc").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net start cryptsvc").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net start bits").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("net start wuauserv").ConfigureAwait(false);
+
+        // Force Group Policy refresh to clear cached policy state
+        await OptimizationOptions.StartInCmd("gpupdate /force").ConfigureAwait(false);
     }
 
-    public static async Task EnableAutomaticUpdates()
+    public static async Task SetWindowsUpdatesSecurityOnly()
     {
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DoNotConnectToWindowsUpdateInternetLocations /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v AUOptions /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoUpdate /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoRebootWithLoggedOnUsers /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config\" /v DODownloadMode /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Speech\" /v AllowSpeechModelUpdate /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\" /v MaintenanceDisabled /f").ConfigureAwait(false);
+        // Ensure the WindowsUpdate policy keys exist
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /f").ConfigureAwait(false);
 
+        // AUOptions = 3: Auto download and notify for install
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v AUOptions /t REG_DWORD /d 3 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoUpdate /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoRebootWithLoggedOnUsers /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+
+        // Defer feature updates for maximum period (365 days)
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DeferFeatureUpdates /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DeferFeatureUpdatesPeriodInDays /t REG_DWORD /d 365 /f").ConfigureAwait(false);
+
+        // Quality updates with minimal deferral
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DeferQualityUpdates /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DeferQualityUpdatesPeriodInDays /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+
+        // Remove blocking policy if it was set
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DoNotConnectToWindowsUpdateInternetLocations' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Services should be on-demand for updates to work
         await OptimizationOptions.StartInCmd("sc config wuauserv start= demand").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("sc config UsoSvc start= demand").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("sc config BITS start= demand").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("sc config WaaSMedicSvc start= demand").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("sc config DoSvc start= demand").ConfigureAwait(false);
+    }
+
+    public static async Task SetWindowsUpdatesManually()
+    {
+        // Ensure the WindowsUpdate policy keys exist
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /f").ConfigureAwait(false);
+
+        // AUOptions = 2: Notify for download and notify for install
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v AUOptions /t REG_DWORD /d 2 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoUpdate /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoRebootWithLoggedOnUsers /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+
+        // Remove deferral settings so user controls all updates
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DeferFeatureUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DeferFeatureUpdatesPeriodInDays' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DeferQualityUpdates' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DeferQualityUpdatesPeriodInDays' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Remove blocking policy if it was set
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DoNotConnectToWindowsUpdateInternetLocations' -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Services should be on-demand
+        await OptimizationOptions.StartInCmd("sc config wuauserv start= demand").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config UsoSvc start= demand").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config BITS start= demand").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config DoSvc start= demand").ConfigureAwait(false);
+    }
+
+    public static async Task SetWindowsUpdatesDisabled()
+    {
+        var build = Environment.OSVersion.Version.Build;
+
+        // Ensure the WindowsUpdate policy keys exist
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /f").ConfigureAwait(false);
+
+        // Block automatic updates using Group Policy registry keys
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoUpdate /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DoNotConnectToWindowsUpdateInternetLocations /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v AUOptions /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\" /v NoAutoRebootWithLoggedOnUsers /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+
+        // Additional policy to disable Windows Update access
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\" /v DisableWindowsUpdateAccess /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+
+        // Disable Delivery Optimization
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config\" /v DODownloadMode /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\DoSvc\" /v Start /t REG_DWORD /d 4 /f").ConfigureAwait(false);
+
+        // Disable speech model updates and maintenance
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Speech\" /v AllowSpeechModelUpdate /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\" /v MaintenanceDisabled /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+
+        // Disable services
+        await OptimizationOptions.StartInCmd("sc config wuauserv start= disabled").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config UsoSvc start= disabled").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config BITS start= disabled").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config DoSvc start= disabled").ConfigureAwait(false);
+
+        // Handle WaaSMedicSvc
+        if (build >= 19041)
+        {
+            // Disable WaaSMedic scheduled tasks - this prevents it from re-enabling update services
+            await OptimizationOptions.StartInCmd("PowerShell -Command \"Get-ScheduledTask -TaskPath '\\Microsoft\\Windows\\WaaSMedic\\*' -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+            // Also try to take ownership and modify the service registry
+            await OptimizationOptions.StartInCmd("PowerShell -Command \"$acl = Get-Acl 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\WaaSMedicSvc' -ErrorAction SilentlyContinue; if($acl) { $rule = New-Object System.Security.AccessControl.RegistryAccessRule('Administrators','FullControl','ContainerInherit,ObjectInherit','None','Allow'); $acl.SetAccessRule($rule); Set-Acl 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\WaaSMedicSvc' $acl -ErrorAction SilentlyContinue }\"").ConfigureAwait(false);
+            await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\WaaSMedicSvc\" /v Start /t REG_DWORD /d 4 /f").ConfigureAwait(false);
+        }
+        else
+        {
+            // On older Windows, we can directly disable the service
+            await OptimizationOptions.StartInCmd("sc stop WaaSMedicSvc").ConfigureAwait(false);
+            await OptimizationOptions.StartInCmd("sc config WaaSMedicSvc start= disabled").ConfigureAwait(false);
+        }
+
+        // Disable Update Orchestrator scheduled tasks
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Get-ScheduledTask -TaskPath '\\Microsoft\\Windows\\UpdateOrchestrator\\*' -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("PowerShell -Command \"Get-ScheduledTask -TaskPath '\\Microsoft\\Windows\\WindowsUpdate\\*' -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
     }
 
     public static async Task DisableStoreUpdates()
@@ -1605,30 +1774,21 @@ public static partial class OptimizeSystemHelper
 
     public static async Task<bool> RemoveTempFiles()
     {
-        // Stop Explorer
-        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe");
-
         try
         {
-
             // List of commands to remove temporary files
             var tempCommands = new[]
             {
             "rd /S /Q %windir%\\Temp",
             "rd /S /Q %TEMP%",
-            "rd /S /Q %localappdata%\\Temp",
             "rd /S /Q %windir%\\SoftwareDistribution\\Download",
             "rd /S /Q %windir%\\SoftwareDistribution\\DeliveryOptimization",
             "del /F /S /Q %windir%\\Logs\\CBS\\*",
             "del /F /S /Q %windir%\\MEMORY.DMP",
             "del /F /S /Q %windir%\\Minidump\\*.dmp",
             "del /F /S /Q %windir%\\Temp\\WindowsUpdate.log",
-            "rd /S /Q %windir%\\Prefetch",
             "rd /S /Q %programdata%\\Microsoft\\Windows\\WER\\ReportQueue",
             "rd /S /Q %localappdata%\\Microsoft\\Windows\\WER\\ReportArchive",
-            "rd /S /Q %localappdata%\\Microsoft\\Windows\\INetCache",
-            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\iconcache*",
-            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache*",
             "rd /S /Q %systemdrive%\\Windows.old",
             "rd /S /Q %systemdrive%\\MSOCache",
             "del /F /S /Q %systemdrive%\\*.tmp",
@@ -1639,23 +1799,44 @@ public static partial class OptimizeSystemHelper
             "del /F /S /Q %systemdrive%\\found.*",
             "del /F /S /Q %userprofile%\\recent\\*.*",
             "del /F /S /Q \"%userprofile%\\Local Settings\\Temporary Internet Files\\*.*\"",
-            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path $env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\* -Include 'Cache', 'Cookies', 'History', 'Visited Links', 'Archived History', 'Web Data', 'Current Session', 'Last Session' -Recurse -Force -ErrorAction SilentlyContinue\"",
-            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path $env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Cache -Recurse -Force -ErrorAction SilentlyContinue\"",
-            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path $env:APPDATA\\Mozilla\\Firefox\\Profiles\\*\\cache2 -Recurse -Force -ErrorAction SilentlyContinue\"",
-            "PowerShell.exe -NoProfile -Command \"Remove-Item -Path $env:APPDATA\\Moonchild Productions\\Pale Moon\\Profiles\\*\\cache2\\entries -Recurse -Force -ErrorAction SilentlyContinue\"",
+            "PowerShell.exe -NoProfile -Command \"& { Remove-Item -Path \"$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\*\" -Include 'Cache','Cookies','History','Visited Links','Archived History','Web Data','Current Session','Last Session' -Recurse -Force -ErrorAction SilentlyContinue }\"",
+            "PowerShell.exe -NoProfile -Command \"& { Remove-Item -Path \"$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Cache\" -Recurse -Force -ErrorAction SilentlyContinue }\"",
+            "PowerShell.exe -NoProfile -Command \"& { Remove-Item -Path \"$env:APPDATA\\Mozilla\\Firefox\\Profiles\\*\\cache2\" -Recurse -Force -ErrorAction SilentlyContinue }\"",
+            "PowerShell.exe -NoProfile -Command \"& { Remove-Item -Path \"$env:APPDATA\\Moonchild Productions\\Pale Moon\\Profiles\\*\\cache2\\entries\" -Recurse -Force -ErrorAction SilentlyContinue }\"",
             "PowerShell.exe -NoProfile -Command \"Clear-RecycleBin -Force\"",
             "PowerShell.exe -NoProfile -Command \"wevtutil cl System\"",
             "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
             "ipconfig /flushdns",
-            "dism /Online /Cleanup-Image /StartComponentCleanup"
+            "dism /Online /Cleanup-Image /StartComponentCleanup /Quiet"
             };
 
-            // Execute all commands
-            var tempTasks = tempCommands.AsParallel().Select(cmd => OptimizationOptions.StartInCmd(cmd));
-            await Task.WhenAll(tempTasks).ConfigureAwait(false);
+            // Commands that require Explorer to be killed
+            var explorerDependentCommands = new[]
+            {
+            "rd /S /Q %localappdata%\\Temp",
+            "rd /S /Q %localappdata%\\Microsoft\\Windows\\INetCache",
+            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\iconcache*",
+            "del /A /Q %localappdata%\\Microsoft\\Windows\\Explorer\\thumbcache*",
+            "rd /S /Q %windir%\\Prefetch"
+            };
 
-            // Start explorer
-            await OptimizationOptions.StartInCmd("start explorer.exe").ConfigureAwait(false);
+            // Kill Explorer to release file locks
+            await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe").ConfigureAwait(false);
+
+            // Execute commands that depend on Explorer being closed
+            foreach (var cmd in explorerDependentCommands)
+            {
+                await OptimizationOptions.StartInCmd(cmd).ConfigureAwait(false);
+            }
+
+            // Restart Explorer immediately
+            await OptimizationOptions.StartInCmd("start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
+
+            // Execute remaining commands
+            foreach (var cmd in tempCommands)
+            {
+                await OptimizationOptions.StartInCmd(cmd).ConfigureAwait(false);
+            }
 
             return true;
         }

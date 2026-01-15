@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windows 디렉터리</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>임시 파일 삭제</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
@@ -561,12 +561,6 @@
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Microsoft Store에서 다운로드한 앱에 대한 자동 업데이트를 비활성화합니다. 앱이 보안 위험에 취약하거나 새로운 기능이 부족할 수 있습니다.</value>
   </data>
-  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>자동 업데이트 비활성화</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>수동 설치가 필요한 자동 Windows 업데이트를 끕니다. 권장하지 않습니다. 이렇게 하면 시스템이 보안 악용 및 버그 수정에 취약해질 수 있습니다.</value>
-  </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>원격 분석</value>
   </data>
@@ -784,6 +778,9 @@
     <value>세부 정보</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>복구</value>
+  </data>
+  <data name="Repair" xml:space="preserve">
     <value>복구</value>
   </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
@@ -1140,6 +1137,9 @@
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
     <value>최소 한 개의 옵션을 선택하여 검사/수리</value>
   </data>
+  <data name="StatusTextBlockDefault" xml:space="preserve">
+    <value>최소 한 개의 옵션을 선택하여 검사/수리</value>
+  </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>배터리 상태</value>
   </data>
@@ -1412,5 +1412,227 @@
   </data>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>웹 및 앱에서 사용자를 보호합니다</value>
+  </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>배터리 및 전원</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>전원 모드</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>성능과 에너지 소비의 균형을 맞추려면 전원 관리 옵션을 선택하세요</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>최대 성능을 위해 숨겨진 최고 성능 전원 계획을 추가합니다.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>최고 성능 전원 계획이 성공적으로 추가되었습니다.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>계획 추가</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>최고 성능 전원 계획이 이미 존재합니다.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>최고 성능 전원 계획 추가</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>최고 성능 전원 계획 추가</value>
+  </data>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>이 기능은 정책 지원 레지스트리 항목만 감지합니다. 서비스 변경이나 정책 외 레지스트리 조정은 감지하지 않습니다.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>이 페이지는 로컬 그룹 정책 재정의를 감지하고 제거할 수 있습니다. 정책 재정의를 제거하면 구성되지 않음 상태로 돌아갑니다.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>정책 요약</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>구성된 정책</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>범주</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>선택 항목 제거</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>상세 정책 목록</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>정책</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>재정의 제거</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>정책 재정의가 감지되지 않았습니다.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>모든 재정의 제거</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>그룹 정책 재정의 감지</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>정책 검색 중...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>새로고침</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>범주</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>선택 항목 제거</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>정책 검색 중...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>정책 재정의가 감지되지 않았습니다.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>정책 요약</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>정보</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>새로고침</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>구성된 정책</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>개별 정책 재정의 보기 및 관리</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>모든 재정의 제거</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>이 페이지는 로컬 그룹 정책 재정의를 감지하고 제거할 수 있습니다. 정책 재정의를 제거하면 구성되지 않음 상태로 돌아갑니다.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>감지된 정책 재정의 개요</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>상세 정책 목록</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} 구성됨</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>정책 검색 중 오류: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>제거 실패</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>{0}개의 정책 재정의가 성공적으로 제거되었습니다.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>범주 정책 제거</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>구성되지 않음</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>정책 제거됨</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0}개의 구성된 정책</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>지금 다시 시작</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>나중에</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>선택한 {0}개의 정책 재정의를 제거하시겠습니까?</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>정책 재정의를 제거하는 동안 오류가 발생했습니다: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>'{1}' 범주의 모든 {0}개 정책 재정의를 제거하시겠습니까?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>모든 {0}개의 정책 재정의를 제거하시겠습니까? 이 작업은 취소할 수 없습니다.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>부분 제거</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>제거</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>정책 제거 중...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>{1}개 중 {0}개의 정책 재정의가 제거되었습니다. 일부 정책은 제거할 수 없습니다.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>탐색기 다시 시작</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>일부 정책 변경 사항을 적용하려면 Windows 탐색기를 다시 시작해야 합니다. 지금 탐색기를 다시 시작하시겠습니까?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>모든 정책 재정의 제거</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>선택한 정책 제거</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>새로 만들기</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>전원 계획 생성</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>전원 계획 이름</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>전원 관리 옵션 이름 입력</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>기본 전원 계획</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>만들기</value>
+  </data>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>전원 계획의 이름을 입력하십시오.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>기본 전원 계획을 선택하십시오.</value>
+  </data>
+  <data name="PowerPlanCreated" xml:space="preserve">
+    <value>전원 관리 옵션이 성공적으로 생성되었습니다.</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Description" xml:space="preserve">
+    <value>Windows가 자동 업데이트를 처리하는 방법을 구성합니다. 자동 업데이트, 보안만, 수동 제어 또는 완전히 비활성화 중에서 선택하세요.</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
+    <value>수동</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
+    <value>보안만</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
+    <value>비활성화</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Header" xml:space="preserve">
+    <value>Windows 업데이트</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
+    <value>기본값</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>검사 결과</value>
   </data>
 </root>

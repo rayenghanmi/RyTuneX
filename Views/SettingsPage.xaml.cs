@@ -503,9 +503,29 @@ public sealed partial class SettingsPage : Page
     private async void ExportButton_Click(object sender, RoutedEventArgs e)
     {
         var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        await OptimizationOptions.StartInCmd($"REG EXPORT HKLM\\SOFTWARE\\RyTuneX\\Optimizations \"{path}\\RyTuneX_Backup_{DateTime.Now:yyyy-MM-dd}.reg\"");
-        await LogHelper.Log($"Exported registry settings to {path}\\RyTuneX_Backup_{DateTime.Now:yyyy-MM-dd}.reg");
-        App.ShowNotification(String.Empty, "SettingsExported".GetLocalized() + $"\n{path}", InfoBarSeverity.Success, 5000);
+        var exportFilePath = Path.Combine(path, $"RyTuneX_Backup_{DateTime.Now:yyyy-MM-dd}.reg");
+
+        try
+        {
+            var regFlag = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess ? " /reg:64" : "";
+            var exitCode = await OptimizationOptions.StartInCmd($"REG EXPORT \"HKLM\\SOFTWARE\\RyTuneX\\Optimizations\" \"{exportFilePath}\" /y{regFlag}");
+
+            if (exitCode == 0 && File.Exists(exportFilePath))
+            {
+                await LogHelper.Log($"Exported registry settings to {exportFilePath}");
+                App.ShowNotification(string.Empty, "SettingsExported".GetLocalized() + $"\n{path}", InfoBarSeverity.Success, 5000);
+            }
+            else
+            {
+                await LogHelper.LogError($"Failed to export registry settings. Exit code: {exitCode}");
+                App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
+            }
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.LogError($"Error exporting registry settings: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
+        }
     }
 
     private async void ImportButton_Click(object sender, RoutedEventArgs e)
@@ -534,6 +554,32 @@ public sealed partial class SettingsPage : Page
                 {
                     var value = key.GetValue(valueName);
                     var kind = key.GetValueKind(valueName);
+
+                    // Handle Windows Updates mode separately
+                    if (valueName == "WindowsUpdatesMode" && kind == RegistryValueKind.String)
+                    {
+                        var mode = value as string;
+                        if (!string.IsNullOrEmpty(mode))
+                        {
+                            switch (mode)
+                            {
+                                case "Default":
+                                    await OptimizeSystemHelper.SetWindowsUpdatesDefault();
+                                    break;
+                                case "Security":
+                                    await OptimizeSystemHelper.SetWindowsUpdatesSecurityOnly();
+                                    break;
+                                case "Manually":
+                                    await OptimizeSystemHelper.SetWindowsUpdatesManually();
+                                    break;
+                                case "Disabled":
+                                    await OptimizeSystemHelper.SetWindowsUpdatesDisabled();
+                                    break;
+                            }
+                            await LogHelper.Log($"Applied Windows Updates mode: {mode}");
+                        }
+                        continue;
+                    }
 
                     if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
                     {

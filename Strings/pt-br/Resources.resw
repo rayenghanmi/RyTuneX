@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Diretório do Windows</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>Excluindo arquivos temporários</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
@@ -561,12 +561,6 @@
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Desabilita atualizações automáticas para aplicativos baixados da Microsoft Store. Pode deixar os aplicativos vulneráveis ​​a riscos de segurança ou sem novos recursos.</value>
   </data>
-  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>Desabilitar atualizações automáticas</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>Desativa atualizações automáticas do Windows, exigindo instalação manual. Altamente desencorajado. Isso pode deixar seu sistema vulnerável a explorações de segurança e correções de bugs.</value>
-  </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>Telemetria</value>
   </data>
@@ -784,6 +778,9 @@
     <value>Detalhes</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>Reparo</value>
+  </data>
+  <data name="Repair" xml:space="preserve">
     <value>Reparo</value>
   </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
@@ -1140,6 +1137,9 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
     <value>Selecione pelo menos uma opção para escanear/reparar</value>
   </data>
+  <data name="StatusTextBlockDefault" xml:space="preserve">
+    <value>Selecione pelo menos uma opção para escanear/reparar</value>
+  </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>Saúde da bateria</value>
   </data>
@@ -1412,5 +1412,227 @@ Verifique se há problemas de memória em seu computador</value>
   </data>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Protege você na web e nos aplicativos</value>
+  </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Bateria e energia</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Modo de energia</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Selecione um plano de energia para equilibrar desempenho e consumo de energia</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Adiciona o plano de energia oculto de desempenho máximo ao sistema.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>Plano de desempenho máximo adicionado com sucesso.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Adicionar plano</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>O plano de desempenho máximo já existe.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Adicionar plano de desempenho máximo</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Adicionar plano de desempenho máximo</value>
+  </data>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>Este recurso detecta apenas entradas do registro com suporte a políticas. Não detecta alterações de serviço ou ajustes de registro não relacionados a políticas.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>Esta página detecta e permite remover substituições de política de grupo local. A remoção de uma substituição de política a retorna ao estado Não configurado.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>Resumo da política</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>Políticas configuradas</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>Categorias</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>Remover selecionados</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>Lista detalhada de políticas</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>Políticas</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>Remover substituições</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>Nenhuma substituição de política detectada.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>Remover todas as substituições</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>Detecção de substituição de política de grupo</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>Verificando políticas...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>Atualizar</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>Categorias</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>Remover selecionados</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>Verificando políticas...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>Nenhuma substituição de política detectada.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>Resumo da política</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>Informação</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>Atualizar</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>Políticas configuradas</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>Visualizar e gerenciar substituições de política individuais</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>Remover todas as substituições</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>Esta página detecta e permite remover substituições de política de grupo local. A remoção de uma substituição de política a retorna ao estado Não configurado.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>Visão geral das substituições de política detectadas</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>Lista detalhada de políticas</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} Configurado</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>Erro ao verificar políticas: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>Falha na remoção</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>{0} substituições de política removidas com sucesso.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>Remover políticas da categoria</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>Não configurado</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>Políticas removidas</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} políticas configuradas</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>Reiniciar agora</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>Mais tarde</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>Tem certeza de que deseja remover as {0} substituições de política selecionadas?</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>Ocorreu um erro ao remover substituições de política: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>Tem certeza de que deseja remover todas as {0} substituições de política na categoria '{1}'?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>Tem certeza de que deseja remover todas as {0} substituições de política? Esta ação não pode ser desfeita.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>Remoção parcial</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>Remover</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>Removendo políticas...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>Removidas {0} de {1} substituições de política. Algumas políticas não puderam ser removidas.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>Reiniciar Explorador</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>Algumas alterações de política requerem a reinicialização do Windows Explorer para entrar em vigor. Deseja reiniciar o Explorer agora?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>Remover todas as substituições de política</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>Remover políticas selecionadas</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Criar novo</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Criar plano de energia</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Nome do plano de energia</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Digite o nome do plano de energia</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Plano de energia base</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Criar</value>
+  </data>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Por favor, insira um nome para o plano de energia.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Por favor, selecione um plano de energia base.</value>
+  </data>
+  <data name="PowerPlanCreated" xml:space="preserve">
+    <value>Plano de energia criado com sucesso.</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Description" xml:space="preserve">
+    <value>Configure como o Windows lida com atualizações automáticas. Escolha entre atualizações automáticas, apenas segurança, controle manual ou completamente desabilitado.</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
+    <value>Manualmente</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
+    <value>Apenas Segurança</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
+    <value>Desabilitado</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Header" xml:space="preserve">
+    <value>Atualizações do Windows</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
+    <value>Padrão</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>Resultados da verificação</value>
   </data>
 </root>

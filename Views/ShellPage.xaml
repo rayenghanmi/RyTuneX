@@ -158,6 +158,11 @@
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA18;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_GroupPolicy" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.GroupPolicyPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9D5;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_SystemInfo" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.SystemInfoPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE770;"/>
@@ -227,6 +232,15 @@
                                 To="100"
                                 Duration="0:0:5"
                                 EnableDependentAnimation="True" />
+                        </Storyboard>
+                        <!-- Storyboard for hiding the InfoBar -->
+                        <Storyboard x:Key="HideNotificationStoryboard">
+                            <DoubleAnimation
+                                Storyboard.TargetName="infoBar"
+                                Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)"
+                                From="0"
+                                To="50"
+                                Duration="0:0:0.25" />
                         </Storyboard>
                     </muxc:InfoBar.Resources>
                     <muxc:InfoBar.RenderTransform>

@@ -109,24 +109,42 @@
                     </Grid>
                     
                     <!-- Installed Apps Count Block -->
-                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5"
+                          PointerPressed="InstalledAppsBlock_PointerPressed"
+                          PointerEntered="InteractiveBlock_PointerEntered"
+                          PointerExited="InteractiveBlock_PointerExited">
                         <FontIcon Glyph="&#xE71D;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_installedAppsCount" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="installedAppsCountText" Text="..." HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Spacing="4">
+                            <TextBlock x:Name="installedAppsCountText" Text="..." Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+                            <FontIcon Glyph="&#xE76C;" FontSize="12" VerticalAlignment="Center" Opacity="0.6"/>
+                        </StackPanel>
                     </Grid>
 
                     <!-- Processes Count Block -->
-                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5"
+                          PointerPressed="ProcessesBlock_PointerPressed"
+                          PointerEntered="InteractiveBlock_PointerEntered"
+                          PointerExited="InteractiveBlock_PointerExited">
                         <FontIcon Glyph="&#xECAA;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_processesCount" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="processesCountText" Text="..." HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Spacing="4">
+                            <TextBlock x:Name="processesCountText" Text="..." Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+                            <FontIcon Glyph="&#xE76C;" FontSize="12" VerticalAlignment="Center" Opacity="0.6"/>
+                        </StackPanel>
                     </Grid>
 
                     <!-- Services Count Block -->
-                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                    <Grid Padding="10" Width="280" Height="150" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5"
+                          PointerPressed="ServicesBlock_PointerPressed"
+                          PointerEntered="InteractiveBlock_PointerEntered"
+                          PointerExited="InteractiveBlock_PointerExited">
                         <FontIcon Glyph="&#xEA86;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock x:Uid="HomePage_servicesCount" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"/>
-                        <TextBlock x:Name="servicesCountText" Text="..." HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Spacing="4">
+                            <TextBlock x:Name="servicesCountText" Text="..." Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+                            <FontIcon Glyph="&#xE76C;" FontSize="12" VerticalAlignment="Center" Opacity="0.6"/>
+                        </StackPanel>
                     </Grid>
                 </controls:WrapPanel>
             </StackPanel>

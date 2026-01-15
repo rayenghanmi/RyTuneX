@@ -248,7 +248,7 @@ public sealed partial class DebloatSystemPage : Page
 
         if (!isWin32App)
         {
-            if (!appName.Contains("microsoft.edge.stable", StringComparison.CurrentCultureIgnoreCase))
+            if (!appName.Contains("edge.stable", StringComparison.CurrentCultureIgnoreCase))
             {
                 var cmdCommandRemoveProvisioned = $"powershell -Command \"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.DisplayName -eq '{appName}' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }}\"";
                 var cmdCommandRemoveAppxPackage = $"powershell -Command \"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -eq '{appName}' }} | Remove-AppxPackage\"";
@@ -455,7 +455,7 @@ public sealed partial class DebloatSystemPage : Page
             TempStack.Visibility = Visibility.Visible;
             TempProgress.Visibility = Visibility.Visible;
             TempButtonStack.Visibility = Visibility.Collapsed;
-            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeligTemp") + "...";
+            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeletingTemp") + "...";
 
             // Execute temp removal commands
             var result = await OptimizeSystemHelper.RemoveTempFiles();

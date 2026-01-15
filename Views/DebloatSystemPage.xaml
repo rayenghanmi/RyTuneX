@@ -23,8 +23,8 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <AutoSuggestBox x:Name="AppSearchBox"
@@ -33,7 +33,7 @@
                             Grid.Column="0"
                             HorizontalAlignment="Stretch"
                             MinWidth="80"
-                            MaxWidth="720"
+                            MaxWidth="300"
                             Height="34"
                             Visibility="Collapsed"
                             QueryIcon="Zoom"

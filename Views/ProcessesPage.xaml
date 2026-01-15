@@ -1,0 +1,159 @@
+﻿<Page
+    x:Class="RyTuneX.Views.ProcessesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid x:Name="ContentArea" Padding="24,14,24,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Summary Cards -->
+        <Grid x:Name="SummaryPanel" Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Total Processes Card -->
+            <Border Grid.Column="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                    CornerRadius="6" Padding="16,12" Margin="0,0,8,0">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <FontIcon Glyph="&#xECAA;" FontSize="24" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                    <StackPanel>
+                        <TextBlock x:Name="TotalProcessesText" Text="0" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock x:Uid="ProcessesPage_TotalProcesses" FontSize="12" Opacity="0.7"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Total Memory Card -->
+            <Border Grid.Column="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                    CornerRadius="6" Padding="16,12" Margin="4,0">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <FontIcon Glyph="&#xE964;" FontSize="24" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                    <StackPanel>
+                        <TextBlock x:Name="TotalMemoryText" Text="0 MB" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock x:Uid="ProcessesPage_TotalMemory" FontSize="12" Opacity="0.7"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Total Threads Card -->
+            <Border Grid.Column="2" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                    CornerRadius="6" Padding="16,12" Margin="8,0,0,0">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <FontIcon Glyph="&#xE8A7;" FontSize="24" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                    <StackPanel>
+                        <TextBlock x:Name="TotalThreadsText" Text="0" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock x:Uid="ProcessesPage_TotalThreads" FontSize="12" Opacity="0.7"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Search and Refresh -->
+        <Grid Grid.Row="1" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <AutoSuggestBox x:Name="SearchBox"
+                            PlaceholderText="Search processes..."
+                            QueryIcon="Find"
+                            TextChanged="SearchBox_TextChanged"/>
+            <Button x:Name="RefreshButton" Grid.Column="1" Margin="8,0,0,0" Click="RefreshButton_Click">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <FontIcon Glyph="&#xE72C;" FontSize="14"/>
+                    <TextBlock x:Uid="ProcessesPage_Refresh"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Column Headers -->
+        <Grid x:Name="HeaderGrid" Grid.Row="2"
+              Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+              Padding="12,8" CornerRadius="4" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.8*"/>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.8*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="NameHeader" Tag="Name" Click="SortHeader_Click"
+                    Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Left">
+                <TextBlock Text="Name" FontWeight="SemiBold" FontSize="13"/>
+            </Button>
+            <Button x:Name="PidHeader" Tag="PID" Grid.Column="1" Click="SortHeader_Click"
+                    Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Center">
+                <TextBlock Text="PID" FontWeight="SemiBold" FontSize="13"/>
+            </Button>
+            <Button x:Name="MemoryHeader" Tag="Memory" Grid.Column="2" Click="SortHeader_Click"
+                    Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Center">
+                <TextBlock Text="Memory" FontWeight="SemiBold" FontSize="13"/>
+            </Button>
+            <Button x:Name="ThreadsHeader" Tag="Threads" Grid.Column="3" Click="SortHeader_Click"
+                    Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Center">
+                <TextBlock Text="Threads" FontWeight="SemiBold" FontSize="13"/>
+            </Button>
+            <TextBlock Text="Actions" Grid.Column="4" FontWeight="SemiBold" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Process List -->
+        <Grid Grid.Row="3" Margin="0,0,0,24">
+            <ProgressRing x:Name="LoadingRing" IsActive="True" Width="48" Height="48"
+                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ListView x:Name="ProcessListView"
+                      SelectionMode="None"
+                      Visibility="Collapsed">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                CornerRadius="4" Padding="12,8" Margin="0,2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.8*"/>
+                                    <ColumnDefinition Width="0.6*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="0.6*"/>
+                                    <ColumnDefinition Width="0.8*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <FontIcon Glyph="&#xE756;" FontSize="14" Opacity="0.6"/>
+                                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" FontSize="13"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="{Binding Id}" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
+                                <StackPanel Grid.Column="2" HorizontalAlignment="Center" Spacing="2">
+                                    <TextBlock Text="{Binding MemoryDisplay}" HorizontalAlignment="Center" FontSize="12"/>
+                                    <ProgressBar Value="{Binding MemoryPercent}" Maximum="100" Width="60" Height="3"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="3" Text="{Binding ThreadCount}" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
+                                <Button Grid.Column="4"
+                                        Tag="{Binding Id}"
+                                        Click="EndTask_Click"
+                                        ToolTipService.ToolTip="End Task"
+                                        HorizontalAlignment="Center"
+                                        Padding="12,6">
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <FontIcon Glyph="&#xE711;" FontSize="12"/>
+                                        <TextBlock Text="End Task" FontSize="12"/>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

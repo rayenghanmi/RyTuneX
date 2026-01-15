@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Répertoire Windows</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>Suppression des fichiers temporaires</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
@@ -561,12 +561,6 @@
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Désactive les mises à jour automatiques pour les applications téléchargées depuis le Microsoft Store. Peut rendre les applications vulnérables aux risques de sécurité ou manquantes de nouvelles fonctionnalités.</value>
   </data>
-  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>Désactiver les Mises à Jour Automatiques</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>Désactive les mises à jour automatiques de Windows, nécessitant une installation manuelle. Fortement déconseillé. Cela peut rendre votre système vulnérable aux exploits de sécurité et aux correctifs de bugs.</value>
-  </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>Télémétrie</value>
   </data>
@@ -784,6 +778,9 @@
     <value>Détails</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>Réparation</value>
+  </data>
+  <data name="Repair" xml:space="preserve">
     <value>Réparation</value>
   </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
@@ -1140,6 +1137,9 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
     <value>Sélectionnez au moins une option pour analyser/réparer</value>
   </data>
+  <data name="StatusTextBlockDefault" xml:space="preserve">
+    <value>Sélectionnez au moins une option pour analyser/réparer</value>
+  </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>État de la batterie</value>
   </data>
@@ -1412,5 +1412,224 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   </data>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Vous protège sur le web et dans les applications</value>
+  </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Batterie et alimentation</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Mode d'alimentation</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Sélectionnez un mode de gestion de l'alimentation pour équilibrer performances et consommation d'énergie</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Ajoute le plan d’alimentation Performances ultimes masqué pour des performances maximales.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>Le plan Performances ultimes a été ajouté avec succès.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Ajouter le plan</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>Le plan Performances ultimes existe déjà.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Ajouter le plan Performances ultimes</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Ajouter le plan Performances ultimes</value>
+  </data>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>Cette fonctionnalité détecte uniquement les entrées de registre sauvegardées par des stratégies. Elle ne détecte pas les modifications de services ou les ajustements de registre non liés aux stratégies.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>Cette page détecte et vous permet de supprimer les remplacements de stratégie de groupe locale. La suppression d'un remplacement de stratégie le remet à l'état Non configuré.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>Résumé des stratégies</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>Stratégies configurées</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>Catégories</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>Supprimer la sélection</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>Liste détaillée des stratégies</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>Stratégies</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>Supprimer les remplacements</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>Aucun remplacement de stratégie détecté.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>Supprimer tous les remplacements</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>Détection des remplacements de stratégie de groupe</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>Analyse des stratégies...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>Catégories</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>Supprimer la sélection</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>Analyse des stratégies...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>Aucun remplacement de stratégie détecté.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>Résumé des stratégies</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>Stratégies configurées</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>Afficher et gérer les remplacements de stratégie individuels</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>Supprimer tous les remplacements</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>Cette page détecte et permet de supprimer les paramètres de stratégie de groupe locale modifiés. La suppression d’un paramètre le rétablit à l’état par défaut.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>Aperçu des remplacements de stratégie détectés</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>Liste détaillée des stratégies</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} Configuré</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>Erreur lors de l'analyse des stratégies : {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>Échec de la suppression</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>{0} remplacements de stratégie supprimés avec succès.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>Supprimer les stratégies de catégorie</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>Non configuré</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>Stratégies supprimées</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} stratégies configurées</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>Redémarrer maintenant</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>Plus tard</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer les {0} remplacements de stratégie sélectionnés ?</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>Une erreur s'est produite lors de la suppression des remplacements de stratégie : {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer les {0} remplacements de stratégie dans la catégorie '{1}' ?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer les {0} remplacements de stratégie ? Cette action est irréversible.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>Suppression partielle</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>Suppression des stratégies...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>{0} sur {1} remplacements de stratégie supprimés. Certaines stratégies n'ont pas pu être supprimées.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>Redémarrer l'Explorateur</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>Certaines modifications de stratégie nécessitent le redémarrage de l'Explorateur Windows. Voulez-vous redémarrer l'Explorateur maintenant ?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>Supprimer tous les remplacements de stratégie</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>Supprimer les stratégies sélectionnées</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Créer nouveau</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Créer un plan d’alimentation</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Nom du plan d’alimentation</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Entrez le nom du mode d'alimentation</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Plan d’alimentation de base</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Veuillez entrer un nom pour le plan d’alimentation.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Veuillez sélectionner un plan d’alimentation de base.</value>
+  </data>
+  <data name="PowerPlanCreated" xml:space="preserve">
+    <value>Mode d'alimentation créé avec succès.</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Description" xml:space="preserve">
+    <value>Configurez la façon dont Windows gère les mises à jour automatiques. Choisissez entre les mises à jour automatiques, la sécurité uniquement, le contrôle manuel ou complètement désactivé.</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
+    <value>Manuellement</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
+    <value>Sécurité uniquement</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Header" xml:space="preserve">
+    <value>Mises à jour Windows</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
+    <value>Par défaut</value>
   </data>
 </root>

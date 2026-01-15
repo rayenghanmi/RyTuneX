@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>دليل ويندوز</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>جاري حذف الملفات المؤقتة</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
@@ -561,12 +561,6 @@
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>يُعطل التحديثات التلقائية للتطبيقات التي تم تنزيلها من متجر مايكروسوفت. قد يترك التطبيقات عرضة لمخاطر الأمان أو تفتقر إلى ميزات جديدة</value>
   </data>
-  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>تعطيل التحديثات التلقائية</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>يُوقف تحديثات ويندوز التلقائية، مما يتطلب التثبيت اليدوي. يُنصح بشدة بعدم فعل ذلك. يمكن أن يترك نظامك عرضة للاستغلالات الأمنية وإصلاح الأخطاء</value>
-  </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>التجسس</value>
   </data>
@@ -784,6 +778,9 @@
     <value>التفاصيل</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>اصلاح</value>
+  </data>
+  <data name="Repair" xml:space="preserve">
     <value>اصلاح</value>
   </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
@@ -1140,6 +1137,9 @@
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
     <value>اختر على الأقل خيارًا واحدًا للفحص/الإصلاح</value>
   </data>
+  <data name="StatusTextBlockDefault" xml:space="preserve">
+    <value>اختر على الأقل خيارًا واحدًا للفحص/الإصلاح</value>
+  </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>حالة البطارية</value>
   </data>
@@ -1412,5 +1412,227 @@
   </data>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>يحميك على الويب وفي التطبيقات</value>
+  </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>البطارية والطاقة</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>وضع الطاقة</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>اختر خطة طاقة لتحقيق التوازن بين الأداء واستهلاك الطاقة</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>تضيف خطة الأداء الفائق المخفية إلى النظام للحصول على أقصى أداء.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>تمت إضافة خطة الأداء الفائق بنجاح.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>إضافة الخطة</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>خطة الأداء الفائق موجودة بالفعل.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>إضافة خطة الأداء الفائق</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>إضافة خطة الأداء النهائي</value>
+  </data>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>تكتشف هذه الميزة فقط إدخالات السجل المدعومة بالسياسات. لا تكتشف تغييرات الخدمة أو تعديلات السجل غير المتعلقة بالسياسات.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>تكشف هذه الصفحة وتتيح لك إزالة تجاوزات سياسة المجموعة المحلية. تؤدي إزالة تجاوز السياسة إلى إرجاعها إلى حالة غير مهيأة.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>ملخص السياسة</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>السياسات المهيأة</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>الفئات</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>إزالة المحدد</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>قائمة السياسات المفصلة</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>السياسات</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>إزالة التجاوزات</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>لم يتم اكتشاف تجاوزات سياسة.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>إزالة جميع التجاوزات</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>كشف تجاوز سياسة المجموعة</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>جارٍ فحص السياسات...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>الفئات</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>إزالة المحدد</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>جارٍ فحص السياسات...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>لم يتم اكتشاف تجاوزات سياسة.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>ملخص السياسة</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>معلومات</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>السياسات المهيأة</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>عرض وإدارة تجاوزات السياسة الفردية</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>إزالة جميع التجاوزات</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>تكشف هذه الصفحة وتتيح لك إزالة تجاوزات سياسة المجموعة المحلية. تؤدي إزالة تجاوز السياسة إلى إرجاعها  للوضع الافتراضي.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>نظرة عامة على تجاوزات السياسة المكتشفة</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>قائمة السياسات المفصلة</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} مهيأ</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>خطأ في فحص السياسات: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>فشلت الإزالة</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>تمت إزالة {0} تجاوزات سياسة بنجاح.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>إزالة سياسات الفئة</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>غير مهيأ</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>تمت إزالة السياسات</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} سياسات مهيأة</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>إعادة التشغيل الآن</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>لاحقاً</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد إزالة تجاوزات السياسة المحددة البالغ عددها {0}؟</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>حدث خطأ أثناء إزالة تجاوزات السياسة: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد إزالة جميع تجاوزات السياسة البالغ عددها {0} في فئة '{1}'؟</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد إزالة جميع تجاوزات السياسة البالغ عددها {0}؟ لا يمكن التراجع عن هذا الإجراء.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>إزالة جزئية</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>إزالة</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>جارٍ إزالة السياسات...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>تمت إزالة {0} من {1} تجاوزات سياسة. لم يمكن إزالة بعض السياسات.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>إعادة تشغيل المستكشف</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>تتطلب بعض تغييرات السياسة إعادة تشغيل مستكشف Windows لتصبح سارية المفعول. هل ترغب في إعادة تشغيل المستكشف الآن؟</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>إزالة جميع تجاوزات السياسة</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>إزالة السياسات المحددة</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>إنشاء جديد</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>إنشاء خطة طاقة</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>اسم خطة الطاقة</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>أدخل اسم خطة الطاقة</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>خطة الطاقة الأساسية</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>إنشاء</value>
+  </data>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>يرجى إدخال اسم خطة الطاقة.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>يرجى اختيار خطة الطاقة الأساسية.</value>
+  </data>
+  <data name="PowerPlanCreated" xml:space="preserve">
+    <value>تم إنشاء خطة الطاقة بنجاح.</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Description" xml:space="preserve">
+    <value>قم بتكوين كيفية تعامل ويندوز مع التحديثات التلقائية. اختر بين التحديثات التلقائية أو الأمان فقط أو التحكم اليدوي أو التعطيل الكامل.</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
+    <value>يدوياً</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
+    <value>الأمان فقط</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
+    <value>معطل</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Header" xml:space="preserve">
+    <value>تحديثات ويندوز</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
+    <value>افتراضي</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>نتائج الفحص</value>
   </data>
 </root>

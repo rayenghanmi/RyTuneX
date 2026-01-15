@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -312,7 +312,7 @@
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Thư mục Windows</value>
   </data>
-  <data name="DeligTemp" xml:space="preserve">
+  <data name="DeletingTemp" xml:space="preserve">
     <value>Đang xoá tệp tin tạm thời</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
@@ -561,12 +561,6 @@
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Vô hiệu hoá tự động cập nhật ứng dụng đã tải từ Microsoft Store. Có thể khiến ứng dụng dễ bị rủi ro bảo mật hoặc thiếu các tính năng mới.</value>
   </data>
-  <data name="Feature_DisableAutomaticUpdates.Header" xml:space="preserve">
-    <value>Vô hiệu hoá tự động cập nhật</value>
-  </data>
-  <data name="Feature_DisableAutomaticUpdates.Description" xml:space="preserve">
-    <value>Tắt tự động cập nhật của Windows, yêu cầu cài đặt thủ công. Rất không khuyến khích. Điều này có thể khiến hệ thống của bạn dễ bị tấn công bảo mật và thiếu các bản sửa lỗi.</value>
-  </data>
   <data name="Privacy_Telemetry.Text" xml:space="preserve">
     <value>Telemetry</value>
   </data>
@@ -784,6 +778,9 @@
     <value>Chi tiết</value>
   </data>
   <data name="Shell_Repair.Content" xml:space="preserve">
+    <value>Sửa chửa</value>
+  </data>
+  <data name="Repair" xml:space="preserve">
     <value>Sửa chửa</value>
   </data>
   <data name="ConfirmRemoveApps" xml:space="preserve">
@@ -1140,6 +1137,9 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
     <value>Chọn tối thiểu một tuỳ chọn để quét/sửa chửa</value>
   </data>
+  <data name="StatusTextBlockDefault" xml:space="preserve">
+    <value>Chọn tối thiểu một tuỳ chọn để quét/sửa chửa</value>
+  </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>Tình trạng pin</value>
   </data>
@@ -1312,10 +1312,10 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
     <value>Cài đặt đã được xuất thành công tới:</value>
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
-    <value />
+    <value>Vô hiệu hóa phần Được đề xuất trong Menu Bắt đầu</value>
   </data>
   <data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
-    <value />
+    <value>Loại bỏ phần "Được đề xuất" khỏi Menu Bắt đầu để tạo bố cục gọn gàng và tập trung hơn.</value>
   </data>
   <data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
     <value>Tắt Windows Recall</value>
@@ -1412,5 +1412,227 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
     <value>Bảo vệ bạn trên web và trong ứng dụng</value>
+  </data>
+  <data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
+    <value>Pin &amp; Nguồn</value>
+  </data>
+  <data name="Feature_PowerMode.Header" xml:space="preserve">
+    <value>Chế độ nguồn</value>
+  </data>
+  <data name="Feature_PowerMode.Description" xml:space="preserve">
+    <value>Chọn gói năng lượng để cân bằng hiệu suất và mức tiêu thụ năng lượng</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
+    <value>Thêm gói năng lượng hiệu suất tối đa ẩn để đạt hiệu năng cao nhất.</value>
+  </data>
+  <data name="UltimatePowerPlanAdded" xml:space="preserve">
+    <value>Đã thêm gói hiệu suất tối đa thành công.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
+    <value>Thêm gói</value>
+  </data>
+  <data name="UltimatePowerPlanExists" xml:space="preserve">
+    <value>Gói hiệu suất tối đa đã tồn tại.</value>
+  </data>
+  <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
+    <value>Thêm gói hiệu suất tối đa</value>
+  </data>
+  <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
+    <value>Thêm gói hiệu suất tối đa</value>
+  </data>
+  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+    <value>Tính năng này chỉ phát hiện các mục đăng ký được hỗ trợ bởi chính sách. Nó không phát hiện các thay đổi dịch vụ hoặc các điều chỉnh đăng ký không liên quan đến chính sách.</value>
+  </data>
+  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+    <value>Trang này phát hiện và cho phép bạn xóa các ghi đè chính sách nhóm cục bộ. Việc xóa ghi đè chính sách sẽ đưa nó về trạng thái Chưa cấu hình.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+    <value>Tóm tắt chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+    <value>Chính sách đã cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+    <value>Danh mục</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+    <value>Xóa đã chọn</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+    <value>Danh sách chính sách chi tiết</value>
+  </data>
+  <data name="Shell_GroupPolicy.Content" xml:space="preserve">
+    <value>Chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+    <value>Xóa ghi đè</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+    <value>Không phát hiện ghi đè chính sách nào.</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+    <value>Xóa tất cả ghi đè</value>
+  </data>
+  <data name="GroupPolicyPage_Title" xml:space="preserve">
+    <value>Phát hiện ghi đè chính sách nhóm</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+    <value>Đang quét chính sách...</value>
+  </data>
+  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+    <value>Danh mục</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+    <value>Xóa đã chọn</value>
+  </data>
+  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+    <value>Đang quét chính sách...</value>
+  </data>
+  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+    <value>Không phát hiện ghi đè chính sách nào.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+    <value>Tóm tắt chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+    <value>Chính sách đã cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+    <value>Xem và quản lý các ghi đè chính sách riêng lẻ</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+    <value>Xóa tất cả ghi đè</value>
+  </data>
+  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+    <value>Trang này phát hiện và cho phép bạn xóa các ghi đè chính sách nhóm cục bộ. Việc xóa ghi đè chính sách sẽ đưa nó về trạng thái Chưa cấu hình.</value>
+  </data>
+  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+    <value>Tổng quan về các ghi đè chính sách đã phát hiện</value>
+  </data>
+  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+    <value>Danh sách chính sách chi tiết</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+    <value>{0} Đã cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+    <value>Lỗi khi quét chính sách: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+    <value>Xóa thất bại</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+    <value>Đã xóa thành công {0} ghi đè chính sách.</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+    <value>Xóa chính sách danh mục</value>
+  </data>
+  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    <value>Chưa cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+    <value>Đã xóa chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+    <value>{0} chính sách đã cấu hình</value>
+  </data>
+  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+    <value>Khởi động lại ngay</value>
+  </data>
+  <data name="GroupPolicyPage_Later" xml:space="preserve">
+    <value>Để sau</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa {0} ghi đè chính sách đã chọn?</value>
+  </data>
+  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+    <value>Đã xảy ra lỗi khi xóa ghi đè chính sách: {0}</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa tất cả {0} ghi đè chính sách trong danh mục '{1}'?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa tất cả {0} ghi đè chính sách? Hành động này không thể hoàn tác.</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+    <value>Xóa một phần</value>
+  </data>
+  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+    <value>Đang xóa chính sách...</value>
+  </data>
+  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+    <value>Đã xóa {0} trong số {1} ghi đè chính sách. Một số chính sách không thể xóa.</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+    <value>Khởi động lại Explorer</value>
+  </data>
+  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+    <value>Một số thay đổi chính sách yêu cầu khởi động lại Windows Explorer để có hiệu lực. Bạn có muốn khởi động lại Explorer ngay bây giờ không?</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+    <value>Xóa tất cả ghi đè chính sách</value>
+  </data>
+  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+    <value>Xóa chính sách đã chọn</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
+    <value>Tạo mới</value>
+  </data>
+  <data name="CreatePowerPlanTitle" xml:space="preserve">
+    <value>Tạo kế hoạch năng lượng</value>
+  </data>
+  <data name="PowerPlanNameLabel" xml:space="preserve">
+    <value>Tên kế hoạch năng lượng</value>
+  </data>
+  <data name="PowerPlanNamePlaceholder" xml:space="preserve">
+    <value>Nhập tên gói nguồn điện</value>
+  </data>
+  <data name="BasePowerPlanLabel" xml:space="preserve">
+    <value>Kế hoạch năng lượng cơ bản</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Tạo</value>
+  </data>
+  <data name="PowerPlanNameRequired" xml:space="preserve">
+    <value>Vui lòng nhập tên cho kế hoạch năng lượng.</value>
+  </data>
+  <data name="BasePowerPlanRequired" xml:space="preserve">
+    <value>Vui lòng chọn kế hoạch năng lượng cơ bản.</value>
+  </data>
+  <data name="PowerPlanCreated" xml:space="preserve">
+    <value>Đã tạo gói nguồn điện thành công.</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Description" xml:space="preserve">
+    <value>Cấu hình cách Windows xử lý cập nhật tự động. Chọn giữa cập nhật tự động, chỉ bảo mật, kiểm soát thủ công hoặc tắt hoàn toàn.</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
+    <value>Thủ công</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
+    <value>Chỉ Bảo mật</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
+    <value>Đã tắt</value>
+  </data>
+  <data name="Feature_WindowsUpdates.Header" xml:space="preserve">
+    <value>Cập nhật Windows</value>
+  </data>
+  <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
+    <value>Mặc định</value>
+  </data>
+  <data name="ScanResults" xml:space="preserve">
+    <value>Kết quả quét</value>
   </data>
 </root>

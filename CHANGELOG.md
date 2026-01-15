@@ -3,6 +3,47 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.6.0 - Released
+
+### Added
+
+- Added Battery & Power section in the `Optimize` page for better power management (suggested by @abiabi0707 in #79):
+  - `Power Mode`
+  - `Add Ultimate Performance Plan`
+- Added a new `Policies` page for detecting and managing Local Group Policy overrides (suggested by @abiabi0707 in #79):
+  - Scans for configured Group Policy overrides across multiple categories (Windows Update, Privacy & Telemetry, Cortana & Search, Windows Store, OneDrive, Security, etc.).
+  - Displays a summary of configured policies by category.
+  - Allows removal of individual policy overrides, by category, or all at once.
+  - Returns removed policies to their default "Not Configured" state.
+  - Supports Windows version-specific policies (e.g., Windows Copilot, Windows Recall).
+- Added a new Services section in the `Home` page for managing Windows services (suggested by @abiabi0707 in #79):
+  - Displays a list of Windows services with their current status (Running/Stopped).
+  - Allows users to start, stop, or restart individual services.
+  - Provides options to set the startup type of services (Automatic, Manual, Disabled).
+  - Includes a search bar for quickly finding specific services.
+- Added a new Processes section in the `Home` page for managing running processes (suggested by @abiabi0707 in #79):
+  - Displays a list of currently running processes with details (CPU, Memory usage).
+  - Allows users to end individual processes.
+  - Includes a search bar for quickly finding specific processes.
+
+### Fixes
+
+- Fixed an issue where the export settings feature did not work #80.
+- Resolved an issue where the sfc repairing method was failing to start.
+- Fixed an issue where notification progress would glitch on hover and notifications failed to auto-hide.
+- Resolved an issue where the temp files cleanup was taking longer than expected.
+- Fixed an issue where the stop button in the `Repair` page did not work as expected.
+- Fixed an issue where edge was not being uninstalled correctly.
+
+### Changes
+
+- Changed the Disable Windows Update toggle to a 4 options dropdown menu:
+  - Default
+  - Security Only
+  - Manually
+  - Disabled
+- Reworked the repairing process to make it more reliable and efficient.
+
 ## 1.5.2 - Released
 
 > [!IMPORTANT]

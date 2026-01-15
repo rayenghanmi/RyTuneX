@@ -19,8 +19,9 @@ public sealed partial class RepairPage : Page
         { "SFC", new StringBuilder() },
         { "CHKDSK", new StringBuilder() }
     };
-    private int _sfcNonProgressLineCount = 0;
     private Process? _runningProcess;
+    private CancellationTokenSource? _cancellationTokenSource;
+    private int _currentProcessId;
     public int selectedCount = 0;
     private string? _pendingScrollTarget;
 
@@ -28,6 +29,7 @@ public sealed partial class RepairPage : Page
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         InitializeComponent();
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += RepairPage_Loaded;
     }
 
@@ -62,17 +64,54 @@ public sealed partial class RepairPage : Page
         await RunCommandsAsync(isRepair: true);
     }
 
-    private void OnStopButtonClick(object sender, RoutedEventArgs e)
+    private async void OnStopButtonClick(object sender, RoutedEventArgs e)
     {
-        if (_runningProcess != null && !_runningProcess.HasExited)
+        // Disable the stop button to prevent multiple clicks
+        StopButton.IsEnabled = false;
+
+        await StopCurrentOperationAsync();
+    }
+
+    private async Task StopCurrentOperationAsync()
+    {
+        // Cancel the operation via CancellationToken first
+        _cancellationTokenSource?.Cancel();
+
+        // Kill the process tree asynchronously
+        var processId = _currentProcessId;
+        if (processId > 0)
         {
-            _runningProcess.Kill(); // Stop the running process
-            StatusTextBlock.Text = "OperationStopped".GetLocalized();
+            await PseudoConsoleHelper.KillProcessTreeAsync(processId);
+        }
+
+        // Also handle the fallback process if it exists
+        if (_runningProcess != null)
+        {
+            try
+            {
+                if (!_runningProcess.HasExited)
+                {
+                    await PseudoConsoleHelper.KillProcessTreeAsync(_runningProcess.Id);
+                }
+            }
+            catch
+            {
+                // Ignore errors during cleanup
+            }
+        }
+    }
+
+    private void ResetUIState()
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            StatusTextBlock.Text = "StatusTextBlockDefault".GetLocalized();
             ProgressBar.Value = 0;
             StopButton.Visibility = Visibility.Collapsed;
+            StopButton.IsEnabled = true;
             ScanRepairPanel.Visibility = Visibility.Visible;
             PercentageTextBlock.Text = string.Empty;
-        }
+        });
     }
 
     private async Task RunCommandsAsync(bool isRepair)
@@ -80,7 +119,14 @@ public sealed partial class RepairPage : Page
         // Hide ScanRepair Panel while operation is in progress
         ScanRepairPanel.Visibility = Visibility.Collapsed;
         StopButton.Visibility = Visibility.Visible;
+        StopButton.IsEnabled = true;
         ProgressBar.Value = 0;
+        _currentProcessId = 0;
+
+        // Create a new CancellationTokenSource for this operation
+        _cancellationTokenSource?.Dispose();
+        _cancellationTokenSource = new CancellationTokenSource();
+        var ct = _cancellationTokenSource.Token;
 
         var commands = new[]
         {
@@ -91,48 +137,128 @@ public sealed partial class RepairPage : Page
 
         var current = 0;
         var selectedNames = new List<string>();
-        foreach (var (checkBox, name, args) in commands)
+        var wasCancelled = false;
+        var hasError = false;
+
+        try
         {
-            if (checkBox.IsChecked == true)
+            foreach (var (checkBox, name, args) in commands)
             {
-                current++;
-                selectedNames.Add(name);
-                StatusTextBlock.Text = $"{current} of {selectedCount}: {name} {(isRepair ? "repair" : "scan")} in progress...";
-                ProgressBar.Value = 0;
-                await RunCommandAsync(name, args);
+                if (ct.IsCancellationRequested)
+                {
+                    wasCancelled = true;
+                    break;
+                }
+
+                if (checkBox.IsChecked == true)
+                {
+                    current++;
+                    selectedNames.Add(name);
+                    StatusTextBlock.Text = $"{current} / {selectedCount}: {name} {(isRepair ? "repair" : "scan")} in progress...";
+                    ProgressBar.Value = 0;
+
+                    try
+                    {
+                        await RunCommandAsync(name, args, ct);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        wasCancelled = true;
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        await LogHelper.Log($"Error running {name}: {ex.Message}");
+                        _scanResults[name].AppendLine($"Error: {ex.Message}");
+                        hasError = true;
+                        // Continue with next command unless cancelled
+                        if (ct.IsCancellationRequested)
+                        {
+                            wasCancelled = true;
+                            break;
+                        }
+                    }
+                }
             }
         }
+        finally
+        {
+            _currentProcessId = 0;
+            ResetUIState();
 
-        StatusTextBlock.Text = "OperationCompleted".GetLocalized();
-        ScanRepairPanel.Visibility = Visibility.Visible;
-        StopButton.Visibility = Visibility.Collapsed;
-        PercentageTextBlock.Text = string.Empty;
-        ProgressBar.Value = 0;
-
-        // Show results dialog
-        await ShowScanResultsDialogAsync(selectedNames);
+            if (wasCancelled)
+            {
+                App.ShowNotification("Repair".GetLocalized(), "OperationStopped".GetLocalized(), InfoBarSeverity.Error, 5000);
+            }
+            else if (hasError)
+            {
+                App.ShowNotification("Repair".GetLocalized(), "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
+                // Still show results dialog even if there were errors
+                if (selectedNames.Count > 0)
+                {
+                    await ShowScanResultsDialogAsync(selectedNames);
+                }
+            }
+            else
+            {
+                App.ShowNotification("Repair".GetLocalized(), "OperationCompleted".GetLocalized(), InfoBarSeverity.Success, 5000);
+                // Show results dialog
+                if (selectedNames.Count > 0)
+                {
+                    await ShowScanResultsDialogAsync(selectedNames);
+                }
+            }
+        }
     }
 
-    private async Task RunCommandAsync(string name, string args)
+    private async Task RunCommandAsync(string name, string args, CancellationToken ct)
     {
         _scanResults[name].Clear();
-        if (name.Equals("SFC", StringComparison.OrdinalIgnoreCase))
-        {
-            // Reset SFC non-progress line skipping for each run
-            _sfcNonProgressLineCount = 0;
-        }
 
-        // Use the OEM code page for DISM and CHKDSK (Not tested yet but it's a possible fix for #73)
+        var toolExecutable = name switch
+        {
+            "DISM" => "dism.exe",
+            "SFC" => "sfc.exe",
+            "CHKDSK" => "chkdsk.exe",
+            _ => name + ".exe"
+        };
+
+        var fileName = GetSystemToolPath(toolExecutable);
+
+        try
+        {
+            await PseudoConsoleHelper.RunAsync(
+                $"\"{fileName}\" {args}",
+                line =>
+                {
+                    LogHelper.Log($"Output: {line}");
+                    HandleOutputLine(name, line);
+                },
+                ct,
+                processId => _currentProcessId = processId);
+        }
+        catch (OperationCanceledException)
+        {
+            await LogHelper.Log($"Operation cancelled for {name}");
+            throw;
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.Log($"ConPTY failed for {name}, falling back to standard: {ex.Message}");
+            await RunCommandStandardAsync(name, fileName, args, ct);
+        }
+    }
+
+    private async Task RunCommandStandardAsync(string name, string fileName, string args, CancellationToken ct)
+    {
         var outputEncoding = name.Equals("SFC", StringComparison.OrdinalIgnoreCase)
             ? Encoding.Unicode
             : Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
 
         var processStartInfo = new ProcessStartInfo
         {
-            FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
-            Arguments = $"/C {name} {args}",
+            FileName = fileName,
+            Arguments = args,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
@@ -143,58 +269,141 @@ public sealed partial class RepairPage : Page
 
         _runningProcess = new Process { StartInfo = processStartInfo, EnableRaisingEvents = true };
 
-        _runningProcess.OutputDataReceived += (sender, e) =>
+        try
         {
-            if (!string.IsNullOrEmpty(e.Data))
+            _runningProcess.Start();
+            _currentProcessId = _runningProcess.Id;
+
+            var outputTask = ReadStreamAsync(_runningProcess.StandardOutput, name, isError: false, ct);
+            var errorTask = ReadStreamAsync(_runningProcess.StandardError, name, isError: true, ct);
+
+            try
             {
-                LogHelper.Log($"Output: {e.Data}");
-                UpdateProgress(name, e.Data);
+                await Task.WhenAll(_runningProcess.WaitForExitAsync(ct), outputTask, errorTask);
+            }
+            catch (OperationCanceledException)
+            {
+                // Kill the process tree when cancelled
+                await PseudoConsoleHelper.KillProcessTreeAsync(_runningProcess.Id);
+                throw;
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            await LogHelper.Log($"Failed to start {name}: {ex.Message}");
+            _scanResults[name].AppendLine(ex.Message);
+            throw;
+        }
+        finally
+        {
+            _runningProcess = null;
+            _currentProcessId = 0;
+        }
+    }
 
-                var isProgress = false;
-                if (name == "DISM")
-                {
-                    isProgress = Regex.IsMatch(e.Data, @"\[\s*[= ]*\s*(\d+(\.\d+)?)%\s*[= ]*\]");
-                }
-                else if (name == "SFC")
-                {
-                    isProgress = Regex.IsMatch(e.Data, @"(\d+)%", RegexOptions.IgnoreCase);
-                }
-                else if (name == "CHKDSK")
-                {
-                    isProgress = Regex.IsMatch(e.Data, @"Total:\s*(\d+)%", RegexOptions.IgnoreCase);
-                }
+    private async Task ReadStreamAsync(StreamReader reader, string name, bool isError, CancellationToken ct)
+    {
+        var buffer = new char[256];
+        var lineBuilder = new StringBuilder();
 
-                if (!isProgress)
+        while (!ct.IsCancellationRequested)
+        {
+            int read;
+            try
+            {
+                read = await reader.ReadAsync(buffer, 0, buffer.Length);
+            }
+            catch
+            {
+                break;
+            }
+
+            if (read == 0)
+            {
+                FlushLine(lineBuilder, name, isError);
+                break;
+            }
+
+            for (var i = 0; i < read; i++)
+            {
+                var ch = buffer[i];
+                if (ch == '\r' || ch == '\n')
                 {
-                    if (name == "SFC")
-                    {
-                        if (_sfcNonProgressLineCount < 2)
-                        {
-                            _sfcNonProgressLineCount++;
-                        }
-                        else
-                        {
-                            _scanResults[name].AppendLine(e.Data);
-                        }
-                    }
-                    else
-                    {
-                        _scanResults[name].AppendLine(e.Data);
-                    }
+                    FlushLine(lineBuilder, name, isError);
+                }
+                else
+                {
+                    lineBuilder.Append(ch);
                 }
             }
+        }
+    }
+
+    private void FlushLine(StringBuilder lineBuilder, string name, bool isError)
+    {
+        if (lineBuilder.Length == 0)
+        {
+            return;
+        }
+
+        var line = lineBuilder.ToString();
+        lineBuilder.Clear();
+
+        if (isError)
+        {
+            LogHelper.Log($"Error: {line}");
+            _scanResults[name].AppendLine(line);
+            return;
+        }
+
+        LogHelper.Log($"Output: {line}");
+        HandleOutputLine(name, line);
+    }
+
+    private void HandleOutputLine(string name, string line)
+    {
+        if (string.IsNullOrWhiteSpace(line))
+        {
+            return;
+        }
+
+        UpdateProgress(name, line);
+
+        var isProgress = name switch
+        {
+            "DISM" => Regex.IsMatch(line, @"\[\s*[= ]*\s*(\d+(\.\d+)?)%\s*[= ]*\]"),
+            "SFC" => Regex.IsMatch(line, @"^\s*(\d+)\s*%\s*$"),
+            "CHKDSK" => Regex.IsMatch(line, @"Total:\s*(\d+)%", RegexOptions.IgnoreCase),
+            _ => false
         };
 
-        _runningProcess.Start();
-        _runningProcess.BeginOutputReadLine();
-        _runningProcess.BeginErrorReadLine();
+        if (isProgress)
+        {
+            return;
+        }
 
-        await _runningProcess.WaitForExitAsync();
+        if (name == "SFC" || name == "DISM")
+        {
+            // Keep only the last meaningful non-progress line (the result)
+            _scanResults[name].Clear();
+            _scanResults[name].AppendLine(line);
+        }
+        else
+        {
+            _scanResults[name].AppendLine(line);
+        }
     }
 
     private void UpdateProgress(string commandName, string data)
     {
-        if (string.IsNullOrEmpty(data)) return;
+        if (string.IsNullOrEmpty(data))
+        {
+            return;
+        }
 
         var percentage = 0;
 
@@ -202,7 +411,6 @@ public sealed partial class RepairPage : Page
         {
             if (commandName == "DISM")
             {
-                // Match the progress from DISM (e.g., [====    ] 50% complete)
                 var match = Regex.Match(data, @"\[\s*[= ]*\s*(\d+(\.\d+)?)%\s*[= ]*\]");
                 if (match.Success)
                 {
@@ -211,39 +419,27 @@ public sealed partial class RepairPage : Page
             }
             else if (commandName == "SFC")
             {
-
-                // Match the number immediately before the '%' sign
                 var match = Regex.Match(data, @"(\d+)%", RegexOptions.IgnoreCase);
 
                 if (match.Success)
                 {
                     percentage = int.Parse(match.Groups[1].Value);
                 }
-                else
-                {
-                    LogHelper.Log($"No match found for SFC progress: {data}");
-                }
+                else { }
             }
             else if (commandName == "CHKDSK")
             {
-                // Match the 'Total' progress specifically
                 var match = Regex.Match(data, @"Total:\s*(\d+)%", RegexOptions.IgnoreCase);
 
                 if (match.Success)
                 {
                     percentage = int.Parse(match.Groups[1].Value);
-                    LogHelper.Log($"CHKDSK Total Progress: {percentage}%");
                 }
-                else
-                {
-                    LogHelper.Log($"No match found for CHKDSK progress: {data}");
-                }
+                else { }
             }
 
-            // Ensure the progress bar only updates if the percentage is between 0 and 100
             if (percentage > 0 && percentage <= 100)
             {
-                // Ensure updates happen on the UI thread
                 DispatcherQueue.TryEnqueue(() =>
                 {
                     ProgressBar.Value = percentage;
@@ -257,9 +453,35 @@ public sealed partial class RepairPage : Page
         }
     }
 
+    private static string GetSystemToolPath(string toolExecutable)
+    {
+        var winDir = Environment.GetEnvironmentVariable("windir");
+        if (string.IsNullOrEmpty(winDir))
+        {
+            return toolExecutable;
+        }
+
+        if (Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess)
+        {
+            var sysNativePath = Path.Combine(winDir, "SysNative", toolExecutable);
+            if (File.Exists(sysNativePath))
+            {
+                return sysNativePath;
+            }
+        }
+
+        var system32Path = Path.Combine(winDir, "System32", toolExecutable);
+        if (File.Exists(system32Path))
+        {
+            return system32Path;
+        }
+
+        return Path.Combine(winDir, toolExecutable);
+    }
+
     private async Task ShowScanResultsDialogAsync(List<string> selectedNames)
     {
-        var stackPanel = new StackPanel();
+        var stackPanel = new StackPanel { Spacing = 8 };
 
         foreach (var name in selectedNames)
         {
@@ -267,32 +489,29 @@ public sealed partial class RepairPage : Page
             {
                 Text = $"{name}:",
                 FontWeight = FontWeights.Bold,
-                Margin = new Thickness(0, 16, 0, 8)
+                Margin = new Thickness(0, 8, 0, 4)
             });
             stackPanel.Children.Add(new TextBlock
             {
-                Text = _scanResults[name].ToString(),
+                Text = _scanResults[name].ToString().Trim(),
                 TextWrapping = TextWrapping.Wrap,
-                MinHeight = 100,
-                MaxHeight = 200,
-                Margin = new Thickness(0, 0, 0, 8)
+                IsTextSelectionEnabled = true
             });
         }
-
-        var scrollViewer = new ScrollViewer
-        {
-            Content = stackPanel,
-            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-            MaxHeight = 400
-        };
 
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-            Title = "Scan Results",
-            Content = scrollViewer,
+            Title = "ScanResults".GetLocalized(),
+            Content = new ScrollViewer
+            {
+                Content = stackPanel,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
+                MaxHeight = 350
+            },
             CloseButtonText = "Close".GetLocalized()
         };
 
@@ -301,8 +520,18 @@ public sealed partial class RepairPage : Page
 
     private async void BatteryHealthButton_Click(object sender, RoutedEventArgs e)
     {
-        await OptimizationOptions.StartInCmd($"powercfg /batteryreport /output \"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\batteryreport.html\"");
-        App.ShowNotification("BatteryStatus".GetLocalized(), "ReportSaved".GetLocalized(), InfoBarSeverity.Informational, 5000);
+        var reportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "batteryreport.html");
+
+        var command = $"%SystemRoot%\\System32\\powercfg.exe /batteryreport /output \"{reportPath}\"";
+
+        var result = await OptimizationOptions.StartInCmd(command);
+
+        if (result == 0 && File.Exists(reportPath))
+        {
+            App.ShowNotification("BatteryStatus".GetLocalized(), "ReportSaved".GetLocalized(), InfoBarSeverity.Success, 5000);
+            return;
+        }
+        App.ShowNotification("BatteryStatus".GetLocalized(), "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
     }
 
     private async void MemoryHealthButton_Click(object sender, RoutedEventArgs e)
@@ -326,7 +555,7 @@ public sealed partial class RepairPage : Page
         };
         memDialog.SecondaryButtonClick += async (sender, args) =>
         {
-            App.ShowNotification("MemoryDiagnosticDialogTitle".GetLocalized(), "ScheduledLater".GetLocalized(), InfoBarSeverity.Informational, 5000);
+            App.ShowNotification("MemoryDiagnosticDialogTitle".GetLocalized(), "ScheduledLater".GetLocalized(), InfoBarSeverity.Success, 5000);
             MemCheckButton.IsEnabled = false;
             await OptimizationOptions.StartInCmd("bcdedit /bootsequence {memdiag}");
         };
@@ -340,7 +569,8 @@ public sealed partial class RepairPage : Page
     }
     private async void DiskOptimizationsButton_Click(object sender, RoutedEventArgs e)
     {
-        await OptimizationOptions.StartInCmd("dfrgui.exe");
+        await OptimizationOptions.StartInCmd("%SystemRoot%\\System32\\dfrgui.exe");
+
     }
 
     private void CheckBox_Changed(object sender, RoutedEventArgs e)

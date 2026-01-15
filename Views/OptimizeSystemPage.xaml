@@ -20,6 +20,39 @@
         <ScrollViewer Padding="24,14,24,0">
             <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
 
+                <!-- Battery & Power Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="OptimizeSystemPage_BatterySection"/>
+
+                <controls:SettingsCard x:Uid="Feature_PowerMode">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEBB7;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Name="CreatePowerPlanButton"
+                                x:Uid="Feature_CreatePowerPlanButton"
+                                Click="CreatePowerPlanButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon Glyph="&#xE710;" FontSize="14"/>
+                                <TextBlock x:Uid="Feature_CreatePowerPlanButtonText"/>
+                            </StackPanel>
+                        </Button>
+                        <ComboBox x:Name="PowerModeComboBox" 
+                                  MinWidth="200"
+                                  SelectionChanged="PowerModeComboBox_SelectionChanged"/>
+                    </StackPanel>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_AddUltimatePowerPlan">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE945;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <Button x:Name="AddUltimatePowerPlanButton" 
+                            x:Uid="Feature_AddUltimatePowerPlanButton"
+                            Click="AddUltimatePowerPlanButton_Click"/>
+                </controls:SettingsCard>
+
                 <!-- Basic System Optimization Section -->
                 <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
@@ -211,7 +244,7 @@
                     x:Uid="OtherSettings"/>
                 <controls:SettingsCard x:Uid="Feature_DisableSystemRestore">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE777;"/>
+                        <FontIcon Glyph="&#xEBC4;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="SystemRestore" Tag="SystemRestore"/>
                 </controls:SettingsCard>
@@ -230,11 +263,18 @@
                     <ToggleSwitch x:Name="StoreUpdates" Tag="StoreUpdates"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableAutomaticUpdates">
+                <controls:SettingsCard x:Uid="Feature_WindowsUpdates">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE8D8;"/>
+                        <FontIcon Glyph="&#xE777;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="AutomaticUpdates" Tag="AutomaticUpdates"/>
+                    <ComboBox x:Name="WindowsUpdatesComboBox" 
+                              MinWidth="150"
+                              SelectionChanged="WindowsUpdatesComboBox_SelectionChanged">
+                        <ComboBoxItem x:Uid="Feature_WindowsUpdates_Default" Tag="Default"/>
+                        <ComboBoxItem x:Uid="Feature_WindowsUpdates_Security" Tag="Security"/>
+                        <ComboBoxItem x:Uid="Feature_WindowsUpdates_Manually" Tag="Manually"/>
+                        <ComboBoxItem x:Uid="Feature_WindowsUpdates_Disabled" Tag="Disabled"/>
+                    </ComboBox>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableSmartScreen">
