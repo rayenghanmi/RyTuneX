@@ -3,7 +3,7 @@
 All notable changes to this branch will be documented in this file.
 
 
-## 1.6.0 - Unreleased
+## 1.6.0 - Released
 
 ### Added
 
@@ -33,7 +33,7 @@ All notable changes to this branch will be documented in this file.
 - Fixed an issue where notification progress would glitch on hover and notifications failed to auto-hide.
 - Resolved an issue where the temp files cleanup was taking longer than expected.
 - Fixed an issue where the stop button in the `Repair` page did not work as expected.
-- fixed an issue where edge was not being uninstalled correctly.
+- Fixed an issue where edge was not being uninstalled correctly.
 
 ### Changes
 
