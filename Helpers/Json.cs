@@ -1,22 +1,29 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace RyTuneX.Core.Helpers;
 
 public static class Json
 {
-    public static async Task<T> ToObjectAsync<T>(string value)
+    private static readonly JsonSerializerOptions Options = new()
     {
-        return await Task.Run<T>(() =>
-        {
-            return JsonConvert.DeserializeObject<T>(value);
-        });
+        PropertyNameCaseInsensitive = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        WriteIndented = false
+    };
+
+    public static Task<T?> ToObjectAsync<T>(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return Task.FromResult<T?>(default);
+
+        var result = JsonSerializer.Deserialize<T>(value, Options);
+        return Task.FromResult(result);
     }
 
-    public static async Task<string> StringifyAsync(object value)
+    public static Task<string> StringifyAsync(object value)
     {
-        return await Task.Run<string>(() =>
-        {
-            return JsonConvert.SerializeObject(value);
-        });
+        var json = JsonSerializer.Serialize(value, Options);
+        return Task.FromResult(json);
     }
 }

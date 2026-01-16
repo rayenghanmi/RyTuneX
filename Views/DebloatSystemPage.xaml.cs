@@ -255,8 +255,8 @@ public sealed partial class DebloatSystemPage : Page
 
                 // Create the process to try running Remove-AppxProvisionedPackage first
                 var processInfoProvisioned = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveProvisioned}")
+                        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"), $"/c {cmdCommandRemoveProvisioned}")
                 {
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -278,8 +278,8 @@ public sealed partial class DebloatSystemPage : Page
 
                 // Run Remove-AppxPackage
                 var processInfoAppxPackage = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveAppxPackage}")
+                        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"), $"/c {cmdCommandRemoveAppxPackage}")
                 {
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -309,8 +309,8 @@ public sealed partial class DebloatSystemPage : Page
                 var cmdCommand = $"powershell.exe -ExecutionPolicy Bypass -File \"{scriptFilePath}\" -UninstallEdge -RemoveEdgeData -NonInteractive";
 
                 var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommand}")
+                        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"), $"/c {cmdCommand}")
                 {
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -390,8 +390,8 @@ public sealed partial class DebloatSystemPage : Page
 
                 // Execute the uninstall command using cmd
                 var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"),
                         $"/c {uninstallString}")
                 {
                     RedirectStandardError = true,

@@ -1,18 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <RootNamespace>RyTuneX</RootNamespace>
     <ApplicationIcon>Assets/WindowIcon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Platforms>x86;x64</Platforms>
-    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+    <Platforms>x86</Platforms>
+    <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     <PublishProfile>Properties\PublishProfiles\win-$(Platform).pubxml</PublishProfile>
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
 	<UseWinUI>true</UseWinUI>
+	<WinUISDKReferences>true</WinUISDKReferences>
 	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+	<PublishReadyToRun>true</PublishReadyToRun>
     <EnableMsixTooling>true</EnableMsixTooling>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -24,18 +26,12 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <Version>1.6.0</Version>
+    <Version>1.6.1</Version>
     <Authors>Rayen Ghanmi</Authors>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Assets\bug.png" />
     <None Remove="Assets\discord.png" />
     <None Remove="Assets\github.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
     <None Remove="Assets\WindowIcon.ico" />
     <None Remove="Views\DebloatSystemPage.xaml" />
     <None Remove="Views\FeaturesPage.xaml" />
@@ -52,18 +48,17 @@
 
   <ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.250402" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.250402" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.250402" />
-	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
-	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
-	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.10" />
-	  <PackageReference Include="System.Drawing.Common" Version="9.0.10" />
-	  <PackageReference Include="System.Management" Version="9.0.10" />
-	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.10" />
+	  <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.251219" />
+	  <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
+	  <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
+	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260101001" />
+	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.2" />
+	  <PackageReference Include="System.Drawing.Common" Version="10.0.2" />
+	  <PackageReference Include="System.Management" Version="10.0.2" />
+	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.2" />
 	  <PackageReference Include="vocaluxe.dependencies.netfwtypelib" Version="1.0.1" />
 	  <PackageReference Include="WinUIEx" Version="2.9.0" />
-	  <PackageReference Include="System.Management.Automation" Version="7.5.4" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

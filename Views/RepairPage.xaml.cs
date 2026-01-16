@@ -455,7 +455,7 @@ public sealed partial class RepairPage : Page
 
     private static string GetSystemToolPath(string toolExecutable)
     {
-        var winDir = Environment.GetEnvironmentVariable("windir");
+        var winDir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
         if (string.IsNullOrEmpty(winDir))
         {
             return toolExecutable;

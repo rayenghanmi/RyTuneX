@@ -3,6 +3,14 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.6.1 - Unreleased
+
+### Changes
+
+- Reduced the msix package size by removing unnecessary dependencies.
+- Upgraded the app's target framework to .NET 10.
+- Enhanced the update process to improve reliability and performance.
+
 ## 1.6.0 - Released
 
 ### Added

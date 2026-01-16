@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Management.Automation;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -412,62 +411,19 @@ internal partial class OptimizationOptions
         return match.Success ? int.Parse(match.Groups[1].Value) : 100;
     }
 
-    internal static async Task ExecuteBatchFileAsync()
-    {
-        try
-        {
-            // Get the path to the PowerShell script file
-            var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
-
-            if (!File.Exists(scriptFilePath))
-            {
-                await LogHelper.LogError($"Script file not found: {scriptFilePath}");
-                return;
-            }
-
-            // Read the content of the script file
-            var scriptContent = await File.ReadAllTextAsync(scriptFilePath);
-
-            // Create a PowerShell instance
-            using var PowerShellInstance = PowerShell.Create();
-            await LogHelper.Log("Getting Installed Apps [OptimizationOptions.cs]");
-
-            // Add the script content
-            PowerShellInstance.AddScript(scriptContent)
-                .AddArgument("-Set-ExecutionPolicy Unrestricted");
-
-            // Invoke the script asynchronously
-            await Task.Run(() => PowerShellInstance.Invoke());
-
-            // Check for errors
-            if (PowerShellInstance.HadErrors)
-            {
-                foreach (var error in PowerShellInstance.Streams.Error)
-                {
-                    await LogHelper.LogError($"PowerShell Error: {error}");
-                }
-            }
-            else
-            {
-                await LogHelper.Log("PowerShell script executed successfully.");
-            }
-        }
-        catch (Exception ex)
-        {
-            await LogHelper.LogError($"Error executing batch file: {ex.Message}");
-        }
-    }
     internal static async Task<int> StartInCmd(string command)
     {
         try
         {
-            using var p = new Process
+            var cmdPath = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                    : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe");
+
+            using var process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                    FileName = cmdPath,
                     Arguments = $"/C {command}",
                     CreateNoWindow = true,
                     UseShellExecute = false,
@@ -476,25 +432,24 @@ internal partial class OptimizationOptions
                 }
             };
 
-            // Start the process in a separate Task
-            await Task.Run(() => p.Start());
+            process.Start();
 
-            // Capture error output
-            var errorOutput = await p.StandardError.ReadToEndAsync();
+            var stdErrTask = process.StandardError.ReadToEndAsync();
 
-            // Await process completion and capture exit code
-            await p.WaitForExitAsync();
+            await process.WaitForExitAsync().ConfigureAwait(false);
 
-            if (p.ExitCode != 0 && !string.IsNullOrEmpty(errorOutput))
+            var errorOutput = await stdErrTask.ConfigureAwait(false);
+
+            if (process.ExitCode != 0)
             {
-                await LogHelper.LogError($"Command '{command}' failed with exit code {p.ExitCode}: {errorOutput}");
+                await LogHelper.LogError($"Command failed (exit {process.ExitCode})\n{errorOutput}");
             }
 
-            return p.ExitCode;
+            return process.ExitCode;
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error running command: {ex.Message}");
+            await LogHelper.LogError($"Error running command: {ex}");
             throw;
         }
     }

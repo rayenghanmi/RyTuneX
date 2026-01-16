@@ -9,13 +9,22 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace RyTuneX.Views;
+
+[JsonSerializable(typeof(GitHubRelease))]
+internal partial class UpdateJsonContext : JsonSerializerContext
+{
+}
+public record GitHubRelease(
+    [property: JsonPropertyName("tag_name")] string TagName
+);
 
 public sealed partial class SettingsPage : Page
 {
@@ -216,18 +225,25 @@ public sealed partial class SettingsPage : Page
     {
         try
         {
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("RyTuneX/0.9");
-            var response = await httpClient.GetAsync("https://api.github.com/repos/rayenghanmi/rytunex/releases");
+            // Only fetch the latest release
+            var requestUri = "https://api.github.com/repos/rayenghanmi/rytunex/releases/latest";
+
+            using var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+            request.Headers.UserAgent.ParseAdd("RyTuneX/1.0");
+
+            var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
-            var responseString = await response.Content.ReadAsStringAsync();
 
-            var releases = JArray.Parse(responseString);
+            // Stream the response directly into the deserializer
+            using var stream = await response.Content.ReadAsStreamAsync();
 
-            // Check if any releases are available
-            if (releases.Count > 0)
+            // Use Source Generation context for near-instant parsing
+            var release = await JsonSerializer.DeserializeAsync(stream, UpdateJsonContext.Default.GitHubRelease);
+
+            if (release?.TagName != null)
             {
                 // Get the latest release version (e.g., "v1.0.0")
-                latestVersionString = releases[0]["tag_name"].ToString();
+                latestVersionString = release.TagName;
 
                 // Remove leading 'v'
                 if (latestVersionString.StartsWith("v"))
@@ -252,7 +268,7 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"HTTP error: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            await LogHelper.LogError($"Update Check Failed: {ex.Message}");
             var networkError = new ContentDialog()
             {
                 XamlRoot = xaml,
@@ -268,7 +284,7 @@ public sealed partial class SettingsPage : Page
         return null;
     }
 
-    private async void Button_Click(object sender, RoutedEventArgs e)
+    private async void UpdateButton_Click(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -331,10 +347,12 @@ public sealed partial class SettingsPage : Page
             UpdateStatusText.Text = "Downloading...";
 
             // Download the setup file
-            using (var webClient = new WebClient())
+            using (var response = await httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead))
             {
-                await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), setupFilePath);
-                Debug.WriteLine("Download complete.");
+                response.EnsureSuccessStatusCode();
+
+                using var fileStream = new FileStream(setupFilePath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+                await response.Content.CopyToAsync(fileStream);
             }
 
             // Run the setup file with the --silent argument
@@ -345,8 +363,8 @@ public sealed partial class SettingsPage : Page
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                    ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                    : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                    ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                    : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"),
                     Arguments = $"/c \"{setupFilePath} --silent\"",
                     UseShellExecute = false,
                     CreateNoWindow = true,
