@@ -13,16 +13,13 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Contracts.Services;
+using RyTuneX.Core.Serialization;
 using RyTuneX.Helpers;
 using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace RyTuneX.Views;
 
-[JsonSerializable(typeof(GitHubRelease))]
-internal partial class UpdateJsonContext : JsonSerializerContext
-{
-}
 public record GitHubRelease(
     [property: JsonPropertyName("tag_name")] string TagName
 );
@@ -239,7 +236,7 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
             using var stream = await response.Content.ReadAsStreamAsync();
 
             // Use Source Generation context for near-instant parsing
-            var release = await JsonSerializer.DeserializeAsync(stream, UpdateJsonContext.Default.GitHubRelease);
+            var release = await JsonSerializer.DeserializeAsync(stream, RyTuneXJsonContext.Default.GitHubRelease);
 
             if (release?.TagName != null)
             {
