@@ -5,6 +5,10 @@ All notable changes to this branch will be documented in this file.
 
 ## 1.6.1 - Unreleased
 
+### Added
+
+- Added more Win32 apps to the debloat list by expanding the detection methods.
+
 ### Fixes
 
 - Fixed an issue where navigating to any page other than `Settings` would cause the navigation item to stuck for a few seconds till the page finishes loading.
@@ -15,6 +19,7 @@ All notable changes to this branch will be documented in this file.
 - Upgraded the app's target framework to .NET 10.
 - Enhanced the update process to improve reliability and performance.
 - Improved the system info fetching process for better accuracy.
+- Optimized the icon extraction process for more app icons to be displayed correctly.
 
 ## 1.6.0 - Released
 

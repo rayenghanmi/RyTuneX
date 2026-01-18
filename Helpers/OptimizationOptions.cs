@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -15,9 +14,9 @@ internal partial class OptimizationOptions
     private static readonly string IconCacheDirectory = Path.Combine(Path.GetTempPath(), "RyTuneX_AppIcons");
 
     [DllImport("Shell32.dll", CharSet = CharSet.Auto)]
-    public static extern int ExtractIconEx(string lpszFile, int nIconIndex, IntPtr[] phiconLarge, IntPtr[]? phiconSmall, int nIcons);
+    private static extern int ExtractIconEx(string file, int index, IntPtr[] large, IntPtr[]? small, int icons);
 
-    [DllImport("user32.dll", SetLastError = true)]
+    [DllImport("user32.dll")]
     private static extern bool DestroyIcon(IntPtr hIcon);
 
     public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
@@ -56,20 +55,11 @@ internal partial class OptimizationOptions
         return installedApps;
     }
 
-    private static string GetSafeIconFileName(string appName, string extension = ".png")
+    private static string GetSafeIconFileName(string identity)
     {
-        // Remove invalid filename characters and limit length
-        var invalidChars = Path.GetInvalidFileNameChars();
-        var safeName = new string(appName.Where(c => !invalidChars.Contains(c)).ToArray());
-
-        // Limit length to prevent long filenames
-        if (safeName.Length > 50)
-        {
-            safeName = safeName[..50];
-        }
-
-        // Add timestamp hash to ensure uniqueness
-        return $"{safeName}_{Math.Abs(appName.GetHashCode())}{extension}";
+        var safe = new string(identity.Where(c => !Path.GetInvalidFileNameChars().Contains(c)).ToArray());
+        if (safe.Length > 60) safe = safe[..60];
+        return $"{safe}_{Math.Abs(identity.GetHashCode())}.png";
     }
 
     private static async Task<List<Tuple<string, string, bool>>> GetUwpApps(bool uninstallableOnly)
@@ -141,27 +131,53 @@ internal partial class OptimizationOptions
         return installedApps;
     }
 
+    private static IEnumerable<RegistryKey> OpenUninstallRoots()
+    {
+        const string path = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+
+        var roots = new[]
+        {
+        (RegistryHive.LocalMachine, RegistryView.Registry64),
+        (RegistryHive.LocalMachine, RegistryView.Registry32),
+        (RegistryHive.CurrentUser,  RegistryView.Registry64),
+        (RegistryHive.CurrentUser,  RegistryView.Registry32),
+    };
+
+        foreach (var (hive, view) in roots)
+        {
+            RegistryKey? baseKey = null;
+            try
+            {
+                baseKey = RegistryKey.OpenBaseKey(hive, view).OpenSubKey(path);
+            }
+            catch { }
+
+            if (baseKey != null)
+                yield return baseKey;
+        }
+    }
+
     public static async Task<List<Tuple<string, string, bool>>> GetWin32Apps()
     {
         var win32Apps = new List<Tuple<string, string, bool>>();
 
-        var registryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
         try
         {
-            using var machineKey = Registry.LocalMachine.OpenSubKey(registryPath);
-            using var userKey = Registry.CurrentUser.OpenSubKey(registryPath);
+            var uninstallRoots = OpenUninstallRoots().ToList();
 
-            var allSubKeys = (machineKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
-                .Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
-                .Distinct();
+            var allSubKeys = uninstallRoots
+                .SelectMany(k => k.GetSubKeyNames()
+                    .Select(name => (Root: k, Name: name)))
+                .GroupBy(x => x.Name, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.First());
 
-            foreach (var subKeyName in allSubKeys)
+            foreach (var uninstallRoot in allSubKeys)
             {
-                using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
+                using var subKey = uninstallRoot.Root.OpenSubKey(uninstallRoot.Name);
 
                 if (subKey == null)
                 {
-                    _ = LogHelper.LogError($"Failed to open subkey {subKeyName}");
+                    _ = LogHelper.LogError($"Failed to open subkey {uninstallRoot.Name}");
                     continue;
                 }
 
@@ -221,194 +237,155 @@ internal partial class OptimizationOptions
             .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
     }
 
-    private static async Task<string> ExtractLogoPath(string installLocation, bool isWin32 = false, string? appName = null)
+    private static async Task<string> ExtractLogoPath(string installLocation, bool isWin32, string appName)
     {
-        var logoPath = Path.Combine(IconCacheDirectory, "defaulticon.png");
+        Directory.CreateDirectory(IconCacheDirectory);
+        var defaultIcon = isWin32
+            ? Path.Combine(IconCacheDirectory, "defaulticon.png")
+            : string.Empty;
 
-        if (isWin32)
+        if (string.IsNullOrEmpty(installLocation)) return defaultIcon;
+
+        var identity = $"{appName}|{installLocation}";
+        var cached = Path.Combine(IconCacheDirectory, GetSafeIconFileName(identity));
+
+        // Prevent poisoned cache
+        if (File.Exists(cached))
+        {
+            if (new FileInfo(cached).Length > 2048)
+                return cached;
+            File.Delete(cached);
+        }
+
+        // -------- WIN32 --------
+        if (isWin32 && Directory.Exists(installLocation))
+        {
+            // Try DisplayIcon from registry
+            try
+            {
+                using var key = OpenUninstallRoots()
+                    .SelectMany(r => r.GetSubKeyNames().Select(n => r.OpenSubKey(n)))
+                    .FirstOrDefault(k => (k?.GetValue("DisplayName") as string)?.Equals(appName, StringComparison.OrdinalIgnoreCase) == true);
+
+                var displayIcon = key?.GetValue("DisplayIcon") as string;
+                if (!string.IsNullOrEmpty(displayIcon))
+                {
+                    displayIcon = displayIcon.Split(',')[0].Replace("\"", "");
+                    if (File.Exists(displayIcon))
+                    {
+                        var large = new IntPtr[1];
+                        ExtractIconEx(displayIcon, 0, large, null, 1);
+                        if (large[0] != IntPtr.Zero)
+                        {
+                            using var icon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(large[0]).Clone();
+                            DestroyIcon(large[0]);
+                            await SaveIcon(icon, cached);
+                            return cached;
+                        }
+                    }
+                }
+            }
+            catch { }
+
+            // Fallback: scan executables (largest EXE wins)
+            var exe = Directory
+                .EnumerateFiles(installLocation, "*.exe", SearchOption.AllDirectories)
+                .OrderByDescending(f => new FileInfo(f).Length)
+                .FirstOrDefault();
+
+            if (exe != null)
+            {
+                var large = new IntPtr[1];
+                ExtractIconEx(exe, 0, large, null, 1);
+
+                if (large[0] != IntPtr.Zero)
+                {
+                    using var icon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(large[0]).Clone();
+                    DestroyIcon(large[0]);
+                    await SaveIcon(icon, cached);
+                    return cached;
+                }
+            }
+        }
+
+        // -------- UWP --------
+        else if (!isWin32 && Directory.Exists(installLocation))
         {
             try
             {
-                if (!string.IsNullOrEmpty(installLocation) && Directory.Exists(installLocation))
+                var manifest = Directory.GetFiles(installLocation, "AppxManifest.xml", SearchOption.TopDirectoryOnly)
+                    .Concat(Directory.GetFiles(installLocation, "appxmanifest.xml", SearchOption.TopDirectoryOnly))
+                    .FirstOrDefault();
+
+                if (manifest == null)
+                    return defaultIcon;
+
+                var doc = XDocument.Load(manifest);
+
+                // Namespaces used by UWP manifests
+                XNamespace foundation = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
+                XNamespace uap = "http://schemas.microsoft.com/appx/manifest/uap/windows10";
+
+                // Prefer VisualElements icons
+                var visual = doc.Descendants(uap + "VisualElements").FirstOrDefault();
+
+                var logoPath =
+                    visual?.Attribute("Square44x44Logo")?.Value ??
+                    visual?.Attribute("Square150x150Logo")?.Value;
+
+                // Fallback to old <Logo> element
+                if (string.IsNullOrEmpty(logoPath))
                 {
-                    // Use the provided app name or fallback to directory name
-                    var nameForIcon = appName ?? Path.GetFileName(installLocation) ?? "Unknown";
-                    var cachedIconPath = Path.Combine(IconCacheDirectory, GetSafeIconFileName(nameForIcon));
-
-                    // Check if icon already exists in cache and is valid
-                    if (File.Exists(cachedIconPath) && new FileInfo(cachedIconPath).Length > 0)
-                    {
-                        return cachedIconPath;
-                    }
-
-                    // Ensure cache directory exists before trying to save
-                    if (!Directory.Exists(IconCacheDirectory))
-                    {
-                        Directory.CreateDirectory(IconCacheDirectory);
-                    }
-
-                    // Look for existing icons in the app directory
-                    var iconIcoPath = Path.Combine(installLocation, "app.ico");
-                    var iconPngPath = Path.Combine(installLocation, "icon.png");
-
-                    // If existing icons are found, copy them to cache
-                    if (File.Exists(iconIcoPath))
-                    {
-                        try
-                        {
-                            // Copy the existing .ico file to cache as .png
-                            using var icon = new System.Drawing.Icon(iconIcoPath);
-                            await SaveIconAsPng(icon, cachedIconPath);
-                            logoPath = cachedIconPath;
-                        }
-                        catch (Exception ex)
-                        {
-                            _ = LogHelper.LogError($"Failed to copy existing .ico file: {ex.Message}");
-                            // Fall back to original path if copying fails
-                            logoPath = iconIcoPath;
-                        }
-                    }
-                    else if (File.Exists(iconPngPath))
-                    {
-                        try
-                        {
-                            // Copy the existing icon.png file to cache
-                            File.Copy(iconPngPath, cachedIconPath, true);
-                            logoPath = cachedIconPath;
-                        }
-                        catch (Exception ex)
-                        {
-                            _ = LogHelper.LogError($"Failed to copy existing .png file: {ex.Message}");
-                            // Fall back to original path if copying fails
-                            logoPath = iconPngPath;
-                        }
-                    }
-                    else
-                    {
-                        // Extract icon from executable and save to temp cache directory
-                        var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
-                        if (!string.IsNullOrEmpty(exeFile))
-                        {
-                            try
-                            {
-                                using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
-                                if (icon != null)
-                                {
-                                    await SaveIconAsPng(icon, cachedIconPath);
-                                    logoPath = cachedIconPath;
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                _ = LogHelper.LogError($"Failed to extract icon from executable: {ex.Message}");
-                            }
-                        }
-                    }
+                    logoPath = doc.Descendants(foundation + "Logo").FirstOrDefault()?.Value;
                 }
+
+                if (string.IsNullOrEmpty(logoPath))
+                    return defaultIcon;
+
+                logoPath = logoPath.Replace('/', '\\');
+                var logoDir = Path.Combine(installLocation, Path.GetDirectoryName(logoPath) ?? "");
+                var baseName = Path.GetFileNameWithoutExtension(logoPath);
+
+                if (!Directory.Exists(logoDir))
+                    return defaultIcon;
+
+                // Collect all possible logo candidates
+                var candidates = Directory.GetFiles(logoDir, baseName + "*.png");
+
+                if (candidates.Length == 0)
+                    return defaultIcon;
+
+                // Prefer targetsize-48/64 then Scale-200
+                var selected = candidates
+                .OrderByDescending(f => f.Contains("targetsize-48"))
+                .ThenByDescending(f => f.Contains("targetsize-64"))
+                .ThenBy(f => Math.Abs(GetScale(f) - 200))
+                .FirstOrDefault();
+
+                if (selected != null && File.Exists(selected))
+                    return selected;
             }
-            catch (Exception ex)
+            catch
             {
-                _ = LogHelper.LogError($"Failed to extract logo for Win32 app: {ex.Message}");
+                return defaultIcon;
             }
         }
-        else
-        {
-            try
-            {
-                var packageName = Path.GetFileName(installLocation).ToLower();
-                if (packageName.Contains("sechealth"))
-                {
-                    logoPath = Path.Combine(installLocation, "Assets", "WindowsSecurityAppList.targetsize-48.png");
-                }
-                else if (packageName.Contains("edge"))
-                {
-                    logoPath = Path.Combine(installLocation, "SmallLogo.png");
-                }
-                else
-                {
-                    string[] possibleManifestPaths = {
-                        Path.Combine(installLocation, "AppxManifest.xml"),
-                        Path.Combine(installLocation, "appxmanifest.xml")
-                    };
-
-                    var manifestPath = possibleManifestPaths.FirstOrDefault(File.Exists);
-
-                    if (manifestPath != null)
-                    {
-                        var doc = XDocument.Load(manifestPath);
-                        XNamespace ns = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
-
-                        var logoElement = doc.Descendants(ns + "Logo").FirstOrDefault();
-                        if (logoElement != null)
-                        {
-                            var relativeLogoPath = logoElement.Value.Replace('/', '\\');
-                            var baseLogoName = Path.GetFileNameWithoutExtension(relativeLogoPath);
-                            var logoDirectory = Path.Combine(installLocation, Path.GetDirectoryName(relativeLogoPath) ?? "");
-
-                            if (Directory.Exists(logoDirectory))
-                            {
-                                var exactLogoPath = Path.Combine(logoDirectory, relativeLogoPath);
-                                if (File.Exists(exactLogoPath))
-                                {
-                                    logoPath = exactLogoPath;
-                                }
-                                else
-                                {
-                                    var logoFiles = Directory.GetFiles(logoDirectory, $"{baseLogoName}.Scale-*.png");
-                                    var selectedLogoFile = logoFiles
-                                        .OrderBy(f => Math.Abs(GetScaleFromFileName(f) - 200))
-                                        .FirstOrDefault();
-
-                                    if (!string.IsNullOrEmpty(selectedLogoFile) && File.Exists(selectedLogoFile))
-                                    {
-                                        logoPath = selectedLogoFile;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _ = LogHelper.LogError($"Failed to extract logo path: {ex.Message}");
-            }
-        }
-        return logoPath;
+        return defaultIcon;
     }
 
     // Save the extracted icon as a PNG file
-    private static async Task SaveIconAsPng(System.Drawing.Icon icon, string filePath)
+    private static async Task SaveIcon(System.Drawing.Icon icon, string path)
     {
-        try
-        {
-            // Ensure the directory exists
-            var directory = Path.GetDirectoryName(filePath);
-            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
-            using var stream = new MemoryStream();
-            // Convert the icon to a bitmap and then save it as PNG
-            using (var bitmap = new Bitmap(icon.ToBitmap()))
-            {
-                bitmap.Save(stream, ImageFormat.Png);
-            }
-
-            // Write the stream to the file
-            File.WriteAllBytes(filePath, stream.ToArray());
-        }
-        catch (Exception ex)
-        {
-            _ = LogHelper.LogError($"Failed to save icon as PNG to {filePath}: {ex.Message}");
-        }
+        using var bmp = icon.ToBitmap();
+        using var ms = new MemoryStream();
+        bmp.Save(ms, ImageFormat.Png);
+        await File.WriteAllBytesAsync(path, ms.ToArray());
     }
 
-    private static int GetScaleFromFileName(string fileName)
+    private static int GetScale(string file)
     {
-        var match = Regex.Match(fileName, @"Scale-(\d+)");
-        return match.Success ? int.Parse(match.Groups[1].Value) : 100;
+        var m = Regex.Match(file, @"Scale-(\\d+)");
+        return m.Success ? int.Parse(m.Groups[1].Value) : 100;
     }
 
     internal static async Task<int> StartInCmd(string command)
