@@ -234,9 +234,6 @@
   <data name="Capacity" xml:space="preserve">
     <value>容量</value>
   </data>
-  <data name="Caption" xml:space="preserve">
-    <value>キャプション</value>
-  </data>
   <data name="Cores" xml:space="preserve">
     <value>コア</value>
   </data>

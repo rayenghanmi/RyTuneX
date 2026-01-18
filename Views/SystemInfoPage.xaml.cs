@@ -1,5 +1,4 @@
-﻿using System.Management;
-using System.Text;
+﻿using System.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Storage.Pickers;
@@ -21,7 +20,7 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Updating SystemInfo");
+            _ = LogHelper.Log("Updating SystemInfo");
 
             var osTask = Task.Run(GetOsInformation);
             var cpuTask = Task.Run(GetCpuInformation);
@@ -57,7 +56,7 @@ public sealed partial class SystemInfoPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error updating system information: {ex}");
+            _ = LogHelper.LogError($"Error updating system information: {ex}");
         }
     }
 
@@ -65,29 +64,68 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting CPU Info").ConfigureAwait(false);
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            using var collection = searcher.Get();
+            _ = LogHelper.Log("Getting CPU Info").ConfigureAwait(false);
+
+            var command = @"
+                $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
+                $cpu.Name
+                $cpu.Manufacturer
+                $cpu.Architecture
+                $cpu.NumberOfCores
+                $cpu.NumberOfLogicalProcessors
+                $cpu.MaxClockSpeed
+                $cpu.SocketDesignation
+                $cpu.L2CacheSize
+                $cpu.L3CacheSize
+            ";
+
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+
+            switch (lines[2])
+            {
+                case "0":
+                    lines[2] = "x86";
+                    break;
+                case "1":
+                    lines[2] = "MIPS";
+                    break;
+                case "2":
+                    lines[2] = "Alpha";
+                    break;
+                case "3":
+                    lines[2] = "PowerPC";
+                    break;
+                case "5":
+                    lines[2] = "ARM";
+                    break;
+                case "6":
+                    lines[2] = "Itanium-based systems";
+                    break;
+                case "9":
+                    lines[2] = "x64";
+                    break;
+                default:
+                    lines[2] = "Unknown";
+                    break;
+            }
 
             var sb = new StringBuilder(512);
-            foreach (var cpu in collection.Cast<ManagementObject>())
-            {
-                sb.Append("Name".GetLocalized()).Append(": ").Append(cpu["Name"]).AppendLine()
-                  .Append("Manufacturer".GetLocalized()).Append(": ").Append(cpu["Manufacturer"]).AppendLine()
-                  .Append("Architecture".GetLocalized()).Append(": ").Append(cpu["Architecture"]).AppendLine()
-                  .Append("Cores".GetLocalized()).Append(": ").Append(cpu["NumberOfCores"]).AppendLine()
-                  .Append("LogicalProcessors".GetLocalized()).Append(": ").Append(cpu["NumberOfLogicalProcessors"]).AppendLine()
-                  .Append("MaxSpeed".GetLocalized()).Append(": ").Append(cpu["MaxClockSpeed"]).Append(" MHz").AppendLine()
-                  .Append("SocketDesignation".GetLocalized()).Append(": ").Append(cpu["SocketDesignation"]).AppendLine()
-                  .Append("L2Cache".GetLocalized()).Append(": ").Append(cpu["L2CacheSize"]).Append(" KB").AppendLine()
-                  .Append("L3Cache".GetLocalized()).Append(": ").Append(cpu["L3CacheSize"]).Append(" KB");
-            }
+            sb.Append("Name".GetLocalized()).Append(": ").AppendLine(lines[0])
+              .Append("Manufacturer".GetLocalized()).Append(": ").AppendLine(lines[1])
+              .Append("Architecture".GetLocalized()).Append(": ").AppendLine(lines[2])
+              .Append("Cores".GetLocalized()).Append(": ").AppendLine(lines[3])
+              .Append("LogicalProcessors".GetLocalized()).Append(": ").AppendLine(lines[4])
+              .Append("MaxSpeed".GetLocalized()).Append(": ").Append(lines[5]).AppendLine(" MHz")
+              .Append("SocketDesignation".GetLocalized()).Append(": ").AppendLine(lines[6])
+              .Append("L2Cache".GetLocalized()).Append(": ").Append(lines[7]).AppendLine(" KB")
+              .Append("L3Cache".GetLocalized()).Append(": ").Append(lines[8]).Append(" KB");
 
             return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting CPU info: {ex}").ConfigureAwait(false);
+            _ = LogHelper.LogError($"Error getting CPU info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -96,31 +134,55 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting GPU Info").ConfigureAwait(false);
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
-            using var collection = searcher.Get();
+            _ = LogHelper.Log("Getting GPU Info").ConfigureAwait(false);
+
+            var command = @"
+                Get-CimInstance Win32_VideoController | ForEach-Object {
+                    'GPU_START'
+                    $_.Caption
+                    [math]::Round($_.AdapterRAM / 1MB)
+                    $_.DriverVersion
+                    $_.VideoArchitecture
+                }
+            ";
+
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var gpuNumber = 0;
 
-            foreach (var gpu in collection.Cast<ManagementObject>())
+            for (var i = 0; i < lines.Length; i++)
             {
-                if (gpuNumber > 0) sb.AppendLine();
+                if (lines[i] == "GPU_START")
+                {
+                    if (gpuNumber > 0)
+                        sb.AppendLine();
 
-                sb.Append("GPU".GetLocalized()).Append(' ').Append(gpuNumber).AppendLine(":")
-                  .Append("   ").Append("Name".GetLocalized()).Append(": ").Append(gpu["Caption"]).AppendLine()
-                  .Append("   ").Append("AdapterRAM".GetLocalized()).Append(": ").Append(gpu["AdapterRAM"]).Append(" bytes").AppendLine()
-                  .Append("   ").Append("DriverVersion".GetLocalized()).Append(": ").Append(gpu["DriverVersion"]).AppendLine()
-                  .Append("   ").Append("VideoArchitecture".GetLocalized()).Append(": ").Append(gpu["VideoArchitecture"]);
+                    if (i + 4 < lines.Length)
+                    {
+                        var name = lines[i + 1];
+                        var ram = lines[i + 2];
+                        var driver = lines[i + 3];
+                        var architecture = MapVideoArchitecture(lines[i + 4]);
 
-                gpuNumber++;
+                        sb.Append("GPU".GetLocalized()).Append(' ').Append(gpuNumber).AppendLine(":")
+                          .Append("   ").Append("Name".GetLocalized()).Append(": ").AppendLine(name)
+                          .Append("   ").Append("AdapterRAM".GetLocalized()).Append(": ").Append(ram).AppendLine(" MB")
+                          .Append("   ").Append("DriverVersion".GetLocalized()).Append(": ").AppendLine(driver)
+                          .Append("   ").Append("VideoArchitecture".GetLocalized()).Append(": ").Append(architecture);
+                    }
+
+                    gpuNumber++;
+                }
             }
+
 
             return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting GPU info: {ex}").ConfigureAwait(false);
+            _ = LogHelper.LogError($"Error getting GPU info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -129,32 +191,47 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting RAM Info").ConfigureAwait(false);
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
-            using var collection = searcher.Get();
+            _ = LogHelper.Log("Getting RAM Info").ConfigureAwait(false);
+
+            var command = @"
+                Get-CimInstance Win32_PhysicalMemory | ForEach-Object {
+                    'RAM_START'
+                    $_.DeviceLocator
+                    [math]::Round($_.Capacity / 1GB)
+                    $_.Speed
+                    $_.Manufacturer
+                }
+            ";
+
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var moduleNumber = 1;
 
-            foreach (var ram in collection.Cast<ManagementObject>())
+            for (var i = 0; i < lines.Length; i++)
             {
-                if (moduleNumber > 1) sb.AppendLine();
+                if (lines[i] == "RAM_START")
+                {
+                    if (moduleNumber > 1) sb.AppendLine();
 
-                var capacityMB = ((ulong)ram["Capacity"]) / (1024 * 1024);
-                sb.Append("RAMModule".GetLocalized()).Append(' ').Append(moduleNumber).AppendLine(":")
-                  .Append("   ").Append("DeviceLocator".GetLocalized()).Append(": ").Append(ram["DeviceLocator"]).AppendLine()
-                  .Append("   ").Append("Capacity".GetLocalized()).Append(": ").Append(capacityMB).Append(" MB").AppendLine()
-                  .Append("   ").Append("Speed".GetLocalized()).Append(": ").Append(ram["Speed"]).Append(" MHz").AppendLine()
-                  .Append("   ").Append("Manufacturer".GetLocalized()).Append(": ").Append(ram["Manufacturer"]);
-
-                moduleNumber++;
+                    if (i + 4 < lines.Length)
+                    {
+                        sb.Append("RAMModule".GetLocalized()).Append(' ').Append(moduleNumber).AppendLine(":")
+                          .Append("   ").Append("DeviceLocator".GetLocalized()).Append(": ").AppendLine(lines[i + 1])
+                          .Append("   ").Append("Capacity".GetLocalized()).Append(": ").Append(lines[i + 2]).AppendLine(" GB")
+                          .Append("   ").Append("Speed".GetLocalized()).Append(": ").Append(lines[i + 3]).AppendLine(" MHz")
+                          .Append("   ").Append("Manufacturer".GetLocalized()).Append(": ").Append(lines[i + 4]);
+                    }
+                    moduleNumber++;
+                }
             }
 
             return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting RAM info: {ex}").ConfigureAwait(false);
+            _ = LogHelper.LogError($"Error getting RAM info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -163,32 +240,49 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting Disks Info").ConfigureAwait(false);
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-            using var collection = searcher.Get();
+            _ = LogHelper.Log("Getting Disks Info").ConfigureAwait(false);
+
+            var command = @"
+                Get-CimInstance Win32_DiskDrive | ForEach-Object {
+                    'DISK_START'
+                    $_.Caption
+                    [math]::Round($_.Size / 1e9)
+                    $_.InterfaceType
+                    $_.Manufacturer
+                    $_.Model
+                }
+            ";
+
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var diskNumber = 0;
 
-            foreach (var disk in collection.Cast<ManagementObject>())
+            for (var i = 0; i < lines.Length; i++)
             {
-                if (diskNumber > 0) sb.AppendLine();
+                if (lines[i] == "DISK_START")
+                {
+                    if (diskNumber > 0) sb.AppendLine();
 
-                sb.Append("Disk".GetLocalized()).Append(' ').Append(diskNumber).AppendLine(":")
-                  .Append("   ").Append("Caption".GetLocalized()).Append(": ").Append(disk["Caption"]).AppendLine()
-                  .Append("   ").Append("Size".GetLocalized()).Append(": ").Append(disk["Size"]).Append(" bytes").AppendLine()
-                  .Append("   ").Append("InterfaceType".GetLocalized()).Append(": ").Append(disk["InterfaceType"]).AppendLine()
-                  .Append("   ").Append("Manufacturer".GetLocalized()).Append(": ").Append(disk["Manufacturer"]).AppendLine()
-                  .Append("   ").Append("Model".GetLocalized()).Append(": ").Append(disk["Model"]);
-
-                diskNumber++;
+                    if (i + 5 < lines.Length)
+                    {
+                        sb.Append("Disk".GetLocalized()).Append(' ').Append(diskNumber).AppendLine(":")
+                          .Append("   ").Append("Name".GetLocalized()).Append(": ").AppendLine(lines[i + 1])
+                          .Append("   ").Append("Size".GetLocalized()).Append(": ").Append(lines[i + 2]).AppendLine(" GB")
+                          .Append("   ").Append("InterfaceType".GetLocalized()).Append(": ").AppendLine(lines[i + 3])
+                          .Append("   ").Append("Manufacturer".GetLocalized()).Append(": ").AppendLine(lines[i + 4])
+                          .Append("   ").Append("Model".GetLocalized()).Append(": ").Append(lines[i + 5]);
+                    }
+                    diskNumber++;
+                }
             }
 
             return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting Disk info: {ex}").ConfigureAwait(false);
+            _ = LogHelper.LogError($"Error getting Disk info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -197,29 +291,40 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting OS Info").ConfigureAwait(false);
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
-            using var collection = searcher.Get();
+            _ = LogHelper.Log("Getting OS Info").ConfigureAwait(false);
+
+            var command = @"
+                $os = Get-CimInstance Win32_OperatingSystem
+                $os.Caption
+                $os.Version
+                $os.BuildNumber
+                $os.OSArchitecture
+                $os.InstallDate.ToString('g')
+                $os.RegisteredUser
+                $os.WindowsDirectory
+                $os.SystemDirectory
+                $os.LastBootUpTime.ToString('g')
+            ";
+
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
-            foreach (var os in collection.Cast<ManagementObject>())
-            {
-                sb.Append("OSName".GetLocalized()).Append(": ").Append(os["Caption"]).AppendLine()
-                  .Append("Version".GetLocalized()).Append(": ").Append(os["Version"]).AppendLine()
-                  .Append("BuildNumber".GetLocalized()).Append(": ").Append(os["BuildNumber"]).AppendLine()
-                  .Append("Architecture".GetLocalized()).Append(": ").Append(os["OSArchitecture"]).AppendLine()
-                  .Append("InstallDate".GetLocalized()).Append(": ").Append(os["InstallDate"]).AppendLine()
-                  .Append("RegisteredUser".GetLocalized()).Append(": ").Append(os["RegisteredUser"]).AppendLine()
-                  .Append("WindowsDirectory".GetLocalized()).Append(": ").Append(os["WindowsDirectory"]).AppendLine()
-                  .Append("SystemDirectory".GetLocalized()).Append(": ").Append(os["SystemDirectory"]).AppendLine()
-                  .Append("LastBoot".GetLocalized()).Append(": ").Append(os["LastBootUpTime"]);
-            }
+            sb.Append("OSName".GetLocalized()).Append(": ").AppendLine(lines[0])
+              .Append("Version".GetLocalized()).Append(": ").AppendLine(lines[1])
+              .Append("BuildNumber".GetLocalized()).Append(": ").AppendLine(lines[2])
+              .Append("Architecture".GetLocalized()).Append(": ").AppendLine(lines[3])
+              .Append("InstallDate".GetLocalized()).Append(": ").AppendLine(lines[4])
+              .Append("RegisteredUser".GetLocalized()).Append(": ").AppendLine(lines[5])
+              .Append("WindowsDirectory".GetLocalized()).Append(": ").AppendLine(lines[6])
+              .Append("SystemDirectory".GetLocalized()).Append(": ").AppendLine(lines[7])
+              .Append("LastBoot".GetLocalized()).Append(": ").Append(lines[8]);
 
             return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting OS info: {ex}").ConfigureAwait(false);
+            _ = LogHelper.LogError($"Error getting OS info: {ex}").ConfigureAwait(false);
             return string.Empty;
         }
     }
@@ -228,30 +333,49 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting Network Info").ConfigureAwait(false);
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE NetEnabled = TRUE");
-            using var collection = searcher.Get();
+            _ = LogHelper.Log("Getting Network Info").ConfigureAwait(false);
+
+            var command = @"
+                Get-CimInstance Win32_NetworkAdapter -Filter 'NetEnabled=TRUE' | ForEach-Object {
+                    'NET_START'
+                    $_.Name
+                    $_.Manufacturer
+                    $_.MACAddress
+                    [math]::Round($_.Speed / 1e9, 2)
+                    $_.AdapterType
+                }
+            ";
+
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var first = true;
 
-            foreach (var network in collection.Cast<ManagementObject>())
+            for (var i = 0; i < lines.Length; i++)
             {
-                if (!first) sb.AppendLine().AppendLine();
-                first = false;
+                if (lines[i] == "NET_START")
+                {
+                    if (!first) sb.AppendLine().AppendLine();
+                    first = false;
 
-                sb.Append("Name".GetLocalized()).Append(": ").Append(network["Name"]).AppendLine()
-                  .Append("MACAddress".GetLocalized()).Append(": ").Append(network["MACAddress"]).AppendLine()
-                  .Append("Speed".GetLocalized()).Append(": ").Append(network["Speed"]).Append(" bps").AppendLine()
-                  .Append("AdapterType".GetLocalized()).Append(": ").Append(network["AdapterType"]);
+                    if (i + 4 < lines.Length)
+                    {
+                        sb.Append("Name".GetLocalized()).Append(": ").AppendLine(lines[i + 1])
+                          .Append("Manufacturer".GetLocalized()).Append(": ").AppendLine(lines[i + 2])
+                          .Append("MACAddress".GetLocalized()).Append(": ").AppendLine(lines[i + 3])
+                          .Append("Speed".GetLocalized()).Append(": ").Append(lines[i + 4]).AppendLine(" Gbps")
+                          .Append("AdapterType".GetLocalized()).Append(": ").Append(lines[i + 5]);
+                    }
+                }
             }
 
             return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting Network info: {ex}").ConfigureAwait(false);
-            return "Error retrieving network information.";
+            _ = LogHelper.LogError($"Error getting Network info: {ex}").ConfigureAwait(false);
+            return string.Empty;
         }
     }
 
@@ -259,32 +383,138 @@ public sealed partial class SystemInfoPage : Page
     {
         try
         {
-            await LogHelper.Log("Getting Battery Info").ConfigureAwait(false);
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Battery");
-            using var collection = searcher.Get();
+            _ = LogHelper.Log("Getting Battery Info").ConfigureAwait(false);
+
+            var command = @"
+                Get-CimInstance Win32_Battery | ForEach-Object {
+                    'BAT_START'
+                    $_.Name
+                    $_.EstimatedChargeRemaining
+                    $_.BatteryStatus
+                    $_.Chemistry
+                }
+            ";
+
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+
+            switch (lines[3])
+            {
+                case "1":
+                    lines[3] = "Discharging";
+                    break;
+                case "2":
+                    lines[3] = "AC Power";
+                    break;
+                case "3":
+                    lines[3] = "Fully Charged";
+                    break;
+                case "4":
+                    lines[3] = "Low";
+                    break;
+                case "5":
+                    lines[3] = "Critical";
+                    break;
+                case "6":
+                    lines[3] = "Charging";
+                    break;
+                case "7":
+                    lines[3] = "Charging and High";
+                    break;
+                case "8":
+                    lines[3] = "Charging and Low";
+                    break;
+                case "9":
+                    lines[3] = "Charging and Critical";
+                    break;
+                case "10":
+                    lines[3] = "Undefined";
+                    break;
+                case "11":
+                    lines[3] = "Partially Charged";
+                    break;
+                default:
+                    lines[3] = "Unknown";
+                    break;
+            }
+
+            switch (lines[4])
+            {
+                case "1":
+                    lines[4] = "Other";
+                    break;
+                case "3":
+                    lines[4] = "Lead Acid";
+                    break;
+                case "4":
+                    lines[4] = "Nickel Cadmium";
+                    break;
+                case "5":
+                    lines[4] = "Nickel Metal Hydride";
+                    break;
+                case "6":
+                    lines[4] = "Lithium-ion";
+                    break;
+                case "7":
+                    lines[4] = "Zinc air";
+                    break;
+                case "8":
+                    lines[4] = "Lithium Polymer";
+                    break;
+                default:
+                    lines[4] = "Unknown";
+                    break;
+            }
 
             var sb = new StringBuilder(256);
             var first = true;
 
-            foreach (var battery in collection.Cast<ManagementObject>())
+            for (var i = 0; i < lines.Length; i++)
             {
-                if (!first) sb.AppendLine().AppendLine();
-                first = false;
+                if (lines[i] == "BAT_START")
+                {
+                    if (!first) sb.AppendLine().AppendLine();
+                    first = false;
 
-                sb.Append("Name".GetLocalized()).Append(": ").Append(battery["Name"]).AppendLine()
-                  .Append("EstimatedChargeRemaining".GetLocalized()).Append(": ").Append(battery["EstimatedChargeRemaining"]).Append("%").AppendLine()
-                  .Append("BatteryStatus".GetLocalized()).Append(": ").Append(battery["BatteryStatus"]).AppendLine()
-                  .Append("Chemistry".GetLocalized()).Append(": ").Append(battery["Chemistry"]);
+                    if (i + 4 < lines.Length)
+                    {
+                        sb.Append("Name".GetLocalized()).Append(": ").AppendLine(lines[i + 1])
+                          .Append("EstimatedChargeRemaining".GetLocalized()).Append(": ").Append(lines[i + 2]).AppendLine("%")
+                          .Append("BatteryStatus".GetLocalized()).Append(": ").AppendLine(lines[i + 3])
+                          .Append("Chemistry".GetLocalized()).Append(": ").Append(lines[i + 4]);
+                    }
+                }
             }
 
             return sb.ToString();
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting Battery info: {ex}").ConfigureAwait(false);
-            return "Error retrieving battery information.";
+            _ = LogHelper.LogError($"Error getting Battery info: {ex}").ConfigureAwait(false);
+            return string.Empty;
         }
     }
+
+    private static string MapVideoArchitecture(string value)
+    {
+        return value switch
+        {
+            "0" => "Other",
+            "2" => "CGA",
+            "3" => "EGA",
+            "4" => "VGA",
+            "5" => "SVGA",
+            "6" => "MDA",
+            "7" => "HGC",
+            "8" => "MCGA",
+            "9" => "8514A",
+            "10" => "XGA",
+            "11" => "Linear Frame Buffer",
+            "12" => "PC-98",
+            _ => "Unknown"
+        };
+    }
+
 
     private async void ExtractButton_Click(object sender, RoutedEventArgs e)
     {
@@ -337,4 +567,3 @@ public sealed partial class SystemInfoPage : Page
         }
     }
 }
-

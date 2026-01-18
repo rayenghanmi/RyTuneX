@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -168,7 +168,7 @@ public sealed partial class RepairPage : Page
                     }
                     catch (Exception ex)
                     {
-                        await LogHelper.Log($"Error running {name}: {ex.Message}");
+                        _ = LogHelper.Log($"Error running {name}: {ex.Message}");
                         _scanResults[name].AppendLine($"Error: {ex.Message}");
                         hasError = true;
                         // Continue with next command unless cancelled
@@ -239,12 +239,12 @@ public sealed partial class RepairPage : Page
         }
         catch (OperationCanceledException)
         {
-            await LogHelper.Log($"Operation cancelled for {name}");
+            _ = LogHelper.Log($"Operation cancelled for {name}");
             throw;
         }
         catch (Exception ex)
         {
-            await LogHelper.Log($"ConPTY failed for {name}, falling back to standard: {ex.Message}");
+            _ = LogHelper.Log($"ConPTY failed for {name}, falling back to standard: {ex.Message}");
             await RunCommandStandardAsync(name, fileName, args, ct);
         }
     }
@@ -294,7 +294,7 @@ public sealed partial class RepairPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.Log($"Failed to start {name}: {ex.Message}");
+            _ = LogHelper.Log($"Failed to start {name}: {ex.Message}");
             _scanResults[name].AppendLine(ex.Message);
             throw;
         }

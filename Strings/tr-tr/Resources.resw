@@ -234,9 +234,6 @@
   <data name="Capacity" xml:space="preserve">
     <value>Kapasite</value>
   </data>
-  <data name="Caption" xml:space="preserve">
-    <value>Başlık</value>
-  </data>
   <data name="Cores" xml:space="preserve">
     <value>Çekirdekler</value>
   </data>

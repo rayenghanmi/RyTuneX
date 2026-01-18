@@ -35,16 +35,10 @@ namespace RyTuneX;
 
 public partial class App : Application
 {
-    public IHost Host
-    {
-        get;
-    }
-
-    public static void ShowNotification(string title, string message, Microsoft.UI.Xaml.Controls.InfoBarSeverity severity, int duration) =>
-        ShellPage.ShowNotification(title, message, severity, duration);
-
+    private IHost? _host;
+    public IHost Host => _host ?? throw new InvalidOperationException("Host accessed before initialization.");
     public static T GetService<T>()
-        where T : class
+    where T : class
     {
         if ((App.Current as App)!.Host.Services.GetService(typeof(T)) is not T service)
         {
@@ -53,6 +47,11 @@ public partial class App : Application
 
         return service;
     }
+
+    private static Microsoft.UI.Xaml.FlowDirection? _flowDirectionCache;
+
+    public static void ShowNotification(string title, string message, Microsoft.UI.Xaml.Controls.InfoBarSeverity severity, int duration) =>
+        ShellPage.ShowNotification(title, message, severity, duration);
 
     public static WindowEx MainWindow { get; } = new MainWindow();
 
@@ -69,51 +68,17 @@ public partial class App : Application
         // Catch unhandled exceptions early to avoid silent activation failures
         UnhandledException += async (sender, e) =>
         {
-            try { await LogHelper.LogError($"UnhandledException: {e.Exception}"); } catch { }
+            try { _ = LogHelper.LogError($"UnhandledException: {e.Exception}"); } catch { }
         };
 
-        Host = Microsoft.Extensions.Hosting.Host.
-        CreateDefaultBuilder().
-        UseContentRoot(AppContext.BaseDirectory).
-        ConfigureServices((context, services) =>
-        {
-            // Default Activation Handler
-            services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
-            // Services
-            services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
-            services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
-            services.AddTransient<INavigationViewService, NavigationViewService>();
-
-            services.AddSingleton<IActivationService, ActivationService>();
-            services.AddSingleton<IPageService, PageService>();
-            services.AddSingleton<INavigationService, NavigationService>();
-
-            // Core Services
-            services.AddSingleton<IFileService, FileService>();
-
-            // Views and ViewModels
-            services.AddTransient<SettingsPage>();
-            services.AddTransient<OptimizeSystemPage>();
-            services.AddTransient<SystemInfoPage>();
-            services.AddTransient<DebloatSystemPage>();
-            services.AddTransient<HomePage>();
-            services.AddTransient<NetworkPage>();
-            services.AddTransient<SecurityPage>();
-            services.AddTransient<RepairPage>();
-            services.AddTransient<ProcessesPage>();
-            services.AddTransient<ServicesPage>();
-            services.AddTransient<ShellPage>();
-            services.AddTransient<ShellViewModel>();
-
-            // Configuration
-            services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
-        }).
-        Build();
     }
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
+        // Initialize the Host when needed
+        _host ??= BuildHost();
+
         base.OnLaunched(args);
 
         // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
@@ -124,26 +89,73 @@ public partial class App : Application
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"TitleBar init failed: {ex}");
+            _ = LogHelper.LogError($"TitleBar init failed: {ex}");
         }
 
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
 
-    // Sets flow direction based on the current language.
+    private IHost BuildHost() => Microsoft.Extensions.Hosting.Host.
+    CreateDefaultBuilder().
+       UseContentRoot(AppContext.BaseDirectory).
+       ConfigureServices((context, services) =>
+       {
+           // Default Activation Handler
+           services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
+           // Services
+           services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
+           services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+           services.AddTransient<INavigationViewService, NavigationViewService>();
+
+           services.AddSingleton<IActivationService, ActivationService>();
+           services.AddSingleton<IPageService, PageService>();
+           services.AddSingleton<INavigationService, NavigationService>();
+
+           // Core Services
+           services.AddSingleton<IFileService, FileService>();
+
+           // Views and ViewModels
+           services.AddTransient<SettingsPage>();
+           services.AddTransient<OptimizeSystemPage>();
+           services.AddTransient<SystemInfoPage>();
+           services.AddTransient<DebloatSystemPage>();
+           services.AddTransient<HomePage>();
+           services.AddTransient<NetworkPage>();
+           services.AddTransient<SecurityPage>();
+           services.AddTransient<RepairPage>();
+           services.AddTransient<ProcessesPage>();
+           services.AddTransient<ServicesPage>();
+           services.AddTransient<ShellPage>();
+           services.AddTransient<ShellViewModel>();
+
+           // Configuration
+           services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
+       }).
+       Build();
+
+    // Sets flow direction based on the current language.
     public static Microsoft.UI.Xaml.FlowDirection FlowDirectionSetting
     {
         get
         {
+            // Return cached value if we already have it
+            if (_flowDirectionCache.HasValue) return _flowDirectionCache.Value;
+
+            // Fallback: Read from disk only once
+            _flowDirectionCache = Microsoft.UI.Xaml.FlowDirection.LeftToRight;
+
             if (ApplicationData.Current.LocalSettings.Values.TryGetValue("SelectedLanguage", out var langObj)
                 && langObj is string lang)
             {
                 if (lang.StartsWith("ar", StringComparison.OrdinalIgnoreCase) ||
                     lang.StartsWith("he", StringComparison.OrdinalIgnoreCase))
-                    return Microsoft.UI.Xaml.FlowDirection.RightToLeft;
+                {
+                    _flowDirectionCache = Microsoft.UI.Xaml.FlowDirection.RightToLeft;
+                }
             }
-            return Microsoft.UI.Xaml.FlowDirection.LeftToRight;
+
+            return _flowDirectionCache.Value;
         }
     }
 }

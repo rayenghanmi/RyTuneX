@@ -80,7 +80,7 @@ public sealed partial class GroupPolicyPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error scanning policies: {ex.Message}");
+            _ = LogHelper.LogError($"Error scanning policies: {ex.Message}");
             DispatcherQueue.TryEnqueue(() =>
             {
                 SummaryText.Text = "GroupPolicyPage_ScanError".GetLocalized();
@@ -383,7 +383,7 @@ public sealed partial class GroupPolicyPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error removing policies: {ex.Message}");
+            _ = LogHelper.LogError($"Error removing policies: {ex.Message}");
             App.ShowNotification(
                 "GroupPolicyPage_RemoveErrorTitle".GetLocalized(),
                 "GroupPolicyPage_RemoveErrorContent".GetLocalized(),

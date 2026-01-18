@@ -234,9 +234,6 @@
   <data name="Capacity" xml:space="preserve">
     <value>السعة</value>
   </data>
-  <data name="Caption" xml:space="preserve">
-    <value>العنوان</value>
-  </data>
   <data name="Cores" xml:space="preserve">
     <value>النوى</value>
   </data>

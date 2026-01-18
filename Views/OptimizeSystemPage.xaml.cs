@@ -79,7 +79,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error initializing power mode: {ex.Message}");
+            _ = LogHelper.LogError($"Error initializing power mode: {ex.Message}");
         }
         finally
         {
@@ -106,7 +106,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting available power plans: {ex.Message}");
+            _ = LogHelper.LogError($"Error getting available power plans: {ex.Message}");
         }
         return powerPlans;
     }
@@ -126,7 +126,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error getting active power plan: {ex.Message}");
+            _ = LogHelper.LogError($"Error getting active power plan: {ex.Message}");
         }
         return null;
     }
@@ -137,11 +137,11 @@ public sealed partial class OptimizeSystemPage : Page
         try
         {
             await StartTaskAsync($"powercfg /setactive {guid}");
-            await LogHelper.Log($"Power plan set to: {guid}");
+            _ = LogHelper.Log($"Power plan set to: {guid}");
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error setting power plan: {ex.Message}");
+            _ = LogHelper.LogError($"Error setting power plan: {ex.Message}");
         }
     }
 
@@ -188,7 +188,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error initializing automatic updates: {ex.Message}");
+            _ = LogHelper.LogError($"Error initializing automatic updates: {ex.Message}");
             // Default to first item on error
             if (WindowsUpdatesComboBox.Items.Count > 0)
             {
@@ -236,18 +236,18 @@ public sealed partial class OptimizeSystemPage : Page
                         break;
                 }
 
-                await LogHelper.Log($"Automatic updates mode set to: {mode}");
+                _ = LogHelper.Log($"Automatic updates mode set to: {mode}");
             }
             catch (Exception ex)
             {
-                await LogHelper.LogError($"Error setting automatic updates mode: {ex.Message}");
+                _ = LogHelper.LogError($"Error setting automatic updates mode: {ex.Message}");
             }
         }
     }
 
     private async Task InitializeToggleSwitchesAsync()
     {
-        await LogHelper.Log("Initializing Toggle Switches");
+        _ = LogHelper.Log("Initializing Toggle Switches");
         try
         {
             foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
@@ -271,7 +271,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
     // Helper method to find all children of a specific type in the visual tree
@@ -313,7 +313,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError(ex.Message);
+            _ = LogHelper.LogError(ex.Message);
         }
     }
     private async Task<string> StartTaskAsync(string command)
@@ -444,7 +444,7 @@ public sealed partial class OptimizeSystemPage : Page
             {
                 // Add the Ultimate Performance power plan using powercfg
                 await StartTaskAsync("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
-                await LogHelper.Log("Added Ultimate Performance power plan");
+                _ = LogHelper.Log("Added Ultimate Performance power plan");
 
                 // Refresh the power plans list
                 await InitializePowerModeAsync();
@@ -458,7 +458,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error adding Ultimate Performance power plan: {ex.Message}");
+            _ = LogHelper.LogError($"Error adding Ultimate Performance power plan: {ex.Message}");
             App.ShowNotification(
                 "AddUltimatePowerPlanTitle".GetLocalized(),
                 "UnexpectedError".GetLocalized(),
@@ -577,7 +577,7 @@ public sealed partial class OptimizeSystemPage : Page
                     // Rename the new power plan
                     await StartTaskAsync($"powercfg /changename {newGuid} \"{planName}\"");
 
-                    await LogHelper.Log($"Created new power plan '{planName}' with GUID: {newGuid}");
+                    _ = LogHelper.Log($"Created new power plan '{planName}' with GUID: {newGuid}");
 
                     // Refresh the power plans list
                     await InitializePowerModeAsync();
@@ -590,7 +590,7 @@ public sealed partial class OptimizeSystemPage : Page
                 }
                 else
                 {
-                    await LogHelper.LogError($"Failed to parse new power plan GUID from output: {createOutput}");
+                    _ = LogHelper.LogError($"Failed to parse new power plan GUID from output: {createOutput}");
                     App.ShowNotification(
                         "CreatePowerPlanTitle".GetLocalized(),
                         "UnexpectedError".GetLocalized(),
@@ -601,7 +601,7 @@ public sealed partial class OptimizeSystemPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error creating power plan: {ex.Message}");
+            _ = LogHelper.LogError($"Error creating power plan: {ex.Message}");
             App.ShowNotification(
                 "CreatePowerPlanTitle".GetLocalized(),
                 "UnexpectedError".GetLocalized(),

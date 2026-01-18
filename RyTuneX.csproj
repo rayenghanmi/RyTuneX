@@ -3,26 +3,33 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <LangVersion>preview</LangVersion>
     <RootNamespace>RyTuneX</RootNamespace>
     <ApplicationIcon>Assets/WindowIcon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x86</Platforms>
     <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     <PublishProfile>Properties\PublishProfiles\win-$(Platform).pubxml</PublishProfile>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
-	<UseWinUI>true</UseWinUI>
-	<WinUISDKReferences>true</WinUISDKReferences>
-	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-	<PublishReadyToRun>true</PublishReadyToRun>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWinUI>true</UseWinUI>
+    <WinUISDKReferences>false</WinUISDKReferences>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishReadyToRunEmitSymbols>true</PublishReadyToRunEmitSymbols>
     <EnableMsixTooling>true</EnableMsixTooling>
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>partial</TrimMode>
+    <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
+    <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
+    <OptimizeImplicitStyles>true</OptimizeImplicitStyles>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-	<AppxBundle>Never</AppxBundle>
+    <AppxBundle>Never</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-	<PackageCertificateThumbprint>953E3900D6095107A760D46C96156DA557D4F889</PackageCertificateThumbprint>
-	<StartupObject>RyTuneX.Program</StartupObject>
+    <PackageCertificateThumbprint>953E3900D6095107A760D46C96156DA557D4F889</PackageCertificateThumbprint>
+    <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
@@ -47,26 +54,40 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.251219" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
-	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
-	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260101001" />
-	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.2" />
-	  <PackageReference Include="System.Drawing.Common" Version="10.0.2" />
-	  <PackageReference Include="System.Management" Version="10.0.2" />
-	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.2" />
-	  <PackageReference Include="vocaluxe.dependencies.netfwtypelib" Version="1.0.1" />
-	  <PackageReference Include="WinUIEx" Version="2.9.0" />
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+      <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.251219" />
+      <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
+      <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
+      <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260101001" />
+      <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.2" />
+      <PackageReference Include="System.Drawing.Common" Version="10.0.2" />
+      <PackageReference Include="System.Management" Version="10.0.2" />
+      <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.2" />
+      <PackageReference Include="WinUIEx" Version="2.9.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
   </ItemGroup>
 
+  <ItemGroup>
+    <TrimmerRootAssembly Include="RyTuneX" />
+    <TrimmerRootAssembly Include="Microsoft.Extensions.DependencyInjection" />
+    <TrimmerRootAssembly Include="Microsoft.Extensions.Hosting" />
+    <TrimmerRootAssembly Include="CommunityToolkit.Mvvm" />
+    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Behaviors" />
+    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Controls.Primitives" />
+    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
+    <TrimmerRootAssembly Include="WinUIEx" />
+    <TrimmerRootAssembly Include="System.ServiceProcess.ServiceController" />
+    <TrimmerRootAssembly Include="System.Diagnostics.PerformanceCounter" />
+    <TrimmerRootAssembly Include="System.Drawing.Common" />
+    <TrimmerRootAssembly Include="System.Management" />
+  </ItemGroup>
+
   <PropertyGroup Label="Globals">
-    <WebView2EnableCsWinRTProjection>False</WebView2EnableCsWinRTProjection>
+    <WebView2EnableCsWinRTProjection>True</WebView2EnableCsWinRTProjection>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

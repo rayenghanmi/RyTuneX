@@ -1,6 +1,9 @@
-﻿using System.Diagnostics;
-using System.Net;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
@@ -9,8 +12,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using Windows.ApplicationModel;
@@ -26,12 +27,29 @@ public record GitHubRelease(
     [property: JsonPropertyName("tag_name")] string TagName
 );
 
-public sealed partial class SettingsPage : Page
+public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 {
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private ElementTheme _elementTheme;
+    public ElementTheme ElementTheme
+    {
+        get => _elementTheme;
+        set
+        {
+            if (_elementTheme != value)
+            {
+                _elementTheme = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
     private static readonly HttpClient httpClient = new();
     private readonly IThemeSelectorService _themeSelectorService;
 
-    private ElementTheme _elementTheme;
     private string _versionDescription;
     private string? _pendingScrollTarget;
 
@@ -39,7 +57,7 @@ public sealed partial class SettingsPage : Page
     {
         get;
     }
-    public static string latestVersionString;
+    public static string latestVersionString = string.Empty;
 
     public SettingsPage()
     {
@@ -105,7 +123,7 @@ public sealed partial class SettingsPage : Page
             }
             else
             {
-                await LogHelper.LogError("Invalid language tag");
+                _ = LogHelper.LogError("Invalid language tag");
                 throw new Exception($"Invalid language tag");
             }
         }
@@ -162,23 +180,6 @@ public sealed partial class SettingsPage : Page
         return $"{version.Major}.{version.Minor}.{version.Build}";
     }
 
-    public ElementTheme ElementTheme
-    {
-        get
-        {
-            LogHelper.Log("Returning ElementTheme");
-            return _elementTheme;
-        }
-        set
-        {
-            if (_elementTheme != value)
-            {
-                LogHelper.Log("Setting ElementTheme");
-                _elementTheme = value;
-            }
-        }
-    }
-
     public string VersionDescription
     {
         get
@@ -217,7 +218,7 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error opening log file: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error opening log file: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
 
@@ -261,14 +262,14 @@ public sealed partial class SettingsPage : Page
                 var isUpdateAvailable = latestVersion > currentVersion;
 
                 Debug.WriteLine($"Is update available: {isUpdateAvailable}");
-                await LogHelper.Log($"Is update available: {isUpdateAvailable}");
+                _ = LogHelper.Log($"Is update available: {isUpdateAvailable}");
 
                 return isUpdateAvailable;
             }
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Update Check Failed: {ex.Message}");
+            _ = LogHelper.LogError($"Update Check Failed: {ex.Message}");
             var networkError = new ContentDialog()
             {
                 XamlRoot = xaml,
@@ -329,7 +330,7 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error during update check: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error during update check: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
 
@@ -379,7 +380,7 @@ public sealed partial class SettingsPage : Page
         {
             UpdateStatusText.Text = "UnexpectedError".GetLocalized();
             UpdateProgress.ShowError = true;
-            await LogHelper.LogError($"Error during installation: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error during installation: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
         finally
         {
@@ -393,7 +394,7 @@ public sealed partial class SettingsPage : Page
                 }
                 catch (Exception ex)
                 {
-                    await LogHelper.LogError($"Error deleting setup file: {ex.Message}");
+                    _ = LogHelper.LogError($"Error deleting setup file: {ex.Message}");
                 }
             }
             UpdateStatusText.Text = "Done".GetLocalized();
@@ -482,7 +483,7 @@ public sealed partial class SettingsPage : Page
 
                 // Execute the revert operation
                 await OptimizationOptions.RevertAllChanges();
-                await LogHelper.Log("Reverted all changes.");
+                _ = LogHelper.Log("Reverted all changes.");
 
                 // Clear local settings if the checkbox is not checked
                 if (keepAppDataCheckBox.IsChecked != true)
@@ -490,11 +491,11 @@ public sealed partial class SettingsPage : Page
                     // Clear all local settings
                     var localSettings = ApplicationData.Current.LocalSettings;
                     localSettings.Values.Clear();
-                    await LogHelper.Log("Cleared all local settings.");
+                    _ = LogHelper.Log("Cleared all local settings.");
                 }
                 else
                 {
-                    await LogHelper.Log("Kept app data as requested by user.");
+                    _ = LogHelper.Log("Kept app data as requested by user.");
                 }
 
                 // Delete all registry keys
@@ -503,7 +504,7 @@ public sealed partial class SettingsPage : Page
                             ? RegistryView.Registry64
                             : RegistryView.Default);
                 key.DeleteSubKeyTree(@"SOFTWARE\RyTuneX", throwOnMissingSubKey: false);
-                await LogHelper.Log("Deleted all registry keys.");
+                _ = LogHelper.Log("Deleted all registry keys.");
 
                 // Wait for a small delay for the operations to complete
                 await Task.Delay(1000);
@@ -530,18 +531,18 @@ public sealed partial class SettingsPage : Page
 
             if (exitCode == 0 && File.Exists(exportFilePath))
             {
-                await LogHelper.Log($"Exported registry settings to {exportFilePath}");
+                _ = LogHelper.Log($"Exported registry settings to {exportFilePath}");
                 App.ShowNotification(string.Empty, "SettingsExported".GetLocalized() + $"\n{path}", InfoBarSeverity.Success, 5000);
             }
             else
             {
-                await LogHelper.LogError($"Failed to export registry settings. Exit code: {exitCode}");
+                _ = LogHelper.LogError($"Failed to export registry settings. Exit code: {exitCode}");
                 App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
             }
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error exporting registry settings: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error exporting registry settings: {ex.Message}\nStack Trace: {ex.StackTrace}");
             App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
         }
     }
@@ -559,7 +560,7 @@ public sealed partial class SettingsPage : Page
         {
             // Import the registry file
             await OptimizationOptions.StartInCmd($"regedit.exe /s {file.Path}");
-            await LogHelper.Log($"Imported registry settings from {file.Path}");
+            _ = LogHelper.Log($"Imported registry settings from {file.Path}");
             // Apply all the optimizations present in the registry key
             using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
                     Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
@@ -594,7 +595,7 @@ public sealed partial class SettingsPage : Page
                                     await OptimizeSystemHelper.SetWindowsUpdatesDisabled();
                                     break;
                             }
-                            await LogHelper.Log($"Applied Windows Updates mode: {mode}");
+                            _ = LogHelper.Log($"Applied Windows Updates mode: {mode}");
                         }
                         continue;
                     }
@@ -609,11 +610,11 @@ public sealed partial class SettingsPage : Page
                         };
 
                         await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
-                        await LogHelper.Log($"Applied optimization: {valueName}");
+                        _ = LogHelper.Log($"Applied optimization: {valueName}");
                     }
                 }
             }
-            await LogHelper.Log("Applied all optimizations from the registry key.");
+            _ = LogHelper.Log("Applied all optimizations from the registry key.");
             App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
         }
     }

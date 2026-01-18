@@ -234,9 +234,6 @@
   <data name="Capacity" xml:space="preserve">
     <value>Dung lượng</value>
   </data>
-  <data name="Caption" xml:space="preserve">
-    <value>Tên</value>
-  </data>
   <data name="Cores" xml:space="preserve">
     <value>Lõi</value>
   </data>

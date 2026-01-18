@@ -234,9 +234,6 @@
   <data name="Capacity" xml:space="preserve">
     <value>Fassungsvermögen</value>
   </data>
-  <data name="Caption" xml:space="preserve">
-    <value>Überschrift</value>
-  </data>
   <data name="Cores" xml:space="preserve">
     <value>Kerne</value>
   </data>

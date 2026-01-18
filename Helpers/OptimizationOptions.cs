@@ -52,7 +52,7 @@ internal partial class OptimizationOptions
             .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
             .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
 
-        await LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
+        _ = LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
         return installedApps;
     }
 
@@ -135,7 +135,7 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError(ex.Message).ConfigureAwait(false);
+            _ = LogHelper.LogError(ex.Message).ConfigureAwait(false);
         }
 
         return installedApps;
@@ -161,7 +161,7 @@ internal partial class OptimizationOptions
 
                 if (subKey == null)
                 {
-                    await LogHelper.LogError($"Failed to open subkey {subKeyName}");
+                    _ = LogHelper.LogError($"Failed to open subkey {subKeyName}");
                     continue;
                 }
 
@@ -213,7 +213,7 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Failed to load Win32 apps: {ex.Message}");
+            _ = LogHelper.LogError($"Failed to load Win32 apps: {ex.Message}");
         }
 
         return [.. win32Apps
@@ -263,7 +263,7 @@ internal partial class OptimizationOptions
                         }
                         catch (Exception ex)
                         {
-                            await LogHelper.LogError($"Failed to copy existing .ico file: {ex.Message}");
+                            _ = LogHelper.LogError($"Failed to copy existing .ico file: {ex.Message}");
                             // Fall back to original path if copying fails
                             logoPath = iconIcoPath;
                         }
@@ -278,7 +278,7 @@ internal partial class OptimizationOptions
                         }
                         catch (Exception ex)
                         {
-                            await LogHelper.LogError($"Failed to copy existing .png file: {ex.Message}");
+                            _ = LogHelper.LogError($"Failed to copy existing .png file: {ex.Message}");
                             // Fall back to original path if copying fails
                             logoPath = iconPngPath;
                         }
@@ -300,7 +300,7 @@ internal partial class OptimizationOptions
                             }
                             catch (Exception ex)
                             {
-                                await LogHelper.LogError($"Failed to extract icon from executable: {ex.Message}");
+                                _ = LogHelper.LogError($"Failed to extract icon from executable: {ex.Message}");
                             }
                         }
                     }
@@ -308,7 +308,7 @@ internal partial class OptimizationOptions
             }
             catch (Exception ex)
             {
-                await LogHelper.LogError($"Failed to extract logo for Win32 app: {ex.Message}");
+                _ = LogHelper.LogError($"Failed to extract logo for Win32 app: {ex.Message}");
             }
         }
         else
@@ -371,7 +371,7 @@ internal partial class OptimizationOptions
             }
             catch (Exception ex)
             {
-                await LogHelper.LogError($"Failed to extract logo path: {ex.Message}");
+                _ = LogHelper.LogError($"Failed to extract logo path: {ex.Message}");
             }
         }
         return logoPath;
@@ -401,7 +401,7 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Failed to save icon as PNG to {filePath}: {ex.Message}");
+            _ = LogHelper.LogError($"Failed to save icon as PNG to {filePath}: {ex.Message}");
         }
     }
 
@@ -442,17 +442,43 @@ internal partial class OptimizationOptions
 
             if (process.ExitCode != 0)
             {
-                await LogHelper.LogError($"Command failed (exit {process.ExitCode})\n{errorOutput}");
+                _ = LogHelper.LogError($"Command failed (exit {process.ExitCode})\n{errorOutput}");
             }
 
             return process.ExitCode;
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error running command: {ex}");
+            _ = LogHelper.LogError($"Error running command: {ex}");
             throw;
         }
     }
+
+    internal static async Task<string> RunPowerShell(string command)
+    {
+        var psPath = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "WindowsPowerShell", "v1.0", "powershell.exe")
+                : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "WindowsPowerShell", "v1.0", "powershell.exe");
+
+        using var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = psPath,
+                Arguments = $"-NoProfile -NonInteractive -Command \"{command}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            }
+        };
+
+        process.Start();
+        var output = await process.StandardOutput.ReadToEndAsync().ConfigureAwait(false);
+        await process.WaitForExitAsync().ConfigureAwait(false);
+        return output.Trim();
+    }
+
     public static async Task RevertAllChanges()
     {
         try
@@ -499,7 +525,7 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"RevertAllChanges: {ex.Message}\n Stack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"RevertAllChanges: {ex.Message}\n Stack Trace: {ex.StackTrace}");
         }
     }
     public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)
@@ -520,7 +546,7 @@ internal partial class OptimizationOptions
             }
             catch (Exception ex)
             {
-                await LogHelper.LogError($"Error saving registry state: {ex.Message}");
+                _ = LogHelper.LogError($"Error saving registry state: {ex.Message}");
             }
             switch (toggleSwitch.Tag)
             {

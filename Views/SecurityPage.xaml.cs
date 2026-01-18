@@ -1,11 +1,9 @@
 ﻿using System.Diagnostics;
-using System.Management;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
-using NetFwTypeLib;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
@@ -178,89 +176,64 @@ public sealed partial class SecurityPage : Page
 
     private async Task<AntivirusInfo> GetAntivirusInfoAsync(CancellationToken cancellationToken = default)
     {
-        return await Task.Run(() =>
+        var result = new AntivirusInfo { ProductName = "Windows Defender", IsEnabled = false };
+
+        try
         {
-            var result = new AntivirusInfo { ProductName = "Windows Defender", IsEnabled = false };
-
-            try
-            {
-                // Try to get antivirus products from SecurityCenter2
-                using var searcher = new ManagementObjectSearcher(@"root\SecurityCenter2", "SELECT * FROM AntiVirusProduct");
-                var products = searcher.Get();
-
-                if (products.Count > 0)
-                {
-                    foreach (var obj in products)
-                    {
-                        if (cancellationToken.IsCancellationRequested)
-                            break;
-
-                        var productName = obj["displayName"]?.ToString();
-
-                        if (obj["productState"] != null && int.TryParse(obj["productState"].ToString(), out var state))
-                        {
-                            var productState = (ProductState)(state & 0xF000);
-                            var isEnabled = productState == ProductState.On;
-
-                            // Prefer enabled products
-                            if (isEnabled || result.ProductName == "Windows Defender")
-                            {
-                                result.ProductName = productName ?? "Unknown Antivirus";
-                                result.IsEnabled = isEnabled;
-                            }
-                        }
-                    }
+            // Get antivirus info using PowerShell
+            var command = @"
+                $av = Get-CimInstance -Namespace 'root\SecurityCenter2' -ClassName 'AntiVirusProduct' -ErrorAction SilentlyContinue | Select-Object -First 1
+                if ($av) {
+                    $av.displayName
+                    $av.productState
+                } else {
+                    'Windows Defender'
+                    '0'
                 }
+            ";
 
-                // Try to get Windows Defender signature update date
-                try
-                {
-                    using var defenderSearcher = new ManagementObjectSearcher(@"root\Microsoft\Windows\Defender",
-                        "SELECT * FROM MSFT_MpComputerStatus");
-                    foreach (var obj in defenderSearcher.Get())
-                    {
-                        if (cancellationToken.IsCancellationRequested)
-                            break;
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
-                        if (obj["AntivirusSignatureLastUpdated"] != null)
-                        {
-                            result.SignatureUpdated = ManagementDateTimeConverter.ToDateTime(obj["AntivirusSignatureLastUpdated"].ToString());
-                        }
-                        break;
-                    }
-                }
-                catch { }
-            }
-            catch (Exception ex)
+            if (lines.Length >= 2)
             {
-                _ = LogHelper.LogError($"Error getting antivirus info: {ex.Message}");
+                result.ProductName = lines[0];
+                if (int.TryParse(lines[1], out var state))
+                {
+                    var productState = (ProductState)(state & 0xF000);
+                    result.IsEnabled = productState == ProductState.On;
+                }
             }
 
-            return result;
-        }, cancellationToken).ConfigureAwait(false);
+            // Get signature update date
+            var sigCommand = @"(Get-MpComputerStatus -ErrorAction SilentlyContinue).AntivirusSignatureLastUpdated.ToString('o')";
+            var sigOutput = await OptimizationOptions.RunPowerShell(sigCommand).ConfigureAwait(false);
+            if (DateTime.TryParse(sigOutput, out var sigDate))
+            {
+                result.SignatureUpdated = sigDate;
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error getting antivirus info: {ex.Message}");
+        }
+
+        return result;
     }
 
     private async Task<bool> IsFirewallEnabledAsync(CancellationToken cancellationToken = default)
     {
-        return await Task.Run(() =>
+        try
         {
-            try
-            {
-                var type = Type.GetTypeFromProgID("HNetCfg.FwPolicy2");
-                if (type != null && Activator.CreateInstance(type) is INetFwPolicy2 firewallPolicy)
-                {
-                    // Check all profiles: Domain, Private, and Public
-                    return firewallPolicy.FirewallEnabled[NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_DOMAIN] ||
-                           firewallPolicy.FirewallEnabled[NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PRIVATE] ||
-                           firewallPolicy.FirewallEnabled[NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PUBLIC];
-                }
-            }
-            catch (Exception ex)
-            {
-                _ = LogHelper.LogError($"Error checking firewall: {ex.Message}");
-            }
-            return false;
-        }, cancellationToken).ConfigureAwait(false);
+            var command = @"(Get-NetFirewallProfile -ErrorAction SilentlyContinue | Where-Object { $_.Enabled -eq 'True' }).Count -gt 0";
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            return output.Equals("True", StringComparison.OrdinalIgnoreCase);
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error checking firewall: {ex.Message}");
+        }
+        return false;
     }
 
     private async Task<bool> IsWindowsUpdateEnabledAsync(CancellationToken cancellationToken = default)
@@ -464,41 +437,18 @@ public sealed partial class SecurityPage : Page
 
     private async Task<bool> IsBitLockerEnabledAsync(CancellationToken cancellationToken = default)
     {
-        return await Task.Run(() =>
+        try
         {
-            try
-            {
-                var drives = DriveInfo.GetDrives();
-                foreach (var drive in drives)
-                {
-                    if (cancellationToken.IsCancellationRequested)
-                        break;
-
-                    if (drive.DriveType == DriveType.Fixed)
-                    {
-                        // Try WMI first (more reliable)
-                        try
-                        {
-                            using var searcher = new ManagementObjectSearcher($"SELECT * FROM Win32_EncryptableVolume WHERE DriveLetter = '{drive.Name.TrimEnd('\\', ':')}'");
-                            foreach (var volume in searcher.Get())
-                            {
-                                var protectionStatus = volume["ProtectionStatus"];
-                                if (protectionStatus != null && (uint)protectionStatus == 1)
-                                {
-                                    return true; // At least one drive is encrypted
-                                }
-                            }
-                        }
-                        catch { }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _ = LogHelper.LogError($"Error checking BitLocker: {ex.Message}");
-            }
-            return false;
-        }, cancellationToken).ConfigureAwait(false);
+            // Use PowerShell to check BitLocker status
+            var command = @"(Get-BitLockerVolume -ErrorAction SilentlyContinue | Where-Object { $_.ProtectionStatus -eq 'On' }).Count -gt 0";
+            var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
+            return output.Equals("True", StringComparison.OrdinalIgnoreCase);
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error checking BitLocker: {ex.Message}");
+        }
+        return false;
     }
 
     private async Task<bool> IsDefenderServiceEnabledAsync(CancellationToken cancellationToken = default)

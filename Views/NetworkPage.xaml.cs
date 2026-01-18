@@ -64,7 +64,7 @@ public sealed partial class NetworkPage : Page
     {
         try
         {
-            await LogHelper.Log("Populating Network Interfaces");
+            _ = LogHelper.Log("Populating Network Interfaces");
 
             var networkInterfaces = await Task.Run(() =>
                 NetworkInterface.GetAllNetworkInterfaces().Where(
@@ -83,14 +83,14 @@ public sealed partial class NetworkPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error populating network interfaces: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error populating network interfaces: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
-    private void DisplayNetworkInfo()
+    private async void DisplayNetworkInfo()
     {
         try
         {
-            LogHelper.Log("Displaying Network Info");
+            _ = LogHelper.Log("Displaying Network Info");
 
             var selectedInterface = selectedInterfaceName;
 
@@ -151,7 +151,7 @@ public sealed partial class NetworkPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error displaying network info: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error displaying network info: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
     private async void ApplyDNS_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -170,7 +170,7 @@ public sealed partial class NetworkPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error applying DNS settings: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error applying DNS settings: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
     private (string[] dnsv4, string[] dnsv6) GetDNSAddresses(string selectedDNS)
@@ -194,7 +194,7 @@ public sealed partial class NetworkPage : Page
     {
         try
         {
-            await LogHelper.Log($"Setting DNS for {nic}");
+            _ = LogHelper.Log($"Setting DNS for {nic}");
 
             var commands = new List<string>
             {
@@ -211,7 +211,7 @@ public sealed partial class NetworkPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error setting DNS for {nic}: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error setting DNS for {nic}: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
     private async void ResetDefaultDNS_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -224,14 +224,14 @@ public sealed partial class NetworkPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error resetting DNS to default: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error resetting DNS to default: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
     private async Task ResetDefaultDNS(string nic)
     {
         try
         {
-            await LogHelper.Log($"Resetting DNS to default for {nic}");
+            _ = LogHelper.Log($"Resetting DNS to default for {nic}");
 
             var cmdv4 = $"netsh interface ipv4 set dnsservers \"{nic}\" dhcp";
             var cmdv6 = $"netsh interface ipv6 set dnsservers \"{nic}\" dhcp";
@@ -241,10 +241,10 @@ public sealed partial class NetworkPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error resetting DNS to default for {nic}: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error resetting DNS to default for {nic}: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
-    private void cmbNetworkInterfaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void cmbNetworkInterfaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         try
         {
@@ -253,7 +253,7 @@ public sealed partial class NetworkPage : Page
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error changing network interface selection: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error changing network interface selection: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
 }

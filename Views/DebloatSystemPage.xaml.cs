@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using CommunityToolkit.WinUI;
@@ -85,7 +85,7 @@ public sealed partial class DebloatSystemPage : Page
                 appsFilter.IsEnabled = false;
             });
 
-            await LogHelper.Log("Loading InstalledApps");
+            _ = LogHelper.Log("Loading InstalledApps");
 
             List<Tuple<string, string, bool>> installedApps;
             if (win32Only)
@@ -126,11 +126,11 @@ public sealed partial class DebloatSystemPage : Page
         }
         catch (OperationCanceledException ex)
         {
-            await LogHelper.Log($"Operation canceled: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.Log($"Operation canceled: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
         catch (Exception ex)
         {
-            await LogHelper.Log($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.Log($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
 
@@ -184,7 +184,7 @@ public sealed partial class DebloatSystemPage : Page
                 }
                 catch (Exception ex)
                 {
-                    await LogHelper.LogError($"Error uninstalling {selectedAppName}: {ex.Message}\nStack Trace: {ex.StackTrace}");
+                    _ = LogHelper.LogError($"Error uninstalling {selectedAppName}: {ex.Message}\nStack Trace: {ex.StackTrace}");
                     failedUninstalls.Add(selectedAppName);
                 }
 
@@ -224,7 +224,7 @@ public sealed partial class DebloatSystemPage : Page
         catch (Exception ex)
         {
             // Log the error
-            await LogHelper.LogError($"Error during uninstallation process: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error during uninstallation process: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
         finally
         {
@@ -244,7 +244,7 @@ public sealed partial class DebloatSystemPage : Page
 
     private static async Task UninstallApps(string appName, bool isWin32App)
     {
-        await LogHelper.Log($"Uninstalling: {appName}");
+        _ = LogHelper.Log($"Uninstalling: {appName}");
 
         if (!isWin32App)
         {
@@ -272,7 +272,7 @@ public sealed partial class DebloatSystemPage : Page
                     // Log errors but ignore them and proceed to the second command
                     if (!string.IsNullOrEmpty(errorProvisioned))
                     {
-                        await LogHelper.LogError(errorProvisioned);
+                        _ = LogHelper.LogError(errorProvisioned);
                     }
                 }
 
@@ -294,7 +294,7 @@ public sealed partial class DebloatSystemPage : Page
 
                     if (!string.IsNullOrEmpty(errorAppxPackage))
                     {
-                        await LogHelper.LogError(errorAppxPackage);
+                        _ = LogHelper.LogError(errorAppxPackage);
                         throw new Exception($"Failed to remove Appx package for {appName}: {errorAppxPackage}");
                     }
                 }
@@ -325,7 +325,7 @@ public sealed partial class DebloatSystemPage : Page
 
                     if (!string.IsNullOrEmpty(error))
                     {
-                        await LogHelper.LogError(error);
+                        _ = LogHelper.LogError(error);
                     }
                 }
             }
@@ -379,7 +379,7 @@ public sealed partial class DebloatSystemPage : Page
 
                 if (string.IsNullOrEmpty(uninstallString))
                 {
-                    await LogHelper.LogError($"Uninstall string for {appName} not found in registry.");
+                    _ = LogHelper.LogError($"Uninstall string for {appName} not found in registry.");
                 }
 
                 // If the uninstall string contains spaces, ensure it's quoted properly
@@ -407,19 +407,19 @@ public sealed partial class DebloatSystemPage : Page
 
                 if (!string.IsNullOrEmpty(error))
                 {
-                    await LogHelper.LogError(error);
+                    _ = LogHelper.LogError(error);
                 }
 
                 if (process.ExitCode != 0)
                 {
-                    await LogHelper.LogError($"Uninstallation failed with exit code: {process.ExitCode}");
+                    _ = LogHelper.LogError($"Uninstallation failed with exit code: {process.ExitCode}");
                 }
 
-                await LogHelper.Log($"Successfully uninstalled {appName}");
+                _ = LogHelper.Log($"Successfully uninstalled {appName}");
             }
             catch (Exception ex)
             {
-                await LogHelper.LogError($"Error uninstalling {appName}: {ex.Message}");
+                _ = LogHelper.LogError($"Error uninstalling {appName}: {ex.Message}");
             }
         }
     }
