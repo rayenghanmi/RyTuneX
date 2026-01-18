@@ -5,6 +5,10 @@ All notable changes to this branch will be documented in this file.
 
 ## 1.6.1 - Unreleased
 
+### Fixes
+
+- Fixed an issue where navigating to any page other than `Settings` would cause the navigation item to stuck for a few seconds till the page finishes loading.
+
 ### Changes
 
 - Reduced the msix package size by ~45% by removing unnecessary dependencies and enabling trimming.

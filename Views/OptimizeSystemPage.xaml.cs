@@ -36,17 +36,34 @@ public sealed partial class OptimizeSystemPage : Page
         }
     }
 
-    private async void OptimizeSystemPage_Loaded(object sender, RoutedEventArgs e)
+    // Start initialization in the background so navigation UI is not blocked
+    private void OptimizeSystemPage_Loaded(object sender, RoutedEventArgs e)
     {
-        await InitializeToggleSwitchesAsync();
-        await InitializePowerModeAsync();
-        await InitializeWindowsUpdatesAsync();
+        _ = InitializeAsync();
+    }
 
-        // Scroll to the target element if there's a pending scroll target
-        if (!string.IsNullOrEmpty(_pendingScrollTarget))
+    // Perform the heavier initialization work asynchronously without blocking the UI navigation
+    private async Task InitializeAsync()
+    {
+        // Allow the UI to finish rendering and release the pressed state on the menu
+        await Task.Yield();
+
+        try
         {
-            await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
-            _pendingScrollTarget = null;
+            await InitializeToggleSwitchesAsync();
+            await InitializePowerModeAsync();
+            await InitializeWindowsUpdatesAsync();
+
+            // Scroll to the target element if there's a pending scroll target
+            if (!string.IsNullOrEmpty(_pendingScrollTarget))
+            {
+                await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+                _pendingScrollTarget = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error during page initialization: {ex.Message}");
         }
     }
 
