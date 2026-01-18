@@ -1632,4 +1632,10 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="ScanResults" xml:space="preserve">
     <value>Resultados da verificação</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Conta Microsoft</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>Conta local</value>
+  </data>
 </root>

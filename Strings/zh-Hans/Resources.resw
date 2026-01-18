@@ -1632,4 +1632,10 @@
   <data name="ScanResults" xml:space="preserve">
     <value>扫描结果</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Microsoft 帐户</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>本地帐户</value>
+  </data>
 </root>

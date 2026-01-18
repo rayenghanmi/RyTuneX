@@ -1632,4 +1632,10 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="ScanResults" xml:space="preserve">
     <value>Kết quả quét</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Tài khoản Microsoft</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>Tài khoản cục bộ</value>
+  </data>
 </root>

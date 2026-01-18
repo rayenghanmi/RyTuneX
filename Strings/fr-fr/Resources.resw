@@ -1629,4 +1629,10 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>Par défaut</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Compte Microsoft</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>Compte local</value>
+  </data>
 </root>

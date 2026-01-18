@@ -1632,4 +1632,10 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="ScanResults" xml:space="preserve">
     <value>Scan-Ergebnisse</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Microsoft-Konto</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>Lokales Konto</value>
+  </data>
 </root>

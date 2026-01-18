@@ -1632,4 +1632,10 @@
   <data name="ScanResults" xml:space="preserve">
     <value>검사 결과</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Microsoft 계정</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>로컬 계정</value>
+  </data>
 </root>

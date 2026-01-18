@@ -25,6 +25,12 @@ public sealed partial class ShellPage : Page
         get;
     }
 
+    public string UserName { get; } = Environment.UserName;
+    public string AccountType =>
+        string.Equals(Environment.UserDomainName, "MicrosoftAccount", StringComparison.OrdinalIgnoreCase)
+            ? "MicrosoftAccount".GetLocalized()
+            : "LocalAccount".GetLocalized();
+
     // Track pointer state to defer hide animation while hovered
     private bool _isPointerOver = false;
     private bool _pendingHide = false;
@@ -70,6 +76,22 @@ public sealed partial class ShellPage : Page
 
         // Attach pointer handlers for pausing/resuming notifications
         Loaded += ShellPage_Loaded;
+    }
+
+    private void UserProfileButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "ms-settings:account",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open account settings: {ex.Message}");
+        }
     }
 
     private void ShellPage_Loaded(object? sender, RoutedEventArgs e)

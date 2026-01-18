@@ -1632,4 +1632,10 @@ Check your computer for memory problems</value>
   <data name="ScanResults" xml:space="preserve">
     <value>Scan Results</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Microsoft account</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>Local account</value>
+  </data>
 </root>

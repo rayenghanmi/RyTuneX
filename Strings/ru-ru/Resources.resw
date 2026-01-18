@@ -1629,4 +1629,10 @@
   <data name="ScanResults" xml:space="preserve">
     <value>Результаты сканирования</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Учетная запись Microsoft</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>Локальная учетная запись</value>
+  </data>
 </root>

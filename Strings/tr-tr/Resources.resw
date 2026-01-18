@@ -1632,4 +1632,10 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="ScanResults" xml:space="preserve">
     <value>Tara Sonuçları</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Microsoft hesabı</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>Yerel hesap</value>
+  </data>
 </root>

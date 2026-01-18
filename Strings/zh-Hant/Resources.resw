@@ -1628,4 +1628,10 @@
   <data name="ScanResults" xml:space="preserve">
     <value>掃描結果</value>
   </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Microsoft 帳戶</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>本機帳戶</value>
+  </data>
 </root>
