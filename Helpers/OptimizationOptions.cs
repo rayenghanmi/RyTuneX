@@ -137,11 +137,11 @@ internal partial class OptimizationOptions
 
         var roots = new[]
         {
-        (RegistryHive.LocalMachine, RegistryView.Registry64),
-        (RegistryHive.LocalMachine, RegistryView.Registry32),
-        (RegistryHive.CurrentUser,  RegistryView.Registry64),
-        (RegistryHive.CurrentUser,  RegistryView.Registry32),
-    };
+            (RegistryHive.LocalMachine, RegistryView.Registry64),
+            (RegistryHive.LocalMachine, RegistryView.Registry32),
+            (RegistryHive.CurrentUser,  RegistryView.Registry64),
+            (RegistryHive.CurrentUser,  RegistryView.Registry32),
+        };
 
         foreach (var (hive, view) in roots)
         {
@@ -155,6 +155,49 @@ internal partial class OptimizationOptions
             if (baseKey != null)
                 yield return baseKey;
         }
+    }
+
+    // Find the uninstall (or quiet uninstall) string for a Win32 app by its display name using the same uninstall roots as GetWin32Apps.
+    internal static string? GetWin32UninstallString(string appName)
+    {
+        try
+        {
+            var uninstallRoots = OpenUninstallRoots().ToList();
+
+            var allSubKeys = uninstallRoots
+                .SelectMany(k => k.GetSubKeyNames()
+                    .Select(name => (Root: k, Name: name)))
+                .GroupBy(x => x.Name, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.First());
+
+            foreach (var uninstallRoot in allSubKeys)
+            {
+                using var subKey = uninstallRoot.Root.OpenSubKey(uninstallRoot.Name);
+                if (subKey == null)
+                    continue;
+
+                var displayName = subKey.GetValue("DisplayName") as string;
+                if (string.IsNullOrEmpty(displayName))
+                    continue;
+
+                if (!displayName.Equals(appName, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                var uninstallString = subKey.GetValue("QuietUninstallString") as string;
+                if (string.IsNullOrEmpty(uninstallString))
+                {
+                    uninstallString = subKey.GetValue("UninstallString") as string;
+                }
+
+                return uninstallString;
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"GetWin32UninstallString failed: {ex.Message}");
+        }
+
+        return null;
     }
 
     public static async Task<List<Tuple<string, string, bool>>> GetWin32Apps()
