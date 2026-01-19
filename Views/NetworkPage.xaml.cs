@@ -196,13 +196,16 @@ public sealed partial class NetworkPage : Page
         {
             _ = LogHelper.Log($"Setting DNS for {nic}");
 
-            var commands = new List<string>
-            {
-                $"netsh interface ipv4 set dnsservers {nic} static {dnsv4[0]} primary",
-                dnsv4.Length == 2 ? $"netsh interface ipv4 add dnsservers {nic} {dnsv4[1]} index=2" : null,
-                $"netsh interface ipv6 set dnsservers {nic} static {dnsv6[0]} primary",
-                dnsv6.Length == 2 ? $"netsh interface ipv6 add dnsservers {nic} {dnsv6[1]} index=2" : null
-            }.Where(cmd => !string.IsNullOrEmpty(cmd));
+            var commands = new List<string>();
+
+            if (dnsv4.Length > 0 && !string.IsNullOrEmpty(dnsv4[0]))
+                commands.Add($"netsh interface ipv4 set dnsservers {nic} static {dnsv4[0]} primary");
+            if (dnsv4.Length > 1 && !string.IsNullOrEmpty(dnsv4[1]))
+                commands.Add($"netsh interface ipv4 add dnsservers {nic} {dnsv4[1]} index=2");
+            if (dnsv6.Length > 0 && !string.IsNullOrEmpty(dnsv6[0]))
+                commands.Add($"netsh interface ipv6 set dnsservers {nic} static {dnsv6[0]} primary");
+            if (dnsv6.Length > 1 && !string.IsNullOrEmpty(dnsv6[1]))
+                commands.Add($"netsh interface ipv6 add dnsservers {nic} {dnsv6[1]} index=2");
 
             foreach (var cmd in commands)
             {

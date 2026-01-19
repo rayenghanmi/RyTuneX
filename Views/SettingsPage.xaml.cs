@@ -147,7 +147,7 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
         }
     }
 
-    private void SetDefaultLanguage(string tag)
+    private void SetDefaultLanguage(string? tag)
     {
         LogHelper.Log($"Setting Language: {tag}");
         foreach (ComboBoxItem item in LanguageComboBox.Items)

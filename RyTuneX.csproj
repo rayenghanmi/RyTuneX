@@ -21,7 +21,6 @@
     <PublishTrimmed>true</PublishTrimmed>
     <TrimMode>partial</TrimMode>
     <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
-    <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
     <OptimizeImplicitStyles>true</OptimizeImplicitStyles>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
@@ -31,8 +30,6 @@
     <PackageCertificateThumbprint>953E3900D6095107A760D46C96156DA557D4F889</PackageCertificateThumbprint>
     <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <Version>1.6.1</Version>
     <Authors>Rayen Ghanmi</Authors>
   </PropertyGroup>
@@ -85,10 +82,6 @@
     <TrimmerRootAssembly Include="System.Drawing.Common" />
     <TrimmerRootAssembly Include="System.Management" />
   </ItemGroup>
-
-  <PropertyGroup Label="Globals">
-    <WebView2EnableCsWinRTProjection>True</WebView2EnableCsWinRTProjection>
-  </PropertyGroup>
 
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>

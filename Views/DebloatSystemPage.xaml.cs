@@ -383,7 +383,7 @@ public sealed partial class DebloatSystemPage : Page
                 }
 
                 // If the uninstall string contains spaces, ensure it's quoted properly
-                if (!uninstallString.StartsWith("\"") && !uninstallString.EndsWith("\""))
+                if (uninstallString != null && !uninstallString.StartsWith("\"") && !uninstallString.EndsWith("\""))
                 {
                     uninstallString = $"\"{uninstallString}\"";
                 }

@@ -237,7 +237,7 @@ internal partial class OptimizationOptions
             .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
     }
 
-    private static async Task<string> ExtractLogoPath(string installLocation, bool isWin32, string appName)
+    private static async Task<string> ExtractLogoPath(string? installLocation, bool isWin32, string appName)
     {
         Directory.CreateDirectory(IconCacheDirectory);
         var defaultIcon = isWin32
