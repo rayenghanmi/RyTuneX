@@ -32,6 +32,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <Version>1.6.1</Version>
     <Authors>Rayen Ghanmi</Authors>
+    <GenerateTestArtifacts>False</GenerateTestArtifacts>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\discord.png" />
