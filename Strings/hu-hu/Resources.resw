@@ -211,7 +211,7 @@
     <value>Kéretlen appok</value>
   </data>
 	<data name="DebloatPage_NotificationBody" xml:space="preserve">
-    <value>Előfordulhat, hogy egyes alkalmazások esetén, nem távolítja el őket teljesen.</value>
+    <value>Előfordulhat, hogy egyes alkalmazások esetén nem távolítja el őket teljesen.</value>
   </data>
 	<data name="UninstallationError" xml:space="preserve">
     <value>Hiba a következő alkalmazás(ok) eltávolításakor</value>
@@ -223,7 +223,7 @@
     <value>Rendszer ideiglenes fájlok törlése</value>
   </data>
 	<data name="AdapterRAM" xml:space="preserve">
-    <value>RAM illesztő</value>
+    <value>Videómemória</value>
   </data>
 	<data name="Architecture" xml:space="preserve">
     <value>Architektúra</value>
@@ -235,7 +235,7 @@
     <value>Kapacitás</value>
   </data>
 	<data name="Caption" xml:space="preserve">
-    <value>Felirat</value>
+    <value>Leírás</value>
   </data>
 	<data name="Cores" xml:space="preserve">
     <value>Magok</value>
@@ -337,7 +337,7 @@
     <value>Modell</value>
   </data>
 	<data name="Feature_EnableVerboseLogon.Description" xml:space="preserve">
-    <value>Engedélyezze a részletes bejelentkezési üzeneteket a rendszer jobb figyeléséhez és hibaelhárításához. Mindennapi használatra nem felhasználóbarát, ínkább csak vizsgálathoz.</value>
+    <value>Engedélyezze a részletes bejelentkezési üzeneteket a rendszer jobb figyeléséhez és hibaelhárításához. Mindennapi használatra nem felhasználóbarát, inkább csak vizsgálathoz.</value>
   </data>
 	<data name="Feature_EnableVerboseLogon.Header" xml:space="preserve">
     <value>Részletes bejelentkezés engedélyezése</value>
@@ -388,7 +388,7 @@
     <value>Keresés letiltása</value>
   </data>
 	<data name="Feature_DisableSearch.Description" xml:space="preserve">
-    <value>Turns off system-wide search functionality</value>
+    <value>Kikapcsolja a rendszerszintű keresési funkciót.</value>
   </data>
 	<data name="Feature_DisableErrorReporting.Header" xml:space="preserve">
     <value>A hibajelentés letiltása</value>
@@ -421,7 +421,7 @@
     <value>Kikapcsolja az érzékelőszolgáltatásokat a magánélet védelme és az energiatakarékosság érdekében. Nem javasolt olyan laptopoknál, amelyek rendelkeznek releváns érzékelőkkel.</value>
   </data>
 	<data name="Feature_DisableWindowsInk.Header" xml:space="preserve">
-    <value>Windows képernyő bevitel</value>
+    <value>Windows képernyő bevitel (Windows Ink)</value>
   </data>
 	<data name="Feature_DisableWindowsInk.Description" xml:space="preserve">
     <value>Kikapcsolja a Windows Ink munkaterületet és a kapcsolódó funkciókat. Nem ajánlott olyan eszközökhöz, amelyekhez stylus tartozik</value>
@@ -451,7 +451,7 @@
     <value>Letiltja a Felhő vágólap funkciót az eszközök közötti vágólapmegosztáshoz</value>
   </data>
 	<data name="Feature_DisableStickyKeys.Header" xml:space="preserve">
-    <value>A ragadós billentyűk kikapcsolása</value>
+    <value>A Beragadó billentyűk kikapcsolása</value>
   </data>
 	<data name="Feature_DisableStickyKeys.Description" xml:space="preserve">
     <value>Letiltja a Sticky Keys (ragadós billentyűk) akadálymentességi funkciót. Hasznos azok számára, akik véletlenül egyszerre több billentyűt nyomhatnak le.</value>
@@ -925,712 +925,712 @@
     <value>Letiltja az olyan hangaktiválási funkciókat, mint a Cortana, így megakadályozza, hogy az asszisztens figyeljen a hangutasításaira. Ez javíthatja a magánélet védelmét, de csökkenti a hangutasítások funkcióit.</value>
   </data>
 	<data name="Feature_DisableFindMyDevice.Header" xml:space="preserve">
-    <value>Disable Find My Device</value>
+    <value>A Saját eszköz keresés kikapcsolása</value>
   </data>
 	<data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
-    <value>Disables the Find My Device feature, which helps locate your device if lost. Disabling this reduces your ability to recover a lost device but enhances privacy.</value>
+    <value>Letiltja a Készülékkereső funkciót, amely segít megtalálni az eszközt, ha elveszik. Ennek letiltása csökkenti az elveszett eszköz visszaállításának lehetőségét, de javítja a magánélet védelmét.</value>
   </data>
 	<data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>Disable Activity Feed</value>
+    <value>A tevékenységi hírcsatorna letiltása</value>
   </data>
 	<data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>Turns off the activity feed that shows your recent activities, helping to protect your privacy by preventing others from seeing what you've been doing on your device.</value>
+    <value>Kikapcsolja a legutóbbi tevékenységeidet megjelenítő aktivitási hírfolyamot, így segít megvédeni a magánéletedet azzal, hogy megakadályozza, hogy mások lássák, mit csináltál az eszközön.</value>
   </data>
 	<data name="Feature_DisableCdp.Header" xml:space="preserve">
-    <value>Disable CDP (Customer Data Platform)</value>
+    <value>CDP (Ügyféladat-platform) letiltása</value>
   </data>
 	<data name="Feature_DisableCdp.Description" xml:space="preserve">
-    <value>Disables CDP, preventing the collection and use of your data by the customer data platform for analysis and targeted recommendations. This increases privacy but may limit personalization.</value>
+    <value>Letiltja a CDP-t, megakadályozva, hogy az ügyféladat-platform gyűjtse és felhasználja adatait elemzésre és célzott ajánlásokhoz. Ez növeli a magánszférát, de korlátozhatja a személyre szabást.</value>
   </data>
 	<data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>Disable Tailored Experiences in Privacy</value>
+    <value>Egyéni élmények letiltása a Adatvédelemben</value>
   </data>
 	<data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>Disables the tailored experiences feature in privacy settings, stopping Windows from using your data to customize your experiences. This may reduce personalization features.</value>
+    <value>Letiltja a személyre szabott élmények funkciót a adatvédelmi beállításoknál, megakadályozva, hogy a Windows az adataidat felhasználja az élményeid testreszabásához. Ez csökkentheti a személyre szabott funkciók használhatóságát.</value>
   </data>
 	<data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
-    <value>Disable Diagnostics Toast</value>
+    <value>Diagnosztikai értesítés kikapcsolása</value>
   </data>
 	<data name="Feature_DisableDiagnosticsToast.Description" xml:space="preserve">
-    <value>Turns off diagnostic toast notifications, preventing Windows from showing you prompts related to system health or errors. This can help reduce distractions.</value>
+    <value>Kikapcsolja a diagnosztikai értesítéseket, megakadályozva, hogy a Windows rendszerfigyelmeztetéseket vagy hibákkal kapcsolatos üzeneteket jelenítsen meg. Ez segíthet csökkenteni a zavaró tényezőket.</value>
   </data>
 	<data name="Feature_DisableOnlineSpeechPrivacy.Header" xml:space="preserve">
-    <value>Disable Online Speech Privacy</value>
+    <value>Online beszédvédelmi funkció kikapcsolása</value>
   </data>
 	<data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
-    <value>Disables online speech privacy, preventing Windows from storing or processing voice commands. This increases privacy but limits voice features like voice search and commands.</value>
+    <value>Letiltja az online beszédadatok védelmét, megakadályozva, hogy a Windows tárolja vagy feldolgozza a hangparancsokat. Ez növeli a magánélet védelmét, de korlátozza a hangalapú funkciókat, például a hangkeresést és a hangparancsokat.</value>
   </data>
 	<data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>Disable Location Access</value>
+    <value>Helymeghatározás kikapcsolása</value>
   </data>
 	<data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>Turns off location access for apps and services, preventing them from using your device's GPS or network location. This improves privacy but may limit location-based services.</value>
+    <value>Kikapcsolja az alkalmazások és szolgáltatások helymeghatározáshoz való hozzáférését, megakadályozva, hogy a készülék GPS-ét vagy hálózati helyzetét használják. Ez javítja az adatvédelmet, de korlátozhatja a helyalapú szolgáltatásokat.</value>
   </data>
 	<data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
-    <value>Disable Location Features</value>
+    <value>Helymeghatározási funkciók kikapcsolása</value>
   </data>
 	<data name="Feature_DisableLocationFeatures.Description" xml:space="preserve">
-    <value>Disables all location-based features on your device, including location services for apps and security features. This can enhance privacy but reduce the functionality of location-dependent services.</value>
+    <value>Letiltja az eszköz összes helyalapú funkcióját, beleértve az alkalmazások és a biztonsági funkciók helymeghatározását is. Ez növelheti a magánélet védelmét, de csökkentheti a helyfüggő szolgáltatások működőképességét.</value>
   </data>
 	<data name="Feature_MenuShowDelay.Header" xml:space="preserve">
-    <value>Disable Menu Show Delay</value>
+    <value>Menü megjelenítési késleltetés kikapcsolása</value>
   </data>
 	<data name="Feature_MenuShowDelay.Description" xml:space="preserve">
-    <value>Controls the delay before menus appear after a mouse hover. Disabling this feature can make the menus open instantly, improving responsiveness but may reduce user control.</value>
+    <value>Azt szabályozza, mennyi ideig késlekedjenek a menük megjelenése előtt, miután az egeret fölé vitték. Ennek a funkciónak a kikapcsolása azonnal megnyithatja a menüket, javítva a reakciókészséget, de csökkentheti a felhasználói irányítást.</value>
   </data>
 	<data name="Feature_MouseHoverTime.Header" xml:space="preserve">
-    <value>Disable Mouse Hover Time</value>
+    <value>Egérmutató rámutatás idejének letiltása</value>
   </data>
 	<data name="Feature_MouseHoverTime.Description" xml:space="preserve">
-    <value>Adjusts the time the system waits before triggering a hover event. Disabling this may speed up interactions but can lead to unintentional activations.</value>
+    <value>Beállítja, mennyi ideig várjon a rendszer a rámutatási esemény kiváltása előtt. Ennek letiltása gyorsíthatja a műveleteket, de véletlen aktivitásokhoz vezethet.</value>
   </data>
 	<data name="Feature_AutoComplete.Header" xml:space="preserve">
-    <value>Disable Auto Complete</value>
+    <value>Automatikus kitöltés kikapcsolása</value>
   </data>
 	<data name="Feature_AutoComplete.Description" xml:space="preserve">
-    <value>Disables automatic suggestions while typing in certain fields, such as search boxes and form inputs. Disabling it can reduce distractions but may slow down workflow.</value>
+    <value>Letiltja az automatikus javaslatokat bizonyos mezőkben történő gépelés közben, például keresőmezőkben és űrlapmezőkben. A letiltás csökkentheti a zavaró tényezőket, de lassíthatja a munkafolyamatot.</value>
   </data>
 	<data name="Feature_CrashDump.Header" xml:space="preserve">
-    <value>Disable Crash Dump</value>
+    <value>Összeomlás-jelentés készítésének letiltása</value>
   </data>
 	<data name="Feature_CrashDump.Description" xml:space="preserve">
-    <value>Controls whether crash reports and memory dumps are generated when applications crash. Disabling this feature can help preserve disk space, but may reduce the ability to diagnose and troubleshoot application issues.</value>
+    <value>Beleavatkozik abba, hogy a rendszer készítsen-e összeomlásjelentéseket és memória-dumpokat, amikor az alkalmazások összeomlanak. Ennek a funkciónak a kikapcsolása segíthet megőrizni a lemezterületet, de csökkentheti az alkalmazásproblémák diagnosztizálásának és elhárításának képességét.</value>
   </data>
 	<data name="Feature_RemoteAssistance.Header" xml:space="preserve">
-    <value>Disable Remote Assistance</value>
+    <value>Távsegítség letiltása</value>
   </data>
 	<data name="Feature_RemoteAssistance.Description" xml:space="preserve">
-    <value>Disables remote support features, allowing others to assist you via remote desktop. Disabling it can improve security but limits support options.</value>
+    <value>Letiltja a távoli támogatási funkciókat, amelyek lehetővé teszik mások számára, hogy távoli asztalon keresztül segítsenek. A letiltása javíthatja a biztonságot, de korlátozza a támogatási lehetőségeket.</value>
   </data>
 	<data name="Feature_WindowShake.Header" xml:space="preserve">
-    <value>Disable Window Shake</value>
+    <value>Ablak rázásának kikapcsolása</value>
   </data>
 	<data name="Feature_WindowShake.Description" xml:space="preserve">
-    <value>Disables the window shake feature that minimizes all open windows when you shake a window. Disabling it improves focus but removes a handy window management tool.</value>
+    <value>Letiltja az ablakrázás funkciót, amely akkor minimalizálja az összes megnyitott ablakot, amikor megráz egy ablakot. A letiltása javítja a koncentrációt, de megszüntet egy hasznos ablakkezelő eszközt.</value>
   </data>
 	<data name="Feature_CopyMoveContextMenu.Header" xml:space="preserve">
-    <value>Add Copy/Move Context Menu</value>
+    <value>Másolás/áthelyezés hozzáadása a helyi menühöz</value>
   </data>
 	<data name="Feature_CopyMoveContextMenu.Description" xml:space="preserve">
-    <value>Enables additional options in the file context menu to easily copy or move files to a new location. This feature streamlines file management by providing quick access to these functions directly from the right-click menu.</value>
+    <value>További lehetőségeket engedélyez a fájl kontextusmenüjében, hogy a fájlokat könnyen másolhassa vagy áthelyezhesse egy új helyre. Ez a funkció egyszerűsíti a fájlkezelést azáltal, hogy gyors hozzáférést biztosít ezekhez a műveletekhez közvetlenül a jobb egérgombos menüből.</value>
   </data>
 	<data name="Feature_TaskTimeouts.Header" xml:space="preserve">
-    <value>Adjust Task Timeouts</value>
+    <value>Feladat időkorlátjainak beállítása</value>
   </data>
 	<data name="Feature_TaskTimeouts.Description" xml:space="preserve">
-    <value>Modifies the timeout settings for system tasks. Adjusting it can improve performance in some scenarios but may cause tasks to fail under certain conditions.</value>
+    <value>Módosítja a rendszerfeladatok időkorlát-beállításait. Ennek módosítása bizonyos helyzetekben javíthatja a teljesítményt, de bizonyos körülmények között a feladatok sikertelenné válhatnak.</value>
   </data>
 	<data name="Feature_LowDiskSpaceChecks.Header" xml:space="preserve">
-    <value>Enable Low Disk Space Checks</value>
+    <value>Alacsony lemezterület-ellenőrzések engedélyezése</value>
   </data>
 	<data name="Feature_LowDiskSpaceChecks.Description" xml:space="preserve">
-    <value>Enables automatic checks for low disk space to prevent performance issues. Disabling it could reduce notifications, but you may miss critical storage warnings.</value>
+    <value>Lehetővé teszi az automatikus ellenőrzést az alacsony lemezterület miatt a teljesítményproblémák megelőzése érdekében. Kikapcsolása csökkentheti az értesítéseket, de előfordulhat, hogy fontos tárolási figyelmeztetéseket elmulaszt.</value>
   </data>
 	<data name="Feature_LinkResolve.Header" xml:space="preserve">
-    <value>Disable Link Resolve</value>
+    <value>Hivatkozás feloldás kikapcsolása</value>
   </data>
 	<data name="Feature_LinkResolve.Description" xml:space="preserve">
-    <value>Disables the resolution of broken links in files and folders. Disabling it can speed up operations but may leave outdated links unresolved.</value>
+    <value>Letiltja a hibás hivatkozások feloldását fájlokban és mappákban. A letiltás gyorsíthatja a műveleteket, de előfordulhat, hogy elavult hivatkozások maradnak feloldatlanul.</value>
   </data>
 	<data name="Feature_ServiceTimeouts.Header" xml:space="preserve">
-    <value>Decrease Service Timeouts</value>
+    <value>Szolgáltatási időkorlátok csökkentése</value>
   </data>
 	<data name="Feature_ServiceTimeouts.Description" xml:space="preserve">
-    <value>Adjusts the timeouts for system services. Shortening these can improve performance but may cause services to terminate prematurely.</value>
+    <value>A rendszer szolgáltatásainak időtúllépéseit állítja. Ezek lerövidítése javíthatja a teljesítményt, de a szolgáltatások idő előtt történő leállását okozhatja.</value>
   </data>
 	<data name="Feature_RemoteRegistry.Header" xml:space="preserve">
-    <value>Disable Remote Registry</value>
+    <value>Távoli nyilvántartás letiltása</value>
   </data>
 	<data name="Feature_RemoteRegistry.Description" xml:space="preserve">
-    <value>Disables access to the registry remotely. Disabling it improves security but prevents remote configuration of registry settings.</value>
+    <value>Letiltja a távoli hozzáférést a rendszerleíró adatbázishoz. A letiltás javítja a biztonságot, de megakadályozza a rendszerleíró beállítások távoli konfigurálását.</value>
   </data>
 	<data name="Feature_FileExtensionsAndHiddenFiles.Header" xml:space="preserve">
-    <value>Hide File Extensions and Hidden Files</value>
+    <value>Fájlkiterjesztések és rejtett fájlok elrejtése</value>
   </data>
 	<data name="Feature_FileExtensionsAndHiddenFiles.Description" xml:space="preserve">
-    <value>Controls the visibility of file extensions and hidden files. Enabling this reduces clutter but hides important file details.</value>
+    <value>A fájlok kiterjesztéseinek és a rejtett fájloknak a láthatóságát szabályozza. Ennek engedélyezése csökkenti a rendetlenséget, de elrejti a fontos fájladatokat.</value>
   </data>
 	<data name="Feature_SystemProfile.Header" xml:space="preserve">
-    <value>Optimize System Profile</value>
+    <value>Rendszerprofil optimalizálása</value>
   </data>
 	<data name="Feature_SystemProfile.Description" xml:space="preserve">
-    <value>Enhances your system's performance by adjusting system profile settings. This feature prioritize speed and efficiency, improving overall system responsiveness and resource management.</value>
+    <value>A rendszer teljesítményét növeli a rendszerprofil-beállítások módosításával. Ez a funkció a sebességet és a hatékonyságot helyezi előtérbe, javítva az egész rendszer válaszkészségét és az erőforrások kezelését.</value>
   </data>
 	<data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>Device Information</value>
+    <value>Eszközinformáció</value>
   </data>
 	<data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
-    <value>Enable Classic Context Menu</value>
+    <value>Klasszikus helyi menü engedélyezése</value>
   </data>
 	<data name="Feature_EnableClassicContextMenu.Description" xml:space="preserve">
-    <value>Restores the classic context menu style of Windows 10, providing a familiar right-click menu experience with all options displayed immediately</value>
+    <value>Visszaállítja a Windows 10 klasszikus helyi menü stílusát, biztosítva egy ismerős jobb klikkes menü élményt, ahol minden opció azonnal megjelenik</value>
   </data>
 	<data name="DoNotShowCheckBox" xml:space="preserve">
-    <value>Don't show this message again</value>
+    <value>Ne mutasd újra ezt az üzenetet</value>
   </data>
 	<data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>Create Restore Point</value>
+    <value>Helyreállítási pont létrehozása</value>
   </data>
 	<data name="RestorePointDialogText" xml:space="preserve">
-    <value>It's highly recommended to create a restore point before making any changes to your system.
+    <value>Erősen ajánlott létrehozni egy visszaállítási pontot, mielőtt bármilyen változtatást végeznél a rendszereden.
 
 
-Would you like to create a system restore point before proceeding?</value>
+Szeretne létrehozni egy rendszer-visszaállítási pontot a folytatás előtt?</value>
   </data>
 	<data name="CreatingRestorePoint" xml:space="preserve">
-    <value>Creating Restore Point</value>
+    <value>Helyreállítási pont létrehozása</value>
   </data>
 	<data name="Settings_RevertChanges.Header" xml:space="preserve">
-    <value>Revert all changes</value>
+    <value>Minden módosítás visszavonása</value>
   </data>
 	<data name="Settings_RevertChanges.Description" xml:space="preserve">
-    <value>Reverts all the changes that RyTuneX has made to your system, including the restore point</value>
+    <value>Visszaállítja az összes változtatást, amit a RyTuneX végrehajtott a rendszereden, beleértve a helyreállítási pontot is.</value>
   </data>
 	<data name="RevertingChanges" xml:space="preserve">
-    <value>Currently reverting changes...</value>
+    <value>Jelenleg a módosítások visszaállítása folyamatban...</value>
   </data>
 	<data name="RevertChangesDialogText" xml:space="preserve">
-    <value>You're about to revert all the changes made by RyTuneX to your system (Except for uninstalled apps) and reset the app's preferences.
+    <value>Most készül visszavonni az összes, a RyTuneX által a rendszereden végrehajtott változtatást (a törölt alkalmazások kivételével), és alaphelyzetbe állítani az alkalmazás beállításait.
 
 
-Are you sure you want to continue?</value>
+Biztos, hogy folytatni szeretné?</value>
   </data>
 	<data name="NoChangesFound" xml:space="preserve">
-    <value>No notable changes found.</value>
+    <value>Nem található jelentős változás.</value>
   </data>
 	<data name="OperationStopped" xml:space="preserve">
-    <value>Operation stopped</value>
+    <value>Művelet leállítva</value>
   </data>
 	<data name="ReportSaved" xml:space="preserve">
-    <value>Report saved to your Desktop</value>
+    <value>A jelentés mentve lett az asztalra</value>
   </data>
 	<data name="MemoryDiagnosticDialogTitle" xml:space="preserve">
-    <value>Memory Diagnostic</value>
+    <value>Memóriateszt</value>
   </data>
 	<data name="MemoryDiagnosticDialogText" xml:space="preserve">
-    <value>Memory problems can cause your computer to lose information or stop working.
+    <value>A memória problémái miatt a számítógép elveszítheti az információkat, vagy leállhat.
 
 
-Check your computer for memory problems</value>
+Ellenőrizi a számítógépét a memóriahibák után?</value>
   </data>
 	<data name="RestartNow" xml:space="preserve">
-    <value>Restart now</value>
+    <value>Indítsa újra most</value>
   </data>
 	<data name="ScheduleLater" xml:space="preserve">
-    <value>Schedule for later</value>
+    <value>Ütemezés későbbre</value>
   </data>
 	<data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Mégse</value>
   </data>
 	<data name="ScheduledLater" xml:space="preserve">
-    <value>Scheduled for next restart</value>
+    <value>A következő újraindításra ütemezve</value>
   </data>
 	<data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>Scan</value>
+    <value>Vizsgálat</value>
   </data>
 	<data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>Repair</value>
+    <value>Helyreállítás</value>
   </data>
 	<data name="RepairPage_StopButton.Content" xml:space="preserve">
-    <value>Stop</value>
+    <value>Leállítás</value>
   </data>
 	<data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>Select at least one option to scan/repair</value>
+    <value>Válasszon legalább egy lehetőséget a vizsgálathoz/helyreállításhoz</value>
   </data>
 	<data name="StatusTextBlockDefault" xml:space="preserve">
-    <value>Select at least one option to scan/repair</value>
+    <value>Válasszon legalább egy lehetőséget a vizsgálathoz/helyreállításhoz</value>
   </data>
 	<data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
-    <value>Battery Health</value>
+    <value>Akkumulátor állapota</value>
   </data>
 	<data name="RepairPage_BatteryHealth.Description" xml:space="preserve">
-    <value>This will generate a complete stat about your battery's health</value>
+    <value>Ez teljes statisztikát készít az akkumulátorod állapotáról</value>
   </data>
 	<data name="RepairPage_BatteryHealthGenerate.Content" xml:space="preserve">
-    <value>Generate</value>
+    <value>Elkészít</value>
   </data>
 	<data name="RepairPage_MemoryDiagnostic.Header" xml:space="preserve">
-    <value>Memory Diagnostic</value>
+    <value>Memóriavizsgálat</value>
   </data>
 	<data name="RepairPage_MemoryDiagnostic.Description" xml:space="preserve">
-    <value>Analyze your system's memory for potential issues and improve stability</value>
+    <value>Elemezze a rendszer memóriáját a lehetséges problémák tekintetében, és javítsa a stabilitást</value>
   </data>
 	<data name="RepairPage_MemoryDiagnosticButton.Content" xml:space="preserve">
-    <value>Diagnose</value>
+    <value>Vizsgál</value>
   </data>
 	<data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
-    <value>Disk Optimizations</value>
+    <value>Lemezoptimalizálások</value>
   </data>
 	<data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
-    <value>This will optimize your storage device by defraging it (if HDD) or retrimming it (if SSD)</value>
+    <value>Ez optimalizálja a tárolóeszközt azáltal, hogy töredezettség-mentesíti (ha HDD) vagy újratrimmelést végez rajta (ha SSD).</value>
   </data>
 	<data name="RepairPage_DiskOptimizationsButton.Content" xml:space="preserve">
-    <value>Optimize</value>
+    <value>Javít</value>
   </data>
 	<data name="RepairPage_EventViewer.Header" xml:space="preserve">
-    <value>Event Viewer</value>
+    <value>Eseménynapló</value>
   </data>
 	<data name="RepairPage_EventViewer.Description" xml:space="preserve">
-    <value>This will display recent system event logs for troubleshooting</value>
+    <value>Ez megjeleníti a legújabb rendszeresemény-naplókat a hibaelhárításhoz</value>
   </data>
 	<data name="RepairPage_RepairOptions.Text" xml:space="preserve">
-    <value>Repair Options</value>
+    <value>Helyreállítási lehetőségek</value>
   </data>
 	<data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>Diagnose Options</value>
+    <value>Diagnosztikai beállítások</value>
   </data>
 	<data name="OperationCompleted" xml:space="preserve">
-    <value>Operation Completed</value>
+    <value>Művelet befejezve</value>
   </data>
 	<data name="RestorePointTitle" xml:space="preserve">
-    <value>Restore Point</value>
+    <value>Helyreállítási pont</value>
   </data>
 	<data name="Warning" xml:space="preserve">
-    <value>Warning</value>
+    <value>Figyelmeztetés</value>
   </data>
 	<data name="PrivacyPage_AdvertisingSettings.Text" xml:space="preserve">
-    <value>Advertising Settings</value>
+    <value>Reklámbeállítások</value>
   </data>
 	<data name="PrivacyPage_TelemetrySettings.Text" xml:space="preserve">
-    <value>Telemetry Settings</value>
+    <value>Telemetria beállítások</value>
   </data>
 	<data name="OtherSettings.Text" xml:space="preserve">
-    <value>Other Settings</value>
+    <value>Egyéb beállítások</value>
   </data>
 	<data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>Basic System Optimizations</value>
+    <value>Alapvető rendszeroptimalizálások</value>
   </data>
 	<data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>Advanced System Optimizations</value>
+    <value>Fejlett rendszeroptimalizálás</value>
   </data>
 	<data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
-    <value>No apps match your search</value>
+    <value>Egy alkalmazás sem felel meg a keresésnek</value>
   </data>
 	<data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
-    <value>Search apps...</value>
+    <value>Alkalmazás keresése...</value>
   </data>
 	<data name="Feature_BackgroundApps.Header" xml:space="preserve">
-    <value>Disable Background Apps</value>
+    <value>Háttéralkalmazások letiltása</value>
   </data>
 	<data name="Feature_BackgroundApps.Description" xml:space="preserve">
-    <value>Prevents the apps from running in the background, leading to enhanced performance in some cases.</value>
+    <value>Megakadályozza, hogy az alkalmazások a háttérben fussanak, ami bizonyos esetekben jobb teljesítményt eredményez.</value>
   </data>
 	<data name="Feature_EnableWindowsDarkMode.Header" xml:space="preserve">
-    <value>Enable Windows Dark Mode</value>
+    <value>Windows sötét mód engedélyezése</value>
   </data>
 	<data name="Feature_EnableWindowsDarkMode.Description" xml:space="preserve">
-    <value>Enables dark mode for the entire system without the need to activate Windows</value>
+    <value>Lehetővé teszi a sötét mód használatát az egész rendszeren anélkül, hogy aktiválnia kellene a Windows-t</value>
   </data>
 	<data name="Feature_DisableWindowsTransparency.Header" xml:space="preserve">
-    <value>Disable Windows Transparency</value>
+    <value>Windows átlátszóság letiltása</value>
   </data>
 	<data name="Feature_DisableWindowsTransparency.Description" xml:space="preserve">
-    <value>Disables transparent effects in system UI elements like the taskbar and windows, improving performance</value>
+    <value>Letiltja az átlátszó hatásokat a rendszer UI elemein, például a tálcán és az ablakokon, ezáltal javítja a teljesítményt</value>
   </data>
 	<data name="DebloatSystemPage_StandardApps.Content" xml:space="preserve">
-    <value>Standard Apps</value>
+    <value>Alap programok</value>
   </data>
 	<data name="DebloatSystemPage_AllApps.Content" xml:space="preserve">
-    <value>All Apps</value>
+    <value>Minden program</value>
   </data>
 	<data name="DebloatSystemPage_Win32Apps.Content" xml:space="preserve">
-    <value>Win32 Apps</value>
+    <value>W32 programok</value>
   </data>
 	<data name="OptimizePage_CompressOS.Header" xml:space="preserve">
-    <value>Compress OS</value>
+    <value>OS tömörítése</value>
   </data>
 	<data name="OptimizePage_CompressOS.Description" xml:space="preserve">
-    <value>Enable operating system compression to reduce disk space usage. This feature is particularly useful for devices with limited storage capacity but may slightly affect system performance on lower-end hardware</value>
+    <value>Kapcsolja be az operációs rendszer tömörítését a lemezterület csökkentése érdekében. Ez a funkció különösen hasznos olyan eszközöknél, ahol korlátozott a tárhely, de alacsonyabb teljesítményű hardver esetén enyhén befolyásolhatja a rendszer teljesítményét.</value>
   </data>
 	<data name="Compressing" xml:space="preserve">
-    <value>Compressing system binaries...</value>
+    <value>Rendszer bináris fájlok tömörítése...</value>
   </data>
 	<data name="Decompressing" xml:space="preserve">
-    <value>Decompressing system binaries...</value>
+    <value>Rendszer bináris fájlok kicsomagolása...</value>
   </data>
 	<data name="OptimizePage_CompressOSButton.Content" xml:space="preserve">
-    <value>Check Compression</value>
+    <value>Tömörítés ellenőrizése</value>
   </data>
 	<data name="Compress" xml:space="preserve">
-    <value>Compress</value>
+    <value>Tömörítés</value>
   </data>
 	<data name="Decompress" xml:space="preserve">
-    <value>Decompress</value>
+    <value>Kicsomagolás</value>
   </data>
 	<data name="SystemCompressionTitle" xml:space="preserve">
-    <value>System Compression</value>
+    <value>Rendszertömörítés</value>
   </data>
 	<data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
-    <value>Disable Service Host Splitting</value>
+    <value>Szolgáltatásgazda-felosztás letiltása</value>
   </data>
 	<data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
-    <value>Disables Service Host splitting for much lower RAM usage and process count.</value>
+    <value>Letiltja a Szolgáltatásgazda szétválasztását a sokkal alacsonyabb RAM-használat és folyamatszám érdekében.</value>
   </data>
 	<data name="Feature_LegacyBootMenu.Header" xml:space="preserve">
-    <value>Enable Legacy Boot Menu</value>
+    <value>Régi indítómenü engedélyezése</value>
   </data>
 	<data name="Feature_LegacyBootMenu.Description" xml:space="preserve">
-    <value>Switch to the legacy boot menu for faster startup.</value>
+    <value>Váltson a régi indítómenüre a gyorsabb indítás érdekében.</value>
   </data>
 	<data name="Feature_OptimizeNTFS.Header" xml:space="preserve">
-    <value>Optimize NTFS Settings</value>
+    <value>NTFS beállítások optimalizálása</value>
   </data>
 	<data name="Feature_OptimizeNTFS.Description" xml:space="preserve">
-    <value>Tune NTFS settings to improve performance and enhance privacy.</value>
+    <value>Állítsa be az NTFS-beállításokat a teljesítmény javítása és a magánélet fokozása érdekében.</value>
   </data>
 	<data name="Feature_PrioritizeForegroundApplications.Header" xml:space="preserve">
-    <value>Optimize Foreground App Performance</value>
+    <value>Az előtérben futó alkalmazások teljesítményének optimalizálása</value>
   </data>
 	<data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
-    <value>Boosts performance for active applications by prioritizing foreground tasks.</value>
+    <value>Fokozza a teljesítményt az aktív alkalmazásoknál azáltal, hogy előnyt biztosít az előtérben futó feladatoknak.</value>
   </data>
 	<data name="Feature_WPBT.Header" xml:space="preserve">
-    <value>Disable WPBT Execution</value>
+    <value>Alaplapi kódinjektálás tiltása</value>
   </data>
 	<data name="Feature_WPBT.Description" xml:space="preserve">
-    <value>Stop firmware from running programs (e.g., OEM bloatware) during startup.</value>
+    <value>Megakadályozza, hogy a firmware saját programokat (pl. gyártói bloatware-eket) futtasson a rendszerindítás során.</value>
   </data>
 	<data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Revert changes</value>
+    <value>Változások visszavonása</value>
   </data>
 	<data name="SettingsPageImportButton.Content" xml:space="preserve">
-    <value>Import</value>
+    <value>Importálás</value>
   </data>
 	<data name="SettingsPageExportButton.Content" xml:space="preserve">
-    <value>Export</value>
+    <value>Exportálás</value>
   </data>
 	<data name="Settings_ExportOptimizations.Header" xml:space="preserve">
-    <value>Export/Import Optimizations</value>
+    <value>Export/Import optimalizálások</value>
   </data>
 	<data name="Settings_ExportOptimizations.Description" xml:space="preserve">
-    <value>Export your current optimizations or import them for an easier and automated optimization</value>
+    <value>Exportálja a jelenlegi optimalizálásait, vagy importálja azokat a könnyebb és automatizált optimalizálás érdekében</value>
   </data>
 	<data name="SettingsImported" xml:space="preserve">
-    <value>Settings imported and applied successfully</value>
+    <value>Beállítások sikeresen importálva és alkalmazva</value>
   </data>
 	<data name="SettingsExported" xml:space="preserve">
-    <value>Settings exported successfully to:</value>
+    <value>Beállítások sikeresen exportálva ide:</value>
   </data>
 	<data name="Feature_DisableRecommendedSectionStartMenu.Header" xml:space="preserve">
-    <value>Disable Recommended Section In Start Menu</value>
+    <value>Ajánlott szakasz letiltása a Start menüben</value>
   </data>
 	<data name="Feature_DisableRecommendedSectionStartMenu.Description" xml:space="preserve">
-    <value>Removes the "Recommended" section from the Start Menu to provide a cleaner and more focused layout.</value>
+    <value>Eltávolítja a „Javasolt” részt a Start menüből, hogy tisztább és fókuszáltabb elrendezést biztosítson.</value>
   </data>
 	<data name="Feature_DisableWindowsRecall.Header" xml:space="preserve">
-    <value>Disable Windows Recall</value>
+    <value>Windows visszahívás (Recall) letiltása</value>
   </data>
 	<data name="Feature_DisableWindowsRecall.Description" xml:space="preserve">
-    <value>Disables Windows Recall, which captures on-screen activity for AI-powered search. Recommended for privacy-conscious users and secure environments.</value>
+    <value>Letiltja a Windows Recall funkciót, amely az AI-alapú kereséshez rögzíti a képernyőn zajló tevékenységet. Ajánlott a magánéletet fontosnak tartó felhasználók és biztonságos környezetek számára.</value>
   </data>
 	<data name="KeepAppData" xml:space="preserve">
-    <value>Keep app data</value>
+    <value>Alkalmazásadatok megőrzése</value>
   </data>
 	<data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>You're running as admin</value>
+    <value>Rendszergazdaként futtatja</value>
   </data>
 	<data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Restart the app as admin for your changes to take effect</value>
+    <value>Indítsa újra az alkalmazást rendszergazdaként, hogy a módosítások érvénybe lépjenek</value>
   </data>
 	<data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Frissítés</value>
   </data>
 	<data name="SecurityPage_OpenWindowsSecurity.Text" xml:space="preserve">
-    <value>Open Windows Security</value>
+    <value>Windows védelem megnyitása</value>
   </data>
 	<data name="SecurityPage_QuickScan.Text" xml:space="preserve">
-    <value>Quick scan</value>
+    <value>Gyors vizsgálat</value>
   </data>
 	<data name="SecurityPage_QuickScanTitle" xml:space="preserve">
-    <value>Quick scan</value>
+    <value>Gyors vizsgálat</value>
   </data>
 	<data name="SecurityPage_UpdateDefinitions.Text" xml:space="preserve">
-    <value>Update definitions</value>
+    <value>Definíciók frissítése</value>
   </data>
 	<data name="SecurityPage_UpdateDefinitionsTitle" xml:space="preserve">
-    <value>Update definitions</value>
+    <value>Definíciók frissítése</value>
   </data>
 	<data name="SecurityPage_Enable.Content" xml:space="preserve">
-    <value>Enable</value>
+    <value>Engedélyezés</value>
   </data>
 	<data name="SecurityPage_TamperProtection.Text" xml:space="preserve">
-    <value>Tamper Protection</value>
+    <value>Szabotázs elleni védelem</value>
   </data>
 	<data name="SecurityPage_ControlledFolderAccess.Text" xml:space="preserve">
-    <value>Controlled folder access</value>
+    <value>Ellenőrzött mappa hozzáférés</value>
   </data>
 	<data name="SecurityPage_BitLockerEncryption.Text" xml:space="preserve">
-    <value>BitLocker drive encryption</value>
+    <value>BitLocker meghajtótitkosítás</value>
   </data>
 	<data name="SecurityPage_WindowsDefenderService.Text" xml:space="preserve">
-    <value>Microsoft Defender service</value>
+    <value>Microsoft Defender szolgáltatás</value>
   </data>
 	<data name="SecurityPage_ActiveMalwareScanning.Text" xml:space="preserve">
-    <value>Active malware scanning</value>
+    <value>Aktív rosszindulatú programok keresése</value>
   </data>
 	<data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
-    <value>Blocks unauthorized network access</value>
+    <value>Blokkolja a jogosulatlan hálózati hozzáférést</value>
   </data>
 	<data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
-    <value>Security patches and feature updates</value>
+    <value>Biztonsági javítások és funkciófrissítések</value>
   </data>
 	<data name="SecurityPage_AdministrativeAccessControl.Text" xml:space="preserve">
-    <value>Controls administrative access prompts</value>
+    <value>Vezérli az adminisztrátori hozzáférési kéréseket</value>
   </data>
 	<data name="SecurityPage_PreventsUnauthorizedChanges.Text" xml:space="preserve">
-    <value>Prevents unauthorized changes to security settings</value>
+    <value>Megakadályozza a biztonsági beállítások jogosulatlan módosítását</value>
   </data>
 	<data name="SecurityPage_RansomwareProtection.Text" xml:space="preserve">
-    <value>Protect folders from unauthorized changes (ransomware protection)</value>
+    <value>Mappák védelme illetéktelen módosítások ellen (zsarolóprogram-védelem)</value>
   </data>
 	<data name="SecurityPage_DriveEncryptionStatus.Text" xml:space="preserve">
-    <value>Drive encryption status</value>
+    <value>Meghajtó titkosítási állapota</value>
   </data>
 	<data name="SecurityPage_CoreSecurityService.Text" xml:space="preserve">
-    <value>Core security service status</value>
+    <value>Alapbiztonsági szolgáltatás állapota</value>
   </data>
 	<data name="SecurityPage_LastUpdated" xml:space="preserve">
-    <value>Last updated</value>
+    <value>Utolsó frissítés</value>
   </data>
 	<data name="SecurityPage_LastRefreshed" xml:space="preserve">
-    <value>Last refreshed</value>
+    <value>Utolsó frissítés</value>
   </data>
 	<data name="SecurityPage_QuickScanCompleted" xml:space="preserve">
-    <value>Quick scan completed</value>
+    <value>Gyors vizsgálat befejezve</value>
   </data>
 	<data name="SecurityPage_QuickScanFailed" xml:space="preserve">
-    <value>Quick scan failed</value>
+    <value>Gyors vizsgálat sikertelen</value>
   </data>
 	<data name="SecurityPage_DefinitionsUpdated" xml:space="preserve">
-    <value>Definitions updated</value>
+    <value>Definíciók frissítve</value>
   </data>
 	<data name="SecurityPage_DefinitionsUpdateFailed" xml:space="preserve">
-    <value>Definitions update failed</value>
+    <value>Definíciók frissítése sikertelen</value>
   </data>
 	<data name="None" xml:space="preserve">
-    <value>None</value>
+    <value>Nincs</value>
   </data>
 	<data name="SecurityPage_WebAndAppProtection.Text" xml:space="preserve">
-    <value>Protects you on the web and in apps</value>
+    <value>Védelmet nyújt a weben és az alkalmazásokban</value>
   </data>
 	<data name="OptimizeSystemPage_BatterySection.Text" xml:space="preserve">
-    <value>Battery &amp; Power</value>
+    <value>Akkumulátor és teljesítmény</value>
   </data>
 	<data name="Feature_PowerMode.Header" xml:space="preserve">
-    <value>Power Mode</value>
+    <value>Teljesítménymód</value>
   </data>
 	<data name="Feature_PowerMode.Description" xml:space="preserve">
-    <value>Select a power plan to balance performance and energy consumption</value>
+    <value>Válasszon egy energiagazdálkodási tervet a teljesítmény és az energiafogyasztás kiegyensúlyozásához</value>
   </data>
 	<data name="Feature_AddUltimatePowerPlan.Description" xml:space="preserve">
-    <value>Adds the hidden Ultimate Performance power plan to your system for maximum performance.</value>
+    <value>Hozzáadja a rejtett Maximális teljesítmény energiasémát a rendszerhez a maximális teljesítmény érdekében.</value>
   </data>
 	<data name="UltimatePowerPlanAdded" xml:space="preserve">
-    <value>Ultimate Performance power plan added successfully.</value>
+    <value>Maximális teljesítmény energiaséma sikeresen hozzáadva.</value>
   </data>
 	<data name="Feature_AddUltimatePowerPlanButton.Content" xml:space="preserve">
     <value>Add Plan</value>
   </data>
 	<data name="UltimatePowerPlanExists" xml:space="preserve">
-    <value>Ultimate Performance power plan already exists.</value>
+    <value>A Maximális teljesítmény energiaséma már létezik.</value>
   </data>
 	<data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
-    <value>Add Ultimate Performance Plan</value>
+    <value>Maximális teljesítmény energiaséma hozzáadása</value>
   </data>
 	<data name="AddUltimatePowerPlanTitle" xml:space="preserve">
-    <value>Add Ultimate Performance Plan</value>
+    <value>Maximális teljesítmény energiaséma hozzáadása</value>
   </data>
 	<data name="GroupPolicyPage_Warning" xml:space="preserve">
-    <value>This feature only detects policy-backed registry entries. It does not detect service changes or non-policy registry tweaks.</value>
+    <value>Ez a szolgáltatás csak a házirenddel alátámasztott rendszerleíró adatbázis bejegyzéseket észleli. Nem észleli a szolgáltatásváltozásokat vagy a rendszerleíró adatbázison kívüli módosításokat.</value>
   </data>
 	<data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
-    <value>This page detects and allows you to remove Local Group Policy overrides. Removing a policy override returns it to Not Configured state.</value>
+    <value>Ez az oldal észleli és lehetővé teszi a helyi csoportházirend-felülírások eltávolítását. A házirend-felülírás eltávolítása visszaállítja a Nem konfigurált állapotot.</value>
   </data>
 	<data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
-    <value>Policy Summary</value>
+    <value>Csoportázirend összefoglaló</value>
   </data>
 	<data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
-    <value>Configured Policies</value>
+    <value>Csoportázirend beállítás</value>
   </data>
 	<data name="GroupPolicyPage_Categories" xml:space="preserve">
-    <value>Categories</value>
+    <value>Kategóriák</value>
   </data>
 	<data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
-    <value>Remove Selected</value>
+    <value>Kijelölt eltávolítása</value>
   </data>
 	<data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
-    <value>Detailed Policy List</value>
+    <value>Részletes Csoportázirend lista</value>
   </data>
 	<data name="Shell_GroupPolicy.Content" xml:space="preserve">
-    <value>Policies</value>
+    <value>Csoportázirend</value>
   </data>
 	<data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
-    <value>Remove Overrides</value>
+    <value>Felülírások eltávolítása</value>
   </data>
 	<data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
-    <value>No policy overrides detected.</value>
+    <value>Nincsenek észlelt házirend-átírások.</value>
   </data>
 	<data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
-    <value>Remove All Overrides</value>
+    <value>Minden felülírás eltávolítása</value>
   </data>
 	<data name="GroupPolicyPage_Title" xml:space="preserve">
-    <value>Group Policy Override Detection</value>
+    <value>Csoportházirend felülírásának észlelése</value>
   </data>
 	<data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
-    <value>Scanning policies...</value>
+    <value>Házirendek vizsgálata...</value>
   </data>
 	<data name="GroupPolicyPage_Refresh" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Frissítés</value>
   </data>
 	<data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
-    <value>Categories</value>
+    <value>Kategóriák</value>
   </data>
 	<data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
-    <value>Remove Selected</value>
+    <value>Kijelölt eltávolítása</value>
   </data>
 	<data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
-    <value>Scanning policies...</value>
+    <value>Házirendek vizsgálata...</value>
   </data>
 	<data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
-    <value>No policy overrides detected.</value>
+    <value>Nem észlelhető a házirend felülírása.</value>
   </data>
 	<data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
-    <value>Policy Summary</value>
+    <value>Házirend összefoglaló</value>
   </data>
 	<data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
-    <value>Information</value>
+    <value>Információ</value>
   </data>
 	<data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Frissítés</value>
   </data>
 	<data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
-    <value>Configured Policies</value>
+    <value>Beállított házirendek</value>
   </data>
 	<data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
-    <value>View and manage individual policy overrides</value>
+    <value>Egyéni házirend-felülírások megtekintése és kezelése</value>
   </data>
 	<data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
-    <value>Remove All Overrides</value>
+    <value>Minden felülírás eltávolítása</value>
   </data>
 	<data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
-    <value>This page detects and allows you to remove Local Group Policy overrides. Removing a policy override returns it to Default state.</value>
+    <value>Ez az oldal észleli és lehetővé teszi a helyi csoportházirend-felülbírálatok eltávolítását. A felülbírálat eltávolítása visszaállítja az alapértelmezett állapotot.</value>
   </data>
 	<data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
-    <value>Overview of detected policy overrides</value>
+    <value>Az észlelt házirend-felülírások áttekintése</value>
   </data>
 	<data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
-    <value>Detailed Policy List</value>
+    <value>Részletes házirend lista</value>
   </data>
 	<data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
-    <value>{0} Configured</value>
+    <value>{0} Beállítva</value>
   </data>
 	<data name="GroupPolicyPage_ScanError" xml:space="preserve">
-    <value>Error scanning policies: {0}</value>
+    <value>Hiba a háziredek vizsgálata során: {0}</value>
   </data>
 	<data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
-    <value>Removal Failed</value>
+    <value>Eltávolítás sikertelen</value>
   </data>
 	<data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
-    <value>Successfully removed {0} policy overrides.</value>
+    <value>{0} házirend-átfedés sikeresen eltávolítva.</value>
   </data>
 	<data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
-    <value>Remove Category Policies</value>
+    <value>Kategória házirendek eltávolítása</value>
   </data>
 	<data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
-    <value>Not Configured</value>
+    <value>Nincs beállítva</value>
   </data>
 	<data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
-    <value>Policies Removed</value>
+    <value>Eltávolított házirendek</value>
   </data>
 	<data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
-    <value>{0} configured policies</value>
+    <value>{0} konfigurált házirendek</value>
   </data>
 	<data name="GroupPolicyPage_RestartNow" xml:space="preserve">
-    <value>Restart Now</value>
+    <value>Újraindítás most</value>
   </data>
 	<data name="GroupPolicyPage_Later" xml:space="preserve">
-    <value>Later</value>
+    <value>Később</value>
   </data>
 	<data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
-    <value>Are you sure you want to remove the {0} selected policy overrides?</value>
+    <value>Biztosan eltávolítja a kiválasztott {0} házirend-felülírást?</value>
   </data>
 	<data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
-    <value>An error occurred while removing policy overrides: {0}</value>
+    <value>Hiba történt a házirend-felülírások eltávolítása közben: {0}</value>
   </data>
 	<data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
-    <value>Are you sure you want to remove all {0} policy overrides in the '{1}' category?</value>
+    <value>Biztosan eltávolítja az összes {0} házirend-felülírást a(z) "{1}" kategóriában?</value>
   </data>
 	<data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
-    <value>Are you sure you want to remove all {0} policy overrides? This action cannot be undone.</value>
+    <value>Biztosan eltávolítja az összes {0} házirend-felülírást? Ez a művelet nem vonható vissza.</value>
   </data>
 	<data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
-    <value>Partial Removal</value>
+    <value>Részleges eltávolítás</value>
   </data>
 	<data name="GroupPolicyPage_Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Eltávolítás</value>
   </data>
 	<data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
-    <value>Removing policies...</value>
+    <value>Házirendek eltávolítása...</value>
   </data>
 	<data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
-    <value>Removed {0} of {1} policy overrides. Some policies could not be removed.</value>
+    <value>Eltávolítottam {0} /{1} háziren felülbírálását. Néhányat nem lehetett eltávolítani.</value>
   </data>
 	<data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
-    <value>Restart Explorer</value>
+    <value>Explorer újraindítása</value>
   </data>
 	<data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
-    <value>Some policy changes require restarting Windows Explorer to take effect. Would you like to restart Explorer now?</value>
+    <value>Egyes házirend-módosítások életbe léptetéséhez a Windows Intéző újraindítása szükséges. Szeretné most újraindítani az Explorert?</value>
   </data>
 	<data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
-    <value>Remove All Policy Overrides</value>
+    <value>Távolítsa el az összes házirend-felülírást</value>
   </data>
 	<data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
-    <value>Remove Selected Policies</value>
+    <value>Távolítsa el a kiválasztott házirendeket</value>
   </data>
 	<data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
-    <value>Create New</value>
+    <value>Új létrehozása</value>
   </data>
 	<data name="CreatePowerPlanTitle" xml:space="preserve">
-    <value>Create Power Plan</value>
+    <value>Hozzon létre energiasémát</value>
   </data>
 	<data name="PowerPlanNameLabel" xml:space="preserve">
-    <value>Power plan name</value>
+    <value>Energiaséma neve</value>
   </data>
 	<data name="PowerPlanNamePlaceholder" xml:space="preserve">
-    <value>Enter power plan name</value>
+    <value>Írja be az Energiaséma nevét!</value>
   </data>
 	<data name="BasePowerPlanLabel" xml:space="preserve">
-    <value>Base power plan</value>
+    <value>Alapértelmezett energiaséma</value>
   </data>
 	<data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Létrehoz</value>
   </data>
 	<data name="PowerPlanNameRequired" xml:space="preserve">
-    <value>Please enter a name for the power plan.</value>
+    <value>Adjon nevet az energiasémának!</value>
   </data>
 	<data name="BasePowerPlanRequired" xml:space="preserve">
-    <value>Please select a base power plan.</value>
+    <value>Kérjük, válasszon egy alapértelmezett energiasémát.</value>
   </data>
 	<data name="PowerPlanCreated" xml:space="preserve">
-    <value>Power plan created successfully.</value>
+    <value>Energiaséma sikeresen létrehozva.</value>
   </data>
 	<data name="Feature_WindowsUpdates.Description" xml:space="preserve">
-    <value>Configure how Windows handles automatic updates. Choose between automatic updates, security-only, manual control, or completely disabled.</value>
+    <value>Állítsa be, hogy a Windows hogyan kezelje az automatikus frissítéseket. Válasszon az automatikus frissítések, a csak biztonsági, a kézi vezérlés vagy a teljesen letiltott lehetőségek közül.</value>
   </data>
 	<data name="Feature_WindowsUpdates_Manually.Content" xml:space="preserve">
-    <value>Manually</value>
+    <value>Kézi</value>
   </data>
 	<data name="Feature_WindowsUpdates_Security.Content" xml:space="preserve">
-    <value>Security Only</value>
+    <value>Csak biztonsági</value>
   </data>
 	<data name="Feature_WindowsUpdates_Disabled.Content" xml:space="preserve">
-    <value>Disabled</value>
+    <value>Letiltva</value>
   </data>
 	<data name="Feature_WindowsUpdates.Header" xml:space="preserve">
-    <value>Windows Updates</value>
+    <value>Windows frissítések</value>
   </data>
 	<data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
-    <value>Default</value>
+    <value>Alapértelmezett</value>
   </data>
 	<data name="ScanResults" xml:space="preserve">
     <value>Scan Results</value>
