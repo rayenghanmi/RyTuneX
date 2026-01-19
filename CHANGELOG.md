@@ -22,6 +22,7 @@ All notable changes to this branch will be documented in this file.
 - Improved the system info fetching process for better accuracy.
 - Optimized the icon extraction process for more app icons to be displayed correctly.
 - Replaced the old driver extraction method with dism.exe for better compatibility.
+- Redesigned the logo and app icon for a refreshed look.
 
 ## 1.6.0 - Released
 
