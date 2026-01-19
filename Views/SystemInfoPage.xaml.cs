@@ -444,7 +444,7 @@ public sealed partial class SystemInfoPage : Page
                         "9" => "Charging and Critical",
                         "10" => "Undefined",
                         "11" => "Partially Charged",
-                        _ => string.Empty,
+                        _ => "Unknown",
                     };
 
                     var chemistry = chemistryCode switch
@@ -456,7 +456,7 @@ public sealed partial class SystemInfoPage : Page
                         "6" => "Lithium-ion",
                         "7" => "Zinc air",
                         "8" => "Lithium Polymer",
-                        _ => string.Empty,
+                        _ => "Unknown",
                     };
 
                     if (!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(charge) || !string.IsNullOrEmpty(status) || !string.IsNullOrEmpty(chemistry))
@@ -526,12 +526,14 @@ public sealed partial class SystemInfoPage : Page
         {
             Directory.CreateDirectory(folderPath);
         }
+        // Get the Long Path prefix to prevent errors with long paths
+        var longPathSafe = $@"\\?\{Path.GetFullPath(folderPath)}";
         ExtractingStatusText.Text = "ExtractingDrivers".GetLocalized() + "...";
         ExtractingStatusPb.ShowError = false;
         ExtractingStatus.Visibility = Visibility.Visible;
         try
         {
-            var exitCode = await OptimizationOptions.StartInCmd($"powershell Export-WindowsDriver -Online -Destination '{folderPath}'");
+            var exitCode = await OptimizationOptions.StartInCmd($"dism.exe /online /export-driver /destination:\"{longPathSafe}\"");
             if (exitCode == 0)
             {
                 ExtractingStatusText.Text = "Done".GetLocalized();
