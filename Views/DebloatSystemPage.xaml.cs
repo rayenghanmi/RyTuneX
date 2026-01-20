@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Microsoft.Win32;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
@@ -332,54 +331,54 @@ public sealed partial class DebloatSystemPage : Page
         }
         else
         {
-                try
+            try
+            {
+                var uninstallString = OptimizationOptions.GetWin32UninstallString(appName);
+
+                if (string.IsNullOrEmpty(uninstallString))
                 {
-                    var uninstallString = OptimizationOptions.GetWin32UninstallString(appName);
-
-                    if (string.IsNullOrEmpty(uninstallString))
-                    {
-                        _ = LogHelper.LogError($"Uninstall string for {appName} not found in uninstall roots.");
-                    }
-
-                    // If the uninstall string contains spaces, ensure it's quoted properly
-                    if (uninstallString != null && !uninstallString.StartsWith("\"") && !uninstallString.EndsWith("\""))
-                    {
-                        uninstallString = $"\"{uninstallString}\"";
-                    }
-
-                    // Execute the uninstall command using cmd
-                    var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
-                            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"),
-                            $"/c {uninstallString}")
-                    {
-                        RedirectStandardError = true,
-                        UseShellExecute = false,
-                        CreateNoWindow = true
-                    };
-
-                    using var process = new Process { StartInfo = processInfo };
-                    process.Start();
-
-                    // Read the error stream asynchronously
-                    var error = await process.StandardError.ReadToEndAsync();
-
-                    if (!string.IsNullOrEmpty(error))
-                    {
-                        _ = LogHelper.LogError(error);
-                    }
-
-                    if (process.ExitCode != 0)
-                    {
-                        _ = LogHelper.LogError($"Uninstallation failed with exit code: {process.ExitCode}");
-                    }
-
-                    _ = LogHelper.Log($"Successfully uninstalled {appName}");
+                    _ = LogHelper.LogError($"Uninstall string for {appName} not found in uninstall roots.");
                 }
-                catch (Exception ex)
+
+                // If the uninstall string contains spaces, ensure it's quoted properly
+                if (uninstallString != null && !uninstallString.StartsWith("\"") && !uninstallString.EndsWith("\""))
                 {
-                    _ = LogHelper.LogError($"Error uninstalling {appName}: {ex.Message}");
+                    uninstallString = $"\"{uninstallString}\"";
                 }
+
+                // Execute the uninstall command using cmd
+                var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"),
+                        $"/c {uninstallString}")
+                {
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using var process = new Process { StartInfo = processInfo };
+                process.Start();
+
+                // Read the error stream asynchronously
+                var error = await process.StandardError.ReadToEndAsync();
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    _ = LogHelper.LogError(error);
+                }
+
+                if (process.ExitCode != 0)
+                {
+                    _ = LogHelper.LogError($"Uninstallation failed with exit code: {process.ExitCode}");
+                }
+
+                _ = LogHelper.Log($"Successfully uninstalled {appName}");
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"Error uninstalling {appName}: {ex.Message}");
+            }
         }
     }
 
