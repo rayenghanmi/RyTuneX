@@ -69,10 +69,10 @@
                     <Button x:Name="UpdateDefinitionsButton" Click="UpdateDefenderSignatures_Click">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <ProgressRing x:Name="UpdateDefinitionsProgressRing" 
-                                        Width="16" 
-                                        Height="16" 
-                                        Visibility="Collapsed"
-                                        IsActive="True"/>
+                                Width="16" 
+                                Height="16" 
+                                Visibility="Collapsed"
+                                IsActive="True"/>
                             <FontIcon x:Name="UpdateDefinitionsIcon" Glyph="&#xE896;" FontSize="16"/>
                             <TextBlock x:Uid="SecurityPage_UpdateDefinitions"/>
                         </StackPanel>

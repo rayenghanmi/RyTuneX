@@ -410,18 +410,17 @@ public sealed partial class DebloatSystemPage : Page
         try
         {
             // Update UI to show progress
-            TempStack.Visibility = Visibility.Visible;
-            TempProgress.Visibility = Visibility.Visible;
-            TempButtonStack.Visibility = Visibility.Collapsed;
-            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeletingTemp") + "...";
+            TempButton.IsEnabled = false;
+            TempButtonProgressRing.Visibility = Visibility.Visible;
+            TempButtonIcon.Visibility = Visibility.Collapsed;
 
             // Execute temp removal commands
             var result = await OptimizeSystemHelper.RemoveTempFiles();
 
             // Reset UI after task completion
-            TempStack.Visibility = Visibility.Collapsed;
-            TempProgress.Visibility = Visibility.Collapsed;
-            TempButtonStack.Visibility = Visibility.Visible;
+            TempButton.IsEnabled = true;
+            TempButtonProgressRing.Visibility = Visibility.Collapsed;
+            TempButtonIcon.Visibility = Visibility.Visible;
 
             if (result)
             {
@@ -443,9 +442,9 @@ public sealed partial class DebloatSystemPage : Page
         catch (Exception)
         {
             // Restore UI in case of unexpected error
-            TempStack.Visibility = Visibility.Collapsed;
-            TempProgress.Visibility = Visibility.Collapsed;
-            TempButtonStack.Visibility = Visibility.Visible;
+            TempButton.IsEnabled = true;
+            TempButtonProgressRing.Visibility = Visibility.Collapsed;
+            TempButtonIcon.Visibility = Visibility.Visible;
 
             // Show error notification
             App.ShowNotification(

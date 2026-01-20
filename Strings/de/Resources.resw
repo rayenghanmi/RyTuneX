@@ -165,7 +165,7 @@
   <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
     <value>Filtern nach:</value>
   </data>
-  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_UninstallButton.Text" xml:space="preserve">
     <value>Ausgewählte App(s) deinstallieren</value>
   </data>
   <data name="Done" xml:space="preserve">
@@ -219,7 +219,7 @@
   <data name="UninstallationSuccess" xml:space="preserve">
     <value>Erfolgreich deinstallierte(r) folgende(n) App(s)</value>
   </data>
-  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_TempButton.Text" xml:space="preserve">
     <value>Systemtemp löschen</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
@@ -308,9 +308,6 @@
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windows-Verzeichnis</value>
-  </data>
-  <data name="DeletingTemp" xml:space="preserve">
-    <value>Temporäre Dateien löschen</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>Fehler beim Löschen temporärer Dateien</value>
