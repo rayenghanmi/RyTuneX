@@ -561,6 +561,10 @@ public sealed partial class SecurityPage : Page
     {
         try
         {
+            UpdateDefinitionsButton.IsEnabled = false;
+            UpdateDefinitionsProgressRing.Visibility = Visibility.Visible;
+            UpdateDefinitionsIcon.Visibility = Visibility.Collapsed;
+
             await Task.Run(() =>
             {
                 var process = new Process
@@ -587,6 +591,12 @@ public sealed partial class SecurityPage : Page
         {
             _ = LogHelper.LogError($"Error updating signatures: {ex.Message}");
             App.ShowNotification("SecurityPage_UpdateDefinitionsTitle".GetLocalized(), "SecurityPage_DefinitionsUpdateFailed".GetLocalized(), Microsoft.UI.Xaml.Controls.InfoBarSeverity.Error, 5000);
+        }
+        finally
+        {
+            UpdateDefinitionsButton.IsEnabled = true;
+            UpdateDefinitionsProgressRing.Visibility = Visibility.Collapsed;
+            UpdateDefinitionsIcon.Visibility = Visibility.Visible;
         }
     }
 

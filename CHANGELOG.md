@@ -24,6 +24,7 @@ All notable changes to this branch will be documented in this file.
 - Replaced the old driver extraction method with dism.exe for better compatibility.
 - Redesigned the logo and app icon for a refreshed look.
 - Enhanced the `Home` page performance monitoring.
+- Minor UI improvements across all pages for better user experience.
 
 ## 1.6.0 - Released
 
