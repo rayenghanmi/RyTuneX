@@ -1635,4 +1635,10 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="LocalAccount" xml:space="preserve">
     <value>Tài khoản cục bộ</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Tắt AI của Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>Loại bỏ các tính năng AI khỏi Notepad, Paint và Photos, tắt hiệu ứng camera/mic của Windows Studio và AI cho chơi game, đồng thời gỡ bỏ tích hợp AI khỏi hệ thống để tối đa hóa quyền riêng tư và hiệu suất.</value>
+  </data>
 </root>

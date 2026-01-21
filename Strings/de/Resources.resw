@@ -1635,4 +1635,10 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="LocalAccount" xml:space="preserve">
     <value>Lokales Konto</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Windows-KI deaktivieren</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>Entfernt KI-Funktionen aus Editor, Paint und Fotos, deaktiviert Windows Studio Kamera-/Mikrofoneffekte und Gaming-KI und entfernt KI-Integrationen aus der Shell zur Maximierung von Datenschutz und Leistung.</value>
+  </data>
 </root>

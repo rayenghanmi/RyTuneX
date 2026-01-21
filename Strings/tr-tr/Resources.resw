@@ -1635,4 +1635,10 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="LocalAccount" xml:space="preserve">
     <value>Yerel hesap</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Windows yapay zekâsını devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>Not Defteri, Paint ve Fotoğraflar’dan yapay zekâ özelliklerini kaldırır, Windows Studio kamera/mikrofon efektlerini ve oyun yapay zekâsını devre dışı bırakır ve gizlilik ile performansı en üst düzeye çıkarmak için kabuktaki yapay zekâ entegrasyonlarını kaldırır.</value>
+  </data>
 </root>

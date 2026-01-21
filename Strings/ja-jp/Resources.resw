@@ -1635,4 +1635,10 @@
   <data name="LocalAccount" xml:space="preserve">
     <value>ローカル アカウント</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Windows の AI を無効化</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>メモ帳、ペイント、フォトからAI機能を削除し、Windows Studioのカメラ／マイク効果とゲームAIを無効化し、プライバシーとパフォーマンスを最大化するためにシェルのAI統合を削除します。</value>
+  </data>
 </root>

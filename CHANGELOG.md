@@ -10,6 +10,7 @@ All notable changes to this branch will be documented in this file.
 - Added more Win32 apps to the debloat list by expanding the detection methods.
 - Added user profile header to the navigation view with account type display and quick access to account settings.
 - Added taskbar flashing and audio alerts for background task completion.
+- Introduced a new `Disable Windows AI` option in the `Features` page to disable Windows AI features.
 
 ### Fixes
 

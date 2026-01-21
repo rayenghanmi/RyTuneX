@@ -1635,4 +1635,10 @@
   <data name="LocalAccount" xml:space="preserve">
     <value>حساب محلي</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>تعطيل ذكاء Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>يزيل ميزات الذكاء الاصطناعي من المفكرة والرسام والصور، ويعطّل تأثيرات الكاميرا والميكروفون في Windows Studio وذكاء الألعاب، ويزيل تكاملات الذكاء الاصطناعي من واجهة النظام لتعزيز الخصوصية والأداء.</value>
+  </data>
 </root>

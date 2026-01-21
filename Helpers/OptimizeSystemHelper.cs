@@ -4,16 +4,78 @@ public static partial class OptimizeSystemHelper
 {
     // Get OS build to handle version-specific behavior
     private static readonly int build = Environment.OSVersion.Version.Build;
+
+    public static async Task DisableWindowsAI()
+    {
+        // Gaming & Xbox AI
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameBar\" /V UseGamingCopilot /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR\" /V AppCaptureEnabled /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+
+        // Studio Effects (Audio/Video AI)
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsEyeContactEnabled /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsVoiceFocusEnabled /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Speech_OneCore\\Settings\\VoiceActivation\\AppLaunchAllowed\" /V AgentAllowed /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+
+        // System App AI (Notepad, Paint, OneDrive)
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Notepad\" /V \"ShowRewriteButton\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\OneDrive\" /V \"EnablePeopleProcessing\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Paint\" /V \"AllowCocreator\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+
+        // AI Intelligence, Edge & Recall Policies
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Intelligence\" /V \"AllowWindowsIntelligence\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V \"ComposeEnabled\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+
+        // Shell & Search Cleanup
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked\" /V \"{64134153-2E11-492F-8181-314091BA79A3}\" /T REG_SZ /D \"Copilot\" /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /V \"EnableDynamicContentInSearchBox\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+
+        // Restart Explorer to apply changes
+        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
+    }
+
+    public static async Task EnableWindowsAI()
+    {
+        // Re-enable Gaming & Xbox AI
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameBar\" /V UseGamingCopilot /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR\" /V AppCaptureEnabled /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+
+        // Restore Studio Effects (Audio/Video AI)
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsEyeContactEnabled /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsVoiceFocusEnabled /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Speech_OneCore\\Settings\\VoiceActivation\\AppLaunchAllowed\" /V AgentAllowed /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+
+        // Re-enable System App AI
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Microsoft\\Notepad\" /V \"ShowRewriteButton\" /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\OneDrive\" /V \"EnablePeopleProcessing\" /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Paint\" /V \"AllowCocreator\" /F").ConfigureAwait(false);
+
+        // Restore Intelligence & Edge Policies
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Intelligence\" /V \"AllowWindowsIntelligence\" /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V \"ComposeEnabled\" /F").ConfigureAwait(false);
+
+        // Restore Shell & Search Features
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked\" /V \"{64134153-2E11-492F-8181-314091BA79A3}\" /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /V \"EnableDynamicContentInSearchBox\" /F").ConfigureAwait(false);
+        
+        // Restart Explorer to apply changes
+        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
+    }
+
     public static async Task DisableWindowsRecall()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /v DisableAIDataAnalysis /t REG_DWORD /d 1 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /v DisableAIDataAnalysis /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config WSAIFabricSvc start= disabled").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -AllUsers *AiFabric* | Remove-AppxPackage -AllUsers\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -AllUsers *WindowsIntelligence* | Remove-AppxPackage -AllUsers\"").ConfigureAwait(false);
     }
 
     public static async Task EnableWindowsRecall()
     {
         await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /v DisableAIDataAnalysis /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg delete \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /v DisableAIDataAnalysis /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config WSAIFabricSvc start= demand").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -allusers *AiFabric* | foreach {Add-AppxPackage -register '$($_.InstallLocation)\\appxmanifest.xml' -DisableDevelopmentMode}\"").ConfigureAwait(false);
     }
 
     public static async Task DisableRecommendedSectionStartMenu()
@@ -1637,15 +1699,17 @@ public static partial class OptimizeSystemHelper
     public static async Task DisableCoPilotAI()
     {
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /T REG_DWORD /D 1 /F").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V ShowCopilotButton /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage *Copilot* | Remove-AppxPackage\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -AllUsers *Microsoft.Windows.Copilot* | Remove-AppxPackage -AllUsers\"").ConfigureAwait(false);
     }
 
     public static async Task EnableCoPilotAI()
     {
         await OptimizationOptions.StartInCmd("REG Delete \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG Delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /F").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V ShowCopilotButton /T REG_DWORD /D 1 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage *Copilot* | Add-AppxPackage\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -allusers *Microsoft.Windows.Copilot* | foreach {Add-AppxPackage -register '$($_.InstallLocation)\\appxmanifest.xml' -DisableDevelopmentMode}\"").ConfigureAwait(false);
     }
 
 

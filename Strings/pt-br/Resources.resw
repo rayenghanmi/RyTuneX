@@ -1635,4 +1635,10 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="LocalAccount" xml:space="preserve">
     <value>Conta local</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Desativar IA do Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>Remove recursos de IA do Bloco de Notas, Paint e Fotos, desativa efeitos de câmera e microfone do Windows Studio e IA para jogos, e remove integrações de IA do shell para maximizar privacidade e desempenho.</value>
+  </data>
 </root>

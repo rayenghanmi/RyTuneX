@@ -1632,4 +1632,10 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="LocalAccount" xml:space="preserve">
     <value>Compte local</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Désactiver l’IA de Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>Supprime les fonctionnalités d’IA du Bloc-notes, de Paint et de Photos, désactive les effets caméra et micro de Windows Studio et l’IA pour le gaming, et retire les intégrations d’IA du shell afin d’optimiser la confidentialité et les performances.</value>
+  </data>
 </root>

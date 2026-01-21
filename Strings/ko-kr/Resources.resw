@@ -1635,4 +1635,10 @@
   <data name="LocalAccount" xml:space="preserve">
     <value>로컬 계정</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Windows AI 비활성화</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>메모장, 그림판, 사진에서 AI 기능을 제거하고 Windows Studio 카메라/마이크 효과와 게임 AI를 비활성화하며, 개인 정보 보호와 성능을 극대화하기 위해 셸의 AI 통합을 제거합니다.</value>
+  </data>
 </root>

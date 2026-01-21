@@ -1631,4 +1631,10 @@
   <data name="LocalAccount" xml:space="preserve">
     <value>本機帳戶</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>停用 Windows AI</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>&#x8;從記事本、畫圖和相片中移除 AI 功能，停用 Windows Studio 的相機/麥克風效果與遊戲 AI，並移除系統殼層中的 AI 整合，以最大化隱私與效能。</value>
+  </data>
 </root>

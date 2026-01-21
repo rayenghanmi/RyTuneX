@@ -1603,6 +1603,17 @@ internal partial class OptimizationOptions
                         await OptimizeSystemHelper.DisableEndTask();
                     }
                     break;
+
+                case "DisableWindowsAI":
+                    if (toggleSwitch.IsOn)
+                    {
+                        await OptimizeSystemHelper.DisableWindowsAI();
+                    }
+                    else
+                    {
+                        await OptimizeSystemHelper.EnableWindowsAI();
+                    }
+                    break;
             }
         }
     }

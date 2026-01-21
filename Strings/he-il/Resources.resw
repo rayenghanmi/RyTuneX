@@ -1635,4 +1635,10 @@
   <data name="LocalAccount" xml:space="preserve">
     <value>חשבון מקומי</value>
   </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>השבתת בינה מלאכותית של Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>מסיר תכונות בינה מלאכותית מפנקס הרשימות, Paint ותמונות, משבית אפקטי מצלמה ומיקרופון של Windows Studio ובינה מלאכותית למשחקים, ומסיר שילובי IA מהמעטפת כדי למקסם פרטיות וביצועים.</value>
+  </data>
 </root>
