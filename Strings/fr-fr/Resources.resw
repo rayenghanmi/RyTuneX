@@ -1287,10 +1287,10 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Annuler les modifications</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Importer</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>Exporter</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">

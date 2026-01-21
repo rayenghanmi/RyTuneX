@@ -1287,10 +1287,10 @@
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>변경 사항 되돌리기</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>수입</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>내보내다</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">

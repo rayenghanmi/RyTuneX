@@ -1284,10 +1284,10 @@
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Отменить изменения</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Импорт</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>Экспорт</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">

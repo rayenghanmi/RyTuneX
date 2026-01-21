@@ -1287,10 +1287,10 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Änderungen rückgängig machen</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Import</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>Export</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">

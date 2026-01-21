@@ -1287,10 +1287,10 @@ Verifica si hay problemas de memoria en tu computadora</value>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Revertir cambios</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Importar</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>Exportar</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">

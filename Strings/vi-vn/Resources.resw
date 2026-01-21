@@ -1287,10 +1287,10 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Hoàn tác thay đổi</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Nhập</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>Xuất</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">

@@ -1287,10 +1287,10 @@
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>変更を元に戻す</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>輸入</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>輸出</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">

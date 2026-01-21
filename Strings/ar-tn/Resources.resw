@@ -1287,10 +1287,10 @@
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>تراجع عن التغييرات</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>استيراد</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>تصدير</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">

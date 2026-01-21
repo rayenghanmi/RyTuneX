@@ -1287,10 +1287,10 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Annulla modifiche</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Importare</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>Esportare</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">

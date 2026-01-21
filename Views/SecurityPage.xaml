@@ -49,7 +49,7 @@
                             Margin="0,10,0,20">
                     <Button Click="OpenWindowsSecurity_Click">
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <FontIcon Glyph="&#xE72E;" FontSize="16"/>
+                            <FontIcon Glyph="&#xEA18;" FontSize="16"/>
                             <TextBlock x:Uid="SecurityPage_OpenWindowsSecurity"/>
                         </StackPanel>
                     </Button>
@@ -61,7 +61,7 @@
                                         Height="16" 
                                         Visibility="Collapsed"
                                         IsActive="True"/>
-                            <FontIcon x:Name="QuickScanIcon" Glyph="&#xE8C8;" FontSize="16"/>
+                            <FontIcon x:Name="QuickScanIcon" Glyph="&#xE721;" FontSize="16"/>
                             <TextBlock x:Uid="SecurityPage_QuickScan"/>
                         </StackPanel>
                     </Button>
@@ -73,7 +73,7 @@
                                 Height="16" 
                                 Visibility="Collapsed"
                                 IsActive="True"/>
-                            <FontIcon x:Name="UpdateDefinitionsIcon" Glyph="&#xE896;" FontSize="16"/>
+                            <FontIcon x:Name="UpdateDefinitionsIcon" Glyph="&#xE895;" FontSize="16"/>
                             <TextBlock x:Uid="SecurityPage_UpdateDefinitions"/>
                         </StackPanel>
                     </Button>

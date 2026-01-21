@@ -1283,10 +1283,10 @@
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>還原更改</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>進口</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>出口</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
@@ -1635,6 +1635,6 @@
     <value>停用 Windows AI</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
-    <value>&#x8;從記事本、畫圖和相片中移除 AI 功能，停用 Windows Studio 的相機/麥克風效果與遊戲 AI，並移除系統殼層中的 AI 整合，以最大化隱私與效能。</value>
+    <value>執行全系統 AI 清理。停用 Copilot、Recall 與 AI Fabric 服務；移除記事本、小畫家與相片中的 AI 功能；停用 Windows Studio 的相機/麥克風效果與遊戲 AI；並移除系統殼層中的 AI 整合，以最大化隱私與效能。</value>
   </data>
 </root>

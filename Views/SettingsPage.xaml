@@ -84,8 +84,28 @@
                 <controls:SettingsCard x:Uid="Settings_ExportOptimizations"
                     HeaderIcon="{ui:FontIcon Glyph=&#xE174;}">
                     <controls:WrapPanel Orientation="Horizontal" HorizontalSpacing="8">
-                        <Button x:Uid="SettingsPageImportButton" x:Name="ImportButton" Click="ImportButton_Click"/>
-                        <Button x:Uid="SettingsPageExportButton" x:Name="ExportButton" Click="ExportButton_Click"/>
+                        <Button x:Name="ImportButton" Click="ImportButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <ProgressRing x:Name="ImportButtonProgressRing" 
+                                    Width="16" 
+                                    Height="16" 
+                                    Visibility="Collapsed"
+                                    IsActive="True"/>
+                                <FontIcon x:Name="ImportButtonIcon" Glyph="&#xE74B;" FontSize="16"/>
+                                <TextBlock x:Uid="SettingsPageImportButton"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="ExportButton" Click="ExportButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <ProgressRing x:Name="ExportButtonProgressRing" 
+                                    Width="16" 
+                                    Height="16" 
+                                    Visibility="Collapsed"
+                                    IsActive="True"/>
+                                <FontIcon x:Name="ExportButtonIcon" Glyph="&#xE74A;" FontSize="16"/>
+                                <TextBlock x:Uid="SettingsPageExportButton"/>
+                            </StackPanel>
+                        </Button>
                     </controls:WrapPanel>
                 </controls:SettingsCard>
 
@@ -93,7 +113,7 @@
                     IsClickEnabled="True"
                     Click="RevertChanges_Click">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE777;"/>
+                        <FontIcon Glyph="&#xE81C;"/>
                     </controls:SettingsCard.HeaderIcon>
                 </controls:SettingsCard>
             </StackPanel>

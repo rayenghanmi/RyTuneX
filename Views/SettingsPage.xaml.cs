@@ -523,6 +523,10 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 
         try
         {
+            ExportButton.IsEnabled = false;
+            ExportButtonProgressRing.Visibility = Visibility.Visible;
+            ExportButtonIcon.Visibility = Visibility.Collapsed;
+
             var regFlag = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess ? " /reg:64" : "";
             var exitCode = await OptimizationOptions.StartInCmd($"REG EXPORT \"HKLM\\SOFTWARE\\RyTuneX\\Optimizations\" \"{exportFilePath}\" /y{regFlag}");
 
@@ -536,11 +540,19 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
                 _ = LogHelper.LogError($"Failed to export registry settings. Exit code: {exitCode}");
                 App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
             }
+
+            ExportButton.IsEnabled = true;
+            ExportButtonProgressRing.Visibility = Visibility.Collapsed;
+            ExportButtonIcon.Visibility = Visibility.Visible;
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error exporting registry settings: {ex.Message}\nStack Trace: {ex.StackTrace}");
             App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
+
+            ExportButton.IsEnabled = true;
+            ExportButtonProgressRing.Visibility = Visibility.Collapsed;
+            ExportButtonIcon.Visibility = Visibility.Visible;
         }
     }
 
@@ -555,64 +567,83 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
         var file = await picker.PickSingleFileAsync();
         if (file != null)
         {
-            // Import the registry file
-            await OptimizationOptions.StartInCmd($"regedit.exe /s {file.Path}");
-            _ = LogHelper.Log($"Imported registry settings from {file.Path}");
-            // Apply all the optimizations present in the registry key
-            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                    Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? RegistryView.Registry64
-                        : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
-
-            if (key != null)
+            ImportButton.IsEnabled = false;
+            ImportButtonProgressRing.Visibility = Visibility.Visible;
+            ImportButtonIcon.Visibility = Visibility.Collapsed;
+            try
             {
-                foreach (var valueName in key.GetValueNames())
+                // Import the registry file
+                await OptimizationOptions.StartInCmd($"regedit.exe /s {file.Path}");
+                _ = LogHelper.Log($"Imported registry settings from {file.Path}");
+                // Apply all the optimizations present in the registry key
+                using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                            ? RegistryView.Registry64
+                            : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
+
+                if (key != null)
                 {
-                    var value = key.GetValue(valueName);
-                    var kind = key.GetValueKind(valueName);
-
-                    // Handle Windows Updates mode separately
-                    if (valueName == "WindowsUpdatesMode" && kind == RegistryValueKind.String)
+                    foreach (var valueName in key.GetValueNames())
                     {
-                        var mode = value as string;
-                        if (!string.IsNullOrEmpty(mode))
+                        var value = key.GetValue(valueName);
+                        var kind = key.GetValueKind(valueName);
+
+                        // Handle Windows Updates mode separately
+                        if (valueName == "WindowsUpdatesMode" && kind == RegistryValueKind.String)
                         {
-                            switch (mode)
+                            var mode = value as string;
+                            if (!string.IsNullOrEmpty(mode))
                             {
-                                case "Default":
-                                    await OptimizeSystemHelper.SetWindowsUpdatesDefault();
-                                    break;
-                                case "Security":
-                                    await OptimizeSystemHelper.SetWindowsUpdatesSecurityOnly();
-                                    break;
-                                case "Manually":
-                                    await OptimizeSystemHelper.SetWindowsUpdatesManually();
-                                    break;
-                                case "Disabled":
-                                    await OptimizeSystemHelper.SetWindowsUpdatesDisabled();
-                                    break;
+                                switch (mode)
+                                {
+                                    case "Default":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesDefault();
+                                        break;
+                                    case "Security":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesSecurityOnly();
+                                        break;
+                                    case "Manually":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesManually();
+                                        break;
+                                    case "Disabled":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesDisabled();
+                                        break;
+                                }
+                                _ = LogHelper.Log($"Applied Windows Updates mode: {mode}");
                             }
-                            _ = LogHelper.Log($"Applied Windows Updates mode: {mode}");
+                            continue;
                         }
-                        continue;
-                    }
 
-                    if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
-                    {
-                        // Simulate the toggle being on
-                        var simulatedToggle = new ToggleSwitch
+                        if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
                         {
-                            Tag = valueName,
-                            IsOn = true
-                        };
+                            // Simulate the toggle being on
+                            var simulatedToggle = new ToggleSwitch
+                            {
+                                Tag = valueName,
+                                IsOn = true
+                            };
 
-                        await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
-                        _ = LogHelper.Log($"Applied optimization: {valueName}");
+                            await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
+                            _ = LogHelper.Log($"Applied optimization: {valueName}");
+                        }
                     }
                 }
+                _ = LogHelper.Log("Applied all optimizations from the registry key.");
+                App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
+
+                ImportButton.IsEnabled = true;
+                ImportButtonProgressRing.Visibility = Visibility.Collapsed;
+                ImportButtonIcon.Visibility = Visibility.Visible;
             }
-            _ = LogHelper.Log("Applied all optimizations from the registry key.");
-            App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"Error importing registry settings: {ex.Message}");
+                App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
+
+                ImportButton.IsEnabled = true;
+                ImportButtonProgressRing.Visibility = Visibility.Collapsed;
+                ImportButtonIcon.Visibility = Visibility.Visible;
+            }
         }
     }
 }
