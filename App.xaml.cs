@@ -18,6 +18,7 @@
  * Contact: ghanmirayen12@gmail.com
  */
 
+using System.Runtime.InteropServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -29,16 +30,66 @@ using RyTuneX.Models;
 using RyTuneX.Services;
 using RyTuneX.ViewModels;
 using RyTuneX.Views;
+using Windows.Media.Core;
+using Windows.Media.Playback;
 using Windows.Storage;
+using WinRT.Interop;
 
 namespace RyTuneX;
 
 public partial class App : Application
 {
+    // P/Invoke for Taskbar Flashing
+    [StructLayout(LayoutKind.Sequential)]
+    private struct FLASHWINFO
+    {
+        public uint cbSize;
+        public IntPtr hwnd;
+        public uint dwFlags;
+        public uint uCount;
+        public uint dwTimeout;
+    }
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool FlashWindowEx(ref FLASHWINFO pwfi);
+
+    private const uint FLASHW_ALL = 3;           // Flash both window caption and taskbar button
+    private const uint FLASHW_TIMERNOFG = 12;    // Flash continuously until the window comes to the foreground
+
+    // Flashes the taskbar icon to alert the user that a background process is complete
+    public static void NotifyTaskCompletion()
+    {
+        try
+        {
+            var hwnd = WindowNative.GetWindowHandle(MainWindow);
+            if (hwnd == IntPtr.Zero) return;
+
+            FLASHWINFO fInfo = new FLASHWINFO();
+            fInfo.cbSize = (uint)Marshal.SizeOf(fInfo);
+            fInfo.hwnd = hwnd;
+            fInfo.dwFlags = FLASHW_ALL | FLASHW_TIMERNOFG;
+            fInfo.uCount = uint.MaxValue; // Flash until focused
+            fInfo.dwTimeout = 0;          // Use default cursor blink rate
+
+            FlashWindowEx(ref fInfo);
+
+            // Play a system notification sound
+            var mediaPlayer = new MediaPlayer();
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-winsoundevent:Notification.Default"));
+            mediaPlayer.Play();
+
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to flash window: {ex.Message}");
+        }
+    }
+
     private IHost? _host;
     public IHost Host => _host ?? throw new InvalidOperationException("Host accessed before initialization.");
-    public static T GetService<T>()
-    where T : class
+
+    public static T GetService<T>() where T : class
     {
         if ((App.Current as App)!.Host.Services.GetService(typeof(T)) is not T service)
         {
@@ -66,12 +117,7 @@ public partial class App : Application
         LogHelper.Log("___________ New Session ___________");
 
         // Catch unhandled exceptions early to avoid silent activation failures
-        UnhandledException += async (sender, e) =>
-        {
-            try { _ = LogHelper.LogError($"UnhandledException: {e.Exception}"); } catch { }
-        };
-
-
+        UnhandledException += App_UnhandledException;
     }
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
@@ -154,8 +200,12 @@ public partial class App : Application
                     _flowDirectionCache = Microsoft.UI.Xaml.FlowDirection.RightToLeft;
                 }
             }
-
             return _flowDirectionCache.Value;
         }
+    }
+
+    private async void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+    {
+        await LogHelper.LogError($"App_UnhandledException: {e.Exception}");
     }
 }

@@ -298,6 +298,7 @@ public sealed partial class ShellPage : Page
 
     public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration)
     {
+        App.NotifyTaskCompletion();
         Current?.ShowNotificationInstance(title, message, severity, duration);
     }
 
