@@ -1,4 +1,4 @@
-# CHANGELOG.md
+﻿# CHANGELOG.md
 
 All notable changes to this branch will be documented in this file.
 
@@ -18,7 +18,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
-- Reduced the msix package size by ~45% by removing unnecessary dependencies and enabling trimming.
+- Reduced the msix package size by ~48.8% by removing unnecessary dependencies and enabling trimming.
 - Upgraded the app's target framework to .NET 10.
 - Enhanced the update process to improve reliability and performance.
 - Improved the system info fetching process for better accuracy.
