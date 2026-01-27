@@ -65,7 +65,7 @@ public partial class App : Application
             var hwnd = WindowNative.GetWindowHandle(MainWindow);
             if (hwnd == IntPtr.Zero) return;
 
-            FLASHWINFO fInfo = new FLASHWINFO();
+            var fInfo = new FLASHWINFO();
             fInfo.cbSize = (uint)Marshal.SizeOf(fInfo);
             fInfo.hwnd = hwnd;
             fInfo.dwFlags = FLASHW_ALL | FLASHW_TIMERNOFG;

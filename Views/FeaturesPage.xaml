@@ -264,7 +264,7 @@
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xF4A5;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="DisableWindowsAI" Tag="DisableWindowsAI"/>
+                    <ToggleSwitch x:Name="WindowsAI" Tag="WindowsAI"/>
                 </controls:SettingsCard>
 
             </StackPanel>

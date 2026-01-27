@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
@@ -9,6 +9,7 @@ namespace RyTuneX.Views;
 public sealed partial class GroupPolicyPage : Page
 {
     private CancellationTokenSource? _cancellationTokenSource;
+    private Guid? _cancellationRegistrationId;
     private IReadOnlyList<GroupPolicyHelper.PolicyState>? _policyStates;
     private string? _pendingScrollTarget;
 
@@ -52,7 +53,13 @@ public sealed partial class GroupPolicyPage : Page
     private async Task ScanPoliciesAsync()
     {
         _cancellationTokenSource?.Cancel();
+        if (_cancellationRegistrationId.HasValue)
+        {
+            OperationCancellationManager.Unregister(_cancellationRegistrationId.Value);
+            _cancellationRegistrationId = null;
+        }
         _cancellationTokenSource = new CancellationTokenSource();
+        _cancellationRegistrationId = OperationCancellationManager.Register(_cancellationTokenSource);
 
         try
         {
@@ -94,6 +101,11 @@ public sealed partial class GroupPolicyPage : Page
                 ScanProgressRing.IsActive = false;
                 RefreshButton.IsEnabled = true;
             });
+            if (_cancellationRegistrationId.HasValue)
+            {
+                OperationCancellationManager.Unregister(_cancellationRegistrationId.Value);
+                _cancellationRegistrationId = null;
+            }
         }
     }
 

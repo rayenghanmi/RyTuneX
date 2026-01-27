@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Contracts.Services;
+using RyTuneX.Helpers;
 using Windows.Management.Deployment;
 
 namespace RyTuneX.Views;
@@ -15,6 +16,7 @@ public sealed partial class HomePage : Page
 {
     private readonly string _versionDescription;
     private readonly CancellationTokenSource _cancellationTokenSource;
+    private Guid _cancellationRegistrationId;
 
     // CPU sampling state
     private ulong _prevIdleTime;
@@ -38,6 +40,7 @@ public sealed partial class HomePage : Page
         _versionDescription = "Version " + SettingsPage.GetVersionDescription();
 
         _cancellationTokenSource = new CancellationTokenSource();
+        _cancellationRegistrationId = OperationCancellationManager.Register(_cancellationTokenSource);
         _ = UpdateSystemStatsAsync(_cancellationTokenSource.Token);
         Unloaded += HomePage_Unloaded;
     }
@@ -125,6 +128,7 @@ public sealed partial class HomePage : Page
     private void HomePage_Unloaded(object sender, RoutedEventArgs e)
     {
         _cancellationTokenSource.Cancel();
+        OperationCancellationManager.Unregister(_cancellationRegistrationId);
         _cancellationTokenSource.Dispose();
 
         // Clean up Performance Counters

@@ -7,75 +7,185 @@ public static partial class OptimizeSystemHelper
 
     public static async Task DisableWindowsAI()
     {
-        // Gaming & Xbox AI
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameBar\" /V UseGamingCopilot /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR\" /V AppCaptureEnabled /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+        // Gaming, Studio Effects, & System App AI Registry
+        var cmds = new List<string> {
+            "REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameBar\" /V UseGamingCopilot /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR\" /V AppCaptureEnabled /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsEyeContactEnabled /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsVoiceFocusEnabled /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKCU\\Software\\Microsoft\\Speech_OneCore\\Settings\\VoiceActivation\\AppLaunchAllowed\" /V AgentAllowed /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKCU\\Software\\Microsoft\\Notepad\" /V ShowRewriteButton /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Policies\\WindowsNotepad\" /V DisableAIFeatures /T REG_DWORD /D 1 /F",
+            "REG ADD \"HKCU\\Software\\Microsoft\\OneDrive\" /V EnablePeopleProcessing /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Paint\" /V AllowCocreator /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint\" /V DisableImageCreator /T REG_DWORD /D 1 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Intelligence\" /V AllowWindowsIntelligence /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V ComposeEnabled /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V HubsSidebarEnabled /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V GenAILocalFoundationalModelSettings /T REG_DWORD /D 1 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /V EnableDynamicContentInSearchBox /T REG_DWORD /D 0 /F",
+            "REG ADD \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\" /V DisableSearchBoxSuggestions /T REG_DWORD /D 1 /F",
+            "REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /V DisableAgentConnectors /T REG_DWORD /D 1 /F"
+        };
+        foreach (var c in cmds) await OptimizationOptions.StartInCmd(c);
 
-        // Studio Effects (Audio/Video AI)
-        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsEyeContactEnabled /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsVoiceFocusEnabled /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Speech_OneCore\\Settings\\VoiceActivation\\AppLaunchAllowed\" /V AgentAllowed /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+        // Hide AI Settings Component
+        await ToggleSettingsAIVisibility(hide: true);
 
-        // System App AI (Notepad, Paint, OneDrive)
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Notepad\" /V \"ShowRewriteButton\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\OneDrive\" /V \"EnablePeopleProcessing\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Paint\" /V \"AllowCocreator\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+        // Remove AI System Packages (CBS) and Machine Learning DLLs
+        await RemoveAISystemComponents();
 
-        // AI Intelligence, Edge & Recall Policies
-        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Intelligence\" /V \"AllowWindowsIntelligence\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V \"ComposeEnabled\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-
-        // Shell & Search Cleanup
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked\" /V \"{64134153-2E11-492F-8181-314091BA79A3}\" /T REG_SZ /D \"Copilot\" /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /V \"EnableDynamicContentInSearchBox\" /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-
-        // Restart Explorer to apply changes
         await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
     }
 
     public static async Task EnableWindowsAI()
     {
-        // Re-enable Gaming & Xbox AI
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameBar\" /V UseGamingCopilot /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR\" /V AppCaptureEnabled /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+        var cmds = new List<string> {
+            "REG DELETE \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameBar\" /V UseGamingCopilot /F",
+            "REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR\" /V AppCaptureEnabled /T REG_DWORD /D 1 /F",
+            "REG DELETE \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsEyeContactEnabled /F",
+            "REG DELETE \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsVoiceFocusEnabled /F",
+            "REG ADD \"HKCU\\Software\\Microsoft\\Speech_OneCore\\Settings\\VoiceActivation\\AppLaunchAllowed\" /V AgentAllowed /T REG_DWORD /D 1 /F",
+            "REG DELETE \"HKCU\\Software\\Microsoft\\Notepad\" /V ShowRewriteButton /F",
+            "REG DELETE \"HKLM\\SOFTWARE\\Policies\\WindowsNotepad\" /V DisableAIFeatures /F",
+            "REG ADD \"HKCU\\Software\\Microsoft\\OneDrive\" /V EnablePeopleProcessing /T REG_DWORD /D 1 /F",
+            "REG DELETE \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Paint\" /V AllowCocreator /F",
+            "REG DELETE \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint\" /V DisableImageCreator /F",
+            "REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Intelligence\" /V AllowWindowsIntelligence /F",
+            "REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V ComposeEnabled /F",
+            "REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V HubsSidebarEnabled /F",
+            "REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V GenAILocalFoundationalModelSettings /F",
+            "REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /V EnableDynamicContentInSearchBox /F",
+            "REG DELETE \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\" /V DisableSearchBoxSuggestions /F"
+        };
+        foreach (var c in cmds) await OptimizationOptions.StartInCmd(c);
 
-        // Restore Studio Effects (Audio/Video AI)
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsEyeContactEnabled /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Control Panel\\Glass\" /V IsVoiceFocusEnabled /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Speech_OneCore\\Settings\\VoiceActivation\\AppLaunchAllowed\" /V AgentAllowed /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+        await ToggleSettingsAIVisibility(hide: false);
 
-        // Re-enable System App AI
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Microsoft\\Notepad\" /V \"ShowRewriteButton\" /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\OneDrive\" /V \"EnablePeopleProcessing\" /T REG_DWORD /D 1 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Paint\" /V \"AllowCocreator\" /F").ConfigureAwait(false);
+        // Restore General AI Packages
+        var psScript = "Get-AppxPackage -allusers *AIX* | foreach {Add-AppxPackage -register \"$($_.InstallLocation)\\appxmanifest.xml\" -DisableDevelopmentMode}";
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -Command \"{psScript}\"").ConfigureAwait(false);
 
-        // Restore Intelligence & Edge Policies
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Intelligence\" /V \"AllowWindowsIntelligence\" /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V \"ComposeEnabled\" /F").ConfigureAwait(false);
-
-        // Restore Shell & Search Features
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked\" /V \"{64134153-2E11-492F-8181-314091BA79A3}\" /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /V \"EnableDynamicContentInSearchBox\" /F").ConfigureAwait(false);
-        
-        // Restart Explorer to apply changes
         await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
+    }
+
+    private static async Task ToggleCopilotJsonPolicy(bool isDisabled)
+    {
+        var state = isDisabled ? "disabled" : "enabled";
+
+        var system32 = Environment.GetFolderPath(Environment.SpecialFolder.System);
+        var policyFile = Path.Combine(system32, "IntegratedServicesRegionPolicySet.json");
+
+        if (!File.Exists(policyFile)) return;
+
+        var psScript = $@"
+        $path = '{policyFile}';
+        try {{
+            takeown /f $path /a;
+            icacls $path /grant *S-1-5-32-544:F;
+            $rawJson = Get-Content $path -Raw;
+            if ([string]::IsNullOrWhiteSpace($rawJson)) {{
+                Write-Error 'JSON file is empty';
+                return;
+            }}
+            $json = $rawJson | ConvertFrom-Json;
+            if ($null -eq $json -or $null -eq $json.policies) {{
+                Write-Error 'Invalid JSON structure';
+                return;
+            }}
+            $modified = $false;
+            foreach ($p in $json.policies) {{
+                if ($p.'$comment' -like '*CoPilot*') {{
+                    $p.defaultState = '{state}';
+                    $modified = $true;
+                }}
+            }}
+            if ($modified) {{
+                $json | ConvertTo-Json -Depth 100 | Set-Content $path -Encoding UTF8 -Force;
+            }}
+        }} catch {{
+            Write-Error ""Failed to process JSON: $($_.Exception.Message)"";
+        }}";
+        var escapedScript = psScript.Replace("\"", "\\\"");
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -ExecutionPolicy Bypass -Command \"{escapedScript}\"").ConfigureAwait(false);
+    }
+
+    private static async Task ToggleSettingsAIVisibility(bool hide)
+    {
+        var psScript = hide
+            ? @"$p='HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'; $n='SettingsPageVisibility'; $v=(Get-ItemProperty $p $n -EA 0).$n; if($v -notlike '*hide:aicomponents*'){$nv=$v+';hide:aicomponents;appactions'; Set-ItemProperty $p $n $nv -Force}"
+            : @"$p='HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'; $n='SettingsPageVisibility'; $v=(Get-ItemProperty $p $n -EA 0).$n; if($v){$nv=$v -replace ';hide:aicomponents;appactions',''; Set-ItemProperty $p $n $nv -Force}";
+
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -Command \"{psScript}\"").ConfigureAwait(false);
+    }
+
+    private static async Task RemoveAISystemComponents()
+    {
+        // This handles CBS packages (CoreAI, AIX) and deleting machine learning DLLs
+        var psScript = @"
+            # CBS Package Removal (Forced)
+            $cbsPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages';
+            $targets = @('*UserExperience-AIX*', '*CoreAI*');
+            Get-ChildItem $cbsPath | Where-Object { $n=$_.PSChildName; $targets | Where-Object { $n -like $_ } } | ForEach-Object {
+                Set-ItemProperty $_.PSPath 'Visibility' 1; Remove-Item ""$($_.PSPath)\Owners"" -Recurse -Force -EA 0;
+                $pn=$_.PSChildName; dism /Online /Remove-Package /PackageName:$pn /NoRestart /Quiet
+            }
+
+            # Aggressive DLL Deletion
+            $files = @(""$env:SystemRoot\System32\Windows.AI.MachineLearning.dll"", ""$env:SystemRoot\System32\SettingsHandlers_Copilot.dll"");
+            foreach($f in $files) { if(Test-Path $f){ takeown /F $f /A; icacls $f /grant *S-1-5-32-544:F; Remove-Item $f -Force } }
+        ";
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -Command \"{psScript.Replace("\"", "\\\"")}\"").ConfigureAwait(false);
     }
 
     public static async Task DisableWindowsRecall()
     {
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /v DisableAIDataAnalysis /t REG_DWORD /d 1 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /v DisableAIDataAnalysis /t REG_DWORD /d 1 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("sc config WSAIFabricSvc start= disabled").ConfigureAwait(false);
+        // Registry Lockout
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /V DisableAIDataAnalysis /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsAI\" /V DisableAIDataAnalysis /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /V TurnOffSavingSnapshots /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+
+        // Services & Tasks
+        await OptimizationOptions.StartInCmd("powershell -Command \"Stop-Service -Name 'WSAIFabricSvc' -ErrorAction SilentlyContinue; Set-Service -Name 'WSAIFabricSvc' -StartupType Disabled\"").ConfigureAwait(false);
+
+        var taskDisable = @"
+            $tasks = @('\Microsoft\Windows\WindowsAI\Recall\InitialConfiguration', '\Microsoft\Windows\WindowsAI\Recall\PolicyConfiguration');
+            foreach($t in $tasks) { 
+                if (Get-ScheduledTask -TaskName $t -ErrorAction SilentlyContinue) {
+                    Disable-ScheduledTask -TaskName $t -ErrorAction SilentlyContinue 
+                }
+            }
+        ";
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -Command \"{taskDisable}\"").ConfigureAwait(false);
+
+        // DISM Feature & Appx
+        await OptimizationOptions.StartInCmd("dism /Online /Disable-Feature /FeatureName:Recall /Remove /NoRestart /Quiet").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -AllUsers *AiFabric* | Remove-AppxPackage -AllUsers\"").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -AllUsers *WindowsIntelligence* | Remove-AppxPackage -AllUsers\"").ConfigureAwait(false);
     }
 
     public static async Task EnableWindowsRecall()
     {
-        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /v DisableAIDataAnalysis /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg delete \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /v DisableAIDataAnalysis /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("sc config WSAIFabricSvc start= demand").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -allusers *AiFabric* | foreach {Add-AppxPackage -register '$($_.InstallLocation)\\appxmanifest.xml' -DisableDevelopmentMode}\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /V DisableAIDataAnalysis /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsAI\" /V DisableAIDataAnalysis /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" /V TurnOffSavingSnapshots /F").ConfigureAwait(false);
+
+        await OptimizationOptions.StartInCmd("powershell -Command \"Set-Service -Name 'WSAIFabricSvc' -StartupType Manual\"").ConfigureAwait(false);
+
+        var taskEnable = @"
+            $tasks = @('\Microsoft\Windows\WindowsAI\Recall\InitialConfiguration', '\Microsoft\Windows\WindowsAI\Recall\PolicyConfiguration');
+            foreach($t in $tasks) { 
+                if (Get-ScheduledTask -TaskName $t -ErrorAction SilentlyContinue) {
+                    Enable-ScheduledTask -TaskName $t -ErrorAction SilentlyContinue 
+                }
+            }
+        ";
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -Command \"{taskEnable}\"").ConfigureAwait(false);
+
+        await OptimizationOptions.StartInCmd("dism /Online /Enable-Feature /FeatureName:Recall /NoRestart").ConfigureAwait(false);
+
+        var psScript = "Get-AppxPackage -allusers *AiFabric* | foreach {Add-AppxPackage -register \"$($_.InstallLocation)\\appxmanifest.xml\" -DisableDevelopmentMode}";
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -Command \"{psScript}\"").ConfigureAwait(false);
     }
 
     public static async Task DisableRecommendedSectionStartMenu()
@@ -1695,23 +1805,53 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("REG Delete \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Edge\" /V SpotlightExperiencesAndRecommendationsEnabled /F").ConfigureAwait(false);
     }
 
-
     public static async Task DisableCoPilotAI()
     {
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+        // Registry Policies & Button
         await OptimizationOptions.StartInCmd("REG ADD \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /T REG_DWORD /D 1 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V ShowCopilotButton /T REG_DWORD /D 0 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -AllUsers *Microsoft.Windows.Copilot* | Remove-AppxPackage -AllUsers\"").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /T REG_DWORD /D 1 /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVe\rsion\\Explorer\\Advanced\" /V ShowCopilotButton /T REG_DWORD /D 0 /F").ConfigureAwait(false);
+
+        // Block the Shell Extension (Prevents Copilot UI from loading in the Shell)
+        await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked\" /V \"{64134153-2E11-492F-8181-314091BA79A3}\" /T REG_SZ /D \"Copilot\" /F").ConfigureAwait(false);
+
+        // Edit the Region Policy JSON
+        await ToggleCopilotJsonPolicy(isDisabled: true);
+
+        // Stop and remove/disable services related to Copilot/AI
+        await OptimizationOptions.StartInCmd("powershell -Command \"Stop-Service -Name 'WSAIFabricSvc' -ErrorAction SilentlyContinue; sc.exe delete WSAIFabricSvc -ErrorAction SilentlyContinue\"").ConfigureAwait(false);
+
+        // Remove Voice Access executable and StartMenu link if present (requires elevated/more privileges)
+        var voiceAccessCmd = "Remove-Item -Path $env:windir\\System32\\voiceaccess.exe -Force -ErrorAction SilentlyContinue; Remove-Item \"$env:appdata\\Microsoft\\Windows\\Start Menu\\Programs\\Accessibility\\VoiceAccess.lnk\" -Force -ErrorAction SilentlyContinue";
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -Command \"{voiceAccessCmd}\"").ConfigureAwait(false);
+
+        // Appx Removal (Uninstall + Deprovision)
+        var psScript = @"
+            $targets = @('Microsoft.Windows.Copilot', 'MicrosoftWindows.Client.Copilot', 'Microsoft.Windows.Ai.Copilot.Provider', 'Microsoft.Copilot');
+            foreach ($t in $targets) {
+                Get-AppxPackage -AllUsers -Name ""*$t*"" | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue;
+                Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like ""*$t*"" } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue;
+            }
+        ";
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -Command \"{psScript}\"").ConfigureAwait(false);
+
+        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
     }
 
     public static async Task EnableCoPilotAI()
     {
-        await OptimizationOptions.StartInCmd("REG Delete \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("REG Delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot\" /V TurnOffWindowsCopilot /F").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("REG DELETE \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked\" /V \"{64134153-2E11-492F-8181-314091BA79A3}\" /F").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /V ShowCopilotButton /T REG_DWORD /D 1 /F").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("powershell \"Get-AppxPackage -allusers *Microsoft.Windows.Copilot* | foreach {Add-AppxPackage -register '$($_.InstallLocation)\\appxmanifest.xml' -DisableDevelopmentMode}\"").ConfigureAwait(false);
-    }
 
+        await ToggleCopilotJsonPolicy(isDisabled: false);
+
+        var psScript = "Get-AppxPackage -allusers *Copilot* | foreach {Add-AppxPackage -register \"$($_.InstallLocation)\\appxmanifest.xml\" -DisableDevelopmentMode}";
+        await OptimizationOptions.StartInCmd($"powershell -NoProfile -Command \"{psScript}\"").ConfigureAwait(false);
+
+        await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe & start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
+    }
 
     public static async Task DisableVisualStudioTelemetry()
     {

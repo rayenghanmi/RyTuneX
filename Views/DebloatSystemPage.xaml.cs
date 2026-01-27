@@ -15,6 +15,8 @@ public sealed partial class DebloatSystemPage : Page
 {
     public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
+    private CancellationTokenSource? _uninstallBatchCts;
+    private Guid? _uninstallBatchRegistrationId;
     private List<Tuple<string, string, bool>> allApps = new();
     private string? _pendingScrollTarget;
 
@@ -24,6 +26,24 @@ public sealed partial class DebloatSystemPage : Page
         LogHelper.Log("Initializing DebloatSystemPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += DebloatSystemPage_Loaded;
+        Unloaded += DebloatSystemPage_Unloaded;
+    }
+
+    private void DebloatSystemPage_Unloaded(object? sender, RoutedEventArgs e)
+    {
+        try
+        {
+            // Cancel any ongoing operations for this page
+            try { cancellationTokenSource.Cancel(); } catch { }
+
+            if (_uninstallBatchCts != null)
+            {
+                try { _uninstallBatchCts.Cancel(); } catch { }
+                _uninstallBatchCts.Dispose();
+                _uninstallBatchCts = null;
+            }
+        }
+        catch { }
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -146,6 +166,13 @@ public sealed partial class DebloatSystemPage : Page
             return;
         }
 
+        // Mark explicit operation and register a CTS for this uninstall batch so it can be cancelled via the central manager
+        OperationCancellationManager.EnterOperation();
+        _uninstallBatchCts?.Dispose();
+        _uninstallBatchCts = new CancellationTokenSource();
+        _uninstallBatchRegistrationId = OperationCancellationManager.Register(_uninstallBatchCts);
+        var batchCt = _uninstallBatchCts.Token;
+
         uninstallButton.IsEnabled = false;
         appsFilter.IsEnabled = false;
         appTreeView.IsEnabled = false;
@@ -178,6 +205,12 @@ public sealed partial class DebloatSystemPage : Page
 
                 try
                 {
+                    if (batchCt.IsCancellationRequested)
+                    {
+                        // Stop processing further uninstalls
+                        break;
+                    }
+
                     await UninstallApps(selectedAppName, isWin32App);
                     successfulUninstalls.Add(selectedAppName);
                 }
@@ -220,6 +253,11 @@ public sealed partial class DebloatSystemPage : Page
             appsFilter_SelectionChanged(appsFilter, e);
 
         }
+        catch (OperationCanceledException)
+        {
+            // Batch was cancelled
+            _ = LogHelper.Log("Uninstall batch cancelled by user/system.");
+        }
         catch (Exception ex)
         {
             // Log the error
@@ -238,6 +276,20 @@ public sealed partial class DebloatSystemPage : Page
                 appsFilter.IsEnabled = true;
                 appTreeView.IsEnabled = true;
             });
+
+            // Cleanup uninstall batch CTS and unregister
+            if (_uninstallBatchRegistrationId.HasValue)
+            {
+                OperationCancellationManager.Unregister(_uninstallBatchRegistrationId.Value);
+                _uninstallBatchRegistrationId = null;
+            }
+            if (_uninstallBatchCts != null)
+            {
+                _uninstallBatchCts.Dispose();
+                _uninstallBatchCts = null;
+            }
+            // Clear explicit operation marker
+            OperationCancellationManager.ExitOperation();
         }
     }
 

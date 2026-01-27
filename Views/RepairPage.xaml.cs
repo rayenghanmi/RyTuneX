@@ -21,6 +21,7 @@ public sealed partial class RepairPage : Page
     };
     private Process? _runningProcess;
     private CancellationTokenSource? _cancellationTokenSource;
+    private Guid? _cancellationRegistrationId;
     private int _currentProcessId;
     public int selectedCount = 0;
     private string? _pendingScrollTarget;
@@ -125,7 +126,13 @@ public sealed partial class RepairPage : Page
 
         // Create a new CancellationTokenSource for this operation
         _cancellationTokenSource?.Dispose();
+        if (_cancellationRegistrationId.HasValue)
+        {
+            OperationCancellationManager.Unregister(_cancellationRegistrationId.Value);
+            _cancellationRegistrationId = null;
+        }
         _cancellationTokenSource = new CancellationTokenSource();
+        _cancellationRegistrationId = OperationCancellationManager.Register(_cancellationTokenSource);
         var ct = _cancellationTokenSource.Token;
 
         var commands = new[]

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -10,6 +11,14 @@ namespace RyTuneX.Helpers;
 
 internal partial class OptimizationOptions
 {
+    // Queueing to serialize toggle operations
+    private static readonly SemaphoreSlim _toggleQueueLock = new(1, 1);
+    private static readonly ConcurrentQueue<Func<CancellationToken, Task>> _toggleQueue = new();
+    private static int _toggleRunning = 0; // 0 = none, > 0 running
+    private static readonly CancellationTokenSource _toggleCts = new();
+
+    public static bool HasPendingToggleOperations => _toggleQueue.Count > 0 || _toggleRunning > 0;
+
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
     private static readonly string IconCacheDirectory = Path.Combine(Path.GetTempPath(), "RyTuneX_AppIcons");
 
@@ -550,1071 +559,550 @@ internal partial class OptimizationOptions
     }
     public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)
     {
-        if (toggleSwitch != null && toggleSwitch.Tag != null)
+        if (toggleSwitch == null || toggleSwitch.Tag == null) return;
+
+        // Save the state to RyTuneX registry first (64-bit registry with 32-bit app)
+        try
         {
-            try
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default).CreateSubKey(RegistryBaseKey);
+
+            key?.SetValue((string)toggleSwitch.Tag, toggleSwitch.IsOn ? 1 : 0, RegistryValueKind.DWord);
+            Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error saving registry state: {ex.Message}");
+        }
+
+        // Enqueue the work so operations are serialized
+        var tag = toggleSwitch.Tag.ToString();
+        var isOn = toggleSwitch.IsOn;
+
+        _toggleQueue.Enqueue(ct => ExecuteToggleActionAsync(tag, isOn, ct));
+
+        // Try to process the queue (fire-and-forget safe runner)
+        _ = Task.Run(() => ProcessToggleQueueAsync(_toggleCts.Token));
+    }
+
+    private static async Task ProcessToggleQueueAsync(CancellationToken ct)
+    {
+        if (!await _toggleQueueLock.WaitAsync(0, ct).ConfigureAwait(false))
+            return; // another process is running
+
+        try
+        {
+            while (_toggleQueue.TryDequeue(out var work))
             {
-                // Save the state to RyTuneX registry first (64-bit registry with 32-bit app)
-                using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                    Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? RegistryView.Registry64
-                        : RegistryView.Default).CreateSubKey(RegistryBaseKey);
-
-                key?.SetValue((string)toggleSwitch.Tag, toggleSwitch.IsOn ? 1 : 0, RegistryValueKind.DWord);
-
-                Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+                Interlocked.Increment(ref _toggleRunning);
+                try
+                {
+                    await work(ct).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException) { break; }
+                catch (Exception ex)
+                {
+                    _ = LogHelper.LogError($"Toggle operation failed: {ex.Message}");
+                }
+                finally
+                {
+                    Interlocked.Decrement(ref _toggleRunning);
+                }
             }
-            catch (Exception ex)
-            {
-                _ = LogHelper.LogError($"Error saving registry state: {ex.Message}");
-            }
-            switch (toggleSwitch.Tag)
-            {
-                case "RecommendedSectionStartMenu":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableRecommendedSectionStartMenu();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableRecommendedSectionStartMenu();
-                    }
-                    break;
-
-                case "LegacyBootMenu":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableLegacyBootMenu();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableLegacyBootMenu();
-                    }
-                    break;
-
-                case "OptimizeNTFS":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableOptimizeNTFS();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableOptimizeNTFS();
-                    }
-                    break;
-
-                case "PrioritizeForegroundApplications":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnablePrioritizeForegroundApplications();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisablePrioritizeForegroundApplications();
-                    }
-                    break;
-
-                case "WPBT":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWPBT();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWPBT();
-                    }
-                    break;
-
-                case "ServiceHostSplitting":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableServiceHostSplitting();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableServiceHostSplitting();
-                    }
-                    break;
-
-                case "MenuShowDelay":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableMenuShowDelay();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableMenuShowDelay();
-                    }
-                    break;
-
-                case "MouseHoverTime":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableMouseHoverTime();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableMouseHoverTime();
-                    }
-                    break;
-
-                case "BackgroundApps":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableBackgroundApps();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableBackgroundApps();
-                    }
-                    break;
-
-                case "AutoComplete":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableAutoComplete();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableAutoComplete();
-                    }
-                    break;
-
-                case "CrashDump":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableCrashDump();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableCrashDump();
-                    }
-                    break;
-
-                case "RemoteAssistance":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableRemoteAssistance();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableRemoteAssistance();
-                    }
-                    break;
-
-                case "WindowShake":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWindowShake();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWindowShake();
-                    }
-                    break;
-
-                case "CopyMoveContextMenu":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.AddCopyMoveContextMenu();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.RemoveCopyMoveContextMenu();
-                    }
-                    break;
-
-                case "TaskTimeouts":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.AdjustTaskTimeouts();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.IncreaseTaskTimeouts();
-                    }
-                    break;
-
-                case "LowDiskSpaceChecks":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableLowDiskSpaceChecks();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableLowDiskSpaceChecks();
-                    }
-                    break;
-
-                case "LinkResolve":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableLinkResolve();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableLinkResolve();
-                    }
-                    break;
-
-                case "ServiceTimeouts":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DecreaseServiceTimeouts();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.RevertServiceTimeouts();
-                    }
-                    break;
-
-                case "RemoteRegistry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableRemoteRegistry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableRemoteRegistry();
-                    }
-                    break;
-
-                case "FileExtensionsAndHiddenFiles":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.HideFileExtensionsAndHiddenFiles();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles();
-                    }
-                    break;
-
-                case "SystemProfile":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.OptimizeSystemProfile();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.RevertSystemProfile();
-                    }
-                    break;
-
-                case "TelemetryServices":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableTelemetryServices();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableTelemetryServices();
-                    }
-                    break;
-
-                case "HomeGroup":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableHomeGroup();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableHomeGroup();
-                    }
-                    break;
-
-                case "PrintService":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisablePrintService();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnablePrintService();
-                    }
-                    break;
-
-                case "SysMain":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSysMain();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSysMain();
-                    }
-                    break;
-
-                case "CompatibilityAssistant":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCompatibilityAssistant();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCompatibilityAssistant();
-                    }
-                    break;
-
-                case "SystemRestore":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSystemRestore();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSystemRestore();
-                    }
-                    break;
-
-                case "WindowsTransparency":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWindowsTransparency();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWindowsTransparency();
-                    }
-                    break;
-
-                case "WindowsDarkMode":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableWindowsDarkMode();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableWindowsDarkMode();
-                    }
-                    break;
-
-                case "VerboseLogon":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableVerboseLogon();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableVerboseLogon();
-                    }
-                    break;
-
-                case "ClassicContextMenu":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableClassicContextMenu();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableClassicContextMenu();
-                    }
-                    break;
-
-                case "Search":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSearch();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSearch();
-                    }
-                    break;
-
-                case "Biometrics":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableBiometrics();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableBiometrics();
-                    }
-                    break;
-
-                case "SMBv1":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSMBAsync("1");
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSMBAsync("1");
-                    }
-                    break;
-
-                case "SMBv2":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSMBAsync("2");
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSMBAsync("2");
-                    }
-                    break;
-
-                case "ErrorReporting":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableErrorReporting();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableErrorReporting();
-                    }
-                    break;
-
-                case "Cortana":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCortana();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCortana();
-                    }
-                    break;
-
-                case "GamingMode":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableGamingMode();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableGamingMode();
-                    }
-                    break;
-
-                case "StoreUpdates":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableStoreUpdates();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableStoreUpdates();
-                    }
-                    break;
-
-                case "OneDrive":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableOneDrive();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableOneDrive();
-                    }
-                    break;
-
-                case "SensorServices":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSensorServices();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSensorServices();
-                    }
-                    break;
-
-                case "NewsAndInterests":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableNewsAndInterests();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableNewsAndInterests();
-                    }
-                    break;
-
-                case "SpotlightFeatures":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSpotlightFeatures();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSpotlightFeatures();
-                    }
-                    break;
-
-                case "TailoredExperiences":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableTailoredExperiences();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableTailoredExperiences();
-                    }
-                    break;
-
-                case "CloudOptimizedContent":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCloudOptimizedContent();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCloudOptimizedContent();
-                    }
-                    break;
-
-                case "FeedbackNotifications":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableFeedbackNotifications();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableFeedbackNotifications();
-                    }
-                    break;
-
-                case "AdvertisingID":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableAdvertisingID();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableAdvertisingID();
-                    }
-                    break;
-
-                case "BluetoothAdvertising":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableBluetoothAdvertising();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableBluetoothAdvertising();
-                    }
-                    break;
-
-                case "AutomaticRestartSignOn":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableAutomaticRestartSignOn();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableAutomaticRestartSignOn();
-                    }
-                    break;
-
-                case "HandwritingDataSharing":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableHandwritingDataSharing();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableHandwritingDataSharing();
-                    }
-                    break;
-
-                case "TextInputDataCollection":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableTextInputDataCollection();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableTextInputDataCollection();
-                    }
-                    break;
-
-                case "InputPersonalization":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableInputPersonalization();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableInputPersonalization();
-                    }
-                    break;
-
-                case "SafeSearchMode":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSafeSearchMode();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSafeSearchMode();
-                    }
-                    break;
-
-                case "ActivityUploads":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableActivityUploads();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableActivityUploads();
-                    }
-                    break;
-
-                case "ClipboardSync":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableClipboardSync();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableClipboardSync();
-                    }
-                    break;
-
-                case "MessageSync":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableMessageSync();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableMessageSync();
-                    }
-                    break;
-
-                case "SettingSync":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSettingSync();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSettingSync();
-                    }
-                    break;
-
-                case "VoiceActivation":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableVoiceActivation();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableVoiceActivation();
-                    }
-                    break;
-
-                case "FindMyDevice":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableFindMyDevice();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableFindMyDevice();
-                    }
-                    break;
-
-                case "ActivityFeed":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableActivityFeed();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableActivityFeed();
-                    }
-                    break;
-
-                case "Cdp":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCdp();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCdp();
-                    }
-                    break;
-
-                case "DiagnosticsToast":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableDiagnosticsToast();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableDiagnosticsToast();
-                    }
-                    break;
-
-                case "OnlineSpeechPrivacy":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableOnlineSpeechPrivacy();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableOnlineSpeechPrivacy();
-                    }
-                    break;
-
-                case "LocationAccess":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableLocationFeatures();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableLocationFeatures();
-                    }
-                    break;
-
-                case "LocationFeatures":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableLocationFeatures();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableLocationFeatures();
-                    }
-                    break;
-
-                case "GameBar":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableGameBar();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableGameBar();
-                    }
-                    break;
-
-                case "QuickAccessHistory":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableQuickAccessHistory();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableQuickAccessHistory();
-                    }
-                    break;
-
-                case "MyPeople":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableMyPeople();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableMyPeople();
-                    }
-                    break;
-
-                case "Drivers":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.ExcludeDrivers();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.IncludeDrivers();
-                    }
-                    break;
-
-                case "WindowsInk":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWindowsInk();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWindowsInk();
-                    }
-                    break;
-
-                case "SpellingAndTypingFeatures":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSpellingAndTypingFeatures();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSpellingAndTypingFeatures();
-                    }
-                    break;
-
-                case "FaxService":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableFaxService();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableFaxService();
-                    }
-                    break;
-
-                case "InsiderService":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableInsiderService();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableInsiderService();
-                    }
-                    break;
-
-                case "SmartScreen":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSmartScreen();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSmartScreen();
-                    }
-                    break;
-
-                case "CloudClipboard":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCloudClipboard();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCloudClipboard();
-                    }
-                    break;
-
-                case "StickyKeys":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableStickyKeys();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableStickyKeys();
-                    }
-                    break;
-
-                case "CastToDevice":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.RemoveCastToDevice();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.AddCastToDevice();
-                    }
-                    break;
-
-                case "VBS":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableVBS();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableVBS();
-                    }
-                    break;
-
-                case "TaskbarToLeft":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.AlignTaskbarToLeft();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.AlignTaskbarToCenter();
-                    }
-                    break;
-
-                case "SnapAssist":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSnapAssist();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSnapAssist();
-                    }
-                    break;
-
-                case "Widgets":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWidgets();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWidgets();
-                    }
-                    break;
-
-                case "Chat":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableChat();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableChat();
-                    }
-                    break;
-
-                case "FilesCompactMode":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableFilesCompactMode();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableFilesCompactMode();
-                    }
-                    break;
-
-                case "Stickers":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableStickers();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableStickers();
-                    }
-                    break;
-
-                case "EdgeDiscoverBar":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableEdgeDiscoverBar();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableEdgeDiscoverBar();
-                    }
-                    break;
-
-                case "EdgeTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableEdgeTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableEdgeTelemetry();
-                    }
-                    break;
-
-                case "CoPilotAI":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCoPilotAI();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCoPilotAI();
-                    }
-                    break;
-
-                case "WindowsRecall":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWindowsRecall();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWindowsRecall();
-                    }
-                    break;
-
-                case "VisualStudioTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableVisualStudioTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableVisualStudioTelemetry();
-                    }
-                    break;
-
-                case "NvidiaTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableNvidiaTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableNvidiaTelemetry();
-                    }
-                    break;
-
-                case "ChromeTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableChromeTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableChromeTelemetry();
-                    }
-                    break;
-
-                case "FirefoxTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableFirefoxTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableFirefoxTelemetry();
-                    }
-                    break;
-
-                case "Hibernation":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableHibernation();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableHibernation();
-                    }
-                    break;
-
-                case "EndTask":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableEndTask();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableEndTask();
-                    }
-                    break;
-
-                case "DisableWindowsAI":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWindowsAI();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWindowsAI();
-                    }
-                    break;
-            }
+        }
+        finally
+        {
+            _toggleQueueLock.Release();
+        }
+    }
+
+    private static async Task ExecuteToggleActionAsync(string? tag, bool isOn, CancellationToken ct)
+    {
+        if (string.IsNullOrEmpty(tag)) return;
+
+        // Provide a cancellable wrapper around each action and centralize switch
+        switch (tag)
+        {
+            case "RecommendedSectionStartMenu":
+                if (isOn) await OptimizeSystemHelper.DisableRecommendedSectionStartMenu().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableRecommendedSectionStartMenu().ConfigureAwait(false);
+                break;
+
+            case "LegacyBootMenu":
+                if (isOn) await OptimizeSystemHelper.EnableLegacyBootMenu().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableLegacyBootMenu().ConfigureAwait(false);
+                break;
+
+            case "OptimizeNTFS":
+                if (isOn) await OptimizeSystemHelper.EnableOptimizeNTFS().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableOptimizeNTFS().ConfigureAwait(false);
+                break;
+
+            case "PrioritizeForegroundApplications":
+                if (isOn) await OptimizeSystemHelper.EnablePrioritizeForegroundApplications().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisablePrioritizeForegroundApplications().ConfigureAwait(false);
+                break;
+
+            case "WPBT":
+                if (isOn) await OptimizeSystemHelper.DisableWPBT().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWPBT().ConfigureAwait(false);
+                break;
+
+            case "ServiceHostSplitting":
+                if (isOn) await OptimizeSystemHelper.DisableServiceHostSplitting().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableServiceHostSplitting().ConfigureAwait(false);
+                break;
+
+            case "MenuShowDelay":
+                if (isOn) await OptimizeSystemHelper.DisableMenuShowDelay().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableMenuShowDelay().ConfigureAwait(false);
+                break;
+
+            case "MouseHoverTime":
+                if (isOn) await OptimizeSystemHelper.DisableMouseHoverTime().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableMouseHoverTime().ConfigureAwait(false);
+                break;
+
+            case "BackgroundApps":
+                if (isOn) await OptimizeSystemHelper.DisableBackgroundApps().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableBackgroundApps().ConfigureAwait(false);
+                break;
+
+            case "AutoComplete":
+                if (isOn) await OptimizeSystemHelper.DisableAutoComplete().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableAutoComplete().ConfigureAwait(false);
+                break;
+
+            case "CrashDump":
+                if (isOn) await OptimizeSystemHelper.EnableCrashDump().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableCrashDump().ConfigureAwait(false);
+                break;
+
+            case "RemoteAssistance":
+                if (isOn) await OptimizeSystemHelper.DisableRemoteAssistance().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableRemoteAssistance().ConfigureAwait(false);
+                break;
+
+            case "WindowShake":
+                if (isOn) await OptimizeSystemHelper.DisableWindowShake().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowShake().ConfigureAwait(false);
+                break;
+
+            case "CopyMoveContextMenu":
+                if (isOn) await OptimizeSystemHelper.AddCopyMoveContextMenu().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RemoveCopyMoveContextMenu().ConfigureAwait(false);
+                break;
+
+            case "TaskTimeouts":
+                if (isOn) await OptimizeSystemHelper.AdjustTaskTimeouts().ConfigureAwait(false);
+                else await OptimizeSystemHelper.IncreaseTaskTimeouts().ConfigureAwait(false);
+                break;
+
+            case "LowDiskSpaceChecks":
+                if (isOn) await OptimizeSystemHelper.EnableLowDiskSpaceChecks().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableLowDiskSpaceChecks().ConfigureAwait(false);
+                break;
+
+            case "LinkResolve":
+                if (isOn) await OptimizeSystemHelper.DisableLinkResolve().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLinkResolve().ConfigureAwait(false);
+                break;
+
+            case "ServiceTimeouts":
+                if (isOn) await OptimizeSystemHelper.DecreaseServiceTimeouts().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RevertServiceTimeouts().ConfigureAwait(false);
+                break;
+
+            case "RemoteRegistry":
+                if (isOn) await OptimizeSystemHelper.DisableRemoteRegistry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableRemoteRegistry().ConfigureAwait(false);
+                break;
+
+            case "FileExtensionsAndHiddenFiles":
+                if (isOn) await OptimizeSystemHelper.HideFileExtensionsAndHiddenFiles().ConfigureAwait(false);
+                else await OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles().ConfigureAwait(false);
+                break;
+
+            case "SystemProfile":
+                if (isOn) await OptimizeSystemHelper.OptimizeSystemProfile().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RevertSystemProfile().ConfigureAwait(false);
+                break;
+
+            case "TelemetryServices":
+                if (isOn) await OptimizeSystemHelper.DisableTelemetryServices().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableTelemetryServices().ConfigureAwait(false);
+                break;
+
+            case "HomeGroup":
+                if (isOn) await OptimizeSystemHelper.DisableHomeGroup().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableHomeGroup().ConfigureAwait(false);
+                break;
+
+            case "PrintService":
+                if (isOn) await OptimizeSystemHelper.DisablePrintService().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnablePrintService().ConfigureAwait(false);
+                break;
+
+            case "SysMain":
+                if (isOn) await OptimizeSystemHelper.DisableSysMain().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSysMain().ConfigureAwait(false);
+                break;
+
+            case "CompatibilityAssistant":
+                if (isOn) await OptimizeSystemHelper.DisableCompatibilityAssistant().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCompatibilityAssistant().ConfigureAwait(false);
+                break;
+
+            case "SystemRestore":
+                if (isOn) await OptimizeSystemHelper.DisableSystemRestore().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSystemRestore().ConfigureAwait(false);
+                break;
+
+            case "WindowsTransparency":
+                if (isOn) await OptimizeSystemHelper.DisableWindowsTransparency().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowsTransparency().ConfigureAwait(false);
+                break;
+
+            case "WindowsDarkMode":
+                if (isOn) await OptimizeSystemHelper.EnableWindowsDarkMode().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableWindowsDarkMode().ConfigureAwait(false);
+                break;
+
+            case "VerboseLogon":
+                if (isOn) await OptimizeSystemHelper.EnableVerboseLogon().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableVerboseLogon().ConfigureAwait(false);
+                break;
+
+            case "ClassicContextMenu":
+                if (isOn) await OptimizeSystemHelper.EnableClassicContextMenu().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableClassicContextMenu().ConfigureAwait(false);
+                break;
+
+            case "Search":
+                if (isOn) await OptimizeSystemHelper.DisableSearch().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSearch().ConfigureAwait(false);
+                break;
+
+            case "Biometrics":
+                if (isOn) await OptimizeSystemHelper.DisableBiometrics().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableBiometrics().ConfigureAwait(false);
+                break;
+
+            case "SMBv1":
+                if (isOn) await OptimizeSystemHelper.DisableSMBAsync("1").ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSMBAsync("1").ConfigureAwait(false);
+                break;
+
+            case "SMBv2":
+                if (isOn) await OptimizeSystemHelper.DisableSMBAsync("2").ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSMBAsync("2").ConfigureAwait(false);
+                break;
+
+            case "ErrorReporting":
+                if (isOn) await OptimizeSystemHelper.DisableErrorReporting().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableErrorReporting().ConfigureAwait(false);
+                break;
+
+            case "Cortana":
+                if (isOn) await OptimizeSystemHelper.DisableCortana().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCortana().ConfigureAwait(false);
+                break;
+
+            case "GamingMode":
+                if (isOn) await OptimizeSystemHelper.EnableGamingMode().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableGamingMode().ConfigureAwait(false);
+                break;
+
+            case "StoreUpdates":
+                if (isOn) await OptimizeSystemHelper.DisableStoreUpdates().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableStoreUpdates().ConfigureAwait(false);
+                break;
+
+            case "OneDrive":
+                if (isOn) await OptimizeSystemHelper.DisableOneDrive().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableOneDrive().ConfigureAwait(false);
+                break;
+
+            case "SensorServices":
+                if (isOn) await OptimizeSystemHelper.DisableSensorServices().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSensorServices().ConfigureAwait(false);
+                break;
+
+            case "NewsAndInterests":
+                if (isOn) await OptimizeSystemHelper.DisableNewsAndInterests().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableNewsAndInterests().ConfigureAwait(false);
+                break;
+
+            case "SpotlightFeatures":
+                if (isOn) await OptimizeSystemHelper.DisableSpotlightFeatures().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSpotlightFeatures().ConfigureAwait(false);
+                break;
+
+            case "TailoredExperiences":
+                if (isOn) await OptimizeSystemHelper.DisableTailoredExperiences().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableTailoredExperiences().ConfigureAwait(false);
+                break;
+
+            case "CloudOptimizedContent":
+                if (isOn) await OptimizeSystemHelper.DisableCloudOptimizedContent().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCloudOptimizedContent().ConfigureAwait(false);
+                break;
+
+            case "FeedbackNotifications":
+                if (isOn) await OptimizeSystemHelper.DisableFeedbackNotifications().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableFeedbackNotifications().ConfigureAwait(false);
+                break;
+
+            case "AdvertisingID":
+                if (isOn) await OptimizeSystemHelper.DisableAdvertisingID().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableAdvertisingID().ConfigureAwait(false);
+                break;
+
+            case "BluetoothAdvertising":
+                if (isOn) await OptimizeSystemHelper.DisableBluetoothAdvertising().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableBluetoothAdvertising().ConfigureAwait(false);
+                break;
+
+            case "AutomaticRestartSignOn":
+                if (isOn) await OptimizeSystemHelper.DisableAutomaticRestartSignOn().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableAutomaticRestartSignOn().ConfigureAwait(false);
+                break;
+
+            case "HandwritingDataSharing":
+                if (isOn) await OptimizeSystemHelper.DisableHandwritingDataSharing().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableHandwritingDataSharing().ConfigureAwait(false);
+                break;
+
+            case "TextInputDataCollection":
+                if (isOn) await OptimizeSystemHelper.DisableTextInputDataCollection().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableTextInputDataCollection().ConfigureAwait(false);
+                break;
+
+            case "InputPersonalization":
+                if (isOn) await OptimizeSystemHelper.DisableInputPersonalization().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableInputPersonalization().ConfigureAwait(false);
+                break;
+
+            case "SafeSearchMode":
+                if (isOn) await OptimizeSystemHelper.DisableSafeSearchMode().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSafeSearchMode().ConfigureAwait(false);
+                break;
+
+            case "ActivityUploads":
+                if (isOn) await OptimizeSystemHelper.DisableActivityUploads().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableActivityUploads().ConfigureAwait(false);
+                break;
+
+            case "ClipboardSync":
+                if (isOn) await OptimizeSystemHelper.DisableClipboardSync().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableClipboardSync().ConfigureAwait(false);
+                break;
+
+            case "MessageSync":
+                if (isOn) await OptimizeSystemHelper.DisableMessageSync().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableMessageSync().ConfigureAwait(false);
+                break;
+
+            case "SettingSync":
+                if (isOn) await OptimizeSystemHelper.DisableSettingSync().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSettingSync().ConfigureAwait(false);
+                break;
+
+            case "VoiceActivation":
+                if (isOn) await OptimizeSystemHelper.DisableVoiceActivation().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableVoiceActivation().ConfigureAwait(false);
+                break;
+
+            case "FindMyDevice":
+                if (isOn) await OptimizeSystemHelper.DisableFindMyDevice().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableFindMyDevice().ConfigureAwait(false);
+                break;
+
+            case "ActivityFeed":
+                if (isOn) await OptimizeSystemHelper.DisableActivityFeed().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableActivityFeed().ConfigureAwait(false);
+                break;
+
+            case "Cdp":
+                if (isOn) await OptimizeSystemHelper.DisableCdp().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCdp().ConfigureAwait(false);
+                break;
+
+            case "DiagnosticsToast":
+                if (isOn) await OptimizeSystemHelper.DisableDiagnosticsToast().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableDiagnosticsToast().ConfigureAwait(false);
+                break;
+
+            case "OnlineSpeechPrivacy":
+                if (isOn) await OptimizeSystemHelper.DisableOnlineSpeechPrivacy().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableOnlineSpeechPrivacy().ConfigureAwait(false);
+                break;
+
+            case "LocationAccess":
+                if (isOn) await OptimizeSystemHelper.DisableLocationFeatures().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLocationFeatures().ConfigureAwait(false);
+                break;
+
+            case "LocationFeatures":
+                if (isOn) await OptimizeSystemHelper.DisableLocationFeatures().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLocationFeatures().ConfigureAwait(false);
+                break;
+
+            case "GameBar":
+                if (isOn) await OptimizeSystemHelper.DisableGameBar().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableGameBar().ConfigureAwait(false);
+                break;
+
+            case "QuickAccessHistory":
+                if (isOn) await OptimizeSystemHelper.DisableQuickAccessHistory().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableQuickAccessHistory().ConfigureAwait(false);
+                break;
+
+            case "MyPeople":
+                if (isOn) await OptimizeSystemHelper.DisableMyPeople().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableMyPeople().ConfigureAwait(false);
+                break;
+
+            case "Drivers":
+                if (isOn) await OptimizeSystemHelper.ExcludeDrivers().ConfigureAwait(false);
+                else await OptimizeSystemHelper.IncludeDrivers().ConfigureAwait(false);
+                break;
+
+            case "WindowsInk":
+                if (isOn) await OptimizeSystemHelper.DisableWindowsInk().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowsInk().ConfigureAwait(false);
+                break;
+
+            case "SpellingAndTypingFeatures":
+                if (isOn) await OptimizeSystemHelper.DisableSpellingAndTypingFeatures().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSpellingAndTypingFeatures().ConfigureAwait(false);
+                break;
+
+            case "FaxService":
+                if (isOn) await OptimizeSystemHelper.DisableFaxService().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableFaxService().ConfigureAwait(false);
+                break;
+
+            case "InsiderService":
+                if (isOn) await OptimizeSystemHelper.DisableInsiderService().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableInsiderService().ConfigureAwait(false);
+                break;
+
+            case "SmartScreen":
+                if (isOn) await OptimizeSystemHelper.DisableSmartScreen().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSmartScreen().ConfigureAwait(false);
+                break;
+
+            case "CloudClipboard":
+                if (isOn) await OptimizeSystemHelper.DisableCloudClipboard().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCloudClipboard().ConfigureAwait(false);
+                break;
+
+            case "StickyKeys":
+                if (isOn) await OptimizeSystemHelper.DisableStickyKeys().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableStickyKeys().ConfigureAwait(false);
+                break;
+
+            case "CastToDevice":
+                if (isOn) await OptimizeSystemHelper.RemoveCastToDevice().ConfigureAwait(false);
+                else await OptimizeSystemHelper.AddCastToDevice().ConfigureAwait(false);
+                break;
+
+            case "VBS":
+                if (isOn) await OptimizeSystemHelper.DisableVBS().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableVBS().ConfigureAwait(false);
+                break;
+
+            case "TaskbarToLeft":
+                if (isOn) await OptimizeSystemHelper.AlignTaskbarToLeft().ConfigureAwait(false);
+                else await OptimizeSystemHelper.AlignTaskbarToCenter().ConfigureAwait(false);
+                break;
+
+            case "SnapAssist":
+                if (isOn) await OptimizeSystemHelper.DisableSnapAssist().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSnapAssist().ConfigureAwait(false);
+                break;
+
+            case "Widgets":
+                if (isOn) await OptimizeSystemHelper.DisableWidgets().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWidgets().ConfigureAwait(false);
+                break;
+
+            case "Chat":
+                if (isOn) await OptimizeSystemHelper.DisableChat().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableChat().ConfigureAwait(false);
+                break;
+
+            case "FilesCompactMode":
+                if (isOn) await OptimizeSystemHelper.EnableFilesCompactMode().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableFilesCompactMode().ConfigureAwait(false);
+                break;
+
+            case "Stickers":
+                if (isOn) await OptimizeSystemHelper.DisableStickers().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableStickers().ConfigureAwait(false);
+                break;
+
+            case "EdgeDiscoverBar":
+                if (isOn) await OptimizeSystemHelper.DisableEdgeDiscoverBar().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableEdgeDiscoverBar().ConfigureAwait(false);
+                break;
+
+            case "EdgeTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableEdgeTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableEdgeTelemetry().ConfigureAwait(false);
+                break;
+
+            case "CoPilotAI":
+                if (isOn) await OptimizeSystemHelper.DisableCoPilotAI().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCoPilotAI().ConfigureAwait(false);
+                break;
+
+            case "WindowsRecall":
+                if (isOn) await OptimizeSystemHelper.DisableWindowsRecall().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowsRecall().ConfigureAwait(false);
+                break;
+
+            case "VisualStudioTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableVisualStudioTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableVisualStudioTelemetry().ConfigureAwait(false);
+                break;
+
+            case "NvidiaTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableNvidiaTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableNvidiaTelemetry().ConfigureAwait(false);
+                break;
+
+            case "ChromeTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableChromeTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableChromeTelemetry().ConfigureAwait(false);
+                break;
+
+            case "FirefoxTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableFirefoxTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableFirefoxTelemetry().ConfigureAwait(false);
+                break;
+
+            case "Hibernation":
+                if (isOn) await OptimizeSystemHelper.DisableHibernation().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableHibernation().ConfigureAwait(false);
+                break;
+
+            case "EndTask":
+                if (isOn) await OptimizeSystemHelper.EnableEndTask().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableEndTask().ConfigureAwait(false);
+                break;
+
+            case "WindowsAI":
+                if (isOn) await OptimizeSystemHelper.DisableWindowsAI().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowsAI().ConfigureAwait(false);
+                break;
+
+            default:
+                _ = LogHelper.Log($"Unhandled toggle tag queued: {tag}");
+                break;
         }
     }
 }

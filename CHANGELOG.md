@@ -27,6 +27,10 @@ All notable changes to this branch will be documented in this file.
 - Redesigned the logo and app icon for a refreshed look.
 - Enhanced the `Home` page performance monitoring.
 - Minor UI improvements across all pages for better user experience.
+- Enhanced the commands of the following feature toggles:
+  - `Disable CoPilot AI`
+  - `Disable Windows Recall`
+  - `Disable Windows AI`
 
 ## 1.6.0 - Released
 
