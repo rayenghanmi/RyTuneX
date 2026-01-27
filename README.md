@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/c1ba80fa-f76c-4fe0-bcff-f648b47fa5b8" alt="RyTuneX Logo" width="128">
+  <img src="https://github.com/user-attachments/assets/fa8a084e-5926-4735-ad83-d0395ec3b272" alt="RyTuneX Logo" width="256" height="256">
 </div>
 <br/>
 <p align="center" style="font-size: 1.1rem; color: #555;">
