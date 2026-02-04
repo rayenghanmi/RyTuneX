@@ -1,5 +1,19 @@
+<h1 align="center" style="font-size: 1.2rem; color: #e74c3c;">
+  <strong>⚠️ Project Status: Paused & Archived ⚠️</strong>
+</h1>
+
+<p align="center">
+  Development of <strong>RyTuneX</strong> is officially paused until further notice. This repository has been archived to preserve the current state of the project. While the existing features remain functional for their intended versions, no further updates, bug fixes, or support will be provided at this time.
+</p>
+
+<p align="center">
+  <em>As the developer, I’ve decided to step away and take a break from the project for the time being. Thanks to everyone for the support.</em>
+</p>
+
+---
+
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/fa8a084e-5926-4735-ad83-d0395ec3b272" alt="RyTuneX Logo" width="256" height="256">
+  <img src="https://github.com/user-attachments/assets/fa8a084e-5926-4735-ad83-d0395ec3b272" alt="RyTuneX Logo" width="128" height="128">
 </div>
 <br/>
 <p align="center" style="font-size: 1.1rem; color: #555;">
