@@ -165,7 +165,7 @@
   <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
     <value>סנן לפי:</value>
   </data>
-  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_UninstallButton.Text" xml:space="preserve">
     <value>הסר יישום(ים) נבחר(ים)</value>
   </data>
   <data name="Done" xml:space="preserve">
@@ -219,7 +219,7 @@
   <data name="UninstallationSuccess" xml:space="preserve">
     <value>היישום(ים) הבא(ים) הוסר(ו) בהצלחה</value>
   </data>
-  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_TempButton.Text" xml:space="preserve">
     <value>מחיקת טמפ מערכת</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
@@ -233,9 +233,6 @@
   </data>
   <data name="Capacity" xml:space="preserve">
     <value>קיבולת</value>
-  </data>
-  <data name="Caption" xml:space="preserve">
-    <value>כותרת</value>
   </data>
   <data name="Cores" xml:space="preserve">
     <value>ליבות</value>
@@ -311,9 +308,6 @@
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>ספריית Windows</value>
-  </data>
-  <data name="DeletingTemp" xml:space="preserve">
-    <value>מוחק קבצים זמניים</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>שגיאה במחיקת קבצים זמניים</value>
@@ -1293,10 +1287,10 @@
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>בטל שינויים</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>ייבוא</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>ייצוא</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
@@ -1634,5 +1628,17 @@
   </data>
   <data name="ScanResults" xml:space="preserve">
     <value>תוצאות הסריקה</value>
+  </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>חשבון Microsoft</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>חשבון מקומי</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>השבתת בינה מלאכותית של Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>מסיר תכונות בינה מלאכותית מפנקס הרשימות, Paint ותמונות, משבית אפקטי מצלמה ומיקרופון של Windows Studio ובינה מלאכותית למשחקים, ומסיר שילובי IA מהמעטפת כדי למקסם פרטיות וביצועים.</value>
   </data>
 </root>

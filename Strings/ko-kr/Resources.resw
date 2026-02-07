@@ -165,7 +165,7 @@
   <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
     <value>필터링 기준:</value>
   </data>
-  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_UninstallButton.Text" xml:space="preserve">
     <value>선택한 앱 제거</value>
   </data>
   <data name="Done" xml:space="preserve">
@@ -187,7 +187,7 @@
     <value>저희 서버에 가입하세요.</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>RyTuneX를 확인하세요.</value>
+    <value>추가 정보</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>피드백 보내기</value>
@@ -219,7 +219,7 @@
   <data name="UninstallationSuccess" xml:space="preserve">
     <value>다음 앱을 성공적으로 제거했습니다.</value>
   </data>
-  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_TempButton.Text" xml:space="preserve">
     <value>시스템 임시 파일 삭제</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
@@ -233,9 +233,6 @@
   </data>
   <data name="Capacity" xml:space="preserve">
     <value>용량</value>
-  </data>
-  <data name="Caption" xml:space="preserve">
-    <value>캡션</value>
   </data>
   <data name="Cores" xml:space="preserve">
     <value>코어</value>
@@ -311,9 +308,6 @@
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windows 디렉터리</value>
-  </data>
-  <data name="DeletingTemp" xml:space="preserve">
-    <value>임시 파일 삭제</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>임시 파일 삭제 오류</value>
@@ -1293,10 +1287,10 @@
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>변경 사항 되돌리기</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>수입</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>내보내다</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
@@ -1634,5 +1628,17 @@
   </data>
   <data name="ScanResults" xml:space="preserve">
     <value>검사 결과</value>
+  </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Microsoft 계정</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>로컬 계정</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Windows AI 비활성화</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>메모장, 그림판, 사진에서 AI 기능을 제거하고 Windows Studio 카메라/마이크 효과와 게임 AI를 비활성화하며, 개인 정보 보호와 성능을 극대화하기 위해 셸의 AI 통합을 제거합니다.</value>
   </data>
 </root>

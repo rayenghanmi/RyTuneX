@@ -165,7 +165,7 @@
   <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
     <value>篩選條件:</value>
   </data>
-  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_UninstallButton.Text" xml:space="preserve">
     <value>解除安裝所選應用程式</value>
   </data>
   <data name="Done" xml:space="preserve">
@@ -187,7 +187,7 @@
     <value>加入我們的伺服器</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>檢視 RyTuneX</value>
+    <value>更多資訊</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>傳送反饋</value>
@@ -219,7 +219,7 @@
   <data name="UninstallationSuccess" xml:space="preserve">
     <value>成功解除安裝了以下應用</value>
   </data>
-  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_TempButton.Text" xml:space="preserve">
     <value>刪除系統暫存檔案</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
@@ -233,9 +233,6 @@
   </data>
   <data name="Capacity" xml:space="preserve">
     <value>容量</value>
-  </data>
-  <data name="Caption" xml:space="preserve">
-    <value>標題</value>
   </data>
   <data name="Cores" xml:space="preserve">
     <value>核心</value>
@@ -311,9 +308,6 @@
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windows 目錄</value>
-  </data>
-  <data name="DeletingTemp" xml:space="preserve">
-    <value>刪除臨時檔案</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>刪除臨時檔案時出錯</value>
@@ -1289,10 +1283,10 @@
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>還原更改</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>進口</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>出口</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
@@ -1630,5 +1624,17 @@
   </data>
   <data name="ScanResults" xml:space="preserve">
     <value>掃描結果</value>
+  </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Microsoft 帳戶</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>本機帳戶</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>停用 Windows AI</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>執行全系統 AI 清理。停用 Copilot、Recall 與 AI Fabric 服務；移除記事本、小畫家與相片中的 AI 功能；停用 Windows Studio 的相機/麥克風效果與遊戲 AI；並移除系統殼層中的 AI 整合，以最大化隱私與效能。</value>
   </data>
 </root>

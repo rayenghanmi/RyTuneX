@@ -107,10 +107,47 @@
             IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
             IsSettingsVisible="True"
+            IsPaneToggleButtonVisible="False"
             ExpandedModeThresholdWidth="800"
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
             OpenPaneLength="220"
             Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
+            <NavigationView.PaneHeader>
+                <NavigationViewItem
+                    x:Name="UserProfileItem"
+                    IsTabStop="True"
+                    SelectsOnInvoked="False"
+                    Padding="12,8"
+                    Tapped="UserProfileButton_Click">
+                    <NavigationViewItem.Content>
+                        <Grid ColumnSpacing="12" Padding="0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <PersonPicture
+                                Grid.Column="0"
+                                Width="60"
+                                Height="60"
+                                DisplayName="{x:Bind UserName, Mode=OneWay}"
+                                Background="{ThemeResource AccentAAFillColorDefaultBrush}"
+                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"/>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock
+                                    Text="{x:Bind UserName, Mode=OneWay}"
+                                    FontWeight="SemiBold"
+                                    FontSize="14"
+                                    TextTrimming="CharacterEllipsis"/>
+                                <TextBlock
+                                    Text="{x:Bind AccountType, Mode=OneWay}"
+                                    FontSize="12"
+                                    TextWrapping="Wrap" 
+                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                    </NavigationViewItem.Content>
+                </NavigationViewItem>
+            </NavigationView.PaneHeader>
             <NavigationView.Resources>
                 <SolidColorBrush
                     x:Key="NavigationViewContentBackground"

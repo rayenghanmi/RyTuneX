@@ -25,8 +25,11 @@ public sealed partial class ShellPage : Page
         get;
     }
 
-    readonly bool isAdmin = new WindowsPrincipal(WindowsIdentity.GetCurrent())
-                  .IsInRole(WindowsBuiltInRole.Administrator);
+    public string UserName { get; } = Environment.UserName;
+    public string AccountType =>
+        string.Equals(Environment.UserDomainName, "MicrosoftAccount", StringComparison.OrdinalIgnoreCase)
+            ? "MicrosoftAccount".GetLocalized()
+            : "LocalAccount".GetLocalized();
 
     // Track pointer state to defer hide animation while hovered
     private bool _isPointerOver = false;
@@ -45,6 +48,23 @@ public sealed partial class ShellPage : Page
             AppTitleBar.Padding = new Thickness(120, 0, 0, 0);
         }
 
+        // Set corresponding visibility of Admin Icon based on administrator rights
+        this.Loaded += (s, e) =>
+        {
+            _ = Task.Run(() =>
+            {
+                var identity = WindowsIdentity.GetCurrent();
+                var principal = new WindowsPrincipal(identity);
+                var admin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    IsAdminIcon.Visibility = admin ? Visibility.Visible : Visibility.Collapsed;
+                    NotAdminIcon.Visibility = admin ? Visibility.Collapsed : Visibility.Visible;
+                });
+            });
+        };
+
         Current = this;
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;
@@ -54,12 +74,24 @@ public sealed partial class ShellPage : Page
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
 
-        // Set corresponding visibility of Admin Icon based on administrator rights
-        IsAdminIcon.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
-        NotAdminIcon.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
-
         // Attach pointer handlers for pausing/resuming notifications
         Loaded += ShellPage_Loaded;
+    }
+
+    private void UserProfileButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "ms-settings:account",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open account settings: {ex.Message}");
+        }
     }
 
     private void ShellPage_Loaded(object? sender, RoutedEventArgs e)
@@ -75,38 +107,18 @@ public sealed partial class ShellPage : Page
     {
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
 
-        KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
-        KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
-
-        // Add Ctrl+K keyboard accelerator for search focus
-        var searchAccelerator = new KeyboardAccelerator
-        {
-            Key = VirtualKey.K,
-            Modifiers = VirtualKeyModifiers.Control
-        };
-        searchAccelerator.Invoked += (s, args) =>
-        {
-            TitleBarSearchBox.Focus(FocusState.Programmatic);
-            args.Handled = true;
-        };
-        KeyboardAccelerators.Add(searchAccelerator);
-
         // Initialize search cache without blocking the UI thread
         WarmUpSearchCache();
 
         // Show restore point dialog if it's the first run
-        if (!ApplicationData.Current.LocalSettings.Values.ContainsKey("FirstRun"))
+        _ = Task.Run(async () =>
         {
-            DispatcherQueue.TryEnqueue(async () => await ShowRestorePointDialogAsync());
-        }
-        else
-        {
-            // Show restore point dialog if the setting is set to true
-            if ((bool)ApplicationData.Current.LocalSettings.Values["FirstRun"] != false)
+            var settings = ApplicationData.Current.LocalSettings.Values;
+            if (!settings.ContainsKey("FirstRun") || (bool)settings["FirstRun"])
             {
                 DispatcherQueue.TryEnqueue(async () => await ShowRestorePointDialogAsync());
             }
-        }
+        });
     }
 
     private static void WarmUpSearchCache()
@@ -119,7 +131,7 @@ public sealed partial class ShellPage : Page
             }
             catch (Exception ex)
             {
-                await LogHelper.LogError($"Search cache warmup failed: {ex.Message}");
+                _ = LogHelper.LogError($"Search cache warmup failed: {ex.Message}");
             }
         });
     }
@@ -171,7 +183,7 @@ public sealed partial class ShellPage : Page
         sender.ItemsSource = null;
     }
 
-    private void NavigateToSearchResult(SearchableItem item)
+    private async void NavigateToSearchResult(SearchableItem item)
     {
         try
         {
@@ -183,12 +195,12 @@ public sealed partial class ShellPage : Page
                 // Navigate to the page, passing the option tag as parameter if available
                 navigationService.NavigateTo(item.PageTypeName, item.OptionTag);
 
-                LogHelper.Log($"Search navigation to: {item.PageTypeName}, Option: {item.OptionTag ?? "none"}");
+                _ = LogHelper.Log($"Search navigation to: {item.PageTypeName}, Option: {item.OptionTag ?? "none"}");
             }
         }
         catch (Exception ex)
         {
-            LogHelper.LogError($"Error navigating to search result: {ex.Message}");
+            _ = LogHelper.LogError($"Error navigating to search result: {ex.Message}");
         }
     }
 
@@ -213,28 +225,6 @@ public sealed partial class ShellPage : Page
             : Visibility.Visible;
     }
 
-    private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null)
-    {
-        var keyboardAccelerator = new KeyboardAccelerator() { Key = key };
-
-        if (modifiers.HasValue)
-        {
-            keyboardAccelerator.Modifiers = modifiers.Value;
-        }
-
-        keyboardAccelerator.Invoked += OnKeyboardAcceleratorInvoked;
-
-        return keyboardAccelerator;
-    }
-
-    private static void OnKeyboardAcceleratorInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
-    {
-        var navigationService = App.GetService<INavigationService>();
-
-        var result = navigationService.GoBack();
-
-        args.Handled = result;
-    }
     private void IssueButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         Process.Start(new ProcessStartInfo
@@ -286,7 +276,7 @@ public sealed partial class ShellPage : Page
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
         };
-        await LogHelper.Log("Showing Restore Point Dialog");
+        _ = LogHelper.Log("Showing Restore Point Dialog");
         var result = await dialog.ShowAsync();
         if (neverShowAgain.IsChecked == true)
         {
@@ -296,18 +286,19 @@ public sealed partial class ShellPage : Page
         {
             try
             {
-                await LogHelper.Log("Opening SystemPropertiesProtection");
+                _ = LogHelper.Log("Opening SystemPropertiesProtection");
                 await OptimizationOptions.StartInCmd("SystemPropertiesProtection");
             }
             catch (Exception ex)
             {
-                await LogHelper.LogError($"Failed to open System Properties Protection: {ex.Message}");
+                _ = LogHelper.LogError($"Failed to open System Properties Protection: {ex.Message}");
             }
         }
     }
 
     public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration)
     {
+        App.NotifyTaskCompletion();
         Current?.ShowNotificationInstance(title, message, severity, duration);
     }
 

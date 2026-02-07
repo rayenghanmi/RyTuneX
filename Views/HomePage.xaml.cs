@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Contracts.Services;
+using Windows.Management.Deployment;
 
 namespace RyTuneX.Views;
 
@@ -22,9 +23,13 @@ public sealed partial class HomePage : Page
     private bool _cpuInitialized;
 
     // Network sampling state
-    private long _prevBytesReceived;
-    private long _prevBytesSent;
-    private DateTime _lastSampleTime = DateTime.UtcNow;
+    private long _prevBytesReceived = 0;
+    private long _prevBytesSent = 0;
+    private DateTime _lastSampleTime = DateTime.MinValue;
+
+    // Cached Resources
+    private readonly List<PerformanceCounter> _gpuCounters = new();
+    private DriveInfo? _systemDriveInfo;
 
     public HomePage()
     {
@@ -41,10 +46,16 @@ public sealed partial class HomePage : Page
     {
         try
         {
-            // Fetch static values once at the beginning
-            var installedAppsCount = await Task.Run(() => GetInstalledAppsCount()).ConfigureAwait(false);
-            var servicesCount = await Task.Run(() => GetServicesCount()).ConfigureAwait(false);
-            var processesCount = await Task.Run(() => GetProcessesCount()).ConfigureAwait(false);
+            // Initialize heavy counters on background thread once
+            await Task.Run(() => InitializeGpuCounters(), cancellationToken);
+            _systemDriveInfo = new DriveInfo(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System)) ?? "C:\\");
+
+            // Fetch static values
+            var installedAppsCount = await Task.Run(() => GetInstalledAppsCount(), cancellationToken).ConfigureAwait(false);
+            var servicesCount = await Task.Run(() => GetServicesCount(), cancellationToken).ConfigureAwait(false);
+
+            // Initial counts
+            var processesCount = await Task.Run(() => Process.GetProcesses().Length, cancellationToken).ConfigureAwait(false);
 
             // Initialize network counters
             _prevBytesReceived = GetTotalBytesReceived();
@@ -59,28 +70,35 @@ public sealed partial class HomePage : Page
                 var diskUsage = GetDiskUsage();
 
                 // Network throughput computed based on previous sample and elapsed time
-                var (networkUploadUsage, networkDownloadUsage) = GetNetworkThroughputKbps();
+                var (networkUploadUsage, networkDownloadUsage) = GetNetworkThroughputMbps();
 
                 // GPU usage remains somewhat heavier; run it without blocking UI but don't await long inside samplers
-                var gpuUsageTask = Task.Run(() => GetGpuUsage());
+                var gpuUsage = GetGpuUsageFromCache();
 
-                var gpuUsage = await gpuUsageTask.ConfigureAwait(false);
+                // Periodic Process update
+                if (DateTime.UtcNow.Second % 2 == 0)
+                {
+                    processesCount = Process.GetProcesses().Length;
+                }
 
                 try
                 {
                     // Update the UI on the main thread
                     DispatcherQueue.TryEnqueue(() =>
                     {
-                        if (this.Visibility == Visibility.Visible && !cancellationToken.IsCancellationRequested)
+                        if (Visibility == Visibility.Visible && !cancellationToken.IsCancellationRequested)
                         {
                             cpuUsageText.Text = $"{cpuUsage}%";
                             ramUsageText.Text = $"{ramUsage}%";
                             diskUsageText.Text = $"{diskUsage}%";
-                            networkUploadUsageText.Text = $"{networkUploadUsage} Kbps";
-                            networkDownloadUsageText.Text = $"{networkDownloadUsage} Kbps";
+
+                            networkUploadUsageText.Text = $"{networkUploadUsage:F1} Mb";
+                            networkDownloadUsageText.Text = $"{networkDownloadUsage:F1} Mb";
+
                             installedAppsCountText.Text = installedAppsCount.ToString();
                             processesCountText.Text = processesCount.ToString();
                             servicesCountText.Text = servicesCount.ToString();
+
                             gpuUsageText.Text = $"{gpuUsage}%";
                         }
                     });
@@ -107,6 +125,14 @@ public sealed partial class HomePage : Page
     private void HomePage_Unloaded(object sender, RoutedEventArgs e)
     {
         _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
+
+        // Clean up Performance Counters
+        foreach (var counter in _gpuCounters)
+        {
+            counter.Dispose();
+        }
+        _gpuCounters.Clear();
     }
 
     private int GetCpuUsage()
@@ -170,13 +196,10 @@ public sealed partial class HomePage : Page
     {
         try
         {
-            var systemDrive = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System)) ?? "C:\\";
-            var di = new DriveInfo(systemDrive);
-            if (!di.IsReady)
-                return 0;
+            if (_systemDriveInfo == null || !_systemDriveInfo.IsReady) return 0;
 
-            var total = di.TotalSize;
-            var free = di.TotalFreeSpace;
+            var total = _systemDriveInfo.TotalSize;
+            var free = _systemDriveInfo.TotalFreeSpace;
             var used = total - free;
             var percent = total == 0 ? 0 : (int)((used * 100L) / total);
             return Math.Clamp(percent, 0, 100);
@@ -188,34 +211,49 @@ public sealed partial class HomePage : Page
     }
 
     // Network throughput (Kbps) computed from previous sample
-    private (int uploadKbps, int downloadKbps) GetNetworkThroughputKbps()
+    private (double uploadKbps, double downloadKbps) GetNetworkThroughputMbps()
     {
         try
         {
             var now = DateTime.UtcNow;
-            var elapsed = (now - _lastSampleTime).TotalSeconds;
-            if (elapsed <= 0)
-                elapsed = 0.5; // fallback
-
             var currentReceived = GetTotalBytesReceived();
             var currentSent = GetTotalBytesSent();
+
+            if (_lastSampleTime == DateTime.MinValue)
+            {
+                _prevBytesReceived = currentReceived;
+                _prevBytesSent = currentSent;
+                _lastSampleTime = now;
+                return (0.0, 0.0);
+            }
+
+            var elapsed = (now - _lastSampleTime).TotalSeconds;
+            if (elapsed < 0.1) return (0.0, 0.0);
 
             var deltaReceived = currentReceived - _prevBytesReceived;
             var deltaSent = currentSent - _prevBytesSent;
 
-            // KB/s
-            var downloadKbps = (int)(deltaReceived / 1024.0 / elapsed);
-            var uploadKbps = (int)(deltaSent / 1024.0 / elapsed);
+            if (deltaReceived < 0 || deltaSent < 0)
+            {
+                _prevBytesReceived = currentReceived;
+                _prevBytesSent = currentSent;
+                _lastSampleTime = now;
+                return (0.0, 0.0);
+            }
+
+            // Mbps (Megabits per second) = (Bytes * 8) / 1,000,000
+            var downloadMbps = (deltaReceived * 8.0) / 1_000_000.0 / elapsed;
+            var uploadMbps = (deltaSent * 8.0) / 1_000_000.0 / elapsed;
 
             _prevBytesReceived = currentReceived;
             _prevBytesSent = currentSent;
             _lastSampleTime = now;
 
-            return (uploadKbps, downloadKbps);
+            return (Math.Round(uploadMbps, 1), Math.Round(downloadMbps, 1));
         }
         catch
         {
-            return (0, 0);
+            return (0.0, 0.0);
         }
     }
 
@@ -224,7 +262,7 @@ public sealed partial class HomePage : Page
     {
         return NetworkInterface.GetAllNetworkInterfaces()
             .Where(ni => ni.OperationalStatus == OperationalStatus.Up)
-            .Sum(ni => ni.GetIPv4Statistics().BytesReceived);
+            .Sum(ni => ni.GetIPStatistics().BytesReceived);
     }
 
     // Get total bytes sent
@@ -232,69 +270,66 @@ public sealed partial class HomePage : Page
     {
         return NetworkInterface.GetAllNetworkInterfaces()
             .Where(ni => ni.OperationalStatus == OperationalStatus.Up)
-            .Sum(ni => ni.GetIPv4Statistics().BytesSent);
+            .Sum(ni => ni.GetIPStatistics().BytesSent);
     }
 
     private int GetInstalledAppsCount()
     {
         try
         {
-            using var process = Process.Start(new ProcessStartInfo
-            {
-                FileName = "powershell",
-                Arguments = "-Command \"(Get-AppxPackage -AllUsers | Select-Object -Unique Name).Count\"",
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            });
-
-            return process != null && int.TryParse(process.StandardOutput.ReadToEnd().Trim(), out var appCount)
-                ? appCount
-                : 0;
+            var packageManager = new PackageManager();
+            return packageManager.FindPackages().Count();
         }
-        catch (Exception)
+        catch
         {
             return 0;
         }
     }
 
-    private async Task<int> GetProcessesCount()
-    {
-        return await Task.Run(() => Process.GetProcesses().Length);
-    }
-
     private int GetServicesCount()
     {
-        var services = ServiceController.GetServices();
-        return services.Length;
+        return ServiceController.GetServices().Length;
     }
 
-    public static async Task<int> GetGpuUsage()
+    // Initialize Counters once, don't recreate them in a loop
+    private void InitializeGpuCounters()
     {
         try
         {
             var category = new PerformanceCounterCategory("GPU Engine");
-            var counterNames = category.GetInstanceNames();
-            var gpuCounters = new List<PerformanceCounter>();
-            var result = 0f;
+            var instanceNames = category.GetInstanceNames();
 
-            foreach (var counterName in counterNames)
+            foreach (var instanceName in instanceNames)
             {
-                if (counterName.EndsWith("engtype_3D"))
+                if (instanceName.EndsWith("engtype_3D"))
                 {
-                    foreach (var counter in category.GetCounters(counterName))
+                    foreach (var counter in category.GetCounters(instanceName))
                     {
                         if (counter.CounterName == "Utilization Percentage")
                         {
-                            gpuCounters.Add(counter);
+                            _gpuCounters.Add(counter);
                         }
                     }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to init GPU counters: {ex.Message}");
+        }
+    }
 
-            gpuCounters.ForEach(x => _ = x.NextValue());
-            await Task.Delay(200);
-            gpuCounters.ForEach(x => result += x.NextValue());
+    private int GetGpuUsageFromCache()
+    {
+        if (_gpuCounters.Count == 0) return 0;
+
+        try
+        {
+            var result = 0f;
+            foreach (var counter in _gpuCounters)
+            {
+                result += counter.NextValue();
+            }
             return (int)Math.Clamp(result, 0, 100);
         }
         catch
@@ -366,7 +401,7 @@ public sealed partial class HomePage : Page
         if (sender is Grid grid)
         {
             grid.Background = (Brush)Application.Current.Resources["CardBackgroundFillColorSecondaryBrush"];
-            this.ProtectedCursor = Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Hand);
+            ProtectedCursor = Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Hand);
         }
     }
 
@@ -375,7 +410,7 @@ public sealed partial class HomePage : Page
         if (sender is Grid grid)
         {
             grid.Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
-            this.ProtectedCursor = null;
+            ProtectedCursor = null;
         }
     }
 

@@ -260,6 +260,13 @@
                     <ToggleSwitch x:Name="WindowsRecall" Tag="WindowsRecall"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Feature_DisableWindowsAI">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF4A5;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="WindowsAI" Tag="WindowsAI"/>
+                </controls:SettingsCard>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

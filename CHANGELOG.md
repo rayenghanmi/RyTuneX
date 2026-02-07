@@ -1,7 +1,39 @@
-# CHANGELOG.md
+﻿# CHANGELOG.md
 
 All notable changes to this branch will be documented in this file.
 
+
+## 1.6.2 - Released
+
+> [!IMPORTANT]
+> RyTuneX is now exclusively available in the [Microsoft Store](https://apps.microsoft.com/detail/9PDH8M7HF2SQ), in-app updates have been removed and all updates will be delivered through the Store. Sideloadable packages are no longer provided.
+
+### Added
+
+- Added more Win32 apps to the debloat list by expanding the detection methods.
+- Added user profile header to the navigation view with account type display and quick access to account settings.
+- Added taskbar flashing and audio alerts for background task completion.
+- Introduced a new `Disable Windows AI` option in the `Features` page to disable Windows AI features.
+
+### Fixes
+
+- Fixed an issue where navigating to any page other than `Settings` would cause the navigation item to stuck for a few seconds till the page finishes loading.
+
+### Changes
+
+- Upgraded the app's target framework to .NET 10.
+- Enhanced the update process to improve reliability and performance.
+- Improved the system info fetching process for better accuracy.
+- Optimized the icon extraction process for more app icons to be displayed correctly.
+- Replaced the old driver extraction method with dism.exe for better compatibility.
+- Redesigned the logo and app icon for a refreshed look.
+- Enhanced the `Home` page performance monitoring.
+- Minor UI improvements across all pages for better user experience.
+- Enhanced the commands of the following feature toggles:
+  - `Disable CoPilot AI`
+  - `Disable Windows Recall`
+  - `Disable Windows AI`
+- RyTuneX is now exclusively available in the Microsoft Store, in-app updates have been removed and all updates will be delivered through the Store. Sideloadable packages are no longer provided.
 
 ## 1.6.0 - Released
 

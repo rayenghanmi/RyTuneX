@@ -48,16 +48,17 @@
                         Orientation="Vertical"
                         VerticalAlignment="Center"
                         Visibility="Collapsed">
-                <Grid>
-                    <StackPanel Orientation="Horizontal" x:Name="TempButtonStack">
-                        <FontIcon Glyph="&#xEA99;" Margin="0,0,12,0"/>
-                        <Button x:Uid="DebloatSystemPage_TempButton" Click="TempButton_Click"/>
+                <Button x:Name="TempButton" Click="TempButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <ProgressRing x:Name="TempButtonProgressRing" 
+                            Width="16" 
+                            Height="16" 
+                            Visibility="Collapsed"
+                            IsActive="True"/>
+                        <FontIcon x:Name="TempButtonIcon" Glyph="&#xEA99;" FontSize="16"/>
+                        <TextBlock x:Uid="DebloatSystemPage_TempButton"/>
                     </StackPanel>
-                    <StackPanel x:Name="TempStack" Visibility="Collapsed">
-                        <ProgressBar x:Name="TempProgress" Margin="3" IsIndeterminate="True" Visibility="Collapsed"/>
-                        <TextBlock x:Name="TempStatusText" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap"/>
-                    </StackPanel>
-                </Grid>
+                </Button>
             </StackPanel>
 
             <TextBlock Grid.Row="1"
@@ -83,7 +84,12 @@
                     <ComboBoxItem x:Uid="DebloatSystemPage_Win32Apps" Tag="Win32"/>
                 </ComboBox>
 
-                <Button x:Uid="DebloatSystemPage_UninstallButton"  Margin="12,6,0,6" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}"/>
+                <Button Margin="12,6,0,6" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon Glyph="&#xE74D;" FontSize="16"/>
+                        <TextBlock x:Uid="DebloatSystemPage_UninstallButton"/>
+                    </StackPanel>
+                </Button>
             </controls:WrapPanel>
         </Grid>
 

@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using CommunityToolkit.WinUI;
@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Microsoft.Win32;
 using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
@@ -16,6 +15,8 @@ public sealed partial class DebloatSystemPage : Page
 {
     public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
+    private CancellationTokenSource? _uninstallBatchCts;
+    private Guid? _uninstallBatchRegistrationId;
     private List<Tuple<string, string, bool>> allApps = new();
     private string? _pendingScrollTarget;
 
@@ -25,6 +26,24 @@ public sealed partial class DebloatSystemPage : Page
         LogHelper.Log("Initializing DebloatSystemPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += DebloatSystemPage_Loaded;
+        Unloaded += DebloatSystemPage_Unloaded;
+    }
+
+    private void DebloatSystemPage_Unloaded(object? sender, RoutedEventArgs e)
+    {
+        try
+        {
+            // Cancel any ongoing operations for this page
+            try { cancellationTokenSource.Cancel(); } catch { }
+
+            if (_uninstallBatchCts != null)
+            {
+                try { _uninstallBatchCts.Cancel(); } catch { }
+                _uninstallBatchCts.Dispose();
+                _uninstallBatchCts = null;
+            }
+        }
+        catch { }
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -85,7 +104,7 @@ public sealed partial class DebloatSystemPage : Page
                 appsFilter.IsEnabled = false;
             });
 
-            await LogHelper.Log("Loading InstalledApps");
+            _ = LogHelper.Log("Loading InstalledApps");
 
             List<Tuple<string, string, bool>> installedApps;
             if (win32Only)
@@ -126,11 +145,11 @@ public sealed partial class DebloatSystemPage : Page
         }
         catch (OperationCanceledException ex)
         {
-            await LogHelper.Log($"Operation canceled: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.Log($"Operation canceled: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
         catch (Exception ex)
         {
-            await LogHelper.Log($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.Log($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
 
@@ -146,6 +165,13 @@ public sealed partial class DebloatSystemPage : Page
         {
             return;
         }
+
+        // Mark explicit operation and register a CTS for this uninstall batch so it can be cancelled via the central manager
+        OperationCancellationManager.EnterOperation();
+        _uninstallBatchCts?.Dispose();
+        _uninstallBatchCts = new CancellationTokenSource();
+        _uninstallBatchRegistrationId = OperationCancellationManager.Register(_uninstallBatchCts);
+        var batchCt = _uninstallBatchCts.Token;
 
         uninstallButton.IsEnabled = false;
         appsFilter.IsEnabled = false;
@@ -179,12 +205,18 @@ public sealed partial class DebloatSystemPage : Page
 
                 try
                 {
+                    if (batchCt.IsCancellationRequested)
+                    {
+                        // Stop processing further uninstalls
+                        break;
+                    }
+
                     await UninstallApps(selectedAppName, isWin32App);
                     successfulUninstalls.Add(selectedAppName);
                 }
                 catch (Exception ex)
                 {
-                    await LogHelper.LogError($"Error uninstalling {selectedAppName}: {ex.Message}\nStack Trace: {ex.StackTrace}");
+                    _ = LogHelper.LogError($"Error uninstalling {selectedAppName}: {ex.Message}\nStack Trace: {ex.StackTrace}");
                     failedUninstalls.Add(selectedAppName);
                 }
 
@@ -221,10 +253,15 @@ public sealed partial class DebloatSystemPage : Page
             appsFilter_SelectionChanged(appsFilter, e);
 
         }
+        catch (OperationCanceledException)
+        {
+            // Batch was cancelled
+            _ = LogHelper.Log("Uninstall batch cancelled by user/system.");
+        }
         catch (Exception ex)
         {
             // Log the error
-            await LogHelper.LogError($"Error during uninstallation process: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error during uninstallation process: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
         finally
         {
@@ -239,12 +276,26 @@ public sealed partial class DebloatSystemPage : Page
                 appsFilter.IsEnabled = true;
                 appTreeView.IsEnabled = true;
             });
+
+            // Cleanup uninstall batch CTS and unregister
+            if (_uninstallBatchRegistrationId.HasValue)
+            {
+                OperationCancellationManager.Unregister(_uninstallBatchRegistrationId.Value);
+                _uninstallBatchRegistrationId = null;
+            }
+            if (_uninstallBatchCts != null)
+            {
+                _uninstallBatchCts.Dispose();
+                _uninstallBatchCts = null;
+            }
+            // Clear explicit operation marker
+            OperationCancellationManager.ExitOperation();
         }
     }
 
     private static async Task UninstallApps(string appName, bool isWin32App)
     {
-        await LogHelper.Log($"Uninstalling: {appName}");
+        _ = LogHelper.Log($"Uninstalling: {appName}");
 
         if (!isWin32App)
         {
@@ -255,8 +306,8 @@ public sealed partial class DebloatSystemPage : Page
 
                 // Create the process to try running Remove-AppxProvisionedPackage first
                 var processInfoProvisioned = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveProvisioned}")
+                        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"), $"/c {cmdCommandRemoveProvisioned}")
                 {
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -272,14 +323,14 @@ public sealed partial class DebloatSystemPage : Page
                     // Log errors but ignore them and proceed to the second command
                     if (!string.IsNullOrEmpty(errorProvisioned))
                     {
-                        await LogHelper.LogError(errorProvisioned);
+                        _ = LogHelper.LogError(errorProvisioned);
                     }
                 }
 
                 // Run Remove-AppxPackage
                 var processInfoAppxPackage = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommandRemoveAppxPackage}")
+                        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"), $"/c {cmdCommandRemoveAppxPackage}")
                 {
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -294,7 +345,7 @@ public sealed partial class DebloatSystemPage : Page
 
                     if (!string.IsNullOrEmpty(errorAppxPackage))
                     {
-                        await LogHelper.LogError(errorAppxPackage);
+                        _ = LogHelper.LogError(errorAppxPackage);
                         throw new Exception($"Failed to remove Appx package for {appName}: {errorAppxPackage}");
                     }
                 }
@@ -309,8 +360,8 @@ public sealed partial class DebloatSystemPage : Page
                 var cmdCommand = $"powershell.exe -ExecutionPolicy Bypass -File \"{scriptFilePath}\" -UninstallEdge -RemoveEdgeData -NonInteractive";
 
                 var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"), $"/c {cmdCommand}")
+                        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"), $"/c {cmdCommand}")
                 {
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -325,7 +376,7 @@ public sealed partial class DebloatSystemPage : Page
 
                     if (!string.IsNullOrEmpty(error))
                     {
-                        await LogHelper.LogError(error);
+                        _ = LogHelper.LogError(error);
                     }
                 }
             }
@@ -334,64 +385,23 @@ public sealed partial class DebloatSystemPage : Page
         {
             try
             {
-                // Define the registry paths for installed programs
-                var registryKeys = new[]
-                {
-                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",            // 64-bit on 64-bit systems, 32-bit on 32-bit systems
-                    @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" // 32-bit on 64-bit systems
-                };
-
-                string? uninstallString = null;
-                foreach (var registryKey in registryKeys)
-                {
-                    // Open the registry keys from both LocalMachine and CurrentUser
-                    using (var keyLocalMachine = Registry.LocalMachine.OpenSubKey(registryKey))
-                    using (var keyCurrentUser = Registry.CurrentUser.OpenSubKey(registryKey))
-                    {
-                        if (keyLocalMachine != null || keyCurrentUser != null)
-                        {
-                            var subKeyNames = keyLocalMachine?.GetSubKeyNames().Concat(keyCurrentUser?.GetSubKeyNames() ?? Enumerable.Empty<string>()) ?? Enumerable.Empty<string>();
-
-                            // Loop through the combined subkeys
-                            foreach (var subKeyName in subKeyNames)
-                            {
-                                using var subKey = keyLocalMachine?.OpenSubKey(subKeyName) ?? keyCurrentUser?.OpenSubKey(subKeyName);
-                                var displayName = subKey?.GetValue("DisplayName")?.ToString();
-
-                                // Check if the display name matches the app name
-                                if (!string.IsNullOrEmpty(displayName) && displayName.Equals(appName, StringComparison.OrdinalIgnoreCase))
-                                {
-                                    uninstallString = subKey?.GetValue("QuietUninstallString") as string;
-
-                                    // If no QuietUninstallString found, try UninstallString
-                                    if (string.IsNullOrEmpty(uninstallString))
-                                    {
-                                        uninstallString = subKey?.GetValue("UninstallString") as string;
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    // If the uninstall string is found, break out of the loop
-                    if (!string.IsNullOrEmpty(uninstallString)) break;
-                }
+                var uninstallString = OptimizationOptions.GetWin32UninstallString(appName);
 
                 if (string.IsNullOrEmpty(uninstallString))
                 {
-                    await LogHelper.LogError($"Uninstall string for {appName} not found in registry.");
+                    _ = LogHelper.LogError($"Uninstall string for {appName} not found in uninstall roots.");
                 }
 
                 // If the uninstall string contains spaces, ensure it's quoted properly
-                if (!uninstallString.StartsWith("\"") && !uninstallString.EndsWith("\""))
+                if (uninstallString != null && !uninstallString.StartsWith("\"") && !uninstallString.EndsWith("\""))
                 {
                     uninstallString = $"\"{uninstallString}\"";
                 }
 
                 // Execute the uninstall command using cmd
                 var processInfo = new ProcessStartInfo(Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"),
                         $"/c {uninstallString}")
                 {
                     RedirectStandardError = true,
@@ -407,19 +417,19 @@ public sealed partial class DebloatSystemPage : Page
 
                 if (!string.IsNullOrEmpty(error))
                 {
-                    await LogHelper.LogError(error);
+                    _ = LogHelper.LogError(error);
                 }
 
                 if (process.ExitCode != 0)
                 {
-                    await LogHelper.LogError($"Uninstallation failed with exit code: {process.ExitCode}");
+                    _ = LogHelper.LogError($"Uninstallation failed with exit code: {process.ExitCode}");
                 }
 
-                await LogHelper.Log($"Successfully uninstalled {appName}");
+                _ = LogHelper.Log($"Successfully uninstalled {appName}");
             }
             catch (Exception ex)
             {
-                await LogHelper.LogError($"Error uninstalling {appName}: {ex.Message}");
+                _ = LogHelper.LogError($"Error uninstalling {appName}: {ex.Message}");
             }
         }
     }
@@ -452,18 +462,17 @@ public sealed partial class DebloatSystemPage : Page
         try
         {
             // Update UI to show progress
-            TempStack.Visibility = Visibility.Visible;
-            TempProgress.Visibility = Visibility.Visible;
-            TempButtonStack.Visibility = Visibility.Collapsed;
-            TempStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("DeletingTemp") + "...";
+            TempButton.IsEnabled = false;
+            TempButtonProgressRing.Visibility = Visibility.Visible;
+            TempButtonIcon.Visibility = Visibility.Collapsed;
 
             // Execute temp removal commands
             var result = await OptimizeSystemHelper.RemoveTempFiles();
 
             // Reset UI after task completion
-            TempStack.Visibility = Visibility.Collapsed;
-            TempProgress.Visibility = Visibility.Collapsed;
-            TempButtonStack.Visibility = Visibility.Visible;
+            TempButton.IsEnabled = true;
+            TempButtonProgressRing.Visibility = Visibility.Collapsed;
+            TempButtonIcon.Visibility = Visibility.Visible;
 
             if (result)
             {
@@ -485,9 +494,9 @@ public sealed partial class DebloatSystemPage : Page
         catch (Exception)
         {
             // Restore UI in case of unexpected error
-            TempStack.Visibility = Visibility.Collapsed;
-            TempProgress.Visibility = Visibility.Collapsed;
-            TempButtonStack.Visibility = Visibility.Visible;
+            TempButton.IsEnabled = true;
+            TempButtonProgressRing.Visibility = Visibility.Collapsed;
+            TempButtonIcon.Visibility = Visibility.Visible;
 
             // Show error notification
             App.ShowNotification(
