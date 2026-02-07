@@ -21,8 +21,6 @@
 
 ## Installation
 
-### Option 1: Microsoft Store (Recommended)
-
 Install RyTuneX directly from the Microsoft Store:  
 
 [![Microsoft Store](https://img.shields.io/badge/Microsoft_Store-Install-blue?logo=microsoft&style=for-the-badge)](https://apps.microsoft.com/detail/9PDH8M7HF2SQ)
@@ -32,30 +30,8 @@ Install RyTuneX directly from the Microsoft Store:
 - Verified and secure installation  
 - No manual steps  
 
-### Option 2: GitHub Releases (MSIX)
-
-1. **Download**  
-   - Get the latest `.msixbundle` from GitHub Releases:  
-
-[![GitHub Releases](https://img.shields.io/badge/GitHub-Releases-black?logo=github&style=for-the-badge)](https://github.com/rayenghanmi/RyTuneX/releases/latest)
-
-2. **Install**  
-   - Double-click the downloaded `.msixbundle` file.  
-   - Windows App Installer will open automatically.
-
-3. **Confirm**  
-   - Click **Install** and wait for completion.
-
-### Option 3: Automatic Installation (PowerShell)
-
-Install directly via PowerShell (downloads and installs the MSIX bundle automatically):
-
-```shell
-irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/main/install.ps1" | iex
-```
-
 > [!IMPORTANT]  
-> Always install RyTuneX from official sources: the **Microsoft Store**, the **GitHub releases page**, or via the **official PowerShell installer** to ensure authenticity and security.
+> Always install RyTuneX from **Microsoft Store** to ensure authenticity and security (RyTuneX no longer provides packages for sideloading).
 
 ## Why Choose RyTuneX?
 - **Effortless Optimization**: Instantly boost your system's speed and reliability.
