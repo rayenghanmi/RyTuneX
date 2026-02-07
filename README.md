@@ -23,7 +23,14 @@
 
 Install RyTuneX directly from the Microsoft Store:  
 
-[![Microsoft Store](https://img.shields.io/badge/Microsoft_Store-Install-blue?logo=microsoft&style=for-the-badge)](https://apps.microsoft.com/detail/9PDH8M7HF2SQ)
+<a href="https://apps.microsoft.com/detail/9PDH8M7HF2SQ?referrer=appbadge&mode=full"
+     target="_blank" rel="noopener noreferrer">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://get.microsoft.com/images/en-us%20dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://get.microsoft.com/images/en-us%20light.svg" />
+    <img alt="Get it from Microsoft" src="https://get.microsoft.com/images/en-us%20light.svg" width="200" />
+  </picture>
+</a>
 
 **Benefits**
 - Automatic updates  
