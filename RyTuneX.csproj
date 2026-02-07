@@ -7,30 +7,30 @@
     <RootNamespace>RyTuneX</RootNamespace>
     <ApplicationIcon>Assets/WindowIcon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Platforms>x86</Platforms>
-    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+	<Platforms>x86;x64</Platforms>
+	<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <PublishProfile>Properties\PublishProfiles\win-$(Platform).pubxml</PublishProfile>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWinUI>true</UseWinUI>
-    <WinUISDKReferences>false</WinUISDKReferences>
-    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <WinUISDKReferences>true</WinUISDKReferences>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AppxBundleAutoResourcePackageQualifiers>Scale|DXFeatureLevel</AppxBundleAutoResourcePackageQualifiers>
+    <AppxDefaultResourceQualifiers>Language=en-US;ar-TN;de;es-ES;fr-FR;he-IL;it-IT;ja-JP;ko-KR;pt-BR;ru-RU;tr-TR;vi-VN;zh-Hans;zh-Hant|Contrast=standard|Scale=200|HomeRegion=001|TargetSize=256|LayoutDirection=LTR|DXFeatureLevel=DX9|Configuration=|AlternateForm=|Platform=UAP</AppxDefaultResourceQualifiers>
+    <WindowsAppSDKSelfContained>false</WindowsAppSDKSelfContained>
     <EnableMsixTooling>true</EnableMsixTooling>
-    <PublishTrimmed>true</PublishTrimmed>
-    <TrimMode>full</TrimMode>
-    <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
-    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxBundle>Never</AppxBundle>
+    <AppxBundle>Always</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-    <PackageCertificateThumbprint>953E3900D6095107A760D46C96156DA557D4F889</PackageCertificateThumbprint>
     <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <Version>1.6.1</Version>
+    <Version>1.6.2</Version>
     <Authors>Rayen Ghanmi</Authors>
     <GenerateTestArtifacts>False</GenerateTestArtifacts>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,16 +44,19 @@
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
+  <PropertyGroup Label="Globals">
+    <WebView2EnableCsWinRTProjection>False</WebView2EnableCsWinRTProjection>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
 	<PublishReadyToRunEmitSymbols>false</PublishReadyToRunEmitSymbols>
   	<GeneratePriDebugFiles>false</GeneratePriDebugFiles>
-  	<NoWarn>$(NoWarn);1591</NoWarn>
   	<GenerateDocumentationFile>false</GenerateDocumentationFile>
   	<CsWinRTRcwFactoryFallbackGeneratorForceOptOut>true</CsWinRTRcwFactoryFallbackGeneratorForceOptOut>
   	<CsWinRTIIDOptimizerOptOut>false</CsWinRTIIDOptimizerOptOut>
   	<EventSourceSupport>false</EventSourceSupport>
   	<EnableDynamicLoading>false</EnableDynamicLoading>
-  	<InvariantGlobalization>true</InvariantGlobalization>
+  	<InvariantGlobalization>false</InvariantGlobalization>
   	<EnableCrashDump>false</EnableCrashDump>
   	<EnableMiniDump>false</EnableMiniDump>
   	<IlcFoldIdenticalMethods>true</IlcFoldIdenticalMethods>
@@ -65,7 +68,7 @@
 	<AppxPackageCompressionEnabled>true</AppxPackageCompressionEnabled>
 	<Deterministic>true</Deterministic>
 	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-	<IlcInvariantGlobalization>true</IlcInvariantGlobalization>
+	<IlcInvariantGlobalization>false</IlcInvariantGlobalization>
 	<StripSymbols>true</StripSymbols>
 	<IlcDisableReflection>false</IlcDisableReflection>
 	<IlcGenerateCompleteTypeMetadata>true</IlcGenerateCompleteTypeMetadata>

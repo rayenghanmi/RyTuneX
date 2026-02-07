@@ -3,7 +3,10 @@
 All notable changes to this branch will be documented in this file.
 
 
-## 1.6.1 - Unreleased
+## 1.6.2 - Released
+
+> [!IMPORTANT]
+> RyTuneX is now exclusively available in the [Microsoft Store](https://apps.microsoft.com/detail/9PDH8M7HF2SQ), in-app updates have been removed and all updates will be delivered through the Store. Sideloadable packages are no longer provided.
 
 ### Added
 
@@ -18,7 +21,6 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
-- Reduced the msix package size by ~48.8% by removing unnecessary dependencies and enabling trimming.
 - Upgraded the app's target framework to .NET 10.
 - Enhanced the update process to improve reliability and performance.
 - Improved the system info fetching process for better accuracy.
@@ -31,6 +33,7 @@ All notable changes to this branch will be documented in this file.
   - `Disable CoPilot AI`
   - `Disable Windows Recall`
   - `Disable Windows AI`
+- RyTuneX is now exclusively available in the Microsoft Store, in-app updates have been removed and all updates will be delivered through the Store. Sideloadable packages are no longer provided.
 
 ## 1.6.0 - Released
 

@@ -187,7 +187,7 @@
     <value>저희 서버에 가입하세요.</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>RyTuneX를 확인하세요.</value>
+    <value>추가 정보</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>피드백 보내기</value>

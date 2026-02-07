@@ -13,16 +13,11 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Contracts.Services;
-using RyTuneX.Core.Serialization;
 using RyTuneX.Helpers;
 using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace RyTuneX.Views;
-
-public record GitHubRelease(
-    [property: JsonPropertyName("tag_name")] string TagName
-);
 
 public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 {
@@ -44,7 +39,6 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-    private static readonly HttpClient httpClient = new();
     private readonly IThemeSelectorService _themeSelectorService;
 
     private string _versionDescription;
@@ -216,188 +210,6 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error opening log file: {ex.Message}\nStack Trace: {ex.StackTrace}");
-        }
-    }
-
-    public static async Task<bool?> CheckForUpdatesAsync(XamlRoot xaml)
-    {
-        try
-        {
-            // Only fetch the latest release
-            var requestUri = "https://api.github.com/repos/rayenghanmi/rytunex/releases/latest";
-
-            using var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
-            request.Headers.UserAgent.ParseAdd("RyTuneX/1.0");
-
-            var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            response.EnsureSuccessStatusCode();
-
-            // Stream the response directly into the deserializer
-            using var stream = await response.Content.ReadAsStreamAsync();
-
-            // Use Source Generation context for near-instant parsing
-            var release = await JsonSerializer.DeserializeAsync(stream, RyTuneXJsonContext.Default.GitHubRelease);
-
-            if (release?.TagName != null)
-            {
-                // Get the latest release version (e.g., "v1.0.0")
-                latestVersionString = release.TagName;
-
-                // Remove leading 'v'
-                if (latestVersionString.StartsWith("v"))
-                {
-                    latestVersionString = latestVersionString.Substring(1);
-                }
-
-                // Get the current assembly version
-                var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-
-                // Parse the latest version string into a Version object
-                var latestVersion = new Version(latestVersionString);
-
-                // Compare versions: check if the latest version is greater than the current version
-                var isUpdateAvailable = latestVersion > currentVersion;
-
-                Debug.WriteLine($"Is update available: {isUpdateAvailable}");
-                _ = LogHelper.Log($"Is update available: {isUpdateAvailable}");
-
-                return isUpdateAvailable;
-            }
-        }
-        catch (Exception ex)
-        {
-            _ = LogHelper.LogError($"Update Check Failed: {ex.Message}");
-            var networkError = new ContentDialog()
-            {
-                XamlRoot = xaml,
-                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                Title = "UpdateTitle".GetLocalized(),
-                Content = "NetworkError".GetLocalized(),
-                CloseButtonText = "Close".GetLocalized()
-            };
-            await networkError.ShowAsync();
-        }
-
-        return null;
-    }
-
-    private async void UpdateButton_Click(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            var res = await CheckForUpdatesAsync(XamlRoot);
-            if (res == false)
-            {
-                var updateUnavailable = new ContentDialog()
-                {
-                    XamlRoot = XamlRoot,
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                    Title = "UpdateTitle".GetLocalized(),
-                    Content = "UnavailableUpdate0".GetLocalized() + latestVersionString + "UnavailableUpdate1".GetLocalized(),
-                    CloseButtonText = "Close".GetLocalized()
-                };
-                await updateUnavailable.ShowAsync();
-            }
-            if (res == true)
-            {
-                var updateAvailable = new ContentDialog()
-                {
-                    XamlRoot = XamlRoot,
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                    Title = "UpdateTitle".GetLocalized(),
-                    Content = "AvailableUpdateContent0".GetLocalized() + latestVersionString + "AvailableUpdateContent1".GetLocalized(),
-                    CloseButtonText = "Close".GetLocalized(),
-                    PrimaryButtonText = "Update".GetLocalized(),
-                    PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
-                };
-                // Show the dialog and await the result
-                var result = await updateAvailable.ShowAsync();
-
-                // Check if the "Update" button was clicked
-                if (result == ContentDialogResult.Primary)
-                {
-                    // Run the installation module
-                    var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneXSetup.exe";
-                    await InstallRyTuneX(downloadUrl);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            _ = LogHelper.LogError($"Error during update check: {ex.Message}\nStack Trace: {ex.StackTrace}");
-        }
-    }
-
-    public async Task InstallRyTuneX(string downloadUrl)
-    {
-        var tempPath = Path.GetTempPath();
-        var setupFilePath = Path.Combine(tempPath, "RyTuneXSetup.exe");
-
-        try
-        {
-            UpdateButton.Visibility = Visibility.Collapsed;
-            UpdateStack.Visibility = Visibility.Visible;
-            UpdateProgress.ShowError = false;
-            UpdateProgress.Visibility = Visibility.Visible;
-            UpdateStatusText.Text = "Downloading...";
-
-            // Download the setup file
-            using (var response = await httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead))
-            {
-                response.EnsureSuccessStatusCode();
-
-                using var fileStream = new FileStream(setupFilePath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
-                await response.Content.CopyToAsync(fileStream);
-            }
-
-            // Run the setup file with the --silent argument
-            UpdateStatusText.Text = "Installing...";
-            Debug.WriteLine("Running RyTuneXSetup.exe...");
-            var setupProcess = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                    ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
-                    : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"),
-                    Arguments = $"/c \"{setupFilePath} --silent\"",
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    Verb = "runas"
-                }
-            };
-            setupProcess.Start();
-            await setupProcess.WaitForExitAsync();
-            Debug.WriteLine("RyTuneX Setup.exe has finished execution.");
-        }
-        catch (Exception ex)
-        {
-            UpdateStatusText.Text = "UnexpectedError".GetLocalized();
-            UpdateProgress.ShowError = true;
-            _ = LogHelper.LogError($"Error during installation: {ex.Message}\nStack Trace: {ex.StackTrace}");
-        }
-        finally
-        {
-            // Cleanup the setup file
-            if (File.Exists(setupFilePath))
-            {
-                try
-                {
-                    File.Delete(setupFilePath);
-                    Debug.WriteLine("Deleted RyTuneXSetup.exe.");
-                }
-                catch (Exception ex)
-                {
-                    _ = LogHelper.LogError($"Error deleting setup file: {ex.Message}");
-                }
-            }
-            UpdateStatusText.Text = "Done".GetLocalized();
-            UpdateButton.Visibility = Visibility.Visible;
-            UpdateStack.Visibility = Visibility.Collapsed;
-            UpdateProgress.Visibility = Visibility.Collapsed;
         }
     }
 

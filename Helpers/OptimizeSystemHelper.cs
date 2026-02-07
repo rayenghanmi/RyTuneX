@@ -2011,7 +2011,7 @@ public static partial class OptimizeSystemHelper
             "PowerShell.exe -NoProfile -Command \"wevtutil cl System\"",
             "PowerShell.exe -NoProfile -Command \"wevtutil cl Application\"",
             "ipconfig /flushdns",
-            "dism /Online /Cleanup-Image /StartComponentCleanup /Quiet"
+            //"dism /Online /Cleanup-Image /StartComponentCleanup /Quiet"
             };
 
             // Commands that require Explorer to be killed

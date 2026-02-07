@@ -9,6 +9,5 @@ namespace RyTuneX.Core.Serialization;
     WriteIndented = false)]
 
 [JsonSerializable(typeof(List<string>))]
-[JsonSerializable(typeof(GitHubRelease))]
 
 public partial class RyTuneXJsonContext : JsonSerializerContext;

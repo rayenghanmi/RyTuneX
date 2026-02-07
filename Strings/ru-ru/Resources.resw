@@ -187,7 +187,7 @@
     <value>Присоединяйтесь к нашему серверу</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>Посетите RyTuneX</value>
+    <value>Подробнее</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>Отправить отзыв</value>

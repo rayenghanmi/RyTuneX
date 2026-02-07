@@ -187,7 +187,7 @@
     <value>Únete a nuestro servidor</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>Visita RyTuneX</value>
+    <value>Más información</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>Enviar comentarios</value>

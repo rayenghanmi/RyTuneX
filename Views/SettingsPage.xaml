@@ -121,20 +121,10 @@
             <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                 x:Uid="Settings_About" />
 
-            <controls:SettingsExpander Description="© 2025 Rayen Ghanmi"
+            <controls:SettingsExpander Description="© Rayen Ghanmi"
                                Header="RyTuneX"
                                HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.scale-100.png}">
                 <StackPanel Orientation="Horizontal">
-
-                    <StackPanel Margin="25,0" Orientation="Vertical" VerticalAlignment="Center">
-                        <Grid>
-                            <Button x:Uid="SettingsPage_UpdateButton" Style="{StaticResource AccentButtonStyle}" x:Name="UpdateButton" Click="UpdateButton_Click"/>
-                            <StackPanel x:Name="UpdateStack" Visibility="Collapsed">
-                                <ProgressBar x:Name="UpdateProgress" Margin="3" IsIndeterminate="True" Visibility="Collapsed"/>
-                                <TextBlock x:Name="UpdateStatusText"/>
-                            </StackPanel>
-                        </Grid>
-                    </StackPanel>
                     <TextBlock VerticalAlignment="Center" IsTextSelectionEnabled="True"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                         Text="{x:Bind _versionDescription}" />

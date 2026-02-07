@@ -11,11 +11,11 @@
   IgnorableNamespaces="uap rescap genTemplate">
 
 	<Identity
-	  Name="Rayen.RyTuneX"
-	  Publisher="CN=Rayen"
-	  Version="1.6.1.0" />
+	  Name="RayenGhanmi.RyTuneX"
+	  Publisher="CN=41442EC5-E400-4C2F-B9A7-64FEEF036EB2"
+	  Version="1.6.2.0" />
 
-	<mp:PhoneIdentity PhoneProductId="593c7ba8-f1c9-47cf-a952-7c22b10aac3a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+	<mp:PhoneIdentity PhoneProductId="5f764d35-a7a5-422c-b80e-dc06935ea3ce" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
 	<Properties>
 		<DisplayName>RyTuneX</DisplayName>
@@ -25,7 +25,7 @@
 	</Properties>
 
 	<Dependencies>
-		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" />
+		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.22621.0" />
 	</Dependencies>
 
 	<Resources>
@@ -51,9 +51,6 @@
 	<Capabilities>
 		<rescap:Capability Name="runFullTrust"/>
 		<rescap:Capability Name="allowElevation"/>
-		<rescap:Capability Name="registry"/>
-		<rescap:Capability Name="packageManagement"/>
-
 	</Capabilities>
 
 	<genTemplate:Metadata>

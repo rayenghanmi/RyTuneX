@@ -187,7 +187,7 @@
     <value>加入我們的伺服器</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>檢視 RyTuneX</value>
+    <value>更多資訊</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>傳送反饋</value>
