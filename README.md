@@ -1,17 +1,3 @@
-<h1 align="center" style="font-size: 1.2rem; color: #e74c3c;">
-  <strong>⚠️ Project Status: Paused & Archived ⚠️</strong>
-</h1>
-
-<p align="center">
-  Development of <strong>RyTuneX</strong> is officially paused until further notice. This repository has been archived to preserve the current state of the project. While the existing features remain functional for their intended versions, no further updates, bug fixes, or support will be provided at this time.
-</p>
-
-<p align="center">
-  <em>As the developer, I’ve decided to step away and take a break from the project for the time being. Thanks to everyone for the support.</em>
-</p>
-
----
-
 <div align="center">
   <img src="https://github.com/user-attachments/assets/fa8a084e-5926-4735-ad83-d0395ec3b272" alt="RyTuneX Logo" width="128" height="128">
 </div>
@@ -35,35 +21,43 @@
 
 ## Installation
 
-### Option 1: Automatic Installation (Recommended)
+### Option 1: Microsoft Store (Recommended)
 
-1. Install using Winget (Delayed new releases):
+Install RyTuneX directly from the Microsoft Store:  
 
-```
-winget install rayen.rytunex
-```
+[![Microsoft Store](https://img.shields.io/badge/Microsoft_Store-Install-blue?logo=microsoft&style=for-the-badge)](https://apps.microsoft.com/detail/9PDH8M7HF2SQ)
 
-2. Install using Powershell:
+**Benefits**
+- Automatic updates  
+- Verified and secure installation  
+- No manual steps  
+
+### Option 2: GitHub Releases (MSIX)
+
+1. **Download**  
+   - Get the latest `.msixbundle` from GitHub Releases:  
+
+[![GitHub Releases](https://img.shields.io/badge/GitHub-Releases-black?logo=github&style=for-the-badge)](https://github.com/rayenghanmi/RyTuneX/releases/latest)
+
+2. **Install**  
+   - Double-click the downloaded `.msixbundle` file.  
+   - Windows App Installer will open automatically.
+
+3. **Confirm**  
+   - Click **Install** and wait for completion.
+
+### Option 3: Automatic Installation (PowerShell)
+
+Install directly via PowerShell (downloads and installs the MSIX bundle automatically):
 
 ```shell
 irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/main/install.ps1" | iex
 ```
 
-### Option 2: Manual Installation
-
-1. Download:
-    - Get the latest [Setup file](https://github.com/rayenghanmi/RyTuneX/releases/latest/download/RyTuneXSetup.exe)
-2. Run Installer:
-    - Navigate to where you donwloaded the excutable and double-click on it (`RyTuneXSetup.exe`) to start the installation.
-3. Follow Prompts:
-    - Complete the installation by following the on-screen instructions.
-
 > [!IMPORTANT]  
-> Always download RyTuneX from the official [GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety.
+> Always install RyTuneX from official sources: the **Microsoft Store**, the **GitHub releases page**, or via the **official PowerShell installer** to ensure authenticity and security.
 
----
-
-### Why Choose RyTuneX?
+## Why Choose RyTuneX?
 - **Effortless Optimization**: Instantly boost your system's speed and reliability.
 - **Smart Features**: From app removal to privacy protection, we've got you covered.
 
@@ -78,7 +72,7 @@ irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/main/install.ps1" | i
   <a href="https://t.me/rytunex"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"></a>
 </div>
 
-### Join the Community
+## Join the Community
 Get the most out of RyTuneX by connecting with fellow users and sharing your experiences. Have questions or feedback? Let’s make RyTuneX even better together!
 
 ## About
@@ -91,7 +85,7 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
   <img src="https://img.shields.io/badge/Windows_11-0078d4?style=for-the-badge&logo=windows-11&logoColor=white" alt="Windows 11 Badge" />
 </div>
 
-## Features
+### Features
 
 - **Selective App Removal**: Uninstall unwanted pre-installed apps with ease. This feature allows users to debloat their system by removing bloatware and unnecessary applications that come pre-installed with Windows. By doing so, users can free up valuable system resources and improve overall performance.
 
@@ -103,35 +97,35 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
 
 - **Cross-Compatible**: RyTuneX is compatible with both **Windows 10 (20H1 and up)** and **Windows 11**, ensuring seamless performance optimization across different Windows versions. The app delivers a consistent experience, allowing users to fully benefit from its features regardless of their operating system version.
 
-## UI Preview
+### UI Preview
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/7e8f8449-9619-446a-a740-68dd78b003c4" />
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/52a79179-c957-4c6d-9582-9c8860d2b402" />
-    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/7e8f8449-9619-446a-a740-68dd78b003c4" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/89fdd701-611c-4cd4-a4c5-931d1ca2f980" />
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/2290d080-ec2a-46f9-bcab-e4b891d73a70" />
+    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/d89ad4d7-fa71-43ba-a604-27018e0d5fe0" />
   </picture>
   <p><em>RyTuneX - Clean, Modern, and Intuitive Interface</em></p>
 </div>
 
-## Usage
+### Usage
 
 > [!WARNING]  
 > Always create a restore point before applying any optimizations.
 
-### System Optimizations
+#### System Optimizations
 To optimize your system, go to the **Optimize** tab and toggle the available options based on your needs. Changes will take effect after a system restart.
 
-### Debloat Unwanted Apps
+#### Debloat Unwanted Apps
 In the **Debloat** tab, you can view a list of installed apps. Select the ones you want to remove and click **Uninstall selected App(s)**. A restart may be required to complete the process.
 
-### Privacy Enhancements
+#### Privacy Enhancements
 Head to the **Privacy** tab to configure your privacy settings. Toggle the switches to enable or disable features that impact telemetry, advertising, and more. Changes will take effect after a restart.
 
-### Windows Features Management
+#### Windows Features Management
 Use the **Features** tab to modify specific Windows features. Toggle the switches to adjust the settings, and restart your system to apply the changes.
 
-### System Information
+#### System Information
 The **Device** page provides a comprehensive view of your system’s hardware and OS. This helps you understand your setup and make more informed decisions about optimizations.
 
 ## Get Involved
@@ -141,23 +135,25 @@ Check out the [contribution guide](https://github.com/rayenghanmi/RyTuneX/blob/m
 
 ## Translation
 
-#### These are the currently supported languages by RyTuneX:
+### These are the currently supported languages by RyTuneX:
 
 | Language                   | Translation status |
-| -------------------------- | ------------------ |
-| English (United States)    | 100%               |
-| French (France)            | 100%               |
-| Arabic (Tunisia)           | 100%               |
-| Simplified Chinese (China) | 100%               |
-| Traditional Chinese (China)| 100%               |
-| German (Germany)           | 100%               |
-| Japanese (Japan)           | 100%               |
-| Russian (Russia)           | 100%               |
-| Spanish (Spain)            | 100%               |
-| Korean (South Korea)       | 100%               |
-| Portuguese (Brazil)        | 100%               |
-| Italian (Italy)            | 100%               |
-| Turkish (Turkey)           | 100%               |
+| -------------------------- | ---------------- |
+| English (United States)    | 100%             |
+| French (France)            | 100%             |
+| Arabic (Tunisia)           | 100%             |
+| Simplified Chinese (China) | 100%             |
+| Traditional Chinese (China)| 100%             |
+| German (Germany)           | 100%             |
+| Japanese (Japan)           | 100%             |
+| Russian (Russia)           | 100%             |
+| Spanish (Spain)            | 100%             |
+| Korean (South Korea)       | 100%             |
+| Portuguese (Brazil)        | 100%             |
+| Italian (Italy)            | 100%             |
+| Turkish (Turkey)           | 100%             |
+| Hebrew (Israel)            | 100%             |
+| Vietnamese (Vietnam)       | 100%             |
 
 *: Translation will be shipped with the next version
 
