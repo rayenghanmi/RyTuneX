@@ -21,6 +21,7 @@ internal partial class OptimizationOptions
 
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
     private static readonly string IconCacheDirectory = Path.Combine(Path.GetTempPath(), "RyTuneX_AppIcons");
+    private static readonly HashSet<char> InvalidFileNameChars = new(Path.GetInvalidFileNameChars());
 
     [DllImport("Shell32.dll", CharSet = CharSet.Auto)]
     private static extern int ExtractIconEx(string file, int index, IntPtr[] large, IntPtr[]? small, int icons);
@@ -28,57 +29,60 @@ internal partial class OptimizationOptions
     [DllImport("user32.dll")]
     private static extern bool DestroyIcon(IntPtr hIcon);
 
-    public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
+    public static async Task<(List<Tuple<string, string, bool>> Apps, HashSet<string> UninstallableNames)> GetInstalledApps()
     {
-        // Ensure the icon cache directory exists
-        if (!Directory.Exists(IconCacheDirectory))
-        {
-            Directory.CreateDirectory(IconCacheDirectory);
-        }
+        Directory.CreateDirectory(IconCacheDirectory);
+        EnsureDefaultIcon();
+
+        var uwpAppsTask = Task.Run(GetUwpApps);
+        var win32AppsTask = Task.Run(GetWin32Apps);
+
+        await Task.WhenAll(uwpAppsTask, win32AppsTask).ConfigureAwait(false);
+
+        var (uwpApps, uninstallableNames) = uwpAppsTask.Result;
+
+        var installedApps = uwpApps.Concat(win32AppsTask.Result)
+            .DistinctBy(app => app.Item1)
+            .OrderBy(app => app.Item1)
+            .ToList();
+
+        _ = LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
+        return (installedApps, uninstallableNames);
+    }
+
+    private static void EnsureDefaultIcon()
+    {
+        var defaultPath = Path.Combine(IconCacheDirectory, "defaulticon.png");
+        if (File.Exists(defaultPath) && new FileInfo(defaultPath).Length > 0)
+            return;
 
         var largeIcons = new IntPtr[1];
         ExtractIconEx(@"C:\Windows\System32\imageres.dll", 152, largeIcons, null, 1);
         var hIcon = largeIcons[0];
         if (hIcon != IntPtr.Zero)
         {
-            // Clone the icon from handle so the original HICON can be safely destroyed
             using var clonedIcon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(hIcon).Clone();
             DestroyIcon(hIcon);
 
             using var bmp = clonedIcon.ToBitmap();
-            bmp.Save(Path.Combine(IconCacheDirectory, "defaulticon.png"), ImageFormat.Png);
+            bmp.Save(defaultPath, ImageFormat.Png);
         }
-
-        var uwpAppsTask = Task.Run(() => GetUwpApps(uninstallableOnly));
-        var win32AppsTask = Task.Run(GetWin32Apps);
-
-        await Task.WhenAll(uwpAppsTask, win32AppsTask);
-
-        var installedApps = uwpAppsTask.Result.Concat(win32AppsTask.Result).ToList();
-
-        installedApps = [.. installedApps
-            .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
-            .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
-
-        _ = LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
-        return installedApps;
     }
 
     private static string GetSafeIconFileName(string identity)
     {
-        var safe = new string(identity.Where(c => !Path.GetInvalidFileNameChars().Contains(c)).ToArray());
+        var safe = new string(identity.Where(c => !InvalidFileNameChars.Contains(c)).ToArray());
         if (safe.Length > 60) safe = safe[..60];
         return $"{safe}_{Math.Abs(identity.GetHashCode())}.png";
     }
 
-    private static async Task<List<Tuple<string, string, bool>>> GetUwpApps(bool uninstallableOnly)
+    private static async Task<(List<Tuple<string, string, bool>> Apps, HashSet<string> UninstallableNames)> GetUwpApps()
     {
         var installedApps = new List<Tuple<string, string, bool>>();
+        var uninstallableNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-        // Use string interpolation with raw string literals for commands
-        var command = uninstallableOnly
-            ? """Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $false } | Select-Object Name,InstallLocation,PackageFullName | Format-List"""
-            : """Get-AppxPackage -AllUsers | Select-Object Name,InstallLocation,PackageFullName | Format-List""";
+        // Single PowerShell call that returns Name, InstallLocation, and NonRemovable
+        var command = """Get-AppxPackage -AllUsers | Select-Object Name,InstallLocation,NonRemovable | Format-List""";
 
         try
         {
@@ -96,27 +100,37 @@ internal partial class OptimizationOptions
             process.Start();
 
             var output = await process.StandardOutput.ReadToEndAsync().ConfigureAwait(false);
+
+            // Parse all apps and track which are removable
             string? currentName = null;
             string? currentLocation = null;
+            bool currentNonRemovable = false;
+            var parsedApps = new List<(string Name, string? Location)>();
 
-            // Use collection expression for split separators
-            ReadOnlySpan<char> newLine = Environment.NewLine;
             foreach (var line in output.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries))
             {
                 if (line.StartsWith("Name", StringComparison.Ordinal))
                 {
-                    if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
+                    // Flush previous app
+                    if (!string.IsNullOrEmpty(currentName))
                     {
-                        var logoPath = await ExtractLogoPath(currentLocation, false, currentName).ConfigureAwait(false);
-                        installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false));
+                        parsedApps.Add((currentName, currentLocation));
+                        if (!currentNonRemovable)
+                            uninstallableNames.Add(currentName);
                     }
 
                     currentName = line.Split([':'], 2)[1].Trim();
                     currentLocation = null;
+                    currentNonRemovable = false;
                 }
                 else if (line.StartsWith("InstallLocation", StringComparison.Ordinal))
                 {
                     currentLocation = line.Split([':'], 2)[1].Trim();
+                }
+                else if (line.StartsWith("NonRemovable", StringComparison.Ordinal))
+                {
+                    var val = line.Split([':'], 2)[1].Trim();
+                    currentNonRemovable = val.Equals("True", StringComparison.OrdinalIgnoreCase);
                 }
                 else if (!string.IsNullOrWhiteSpace(currentLocation) && line.StartsWith(" ", StringComparison.Ordinal))
                 {
@@ -124,20 +138,40 @@ internal partial class OptimizationOptions
                 }
             }
 
-            if (!string.IsNullOrEmpty(currentName) && !string.IsNullOrEmpty(currentLocation))
+            // Flush last app
+            if (!string.IsNullOrEmpty(currentName))
             {
-                var logoPath = await ExtractLogoPath(currentLocation, false, currentName).ConfigureAwait(false);
-                installedApps.Add(new Tuple<string, string, bool>(currentName, logoPath, false));
+                parsedApps.Add((currentName, currentLocation));
+                if (!currentNonRemovable)
+                    uninstallableNames.Add(currentName);
             }
 
             await process.WaitForExitAsync().ConfigureAwait(false);
+
+            // Extract icons in parallel (I/O-bound, safe to parallelize)
+            var iconTasks = parsedApps
+                .Where(app => !string.IsNullOrEmpty(app.Location))
+                .Select(async app =>
+                {
+                    var logoPath = await ExtractLogoPath(app.Location, false, app.Name).ConfigureAwait(false);
+                    return new Tuple<string, string, bool>(app.Name, logoPath, false);
+                })
+                .ToList();
+
+            // Apps without install location still get added with empty icon
+            foreach (var app in parsedApps.Where(app => string.IsNullOrEmpty(app.Location)))
+            {
+                installedApps.Add(new Tuple<string, string, bool>(app.Name, string.Empty, false));
+            }
+
+            installedApps.AddRange(await Task.WhenAll(iconTasks).ConfigureAwait(false));
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogError(ex.Message).ConfigureAwait(false);
         }
 
-        return installedApps;
+        return (installedApps, uninstallableNames);
     }
 
     private static IEnumerable<RegistryKey> OpenUninstallRoots()
@@ -211,7 +245,7 @@ internal partial class OptimizationOptions
 
     public static async Task<List<Tuple<string, string, bool>>> GetWin32Apps()
     {
-        var win32Apps = new List<Tuple<string, string, bool>>();
+        var appEntries = new List<(string DisplayName, string? InstallLocation, string? DisplayIcon)>();
 
         try
         {
@@ -221,62 +255,46 @@ internal partial class OptimizationOptions
                 .SelectMany(k => k.GetSubKeyNames()
                     .Select(name => (Root: k, Name: name)))
                 .GroupBy(x => x.Name, StringComparer.OrdinalIgnoreCase)
-                .Select(g => g.First());
+                .Select(g => g.First())
+                .ToList();
 
             foreach (var uninstallRoot in allSubKeys)
             {
                 using var subKey = uninstallRoot.Root.OpenSubKey(uninstallRoot.Name);
 
                 if (subKey == null)
-                {
-                    _ = LogHelper.LogError($"Failed to open subkey {uninstallRoot.Name}");
                     continue;
-                }
 
                 var displayName = subKey.GetValue("DisplayName") as string;
+                var systemComponent = subKey.GetValue("SystemComponent") as int?;
+
+                if (string.IsNullOrEmpty(displayName) || systemComponent == 1)
+                    continue;
+
+                if (displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
+                    continue;
+
                 var installLocation = subKey.GetValue("InstallLocation") as string;
                 if (!string.IsNullOrEmpty(installLocation))
                 {
-                    installLocation = installLocation.Replace("\"", ""); // Remove all double quotes
-                    if (installLocation.Contains(".exe")) // If it contains a file extension
-                        installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
+                    installLocation = installLocation.Replace("\"", "");
+                    if (installLocation.Contains(".exe"))
+                        installLocation = Path.GetDirectoryName(installLocation);
                 }
 
-                var uninstallString = subKey.GetValue("UninstallString") as string;
-                if (!string.IsNullOrEmpty(uninstallString))
+                if (string.IsNullOrEmpty(installLocation))
                 {
-                    uninstallString = uninstallString.Replace("\"", ""); // Remove all double quotes
-                }
-
-                var systemComponent = subKey.GetValue("SystemComponent") as int?; // Returns 1 if the app is marked as system components
-
-                // Skip entries without names or marked as system components
-                if (string.IsNullOrEmpty(displayName) || systemComponent == 1)
-                {
-                    continue;
-                }
-
-                // Some apps don't have InstallLocation but have an UninstallString
-                if (string.IsNullOrEmpty(installLocation) && !string.IsNullOrEmpty(uninstallString))
-                {
-                    installLocation = Path.GetDirectoryName(uninstallString);
-                    if (!string.IsNullOrEmpty(installLocation))
+                    var uninstallString = (subKey.GetValue("UninstallString") as string)?.Replace("\"", "");
+                    if (!string.IsNullOrEmpty(uninstallString))
                     {
-                        if (installLocation.Contains(".exe")) // If it contains a file extension
-                        {
-                            installLocation = Path.GetDirectoryName(installLocation); // Extract directory path
-                        }
+                        installLocation = Path.GetDirectoryName(uninstallString);
+                        if (!string.IsNullOrEmpty(installLocation) && installLocation.Contains(".exe"))
+                            installLocation = Path.GetDirectoryName(installLocation);
                     }
                 }
 
-                // Exclude Win32 Microsoft Edge
-                if (displayName.Contains("edge", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    continue;
-                }
-
-                var logoPath = await ExtractLogoPath(installLocation, true, displayName); // true for Win32, pass displayName
-                win32Apps.Add(new Tuple<string, string, bool>(displayName, logoPath, true));
+                var displayIcon = subKey.GetValue("DisplayIcon") as string;
+                appEntries.Add((displayName, installLocation, displayIcon));
             }
         }
         catch (Exception ex)
@@ -284,14 +302,25 @@ internal partial class OptimizationOptions
             _ = LogHelper.LogError($"Failed to load Win32 apps: {ex.Message}");
         }
 
-        return [.. win32Apps
-            .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
-            .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
+        // Deduplicate before icon extraction to avoid wasted work
+        var unique = appEntries
+            .DistinctBy(e => e.DisplayName, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        // Extract icons in parallel
+        var iconTasks = unique.Select(async entry =>
+        {
+            var logoPath = await ExtractLogoPath(entry.InstallLocation, true, entry.DisplayName, entry.DisplayIcon).ConfigureAwait(false);
+            return new Tuple<string, string, bool>(entry.DisplayName, logoPath, true);
+        }).ToList();
+
+        var results = await Task.WhenAll(iconTasks).ConfigureAwait(false);
+
+        return [.. results.OrderBy(app => app.Item1)];
     }
 
-    private static async Task<string> ExtractLogoPath(string? installLocation, bool isWin32, string appName)
+    private static async Task<string> ExtractLogoPath(string? installLocation, bool isWin32, string appName, string? displayIconPath = null)
     {
-        Directory.CreateDirectory(IconCacheDirectory);
         var defaultIcon = isWin32
             ? Path.Combine(IconCacheDirectory, "defaulticon.png")
             : string.Empty;
@@ -301,63 +330,62 @@ internal partial class OptimizationOptions
         var identity = $"{appName}|{installLocation}";
         var cached = Path.Combine(IconCacheDirectory, GetSafeIconFileName(identity));
 
-        // Prevent poisoned cache
+        // Return cached icon if valid
         if (File.Exists(cached))
         {
             if (new FileInfo(cached).Length > 2048)
                 return cached;
-            File.Delete(cached);
+            try { File.Delete(cached); } catch { }
         }
 
         // -------- WIN32 --------
         if (isWin32 && Directory.Exists(installLocation))
         {
-            // Try DisplayIcon from registry
-            try
+            // Try DisplayIcon passed from registry (no re-scan needed)
+            if (!string.IsNullOrEmpty(displayIconPath))
             {
-                using var key = OpenUninstallRoots()
-                    .SelectMany(r => r.GetSubKeyNames().Select(n => r.OpenSubKey(n)))
-                    .FirstOrDefault(k => (k?.GetValue("DisplayName") as string)?.Equals(appName, StringComparison.OrdinalIgnoreCase) == true);
-
-                var displayIcon = key?.GetValue("DisplayIcon") as string;
-                if (!string.IsNullOrEmpty(displayIcon))
+                try
                 {
-                    displayIcon = displayIcon.Split(',')[0].Replace("\"", "");
-                    if (File.Exists(displayIcon))
+                    var iconFile = displayIconPath.Split(',')[0].Replace("\"", "").Trim();
+                    if (File.Exists(iconFile))
                     {
                         var large = new IntPtr[1];
-                        ExtractIconEx(displayIcon, 0, large, null, 1);
+                        ExtractIconEx(iconFile, 0, large, null, 1);
                         if (large[0] != IntPtr.Zero)
                         {
                             using var icon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(large[0]).Clone();
                             DestroyIcon(large[0]);
-                            await SaveIcon(icon, cached);
+                            await SaveIcon(icon, cached).ConfigureAwait(false);
                             return cached;
                         }
                     }
                 }
+                catch { }
             }
-            catch { }
 
-            // Fallback: scan executables (largest EXE wins)
-            var exe = Directory
-                .EnumerateFiles(installLocation, "*.exe", SearchOption.AllDirectories)
-                .OrderByDescending(f => new FileInfo(f).Length)
-                .FirstOrDefault();
-
-            if (exe != null)
+            // Fallback: scan executables in top directory only (avoid deep recursion)
+            try
             {
-                var large = new IntPtr[1];
-                ExtractIconEx(exe, 0, large, null, 1);
+                var exe = Directory
+                    .EnumerateFiles(installLocation, "*.exe", SearchOption.TopDirectoryOnly)
+                    .OrderByDescending(f => new FileInfo(f).Length)
+                    .FirstOrDefault();
 
-                if (large[0] != IntPtr.Zero)
+                if (exe != null)
                 {
-                    using var icon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(large[0]).Clone();
-                    DestroyIcon(large[0]);
-                    await SaveIcon(icon, cached);
-                    return cached;
+                    var large = new IntPtr[1];
+                    ExtractIconEx(exe, 0, large, null, 1);
+
+                    if (large[0] != IntPtr.Zero)
+                    {
+                        using var icon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(large[0]).Clone();
+                        DestroyIcon(large[0]);
+                        await SaveIcon(icon, cached).ConfigureAwait(false);
+                        return cached;
+                    }
                 }
             }
+            catch { }
         }
 
         // -------- UWP --------

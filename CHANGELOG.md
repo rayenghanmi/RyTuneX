@@ -3,6 +3,20 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.7.0
+
+### Added
+
+- Added a new reload button in the `Debloat` page to refresh the list of installed apps.
+
+### Fixes
+
+- Fixed some values in optimization toggles.
+
+### Changes
+
+- Improved general performance and stability of the `Debloat` page.
+
 ## 1.6.2 - Released
 
 > [!IMPORTANT]

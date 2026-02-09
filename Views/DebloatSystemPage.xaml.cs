@@ -18,6 +18,7 @@ public sealed partial class DebloatSystemPage : Page
     private CancellationTokenSource? _uninstallBatchCts;
     private Guid? _uninstallBatchRegistrationId;
     private List<Tuple<string, string, bool>> allApps = new();
+    private HashSet<string> uninstallableAppNames = new(StringComparer.OrdinalIgnoreCase);
     private string? _pendingScrollTarget;
 
     public DebloatSystemPage()
@@ -35,6 +36,7 @@ public sealed partial class DebloatSystemPage : Page
         {
             // Cancel any ongoing operations for this page
             try { cancellationTokenSource.Cancel(); } catch { }
+            try { _filterAnimationCts?.Cancel(); } catch { }
 
             if (_uninstallBatchCts != null)
             {
@@ -88,7 +90,7 @@ public sealed partial class DebloatSystemPage : Page
         }
     }
 
-    private async void LoadInstalledApps(bool uninstallableOnly = true, bool win32Only = false, CancellationToken cancellationToken = default)
+    private async void LoadInstalledApps(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -106,33 +108,21 @@ public sealed partial class DebloatSystemPage : Page
 
             _ = LogHelper.Log("Loading InstalledApps");
 
-            List<Tuple<string, string, bool>> installedApps;
-            if (win32Only)
-            {
-                installedApps = await Task.Run(OptimizationOptions.GetWin32Apps);
-            }
-            else
-            {
-                installedApps = await Task.Run(() => OptimizationOptions.GetInstalledApps(uninstallableOnly));
-            }
+            var (installedApps, fetchedUninstallableNames) = await Task.Run(OptimizationOptions.GetInstalledApps).ConfigureAwait(false);
 
             DispatcherQueue.TryEnqueue(() =>
             {
-                AppList.Clear();
+                uninstallableAppNames = fetchedUninstallableNames;
+                allApps = installedApps.Where(app =>
+                    !app.Item1.Contains("rytunex", StringComparison.CurrentCultureIgnoreCase)).ToList();
 
-                allApps = installedApps.AsParallel().Where(app =>
-                !app.Item1.Contains("rytunex", StringComparison.CurrentCultureIgnoreCase)).ToList();
+                ApplyFilter();
 
-                foreach (var app in allApps)
-                {
-                    AppList.Add(app);
-                }
-
-                installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), AppList.Count);
                 installedAppsCount.Visibility = Visibility.Visible;
                 appsFilter.IsEnabled = true;
                 appsFilter.Visibility = Visibility.Visible;
                 appsFilterText.Visibility = Visibility.Visible;
+                reloadButton.Visibility = Visibility.Visible;
                 uninstallButton.Visibility = Visibility.Visible;
                 appTreeView.Visibility = Visibility.Visible;
                 appTreeView.IsEnabled = true;
@@ -150,6 +140,65 @@ public sealed partial class DebloatSystemPage : Page
         catch (Exception ex)
         {
             _ = LogHelper.Log($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
+        }
+    }
+
+    private CancellationTokenSource? _filterAnimationCts;
+
+    private async void ApplyFilter()
+    {
+        // Cancel any in-progress staggered animation
+        _filterAnimationCts?.Cancel();
+        _filterAnimationCts = new CancellationTokenSource();
+        var ct = _filterAnimationCts.Token;
+
+        var searchText = AppSearchBox?.Text?.Trim() ?? string.Empty;
+
+        var filtered = appsFilter.SelectedIndex switch
+        {
+            0 => allApps.Where(app => app.Item3 || uninstallableAppNames.Contains(app.Item1)),
+            2 => allApps.Where(app => app.Item3),
+            _ => allApps.AsEnumerable()
+        };
+
+        if (!string.IsNullOrEmpty(searchText))
+        {
+            filtered = filtered.Where(app => app.Item1.Contains(searchText, StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        var result = filtered.OrderBy(app => app.Item1).ToList();
+
+        // Detach to clear without per-item animations
+        appTreeView.ItemsSource = null;
+        AppList.Clear();
+        appTreeView.ItemsSource = AppList;
+
+        installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), result.Count);
+        noAppFoundText.Visibility = result.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+        // Animate visible items one by one, then bulk-add the rest (off-screen)
+        const int animatedCount = 20;
+        const int delayMs = 30;
+
+        var animated = Math.Min(animatedCount, result.Count);
+        for (var i = 0; i < animated; i++)
+        {
+            if (ct.IsCancellationRequested) return;
+            AppList.Add(result[i]);
+            await Task.Delay(delayMs, ct).ConfigureAwait(true);
+        }
+
+        if (ct.IsCancellationRequested) return;
+
+        // Bulk-add remaining off-screen items without animation
+        if (animated < result.Count)
+        {
+            appTreeView.ItemsSource = null;
+            for (var i = animated; i < result.Count; i++)
+            {
+                AppList.Add(result[i]);
+            }
+            appTreeView.ItemsSource = AppList;
         }
     }
 
@@ -174,6 +223,7 @@ public sealed partial class DebloatSystemPage : Page
         var batchCt = _uninstallBatchCts.Token;
 
         uninstallButton.IsEnabled = false;
+        reloadButton.IsEnabled = false;
         appsFilter.IsEnabled = false;
         appTreeView.IsEnabled = false;
 
@@ -213,6 +263,15 @@ public sealed partial class DebloatSystemPage : Page
 
                     await UninstallApps(selectedAppName, isWin32App);
                     successfulUninstalls.Add(selectedAppName);
+
+                    // Remove the uninstalled app from the view and cached list
+                    DispatcherQueue.TryEnqueue(() =>
+                    {
+                        AppList.Remove(appInfo);
+                        allApps.Remove(appInfo);
+                        uninstallableAppNames.Remove(selectedAppName);
+                        installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), AppList.Count);
+                    });
                 }
                 catch (Exception ex)
                 {
@@ -249,9 +308,6 @@ public sealed partial class DebloatSystemPage : Page
                     InfoBarSeverity.Error, 5000);
             }
 
-            // Reload installed apps after uninstallation and keep the list filtered
-            appsFilter_SelectionChanged(appsFilter, e);
-
         }
         catch (OperationCanceledException)
         {
@@ -273,8 +329,10 @@ public sealed partial class DebloatSystemPage : Page
             {
                 uninstallingStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallTip");
                 uninstallButton.IsEnabled = true;
+                reloadButton.IsEnabled = true;
                 appsFilter.IsEnabled = true;
                 appTreeView.IsEnabled = true;
+                uninstallingStatusBar.Opacity = 0;
             });
 
             // Cleanup uninstall batch CTS and unregister
@@ -434,27 +492,30 @@ public sealed partial class DebloatSystemPage : Page
         }
     }
 
+    private void ReloadApps_Click(object sender, RoutedEventArgs e)
+    {
+        LoadInstalledApps(cancellationTokenSource.Token);
+    }
+
     private void appsFilter_SelectionChanged(object sender, RoutedEventArgs e)
     {
-        switch (appsFilter.SelectedIndex)
+        if (allApps.Count == 0)
         {
-            case 0:
-                LoadInstalledApps(true, false, cancellationTokenSource.Token);
-                break;
-            case 1:
-                // Show warning message when all apps are showing in the NotificationQueue
-                App.ShowNotification(
-                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
-                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("DebloatPage_NotificationBody"),
-                    InfoBarSeverity.Warning, 5000);
-
-                // Show all apps
-                LoadInstalledApps(false, false, cancellationTokenSource.Token);
-                break;
-            case 2:
-                LoadInstalledApps(false, true, cancellationTokenSource.Token);
-                break;
+            // First load — fetch all apps
+            LoadInstalledApps(cancellationTokenSource.Token);
+            return;
         }
+
+        if (appsFilter.SelectedIndex == 1)
+        {
+            // Show warning message when all apps are showing
+            App.ShowNotification(
+                RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
+                RyTuneX.Helpers.ResourceExtensions.GetLocalized("DebloatPage_NotificationBody"),
+                InfoBarSeverity.Warning, 5000);
+        }
+
+        ApplyFilter();
     }
 
     private async void TempButton_Click(object sender, RoutedEventArgs e)
@@ -506,44 +567,17 @@ public sealed partial class DebloatSystemPage : Page
         }
     }
 
-    private void SearchApps(string query)
-    {
-        noAppFoundText.Visibility = Visibility.Collapsed;
-
-        // Search and sort apps
-        var filteredApps = allApps.AsParallel()
-                                  .Where(app => app.Item1.Contains(query, StringComparison.CurrentCultureIgnoreCase))
-                                  .OrderBy(app => app.Item1)
-                                  .ToList();
-
-        // Update the AppList
-        AppList.Clear();
-        foreach (var app in filteredApps)
-        {
-            AppList.Add(app);
-        }
-
-        // Show "no app found" text if no results
-        if (AppList.Count == 0)
-        {
-            noAppFoundText.Visibility = Visibility.Visible;
-        }
-
-        // Update the installed apps count
-        installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), AppList.Count);
-    }
-
     private void AppSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
         {
-            SearchApps(sender.Text.ToLower());
+            ApplyFilter();
         }
     }
 
     private void AppSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
     {
-        SearchApps(args.QueryText.ToLower());
+        ApplyFilter();
     }
 
     public async Task<ContentDialogResult> ShowUninstallConfirmationDialog(TreeView appTreeView)

@@ -13,7 +13,7 @@
 	<Identity
 	  Name="RayenGhanmi.RyTuneX"
 	  Publisher="CN=41442EC5-E400-4C2F-B9A7-64FEEF036EB2"
-	  Version="1.6.2.0" />
+	  Version="1.7.0.0" />
 
 	<mp:PhoneIdentity PhoneProductId="5f764d35-a7a5-422c-b80e-dc06935ea3ce" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

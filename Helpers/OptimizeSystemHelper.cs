@@ -214,7 +214,7 @@ public static partial class OptimizeSystemHelper
 
     public static async Task EnablePrioritizeForegroundApplications()
     {
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\" /v Win32PrioritySeparation /t REG_DWORD /d 38 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\" /v Win32PrioritySeparation /t REG_DWORD /d 42 /f").ConfigureAwait(false);
     }
 
     public static async Task DisablePrioritizeForegroundApplications()
@@ -1043,7 +1043,7 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("sc config wuauserv start= disabled").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("sc config UsoSvc start= disabled").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("sc config BITS start= disabled").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("sc config DoSvc start= disabled").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("sc config DoSvc start= demand").ConfigureAwait(false);
 
         // Handle WaaSMedicSvc
         if (build >= 19041)
