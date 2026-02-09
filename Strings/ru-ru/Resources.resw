@@ -738,9 +738,6 @@
   <data name="TotalApps" xml:space="preserve">
     <value>Всего: {0} приложений</value>
   </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Производительность</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>Включено</value>
   </data>
@@ -1637,5 +1634,11 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Удаляет функции ИИ из Блокнота, Paint и Фото, отключает эффекты камеры и микрофона Windows Studio и игровой ИИ, а также удаляет интеграции ИИ из оболочки для максимальной конфиденциальности и производительности.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Службы</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Процессы</value>
   </data>
 </root>

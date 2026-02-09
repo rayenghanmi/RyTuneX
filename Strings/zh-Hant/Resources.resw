@@ -738,9 +738,6 @@
   <data name="TotalApps" xml:space="preserve">
     <value>總數: {0} 個應用</value>
   </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>效能</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>已啟用</value>
   </data>
@@ -1636,5 +1633,11 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>執行全系統 AI 清理。停用 Copilot、Recall 與 AI Fabric 服務；移除記事本、小畫家與相片中的 AI 功能；停用 Windows Studio 的相機/麥克風效果與遊戲 AI；並移除系統殼層中的 AI 整合，以最大化隱私與效能。</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>服務</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>程序</value>
   </data>
 </root>

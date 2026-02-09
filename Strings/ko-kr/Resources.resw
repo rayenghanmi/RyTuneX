@@ -738,9 +738,6 @@
   <data name="TotalApps" xml:space="preserve">
     <value>총: {0}개의 앱</value>
   </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>성능</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>활성화됨</value>
   </data>
@@ -1640,5 +1637,11 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>메모장, 그림판, 사진에서 AI 기능을 제거하고 Windows Studio 카메라/마이크 효과와 게임 AI를 비활성화하며, 개인 정보 보호와 성능을 극대화하기 위해 셸의 AI 통합을 제거합니다.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>서비스</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>프로세스</value>
   </data>
 </root>

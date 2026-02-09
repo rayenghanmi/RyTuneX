@@ -16,6 +16,9 @@ All notable changes to this branch will be documented in this file.
 ### Changes
 
 - Improved general performance and stability of the `Debloat` page.
+- Added Services and Processes pages entry points to the navigation menu for better accessibility.
+- Minor UI improvements all across the app.
+- Added real-time processes monitoring in the `Processes` page.
 
 ## 1.6.2 - Released
 

@@ -738,9 +738,6 @@
   <data name="TotalApps" xml:space="preserve">
     <value>الإجمالي: {0} تطبيق(ات)</value>
   </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>الأداء</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>مفعل</value>
   </data>
@@ -1640,5 +1637,11 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>يزيل ميزات الذكاء الاصطناعي من المفكرة والرسام والصور، ويعطّل تأثيرات الكاميرا والميكروفون في Windows Studio وذكاء الألعاب، ويزيل تكاملات الذكاء الاصطناعي من واجهة النظام لتعزيز الخصوصية والأداء.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>الخدمات</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>العمليات</value>
   </data>
 </root>

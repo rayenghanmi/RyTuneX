@@ -738,9 +738,6 @@
   <data name="TotalApps" xml:space="preserve">
     <value>סה"כ: {0} יישום(ים)</value>
   </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>ביצועים</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>מופעל</value>
   </data>
@@ -1640,5 +1637,11 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>מסיר תכונות בינה מלאכותית מפנקס הרשימות, Paint ותמונות, משבית אפקטי מצלמה ומיקרופון של Windows Studio ובינה מלאכותית למשחקים, ומסיר שילובי IA מהמעטפת כדי למקסם פרטיות וביצועים.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>שירותים</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>תהליכים</value>
   </data>
 </root>

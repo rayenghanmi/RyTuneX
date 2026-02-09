@@ -738,9 +738,6 @@
   <data name="TotalApps" xml:space="preserve">
     <value>Total: {0} App(s)</value>
   </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Performance</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>Enabled</value>
   </data>
@@ -1640,5 +1637,11 @@ Check your computer for memory problems</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Strips AI features from Notepad, Paint, and Photos, disables Windows Studio camera/mic effects and Gaming AI, and removes AI shell integrations to maximize privacy and performance.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Processes</value>
   </data>
 </root>

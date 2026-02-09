@@ -1,7 +1,9 @@
-﻿using System.ServiceProcess;
+﻿using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
+using System.ServiceProcess;
 
 namespace RyTuneX.Views;
 
@@ -373,6 +375,12 @@ internal enum ServiceControlAction
     Restart
 }
 
+internal class StatusInfo
+{
+    public string Glyph { get; set; } = string.Empty;
+    public Brush Color { get; set; } = null!;
+}
+
 internal class ServiceInfoItem
 {
     public string Name { get; set; } = string.Empty;
@@ -388,7 +396,24 @@ internal class ServiceInfoItem
         get; set;
     }
 
-    public string StatusIcon => Status == "Running" ? "\uE768" : "\uE71A";
+    public StatusInfo StatusDisplay => Status switch
+    {
+        "Running" => new StatusInfo
+        {
+            Glyph = "\uE768",
+            Color = (Brush)App.Current.Resources["SystemFillColorSuccessBrush"]
+        },
+        "Stopped" => new StatusInfo
+        {
+            Glyph = "\uE71A",
+            Color = (Brush)App.Current.Resources["SystemFillColorCautionBrush"]
+        },
+        _ => new StatusInfo
+        {
+            Glyph = "\uE7BA",
+            Color = (Brush)App.Current.Resources["SystemFillColorBaseMediumBrush"]
+        }
+    };
 
     // Gets the index for the startup type ComboBox.
     public int StartTypeIndex => StartType switch

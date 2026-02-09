@@ -26,7 +26,7 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" 
                     CornerRadius="6" Padding="16,12" Margin="0,0,8,0">
                 <StackPanel Orientation="Horizontal" Spacing="12">
-                    <FontIcon Glyph="&#xEA86;" FontSize="24" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                    <FontIcon Glyph="&#xE9F5;" FontSize="24" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
                     <StackPanel>
                         <TextBlock x:Name="TotalServicesText" Text="0" FontSize="18" FontWeight="SemiBold"/>
                         <TextBlock x:Uid="ServicesPage_TotalServices" FontSize="12" Opacity="0.7"/>
@@ -82,10 +82,7 @@
                 <ComboBoxItem Content="Disabled"/>
             </ComboBox>
             <Button x:Name="RefreshButton" Grid.Column="2" Margin="8,0,0,0" Click="RefreshButton_Click">
-                <StackPanel Orientation="Horizontal" Spacing="6">
-                    <FontIcon Glyph="&#xE72C;" FontSize="14"/>
-                    <TextBlock x:Uid="ServicesPage_Refresh"/>
-                </StackPanel>
+                <FontIcon Glyph="&#xE72C;" FontSize="14"/>
             </Button>
         </Grid>
 
@@ -136,7 +133,7 @@
                                     <ColumnDefinition Width="1.2*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <FontIcon Glyph="{Binding StatusIcon}" FontSize="14" Opacity="0.6"/>
+                                    <FontIcon Glyph="{Binding StatusDisplay.Glyph}" FontSize="14" Foreground="{Binding StatusDisplay.Color}" Opacity="0.6"/>
                                     <StackPanel Spacing="2">
                                         <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" FontSize="13"/>
                                         <TextBlock Text="{Binding Name}" FontSize="11" Opacity="0.5" TextTrimming="CharacterEllipsis"/>

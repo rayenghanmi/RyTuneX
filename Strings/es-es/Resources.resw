@@ -738,9 +738,6 @@
   <data name="TotalApps" xml:space="preserve">
     <value>Total: {0} Aplicación(es)</value>
   </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Rendimiento</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>Habilitado</value>
   </data>
@@ -1637,5 +1634,11 @@ Verifica si hay problemas de memoria en tu computadora</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Elimina funciones de IA de Bloc de notas, Paint y Fotos, desactiva los efectos de cámara y micrófono de Windows Studio y la IA para juegos, y elimina integraciones de IA del sistema para maximizar la privacidad y el rendimiento.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Servicios</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Procesos</value>
   </data>
 </root>

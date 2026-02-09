@@ -738,9 +738,6 @@
   <data name="TotalApps" xml:space="preserve">
     <value>Toplam: {0} Uygulama</value>
   </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Performans</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>Etkinleştirilmiş</value>
   </data>
@@ -1640,5 +1637,11 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Not Defteri, Paint ve Fotoğraflar’dan yapay zekâ özelliklerini kaldırır, Windows Studio kamera/mikrofon efektlerini ve oyun yapay zekâsını devre dışı bırakır ve gizlilik ile performansı en üst düzeye çıkarmak için kabuktaki yapay zekâ entegrasyonlarını kaldırır.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Hizmetler</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>İşlemler</value>
   </data>
 </root>

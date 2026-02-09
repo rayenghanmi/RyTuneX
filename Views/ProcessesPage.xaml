@@ -72,10 +72,7 @@
                             QueryIcon="Find"
                             TextChanged="SearchBox_TextChanged"/>
             <Button x:Name="RefreshButton" Grid.Column="1" Margin="8,0,0,0" Click="RefreshButton_Click">
-                <StackPanel Orientation="Horizontal" Spacing="6">
-                    <FontIcon Glyph="&#xE72C;" FontSize="14"/>
-                    <TextBlock x:Uid="ProcessesPage_Refresh"/>
-                </StackPanel>
+                <FontIcon x:Name="RefreshButtonIcon" Glyph="&#xE769;" FontSize="14"/>
             </Button>
         </Grid>
 
@@ -130,14 +127,14 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Spacing="8">
                                     <FontIcon Glyph="&#xE756;" FontSize="14" Opacity="0.6"/>
-                                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" FontSize="13"/>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" FontSize="13"/>
                                 </StackPanel>
-                                <TextBlock Grid.Column="1" Text="{Binding Id}" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
-                                <StackPanel Grid.Column="2" HorizontalAlignment="Center" Spacing="2">
+                                <TextBlock Grid.Column="1" Text="{Binding Id}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
+                                <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="2">
                                     <TextBlock Text="{Binding MemoryDisplay}" HorizontalAlignment="Center" FontSize="12"/>
                                     <ProgressBar Value="{Binding MemoryPercent}" Maximum="100" Width="60" Height="3"/>
                                 </StackPanel>
-                                <TextBlock Grid.Column="3" Text="{Binding ThreadCount}" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
+                                <TextBlock Grid.Column="3" Text="{Binding ThreadCount}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
                                 <Button Grid.Column="4"
                                         Tag="{Binding Id}"
                                         Click="EndTask_Click"

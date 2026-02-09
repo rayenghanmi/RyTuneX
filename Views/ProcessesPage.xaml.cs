@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -7,20 +9,48 @@ namespace RyTuneX.Views;
 public sealed partial class ProcessesPage : Page
 {
     private List<ProcessInfoItem> _allProcesses = [];
-    private List<ProcessInfoItem> _filteredProcesses = [];
+    private readonly ObservableCollection<ProcessInfoItem> _filteredProcesses = [];
     private string _currentSort = "Memory";
     private bool _sortAscending;
+    private DispatcherTimer? _refreshTimer;
+    private bool _isUpdating;
 
     public ProcessesPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing ProcessesPage");
+        ProcessListView.ItemsSource = _filteredProcesses;
         Loaded += ProcessesPage_Loaded;
+        Unloaded += ProcessesPage_Unloaded;
     }
 
     private async void ProcessesPage_Loaded(object sender, RoutedEventArgs e)
     {
         await LoadProcessesAsync();
+        StartAutoRefresh();
+    }
+
+    private void ProcessesPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        StopAutoRefresh();
+    }
+
+    private void StartAutoRefresh()
+    {
+        if (_refreshTimer != null)
+        {
+            return;
+        }
+
+        _refreshTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _refreshTimer.Tick += async (_, _) => await RefreshProcessesAsync();
+        _refreshTimer.Start();
+    }
+
+    private void StopAutoRefresh()
+    {
+        _refreshTimer?.Stop();
+        _refreshTimer = null;
     }
 
     private async Task LoadProcessesAsync()
@@ -31,30 +61,7 @@ public sealed partial class ProcessesPage : Page
 
         try
         {
-            _allProcesses = await Task.Run(() =>
-            {
-                return Process.GetProcesses()
-                    .Select(p =>
-                    {
-                        try
-                        {
-                            return new ProcessInfoItem
-                            {
-                                Name = p.ProcessName,
-                                Id = p.Id,
-                                MemoryMB = p.WorkingSet64 / (1024.0 * 1024.0),
-                                ThreadCount = p.Threads.Count
-                            };
-                        }
-                        catch
-                        {
-                            return new ProcessInfoItem { Name = p.ProcessName, Id = p.Id };
-                        }
-                    })
-                    .OrderByDescending(p => p.MemoryMB)
-                    .ToList();
-            });
-
+            _allProcesses = await GetProcessSnapshotAsync();
             UpdateSummary();
             ApplyFilterAndSort();
         }
@@ -70,6 +77,56 @@ public sealed partial class ProcessesPage : Page
         }
     }
 
+    private async Task RefreshProcessesAsync()
+    {
+        if (_isUpdating)
+        {
+            return;
+        }
+
+        _isUpdating = true;
+        try
+        {
+            _allProcesses = await GetProcessSnapshotAsync();
+            UpdateSummary();
+            ApplyFilterAndSort();
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error refreshing processes: {ex.Message}");
+        }
+        finally
+        {
+            _isUpdating = false;
+        }
+    }
+
+    private static async Task<List<ProcessInfoItem>> GetProcessSnapshotAsync()
+    {
+        return await Task.Run(() =>
+        {
+            return Process.GetProcesses()
+                .Select(p =>
+                {
+                    try
+                    {
+                        return new ProcessInfoItem
+                        {
+                            Name = p.ProcessName,
+                            Id = p.Id,
+                            MemoryMB = p.WorkingSet64 / (1024.0 * 1024.0),
+                            ThreadCount = p.Threads.Count
+                        };
+                    }
+                    catch
+                    {
+                        return new ProcessInfoItem { Name = p.ProcessName, Id = p.Id };
+                    }
+                })
+                .ToList();
+        });
+    }
+
     private void UpdateSummary()
     {
         TotalProcessesText.Text = _allProcesses.Count.ToString();
@@ -81,35 +138,62 @@ public sealed partial class ProcessesPage : Page
     {
         var query = SearchBox.Text?.ToLowerInvariant() ?? "";
 
-        _filteredProcesses = string.IsNullOrEmpty(query)
+        var filtered = string.IsNullOrEmpty(query)
             ? [.. _allProcesses]
             : _allProcesses
                 .Where(p => p.Name.Contains(query, StringComparison.OrdinalIgnoreCase) ||
                            p.Id.ToString().Contains(query))
                 .ToList();
 
-        SortProcesses();
-        ProcessListView.ItemsSource = _filteredProcesses;
+        var sorted = SortProcesses(filtered);
+        MergeInto(_filteredProcesses, sorted);
     }
 
-    private void SortProcesses()
+    private List<ProcessInfoItem> SortProcesses(List<ProcessInfoItem> source)
     {
-        _filteredProcesses = _currentSort switch
+        return _currentSort switch
         {
             "Name" => _sortAscending
-                ? [.. _filteredProcesses.OrderBy(p => p.Name)]
-                : [.. _filteredProcesses.OrderByDescending(p => p.Name)],
+                ? [.. source.OrderBy(p => p.Name)]
+                : [.. source.OrderByDescending(p => p.Name)],
             "PID" => _sortAscending
-                ? [.. _filteredProcesses.OrderBy(p => p.Id)]
-                : [.. _filteredProcesses.OrderByDescending(p => p.Id)],
+                ? [.. source.OrderBy(p => p.Id)]
+                : [.. source.OrderByDescending(p => p.Id)],
             "Memory" => _sortAscending
-                ? [.. _filteredProcesses.OrderBy(p => p.MemoryMB)]
-                : [.. _filteredProcesses.OrderByDescending(p => p.MemoryMB)],
+                ? [.. source.OrderBy(p => p.MemoryMB)]
+                : [.. source.OrderByDescending(p => p.MemoryMB)],
             "Threads" => _sortAscending
-                ? [.. _filteredProcesses.OrderBy(p => p.ThreadCount)]
-                : [.. _filteredProcesses.OrderByDescending(p => p.ThreadCount)],
-            _ => _filteredProcesses
+                ? [.. source.OrderBy(p => p.ThreadCount)]
+                : [.. source.OrderByDescending(p => p.ThreadCount)],
+            _ => source
         };
+    }
+
+    private static void MergeInto(ObservableCollection<ProcessInfoItem> target, List<ProcessInfoItem> source)
+    {
+        for (var i = 0; i < source.Count; i++)
+        {
+            if (i < target.Count)
+            {
+                if (target[i].Id == source[i].Id)
+                {
+                    target[i].UpdateFrom(source[i]);
+                }
+                else
+                {
+                    target[i] = source[i];
+                }
+            }
+            else
+            {
+                target.Add(source[i]);
+            }
+        }
+
+        while (target.Count > source.Count)
+        {
+            target.RemoveAt(target.Count - 1);
+        }
     }
 
     private void SearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -132,7 +216,17 @@ public sealed partial class ProcessesPage : Page
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
-        await LoadProcessesAsync();
+        if (_refreshTimer?.IsEnabled == true)
+        {
+            StopAutoRefresh();
+            RefreshButtonIcon.Glyph = "\uE768"; // Play
+        }
+        else
+        {
+            await RefreshProcessesAsync();
+            StartAutoRefresh();
+            RefreshButtonIcon.Glyph = "\uE769"; // Pause
+        }
     }
 
     private async void EndTask_Click(object sender, RoutedEventArgs e)
@@ -156,16 +250,15 @@ public sealed partial class ProcessesPage : Page
             {
                 using var process = Process.GetProcessById(processId);
                 process.Kill();
-                process.WaitForExit(5000);
             });
 
             App.ShowNotification("Process Ended", $"Process '{processName}' (PID: {processId}) was terminated successfully.", InfoBarSeverity.Success, 3000);
-            await LoadProcessesAsync();
+            await RefreshProcessesAsync();
         }
         catch (ArgumentException)
         {
             App.ShowNotification("Process Not Found", $"Process with PID {processId} no longer exists.", InfoBarSeverity.Warning, 3000);
-            await LoadProcessesAsync();
+            await RefreshProcessesAsync();
         }
         catch (Exception ex)
         {
@@ -175,21 +268,60 @@ public sealed partial class ProcessesPage : Page
     }
 }
 
-internal class ProcessInfoItem
+internal class ProcessInfoItem : INotifyPropertyChanged
 {
-    public string Name { get; set; } = string.Empty;
+    private string _name = string.Empty;
+    private int _id;
+    private double _memoryMB;
+    private int _threadCount;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public string Name
+    {
+        get => _name;
+        set { if (_name != value) { _name = value; OnPropertyChanged(nameof(Name)); } }
+    }
+
     public int Id
     {
-        get; set;
+        get => _id;
+        set { if (_id != value) { _id = value; OnPropertyChanged(nameof(Id)); } }
     }
+
     public double MemoryMB
     {
-        get; set;
+        get => _memoryMB;
+        set
+        {
+            if (Math.Abs(_memoryMB - value) > 0.01)
+            {
+                _memoryMB = value;
+                OnPropertyChanged(nameof(MemoryMB));
+                OnPropertyChanged(nameof(MemoryDisplay));
+                OnPropertyChanged(nameof(MemoryPercent));
+            }
+        }
     }
+
     public int ThreadCount
     {
-        get; set;
+        get => _threadCount;
+        set { if (_threadCount != value) { _threadCount = value; OnPropertyChanged(nameof(ThreadCount)); } }
     }
+
     public string MemoryDisplay => $"{MemoryMB:F1} MB";
     public double MemoryPercent => Math.Min(MemoryMB / 500.0 * 100, 100);
+
+    public void UpdateFrom(ProcessInfoItem other)
+    {
+        Name = other.Name;
+        MemoryMB = other.MemoryMB;
+        ThreadCount = other.ThreadCount;
+    }
+
+    private void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }

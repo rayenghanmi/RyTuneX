@@ -738,9 +738,6 @@
   <data name="TotalApps" xml:space="preserve">
     <value>Tổng cộng: {0} ứng dụng</value>
   </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Hiệu suất</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>Bật</value>
   </data>
@@ -1640,5 +1637,11 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Loại bỏ các tính năng AI khỏi Notepad, Paint và Photos, tắt hiệu ứng camera/mic của Windows Studio và AI cho chơi game, đồng thời gỡ bỏ tích hợp AI khỏi hệ thống để tối đa hóa quyền riêng tư và hiệu suất.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Dịch vụ</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Tiến trình</value>
   </data>
 </root>
