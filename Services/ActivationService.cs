@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using RyTuneX.Activation;
 using RyTuneX.Contracts.Services;
@@ -23,6 +23,7 @@ public class ActivationService : IActivationService
 
     public async Task ActivateAsync(object activationArgs)
     {
+        _ = LogHelper.Log("ActivateAsync started");
         await InitializeAsync(); // only load theme
 
         // Present an empty frame immediately to show a window asap
@@ -36,9 +37,17 @@ public class ActivationService : IActivationService
         // Defer the rest of the UI intialization to show the window faster
         App.MainWindow.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, async () =>
         {
-            await EnsureShellAsync();
-            await HandleActivationAsync(activationArgs);
-            await StartupAsync();
+            try
+            {
+                await EnsureShellAsync();
+                await HandleActivationAsync(activationArgs);
+                await StartupAsync();
+                _ = LogHelper.Log("ActivateAsync completed successfully");
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogException(ex, "Deferred activation failed");
+            }
         });
     }
 
@@ -52,6 +61,7 @@ public class ActivationService : IActivationService
         _shell = App.GetService<ShellPage>();
         App.MainWindow.Content = _shell;
         _initializedShell = true;
+        _ = LogHelper.Log("Shell initialized");
     }
 
     private async Task HandleActivationAsync(object activationArgs)
@@ -59,6 +69,7 @@ public class ActivationService : IActivationService
         var activationHandler = _activationHandlers.FirstOrDefault(h => h.CanHandle(activationArgs));
         if (activationHandler != null)
         {
+            _ = LogHelper.Log($"Using activation handler: {activationHandler.GetType().Name}");
             await activationHandler.HandleAsync(activationArgs);
         }
         if (_defaultHandler.CanHandle(activationArgs))

@@ -2044,8 +2044,9 @@ public static partial class OptimizeSystemHelper
 
             return true;
         }
-        catch
+        catch (Exception ex)
         {
+            _ = LogHelper.LogError($"Error removing temp files: {ex.Message}");
             return false;
         }
     }

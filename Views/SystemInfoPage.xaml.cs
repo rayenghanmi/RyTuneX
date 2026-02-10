@@ -1,8 +1,8 @@
-﻿using System.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Helpers;
+using System.Text;
 
 namespace RyTuneX.Views;
 

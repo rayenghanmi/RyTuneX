@@ -1,11 +1,4 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -14,6 +7,9 @@ using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using Windows.ApplicationModel;
 using Windows.Storage;
 
@@ -106,6 +102,8 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 
             if (!string.IsNullOrEmpty(languageTag))
             {
+                _ = LogHelper.Log($"Language changed to: {languageTag}");
+
                 // Set the primary language override
                 Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = languageTag;
 
@@ -173,16 +171,11 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 
     public string VersionDescription
     {
-        get
-        {
-            LogHelper.Log("Getting VersionDescription");
-            return _versionDescription;
-        }
+        get => _versionDescription;
         set
         {
             if (_versionDescription != value)
             {
-                LogHelper.Log("Setting VersionDescription");
                 _versionDescription = value;
             }
         }
@@ -190,27 +183,7 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 
     private async void HyperlinkButton_Click(object sender, RoutedEventArgs e)
     {
-        await OpenLogFile();
-    }
-
-    private async Task OpenLogFile()
-    {
-        try
-        {
-            var tempFolder = ApplicationData.Current.TemporaryFolder;
-            var logFile = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
-
-            if (logFile != null)
-            {
-                var options = new Windows.System.LauncherOptions();
-                options.DisplayApplicationPicker = false;
-                await Windows.System.Launcher.LaunchFileAsync(logFile, options);
-            }
-        }
-        catch (Exception ex)
-        {
-            _ = LogHelper.LogError($"Error opening log file: {ex.Message}\nStack Trace: {ex.StackTrace}");
-        }
+        await LogViewerHelper.ShowLogViewerAsync(XamlRoot);
     }
 
     private async void RevertChanges_Click(object sender, RoutedEventArgs e)
@@ -323,7 +296,7 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error: {ex.Message}");
+                _ = LogHelper.LogError($"Error reverting changes: {ex.Message}\nStack Trace: {ex.StackTrace}");
             }
         }
     }

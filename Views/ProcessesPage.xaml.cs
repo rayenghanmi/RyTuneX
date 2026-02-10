@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace RyTuneX.Views;
 
@@ -118,8 +118,9 @@ public sealed partial class ProcessesPage : Page
                             ThreadCount = p.Threads.Count
                         };
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        _ = LogHelper.LogWarning($"Error reading process info for {p.ProcessName}: {ex.Message}");
                         return new ProcessInfoItem { Name = p.ProcessName, Id = p.Id };
                     }
                 })

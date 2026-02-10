@@ -215,6 +215,7 @@ public sealed partial class GroupPolicyPage : Page
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
+        _ = LogHelper.Log("Manually refreshing group policy scan");
         await ScanPoliciesAsync();
     }
 
@@ -348,7 +349,9 @@ public sealed partial class GroupPolicyPage : Page
             RefreshButton.IsEnabled = false;
             RemoveAllButton.IsEnabled = false;
 
+            _ = LogHelper.Log($"Removing {policyList.Count} group policy overrides");
             var (succeeded, failed) = await GroupPolicyHelper.RemovePolicyOverridesAsync(policyList);
+            _ = LogHelper.Log($"Policy removal complete: {succeeded} succeeded, {failed} failed");
 
             // Show result notification
             if (failed == 0)

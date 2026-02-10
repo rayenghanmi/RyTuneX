@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Security.Principal;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
@@ -9,6 +7,8 @@ using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.ViewModels;
+using System.Diagnostics;
+using System.Security.Principal;
 using Windows.Storage;
 using Windows.System;
 
@@ -227,20 +227,34 @@ public sealed partial class ShellPage : Page
 
     private void IssueButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo
+        try
         {
-            FileName = "https://github.com/rayenghanmi/rytunex/issues/new",
-            UseShellExecute = true
-        });
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/rayenghanmi/rytunex/issues/new",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open issue page: {ex.Message}");
+        }
     }
 
     private void SupportButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo
+        try
         {
-            FileName = "https://buymeacoffee.com/rayen.ghanmi.22",
-            UseShellExecute = true
-        });
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://buymeacoffee.com/rayen.ghanmi.22",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open support page: {ex.Message}");
+        }
     }
 
     private async Task ShowRestorePointDialogAsync()

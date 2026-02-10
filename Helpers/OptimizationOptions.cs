@@ -1,11 +1,11 @@
-﻿using System.Collections.Concurrent;
+﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.Win32;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.Win32;
 
 namespace RyTuneX.Helpers;
 
@@ -193,7 +193,10 @@ internal partial class OptimizationOptions
             {
                 baseKey = RegistryKey.OpenBaseKey(hive, view).OpenSubKey(path);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogWarning($"Failed to open uninstall root ({hive}/{view}): {ex.Message}");
+            }
 
             if (baseKey != null)
                 yield return baseKey;
@@ -598,7 +601,6 @@ internal partial class OptimizationOptions
                     : RegistryView.Default).CreateSubKey(RegistryBaseKey);
 
             key?.SetValue((string)toggleSwitch.Tag, toggleSwitch.IsOn ? 1 : 0, RegistryValueKind.DWord);
-            Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
         }
         catch (Exception ex)
         {
@@ -649,6 +651,8 @@ internal partial class OptimizationOptions
     private static async Task ExecuteToggleActionAsync(string? tag, bool isOn, CancellationToken ct)
     {
         if (string.IsNullOrEmpty(tag)) return;
+
+        _ = LogHelper.Log($"Executing optimization: {tag} = {(isOn ? "ON" : "OFF")}");
 
         // Provide a cancellable wrapper around each action and centralize switch
         switch (tag)

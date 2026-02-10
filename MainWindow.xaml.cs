@@ -75,6 +75,7 @@ public sealed partial class MainWindow : WindowEx
                 });
 
                 var result = await tcs.Task.ConfigureAwait(false);
+                _ = LogHelper.Log($"Close dialog result: {result}");
                 if (result == ContentDialogResult.Primary)
                 {
                     // Run a background waiter that will close the dialog and exit when done
@@ -87,8 +88,8 @@ public sealed partial class MainWindow : WindowEx
                             Interlocked.Exchange(ref _exitRequested, 1);
                             dispatcherQueue.TryEnqueue(() =>
                             {
-                                try { dialog.Hide(); } catch { }
-                                try { App.MainWindow.Close(); } catch { }
+                                try { dialog.Hide(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error hiding dialog on exit: {ex.Message}"); }
+                                try { App.MainWindow.Close(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error closing window on exit: {ex.Message}"); }
                             });
                         }
                     });
@@ -101,8 +102,8 @@ public sealed partial class MainWindow : WindowEx
                     Interlocked.Exchange(ref _exitRequested, 1);
                     dispatcherQueue.TryEnqueue(() =>
                     {
-                        try { dialog.Hide(); } catch { }
-                        try { App.MainWindow.Close(); } catch { }
+                        try { dialog.Hide(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error hiding dialog on force exit: {ex.Message}"); }
+                        try { App.MainWindow.Close(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error closing window on force exit: {ex.Message}"); }
                     });
                 }
                 else
@@ -117,7 +118,7 @@ public sealed partial class MainWindow : WindowEx
         }
         catch (Exception ex)
         {
-            _ = LogHelper.LogError($"Error during closing handler: {ex.Message}");
+            _ = LogHelper.LogException(ex, "MainWindow_Closing");
         }
     }
 

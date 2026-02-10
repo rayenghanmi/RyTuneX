@@ -1,5 +1,4 @@
-﻿using Microsoft.UI;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
@@ -166,6 +165,7 @@ public sealed partial class ServicesPage : Page
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
+        _ = LogHelper.Log("Manually refreshing services list");
         await LoadServicesAsync();
     }
 
@@ -363,7 +363,10 @@ public sealed partial class ServicesPage : Page
                 };
             }
         }
-        catch { }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogWarning($"Error reading start type for service {serviceName}: {ex.Message}");
+        }
         return "Unknown";
     }
 }

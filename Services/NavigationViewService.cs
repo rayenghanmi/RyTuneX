@@ -1,9 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
 using Microsoft.UI.Xaml.Controls;
-
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace RyTuneX.Services;
 

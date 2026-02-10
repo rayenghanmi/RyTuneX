@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using CommunityToolkit.WinUI.Controls;
+﻿using CommunityToolkit.WinUI.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -106,7 +105,7 @@ public sealed partial class FeaturesPage : Page
         try
         {
             var toggleSwitch = (ToggleSwitch)sender;
-            Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            _ = LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }
         catch (Exception ex)

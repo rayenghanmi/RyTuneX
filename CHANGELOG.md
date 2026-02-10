@@ -8,6 +8,7 @@ All notable changes to this branch will be documented in this file.
 ### Added
 
 - Added a new reload button in the `Debloat` page to refresh the list of installed apps.
+- Introduced a new Log Viewer page to view and manage the app's logs.
 
 ### Fixes
 
@@ -19,6 +20,7 @@ All notable changes to this branch will be documented in this file.
 - Added Services and Processes pages entry points to the navigation menu for better accessibility.
 - Minor UI improvements all across the app.
 - Added real-time processes monitoring in the `Processes` page.
+- Enhanced the logging system and added a new Log Viewer page to view and manage the app's logs.
 
 ## 1.6.2 - Released
 

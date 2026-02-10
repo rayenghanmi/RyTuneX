@@ -1,10 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Contracts.ViewModels;
 using RyTuneX.Helpers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace RyTuneX.Services;
 
@@ -90,10 +90,15 @@ public class NavigationService : INavigationService
             if (navigated)
             {
                 _lastParameterUsed = parameter;
+                _ = LogHelper.Log($"Navigated to {pageKey}");
                 if (vmBeforeNavigation is INavigationAware navigationAware)
                 {
                     navigationAware.OnNavigatedFrom();
                 }
+            }
+            else
+            {
+                _ = LogHelper.LogWarning($"Navigation to {pageKey} failed");
             }
 
             return navigated;

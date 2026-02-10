@@ -1,10 +1,10 @@
-﻿using System.Diagnostics;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
+using System.Diagnostics;
 
 namespace RyTuneX.Views;
 
@@ -18,6 +18,7 @@ public sealed partial class SecurityPage : Page
     public SecurityPage()
     {
         InitializeComponent();
+        LogHelper.Log("Initializing SecurityPage");
 
         // Initialize cancellation token
         _cancellationTokenSource = new CancellationTokenSource();
@@ -70,6 +71,7 @@ public sealed partial class SecurityPage : Page
             return;
 
         _isCheckInProgress = true;
+        _ = LogHelper.Log("Starting security status check");
 
         try
         {
@@ -495,6 +497,7 @@ public sealed partial class SecurityPage : Page
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
+        _ = LogHelper.Log("Manually refreshing security status");
         await CheckSecurityStatusAsync(_cancellationTokenSource?.Token ?? default);
     }
 
@@ -518,6 +521,7 @@ public sealed partial class SecurityPage : Page
     {
         try
         {
+            _ = LogHelper.Log("Starting Windows Defender quick scan");
             QuickScanButton.IsEnabled = false;
             QuickScanProgressRing.Visibility = Visibility.Visible;
             QuickScanIcon.Visibility = Visibility.Collapsed;
@@ -561,6 +565,7 @@ public sealed partial class SecurityPage : Page
     {
         try
         {
+            _ = LogHelper.Log("Updating Windows Defender signatures");
             UpdateDefinitionsButton.IsEnabled = false;
             UpdateDefinitionsProgressRing.Visibility = Visibility.Visible;
             UpdateDefinitionsIcon.Visibility = Visibility.Collapsed;
@@ -653,8 +658,9 @@ public sealed partial class SecurityPage : Page
                 UseShellExecute = true
             });
         }
-        catch
+        catch (Exception ex)
         {
+            _ = LogHelper.LogWarning($"Failed to open device encryption settings, trying control panel: {ex.Message}");
             // Fallback to control panel BitLocker
             try
             {
@@ -665,9 +671,9 @@ public sealed partial class SecurityPage : Page
                     UseShellExecute = true
                 });
             }
-            catch (Exception ex)
+            catch (Exception fallbackEx)
             {
-                _ = LogHelper.LogError($"Error opening BitLocker settings: {ex.Message}");
+                _ = LogHelper.LogError($"Error opening BitLocker settings: {fallbackEx.Message}");
             }
         }
     }

@@ -1,13 +1,13 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Text;
-using CommunityToolkit.WinUI;
+﻿using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Helpers;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Text;
 
 namespace RyTuneX.Views;
 
@@ -35,17 +35,20 @@ public sealed partial class DebloatSystemPage : Page
         try
         {
             // Cancel any ongoing operations for this page
-            try { cancellationTokenSource.Cancel(); } catch { }
-            try { _filterAnimationCts?.Cancel(); } catch { }
+            try { cancellationTokenSource.Cancel(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error cancelling CTS: {ex.Message}"); }
+            try { _filterAnimationCts?.Cancel(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error cancelling filter CTS: {ex.Message}"); }
 
             if (_uninstallBatchCts != null)
             {
-                try { _uninstallBatchCts.Cancel(); } catch { }
+                try { _uninstallBatchCts.Cancel(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error cancelling uninstall CTS: {ex.Message}"); }
                 _uninstallBatchCts.Dispose();
                 _uninstallBatchCts = null;
             }
         }
-        catch { }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogWarning($"Error during DebloatSystemPage unload cleanup: {ex.Message}");
+        }
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -287,6 +290,8 @@ public sealed partial class DebloatSystemPage : Page
                 });
             }
 
+            _ = LogHelper.Log($"Uninstall batch complete: {successfulUninstalls.Count} succeeded, {failedUninstalls.Count} failed");
+
             // Show notifications
             if (successfulUninstalls.Count > 0)
             {
@@ -494,6 +499,7 @@ public sealed partial class DebloatSystemPage : Page
 
     private void ReloadApps_Click(object sender, RoutedEventArgs e)
     {
+        _ = LogHelper.Log("Reloading installed apps list");
         LoadInstalledApps(cancellationTokenSource.Token);
     }
 
@@ -522,6 +528,7 @@ public sealed partial class DebloatSystemPage : Page
     {
         try
         {
+            _ = LogHelper.Log("Starting temp files removal");
             // Update UI to show progress
             TempButton.IsEnabled = false;
             TempButtonProgressRing.Visibility = Visibility.Visible;
@@ -552,8 +559,9 @@ public sealed partial class DebloatSystemPage : Page
                     InfoBarSeverity.Error, 5000);
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            _ = LogHelper.LogException(ex, "TempButton_Click");
             // Restore UI in case of unexpected error
             TempButton.IsEnabled = true;
             TempButtonProgressRing.Visibility = Visibility.Collapsed;

@@ -18,7 +18,6 @@
  * Contact: ghanmirayen12@gmail.com
  */
 
-using System.Runtime.InteropServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -30,6 +29,7 @@ using RyTuneX.Models;
 using RyTuneX.Services;
 using RyTuneX.ViewModels;
 using RyTuneX.Views;
+using System.Runtime.InteropServices;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.Storage;
@@ -114,10 +114,18 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-        LogHelper.Log("___________ New Session ___________");
 
         // Catch unhandled exceptions early to avoid silent activation failures
         UnhandledException += App_UnhandledException;
+
+        // Catch unobserved Task exceptions (fire-and-forget tasks that throw)
+        TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+
+        // Catch truly fatal AppDomain exceptions (native crashes, thread aborts, etc.)
+        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+        LogHelper.Log("___________ New Session ___________");
+        LogHelper.Log($"App version: {Views.SettingsPage.GetVersionDescription()}, OS: {Environment.OSVersion}, Runtime: {System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}");
     }
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
@@ -206,6 +214,36 @@ public partial class App : Application
 
     private async void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
     {
-        await LogHelper.LogError($"App_UnhandledException: {e.Exception}");
+        // Mark as handled to prevent immediate crash and allow the log to be written
+        e.Handled = true;
+        try
+        {
+            await LogHelper.LogException(e.Exception, "UnhandledException (XAML)");
+        }
+        catch
+        {
+            LogHelper.LogCriticalSync($"UnhandledException (XAML): {e.Exception}");
+        }
+    }
+
+    private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
+    {
+        // Mark observed so the process is not terminated
+        e.SetObserved();
+        try
+        {
+            _ = LogHelper.LogException(e.Exception, "UnobservedTaskException");
+        }
+        catch
+        {
+            LogHelper.LogCriticalSync($"UnobservedTaskException: {e.Exception}");
+        }
+    }
+
+    private void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+    {
+        // This fires for fatal exceptions; use sync logging because the process may terminate immediately
+        var ex = e.ExceptionObject as Exception;
+        LogHelper.LogCriticalSync($"AppDomain.UnhandledException (IsTerminating={e.IsTerminating}): {ex}");
     }
 }

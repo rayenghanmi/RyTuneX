@@ -1,12 +1,12 @@
-﻿using System.Diagnostics;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
-using System.ServiceProcess;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Contracts.Services;
+using System.Diagnostics;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
+using System.ServiceProcess;
 using Windows.Management.Deployment;
 
 namespace RyTuneX.Views;
@@ -105,7 +105,7 @@ public sealed partial class HomePage : Page
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Error updating UI: {ex.Message}");
+                    _ = LogHelper.LogWarning($"Error updating UI: {ex.Message}");
                 }
 
                 // Small delay between samples
@@ -114,11 +114,11 @@ public sealed partial class HomePage : Page
         }
         catch (OperationCanceledException)
         {
-            Debug.WriteLine("UpdateSystemStats task was canceled.");
+            _ = LogHelper.Log("UpdateSystemStats task was canceled.");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Unexpected error: {ex.Message}");
+            _ = LogHelper.LogException(ex, "UpdateSystemStatsAsync");
         }
     }
 
@@ -204,8 +204,9 @@ public sealed partial class HomePage : Page
             var percent = total == 0 ? 0 : (int)((used * 100L) / total);
             return Math.Clamp(percent, 0, 100);
         }
-        catch
+        catch (Exception ex)
         {
+            _ = LogHelper.LogWarning($"Error reading disk usage: {ex.Message}");
             return 0;
         }
     }
@@ -251,13 +252,13 @@ public sealed partial class HomePage : Page
 
             return (Math.Round(uploadMbps, 1), Math.Round(downloadMbps, 1));
         }
-        catch
+        catch (Exception ex)
         {
+            _ = LogHelper.LogWarning($"Error reading network throughput: {ex.Message}");
             return (0.0, 0.0);
         }
     }
 
-    // Get total bytes received by all network interfaces
     private static long GetTotalBytesReceived()
     {
         return NetworkInterface.GetAllNetworkInterfaces()
@@ -280,8 +281,9 @@ public sealed partial class HomePage : Page
             var packageManager = new PackageManager();
             return packageManager.FindPackages().Count();
         }
-        catch
+        catch (Exception ex)
         {
+            _ = LogHelper.LogWarning($"Error getting installed apps count: {ex.Message}");
             return 0;
         }
     }
@@ -315,7 +317,7 @@ public sealed partial class HomePage : Page
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Failed to init GPU counters: {ex.Message}");
+            _ = LogHelper.LogWarning($"Failed to init GPU counters: {ex.Message}");
         }
     }
 
@@ -332,8 +334,9 @@ public sealed partial class HomePage : Page
             }
             return (int)Math.Clamp(result, 0, 100);
         }
-        catch
+        catch (Exception ex)
         {
+            _ = LogHelper.LogWarning($"Error reading GPU usage: {ex.Message}");
             return 0;
         }
     }
