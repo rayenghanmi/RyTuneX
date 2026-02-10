@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
@@ -30,6 +30,9 @@ public sealed partial class HomePage : Page
     // Cached Resources
     private readonly List<PerformanceCounter> _gpuCounters = new();
     private DriveInfo? _systemDriveInfo;
+
+    private DateTime _lastGpuRefresh = DateTime.MinValue;
+    private readonly TimeSpan _gpuRefreshInterval = TimeSpan.FromSeconds(5);
 
     public HomePage()
     {
@@ -303,7 +306,7 @@ public sealed partial class HomePage : Page
 
             foreach (var instanceName in instanceNames)
             {
-                if (instanceName.EndsWith("engtype_3D"))
+                if (instanceName.Contains("engtype_3D"))
                 {
                     foreach (var counter in category.GetCounters(instanceName))
                     {
@@ -323,21 +326,56 @@ public sealed partial class HomePage : Page
 
     private int GetGpuUsageFromCache()
     {
-        if (_gpuCounters.Count == 0) return 0;
-
-        try
+        // Periodically rebuild counters
+        if (_gpuCounters.Count == 0 ||
+            DateTime.UtcNow - _lastGpuRefresh > _gpuRefreshInterval)
         {
-            var result = 0f;
-            foreach (var counter in _gpuCounters)
+            RefreshGpuCounters();
+        }
+
+        if (_gpuCounters.Count == 0)
+            return 0;
+
+        float result = 0f;
+
+        // Iterate backwards so we can safely remove dead counters
+        for (int i = _gpuCounters.Count - 1; i >= 0; i--)
+        {
+            var counter = _gpuCounters[i];
+            try
             {
                 result += counter.NextValue();
             }
-            return (int)Math.Clamp(result, 0, 100);
+            catch (InvalidOperationException)
+            {
+                // Remove instances that no longer exist
+                counter.Dispose();
+                _gpuCounters.RemoveAt(i);
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogWarning($"GPU counter error: {ex.Message}");
+            }
+        }
+
+        return (int)Math.Clamp(result, 0, 100);
+    }
+
+    private void RefreshGpuCounters()
+    {
+        try
+        {
+            foreach (var counter in _gpuCounters)
+                counter.Dispose();
+
+            _gpuCounters.Clear();
+
+            InitializeGpuCounters();
+            _lastGpuRefresh = DateTime.UtcNow;
         }
         catch (Exception ex)
         {
-            _ = LogHelper.LogWarning($"Error reading GPU usage: {ex.Message}");
-            return 0;
+            _ = LogHelper.LogWarning($"Failed to refresh GPU counters: {ex.Message}");
         }
     }
 

@@ -13,6 +13,7 @@ All notable changes to this branch will be documented in this file.
 ### Fixes
 
 - Fixed some values in optimization toggles.
+- Resolved an issue where the gpu usage was not being detected correctly in the `Home` page.
 
 ### Changes
 
