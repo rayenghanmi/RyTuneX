@@ -54,6 +54,9 @@ public partial class App : Application
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool FlashWindowEx(ref FLASHWINFO pwfi);
 
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetForegroundWindow();
+
     private const uint FLASHW_ALL = 3;           // Flash both window caption and taskbar button
     private const uint FLASHW_TIMERNOFG = 12;    // Flash continuously until the window comes to the foreground
 
@@ -64,6 +67,9 @@ public partial class App : Application
         {
             var hwnd = WindowNative.GetWindowHandle(MainWindow);
             if (hwnd == IntPtr.Zero) return;
+
+            // Skip flash and sound when the window is already in the foreground
+            if (GetForegroundWindow() == hwnd) return;
 
             var fInfo = new FLASHWINFO();
             fInfo.cbSize = (uint)Marshal.SizeOf(fInfo);

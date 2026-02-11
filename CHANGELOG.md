@@ -19,7 +19,8 @@ All notable changes to this branch will be documented in this file.
 
 - Improved general performance and stability of the `Debloat` page.
 - Added Services and Processes pages entry points to the navigation menu for better accessibility.
-- Minor UI improvements all across the app.
+- Minor UI improvements all across the app:
+  - Replaced the old notification info bars with the new `GrowlInfo` control for better consistency and appearance.
 - Added real-time processes monitoring in the `Processes` page.
 - Enhanced the logging system and added a new Log Viewer page to view and manage the app's logs.
 

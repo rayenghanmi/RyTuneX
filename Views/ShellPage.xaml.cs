@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using DevWinUI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
@@ -73,9 +74,6 @@ public sealed partial class ShellPage : Page
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
-
-        // Attach pointer handlers for pausing/resuming notifications
-        Loaded += ShellPage_Loaded;
     }
 
     private void UserProfileButton_Click(object sender, RoutedEventArgs e)
@@ -92,15 +90,6 @@ public sealed partial class ShellPage : Page
         {
             _ = LogHelper.LogError($"Failed to open account settings: {ex.Message}");
         }
-    }
-
-    private void ShellPage_Loaded(object? sender, RoutedEventArgs e)
-    {
-        // Pointer events to pause/resume animations and the notification queue
-        infoBar.PointerEntered -= InfoBar_PointerEntered;
-        infoBar.PointerEntered += InfoBar_PointerEntered;
-        infoBar.PointerExited -= InfoBar_PointerExited;
-        infoBar.PointerExited += InfoBar_PointerExited;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -310,122 +299,58 @@ public sealed partial class ShellPage : Page
         }
     }
 
-    public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration)
+    public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration = 3000)
     {
         App.NotifyTaskCompletion();
-        Current?.ShowNotificationInstance(title, message, severity, duration);
-    }
 
-    private Storyboard? GetStoryboard(string key)
-    {
-        if (infoBar.Resources.TryGetValue(key, out var obj) && obj is Storyboard sb)
+        void Show()
         {
-            return sb;
-        }
-        return null;
-    }
-
-    private void ShowNotificationInstance(string title, string message, InfoBarSeverity severity, int duration)
-    {
-        // Make visible and show notification content via behavior
-        infoBar.Visibility = Visibility.Visible;
-
-        NotificationQueue.Show(new CommunityToolkit.WinUI.Behaviors.Notification
-        {
-            Title = title,
-            Message = message,
-            Severity = severity,
-            Duration = TimeSpan.FromMilliseconds(duration)
-        });
-
-        // Start entrance animation
-        GetStoryboard("ShowNotificationStoryboard")?.Begin();
-
-        // Start progress animation and wire completion
-        var progressSb = GetStoryboard("ProgressBarAnimationStoryboard");
-        if (progressSb != null)
-        {
-            // Ensure single subscription
-            progressSb.Completed -= ProgressBarAnimationStoryboard_Completed;
-            progressSb.Completed += ProgressBarAnimationStoryboard_Completed;
-            progressSb.Begin();
-        }
-    }
-
-    private void ProgressBarAnimationStoryboard_Completed(object? sender, object e)
-    {
-        // If pointer is over infoBar, defer the hide until pointer exits
-        if (_isPointerOver)
-        {
-            _pendingHide = true;
-            return;
-        }
-
-        // Start hide animation
-        DispatcherQueue.TryEnqueue(() =>
-        {
-            var hideSb = GetStoryboard("HideNotificationStoryboard");
-            if (hideSb != null)
+            var growlInfo = new GrowlInfo
             {
-                hideSb.Completed -= HideNotificationStoryboard_Completed;
-                hideSb.Completed += HideNotificationStoryboard_Completed;
-                hideSb.Begin();
+                Title = title,
+                Message = message,
+                ShowDateTime = true,
+                StaysOpen = false,
+                IsClosable = true,
+                Token = "MainToken",
+                WaitTime = TimeSpan.FromMilliseconds(duration)
+            };
+            try
+            {
+                switch (severity)
+                {
+                    case InfoBarSeverity.Informational:
+                        Growl.Info(growlInfo);
+                        break;
+                    case InfoBarSeverity.Success:
+                        Growl.Success(growlInfo);
+                        break;
+                    case InfoBarSeverity.Warning:
+                        Growl.Warning(growlInfo);
+                        break;
+                    case InfoBarSeverity.Error:
+                        Growl.Error(growlInfo);
+                        break;
+                    default:
+                        Growl.Info(growlInfo);
+                        break;
+                }
+                _ = LogHelper.Log($"Showing notification: {title} - {message}");
             }
-            else
+            catch (Exception ex)
             {
-                FinalizeHide();
-            }
-        });
-    }
-
-    private void HideNotificationStoryboard_Completed(object? sender, object e)
-    {
-        FinalizeHide();
-    }
-
-    private void FinalizeHide()
-    {
-        // Stop storyboards and reset state
-        GetStoryboard("ProgressBarAnimationStoryboard")?.Stop();
-        GetStoryboard("ShowNotificationStoryboard")?.Stop();
-        GetStoryboard("HideNotificationStoryboard")?.Stop();
-
-        progressBar.Value = 0;
-        infoBar.Visibility = Visibility.Collapsed;
-
-        _pendingHide = false;
-    }
-
-    private void InfoBar_PointerEntered(object sender, PointerRoutedEventArgs e)
-    {
-        _isPointerOver = true;
-
-        GetStoryboard("ProgressBarAnimationStoryboard")?.Pause();
-        GetStoryboard("ShowNotificationStoryboard")?.Pause();
-        GetStoryboard("HideNotificationStoryboard")?.Pause();
-    }
-
-    private void InfoBar_PointerExited(object sender, PointerRoutedEventArgs e)
-    {
-        _isPointerOver = false;
-
-        GetStoryboard("ProgressBarAnimationStoryboard")?.Resume();
-        GetStoryboard("ShowNotificationStoryboard")?.Resume();
-        GetStoryboard("HideNotificationStoryboard")?.Resume();
-
-        if (_pendingHide)
-        {
-            var hideSb = GetStoryboard("HideNotificationStoryboard");
-            if (hideSb != null)
-            {
-                hideSb.Completed -= HideNotificationStoryboard_Completed;
-                hideSb.Completed += HideNotificationStoryboard_Completed;
-                hideSb.Begin();
-            }
-            else
-            {
-                FinalizeHide();
+                _ = LogHelper.LogError($"Failed to show notification: {ex.Message}");
             }
         }
+
+        if (Current?.DispatcherQueue.HasThreadAccess == true)
+        {
+            Show();
+        }
+        else
+        {
+            Current?.DispatcherQueue.TryEnqueue(Show);
+        }
     }
+
 }

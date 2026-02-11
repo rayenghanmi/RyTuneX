@@ -11,6 +11,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:winbehaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:models="using:RyTuneX.Models"
+    xmlns:dev="using:DevWinUI"
     Loaded="OnLoaded">
 
     <Grid>
@@ -251,65 +252,18 @@
                     </behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
                 </behaviors:NavigationViewHeaderBehavior>
             </i:Interaction.Behaviors>
-            <Grid>
-                <Frame x:Name="NavigationFrame"/>
-                <muxc:InfoBar
-                    x:Name="infoBar"
-                    Grid.Row="0"
-                    MaxWidth="600"
-                    Margin="32"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom">
-                    <muxc:InfoBar.Resources>
-                        <!-- Storyboard for InfoBar Animation -->
-                        <Storyboard x:Key="ShowNotificationStoryboard">
-                            <DoubleAnimation
-                                Storyboard.TargetName="infoBar"
-                                Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)"
-                                From="50"
-                                To="0"
-                                Duration="0:0:0.3" />
-                        </Storyboard>
-                        <!-- Storyboard for ProgressBar Animation -->
-                        <Storyboard x:Key="ProgressBarAnimationStoryboard">
-                            <DoubleAnimation
-                                Storyboard.TargetName="progressBar"
-                                Storyboard.TargetProperty="Value"
-                                From="0"
-                                To="100"
-                                Duration="0:0:5"
-                                EnableDependentAnimation="True" />
-                        </Storyboard>
-                        <!-- Storyboard for hiding the InfoBar -->
-                        <Storyboard x:Key="HideNotificationStoryboard">
-                            <DoubleAnimation
-                                Storyboard.TargetName="infoBar"
-                                Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)"
-                                From="0"
-                                To="50"
-                                Duration="0:0:0.25" />
-                        </Storyboard>
-                    </muxc:InfoBar.Resources>
-                    <muxc:InfoBar.RenderTransform>
-                        <TranslateTransform Y="50" />
-                    </muxc:InfoBar.RenderTransform>
-                    <muxc:InfoBar.Content>
-                        <StackPanel>
-                            <ProgressBar
-                                x:Name="progressBar"
-                                Margin="-48,0"
-                                Background="Transparent"
-                                HorizontalAlignment="Stretch"
-                                Minimum="0"
-                                Maximum="100"
-                                Value="0" />
-                        </StackPanel>
-                    </muxc:InfoBar.Content>
-                    <interactivity:Interaction.Behaviors>
-                        <winbehaviors:StackedNotificationsBehavior x:Name="NotificationQueue" />
-                    </interactivity:Interaction.Behaviors>
-                </muxc:InfoBar>
-            </Grid>
+            <Frame x:Name="NavigationFrame"/>
         </NavigationView>
+        <Grid
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,48,0,0"
+            Canvas.ZIndex="999">
+            <Border Width="400">
+                <StackPanel
+                    dev:Growl.GrowlParent="True"
+                    dev:Growl.Token="MainToken"/>
+            </Border>
+        </Grid>
     </Grid>
 </Page>
