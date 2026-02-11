@@ -70,29 +70,6 @@ public sealed partial class DebloatSystemPage : Page
         }
     }
 
-    private void AppTreeView_DragItemsStarting(TreeView sender, TreeViewDragItemsStartingEventArgs args)
-    {
-        args.Cancel = true;
-    }
-
-    // Select the treeview item when pressed
-    private void appTreeView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
-    {
-        if (args.InvokedItem is Tuple<string, string, bool> app)
-        {
-            if (sender.SelectedItems.Contains(app))
-            {
-                // If the item is already selected, remove it
-                sender.SelectedItems.Remove(app);
-            }
-            else
-            {
-                // If the item is not selected, add it
-                sender.SelectedItems.Add(app);
-            }
-        }
-    }
-
     private async void LoadInstalledApps(CancellationToken cancellationToken = default)
     {
         try
@@ -102,7 +79,7 @@ public sealed partial class DebloatSystemPage : Page
             DispatcherQueue.TryEnqueue(() =>
             {
                 gettingAppsLoading.Visibility = Visibility.Visible;
-                appTreeView.Visibility = Visibility.Collapsed;
+                appListView.Visibility = Visibility.Collapsed;
                 uninstallButton.IsEnabled = false;
                 uninstallingStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallTip");
                 uninstallingStatusBar.Opacity = 0;
@@ -127,8 +104,8 @@ public sealed partial class DebloatSystemPage : Page
                 appsFilterText.Visibility = Visibility.Visible;
                 reloadButton.Visibility = Visibility.Visible;
                 uninstallButton.Visibility = Visibility.Visible;
-                appTreeView.Visibility = Visibility.Visible;
-                appTreeView.IsEnabled = true;
+                appListView.Visibility = Visibility.Visible;
+                appListView.IsEnabled = true;
                 uninstallButton.IsEnabled = true;
                 uninstallingStatusText.Visibility = Visibility.Visible;
                 AppSearchBox.Visibility = Visibility.Visible;
@@ -172,9 +149,9 @@ public sealed partial class DebloatSystemPage : Page
         var result = filtered.OrderBy(app => app.Item1).ToList();
 
         // Detach to clear without per-item animations
-        appTreeView.ItemsSource = null;
+        appListView.ItemsSource = null;
         AppList.Clear();
-        appTreeView.ItemsSource = AppList;
+        appListView.ItemsSource = AppList;
 
         installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), result.Count);
         noAppFoundText.Visibility = result.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
@@ -196,23 +173,23 @@ public sealed partial class DebloatSystemPage : Page
         // Bulk-add remaining off-screen items without animation
         if (animated < result.Count)
         {
-            appTreeView.ItemsSource = null;
+            appListView.ItemsSource = null;
             for (var i = animated; i < result.Count; i++)
             {
                 AppList.Add(result[i]);
             }
-            appTreeView.ItemsSource = AppList;
+            appListView.ItemsSource = AppList;
         }
     }
 
     private async void UninstallSelectedApp_Click(object sender, RoutedEventArgs e)
     {
-        if (appTreeView.SelectedItems.Count == 0)
+        if (appListView.SelectedItems.Count == 0)
         {
             return;
         }
 
-        var result = await ShowUninstallConfirmationDialog(appTreeView);
+        var result = await ShowUninstallConfirmationDialog(appListView);
         if (result != ContentDialogResult.Primary)
         {
             return;
@@ -228,14 +205,14 @@ public sealed partial class DebloatSystemPage : Page
         uninstallButton.IsEnabled = false;
         reloadButton.IsEnabled = false;
         appsFilter.IsEnabled = false;
-        appTreeView.IsEnabled = false;
+        appListView.IsEnabled = false;
 
         var failedUninstalls = new List<string>();
         var successfulUninstalls = new List<string>();
 
         try
         {
-            var totalApps = appTreeView.SelectedItems.Count;
+            var totalApps = appListView.SelectedItems.Count;
             var completedApps = 0;
 
             // Initialize status bar
@@ -246,7 +223,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallingStatusBar.Opacity = 1;
             });
 
-            foreach (var appInfo in appTreeView.SelectedItems.OfType<Tuple<string, string, bool>>())
+            foreach (var appInfo in appListView.SelectedItems.OfType<Tuple<string, string, bool>>())
             {
                 var selectedAppName = appInfo.Item1;
                 var isWin32App = appInfo.Item3;
@@ -327,7 +304,7 @@ public sealed partial class DebloatSystemPage : Page
         finally
         {
             // Clear the selected apps for uninstall
-            appTreeView.SelectedItems.Clear();
+            appListView.SelectedItems.Clear();
 
             // Reset UI
             DispatcherQueue.TryEnqueue(() =>
@@ -336,7 +313,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallButton.IsEnabled = true;
                 reloadButton.IsEnabled = true;
                 appsFilter.IsEnabled = true;
-                appTreeView.IsEnabled = true;
+                appListView.IsEnabled = true;
                 uninstallingStatusBar.Opacity = 0;
             });
 
@@ -588,11 +565,11 @@ public sealed partial class DebloatSystemPage : Page
         ApplyFilter();
     }
 
-    public async Task<ContentDialogResult> ShowUninstallConfirmationDialog(TreeView appTreeView)
+    public async Task<ContentDialogResult> ShowUninstallConfirmationDialog(ListView appListView)
     {
         var selectedItemsText = new StringBuilder();
 
-        foreach (var item in appTreeView.SelectedItems.OfType<Tuple<string, string, bool>>())
+        foreach (var item in appListView.SelectedItems.OfType<Tuple<string, string, bool>>())
         {
             selectedItemsText.AppendLine(item.Item1);
         }

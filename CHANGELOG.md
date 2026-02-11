@@ -25,6 +25,7 @@ All notable changes to this branch will be documented in this file.
 - Added real-time processes monitoring in the `Processes` page.
 - Enhanced the logging system.
 - Improved the optimization scripts of most of the toggles for better performance.
+- Replaced TreeView with ListView in the `Debloat` page for lower resources usage and faster loading times.
 
 ## 1.6.2 - Released
 
