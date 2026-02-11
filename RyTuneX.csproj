@@ -110,4 +110,10 @@
     <TrimmerRootAssembly Include="System.Management" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Controls\UsageGraph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
 </Project>

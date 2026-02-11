@@ -9,6 +9,7 @@ All notable changes to this branch will be documented in this file.
 
 - Added a new reload button in the `Debloat` page to refresh the list of installed apps.
 - Introduced a new Log Viewer page to view and manage the app's logs.
+- Added a real-time graph to monitor CPU, RAM, Disk, Network, and GPU usage in the `Home` page instead of values only.
 
 ### Fixes
 
@@ -22,7 +23,7 @@ All notable changes to this branch will be documented in this file.
 - Minor UI improvements all across the app:
   - Replaced the old notification info bars with the new `GrowlInfo` control for better consistency and appearance.
 - Added real-time processes monitoring in the `Processes` page.
-- Enhanced the logging system and added a new Log Viewer page to view and manage the app's logs.
+- Enhanced the logging system.
 
 ## 1.6.2 - Released
 

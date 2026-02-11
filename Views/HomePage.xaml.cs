@@ -14,7 +14,8 @@ namespace RyTuneX.Views;
 public sealed partial class HomePage : Page
 {
     private readonly string _versionDescription;
-    private readonly CancellationTokenSource _cancellationTokenSource;
+    private CancellationTokenSource? _cancellationTokenSource;
+    private bool _initialized;
 
     // CPU sampling state
     private ulong _prevIdleTime;
@@ -37,30 +38,40 @@ public sealed partial class HomePage : Page
     public HomePage()
     {
         InitializeComponent();
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         LogHelper.Log("Initializing HomePage");
         _versionDescription = "Version " + SettingsPage.GetVersionDescription();
 
+        Loaded += HomePage_Loaded;
+        Unloaded += HomePage_Unloaded;
+    }
+
+    private void HomePage_Loaded(object sender, RoutedEventArgs e)
+    {
         _cancellationTokenSource = new CancellationTokenSource();
         _ = UpdateSystemStatsAsync(_cancellationTokenSource.Token);
-        Unloaded += HomePage_Unloaded;
     }
 
     private async Task UpdateSystemStatsAsync(CancellationToken cancellationToken)
     {
         try
         {
-            // Initialize heavy counters on background thread once
-            await Task.Run(() => InitializeGpuCounters(), cancellationToken);
-            _systemDriveInfo = new DriveInfo(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System)) ?? "C:\\");
+            if (!_initialized)
+            {
+                // Initialize heavy counters on background thread once
+                await Task.Run(() => InitializeGpuCounters(), cancellationToken);
+                _systemDriveInfo = new DriveInfo(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System)) ?? "C:\\");
+                _initialized = true;
+            }
 
-            // Fetch static values
+            // Fetch values that may change between navigations
             var installedAppsCount = await Task.Run(() => GetInstalledAppsCount(), cancellationToken).ConfigureAwait(false);
             var servicesCount = await Task.Run(() => GetServicesCount(), cancellationToken).ConfigureAwait(false);
 
             // Initial counts
             var processesCount = await Task.Run(() => Process.GetProcesses().Length, cancellationToken).ConfigureAwait(false);
 
-            // Initialize network counters
+            // Reset network sampling baseline
             _prevBytesReceived = GetTotalBytesReceived();
             _prevBytesSent = GetTotalBytesSent();
             _lastSampleTime = DateTime.UtcNow;
@@ -92,17 +103,25 @@ public sealed partial class HomePage : Page
                         if (Visibility == Visibility.Visible && !cancellationToken.IsCancellationRequested)
                         {
                             cpuUsageText.Text = $"{cpuUsage}%";
+                            cpuGraph.AddValue(cpuUsage);
+
                             ramUsageText.Text = $"{ramUsage}%";
+                            ramGraph.AddValue(ramUsage);
+
                             diskUsageText.Text = $"{diskUsage}%";
+                            diskGraph.AddValue(diskUsage);
 
                             networkUploadUsageText.Text = $"{networkUploadUsage:F1} Mb";
                             networkDownloadUsageText.Text = $"{networkDownloadUsage:F1} Mb";
+                            networkUploadGraph.AddValue(Math.Min(networkUploadUsage, 100));
+                            networkDownloadGraph.AddValue(Math.Min(networkDownloadUsage, 100));
 
                             installedAppsCountText.Text = installedAppsCount.ToString();
                             processesCountText.Text = processesCount.ToString();
                             servicesCountText.Text = servicesCount.ToString();
 
                             gpuUsageText.Text = $"{gpuUsage}%";
+                            gpuGraph.AddValue(gpuUsage);
                         }
                     });
                 }
@@ -127,15 +146,9 @@ public sealed partial class HomePage : Page
 
     private void HomePage_Unloaded(object sender, RoutedEventArgs e)
     {
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource.Dispose();
-
-        // Clean up Performance Counters
-        foreach (var counter in _gpuCounters)
-        {
-            counter.Dispose();
-        }
-        _gpuCounters.Clear();
+        _cancellationTokenSource?.Cancel();
+        _cancellationTokenSource?.Dispose();
+        _cancellationTokenSource = null;
     }
 
     private int GetCpuUsage()
