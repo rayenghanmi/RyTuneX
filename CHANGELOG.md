@@ -15,15 +15,16 @@ All notable changes to this branch will be documented in this file.
 
 - Fixed some values in optimization toggles.
 - Resolved an issue where the gpu usage was not being detected correctly in the `Home` page.
+- Fixed an issue where navigating away and back to the `Home` page caused the performance monitoring to restart and lose the current values.
 
 ### Changes
 
 - Improved general performance and stability of the `Debloat` page.
 - Added Services and Processes pages entry points to the navigation menu for better accessibility.
-- Minor UI improvements all across the app:
-  - Replaced the old notification info bars with the new `GrowlInfo` control for better consistency and appearance.
+- Minor UI improvements all across the app.
 - Added real-time processes monitoring in the `Processes` page.
 - Enhanced the logging system.
+- Improved the optimization scripts of most of the toggles for better performance.
 
 ## 1.6.2 - Released
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using DevWinUI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
@@ -44,6 +45,32 @@ public sealed partial class HomePage : Page
 
         Loaded += HomePage_Loaded;
         Unloaded += HomePage_Unloaded;
+
+        // Add hover and ambient lights to all blocks
+        cpuUsage.Lights.Add(new AmbLight());
+        cpuUsage.Lights.Add(new HoverLight());
+
+        ramUsage.Lights.Add(new AmbLight());
+        ramUsage.Lights.Add(new HoverLight());
+
+        diskUsage.Lights.Add(new AmbLight());
+        diskUsage.Lights.Add(new HoverLight());
+
+        networkUsage.Lights.Add(new AmbLight());
+        networkUsage.Lights.Add(new HoverLight());
+
+        gpuUsage.Lights.Add(new AmbLight());
+        gpuUsage.Lights.Add(new HoverLight());
+
+        appsCount.Lights.Add(new AmbLight());
+        appsCount.Lights.Add(new HoverLight());
+
+        processesCount.Lights.Add(new AmbLight());
+        processesCount.Lights.Add(new HoverLight());
+
+        servicesCount.Lights.Add(new AmbLight());
+        servicesCount.Lights.Add(new HoverLight());
+
     }
 
     private void HomePage_Loaded(object sender, RoutedEventArgs e)
