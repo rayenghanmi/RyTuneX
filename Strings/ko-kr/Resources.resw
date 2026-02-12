@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>장치</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>보고서</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>최적화</value>
   </data>
@@ -701,9 +698,6 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>업데이트</value>
-  </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>지원</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>네트워크</value>
@@ -1643,5 +1637,41 @@
   </data>
   <data name="Shell_Processes.Content" xml:space="preserve">
     <value>프로세스</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>앱 테마</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>앱 색상 테마를 선택하세요</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>탐색 스타일</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>탐색 창 표시 방식을 선택하세요</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>소스 코드</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>GitHub에서 보기 및 기여하기</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>버그 신고 또는 기능 요청</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>GitHub에서 이슈 열기</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>개발자 지원</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>커피 한 잔 사주기</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>로그 보기</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>문제 해결을 위해 애플리케이션 로그 보기</value>
   </data>
 </root>

@@ -1,4 +1,6 @@
 ﻿using DevWinUI;
+using Microsoft.UI;
+using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -6,8 +8,8 @@ using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.ViewModels;
-using System.Diagnostics;
 using System.Security.Principal;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.System;
 
@@ -24,12 +26,6 @@ public sealed partial class ShellPage : Page
         get;
     }
 
-    public string UserName { get; } = Environment.UserName;
-    public string AccountType =>
-        string.Equals(Environment.UserDomainName, "MicrosoftAccount", StringComparison.OrdinalIgnoreCase)
-            ? "MicrosoftAccount".GetLocalized()
-            : "LocalAccount".GetLocalized();
-
     // Track pointer state to defer hide animation while hovered
     private bool _isPointerOver = false;
     private bool _pendingHide = false;
@@ -40,12 +36,8 @@ public sealed partial class ShellPage : Page
         InitializeComponent();
         this.FlowDirection = App.FlowDirectionSetting;
 
-        // Temporary fix for RTL layout issue with the overlap of NavigationViewControl and caption buttons
-        if (FlowDirection == FlowDirection.RightToLeft)
-        {
-            NavigationViewControl.Margin = new Thickness(0, 40, 0, 0);
-            AppTitleBar.Padding = new Thickness(120, 0, 0, 0);
-        }
+        TitleBarBackButton.Resources["ButtonBackgroundDisabled"] = new SolidColorBrush(Colors.Transparent);
+        TitleBarBackButton.Resources["ButtonBorderBrushDisabled"] = new SolidColorBrush(Colors.Transparent);
 
         // Set corresponding visibility of Admin Icon based on administrator rights
         this.Loaded += (s, e) =>
@@ -72,27 +64,18 @@ public sealed partial class ShellPage : Page
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
-    }
 
-    private void UserProfileButton_Click(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "ms-settings:account",
-                UseShellExecute = true
-            });
-        }
-        catch (Exception ex)
-        {
-            _ = LogHelper.LogError($"Failed to open account settings: {ex.Message}");
-        }
+        var savedStyle = ApplicationData.Current.LocalSettings.Values["NavigationStyle"] as string ?? "Auto";
+        ApplyNavigationStyle(savedStyle);
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
+
+        SetTitleBarPassthroughRegions();
+        TitleBarBackButton.SizeChanged += (_, _) => SetTitleBarPassthroughRegions();
+        TitleBarSearchBox.SizeChanged += (_, _) => SetTitleBarPassthroughRegions();
 
         // Initialize search cache without blocking the UI thread
         WarmUpSearchCache();
@@ -191,6 +174,72 @@ public sealed partial class ShellPage : Page
         }
     }
 
+    private void TitleBarBackButton_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.NavigationService.GoBack();
+    }
+
+    private void TitleBarBackButton_PointerEntered(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        AnimatedIcon.SetState(BackAnimatedIcon, "PointerOver");
+    }
+
+    private void TitleBarBackButton_PointerExited(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        AnimatedIcon.SetState(BackAnimatedIcon, "Normal");
+    }
+
+    private void SetTitleBarPassthroughRegions()
+    {
+        if (AppTitleBar.XamlRoot is null)
+        {
+            return;
+        }
+
+        var scaleAdjustment = AppTitleBar.XamlRoot.RasterizationScale;
+        var nonClientSrc = InputNonClientPointerSource.GetForWindowId(App.MainWindow.AppWindow.Id);
+
+        var rects = new List<Windows.Graphics.RectInt32>();
+
+        // Back button passthrough
+        var backTransform = TitleBarBackButton.TransformToVisual(null);
+        var backBounds = backTransform.TransformBounds(new Rect(0, 0, TitleBarBackButton.ActualWidth, TitleBarBackButton.ActualHeight));
+        rects.Add(ScaleRect(backBounds, scaleAdjustment));
+
+        // Search box passthrough
+        if (TitleBarSearchBox.Visibility == Visibility.Visible)
+        {
+            var searchTransform = TitleBarSearchBox.TransformToVisual(null);
+            var searchBounds = searchTransform.TransformBounds(new Rect(0, 0, TitleBarSearchBox.ActualWidth, TitleBarSearchBox.ActualHeight));
+            rects.Add(ScaleRect(searchBounds, scaleAdjustment));
+        }
+
+        // WS_EX_LAYOUTRTL mirrors Win32 input coordinates but TransformToVisual
+        // returns compositor coordinates (unmirrored). Mirror the passthrough rects
+        // so they match the coordinate space the system uses for hit-testing.
+        if (App.FlowDirectionSetting == FlowDirection.RightToLeft)
+        {
+            var windowWidthPx = App.MainWindow.AppWindow.Size.Width;
+            for (var i = 0; i < rects.Count; i++)
+            {
+                var r = rects[i];
+                rects[i] = new Windows.Graphics.RectInt32(
+                    windowWidthPx - r.X - r.Width, r.Y, r.Width, r.Height);
+            }
+        }
+
+        nonClientSrc.SetRegionRects(NonClientRegionKind.Passthrough, rects.ToArray());
+    }
+
+    private static Windows.Graphics.RectInt32 ScaleRect(Rect bounds, double scale)
+    {
+        return new Windows.Graphics.RectInt32(
+            (int)Math.Round(bounds.X * scale),
+            (int)Math.Round(bounds.Y * scale),
+            (int)Math.Round(bounds.Width * scale),
+            (int)Math.Round(bounds.Height * scale));
+    }
+
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {
         App.AppTitlebar = AppTitleBarText;
@@ -198,49 +247,28 @@ public sealed partial class ShellPage : Page
 
     private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
     {
-        AppTitleBar.Margin = new Thickness()
+        if (sender.PaneDisplayMode == NavigationViewPaneDisplayMode.Top)
         {
-            Left = sender.CompactPaneLength * (sender.DisplayMode == NavigationViewDisplayMode.Minimal ? 2 : 1),
-            Top = AppTitleBar.Margin.Top,
-            Right = AppTitleBar.Margin.Right,
-            Bottom = AppTitleBar.Margin.Bottom
-        };
-
-        // Adjust search box visibility based on display mode
-        TitleBarSearchBox.Visibility = sender.DisplayMode == NavigationViewDisplayMode.Minimal
-            ? Visibility.Collapsed
-            : Visibility.Visible;
-    }
-
-    private void IssueButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-    {
-        try
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://github.com/rayenghanmi/rytunex/issues/new",
-                UseShellExecute = true
-            });
+            TitleBarSearchBox.Visibility = Visibility.Visible;
         }
-        catch (Exception ex)
+        else
         {
-            _ = LogHelper.LogError($"Failed to open issue page: {ex.Message}");
+            TitleBarSearchBox.Visibility = sender.DisplayMode == NavigationViewDisplayMode.Minimal
+                ? Visibility.Collapsed
+                : Visibility.Visible;
         }
     }
 
-    private void SupportButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    // Applies the navigation pane display mode and adjusts the title bar accordingly.
+    public void ApplyNavigationStyle(string style)
     {
-        try
+        if (style == "Top")
         {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://buymeacoffee.com/rayen.ghanmi.22",
-                UseShellExecute = true
-            });
+            NavigationViewControl.PaneDisplayMode = NavigationViewPaneDisplayMode.Top;
         }
-        catch (Exception ex)
+        else
         {
-            _ = LogHelper.LogError($"Failed to open support page: {ex.Message}");
+            NavigationViewControl.PaneDisplayMode = NavigationViewPaneDisplayMode.Auto;
         }
     }
 

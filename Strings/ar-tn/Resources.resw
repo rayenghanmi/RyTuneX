@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>الجهاز</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>الإبلاغ</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>تحسين</value>
   </data>
@@ -701,9 +698,6 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>تحديث</value>
-  </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>الدعم</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>الشبكة</value>
@@ -1644,4 +1638,41 @@
   <data name="Shell_Processes.Content" xml:space="preserve">
     <value>العمليات</value>
   </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+  <value>سمة التطبيق</value>
+</data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+  <value>اختر سمة ألوان التطبيق</value>
+</data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+  <value>نمط التنقل</value>
+</data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+  <value>اختر كيفية عرض جزء التنقل</value>
+</data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+  <value>الكود المصدري</value>
+</data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+  <value>عرض والمساهمة على GitHub</value>
+</data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+  <value>الإبلاغ عن خطأ أو طلب ميزة</value>
+</data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+  <value>فتح مشكلة على GitHub</value>
+</data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+  <value>دعم المطور</value>
+</data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+  <value>اشترِ لي قهوة</value>
+</data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+  <value>عرض السجلات</value>
+</data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+  <value>عرض سجلات التطبيق لاستكشاف الأخطاء وإصلاحها</value>
+</data>
+
 </root>

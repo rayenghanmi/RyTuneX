@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Thiết bị</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Báo cáo</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Tối ưu</value>
   </data>
@@ -701,9 +698,6 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Cập nhật</value>
-  </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Hỗ trợ</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Mạng</value>
@@ -1643,5 +1637,41 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="Shell_Processes.Content" xml:space="preserve">
     <value>Tiến trình</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>Chủ đề ứng dụng</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Chọn chủ đề màu của ứng dụng</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Kiểu điều hướng</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Chọn cách hiển thị ngăn điều hướng</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Mã nguồn</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>Xem và đóng góp trên GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Báo lỗi hoặc yêu cầu tính năng</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Mở issue trên GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Hỗ trợ nhà phát triển</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Mời tôi một ly cà phê</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Xem nhật ký</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Xem nhật ký ứng dụng để khắc phục sự cố</value>
   </data>
 </root>

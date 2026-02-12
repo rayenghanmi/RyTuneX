@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Appareil</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Signaler</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Optimiser</value>
   </data>
@@ -701,9 +698,6 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Mettre à jour</value>
-  </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Support</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Réseau</value>
@@ -1640,5 +1634,41 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   </data>
   <data name="Shell_Processes.Content" xml:space="preserve">
     <value>Processus</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>Thème de l’application</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Choisissez le thème de couleur de l’application</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Style de navigation</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Choisissez comment le volet de navigation est affiché</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Code source</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>Voir et contribuer sur GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Signaler un bug ou demander une fonctionnalité</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Ouvrir un ticket sur GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Soutenir le développeur</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Offrez-moi un café</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Voir les journaux</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Consulter les journaux de l’application pour le dépannage</value>
   </data>
 </root>

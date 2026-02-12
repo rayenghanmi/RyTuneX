@@ -60,6 +60,24 @@ public partial class App : Application
     private const uint FLASHW_ALL = 3;           // Flash both window caption and taskbar button
     private const uint FLASHW_TIMERNOFG = 12;    // Flash continuously until the window comes to the foreground
 
+    // P/Invoke for RTL caption buttons
+    private const int GWL_EXSTYLE = -20;
+    private const int WS_EX_LAYOUTRTL = 0x00400000;
+    private const uint SWP_FRAMECHANGED = 0x0020;
+    private const uint SWP_NOMOVE = 0x0002;
+    private const uint SWP_NOSIZE = 0x0001;
+    private const uint SWP_NOZORDER = 0x0004;
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern nint GetWindowLongPtr(IntPtr hWnd, int nIndex);
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern nint SetWindowLongPtr(IntPtr hWnd, int nIndex, nint dwNewLong);
+
+    [DllImport("user32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+
     // Flashes the taskbar icon to alert the user that a background process is complete
     public static void NotifyTaskCompletion()
     {
@@ -140,6 +158,24 @@ public partial class App : Application
         _host ??= BuildHost();
 
         base.OnLaunched(args);
+
+        // Apply RTL window style BEFORE title bar setup so the framework
+        // calculates caption button positions in the correct coordinate space
+        if (FlowDirectionSetting == Microsoft.UI.Xaml.FlowDirection.RightToLeft)
+        {
+            try
+            {
+                var hwnd = WindowNative.GetWindowHandle(MainWindow);
+                var exStyle = GetWindowLongPtr(hwnd, GWL_EXSTYLE);
+                SetWindowLongPtr(hwnd, GWL_EXSTYLE, exStyle | WS_EX_LAYOUTRTL);
+                SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0,
+                    SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"RTL caption buttons failed: {ex.Message}");
+            }
+        }
 
         // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
         try

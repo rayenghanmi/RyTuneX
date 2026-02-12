@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Dispositivo</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Informar</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Optimizar</value>
   </data>
@@ -701,9 +698,6 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Actualizar</value>
-  </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Soporte</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Red</value>
@@ -1640,5 +1634,41 @@ Verifica si hay problemas de memoria en tu computadora</value>
   </data>
   <data name="Shell_Processes.Content" xml:space="preserve">
     <value>Procesos</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>Tema de la aplicación</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Elige el tema de color de la aplicación</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Estilo de navegación</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Elige cómo se muestra el panel de navegación</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Código fuente</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>Ver y contribuir en GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Informar de un error o solicitar una función</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Abrir un issue en GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Apoyar al desarrollador</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Invítame a un café</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Ver registros</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Ver los registros de la aplicación para solucionar problemas</value>
   </data>
 </root>

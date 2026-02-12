@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
@@ -7,43 +6,19 @@ using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
+using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace RyTuneX.Views;
 
-public sealed partial class SettingsPage : Page, INotifyPropertyChanged
+public sealed partial class SettingsPage : Page
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    private ElementTheme _elementTheme;
-    public ElementTheme ElementTheme
-    {
-        get => _elementTheme;
-        set
-        {
-            if (_elementTheme != value)
-            {
-                _elementTheme = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
     private readonly IThemeSelectorService _themeSelectorService;
 
     private string _versionDescription;
     private string? _pendingScrollTarget;
 
-    public ICommand SwitchThemeCommand
-    {
-        get;
-    }
     public static string latestVersionString = string.Empty;
 
     public SettingsPage()
@@ -57,18 +32,10 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
         // Set the default language based on the stored setting or the system if not set explicitly
         SetDefaultLanguageBasedOnSystem();
 
-        _elementTheme = _themeSelectorService.Theme;
         _versionDescription = "Version".GetLocalized() + " " + GetVersionDescription();
 
-        SwitchThemeCommand = new RelayCommand<ElementTheme>(
-            async (param) =>
-            {
-                if (ElementTheme != param)
-                {
-                    ElementTheme = param;
-                    await _themeSelectorService.SetThemeAsync(param);
-                }
-            });
+        InitializeThemeComboBox();
+        InitializeNavigationStyleComboBox();
 
         Loaded += SettingsPage_Loaded;
     }
@@ -89,6 +56,67 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
         {
             await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
             _pendingScrollTarget = null;
+        }
+    }
+
+    private void InitializeNavigationStyleComboBox()
+    {
+        var saved = ApplicationData.Current.LocalSettings.Values["NavigationStyle"] as string ?? "Auto";
+        foreach (ComboBoxItem item in NavigationStyleComboBox.Items)
+        {
+            if (item.Tag as string == saved)
+            {
+                NavigationStyleComboBox.SelectedItem = item;
+                break;
+            }
+        }
+    }
+
+    private void InitializeThemeComboBox()
+    {
+        var currentTheme = _themeSelectorService.Theme.ToString();
+        foreach (ComboBoxItem item in ThemeComboBox.Items)
+        {
+            if (item.Tag as string == currentTheme)
+            {
+                ThemeComboBox.SelectedItem = item;
+                break;
+            }
+        }
+    }
+
+    private async void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ThemeComboBox.SelectedItem is ComboBoxItem selected)
+        {
+            var tag = selected.Tag as string;
+            if (string.IsNullOrEmpty(tag))
+            {
+                return;
+            }
+
+            if (Enum.TryParse<ElementTheme>(tag, out var theme))
+            {
+                await _themeSelectorService.SetThemeAsync(theme);
+                _ = LogHelper.Log($"Theme changed to: {tag}");
+            }
+        }
+    }
+
+    private void NavigationStyleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (NavigationStyleComboBox.SelectedItem is ComboBoxItem selected)
+        {
+            var tag = selected.Tag as string;
+            if (string.IsNullOrEmpty(tag))
+            {
+                return;
+            }
+
+            ApplicationData.Current.LocalSettings.Values["NavigationStyle"] = tag;
+            _ = LogHelper.Log($"Navigation style changed to: {tag}");
+
+            ShellPage.Current?.ApplyNavigationStyle(tag);
         }
     }
 
@@ -181,9 +209,57 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
         }
     }
 
-    private async void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+    private async void ViewLogsCard_Click(object sender, RoutedEventArgs e)
     {
         await LogViewerHelper.ShowLogViewerAsync(XamlRoot);
+    }
+
+    private void SourceCodeCard_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/rayenghanmi/RyTuneX",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open source code page: {ex.Message}");
+        }
+    }
+
+    private void FileBugCard_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/rayenghanmi/rytunex/issues/new",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open issue page: {ex.Message}");
+        }
+    }
+
+    private void SupportDeveloperCard_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://buymeacoffee.com/rayen.ghanmi.22",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open support page: {ex.Message}");
+        }
     }
 
     private async void RevertChanges_Click(object sender, RoutedEventArgs e)

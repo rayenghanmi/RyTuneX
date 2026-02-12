@@ -5,12 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:RyTuneX.Helpers"
-    xmlns:xaml="using:Microsoft.UI.Xaml"
     mc:Ignorable="d"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI">
     <Page.Resources>
-        <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
         <x:Double x:Key="SettingsCardSpacing">4</x:Double>
         <Style x:Key="SettingsSectionHeaderTextBlockStyle"
             BasedOn="{StaticResource BodyStrongTextBlockStyle}"
@@ -22,6 +20,10 @@
     </Page.Resources>
     <ScrollView Padding="24,14,24,0">
         <StackPanel x:Name="ContentArea" Margin="0,0,0,38">
+            <StackPanel.ChildrenTransitions>
+                <EntranceThemeTransition FromVerticalOffset="50" />
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
+            </StackPanel.ChildrenTransitions>
             <TextBlock x:Uid="Settings_Language" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
                 <controls:SettingsCard x:Name="LanguageSettingsCard"
                                x:Uid="Settings_LanguageSettingsCard"
@@ -46,39 +48,27 @@
             </controls:SettingsCard>
 
                 <TextBlock x:Uid="Settings_Theme" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-                <StackPanel>
-                    <RadioButton
-                        x:Uid="Settings_Theme_Light"
-                        Command="{x:Bind SwitchThemeCommand}"
-                        IsChecked="{x:Bind ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"
-                        FontSize="15"
-                        GroupName="AppTheme">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Light</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                    <RadioButton
-                        x:Uid="Settings_Theme_Dark"
-                        Command="{x:Bind SwitchThemeCommand}"
-                        IsChecked="{x:Bind ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
-                        FontSize="15"
-                        GroupName="AppTheme">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Dark</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                    <RadioButton
-                        x:Uid="Settings_Theme_Default"
-                        Command="{x:Bind SwitchThemeCommand}"
-                        IsChecked="{x:Bind ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}"
-                        FontSize="15"
-                        GroupName="AppTheme">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Default</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                </StackPanel>
-
+            <StackPanel Spacing="6">
+                <controls:SettingsCard x:Uid="Settings_ThemeSettingsCard"
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xE790;}">
+                    <ComboBox x:Name="ThemeComboBox"
+                              VerticalAlignment="Center"
+                              SelectionChanged="ThemeComboBox_SelectionChanged">
+                        <ComboBoxItem x:Uid="Settings_Theme_Light" Tag="Light"/>
+                        <ComboBoxItem x:Uid="Settings_Theme_Dark" Tag="Dark"/>
+                        <ComboBoxItem x:Uid="Settings_Theme_Default" Tag="Default"/>
+                    </ComboBox>
+                </controls:SettingsCard>
+                <controls:SettingsCard x:Uid="Settings_NavigationStyle"
+                                       HeaderIcon="{ui:FontIcon Glyph=&#xE700;}">
+                    <ComboBox x:Name="NavigationStyleComboBox"
+                              VerticalAlignment="Center"
+                              SelectionChanged="NavigationStyleComboBox_SelectionChanged">
+                        <ComboBoxItem Content="Left" Tag="Auto"/>
+                        <ComboBoxItem Content="Top" Tag="Top"/>
+                    </ComboBox>
+                </controls:SettingsCard>
+            </StackPanel>
             <TextBlock x:Uid="OtherSettings" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
             <StackPanel Spacing="6">
                 <controls:SettingsCard x:Uid="Settings_ExportOptimizations"
@@ -116,43 +106,70 @@
                         <FontIcon Glyph="&#xE81C;"/>
                     </controls:SettingsCard.HeaderIcon>
                 </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Settings_ViewLogs"
+                    IsClickEnabled="True"
+                    Click="ViewLogsCard_Click">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE9D9;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                </controls:SettingsCard>
             </StackPanel>
 
             <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                 x:Uid="Settings_About" />
 
             <controls:SettingsExpander Description="© Rayen Ghanmi"
-                               Header="RyTuneX"
-                               HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.scale-100.png}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock VerticalAlignment="Center" IsTextSelectionEnabled="True"
-                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                        Text="{x:Bind _versionDescription}" />
-                </StackPanel>
+                                Header="RyTuneX"
+                                HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.scale-100.png}">
+                <TextBlock VerticalAlignment="Center" IsTextSelectionEnabled="True"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    Text="{x:Bind _versionDescription}" />
                 <controls:SettingsExpander.Items>
                     <controls:SettingsCard HorizontalContentAlignment="Left"
                                    ContentAlignment="Left">
                         <StackPanel Margin="-12,0,0,0"
-                            Orientation="Vertical">
+                            Orientation="Vertical" VerticalAlignment="Center">
                             <TextBlock
                                     x:Name="AboutDescription"
                                     x:Uid="Settings_AboutDescription"
                                     Margin="{StaticResource XSmallTopMargin}"
                                     Style="{ThemeResource BodyTextBlockStyle}" />
-                            <StackPanel Orientation="Horizontal">
-                                <HyperlinkButton x:Uid="SettingsPage_LogsLink" Margin="0,8,0,0" Click="HyperlinkButton_Click"/>
-                                <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="0,8,0,0"/>
-                            </StackPanel>
                         </StackPanel>
+                    </controls:SettingsCard>
+                    <controls:SettingsCard x:Uid="Settings_SourceCode"
+                                   IsClickEnabled="True"
+                                   Click="SourceCodeCard_Click">
+                        <controls:SettingsCard.HeaderIcon>
+                            <FontIcon Glyph="&#xE71B;"/>
+                        </controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8A7;" FontSize="14"/>
+                    </controls:SettingsCard>
+                    <controls:SettingsCard x:Uid="Settings_FileBug"
+                                   IsClickEnabled="True"
+                                   Click="FileBugCard_Click">
+                        <controls:SettingsCard.HeaderIcon>
+                            <FontIcon Glyph="&#xEBE8;"/>
+                        </controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8A7;" FontSize="14"/>
+                    </controls:SettingsCard>
+                    <controls:SettingsCard x:Uid="Settings_SupportDeveloper"
+                                   IsClickEnabled="True"
+                                   Click="SupportDeveloperCard_Click">
+                        <controls:SettingsCard.HeaderIcon>
+                            <FontIcon Glyph="&#xEB51;"/>
+                        </controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8A7;" FontSize="14"/>
+                    </controls:SettingsCard>
+                    <controls:SettingsCard HorizontalContentAlignment="Left"
+                                   ContentAlignment="Left">
+                        <controls:SettingsCard.HeaderIcon>
+                            <FontIcon Glyph="&#xE82D;"/>
+                        </controls:SettingsCard.HeaderIcon>
+                        <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Padding="0" VerticalAlignment="Center"/>
                     </controls:SettingsCard>
                 </controls:SettingsExpander.Items>
             </controls:SettingsExpander>
-            <StackPanel Orientation="Horizontal" Margin="0,42,0,0">
-                <FontIcon Glyph="&#xED15;" FontSize="16" Margin="0,0,14,0"/>
-                <HyperlinkButton x:Uid="SettingsPage_FeedbackButton"
-                        Padding="0"
-                        NavigateUri="https://github.com/rayenghanmi/rytunex/issues/new" />
-            </StackPanel>
         </StackPanel>
     </ScrollView>
 </Page>

@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>デバイス</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>バグを報告</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>最適化</value>
   </data>
@@ -701,9 +698,6 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>更新</value>
-  </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>サポート</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>ネットワーク</value>
@@ -1643,5 +1637,41 @@
   </data>
   <data name="Shell_Processes.Content" xml:space="preserve">
     <value>プロセス</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>アプリのテーマ</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>アプリのカラーテーマを選択します</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>ナビゲーションスタイル</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>ナビゲーションペインの表示方法を選択します</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>ソースコード</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>GitHubで閲覧および貢献</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>バグの報告または機能のリクエスト</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>GitHubでIssueを作成</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>開発者をサポート</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>コーヒーをごちそうする</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>ログを表示</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>トラブルシューティングのためにアプリのログを表示します</value>
   </data>
 </root>

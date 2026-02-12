@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Устройство</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Сообщить</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Оптимизация</value>
   </data>
@@ -701,9 +698,6 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Обновить</value>
-  </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Поддержка</value>
   </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Сеть</value>
@@ -1640,5 +1634,41 @@
   </data>
   <data name="Shell_Processes.Content" xml:space="preserve">
     <value>Процессы</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>Тема приложения</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Выберите цветовую тему приложения</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Стиль навигации</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Выберите способ отображения панели навигации</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Исходный код</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>Просмотреть и внести вклад на GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Сообщить об ошибке или предложить функцию</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Открыть проблему на GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Поддержать разработчика</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Купить мне кофе</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Просмотр журналов</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Просмотр журналов приложения для устранения неполадок</value>
   </data>
 </root>
