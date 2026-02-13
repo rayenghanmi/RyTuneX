@@ -74,17 +74,17 @@
                     Width="22"
                     Height="22"/>
                 <TextBlock x:Name="AppTitleBarText"
-                Text="RyTuneX"
-                VerticalAlignment="Center"
-                Margin="16,0,0,0"
-                TextWrapping="NoWrap"
-                Style="{StaticResource CaptionTextBlockStyle}"/>
+                    Text="RyTuneX"
+                    VerticalAlignment="Center"
+                    Margin="16,0,0,0"
+                    TextWrapping="NoWrap"
+                    Style="{StaticResource CaptionTextBlockStyle}"/>
                 <TextBlock x:Name="AppTitleBarVersion"
-                VerticalAlignment="Center"
-                Margin="8,0,0,0"
-                TextWrapping="NoWrap"
-                FontSize="11"
-                Opacity="0.75"/>
+                    VerticalAlignment="Center"
+                    Margin="8,0,0,0"
+                    TextWrapping="NoWrap"
+                    FontSize="11"
+                    Opacity="0.75"/>
             </StackPanel>
             
             <!-- Search Box in Title Bar -->

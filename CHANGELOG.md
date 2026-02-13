@@ -12,6 +12,7 @@ All notable changes to this branch will be documented in this file.
 - Added a real-time graph to monitor CPU, RAM, Disk, Network, and GPU usage in the `Home` page instead of values only.
 - Added a custom back button with animated icon in the title bar for easier navigation.
 - Added a navigation style setting in the `Settings` page to switch between Left and Top navigation pane layouts.
+- Expanded the Policies page with new categories and policies: `Windows Defender`, `Windows Firewall`, `Remote Desktop`, `Remote Assistance`, `Network`, `Power Management`, `Device Installation`, `Lock Screen`, `User Account Control`, `Delivery Optimization`, `Notifications`, `Windows Spotlight`, `Autoplay`, `Offline Maps`, `Print Spooler`, `Scheduled Maintenance`, `OEM & Preinstall`, `Microsoft Office`, `Google Chrome`, `Mozilla Firefox`, `Adobe`, `Microsoft Teams`, `BitLocker`, `Credentials`, `Startup`, `Explorer`, `Multimedia`
 
 ### Fixes
 

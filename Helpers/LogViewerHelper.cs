@@ -1,9 +1,10 @@
 ﻿using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Markup;
 using Microsoft.UI.Xaml.Media;
+using System.Collections.ObjectModel;
 using System.Text;
-using System.Text.RegularExpressions;
 using Windows.ApplicationModel.DataTransfer;
 
 namespace RyTuneX.Helpers;
@@ -30,16 +31,128 @@ internal static partial class LogViewerHelper
         public string SessionInfo { get; set; } = string.Empty;
     }
 
-    // Pattern: 2025-01-01 12:00:00.000: [LEVEL] [Caller.Method] message
-    [GeneratedRegex(@"^(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}):\s\[(\w+)\]\s\[([^\]]+)\]\s(.*)$", RegexOptions.Singleline)]
-    private static partial Regex LogLineRegex();
+    // Fast IndexOf-based parser for: "yyyy-MM-dd HH:mm:ss.fff: [LEVEL] [Caller.Method] message"
+    private static bool TryParseLogLine(string line, out string timestamp, out string level, out string caller, out string message)
+    {
+        timestamp = level = caller = message = string.Empty;
+
+        // Minimum: "yyyy-MM-dd HH:mm:ss.fff: [X] [X] X" (~35 chars)
+        if (line.Length < 35)
+            return false;
+
+        // Timestamp is exactly 23 chars, followed by ": ["
+        if (line[23] != ':' || line[24] != ' ' || line[25] != '[')
+            return false;
+
+        // Validate key timestamp positions: yyyy-MM-dd HH:mm:ss.fff
+        if (line[4] != '-' || line[7] != '-' || line[10] != ' ' ||
+            line[13] != ':' || line[16] != ':' || line[19] != '.')
+            return false;
+
+        timestamp = line[..23];
+
+        // Find end of level: "] ["
+        var levelEnd = line.IndexOf(']', 26);
+        if (levelEnd < 0 || levelEnd + 2 >= line.Length || line[levelEnd + 1] != ' ' || line[levelEnd + 2] != '[')
+            return false;
+
+        level = line[26..levelEnd];
+
+        // Find end of caller: "] "
+        var callerStart = levelEnd + 3;
+        var callerEnd = line.IndexOf(']', callerStart);
+        if (callerEnd < 0 || callerEnd + 1 >= line.Length || line[callerEnd + 1] != ' ')
+            return false;
+
+        caller = line[callerStart..callerEnd];
+        message = line[(callerEnd + 2)..];
+
+        return true;
+    }
+
+    private const string LogEntryTemplateXaml =
+        """
+        <DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'>
+            <Grid Padding='4,6,8,6' Margin='0,1,0,1' CornerRadius='4'
+                  Background='{ThemeResource CardBackgroundFillColorDefaultBrush}'>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width='Auto'/>
+                    <ColumnDefinition Width='*'/>
+                </Grid.ColumnDefinitions>
+                <Border Width='3' CornerRadius='1.5' VerticalAlignment='Stretch' Margin='0,2,8,2'/>
+                <StackPanel Grid.Column='1' Spacing='1'>
+                    <StackPanel Orientation='Horizontal' Spacing='4'>
+                        <FontIcon FontSize='12' VerticalAlignment='Top' Margin='0,2,6,0'/>
+                        <TextBlock FontSize='11' FontFamily='Cascadia Mono, Consolas, Courier New'
+                                   Foreground='{ThemeResource TextFillColorTertiaryBrush}'
+                                   VerticalAlignment='Top' Margin='0,2,8,0'/>
+                        <Border Background='{ThemeResource CardBackgroundFillColorSecondaryBrush}'
+                                CornerRadius='4' Padding='5,1,5,1' Margin='2,0,0,0'
+                                VerticalAlignment='Center'>
+                            <TextBlock FontSize='10' FontFamily='Cascadia Mono, Consolas, Courier New'
+                                       Foreground='{ThemeResource TextFillColorSecondaryBrush}'/>
+                        </Border>
+                    </StackPanel>
+                    <TextBlock TextWrapping='Wrap' IsTextSelectionEnabled='True' FontSize='12.5'
+                               FontFamily='Cascadia Mono, Consolas, Courier New'
+                               MaxLines='6' TextTrimming='CharacterEllipsis' Margin='0,2,0,0'/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        """;
+
+    private const string SessionMarkerTemplateXaml =
+        """
+        <DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'>
+            <Grid Padding='4,10,8,6' Margin='0,4,0,4'>
+                <StackPanel Spacing='4'>
+                    <Grid Margin='0,2,0,2'>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width='*'/>
+                            <ColumnDefinition Width='Auto'/>
+                            <ColumnDefinition Width='*'/>
+                        </Grid.ColumnDefinitions>
+                        <Border Height='1' VerticalAlignment='Center'
+                                Background='{ThemeResource DividerStrokeColorDefaultBrush}'/>
+                        <StackPanel Grid.Column='1' Orientation='Horizontal' Spacing='6'
+                                    Padding='12,0,12,0' HorizontalAlignment='Center'>
+                            <FontIcon Glyph='&#xE768;' FontSize='10'
+                                      Foreground='{ThemeResource TextFillColorTertiaryBrush}'
+                                      VerticalAlignment='Center'/>
+                            <TextBlock Text='New Session' FontSize='11' FontWeight='SemiBold'
+                                       Foreground='{ThemeResource TextFillColorTertiaryBrush}'
+                                       VerticalAlignment='Center'/>
+                            <TextBlock FontSize='10'
+                                       Foreground='{ThemeResource TextFillColorTertiaryBrush}'
+                                       Opacity='0.7' VerticalAlignment='Center'/>
+                        </StackPanel>
+                        <Border Grid.Column='2' Height='1' VerticalAlignment='Center'
+                                Background='{ThemeResource DividerStrokeColorDefaultBrush}'/>
+                    </Grid>
+                    <TextBlock FontSize='10' FontFamily='Cascadia Mono, Consolas, Courier New'
+                               Foreground='{ThemeResource TextFillColorTertiaryBrush}'
+                               Opacity='0.7' HorizontalAlignment='Center'
+                               TextTrimming='CharacterEllipsis'/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        """;
+
+    private sealed class LogEntryTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate LogTemplate { get; init; } = null!;
+        public DataTemplate SessionTemplate { get; init; } = null!;
+
+        protected override DataTemplate SelectTemplateCore(object item) =>
+            item is LogEntry { IsSessionMarker: true } ? SessionTemplate : LogTemplate;
+    }
 
     public static async Task ShowLogViewerAsync(XamlRoot xamlRoot)
     {
         var allEntries = await LoadLogEntriesAsync();
         var currentFilter = LogLevel.All;
 
-        // --- Filter bar ---
+        // Filter bar
         var filterCombo = new ComboBox
         {
             PlaceholderText = "Filter by level",
@@ -90,7 +203,7 @@ internal static partial class LogViewerHelper
         filterBar.Children.Add(countBadge);
         filterBar.Children.Add(searchBox);
 
-        // --- Quick stat pills ---
+        // Quick stat pills
         var logEntries = allEntries.Where(e => !e.IsSessionMarker);
         var infoCount = logEntries.Count(e => e.Level == "INFO");
         var warnCount = logEntries.Count(e => e.Level == "WARN");
@@ -111,25 +224,41 @@ internal static partial class LogViewerHelper
             }
         };
 
-        // --- Log list ---
+        // Log list
+        var templateSelector = new LogEntryTemplateSelector
+        {
+            LogTemplate = (DataTemplate)XamlReader.Load(LogEntryTemplateXaml),
+            SessionTemplate = (DataTemplate)XamlReader.Load(SessionMarkerTemplateXaml)
+        };
+
+        var displayedEntries = new ObservableCollection<LogEntry>();
+
         var logListView = new ListView
         {
             SelectionMode = ListViewSelectionMode.None,
             IsItemClickEnabled = false,
             MaxHeight = 400,
             Padding = new Thickness(0),
-            ItemContainerStyle = CreateCompactItemStyle()
+            ItemContainerStyle = CreateCompactItemStyle(),
+            ItemTemplateSelector = templateSelector,
+            ItemsSource = displayedEntries,
+            ItemContainerTransitions = []
         };
+        ScrollViewer.SetHorizontalScrollMode(logListView, ScrollMode.Disabled);
+        ScrollViewer.SetHorizontalScrollBarVisibility(logListView, ScrollBarVisibility.Disabled);
+        logListView.ContainerContentChanging += OnContainerContentChanging;
 
-        var scrollViewer = new ScrollViewer
+        // Enable ItemsStackPanel recycling
+        logListView.Loaded += (_, _) =>
         {
-            Content = logListView,
-            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-            HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
-            MaxHeight = 400
+            if (logListView.ItemsPanelRoot is ItemsStackPanel panel)
+            {
+                panel.CacheLength = 2;
+                panel.AreStickyGroupHeadersEnabled = false;
+            }
         };
 
-        // --- Empty state ---
+        // Empty state
         var emptyText = new TextBlock
         {
             Text = "No log entries found.",
@@ -140,11 +269,11 @@ internal static partial class LogViewerHelper
             Visibility = Visibility.Collapsed
         };
 
-        // --- Main layout ---
+        // Main layout
         var rootPanel = new StackPanel
         {
             HorizontalAlignment = HorizontalAlignment.Stretch,
-            Children = { filterBar, statBar, scrollViewer, emptyText }
+            Children = { filterBar, statBar, logListView, emptyText }
         };
 
         // Populate helper
@@ -167,20 +296,17 @@ internal static partial class LogViewerHelper
             }
 
             var list = filtered.ToList();
-            logListView.Items.Clear();
 
-            foreach (var entry in list)
-            {
-                logListView.Items.Add(entry.IsSessionMarker
-                    ? CreateSessionSeparatorUI(entry)
-                    : CreateLogItemUI(entry));
-            }
+            // Reset ItemsSource to avoid per-item change notifications
+            logListView.ItemsSource = null;
+            displayedEntries = new ObservableCollection<LogEntry>(list);
+            logListView.ItemsSource = displayedEntries;
 
             var logCount = list.Count(e => !e.IsSessionMarker);
             var totalLogCount = allEntries.Count(e => !e.IsSessionMarker);
             countBadge.Text = $"{logCount} of {totalLogCount} entries";
             emptyText.Visibility = logCount == 0 ? Visibility.Visible : Visibility.Collapsed;
-            scrollViewer.Visibility = logCount == 0 ? Visibility.Collapsed : Visibility.Visible;
+            logListView.Visibility = logCount == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
 
         Repopulate();
@@ -225,7 +351,7 @@ internal static partial class LogViewerHelper
             Resources =
             {
                 ["ContentDialogMaxWidth"] = 800d,
-                ["ContentDialogMinWidth"] = 650d
+                ["ContentDialogMinWidth"] = 800d
             }
         };
 
@@ -255,27 +381,25 @@ internal static partial class LogViewerHelper
             if (!File.Exists(logFilePath))
                 return entries;
 
-            var lines = await File.ReadAllLinesAsync(logFilePath);
-            var regex = LogLineRegex();
+            using var stream = new FileStream(logFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var reader = new StreamReader(stream);
 
-            foreach (var line in lines)
+            string? line;
+            while ((line = await reader.ReadLineAsync()) != null)
             {
                 if (string.IsNullOrWhiteSpace(line))
                     continue;
 
-                var match = regex.Match(line);
-                if (match.Success)
+                if (TryParseLogLine(line, out var timestamp, out var level, out var caller, out var message))
                 {
-                    var message = match.Groups[4].Value;
-
                     // Detect the "New Session" separator line
                     if (message.Contains("New Session", StringComparison.OrdinalIgnoreCase))
                     {
                         entries.Add(new LogEntry
                         {
-                            Timestamp = match.Groups[1].Value,
+                            Timestamp = timestamp,
                             Level = "INFO",
-                            Caller = match.Groups[3].Value,
+                            Caller = caller,
                             Message = message,
                             RawLine = line,
                             IsSessionMarker = true
@@ -294,9 +418,9 @@ internal static partial class LogViewerHelper
 
                     entries.Add(new LogEntry
                     {
-                        Timestamp = match.Groups[1].Value,
-                        Level = match.Groups[2].Value.ToUpperInvariant(),
-                        Caller = match.Groups[3].Value,
+                        Timestamp = timestamp,
+                        Level = level.ToUpperInvariant(),
+                        Caller = caller,
                         Message = message,
                         RawLine = line
                     });
@@ -349,225 +473,74 @@ internal static partial class LogViewerHelper
         };
     }
 
-    private static Grid CreateLogItemUI(LogEntry entry)
+    private static void OnContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+    {
+        if (args.InRecycleQueue)
+            return;
+
+        if (args.Item is not LogEntry entry)
+            return;
+
+        var root = (Grid)args.ItemContainer.ContentTemplateRoot;
+
+        if (entry.IsSessionMarker)
+            BindSessionMarker(root, entry);
+        else
+            BindLogEntry(root, entry);
+    }
+
+    private static void BindLogEntry(Grid root, LogEntry entry)
     {
         var levelColor = GetLevelColor(entry.Level);
-        var levelGlyph = GetLevelGlyph(entry.Level);
 
-        // Level indicator (colored bar on the left side)
-        var levelBar = new Border
-        {
-            Width = 3,
-            CornerRadius = new CornerRadius(1.5),
-            Background = new SolidColorBrush(levelColor),
-            VerticalAlignment = VerticalAlignment.Stretch,
-            Margin = new Thickness(0, 2, 8, 2)
-        };
+        var levelBar = (Border)root.Children[0];
+        levelBar.Background = new SolidColorBrush(levelColor);
 
-        // Level icon
-        var levelIcon = new FontIcon
-        {
-            Glyph = levelGlyph,
-            FontSize = 12,
-            Foreground = new SolidColorBrush(levelColor),
-            VerticalAlignment = VerticalAlignment.Top,
-            Margin = new Thickness(0, 2, 6, 0)
-        };
+        var contentPanel = (StackPanel)root.Children[1];
+        var headerRow = (StackPanel)contentPanel.Children[0];
+        var messageBlock = (TextBlock)contentPanel.Children[1];
 
-        // Timestamp
-        var timestampBlock = new TextBlock
-        {
-            Text = FormatTimestamp(entry.Timestamp),
-            FontSize = 11,
-            FontFamily = new FontFamily("Cascadia Mono, Consolas, Courier New"),
-            Foreground = (SolidColorBrush)Application.Current.Resources["TextFillColorTertiaryBrush"],
-            VerticalAlignment = VerticalAlignment.Top,
-            Margin = new Thickness(0, 2, 8, 0)
-        };
+        var levelIcon = (FontIcon)headerRow.Children[0];
+        levelIcon.Glyph = GetLevelGlyph(entry.Level);
+        levelIcon.Foreground = new SolidColorBrush(levelColor);
 
-        // Caller badge
-        var callerBadge = CreateCallerBadge(entry.Caller);
+        var timestampBlock = (TextBlock)headerRow.Children[1];
+        timestampBlock.Text = FormatTimestamp(entry.Timestamp);
 
-        // Header row: icon + timestamp + caller
-        var headerRow = new StackPanel
+        var callerBadge = (Border)headerRow.Children[2];
+        if (string.IsNullOrEmpty(entry.Caller))
         {
-            Orientation = Orientation.Horizontal,
-            Spacing = 4,
-            Children = { levelIcon, timestampBlock }
-        };
-        if (callerBadge != null)
+            callerBadge.Visibility = Visibility.Collapsed;
+        }
+        else
         {
-            headerRow.Children.Add(callerBadge);
+            callerBadge.Visibility = Visibility.Visible;
+            ((TextBlock)callerBadge.Child).Text = entry.Caller;
         }
 
-        // Message text
-        var messageBlock = new TextBlock
-        {
-            Text = entry.Message,
-            TextWrapping = TextWrapping.Wrap,
-            IsTextSelectionEnabled = true,
-            FontSize = 12.5,
-            FontFamily = new FontFamily("Cascadia Mono, Consolas, Courier New"),
-            Foreground = GetMessageBrush(entry.Level),
-            Margin = new Thickness(0, 2, 0, 0),
-            MaxLines = 6,
-            TextTrimming = TextTrimming.CharacterEllipsis
-        };
-
-        // Content column
-        var contentPanel = new StackPanel
-        {
-            Spacing = 1,
-            Children = { headerRow, messageBlock }
-        };
-
-        // Grid: level bar + content
-        var grid = new Grid
-        {
-            ColumnDefinitions =
-            {
-                new ColumnDefinition { Width = GridLength.Auto },
-                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
-            },
-            Padding = new Thickness(4, 6, 8, 6),
-            Margin = new Thickness(0, 1, 0, 1),
-            CornerRadius = new CornerRadius(4),
-            Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"]
-        };
-
-        Grid.SetColumn(levelBar, 0);
-        Grid.SetColumn(contentPanel, 1);
-        grid.Children.Add(levelBar);
-        grid.Children.Add(contentPanel);
-
-        return grid;
+        messageBlock.Text = entry.Message;
+        messageBlock.Foreground = GetMessageBrush(entry.Level);
     }
 
-    private static Grid CreateSessionSeparatorUI(LogEntry entry)
+    private static void BindSessionMarker(Grid root, LogEntry entry)
     {
-        var accentBrush = (SolidColorBrush)Application.Current.Resources["TextFillColorTertiaryBrush"];
+        var container = (StackPanel)root.Children[0];
+        var separatorRow = (Grid)container.Children[0];
+        var sessionLabel = (StackPanel)separatorRow.Children[1];
 
-        // Left line
-        var leftLine = new Border
-        {
-            Height = 1,
-            VerticalAlignment = VerticalAlignment.Center,
-            Background = (Brush)Application.Current.Resources["DividerStrokeColorDefaultBrush"]
-        };
+        var timestampText = (TextBlock)sessionLabel.Children[2];
+        timestampText.Text = FormatTimestamp(entry.Timestamp);
 
-        // Session label with icon
-        var sessionLabel = new StackPanel
+        var sessionInfoText = (TextBlock)container.Children[1];
+        if (string.IsNullOrEmpty(entry.SessionInfo))
         {
-            Orientation = Orientation.Horizontal,
-            Spacing = 6,
-            Padding = new Thickness(12, 0, 12, 0),
-            HorizontalAlignment = HorizontalAlignment.Center,
-            Children =
-            {
-                new FontIcon
-                {
-                    Glyph = "\uE768",
-                    FontSize = 10,
-                    Foreground = accentBrush,
-                    VerticalAlignment = VerticalAlignment.Center
-                },
-                new TextBlock
-                {
-                    Text = "New Session",
-                    FontSize = 11,
-                    FontWeight = FontWeights.SemiBold,
-                    Foreground = accentBrush,
-                    VerticalAlignment = VerticalAlignment.Center
-                },
-                new TextBlock
-                {
-                    Text = FormatTimestamp(entry.Timestamp),
-                    FontSize = 10,
-                    Foreground = accentBrush,
-                    Opacity = 0.7,
-                    VerticalAlignment = VerticalAlignment.Center
-                }
-            }
-        };
-
-        // Right line
-        var rightLine = new Border
-        {
-            Height = 1,
-            VerticalAlignment = VerticalAlignment.Center,
-            Background = (Brush)Application.Current.Resources["DividerStrokeColorDefaultBrush"]
-        };
-
-        // Center row: line — label — line
-        var separatorRow = new Grid
-        {
-            ColumnDefinitions =
-            {
-                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                new ColumnDefinition { Width = GridLength.Auto },
-                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
-            },
-            Margin = new Thickness(0, 2, 0, 2)
-        };
-        Grid.SetColumn(leftLine, 0);
-        Grid.SetColumn(sessionLabel, 1);
-        Grid.SetColumn(rightLine, 2);
-        separatorRow.Children.Add(leftLine);
-        separatorRow.Children.Add(sessionLabel);
-        separatorRow.Children.Add(rightLine);
-
-        // Container
-        var container = new StackPanel
-        {
-            Spacing = 4,
-            Children = { separatorRow }
-        };
-
-        // Add system info line if available
-        if (!string.IsNullOrEmpty(entry.SessionInfo))
-        {
-            container.Children.Add(new TextBlock
-            {
-                Text = entry.SessionInfo,
-                FontSize = 10,
-                FontFamily = new FontFamily("Cascadia Mono, Consolas, Courier New"),
-                Foreground = accentBrush,
-                Opacity = 0.7,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                TextTrimming = TextTrimming.CharacterEllipsis
-            });
+            sessionInfoText.Visibility = Visibility.Collapsed;
         }
-
-        var grid = new Grid
+        else
         {
-            Padding = new Thickness(4, 10, 8, 6),
-            Margin = new Thickness(0, 4, 0, 4),
-            Children = { container }
-        };
-
-        return grid;
-    }
-
-    private static Border? CreateCallerBadge(string caller)
-    {
-        if (string.IsNullOrEmpty(caller))
-            return null;
-
-        return new Border
-        {
-            Background = (Brush)Application.Current.Resources["CardBackgroundFillColorSecondaryBrush"],
-            CornerRadius = new CornerRadius(4),
-            Padding = new Thickness(5, 1, 5, 1),
-            Margin = new Thickness(2, 0, 0, 0),
-            VerticalAlignment = VerticalAlignment.Center,
-            Child = new TextBlock
-            {
-                Text = caller,
-                FontSize = 10,
-                FontFamily = new FontFamily("Cascadia Mono, Consolas, Courier New"),
-                Foreground = (SolidColorBrush)Application.Current.Resources["TextFillColorSecondaryBrush"]
-            }
-        };
+            sessionInfoText.Visibility = Visibility.Visible;
+            sessionInfoText.Text = entry.SessionInfo;
+        }
     }
 
     private static Border CreateStatPill(string glyph, string count, Windows.UI.Color color)
