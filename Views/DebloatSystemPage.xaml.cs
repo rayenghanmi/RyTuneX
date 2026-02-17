@@ -512,19 +512,20 @@ public sealed partial class DebloatSystemPage : Page
             TempButtonIcon.Visibility = Visibility.Collapsed;
 
             // Execute temp removal commands
-            var result = await OptimizeSystemHelper.RemoveTempFiles();
+            var (success, bytesCleared) = await OptimizeSystemHelper.RemoveTempFiles();
 
             // Reset UI after task completion
             TempButton.IsEnabled = true;
             TempButtonProgressRing.Visibility = Visibility.Collapsed;
             TempButtonIcon.Visibility = Visibility.Visible;
 
-            if (result)
+            if (success)
             {
-                // Show success notification
+                // Show success notification with cleared size
+                var sizeStr = FormatBytes(bytesCleared);
                 App.ShowNotification(
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
-                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc"),
+                    string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc")) + $" (Cleared: {sizeStr})",
                     InfoBarSeverity.Success, 5000);
             }
             else
@@ -549,6 +550,18 @@ public sealed partial class DebloatSystemPage : Page
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
                 RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel"),
                 InfoBarSeverity.Error, 5000);
+        }
+
+        // Helper to format bytes as readable string
+        static string FormatBytes(long bytes)
+        {
+            if (bytes < 1024) return $"{bytes} B";
+            double kb = bytes / 1024.0;
+            if (kb < 1024) return $"{kb:F1} KB";
+            double mb = kb / 1024.0;
+            if (mb < 1024) return $"{mb:F1} MB";
+            double gb = mb / 1024.0;
+            return $"{gb:F2} GB";
         }
     }
 

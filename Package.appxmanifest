@@ -15,7 +15,7 @@
 	  Publisher="CN=41442EC5-E400-4C2F-B9A7-64FEEF036EB2"
 	  Version="1.7.0.0" />
 
-	<mp:PhoneIdentity PhoneProductId="5f764d35-a7a5-422c-b80e-dc06935ea3ce" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+	<mp:PhoneIdentity PhoneProductId="2743ce40-6634-4232-824a-03fd6a0f09e1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
 	<Properties>
 		<DisplayName>RyTuneX</DisplayName>
@@ -25,7 +25,7 @@
 	</Properties>
 
 	<Dependencies>
-		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.22621.0" />
+		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" />
 	</Dependencies>
 
 	<Resources>

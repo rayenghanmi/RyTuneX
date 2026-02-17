@@ -217,10 +217,10 @@ internal static partial class LogViewerHelper
             Margin = new Thickness(0, 0, 0, 12),
             Children =
             {
-                CreateStatPill("\uE946", infoCount.ToString(), GetLevelColor("INFO")),
-                CreateStatPill("\uE7BA", warnCount.ToString(), GetLevelColor("WARN")),
-                CreateStatPill("\uEA39", errorCount.ToString(), GetLevelColor("ERROR")),
-                CreateStatPill("\uE783", criticalCount.ToString(), GetLevelColor("CRITICAL"))
+                CreateStatPill(GetLevelGlyph("INFO"), infoCount.ToString(), GetLevelColor("INFO")),
+                CreateStatPill(GetLevelGlyph("WARN"), warnCount.ToString(), GetLevelColor("WARN")),
+                CreateStatPill(GetLevelGlyph("ERROR"), errorCount.ToString(), GetLevelColor("ERROR")),
+                CreateStatPill(GetLevelGlyph("CRITICAL"), criticalCount.ToString(), GetLevelColor("CRITICAL"))
             }
         };
 
@@ -384,6 +384,7 @@ internal static partial class LogViewerHelper
             using var stream = new FileStream(logFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var reader = new StreamReader(stream);
 
+            LogEntry? lastEntry = null;
             string? line;
             while ((line = await reader.ReadLineAsync()) != null)
             {
@@ -395,7 +396,7 @@ internal static partial class LogViewerHelper
                     // Detect the "New Session" separator line
                     if (message.Contains("New Session", StringComparison.OrdinalIgnoreCase))
                     {
-                        entries.Add(new LogEntry
+                        var sessionEntry = new LogEntry
                         {
                             Timestamp = timestamp,
                             Level = "INFO",
@@ -403,7 +404,9 @@ internal static partial class LogViewerHelper
                             Message = message,
                             RawLine = line,
                             IsSessionMarker = true
-                        });
+                        };
+                        entries.Add(sessionEntry);
+                        lastEntry = sessionEntry;
                         continue;
                     }
 
@@ -416,26 +419,59 @@ internal static partial class LogViewerHelper
                         continue;
                     }
 
-                    entries.Add(new LogEntry
+                    var newEntry = new LogEntry
                     {
                         Timestamp = timestamp,
                         Level = level.ToUpperInvariant(),
                         Caller = caller,
                         Message = message,
                         RawLine = line
-                    });
+                    };
+                    entries.Add(newEntry);
+                    lastEntry = newEntry;
                 }
                 else
                 {
-                    // Non-matching lines (e.g. multi-line exceptions) — create raw entry
-                    entries.Add(new LogEntry
+                    // If the line does not match the log entry pattern, treat as continuation of previous entry
+                    if (lastEntry != null)
                     {
-                        Timestamp = string.Empty,
-                        Level = "INFO",
-                        Caller = string.Empty,
-                        Message = line,
-                        RawLine = line
-                    });
+                        // Append to message and rawline (with newline)
+                        var newMessage = string.IsNullOrEmpty(lastEntry.Message)
+                            ? line
+                            : lastEntry.Message + "\n" + line;
+                        var newRawLine = string.IsNullOrEmpty(lastEntry.RawLine)
+                            ? line
+                            : lastEntry.RawLine + "\n" + line;
+
+                        // Create a new LogEntry with updated message/rawline, keep other fields
+                        var updatedEntry = new LogEntry
+                        {
+                            Timestamp = lastEntry.Timestamp,
+                            Level = lastEntry.Level,
+                            Caller = lastEntry.Caller,
+                            Message = newMessage,
+                            RawLine = newRawLine,
+                            IsSessionMarker = lastEntry.IsSessionMarker,
+                            SessionInfo = lastEntry.SessionInfo
+                        };
+                        // Replace last entry
+                        entries[^1] = updatedEntry;
+                        lastEntry = updatedEntry;
+                    }
+                    else
+                    {
+                        // No previous entry, treat as a new raw entry
+                        var newEntry = new LogEntry
+                        {
+                            Timestamp = string.Empty,
+                            Level = "INFO",
+                            Caller = string.Empty,
+                            Message = line,
+                            RawLine = line
+                        };
+                        entries.Add(newEntry);
+                        lastEntry = newEntry;
+                    }
                 }
             }
         }

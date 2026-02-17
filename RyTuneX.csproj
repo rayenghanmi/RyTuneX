@@ -44,10 +44,6 @@
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
-  <PropertyGroup Label="Globals">
-    <WebView2EnableCsWinRTProjection>False</WebView2EnableCsWinRTProjection>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
 	<PublishReadyToRunEmitSymbols>false</PublishReadyToRunEmitSymbols>
   	<GeneratePriDebugFiles>false</GeneratePriDebugFiles>
