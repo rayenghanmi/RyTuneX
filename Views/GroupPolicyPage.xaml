@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:local="using:RyTuneX.Views"
     mc:Ignorable="d">
     <Page.Resources>
         <x:Double x:Key="SettingsCardSpacing">4</x:Double>
@@ -81,22 +82,22 @@
                         <StackLayout Spacing="4"/>
                     </ItemsRepeater.Layout>
                     <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="local:CategorySummaryItem">
                             <controls:SettingsCard>
                                 <controls:SettingsCard.Header>
-                                    <TextBlock Text="{Binding Category}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{x:Bind Category}" FontWeight="SemiBold"/>
                                 </controls:SettingsCard.Header>
                                 <controls:SettingsCard.Description>
-                                    <TextBlock Text="{Binding StatusText}" 
-                                               Foreground="{Binding StatusColor}"/>
+                                    <TextBlock Text="{x:Bind StatusText}" 
+                                               Foreground="{x:Bind StatusColor}"/>
                                 </controls:SettingsCard.Description>
                                 <controls:SettingsCard.HeaderIcon>
-                                    <FontIcon Glyph="{Binding IconGlyph}"/>
+                                    <FontIcon Glyph="{x:Bind IconGlyph}"/>
                                 </controls:SettingsCard.HeaderIcon>
-                                <Button Content="{Binding ButtonText}"
-                                        Tag="{Binding Category}"
+                                <Button Content="{x:Bind ButtonText}"
+                                        Tag="{x:Bind Category}"
                                         Click="CategoryRemoveButton_Click"
-                                        IsEnabled="{Binding HasConfiguredPolicies}"/>
+                                        IsEnabled="{x:Bind HasConfiguredPolicies}"/>
                             </controls:SettingsCard>
                         </DataTemplate>
                     </ItemsRepeater.ItemTemplate>
@@ -120,7 +121,7 @@
                                               SelectionMode="Multiple"
                                               MaxHeight="400">
                                         <ListView.ItemTemplate>
-                                            <DataTemplate>
+                                            <DataTemplate x:DataType="local:PolicyStateViewModel">
                                                 <Grid Padding="8,4" ColumnSpacing="12">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
@@ -128,24 +129,24 @@
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                        <TextBlock Text="{Binding Policy.Name}" 
+                                                        <TextBlock Text="{x:Bind Policy.Name}" 
                                                                    FontWeight="SemiBold"
                                                                    TextTrimming="CharacterEllipsis"/>
-                                                        <TextBlock Text="{Binding Policy.Description}" 
+                                                        <TextBlock Text="{x:Bind Policy.Description}" 
                                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                                    TextTrimming="CharacterEllipsis"/>
-                                                        <TextBlock Text="{Binding Policy.Category}"
+                                                        <TextBlock Text="{x:Bind Policy.Category}"
                                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                                    Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
                                                     </StackPanel>
                                                     <TextBlock Grid.Column="1" 
-                                                               Text="{Binding HiveDisplay}"
+                                                               Text="{x:Bind HiveDisplay}"
                                                                Style="{StaticResource CaptionTextBlockStyle}"
                                                                VerticalAlignment="Center"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                                                     <Button Grid.Column="2"
-                                                            Tag="{Binding Policy.Id}"
+                                                            Tag="{x:Bind Policy.Id}"
                                                             Click="PolicyRemoveButton_Click"
                                                             VerticalAlignment="Center">
                                                         <FontIcon Glyph="&#xE74D;" FontSize="12"/>

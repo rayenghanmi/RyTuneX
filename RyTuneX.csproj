@@ -31,6 +31,7 @@
     <GenerateTestArtifacts>False</GenerateTestArtifacts>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -82,28 +83,12 @@
       <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260101001" />
       <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.2" />
       <PackageReference Include="System.Drawing.Common" Version="10.0.2" />
-      <PackageReference Include="System.Management" Version="10.0.2" />
       <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.2" />
       <PackageReference Include="WinUIEx" Version="2.9.0" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TrimmerRootAssembly Include="RyTuneX" />
-    <TrimmerRootAssembly Include="Microsoft.Extensions.DependencyInjection" />
-    <TrimmerRootAssembly Include="Microsoft.Extensions.Hosting" />
-    <TrimmerRootAssembly Include="CommunityToolkit.Mvvm" />
-    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Behaviors" />
-    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Controls.Primitives" />
-    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
-    <TrimmerRootAssembly Include="WinUIEx" />
-    <TrimmerRootAssembly Include="System.ServiceProcess.ServiceController" />
-    <TrimmerRootAssembly Include="System.Diagnostics.PerformanceCounter" />
-    <TrimmerRootAssembly Include="System.Drawing.Common" />
-    <TrimmerRootAssembly Include="System.Management" />
   </ItemGroup>
 
   <ItemGroup>

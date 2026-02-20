@@ -439,77 +439,73 @@ public sealed partial class GroupPolicyPage : Page
             RefreshButton.IsEnabled = true;
         }
     }
+}
 
-    /// <summary>
-    /// View model for category summary display.
-    /// </summary>
-    private sealed class CategorySummaryItem
+// View model for category summary display.
+internal sealed class CategorySummaryItem
+{
+    public required string Category
     {
-        public required string Category
-        {
-            get; init;
-        }
-        public required int TotalCount
-        {
-            get; init;
-        }
-        public required int ConfiguredCount
-        {
-            get; init;
-        }
-        public required string IconGlyph
-        {
-            get; init;
-        }
-
-        public string StatusText => ConfiguredCount == 0
-            ? "GroupPolicyPage_NotConfigured".GetLocalized()
-            : string.Format("GroupPolicyPage_ConfiguredCount".GetLocalized(), ConfiguredCount);
-
-        public SolidColorBrush StatusColor => ConfiguredCount == 0
-            ? new SolidColorBrush(Microsoft.UI.Colors.Green)
-            : (SolidColorBrush)Application.Current.Resources["SystemFillColorCautionBrush"];
-
-        public bool HasConfiguredPolicies => ConfiguredCount > 0;
-
-        public string ButtonText => "GroupPolicyPage_RemoveOverrides".GetLocalized();
+        get; init;
+    }
+    public required int TotalCount
+    {
+        get; init;
+    }
+    public required int ConfiguredCount
+    {
+        get; init;
+    }
+    public required string IconGlyph
+    {
+        get; init;
     }
 
-    /// <summary>
-    /// View model for policy state display.
-    /// </summary>
-    private sealed class PolicyStateViewModel
+    public string StatusText => ConfiguredCount == 0
+        ? "GroupPolicyPage_NotConfigured".GetLocalized()
+        : string.Format("GroupPolicyPage_ConfiguredCount".GetLocalized(), ConfiguredCount);
+
+    public SolidColorBrush StatusColor => ConfiguredCount == 0
+        ? new SolidColorBrush(Microsoft.UI.Colors.Green)
+        : (SolidColorBrush)Application.Current.Resources["SystemFillColorCautionBrush"];
+
+    public bool HasConfiguredPolicies => ConfiguredCount > 0;
+
+    public string ButtonText => "GroupPolicyPage_RemoveOverrides".GetLocalized();
+}
+
+// View model for policy state display.
+internal sealed class PolicyStateViewModel
+{
+    private readonly GroupPolicyHelper.PolicyState _state;
+
+    public PolicyStateViewModel(GroupPolicyHelper.PolicyState state)
     {
-        private readonly GroupPolicyHelper.PolicyState _state;
+        _state = state;
+    }
 
-        public PolicyStateViewModel(GroupPolicyHelper.PolicyState state)
+    public GroupPolicyHelper.PolicyEntry Policy => _state.Policy;
+
+    public string HiveDisplay => _state.Policy.Hive switch
+    {
+        Microsoft.Win32.RegistryHive.LocalMachine => "HKLM",
+        Microsoft.Win32.RegistryHive.CurrentUser => "HKCU",
+        _ => _state.Policy.Hive.ToString()
+    };
+
+    public string CurrentValueDisplay
+    {
+        get
         {
-            _state = state;
-        }
+            if (_state.CurrentValue == null)
+                return "Not set";
 
-        public GroupPolicyHelper.PolicyEntry Policy => _state.Policy;
-
-        public string HiveDisplay => _state.Policy.Hive switch
-        {
-            Microsoft.Win32.RegistryHive.LocalMachine => "HKLM",
-            Microsoft.Win32.RegistryHive.CurrentUser => "HKCU",
-            _ => _state.Policy.Hive.ToString()
-        };
-
-        public string CurrentValueDisplay
-        {
-            get
+            return _state.ActualValueKind switch
             {
-                if (_state.CurrentValue == null)
-                    return "Not set";
-
-                return _state.ActualValueKind switch
-                {
-                    Microsoft.Win32.RegistryValueKind.DWord => $"Value: {_state.CurrentValue}",
-                    Microsoft.Win32.RegistryValueKind.String => $"Value: \"{_state.CurrentValue}\"",
-                    _ => $"Value: {_state.CurrentValue}"
-                };
-            }
+                Microsoft.Win32.RegistryValueKind.DWord => $"Value: {_state.CurrentValue}",
+                Microsoft.Win32.RegistryValueKind.String => $"Value: \"{_state.CurrentValue}\"",
+                _ => $"Value: {_state.CurrentValue}"
+            };
         }
     }
 }

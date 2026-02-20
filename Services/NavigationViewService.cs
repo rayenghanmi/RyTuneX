@@ -56,16 +56,7 @@ public class NavigationViewService : INavigationViewService
     {
         if (args.IsSettingsInvoked)
         {
-            // Defer navigation slightly via the UI dispatcher
-            if (_navigationView?.DispatcherQueue != null)
-            {
-                _navigationView.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low,
-                    () => _navigationService.NavigateTo(typeof(RyTuneX.Views.SettingsPage).FullName!));
-            }
-            else
-            {
-                _navigationService.NavigateTo(typeof(RyTuneX.Views.SettingsPage).FullName!);
-            }
+            _navigationService.NavigateTo(typeof(RyTuneX.Views.SettingsPage).FullName!);
         }
         else
         {
@@ -73,15 +64,7 @@ public class NavigationViewService : INavigationViewService
 
             if (selectedItem?.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
             {
-                if (_navigationView?.DispatcherQueue != null)
-                {
-                    _navigationView.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low,
-                        () => _navigationService.NavigateTo(pageKey));
-                }
-                else
-                {
-                    _navigationService.NavigateTo(pageKey);
-                }
+                _navigationService.NavigateTo(pageKey);
             }
         }
     }

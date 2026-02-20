@@ -13,11 +13,11 @@ namespace RyTuneX.Views;
 
 public sealed partial class DebloatSystemPage : Page
 {
-    public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
+    private ObservableCollection<AppItem> AppList { get; set; } = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
     private CancellationTokenSource? _uninstallBatchCts;
     private Guid? _uninstallBatchRegistrationId;
-    private List<Tuple<string, string, bool>> allApps = new();
+    private List<AppItem> allApps = new();
     private HashSet<string> uninstallableAppNames = new(StringComparer.OrdinalIgnoreCase);
     private string? _pendingScrollTarget;
 
@@ -90,11 +90,21 @@ public sealed partial class DebloatSystemPage : Page
 
             var (installedApps, fetchedUninstallableNames) = await Task.Run(OptimizationOptions.GetInstalledApps).ConfigureAwait(false);
 
+            // Convert tuple results to AppItem records for x:Bind support
+            var installedAppItems = installedApps
+                .Select(t => new AppItem
+                {
+                    Name = t.Item1,
+                    IconPath = t.Item2,
+                    IsWin32 = t.Item3
+                })
+                .ToList();
+
             DispatcherQueue.TryEnqueue(() =>
             {
                 uninstallableAppNames = fetchedUninstallableNames;
-                allApps = installedApps.Where(app =>
-                    !app.Item1.Contains("rytunex", StringComparison.CurrentCultureIgnoreCase)).ToList();
+                allApps = installedAppItems.Where(app =>
+                    !app.Name.Contains("rytunex", StringComparison.CurrentCultureIgnoreCase)).ToList();
 
                 ApplyFilter();
 
@@ -136,17 +146,17 @@ public sealed partial class DebloatSystemPage : Page
 
         var filtered = appsFilter.SelectedIndex switch
         {
-            0 => allApps.Where(app => app.Item3 || uninstallableAppNames.Contains(app.Item1)),
-            2 => allApps.Where(app => app.Item3),
+            0 => allApps.Where(app => app.IsWin32 || uninstallableAppNames.Contains(app.Name)),
+            2 => allApps.Where(app => app.IsWin32),
             _ => allApps.AsEnumerable()
         };
 
         if (!string.IsNullOrEmpty(searchText))
         {
-            filtered = filtered.Where(app => app.Item1.Contains(searchText, StringComparison.CurrentCultureIgnoreCase));
+            filtered = filtered.Where(app => app.Name.Contains(searchText, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        var result = filtered.OrderBy(app => app.Item1).ToList();
+        var result = filtered.OrderBy(app => app.Name).ToList();
 
         // Detach to clear without per-item animations
         appListView.ItemsSource = null;
@@ -223,10 +233,10 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallingStatusBar.Opacity = 1;
             });
 
-            foreach (var appInfo in appListView.SelectedItems.OfType<Tuple<string, string, bool>>())
+            foreach (var appInfo in appListView.SelectedItems.OfType<AppItem>())
             {
-                var selectedAppName = appInfo.Item1;
-                var isWin32App = appInfo.Item3;
+                var selectedAppName = appInfo.Name;
+                var isWin32App = appInfo.IsWin32;
 
                 await DispatcherQueue.EnqueueAsync(() =>
                 {
@@ -656,4 +666,11 @@ public class NullToVisibilityConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
+}
+
+internal sealed class AppItem
+{
+    public string Name { get; set; } = string.Empty;
+    public string? IconPath { get; set; }
+    public bool IsWin32 { get; set; }
 }

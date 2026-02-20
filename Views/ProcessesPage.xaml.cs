@@ -258,6 +258,7 @@ public sealed partial class ProcessesPage : Page
         }
         catch (ArgumentException)
         {
+            _ = LogHelper.LogWarning($"Process with PID {processId} no longer exists.");
             App.ShowNotification("Process Not Found", $"Process with PID {processId} no longer exists.", InfoBarSeverity.Warning, 3000);
             await RefreshProcessesAsync();
         }

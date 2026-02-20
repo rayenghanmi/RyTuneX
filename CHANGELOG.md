@@ -20,6 +20,7 @@ All notable changes to this branch will be documented in this file.
 - Resolved an issue where the gpu usage was not being detected correctly in the `Home` page.
 - Fixed an issue where navigating away and back to the `Home` page caused the performance monitoring to restart and lose the current values.
 - Fixed RTL (Right-to-Left) layout issues with caption buttons by applying native `WS_EX_LAYOUTRTL` window style.
+- Resolved an issue where the CHKDSK repairing method was not working correctly.
 
 ### Changes
 

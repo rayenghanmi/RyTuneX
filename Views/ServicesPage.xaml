@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:RyTuneX.Views"
     mc:Ignorable="d">
     <Grid x:Name="ContentArea" Padding="24,14,24,0">
         <Grid.RowDefinitions>
@@ -122,7 +123,7 @@
                       SelectionMode="None"
                       Visibility="Collapsed">
                 <ListView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="local:ServiceInfoItem">
                         <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
                                 CornerRadius="4" Padding="12,10" Margin="0,2">
                             <Grid>
@@ -133,19 +134,19 @@
                                     <ColumnDefinition Width="1.2*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <FontIcon Glyph="{Binding StatusDisplay.Glyph}" FontSize="14" Foreground="{Binding StatusDisplay.Color}" Opacity="0.6"/>
+                                    <FontIcon Glyph="{x:Bind StatusDisplay.Glyph}" FontSize="14" Foreground="{x:Bind StatusDisplay.Color}" Opacity="0.6"/>
                                     <StackPanel Spacing="2">
-                                        <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" FontSize="13"/>
-                                        <TextBlock Text="{Binding Name}" FontSize="11" Opacity="0.5" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Text="{x:Bind DisplayName}" TextTrimming="CharacterEllipsis" FontSize="13"/>
+                                        <TextBlock Text="{x:Bind Name}" FontSize="11" Opacity="0.5" TextTrimming="CharacterEllipsis"/>
                                     </StackPanel>
                                 </StackPanel>
                                 <Border Grid.Column="1" Background="{ThemeResource SubtleFillColorSecondaryBrush}" 
                                         CornerRadius="4" Padding="10,4" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding Status}" FontSize="12" Opacity="0.85" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{x:Bind Status}" FontSize="12" Opacity="0.85" VerticalAlignment="Center"/>
                                 </Border>
                                 <ComboBox Grid.Column="2" 
-                                          SelectedIndex="{Binding StartTypeIndex}"
-                                          Tag="{Binding Name}"
+                                          SelectedIndex="{x:Bind StartTypeIndex}"
+                                          Tag="{x:Bind Name}"
                                           SelectionChanged="StartupType_SelectionChanged"
                                           DropDownOpened="StartupType_DropDownOpened"
                                           DropDownClosed="StartupType_DropDownClosed"
@@ -157,25 +158,25 @@
                                     <ComboBoxItem Content="Disabled"/>
                                 </ComboBox>
                                 <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
-                                    <Button Tag="{Binding Name}" 
+                                    <Button Tag="{x:Bind Name}" 
                                             Click="StartService_Click" 
                                             ToolTipService.ToolTip="Start Service"
                                             Padding="8,6"
-                                            IsEnabled="{Binding CanStart}">
+                                            IsEnabled="{x:Bind CanStart}">
                                         <FontIcon Glyph="&#xE768;" FontSize="12"/>
                                     </Button>
-                                    <Button Tag="{Binding Name}" 
+                                    <Button Tag="{x:Bind Name}" 
                                             Click="StopService_Click" 
                                             ToolTipService.ToolTip="Stop Service"
                                             Padding="8,6"
-                                            IsEnabled="{Binding CanStop}">
+                                            IsEnabled="{x:Bind CanStop}">
                                         <FontIcon Glyph="&#xE71A;" FontSize="12"/>
                                     </Button>
-                                    <Button Tag="{Binding Name}" 
+                                    <Button Tag="{x:Bind Name}" 
                                             Click="RestartService_Click" 
                                             ToolTipService.ToolTip="Restart Service"
                                             Padding="8,6"
-                                            IsEnabled="{Binding CanStop}">
+                                            IsEnabled="{x:Bind CanStop}">
                                         <FontIcon Glyph="&#xE72C;" FontSize="12"/>
                                     </Button>
                                 </StackPanel>

@@ -192,7 +192,7 @@
                                                         MinWidth="0"
                                                         IsHitTestVisible="False"
                                                         IsTabStop="False"
-                                                        IsChecked="{TemplateBinding IsSelected}" />
+                                                        IsChecked="{x:Bind IsSelected}" />
                                                     <ContentPresenter Grid.Column="1"
                                                         HorizontalAlignment="Stretch"/>
                                                 </Grid>
@@ -204,7 +204,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="local:AppItem">
                             <Grid Background="Transparent">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -219,13 +219,13 @@
                                     Width="48"
                                     Height="48"
                                     Margin="0,0,18,0">
-                                    <Image Source="{Binding Item2}"
+                                <Image Source="{x:Bind IconPath, Converter={StaticResource StringToBitmapImageConverter}}"
                                         Width="38"
                                         Height="38"
-                                        Visibility="{Binding Item2, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                        Visibility="{x:Bind IconPath, Converter={StaticResource NullToVisibilityConverter}}"/>
                                 </Grid>
                                 <TextBlock Grid.Column="1"
-                                    Text="{Binding Item1}"
+                                    Text="{x:Bind Name}"
                                     VerticalAlignment="Center"
                                     FontWeight="SemiBold"
                                     FontSize="14"
@@ -235,7 +235,7 @@
                                     VerticalAlignment="Center"
                                     Opacity="0.7"
                                     Style="{StaticResource CaptionTextBlockStyle}"
-                                    Visibility="{Binding Item3}"/>
+                                    Visibility="{x:Bind IsWin32}"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

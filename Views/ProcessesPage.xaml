@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:RyTuneX.Views"
     mc:Ignorable="d">
     <Grid x:Name="ContentArea" Padding="24,14,24,0">
         <Grid.RowDefinitions>
@@ -114,7 +115,7 @@
                       SelectionMode="None"
                       Visibility="Collapsed">
                 <ListView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="local:ProcessInfoItem">
                         <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                 CornerRadius="4" Padding="12,8" Margin="0,2">
                             <Grid>
@@ -127,16 +128,16 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" Spacing="8">
                                     <FontIcon Glyph="&#xE756;" FontSize="14" Opacity="0.6"/>
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" FontSize="13"/>
+                                    <TextBlock Text="{x:Bind Name, Mode=OneWay}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" FontSize="13"/>
                                 </StackPanel>
-                                <TextBlock Grid.Column="1" Text="{Binding Id}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
+                                <TextBlock Grid.Column="1" Text="{x:Bind Id}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
                                 <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="2">
-                                    <TextBlock Text="{Binding MemoryDisplay}" HorizontalAlignment="Center" FontSize="12"/>
-                                    <ProgressBar Value="{Binding MemoryPercent}" Maximum="100" Width="60" Height="3"/>
+                                    <TextBlock Text="{x:Bind MemoryDisplay, Mode=OneWay}" HorizontalAlignment="Center" FontSize="12"/>
+                                    <ProgressBar Value="{x:Bind MemoryPercent, Mode=OneWay}" Maximum="100" Width="60" Height="3"/>
                                 </StackPanel>
-                                <TextBlock Grid.Column="3" Text="{Binding ThreadCount}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
+                                <TextBlock Grid.Column="3" Text="{x:Bind ThreadCount, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Opacity="0.8"/>
                                 <Button Grid.Column="4"
-                                        Tag="{Binding Id}"
+                                        Tag="{x:Bind Id}"
                                         Click="EndTask_Click"
                                         ToolTipService.ToolTip="End Task"
                                         HorizontalAlignment="Center"

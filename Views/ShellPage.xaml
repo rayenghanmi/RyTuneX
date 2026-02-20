@@ -209,10 +209,10 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.HeaderTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="x:String">
                     <Grid>
                         <TextBlock
-                            Text="{Binding}"
+                            Text="{x:Bind}"
                             Style="{ThemeResource TitleTextBlockStyle}" />
                     </Grid>
                 </DataTemplate>
@@ -221,10 +221,10 @@
                 <behaviors:NavigationViewHeaderBehavior
                     DefaultHeader="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
                     <behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="x:String">
                             <Grid>
                                 <TextBlock
-                                    Text="{Binding}"
+                                    Text="{x:Bind}"
                                     Style="{ThemeResource TitleTextBlockStyle}" />
                             </Grid>
                         </DataTemplate>

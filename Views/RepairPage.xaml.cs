@@ -140,9 +140,11 @@ public sealed partial class RepairPage : Page
 
         var commands = new[]
         {
-            (DismCheckBox, "DISM", isRepair ? "/Online /Cleanup-Image /RestoreHealth" : "/Online /Cleanup-Image /ScanHealth"),
-            (SfcCheckBox, "SFC", isRepair ? "/scannow" : "/verifyonly"),
-            (ChkdskCheckBox, "CHKDSK", isRepair ? "/f" : "")
+            // (checkbox, command name, args, schedule template)
+            (DismCheckBox, "DISM", isRepair ? "/Online /Cleanup-Image /RestoreHealth" : "/Online /Cleanup-Image /ScanHealth", string.Empty),
+            (SfcCheckBox, "SFC", isRepair ? "/scannow" : "/verifyonly", string.Empty),
+            // schedule template uses placeholder {DriveRoot} which will be replaced at runtime
+            (ChkdskCheckBox, "CHKDSK", isRepair ? "/f" : "", "echo Y|chkdsk {DriveRoot} /f")
         };
 
         var current = 0;
@@ -152,7 +154,7 @@ public sealed partial class RepairPage : Page
 
         try
         {
-            foreach (var (checkBox, name, args) in commands)
+            foreach (var (checkBox, name, args, scheduleTemplate) in commands)
             {
                 if (ct.IsCancellationRequested)
                 {
@@ -166,6 +168,23 @@ public sealed partial class RepairPage : Page
                     selectedNames.Add(name);
                     StatusTextBlock.Text = $"{current} / {selectedCount}: {name} {(isRepair ? "repair" : "scan")} in progress...";
                     ProgressBar.Value = 0;
+
+                    // Automatically schedule CHKDSK repair for next reboot
+                    if (name == "CHKDSK" && isRepair)
+                    {
+                        var driveRoot = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.Windows))?.TrimEnd('\\') ?? "C:";
+
+                        App.ShowNotification("Repair".GetLocalized(), "ScheduledLater".GetLocalized(), InfoBarSeverity.Success, 5000);
+                        ChkdskCheckBox.IsEnabled = false;
+                        _scanResults[name].Clear();
+                        _scanResults[name].AppendLine("ScheduledLater".GetLocalized());
+                        if (!string.IsNullOrEmpty(scheduleTemplate))
+                        {
+                            var scheduleCmd = scheduleTemplate.Replace("{DriveRoot}", driveRoot);
+                            await OptimizationOptions.StartInCmd(scheduleCmd);
+                        }
+                        continue;
+                    }
 
                     try
                     {
@@ -218,6 +237,24 @@ public sealed partial class RepairPage : Page
                     await ShowScanResultsDialogAsync(selectedNames);
                 }
             }
+            // Ensure the cancellation token source is signaled and unregistered
+            try
+            {
+                if (_cancellationTokenSource != null && !_cancellationTokenSource.IsCancellationRequested)
+                {
+                    _cancellationTokenSource.Cancel();
+                }
+            }
+            catch { }
+
+            if (_cancellationRegistrationId.HasValue)
+            {
+                OperationCancellationManager.Unregister(_cancellationRegistrationId.Value);
+                _cancellationRegistrationId = null;
+            }
+
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = null;
         }
     }
 

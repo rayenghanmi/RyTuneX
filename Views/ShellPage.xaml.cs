@@ -26,10 +26,6 @@ public sealed partial class ShellPage : Page
         get;
     }
 
-    // Track pointer state to defer hide animation while hovered
-    private bool _isPointerOver = false;
-    private bool _pendingHide = false;
-
     public ShellPage(ShellViewModel viewModel)
     {
         ViewModel = viewModel;
@@ -157,16 +153,12 @@ public sealed partial class ShellPage : Page
     {
         try
         {
-            var pageType = Type.GetType(item.PageTypeName);
-            if (pageType != null)
-            {
-                var navigationService = App.GetService<INavigationService>();
+            var navigationService = App.GetService<INavigationService>();
 
-                // Navigate to the page, passing the option tag as parameter if available
-                navigationService.NavigateTo(item.PageTypeName, item.OptionTag);
+            // Navigate to the page, passing the option tag as parameter if available
+            navigationService.NavigateTo(item.PageTypeName, item.OptionTag);
 
-                _ = LogHelper.Log($"Search navigation to: {item.PageTypeName}, Option: {item.OptionTag ?? "none"}");
-            }
+            _ = LogHelper.Log($"Search navigation to: {item.PageTypeName}, Option: {item.OptionTag ?? "none"}");
         }
         catch (Exception ex)
         {
@@ -336,8 +328,9 @@ public sealed partial class ShellPage : Page
                 Title = title,
                 Message = message,
                 ShowDateTime = true,
-                StaysOpen = false,
+                StaysOpen = duration == 0,
                 IsClosable = true,
+                UseBlueColorForInfo = false,
                 Token = "MainToken",
                 WaitTime = TimeSpan.FromMilliseconds(duration)
             };
@@ -346,6 +339,7 @@ public sealed partial class ShellPage : Page
                 switch (severity)
                 {
                     case InfoBarSeverity.Informational:
+                        growlInfo.UseBlueColorForInfo = true;
                         Growl.Info(growlInfo);
                         break;
                     case InfoBarSeverity.Success:
@@ -378,5 +372,4 @@ public sealed partial class ShellPage : Page
             Current?.DispatcherQueue.TryEnqueue(Show);
         }
     }
-
 }
