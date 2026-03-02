@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1673,5 +1673,8 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   </data>
   <data name="Settings_ViewLogs.Description" xml:space="preserve">
     <value>Anwendungsprotokolle zur Fehlerbehebung anzeigen</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Wird geladen...</value>
   </data>
 </root>

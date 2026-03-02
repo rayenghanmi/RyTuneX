@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1639,40 +1639,42 @@
     <value>العمليات</value>
   </data>
   <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
-  <value>سمة التطبيق</value>
-</data>
+    <value>سمة التطبيق</value>
+  </data>
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
-  <value>اختر سمة ألوان التطبيق</value>
-</data>
+    <value>اختر سمة ألوان التطبيق</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
-  <value>نمط التنقل</value>
-</data>
+    <value>نمط التنقل</value>
+  </data>
   <data name="Settings_NavigationStyle.Description" xml:space="preserve">
-  <value>اختر كيفية عرض جزء التنقل</value>
-</data>
+    <value>اختر كيفية عرض جزء التنقل</value>
+  </data>
   <data name="Settings_SourceCode.Header" xml:space="preserve">
-  <value>الكود المصدري</value>
-</data>
+    <value>الكود المصدري</value>
+  </data>
   <data name="Settings_SourceCode.Description" xml:space="preserve">
-  <value>عرض والمساهمة على GitHub</value>
-</data>
+    <value>عرض والمساهمة على GitHub</value>
+  </data>
   <data name="Settings_FileBug.Header" xml:space="preserve">
-  <value>الإبلاغ عن خطأ أو طلب ميزة</value>
-</data>
+    <value>الإبلاغ عن خطأ أو طلب ميزة</value>
+  </data>
   <data name="Settings_FileBug.Description" xml:space="preserve">
-  <value>فتح مشكلة على GitHub</value>
-</data>
+    <value>فتح مشكلة على GitHub</value>
+  </data>
   <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
-  <value>دعم المطور</value>
-</data>
+    <value>دعم المطور</value>
+  </data>
   <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
-  <value>اشترِ لي قهوة</value>
-</data>
+    <value>اشترِ لي قهوة</value>
+  </data>
   <data name="Settings_ViewLogs.Header" xml:space="preserve">
-  <value>عرض السجلات</value>
-</data>
+    <value>عرض السجلات</value>
+  </data>
   <data name="Settings_ViewLogs.Description" xml:space="preserve">
-  <value>عرض سجلات التطبيق لاستكشاف الأخطاء وإصلاحها</value>
-</data>
-
+    <value>عرض سجلات التطبيق لاستكشاف الأخطاء وإصلاحها</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>جارٍ التحميل...</value>
+  </data>
 </root>

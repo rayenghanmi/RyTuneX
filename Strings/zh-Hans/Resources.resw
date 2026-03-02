@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1639,7 +1639,7 @@
     <value>进程</value>
   </data>
   <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
-  <value>应用主题</value>
+    <value>应用主题</value>
   </data>
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>选择应用的颜色主题</value>
@@ -1673,5 +1673,8 @@
   </data>
   <data name="Settings_ViewLogs.Description" xml:space="preserve">
     <value>查看应用日志以进行故障排除</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>正在加载...</value>
   </data>
 </root>

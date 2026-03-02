@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1673,5 +1673,8 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="Settings_ViewLogs.Description" xml:space="preserve">
     <value>Xem nhật ký ứng dụng để khắc phục sự cố</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Đang tải...</value>
   </data>
 </root>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1673,5 +1673,8 @@ Controlla se il computer presenta problemi di memoria</value>
   </data>
   <data name="Settings_ViewLogs.Description" xml:space="preserve">
     <value>Visualizza i log dell'applicazione per la risoluzione dei problemi</value>
-</data>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Caricamento...</value>
+  </data>
 </root>

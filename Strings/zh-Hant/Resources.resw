@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1669,5 +1669,8 @@
   </data>
   <data name="Settings_ViewLogs.Description" xml:space="preserve">
     <value>檢視應用程式記錄以進行疑難排解</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>正在載入...</value>
   </data>
 </root>

@@ -34,6 +34,7 @@ All notable changes to this branch will be documented in this file.
 - Redesigned the `Settings` page: replaced theme radio buttons with a ComboBox, reorganized About section links into individual settings cards, and moved View Logs into its own settings card.
 - Moved Issue and Support links from the navigation footer to the `Settings` page About section.
 - Removed user profile header from the navigation pane.
+- Overhauled the `System Info` page with a new design and more detailed information.
 
 ## 1.6.2 - Released
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1670,5 +1670,8 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   </data>
   <data name="Settings_ViewLogs.Description" xml:space="preserve">
     <value>Consulter les journaux de l’application pour le dépannage</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Chargement...</value>
   </data>
 </root>
