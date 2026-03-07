@@ -90,9 +90,9 @@
             <!-- Search Box in Title Bar -->
             <AutoSuggestBox x:Name="TitleBarSearchBox"
                             Grid.Column="3"
-                            Width="280"
-                            MaxWidth="400"
+                            Width="400"
                             MinWidth="200"
+                            BorderThickness="0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             PlaceholderText="Search settings..."
