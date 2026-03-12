@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,9 +125,6 @@
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>התקן</value>
-  </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>דיווח</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>מיטוב</value>
@@ -702,9 +699,6 @@
   <data name="Update" xml:space="preserve">
     <value>עדכן</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>תמיכה</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>רשת</value>
   </data>
@@ -737,9 +731,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>סה"כ: {0} יישום(ים)</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>ביצועים</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>מופעל</value>
@@ -1640,5 +1631,50 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>מסיר תכונות בינה מלאכותית מפנקס הרשימות, Paint ותמונות, משבית אפקטי מצלמה ומיקרופון של Windows Studio ובינה מלאכותית למשחקים, ומסיר שילובי IA מהמעטפת כדי למקסם פרטיות וביצועים.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>שירותים</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>תהליכים</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>ערכת נושא של האפליקציה</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>בחר את ערכת הצבעים של האפליקציה</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>סגנון ניווט</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>בחר כיצד חלונית הניווט מוצגת</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>קוד מקור</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>צפה ותרום ב-GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>דווח על באג או בקש תכונה</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>פתח issue ב-GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>תמוך במפתח</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>קנה לי קפה</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>הצג יומנים</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>הצג יומני יישום לצורך פתרון בעיות</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>טוען...</value>
   </data>
 </root>

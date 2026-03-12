@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,9 +125,6 @@
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Device</value>
-  </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Report</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Optimize</value>
@@ -702,9 +699,6 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Support</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Network</value>
   </data>
@@ -737,9 +731,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Total: {0} App(s)</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Performance</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Enabled</value>
@@ -1640,5 +1631,50 @@ Check your computer for memory problems</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Strips AI features from Notepad, Paint, and Photos, disables Windows Studio camera/mic effects and Gaming AI, and removes AI shell integrations to maximize privacy and performance.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Processes</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>App Theme</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Choose the app color theme</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Navigation Style</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Choose how the navigation pane is displayed</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Source code</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>View and contribute on GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>File a bug or request a feature</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Open an issue on GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Support the developer</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Buy me a coffee</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>View Logs</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>View application logs for troubleshooting</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Loading...</value>
   </data>
 </root>

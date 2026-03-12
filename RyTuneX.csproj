@@ -26,11 +26,12 @@
     <WindowsPackageType>MSIX</WindowsPackageType>
     <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <Version>1.6.2</Version>
+    <Version>1.7.0</Version>
     <Authors>Rayen Ghanmi</Authors>
     <GenerateTestArtifacts>False</GenerateTestArtifacts>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,10 +44,6 @@
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
-
-  <PropertyGroup Label="Globals">
-    <WebView2EnableCsWinRTProjection>False</WebView2EnableCsWinRTProjection>
-  </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
 	<PublishReadyToRunEmitSymbols>false</PublishReadyToRunEmitSymbols>
@@ -80,11 +77,12 @@
       <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.251219" />
       <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
       <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
+      <PackageReference Include="DevWinUI" Version="9.9.3" />
+      <PackageReference Include="DevWinUI.Controls" Version="9.9.3" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
       <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260101001" />
       <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.2" />
       <PackageReference Include="System.Drawing.Common" Version="10.0.2" />
-      <PackageReference Include="System.Management" Version="10.0.2" />
       <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.2" />
       <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.5" />
       <PackageReference Include="WinUIEx" Version="2.9.0" />
@@ -95,18 +93,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TrimmerRootAssembly Include="RyTuneX" />
-    <TrimmerRootAssembly Include="Microsoft.Extensions.DependencyInjection" />
-    <TrimmerRootAssembly Include="Microsoft.Extensions.Hosting" />
-    <TrimmerRootAssembly Include="CommunityToolkit.Mvvm" />
-    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Behaviors" />
-    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Controls.Primitives" />
-    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
-    <TrimmerRootAssembly Include="WinUIEx" />
-    <TrimmerRootAssembly Include="System.ServiceProcess.ServiceController" />
-    <TrimmerRootAssembly Include="System.Diagnostics.PerformanceCounter" />
-    <TrimmerRootAssembly Include="System.Drawing.Common" />
-    <TrimmerRootAssembly Include="System.Management" />
+    <None Update="Controls\UsageGraph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
 </Project>

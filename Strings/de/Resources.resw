@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,9 +125,6 @@
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Gerät</value>
-  </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Bericht</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Optimieren</value>
@@ -702,9 +699,6 @@
   <data name="Update" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Unterstützung</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Netzwerk</value>
   </data>
@@ -737,9 +731,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Gesamt: {0} App(s)</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Leistung</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Aktiviert</value>
@@ -1640,5 +1631,50 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Entfernt KI-Funktionen aus Editor, Paint und Fotos, deaktiviert Windows Studio Kamera-/Mikrofoneffekte und Gaming-KI und entfernt KI-Integrationen aus der Shell zur Maximierung von Datenschutz und Leistung.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Dienste</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Prozesse</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>App-Design</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Wählen Sie das Farbdesign der App</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Navigationsstil</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Wählen Sie, wie der Navigationsbereich angezeigt wird</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Quellcode</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>Auf GitHub ansehen und mitwirken</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Fehler melden oder Funktion anfordern</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Ein Issue auf GitHub öffnen</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Entwickler unterstützen</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Spendiere mir einen Kaffee</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Protokolle anzeigen</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Anwendungsprotokolle zur Fehlerbehebung anzeigen</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Wird geladen...</value>
   </data>
 </root>

@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using RyTuneX.Views;
+using System.Text.Json.Serialization;
 
 namespace RyTuneX.Core.Serialization;
 

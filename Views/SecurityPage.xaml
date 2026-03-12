@@ -49,7 +49,7 @@
                             Margin="0,10,0,20">
                     <Button Click="OpenWindowsSecurity_Click">
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <FontIcon Glyph="&#xEA18;" FontSize="16"/>
+                            <FontIcon Glyph="&#xE83D;" FontSize="16"/>
                             <TextBlock x:Uid="SecurityPage_OpenWindowsSecurity"/>
                         </StackPanel>
                     </Button>

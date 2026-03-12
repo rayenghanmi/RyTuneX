@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
-using System.Globalization;
-using System.Text;
-using System.Text.RegularExpressions;
-using Microsoft.UI.Text;
+﻿using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Helpers;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace RyTuneX.Views;
 
@@ -30,6 +30,7 @@ public sealed partial class RepairPage : Page
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         InitializeComponent();
+        LogHelper.Log("Initializing RepairPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += RepairPage_Loaded;
     }
@@ -56,12 +57,14 @@ public sealed partial class RepairPage : Page
     private async void OnScanButtonClick(object sender, RoutedEventArgs e)
     {
         if (selectedCount == 0) { return; }
+        _ = LogHelper.Log($"Starting system scan with {selectedCount} tool(s) selected");
         await RunCommandsAsync(isRepair: false);
     }
 
     private async void OnRepairButtonClick(object sender, RoutedEventArgs e)
     {
         if (selectedCount == 0) { return; }
+        _ = LogHelper.Log($"Starting system repair with {selectedCount} tool(s) selected");
         await RunCommandsAsync(isRepair: true);
     }
 
@@ -69,7 +72,7 @@ public sealed partial class RepairPage : Page
     {
         // Disable the stop button to prevent multiple clicks
         StopButton.IsEnabled = false;
-
+        _ = LogHelper.Log("User requested to stop current repair/scan operation");
         await StopCurrentOperationAsync();
     }
 
@@ -95,9 +98,9 @@ public sealed partial class RepairPage : Page
                     await PseudoConsoleHelper.KillProcessTreeAsync(_runningProcess.Id);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // Ignore errors during cleanup
+                _ = LogHelper.LogWarning($"Error stopping running process: {ex.Message}");
             }
         }
     }
@@ -137,9 +140,11 @@ public sealed partial class RepairPage : Page
 
         var commands = new[]
         {
-            (DismCheckBox, "DISM", isRepair ? "/Online /Cleanup-Image /RestoreHealth" : "/Online /Cleanup-Image /ScanHealth"),
-            (SfcCheckBox, "SFC", isRepair ? "/scannow" : "/verifyonly"),
-            (ChkdskCheckBox, "CHKDSK", isRepair ? "/f" : "")
+            // (checkbox, command name, args, schedule template)
+            (DismCheckBox, "DISM", isRepair ? "/Online /Cleanup-Image /RestoreHealth" : "/Online /Cleanup-Image /ScanHealth", string.Empty),
+            (SfcCheckBox, "SFC", isRepair ? "/scannow" : "/verifyonly", string.Empty),
+            // schedule template uses placeholder {DriveRoot} which will be replaced at runtime
+            (ChkdskCheckBox, "CHKDSK", isRepair ? "/f" : "", "echo Y|chkdsk {DriveRoot} /f")
         };
 
         var current = 0;
@@ -149,7 +154,7 @@ public sealed partial class RepairPage : Page
 
         try
         {
-            foreach (var (checkBox, name, args) in commands)
+            foreach (var (checkBox, name, args, scheduleTemplate) in commands)
             {
                 if (ct.IsCancellationRequested)
                 {
@@ -163,6 +168,23 @@ public sealed partial class RepairPage : Page
                     selectedNames.Add(name);
                     StatusTextBlock.Text = $"{current} / {selectedCount}: {name} {(isRepair ? "repair" : "scan")} in progress...";
                     ProgressBar.Value = 0;
+
+                    // Automatically schedule CHKDSK repair for next reboot
+                    if (name == "CHKDSK" && isRepair)
+                    {
+                        var driveRoot = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.Windows))?.TrimEnd('\\') ?? "C:";
+
+                        App.ShowNotification("Repair".GetLocalized(), "ScheduledLater".GetLocalized(), InfoBarSeverity.Success, 5000);
+                        ChkdskCheckBox.IsEnabled = false;
+                        _scanResults[name].Clear();
+                        _scanResults[name].AppendLine("ScheduledLater".GetLocalized());
+                        if (!string.IsNullOrEmpty(scheduleTemplate))
+                        {
+                            var scheduleCmd = scheduleTemplate.Replace("{DriveRoot}", driveRoot);
+                            await OptimizationOptions.StartInCmd(scheduleCmd);
+                        }
+                        continue;
+                    }
 
                     try
                     {
@@ -215,6 +237,24 @@ public sealed partial class RepairPage : Page
                     await ShowScanResultsDialogAsync(selectedNames);
                 }
             }
+            // Ensure the cancellation token source is signaled and unregistered
+            try
+            {
+                if (_cancellationTokenSource != null && !_cancellationTokenSource.IsCancellationRequested)
+                {
+                    _cancellationTokenSource.Cancel();
+                }
+            }
+            catch { }
+
+            if (_cancellationRegistrationId.HasValue)
+            {
+                OperationCancellationManager.Unregister(_cancellationRegistrationId.Value);
+                _cancellationRegistrationId = null;
+            }
+
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = null;
         }
     }
 
@@ -324,8 +364,9 @@ public sealed partial class RepairPage : Page
             {
                 read = await reader.ReadAsync(buffer, 0, buffer.Length);
             }
-            catch
+            catch (Exception ex)
             {
+                _ = LogHelper.LogWarning($"Error reading stream for {name}: {ex.Message}");
                 break;
             }
 
@@ -529,20 +570,24 @@ public sealed partial class RepairPage : Page
     {
         var reportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "batteryreport.html");
 
+        _ = LogHelper.Log($"Generating battery report to {reportPath}");
         var command = $"%SystemRoot%\\System32\\powercfg.exe /batteryreport /output \"{reportPath}\"";
 
         var result = await OptimizationOptions.StartInCmd(command);
 
         if (result == 0 && File.Exists(reportPath))
         {
+            _ = LogHelper.Log("Battery report generated successfully");
             App.ShowNotification("BatteryStatus".GetLocalized(), "ReportSaved".GetLocalized(), InfoBarSeverity.Success, 5000);
             return;
         }
+        _ = LogHelper.LogError($"Battery report generation failed with exit code {result}");
         App.ShowNotification("BatteryStatus".GetLocalized(), "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
     }
 
     private async void MemoryHealthButton_Click(object sender, RoutedEventArgs e)
     {
+        _ = LogHelper.Log("Opening memory diagnostic dialog");
         var memDialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
@@ -572,12 +617,13 @@ public sealed partial class RepairPage : Page
 
     private async void EventViewerSettingsCard_Click(object sender, RoutedEventArgs e)
     {
+        _ = LogHelper.Log("Opening Event Viewer");
         await OptimizationOptions.StartInCmd("eventvwr.msc");
     }
     private async void DiskOptimizationsButton_Click(object sender, RoutedEventArgs e)
     {
+        _ = LogHelper.Log("Opening Disk Optimization utility");
         await OptimizationOptions.StartInCmd("%SystemRoot%\\System32\\dfrgui.exe");
-
     }
 
     private void CheckBox_Changed(object sender, RoutedEventArgs e)

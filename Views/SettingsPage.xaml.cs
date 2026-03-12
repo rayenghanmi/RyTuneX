@@ -1,12 +1,4 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
@@ -14,40 +6,19 @@ using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
+using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace RyTuneX.Views;
 
-public sealed partial class SettingsPage : Page, INotifyPropertyChanged
+public sealed partial class SettingsPage : Page
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    private ElementTheme _elementTheme;
-    public ElementTheme ElementTheme
-    {
-        get => _elementTheme;
-        set
-        {
-            if (_elementTheme != value)
-            {
-                _elementTheme = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
     private readonly IThemeSelectorService _themeSelectorService;
 
     private string _versionDescription;
     private string? _pendingScrollTarget;
 
-    public ICommand SwitchThemeCommand
-    {
-        get;
-    }
     public static string latestVersionString = string.Empty;
 
     public SettingsPage()
@@ -61,18 +32,10 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
         // Set the default language based on the stored setting or the system if not set explicitly
         SetDefaultLanguageBasedOnSystem();
 
-        _elementTheme = _themeSelectorService.Theme;
         _versionDescription = "Version".GetLocalized() + " " + GetVersionDescription();
 
-        SwitchThemeCommand = new RelayCommand<ElementTheme>(
-            async (param) =>
-            {
-                if (ElementTheme != param)
-                {
-                    ElementTheme = param;
-                    await _themeSelectorService.SetThemeAsync(param);
-                }
-            });
+        InitializeThemeComboBox();
+        InitializeNavigationStyleComboBox();
 
         Loaded += SettingsPage_Loaded;
     }
@@ -96,6 +59,67 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
         }
     }
 
+    private void InitializeNavigationStyleComboBox()
+    {
+        var saved = ApplicationData.Current.LocalSettings.Values["NavigationStyle"] as string ?? "Auto";
+        foreach (ComboBoxItem item in NavigationStyleComboBox.Items)
+        {
+            if (item.Tag as string == saved)
+            {
+                NavigationStyleComboBox.SelectedItem = item;
+                break;
+            }
+        }
+    }
+
+    private void InitializeThemeComboBox()
+    {
+        var currentTheme = _themeSelectorService.Theme.ToString();
+        foreach (ComboBoxItem item in ThemeComboBox.Items)
+        {
+            if (item.Tag as string == currentTheme)
+            {
+                ThemeComboBox.SelectedItem = item;
+                break;
+            }
+        }
+    }
+
+    private async void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ThemeComboBox.SelectedItem is ComboBoxItem selected)
+        {
+            var tag = selected.Tag as string;
+            if (string.IsNullOrEmpty(tag))
+            {
+                return;
+            }
+
+            if (Enum.TryParse<ElementTheme>(tag, out var theme))
+            {
+                await _themeSelectorService.SetThemeAsync(theme);
+                _ = LogHelper.Log($"Theme changed to: {tag}");
+            }
+        }
+    }
+
+    private void NavigationStyleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (NavigationStyleComboBox.SelectedItem is ComboBoxItem selected)
+        {
+            var tag = selected.Tag as string;
+            if (string.IsNullOrEmpty(tag))
+            {
+                return;
+            }
+
+            ApplicationData.Current.LocalSettings.Values["NavigationStyle"] = tag;
+            _ = LogHelper.Log($"Navigation style changed to: {tag}");
+
+            ShellPage.Current?.ApplyNavigationStyle(tag);
+        }
+    }
+
     private async void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var selectedLanguage = (ComboBoxItem)LanguageComboBox.SelectedItem;
@@ -106,6 +130,8 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 
             if (!string.IsNullOrEmpty(languageTag))
             {
+                _ = LogHelper.Log($"Language changed to: {languageTag}");
+
                 // Set the primary language override
                 Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = languageTag;
 
@@ -173,43 +199,66 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 
     public string VersionDescription
     {
-        get
-        {
-            LogHelper.Log("Getting VersionDescription");
-            return _versionDescription;
-        }
+        get => _versionDescription;
         set
         {
             if (_versionDescription != value)
             {
-                LogHelper.Log("Setting VersionDescription");
                 _versionDescription = value;
             }
         }
     }
 
-    private async void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+    private async void ViewLogsCard_Click(object sender, RoutedEventArgs e)
     {
-        await OpenLogFile();
+        await LogViewerHelper.ShowLogViewerAsync(XamlRoot);
     }
 
-    private async Task OpenLogFile()
+    private void SourceCodeCard_Click(object sender, RoutedEventArgs e)
     {
         try
         {
-            var tempFolder = ApplicationData.Current.TemporaryFolder;
-            var logFile = await tempFolder.GetFileAsync($"Logs_{DateTime.Now:yyyy-MM-dd}.txt");
-
-            if (logFile != null)
+            Process.Start(new ProcessStartInfo
             {
-                var options = new Windows.System.LauncherOptions();
-                options.DisplayApplicationPicker = false;
-                await Windows.System.Launcher.LaunchFileAsync(logFile, options);
-            }
+                FileName = "https://github.com/rayenghanmi/RyTuneX",
+                UseShellExecute = true
+            });
         }
         catch (Exception ex)
         {
-            _ = LogHelper.LogError($"Error opening log file: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Failed to open source code page: {ex.Message}");
+        }
+    }
+
+    private void FileBugCard_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/rayenghanmi/rytunex/issues/new",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open issue page: {ex.Message}");
+        }
+    }
+
+    private void SupportDeveloperCard_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://buymeacoffee.com/rayen.ghanmi.22",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open support page: {ex.Message}");
         }
     }
 
@@ -323,7 +372,7 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error: {ex.Message}");
+                _ = LogHelper.LogError($"Error reverting changes: {ex.Message}\nStack Trace: {ex.StackTrace}");
             }
         }
     }

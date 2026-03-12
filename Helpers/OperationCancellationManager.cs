@@ -24,6 +24,7 @@ internal static class OperationCancellationManager
 
     public static void CancelAll()
     {
+        _ = LogHelper.Log($"Cancelling all {_ctsMap.Count} registered operations");
         foreach (var kvp in _ctsMap)
         {
             try

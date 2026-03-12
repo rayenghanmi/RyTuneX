@@ -3,6 +3,39 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.7.0
+
+### Added
+
+- Added a new reload button in the `Debloat` page to refresh the list of installed apps.
+- Introduced a new Log Viewer page to view and manage the app's logs.
+- Added a real-time graph to monitor CPU, RAM, Disk, Network, and GPU usage in the `Home` page instead of values only.
+- Added a custom back button with animated icon in the title bar for easier navigation.
+- Added a navigation style setting in the `Settings` page to switch between Left and Top navigation pane layouts.
+- Expanded the Policies page with new categories and policies: `Windows Defender`, `Windows Firewall`, `Remote Desktop`, `Remote Assistance`, `Network`, `Power Management`, `Device Installation`, `Lock Screen`, `User Account Control`, `Delivery Optimization`, `Notifications`, `Windows Spotlight`, `Autoplay`, `Offline Maps`, `Print Spooler`, `Scheduled Maintenance`, `OEM & Preinstall`, `Microsoft Office`, `Google Chrome`, `Mozilla Firefox`, `Adobe`, `Microsoft Teams`, `BitLocker`, `Credentials`, `Startup`, `Explorer`, `Multimedia`
+
+### Fixes
+
+- Fixed some values in optimization toggles.
+- Resolved an issue where the gpu usage was not being detected correctly in the `Home` page.
+- Fixed an issue where navigating away and back to the `Home` page caused the performance monitoring to restart and lose the current values.
+- Fixed RTL (Right-to-Left) layout issues with caption buttons by applying native `WS_EX_LAYOUTRTL` window style.
+- Resolved an issue where the CHKDSK repairing method was not working correctly.
+
+### Changes
+
+- Improved general performance and stability of the `Debloat` page.
+- Added Services and Processes pages entry points to the navigation menu for better accessibility.
+- Minor UI improvements all across the app.
+- Added real-time processes monitoring in the `Processes` page.
+- Enhanced the logging system.
+- Improved the optimization scripts of most of the toggles for better performance.
+- Replaced TreeView with ListView in the `Debloat` page for lower resources usage and faster loading times.
+- Redesigned the `Settings` page: replaced theme radio buttons with a ComboBox, reorganized About section links into individual settings cards, and moved View Logs into its own settings card.
+- Moved Issue and Support links from the navigation footer to the `Settings` page About section.
+- Removed user profile header from the navigation pane.
+- Overhauled the `System Info` page with a new design and more detailed information.
+
 ## 1.6.2 - Released
 
 > [!IMPORTANT]

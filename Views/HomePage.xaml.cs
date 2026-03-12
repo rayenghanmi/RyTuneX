@@ -1,12 +1,13 @@
-﻿using System.Diagnostics;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
-using System.ServiceProcess;
+﻿using DevWinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using RyTuneX.Contracts.Services;
+using System.Diagnostics;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
+using System.ServiceProcess;
 using Windows.Management.Deployment;
 
 namespace RyTuneX.Views;
@@ -14,7 +15,8 @@ namespace RyTuneX.Views;
 public sealed partial class HomePage : Page
 {
     private readonly string _versionDescription;
-    private readonly CancellationTokenSource _cancellationTokenSource;
+    private CancellationTokenSource? _cancellationTokenSource;
+    private bool _initialized;
 
     // CPU sampling state
     private ulong _prevIdleTime;
@@ -31,33 +33,72 @@ public sealed partial class HomePage : Page
     private readonly List<PerformanceCounter> _gpuCounters = new();
     private DriveInfo? _systemDriveInfo;
 
+    private DateTime _lastGpuRefresh = DateTime.MinValue;
+    private readonly TimeSpan _gpuRefreshInterval = TimeSpan.FromSeconds(5);
+
     public HomePage()
     {
         InitializeComponent();
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         LogHelper.Log("Initializing HomePage");
         _versionDescription = "Version " + SettingsPage.GetVersionDescription();
 
+        Loaded += HomePage_Loaded;
+        Unloaded += HomePage_Unloaded;
+
+        // Add hover and ambient lights to all blocks
+        cpuUsage.Lights.Add(new AmbLight());
+        cpuUsage.Lights.Add(new HoverLight());
+
+        ramUsage.Lights.Add(new AmbLight());
+        ramUsage.Lights.Add(new HoverLight());
+
+        diskUsage.Lights.Add(new AmbLight());
+        diskUsage.Lights.Add(new HoverLight());
+
+        networkUsage.Lights.Add(new AmbLight());
+        networkUsage.Lights.Add(new HoverLight());
+
+        gpuUsage.Lights.Add(new AmbLight());
+        gpuUsage.Lights.Add(new HoverLight());
+
+        appsCount.Lights.Add(new AmbLight());
+        appsCount.Lights.Add(new HoverLight());
+
+        processesCount.Lights.Add(new AmbLight());
+        processesCount.Lights.Add(new HoverLight());
+
+        servicesCount.Lights.Add(new AmbLight());
+        servicesCount.Lights.Add(new HoverLight());
+
+    }
+
+    private void HomePage_Loaded(object sender, RoutedEventArgs e)
+    {
         _cancellationTokenSource = new CancellationTokenSource();
         _ = UpdateSystemStatsAsync(_cancellationTokenSource.Token);
-        Unloaded += HomePage_Unloaded;
     }
 
     private async Task UpdateSystemStatsAsync(CancellationToken cancellationToken)
     {
         try
         {
-            // Initialize heavy counters on background thread once
-            await Task.Run(() => InitializeGpuCounters(), cancellationToken);
-            _systemDriveInfo = new DriveInfo(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System)) ?? "C:\\");
+            if (!_initialized)
+            {
+                // Initialize heavy counters on background thread once
+                await Task.Run(() => InitializeGpuCounters(), cancellationToken);
+                _systemDriveInfo = new DriveInfo(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System)) ?? "C:\\");
+                _initialized = true;
+            }
 
-            // Fetch static values
+            // Fetch values that may change between navigations
             var installedAppsCount = await Task.Run(() => GetInstalledAppsCount(), cancellationToken).ConfigureAwait(false);
             var servicesCount = await Task.Run(() => GetServicesCount(), cancellationToken).ConfigureAwait(false);
 
             // Initial counts
             var processesCount = await Task.Run(() => Process.GetProcesses().Length, cancellationToken).ConfigureAwait(false);
 
-            // Initialize network counters
+            // Reset network sampling baseline
             _prevBytesReceived = GetTotalBytesReceived();
             _prevBytesSent = GetTotalBytesSent();
             _lastSampleTime = DateTime.UtcNow;
@@ -89,23 +130,31 @@ public sealed partial class HomePage : Page
                         if (Visibility == Visibility.Visible && !cancellationToken.IsCancellationRequested)
                         {
                             cpuUsageText.Text = $"{cpuUsage}%";
+                            cpuGraph.AddValue(cpuUsage);
+
                             ramUsageText.Text = $"{ramUsage}%";
+                            ramGraph.AddValue(ramUsage);
+
                             diskUsageText.Text = $"{diskUsage}%";
+                            diskGraph.AddValue(diskUsage);
 
                             networkUploadUsageText.Text = $"{networkUploadUsage:F1} Mb";
                             networkDownloadUsageText.Text = $"{networkDownloadUsage:F1} Mb";
+                            networkUploadGraph.AddValue(Math.Min(networkUploadUsage, 100));
+                            networkDownloadGraph.AddValue(Math.Min(networkDownloadUsage, 100));
 
                             installedAppsCountText.Text = installedAppsCount.ToString();
                             processesCountText.Text = processesCount.ToString();
                             servicesCountText.Text = servicesCount.ToString();
 
                             gpuUsageText.Text = $"{gpuUsage}%";
+                            gpuGraph.AddValue(gpuUsage);
                         }
                     });
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Error updating UI: {ex.Message}");
+                    _ = LogHelper.LogWarning($"Error updating UI: {ex.Message}");
                 }
 
                 // Small delay between samples
@@ -114,25 +163,19 @@ public sealed partial class HomePage : Page
         }
         catch (OperationCanceledException)
         {
-            Debug.WriteLine("UpdateSystemStats task was canceled.");
+            _ = LogHelper.Log("UpdateSystemStats task was canceled.");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Unexpected error: {ex.Message}");
+            _ = LogHelper.LogException(ex, "UpdateSystemStatsAsync");
         }
     }
 
     private void HomePage_Unloaded(object sender, RoutedEventArgs e)
     {
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource.Dispose();
-
-        // Clean up Performance Counters
-        foreach (var counter in _gpuCounters)
-        {
-            counter.Dispose();
-        }
-        _gpuCounters.Clear();
+        _cancellationTokenSource?.Cancel();
+        _cancellationTokenSource?.Dispose();
+        _cancellationTokenSource = null;
     }
 
     private int GetCpuUsage()
@@ -204,8 +247,9 @@ public sealed partial class HomePage : Page
             var percent = total == 0 ? 0 : (int)((used * 100L) / total);
             return Math.Clamp(percent, 0, 100);
         }
-        catch
+        catch (Exception ex)
         {
+            _ = LogHelper.LogWarning($"Error reading disk usage: {ex.Message}");
             return 0;
         }
     }
@@ -251,13 +295,13 @@ public sealed partial class HomePage : Page
 
             return (Math.Round(uploadMbps, 1), Math.Round(downloadMbps, 1));
         }
-        catch
+        catch (Exception ex)
         {
+            _ = LogHelper.LogWarning($"Error reading network throughput: {ex.Message}");
             return (0.0, 0.0);
         }
     }
 
-    // Get total bytes received by all network interfaces
     private static long GetTotalBytesReceived()
     {
         return NetworkInterface.GetAllNetworkInterfaces()
@@ -280,8 +324,9 @@ public sealed partial class HomePage : Page
             var packageManager = new PackageManager();
             return packageManager.FindPackages().Count();
         }
-        catch
+        catch (Exception ex)
         {
+            _ = LogHelper.LogWarning($"Error getting installed apps count: {ex.Message}");
             return 0;
         }
     }
@@ -301,7 +346,7 @@ public sealed partial class HomePage : Page
 
             foreach (var instanceName in instanceNames)
             {
-                if (instanceName.EndsWith("engtype_3D"))
+                if (instanceName.Contains("engtype_3D"))
                 {
                     foreach (var counter in category.GetCounters(instanceName))
                     {
@@ -315,26 +360,62 @@ public sealed partial class HomePage : Page
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Failed to init GPU counters: {ex.Message}");
+            _ = LogHelper.LogWarning($"Failed to init GPU counters: {ex.Message}");
         }
     }
 
     private int GetGpuUsageFromCache()
     {
-        if (_gpuCounters.Count == 0) return 0;
-
-        try
+        // Periodically rebuild counters
+        if (_gpuCounters.Count == 0 ||
+            DateTime.UtcNow - _lastGpuRefresh > _gpuRefreshInterval)
         {
-            var result = 0f;
-            foreach (var counter in _gpuCounters)
+            RefreshGpuCounters();
+        }
+
+        if (_gpuCounters.Count == 0)
+            return 0;
+
+        float result = 0f;
+
+        // Iterate backwards so we can safely remove dead counters
+        for (int i = _gpuCounters.Count - 1; i >= 0; i--)
+        {
+            var counter = _gpuCounters[i];
+            try
             {
                 result += counter.NextValue();
             }
-            return (int)Math.Clamp(result, 0, 100);
+            catch (InvalidOperationException)
+            {
+                // Remove instances that no longer exist
+                counter.Dispose();
+                _gpuCounters.RemoveAt(i);
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogWarning($"GPU counter error: {ex.Message}");
+            }
         }
-        catch
+
+        return (int)Math.Clamp(result, 0, 100);
+    }
+
+    private void RefreshGpuCounters()
+    {
+        try
         {
-            return 0;
+            foreach (var counter in _gpuCounters)
+                counter.Dispose();
+
+            _gpuCounters.Clear();
+
+            InitializeGpuCounters();
+            _lastGpuRefresh = DateTime.UtcNow;
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogWarning($"Failed to refresh GPU counters: {ex.Message}");
         }
     }
 

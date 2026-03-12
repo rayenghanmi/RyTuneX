@@ -327,7 +327,7 @@ public sealed partial class OptimizeSystemPage : Page
         try
         {
             var toggleSwitch = (ToggleSwitch)sender;
-            Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            _ = LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }
         catch (Exception ex)
@@ -397,6 +397,7 @@ public sealed partial class OptimizeSystemPage : Page
         // Handle the Compress button click by setting UI elements and running the command
         compressDialog.PrimaryButtonClick += async (sender, args) =>
         {
+            _ = LogHelper.Log("Starting OS compression");
             CompressOSButton.Visibility = Visibility.Collapsed;
             CompressOSProgressRing.Visibility = Visibility.Visible;
             CompressOSProgressText.Text = "Compressing".GetLocalized();
@@ -410,6 +411,7 @@ public sealed partial class OptimizeSystemPage : Page
         // Handle the Decompress button click by setting UI elements and running the command
         compressDialog.SecondaryButtonClick += async (sender, args) =>
         {
+            _ = LogHelper.Log("Starting OS decompression");
             CompressOSButton.Visibility = Visibility.Collapsed;
             CompressOSProgressRing.Visibility = Visibility.Visible;
             CompressOSProgressText.Text = "Decompressing".GetLocalized();

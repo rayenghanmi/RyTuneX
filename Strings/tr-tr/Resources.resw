@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,9 +125,6 @@
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Aygıt</value>
-  </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Rapor</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Optimizasyon</value>
@@ -702,9 +699,6 @@
   <data name="Update" xml:space="preserve">
     <value>Güncelleme</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Destek</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Ağ</value>
   </data>
@@ -737,9 +731,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Toplam: {0} Uygulama</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Performans</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Etkinleştirilmiş</value>
@@ -1640,5 +1631,50 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Not Defteri, Paint ve Fotoğraflar’dan yapay zekâ özelliklerini kaldırır, Windows Studio kamera/mikrofon efektlerini ve oyun yapay zekâsını devre dışı bırakır ve gizlilik ile performansı en üst düzeye çıkarmak için kabuktaki yapay zekâ entegrasyonlarını kaldırır.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Hizmetler</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>İşlemler</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>Uygulama Teması</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Uygulama renk temasını seçin</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Gezinme Stili</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Gezinme panelinin nasıl görüntüleneceğini seçin</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Kaynak kodu</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>GitHub’da görüntüle ve katkıda bulun</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Hata bildir veya özellik iste</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>GitHub’da bir issue aç</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Geliştiriciyi destekle</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Bana bir kahve ısmarla</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Günlükleri Görüntüle</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Sorun giderme için uygulama günlüklerini görüntüleyin</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Yükleniyor...</value>
   </data>
 </root>

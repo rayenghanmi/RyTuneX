@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,9 +125,6 @@
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Dispositivo</value>
-  </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Informar</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Optimizar</value>
@@ -702,9 +699,6 @@
   <data name="Update" xml:space="preserve">
     <value>Actualizar</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Soporte</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Red</value>
   </data>
@@ -737,9 +731,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Total: {0} Aplicación(es)</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Rendimiento</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Habilitado</value>
@@ -1637,5 +1628,50 @@ Verifica si hay problemas de memoria en tu computadora</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Elimina funciones de IA de Bloc de notas, Paint y Fotos, desactiva los efectos de cámara y micrófono de Windows Studio y la IA para juegos, y elimina integraciones de IA del sistema para maximizar la privacidad y el rendimiento.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Servicios</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Procesos</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>Tema de la aplicación</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Elige el tema de color de la aplicación</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Estilo de navegación</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Elige cómo se muestra el panel de navegación</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Código fuente</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>Ver y contribuir en GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Informar de un error o solicitar una función</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Abrir un issue en GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Apoyar al desarrollador</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Invítame a un café</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Ver registros</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Ver los registros de la aplicación para solucionar problemas</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Cargando...</value>
   </data>
 </root>

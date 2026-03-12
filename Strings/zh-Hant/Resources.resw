@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,9 +125,6 @@
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>裝置</value>
-  </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>報告錯誤</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>優化</value>
@@ -702,9 +699,6 @@
   <data name="Update" xml:space="preserve">
     <value>更新</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>支援</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>網路</value>
   </data>
@@ -737,9 +731,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>總數: {0} 個應用</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>效能</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>已啟用</value>
@@ -1636,5 +1627,50 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>執行全系統 AI 清理。停用 Copilot、Recall 與 AI Fabric 服務；移除記事本、小畫家與相片中的 AI 功能；停用 Windows Studio 的相機/麥克風效果與遊戲 AI；並移除系統殼層中的 AI 整合，以最大化隱私與效能。</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>服務</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>程序</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>應用程式主題</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>選擇應用程式的色彩主題</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>導覽樣式</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>選擇導覽窗格的顯示方式</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>原始碼</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>在 GitHub 上查看並貢獻</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>回報錯誤或請求功能</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>在 GitHub 上建立問題</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>支持開發者</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>請我喝杯咖啡</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>檢視記錄</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>檢視應用程式記錄以進行疑難排解</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>正在載入...</value>
   </data>
 </root>

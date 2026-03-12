@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,9 +125,6 @@
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Устройство</value>
-  </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Сообщить</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Оптимизация</value>
@@ -702,9 +699,6 @@
   <data name="Update" xml:space="preserve">
     <value>Обновить</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Поддержка</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Сеть</value>
   </data>
@@ -737,9 +731,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Всего: {0} приложений</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Производительность</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Включено</value>
@@ -1637,5 +1628,50 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Удаляет функции ИИ из Блокнота, Paint и Фото, отключает эффекты камеры и микрофона Windows Studio и игровой ИИ, а также удаляет интеграции ИИ из оболочки для максимальной конфиденциальности и производительности.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Службы</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Процессы</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>Тема приложения</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Выберите цветовую тему приложения</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Стиль навигации</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Выберите способ отображения панели навигации</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Исходный код</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>Просмотреть и внести вклад на GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Сообщить об ошибке или предложить функцию</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Открыть проблему на GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Поддержать разработчика</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Купить мне кофе</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Просмотр журналов</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Просмотр журналов приложения для устранения неполадок</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Загрузка...</value>
   </data>
 </root>

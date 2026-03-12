@@ -1,14 +1,15 @@
-﻿using System.Diagnostics;
-using System.Security.Principal;
+﻿using DevWinUI;
+using Microsoft.UI;
+using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Animation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.ViewModels;
+using System.Security.Principal;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.System;
 
@@ -25,28 +26,14 @@ public sealed partial class ShellPage : Page
         get;
     }
 
-    public string UserName { get; } = Environment.UserName;
-    public string AccountType =>
-        string.Equals(Environment.UserDomainName, "MicrosoftAccount", StringComparison.OrdinalIgnoreCase)
-            ? "MicrosoftAccount".GetLocalized()
-            : "LocalAccount".GetLocalized();
-
-    // Track pointer state to defer hide animation while hovered
-    private bool _isPointerOver = false;
-    private bool _pendingHide = false;
-
     public ShellPage(ShellViewModel viewModel)
     {
         ViewModel = viewModel;
         InitializeComponent();
         this.FlowDirection = App.FlowDirectionSetting;
 
-        // Temporary fix for RTL layout issue with the overlap of NavigationViewControl and caption buttons
-        if (FlowDirection == FlowDirection.RightToLeft)
-        {
-            NavigationViewControl.Margin = new Thickness(0, 40, 0, 0);
-            AppTitleBar.Padding = new Thickness(120, 0, 0, 0);
-        }
+        TitleBarBackButton.Resources["ButtonBackgroundDisabled"] = new SolidColorBrush(Colors.Transparent);
+        TitleBarBackButton.Resources["ButtonBorderBrushDisabled"] = new SolidColorBrush(Colors.Transparent);
 
         // Set corresponding visibility of Admin Icon based on administrator rights
         this.Loaded += (s, e) =>
@@ -74,38 +61,17 @@ public sealed partial class ShellPage : Page
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
 
-        // Attach pointer handlers for pausing/resuming notifications
-        Loaded += ShellPage_Loaded;
-    }
-
-    private void UserProfileButton_Click(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "ms-settings:account",
-                UseShellExecute = true
-            });
-        }
-        catch (Exception ex)
-        {
-            _ = LogHelper.LogError($"Failed to open account settings: {ex.Message}");
-        }
-    }
-
-    private void ShellPage_Loaded(object? sender, RoutedEventArgs e)
-    {
-        // Pointer events to pause/resume animations and the notification queue
-        infoBar.PointerEntered -= InfoBar_PointerEntered;
-        infoBar.PointerEntered += InfoBar_PointerEntered;
-        infoBar.PointerExited -= InfoBar_PointerExited;
-        infoBar.PointerExited += InfoBar_PointerExited;
+        var savedStyle = ApplicationData.Current.LocalSettings.Values["NavigationStyle"] as string ?? "Auto";
+        ApplyNavigationStyle(savedStyle);
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
+
+        SetTitleBarPassthroughRegions();
+        TitleBarBackButton.SizeChanged += (_, _) => SetTitleBarPassthroughRegions();
+        TitleBarSearchBox.SizeChanged += (_, _) => SetTitleBarPassthroughRegions();
 
         // Initialize search cache without blocking the UI thread
         WarmUpSearchCache();
@@ -187,21 +153,83 @@ public sealed partial class ShellPage : Page
     {
         try
         {
-            var pageType = Type.GetType(item.PageTypeName);
-            if (pageType != null)
-            {
-                var navigationService = App.GetService<INavigationService>();
+            var navigationService = App.GetService<INavigationService>();
 
-                // Navigate to the page, passing the option tag as parameter if available
-                navigationService.NavigateTo(item.PageTypeName, item.OptionTag);
+            // Navigate to the page, passing the option tag as parameter if available
+            navigationService.NavigateTo(item.PageTypeName, item.OptionTag);
 
-                _ = LogHelper.Log($"Search navigation to: {item.PageTypeName}, Option: {item.OptionTag ?? "none"}");
-            }
+            _ = LogHelper.Log($"Search navigation to: {item.PageTypeName}, Option: {item.OptionTag ?? "none"}");
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error navigating to search result: {ex.Message}");
         }
+    }
+
+    private void TitleBarBackButton_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.NavigationService.GoBack();
+    }
+
+    private void TitleBarBackButton_PointerEntered(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        AnimatedIcon.SetState(BackAnimatedIcon, "PointerOver");
+    }
+
+    private void TitleBarBackButton_PointerExited(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        AnimatedIcon.SetState(BackAnimatedIcon, "Normal");
+    }
+
+    private void SetTitleBarPassthroughRegions()
+    {
+        if (AppTitleBar.XamlRoot is null)
+        {
+            return;
+        }
+
+        var scaleAdjustment = AppTitleBar.XamlRoot.RasterizationScale;
+        var nonClientSrc = InputNonClientPointerSource.GetForWindowId(App.MainWindow.AppWindow.Id);
+
+        var rects = new List<Windows.Graphics.RectInt32>();
+
+        // Back button passthrough
+        var backTransform = TitleBarBackButton.TransformToVisual(null);
+        var backBounds = backTransform.TransformBounds(new Rect(0, 0, TitleBarBackButton.ActualWidth, TitleBarBackButton.ActualHeight));
+        rects.Add(ScaleRect(backBounds, scaleAdjustment));
+
+        // Search box passthrough
+        if (TitleBarSearchBox.Visibility == Visibility.Visible)
+        {
+            var searchTransform = TitleBarSearchBox.TransformToVisual(null);
+            var searchBounds = searchTransform.TransformBounds(new Rect(0, 0, TitleBarSearchBox.ActualWidth, TitleBarSearchBox.ActualHeight));
+            rects.Add(ScaleRect(searchBounds, scaleAdjustment));
+        }
+
+        // WS_EX_LAYOUTRTL mirrors Win32 input coordinates but TransformToVisual
+        // returns compositor coordinates (unmirrored). Mirror the passthrough rects
+        // so they match the coordinate space the system uses for hit-testing.
+        if (App.FlowDirectionSetting == FlowDirection.RightToLeft)
+        {
+            var windowWidthPx = App.MainWindow.AppWindow.Size.Width;
+            for (var i = 0; i < rects.Count; i++)
+            {
+                var r = rects[i];
+                rects[i] = new Windows.Graphics.RectInt32(
+                    windowWidthPx - r.X - r.Width, r.Y, r.Width, r.Height);
+            }
+        }
+
+        nonClientSrc.SetRegionRects(NonClientRegionKind.Passthrough, rects.ToArray());
+    }
+
+    private static Windows.Graphics.RectInt32 ScaleRect(Rect bounds, double scale)
+    {
+        return new Windows.Graphics.RectInt32(
+            (int)Math.Round(bounds.X * scale),
+            (int)Math.Round(bounds.Y * scale),
+            (int)Math.Round(bounds.Width * scale),
+            (int)Math.Round(bounds.Height * scale));
     }
 
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
@@ -211,36 +239,29 @@ public sealed partial class ShellPage : Page
 
     private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
     {
-        AppTitleBar.Margin = new Thickness()
+        if (sender.PaneDisplayMode == NavigationViewPaneDisplayMode.Top)
         {
-            Left = sender.CompactPaneLength * (sender.DisplayMode == NavigationViewDisplayMode.Minimal ? 2 : 1),
-            Top = AppTitleBar.Margin.Top,
-            Right = AppTitleBar.Margin.Right,
-            Bottom = AppTitleBar.Margin.Bottom
-        };
-
-        // Adjust search box visibility based on display mode
-        TitleBarSearchBox.Visibility = sender.DisplayMode == NavigationViewDisplayMode.Minimal
-            ? Visibility.Collapsed
-            : Visibility.Visible;
+            TitleBarSearchBox.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            TitleBarSearchBox.Visibility = sender.DisplayMode == NavigationViewDisplayMode.Minimal
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+        }
     }
 
-    private void IssueButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    // Applies the navigation pane display mode and adjusts the title bar accordingly.
+    public void ApplyNavigationStyle(string style)
     {
-        Process.Start(new ProcessStartInfo
+        if (style == "Top")
         {
-            FileName = "https://github.com/rayenghanmi/rytunex/issues/new",
-            UseShellExecute = true
-        });
-    }
-
-    private void SupportButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-    {
-        Process.Start(new ProcessStartInfo
+            NavigationViewControl.PaneDisplayMode = NavigationViewPaneDisplayMode.Top;
+        }
+        else
         {
-            FileName = "https://buymeacoffee.com/rayen.ghanmi.22",
-            UseShellExecute = true
-        });
+            NavigationViewControl.PaneDisplayMode = NavigationViewPaneDisplayMode.Auto;
+        }
     }
 
     private async Task ShowRestorePointDialogAsync()
@@ -296,122 +317,59 @@ public sealed partial class ShellPage : Page
         }
     }
 
-    public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration)
+    public static void ShowNotification(string title, string message, InfoBarSeverity severity, int duration = 3000)
     {
         App.NotifyTaskCompletion();
-        Current?.ShowNotificationInstance(title, message, severity, duration);
-    }
 
-    private Storyboard? GetStoryboard(string key)
-    {
-        if (infoBar.Resources.TryGetValue(key, out var obj) && obj is Storyboard sb)
+        void Show()
         {
-            return sb;
-        }
-        return null;
-    }
-
-    private void ShowNotificationInstance(string title, string message, InfoBarSeverity severity, int duration)
-    {
-        // Make visible and show notification content via behavior
-        infoBar.Visibility = Visibility.Visible;
-
-        NotificationQueue.Show(new CommunityToolkit.WinUI.Behaviors.Notification
-        {
-            Title = title,
-            Message = message,
-            Severity = severity,
-            Duration = TimeSpan.FromMilliseconds(duration)
-        });
-
-        // Start entrance animation
-        GetStoryboard("ShowNotificationStoryboard")?.Begin();
-
-        // Start progress animation and wire completion
-        var progressSb = GetStoryboard("ProgressBarAnimationStoryboard");
-        if (progressSb != null)
-        {
-            // Ensure single subscription
-            progressSb.Completed -= ProgressBarAnimationStoryboard_Completed;
-            progressSb.Completed += ProgressBarAnimationStoryboard_Completed;
-            progressSb.Begin();
-        }
-    }
-
-    private void ProgressBarAnimationStoryboard_Completed(object? sender, object e)
-    {
-        // If pointer is over infoBar, defer the hide until pointer exits
-        if (_isPointerOver)
-        {
-            _pendingHide = true;
-            return;
+            var growlInfo = new GrowlInfo
+            {
+                Title = title,
+                Message = message,
+                ShowDateTime = true,
+                StaysOpen = duration == 0,
+                IsClosable = true,
+                UseBlueColorForInfo = false,
+                Token = "MainToken",
+                WaitTime = TimeSpan.FromMilliseconds(duration)
+            };
+            try
+            {
+                switch (severity)
+                {
+                    case InfoBarSeverity.Informational:
+                        growlInfo.UseBlueColorForInfo = true;
+                        Growl.Info(growlInfo);
+                        break;
+                    case InfoBarSeverity.Success:
+                        Growl.Success(growlInfo);
+                        break;
+                    case InfoBarSeverity.Warning:
+                        Growl.Warning(growlInfo);
+                        break;
+                    case InfoBarSeverity.Error:
+                        Growl.Error(growlInfo);
+                        break;
+                    default:
+                        Growl.Info(growlInfo);
+                        break;
+                }
+                _ = LogHelper.Log($"Showing notification: {title} - {message}");
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"Failed to show notification: {ex.Message}");
+            }
         }
 
-        // Start hide animation
-        DispatcherQueue.TryEnqueue(() =>
+        if (Current?.DispatcherQueue.HasThreadAccess == true)
         {
-            var hideSb = GetStoryboard("HideNotificationStoryboard");
-            if (hideSb != null)
-            {
-                hideSb.Completed -= HideNotificationStoryboard_Completed;
-                hideSb.Completed += HideNotificationStoryboard_Completed;
-                hideSb.Begin();
-            }
-            else
-            {
-                FinalizeHide();
-            }
-        });
-    }
-
-    private void HideNotificationStoryboard_Completed(object? sender, object e)
-    {
-        FinalizeHide();
-    }
-
-    private void FinalizeHide()
-    {
-        // Stop storyboards and reset state
-        GetStoryboard("ProgressBarAnimationStoryboard")?.Stop();
-        GetStoryboard("ShowNotificationStoryboard")?.Stop();
-        GetStoryboard("HideNotificationStoryboard")?.Stop();
-
-        progressBar.Value = 0;
-        infoBar.Visibility = Visibility.Collapsed;
-
-        _pendingHide = false;
-    }
-
-    private void InfoBar_PointerEntered(object sender, PointerRoutedEventArgs e)
-    {
-        _isPointerOver = true;
-
-        GetStoryboard("ProgressBarAnimationStoryboard")?.Pause();
-        GetStoryboard("ShowNotificationStoryboard")?.Pause();
-        GetStoryboard("HideNotificationStoryboard")?.Pause();
-    }
-
-    private void InfoBar_PointerExited(object sender, PointerRoutedEventArgs e)
-    {
-        _isPointerOver = false;
-
-        GetStoryboard("ProgressBarAnimationStoryboard")?.Resume();
-        GetStoryboard("ShowNotificationStoryboard")?.Resume();
-        GetStoryboard("HideNotificationStoryboard")?.Resume();
-
-        if (_pendingHide)
+            Show();
+        }
+        else
         {
-            var hideSb = GetStoryboard("HideNotificationStoryboard");
-            if (hideSb != null)
-            {
-                hideSb.Completed -= HideNotificationStoryboard_Completed;
-                hideSb.Completed += HideNotificationStoryboard_Completed;
-                hideSb.Begin();
-            }
-            else
-            {
-                FinalizeHide();
-            }
+            Current?.DispatcherQueue.TryEnqueue(Show);
         }
     }
 }

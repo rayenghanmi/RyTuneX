@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,9 +125,6 @@
   </data>
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>장치</value>
-  </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>보고서</value>
   </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>최적화</value>
@@ -702,9 +699,6 @@
   <data name="Update" xml:space="preserve">
     <value>업데이트</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>지원</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>네트워크</value>
   </data>
@@ -737,9 +731,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>총: {0}개의 앱</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>성능</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>활성화됨</value>
@@ -1640,5 +1631,50 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>메모장, 그림판, 사진에서 AI 기능을 제거하고 Windows Studio 카메라/마이크 효과와 게임 AI를 비활성화하며, 개인 정보 보호와 성능을 극대화하기 위해 셸의 AI 통합을 제거합니다.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>서비스</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>프로세스</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>앱 테마</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>앱 색상 테마를 선택하세요</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>탐색 스타일</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>탐색 창 표시 방식을 선택하세요</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>소스 코드</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>GitHub에서 보기 및 기여하기</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>버그 신고 또는 기능 요청</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>GitHub에서 이슈 열기</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>개발자 지원</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>커피 한 잔 사주기</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>로그 보기</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>문제 해결을 위해 애플리케이션 로그 보기</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>로딩 중...</value>
   </data>
 </root>
