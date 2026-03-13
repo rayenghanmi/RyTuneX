@@ -6,6 +6,8 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace RyTuneX.Views;
@@ -333,19 +335,26 @@ public sealed partial class OptimizeSystemPage : Page
             _ = LogHelper.LogError(ex.Message);
         }
     }
-    private async Task<string> StartTaskAsync(string command)
+    private readonly Lazy<string> _cmdFullPath = new Lazy<string>(() =>
+    {
+        return Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.Windows),
+                    Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess ? "SysNative" : "System32",
+                    "cmd.exe"
+                    );
+    });
+    private async Task<string> StartTaskAsync(string command, Encoding? encoding = null)
     {
         using var process = new Process
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
-                            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"),
+                FileName = _cmdFullPath.Value,
                 Arguments = $"/C \"{command}\"",
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
-                CreateNoWindow = true
+                CreateNoWindow = true,
+                StandardOutputEncoding = encoding ?? await GetOEMConsoleEncoding(),
             }
         };
 
@@ -362,29 +371,7 @@ public sealed partial class OptimizeSystemPage : Page
 
     private async Task<string> StartTask(string command)
     {
-        using var process = new Process
-        {
-            StartInfo = new ProcessStartInfo
-            {
-                FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
-                            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe"),
-                Arguments = $"/C \"{command}\"",
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            }
-        };
-
-        process.Start();
-
-        // Read output asynchronously
-        var output = await process.StandardOutput.ReadToEndAsync();
-
-        // Wait for the process to exit asynchronously
-        await process.WaitForExitAsync();
-
-        return output;
+        return await StartTaskAsync(command);
     }
 
     private async void CompressOSButton_Click(object sender, RoutedEventArgs e)
@@ -627,5 +614,53 @@ public sealed partial class OptimizeSystemPage : Page
                 InfoBarSeverity.Error,
                 3000);
         }
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern uint GetConsoleOutputCP();
+
+
+    private static int GetFallbackOEMCodePage()
+    {
+        int ansiCodePage = Console.OutputEncoding.CodePage;
+
+        return ansiCodePage switch
+        {
+            1251 => 866,
+            1252 => 437,
+            1250 => 852,
+            1253 => 737,
+            1254 => 857,
+            1255 => 862,
+            1256 => 708,
+            1257 => 775,
+            1258 => 869,
+            932 => 932,
+            936 => 936,
+            949 => 949,
+            950 => 950,
+            _ => 437
+        };
+    }
+
+    private Encoding? _OEMConsoleEncoding;
+    private async Task<Encoding> GetOEMConsoleEncoding()
+    {
+        if (_OEMConsoleEncoding == null)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            int code_page = (int)GetConsoleOutputCP();
+            if (code_page == 0)
+            {
+                var output = await StartTaskAsync("chcp", Console.OutputEncoding);
+                var match = Regex.Match(output, @"(\d+)");
+                if (match.Success && int.TryParse(match.Value, out code_page)) ;
+            }
+            if (code_page == 0)
+                code_page = GetFallbackOEMCodePage();
+
+            _OEMConsoleEncoding = Encoding.GetEncoding(code_page);
+        }
+        return _OEMConsoleEncoding!;
     }
 }
