@@ -25,6 +25,7 @@ using RyTuneX.Activation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Core.Contracts.Services;
 using RyTuneX.Core.Services;
+using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.Services;
 using RyTuneX.ViewModels;
@@ -188,8 +189,14 @@ public partial class App : Application
             _ = LogHelper.LogError($"TitleBar init failed: {ex}");
         }
 
+        // Detect actual system state and sync to RyTuneX registry before any page loads
+        await SyncSystemStateAsync();
+
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
+
+    // Fires once at launch to seed the RyTuneX registry with the real system state.
+    private static Task SyncSystemStateAsync() => Task.Run(SystemStateDetector.SyncToRegistry);
 
     private IHost BuildHost() => Microsoft.Extensions.Hosting.Host.
     CreateDefaultBuilder().

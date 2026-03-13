@@ -7,6 +7,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Added
 
+- Reimplemented the new toggle state management to accurately reflect the current system state.
 - Added a new reload button in the `Debloat` page to refresh the list of installed apps.
 - Introduced a new Log Viewer page to view and manage the app's logs.
 - Added a real-time graph to monitor CPU, RAM, Disk, Network, and GPU usage in the `Home` page instead of values only.
