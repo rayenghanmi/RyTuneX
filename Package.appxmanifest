@@ -26,6 +26,11 @@
 
 	<Dependencies>
 		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" />
+		
+		<PackageDependency
+			Name="Microsoft.WindowsAppRuntime.1.8"
+			MinVersion="10000.0.0.0"
+			Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 	</Dependencies>
 
 	<Resources>

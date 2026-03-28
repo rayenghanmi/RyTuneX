@@ -17,7 +17,6 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxBundleAutoResourcePackageQualifiers>Scale|DXFeatureLevel</AppxBundleAutoResourcePackageQualifiers>
     <AppxDefaultResourceQualifiers>Language=en-US;ar-TN;de;es-ES;fr-FR;he-IL;it-IT;ja-JP;ko-KR;pt-BR;ru-RU;tr-TR;vi-VN;zh-Hans;zh-Hant|Contrast=standard|Scale=200|HomeRegion=001|TargetSize=256|LayoutDirection=LTR|DXFeatureLevel=DX9|Configuration=|AlternateForm=|Platform=UAP</AppxDefaultResourceQualifiers>
-    <WindowsAppSDKSelfContained>false</WindowsAppSDKSelfContained>
     <EnableMsixTooling>true</EnableMsixTooling>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
@@ -46,30 +45,17 @@
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
-	<PublishReadyToRunEmitSymbols>false</PublishReadyToRunEmitSymbols>
-  	<GeneratePriDebugFiles>false</GeneratePriDebugFiles>
-  	<GenerateDocumentationFile>false</GenerateDocumentationFile>
-  	<CsWinRTRcwFactoryFallbackGeneratorForceOptOut>true</CsWinRTRcwFactoryFallbackGeneratorForceOptOut>
-  	<CsWinRTIIDOptimizerOptOut>false</CsWinRTIIDOptimizerOptOut>
-  	<EventSourceSupport>false</EventSourceSupport>
-  	<EnableDynamicLoading>false</EnableDynamicLoading>
-  	<InvariantGlobalization>false</InvariantGlobalization>
-  	<EnableCrashDump>false</EnableCrashDump>
-  	<EnableMiniDump>false</EnableMiniDump>
-  	<IlcFoldIdenticalMethods>true</IlcFoldIdenticalMethods>
-  	<IlcDisableStackTraceMetadata>true</IlcDisableStackTraceMetadata>
-  	<EnableXbfGeneration>true</EnableXbfGeneration>
-	<DebuggerSupport>false</DebuggerSupport>
-	<EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
-	<EnableBindingDiagnostics>false</EnableBindingDiagnostics>
-	<AppxPackageCompressionEnabled>true</AppxPackageCompressionEnabled>
-	<Deterministic>true</Deterministic>
-	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-	<IlcInvariantGlobalization>false</IlcInvariantGlobalization>
-	<StripSymbols>true</StripSymbols>
-	<IlcDisableReflection>false</IlcDisableReflection>
-	<IlcGenerateCompleteTypeMetadata>true</IlcGenerateCompleteTypeMetadata>
-	<OptimizeImplicitStyles>true</OptimizeImplicitStyles>
+      <AppxPackageCompressionEnabled>true</AppxPackageCompressionEnabled>
+      <Deterministic>true</Deterministic>
+      <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+      <EnableXbfGeneration>true</EnableXbfGeneration>
+      <OptimizeImplicitStyles>true</OptimizeImplicitStyles>
+      <GeneratePriDebugFiles>false</GeneratePriDebugFiles>
+      <GenerateDocumentationFile>false</GenerateDocumentationFile>
+      <DebuggerSupport>false</DebuggerSupport>
+      <StripSymbols>true</StripSymbols>
+      <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+      <EnableBindingDiagnostics>false</EnableBindingDiagnostics>
   </PropertyGroup>
 
   <ItemGroup>
@@ -84,7 +70,6 @@
       <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.2" />
       <PackageReference Include="System.Drawing.Common" Version="10.0.2" />
       <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.2" />
-      <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.5" />
       <PackageReference Include="WinUIEx" Version="2.9.0" />
   </ItemGroup>
   
