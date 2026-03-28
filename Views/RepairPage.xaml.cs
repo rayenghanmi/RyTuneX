@@ -25,6 +25,7 @@ public sealed partial class RepairPage : Page
     private int _currentProcessId;
     public int selectedCount = 0;
     private string? _pendingScrollTarget;
+    private int _sfcPrefaceLinesSkipped;
 
     public RepairPage()
     {
@@ -109,8 +110,8 @@ public sealed partial class RepairPage : Page
     {
         DispatcherQueue.TryEnqueue(() =>
         {
-            StatusTextBlock.Text = "StatusTextBlockDefault".GetLocalized();
             ProgressBar.Value = 0;
+            StatusTextBlock.Text = "StatusTextBlockDefault".GetLocalized();
             StopButton.Visibility = Visibility.Collapsed;
             StopButton.IsEnabled = true;
             ScanRepairPanel.Visibility = Visibility.Visible;
@@ -262,6 +263,11 @@ public sealed partial class RepairPage : Page
     {
         _scanResults[name].Clear();
 
+        if (name == "SFC")
+        {
+            _sfcPrefaceLinesSkipped = 0;
+        }
+
         var toolExecutable = name switch
         {
             "DISM" => "dism.exe",
@@ -300,7 +306,7 @@ public sealed partial class RepairPage : Page
     {
         var outputEncoding = name.Equals("SFC", StringComparison.OrdinalIgnoreCase)
             ? Encoding.Unicode
-            : Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
+            : await ConsoleEncodingHelper.GetOemConsoleEncodingAsync();
 
         var processStartInfo = new ProcessStartInfo
         {
@@ -421,11 +427,20 @@ public sealed partial class RepairPage : Page
 
         UpdateProgress(name, line);
 
+        if (name == "DISM")
+        {
+            line = Regex.Replace(line, @"\[\s*[= ]*\s*\d+(?:[\.,]\d+)?%\s*[= ]*\]\s*", string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(line))
+            {
+                return;
+            }
+        }
+
         var isProgress = name switch
         {
-            "DISM" => Regex.IsMatch(line, @"\[\s*[= ]*\s*(\d+(\.\d+)?)%\s*[= ]*\]"),
-            "SFC" => Regex.IsMatch(line, @"^\s*(\d+)\s*%\s*$"),
-            "CHKDSK" => Regex.IsMatch(line, @"Total:\s*(\d+)%", RegexOptions.IgnoreCase),
+            "DISM" => Regex.IsMatch(line, @"^\s*\[\s*[= ]*\s*(\d+(\.\d+)?)%\s*[= ]*\]\s*$"),
+            "SFC" => Regex.IsMatch(line, @"^\s*[^\d\r\n]*?(\d{1,3}(?:[\.,]\d+)?)\s*%\s*[^\d\r\n]*$"),
+            "CHKDSK" => Regex.IsMatch(line, @"^\s*[^\d\r\n]*?(\d{1,3}(?:[\.,]\d+)?)\s*%\s*[^\d\r\n]*$"),
             _ => false
         };
 
@@ -434,16 +449,13 @@ public sealed partial class RepairPage : Page
             return;
         }
 
-        if (name == "SFC" || name == "DISM")
+        if (name == "SFC" && _sfcPrefaceLinesSkipped < 2)
         {
-            // Keep only the last meaningful non-progress line (the result)
-            _scanResults[name].Clear();
-            _scanResults[name].AppendLine(line);
+            _sfcPrefaceLinesSkipped++;
+            return;
         }
-        else
-        {
-            _scanResults[name].AppendLine(line);
-        }
+
+        _scanResults[name].AppendLine(line);
     }
 
     private void UpdateProgress(string commandName, string data)
@@ -477,11 +489,12 @@ public sealed partial class RepairPage : Page
             }
             else if (commandName == "CHKDSK")
             {
-                var match = Regex.Match(data, @"Total:\s*(\d+)%", RegexOptions.IgnoreCase);
+                var match = Regex.Match(data, @"(\d+(?:[\.,]\d+)?)\s*%", RegexOptions.IgnoreCase);
 
                 if (match.Success)
                 {
-                    percentage = int.Parse(match.Groups[1].Value);
+                    var percentageText = match.Groups[1].Value.Replace(',', '.');
+                    percentage = (int)Math.Round(double.Parse(percentageText, CultureInfo.InvariantCulture));
                 }
                 else { }
             }
