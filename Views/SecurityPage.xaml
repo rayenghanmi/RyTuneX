@@ -49,7 +49,7 @@
                             Margin="0,10,0,20">
                     <Button Click="OpenWindowsSecurity_Click">
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <FontIcon Glyph="&#xE72E;" FontSize="16"/>
+                            <FontIcon Glyph="&#xEA18;" FontSize="16"/>
                             <TextBlock x:Uid="SecurityPage_OpenWindowsSecurity"/>
                         </StackPanel>
                     </Button>
@@ -61,14 +61,19 @@
                                         Height="16" 
                                         Visibility="Collapsed"
                                         IsActive="True"/>
-                            <FontIcon x:Name="QuickScanIcon" Glyph="&#xE8C8;" FontSize="16"/>
+                            <FontIcon x:Name="QuickScanIcon" Glyph="&#xE721;" FontSize="16"/>
                             <TextBlock x:Uid="SecurityPage_QuickScan"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Click="UpdateDefenderSignatures_Click">
+                    <Button x:Name="UpdateDefinitionsButton" Click="UpdateDefenderSignatures_Click">
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <FontIcon Glyph="&#xE896;" FontSize="16"/>
+                            <ProgressRing x:Name="UpdateDefinitionsProgressRing" 
+                                Width="16" 
+                                Height="16" 
+                                Visibility="Collapsed"
+                                IsActive="True"/>
+                            <FontIcon x:Name="UpdateDefinitionsIcon" Glyph="&#xE895;" FontSize="16"/>
                             <TextBlock x:Uid="SecurityPage_UpdateDefinitions"/>
                         </StackPanel>
                     </Button>
@@ -83,124 +88,124 @@
                             <RepositionThemeTransition IsStaggeringEnabled="False" />
                         </controls:WrapPanel.ChildrenTransitions>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xEA18;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="VirusThreatProtectionStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="VirusThreatProtectionLink" x:Uid="SecurityPage_Enable" Click="VirusThreatProtectionLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_VirusThreatProtection" FontSize="16"/>
-                                <TextBlock x:Name="AntivirusProductName" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
-                                <TextBlock x:Name="SignatureUpdateText" FontSize="11" Opacity="0.7" Margin="0,2,0,0" Visibility="Collapsed"/>
+                                <TextBlock x:Uid="SecurityPage_VirusThreatProtection" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="AntivirusProductName" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="SignatureUpdateText" FontSize="11" Opacity="0.7" Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE7EF;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="RealTimeProtectionStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="RealTimeProtectionLink" x:Uid="SecurityPage_Enable" Click="RealTimeProtectionLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_RealTimeProtection" FontSize="16"/>
-                                <TextBlock x:Uid="SecurityPage_ActiveMalwareScanning" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
+                                <TextBlock x:Uid="SecurityPage_RealTimeProtection" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Uid="SecurityPage_ActiveMalwareScanning" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE964;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="FirewallStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="FirewallLink" x:Uid="SecurityPage_Enable" Click="FirewallLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_FirewallNetworkProtection" FontSize="16"/>
-                                <TextBlock x:Uid="SecurityPage_BlocksUnauthorizedAccess" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
+                                <TextBlock x:Uid="SecurityPage_FirewallNetworkProtection" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Uid="SecurityPage_BlocksUnauthorizedAccess" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE895;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="WindowsUpdateStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="WindowsUpdateLink" x:Uid="SecurityPage_Enable" Click="WindowsUpdateLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_WindowsUpdate" FontSize="16"/>
-                                <TextBlock x:Uid="SecurityPage_SecurityPatchesAndUpdates" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
+                                <TextBlock x:Uid="SecurityPage_WindowsUpdate" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Uid="SecurityPage_SecurityPatchesAndUpdates" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xF8A5;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="SmartScreenStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="SmartScreenLink" x:Uid="SecurityPage_Enable" Click="SmartScreenLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_SmartScreen" FontSize="16"/>
-                                <TextBlock x:Uid="SecurityPage_WebAndAppProtection" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
+                                <TextBlock x:Uid="SecurityPage_SmartScreen" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Uid="SecurityPage_WebAndAppProtection" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE7C1;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="UACStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="UACLink" x:Uid="SecurityPage_Enable" Click="UACLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_UAC" FontSize="16"/>
-                                <TextBlock x:Uid="SecurityPage_AdministrativeAccessControl" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
+                                <TextBlock x:Uid="SecurityPage_UAC" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Uid="SecurityPage_AdministrativeAccessControl" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE72E;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="TamperProtectionStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="TamperProtectionLink" x:Uid="SecurityPage_Enable" Click="TamperProtectionLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_TamperProtection" FontSize="16"/>
-                                <TextBlock x:Uid="SecurityPage_PreventsUnauthorizedChanges" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
+                                <TextBlock x:Uid="SecurityPage_TamperProtection" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Uid="SecurityPage_PreventsUnauthorizedChanges" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE8B7;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="ControlledFolderAccessStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="ControlledFolderAccessLink" x:Uid="SecurityPage_Enable" Click="ControlledFolderAccessLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_ControlledFolderAccess" FontSize="16"/>
-                                <TextBlock x:Uid="SecurityPage_RansomwareProtection" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
+                                <TextBlock x:Uid="SecurityPage_ControlledFolderAccess" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Uid="SecurityPage_RansomwareProtection" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE8D7;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="BitLockerStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="BitLockerLink" x:Uid="SecurityPage_Enable" Click="BitLockerLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_BitLockerEncryption" FontSize="16"/>
-                                <TextBlock x:Uid="SecurityPage_DriveEncryptionStatus" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
+                                <TextBlock x:Uid="SecurityPage_BitLockerEncryption" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Uid="SecurityPage_DriveEncryptionStatus" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 
-                        <Grid Padding="10" Width="380" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
+                        <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xE9F5;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                 <TextBlock x:Name="DefenderServiceStatus" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
                                 <HyperlinkButton x:Name="DefenderServiceLink" x:Uid="SecurityPage_Enable" Click="DefenderServiceLink_Click" FontSize="12" Padding="0" Margin="0,4,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <TextBlock x:Uid="SecurityPage_WindowsDefenderService" FontSize="16"/>
-                                <TextBlock x:Uid="SecurityPage_CoreSecurityService" FontSize="11" Opacity="0.7" Margin="0,2,0,0"/>
+                                <TextBlock x:Uid="SecurityPage_WindowsDefenderService" FontSize="16" TextWrapping="Wrap"/>
+                                <TextBlock x:Uid="SecurityPage_CoreSecurityService" FontSize="11" Opacity="0.7" Margin="0,2,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Grid>
 

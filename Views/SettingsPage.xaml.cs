@@ -1,6 +1,9 @@
-﻿using System.Diagnostics;
-using System.Net;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
@@ -9,7 +12,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
-using Newtonsoft.Json.Linq;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using Windows.ApplicationModel;
@@ -17,12 +19,28 @@ using Windows.Storage;
 
 namespace RyTuneX.Views;
 
-public sealed partial class SettingsPage : Page
+public sealed partial class SettingsPage : Page, INotifyPropertyChanged
 {
-    private static readonly HttpClient httpClient = new();
-    private readonly IThemeSelectorService _themeSelectorService;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     private ElementTheme _elementTheme;
+    public ElementTheme ElementTheme
+    {
+        get => _elementTheme;
+        set
+        {
+            if (_elementTheme != value)
+            {
+                _elementTheme = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+    private readonly IThemeSelectorService _themeSelectorService;
+
     private string _versionDescription;
     private string? _pendingScrollTarget;
 
@@ -30,7 +48,7 @@ public sealed partial class SettingsPage : Page
     {
         get;
     }
-    public static string latestVersionString;
+    public static string latestVersionString = string.Empty;
 
     public SettingsPage()
     {
@@ -96,7 +114,7 @@ public sealed partial class SettingsPage : Page
             }
             else
             {
-                await LogHelper.LogError("Invalid language tag");
+                _ = LogHelper.LogError("Invalid language tag");
                 throw new Exception($"Invalid language tag");
             }
         }
@@ -123,7 +141,7 @@ public sealed partial class SettingsPage : Page
         }
     }
 
-    private void SetDefaultLanguage(string tag)
+    private void SetDefaultLanguage(string? tag)
     {
         LogHelper.Log($"Setting Language: {tag}");
         foreach (ComboBoxItem item in LanguageComboBox.Items)
@@ -151,23 +169,6 @@ public sealed partial class SettingsPage : Page
             version = typeof(SettingsPage).Assembly.GetName().Version!;
         }
         return $"{version.Major}.{version.Minor}.{version.Build}";
-    }
-
-    public ElementTheme ElementTheme
-    {
-        get
-        {
-            LogHelper.Log("Returning ElementTheme");
-            return _elementTheme;
-        }
-        set
-        {
-            if (_elementTheme != value)
-            {
-                LogHelper.Log("Setting ElementTheme");
-                _elementTheme = value;
-            }
-        }
     }
 
     public string VersionDescription
@@ -208,180 +209,7 @@ public sealed partial class SettingsPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error opening log file: {ex.Message}\nStack Trace: {ex.StackTrace}");
-        }
-    }
-
-    public static async Task<bool?> CheckForUpdatesAsync(XamlRoot xaml)
-    {
-        try
-        {
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("RyTuneX/0.9");
-            var response = await httpClient.GetAsync("https://api.github.com/repos/rayenghanmi/rytunex/releases");
-            response.EnsureSuccessStatusCode();
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            var releases = JArray.Parse(responseString);
-
-            // Check if any releases are available
-            if (releases.Count > 0)
-            {
-                // Get the latest release version (e.g., "v1.0.0")
-                latestVersionString = releases[0]["tag_name"].ToString();
-
-                // Remove leading 'v'
-                if (latestVersionString.StartsWith("v"))
-                {
-                    latestVersionString = latestVersionString.Substring(1);
-                }
-
-                // Get the current assembly version
-                var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-
-                // Parse the latest version string into a Version object
-                var latestVersion = new Version(latestVersionString);
-
-                // Compare versions: check if the latest version is greater than the current version
-                var isUpdateAvailable = latestVersion > currentVersion;
-
-                Debug.WriteLine($"Is update available: {isUpdateAvailable}");
-                await LogHelper.Log($"Is update available: {isUpdateAvailable}");
-
-                return isUpdateAvailable;
-            }
-        }
-        catch (Exception ex)
-        {
-            await LogHelper.LogError($"HTTP error: {ex.Message}\nStack Trace: {ex.StackTrace}");
-            var networkError = new ContentDialog()
-            {
-                XamlRoot = xaml,
-                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                Title = "UpdateTitle".GetLocalized(),
-                Content = "NetworkError".GetLocalized(),
-                CloseButtonText = "Close".GetLocalized()
-            };
-            await networkError.ShowAsync();
-        }
-
-        return null;
-    }
-
-    private async void Button_Click(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            var res = await CheckForUpdatesAsync(XamlRoot);
-            if (res == false)
-            {
-                var updateUnavailable = new ContentDialog()
-                {
-                    XamlRoot = XamlRoot,
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                    Title = "UpdateTitle".GetLocalized(),
-                    Content = "UnavailableUpdate0".GetLocalized() + latestVersionString + "UnavailableUpdate1".GetLocalized(),
-                    CloseButtonText = "Close".GetLocalized()
-                };
-                await updateUnavailable.ShowAsync();
-            }
-            if (res == true)
-            {
-                var updateAvailable = new ContentDialog()
-                {
-                    XamlRoot = XamlRoot,
-                    Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
-                    BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                    Title = "UpdateTitle".GetLocalized(),
-                    Content = "AvailableUpdateContent0".GetLocalized() + latestVersionString + "AvailableUpdateContent1".GetLocalized(),
-                    CloseButtonText = "Close".GetLocalized(),
-                    PrimaryButtonText = "Update".GetLocalized(),
-                    PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"]
-                };
-                // Show the dialog and await the result
-                var result = await updateAvailable.ShowAsync();
-
-                // Check if the "Update" button was clicked
-                if (result == ContentDialogResult.Primary)
-                {
-                    // Run the installation module
-                    var downloadUrl = "https://github.com/rayenghanmi/rytunex/releases/latest/download/RyTuneXSetup.exe";
-                    await InstallRyTuneX(downloadUrl);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            await LogHelper.LogError($"Error during update check: {ex.Message}\nStack Trace: {ex.StackTrace}");
-        }
-    }
-
-    public async Task InstallRyTuneX(string downloadUrl)
-    {
-        var tempPath = Path.GetTempPath();
-        var setupFilePath = Path.Combine(tempPath, "RyTuneXSetup.exe");
-
-        try
-        {
-            UpdateButton.Visibility = Visibility.Collapsed;
-            UpdateStack.Visibility = Visibility.Visible;
-            UpdateProgress.ShowError = false;
-            UpdateProgress.Visibility = Visibility.Visible;
-            UpdateStatusText.Text = "Downloading...";
-
-            // Download the setup file
-            using (var webClient = new WebClient())
-            {
-                await webClient.DownloadFileTaskAsync(new Uri(downloadUrl), setupFilePath);
-                Debug.WriteLine("Download complete.");
-            }
-
-            // Run the setup file with the --silent argument
-            UpdateStatusText.Text = "Installing...";
-            Debug.WriteLine("Running RyTuneXSetup.exe...");
-            var setupProcess = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                    ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                    : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
-                    Arguments = $"/c \"{setupFilePath} --silent\"",
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    Verb = "runas"
-                }
-            };
-            setupProcess.Start();
-            await setupProcess.WaitForExitAsync();
-            Debug.WriteLine("RyTuneX Setup.exe has finished execution.");
-        }
-        catch (Exception ex)
-        {
-            UpdateStatusText.Text = "UnexpectedError".GetLocalized();
-            UpdateProgress.ShowError = true;
-            await LogHelper.LogError($"Error during installation: {ex.Message}\nStack Trace: {ex.StackTrace}");
-        }
-        finally
-        {
-            // Cleanup the setup file
-            if (File.Exists(setupFilePath))
-            {
-                try
-                {
-                    File.Delete(setupFilePath);
-                    Debug.WriteLine("Deleted RyTuneXSetup.exe.");
-                }
-                catch (Exception ex)
-                {
-                    await LogHelper.LogError($"Error deleting setup file: {ex.Message}");
-                }
-            }
-            UpdateStatusText.Text = "Done".GetLocalized();
-            UpdateButton.Visibility = Visibility.Visible;
-            UpdateStack.Visibility = Visibility.Collapsed;
-            UpdateProgress.Visibility = Visibility.Collapsed;
+            _ = LogHelper.LogError($"Error opening log file: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
 
@@ -464,7 +292,7 @@ public sealed partial class SettingsPage : Page
 
                 // Execute the revert operation
                 await OptimizationOptions.RevertAllChanges();
-                await LogHelper.Log("Reverted all changes.");
+                _ = LogHelper.Log("Reverted all changes.");
 
                 // Clear local settings if the checkbox is not checked
                 if (keepAppDataCheckBox.IsChecked != true)
@@ -472,11 +300,11 @@ public sealed partial class SettingsPage : Page
                     // Clear all local settings
                     var localSettings = ApplicationData.Current.LocalSettings;
                     localSettings.Values.Clear();
-                    await LogHelper.Log("Cleared all local settings.");
+                    _ = LogHelper.Log("Cleared all local settings.");
                 }
                 else
                 {
-                    await LogHelper.Log("Kept app data as requested by user.");
+                    _ = LogHelper.Log("Kept app data as requested by user.");
                 }
 
                 // Delete all registry keys
@@ -485,7 +313,7 @@ public sealed partial class SettingsPage : Page
                             ? RegistryView.Registry64
                             : RegistryView.Default);
                 key.DeleteSubKeyTree(@"SOFTWARE\RyTuneX", throwOnMissingSubKey: false);
-                await LogHelper.Log("Deleted all registry keys.");
+                _ = LogHelper.Log("Deleted all registry keys.");
 
                 // Wait for a small delay for the operations to complete
                 await Task.Delay(1000);
@@ -507,24 +335,36 @@ public sealed partial class SettingsPage : Page
 
         try
         {
+            ExportButton.IsEnabled = false;
+            ExportButtonProgressRing.Visibility = Visibility.Visible;
+            ExportButtonIcon.Visibility = Visibility.Collapsed;
+
             var regFlag = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess ? " /reg:64" : "";
             var exitCode = await OptimizationOptions.StartInCmd($"REG EXPORT \"HKLM\\SOFTWARE\\RyTuneX\\Optimizations\" \"{exportFilePath}\" /y{regFlag}");
 
             if (exitCode == 0 && File.Exists(exportFilePath))
             {
-                await LogHelper.Log($"Exported registry settings to {exportFilePath}");
+                _ = LogHelper.Log($"Exported registry settings to {exportFilePath}");
                 App.ShowNotification(string.Empty, "SettingsExported".GetLocalized() + $"\n{path}", InfoBarSeverity.Success, 5000);
             }
             else
             {
-                await LogHelper.LogError($"Failed to export registry settings. Exit code: {exitCode}");
+                _ = LogHelper.LogError($"Failed to export registry settings. Exit code: {exitCode}");
                 App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
             }
+
+            ExportButton.IsEnabled = true;
+            ExportButtonProgressRing.Visibility = Visibility.Collapsed;
+            ExportButtonIcon.Visibility = Visibility.Visible;
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error exporting registry settings: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error exporting registry settings: {ex.Message}\nStack Trace: {ex.StackTrace}");
             App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
+
+            ExportButton.IsEnabled = true;
+            ExportButtonProgressRing.Visibility = Visibility.Collapsed;
+            ExportButtonIcon.Visibility = Visibility.Visible;
         }
     }
 
@@ -539,64 +379,83 @@ public sealed partial class SettingsPage : Page
         var file = await picker.PickSingleFileAsync();
         if (file != null)
         {
-            // Import the registry file
-            await OptimizationOptions.StartInCmd($"regedit.exe /s {file.Path}");
-            await LogHelper.Log($"Imported registry settings from {file.Path}");
-            // Apply all the optimizations present in the registry key
-            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                    Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? RegistryView.Registry64
-                        : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
-
-            if (key != null)
+            ImportButton.IsEnabled = false;
+            ImportButtonProgressRing.Visibility = Visibility.Visible;
+            ImportButtonIcon.Visibility = Visibility.Collapsed;
+            try
             {
-                foreach (var valueName in key.GetValueNames())
+                // Import the registry file
+                await OptimizationOptions.StartInCmd($"regedit.exe /s {file.Path}");
+                _ = LogHelper.Log($"Imported registry settings from {file.Path}");
+                // Apply all the optimizations present in the registry key
+                using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                            ? RegistryView.Registry64
+                            : RegistryView.Default).CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
+
+                if (key != null)
                 {
-                    var value = key.GetValue(valueName);
-                    var kind = key.GetValueKind(valueName);
-
-                    // Handle Windows Updates mode separately
-                    if (valueName == "WindowsUpdatesMode" && kind == RegistryValueKind.String)
+                    foreach (var valueName in key.GetValueNames())
                     {
-                        var mode = value as string;
-                        if (!string.IsNullOrEmpty(mode))
+                        var value = key.GetValue(valueName);
+                        var kind = key.GetValueKind(valueName);
+
+                        // Handle Windows Updates mode separately
+                        if (valueName == "WindowsUpdatesMode" && kind == RegistryValueKind.String)
                         {
-                            switch (mode)
+                            var mode = value as string;
+                            if (!string.IsNullOrEmpty(mode))
                             {
-                                case "Default":
-                                    await OptimizeSystemHelper.SetWindowsUpdatesDefault();
-                                    break;
-                                case "Security":
-                                    await OptimizeSystemHelper.SetWindowsUpdatesSecurityOnly();
-                                    break;
-                                case "Manually":
-                                    await OptimizeSystemHelper.SetWindowsUpdatesManually();
-                                    break;
-                                case "Disabled":
-                                    await OptimizeSystemHelper.SetWindowsUpdatesDisabled();
-                                    break;
+                                switch (mode)
+                                {
+                                    case "Default":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesDefault();
+                                        break;
+                                    case "Security":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesSecurityOnly();
+                                        break;
+                                    case "Manually":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesManually();
+                                        break;
+                                    case "Disabled":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesDisabled();
+                                        break;
+                                }
+                                _ = LogHelper.Log($"Applied Windows Updates mode: {mode}");
                             }
-                            await LogHelper.Log($"Applied Windows Updates mode: {mode}");
+                            continue;
                         }
-                        continue;
-                    }
 
-                    if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
-                    {
-                        // Simulate the toggle being on
-                        var simulatedToggle = new ToggleSwitch
+                        if (kind == RegistryValueKind.DWord && Convert.ToInt32(value) == 1)
                         {
-                            Tag = valueName,
-                            IsOn = true
-                        };
+                            // Simulate the toggle being on
+                            var simulatedToggle = new ToggleSwitch
+                            {
+                                Tag = valueName,
+                                IsOn = true
+                            };
 
-                        await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
-                        await LogHelper.Log($"Applied optimization: {valueName}");
+                            await OptimizationOptions.XamlSwitchesAsync(simulatedToggle);
+                            _ = LogHelper.Log($"Applied optimization: {valueName}");
+                        }
                     }
                 }
+                _ = LogHelper.Log("Applied all optimizations from the registry key.");
+                App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
+
+                ImportButton.IsEnabled = true;
+                ImportButtonProgressRing.Visibility = Visibility.Collapsed;
+                ImportButtonIcon.Visibility = Visibility.Visible;
             }
-            await LogHelper.Log("Applied all optimizations from the registry key.");
-            App.ShowNotification(string.Empty, "SettingsImported".GetLocalized(), InfoBarSeverity.Success, 5000);
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"Error importing registry settings: {ex.Message}");
+                App.ShowNotification(string.Empty, "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
+
+                ImportButton.IsEnabled = true;
+                ImportButtonProgressRing.Visibility = Visibility.Collapsed;
+                ImportButtonIcon.Visibility = Visibility.Visible;
+            }
         }
     }
 }

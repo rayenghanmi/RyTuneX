@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/0a425dec-a7b2-41b6-8686-e5b916af5af9" alt="RyTuneX Logo" width="auto">
+  <img src="https://github.com/user-attachments/assets/fa8a084e-5926-4735-ad83-d0395ec3b272" alt="RyTuneX Logo" width="128" height="128">
 </div>
 <br/>
 <p align="center" style="font-size: 1.1rem; color: #555;">
@@ -21,35 +21,33 @@
 
 ## Installation
 
-### Option 1: Automatic Installation (Recommended)
+### Option 1: Microsoft Store (Recommended)
+Install RyTuneX directly from the Microsoft Store for the best experience:
 
-1. Install using Winget (Delayed new releases):
+<a href="https://apps.microsoft.com/detail/9PDH8M7HF2SQ?referrer=appbadge&mode=full" target="_blank" rel="noopener noreferrer">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://get.microsoft.com/images/en-us%20light.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://get.microsoft.com/images/en-us%20dark.svg" />
+    <img alt="Get it from Microsoft" src="https://get.microsoft.com/images/en-us%20light.svg" width="200" />
+  </picture>
+</a>
 
+**Benefits:**
+- Automatic updates
+- Verified and secure installation
+- Seamless integration with Windows
+
+### Option 2: Windows Package Manager (WinGet)
+You can also install RyTuneX via the command line using WinGet:
+
+```powershell
+winget install --id 9PDH8M7HF2SQ
 ```
-winget install rayen.rytunex
-```
-
-2. Install using Powershell:
-
-```shell
-irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/main/install.ps1" | iex
-```
-
-### Option 2: Manual Installation
-
-1. Download:
-    - Get the latest [Setup file](https://github.com/rayenghanmi/RyTuneX/releases/latest/download/RyTuneXSetup.exe)
-2. Run Installer:
-    - Navigate to where you donwloaded the excutable and double-click on it (`RyTuneXSetup.exe`) to start the installation.
-3. Follow Prompts:
-    - Complete the installation by following the on-screen instructions.
 
 > [!IMPORTANT]  
-> Always download RyTuneX from the official [GitHub releases page](https://github.com/rayenghanmi/RyTuneX/releases) to ensure its authenticity and safety.
+> Always install RyTuneX from **Microsoft Store** to ensure authenticity and security (RyTuneX no longer provides packages for sideloading).
 
----
-
-### Why Choose RyTuneX?
+## Why Choose RyTuneX?
 - **Effortless Optimization**: Instantly boost your system's speed and reliability.
 - **Smart Features**: From app removal to privacy protection, we've got you covered.
 
@@ -64,7 +62,7 @@ irm "https://raw.githubusercontent.com/rayenghanmi/rytunex/main/install.ps1" | i
   <a href="https://t.me/rytunex"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"></a>
 </div>
 
-### Join the Community
+## Join the Community
 Get the most out of RyTuneX by connecting with fellow users and sharing your experiences. Have questions or feedback? Let’s make RyTuneX even better together!
 
 ## About
@@ -77,7 +75,7 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
   <img src="https://img.shields.io/badge/Windows_11-0078d4?style=for-the-badge&logo=windows-11&logoColor=white" alt="Windows 11 Badge" />
 </div>
 
-## Features
+### Features
 
 - **Selective App Removal**: Uninstall unwanted pre-installed apps with ease. This feature allows users to debloat their system by removing bloatware and unnecessary applications that come pre-installed with Windows. By doing so, users can free up valuable system resources and improve overall performance.
 
@@ -89,35 +87,35 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
 
 - **Cross-Compatible**: RyTuneX is compatible with both **Windows 10 (20H1 and up)** and **Windows 11**, ensuring seamless performance optimization across different Windows versions. The app delivers a consistent experience, allowing users to fully benefit from its features regardless of their operating system version.
 
-## UI Preview
+### UI Preview
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/7e8f8449-9619-446a-a740-68dd78b003c4" />
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/52a79179-c957-4c6d-9582-9c8860d2b402" />
-    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/7e8f8449-9619-446a-a740-68dd78b003c4" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/89fdd701-611c-4cd4-a4c5-931d1ca2f980" />
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/2290d080-ec2a-46f9-bcab-e4b891d73a70" />
+    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/d89ad4d7-fa71-43ba-a604-27018e0d5fe0" />
   </picture>
   <p><em>RyTuneX - Clean, Modern, and Intuitive Interface</em></p>
 </div>
 
-## Usage
+### Usage
 
 > [!WARNING]  
 > Always create a restore point before applying any optimizations.
 
-### System Optimizations
+#### System Optimizations
 To optimize your system, go to the **Optimize** tab and toggle the available options based on your needs. Changes will take effect after a system restart.
 
-### Debloat Unwanted Apps
+#### Debloat Unwanted Apps
 In the **Debloat** tab, you can view a list of installed apps. Select the ones you want to remove and click **Uninstall selected App(s)**. A restart may be required to complete the process.
 
-### Privacy Enhancements
+#### Privacy Enhancements
 Head to the **Privacy** tab to configure your privacy settings. Toggle the switches to enable or disable features that impact telemetry, advertising, and more. Changes will take effect after a restart.
 
-### Windows Features Management
+#### Windows Features Management
 Use the **Features** tab to modify specific Windows features. Toggle the switches to adjust the settings, and restart your system to apply the changes.
 
-### System Information
+#### System Information
 The **Device** page provides a comprehensive view of your system’s hardware and OS. This helps you understand your setup and make more informed decisions about optimizations.
 
 ## Get Involved
@@ -127,23 +125,25 @@ Check out the [contribution guide](https://github.com/rayenghanmi/RyTuneX/blob/m
 
 ## Translation
 
-#### These are the currently supported languages by RyTuneX:
+### These are the currently supported languages by RyTuneX:
 
 | Language                   | Translation status |
-| -------------------------- | ------------------ |
-| English (United States)    | 100%               |
-| French (France)            | 100%               |
-| Arabic (Tunisia)           | 100%               |
-| Simplified Chinese (China) | 100%               |
-| Traditional Chinese (China)| 100%               |
-| German (Germany)           | 100%               |
-| Japanese (Japan)           | 100%               |
-| Russian (Russia)           | 100%               |
-| Spanish (Spain)            | 100%               |
-| Korean (South Korea)       | 100%               |
-| Portuguese (Brazil)        | 100%               |
-| Italian (Italy)            | 100%               |
-| Turkish (Turkey)           | 100%               |
+| -------------------------- | ---------------- |
+| English (United States)    | 100%             |
+| French (France)            | 100%             |
+| Arabic (Tunisia)           | 100%             |
+| Simplified Chinese (China) | 100%             |
+| Traditional Chinese (China)| 100%             |
+| German (Germany)           | 100%             |
+| Japanese (Japan)           | 100%             |
+| Russian (Russia)           | 100%             |
+| Spanish (Spain)            | 100%             |
+| Korean (South Korea)       | 100%             |
+| Portuguese (Brazil)        | 100%             |
+| Italian (Italy)            | 100%             |
+| Turkish (Turkey)           | 100%             |
+| Hebrew (Israel)            | 100%             |
+| Vietnamese (Vietnam)       | 100%             |
 
 *: Translation will be shipped with the next version
 

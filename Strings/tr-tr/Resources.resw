@@ -165,7 +165,7 @@
   <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
     <value>Filtreleme:</value>
   </data>
-  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_UninstallButton.Text" xml:space="preserve">
     <value>Seçili Uygulamaları Kaldır</value>
   </data>
   <data name="Done" xml:space="preserve">
@@ -187,7 +187,7 @@
     <value>Serverımıza Katılın</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>RyTuneX'i inceleyin</value>
+    <value>Daha fazla bilgi</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>Geri bildirim gönder</value>
@@ -219,7 +219,7 @@
   <data name="UninstallationSuccess" xml:space="preserve">
     <value>Aşağıdaki uygulamalar başarıyla kaldırıldı</value>
   </data>
-  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_TempButton.Text" xml:space="preserve">
     <value>Sistem temp’ini temizle</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
@@ -233,9 +233,6 @@
   </data>
   <data name="Capacity" xml:space="preserve">
     <value>Kapasite</value>
-  </data>
-  <data name="Caption" xml:space="preserve">
-    <value>Başlık</value>
   </data>
   <data name="Cores" xml:space="preserve">
     <value>Çekirdekler</value>
@@ -311,9 +308,6 @@
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windows Dizini</value>
-  </data>
-  <data name="DeletingTemp" xml:space="preserve">
-    <value>Temp Dosyalarını Siliniyor</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>Temp Dosyalarını Silerken Hata</value>
@@ -1293,10 +1287,10 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Değişiklikleri geri al</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>İçe aktarmak</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>İhracat</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
@@ -1634,5 +1628,17 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   </data>
   <data name="ScanResults" xml:space="preserve">
     <value>Tara Sonuçları</value>
+  </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Microsoft hesabı</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>Yerel hesap</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Windows yapay zekâsını devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>Not Defteri, Paint ve Fotoğraflar’dan yapay zekâ özelliklerini kaldırır, Windows Studio kamera/mikrofon efektlerini ve oyun yapay zekâsını devre dışı bırakır ve gizlilik ile performansı en üst düzeye çıkarmak için kabuktaki yapay zekâ entegrasyonlarını kaldırır.</value>
   </data>
 </root>

@@ -165,7 +165,7 @@
   <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
     <value>تصفية حسب:</value>
   </data>
-  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_UninstallButton.Text" xml:space="preserve">
     <value>إلغاء تثبيت التطبيق(ات) المحدد(ة)</value>
   </data>
   <data name="Done" xml:space="preserve">
@@ -187,7 +187,7 @@
     <value>انضم إلى خادمنا</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>تفقد RyTuneX</value>
+    <value>مزيد من المعلومات</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>ترك تقييم</value>
@@ -219,7 +219,7 @@
   <data name="UninstallationSuccess" xml:space="preserve">
     <value>تم إلغاء تثبيت التطبيق(التطبيقات) التالية بنجاح</value>
   </data>
-  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_TempButton.Text" xml:space="preserve">
     <value>حذف الملفات المؤقتة للنظام</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
@@ -233,9 +233,6 @@
   </data>
   <data name="Capacity" xml:space="preserve">
     <value>السعة</value>
-  </data>
-  <data name="Caption" xml:space="preserve">
-    <value>العنوان</value>
   </data>
   <data name="Cores" xml:space="preserve">
     <value>النوى</value>
@@ -311,9 +308,6 @@
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>دليل ويندوز</value>
-  </data>
-  <data name="DeletingTemp" xml:space="preserve">
-    <value>جاري حذف الملفات المؤقتة</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>حدث خطأ أثناء حذف الملفات المؤقتة</value>
@@ -1293,10 +1287,10 @@
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>تراجع عن التغييرات</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>استيراد</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>تصدير</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
@@ -1634,5 +1628,17 @@
   </data>
   <data name="ScanResults" xml:space="preserve">
     <value>نتائج الفحص</value>
+  </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>حساب Microsoft</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>حساب محلي</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>تعطيل ذكاء Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>يزيل ميزات الذكاء الاصطناعي من المفكرة والرسام والصور، ويعطّل تأثيرات الكاميرا والميكروفون في Windows Studio وذكاء الألعاب، ويزيل تكاملات الذكاء الاصطناعي من واجهة النظام لتعزيز الخصوصية والأداء.</value>
   </data>
 </root>

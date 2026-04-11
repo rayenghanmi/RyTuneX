@@ -165,7 +165,7 @@
   <data name="DebloatSystemPage_AppsFilter.Text" xml:space="preserve">
     <value>Filtrar por:</value>
   </data>
-  <data name="DebloatSystemPage_UninstallButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_UninstallButton.Text" xml:space="preserve">
     <value>Desinstalar aplicativo(s) selecionado(s)</value>
   </data>
   <data name="Done" xml:space="preserve">
@@ -187,7 +187,7 @@
     <value>Entre para o nosso servidor</value>
   </data>
   <data name="HomePage_WebsiteButton.Text" xml:space="preserve">
-    <value>Confira RyTuneX</value>
+    <value>Mais informações</value>
   </data>
   <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
     <value>Enviar feedback</value>
@@ -219,7 +219,7 @@
   <data name="UninstallationSuccess" xml:space="preserve">
     <value>Os seguintes aplicativos foram desinstalados com sucesso</value>
   </data>
-  <data name="DebloatSystemPage_TempButton.Content" xml:space="preserve">
+  <data name="DebloatSystemPage_TempButton.Text" xml:space="preserve">
     <value>Limpar temp do sistema</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
@@ -232,9 +232,6 @@
     <value>Número da compilação</value>
   </data>
   <data name="Capacity" xml:space="preserve">
-    <value>Caption</value>
-  </data>
-  <data name="Caption" xml:space="preserve">
     <value>Caption</value>
   </data>
   <data name="Cores" xml:space="preserve">
@@ -311,9 +308,6 @@
   </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Diretório do Windows</value>
-  </data>
-  <data name="DeletingTemp" xml:space="preserve">
-    <value>Excluindo arquivos temporários</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>Erro ao excluir arquivos temporários</value>
@@ -1293,10 +1287,10 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="Settings_RevertTitle.Text" xml:space="preserve">
     <value>Reverter alterações</value>
   </data>
-  <data name="SettingsPageImportButton.Content" xml:space="preserve">
+  <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Importar</value>
   </data>
-  <data name="SettingsPageExportButton.Content" xml:space="preserve">
+  <data name="SettingsPageExportButton.Text" xml:space="preserve">
     <value>Exportar</value>
   </data>
   <data name="Settings_ExportOptimizations.Header" xml:space="preserve">
@@ -1634,5 +1628,17 @@ Verifique se há problemas de memória em seu computador</value>
   </data>
   <data name="ScanResults" xml:space="preserve">
     <value>Resultados da verificação</value>
+  </data>
+  <data name="MicrosoftAccount" xml:space="preserve">
+    <value>Conta Microsoft</value>
+  </data>
+  <data name="LocalAccount" xml:space="preserve">
+    <value>Conta local</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
+    <value>Desativar IA do Windows</value>
+  </data>
+  <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
+    <value>Remove recursos de IA do Bloco de Notas, Paint e Fotos, desativa efeitos de câmera e microfone do Windows Studio e IA para jogos, e remove integrações de IA do shell para maximizar privacidade e desempenho.</value>
   </data>
 </root>

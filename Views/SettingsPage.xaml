@@ -84,8 +84,28 @@
                 <controls:SettingsCard x:Uid="Settings_ExportOptimizations"
                     HeaderIcon="{ui:FontIcon Glyph=&#xE174;}">
                     <controls:WrapPanel Orientation="Horizontal" HorizontalSpacing="8">
-                        <Button x:Uid="SettingsPageImportButton" x:Name="ImportButton" Click="ImportButton_Click"/>
-                        <Button x:Uid="SettingsPageExportButton" x:Name="ExportButton" Click="ExportButton_Click"/>
+                        <Button x:Name="ImportButton" Click="ImportButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <ProgressRing x:Name="ImportButtonProgressRing" 
+                                    Width="16" 
+                                    Height="16" 
+                                    Visibility="Collapsed"
+                                    IsActive="True"/>
+                                <FontIcon x:Name="ImportButtonIcon" Glyph="&#xE74B;" FontSize="16"/>
+                                <TextBlock x:Uid="SettingsPageImportButton"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="ExportButton" Click="ExportButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <ProgressRing x:Name="ExportButtonProgressRing" 
+                                    Width="16" 
+                                    Height="16" 
+                                    Visibility="Collapsed"
+                                    IsActive="True"/>
+                                <FontIcon x:Name="ExportButtonIcon" Glyph="&#xE74A;" FontSize="16"/>
+                                <TextBlock x:Uid="SettingsPageExportButton"/>
+                            </StackPanel>
+                        </Button>
                     </controls:WrapPanel>
                 </controls:SettingsCard>
 
@@ -93,7 +113,7 @@
                     IsClickEnabled="True"
                     Click="RevertChanges_Click">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE777;"/>
+                        <FontIcon Glyph="&#xE81C;"/>
                     </controls:SettingsCard.HeaderIcon>
                 </controls:SettingsCard>
             </StackPanel>
@@ -101,20 +121,10 @@
             <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                 x:Uid="Settings_About" />
 
-            <controls:SettingsExpander Description="© 2025 Rayen Ghanmi"
+            <controls:SettingsExpander Description="© Rayen Ghanmi"
                                Header="RyTuneX"
                                HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/StoreLogo.scale-100.png}">
                 <StackPanel Orientation="Horizontal">
-
-                    <StackPanel Margin="25,0" Orientation="Vertical" VerticalAlignment="Center">
-                        <Grid>
-                            <Button x:Uid="SettingsPage_UpdateButton" Style="{StaticResource AccentButtonStyle}" x:Name="UpdateButton" Click="Button_Click"/>
-                            <StackPanel x:Name="UpdateStack" Visibility="Collapsed">
-                                <ProgressBar x:Name="UpdateProgress" Margin="3" IsIndeterminate="True" Visibility="Collapsed"/>
-                                <TextBlock x:Name="UpdateStatusText"/>
-                            </StackPanel>
-                        </Grid>
-                    </StackPanel>
                     <TextBlock VerticalAlignment="Center" IsTextSelectionEnabled="True"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                         Text="{x:Bind _versionDescription}" />

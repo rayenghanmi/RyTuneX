@@ -45,7 +45,7 @@ public sealed partial class PrivacyPage : Page
 
     private async Task InitializeToggleSwitchesAsync()
     {
-        await LogHelper.Log("Initializing Toggle Switches");
+        _ = LogHelper.Log("Initializing Toggle Switches");
         try
         {
             foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
@@ -69,7 +69,7 @@ public sealed partial class PrivacyPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"Error initializing toggle switches: {ex.Message}\nStack Trace: {ex.StackTrace}");
         }
     }
     // Helper method to find all children of a specific type in the visual tree
@@ -111,7 +111,7 @@ public sealed partial class PrivacyPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError(ex.Message);
+            _ = LogHelper.LogError(ex.Message);
         }
     }
 }

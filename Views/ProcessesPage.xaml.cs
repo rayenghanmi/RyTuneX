@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -60,7 +60,7 @@ public sealed partial class ProcessesPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error loading processes: {ex.Message}");
+            _ = LogHelper.LogError($"Error loading processes: {ex.Message}");
         }
         finally
         {
@@ -150,7 +150,7 @@ public sealed partial class ProcessesPage : Page
             var processItem = _allProcesses.FirstOrDefault(p => p.Id == processId);
             var processName = processItem?.Name ?? "Unknown";
 
-            await LogHelper.Log($"Ending process: {processName} (PID: {processId})");
+            _ = LogHelper.Log($"Ending process: {processName} (PID: {processId})");
 
             await Task.Run(() =>
             {
@@ -169,7 +169,7 @@ public sealed partial class ProcessesPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error ending process {processId}: {ex.Message}");
+            _ = LogHelper.LogError($"Error ending process {processId}: {ex.Message}");
             App.ShowNotification("Error", $"Failed to end process: {ex.Message}", InfoBarSeverity.Error, 5000);
         }
     }

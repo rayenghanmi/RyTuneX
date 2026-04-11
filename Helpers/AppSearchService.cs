@@ -1,4 +1,5 @@
 using RyTuneX.Models;
+using RyTuneX.Views;
 
 namespace RyTuneX.Helpers;
 
@@ -6,137 +7,137 @@ namespace RyTuneX.Helpers;
 public static class AppSearchService
 {
     // Mapping of resource key prefix to their page, category, glyph (matching XAML), and toggle tag
-    private static readonly List<(string ResourceKeyPrefix, string PageTypeName, string Category, string Glyph, string ToggleTag)> FeatureMap =
+    private static readonly List<(string ResourceKeyPrefix, Type PageType, string Category, string Glyph, string ToggleTag)> FeatureMap =
     [
         // OptimizeSystemPage - Basic (icons match OptimizeSystemPage.xaml)
-        ("Feature_PowerMode", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uEBB7", "PowerMode"),
-        ("Feature_AddUltimatePowerPlan", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE945", "AddUltimatePowerPlan"),
-        ("Feature_MenuShowDelay", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uF182", "MenuShowDelay"),
-        ("Feature_MouseHoverTime", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE8B0", "MouseHoverTime"),
-        ("Feature_BackgroundApps", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE8BE", "BackgroundApps"),
-        ("Feature_AutoComplete", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE8A1", "AutoComplete"),
-        ("Feature_CrashDump", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE74D", "CrashDump"),
-        ("Feature_RemoteAssistance", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE8AF", "RemoteAssistance"),
-        ("Feature_WindowShake", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE746", "WindowShake"),
-        ("Feature_CopyMoveContextMenu", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE8C8", "CopyMoveContextMenu"),
-        ("Feature_TaskTimeouts", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE916", "TaskTimeouts"),
-        ("Feature_LowDiskSpaceChecks", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE73E", "LowDiskSpaceChecks"),
-        ("Feature_LinkResolve", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE8F5", "LinkResolve"),
-        ("Feature_ServiceTimeouts", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE823", "ServiceTimeouts"),
-        ("Feature_RemoteRegistry", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uED5C", "RemoteRegistry"),
-        ("Feature_FileExtensionsAndHiddenFiles", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uF19D", "FileExtensionsAndHiddenFiles"),
+        ("Feature_PowerMode", typeof(OptimizeSystemPage), "Optimize", "\uEBB7", "PowerMode"),
+        ("Feature_AddUltimatePowerPlan", typeof(OptimizeSystemPage), "Optimize", "\uE945", "AddUltimatePowerPlan"),
+        ("Feature_MenuShowDelay", typeof(OptimizeSystemPage), "Optimize", "\uF182", "MenuShowDelay"),
+        ("Feature_MouseHoverTime", typeof(OptimizeSystemPage), "Optimize", "\uE8B0", "MouseHoverTime"),
+        ("Feature_BackgroundApps", typeof(OptimizeSystemPage), "Optimize", "\uE8BE", "BackgroundApps"),
+        ("Feature_AutoComplete", typeof(OptimizeSystemPage), "Optimize", "\uE8A1", "AutoComplete"),
+        ("Feature_CrashDump", typeof(OptimizeSystemPage), "Optimize", "\uE74D", "CrashDump"),
+        ("Feature_RemoteAssistance", typeof(OptimizeSystemPage), "Optimize", "\uE8AF", "RemoteAssistance"),
+        ("Feature_WindowShake", typeof(OptimizeSystemPage), "Optimize", "\uE746", "WindowShake"),
+        ("Feature_CopyMoveContextMenu", typeof(OptimizeSystemPage), "Optimize", "\uE8C8", "CopyMoveContextMenu"),
+        ("Feature_TaskTimeouts", typeof(OptimizeSystemPage), "Optimize", "\uE916", "TaskTimeouts"),
+        ("Feature_LowDiskSpaceChecks", typeof(OptimizeSystemPage), "Optimize", "\uE73E", "LowDiskSpaceChecks"),
+        ("Feature_LinkResolve", typeof(OptimizeSystemPage), "Optimize", "\uE8F5", "LinkResolve"),
+        ("Feature_ServiceTimeouts", typeof(OptimizeSystemPage), "Optimize", "\uE823", "ServiceTimeouts"),
+        ("Feature_RemoteRegistry", typeof(OptimizeSystemPage), "Optimize", "\uED5C", "RemoteRegistry"),
+        ("Feature_FileExtensionsAndHiddenFiles", typeof(OptimizeSystemPage), "Optimize", "\uF19D", "FileExtensionsAndHiddenFiles"),
         
         // OptimizeSystemPage - Advanced
-        ("Feature_SystemProfile", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE9F5", "SystemProfile"),
-        ("Feature_DisableSysMain", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uEC4A", "SysMain"),
-        ("Feature_EnableGamingMode", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE7FC", "GamingMode"),
-        ("Feature_ExcludeDriversFromWindowsUpdates", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE772", "Drivers"),
-        ("OptimizePage_CompressOS", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uEB05", "CompressOS"),
-        ("Feature_ServiceHostSplitting", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE15E", "ServiceHostSplitting"),
-        ("Feature_LegacyBootMenu", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uF16A", "LegacyBootMenu"),
-        ("Feature_OptimizeNTFS", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE9F3", "OptimizeNTFS"),
-        ("Feature_PrioritizeForegroundApplications", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE9D9", "PrioritizeForegroundApplications"),
-        ("Feature_WPBT", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE9E9", "WPBT"),
+        ("Feature_SystemProfile", typeof(OptimizeSystemPage), "Optimize", "\uE9F5", "SystemProfile"),
+        ("Feature_DisableSysMain", typeof(OptimizeSystemPage), "Optimize", "\uEC4A", "SysMain"),
+        ("Feature_EnableGamingMode", typeof(OptimizeSystemPage), "Optimize", "\uE7FC", "GamingMode"),
+        ("Feature_ExcludeDriversFromWindowsUpdates", typeof(OptimizeSystemPage), "Optimize", "\uE772", "Drivers"),
+        ("OptimizePage_CompressOS", typeof(OptimizeSystemPage), "Optimize", "\uEB05", "CompressOS"),
+        ("Feature_ServiceHostSplitting", typeof(OptimizeSystemPage), "Optimize", "\uE15E", "ServiceHostSplitting"),
+        ("Feature_LegacyBootMenu", typeof(OptimizeSystemPage), "Optimize", "\uF16A", "LegacyBootMenu"),
+        ("Feature_OptimizeNTFS", typeof(OptimizeSystemPage), "Optimize", "\uE9F3", "OptimizeNTFS"),
+        ("Feature_PrioritizeForegroundApplications", typeof(OptimizeSystemPage), "Optimize", "\uE9D9", "PrioritizeForegroundApplications"),
+        ("Feature_WPBT", typeof(OptimizeSystemPage), "Optimize", "\uE9E9", "WPBT"),
         
         // OptimizeSystemPage - Other
-        ("Feature_DisableSystemRestore", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE777", "SystemRestore"),
-        ("Feature_DisableCortana", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uED66", "Cortana"),
-        ("Feature_DisableStoreUpdates", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE719", "StoreUpdates"),
-        ("Feature_WindowsUpdates", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uE8D8", "AutomaticUpdates"),
-        ("Feature_DisableSmartScreen", "RyTuneX.Views.OptimizeSystemPage", "Optimize", "\uF8A5", "SmartScreen"),
+        ("Feature_DisableSystemRestore", typeof(OptimizeSystemPage), "Optimize", "\uE777", "SystemRestore"),
+        ("Feature_DisableCortana", typeof(OptimizeSystemPage), "Optimize", "\uED66", "Cortana"),
+        ("Feature_DisableStoreUpdates", typeof(OptimizeSystemPage), "Optimize", "\uE719", "StoreUpdates"),
+        ("Feature_WindowsUpdates", typeof(OptimizeSystemPage), "Optimize", "\uE8D8", "AutomaticUpdates"),
+        ("Feature_DisableSmartScreen", typeof(OptimizeSystemPage), "Optimize", "\uF8A5", "SmartScreen"),
 
         // PrivacyPage - Advertising (glyphs match PrivacyPage.xaml)
-        ("Feature_DisableAdvertisingID", "RyTuneX.Views.PrivacyPage", "Privacy", "\uEE57", "AdvertisingID"),
-        ("Feature_DisableBluetoothAdvertising", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE702", "BluetoothAdvertising"),
-        ("Feature_DisableNewsAndInterests", "RyTuneX.Views.PrivacyPage", "Privacy", "\uF586", "NewsAndInterests"),
-        ("Feature_DisableSpotlightFeatures", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE786", "SpotlightFeatures"),
-        ("Feature_DisableTailoredExperiences", "RyTuneX.Views.PrivacyPage", "Privacy", "\uEADF", "TailoredExperiences"),
-        ("Feature_DisableCloudOptimizedContent", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE753", "CloudOptimizedContent"),
-        ("Feature_DisableFeedbackNotifications", "RyTuneX.Views.PrivacyPage", "Privacy", "\uED15", "FeedbackNotifications"),
+        ("Feature_DisableAdvertisingID", typeof(PrivacyPage), "Privacy", "\uEE57", "AdvertisingID"),
+        ("Feature_DisableBluetoothAdvertising", typeof(PrivacyPage), "Privacy", "\uE702", "BluetoothAdvertising"),
+        ("Feature_DisableNewsAndInterests", typeof(PrivacyPage), "Privacy", "\uF586", "NewsAndInterests"),
+        ("Feature_DisableSpotlightFeatures", typeof(PrivacyPage), "Privacy", "\uE786", "SpotlightFeatures"),
+        ("Feature_DisableTailoredExperiences", typeof(PrivacyPage), "Privacy", "\uEADF", "TailoredExperiences"),
+        ("Feature_DisableCloudOptimizedContent", typeof(PrivacyPage), "Privacy", "\uE753", "CloudOptimizedContent"),
+        ("Feature_DisableFeedbackNotifications", typeof(PrivacyPage), "Privacy", "\uED15", "FeedbackNotifications"),
 
         // PrivacyPage - Telemetry (glyphs match PrivacyPage.xaml)
-        ("Feature_DisableTelemetryServices", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE9F9", "TelemetryServices"),
-        ("Feature_DisableEdgeTelemetry", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE9F9", "EdgeTelemetry"),
-        ("Feature_DisableVisualStudioTelemetry", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE9F9", "VisualStudioTelemetry"),
-        ("Feature_DisableNvidiaTelemetry", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE9F9", "NvidiaTelemetry"),
-        ("Feature_DisableChromeTelemetry", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE9F9", "ChromeTelemetry"),
-        ("Feature_DisableFirefoxTelemetry", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE9F9", "FirefoxTelemetry"),
-        ("Feature_DisableActivityFeed", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE779", "ActivityFeed"),
-        ("Feature_DisableCdp", "RyTuneX.Views.PrivacyPage", "Privacy", "\uEF58", "Cdp"),
-        ("Feature_DisableDiagnosticsToast", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE9D9", "DiagnosticsToast"),
-        ("Feature_DisableOnlineSpeechPrivacy", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE720", "OnlineSpeechPrivacy"),
-        ("Feature_DisableLocationFeatures", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE809", "LocationFeatures"),
-        ("Feature_DisableBiometrics", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE928", "Biometrics"),
+        ("Feature_DisableTelemetryServices", typeof(PrivacyPage), "Privacy", "\uE9F9", "TelemetryServices"),
+        ("Feature_DisableEdgeTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "EdgeTelemetry"),
+        ("Feature_DisableVisualStudioTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "VisualStudioTelemetry"),
+        ("Feature_DisableNvidiaTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "NvidiaTelemetry"),
+        ("Feature_DisableChromeTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "ChromeTelemetry"),
+        ("Feature_DisableFirefoxTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "FirefoxTelemetry"),
+        ("Feature_DisableActivityFeed", typeof(PrivacyPage), "Privacy", "\uE779", "ActivityFeed"),
+        ("Feature_DisableCdp", typeof(PrivacyPage), "Privacy", "\uEF58", "Cdp"),
+        ("Feature_DisableDiagnosticsToast", typeof(PrivacyPage), "Privacy", "\uE9D9", "DiagnosticsToast"),
+        ("Feature_DisableOnlineSpeechPrivacy", typeof(PrivacyPage), "Privacy", "\uE720", "OnlineSpeechPrivacy"),
+        ("Feature_DisableLocationFeatures", typeof(PrivacyPage), "Privacy", "\uE809", "LocationFeatures"),
+        ("Feature_DisableBiometrics", typeof(PrivacyPage), "Privacy", "\uE928", "Biometrics"),
         
         // PrivacyPage - Other Privacy (glyphs match PrivacyPage.xaml)
-        ("Feature_DisableAutomaticRestartSignOn", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE777", "AutomaticRestartSignOn"),
-        ("Feature_DisableHandwritingDataSharing", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE929", "HandwritingDataSharing"),
-        ("Feature_DisableTextInputDataCollection", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE961", "TextInputDataCollection"),
-        ("Feature_DisableInputPersonalization", "RyTuneX.Views.PrivacyPage", "Privacy", "\uF180", "InputPersonalization"),
-        ("Feature_DisableSafeSearchMode", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE773", "SafeSearchMode"),
-        ("Feature_DisableActivityUploads", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE8FD", "ActivityUploads"),
-        ("Feature_DisableClipboardSync", "RyTuneX.Views.PrivacyPage", "Privacy", "\uF0E3", "ClipboardSync"),
-        ("Feature_DisableMessageSync", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE90A", "MessageSync"),
-        ("Feature_DisableSettingSync", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE895", "SettingSync"),
-        ("Feature_DisableVoiceActivation", "RyTuneX.Views.PrivacyPage", "Privacy", "\uEFA9", "VoiceActivation"),
-        ("Feature_DisableFindMyDevice", "RyTuneX.Views.PrivacyPage", "Privacy", "\uE707", "FindMyDevice"),
-        ("Feature_DisableSMBv1", "RyTuneX.Views.PrivacyPage", "Privacy", "\uF193", "SMBv1"),
-        ("Feature_DisableSMBv2", "RyTuneX.Views.PrivacyPage", "Privacy", "\uF193", "SMBv2"),
+        ("Feature_DisableAutomaticRestartSignOn", typeof(PrivacyPage), "Privacy", "\uE777", "AutomaticRestartSignOn"),
+        ("Feature_DisableHandwritingDataSharing", typeof(PrivacyPage), "Privacy", "\uE929", "HandwritingDataSharing"),
+        ("Feature_DisableTextInputDataCollection", typeof(PrivacyPage), "Privacy", "\uE961", "TextInputDataCollection"),
+        ("Feature_DisableInputPersonalization", typeof(PrivacyPage), "Privacy", "\uF180", "InputPersonalization"),
+        ("Feature_DisableSafeSearchMode", typeof(PrivacyPage), "Privacy", "\uE773", "SafeSearchMode"),
+        ("Feature_DisableActivityUploads", typeof(PrivacyPage), "Privacy", "\uE8FD", "ActivityUploads"),
+        ("Feature_DisableClipboardSync", typeof(PrivacyPage), "Privacy", "\uF0E3", "ClipboardSync"),
+        ("Feature_DisableMessageSync", typeof(PrivacyPage), "Privacy", "\uE90A", "MessageSync"),
+        ("Feature_DisableSettingSync", typeof(PrivacyPage), "Privacy", "\uE895", "SettingSync"),
+        ("Feature_DisableVoiceActivation", typeof(PrivacyPage), "Privacy", "\uEFA9", "VoiceActivation"),
+        ("Feature_DisableFindMyDevice", typeof(PrivacyPage), "Privacy", "\uE707", "FindMyDevice"),
+        ("Feature_DisableSMBv1", typeof(PrivacyPage), "Privacy", "\uF193", "SMBv1"),
+        ("Feature_DisableSMBv2", typeof(PrivacyPage), "Privacy", "\uF193", "SMBv2"),
 
         // FeaturesPage - System Features (glyphs match FeaturesPage.xaml)
-        ("Feature_DisableWindowsTransparency", "RyTuneX.Views.FeaturesPage", "Features", "\uF5ED", "WindowsTransparency"),
-        ("Feature_EnableWindowsDarkMode", "RyTuneX.Views.FeaturesPage", "Features", "\uE790", "WindowsDarkMode"),
-        ("Feature_EnableVerboseLogon", "RyTuneX.Views.FeaturesPage", "Features", "\uE946", "VerboseLogon"),
-        ("Feature_DisableHibernation", "RyTuneX.Views.FeaturesPage", "Features", "\uE708", "Hibernation"),
-        ("Feature_DisableHomeGroup", "RyTuneX.Views.FeaturesPage", "Features", "\uE902", "HomeGroup"),
-        ("Feature_DisablePrintService", "RyTuneX.Views.FeaturesPage", "Features", "\uE749", "PrintService"),
-        ("Feature_DisableCompatibilityAssistant", "RyTuneX.Views.FeaturesPage", "Features", "\uE83D", "CompatibilityAssistant"),
-        ("Feature_DisableSearch", "RyTuneX.Views.FeaturesPage", "Features", "\uE721", "Search"),
-        ("Feature_DisableErrorReporting", "RyTuneX.Views.FeaturesPage", "Features", "\uE9F9", "ErrorReporting"),
-        ("Feature_DisableGameBar", "RyTuneX.Views.FeaturesPage", "Features", "\uE990", "GameBar"),
-        ("Feature_DisableQuickAccessHistory", "RyTuneX.Views.FeaturesPage", "Features", "\uE81C", "QuickAccessHistory"),
-        ("Feature_DisableMyPeople", "RyTuneX.Views.FeaturesPage", "Features", "\uE716", "MyPeople"),
-        ("Feature_DisableSensorServices", "RyTuneX.Views.FeaturesPage", "Features", "\uE957", "SensorServices"),
-        ("Feature_DisableWindowsInk", "RyTuneX.Views.FeaturesPage", "Features", "\uEDC6", "WindowsInk"),
-        ("Feature_DisableSpellingAndTypingFeatures", "RyTuneX.Views.FeaturesPage", "Features", "\uF87B", "SpellingAndTypingFeatures"),
-        ("Feature_DisableFaxService", "RyTuneX.Views.FeaturesPage", "Features", "\uEF40", "FaxService"),
-        ("Feature_DisableInsiderService", "RyTuneX.Views.FeaturesPage", "Features", "\uF1AD", "InsiderService"),
-        ("Feature_DisableCloudClipboard", "RyTuneX.Views.FeaturesPage", "Features", "\uEBC3", "CloudClipboard"),
-        ("Feature_DisableStickyKeys", "RyTuneX.Views.FeaturesPage", "Features", "\uE765", "StickyKeys"),
-        ("Feature_DisableCastToDevice", "RyTuneX.Views.FeaturesPage", "Features", "\uEC15", "CastToDevice"),
+        ("Feature_DisableWindowsTransparency", typeof(FeaturesPage), "Features", "\uF5ED", "WindowsTransparency"),
+        ("Feature_EnableWindowsDarkMode", typeof(FeaturesPage), "Features", "\uE790", "WindowsDarkMode"),
+        ("Feature_EnableVerboseLogon", typeof(FeaturesPage), "Features", "\uE946", "VerboseLogon"),
+        ("Feature_DisableHibernation", typeof(FeaturesPage), "Features", "\uE708", "Hibernation"),
+        ("Feature_DisableHomeGroup", typeof(FeaturesPage), "Features", "\uE902", "HomeGroup"),
+        ("Feature_DisablePrintService", typeof(FeaturesPage), "Features", "\uE749", "PrintService"),
+        ("Feature_DisableCompatibilityAssistant", typeof(FeaturesPage), "Features", "\uE83D", "CompatibilityAssistant"),
+        ("Feature_DisableSearch", typeof(FeaturesPage), "Features", "\uE721", "Search"),
+        ("Feature_DisableErrorReporting", typeof(FeaturesPage), "Features", "\uE9F9", "ErrorReporting"),
+        ("Feature_DisableGameBar", typeof(FeaturesPage), "Features", "\uE990", "GameBar"),
+        ("Feature_DisableQuickAccessHistory", typeof(FeaturesPage), "Features", "\uE81C", "QuickAccessHistory"),
+        ("Feature_DisableMyPeople", typeof(FeaturesPage), "Features", "\uE716", "MyPeople"),
+        ("Feature_DisableSensorServices", typeof(FeaturesPage), "Features", "\uE957", "SensorServices"),
+        ("Feature_DisableWindowsInk", typeof(FeaturesPage), "Features", "\uEDC6", "WindowsInk"),
+        ("Feature_DisableSpellingAndTypingFeatures", typeof(FeaturesPage), "Features", "\uF87B", "SpellingAndTypingFeatures"),
+        ("Feature_DisableFaxService", typeof(FeaturesPage), "Features", "\uEF40", "FaxService"),
+        ("Feature_DisableInsiderService", typeof(FeaturesPage), "Features", "\uF1AD", "InsiderService"),
+        ("Feature_DisableCloudClipboard", typeof(FeaturesPage), "Features", "\uEBC3", "CloudClipboard"),
+        ("Feature_DisableStickyKeys", typeof(FeaturesPage), "Features", "\uE765", "StickyKeys"),
+        ("Feature_DisableCastToDevice", typeof(FeaturesPage), "Features", "\uEC15", "CastToDevice"),
         
         // FeaturesPage - Windows 11 Exclusive (glyphs match FeaturesPage.xaml)
-        ("Feature_DisableVBS", "RyTuneX.Views.FeaturesPage", "Features", "\uF552", "VBS"),
-        ("Feature_EnableEndTask", "RyTuneX.Views.FeaturesPage", "Features", "\uE25B", "EndTask"),
-        ("Feature_EnableClassicContextMenu", "RyTuneX.Views.FeaturesPage", "Features", "\uE8C8", "ClassicContextMenu"),
-        ("Feature_DisableRecommendedSectionStartMenu", "RyTuneX.Views.FeaturesPage", "Features", "\uE8FC", "RecommendedSectionStartMenu"),
-        ("Feature_MoveTaskbarToLeft", "RyTuneX.Views.FeaturesPage", "Features", "\uE112", "TaskbarToLeft"),
-        ("Feature_DisableSnapAssist", "RyTuneX.Views.FeaturesPage", "Features", "\uE7C4", "SnapAssist"),
-        ("Feature_DisableWidgets", "RyTuneX.Views.FeaturesPage", "Features", "\uE1AC", "Widgets"),
-        ("Feature_DisableChat", "RyTuneX.Views.FeaturesPage", "Features", "\uE8BD", "Chat"),
-        ("Feature_EnableFilesCompactMode", "RyTuneX.Views.FeaturesPage", "Features", "\uE8FD", "FilesCompactMode"),
-        ("Feature_DisableStickers", "RyTuneX.Views.FeaturesPage", "Features", "\uF4AA", "Stickers"),
-        ("Feature_DisableEdgeDiscoverBar", "RyTuneX.Views.FeaturesPage", "Features", "\uF6FA", "EdgeDiscoverBar"),
-        ("Feature_DisableCoPilotAI", "RyTuneX.Views.FeaturesPage", "Features", "\uE99A", "CoPilotAI"),
-        ("Feature_DisableWindowsRecall", "RyTuneX.Views.FeaturesPage", "Features", "\uE82F", "WindowsRecall"),
+        ("Feature_DisableVBS", typeof(FeaturesPage), "Features", "\uF552", "VBS"),
+        ("Feature_EnableEndTask", typeof(FeaturesPage), "Features", "\uE25B", "EndTask"),
+        ("Feature_EnableClassicContextMenu", typeof(FeaturesPage), "Features", "\uE8C8", "ClassicContextMenu"),
+        ("Feature_DisableRecommendedSectionStartMenu", typeof(FeaturesPage), "Features", "\uE8FC", "RecommendedSectionStartMenu"),
+        ("Feature_MoveTaskbarToLeft", typeof(FeaturesPage), "Features", "\uE112", "TaskbarToLeft"),
+        ("Feature_DisableSnapAssist", typeof(FeaturesPage), "Features", "\uE7C4", "SnapAssist"),
+        ("Feature_DisableWidgets", typeof(FeaturesPage), "Features", "\uE1AC", "Widgets"),
+        ("Feature_DisableChat", typeof(FeaturesPage), "Features", "\uE8BD", "Chat"),
+        ("Feature_EnableFilesCompactMode", typeof(FeaturesPage), "Features", "\uE8FD", "FilesCompactMode"),
+        ("Feature_DisableStickers", typeof(FeaturesPage), "Features", "\uF4AA", "Stickers"),
+        ("Feature_DisableEdgeDiscoverBar", typeof(FeaturesPage), "Features", "\uF6FA", "EdgeDiscoverBar"),
+        ("Feature_DisableCoPilotAI", typeof(FeaturesPage), "Features", "\uE99A", "CoPilotAI"),
+        ("Feature_DisableWindowsRecall", typeof(FeaturesPage), "Features", "\uE82F", "WindowsRecall"),
     ];
 
     // Navigation pages with their resource keys for localization
-    private static readonly List<(string ResourceKey, string PageTypeName, string Glyph)> NavigationPages =
+    private static readonly List<(string ResourceKey, Type PageType, string Glyph)> NavigationPages =
     [
-        ("Shell_Home", "RyTuneX.Views.HomePage", "\uE80F"),
-        ("Shell_OptimizeSystem", "RyTuneX.Views.OptimizeSystemPage", "\uF259"),
-        ("Shell_Repair", "RyTuneX.Views.RepairPage", "\uE90F"),
-        ("Shell_Debloat", "RyTuneX.Views.DebloatSystemPage", "\uE74D"),
-        ("Shell_Privacy", "RyTuneX.Views.PrivacyPage", "\uE7B3"),
-        ("Shell_Features", "RyTuneX.Views.FeaturesPage", "\uE74C"),
-        ("Shell_Network", "RyTuneX.Views.NetworkPage", "\uE968"),
-        ("Shell_Security", "RyTuneX.Views.SecurityPage", "\uEA18"),
-        ("Shell_GroupPolicy", "RyTuneX.Views.GroupPolicyPage", "\uE9D5"),
-        ("Shell_Processes", "RyTuneX.Views.ProcessesPage", "\uECAA"),
-        ("Shell_Services", "RyTuneX.Views.ServicesPage", "\uEA86"),
-        ("Shell_SystemInfo", "RyTuneX.Views.SystemInfoPage", "\uE770"),
-        ("Settings", "RyTuneX.Views.SettingsPage", "\uE713")
+        ("Shell_Home", typeof(HomePage), "\uE80F"),
+        ("Shell_OptimizeSystem", typeof(OptimizeSystemPage), "\uF259"),
+        ("Shell_Repair", typeof(RepairPage), "\uE90F"),
+        ("Shell_Debloat", typeof(DebloatSystemPage), "\uE74D"),
+        ("Shell_Privacy", typeof(PrivacyPage), "\uE7B3"),
+        ("Shell_Features", typeof(FeaturesPage), "\uE74C"),
+        ("Shell_Network", typeof(NetworkPage), "\uE968"),
+        ("Shell_Security", typeof(SecurityPage), "\uEA18"),
+        ("Shell_GroupPolicy", typeof(GroupPolicyPage), "\uE9D5"),
+        ("Shell_Processes", typeof(ProcessesPage), "\uECAA"),
+        ("Shell_Services", typeof(ServicesPage), "\uEA86"),
+        ("Shell_SystemInfo", typeof(SystemInfoPage), "\uE770"),
+        ("Settings", typeof(SettingsPage), "\uE713")
     ];
 
     private static readonly object CacheLock = new();
@@ -171,27 +172,27 @@ public static class AppSearchService
         var items = new List<SearchableItem>(NavigationPages.Count + FeatureMap.Count);
 
         // Add navigation pages
-        foreach (var (resourceKey, pageTypeName, glyph) in NavigationPages)
+        foreach (var (resourceKey, pageType, glyph) in NavigationPages)
         {
             // Try with .Content suffix first (Shell_Home.Content)
             var displayName = $"{resourceKey}.Content".TryGetLocalized();
             if (string.IsNullOrEmpty(displayName))
             {
                 // Fallback to page name extraction
-                displayName = pageTypeName.Split('.').Last().Replace("Page", "");
+                displayName = pageType.FullName!.Split('.').Last().Replace("Page", "");
             }
 
             items.Add(new SearchableItem
             {
                 DisplayName = displayName,
                 Glyph = glyph,
-                PageTypeName = pageTypeName,
+                PageTypeName = pageType.FullName!,
                 Category = "Navigation"
             });
         }
 
         // Add feature items from resources using the slash format for x:Uid
-        foreach (var (resourceKeyPrefix, pageTypeName, category, glyph, toggleTag) in FeatureMap)
+        foreach (var (resourceKeyPrefix, pageType, category, glyph, toggleTag) in FeatureMap)
         {
             // WinUI x:Uid resources use slash format: "Feature_MenuShowDelay/Header"
             // but ResourceLoader.GetString uses dot format: "Feature_MenuShowDelay.Header"
@@ -220,7 +221,7 @@ public static class AppSearchService
                 DisplayName = header,
                 Description = description,
                 Glyph = glyph,
-                PageTypeName = pageTypeName,
+                PageTypeName = pageType.FullName!,
                 OptionTag = toggleTag,
                 Category = category
             });

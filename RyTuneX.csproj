@@ -1,80 +1,111 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <LangVersion>preview</LangVersion>
     <RootNamespace>RyTuneX</RootNamespace>
     <ApplicationIcon>Assets/WindowIcon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Platforms>x86;x64</Platforms>
-    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+	<Platforms>x86;x64</Platforms>
+	<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <PublishProfile>Properties\PublishProfiles\win-$(Platform).pubxml</PublishProfile>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
-	<UseWinUI>true</UseWinUI>
-	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWinUI>true</UseWinUI>
+    <WinUISDKReferences>true</WinUISDKReferences>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AppxBundleAutoResourcePackageQualifiers>Scale|DXFeatureLevel</AppxBundleAutoResourcePackageQualifiers>
+    <AppxDefaultResourceQualifiers>Language=en-US;ar-TN;de;es-ES;fr-FR;he-IL;it-IT;ja-JP;ko-KR;pt-BR;ru-RU;tr-TR;vi-VN;zh-Hans;zh-Hant|Contrast=standard|Scale=200|HomeRegion=001|TargetSize=256|LayoutDirection=LTR|DXFeatureLevel=DX9|Configuration=|AlternateForm=|Platform=UAP</AppxDefaultResourceQualifiers>
+    <WindowsAppSDKSelfContained>false</WindowsAppSDKSelfContained>
     <EnableMsixTooling>true</EnableMsixTooling>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-	<AppxBundle>Never</AppxBundle>
+    <AppxBundle>Always</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
-	<PackageCertificateThumbprint>953E3900D6095107A760D46C96156DA557D4F889</PackageCertificateThumbprint>
-	<StartupObject>RyTuneX.Program</StartupObject>
+    <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <Version>1.6.0</Version>
+    <Version>1.6.2</Version>
     <Authors>Rayen Ghanmi</Authors>
+    <GenerateTestArtifacts>False</GenerateTestArtifacts>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
   </PropertyGroup>
+
   <ItemGroup>
-    <None Remove="Assets\bug.png" />
     <None Remove="Assets\discord.png" />
     <None Remove="Assets\github.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
-    <None Remove="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
     <None Remove="Assets\WindowIcon.ico" />
-    <None Remove="Views\DebloatSystemPage.xaml" />
-    <None Remove="Views\FeaturesPage.xaml" />
-    <None Remove="Views\NetworkPage.xaml" />
-    <None Remove="Views\PrivacyPage.xaml" />
-    <None Remove="Views\RepairPage.xaml" />
-    <None Remove="Views\ProcessesPage.xaml" />
-    <None Remove="Views\ServiesPage.xaml" />
+    <None Remove="Views\*.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
-  <ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.250402" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.250402" />
-	  <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.250402" />
-	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
-	  <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
-	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.10" />
-	  <PackageReference Include="System.Drawing.Common" Version="9.0.10" />
-	  <PackageReference Include="System.Management" Version="9.0.10" />
-	  <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.10" />
-	  <PackageReference Include="vocaluxe.dependencies.netfwtypelib" Version="1.0.1" />
-	  <PackageReference Include="WinUIEx" Version="2.9.0" />
-	  <PackageReference Include="System.Management.Automation" Version="7.5.4" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
-    <ProjectCapability Include="Msix" />
-  </ItemGroup>
-
   <PropertyGroup Label="Globals">
     <WebView2EnableCsWinRTProjection>False</WebView2EnableCsWinRTProjection>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
-    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
+	<PublishReadyToRunEmitSymbols>false</PublishReadyToRunEmitSymbols>
+  	<GeneratePriDebugFiles>false</GeneratePriDebugFiles>
+  	<GenerateDocumentationFile>false</GenerateDocumentationFile>
+  	<CsWinRTRcwFactoryFallbackGeneratorForceOptOut>true</CsWinRTRcwFactoryFallbackGeneratorForceOptOut>
+  	<CsWinRTIIDOptimizerOptOut>false</CsWinRTIIDOptimizerOptOut>
+  	<EventSourceSupport>false</EventSourceSupport>
+  	<EnableDynamicLoading>false</EnableDynamicLoading>
+  	<InvariantGlobalization>false</InvariantGlobalization>
+  	<EnableCrashDump>false</EnableCrashDump>
+  	<EnableMiniDump>false</EnableMiniDump>
+  	<IlcFoldIdenticalMethods>true</IlcFoldIdenticalMethods>
+  	<IlcDisableStackTraceMetadata>true</IlcDisableStackTraceMetadata>
+  	<EnableXbfGeneration>true</EnableXbfGeneration>
+	<DebuggerSupport>false</DebuggerSupport>
+	<EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+	<EnableBindingDiagnostics>false</EnableBindingDiagnostics>
+	<AppxPackageCompressionEnabled>true</AppxPackageCompressionEnabled>
+	<Deterministic>true</Deterministic>
+	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	<IlcInvariantGlobalization>false</IlcInvariantGlobalization>
+	<StripSymbols>true</StripSymbols>
+	<IlcDisableReflection>false</IlcDisableReflection>
+	<IlcGenerateCompleteTypeMetadata>true</IlcGenerateCompleteTypeMetadata>
+	<OptimizeImplicitStyles>true</OptimizeImplicitStyles>
   </PropertyGroup>
+
+  <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+      <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.251219" />
+      <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
+      <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
+      <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260101001" />
+      <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.2" />
+      <PackageReference Include="System.Drawing.Common" Version="10.0.2" />
+      <PackageReference Include="System.Management" Version="10.0.2" />
+      <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.2" />
+      <PackageReference Include="WinUIEx" Version="2.9.0" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TrimmerRootAssembly Include="RyTuneX" />
+    <TrimmerRootAssembly Include="Microsoft.Extensions.DependencyInjection" />
+    <TrimmerRootAssembly Include="Microsoft.Extensions.Hosting" />
+    <TrimmerRootAssembly Include="CommunityToolkit.Mvvm" />
+    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Behaviors" />
+    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Controls.Primitives" />
+    <TrimmerRootAssembly Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
+    <TrimmerRootAssembly Include="WinUIEx" />
+    <TrimmerRootAssembly Include="System.ServiceProcess.ServiceController" />
+    <TrimmerRootAssembly Include="System.Diagnostics.PerformanceCounter" />
+    <TrimmerRootAssembly Include="System.Drawing.Common" />
+    <TrimmerRootAssembly Include="System.Management" />
+  </ItemGroup>
+
 </Project>

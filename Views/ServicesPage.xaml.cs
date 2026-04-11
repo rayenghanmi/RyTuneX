@@ -1,4 +1,4 @@
-using System.ServiceProcess;
+﻿using System.ServiceProcess;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
@@ -65,7 +65,7 @@ public sealed partial class ServicesPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error loading services: {ex.Message}");
+            _ = LogHelper.LogError($"Error loading services: {ex.Message}");
         }
         finally
         {
@@ -246,7 +246,7 @@ public sealed partial class ServicesPage : Page
                 _ => "Processing"
             };
 
-            await LogHelper.Log($"{actionText} service: {serviceName}");
+            _ = LogHelper.Log($"{actionText} service: {serviceName}");
 
             await Task.Run(() =>
             {
@@ -296,7 +296,7 @@ public sealed partial class ServicesPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error controlling service {serviceName}: {ex.Message}");
+            _ = LogHelper.LogError($"Error controlling service {serviceName}: {ex.Message}");
             App.ShowNotification("Service Control Error", $"Failed to control service: {ex.Message}", InfoBarSeverity.Error, 5000);
         }
     }
@@ -305,7 +305,7 @@ public sealed partial class ServicesPage : Page
     {
         try
         {
-            await LogHelper.Log($"Changing startup type for service {serviceName} to {startupType}");
+            _ = LogHelper.Log($"Changing startup type for service {serviceName} to {startupType}");
 
             var startValue = startupType switch
             {
@@ -333,7 +333,7 @@ public sealed partial class ServicesPage : Page
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error changing startup type for {serviceName}: {ex.Message}");
+            _ = LogHelper.LogError($"Error changing startup type for {serviceName}: {ex.Message}");
             App.ShowNotification("Error", $"Failed to change startup type: {ex.Message}", InfoBarSeverity.Error, 5000);
 
             // Reload to reset the combobox

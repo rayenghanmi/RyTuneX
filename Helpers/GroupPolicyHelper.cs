@@ -948,7 +948,7 @@ public static class GroupPolicyHelper
                 if (subKey == null)
                 {
                     // Key doesn't exist - nothing to remove
-                    await LogHelper.Log($"Policy {policy.Id}: Registry key does not exist, nothing to remove.");
+                    _ = LogHelper.Log($"Policy {policy.Id}: Registry key does not exist, nothing to remove.");
                     return true;
                 }
 
@@ -956,11 +956,11 @@ public static class GroupPolicyHelper
                 if (subKey.GetValue(policy.ValueName) != null)
                 {
                     subKey.DeleteValue(policy.ValueName, throwOnMissingValue: false);
-                    await LogHelper.Log($"Policy {policy.Id}: Removed registry value {policy.ValueName}");
+                    _ = LogHelper.Log($"Policy {policy.Id}: Removed registry value {policy.ValueName}");
                 }
                 else
                 {
-                    await LogHelper.Log($"Policy {policy.Id}: Value does not exist, nothing to remove.");
+                    _ = LogHelper.Log($"Policy {policy.Id}: Value does not exist, nothing to remove.");
                 }
 
                 // Clean up empty parent keys if possible (but be careful not to delete keys with other values)
@@ -970,12 +970,12 @@ public static class GroupPolicyHelper
             }
             catch (UnauthorizedAccessException ex)
             {
-                await LogHelper.LogError($"Access denied removing policy {policy.Id}: {ex.Message}");
+                _ = LogHelper.LogError($"Access denied removing policy {policy.Id}: {ex.Message}");
                 return false;
             }
             catch (Exception ex)
             {
-                await LogHelper.LogError($"Error removing policy {policy.Id}: {ex.Message}");
+                _ = LogHelper.LogError($"Error removing policy {policy.Id}: {ex.Message}");
                 return false;
             }
         }).ConfigureAwait(false);
@@ -1072,11 +1072,11 @@ public static class GroupPolicyHelper
             await OptimizationOptions.StartInCmd("taskkill /F /IM explorer.exe").ConfigureAwait(false);
             await Task.Delay(500).ConfigureAwait(false);
             await OptimizationOptions.StartInCmd("start %SystemRoot%\\explorer.exe").ConfigureAwait(false);
-            await LogHelper.Log("Explorer restarted to apply policy changes.");
+            _ = LogHelper.Log("Explorer restarted to apply policy changes.");
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error restarting Explorer: {ex.Message}");
+            _ = LogHelper.LogError($"Error restarting Explorer: {ex.Message}");
         }
     }
 }

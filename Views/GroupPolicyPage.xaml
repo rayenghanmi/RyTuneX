@@ -19,7 +19,10 @@
     <Grid x:Name="ContentArea">
         <ScrollViewer Padding="24,14,24,0">
             <StackPanel Margin="0,0,0,38" Spacing="{StaticResource SettingsCardSpacing}">
-                
+                <StackPanel.ChildrenTransitions>
+                    <EntranceThemeTransition FromVerticalOffset="50" />
+                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                </StackPanel.ChildrenTransitions>
                 <InfoBar x:Name="InfoBanner"
                          x:Uid="GroupPolicyPage_InfoBanner"
                          IsOpen="True"

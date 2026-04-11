@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using System.Drawing;
+﻿using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Drawing.Imaging;
-using System.Management.Automation;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -12,13 +11,21 @@ namespace RyTuneX.Helpers;
 
 internal partial class OptimizationOptions
 {
+    // Queueing to serialize toggle operations
+    private static readonly SemaphoreSlim _toggleQueueLock = new(1, 1);
+    private static readonly ConcurrentQueue<Func<CancellationToken, Task>> _toggleQueue = new();
+    private static int _toggleRunning = 0; // 0 = none, > 0 running
+    private static readonly CancellationTokenSource _toggleCts = new();
+
+    public static bool HasPendingToggleOperations => _toggleQueue.Count > 0 || _toggleRunning > 0;
+
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
     private static readonly string IconCacheDirectory = Path.Combine(Path.GetTempPath(), "RyTuneX_AppIcons");
 
     [DllImport("Shell32.dll", CharSet = CharSet.Auto)]
-    public static extern int ExtractIconEx(string lpszFile, int nIconIndex, IntPtr[] phiconLarge, IntPtr[]? phiconSmall, int nIcons);
+    private static extern int ExtractIconEx(string file, int index, IntPtr[] large, IntPtr[]? small, int icons);
 
-    [DllImport("user32.dll", SetLastError = true)]
+    [DllImport("user32.dll")]
     private static extern bool DestroyIcon(IntPtr hIcon);
 
     public static async Task<List<Tuple<string, string, bool>>> GetInstalledApps(bool uninstallableOnly)
@@ -53,24 +60,15 @@ internal partial class OptimizationOptions
             .DistinctBy(app => app.Item1)  // Remove duplicates based on app name
             .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
 
-        await LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
+        _ = LogHelper.Log("Returning Installed Apps [GetInstalledApps]");
         return installedApps;
     }
 
-    private static string GetSafeIconFileName(string appName, string extension = ".png")
+    private static string GetSafeIconFileName(string identity)
     {
-        // Remove invalid filename characters and limit length
-        var invalidChars = Path.GetInvalidFileNameChars();
-        var safeName = new string(appName.Where(c => !invalidChars.Contains(c)).ToArray());
-
-        // Limit length to prevent long filenames
-        if (safeName.Length > 50)
-        {
-            safeName = safeName[..50];
-        }
-
-        // Add timestamp hash to ensure uniqueness
-        return $"{safeName}_{Math.Abs(appName.GetHashCode())}{extension}";
+        var safe = new string(identity.Where(c => !Path.GetInvalidFileNameChars().Contains(c)).ToArray());
+        if (safe.Length > 60) safe = safe[..60];
+        return $"{safe}_{Math.Abs(identity.GetHashCode())}.png";
     }
 
     private static async Task<List<Tuple<string, string, bool>>> GetUwpApps(bool uninstallableOnly)
@@ -136,33 +134,102 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError(ex.Message).ConfigureAwait(false);
+            _ = LogHelper.LogError(ex.Message).ConfigureAwait(false);
         }
 
         return installedApps;
+    }
+
+    private static IEnumerable<RegistryKey> OpenUninstallRoots()
+    {
+        const string path = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+
+        var roots = new[]
+        {
+            (RegistryHive.LocalMachine, RegistryView.Registry64),
+            (RegistryHive.LocalMachine, RegistryView.Registry32),
+            (RegistryHive.CurrentUser,  RegistryView.Registry64),
+            (RegistryHive.CurrentUser,  RegistryView.Registry32),
+        };
+
+        foreach (var (hive, view) in roots)
+        {
+            RegistryKey? baseKey = null;
+            try
+            {
+                baseKey = RegistryKey.OpenBaseKey(hive, view).OpenSubKey(path);
+            }
+            catch { }
+
+            if (baseKey != null)
+                yield return baseKey;
+        }
+    }
+
+    // Find the uninstall (or quiet uninstall) string for a Win32 app by its display name using the same uninstall roots as GetWin32Apps.
+    internal static string? GetWin32UninstallString(string appName)
+    {
+        try
+        {
+            var uninstallRoots = OpenUninstallRoots().ToList();
+
+            var allSubKeys = uninstallRoots
+                .SelectMany(k => k.GetSubKeyNames()
+                    .Select(name => (Root: k, Name: name)))
+                .GroupBy(x => x.Name, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.First());
+
+            foreach (var uninstallRoot in allSubKeys)
+            {
+                using var subKey = uninstallRoot.Root.OpenSubKey(uninstallRoot.Name);
+                if (subKey == null)
+                    continue;
+
+                var displayName = subKey.GetValue("DisplayName") as string;
+                if (string.IsNullOrEmpty(displayName))
+                    continue;
+
+                if (!displayName.Equals(appName, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                var uninstallString = subKey.GetValue("QuietUninstallString") as string;
+                if (string.IsNullOrEmpty(uninstallString))
+                {
+                    uninstallString = subKey.GetValue("UninstallString") as string;
+                }
+
+                return uninstallString;
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"GetWin32UninstallString failed: {ex.Message}");
+        }
+
+        return null;
     }
 
     public static async Task<List<Tuple<string, string, bool>>> GetWin32Apps()
     {
         var win32Apps = new List<Tuple<string, string, bool>>();
 
-        var registryPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
         try
         {
-            using var machineKey = Registry.LocalMachine.OpenSubKey(registryPath);
-            using var userKey = Registry.CurrentUser.OpenSubKey(registryPath);
+            var uninstallRoots = OpenUninstallRoots().ToList();
 
-            var allSubKeys = (machineKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
-                .Concat(userKey?.GetSubKeyNames() ?? Enumerable.Empty<string>())
-                .Distinct();
+            var allSubKeys = uninstallRoots
+                .SelectMany(k => k.GetSubKeyNames()
+                    .Select(name => (Root: k, Name: name)))
+                .GroupBy(x => x.Name, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.First());
 
-            foreach (var subKeyName in allSubKeys)
+            foreach (var uninstallRoot in allSubKeys)
             {
-                using var subKey = machineKey?.OpenSubKey(subKeyName) ?? userKey?.OpenSubKey(subKeyName);
+                using var subKey = uninstallRoot.Root.OpenSubKey(uninstallRoot.Name);
 
                 if (subKey == null)
                 {
-                    await LogHelper.LogError($"Failed to open subkey {subKeyName}");
+                    _ = LogHelper.LogError($"Failed to open subkey {uninstallRoot.Name}");
                     continue;
                 }
 
@@ -214,7 +281,7 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Failed to load Win32 apps: {ex.Message}");
+            _ = LogHelper.LogError($"Failed to load Win32 apps: {ex.Message}");
         }
 
         return [.. win32Apps
@@ -222,252 +289,170 @@ internal partial class OptimizationOptions
             .OrderBy(app => app.Item1)];   // Sort the apps alphabetically by name
     }
 
-    private static async Task<string> ExtractLogoPath(string installLocation, bool isWin32 = false, string? appName = null)
+    private static async Task<string> ExtractLogoPath(string? installLocation, bool isWin32, string appName)
     {
-        var logoPath = Path.Combine(IconCacheDirectory, "defaulticon.png");
+        Directory.CreateDirectory(IconCacheDirectory);
+        var defaultIcon = isWin32
+            ? Path.Combine(IconCacheDirectory, "defaulticon.png")
+            : string.Empty;
 
-        if (isWin32)
+        if (string.IsNullOrEmpty(installLocation)) return defaultIcon;
+
+        var identity = $"{appName}|{installLocation}";
+        var cached = Path.Combine(IconCacheDirectory, GetSafeIconFileName(identity));
+
+        // Prevent poisoned cache
+        if (File.Exists(cached))
+        {
+            if (new FileInfo(cached).Length > 2048)
+                return cached;
+            File.Delete(cached);
+        }
+
+        // -------- WIN32 --------
+        if (isWin32 && Directory.Exists(installLocation))
+        {
+            // Try DisplayIcon from registry
+            try
+            {
+                using var key = OpenUninstallRoots()
+                    .SelectMany(r => r.GetSubKeyNames().Select(n => r.OpenSubKey(n)))
+                    .FirstOrDefault(k => (k?.GetValue("DisplayName") as string)?.Equals(appName, StringComparison.OrdinalIgnoreCase) == true);
+
+                var displayIcon = key?.GetValue("DisplayIcon") as string;
+                if (!string.IsNullOrEmpty(displayIcon))
+                {
+                    displayIcon = displayIcon.Split(',')[0].Replace("\"", "");
+                    if (File.Exists(displayIcon))
+                    {
+                        var large = new IntPtr[1];
+                        ExtractIconEx(displayIcon, 0, large, null, 1);
+                        if (large[0] != IntPtr.Zero)
+                        {
+                            using var icon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(large[0]).Clone();
+                            DestroyIcon(large[0]);
+                            await SaveIcon(icon, cached);
+                            return cached;
+                        }
+                    }
+                }
+            }
+            catch { }
+
+            // Fallback: scan executables (largest EXE wins)
+            var exe = Directory
+                .EnumerateFiles(installLocation, "*.exe", SearchOption.AllDirectories)
+                .OrderByDescending(f => new FileInfo(f).Length)
+                .FirstOrDefault();
+
+            if (exe != null)
+            {
+                var large = new IntPtr[1];
+                ExtractIconEx(exe, 0, large, null, 1);
+
+                if (large[0] != IntPtr.Zero)
+                {
+                    using var icon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(large[0]).Clone();
+                    DestroyIcon(large[0]);
+                    await SaveIcon(icon, cached);
+                    return cached;
+                }
+            }
+        }
+
+        // -------- UWP --------
+        else if (!isWin32 && Directory.Exists(installLocation))
         {
             try
             {
-                if (!string.IsNullOrEmpty(installLocation) && Directory.Exists(installLocation))
+                var manifest = Directory.GetFiles(installLocation, "AppxManifest.xml", SearchOption.TopDirectoryOnly)
+                    .Concat(Directory.GetFiles(installLocation, "appxmanifest.xml", SearchOption.TopDirectoryOnly))
+                    .FirstOrDefault();
+
+                if (manifest == null)
+                    return defaultIcon;
+
+                var doc = XDocument.Load(manifest);
+
+                // Namespaces used by UWP manifests
+                XNamespace foundation = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
+                XNamespace uap = "http://schemas.microsoft.com/appx/manifest/uap/windows10";
+
+                // Prefer VisualElements icons
+                var visual = doc.Descendants(uap + "VisualElements").FirstOrDefault();
+
+                var logoPath =
+                    visual?.Attribute("Square44x44Logo")?.Value ??
+                    visual?.Attribute("Square150x150Logo")?.Value;
+
+                // Fallback to old <Logo> element
+                if (string.IsNullOrEmpty(logoPath))
                 {
-                    // Use the provided app name or fallback to directory name
-                    var nameForIcon = appName ?? Path.GetFileName(installLocation) ?? "Unknown";
-                    var cachedIconPath = Path.Combine(IconCacheDirectory, GetSafeIconFileName(nameForIcon));
-
-                    // Check if icon already exists in cache and is valid
-                    if (File.Exists(cachedIconPath) && new FileInfo(cachedIconPath).Length > 0)
-                    {
-                        return cachedIconPath;
-                    }
-
-                    // Ensure cache directory exists before trying to save
-                    if (!Directory.Exists(IconCacheDirectory))
-                    {
-                        Directory.CreateDirectory(IconCacheDirectory);
-                    }
-
-                    // Look for existing icons in the app directory
-                    var iconIcoPath = Path.Combine(installLocation, "app.ico");
-                    var iconPngPath = Path.Combine(installLocation, "icon.png");
-
-                    // If existing icons are found, copy them to cache
-                    if (File.Exists(iconIcoPath))
-                    {
-                        try
-                        {
-                            // Copy the existing .ico file to cache as .png
-                            using var icon = new System.Drawing.Icon(iconIcoPath);
-                            await SaveIconAsPng(icon, cachedIconPath);
-                            logoPath = cachedIconPath;
-                        }
-                        catch (Exception ex)
-                        {
-                            await LogHelper.LogError($"Failed to copy existing .ico file: {ex.Message}");
-                            // Fall back to original path if copying fails
-                            logoPath = iconIcoPath;
-                        }
-                    }
-                    else if (File.Exists(iconPngPath))
-                    {
-                        try
-                        {
-                            // Copy the existing icon.png file to cache
-                            File.Copy(iconPngPath, cachedIconPath, true);
-                            logoPath = cachedIconPath;
-                        }
-                        catch (Exception ex)
-                        {
-                            await LogHelper.LogError($"Failed to copy existing .png file: {ex.Message}");
-                            // Fall back to original path if copying fails
-                            logoPath = iconPngPath;
-                        }
-                    }
-                    else
-                    {
-                        // Extract icon from executable and save to temp cache directory
-                        var exeFile = Directory.GetFiles(installLocation, "*.exe").FirstOrDefault();
-                        if (!string.IsNullOrEmpty(exeFile))
-                        {
-                            try
-                            {
-                                using var icon = System.Drawing.Icon.ExtractAssociatedIcon(exeFile);
-                                if (icon != null)
-                                {
-                                    await SaveIconAsPng(icon, cachedIconPath);
-                                    logoPath = cachedIconPath;
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                await LogHelper.LogError($"Failed to extract icon from executable: {ex.Message}");
-                            }
-                        }
-                    }
+                    logoPath = doc.Descendants(foundation + "Logo").FirstOrDefault()?.Value;
                 }
+
+                if (string.IsNullOrEmpty(logoPath))
+                    return defaultIcon;
+
+                logoPath = logoPath.Replace('/', '\\');
+                var logoDir = Path.Combine(installLocation, Path.GetDirectoryName(logoPath) ?? "");
+                var baseName = Path.GetFileNameWithoutExtension(logoPath);
+
+                if (!Directory.Exists(logoDir))
+                    return defaultIcon;
+
+                // Collect all possible logo candidates
+                var candidates = Directory.GetFiles(logoDir, baseName + "*.png");
+
+                if (candidates.Length == 0)
+                    return defaultIcon;
+
+                // Prefer targetsize-48/64 then Scale-200
+                var selected = candidates
+                .OrderByDescending(f => f.Contains("targetsize-48"))
+                .ThenByDescending(f => f.Contains("targetsize-64"))
+                .ThenBy(f => Math.Abs(GetScale(f) - 200))
+                .FirstOrDefault();
+
+                if (selected != null && File.Exists(selected))
+                    return selected;
             }
-            catch (Exception ex)
+            catch
             {
-                await LogHelper.LogError($"Failed to extract logo for Win32 app: {ex.Message}");
+                return defaultIcon;
             }
         }
-        else
-        {
-            try
-            {
-                var packageName = Path.GetFileName(installLocation).ToLower();
-                if (packageName.Contains("sechealth"))
-                {
-                    logoPath = Path.Combine(installLocation, "Assets", "WindowsSecurityAppList.targetsize-48.png");
-                }
-                else if (packageName.Contains("edge"))
-                {
-                    logoPath = Path.Combine(installLocation, "SmallLogo.png");
-                }
-                else
-                {
-                    string[] possibleManifestPaths = {
-                        Path.Combine(installLocation, "AppxManifest.xml"),
-                        Path.Combine(installLocation, "appxmanifest.xml")
-                    };
-
-                    var manifestPath = possibleManifestPaths.FirstOrDefault(File.Exists);
-
-                    if (manifestPath != null)
-                    {
-                        var doc = XDocument.Load(manifestPath);
-                        XNamespace ns = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
-
-                        var logoElement = doc.Descendants(ns + "Logo").FirstOrDefault();
-                        if (logoElement != null)
-                        {
-                            var relativeLogoPath = logoElement.Value.Replace('/', '\\');
-                            var baseLogoName = Path.GetFileNameWithoutExtension(relativeLogoPath);
-                            var logoDirectory = Path.Combine(installLocation, Path.GetDirectoryName(relativeLogoPath) ?? "");
-
-                            if (Directory.Exists(logoDirectory))
-                            {
-                                var exactLogoPath = Path.Combine(logoDirectory, relativeLogoPath);
-                                if (File.Exists(exactLogoPath))
-                                {
-                                    logoPath = exactLogoPath;
-                                }
-                                else
-                                {
-                                    var logoFiles = Directory.GetFiles(logoDirectory, $"{baseLogoName}.Scale-*.png");
-                                    var selectedLogoFile = logoFiles
-                                        .OrderBy(f => Math.Abs(GetScaleFromFileName(f) - 200))
-                                        .FirstOrDefault();
-
-                                    if (!string.IsNullOrEmpty(selectedLogoFile) && File.Exists(selectedLogoFile))
-                                    {
-                                        logoPath = selectedLogoFile;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                await LogHelper.LogError($"Failed to extract logo path: {ex.Message}");
-            }
-        }
-        return logoPath;
+        return defaultIcon;
     }
 
     // Save the extracted icon as a PNG file
-    private static async Task SaveIconAsPng(System.Drawing.Icon icon, string filePath)
+    private static async Task SaveIcon(System.Drawing.Icon icon, string path)
     {
-        try
-        {
-            // Ensure the directory exists
-            var directory = Path.GetDirectoryName(filePath);
-            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
-            using var stream = new MemoryStream();
-            // Convert the icon to a bitmap and then save it as PNG
-            using (var bitmap = new Bitmap(icon.ToBitmap()))
-            {
-                bitmap.Save(stream, ImageFormat.Png);
-            }
-
-            // Write the stream to the file
-            File.WriteAllBytes(filePath, stream.ToArray());
-        }
-        catch (Exception ex)
-        {
-            await LogHelper.LogError($"Failed to save icon as PNG to {filePath}: {ex.Message}");
-        }
+        using var bmp = icon.ToBitmap();
+        using var ms = new MemoryStream();
+        bmp.Save(ms, ImageFormat.Png);
+        await File.WriteAllBytesAsync(path, ms.ToArray());
     }
 
-    private static int GetScaleFromFileName(string fileName)
+    private static int GetScale(string file)
     {
-        var match = Regex.Match(fileName, @"Scale-(\d+)");
-        return match.Success ? int.Parse(match.Groups[1].Value) : 100;
+        var m = Regex.Match(file, @"Scale-(\\d+)");
+        return m.Success ? int.Parse(m.Groups[1].Value) : 100;
     }
 
-    internal static async Task ExecuteBatchFileAsync()
-    {
-        try
-        {
-            // Get the path to the PowerShell script file
-            var scriptFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "RemoveEdge.ps1");
-
-            if (!File.Exists(scriptFilePath))
-            {
-                await LogHelper.LogError($"Script file not found: {scriptFilePath}");
-                return;
-            }
-
-            // Read the content of the script file
-            var scriptContent = await File.ReadAllTextAsync(scriptFilePath);
-
-            // Create a PowerShell instance
-            using var PowerShellInstance = PowerShell.Create();
-            await LogHelper.Log("Getting Installed Apps [OptimizationOptions.cs]");
-
-            // Add the script content
-            PowerShellInstance.AddScript(scriptContent)
-                .AddArgument("-Set-ExecutionPolicy Unrestricted");
-
-            // Invoke the script asynchronously
-            await Task.Run(() => PowerShellInstance.Invoke());
-
-            // Check for errors
-            if (PowerShellInstance.HadErrors)
-            {
-                foreach (var error in PowerShellInstance.Streams.Error)
-                {
-                    await LogHelper.LogError($"PowerShell Error: {error}");
-                }
-            }
-            else
-            {
-                await LogHelper.Log("PowerShell script executed successfully.");
-            }
-        }
-        catch (Exception ex)
-        {
-            await LogHelper.LogError($"Error executing batch file: {ex.Message}");
-        }
-    }
     internal static async Task<int> StartInCmd(string command)
     {
         try
         {
-            using var p = new Process
+            var cmdPath = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "cmd.exe")
+                    : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "cmd.exe");
+
+            using var process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? Path.Combine(Environment.GetEnvironmentVariable("windir"), @"SysNative\cmd.exe")
-                        : Path.Combine(Environment.GetEnvironmentVariable("windir"), @"System32\cmd.exe"),
+                    FileName = cmdPath,
                     Arguments = $"/C {command}",
                     CreateNoWindow = true,
                     UseShellExecute = false,
@@ -476,28 +461,53 @@ internal partial class OptimizationOptions
                 }
             };
 
-            // Start the process in a separate Task
-            await Task.Run(() => p.Start());
+            process.Start();
 
-            // Capture error output
-            var errorOutput = await p.StandardError.ReadToEndAsync();
+            var stdErrTask = process.StandardError.ReadToEndAsync();
 
-            // Await process completion and capture exit code
-            await p.WaitForExitAsync();
+            await process.WaitForExitAsync().ConfigureAwait(false);
 
-            if (p.ExitCode != 0 && !string.IsNullOrEmpty(errorOutput))
+            var errorOutput = await stdErrTask.ConfigureAwait(false);
+
+            if (process.ExitCode != 0)
             {
-                await LogHelper.LogError($"Command '{command}' failed with exit code {p.ExitCode}: {errorOutput}");
+                _ = LogHelper.LogError($"Command failed (exit {process.ExitCode})\n{errorOutput}");
             }
 
-            return p.ExitCode;
+            return process.ExitCode;
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"Error running command: {ex.Message}");
+            _ = LogHelper.LogError($"Error running command: {ex}");
             throw;
         }
     }
+
+    internal static async Task<string> RunPowerShell(string command)
+    {
+        var psPath = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysNative", "WindowsPowerShell", "v1.0", "powershell.exe")
+                : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "WindowsPowerShell", "v1.0", "powershell.exe");
+
+        using var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = psPath,
+                Arguments = $"-NoProfile -NonInteractive -Command \"{command}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            }
+        };
+
+        process.Start();
+        var output = await process.StandardOutput.ReadToEndAsync().ConfigureAwait(false);
+        await process.WaitForExitAsync().ConfigureAwait(false);
+        return output.Trim();
+    }
+
     public static async Task RevertAllChanges()
     {
         try
@@ -544,1065 +554,555 @@ internal partial class OptimizationOptions
         }
         catch (Exception ex)
         {
-            await LogHelper.LogError($"RevertAllChanges: {ex.Message}\n Stack Trace: {ex.StackTrace}");
+            _ = LogHelper.LogError($"RevertAllChanges: {ex.Message}\n Stack Trace: {ex.StackTrace}");
         }
     }
     public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)
     {
-        if (toggleSwitch != null && toggleSwitch.Tag != null)
+        if (toggleSwitch == null || toggleSwitch.Tag == null) return;
+
+        // Save the state to RyTuneX registry first (64-bit registry with 32-bit app)
+        try
         {
-            try
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default).CreateSubKey(RegistryBaseKey);
+
+            key?.SetValue((string)toggleSwitch.Tag, toggleSwitch.IsOn ? 1 : 0, RegistryValueKind.DWord);
+            Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error saving registry state: {ex.Message}");
+        }
+
+        // Enqueue the work so operations are serialized
+        var tag = toggleSwitch.Tag.ToString();
+        var isOn = toggleSwitch.IsOn;
+
+        _toggleQueue.Enqueue(ct => ExecuteToggleActionAsync(tag, isOn, ct));
+
+        // Try to process the queue (fire-and-forget safe runner)
+        _ = Task.Run(() => ProcessToggleQueueAsync(_toggleCts.Token));
+    }
+
+    private static async Task ProcessToggleQueueAsync(CancellationToken ct)
+    {
+        if (!await _toggleQueueLock.WaitAsync(0, ct).ConfigureAwait(false))
+            return; // another process is running
+
+        try
+        {
+            while (_toggleQueue.TryDequeue(out var work))
             {
-                // Save the state to RyTuneX registry first (64-bit registry with 32-bit app)
-                using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                    Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                        ? RegistryView.Registry64
-                        : RegistryView.Default).CreateSubKey(RegistryBaseKey);
-
-                key?.SetValue((string)toggleSwitch.Tag, toggleSwitch.IsOn ? 1 : 0, RegistryValueKind.DWord);
-
-                Debug.WriteLine($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+                Interlocked.Increment(ref _toggleRunning);
+                try
+                {
+                    await work(ct).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException) { break; }
+                catch (Exception ex)
+                {
+                    _ = LogHelper.LogError($"Toggle operation failed: {ex.Message}");
+                }
+                finally
+                {
+                    Interlocked.Decrement(ref _toggleRunning);
+                }
             }
-            catch (Exception ex)
-            {
-                await LogHelper.LogError($"Error saving registry state: {ex.Message}");
-            }
-            switch (toggleSwitch.Tag)
-            {
-                case "RecommendedSectionStartMenu":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableRecommendedSectionStartMenu();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableRecommendedSectionStartMenu();
-                    }
-                    break;
-
-                case "LegacyBootMenu":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableLegacyBootMenu();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableLegacyBootMenu();
-                    }
-                    break;
-
-                case "OptimizeNTFS":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableOptimizeNTFS();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableOptimizeNTFS();
-                    }
-                    break;
-
-                case "PrioritizeForegroundApplications":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnablePrioritizeForegroundApplications();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisablePrioritizeForegroundApplications();
-                    }
-                    break;
-
-                case "WPBT":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWPBT();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWPBT();
-                    }
-                    break;
-
-                case "ServiceHostSplitting":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableServiceHostSplitting();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableServiceHostSplitting();
-                    }
-                    break;
-
-                case "MenuShowDelay":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableMenuShowDelay();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableMenuShowDelay();
-                    }
-                    break;
-
-                case "MouseHoverTime":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableMouseHoverTime();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableMouseHoverTime();
-                    }
-                    break;
-
-                case "BackgroundApps":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableBackgroundApps();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableBackgroundApps();
-                    }
-                    break;
-
-                case "AutoComplete":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableAutoComplete();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableAutoComplete();
-                    }
-                    break;
-
-                case "CrashDump":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableCrashDump();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableCrashDump();
-                    }
-                    break;
-
-                case "RemoteAssistance":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableRemoteAssistance();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableRemoteAssistance();
-                    }
-                    break;
-
-                case "WindowShake":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWindowShake();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWindowShake();
-                    }
-                    break;
-
-                case "CopyMoveContextMenu":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.AddCopyMoveContextMenu();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.RemoveCopyMoveContextMenu();
-                    }
-                    break;
-
-                case "TaskTimeouts":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.AdjustTaskTimeouts();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.IncreaseTaskTimeouts();
-                    }
-                    break;
-
-                case "LowDiskSpaceChecks":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableLowDiskSpaceChecks();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableLowDiskSpaceChecks();
-                    }
-                    break;
-
-                case "LinkResolve":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableLinkResolve();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableLinkResolve();
-                    }
-                    break;
-
-                case "ServiceTimeouts":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DecreaseServiceTimeouts();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.RevertServiceTimeouts();
-                    }
-                    break;
-
-                case "RemoteRegistry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableRemoteRegistry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableRemoteRegistry();
-                    }
-                    break;
-
-                case "FileExtensionsAndHiddenFiles":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.HideFileExtensionsAndHiddenFiles();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles();
-                    }
-                    break;
-
-                case "SystemProfile":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.OptimizeSystemProfile();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.RevertSystemProfile();
-                    }
-                    break;
-
-                case "TelemetryServices":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableTelemetryServices();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableTelemetryServices();
-                    }
-                    break;
-
-                case "HomeGroup":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableHomeGroup();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableHomeGroup();
-                    }
-                    break;
-
-                case "PrintService":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisablePrintService();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnablePrintService();
-                    }
-                    break;
-
-                case "SysMain":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSysMain();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSysMain();
-                    }
-                    break;
-
-                case "CompatibilityAssistant":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCompatibilityAssistant();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCompatibilityAssistant();
-                    }
-                    break;
-
-                case "SystemRestore":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSystemRestore();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSystemRestore();
-                    }
-                    break;
-
-                case "WindowsTransparency":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWindowsTransparency();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWindowsTransparency();
-                    }
-                    break;
-
-                case "WindowsDarkMode":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableWindowsDarkMode();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableWindowsDarkMode();
-                    }
-                    break;
-
-                case "VerboseLogon":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableVerboseLogon();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableVerboseLogon();
-                    }
-                    break;
-
-                case "ClassicContextMenu":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableClassicContextMenu();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableClassicContextMenu();
-                    }
-                    break;
-
-                case "Search":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSearch();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSearch();
-                    }
-                    break;
-
-                case "Biometrics":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableBiometrics();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableBiometrics();
-                    }
-                    break;
-
-                case "SMBv1":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSMBAsync("1");
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSMBAsync("1");
-                    }
-                    break;
-
-                case "SMBv2":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSMBAsync("2");
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSMBAsync("2");
-                    }
-                    break;
-
-                case "ErrorReporting":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableErrorReporting();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableErrorReporting();
-                    }
-                    break;
-
-                case "Cortana":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCortana();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCortana();
-                    }
-                    break;
-
-                case "GamingMode":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableGamingMode();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableGamingMode();
-                    }
-                    break;
-
-                case "StoreUpdates":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableStoreUpdates();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableStoreUpdates();
-                    }
-                    break;
-
-                case "OneDrive":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableOneDrive();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableOneDrive();
-                    }
-                    break;
-
-                case "SensorServices":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSensorServices();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSensorServices();
-                    }
-                    break;
-
-                case "NewsAndInterests":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableNewsAndInterests();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableNewsAndInterests();
-                    }
-                    break;
-
-                case "SpotlightFeatures":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSpotlightFeatures();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSpotlightFeatures();
-                    }
-                    break;
-
-                case "TailoredExperiences":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableTailoredExperiences();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableTailoredExperiences();
-                    }
-                    break;
-
-                case "CloudOptimizedContent":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCloudOptimizedContent();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCloudOptimizedContent();
-                    }
-                    break;
-
-                case "FeedbackNotifications":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableFeedbackNotifications();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableFeedbackNotifications();
-                    }
-                    break;
-
-                case "AdvertisingID":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableAdvertisingID();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableAdvertisingID();
-                    }
-                    break;
-
-                case "BluetoothAdvertising":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableBluetoothAdvertising();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableBluetoothAdvertising();
-                    }
-                    break;
-
-                case "AutomaticRestartSignOn":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableAutomaticRestartSignOn();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableAutomaticRestartSignOn();
-                    }
-                    break;
-
-                case "HandwritingDataSharing":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableHandwritingDataSharing();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableHandwritingDataSharing();
-                    }
-                    break;
-
-                case "TextInputDataCollection":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableTextInputDataCollection();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableTextInputDataCollection();
-                    }
-                    break;
-
-                case "InputPersonalization":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableInputPersonalization();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableInputPersonalization();
-                    }
-                    break;
-
-                case "SafeSearchMode":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSafeSearchMode();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSafeSearchMode();
-                    }
-                    break;
-
-                case "ActivityUploads":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableActivityUploads();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableActivityUploads();
-                    }
-                    break;
-
-                case "ClipboardSync":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableClipboardSync();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableClipboardSync();
-                    }
-                    break;
-
-                case "MessageSync":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableMessageSync();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableMessageSync();
-                    }
-                    break;
-
-                case "SettingSync":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSettingSync();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSettingSync();
-                    }
-                    break;
-
-                case "VoiceActivation":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableVoiceActivation();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableVoiceActivation();
-                    }
-                    break;
-
-                case "FindMyDevice":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableFindMyDevice();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableFindMyDevice();
-                    }
-                    break;
-
-                case "ActivityFeed":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableActivityFeed();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableActivityFeed();
-                    }
-                    break;
-
-                case "Cdp":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCdp();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCdp();
-                    }
-                    break;
-
-                case "DiagnosticsToast":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableDiagnosticsToast();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableDiagnosticsToast();
-                    }
-                    break;
-
-                case "OnlineSpeechPrivacy":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableOnlineSpeechPrivacy();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableOnlineSpeechPrivacy();
-                    }
-                    break;
-
-                case "LocationAccess":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableLocationFeatures();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableLocationFeatures();
-                    }
-                    break;
-
-                case "LocationFeatures":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableLocationFeatures();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableLocationFeatures();
-                    }
-                    break;
-
-                case "GameBar":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableGameBar();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableGameBar();
-                    }
-                    break;
-
-                case "QuickAccessHistory":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableQuickAccessHistory();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableQuickAccessHistory();
-                    }
-                    break;
-
-                case "MyPeople":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableMyPeople();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableMyPeople();
-                    }
-                    break;
-
-                case "Drivers":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.ExcludeDrivers();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.IncludeDrivers();
-                    }
-                    break;
-
-                case "WindowsInk":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWindowsInk();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWindowsInk();
-                    }
-                    break;
-
-                case "SpellingAndTypingFeatures":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSpellingAndTypingFeatures();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSpellingAndTypingFeatures();
-                    }
-                    break;
-
-                case "FaxService":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableFaxService();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableFaxService();
-                    }
-                    break;
-
-                case "InsiderService":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableInsiderService();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableInsiderService();
-                    }
-                    break;
-
-                case "SmartScreen":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSmartScreen();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSmartScreen();
-                    }
-                    break;
-
-                case "CloudClipboard":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCloudClipboard();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCloudClipboard();
-                    }
-                    break;
-
-                case "StickyKeys":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableStickyKeys();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableStickyKeys();
-                    }
-                    break;
-
-                case "CastToDevice":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.RemoveCastToDevice();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.AddCastToDevice();
-                    }
-                    break;
-
-                case "VBS":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableVBS();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableVBS();
-                    }
-                    break;
-
-                case "TaskbarToLeft":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.AlignTaskbarToLeft();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.AlignTaskbarToCenter();
-                    }
-                    break;
-
-                case "SnapAssist":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableSnapAssist();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableSnapAssist();
-                    }
-                    break;
-
-                case "Widgets":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWidgets();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWidgets();
-                    }
-                    break;
-
-                case "Chat":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableChat();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableChat();
-                    }
-                    break;
-
-                case "FilesCompactMode":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableFilesCompactMode();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableFilesCompactMode();
-                    }
-                    break;
-
-                case "Stickers":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableStickers();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableStickers();
-                    }
-                    break;
-
-                case "EdgeDiscoverBar":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableEdgeDiscoverBar();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableEdgeDiscoverBar();
-                    }
-                    break;
-
-                case "EdgeTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableEdgeTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableEdgeTelemetry();
-                    }
-                    break;
-
-                case "CoPilotAI":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableCoPilotAI();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableCoPilotAI();
-                    }
-                    break;
-
-                case "WindowsRecall":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableWindowsRecall();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableWindowsRecall();
-                    }
-                    break;
-
-                case "VisualStudioTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableVisualStudioTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableVisualStudioTelemetry();
-                    }
-                    break;
-
-                case "NvidiaTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableNvidiaTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableNvidiaTelemetry();
-                    }
-                    break;
-
-                case "ChromeTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableChromeTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableChromeTelemetry();
-                    }
-                    break;
-
-                case "FirefoxTelemetry":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableFirefoxTelemetry();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableFirefoxTelemetry();
-                    }
-                    break;
-
-                case "Hibernation":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.DisableHibernation();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.EnableHibernation();
-                    }
-                    break;
-
-                case "EndTask":
-                    if (toggleSwitch.IsOn)
-                    {
-                        await OptimizeSystemHelper.EnableEndTask();
-                    }
-                    else
-                    {
-                        await OptimizeSystemHelper.DisableEndTask();
-                    }
-                    break;
-            }
+        }
+        finally
+        {
+            _toggleQueueLock.Release();
+        }
+    }
+
+    private static async Task ExecuteToggleActionAsync(string? tag, bool isOn, CancellationToken ct)
+    {
+        if (string.IsNullOrEmpty(tag)) return;
+
+        // Provide a cancellable wrapper around each action and centralize switch
+        switch (tag)
+        {
+            case "RecommendedSectionStartMenu":
+                if (isOn) await OptimizeSystemHelper.DisableRecommendedSectionStartMenu().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableRecommendedSectionStartMenu().ConfigureAwait(false);
+                break;
+
+            case "LegacyBootMenu":
+                if (isOn) await OptimizeSystemHelper.EnableLegacyBootMenu().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableLegacyBootMenu().ConfigureAwait(false);
+                break;
+
+            case "OptimizeNTFS":
+                if (isOn) await OptimizeSystemHelper.EnableOptimizeNTFS().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableOptimizeNTFS().ConfigureAwait(false);
+                break;
+
+            case "PrioritizeForegroundApplications":
+                if (isOn) await OptimizeSystemHelper.EnablePrioritizeForegroundApplications().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisablePrioritizeForegroundApplications().ConfigureAwait(false);
+                break;
+
+            case "WPBT":
+                if (isOn) await OptimizeSystemHelper.DisableWPBT().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWPBT().ConfigureAwait(false);
+                break;
+
+            case "ServiceHostSplitting":
+                if (isOn) await OptimizeSystemHelper.DisableServiceHostSplitting().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableServiceHostSplitting().ConfigureAwait(false);
+                break;
+
+            case "MenuShowDelay":
+                if (isOn) await OptimizeSystemHelper.DisableMenuShowDelay().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableMenuShowDelay().ConfigureAwait(false);
+                break;
+
+            case "MouseHoverTime":
+                if (isOn) await OptimizeSystemHelper.DisableMouseHoverTime().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableMouseHoverTime().ConfigureAwait(false);
+                break;
+
+            case "BackgroundApps":
+                if (isOn) await OptimizeSystemHelper.DisableBackgroundApps().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableBackgroundApps().ConfigureAwait(false);
+                break;
+
+            case "AutoComplete":
+                if (isOn) await OptimizeSystemHelper.DisableAutoComplete().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableAutoComplete().ConfigureAwait(false);
+                break;
+
+            case "CrashDump":
+                if (isOn) await OptimizeSystemHelper.EnableCrashDump().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableCrashDump().ConfigureAwait(false);
+                break;
+
+            case "RemoteAssistance":
+                if (isOn) await OptimizeSystemHelper.DisableRemoteAssistance().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableRemoteAssistance().ConfigureAwait(false);
+                break;
+
+            case "WindowShake":
+                if (isOn) await OptimizeSystemHelper.DisableWindowShake().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowShake().ConfigureAwait(false);
+                break;
+
+            case "CopyMoveContextMenu":
+                if (isOn) await OptimizeSystemHelper.AddCopyMoveContextMenu().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RemoveCopyMoveContextMenu().ConfigureAwait(false);
+                break;
+
+            case "TaskTimeouts":
+                if (isOn) await OptimizeSystemHelper.AdjustTaskTimeouts().ConfigureAwait(false);
+                else await OptimizeSystemHelper.IncreaseTaskTimeouts().ConfigureAwait(false);
+                break;
+
+            case "LowDiskSpaceChecks":
+                if (isOn) await OptimizeSystemHelper.EnableLowDiskSpaceChecks().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableLowDiskSpaceChecks().ConfigureAwait(false);
+                break;
+
+            case "LinkResolve":
+                if (isOn) await OptimizeSystemHelper.DisableLinkResolve().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLinkResolve().ConfigureAwait(false);
+                break;
+
+            case "ServiceTimeouts":
+                if (isOn) await OptimizeSystemHelper.DecreaseServiceTimeouts().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RevertServiceTimeouts().ConfigureAwait(false);
+                break;
+
+            case "RemoteRegistry":
+                if (isOn) await OptimizeSystemHelper.DisableRemoteRegistry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableRemoteRegistry().ConfigureAwait(false);
+                break;
+
+            case "FileExtensionsAndHiddenFiles":
+                if (isOn) await OptimizeSystemHelper.HideFileExtensionsAndHiddenFiles().ConfigureAwait(false);
+                else await OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles().ConfigureAwait(false);
+                break;
+
+            case "SystemProfile":
+                if (isOn) await OptimizeSystemHelper.OptimizeSystemProfile().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RevertSystemProfile().ConfigureAwait(false);
+                break;
+
+            case "TelemetryServices":
+                if (isOn) await OptimizeSystemHelper.DisableTelemetryServices().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableTelemetryServices().ConfigureAwait(false);
+                break;
+
+            case "HomeGroup":
+                if (isOn) await OptimizeSystemHelper.DisableHomeGroup().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableHomeGroup().ConfigureAwait(false);
+                break;
+
+            case "PrintService":
+                if (isOn) await OptimizeSystemHelper.DisablePrintService().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnablePrintService().ConfigureAwait(false);
+                break;
+
+            case "SysMain":
+                if (isOn) await OptimizeSystemHelper.DisableSysMain().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSysMain().ConfigureAwait(false);
+                break;
+
+            case "CompatibilityAssistant":
+                if (isOn) await OptimizeSystemHelper.DisableCompatibilityAssistant().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCompatibilityAssistant().ConfigureAwait(false);
+                break;
+
+            case "SystemRestore":
+                if (isOn) await OptimizeSystemHelper.DisableSystemRestore().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSystemRestore().ConfigureAwait(false);
+                break;
+
+            case "WindowsTransparency":
+                if (isOn) await OptimizeSystemHelper.DisableWindowsTransparency().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowsTransparency().ConfigureAwait(false);
+                break;
+
+            case "WindowsDarkMode":
+                if (isOn) await OptimizeSystemHelper.EnableWindowsDarkMode().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableWindowsDarkMode().ConfigureAwait(false);
+                break;
+
+            case "VerboseLogon":
+                if (isOn) await OptimizeSystemHelper.EnableVerboseLogon().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableVerboseLogon().ConfigureAwait(false);
+                break;
+
+            case "ClassicContextMenu":
+                if (isOn) await OptimizeSystemHelper.EnableClassicContextMenu().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableClassicContextMenu().ConfigureAwait(false);
+                break;
+
+            case "Search":
+                if (isOn) await OptimizeSystemHelper.DisableSearch().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSearch().ConfigureAwait(false);
+                break;
+
+            case "Biometrics":
+                if (isOn) await OptimizeSystemHelper.DisableBiometrics().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableBiometrics().ConfigureAwait(false);
+                break;
+
+            case "SMBv1":
+                if (isOn) await OptimizeSystemHelper.DisableSMBAsync("1").ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSMBAsync("1").ConfigureAwait(false);
+                break;
+
+            case "SMBv2":
+                if (isOn) await OptimizeSystemHelper.DisableSMBAsync("2").ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSMBAsync("2").ConfigureAwait(false);
+                break;
+
+            case "ErrorReporting":
+                if (isOn) await OptimizeSystemHelper.DisableErrorReporting().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableErrorReporting().ConfigureAwait(false);
+                break;
+
+            case "Cortana":
+                if (isOn) await OptimizeSystemHelper.DisableCortana().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCortana().ConfigureAwait(false);
+                break;
+
+            case "GamingMode":
+                if (isOn) await OptimizeSystemHelper.EnableGamingMode().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableGamingMode().ConfigureAwait(false);
+                break;
+
+            case "StoreUpdates":
+                if (isOn) await OptimizeSystemHelper.DisableStoreUpdates().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableStoreUpdates().ConfigureAwait(false);
+                break;
+
+            case "OneDrive":
+                if (isOn) await OptimizeSystemHelper.DisableOneDrive().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableOneDrive().ConfigureAwait(false);
+                break;
+
+            case "SensorServices":
+                if (isOn) await OptimizeSystemHelper.DisableSensorServices().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSensorServices().ConfigureAwait(false);
+                break;
+
+            case "NewsAndInterests":
+                if (isOn) await OptimizeSystemHelper.DisableNewsAndInterests().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableNewsAndInterests().ConfigureAwait(false);
+                break;
+
+            case "SpotlightFeatures":
+                if (isOn) await OptimizeSystemHelper.DisableSpotlightFeatures().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSpotlightFeatures().ConfigureAwait(false);
+                break;
+
+            case "TailoredExperiences":
+                if (isOn) await OptimizeSystemHelper.DisableTailoredExperiences().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableTailoredExperiences().ConfigureAwait(false);
+                break;
+
+            case "CloudOptimizedContent":
+                if (isOn) await OptimizeSystemHelper.DisableCloudOptimizedContent().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCloudOptimizedContent().ConfigureAwait(false);
+                break;
+
+            case "FeedbackNotifications":
+                if (isOn) await OptimizeSystemHelper.DisableFeedbackNotifications().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableFeedbackNotifications().ConfigureAwait(false);
+                break;
+
+            case "AdvertisingID":
+                if (isOn) await OptimizeSystemHelper.DisableAdvertisingID().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableAdvertisingID().ConfigureAwait(false);
+                break;
+
+            case "BluetoothAdvertising":
+                if (isOn) await OptimizeSystemHelper.DisableBluetoothAdvertising().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableBluetoothAdvertising().ConfigureAwait(false);
+                break;
+
+            case "AutomaticRestartSignOn":
+                if (isOn) await OptimizeSystemHelper.DisableAutomaticRestartSignOn().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableAutomaticRestartSignOn().ConfigureAwait(false);
+                break;
+
+            case "HandwritingDataSharing":
+                if (isOn) await OptimizeSystemHelper.DisableHandwritingDataSharing().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableHandwritingDataSharing().ConfigureAwait(false);
+                break;
+
+            case "TextInputDataCollection":
+                if (isOn) await OptimizeSystemHelper.DisableTextInputDataCollection().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableTextInputDataCollection().ConfigureAwait(false);
+                break;
+
+            case "InputPersonalization":
+                if (isOn) await OptimizeSystemHelper.DisableInputPersonalization().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableInputPersonalization().ConfigureAwait(false);
+                break;
+
+            case "SafeSearchMode":
+                if (isOn) await OptimizeSystemHelper.DisableSafeSearchMode().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSafeSearchMode().ConfigureAwait(false);
+                break;
+
+            case "ActivityUploads":
+                if (isOn) await OptimizeSystemHelper.DisableActivityUploads().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableActivityUploads().ConfigureAwait(false);
+                break;
+
+            case "ClipboardSync":
+                if (isOn) await OptimizeSystemHelper.DisableClipboardSync().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableClipboardSync().ConfigureAwait(false);
+                break;
+
+            case "MessageSync":
+                if (isOn) await OptimizeSystemHelper.DisableMessageSync().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableMessageSync().ConfigureAwait(false);
+                break;
+
+            case "SettingSync":
+                if (isOn) await OptimizeSystemHelper.DisableSettingSync().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSettingSync().ConfigureAwait(false);
+                break;
+
+            case "VoiceActivation":
+                if (isOn) await OptimizeSystemHelper.DisableVoiceActivation().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableVoiceActivation().ConfigureAwait(false);
+                break;
+
+            case "FindMyDevice":
+                if (isOn) await OptimizeSystemHelper.DisableFindMyDevice().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableFindMyDevice().ConfigureAwait(false);
+                break;
+
+            case "ActivityFeed":
+                if (isOn) await OptimizeSystemHelper.DisableActivityFeed().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableActivityFeed().ConfigureAwait(false);
+                break;
+
+            case "Cdp":
+                if (isOn) await OptimizeSystemHelper.DisableCdp().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCdp().ConfigureAwait(false);
+                break;
+
+            case "DiagnosticsToast":
+                if (isOn) await OptimizeSystemHelper.DisableDiagnosticsToast().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableDiagnosticsToast().ConfigureAwait(false);
+                break;
+
+            case "OnlineSpeechPrivacy":
+                if (isOn) await OptimizeSystemHelper.DisableOnlineSpeechPrivacy().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableOnlineSpeechPrivacy().ConfigureAwait(false);
+                break;
+
+            case "LocationAccess":
+                if (isOn) await OptimizeSystemHelper.DisableLocationFeatures().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLocationFeatures().ConfigureAwait(false);
+                break;
+
+            case "LocationFeatures":
+                if (isOn) await OptimizeSystemHelper.DisableLocationFeatures().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLocationFeatures().ConfigureAwait(false);
+                break;
+
+            case "GameBar":
+                if (isOn) await OptimizeSystemHelper.DisableGameBar().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableGameBar().ConfigureAwait(false);
+                break;
+
+            case "QuickAccessHistory":
+                if (isOn) await OptimizeSystemHelper.DisableQuickAccessHistory().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableQuickAccessHistory().ConfigureAwait(false);
+                break;
+
+            case "MyPeople":
+                if (isOn) await OptimizeSystemHelper.DisableMyPeople().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableMyPeople().ConfigureAwait(false);
+                break;
+
+            case "Drivers":
+                if (isOn) await OptimizeSystemHelper.ExcludeDrivers().ConfigureAwait(false);
+                else await OptimizeSystemHelper.IncludeDrivers().ConfigureAwait(false);
+                break;
+
+            case "WindowsInk":
+                if (isOn) await OptimizeSystemHelper.DisableWindowsInk().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowsInk().ConfigureAwait(false);
+                break;
+
+            case "SpellingAndTypingFeatures":
+                if (isOn) await OptimizeSystemHelper.DisableSpellingAndTypingFeatures().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSpellingAndTypingFeatures().ConfigureAwait(false);
+                break;
+
+            case "FaxService":
+                if (isOn) await OptimizeSystemHelper.DisableFaxService().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableFaxService().ConfigureAwait(false);
+                break;
+
+            case "InsiderService":
+                if (isOn) await OptimizeSystemHelper.DisableInsiderService().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableInsiderService().ConfigureAwait(false);
+                break;
+
+            case "SmartScreen":
+                if (isOn) await OptimizeSystemHelper.DisableSmartScreen().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSmartScreen().ConfigureAwait(false);
+                break;
+
+            case "CloudClipboard":
+                if (isOn) await OptimizeSystemHelper.DisableCloudClipboard().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCloudClipboard().ConfigureAwait(false);
+                break;
+
+            case "StickyKeys":
+                if (isOn) await OptimizeSystemHelper.DisableStickyKeys().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableStickyKeys().ConfigureAwait(false);
+                break;
+
+            case "CastToDevice":
+                if (isOn) await OptimizeSystemHelper.RemoveCastToDevice().ConfigureAwait(false);
+                else await OptimizeSystemHelper.AddCastToDevice().ConfigureAwait(false);
+                break;
+
+            case "VBS":
+                if (isOn) await OptimizeSystemHelper.DisableVBS().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableVBS().ConfigureAwait(false);
+                break;
+
+            case "TaskbarToLeft":
+                if (isOn) await OptimizeSystemHelper.AlignTaskbarToLeft().ConfigureAwait(false);
+                else await OptimizeSystemHelper.AlignTaskbarToCenter().ConfigureAwait(false);
+                break;
+
+            case "SnapAssist":
+                if (isOn) await OptimizeSystemHelper.DisableSnapAssist().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSnapAssist().ConfigureAwait(false);
+                break;
+
+            case "Widgets":
+                if (isOn) await OptimizeSystemHelper.DisableWidgets().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWidgets().ConfigureAwait(false);
+                break;
+
+            case "Chat":
+                if (isOn) await OptimizeSystemHelper.DisableChat().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableChat().ConfigureAwait(false);
+                break;
+
+            case "FilesCompactMode":
+                if (isOn) await OptimizeSystemHelper.EnableFilesCompactMode().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableFilesCompactMode().ConfigureAwait(false);
+                break;
+
+            case "Stickers":
+                if (isOn) await OptimizeSystemHelper.DisableStickers().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableStickers().ConfigureAwait(false);
+                break;
+
+            case "EdgeDiscoverBar":
+                if (isOn) await OptimizeSystemHelper.DisableEdgeDiscoverBar().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableEdgeDiscoverBar().ConfigureAwait(false);
+                break;
+
+            case "EdgeTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableEdgeTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableEdgeTelemetry().ConfigureAwait(false);
+                break;
+
+            case "CoPilotAI":
+                if (isOn) await OptimizeSystemHelper.DisableCoPilotAI().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableCoPilotAI().ConfigureAwait(false);
+                break;
+
+            case "WindowsRecall":
+                if (isOn) await OptimizeSystemHelper.DisableWindowsRecall().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowsRecall().ConfigureAwait(false);
+                break;
+
+            case "VisualStudioTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableVisualStudioTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableVisualStudioTelemetry().ConfigureAwait(false);
+                break;
+
+            case "NvidiaTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableNvidiaTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableNvidiaTelemetry().ConfigureAwait(false);
+                break;
+
+            case "ChromeTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableChromeTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableChromeTelemetry().ConfigureAwait(false);
+                break;
+
+            case "FirefoxTelemetry":
+                if (isOn) await OptimizeSystemHelper.DisableFirefoxTelemetry().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableFirefoxTelemetry().ConfigureAwait(false);
+                break;
+
+            case "Hibernation":
+                if (isOn) await OptimizeSystemHelper.DisableHibernation().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableHibernation().ConfigureAwait(false);
+                break;
+
+            case "EndTask":
+                if (isOn) await OptimizeSystemHelper.EnableEndTask().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableEndTask().ConfigureAwait(false);
+                break;
+
+            case "WindowsAI":
+                if (isOn) await OptimizeSystemHelper.DisableWindowsAI().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWindowsAI().ConfigureAwait(false);
+                break;
+
+            default:
+                _ = LogHelper.Log($"Unhandled toggle tag queued: {tag}");
+                break;
         }
     }
 }
