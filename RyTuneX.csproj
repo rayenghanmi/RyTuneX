@@ -59,17 +59,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
       <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.251219" />
       <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
       <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
       <PackageReference Include="DevWinUI" Version="9.9.3" />
       <PackageReference Include="DevWinUI.Controls" Version="9.9.3" />
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
-      <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260101001" />
-      <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.2" />
-      <PackageReference Include="System.Drawing.Common" Version="10.0.2" />
-      <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.2" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.5" />
+      <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260317003" />
+      <PackageReference Include="Microsoft.WindowsPackageManager.ComInterop" Version="1.28.220" />
+      <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.5" />
+      <PackageReference Include="System.Drawing.Common" Version="10.0.5" />
+      <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.5" />
       <PackageReference Include="WinUIEx" Version="2.9.0" />
   </ItemGroup>
   

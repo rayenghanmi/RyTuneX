@@ -1,10 +1,10 @@
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 
 namespace RyTuneX.Helpers;
 
 // Helper class for detecting and reverting Local Group Policy (gpedit.msc) changes.
 // Only operates on known policy-backed registry paths under HKLM\Software\Policies and HKCU\Software\Policies.
-public static class GroupPolicyHelper
+public static class PolicyHelper
 {
     // Represents a known Group Policy entry with its registry location.
     public sealed record PolicyEntry

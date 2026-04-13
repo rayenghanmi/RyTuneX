@@ -15,6 +15,7 @@ All notable changes to this branch will be documented in this file.
 - Added a navigation style setting in the `Settings` page to switch between Left and Top navigation pane layouts.
 - Expanded the Policies page with new categories and policies: `Windows Defender`, `Windows Firewall`, `Remote Desktop`, `Remote Assistance`, `Network`, `Power Management`, `Device Installation`, `Lock Screen`, `User Account Control`, `Delivery Optimization`, `Notifications`, `Windows Spotlight`, `Autoplay`, `Offline Maps`, `Print Spooler`, `Scheduled Maintenance`, `OEM & Preinstall`, `Microsoft Office`, `Google Chrome`, `Mozilla Firefox`, `Adobe`, `Microsoft Teams`, `BitLocker`, `Credentials`, `Startup`, `Explorer`, `Multimedia`
 - Added Bahasa Indonesia translation by @1001rahmat in #96.
+- Added a new `Packages` page to install different applications using `winget`.
 
 ### Fixes
 

@@ -1428,152 +1428,152 @@
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Tambahkan Paket Daya Ultimate Performance</value>
   </data>
-  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+  <data name="PoliciesPage_Warning" xml:space="preserve">
     <value>Fitur ini hanya mendeteksi entri registri yang didukung kebijakan. Fitur ini tidak mendeteksi perubahan layanan atau penyesuaian registri non-kebijakan.</value>
   </data>
-  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
     <value>Halaman ini mendeteksi dan memungkinkan Anda menghapus pengabaian Kebijakan Grup Lokal (Local Group Policy). Menghapus pengabaian kebijakan akan mengembalikannya ke status Belum Dikonfigurasi.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>Ringkasan Kebijakan</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPolicies" xml:space="preserve">
     <value>Kebijakan Dikonfigurasi</value>
   </data>
-  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+  <data name="PoliciesPage_Categories" xml:space="preserve">
     <value>Kategori</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelected" xml:space="preserve">
     <value>Hapus Terpilih</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyList" xml:space="preserve">
     <value>Daftar Kebijakan Terperinci</value>
   </data>
   <data name="Shell_GroupPolicy.Content" xml:space="preserve">
     <value>Kebijakan</value>
   </data>
-  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveOverrides" xml:space="preserve">
     <value>Hapus Pengabaian</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>Tidak ada pengabaian kebijakan yang terdeteksi.</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
     <value>Hapus Semua Pengabaian</value>
   </data>
-  <data name="GroupPolicyPage_Title" xml:space="preserve">
+  <data name="PoliciesPage_Title" xml:space="preserve">
     <value>Deteksi Pengabaian Kebijakan Grup</value>
   </data>
-  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>Memindai kebijakan...</value>
   </data>
-  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+  <data name="PoliciesPage_Refresh" xml:space="preserve">
     <value>Segarkan</value>
   </data>
-  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_CategoriesHeader.Text" xml:space="preserve">
     <value>Kategori</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelectedText.Text" xml:space="preserve">
     <value>Hapus Terpilih</value>
   </data>
-  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+  <data name="PoliciesPage_ScanningText.Text" xml:space="preserve">
     <value>Memindai kebijakan...</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesText.Text" xml:space="preserve">
     <value>Tidak ada pengabaian kebijakan yang terdeteksi.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Header" xml:space="preserve">
     <value>Ringkasan Kebijakan</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Title" xml:space="preserve">
     <value>Informasi</value>
   </data>
-  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RefreshText.Text" xml:space="preserve">
     <value>Segarkan</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
     <value>Kebijakan Dikonfigurasi</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Description" xml:space="preserve">
     <value>Lihat dan kelola masing-masing pengabaian kebijakan</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllText.Text" xml:space="preserve">
     <value>Hapus Semua Pengabaian</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Message" xml:space="preserve">
     <value>Halaman ini mendeteksi dan memungkinkan Anda menghapus pengabaian Kebijakan Grup Lokal. Menghapus pengabaian kebijakan akan mengembalikannya ke status Bawaan.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Description" xml:space="preserve">
     <value>Gambaran umum pengabaian kebijakan yang terdeteksi</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Header" xml:space="preserve">
     <value>Daftar Kebijakan Terperinci</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredCount" xml:space="preserve">
     <value>{0} Dikonfigurasi</value>
   </data>
-  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+  <data name="PoliciesPage_ScanError" xml:space="preserve">
     <value>Kesalahan saat memindai kebijakan: {0}</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorTitle" xml:space="preserve">
     <value>Penghapusan Gagal</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessContent" xml:space="preserve">
     <value>Berhasil menghapus {0} pengabaian kebijakan.</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
     <value>Hapus Kebijakan Kategori</value>
   </data>
   <data
-    name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+    name="PoliciesPage_NotConfigured" xml:space="preserve">
     <value>Belum Dikonfigurasi</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessTitle" xml:space="preserve">
     <value>Kebijakan Dihapus</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesCount" xml:space="preserve">
     <value>{0} kebijakan yang dikonfigurasi</value>
   </data>
-  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+  <data name="PoliciesPage_RestartNow" xml:space="preserve">
     <value>Mulai Ulang Sekarang</value>
   </data>
-  <data name="GroupPolicyPage_Later" xml:space="preserve">
+  <data name="PoliciesPage_Later" xml:space="preserve">
     <value>Nanti</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedContent" xml:space="preserve">
     <value>Apakah Anda yakin ingin menghapus {0} pengabaian kebijakan yang dipilih?</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorContent" xml:space="preserve">
     <value>Terjadi kesalahan saat menghapus pengabaian kebijakan: {0}</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryContent" xml:space="preserve">
     <value>Apakah Anda yakin ingin menghapus semua {0} pengabaian kebijakan dalam kategori '{1}'?</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllContent" xml:space="preserve">
     <value>Apakah Anda yakin ingin menghapus semua {0} pengabaian kebijakan? Tindakan ini tidak dapat dibatalkan.</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialTitle" xml:space="preserve">
     <value>Penghapusan Sebagian</value>
   </data>
-  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+  <data name="PoliciesPage_Remove" xml:space="preserve">
     <value>Hapus</value>
   </data>
-  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+  <data name="PoliciesPage_RemovingPolicies" xml:space="preserve">
     <value>Menghapus kebijakan...</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialContent" xml:space="preserve">
     <value>Menghapus {0} dari {1} pengabaian kebijakan. Beberapa kebijakan tidak dapat dihapus.</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerTitle" xml:space="preserve">
     <value>Mulai Ulang Explorer</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerContent" xml:space="preserve">
     <value>Beberapa perubahan kebijakan memerlukan proses mulai ulang Windows Explorer agar dapat diterapkan. Apakah Anda ingin memulai ulang Explorer sekarang?</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllTitle" xml:space="preserve">
     <value>Hapus Semua Pengabaian Kebijakan</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Hapus Kebijakan Terpilih</value>
   </data>
   <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">

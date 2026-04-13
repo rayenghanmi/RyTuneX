@@ -133,7 +133,7 @@ public static class AppSearchService
         ("Shell_Features", typeof(FeaturesPage), "\uE74C"),
         ("Shell_Network", typeof(NetworkPage), "\uE968"),
         ("Shell_Security", typeof(SecurityPage), "\uEA18"),
-        ("Shell_GroupPolicy", typeof(GroupPolicyPage), "\uE9D5"),
+        ("Shell_GroupPolicy", typeof(PoliciesPage), "\uE9D5"),
         ("Shell_Processes", typeof(ProcessesPage), "\uECAA"),
         ("Shell_Services", typeof(ServicesPage), "\uEA86"),
         ("Shell_SystemInfo", typeof(SystemInfoPage), "\uE770"),
