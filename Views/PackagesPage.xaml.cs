@@ -445,85 +445,98 @@ public sealed partial class PackagesPage : Page
         installingStatusBar.Maximum = selected.Count;
         installingStatusBar.Value = 0;
 
+        OperationCancellationManager.EnterOperation();
+        var localCts = CancellationTokenSource.CreateLinkedTokenSource(_cts.Token);
+        var opId = OperationCancellationManager.Register(localCts);
+
         int ok = 0, fail = 0;
 
-        for (int i = 0; i < selected.Count; i++)
+        try
         {
-            var pkg = selected[i];
-            bool upgrade = pkg.HasUpdate;
-            installingStatusText.Text = $"{(upgrade ? "Updating" : "Installing")} {pkg.Name} ({i + 1}/{selected.Count})…";
-
-            try
+            for (int i = 0; i < selected.Count; i++)
             {
-                string cmd = upgrade
-                    ? $"upgrade --id \"{pkg.Id}\" --exact"
-                    : $"install --id \"{pkg.Id}\" --exact";
+                var pkg = selected[i];
+                bool upgrade = pkg.HasUpdate;
+                installingStatusText.Text = $"{(upgrade ? "Updating" : "Installing")} {pkg.Name} ({i + 1}/{selected.Count})…";
 
-                var psi = new ProcessStartInfo
+                try
                 {
-                    FileName = "cmd.exe",
-                    Arguments = $"/c winget {cmd} --accept-package-agreements --accept-source-agreements --silent",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    StandardOutputEncoding = Encoding.UTF8,
-                    StandardErrorEncoding = Encoding.UTF8
-                };
+                    string cmd = upgrade
+                        ? $"upgrade --id \"{pkg.Id}\" --exact"
+                        : $"install --id \"{pkg.Id}\" --exact";
 
-                using var p = Process.Start(psi);
-                if (p != null)
-                {
-                    await p.WaitForExitAsync(_cts.Token);
-                    if (p.ExitCode == 0)
+                    var psi = new ProcessStartInfo
                     {
-                        ok++;
-                        pkg.IsInstalled = true;
-                        if (upgrade)
+                        FileName = "cmd.exe",
+                        Arguments = $"/c winget {cmd} --accept-package-agreements --accept-source-agreements --silent",
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        StandardOutputEncoding = Encoding.UTF8,
+                        StandardErrorEncoding = Encoding.UTF8
+                    };
+
+                    using var p = Process.Start(psi);
+                    if (p != null)
+                    {
+                        await p.WaitForExitAsync(localCts.Token);
+                        if (p.ExitCode == 0)
                         {
-                            pkg.Version = pkg.LatestVersion;
-                            pkg.HasUpdate = false;
-                            pkg.LatestVersion = string.Empty;
-                            _updateablePackages.Remove(pkg);
-                            _updateCount = Math.Max(0, _updateCount - 1);
-                            UpdatesTabLabel.Text = _updateCount > 0 ? $"Updates ({_updateCount})" : "Updates";
-                            UpdatesList.Remove(pkg);
+                            ok++;
+                            pkg.IsInstalled = true;
+                            if (upgrade)
+                            {
+                                pkg.Version = pkg.LatestVersion;
+                                pkg.HasUpdate = false;
+                                pkg.LatestVersion = string.Empty;
+                                _updateablePackages.Remove(pkg);
+                                _updateCount = Math.Max(0, _updateCount - 1);
+                                UpdatesTabLabel.Text = _updateCount > 0 ? $"Updates ({_updateCount})" : "Updates";
+                                UpdatesList.Remove(pkg);
+                            }
+                        }
+                        else
+                        {
+                            fail++;
+                            await LogHelper.LogWarning($"Failed to {(upgrade ? "upgrade" : "install")} {pkg.Name}. Exit: {p.ExitCode}");
                         }
                     }
-                    else
-                    {
-                        fail++;
-                        await LogHelper.LogWarning($"Failed to {(upgrade ? "upgrade" : "install")} {pkg.Name}. Exit: {p.ExitCode}");
-                    }
                 }
-            }
-            catch (OperationCanceledException) { break; }
-            catch (Exception ex)
-            {
-                fail++;
-                await LogHelper.LogError($"Exception on {pkg.Name}: {ex.Message}");
-            }
+                catch (OperationCanceledException) { break; }
+                catch (Exception ex)
+                {
+                    fail++;
+                    await LogHelper.LogError($"Exception on {pkg.Name}: {ex.Message}");
+                }
 
-            installingStatusBar.Value = i + 1;
+                installingStatusBar.Value = i + 1;
+            }
         }
-
-        InstallButton.IsEnabled = true;
-        RefreshButton.IsEnabled = true;
-        activeView.IsEnabled = true;
-        installingStatusText.Text = _isUpdatesMode ? "Select packages to update" : "Select a package to install";
-        installingStatusBar.Opacity = 0;
-        installingStatusBar.Value = 0;
-        activeView.SelectedItems.Clear();
-
-        if (_isUpdatesMode && UpdatesList.Count == 0)
+        finally
         {
-            StatusText.Text = "All updates installed successfully.";
-            StatusText.Visibility = Visibility.Visible;
-        }
+            OperationCancellationManager.Unregister(opId);
+            localCts.Dispose();
+            OperationCancellationManager.ExitOperation();
 
-        ShellPage.ShowNotification("Packages",
-            $"{(_isUpdatesMode ? "Update" : "Installation")} completed: {ok} succeeded, {fail} failed.",
-            fail == 0 ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
+            InstallButton.IsEnabled = true;
+            RefreshButton.IsEnabled = true;
+            activeView.IsEnabled = true;
+            installingStatusText.Text = _isUpdatesMode ? "Select packages to update" : "Select a package to install";
+            installingStatusBar.Opacity = 0;
+            installingStatusBar.Value = 0;
+            activeView.SelectedItems.Clear();
+
+            if (_isUpdatesMode && UpdatesList.Count == 0)
+            {
+                StatusText.Text = "All updates installed successfully.";
+                StatusText.Visibility = Visibility.Visible;
+            }
+
+            ShellPage.ShowNotification("Packages",
+                $"{(_isUpdatesMode ? "Update" : "Installation")} completed: {ok} succeeded, {fail} failed.",
+                fail == 0 ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
+        }
     }
 
     // SelectionChanged
