@@ -654,7 +654,7 @@ public sealed partial class OptimizeSystemPage : Page
             {
                 var output = await StartTaskAsync("chcp", Console.OutputEncoding);
                 var match = Regex.Match(output, @"(\d+)");
-                if (match.Success && int.TryParse(match.Value, out code_page)) ;
+                if (match.Success && int.TryParse(match.Value, out code_page)) {;}
             }
             if (code_page == 0)
                 code_page = GetFallbackOEMCodePage();

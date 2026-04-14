@@ -147,11 +147,8 @@
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>RyTuneX, un optimiseur pour Windows 10 et 11 créé par Rayen Ghanmi, est conçu pour améliorer les performances et l'efficacité du système en supprimant sélectivement certains logiciels et en désactivant des services inutiles.</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+  <data name="SettingsPage_PrivacyTermsLink.Header" xml:space="preserve">
     <value>AGPL v3.0</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Langue</value>

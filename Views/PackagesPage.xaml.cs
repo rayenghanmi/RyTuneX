@@ -73,7 +73,7 @@ public sealed partial class PackagesPage : Page
         _updateablePackages.Clear();
         _updateCount = 0;
         UpdatesTabLabel.Text = "Updates";
-        ApplyTabButtonStyles(browseActive: true);
+        TabSegmented.SelectedIndex = 0;
         PackageSearchBox.Visibility = Visibility.Visible;
         InstallButtonText.Text = "Install Selected";
         InstallButtonIcon.Glyph = "\uE896";
@@ -359,36 +359,36 @@ public sealed partial class PackagesPage : Page
     }
 
     // Tab switching
-    private void BrowseTabButton_Click(object sender, RoutedEventArgs e)
+    private void TabSegmented_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!_isUpdatesMode) return;
-        _isUpdatesMode = false;
-        ApplyTabButtonStyles(browseActive: true);
-        PackageSearchBox.Visibility = Visibility.Visible;
-        InstallButtonText.Text = "Install Selected";
-        InstallButtonIcon.Glyph = "\uE896";
-        installingStatusText.Text = "Select a package to install";
-        UpdatesGridView.Visibility = Visibility.Collapsed;
-        UpdatesGridView.SelectedItems.Clear();
-        StatusText.Visibility = Visibility.Collapsed;
-        PackagesGridView.Visibility = Visibility.Visible;
+        if (TabSegmented.SelectedIndex == 0)
+        {
+            if (!_isUpdatesMode) return;
+            _isUpdatesMode = false;
+            PackageSearchBox.Visibility = Visibility.Visible;
+            InstallButtonText.Text = "Install Selected";
+            InstallButtonIcon.Glyph = "\uE896";
+            installingStatusText.Text = "Select a package to install";
+            UpdatesGridView.Visibility = Visibility.Collapsed;
+            UpdatesGridView.SelectedItems.Clear();
+            StatusText.Visibility = Visibility.Collapsed;
+            PackagesGridView.Visibility = Visibility.Visible;
 
-        // Re-apply whatever is currently in the search box
-        ApplySearch(PackageSearchBox.Text?.Trim() ?? string.Empty);
-    }
-
-    private void UpdatesTabButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (_isUpdatesMode) return;
-        _isUpdatesMode = true;
-        ApplyTabButtonStyles(browseActive: false);
-        PackageSearchBox.Visibility = Visibility.Collapsed;
-        InstallButtonText.Text = "Update Selected";
-        InstallButtonIcon.Glyph = "\uE898";
-        installingStatusText.Text = "Select packages to update";
-        PackagesGridView.Visibility = Visibility.Collapsed;
-        PackagesGridView.SelectedItems.Clear();
-        RefreshUpdatesTabList();
+            // Re-apply whatever is currently in the search box
+            ApplySearch(PackageSearchBox.Text?.Trim() ?? string.Empty);
+        }
+        else if (TabSegmented.SelectedIndex == 1)
+        {
+            if (_isUpdatesMode) return;
+            _isUpdatesMode = true;
+            PackageSearchBox.Visibility = Visibility.Collapsed;
+            InstallButtonText.Text = "Update Selected";
+            InstallButtonIcon.Glyph = "\uE898";
+            installingStatusText.Text = "Select packages to update";
+            PackagesGridView.Visibility = Visibility.Collapsed;
+            PackagesGridView.SelectedItems.Clear();
+            RefreshUpdatesTabList();
+        }
     }
 
     private void RefreshUpdatesTabList()
@@ -414,13 +414,6 @@ public sealed partial class PackagesPage : Page
         UpdatesGridView.Visibility = Visibility.Visible;
         PackagesGridView.Visibility = Visibility.Collapsed;
         LoadingState.Visibility = Visibility.Collapsed;
-    }
-
-    private void ApplyTabButtonStyles(bool browseActive)
-    {
-        Style? accent = Application.Current.Resources.TryGetValue("AccentButtonStyle", out var s) ? s as Style : null;
-        BrowseTabButton.Style = browseActive ? accent : null;
-        UpdatesTabButton.Style = browseActive ? null : accent;
     }
 
     // Install / Update

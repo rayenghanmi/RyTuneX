@@ -43,7 +43,7 @@ public sealed partial class SystemInfoPage : Page
         }
     }
 
-    private void SetFormattedText(TextBlock textBlock, string info)
+    private static void SetFormattedText(TextBlock textBlock, string info)
     {
         textBlock.Text = string.Empty;
         textBlock.Inlines.Clear();
@@ -52,7 +52,7 @@ public sealed partial class SystemInfoPage : Page
 
         var subtleBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
 
-        var lines = info.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        var lines = info.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
         for (int i = 0; i < lines.Length; i++)
         {
@@ -61,8 +61,8 @@ public sealed partial class SystemInfoPage : Page
 
             if (colonIndex >= 0)
             {
-                var title = line.Substring(0, colonIndex + 1);
-                var value = line.Substring(colonIndex + 1);
+                var title = line[..(colonIndex + 1)];
+                var value = line[(colonIndex + 1)..];
 
                 textBlock.Inlines.Add(new Run
                 {
@@ -154,7 +154,7 @@ public sealed partial class SystemInfoPage : Page
     private static string GetFirstLine(string text)
     {
         if (string.IsNullOrWhiteSpace(text)) return string.Empty;
-        var parts = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        var parts = text.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
         foreach (var p in parts)
         {
             var trimmed = p.Trim();
@@ -162,7 +162,7 @@ public sealed partial class SystemInfoPage : Page
             {
                 var colonIndex = trimmed.IndexOf(':');
                 if (colonIndex >= 0 && colonIndex < trimmed.Length - 1)
-                    return trimmed.Substring(colonIndex + 1).Trim();
+                    return trimmed[(colonIndex + 1)..].Trim();
                 return trimmed;
             }
         }
@@ -173,7 +173,7 @@ public sealed partial class SystemInfoPage : Page
     private static string GetRamSummary(string ramInfo)
     {
         if (string.IsNullOrWhiteSpace(ramInfo)) return string.Empty;
-        var lines = ramInfo.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        var lines = ramInfo.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
         long total = 0;
         foreach (var line in lines)
         {
@@ -211,7 +211,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var archCode = GetValue(lines, 2, string.Empty);
             var arch = archCode switch
@@ -264,7 +264,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var gpuNumber = 0;
@@ -322,7 +322,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var moduleNumber = 1;
@@ -381,7 +381,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var diskNumber = 0;
@@ -444,7 +444,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             AppendField(sb, "OSName", GetValue(lines, 0, string.Empty));
@@ -544,7 +544,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(256);
             var first = true;
@@ -637,7 +637,7 @@ public sealed partial class SystemInfoPage : Page
     }
 
     // Append a localized label and value only when value is present
-    private static void AppendField(StringBuilder sb, string labelKey, string value, string suffix = null, bool indent = false)
+    private static void AppendField(StringBuilder sb, string labelKey, string value, string? suffix = null, bool indent = false)
     {
         if (string.IsNullOrWhiteSpace(value)) return;
         if (indent) sb.Append("   ");

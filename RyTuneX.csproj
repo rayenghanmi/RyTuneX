@@ -16,7 +16,7 @@
     <WinUISDKReferences>true</WinUISDKReferences>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxBundleAutoResourcePackageQualifiers>Scale|DXFeatureLevel</AppxBundleAutoResourcePackageQualifiers>
-    <AppxDefaultResourceQualifiers>Language=en-US;ar-TN;de;es-ES;fr-FR;he-IL;it-IT;ja-JP;ko-KR;pt-BR;ru-RU;tr-TR;vi-VN;zh-Hans;zh-Hant|Contrast=standard|Scale=200|HomeRegion=001|TargetSize=256|LayoutDirection=LTR|DXFeatureLevel=DX9|Configuration=|AlternateForm=|Platform=UAP</AppxDefaultResourceQualifiers>
+    <AppxDefaultResourceQualifiers>Language=en-US;ar-TN;de;es-ES;fr-FR;he-IL;it-IT;ja-JP;ko-KR;pt-BR;ru-RU;tr-TR;vi-VN;id-ID;zh-Hans;zh-Hant|Contrast=standard|Scale=200|HomeRegion=001|TargetSize=256|LayoutDirection=LTR|DXFeatureLevel=DX9|Configuration=|AlternateForm=|Platform=UAP</AppxDefaultResourceQualifiers>
     <EnableMsixTooling>true</EnableMsixTooling>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
@@ -62,6 +62,7 @@
       <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
       <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.251219" />
       <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
+      <PackageReference Include="CommunityToolkit.WinUI.Controls.Segmented" Version="8.2.251219" />
       <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
       <PackageReference Include="DevWinUI" Version="9.9.3" />
       <PackageReference Include="DevWinUI.Controls" Version="9.9.3" />

@@ -190,33 +190,17 @@
 			</Grid.ColumnDefinitions>
 
 			<!-- Tab pill strip -->
-			<Border Grid.Column="0"
-                    Background="{ThemeResource ControlFillColorSecondaryBrush}"
-                    BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    Padding="3"
-                    Margin="0,0,10,0"
-                    VerticalAlignment="Center">
-				<StackPanel Orientation="Horizontal" Spacing="2">
-					<Button x:Name="BrowseTabButton"
-                            Content="Browse"
-                            Style="{ThemeResource AccentButtonStyle}"
-                            Click="BrowseTabButton_Click"
-                            Padding="12,5"
-                            MinWidth="0"
-                            MinHeight="0"
-                            CornerRadius="6"/>
-					<Button x:Name="UpdatesTabButton"
-                            Click="UpdatesTabButton_Click"
-                            Padding="12,5"
-                            MinWidth="0"
-                            MinHeight="0"
-                            CornerRadius="6">
-						<TextBlock x:Name="UpdatesTabLabel" Text="Updates"/>
-					</Button>
-				</StackPanel>
-			</Border>
+			<controls:Segmented x:Name="TabSegmented"
+								Grid.Column="0"
+								Margin="0,0,10,0"
+								VerticalAlignment="Center"
+								SelectionChanged="TabSegmented_SelectionChanged"
+								SelectedIndex="0">
+				<controls:SegmentedItem Content="Browse" />
+				<controls:SegmentedItem x:Name="UpdatesTabItem">
+					<TextBlock x:Name="UpdatesTabLabel" Text="Updates" Margin="4,0"/>
+				</controls:SegmentedItem>
+			</controls:Segmented>
 
 			<!-- Search box -->
 			<AutoSuggestBox x:Name="PackageSearchBox"

@@ -262,6 +262,22 @@ public sealed partial class SettingsPage : Page
         }
     }
 
+    private void PrivacyTermsCard_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to open support page: {ex.Message}");
+        }
+    }
+
     private async void RevertChanges_Click(object sender, RoutedEventArgs e)
     {
         // Checkbox for keeping app data

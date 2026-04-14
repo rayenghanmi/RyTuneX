@@ -147,11 +147,8 @@
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>RyTuneX, công cụ tối ưu Windows 10 và 11 được tạo bởi Rayen Ghanmi, được thiết kế để tối ưu hiệu suất và hiệu quả của hệ thống bằng cách loại bỏ có chọn lọc phần mềm đã chọn và vô hiệu hóa các dịch vụ không cần thiết.</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+  <data name="SettingsPage_PrivacyTermsLink.Header" xml:space="preserve">
     <value>AGPL v3.0</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Ngôn ngữ</value>

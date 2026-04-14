@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -22,10 +22,8 @@
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
-  mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
-  object]</value>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -61,8 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -115,12 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
-      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
-      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Shell_Home.Content" xml:space="preserve">
     <value>RyTuneX</value>
@@ -141,7 +136,7 @@
     <value>Terang</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-   <value>Gelap</value>
+    <value>Gelap</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
     <value>Default</value>
@@ -152,11 +147,8 @@
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>RyTuneX adalah sebuah program optimalisasi Windows 10 dan 11 yang dibuat oleh Rayen Ghanmi. Aplikasi ini dirancang untuk meningkatkan performa dan efisiensi sistem dengan menghapus perangkat lunak yang dipilih secara selektif dan menonaktifkan layanan yang tidak dibutuhkan.</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+  <data name="SettingsPage_PrivacyTermsLink.Header" xml:space="preserve">
     <value>AGPL v3.0</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Bahasa</value>
@@ -172,7 +164,7 @@
   </data>
   <data name="Done" xml:space="preserve">
     <value>Selesai</value>
- </data>
+  </data>
   <data name="Uninstalling" xml:space="preserve">
     <value>Mencopot</value>
   </data>
@@ -198,7 +190,7 @@
     <value>Prosesor</value>
   </data>
   <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-   <value>Kartu Grafis</value>
+    <value>Kartu Grafis</value>
   </data>
   <data name="SystemInfoPage_OS.Text" xml:space="preserve">
     <value>Sistem Operasi</value>
@@ -222,7 +214,7 @@
     <value>Sukses mencopot aplikasi berikut</value>
   </data>
   <data name="DebloatSystemPage_TempButton.Text" xml:space="preserve">
- <value>Hapus Temp Sistem</value>
+    <value>Hapus Temp Sistem</value>
   </data>
   <data name="AdapterRAM" xml:space="preserve">
     <value>Adapter RAM</value>
@@ -249,7 +241,7 @@
     <value>Terjadi kesalahan saat mengekstrak driver</value>
   </data>
   <data name="ExtractingDrivers" xml:space="preserve">
- <value>Mengekstrak Driver</value>
+    <value>Mengekstrak Driver</value>
   </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
@@ -276,7 +268,7 @@
     <value>Perusahaan</value>
   </data>
   <data name="MaxSpeed" xml:space="preserve">
- <value>Kecepatan Maksimum</value>
+    <value>Kecepatan Maksimum</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nama</value>
@@ -304,7 +296,7 @@
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versi</value>
-</data>
+  </data>
   <data name="VideoArchitecture" xml:space="preserve">
     <value>Arsitektur Video</value>
   </data>
@@ -357,7 +349,7 @@
     <value>Pilih</value>
   </data>
   <data name="Feature_DisableHibernation.Header" xml:space="preserve">
- <value>Nonaktifkan Hibernasi</value>
+    <value>Nonaktifkan Hibernasi</value>
   </data>
   <data name="Feature_DisableHibernation.Description" xml:space="preserve">
     <value>Matikan hibernasi untuk menghemat daya dan mencegah komputer masuk ke mode tidur. Tidak direkomendasikan untuk laptop</value>
@@ -400,7 +392,7 @@
   </data>
   <data name="Feature_DisableQuickAccessHistory.Header" xml:space="preserve">
     <value>Nonaktifkan Riwayat Akses Cepat</value>
- </data>
+  </data>
   <data name="Feature_DisableQuickAccessHistory.Description" xml:space="preserve">
     <value>Menonaktifkan pencatatan dan tampilan riwayat Akses Cepat</value>
   </data>
@@ -441,7 +433,7 @@
     <value>Keluar dari Program Windows Insider dan berhenti menerima build pratinjau</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Header" xml:space="preserve">
-<value>Nonaktifkan Clipboard Cloud</value>
+    <value>Nonaktifkan Clipboard Cloud</value>
   </data>
   <data name="Feature_DisableCloudClipboard.Description" xml:space="preserve">
     <value>Menonaktifkan fitur Clipboard Cloud untuk berbagi clipboard antar perangkat</value>
@@ -723,7 +715,7 @@
     <value>Status Baterai</value>
   </data>
   <data name="Chemistry" xml:space="preserve">
- <value>Kimia</value>
+    <value>Kimia</value>
   </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>Keamanan</value>
@@ -802,7 +794,7 @@
   </data>
   <data name="HomePage_processesCount.Text" xml:space="preserve">
     <value>Proses</value>
-</data>
+  </data>
   <data name="HomePage_servicesCount.Text" xml:space="preserve">
     <value>Layanan</value>
   </data>
@@ -904,7 +896,7 @@
   </data>
   <data name="Feature_DisableSettingSync.Header" xml:space="preserve">
     <value>Nonaktifkan Sinkronisasi Pengaturan</value>
- </data>
+  </data>
   <data name="Feature_DisableSettingSync.Description" xml:space="preserve">
     <value>Menonaktifkan sinkronisasi pengaturan sistem di seluruh perangkat. Hal ini mencegah pengaturan perangkat, tema, dan konfigurasi lainnya dibagikan.</value>
   </data>
@@ -1062,7 +1054,7 @@
     <value>Buat Titik Pemulihan</value>
   </data>
   <data name="RestorePointDialogText" xml:space="preserve">
- <value>Sangat disarankan untuk membuat titik pemulihan sebelum membuat perubahan apa pun pada sistem Anda.
+    <value>Sangat disarankan untuk membuat titik pemulihan sebelum membuat perubahan apa pun pada sistem Anda.
   
   
   Apakah Anda ingin membuat titik pemulihan sistem sebelum melanjutkan?</value>
@@ -1147,7 +1139,7 @@
     <value>Diagnosis</value>
   </data>
   <data name="RepairPage_DiskOptimizations.Header" xml:space="preserve">
-   <value>Optimisasi Disk</value>
+    <value>Optimisasi Disk</value>
   </data>
   <data name="RepairPage_DiskOptimizations.Description" xml:space="preserve">
     <value>Ini akan mengoptimalkan perangkat penyimpanan Anda dengan mendefragnya (jika HDD) atau melakukan retrim (jika SSD)</value>
@@ -1168,7 +1160,7 @@
     <value>Opsi Diagnosis</value>
   </data>
   <data name="OperationCompleted" xml:space="preserve">
-<value>Operasi Selesai</value>
+    <value>Operasi Selesai</value>
   </data>
   <data name="RestorePointTitle" xml:space="preserve">
     <value>Titik Pemulihan</value>
@@ -1195,7 +1187,7 @@
     <value>Tidak ada aplikasi yang cocok dengan pencarian Anda</value>
   </data>
   <data name="DebloatSystemPage_SearchBar.PlaceholderText" xml:space="preserve">
-   <value>Cari aplikasi...</value>
+    <value>Cari aplikasi...</value>
   </data>
   <data name="Feature_BackgroundApps.Header" xml:space="preserve">
     <value>Nonaktifkan Aplikasi Latar Belakang</value>
@@ -1250,7 +1242,7 @@
   </data>
   <data name="Feature_ServiceHostSplitting.Header" xml:space="preserve">
     <value>Nonaktifkan Pemisahan Service Host</value>
-</data>
+  </data>
   <data name="Feature_ServiceHostSplitting.Description" xml:space="preserve">
     <value>Menonaktifkan pemisahan Service Host untuk penggunaan RAM dan jumlah proses yang jauh lebih rendah.</value>
   </data>
@@ -1270,7 +1262,7 @@
     <value>Optimalkan Kinerja Aplikasi Latar Depan</value>
   </data>
   <data name="Feature_PrioritizeForegroundApplications.Description" xml:space="preserve">
-   <value>Meningkatkan kinerja untuk aplikasi aktif dengan memprioritaskan tugas latar depan.</value>
+    <value>Meningkatkan kinerja untuk aplikasi aktif dengan memprioritaskan tugas latar depan.</value>
   </data>
   <data name="Feature_WPBT.Header" xml:space="preserve">
     <value>Nonaktifkan Eksekusi WPBT</value>
@@ -1357,7 +1349,7 @@
     <value>Pemindaian malware aktif</value>
   </data>
   <data name="SecurityPage_BlocksUnauthorizedAccess.Text" xml:space="preserve">
- <value>Memblokir akses jaringan tidak sah</value>
+    <value>Memblokir akses jaringan tidak sah</value>
   </data>
   <data name="SecurityPage_SecurityPatchesAndUpdates.Text" xml:space="preserve">
     <value>Patch keamanan dan pembaruan fitur</value>
@@ -1379,7 +1371,7 @@
   </data>
   <data name="SecurityPage_LastUpdated" xml:space="preserve">
     <value>Terakhir diperbarui</value>
-</data>
+  </data>
   <data name="SecurityPage_LastRefreshed" xml:space="preserve">
     <value>Terakhir disegarkan</value>
   </data>
@@ -1423,7 +1415,7 @@
     <value>Paket daya Ultimate Performance sudah ada.</value>
   </data>
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
-   <value>Tambahkan Paket Daya Ultimate Performance</value>
+    <value>Tambahkan Paket Daya Ultimate Performance</value>
   </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Tambahkan Paket Daya Ultimate Performance</value>
@@ -1524,8 +1516,7 @@
   <data name="PoliciesPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
     <value>Hapus Kebijakan Kategori</value>
   </data>
-  <data
-    name="PoliciesPage_NotConfigured" xml:space="preserve">
+  <data name="PoliciesPage_NotConfigured" xml:space="preserve">
     <value>Belum Dikonfigurasi</value>
   </data>
   <data name="PoliciesPage_RemoveSuccessTitle" xml:space="preserve">
@@ -1592,7 +1583,7 @@
     <value>Paket daya dasar</value>
   </data>
   <data name="Create" xml:space="preserve">
- <value>Buat</value>
+    <value>Buat</value>
   </data>
   <data name="PowerPlanNameRequired" xml:space="preserve">
     <value>Harap masukkan nama untuk paket daya.</value>
@@ -1630,8 +1621,7 @@
   <data name="LocalAccount" xml:space="preserve">
     <value>Akun lokal</value>
   </data>
-  <data name="Feature_DisableWindowsAI.Header"
-    xml:space="preserve">
+  <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
     <value>Nonaktifkan Windows AI</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
@@ -1674,7 +1664,7 @@
     <value>Belikan saya kopi (Buy me a coffee)</value>
   </data>
   <data name="Settings_ViewLogs.Header" xml:space="preserve">
-   <value>Lihat Log</value>
+    <value>Lihat Log</value>
   </data>
   <data name="Settings_ViewLogs.Description" xml:space="preserve">
     <value>Lihat log aplikasi untuk pemecahan masalah</value>
