@@ -31,8 +31,6 @@ public sealed partial class PackagesPage : Page
     private PackageCatalog? _localCatalog;
 
     private bool? _isWingetAvailable;
-    private bool _isUsingInventoryFallback;
-    private bool _isUsingCliDiscoveryFallback;
     private bool _isUpdatesMode;
     private bool _isLoading;
     private bool _suppressSearch;
@@ -559,7 +557,6 @@ public sealed partial class PackagesPage : Page
 
     private async Task<List<DiscoveredPackageEntry>> DiscoverPackagesAsync(PackageCatalog catalog)
     {
-        _isUsingCliDiscoveryFallback = false;
         try
         {
             var packages = new List<DiscoveredPackageEntry>();
@@ -582,7 +579,6 @@ public sealed partial class PackagesPage : Page
         catch (OperationCanceledException) { throw; }
         catch (Exception ex) when (ex.Message.Contains("No such interface supported", StringComparison.OrdinalIgnoreCase))
         {
-            _isUsingCliDiscoveryFallback = true;
             await LogHelper.LogWarning($"COM catalog unavailable, falling back to CLI. {ex.Message}");
             return await DiscoverPackagesFromWingetCliAsync();
         }
@@ -595,7 +591,6 @@ public sealed partial class PackagesPage : Page
 
     private async Task<List<DiscoveredPackageEntry>> DiscoverPackagesFromWingetCliAsync()
     {
-        _isUsingCliDiscoveryFallback = true;
         var psi = new ProcessStartInfo
         {
             FileName = "cmd.exe",
@@ -735,7 +730,6 @@ public sealed partial class PackagesPage : Page
     {
         var result = new Dictionary<string, (string Name, string Version)>(StringComparer.OrdinalIgnoreCase);
         _installedSnapshot.Clear();
-        _isUsingInventoryFallback = false;
 
         try
         {
@@ -777,7 +771,6 @@ public sealed partial class PackagesPage : Page
     {
         try
         {
-            _isUsingInventoryFallback = true;
             var (apps, _) = await OptimizationOptions.GetInstalledApps();
             foreach (var app in apps)
             {
