@@ -1,10 +1,11 @@
-<Page
-    x:Class="RyTuneX.Views.GroupPolicyPage"
+﻿<Page
+    x:Class="RyTuneX.Views.PoliciesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:local="using:RyTuneX.Views"
     mc:Ignorable="d">
     <Page.Resources>
         <x:Double x:Key="SettingsCardSpacing">4</x:Double>
@@ -24,14 +25,14 @@
                     <RepositionThemeTransition IsStaggeringEnabled="False" />
                 </StackPanel.ChildrenTransitions>
                 <InfoBar x:Name="InfoBanner"
-                         x:Uid="GroupPolicyPage_InfoBanner"
+                         x:Uid="PoliciesPage_InfoBanner"
                          IsOpen="True"
                          IsClosable="False"
                          Severity="Informational"
                          Margin="0,0,0,16"/>
                 
                 <controls:SettingsExpander x:Name="PolicySummaryExpander"
-                                           x:Uid="GroupPolicyPage_PolicySummaryExpander"
+                                           x:Uid="PoliciesPage_PolicySummaryExpander"
                                            IsExpanded="True">
                     <controls:SettingsExpander.HeaderIcon>
                         <FontIcon Glyph="&#xE9D5;"/>
@@ -46,7 +47,7 @@
                                                   Height="20"
                                                   Visibility="Visible"/>
                                     <TextBlock x:Name="SummaryText" 
-                                               x:Uid="GroupPolicyPage_ScanningText"
+                                               x:Uid="PoliciesPage_ScanningText"
                                                VerticalAlignment="Center"/>
                                 </StackPanel>
                             </controls:SettingsCard.Header>
@@ -55,7 +56,7 @@
                                         Click="RefreshButton_Click">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <FontIcon Glyph="&#xE72C;" FontSize="14"/>
-                                        <TextBlock x:Uid="GroupPolicyPage_RefreshText"/>
+                                        <TextBlock x:Uid="PoliciesPage_RefreshText"/>
                                     </StackPanel>
                                 </Button>
                                 <Button x:Name="RemoveAllButton"
@@ -64,7 +65,7 @@
                                         Style="{StaticResource AccentButtonStyle}">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <FontIcon Glyph="&#xE74D;" FontSize="14"/>
-                                        <TextBlock x:Uid="GroupPolicyPage_RemoveAllText"/>
+                                        <TextBlock x:Uid="PoliciesPage_RemoveAllText"/>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
@@ -72,7 +73,7 @@
                     </controls:SettingsExpander.Items>
                 </controls:SettingsExpander>
 
-                <TextBlock x:Uid="GroupPolicyPage_CategoriesHeader"
+                <TextBlock x:Uid="PoliciesPage_CategoriesHeader"
                            Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                            Margin="6"/>
                 
@@ -81,33 +82,33 @@
                         <StackLayout Spacing="4"/>
                     </ItemsRepeater.Layout>
                     <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="local:CategorySummaryItem">
                             <controls:SettingsCard>
                                 <controls:SettingsCard.Header>
-                                    <TextBlock Text="{Binding Category}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{x:Bind Category}" FontWeight="SemiBold"/>
                                 </controls:SettingsCard.Header>
                                 <controls:SettingsCard.Description>
-                                    <TextBlock Text="{Binding StatusText}" 
-                                               Foreground="{Binding StatusColor}"/>
+                                    <TextBlock Text="{x:Bind StatusText}" 
+                                               Foreground="{x:Bind StatusColor}"/>
                                 </controls:SettingsCard.Description>
                                 <controls:SettingsCard.HeaderIcon>
-                                    <FontIcon Glyph="{Binding IconGlyph}"/>
+                                    <FontIcon Glyph="{x:Bind IconGlyph}"/>
                                 </controls:SettingsCard.HeaderIcon>
-                                <Button Content="{Binding ButtonText}"
-                                        Tag="{Binding Category}"
+                                <Button Content="{x:Bind ButtonText}"
+                                        Tag="{x:Bind Category}"
                                         Click="CategoryRemoveButton_Click"
-                                        IsEnabled="{Binding HasConfiguredPolicies}"/>
+                                        IsEnabled="{x:Bind HasConfiguredPolicies}"/>
                             </controls:SettingsCard>
                         </DataTemplate>
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>
 
-                <TextBlock x:Uid="GroupPolicyPage_ConfiguredPoliciesHeader"
+                <TextBlock x:Uid="PoliciesPage_ConfiguredPoliciesHeader"
                            Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
                            Margin="6"/>
 
                 <controls:SettingsExpander x:Name="ConfiguredPoliciesExpander"
-                                           x:Uid="GroupPolicyPage_DetailedPolicyListExpander"
+                                           x:Uid="PoliciesPage_DetailedPolicyListExpander"
                                            IsExpanded="False">
                     <controls:SettingsExpander.HeaderIcon>
                         <FontIcon Glyph="&#xE90F;"/>
@@ -120,7 +121,7 @@
                                               SelectionMode="Multiple"
                                               MaxHeight="400">
                                         <ListView.ItemTemplate>
-                                            <DataTemplate>
+                                            <DataTemplate x:DataType="local:PolicyStateViewModel">
                                                 <Grid Padding="8,4" ColumnSpacing="12">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
@@ -128,24 +129,24 @@
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                        <TextBlock Text="{Binding Policy.Name}" 
+                                                        <TextBlock Text="{x:Bind Policy.Name}" 
                                                                    FontWeight="SemiBold"
                                                                    TextTrimming="CharacterEllipsis"/>
-                                                        <TextBlock Text="{Binding Policy.Description}" 
+                                                        <TextBlock Text="{x:Bind Policy.Description}" 
                                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                                    TextTrimming="CharacterEllipsis"/>
-                                                        <TextBlock Text="{Binding Policy.Category}"
+                                                        <TextBlock Text="{x:Bind Policy.Category}"
                                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                                    Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
                                                     </StackPanel>
                                                     <TextBlock Grid.Column="1" 
-                                                               Text="{Binding HiveDisplay}"
+                                                               Text="{x:Bind HiveDisplay}"
                                                                Style="{StaticResource CaptionTextBlockStyle}"
                                                                VerticalAlignment="Center"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                                                     <Button Grid.Column="2"
-                                                            Tag="{Binding Policy.Id}"
+                                                            Tag="{x:Bind Policy.Id}"
                                                             Click="PolicyRemoveButton_Click"
                                                             VerticalAlignment="Center">
                                                         <FontIcon Glyph="&#xE74D;" FontSize="12"/>
@@ -161,7 +162,7 @@
                                         <FontIcon Glyph="&#xE73E;" 
                                                   FontSize="48" 
                                                   Foreground="{ThemeResource SystemFillColorSuccessBrush}"/>
-                                        <TextBlock x:Uid="GroupPolicyPage_NoPoliciesText"
+                                        <TextBlock x:Uid="PoliciesPage_NoPoliciesText"
                                                    HorizontalAlignment="Center"
                                                    Margin="0,12,0,0"/>
                                     </StackPanel>
@@ -173,7 +174,7 @@
                                         IsEnabled="False">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <FontIcon Glyph="&#xE74D;" FontSize="14"/>
-                                        <TextBlock x:Uid="GroupPolicyPage_RemoveSelectedText"/>
+                                        <TextBlock x:Uid="PoliciesPage_RemoveSelectedText"/>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>

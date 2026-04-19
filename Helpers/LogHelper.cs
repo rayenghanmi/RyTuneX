@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Windows.Storage;
 
@@ -6,23 +7,21 @@ internal class LogHelper
 {
     private static readonly SemaphoreSlim LogSemaphore = new(1, 1);
 
-    private static async Task LogToFile(string message, string fileName)
+    private static readonly string LogDirectory = Path.Combine(
+        ApplicationData.Current.LocalCacheFolder.Path,
+        "Logs");
+
+    private static readonly string LogFilePath = Path.Combine(LogDirectory, "Log.txt");
+
+    private static async Task LogToFile(string message)
     {
         await LogSemaphore.WaitAsync();
         try
         {
-            var tempFolder = ApplicationData.Current.TemporaryFolder;
-            var logFile = await tempFolder.CreateFileAsync($"{fileName}_{DateTime.Now:yyyy-MM-dd}.txt", CreationCollisionOption.OpenIfExists);
-
-            // Ensure UTF-8 encoding when appending to the log file
-            using (var stream = await logFile.OpenStreamForWriteAsync())
-            {
-                stream.Seek(0, SeekOrigin.End); // Append to the file
-                using (var writer = new StreamWriter(stream, new UTF8Encoding(false))) // Disable BOM
-                {
-                    await writer.WriteLineAsync($"{DateTime.Now:T}: {message}");
-                }
-            }
+            Directory.CreateDirectory(LogDirectory);
+            await File.AppendAllTextAsync(LogFilePath,
+                $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}: {message}{Environment.NewLine}",
+                new UTF8Encoding(false));
         }
         catch (Exception logException)
         {
@@ -34,9 +33,53 @@ internal class LogHelper
         }
     }
 
-    public static Task Log(string message) => LogToFile($"[DEBUG] {message}", "Logs");
-    public static async Task LogError(string message)
+    // Writes a critical log entry synchronously.
+    public static void LogCriticalSync(string message, [CallerMemberName] string caller = "", [CallerFilePath] string file = "")
     {
-        await LogToFile($"[ERROR] {message}", "Logs");
+        var callerInfo = FormatCaller(caller, file);
+        var entry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}: [CRITICAL] [{callerInfo}] {message}{Environment.NewLine}";
+        try
+        {
+            Directory.CreateDirectory(LogDirectory);
+            File.AppendAllText(LogFilePath, entry);
+        }
+        catch
+        {
+            Debug.WriteLine(entry);
+        }
+    }
+
+    public static Task Log(string message, [CallerMemberName] string caller = "", [CallerFilePath] string file = "")
+    {
+        var callerInfo = FormatCaller(caller, file);
+        return LogToFile($"[INFO] [{callerInfo}] {message}");
+    }
+
+    public static Task LogWarning(string message, [CallerMemberName] string caller = "", [CallerFilePath] string file = "")
+    {
+        var callerInfo = FormatCaller(caller, file);
+        return LogToFile($"[WARN] [{callerInfo}] {message}");
+    }
+
+    public static Task LogError(string message, [CallerMemberName] string caller = "", [CallerFilePath] string file = "")
+    {
+        var callerInfo = FormatCaller(caller, file);
+        return LogToFile($"[ERROR] [{callerInfo}] {message}");
+    }
+
+    public static Task LogException(Exception ex, string context = "", [CallerMemberName] string caller = "", [CallerFilePath] string file = "")
+    {
+        var callerInfo = FormatCaller(caller, file);
+        var prefix = string.IsNullOrEmpty(context) ? string.Empty : $"{context} | ";
+        return LogToFile($"[ERROR] [{callerInfo}] {prefix}{ex}");
+    }
+
+    // Returns the full path to the log file.
+    public static string GetLogFilePath() => LogFilePath;
+
+    private static string FormatCaller(string caller, string file)
+    {
+        var fileName = Path.GetFileNameWithoutExtension(file);
+        return $"{fileName}.{caller}";
     }
 }

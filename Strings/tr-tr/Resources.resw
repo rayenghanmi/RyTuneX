@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Aygıt</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Rapor</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Optimizasyon</value>
   </data>
@@ -150,11 +147,8 @@
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Rayen Ghanmi tarafından oluşturulan bir Windows 10 ve 11 optimizasyon aracı olan RyTuneX, seçilen yazılımı seçerek kaldırarak ve gereksiz hizmetleri devre dışı bırakarak sistem performansını ve verimliliğini artırmak için tasarlanmıştır.</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+  <data name="SettingsPage_PrivacyTermsLink.Header" xml:space="preserve">
     <value>AGPL v3.0</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Dil</value>
@@ -702,9 +696,6 @@
   <data name="Update" xml:space="preserve">
     <value>Güncelleme</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Destek</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Ağ</value>
   </data>
@@ -737,9 +728,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Toplam: {0} Uygulama</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Performans</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Etkinleştirilmiş</value>
@@ -1434,151 +1422,151 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>En Yüksek Performans Planını Ekle</value>
   </data>
-  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+  <data name="PoliciesPage_Warning" xml:space="preserve">
     <value>Bu özellik yalnızca ilke destekli kayıt defteri girişlerini algılar. Hizmet değişikliklerini veya ilke dışı kayıt defteri düzenlemelerini algılamaz.</value>
   </data>
-  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
     <value>Bu sayfa Yerel Grup İlkesi geçersiz kılmalarını algılar ve kaldırmanıza olanak tanır. Bir ilke geçersiz kılmasını kaldırmak, onu Yapılandırılmamış durumuna döndürür.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>İlke Özeti</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPolicies" xml:space="preserve">
     <value>Yapılandırılmış İlkeler</value>
   </data>
-  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+  <data name="PoliciesPage_Categories" xml:space="preserve">
     <value>Kategoriler</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelected" xml:space="preserve">
     <value>Seçilenleri Kaldır</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyList" xml:space="preserve">
     <value>Ayrıntılı İlke Listesi</value>
   </data>
   <data name="Shell_GroupPolicy.Content" xml:space="preserve">
     <value>İlkeler</value>
   </data>
-  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveOverrides" xml:space="preserve">
     <value>Geçersiz Kılmaları Kaldır</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>İlke geçersiz kılma algılanmadı.</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
     <value>Tüm Geçersiz Kılmaları Kaldır</value>
   </data>
-  <data name="GroupPolicyPage_Title" xml:space="preserve">
+  <data name="PoliciesPage_Title" xml:space="preserve">
     <value>Grup İlkesi Geçersiz Kılma Algılama</value>
   </data>
-  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>İlkeler taranıyor...</value>
   </data>
-  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+  <data name="PoliciesPage_Refresh" xml:space="preserve">
     <value>Yenile</value>
   </data>
-  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_CategoriesHeader.Text" xml:space="preserve">
     <value>Kategoriler</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelectedText.Text" xml:space="preserve">
     <value>Seçilenleri Kaldır</value>
   </data>
-  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+  <data name="PoliciesPage_ScanningText.Text" xml:space="preserve">
     <value>İlkeler taranıyor...</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesText.Text" xml:space="preserve">
     <value>İlke geçersiz kılma algılanmadı.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Header" xml:space="preserve">
     <value>İlke Özeti</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Title" xml:space="preserve">
     <value>Bilgi</value>
   </data>
-  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RefreshText.Text" xml:space="preserve">
     <value>Yenile</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
     <value>Yapılandırılmış İlkeler</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Description" xml:space="preserve">
     <value>Bireysel ilke geçersiz kılmalarını görüntüle ve yönet</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllText.Text" xml:space="preserve">
     <value>Tüm Geçersiz Kılmaları Kaldır</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Message" xml:space="preserve">
     <value>Bu sayfa Yerel Grup İlkesi geçersiz kılmalarını algılar ve kaldırmanıza olanak tanır. Bir ilke geçersiz kılmasını kaldırmak, onu Yapılandırılmamış durumuna döndürür.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Description" xml:space="preserve">
     <value>Algılanan ilke geçersiz kılmalarına genel bakış</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Header" xml:space="preserve">
     <value>Ayrıntılı İlke Listesi</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredCount" xml:space="preserve">
     <value>{0} Yapılandırılmış</value>
   </data>
-  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+  <data name="PoliciesPage_ScanError" xml:space="preserve">
     <value>İlkeler taranırken hata: {0}</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorTitle" xml:space="preserve">
     <value>Kaldırma Başarısız</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessContent" xml:space="preserve">
     <value>{0} ilke geçersiz kılması başarıyla kaldırıldı.</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
     <value>Kategori İlkelerini Kaldır</value>
   </data>
-  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+  <data name="PoliciesPage_NotConfigured" xml:space="preserve">
     <value>Yapılandırılmamış</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessTitle" xml:space="preserve">
     <value>İlkeler Kaldırıldı</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesCount" xml:space="preserve">
     <value>{0} yapılandırılmış ilke</value>
   </data>
-  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+  <data name="PoliciesPage_RestartNow" xml:space="preserve">
     <value>Şimdi Yeniden Başlat</value>
   </data>
-  <data name="GroupPolicyPage_Later" xml:space="preserve">
+  <data name="PoliciesPage_Later" xml:space="preserve">
     <value>Daha Sonra</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedContent" xml:space="preserve">
     <value>Seçilen {0} ilke geçersiz kılmasını kaldırmak istediğinizden emin misiniz?</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorContent" xml:space="preserve">
     <value>İlke geçersiz kılmaları kaldırılırken bir hata oluştu: {0}</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryContent" xml:space="preserve">
     <value>'{1}' kategorisindeki tüm {0} ilke geçersiz kılmasını kaldırmak istediğinizden emin misiniz?</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllContent" xml:space="preserve">
     <value>Tüm {0} ilke geçersiz kılmasını kaldırmak istediğinizden emin misiniz? Bu işlem geri alınamaz.</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialTitle" xml:space="preserve">
     <value>Kısmi Kaldırma</value>
   </data>
-  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+  <data name="PoliciesPage_Remove" xml:space="preserve">
     <value>Kaldır</value>
   </data>
-  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+  <data name="PoliciesPage_RemovingPolicies" xml:space="preserve">
     <value>İlkeler kaldırılıyor...</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialContent" xml:space="preserve">
     <value>{1} ilke geçersiz kılmasından {0} tanesi kaldırıldı. Bazı ilkeler kaldırılamadı.</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerTitle" xml:space="preserve">
     <value>Gezgini Yeniden Başlat</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerContent" xml:space="preserve">
     <value>Bazı ilke değişikliklerinin etkili olması için Windows Gezgini'nin yeniden başlatılması gerekir. Gezgini şimdi yeniden başlatmak ister misiniz?</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllTitle" xml:space="preserve">
     <value>Tüm İlke Geçersiz Kılmalarını Kaldır</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Seçilen İlkeleri Kaldır</value>
   </data>
   <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
@@ -1640,5 +1628,50 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Not Defteri, Paint ve Fotoğraflar’dan yapay zekâ özelliklerini kaldırır, Windows Studio kamera/mikrofon efektlerini ve oyun yapay zekâsını devre dışı bırakır ve gizlilik ile performansı en üst düzeye çıkarmak için kabuktaki yapay zekâ entegrasyonlarını kaldırır.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Hizmetler</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>İşlemler</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>Uygulama Teması</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Uygulama renk temasını seçin</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Gezinme Stili</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Gezinme panelinin nasıl görüntüleneceğini seçin</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Kaynak kodu</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>GitHub’da görüntüle ve katkıda bulun</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Hata bildir veya özellik iste</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>GitHub’da bir issue aç</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Geliştiriciyi destekle</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Bana bir kahve ısmarla</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Günlükleri Görüntüle</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Sorun giderme için uygulama günlüklerini görüntüleyin</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Yükleniyor...</value>
   </data>
 </root>

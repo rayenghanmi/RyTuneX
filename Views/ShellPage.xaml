@@ -11,23 +11,51 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:winbehaviors="using:CommunityToolkit.WinUI.Behaviors"
     xmlns:models="using:RyTuneX.Models"
+    xmlns:dev="using:DevWinUI"
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     Loaded="OnLoaded">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid x:Name="AppTitleBar"
-              Canvas.ZIndex="1"
-              Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
+              Grid.Row="0"
+              Height="48"
               IsHitTestVisible="True"
               VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="BackButtonColumn" Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="128"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Grid>
+            <Button x:Name="TitleBarBackButton"
+                    Grid.Column="0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    IsEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
+                    Click="TitleBarBackButton_Click"
+                    PointerEntered="TitleBarBackButton_PointerEntered"
+                    PointerExited="TitleBarBackButton_PointerExited"
+                    VerticalAlignment="Center"
+                    Width="38" Height="42"
+                    Padding="10"
+                    Margin="2,2,0,0">
+                <AnimatedIcon x:Name="BackAnimatedIcon">
+                    <AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedBackVisualSource/>
+                    </AnimatedIcon.Source>
+                    <AnimatedIcon.FallbackIconSource>
+                        <SymbolIconSource Symbol="Back"/>
+                    </AnimatedIcon.FallbackIconSource>
+                </AnimatedIcon>
+            </Button>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Grid Margin="8,0,16,0">
                     <FontIcon x:Name="IsAdminIcon"
                     x:Uid="IsAdminIcon"
                     Glyph="&#xEA18;"
@@ -44,31 +72,31 @@
                 <Image x:Name="ShellTitleBarImage" Source="/Assets/WindowIcon.ico"
                     HorizontalAlignment="Left"
                     Width="22"
-                    Height="22"
-                    Margin="16,0,0,0"/>
+                    Height="22"/>
                 <TextBlock x:Name="AppTitleBarText"
-                Text="RyTuneX"
-                VerticalAlignment="Center"
-                Margin="16,0,0,0"
-                TextWrapping="NoWrap"
-                Style="{StaticResource CaptionTextBlockStyle}"/>
+                    Text="RyTuneX"
+                    VerticalAlignment="Center"
+                    Margin="16,0,0,0"
+                    TextWrapping="NoWrap"
+                    Style="{StaticResource CaptionTextBlockStyle}"/>
                 <TextBlock x:Name="AppTitleBarVersion"
-                VerticalAlignment="Center"
-                Margin="8,0,0,0"
-                TextWrapping="NoWrap"
-                FontSize="11"
-                Opacity="0.75"/>
+                    VerticalAlignment="Center"
+                    Margin="8,0,0,0"
+                    TextWrapping="NoWrap"
+                    FontSize="11"
+                    Opacity="0.75"/>
             </StackPanel>
             
             <!-- Search Box in Title Bar -->
             <AutoSuggestBox x:Name="TitleBarSearchBox"
-                            Grid.Column="2"
-                            Width="280"
-                            MaxWidth="400"
+                            Grid.Column="3"
+                            Width="400"
                             MinWidth="200"
+                            BorderThickness="0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             PlaceholderText="Search settings..."
+                            CornerRadius="16"
                             QueryIcon="Find"
                             TextMemberPath="DisplayName"
                             TextChanged="TitleBarSearchBox_TextChanged"
@@ -102,52 +130,16 @@
         </Grid>
         <NavigationView
             x:Name="NavigationViewControl"
-            Canvas.ZIndex="0"
-            IsBackButtonVisible="Visible"
-            IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
+            Grid.Row="1"
+            IsBackButtonVisible="Collapsed"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
             IsSettingsVisible="True"
+            PaneDisplayMode="Auto"
             IsPaneToggleButtonVisible="False"
             ExpandedModeThresholdWidth="800"
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
             OpenPaneLength="220"
             Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
-            <NavigationView.PaneHeader>
-                <NavigationViewItem
-                    x:Name="UserProfileItem"
-                    IsTabStop="True"
-                    SelectsOnInvoked="False"
-                    Padding="12,8"
-                    Tapped="UserProfileButton_Click">
-                    <NavigationViewItem.Content>
-                        <Grid ColumnSpacing="12" Padding="0,4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <PersonPicture
-                                Grid.Column="0"
-                                Width="60"
-                                Height="60"
-                                DisplayName="{x:Bind UserName, Mode=OneWay}"
-                                Background="{ThemeResource AccentAAFillColorDefaultBrush}"
-                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"/>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock
-                                    Text="{x:Bind UserName, Mode=OneWay}"
-                                    FontWeight="SemiBold"
-                                    FontSize="14"
-                                    TextTrimming="CharacterEllipsis"/>
-                                <TextBlock
-                                    Text="{x:Bind AccountType, Mode=OneWay}"
-                                    FontSize="12"
-                                    TextWrapping="Wrap" 
-                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                            </StackPanel>
-                        </Grid>
-                    </NavigationViewItem.Content>
-                </NavigationViewItem>
-            </NavigationView.PaneHeader>
             <NavigationView.Resources>
                 <SolidColorBrush
                     x:Key="NavigationViewContentBackground"
@@ -165,6 +157,16 @@
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF259;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_Services" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.ServicesPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9F5;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_Processes" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.ProcessesPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xECAA;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_Repair" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.RepairPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE90F;"/>
@@ -173,6 +175,11 @@
                 <NavigationViewItem x:Uid="Shell_Debloat" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.DebloatSystemPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE74D;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Packages" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.PackagesPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE896;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_Privacy" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.PrivacyPage">
@@ -195,7 +202,7 @@
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEA18;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_GroupPolicy" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.GroupPolicyPage">
+                <NavigationViewItem x:Uid="Shell_GroupPolicy" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.PoliciesPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE9D5;"/>
                     </NavigationViewItem.Icon>
@@ -206,23 +213,11 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
-            <NavigationView.FooterMenuItems>
-                <NavigationViewItem x:Uid="Shell_Issue" SelectsOnInvoked="False" PointerPressed="IssueButton_Click">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEBE8;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Support" SelectsOnInvoked="False" PointerPressed="SupportButton_Click">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF133;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-            </NavigationView.FooterMenuItems>
             <NavigationView.HeaderTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="x:String">
                     <Grid>
                         <TextBlock
-                            Text="{Binding}"
+                            Text="{x:Bind}"
                             Style="{ThemeResource TitleTextBlockStyle}" />
                     </Grid>
                 </DataTemplate>
@@ -231,75 +226,28 @@
                 <behaviors:NavigationViewHeaderBehavior
                     DefaultHeader="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
                     <behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="x:String">
                             <Grid>
                                 <TextBlock
-                                    Text="{Binding}"
+                                    Text="{x:Bind}"
                                     Style="{ThemeResource TitleTextBlockStyle}" />
                             </Grid>
                         </DataTemplate>
                     </behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
                 </behaviors:NavigationViewHeaderBehavior>
             </i:Interaction.Behaviors>
-            <Grid>
-                <Frame x:Name="NavigationFrame"/>
-                <muxc:InfoBar
-                    x:Name="infoBar"
-                    Grid.Row="0"
-                    MaxWidth="600"
-                    Margin="32"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom">
-                    <muxc:InfoBar.Resources>
-                        <!-- Storyboard for InfoBar Animation -->
-                        <Storyboard x:Key="ShowNotificationStoryboard">
-                            <DoubleAnimation
-                                Storyboard.TargetName="infoBar"
-                                Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)"
-                                From="50"
-                                To="0"
-                                Duration="0:0:0.3" />
-                        </Storyboard>
-                        <!-- Storyboard for ProgressBar Animation -->
-                        <Storyboard x:Key="ProgressBarAnimationStoryboard">
-                            <DoubleAnimation
-                                Storyboard.TargetName="progressBar"
-                                Storyboard.TargetProperty="Value"
-                                From="0"
-                                To="100"
-                                Duration="0:0:5"
-                                EnableDependentAnimation="True" />
-                        </Storyboard>
-                        <!-- Storyboard for hiding the InfoBar -->
-                        <Storyboard x:Key="HideNotificationStoryboard">
-                            <DoubleAnimation
-                                Storyboard.TargetName="infoBar"
-                                Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)"
-                                From="0"
-                                To="50"
-                                Duration="0:0:0.25" />
-                        </Storyboard>
-                    </muxc:InfoBar.Resources>
-                    <muxc:InfoBar.RenderTransform>
-                        <TranslateTransform Y="50" />
-                    </muxc:InfoBar.RenderTransform>
-                    <muxc:InfoBar.Content>
-                        <StackPanel>
-                            <ProgressBar
-                                x:Name="progressBar"
-                                Margin="-48,0"
-                                Background="Transparent"
-                                HorizontalAlignment="Stretch"
-                                Minimum="0"
-                                Maximum="100"
-                                Value="0" />
-                        </StackPanel>
-                    </muxc:InfoBar.Content>
-                    <interactivity:Interaction.Behaviors>
-                        <winbehaviors:StackedNotificationsBehavior x:Name="NotificationQueue" />
-                    </interactivity:Interaction.Behaviors>
-                </muxc:InfoBar>
-            </Grid>
+            <Frame x:Name="NavigationFrame"/>
         </NavigationView>
+        <Grid
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Canvas.ZIndex="999">
+            <Border Width="400">
+                <StackPanel
+                    dev:Growl.GrowlParent="True"
+                    dev:Growl.Token="MainToken"/>
+            </Border>
+        </Grid>
     </Grid>
 </Page>

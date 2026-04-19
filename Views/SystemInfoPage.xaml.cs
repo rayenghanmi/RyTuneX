@@ -1,8 +1,11 @@
-﻿using System.Text;
+﻿using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Documents;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Helpers;
+using System.Text;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace RyTuneX.Views;
 
@@ -11,9 +14,77 @@ public sealed partial class SystemInfoPage : Page
     public SystemInfoPage()
     {
         InitializeComponent();
-        LogHelper.Log("Initializing SystemInfoPage");
+        _ = _ = LogHelper.Log("Initializing SystemInfoPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         _ = UpdateSystemInfoAsync();
+    }
+
+    private void CopyExpander_Click(object sender, RoutedEventArgs e)
+    {
+        LogHelper.Log("CopyExpander_Click invoked");
+        try
+        {
+            if (sender is Button btn && btn.Tag is string tag)
+            {
+                LogHelper.Log($"Button tag is {tag}");
+                var element = this.FindName(tag) as TextBlock;
+                var text = element?.Text ?? string.Empty;
+                if (!string.IsNullOrEmpty(text))
+                {
+                    var dp = new DataPackage();
+                    dp.SetText(text);
+                    Clipboard.SetContent(dp);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error copying expander content: {ex}");
+        }
+    }
+
+    private static void SetFormattedText(TextBlock textBlock, string info)
+    {
+        textBlock.Text = string.Empty;
+        textBlock.Inlines.Clear();
+
+        if (string.IsNullOrWhiteSpace(info)) return;
+
+        var subtleBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+
+        var lines = info.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var line = lines[i];
+            var colonIndex = line.IndexOf(':');
+
+            if (colonIndex >= 0)
+            {
+                var title = line[..(colonIndex + 1)];
+                var value = line[(colonIndex + 1)..];
+
+                textBlock.Inlines.Add(new Run
+                {
+                    Text = title,
+                    FontWeight = FontWeights.SemiBold
+                });
+
+                textBlock.Inlines.Add(new Run
+                {
+                    Text = value + (i < lines.Length - 1 ? "\n" : ""),
+                    Foreground = subtleBrush,
+                });
+            }
+            else
+            {
+                textBlock.Inlines.Add(new Run
+                {
+                    Text = line + (i < lines.Length - 1 ? "\n" : ""),
+                    FontWeight = FontWeights.SemiBold
+                });
+            }
+        }
     }
 
     private async Task UpdateSystemInfoAsync()
@@ -22,42 +93,101 @@ public sealed partial class SystemInfoPage : Page
         {
             _ = LogHelper.Log("Updating SystemInfo");
 
-            var osTask = Task.Run(GetOsInformation);
-            var cpuTask = Task.Run(GetCpuInformation);
-            var gpuTask = Task.Run(GetGpuInformation);
-            var ramTask = Task.Run(GetRamInformation);
-            var diskTask = Task.Run(GetDiskInformation);
-            var networkTask = Task.Run(GetNetworkInformation);
-            var batteryTask = Task.Run(GetBatteryInformation);
+            var osInformationTask = GetOsInformation();
+            var cpuInformationTask = GetCpuInformation();
+            var gpuInformationTask = GetGpuInformation();
+            var ramInformationTask = GetRamInformation();
+            var diskInformationTask = GetDiskInformation();
+            var networkInformationTask = GetNetworkInformation();
+            var batteryInformationTask = GetBatteryInformation();
 
-            await Task.WhenAll(osTask, cpuTask, gpuTask, ramTask, diskTask, networkTask, batteryTask).ConfigureAwait(false);
+            await Task.WhenAll(osInformationTask, cpuInformationTask, gpuInformationTask, ramInformationTask, diskInformationTask, networkInformationTask, batteryInformationTask).ConfigureAwait(false);
 
-            var osInformation = await osTask.ConfigureAwait(false);
-            var cpuInformation = await cpuTask.ConfigureAwait(false);
-            var gpuInformation = await gpuTask.ConfigureAwait(false);
-            var ramInformation = await ramTask.ConfigureAwait(false);
-            var diskInformation = await diskTask.ConfigureAwait(false);
-            var networkInformation = await networkTask.ConfigureAwait(false);
-            var batteryInformation = await batteryTask.ConfigureAwait(false);
+            var osInformation = osInformationTask.Result;
+            var cpuInformation = cpuInformationTask.Result;
+            var gpuInformation = gpuInformationTask.Result;
+            var ramInformation = ramInformationTask.Result;
+            var diskInformation = diskInformationTask.Result;
+            var networkInformation = networkInformationTask.Result;
+            var batteryInformation = batteryInformationTask.Result;
+
+            // Extract summary fields from the info strings
+            var osCaption = GetFirstLine(osInformation);
+            var cpuName = GetFirstLine(cpuInformation);
+            var ramSummary = GetRamSummary(ramInformation);
 
             DispatcherQueue.TryEnqueue(() =>
             {
-                os.Text = osInformation;
-                cpu.Text = cpuInformation;
-                gpu.Text = gpuInformation;
-                ram.Text = ramInformation;
-                disk.Text = diskInformation;
-                network.Text = networkInformation;
-                battery.Text = batteryInformation;
+                SetFormattedText(os, osInformation);
+                SetFormattedText(cpu, cpuInformation);
+                SetFormattedText(gpu, gpuInformation);
+                SetFormattedText(ram, ramInformation);
+                SetFormattedText(disk, diskInformation);
+                SetFormattedText(network, networkInformation);
+                SetFormattedText(battery, batteryInformation);
+
+                try
+                {
+                    DeviceNameText.Text = Environment.MachineName;
+                    var parts = new List<string>();
+                    if (!string.IsNullOrWhiteSpace(osCaption)) parts.Add(osCaption.Trim());
+                    if (!string.IsNullOrWhiteSpace(cpuName)) parts.Add(cpuName.Trim());
+                    if (!string.IsNullOrWhiteSpace(ramSummary)) parts.Add(ramSummary.Trim() + " RAM");
+                    DeviceSummaryText.Text = string.Join(" | ", parts);
+                }
+                catch
+                {
+
+                }
 
                 loadingProgressRing.Visibility = Visibility.Collapsed;
-                infoPanel.Visibility = Visibility.Visible;
+                ContentArea.Visibility = Visibility.Visible;
             });
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error updating system information: {ex}");
         }
+    }
+
+    // Return the value after the first colon from the first non-empty line in the multi-line info string
+    private static string GetFirstLine(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return string.Empty;
+        var parts = text.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+        foreach (var p in parts)
+        {
+            var trimmed = p.Trim();
+            if (!string.IsNullOrWhiteSpace(trimmed))
+            {
+                var colonIndex = trimmed.IndexOf(':');
+                if (colonIndex >= 0 && colonIndex < trimmed.Length - 1)
+                    return trimmed[(colonIndex + 1)..].Trim();
+                return trimmed;
+            }
+        }
+        return string.Empty;
+    }
+
+    // Extract total RAM in GB from RAM info string
+    private static string GetRamSummary(string ramInfo)
+    {
+        if (string.IsNullOrWhiteSpace(ramInfo)) return string.Empty;
+        var lines = ramInfo.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+        long total = 0;
+        foreach (var line in lines)
+        {
+            if (line.TrimStart().StartsWith("Capacity".GetLocalized(), StringComparison.OrdinalIgnoreCase))
+            {
+                var parts = line.Split(':');
+                if (parts.Length > 1)
+                {
+                    var val = parts[1].Trim().Split(' ')[0];
+                    if (long.TryParse(val, out var gb)) total += gb;
+                }
+            }
+        }
+        return total > 0 ? total + " GB" : string.Empty;
     }
 
     private static async Task<string> GetCpuInformation()
@@ -81,7 +211,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var archCode = GetValue(lines, 2, string.Empty);
             var arch = archCode switch
@@ -134,7 +264,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var gpuNumber = 0;
@@ -192,7 +322,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var moduleNumber = 1;
@@ -251,7 +381,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             var diskNumber = 0;
@@ -314,7 +444,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(512);
             AppendField(sb, "OSName", GetValue(lines, 0, string.Empty));
@@ -414,7 +544,7 @@ public sealed partial class SystemInfoPage : Page
             ";
 
             var output = await OptimizationOptions.RunPowerShell(command).ConfigureAwait(false);
-            var lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
             var sb = new StringBuilder(256);
             var first = true;
@@ -507,7 +637,7 @@ public sealed partial class SystemInfoPage : Page
     }
 
     // Append a localized label and value only when value is present
-    private static void AppendField(StringBuilder sb, string labelKey, string value, string suffix = null, bool indent = false)
+    private static void AppendField(StringBuilder sb, string labelKey, string value, string? suffix = null, bool indent = false)
     {
         if (string.IsNullOrWhiteSpace(value)) return;
         if (indent) sb.Append("   ");
@@ -533,27 +663,32 @@ public sealed partial class SystemInfoPage : Page
         ExtractingStatus.Visibility = Visibility.Visible;
         try
         {
+            await LogHelper.Log("Starting driver extraction via DISM");
             var exitCode = await OptimizationOptions.StartInCmd($"dism.exe /online /export-driver /destination:\"{longPathSafe}\"");
             if (exitCode == 0)
             {
                 ExtractingStatusText.Text = "Done".GetLocalized();
                 ExtractingStatusPb.Visibility = Visibility.Collapsed;
+                await LogHelper.Log("Driver extraction completed successfully");
             }
             else
             {
                 ExtractingStatusText.Text = "ErrDriversExtract".GetLocalized();
                 ExtractingStatusPb.ShowError = true;
+                await LogHelper.LogError($"Driver extraction failed with exit code {exitCode}");
             }
         }
-        catch
+        catch (Exception ex)
         {
             ExtractingStatusText.Text = "ErrDriversExtract".GetLocalized();
             ExtractingStatusPb.ShowError = true;
+            await LogHelper.LogError($"Exception during driver extraction: {ex}");
         }
     }
 
     private async void SelectPathButton_Click(object sender, RoutedEventArgs e)
     {
+        await LogHelper.Log("SelectPathButton_Click invoked");
         var folderPicker = new FolderPicker(App.MainWindow.AppWindow.Id)
         {
             SuggestedStartLocation = PickerLocationId.Desktop
@@ -562,11 +697,13 @@ public sealed partial class SystemInfoPage : Page
         var folder = await folderPicker.PickSingleFolderAsync();
         if (folder != null)
         {
+            await LogHelper.Log($"Folder selected: {folder.Path}");
             FolderPathText.Text = folder.Path;
             ExtractButton.Visibility = Visibility.Visible;
         }
         else
         {
+            await LogHelper.Log("No folder selected");
             ExtractButton.Visibility = Visibility.Collapsed;
             FolderPathText.Text = "SelecFold".GetLocalized();
         }

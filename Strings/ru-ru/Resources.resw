@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Устройство</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Сообщить</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Оптимизация</value>
   </data>
@@ -150,11 +147,8 @@
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>RyTuneX, оптимизатор для Windows 10 и 11, созданный Рейеном Ганми, предназначен для повышения производительности и эффективности системы за счет удаления выбранного программного обеспечения и отключения ненужных служб.</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+  <data name="SettingsPage_PrivacyTermsLink.Header" xml:space="preserve">
     <value>AGPL v3.0</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Язык</value>
@@ -702,9 +696,6 @@
   <data name="Update" xml:space="preserve">
     <value>Обновить</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Поддержка</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Сеть</value>
   </data>
@@ -737,9 +728,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Всего: {0} приложений</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Производительность</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Включено</value>
@@ -1431,151 +1419,151 @@
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Добавить план максимальной производительности</value>
   </data>
-  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+  <data name="PoliciesPage_Warning" xml:space="preserve">
     <value>Эта функция обнаруживает только записи реестра, поддерживаемые политиками. Она не обнаруживает изменения служб или изменения реестра, не связанные с политиками.</value>
   </data>
-  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
     <value>Эта страница обнаруживает и позволяет удалять переопределения локальной групповой политики. Удаление переопределения политики возвращает её в состояние Не настроено.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>Сводка политик</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPolicies" xml:space="preserve">
     <value>Настроенные политики</value>
   </data>
-  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+  <data name="PoliciesPage_Categories" xml:space="preserve">
     <value>Категории</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelected" xml:space="preserve">
     <value>Удалить выбранные</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyList" xml:space="preserve">
     <value>Подробный список политик</value>
   </data>
   <data name="Shell_GroupPolicy.Content" xml:space="preserve">
     <value>Политики</value>
   </data>
-  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveOverrides" xml:space="preserve">
     <value>Удалить переопределения</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>Переопределения политик не обнаружены.</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
     <value>Удалить все переопределения</value>
   </data>
-  <data name="GroupPolicyPage_Title" xml:space="preserve">
+  <data name="PoliciesPage_Title" xml:space="preserve">
     <value>Обнаружение переопределения групповой политики</value>
   </data>
-  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>Сканирование политик...</value>
   </data>
-  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+  <data name="PoliciesPage_Refresh" xml:space="preserve">
     <value>Обновить</value>
   </data>
-  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_CategoriesHeader.Text" xml:space="preserve">
     <value>Категории</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelectedText.Text" xml:space="preserve">
     <value>Удалить выбранные</value>
   </data>
-  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+  <data name="PoliciesPage_ScanningText.Text" xml:space="preserve">
     <value>Сканирование политик...</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesText.Text" xml:space="preserve">
     <value>Переопределения политик не обнаружены.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Header" xml:space="preserve">
     <value>Сводка политик</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Title" xml:space="preserve">
     <value>Информация</value>
   </data>
-  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RefreshText.Text" xml:space="preserve">
     <value>Обновить</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
     <value>Настроенные политики</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Description" xml:space="preserve">
     <value>Просмотр и управление отдельными переопределениями политик</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllText.Text" xml:space="preserve">
     <value>Удалить все переопределения</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Message" xml:space="preserve">
     <value>Эта страница обнаруживает и позволяет удалять переопределения локальной групповой политики. Удаление переопределения политики возвращает её в состояние Не настроено.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Description" xml:space="preserve">
     <value>Обзор обнаруженных переопределений политик</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Header" xml:space="preserve">
     <value>Подробный список политик</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredCount" xml:space="preserve">
     <value>{0} Настроено</value>
   </data>
-  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+  <data name="PoliciesPage_ScanError" xml:space="preserve">
     <value>Ошибка сканирования политик: {0}</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorTitle" xml:space="preserve">
     <value>Ошибка удаления</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessContent" xml:space="preserve">
     <value>Успешно удалено {0} переопределений политик.</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
     <value>Удалить политики категории</value>
   </data>
-  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+  <data name="PoliciesPage_NotConfigured" xml:space="preserve">
     <value>Не настроено</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessTitle" xml:space="preserve">
     <value>Политики удалены</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesCount" xml:space="preserve">
     <value>{0} настроенных политик</value>
   </data>
-  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+  <data name="PoliciesPage_RestartNow" xml:space="preserve">
     <value>Перезапустить сейчас</value>
   </data>
-  <data name="GroupPolicyPage_Later" xml:space="preserve">
+  <data name="PoliciesPage_Later" xml:space="preserve">
     <value>Позже</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedContent" xml:space="preserve">
     <value>Вы уверены, что хотите удалить {0} выбранных переопределений политик?</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorContent" xml:space="preserve">
     <value>Произошла ошибка при удалении переопределений политик: {0}</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryContent" xml:space="preserve">
     <value>Вы уверены, что хотите удалить все {0} переопределений политик в категории '{1}'?</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllContent" xml:space="preserve">
     <value>Вы уверены, что хотите удалить все {0} переопределений политик? Это действие нельзя отменить.</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialTitle" xml:space="preserve">
     <value>Частичное удаление</value>
   </data>
-  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+  <data name="PoliciesPage_Remove" xml:space="preserve">
     <value>Удалить</value>
   </data>
-  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+  <data name="PoliciesPage_RemovingPolicies" xml:space="preserve">
     <value>Удаление политик...</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialContent" xml:space="preserve">
     <value>Удалено {0} из {1} переопределений политик. Некоторые политики не удалось удалить.</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerTitle" xml:space="preserve">
     <value>Перезапустить Проводник</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerContent" xml:space="preserve">
     <value>Для применения некоторых изменений политик требуется перезапуск Проводника Windows. Перезапустить Проводник сейчас?</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllTitle" xml:space="preserve">
     <value>Удалить все переопределения политик</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Удалить выбранные политики</value>
   </data>
   <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
@@ -1637,5 +1625,50 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Удаляет функции ИИ из Блокнота, Paint и Фото, отключает эффекты камеры и микрофона Windows Studio и игровой ИИ, а также удаляет интеграции ИИ из оболочки для максимальной конфиденциальности и производительности.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Службы</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Процессы</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>Тема приложения</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Выберите цветовую тему приложения</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Стиль навигации</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Выберите способ отображения панели навигации</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Исходный код</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>Просмотреть и внести вклад на GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>Сообщить об ошибке или предложить функцию</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Открыть проблему на GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Поддержать разработчика</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Купить мне кофе</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>Просмотр журналов</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>Просмотр журналов приложения для устранения неполадок</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Загрузка...</value>
   </data>
 </root>

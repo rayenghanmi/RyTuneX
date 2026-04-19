@@ -1,8 +1,8 @@
+using Microsoft.Win32.SafeHandles;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using Microsoft.Win32.SafeHandles;
 
 namespace RyTuneX.Helpers;
 
@@ -124,7 +124,8 @@ internal static partial class PseudoConsoleHelper
             using var process = Process.GetProcessById(processId);
 
             // Read output while process runs
-            var readTask = ReadOutputAsync(outputRead, outputCallback, ct);
+            var outputEncoding = await ConsoleEncodingHelper.GetOemConsoleEncodingAsync();
+            var readTask = ReadOutputAsync(outputRead, outputEncoding, outputCallback, ct);
 
             try
             {
@@ -276,10 +277,10 @@ internal static partial class PseudoConsoleHelper
         }
     }
 
-    private static async Task ReadOutputAsync(SafeFileHandle handle, Action<string> callback, CancellationToken ct)
+    private static async Task ReadOutputAsync(SafeFileHandle handle, Encoding encoding, Action<string> callback, CancellationToken ct)
     {
         using var stream = new FileStream(handle, FileAccess.Read, 4096, false);
-        using var reader = new StreamReader(stream, Encoding.UTF8);
+        using var reader = new StreamReader(stream, encoding);
 
         var buffer = new char[256];
         var line = new StringBuilder();

@@ -5,119 +5,248 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
-    <Page.Resources>
-        <x:Double x:Key="SettingsCardSpacing">4</x:Double>
-        <Style x:Key="SettingsSectionHeaderTextBlockStyle"
-            BasedOn="{StaticResource BodyStrongTextBlockStyle}"
-            TargetType="TextBlock">
-            <Style.Setters>
-                <Setter Property="Margin" Value="1,30,0,6" />
-            </Style.Setters>
-        </Style>
-    </Page.Resources>
-    <Grid x:Name="ContentArea">
-        <ScrollViewer Padding="24,14,24,0" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Background="Transparent">
+
+    <Grid>
+        <StackPanel Grid.Row="1" x:Name="loadingProgressRing" VerticalAlignment="Center" Margin="0,40,0,0">
+            <ProgressRing IsActive="True" Width="80" Height="80"/>
+            <TextBlock x:Uid="Loading" HorizontalAlignment="Center" Margin="0,20,0,0" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+        </StackPanel>
+        <ScrollViewer x:Name="ContentArea" Padding="24,14,24,0" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Visibility="Collapsed" Background="Transparent">
             <Grid Margin="0,0,0,38">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- Drivers Section -->
-                <StackPanel Grid.Row="0">
-                    <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_Drivers" Margin="6" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-                    <StackPanel x:Name="driversPanel" Padding="20" CornerRadius="4"  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-                        <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_ExtractDrivers"/>
-                        <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
-                            <ScrollViewer VerticalScrollMode="Disabled" VerticalAlignment="Center" MinWidth="230">
-                                <TextBox x:Uid="SystemInfoPage_FolderPathText" x:Name="FolderPathText" IsReadOnly="True"/>
-                            </ScrollViewer>
-                            <Button x:Uid="SystemInfoPage_SelectButton" Margin="15,15,0,15" Click="SelectPathButton_Click"/>
-                            <Button x:Uid="SystemInfoPage_ExtractButton" Margin="15,15,0,15" x:Name="ExtractButton" Click="ExtractButton_Click" Visibility="Collapsed"/>
-                        </StackPanel>
-                        <StackPanel x:Name="ExtractingStatus" Visibility="Collapsed">
-                            <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_ExtractingStatusText" x:Name="ExtractingStatusText" Margin="3"/>
-                            <ProgressBar x:Name="ExtractingStatusPb" IsIndeterminate="True"/>
+                <Border Grid.Row="0" x:Name="summaryPanel" Margin="0,0,0,24" Padding="24" CornerRadius="8"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                    <StackPanel Orientation="Horizontal" Spacing="24">
+                        <FontIcon Glyph="&#xE7F8;" FontSize="56" VerticalAlignment="Center"/>
+                        <StackPanel VerticalAlignment="Center" Spacing="4">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock x:Name="DeviceNameText" Style="{StaticResource TitleTextBlockStyle}" FontWeight="SemiBold"/>
+                            </StackPanel>
+                            <TextBlock x:Name="DeviceSummaryText" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                         </StackPanel>
                     </StackPanel>
+                </Border>
+                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="6">
+                    <StackPanel.ChildrenTransitions>
+                        <EntranceThemeTransition FromVerticalOffset="50" />
+                        <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    </StackPanel.ChildrenTransitions>
+
+                    <!-- OS -->
+                    <controls:SettingsExpander
+                            IsExpanded="True"
+                            Header="Operating System"
+                            HeaderIcon="{ui:FontIcon Glyph=&#xE958;}">
+
+                        <Button Tag="os"
+                                Padding="10,10"
+                                Click="CopyExpander_Click">
+                            <TextBlock Margin="20,-4" Text="Copy" />
+                        </Button>
+
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard HorizontalContentAlignment="Left"
+                               ContentAlignment="Left">
+                                <StackPanel Margin="0,16"
+                                        VerticalAlignment="Center">
+                                    <TextBlock x:Name="os"
+                                            TextWrapping="Wrap"
+                                            Style="{ThemeResource BodyTextBlockStyle}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+
+                    <!-- CPU -->
+                    <controls:SettingsExpander
+                            IsExpanded="True"
+                            Header="Processor"
+                            HeaderIcon="{ui:FontIcon Glyph=&#xE950;}">
+
+                        <Button Tag="cpu"
+                            Padding="10,10"
+                            Click="CopyExpander_Click">
+                            <TextBlock Margin="20,-4" Text="Copy" />
+                        </Button>
+
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard HorizontalContentAlignment="Left"
+                               ContentAlignment="Left">
+                                <StackPanel Margin="0,16"
+                                        VerticalAlignment="Center">
+                                    <TextBlock x:Name="cpu"
+                                           TextWrapping="Wrap"
+                                           Style="{ThemeResource BodyTextBlockStyle}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+
+                    <!-- GPU -->
+                    <controls:SettingsExpander
+                            IsExpanded="True"
+                            Header="Graphics"
+                            HeaderIcon="{ui:FontIcon Glyph=&#xF211;}">
+
+                        <Button Tag="gpu"
+                                Padding="10,10"
+                                Click="CopyExpander_Click">
+                            <TextBlock Margin="20,-4" Text="Copy" />
+                        </Button>
+
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard HorizontalContentAlignment="Left"
+                               ContentAlignment="Left">
+                                <StackPanel Margin="0,16"
+                                        VerticalAlignment="Center">
+                                    <TextBlock x:Name="gpu"
+                                            TextWrapping="Wrap"
+                                            Style="{ThemeResource BodyTextBlockStyle}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+
+                    <!-- RAM -->
+                    <controls:SettingsExpander
+                            IsExpanded="True"
+                            Header="RAM"
+                            HeaderIcon="{ui:FontIcon Glyph=&#xE964;}">
+
+                        <Button Tag="ram"
+                                Padding="10,10"
+                                Click="CopyExpander_Click">
+                            <TextBlock Margin="20,-4" Text="Copy" />
+                        </Button>
+
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard HorizontalContentAlignment="Left"
+                               ContentAlignment="Left">
+                                <StackPanel Margin="0,16"
+                                        VerticalAlignment="Center">
+                                    <TextBlock x:Name="ram"
+                                            TextWrapping="Wrap"
+                                            Style="{ThemeResource BodyTextBlockStyle}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+
+                    <!-- Storage -->
+                    <controls:SettingsExpander
+                            IsExpanded="True"
+                            Header="Storage"
+                            HeaderIcon="{ui:FontIcon Glyph=&#xEDA2;}">
+
+                        <Button Tag="disk"
+                                Padding="10,10"
+                                Click="CopyExpander_Click">
+                            <TextBlock Margin="20,-4" Text="Copy" />
+                        </Button>
+
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard HorizontalContentAlignment="Left"
+                               ContentAlignment="Left">
+                                <StackPanel Margin="0,16"
+                                        VerticalAlignment="Center">
+                                    <TextBlock x:Name="disk"
+                                            TextWrapping="Wrap"
+                                            Style="{ThemeResource BodyTextBlockStyle}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+
+                    <!-- Network -->
+                    <controls:SettingsExpander
+                            IsExpanded="True"
+                            Header="Network"
+                            HeaderIcon="{ui:FontIcon Glyph=&#xEDA3;}">
+
+                        <Button Tag="network"
+                                Padding="10,10"
+                                Click="CopyExpander_Click">
+                            <TextBlock Margin="20,-4" Text="Copy" />
+                        </Button>
+
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard HorizontalContentAlignment="Left"
+                               ContentAlignment="Left">
+                                <StackPanel Margin="0,16"
+                                        VerticalAlignment="Center">
+                                    <TextBlock x:Name="network"
+                                           TextWrapping="Wrap"
+                                           Style="{ThemeResource BodyTextBlockStyle}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+
+                    <!-- Battery -->
+                    <controls:SettingsExpander
+                            IsExpanded="True"
+                            Header="Battery"
+                            HeaderIcon="{ui:FontIcon Glyph=&#xF5F9;}">
+
+                        <Button Tag="battery"
+                                Padding="10,10"
+                                Click="CopyExpander_Click">
+                            <TextBlock Margin="20,-4" Text="Copy" />
+                        </Button>
+
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard HorizontalContentAlignment="Left"
+                               ContentAlignment="Left">
+                                <StackPanel Margin="0,16"
+                                        VerticalAlignment="Center">
+                                    <TextBlock x:Name="battery"
+                                            TextWrapping="Wrap"
+                                            Style="{ThemeResource BodyTextBlockStyle}" />
+                                </StackPanel>
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+
                 </StackPanel>
-                <StackPanel Grid.Row="1" Margin="0,10,0,0">
-                    <TextBlock TextWrapping="Wrap" Margin="6"
-                        x:Uid="SystemInfoPage_DeviceInfo" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
-                    <StackPanel x:Name="loadingProgressRing" VerticalAlignment="Center">
-                        <ProgressRing IsActive="True" Width="80" Height="80"/>
-                        <TextBlock x:Uid="LoadingWindowText" HorizontalAlignment="Center" Margin="0,20,0,0" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
-                    </StackPanel>
-                    <controls:WrapPanel x:Name="infoPanel" Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Collapsed">
-                        <controls:WrapPanel.ChildrenTransitions>
-                            <EntranceThemeTransition FromVerticalOffset="50" />
-                            <RepositionThemeTransition IsStaggeringEnabled="False" />
-                        </controls:WrapPanel.ChildrenTransitions>
-                        <!-- OS Information Section -->
-                        <StackPanel x:Name="osPanel" Padding="10" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                                <FontIcon Glyph="&#xE958;" VerticalAlignment="Center" Margin="6"/>
-                                <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_OS" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
-                            </StackPanel>
-                            <TextBlock TextWrapping="Wrap" Margin="10" Style="{StaticResource BodyTextBlockStyle}" x:Name="os" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                
+                <!-- Drivers -->
+                <Border Grid.Row="2" Grid.ColumnSpan="2" Padding="16" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Margin="0,24,0,12">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="12" Height="40">
+                            <FontIcon Glyph="&#xE8D5;" VerticalAlignment="Center"/>
+                            <TextBlock x:Uid="SystemInfoPage_Drivers" Text="Drivers" VerticalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                         </StackPanel>
-
-                        <!-- CPU Information Section -->
-                        <StackPanel x:Name="cpuPanel" Padding="10" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                                <FontIcon Glyph="&#xE950;" VerticalAlignment="Center" Margin="6"/>
-                                <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_CPU" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
+                        <TextBox x:Uid="SystemInfoPage_FolderPathText" x:Name="FolderPathText" IsReadOnly="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,8,0,12"/>
+                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                            <StackPanel x:Name="ExtractingStatus" Visibility="Collapsed" Orientation="Horizontal" Spacing="12">
+                                <ProgressBar x:Name="ExtractingStatusPb" IsIndeterminate="True" Width="200" VerticalAlignment="Center"/>
+                                <TextBlock x:Uid="SystemInfoPage_ExtractingStatusText" x:Name="ExtractingStatusText" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <TextBlock TextWrapping="Wrap" Margin="10" Style="{StaticResource BodyTextBlockStyle}" x:Name="cpu" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         </StackPanel>
-
-                        <!-- GPU Information Section -->
-                        <StackPanel x:Name="gpuPanel" Padding="10" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                                <FontIcon Glyph="&#xF211;" VerticalAlignment="Center" Margin="6"/>
-                                <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_GPU" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
-                            </StackPanel>
-                            <TextBlock TextWrapping="Wrap" Margin="10" Style="{StaticResource BodyTextBlockStyle}" x:Name="gpu" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Spacing="12" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Button x:Uid="SystemInfoPage_SelectButton" Content="Select" Click="SelectPathButton_Click" Margin="0"/>
+                            <TextBlock Text="Drivers for Backup" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Margin="6,0"/>
+                            <Button x:Uid="SystemInfoPage_ExportButton" Content="Export" x:Name="ExtractButton" Click="ExtractButton_Click" Visibility="Visible"/>
                         </StackPanel>
-
-                        <!-- RAM Information Section -->
-                        <StackPanel x:Name="ramPanel" Padding="10" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                                <FontIcon Glyph="&#xE964;" VerticalAlignment="Center" Margin="6"/>
-                                <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_RAM" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
-                            </StackPanel>
-                            <TextBlock TextWrapping="Wrap" Margin="10" Style="{StaticResource BodyTextBlockStyle}" x:Name="ram" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        </StackPanel>
-
-                        <!-- Disk Information Section -->
-                        <StackPanel x:Name="diskPanel" Padding="10" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
-                          <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                                <FontIcon Glyph="&#xEDA2;" VerticalAlignment="Center" Margin="6"/>
-                                <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_Storage" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
-                            </StackPanel>
-                            <TextBlock TextWrapping="Wrap" Margin="10" Style="{StaticResource BodyTextBlockStyle}" x:Name="disk" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        </StackPanel>
-
-                        <!-- Network Information Section -->
-                        <StackPanel x:Name="networkPanel" Padding="10" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                                <FontIcon Glyph="&#xEDA3;" VerticalAlignment="Center" Margin="6"/>
-                                <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_Network" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
-                            </StackPanel>
-                            <TextBlock TextWrapping="Wrap" Margin="10" Style="{StaticResource BodyTextBlockStyle}" x:Name="network" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        </StackPanel>
-
-                        <!-- Battery Information Section -->
-                        <StackPanel x:Name="batteryPanel" Padding="10" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                                <FontIcon Glyph="&#xF5F9;" VerticalAlignment="Center" Margin="6"/>
-                                <TextBlock TextWrapping="Wrap" x:Uid="SystemInfoPage_Battery" Margin="6" VerticalAlignment="Center" Style="{StaticResource PageTitleStyle}"/>
-                            </StackPanel>
-                            <TextBlock TextWrapping="Wrap" Margin="10" Style="{StaticResource BodyTextBlockStyle}" x:Name="battery" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        </StackPanel>
-                    </controls:WrapPanel>
-                </StackPanel>
+                    </Grid>
+                </Border>
             </Grid>
         </ScrollViewer>
     </Grid>

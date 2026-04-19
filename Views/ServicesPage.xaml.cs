@@ -1,7 +1,8 @@
-﻿using System.ServiceProcess;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
+using System.ServiceProcess;
 
 namespace RyTuneX.Views;
 
@@ -164,6 +165,7 @@ public sealed partial class ServicesPage : Page
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
+        _ = LogHelper.Log("Manually refreshing services list");
         await LoadServicesAsync();
     }
 
@@ -361,7 +363,10 @@ public sealed partial class ServicesPage : Page
                 };
             }
         }
-        catch { }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogWarning($"Error reading start type for service {serviceName}: {ex.Message}");
+        }
         return "Unknown";
     }
 }
@@ -371,6 +376,12 @@ internal enum ServiceControlAction
     Start,
     Stop,
     Restart
+}
+
+internal class StatusInfo
+{
+    public string Glyph { get; set; } = string.Empty;
+    public Brush Color { get; set; } = null!;
 }
 
 internal class ServiceInfoItem
@@ -388,7 +399,24 @@ internal class ServiceInfoItem
         get; set;
     }
 
-    public string StatusIcon => Status == "Running" ? "\uE768" : "\uE71A";
+    public StatusInfo StatusDisplay => Status switch
+    {
+        "Running" => new StatusInfo
+        {
+            Glyph = "\uE768",
+            Color = (Brush)App.Current.Resources["SystemFillColorSuccessBrush"]
+        },
+        "Stopped" => new StatusInfo
+        {
+            Glyph = "\uE71A",
+            Color = (Brush)App.Current.Resources["SystemFillColorCautionBrush"]
+        },
+        _ => new StatusInfo
+        {
+            Glyph = "\uE7BA",
+            Color = (Brush)App.Current.Resources["SystemFillColorBaseMediumBrush"]
+        }
+    };
 
     // Gets the index for the startup type ComboBox.
     public int StartTypeIndex => StartType switch

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>Device</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>Report</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>Optimize</value>
   </data>
@@ -150,11 +147,8 @@
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>RyTuneX, a Windows 10 and 11 optimizer created by Rayen Ghanmi, is designed to enhance system performance and efficiency by selectively removing chosen software and disabling unnecessary services.</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+  <data name="SettingsPage_PrivacyTermsLink.Header" xml:space="preserve">
     <value>AGPL v3.0</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>Language</value>
@@ -702,9 +696,6 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>Support</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>Network</value>
   </data>
@@ -737,9 +728,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Total: {0} App(s)</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>Performance</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Enabled</value>
@@ -1434,151 +1422,151 @@ Check your computer for memory problems</value>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Add Ultimate Performance Plan</value>
   </data>
-  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+  <data name="PoliciesPage_Warning" xml:space="preserve">
     <value>This feature only detects policy-backed registry entries. It does not detect service changes or non-policy registry tweaks.</value>
   </data>
-  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
     <value>This page detects and allows you to remove Local Group Policy overrides. Removing a policy override returns it to Not Configured state.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>Policy Summary</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPolicies" xml:space="preserve">
     <value>Configured Policies</value>
   </data>
-  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+  <data name="PoliciesPage_Categories" xml:space="preserve">
     <value>Categories</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelected" xml:space="preserve">
     <value>Remove Selected</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyList" xml:space="preserve">
     <value>Detailed Policy List</value>
   </data>
   <data name="Shell_GroupPolicy.Content" xml:space="preserve">
     <value>Policies</value>
   </data>
-  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveOverrides" xml:space="preserve">
     <value>Remove Overrides</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>No policy overrides detected.</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
     <value>Remove All Overrides</value>
   </data>
-  <data name="GroupPolicyPage_Title" xml:space="preserve">
+  <data name="PoliciesPage_Title" xml:space="preserve">
     <value>Group Policy Override Detection</value>
   </data>
-  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>Scanning policies...</value>
   </data>
-  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+  <data name="PoliciesPage_Refresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
-  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_CategoriesHeader.Text" xml:space="preserve">
     <value>Categories</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelectedText.Text" xml:space="preserve">
     <value>Remove Selected</value>
   </data>
-  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+  <data name="PoliciesPage_ScanningText.Text" xml:space="preserve">
     <value>Scanning policies...</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesText.Text" xml:space="preserve">
     <value>No policy overrides detected.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Header" xml:space="preserve">
     <value>Policy Summary</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Title" xml:space="preserve">
     <value>Information</value>
   </data>
-  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RefreshText.Text" xml:space="preserve">
     <value>Refresh</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
     <value>Configured Policies</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Description" xml:space="preserve">
     <value>View and manage individual policy overrides</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllText.Text" xml:space="preserve">
     <value>Remove All Overrides</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Message" xml:space="preserve">
     <value>This page detects and allows you to remove Local Group Policy overrides. Removing a policy override returns it to Default state.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Description" xml:space="preserve">
     <value>Overview of detected policy overrides</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Header" xml:space="preserve">
     <value>Detailed Policy List</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredCount" xml:space="preserve">
     <value>{0} Configured</value>
   </data>
-  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+  <data name="PoliciesPage_ScanError" xml:space="preserve">
     <value>Error scanning policies: {0}</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorTitle" xml:space="preserve">
     <value>Removal Failed</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessContent" xml:space="preserve">
     <value>Successfully removed {0} policy overrides.</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
     <value>Remove Category Policies</value>
   </data>
-  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+  <data name="PoliciesPage_NotConfigured" xml:space="preserve">
     <value>Not Configured</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessTitle" xml:space="preserve">
     <value>Policies Removed</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesCount" xml:space="preserve">
     <value>{0} configured policies</value>
   </data>
-  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+  <data name="PoliciesPage_RestartNow" xml:space="preserve">
     <value>Restart Now</value>
   </data>
-  <data name="GroupPolicyPage_Later" xml:space="preserve">
+  <data name="PoliciesPage_Later" xml:space="preserve">
     <value>Later</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedContent" xml:space="preserve">
     <value>Are you sure you want to remove the {0} selected policy overrides?</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorContent" xml:space="preserve">
     <value>An error occurred while removing policy overrides: {0}</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryContent" xml:space="preserve">
     <value>Are you sure you want to remove all {0} policy overrides in the '{1}' category?</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllContent" xml:space="preserve">
     <value>Are you sure you want to remove all {0} policy overrides? This action cannot be undone.</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialTitle" xml:space="preserve">
     <value>Partial Removal</value>
   </data>
-  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+  <data name="PoliciesPage_Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+  <data name="PoliciesPage_RemovingPolicies" xml:space="preserve">
     <value>Removing policies...</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialContent" xml:space="preserve">
     <value>Removed {0} of {1} policy overrides. Some policies could not be removed.</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerTitle" xml:space="preserve">
     <value>Restart Explorer</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerContent" xml:space="preserve">
     <value>Some policy changes require restarting Windows Explorer to take effect. Would you like to restart Explorer now?</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllTitle" xml:space="preserve">
     <value>Remove All Policy Overrides</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>Remove Selected Policies</value>
   </data>
   <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
@@ -1640,5 +1628,50 @@ Check your computer for memory problems</value>
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>Strips AI features from Notepad, Paint, and Photos, disables Windows Studio camera/mic effects and Gaming AI, and removes AI shell integrations to maximize privacy and performance.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>Processes</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>App Theme</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>Choose the app color theme</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>Navigation Style</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>Choose how the navigation pane is displayed</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>Source code</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>View and contribute on GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>File a bug or request a feature</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>Open an issue on GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>Support the developer</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>Buy me a coffee</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>View Logs</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>View application logs for troubleshooting</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Loading...</value>
   </data>
 </root>

@@ -6,19 +6,19 @@ using RyTuneX.Helpers;
 
 namespace RyTuneX.Views;
 
-public sealed partial class GroupPolicyPage : Page
+public sealed partial class PoliciesPage : Page
 {
     private CancellationTokenSource? _cancellationTokenSource;
     private Guid? _cancellationRegistrationId;
-    private IReadOnlyList<GroupPolicyHelper.PolicyState>? _policyStates;
+    private IReadOnlyList<PolicyHelper.PolicyState>? _policyStates;
     private string? _pendingScrollTarget;
 
-    public GroupPolicyPage()
+    public PoliciesPage()
     {
         InitializeComponent();
-        LogHelper.Log("Initializing GroupPolicyPage");
+        LogHelper.Log("Initializing PoliciesPage");
         NavigationCacheMode = NavigationCacheMode.Required;
-        Loaded += GroupPolicyPage_Loaded;
+        Loaded += PoliciesPage_Loaded;
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -31,7 +31,7 @@ public sealed partial class GroupPolicyPage : Page
         }
     }
 
-    private async void GroupPolicyPage_Loaded(object sender, RoutedEventArgs e)
+    private async void PoliciesPage_Loaded(object sender, RoutedEventArgs e)
     {
         // Subscribe to selection changed after page is loaded
         ConfiguredPoliciesListView.SelectionChanged += ConfiguredPoliciesListView_SelectionChanged;
@@ -66,12 +66,12 @@ public sealed partial class GroupPolicyPage : Page
             // Show scanning state
             ScanProgressRing.Visibility = Visibility.Visible;
             ScanProgressRing.IsActive = true;
-            SummaryText.Text = "GroupPolicyPage_ScanningPolicies".GetLocalized();
+            SummaryText.Text = "PoliciesPage_ScanningPolicies".GetLocalized();
             RefreshButton.IsEnabled = false;
             RemoveAllButton.IsEnabled = false;
 
             // Detect policy states
-            _policyStates = await GroupPolicyHelper.DetectPolicyStatesAsync(_cancellationTokenSource.Token);
+            _policyStates = await PolicyHelper.DetectPolicyStatesAsync(_cancellationTokenSource.Token);
 
             // Update UI on dispatcher thread
             DispatcherQueue.TryEnqueue(() =>
@@ -90,7 +90,7 @@ public sealed partial class GroupPolicyPage : Page
             _ = LogHelper.LogError($"Error scanning policies: {ex.Message}");
             DispatcherQueue.TryEnqueue(() =>
             {
-                SummaryText.Text = "GroupPolicyPage_ScanError".GetLocalized();
+                SummaryText.Text = "PoliciesPage_ScanError".GetLocalized();
             });
         }
         finally
@@ -119,13 +119,13 @@ public sealed partial class GroupPolicyPage : Page
 
         if (configuredCount == 0)
         {
-            SummaryText.Text = "GroupPolicyPage_NoPoliciesDetected".GetLocalized();
+            SummaryText.Text = "PoliciesPage_NoPoliciesDetected".GetLocalized();
             RemoveAllButton.IsEnabled = false;
         }
         else
         {
             SummaryText.Text = string.Format(
-                "GroupPolicyPage_ConfiguredPoliciesCount".GetLocalized(),
+                "PoliciesPage_ConfiguredPoliciesCount".GetLocalized(),
                 configuredCount,
                 totalCount);
             RemoveAllButton.IsEnabled = true;
@@ -209,12 +209,40 @@ public sealed partial class GroupPolicyPage : Page
             "File History" => "\uE8F1",
             "Search" => "\uE721",
             "Start Menu" => "\uE80F",
+            "Windows Defender" => "\uE83D",
+            "Windows Firewall" => "\uE785",
+            "Remote Desktop" => "\uE8AF",
+            "Remote Assistance" => "\uE8AF",
+            "Network" => "\uE839",
+            "Power Management" => "\uE945",
+            "Device Installation" => "\uE772",
+            "Lock Screen" => "\uE72E",
+            "User Account Control" => "\uE7EF",
+            "Delivery Optimization" => "\uE896",
+            "Notifications" => "\uEA8F",
+            "Windows Spotlight" => "\uE7E8",
+            "Autoplay" => "\uE768",
+            "Offline Maps" => "\uE909",
+            "Print Spooler" => "\uE749",
+            "Scheduled Maintenance" => "\uE916",
+            "OEM & Preinstall" => "\uE770",
+            "Microsoft Office" => "\uE8A5",
+            "Google Chrome" => "\uE774",
+            "Mozilla Firefox" => "\uE774",
+            "Adobe" => "\uE8A5",
+            "Microsoft Teams" => "\uE8F2",
+            "BitLocker" => "\uE72E",
+            "Credentials" => "\uE8D7",
+            "Startup" => "\uE7E8",
+            "Explorer" => "\uED43",
+            "Multimedia" => "\uE8B2",
             _ => "\uE713"
         };
     }
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
+        _ = LogHelper.Log("Manually refreshing group policy scan");
         await ScanPoliciesAsync();
     }
 
@@ -233,11 +261,11 @@ public sealed partial class GroupPolicyPage : Page
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-            Title = "GroupPolicyPage_ConfirmRemoveAllTitle".GetLocalized(),
+            Title = "PoliciesPage_ConfirmRemoveAllTitle".GetLocalized(),
             Content = string.Format(
-                "GroupPolicyPage_ConfirmRemoveAllContent".GetLocalized(),
+                "PoliciesPage_ConfirmRemoveAllContent".GetLocalized(),
                 configuredPolicies.Count),
-            PrimaryButtonText = "GroupPolicyPage_Remove".GetLocalized(),
+            PrimaryButtonText = "PoliciesPage_Remove".GetLocalized(),
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             CloseButtonText = "Cancel".GetLocalized()
         };
@@ -270,12 +298,12 @@ public sealed partial class GroupPolicyPage : Page
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-            Title = "GroupPolicyPage_ConfirmRemoveCategoryTitle".GetLocalized(),
+            Title = "PoliciesPage_ConfirmRemoveCategoryTitle".GetLocalized(),
             Content = string.Format(
-                "GroupPolicyPage_ConfirmRemoveCategoryContent".GetLocalized(),
+                "PoliciesPage_ConfirmRemoveCategoryContent".GetLocalized(),
                 categoryPolicies.Count,
                 category),
-            PrimaryButtonText = "GroupPolicyPage_Remove".GetLocalized(),
+            PrimaryButtonText = "PoliciesPage_Remove".GetLocalized(),
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             CloseButtonText = "Cancel".GetLocalized()
         };
@@ -317,11 +345,11 @@ public sealed partial class GroupPolicyPage : Page
             XamlRoot = XamlRoot,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-            Title = "GroupPolicyPage_ConfirmRemoveSelectedTitle".GetLocalized(),
+            Title = "PoliciesPage_ConfirmRemoveSelectedTitle".GetLocalized(),
             Content = string.Format(
-                "GroupPolicyPage_ConfirmRemoveSelectedContent".GetLocalized(),
+                "PoliciesPage_ConfirmRemoveSelectedContent".GetLocalized(),
                 selectedItems.Count),
-            PrimaryButtonText = "GroupPolicyPage_Remove".GetLocalized(),
+            PrimaryButtonText = "PoliciesPage_Remove".GetLocalized(),
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             CloseButtonText = "Cancel".GetLocalized()
         };
@@ -333,7 +361,7 @@ public sealed partial class GroupPolicyPage : Page
         await RemovePoliciesAsync(selectedItems.Select(s => s.Policy));
     }
 
-    private async Task RemovePoliciesAsync(IEnumerable<GroupPolicyHelper.PolicyEntry> policies)
+    private async Task RemovePoliciesAsync(IEnumerable<PolicyHelper.PolicyEntry> policies)
     {
         var policyList = policies.ToList();
         if (policyList.Count == 0)
@@ -344,26 +372,28 @@ public sealed partial class GroupPolicyPage : Page
             // Show progress
             ScanProgressRing.Visibility = Visibility.Visible;
             ScanProgressRing.IsActive = true;
-            SummaryText.Text = "GroupPolicyPage_RemovingPolicies".GetLocalized();
+            SummaryText.Text = "PoliciesPage_RemovingPolicies".GetLocalized();
             RefreshButton.IsEnabled = false;
             RemoveAllButton.IsEnabled = false;
 
-            var (succeeded, failed) = await GroupPolicyHelper.RemovePolicyOverridesAsync(policyList);
+            _ = LogHelper.Log($"Removing {policyList.Count} group policy overrides");
+            var (succeeded, failed) = await PolicyHelper.RemovePolicyOverridesAsync(policyList);
+            _ = LogHelper.Log($"Policy removal complete: {succeeded} succeeded, {failed} failed");
 
             // Show result notification
             if (failed == 0)
             {
                 App.ShowNotification(
-                    "GroupPolicyPage_RemoveSuccessTitle".GetLocalized(),
-                    string.Format("GroupPolicyPage_RemoveSuccessContent".GetLocalized(), succeeded),
+                    "PoliciesPage_RemoveSuccessTitle".GetLocalized(),
+                    string.Format("PoliciesPage_RemoveSuccessContent".GetLocalized(), succeeded),
                     InfoBarSeverity.Success,
                     5000);
             }
             else
             {
                 App.ShowNotification(
-                    "GroupPolicyPage_RemovePartialTitle".GetLocalized(),
-                    string.Format("GroupPolicyPage_RemovePartialContent".GetLocalized(), succeeded, failed),
+                    "PoliciesPage_RemovePartialTitle".GetLocalized(),
+                    string.Format("PoliciesPage_RemovePartialContent".GetLocalized(), succeeded, failed),
                     InfoBarSeverity.Warning,
                     5000);
             }
@@ -376,17 +406,17 @@ public sealed partial class GroupPolicyPage : Page
                     XamlRoot = XamlRoot,
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-                    Title = "GroupPolicyPage_RestartExplorerTitle".GetLocalized(),
-                    Content = "GroupPolicyPage_RestartExplorerContent".GetLocalized(),
-                    PrimaryButtonText = "GroupPolicyPage_RestartNow".GetLocalized(),
+                    Title = "PoliciesPage_RestartExplorerTitle".GetLocalized(),
+                    Content = "PoliciesPage_RestartExplorerContent".GetLocalized(),
+                    PrimaryButtonText = "PoliciesPage_RestartNow".GetLocalized(),
                     PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
-                    CloseButtonText = "GroupPolicyPage_Later".GetLocalized()
+                    CloseButtonText = "PoliciesPage_Later".GetLocalized()
                 };
 
                 var restartResult = await restartDialog.ShowAsync();
                 if (restartResult == ContentDialogResult.Primary)
                 {
-                    await GroupPolicyHelper.RestartExplorerAsync();
+                    await PolicyHelper.RestartExplorerAsync();
                 }
             }
 
@@ -397,8 +427,8 @@ public sealed partial class GroupPolicyPage : Page
         {
             _ = LogHelper.LogError($"Error removing policies: {ex.Message}");
             App.ShowNotification(
-                "GroupPolicyPage_RemoveErrorTitle".GetLocalized(),
-                "GroupPolicyPage_RemoveErrorContent".GetLocalized(),
+                "PoliciesPage_RemoveErrorTitle".GetLocalized(),
+                "PoliciesPage_RemoveErrorContent".GetLocalized(),
                 InfoBarSeverity.Error,
                 5000);
         }
@@ -409,77 +439,73 @@ public sealed partial class GroupPolicyPage : Page
             RefreshButton.IsEnabled = true;
         }
     }
+}
 
-    /// <summary>
-    /// View model for category summary display.
-    /// </summary>
-    private sealed class CategorySummaryItem
+// View model for category summary display.
+internal sealed class CategorySummaryItem
+{
+    public required string Category
     {
-        public required string Category
-        {
-            get; init;
-        }
-        public required int TotalCount
-        {
-            get; init;
-        }
-        public required int ConfiguredCount
-        {
-            get; init;
-        }
-        public required string IconGlyph
-        {
-            get; init;
-        }
-
-        public string StatusText => ConfiguredCount == 0
-            ? "GroupPolicyPage_NotConfigured".GetLocalized()
-            : string.Format("GroupPolicyPage_ConfiguredCount".GetLocalized(), ConfiguredCount);
-
-        public SolidColorBrush StatusColor => ConfiguredCount == 0
-            ? new SolidColorBrush(Microsoft.UI.Colors.Green)
-            : (SolidColorBrush)Application.Current.Resources["SystemFillColorCautionBrush"];
-
-        public bool HasConfiguredPolicies => ConfiguredCount > 0;
-
-        public string ButtonText => "GroupPolicyPage_RemoveOverrides".GetLocalized();
+        get; init;
+    }
+    public required int TotalCount
+    {
+        get; init;
+    }
+    public required int ConfiguredCount
+    {
+        get; init;
+    }
+    public required string IconGlyph
+    {
+        get; init;
     }
 
-    /// <summary>
-    /// View model for policy state display.
-    /// </summary>
-    private sealed class PolicyStateViewModel
+    public string StatusText => ConfiguredCount == 0
+        ? "PoliciesPage_NotConfigured".GetLocalized()
+        : string.Format("PoliciesPage_ConfiguredCount".GetLocalized(), ConfiguredCount);
+
+    public SolidColorBrush StatusColor => ConfiguredCount == 0
+        ? new SolidColorBrush(Microsoft.UI.Colors.Green)
+        : (SolidColorBrush)Application.Current.Resources["SystemFillColorCautionBrush"];
+
+    public bool HasConfiguredPolicies => ConfiguredCount > 0;
+
+    public string ButtonText => "PoliciesPage_RemoveOverrides".GetLocalized();
+}
+
+// View model for policy state display.
+internal sealed class PolicyStateViewModel
+{
+    private readonly PolicyHelper.PolicyState _state;
+
+    public PolicyStateViewModel(PolicyHelper.PolicyState state)
     {
-        private readonly GroupPolicyHelper.PolicyState _state;
+        _state = state;
+    }
 
-        public PolicyStateViewModel(GroupPolicyHelper.PolicyState state)
+    public PolicyHelper.PolicyEntry Policy => _state.Policy;
+
+    public string HiveDisplay => _state.Policy.Hive switch
+    {
+        Microsoft.Win32.RegistryHive.LocalMachine => "HKLM",
+        Microsoft.Win32.RegistryHive.CurrentUser => "HKCU",
+        _ => _state.Policy.Hive.ToString()
+    };
+
+    public string CurrentValueDisplay
+    {
+        get
         {
-            _state = state;
-        }
+            if (_state.CurrentValue == null)
+                return "Not set";
 
-        public GroupPolicyHelper.PolicyEntry Policy => _state.Policy;
-
-        public string HiveDisplay => _state.Policy.Hive switch
-        {
-            Microsoft.Win32.RegistryHive.LocalMachine => "HKLM",
-            Microsoft.Win32.RegistryHive.CurrentUser => "HKCU",
-            _ => _state.Policy.Hive.ToString()
-        };
-
-        public string CurrentValueDisplay
-        {
-            get
+            return _state.ActualValueKind switch
             {
-                if (_state.CurrentValue == null)
-                    return "Not set";
-
-                return _state.ActualValueKind switch
-                {
-                    Microsoft.Win32.RegistryValueKind.DWord => $"Value: {_state.CurrentValue}",
-                    Microsoft.Win32.RegistryValueKind.String => $"Value: \"{_state.CurrentValue}\"",
-                    _ => $"Value: {_state.CurrentValue}"
-                };
-            }
+                Microsoft.Win32.RegistryValueKind.DWord => $"Value: {_state.CurrentValue}",
+                Microsoft.Win32.RegistryValueKind.String => $"Value: \"{_state.CurrentValue}\"",
+                _ => $"Value: {_state.CurrentValue}"
+            };
         }
     }
 }

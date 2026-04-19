@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -126,9 +126,6 @@
   <data name="Shell_SystemInfo.Content" xml:space="preserve">
     <value>الجهاز</value>
   </data>
-  <data name="Shell_Issue.Content" xml:space="preserve">
-    <value>الإبلاغ</value>
-  </data>
   <data name="Shell_OptimizeSystem.Content" xml:space="preserve">
     <value>تحسين</value>
   </data>
@@ -150,11 +147,8 @@
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>راي تيونكس، المحسن لنظام ويندوز 10 و 11 المُبتكر من قبل ريان غانمي، مصمم لتحسين أداء النظام وكفاءته من خلال إزالة البرمجيات المختارة وتعطيل الخدمات غير الضرورية.</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+  <data name="SettingsPage_PrivacyTermsLink.Header" xml:space="preserve">
     <value>AGPL v3.0</value>
-  </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md</value>
   </data>
   <data name="Settings_Language.Text" xml:space="preserve">
     <value>اللغة</value>
@@ -702,9 +696,6 @@
   <data name="Update" xml:space="preserve">
     <value>تحديث</value>
   </data>
-  <data name="Shell_Support.Content" xml:space="preserve">
-    <value>الدعم</value>
-  </data>
   <data name="SystemInfoPage_Network.Text" xml:space="preserve">
     <value>الشبكة</value>
   </data>
@@ -737,9 +728,6 @@
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>الإجمالي: {0} تطبيق(ات)</value>
-  </data>
-  <data name="HomePage_Performance.Text" xml:space="preserve">
-    <value>الأداء</value>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>مفعل</value>
@@ -1434,151 +1422,151 @@
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>إضافة خطة الأداء النهائي</value>
   </data>
-  <data name="GroupPolicyPage_Warning" xml:space="preserve">
+  <data name="PoliciesPage_Warning" xml:space="preserve">
     <value>تكتشف هذه الميزة فقط إدخالات السجل المدعومة بالسياسات. لا تكتشف تغييرات الخدمة أو تعديلات السجل غير المتعلقة بالسياسات.</value>
   </data>
-  <data name="GroupPolicyPage_InfoMessage" xml:space="preserve">
+  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
     <value>تكشف هذه الصفحة وتتيح لك إزالة تجاوزات سياسة المجموعة المحلية. تؤدي إزالة تجاوز السياسة إلى إرجاعها إلى حالة غير مهيأة.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummary" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>ملخص السياسة</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPolicies" xml:space="preserve">
     <value>السياسات المهيأة</value>
   </data>
-  <data name="GroupPolicyPage_Categories" xml:space="preserve">
+  <data name="PoliciesPage_Categories" xml:space="preserve">
     <value>الفئات</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelected" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelected" xml:space="preserve">
     <value>إزالة المحدد</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyList" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyList" xml:space="preserve">
     <value>قائمة السياسات المفصلة</value>
   </data>
   <data name="Shell_GroupPolicy.Content" xml:space="preserve">
     <value>السياسات</value>
   </data>
-  <data name="GroupPolicyPage_RemoveOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveOverrides" xml:space="preserve">
     <value>إزالة التجاوزات</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesDetected" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>لم يتم اكتشاف تجاوزات سياسة.</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllOverrides" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
     <value>إزالة جميع التجاوزات</value>
   </data>
-  <data name="GroupPolicyPage_Title" xml:space="preserve">
+  <data name="PoliciesPage_Title" xml:space="preserve">
     <value>كشف تجاوز سياسة المجموعة</value>
   </data>
-  <data name="GroupPolicyPage_ScanningPolicies" xml:space="preserve">
+  <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>جارٍ فحص السياسات...</value>
   </data>
-  <data name="GroupPolicyPage_Refresh" xml:space="preserve">
+  <data name="PoliciesPage_Refresh" xml:space="preserve">
     <value>تحديث</value>
   </data>
-  <data name="GroupPolicyPage_CategoriesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_CategoriesHeader.Text" xml:space="preserve">
     <value>الفئات</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSelectedText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSelectedText.Text" xml:space="preserve">
     <value>إزالة المحدد</value>
   </data>
-  <data name="GroupPolicyPage_ScanningText.Text" xml:space="preserve">
+  <data name="PoliciesPage_ScanningText.Text" xml:space="preserve">
     <value>جارٍ فحص السياسات...</value>
   </data>
-  <data name="GroupPolicyPage_NoPoliciesText.Text" xml:space="preserve">
+  <data name="PoliciesPage_NoPoliciesText.Text" xml:space="preserve">
     <value>لم يتم اكتشاف تجاوزات سياسة.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Header" xml:space="preserve">
     <value>ملخص السياسة</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Title" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Title" xml:space="preserve">
     <value>معلومات</value>
   </data>
-  <data name="GroupPolicyPage_RefreshText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RefreshText.Text" xml:space="preserve">
     <value>تحديث</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesHeader.Text" xml:space="preserve">
     <value>السياسات المهيأة</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Description" xml:space="preserve">
     <value>عرض وإدارة تجاوزات السياسة الفردية</value>
   </data>
-  <data name="GroupPolicyPage_RemoveAllText.Text" xml:space="preserve">
+  <data name="PoliciesPage_RemoveAllText.Text" xml:space="preserve">
     <value>إزالة جميع التجاوزات</value>
   </data>
-  <data name="GroupPolicyPage_InfoBanner.Message" xml:space="preserve">
+  <data name="PoliciesPage_InfoBanner.Message" xml:space="preserve">
     <value>تكشف هذه الصفحة وتتيح لك إزالة تجاوزات سياسة المجموعة المحلية. تؤدي إزالة تجاوز السياسة إلى إرجاعها  للوضع الافتراضي.</value>
   </data>
-  <data name="GroupPolicyPage_PolicySummaryExpander.Description" xml:space="preserve">
+  <data name="PoliciesPage_PolicySummaryExpander.Description" xml:space="preserve">
     <value>نظرة عامة على تجاوزات السياسة المكتشفة</value>
   </data>
-  <data name="GroupPolicyPage_DetailedPolicyListExpander.Header" xml:space="preserve">
+  <data name="PoliciesPage_DetailedPolicyListExpander.Header" xml:space="preserve">
     <value>قائمة السياسات المفصلة</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredCount" xml:space="preserve">
     <value>{0} مهيأ</value>
   </data>
-  <data name="GroupPolicyPage_ScanError" xml:space="preserve">
+  <data name="PoliciesPage_ScanError" xml:space="preserve">
     <value>خطأ في فحص السياسات: {0}</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorTitle" xml:space="preserve">
     <value>فشلت الإزالة</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessContent" xml:space="preserve">
     <value>تمت إزالة {0} تجاوزات سياسة بنجاح.</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryTitle" xml:space="preserve">
     <value>إزالة سياسات الفئة</value>
   </data>
-  <data name="GroupPolicyPage_NotConfigured" xml:space="preserve">
+  <data name="PoliciesPage_NotConfigured" xml:space="preserve">
     <value>غير مهيأ</value>
   </data>
-  <data name="GroupPolicyPage_RemoveSuccessTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemoveSuccessTitle" xml:space="preserve">
     <value>تمت إزالة السياسات</value>
   </data>
-  <data name="GroupPolicyPage_ConfiguredPoliciesCount" xml:space="preserve">
+  <data name="PoliciesPage_ConfiguredPoliciesCount" xml:space="preserve">
     <value>{0} سياسات مهيأة</value>
   </data>
-  <data name="GroupPolicyPage_RestartNow" xml:space="preserve">
+  <data name="PoliciesPage_RestartNow" xml:space="preserve">
     <value>إعادة التشغيل الآن</value>
   </data>
-  <data name="GroupPolicyPage_Later" xml:space="preserve">
+  <data name="PoliciesPage_Later" xml:space="preserve">
     <value>لاحقاً</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedContent" xml:space="preserve">
     <value>هل أنت متأكد من أنك تريد إزالة تجاوزات السياسة المحددة البالغ عددها {0}؟</value>
   </data>
-  <data name="GroupPolicyPage_RemoveErrorContent" xml:space="preserve">
+  <data name="PoliciesPage_RemoveErrorContent" xml:space="preserve">
     <value>حدث خطأ أثناء إزالة تجاوزات السياسة: {0}</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveCategoryContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveCategoryContent" xml:space="preserve">
     <value>هل أنت متأكد من أنك تريد إزالة جميع تجاوزات السياسة البالغ عددها {0} في فئة '{1}'؟</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllContent" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllContent" xml:space="preserve">
     <value>هل أنت متأكد من أنك تريد إزالة جميع تجاوزات السياسة البالغ عددها {0}؟ لا يمكن التراجع عن هذا الإجراء.</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialTitle" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialTitle" xml:space="preserve">
     <value>إزالة جزئية</value>
   </data>
-  <data name="GroupPolicyPage_Remove" xml:space="preserve">
+  <data name="PoliciesPage_Remove" xml:space="preserve">
     <value>إزالة</value>
   </data>
-  <data name="GroupPolicyPage_RemovingPolicies" xml:space="preserve">
+  <data name="PoliciesPage_RemovingPolicies" xml:space="preserve">
     <value>جارٍ إزالة السياسات...</value>
   </data>
-  <data name="GroupPolicyPage_RemovePartialContent" xml:space="preserve">
+  <data name="PoliciesPage_RemovePartialContent" xml:space="preserve">
     <value>تمت إزالة {0} من {1} تجاوزات سياسة. لم يمكن إزالة بعض السياسات.</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerTitle" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerTitle" xml:space="preserve">
     <value>إعادة تشغيل المستكشف</value>
   </data>
-  <data name="GroupPolicyPage_RestartExplorerContent" xml:space="preserve">
+  <data name="PoliciesPage_RestartExplorerContent" xml:space="preserve">
     <value>تتطلب بعض تغييرات السياسة إعادة تشغيل مستكشف Windows لتصبح سارية المفعول. هل ترغب في إعادة تشغيل المستكشف الآن؟</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveAllTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveAllTitle" xml:space="preserve">
     <value>إزالة جميع تجاوزات السياسة</value>
   </data>
-  <data name="GroupPolicyPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
+  <data name="PoliciesPage_ConfirmRemoveSelectedTitle" xml:space="preserve">
     <value>إزالة السياسات المحددة</value>
   </data>
   <data name="Feature_CreatePowerPlanButtonText.Text" xml:space="preserve">
@@ -1640,5 +1628,50 @@
   </data>
   <data name="Feature_DisableWindowsAI.Description" xml:space="preserve">
     <value>يزيل ميزات الذكاء الاصطناعي من المفكرة والرسام والصور، ويعطّل تأثيرات الكاميرا والميكروفون في Windows Studio وذكاء الألعاب، ويزيل تكاملات الذكاء الاصطناعي من واجهة النظام لتعزيز الخصوصية والأداء.</value>
+  </data>
+  <data name="Shell_Services.Content" xml:space="preserve">
+    <value>الخدمات</value>
+  </data>
+  <data name="Shell_Processes.Content" xml:space="preserve">
+    <value>العمليات</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Header" xml:space="preserve">
+    <value>سمة التطبيق</value>
+  </data>
+  <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
+    <value>اختر سمة ألوان التطبيق</value>
+  </data>
+  <data name="Settings_NavigationStyle.Header" xml:space="preserve">
+    <value>نمط التنقل</value>
+  </data>
+  <data name="Settings_NavigationStyle.Description" xml:space="preserve">
+    <value>اختر كيفية عرض جزء التنقل</value>
+  </data>
+  <data name="Settings_SourceCode.Header" xml:space="preserve">
+    <value>الكود المصدري</value>
+  </data>
+  <data name="Settings_SourceCode.Description" xml:space="preserve">
+    <value>عرض والمساهمة على GitHub</value>
+  </data>
+  <data name="Settings_FileBug.Header" xml:space="preserve">
+    <value>الإبلاغ عن خطأ أو طلب ميزة</value>
+  </data>
+  <data name="Settings_FileBug.Description" xml:space="preserve">
+    <value>فتح مشكلة على GitHub</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Header" xml:space="preserve">
+    <value>دعم المطور</value>
+  </data>
+  <data name="Settings_SupportDeveloper.Description" xml:space="preserve">
+    <value>اشترِ لي قهوة</value>
+  </data>
+  <data name="Settings_ViewLogs.Header" xml:space="preserve">
+    <value>عرض السجلات</value>
+  </data>
+  <data name="Settings_ViewLogs.Description" xml:space="preserve">
+    <value>عرض سجلات التطبيق لاستكشاف الأخطاء وإصلاحها</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>جارٍ التحميل...</value>
   </data>
 </root>

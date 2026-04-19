@@ -18,7 +18,6 @@
  * Contact: ghanmirayen12@gmail.com
  */
 
-using System.Runtime.InteropServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -26,10 +25,12 @@ using RyTuneX.Activation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Core.Contracts.Services;
 using RyTuneX.Core.Services;
+using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.Services;
 using RyTuneX.ViewModels;
 using RyTuneX.Views;
+using System.Runtime.InteropServices;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.Storage;
@@ -54,8 +55,29 @@ public partial class App : Application
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool FlashWindowEx(ref FLASHWINFO pwfi);
 
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetForegroundWindow();
+
     private const uint FLASHW_ALL = 3;           // Flash both window caption and taskbar button
     private const uint FLASHW_TIMERNOFG = 12;    // Flash continuously until the window comes to the foreground
+
+    // P/Invoke for RTL caption buttons
+    private const int GWL_EXSTYLE = -20;
+    private const int WS_EX_LAYOUTRTL = 0x00400000;
+    private const uint SWP_FRAMECHANGED = 0x0020;
+    private const uint SWP_NOMOVE = 0x0002;
+    private const uint SWP_NOSIZE = 0x0001;
+    private const uint SWP_NOZORDER = 0x0004;
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern nint GetWindowLongPtr(IntPtr hWnd, int nIndex);
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern nint SetWindowLongPtr(IntPtr hWnd, int nIndex, nint dwNewLong);
+
+    [DllImport("user32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
     // Flashes the taskbar icon to alert the user that a background process is complete
     public static void NotifyTaskCompletion()
@@ -64,6 +86,9 @@ public partial class App : Application
         {
             var hwnd = WindowNative.GetWindowHandle(MainWindow);
             if (hwnd == IntPtr.Zero) return;
+
+            // Skip flash and sound when the window is already in the foreground
+            if (GetForegroundWindow() == hwnd) return;
 
             var fInfo = new FLASHWINFO();
             fInfo.cbSize = (uint)Marshal.SizeOf(fInfo);
@@ -114,10 +139,18 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-        LogHelper.Log("___________ New Session ___________");
 
         // Catch unhandled exceptions early to avoid silent activation failures
         UnhandledException += App_UnhandledException;
+
+        // Catch unobserved Task exceptions (fire-and-forget tasks that throw)
+        TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+
+        // Catch truly fatal AppDomain exceptions (native crashes, thread aborts, etc.)
+        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+        LogHelper.Log("___________ New Session ___________");
+        LogHelper.Log($"App version: {Views.SettingsPage.GetVersionDescription()}, OS: {Environment.OSVersion}, Runtime: {System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}");
     }
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
@@ -126,6 +159,24 @@ public partial class App : Application
         _host ??= BuildHost();
 
         base.OnLaunched(args);
+
+        // Apply RTL window style BEFORE title bar setup so the framework
+        // calculates caption button positions in the correct coordinate space
+        if (FlowDirectionSetting == Microsoft.UI.Xaml.FlowDirection.RightToLeft)
+        {
+            try
+            {
+                var hwnd = WindowNative.GetWindowHandle(MainWindow);
+                var exStyle = GetWindowLongPtr(hwnd, GWL_EXSTYLE);
+                SetWindowLongPtr(hwnd, GWL_EXSTYLE, exStyle | WS_EX_LAYOUTRTL);
+                SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0,
+                    SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"RTL caption buttons failed: {ex.Message}");
+            }
+        }
 
         // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
         try
@@ -138,8 +189,14 @@ public partial class App : Application
             _ = LogHelper.LogError($"TitleBar init failed: {ex}");
         }
 
+        // Detect actual system state and sync to RyTuneX registry before any page loads
+        await SyncSystemStateAsync();
+
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
+
+    // Fires once at launch to seed the RyTuneX registry with the real system state.
+    private static Task SyncSystemStateAsync() => Task.Run(SystemStateDetector.SyncToRegistry);
 
     private IHost BuildHost() => Microsoft.Extensions.Hosting.Host.
     CreateDefaultBuilder().
@@ -206,6 +263,36 @@ public partial class App : Application
 
     private async void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
     {
-        await LogHelper.LogError($"App_UnhandledException: {e.Exception}");
+        // Mark as handled to prevent immediate crash and allow the log to be written
+        e.Handled = true;
+        try
+        {
+            await LogHelper.LogException(e.Exception, "UnhandledException (XAML)");
+        }
+        catch
+        {
+            LogHelper.LogCriticalSync($"UnhandledException (XAML): {e.Exception}");
+        }
+    }
+
+    private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
+    {
+        // Mark observed so the process is not terminated
+        e.SetObserved();
+        try
+        {
+            _ = LogHelper.LogException(e.Exception, "UnobservedTaskException");
+        }
+        catch
+        {
+            LogHelper.LogCriticalSync($"UnobservedTaskException: {e.Exception}");
+        }
+    }
+
+    private void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+    {
+        // This fires for fatal exceptions; use sync logging because the process may terminate immediately
+        var ex = e.ExceptionObject as Exception;
+        LogHelper.LogCriticalSync($"AppDomain.UnhandledException (IsTerminating={e.IsTerminating}): {ex}");
     }
 }

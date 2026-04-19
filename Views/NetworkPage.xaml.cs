@@ -1,9 +1,9 @@
-﻿using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Helpers;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace RyTuneX.Views;
 
@@ -162,6 +162,7 @@ public sealed partial class NetworkPage : Page
 
             if (!string.IsNullOrEmpty(selectedDNS))
             {
+                _ = LogHelper.Log($"Applying DNS: {selectedDNS} on interface: {selectedInterfaceName}");
                 var (dnsv4, dnsv6) = GetDNSAddresses(selectedDNS);
 
                 await SetDNS(selectedInterfaceName, dnsv4, dnsv6);
@@ -252,6 +253,7 @@ public sealed partial class NetworkPage : Page
         try
         {
             selectedInterfaceName = cmbNetworkInterfaces.SelectedItem?.ToString() ?? "";
+            _ = LogHelper.Log($"Network interface changed to: {selectedInterfaceName}");
             DisplayNetworkInfo();
         }
         catch (Exception ex)
