@@ -19,7 +19,7 @@
   <a href="https://github.com/rayenghanmi/RyTuneX/wiki/Installation"><img src="https://img.shields.io/badge/Get%20Started-RyTuneX-blue?style=for-the-badge" alt="Get Started"></a>
 </div>
 
-## Installation
+## 📥 Installation
 
 ### Option 1: Microsoft Store (Recommended)
 Install RyTuneX directly from the Microsoft Store for the best experience:
@@ -47,7 +47,7 @@ winget install --id 9PDH8M7HF2SQ
 > [!IMPORTANT]  
 > Always install RyTuneX from **Microsoft Store** to ensure authenticity and security (RyTuneX no longer provides packages for sideloading).
 
-## Why Choose RyTuneX?
+## 💡 Why Choose RyTuneX?
 - **Effortless Optimization**: Instantly boost your system's speed and reliability.
 - **Smart Features**: From app removal to privacy protection, we've got you covered.
 
@@ -62,92 +62,108 @@ winget install --id 9PDH8M7HF2SQ
   <a href="https://t.me/rytunex"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"></a>
 </div>
 
-## Join the Community
+## 🤝 Join the Community
 Get the most out of RyTuneX by connecting with fellow users and sharing your experiences. Have questions or feedback? Let’s make RyTuneX even better together!
 
-## About
+## ℹ️ About
 
-RyTuneX is a comprehensive system optimization tool designed to **enhance** the **performance**, **privacy**, and **usability** of Windows systems. Built with the **WinUI 3** framework and leveraging **.NET 8**, RyTuneX provides a modern and responsive user experience. It is crafted specifically for **Windows 10 (20H1 and up)** and **Windows 11**. whether you're **a gamer** or **an advanced user**, RyTuneX allows you to remove **pre-installed apps**, manage **system settings**, and optimize **performance**.
+RyTuneX is a comprehensive system optimization tool designed to **enhance** the **performance**, **privacy**, and **usability** of Windows systems. Built with the **WinUI 3** framework and leveraging **.NET 10**, RyTuneX provides a modern and responsive user experience. It is crafted specifically for **Windows 10 (20H1 and up)** and **Windows 11**. whether you're **a gamer** or **an advanced user**, RyTuneX allows you to remove **pre-installed apps**, manage **system settings**, and optimize **performance**.
 
 <div align="center" style="margin: 20px 0;">
-  <img src="https://img.shields.io/badge/.NET8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
+  <img src="https://img.shields.io/badge/.NET10-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
   <img src="https://img.shields.io/badge/Windows_10-0078d7?style=for-the-badge&logo=windows-10&logoColor=white" alt="Windows 10 Badge" />
   <img src="https://img.shields.io/badge/Windows_11-0078d4?style=for-the-badge&logo=windows-11&logoColor=white" alt="Windows 11 Badge" />
 </div>
 
-### Features
+## 🌟 Features
 
-- **Selective App Removal**: Uninstall unwanted pre-installed apps with ease. This feature allows users to debloat their system by removing bloatware and unnecessary applications that come pre-installed with Windows. By doing so, users can free up valuable system resources and improve overall performance.
+- 🧹 **Selective App Removal**: Uninstall unwanted pre-installed apps with ease. This feature allows users to debloat their system by removing bloatware and unnecessary applications that come pre-installed with Windows. By doing so, users can free up valuable system resources and improve overall performance.
 
-- **System Optimizations**: Streamline your system by reducing resource usage, and improving overall system efficiency. Choose from a range of basic and advanced options for both beginner and expert users.
+- ⚡ **System Optimizations**: Streamline your system by reducing resource usage, and improving overall system efficiency. Choose from a range of basic and advanced options for both beginner and expert users.
 
-- **Privacy Enhancements**: Enhance your privacy by blocking telemetry and data collection. RyTuneX provides tools to enhance user privacy by disabling tracking and data collection features inherent in Windows. This ensures that users have greater control over their personal data and can protect their privacy more effectively.
+- 🛡️ **Privacy Enhancements**: Enhance your privacy by blocking telemetry and data collection. RyTuneX provides tools to enhance user privacy by disabling tracking and data collection features inherent in Windows. This ensures that users have greater control over their personal data and can protect their privacy more effectively.
 
-- **Modern Design**: Enjoy a sleek and intuitive interface powered by WinUI 3. The application boasts a modern design that is both user-friendly and visually appealing, making system optimization tasks straightforward. The interface is designed to be clean and easy to navigate, allowing users to quickly access the features they need.
+- 🎨 **Modern Design**: Enjoy a sleek and intuitive interface powered by WinUI 3. The application boasts a modern design that is both user-friendly and visually appealing, making system optimization tasks straightforward. The interface is designed to be clean and easy to navigate, allowing users to quickly access the features they need.
 
-- **Cross-Compatible**: RyTuneX is compatible with both **Windows 10 (20H1 and up)** and **Windows 11**, ensuring seamless performance optimization across different Windows versions. The app delivers a consistent experience, allowing users to fully benefit from its features regardless of their operating system version.
+- 💻 **Cross-Compatible**: RyTuneX is compatible with both **Windows 10 (20H1 and up)** and **Windows 11**, ensuring seamless performance optimization across different Windows versions. The app delivers a consistent experience, allowing users to fully benefit from its features regardless of their operating system version.
 
-### UI Preview
+<div align="center" style="margin: 20px 0;">
+  <a href="https://rayenghanmi.github.io/rytunex/docs.html"><img src="https://img.shields.io/badge/Read%20the%20Docs-Technical%20Reference-blue?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Read the Docs"></a>
+</div>
+
+## 🏗️ Technical Architecture
+
+RyTuneX is built on a modern Windows development stack, leveraging a layered architecture to ensure stability, performance, and maintainability:
+
+<p align="center">
+  <img src="https://img.shields.io/badge/WinUI%203-0078D4?style=flat-square&logo=windows&logoColor=white" alt="WinUI 3" />
+  <img src="https://img.shields.io/badge/Windows_App_SDK-1.8-0078D4?style=flat-square&logo=windows&logoColor=white" alt="Windows App SDK 1.8" />
+  <img src="https://img.shields.io/badge/C%23-14-239120?style=flat-square&logo=c-sharp&logoColor=white" alt="C# 14" />
+  <img src="https://img.shields.io/badge/.NET-10-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt=".NET 10" />
+  <img src="https://img.shields.io/badge/Windows_PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white" alt="PowerShell" />
+</p>
+
+- 🖥️ **UI Framework**: Native rendering with **WinUI 3** and the **Windows App SDK 1.8**, fully supporting Fluent Design, Mica backdrop, and Adaptive Layouts.
+- ⚙️ **Managed Runtime**: Written in **C# 14** running on **.NET 10 Desktop Runtime**, enabling fast async/await operations and robust memory management.
+- 🔗 **Service Layer**: Decoupled core services (e.g., `OptimizationOptions`, `PolicyHelper`) manage background tasks, package parsing, and API interactions.
+- 🔧 **Deep OS Interop**: Direct platform interactions using **Win32 APIs (P/Invoke)**, **PowerShell**, **WMI**, and **COM** for reliable registry tweaks, UWP app removals, policy scanning, and WinGet catalog management.
+- 🔒 **Safety First Development**: Implements an atomic State Management system to securely track toggle states, ensuring a 1-click **Revert All Changes** safe harbor for users.
+
+## 📸 UI Preview
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/89fdd701-611c-4cd4-a4c5-931d1ca2f980" />
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/2290d080-ec2a-46f9-bcab-e4b891d73a70" />
-    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/d89ad4d7-fa71-43ba-a604-27018e0d5fe0" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/8547e680-5b16-46d3-a6e5-64a006fd476b" />
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/0f8fe3ba-7477-4ca7-ad00-be08cc559a21" />
+    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/8547e680-5b16-46d3-a6e5-64a006fd476b" />
   </picture>
   <p><em>RyTuneX - Clean, Modern, and Intuitive Interface</em></p>
 </div>
 
-### Usage
+## 🚀 Usage Guide
 
 > [!WARNING]  
 > Always create a restore point before applying any optimizations.
 
-#### System Optimizations
+### ⚡ System Optimizations
 To optimize your system, go to the **Optimize** tab and toggle the available options based on your needs. Changes will take effect after a system restart.
 
-#### Debloat Unwanted Apps
+### 🧹 Debloat Unwanted Apps
 In the **Debloat** tab, you can view a list of installed apps. Select the ones you want to remove and click **Uninstall selected App(s)**. A restart may be required to complete the process.
 
-#### Privacy Enhancements
+### 🛡️ Privacy Enhancements
 Head to the **Privacy** tab to configure your privacy settings. Toggle the switches to enable or disable features that impact telemetry, advertising, and more. Changes will take effect after a restart.
 
-#### Windows Features Management
+### 🌐 Network & Security Management
+Use the **Network** module to assign custom DNS profiles or manage connections, and head over to **Security** to control Defender and SmartScreen configurations locally.
+
+### 🧰 Advanced Workloads (Policies, WinGet, Processes, Services, Repair)
+Explore deeper configuration by updating applications via the **Packages (WinGet)** page, scanning override settings with the **Policies** scanner, managing active system resources securely under the **Processes** and **Services** modules, and restoring corrupted system states using the built-in **Repair** module.
+
+### ⚙️ Windows Features Management
 Use the **Features** tab to modify specific Windows features. Toggle the switches to adjust the settings, and restart your system to apply the changes.
 
-#### System Information
+### 📊 System Information
 The **Device** page provides a comprehensive view of your system’s hardware and OS. This helps you understand your setup and make more informed decisions about optimizations.
 
-## Get Involved
+## 🛠️ Get Involved
 
 RyTuneX is an open-source project. Contributions are welcome!  
 Check out the [contribution guide](https://github.com/rayenghanmi/RyTuneX/blob/main/CONTRIBUTING.md) to get started.
 
-## Translation
+## 🌍 Translation
 
-### These are the currently supported languages by RyTuneX:
+### Currently supported languages by RyTuneX:
 
-| Language                   | Translation status |
-| -------------------------- | ---------------- |
-| English (United States)    | 100%             |
-| French (France)            | 100%             |
-| Arabic (Tunisia)           | 100%             |
-| Simplified Chinese (China) | 100%             |
-| Traditional Chinese (China)| 100%             |
-| German (Germany)           | 100%             |
-| Japanese (Japan)           | 100%             |
-| Russian (Russia)           | 100%             |
-| Spanish (Spain)            | 100%             |
-| Korean (South Korea)       | 100%             |
-| Portuguese (Brazil)        | 100%             |
-| Italian (Italy)            | 100%             |
-| Turkish (Turkey)           | 100%             |
-| Hebrew (Israel)            | 100%             |
-| Vietnamese (Vietnam)       | 100%             |
+<div align="center">
+  <p style="font-size: 1.1rem; line-height: 2;">
+    🇺🇸 <strong>English (US)</strong> &nbsp;&bull;&nbsp; 🇫🇷 <strong>French</strong> &nbsp;&bull;&nbsp; 🇹🇳 <strong>Arabic</strong> &nbsp;&bull;&nbsp; 🇨🇳 <strong>Simplified Chinese</strong> &nbsp;&bull;&nbsp; 🇹🇼 <strong>Traditional Chinese</strong> &nbsp;&bull;&nbsp; 🇩🇪 <strong>German</strong> &nbsp;&bull;&nbsp; 🇯🇵 <strong>Japanese</strong> <br> 🇷🇺 <strong>Russian</strong> &nbsp;&bull;&nbsp; 🇪🇸 <strong>Spanish</strong> &nbsp;&bull;&nbsp; 🇰🇷 <strong>Korean</strong> &nbsp;&bull;&nbsp; 🇧🇷 <strong>Portuguese (BR)</strong> &nbsp;&bull;&nbsp; 🇮🇹 <strong>Italian</strong> &nbsp;&bull;&nbsp; 🇹🇷 <strong>Turkish</strong> &nbsp;&bull;&nbsp; 🇮🇱 <strong>Hebrew</strong> &nbsp;&bull;&nbsp; 🇻🇳 <strong>Vietnamese</strong> &nbsp;&bull;&nbsp; 🇮🇩 <strong>Indonesian</strong>
+  </p>
+</div>
 
-*: Translation will be shipped with the next version
+> *More translations will dynamically ship with each new release!*
 
-#### Want to add your language?
+### Want to add your language?
 
 If you're interested in contributing translations, please follow these steps:
 
@@ -158,15 +174,15 @@ If you're interested in contributing translations, please follow these steps:
 
 Thank you for helping make RyTuneX accessible to more people!
 
-## License
+## 📄 License
 
 This project is licensed under the [GNU Affero General Public License v3.0](https://github.com/rayenghanmi/RyTuneX/blob/main/LICENSE.md).
 
-## Contact
+## 📫 Contact
 
--   E-mail: [ghanmirayen12@gmail.com](mailto:ghanmirayen12@gmail.com)
+-   E-mail: [rytunex@gmail.com](mailto:rytunex@gmail.com)
 -   Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
--   Facebook: [@rayen.ghanmi.23](https://www.facebook.com/rayen.ghanmi.23)
+-   Facebook: [@rytunex](https://www.facebook.com/rytunex)
 -   Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
 -   Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
 
