@@ -50,8 +50,6 @@ public sealed partial class SystemInfoPage : Page
 
         if (string.IsNullOrWhiteSpace(info)) return;
 
-        var subtleBrush = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
-
         var lines = info.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
 
         for (int i = 0; i < lines.Length; i++)
@@ -70,11 +68,11 @@ public sealed partial class SystemInfoPage : Page
                     FontWeight = FontWeights.SemiBold
                 });
 
-                textBlock.Inlines.Add(new Run
-                {
-                    Text = value + (i < lines.Length - 1 ? "\n" : ""),
-                    Foreground = subtleBrush,
-                });
+                var valueRun = (Run)Microsoft.UI.Xaml.Markup.XamlReader.Load(
+                    @"<Run xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" Foreground=""{ThemeResource TextFillColorSecondaryBrush}"" />"
+                );
+                valueRun.Text = value + (i < lines.Length - 1 ? "\n" : "");
+                textBlock.Inlines.Add(valueRun);
             }
             else
             {
