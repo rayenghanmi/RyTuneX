@@ -1,0 +1,46 @@
+name: Feature Request
+description: Suggest an idea, enhancement, or new tweak for RyTuneX.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea for a new Windows tweak, setting, or UI improvement? Let us know!
+  - type: checkboxes
+    id: search_check
+    attributes:
+      label: Issue Checklist
+      options:
+        - label: I have searched the issue tracker to ensure this hasn't already been requested.
+          required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Is your feature request related to a problem? Please describe.
+      description: A clear and concise description of what the problem is.
+      placeholder: I'm always frustrated when [...] because RyTuneX doesn't have a way to...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen.
+      placeholder: I would like a new toggle in the Privacy section that automatically...
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Describe alternatives you've considered
+      description: A clear and concise description of any alternative solutions, scripts, or apps you've used.
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context or screenshots about the feature request here.
+    validations:
+      required: false
