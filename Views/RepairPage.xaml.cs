@@ -198,6 +198,7 @@ public sealed partial class RepairPage : Page
                     try
                     {
                         await RunCommandAsync(name, args, ct);
+                        ProcessCommandResult(name);
                     }
                     catch (OperationCanceledException)
                     {
@@ -661,6 +662,120 @@ public sealed partial class RepairPage : Page
             if (checkbox is CheckBox checkBox && checkBox.IsChecked == true)
             {
                 selectedCount++;
+            }
+        }
+    }
+
+    private void ProcessCommandResult(string commandName)
+    {
+        var rawOutput = _scanResults[commandName].ToString();
+        var lines = rawOutput.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+        if (lines.Length == 0) return;
+
+        _scanResults[commandName].Clear();
+
+        if (commandName == "DISM")
+        {
+            var dismLines = rawOutput
+                .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Where(l => !string.IsNullOrWhiteSpace(l) && !l.Contains(@"[==========================") && !l.EndsWith(@"%]"))
+                .TakeLast(5)
+                .ToList();
+
+            if (dismLines.Count > 0)
+            {
+                foreach (var line in dismLines)
+                {
+                    _scanResults[commandName].AppendLine(line);
+                }
+            }
+            else
+            {
+                var lastLines = lines.Skip(Math.Max(0, lines.Length - 5)).ToList();
+                foreach (var line in lastLines)
+                {
+                    _scanResults[commandName].AppendLine(line);
+                }
+            }
+        }
+        else if (commandName == "CHKDSK")
+        {
+            // CHKDSK writes its final completion event into the Application event log under 'Chkdsk' or 'Wininit'
+            try
+            {
+                using var eventLog = new EventLog("Application");
+                var latestChkdskEntry = eventLog.Entries.Cast<EventLogEntry>()
+                    .Where(e => e.Source.Equals("Chkdsk", StringComparison.OrdinalIgnoreCase) ||
+                                e.Source.Equals("Wininit", StringComparison.OrdinalIgnoreCase))
+                    .OrderByDescending(e => e.TimeGenerated)
+                    .FirstOrDefault();
+
+                // If there is a recent log (within the last few minutes/hours matching current session)
+                if (latestChkdskEntry != null && (DateTime.Now - latestChkdskEntry.TimeGenerated).TotalDays < 1)
+                {
+                    _scanResults[commandName].AppendLine("Event Viewer Result (Application -> Chkdsk/Wininit):");
+                    _scanResults[commandName].AppendLine(latestChkdskEntry.Message);
+                }
+                else
+                {
+                    // Fallback to text captured from standard output if log not in Event Viewer yet
+                    var lastLines = lines.Skip(Math.Max(0, lines.Length - 10)).ToList();
+                    foreach (var line in lastLines)
+                    {
+                        _scanResults[commandName].AppendLine(line);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Log($"Could not parse CHKDSK event log: {ex.Message}");
+                // Fallback
+                var lastLines = lines.Skip(Math.Max(0, lines.Length - 10)).ToList();
+                foreach (var line in lastLines)
+                {
+                    _scanResults[commandName].AppendLine(line);
+                }
+            }
+        }
+        else if (commandName == "SFC")
+        {
+            // Use the last few lines of the output directly
+            var lastLines = lines.Skip(Math.Max(0, lines.Length - 5)).ToList();
+            foreach (var line in lastLines)
+            {
+                _scanResults[commandName].AppendLine(line);
+            }
+            try
+            {
+                var cbsLogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Logs", "CBS", "CBS.log");
+                if (File.Exists(cbsLogPath))
+                {
+                    var cbsLines = File.ReadLines(cbsLogPath)
+                                       .Where(l => l.Contains("[SR] Repair", StringComparison.OrdinalIgnoreCase))
+                                       .ToList();
+
+                    if (cbsLines.Count > 0)
+                    {
+                        var headerStr = "RepairedFiles".GetLocalized();
+                        if (string.IsNullOrEmpty(headerStr) || headerStr == "RepairedFiles")
+                        {
+                            headerStr = "Repaired files (from CBS.log):";
+                        }
+
+                        _scanResults[commandName].AppendLine();
+                        _scanResults[commandName].AppendLine(headerStr);
+
+                        foreach (var line in cbsLines)
+                        {
+                            _scanResults[commandName].AppendLine(line);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Log($"Could not parse CBS.log: {ex.Message}");
             }
         }
     }
