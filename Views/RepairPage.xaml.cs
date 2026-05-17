@@ -26,6 +26,7 @@ public sealed partial class RepairPage : Page
     public int selectedCount = 0;
     private string? _pendingScrollTarget;
     private int _sfcPrefaceLinesSkipped;
+    private bool _isLoaded;
 
     public RepairPage()
     {
@@ -34,6 +35,7 @@ public sealed partial class RepairPage : Page
         LogHelper.Log("Initializing RepairPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += RepairPage_Loaded;
+        Unloaded += RepairPage_Unloaded;
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -48,11 +50,17 @@ public sealed partial class RepairPage : Page
 
     private async void RepairPage_Loaded(object sender, RoutedEventArgs e)
     {
+        _isLoaded = true;
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
         {
             await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
             _pendingScrollTarget = null;
         }
+    }
+
+    private void RepairPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        _isLoaded = false;
     }
 
     private async void OnScanButtonClick(object sender, RoutedEventArgs e)
@@ -542,6 +550,12 @@ public sealed partial class RepairPage : Page
 
     private async Task ShowScanResultsDialogAsync(List<string> selectedNames)
     {
+        if (!_isLoaded || XamlRoot is null)
+        {
+            _ = LogHelper.LogWarning("Skipping scan results dialog because the page is not loaded.");
+            return;
+        }
+
         var stackPanel = new StackPanel { Spacing = 8 };
 
         foreach (var name in selectedNames)

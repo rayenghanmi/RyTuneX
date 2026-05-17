@@ -37,7 +37,13 @@ internal static class SystemStateDetector
                 @"SYSTEM\CurrentControlSet\Control\Session Manager", "DisableWpbtExecution", 1),
 
             "ServiceHostSplitting" => DwordEquals(RegistryHive.LocalMachine,
-                @"SYSTEM\CurrentControlSet\Control", "SvcHostSplitThresholdInKB", unchecked((int)0xFFFFFFFF)),
+                @"SYSTEM\CurrentControlSet\Control",
+                "SvcHostSplitThresholdInKB",
+                (int)Math.Min(
+                    (ulong)Math.Ceiling(
+                        MemoryHelper.GetTotalPhysicalMemory() / (1024d * 1024d * 1024d)
+                    ) * 1024UL * 1024UL,
+                    int.MaxValue)),
 
             "MenuShowDelay" => StringEquals(RegistryHive.CurrentUser,
                 @"Control Panel\Desktop", "MenuShowDelay", "0"),

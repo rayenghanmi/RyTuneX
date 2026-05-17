@@ -31,6 +31,7 @@ public sealed partial class PackagesPage : Page
     private PackageCatalog? _localCatalog;
 
     private bool? _isWingetAvailable;
+    private bool _useWingetCom;
     private bool _isUpdatesMode;
     private bool _isLoading;
     private bool _suppressSearch;
@@ -103,11 +104,15 @@ public sealed partial class PackagesPage : Page
                 return;
             }
 
-            var catalog = await EnsureWingetCatalogAsync();
-            if (catalog is null)
+            PackageCatalog? catalog = null;
+            if (_useWingetCom)
             {
-                SetErrorState("Could not connect to the winget source.");
-                return;
+                catalog = await EnsureWingetCatalogAsync();
+                if (catalog is null)
+                {
+                    SetErrorState("Could not connect to the winget source.");
+                    return;
+                }
             }
 
             _allPackages.Clear();
@@ -116,7 +121,9 @@ public sealed partial class PackagesPage : Page
             PackagesGridView.Visibility = Visibility.Collapsed;
 
             var installedMap = await GetInstalledPackagesMapAsync();
-            var discovered = await DiscoverPackagesAsync(catalog);
+            var discovered = _useWingetCom && catalog is not null
+                ? await DiscoverPackagesAsync(catalog)
+                : await DiscoverPackagesFromWingetCliAsync();
 
             if (discovered.Count < 200)
             {
@@ -549,10 +556,60 @@ public sealed partial class PackagesPage : Page
     private async Task<bool> IsWingetAvailableAsync()
     {
         if (_isWingetAvailable.HasValue) return _isWingetAvailable.Value;
-        try { _isWingetAvailable = await EnsureWingetCatalogAsync() is not null; return _isWingetAvailable.Value; }
+        try
+        {
+            if (!await IsWingetCliAvailableAsync())
+            {
+                _isWingetAvailable = false;
+                return false;
+            }
+
+            _useWingetCom = string.Equals(
+                Environment.GetEnvironmentVariable("RYTUNEX_USE_WINGET_COM"),
+                "1",
+                StringComparison.OrdinalIgnoreCase);
+
+            if (_useWingetCom)
+            {
+                _isWingetAvailable = await EnsureWingetCatalogAsync() is not null;
+                return _isWingetAvailable.Value;
+            }
+
+            _isWingetAvailable = true;
+            return true;
+        }
         catch { }
+
         _isWingetAvailable = false;
         return false;
+    }
+
+    private async Task<bool> IsWingetCliAvailableAsync()
+    {
+        var psi = new ProcessStartInfo
+        {
+            FileName = "cmd.exe",
+            Arguments = "/c winget --version",
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            StandardOutputEncoding = Encoding.UTF8,
+            StandardErrorEncoding = Encoding.UTF8
+        };
+
+        using var process = Process.Start(psi);
+        if (process is null) return false;
+
+        var stdOut = process.StandardOutput.ReadToEndAsync();
+        var stdErr = process.StandardError.ReadToEndAsync();
+        try { await process.WaitForExitAsync(_cts.Token); }
+        catch (OperationCanceledException) { TryTerminateProcess(process); throw; }
+
+        _ = await stdOut;
+        _ = await stdErr;
+
+        return process.ExitCode == 0;
     }
 
     private async Task<List<DiscoveredPackageEntry>> DiscoverPackagesAsync(PackageCatalog catalog)
@@ -690,6 +747,7 @@ public sealed partial class PackagesPage : Page
     // Catalog connections
     private async Task<PackageCatalog?> EnsureWingetCatalogAsync()
     {
+        if (!_useWingetCom) return null;
         if (_wingetCatalog is not null) return _wingetCatalog;
         try
         {
@@ -709,6 +767,7 @@ public sealed partial class PackagesPage : Page
 
     private async Task<PackageCatalog?> EnsureLocalCatalogAsync()
     {
+        if (!_useWingetCom) return null;
         if (_localCatalog is not null) return _localCatalog;
         try
         {
@@ -730,6 +789,12 @@ public sealed partial class PackagesPage : Page
     {
         var result = new Dictionary<string, (string Name, string Version)>(StringComparer.OrdinalIgnoreCase);
         _installedSnapshot.Clear();
+
+        if (!_useWingetCom)
+        {
+            await PopulateInstalledMapFallbackAsync(result);
+            return result;
+        }
 
         try
         {

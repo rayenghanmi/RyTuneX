@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.InteropServices;
+using System.Text;
 
 namespace RyTuneX.Helpers;
 
@@ -334,7 +335,23 @@ public static partial class OptimizeSystemHelper
 
     public static async Task DisableServiceHostSplitting()
     {
-        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\" /v SvcHostSplitThresholdInKB /t REG_DWORD /d 4294967295 /f").ConfigureAwait(false);
+        ulong ramBytes = MemoryHelper.GetTotalPhysicalMemory();
+
+        // Convert to GB
+        double ramGbExact = ramBytes / (1024d * 1024d * 1024d);
+
+        // round UP to nearest GB
+        ulong ramGb = (ulong)Math.Ceiling(ramGbExact);
+
+        // GB * 1024 * 1024
+        ulong ramInKb = ramGb * 1024UL * 1024UL;
+
+        if (ramInKb > uint.MaxValue)
+            ramInKb = uint.MaxValue;
+
+        await OptimizationOptions.StartInCmd(
+            $"reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\" /v SvcHostSplitThresholdInKB /t REG_DWORD /d {ramInKb} /f"
+        );
     }
 
     public static async Task EnableServiceHostSplitting()
@@ -2705,5 +2722,34 @@ public static partial class OptimizeSystemHelper
         }
         catch { /* ignore errors */ }
         return size;
+    }
+}
+
+public static class MemoryHelper
+{
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    public class MEMORYSTATUSEX
+    {
+        public uint dwLength = (uint)Marshal.SizeOf(typeof(MEMORYSTATUSEX));
+        public uint dwMemoryLoad;
+        public ulong ullTotalPhys;
+        public ulong ullAvailPhys;
+        public ulong ullTotalPageFile;
+        public ulong ullAvailPageFile;
+        public ulong ullTotalVirtual;
+        public ulong ullAvailVirtual;
+        public ulong ullAvailExtendedVirtual;
+    }
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    public static extern bool GlobalMemoryStatusEx([In, Out] MEMORYSTATUSEX lpBuffer);
+
+    public static ulong GetTotalPhysicalMemory()
+    {
+        var memStatus = new MEMORYSTATUSEX();
+        if (!GlobalMemoryStatusEx(memStatus))
+            throw new Exception("Unable to get memory status");
+
+        return memStatus.ullTotalPhys;
     }
 }
