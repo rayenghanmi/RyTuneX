@@ -697,6 +697,16 @@ internal partial class OptimizationOptions
                 else await OptimizeSystemHelper.EnableMouseHoverTime().ConfigureAwait(false);
                 break;
 
+            case "KeyboardLatency":
+                if (isOn) await OptimizeSystemHelper.EnableKeyboardLatencyOptimization().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableKeyboardLatencyOptimization().ConfigureAwait(false);
+                break;
+
+            case "MouseAcceleration":
+                if (isOn) await OptimizeSystemHelper.DisableMouseAcceleration().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableMouseAcceleration().ConfigureAwait(false);
+                break;
+
             case "BackgroundApps":
                 if (isOn) await OptimizeSystemHelper.DisableBackgroundApps().ConfigureAwait(false);
                 else await OptimizeSystemHelper.EnableBackgroundApps().ConfigureAwait(false);
@@ -845,6 +855,26 @@ internal partial class OptimizationOptions
             case "GamingMode":
                 if (isOn) await OptimizeSystemHelper.EnableGamingMode().ConfigureAwait(false);
                 else await OptimizeSystemHelper.DisableGamingMode().ConfigureAwait(false);
+                break;
+
+            case "FullscreenOptimizations":
+                if (isOn) await OptimizeSystemHelper.EnableFullscreenOptimizations().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableFullscreenOptimizations().ConfigureAwait(false);
+                break;
+
+            case "UsbPowerSaving":
+                if (isOn) await OptimizeSystemHelper.DisableUsbPowerSaving().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableUsbPowerSaving().ConfigureAwait(false);
+                break;
+
+            case "PowerThrottling":
+                if (isOn) await OptimizeSystemHelper.DisablePowerThrottling().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnablePowerThrottling().ConfigureAwait(false);
+                break;
+
+            case "GpuDriverTweaks":
+                if (isOn) await OptimizeSystemHelper.ApplyGpuDriverTweaks().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RevertGpuDriverTweaks().ConfigureAwait(false);
                 break;
 
             case "StoreUpdates":

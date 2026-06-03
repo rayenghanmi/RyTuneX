@@ -51,6 +51,20 @@ internal static class SystemStateDetector
             "MouseHoverTime" => StringEquals(RegistryHive.CurrentUser,
                 @"Control Panel\Mouse", "MouseHoverTime", "0"),
 
+            "KeyboardLatency" => All(
+                StringEquals(RegistryHive.CurrentUser,
+                    @"Control Panel\Keyboard", "KeyboardDelay", "0"),
+                StringEquals(RegistryHive.CurrentUser,
+                    @"Control Panel\Keyboard", "KeyboardSpeed", "31")),
+
+            "MouseAcceleration" => All(
+                StringEquals(RegistryHive.CurrentUser,
+                    @"Control Panel\Mouse", "MouseSpeed", "0"),
+                StringEquals(RegistryHive.CurrentUser,
+                    @"Control Panel\Mouse", "MouseThreshold1", "0"),
+                StringEquals(RegistryHive.CurrentUser,
+                    @"Control Panel\Mouse", "MouseThreshold2", "0")),
+
             "BackgroundApps" => All(
                 DwordEquals(RegistryHive.CurrentUser,
                     @"Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications", "GlobalUserDisabled", 1),
@@ -207,6 +221,26 @@ internal static class SystemStateDetector
                     @"Software\Microsoft\GameBar", "AllowAutoGameMode", 1),
                 DwordEquals(RegistryHive.LocalMachine,
                     @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", 2)),
+
+            "FullscreenOptimizations" => All(
+                DwordEquals(RegistryHive.CurrentUser,
+                    @"System\GameConfigStore", "GameDVR_DXGIHonorFSEWindowsCompatible", 0),
+                DwordEquals(RegistryHive.CurrentUser,
+                    @"System\GameConfigStore", "GameDVR_FSEBehavior", 0),
+                DwordEquals(RegistryHive.CurrentUser,
+                    @"System\GameConfigStore", "GameDVR_FSEBehaviorMode", 0),
+                DwordEquals(RegistryHive.CurrentUser,
+                    @"System\GameConfigStore", "GameDVR_HonorUserFSEBehaviorMode", 0)),
+
+            "UsbPowerSaving" => null,
+
+            "PowerThrottling" => All(
+                DwordEquals(RegistryHive.LocalMachine,
+                    @"SYSTEM\CurrentControlSet\Control\Power\PowerThrottling", "PowerThrottlingOff", 1),
+                DwordEquals(RegistryHive.LocalMachine,
+                    @"SYSTEM\CurrentControlSet\Control\USB\AutomaticSurpriseRemoval", "AttemptRecoveryFromUsbPowerDrain", 0)),
+
+            "GpuDriverTweaks" => AnyDisplayAdapterTweaksApplied(),
 
             "StoreUpdates" => All(
                 DwordEquals(RegistryHive.CurrentUser,
@@ -591,7 +625,8 @@ internal static class SystemStateDetector
         // Optimize System Page
         "RecommendedSectionStartMenu", "LegacyBootMenu", "OptimizeNTFS",
         "PrioritizeForegroundApplications", "WPBT", "ServiceHostSplitting",
-        "MenuShowDelay", "MouseHoverTime", "BackgroundApps", "AutoComplete",
+        "MenuShowDelay", "MouseHoverTime", "KeyboardLatency", "MouseAcceleration",
+        "BackgroundApps", "AutoComplete",
         "CrashDump", "RemoteAssistance", "WindowShake", "CopyMoveContextMenu",
         "TaskTimeouts", "LowDiskSpaceChecks", "LinkResolve", "ServiceTimeouts",
         "RemoteRegistry", "FileExtensionsAndHiddenFiles", "SystemProfile",
@@ -599,7 +634,8 @@ internal static class SystemStateDetector
         "CompatibilityAssistant", "SystemRestore", "WindowsTransparency",
         "WindowsDarkMode", "VerboseLogon", "ClassicContextMenu", "Search",
         "Biometrics", "SMBv1", "SMBv2", "ErrorReporting", "Cortana",
-        "GamingMode", "StoreUpdates", "OneDrive", "SensorServices",
+        "GamingMode", "FullscreenOptimizations", "UsbPowerSaving", "PowerThrottling",
+        "GpuDriverTweaks", "StoreUpdates", "OneDrive", "SensorServices",
         "NewsAndInterests", "Hibernation", "EndTask", "MediaPlayerSharing",
 
         // Privacy Page
@@ -686,6 +722,58 @@ internal static class SystemStateDetector
         {
             return null;
         }
+    }
+
+    private static bool? AnyDisplayAdapterTweaksApplied()
+    {
+        try
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegView);
+            using var classKey = baseKey.OpenSubKey(
+                @"SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}",
+                writable: false);
+
+            if (classKey == null) return null;
+
+            var sawAdapterKey = false;
+            foreach (var subKeyName in classKey.GetSubKeyNames())
+            {
+                if (subKeyName.Length != 4 || !subKeyName.All(char.IsDigit))
+                {
+                    continue;
+                }
+
+                sawAdapterKey = true;
+                using var adapterKey = classKey.OpenSubKey(subKeyName, writable: false);
+                if (adapterKey == null) continue;
+
+                var amdTweaksApplied =
+                    DwordValueEquals(adapterKey, "EnableULPS", 0) &&
+                    DwordValueEquals(adapterKey, "DisablePowerGating", 1);
+                var nvidiaTweaksApplied =
+                    DwordValueEquals(adapterKey, "DisableDynamicPstate", 1) &&
+                    DwordValueEquals(adapterKey, "DisableASyncPstates", 1);
+                var intelTweaksApplied =
+                    DwordValueEquals(adapterKey, "Display1_DisableAsyncFlips", 1) &&
+                    DwordValueEquals(adapterKey, "AdaptiveVsyncEnable", 0);
+
+                if (amdTweaksApplied || nvidiaTweaksApplied || intelTweaksApplied)
+                {
+                    return true;
+                }
+            }
+
+            return sawAdapterKey ? false : null;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static bool DwordValueEquals(RegistryKey key, string valueName, int expected)
+    {
+        return key.GetValue(valueName) is int value && value == expected;
     }
 
     private static bool? ServiceDisabled(string serviceName)

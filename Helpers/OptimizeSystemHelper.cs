@@ -19,6 +19,12 @@ public static partial class OptimizeSystemHelper
         }
     }
 
+    private static Task<int> RunEncodedPowerShell(string script)
+    {
+        var encodedCommand = Convert.ToBase64String(Encoding.Unicode.GetBytes(script));
+        return OptimizationOptions.StartInCmd($"PowerShell.exe -NoProfile -ExecutionPolicy Bypass -EncodedCommand {encodedCommand}");
+    }
+
     public static async Task DisableWindowsAI()
     {
         // Gaming, Studio Effects, & System App AI Registry
@@ -369,6 +375,29 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Mouse\" /v MouseHoverTime /t REG_SZ /d 0 /f").ConfigureAwait(false);
     }
 
+    public static async Task EnableKeyboardLatencyOptimization()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Keyboard\" /v KeyboardDelay /t REG_SZ /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Keyboard\" /v KeyboardSpeed /t REG_SZ /d 31 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKEY_USERS\\.DEFAULT\\Control Panel\\Keyboard\" /v KeyboardDelay /t REG_SZ /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKEY_USERS\\.DEFAULT\\Control Panel\\Keyboard\" /v KeyboardSpeed /t REG_SZ /d 31 /f").ConfigureAwait(false);
+    }
+
+    public static async Task DisableMouseAcceleration()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Mouse\" /v MouseSpeed /t REG_SZ /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Mouse\" /v MouseThreshold1 /t REG_SZ /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Mouse\" /v MouseThreshold2 /t REG_SZ /d 0 /f").ConfigureAwait(false);
+    }
+
+    public static async Task EnableFullscreenOptimizations()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_DXGIHonorFSEWindowsCompatible /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_FSEBehavior /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_FSEBehaviorMode /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_HonorUserFSEBehaviorMode /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+    }
+
     public static async Task DisableBackgroundApps()
     {
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications\" /v GlobalUserDisabled /t REG_DWORD /d 1 /f").ConfigureAwait(false);
@@ -495,6 +524,29 @@ public static partial class OptimizeSystemHelper
     public static async Task EnableMouseHoverTime()
     {
         await OptimizationOptions.StartInCmd("reg delete \"HKCU\\Control Panel\\Mouse\" /v MouseHoverTime /f").ConfigureAwait(false);
+    }
+
+    public static async Task DisableKeyboardLatencyOptimization()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Keyboard\" /v KeyboardDelay /t REG_SZ /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Keyboard\" /v KeyboardSpeed /t REG_SZ /d 31 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKEY_USERS\\.DEFAULT\\Control Panel\\Keyboard\" /v KeyboardDelay /t REG_SZ /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKEY_USERS\\.DEFAULT\\Control Panel\\Keyboard\" /v KeyboardSpeed /t REG_SZ /d 31 /f").ConfigureAwait(false);
+    }
+
+    public static async Task EnableMouseAcceleration()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Mouse\" /v MouseSpeed /t REG_SZ /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Mouse\" /v MouseThreshold1 /t REG_SZ /d 6 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\Control Panel\\Mouse\" /v MouseThreshold2 /t REG_SZ /d 10 /f").ConfigureAwait(false);
+    }
+
+    public static async Task DisableFullscreenOptimizations()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_DXGIHonorFSEWindowsCompatible /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_FSEBehavior /t REG_DWORD /d 2 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_FSEBehaviorMode /t REG_DWORD /d 2 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_HonorUserFSEBehaviorMode /t REG_DWORD /d 1 /f").ConfigureAwait(false);
     }
 
     public static async Task EnableBackgroundApps()
@@ -1189,7 +1241,6 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\" /v HwSchMode /t REG_DWORD /d 2 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\GameBar\" /v AllowAutoGameMode /t REG_DWORD /d 1 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\GameBar\" /v AutoGameModeEnabled /t REG_DWORD /d 1 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_FSEBehaviorMode /t REG_DWORD /d 2 /f").ConfigureAwait(false);
     }
 
     public static async Task DisableGamingMode()
@@ -1197,7 +1248,138 @@ public static partial class OptimizeSystemHelper
         await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\" /v HwSchMode /t REG_DWORD /d 1 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\GameBar\" /v AllowAutoGameMode /t REG_DWORD /d 0 /f").ConfigureAwait(false);
         await OptimizationOptions.StartInCmd("reg add \"HKCU\\Software\\Microsoft\\GameBar\" /v AutoGameModeEnabled /t REG_DWORD /d 0 /f").ConfigureAwait(false);
-        await OptimizationOptions.StartInCmd("reg add \"HKCU\\System\\GameConfigStore\" /v GameDVR_FSEBehaviorMode /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+    }
+
+    public static async Task DisableUsbPowerSaving()
+    {
+        await RunEncodedPowerShell("""
+            $devices = Get-CimInstance -Namespace root\wmi -ClassName MSPower_DeviceEnable -ErrorAction SilentlyContinue |
+                Where-Object { $_.InstanceName -match 'USB\\ROOT' }
+
+            foreach ($device in $devices) {
+                if ($device.Enable -ne $false) {
+                    Set-CimInstance -CimInstance $device -Property @{ Enable = $false } | Out-Null
+                }
+            }
+            """).ConfigureAwait(false);
+
+        await OptimizationOptions.StartInCmd("powercfg /SETACVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("powercfg /SETDCVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("powercfg /S SCHEME_CURRENT").ConfigureAwait(false);
+    }
+
+    public static async Task EnableUsbPowerSaving()
+    {
+        await RunEncodedPowerShell("""
+            $devices = Get-CimInstance -Namespace root\wmi -ClassName MSPower_DeviceEnable -ErrorAction SilentlyContinue |
+                Where-Object { $_.InstanceName -match 'USB\\ROOT' }
+
+            foreach ($device in $devices) {
+                if ($device.Enable -ne $true) {
+                    Set-CimInstance -CimInstance $device -Property @{ Enable = $true } | Out-Null
+                }
+            }
+            """).ConfigureAwait(false);
+
+        await OptimizationOptions.StartInCmd("powercfg /SETACVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 1").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("powercfg /SETDCVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 1").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("powercfg /S SCHEME_CURRENT").ConfigureAwait(false);
+    }
+
+    public static async Task DisablePowerThrottling()
+    {
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling\" /v PowerThrottlingOff /t REG_DWORD /d 1 /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\USB\\AutomaticSurpriseRemoval\" /v AttemptRecoveryFromUsbPowerDrain /t REG_DWORD /d 0 /f").ConfigureAwait(false);
+    }
+
+    public static async Task EnablePowerThrottling()
+    {
+        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling\" /v PowerThrottlingOff /f").ConfigureAwait(false);
+        await OptimizationOptions.StartInCmd("reg delete \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\USB\\AutomaticSurpriseRemoval\" /v AttemptRecoveryFromUsbPowerDrain /f").ConfigureAwait(false);
+    }
+
+    public static async Task ApplyGpuDriverTweaks()
+    {
+        await RunEncodedPowerShell("""
+            $displayClass = 'HKLM:\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}'
+
+            function Set-DwordValue {
+                param(
+                    [string]$Path,
+                    [string]$Name,
+                    [int]$Value
+                )
+
+                New-ItemProperty -Path $Path -Name $Name -Value $Value -PropertyType DWord -Force | Out-Null
+            }
+
+            $controllers = Get-CimInstance -ClassName Win32_VideoController -ErrorAction SilentlyContinue
+
+            foreach ($gpu in $controllers) {
+                $deviceId = [string]$gpu.DeviceID
+                if ($deviceId -notmatch '^VideoController(\d+)$') {
+                    continue
+                }
+
+                $index = [int]$Matches[1] - 1
+                $path = Join-Path $displayClass ('{0:D4}' -f $index)
+                if (-not (Test-Path $path)) {
+                    continue
+                }
+
+                $vendorText = "$($gpu.Name) $($gpu.AdapterCompatibility)"
+                if ($vendorText -match 'AMD|Advanced Micro Devices|ATI') {
+                    Set-DwordValue $path 'EnableULPS' 0
+                    Set-DwordValue $path 'DisablePowerGating' 1
+                    Set-DwordValue $path 'PP_GPUPowerDownEnabled' 0
+                    Set-DwordValue $path 'DisableDynamicPstate' 1
+                    Set-DwordValue $path 'DisableVCEPowerGating' 1
+                    Set-DwordValue $path 'DisableVceClockGating' 1
+                    Set-DwordValue $path 'EnableUvdClockGating' 0
+                    Set-DwordValue $path 'EnableVceSwClockGating' 0
+                    Set-DwordValue $path 'EnableAspmL0s' 0
+                    Set-DwordValue $path 'EnableAspmL1' 0
+                }
+                elseif ($vendorText -match 'NVIDIA') {
+                    Set-DwordValue $path 'DisableDynamicPstate' 1
+                    Set-DwordValue $path 'DisableASyncPstates' 1
+                }
+                elseif ($vendorText -match 'Intel') {
+                    Set-DwordValue $path 'Display1_DisableAsyncFlips' 1
+                    Set-DwordValue $path 'AdaptiveVsyncEnable' 0
+                }
+            }
+            """).ConfigureAwait(false);
+    }
+
+    public static async Task RevertGpuDriverTweaks()
+    {
+        await RunEncodedPowerShell("""
+            $displayClass = 'HKLM:\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}'
+            $values = @(
+                'EnableULPS',
+                'DisablePowerGating',
+                'PP_GPUPowerDownEnabled',
+                'DisableDynamicPstate',
+                'DisableVCEPowerGating',
+                'DisableVceClockGating',
+                'EnableUvdClockGating',
+                'EnableVceSwClockGating',
+                'EnableAspmL0s',
+                'EnableAspmL1',
+                'DisableASyncPstates',
+                'Display1_DisableAsyncFlips',
+                'AdaptiveVsyncEnable'
+            )
+
+            Get-ChildItem -Path $displayClass -ErrorAction SilentlyContinue |
+                Where-Object { $_.PSChildName -match '^\d{4}$' } |
+                ForEach-Object {
+                    foreach ($value in $values) {
+                        Remove-ItemProperty -Path $_.PSPath -Name $value -ErrorAction SilentlyContinue
+                    }
+                }
+            """).ConfigureAwait(false);
     }
 
     public static async Task SetWindowsUpdatesDefault()

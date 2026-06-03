@@ -53,6 +53,20 @@
                             Click="AddUltimatePowerPlanButton_Click"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Feature_DisableUsbPowerSaving">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE945;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="UsbPowerSaving" Tag="UsbPowerSaving"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisablePowerThrottling">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xECAD;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="PowerThrottling" Tag="PowerThrottling"/>
+                </controls:SettingsCard>
+
                 <!-- Basic System Optimization Section -->
                 <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
@@ -70,6 +84,20 @@
                         <FontIcon Glyph="&#xE8B0;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="MouseHoverTime" Tag="MouseHoverTime"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_KeyboardLatency">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE765;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="KeyboardLatency" Tag="KeyboardLatency"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableMouseAcceleration">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE962;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="MouseAcceleration" Tag="MouseAcceleration"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_BackgroundApps">
@@ -180,6 +208,20 @@
                         <FontIcon Glyph="&#xE7FC;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="GamingMode" Tag="GamingMode"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_EnableFullscreenOptimizations">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE740;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="FullscreenOptimizations" Tag="FullscreenOptimizations"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_GpuDriverTweaks">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE950;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="GpuDriverTweaks" Tag="GpuDriverTweaks"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_ExcludeDriversFromWindowsUpdates">

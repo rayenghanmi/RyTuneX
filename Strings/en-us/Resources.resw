@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>Enables Gaming Mode, which optimizes system resources for a smoother gaming experience. May affect background processes.</value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>Enable Fullscreen Optimizations</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>Lets Windows use its fullscreen optimization path for games. Disable this toggle only for games that need exclusive fullscreen behavior.</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>GPU Driver Performance Tweaks</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>Applies AMD, NVIDIA, and Intel registry tweaks to reduce GPU power-state switching and display latency.</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>Exclude Drivers From Windows Updates</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>Adjusts the time the system waits before triggering a hover event. Disabling this may speed up interactions but can lead to unintentional activations.</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>Optimize Keyboard Latency</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>Sets the keyboard repeat delay to the lowest value and keeps repeat speed at maximum for more responsive input.</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>Disable Mouse Acceleration</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>Turns off Windows pointer acceleration so mouse movement stays consistent for games and precision input.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>Disable Auto Complete</value>
@@ -1418,6 +1442,18 @@ Check your computer for memory problems</value>
   </data>
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>Add Ultimate Performance Plan</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>Disable USB Power Saving</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>Disables USB selective suspend and USB root power saving to reduce controller wake latency during gaming.</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>Disable Power Throttling</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>Turns off Windows power throttling and USB power-drain recovery behavior so foreground workloads can stay responsive.</value>
   </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Add Ultimate Performance Plan</value>
