@@ -7,11 +7,12 @@ internal class LogHelper
 {
     private static readonly SemaphoreSlim LogSemaphore = new(1, 1);
 
-    private static readonly string LogDirectory = Path.Combine(
-        ApplicationData.Current.LocalCacheFolder.Path,
-        "Logs");
+    private static string? _logDirectory;
+    private static string? _logFilePath;
 
-    private static readonly string LogFilePath = Path.Combine(LogDirectory, "Log.txt");
+    private static string LogDirectory => _logDirectory ??= ResolveLogDirectory();
+
+    private static string LogFilePath => _logFilePath ??= Path.Combine(LogDirectory, "Log.txt");
 
     private static async Task LogToFile(string message)
     {
@@ -76,6 +77,25 @@ internal class LogHelper
 
     // Returns the full path to the log file.
     public static string GetLogFilePath() => LogFilePath;
+
+    private static string ResolveLogDirectory()
+    {
+        try
+        {
+            return Path.Combine(ApplicationData.Current.LocalCacheFolder.Path, "Logs");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"ApplicationData log path unavailable: {ex.Message}");
+            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            if (string.IsNullOrWhiteSpace(basePath))
+            {
+                basePath = Path.GetTempPath();
+            }
+
+            return Path.Combine(basePath, "RyTuneX", "Logs");
+        }
+    }
 
     private static string FormatCaller(string caller, string file)
     {

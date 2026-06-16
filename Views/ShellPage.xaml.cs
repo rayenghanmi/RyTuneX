@@ -44,11 +44,21 @@ public sealed partial class ShellPage : Page
                 var principal = new WindowsPrincipal(identity);
                 var admin = principal.IsInRole(WindowsBuiltInRole.Administrator);
 
-                DispatcherQueue.TryEnqueue(() =>
+                if (!DispatcherQueue.TryEnqueue(() =>
                 {
-                    IsAdminIcon.Visibility = admin ? Visibility.Visible : Visibility.Collapsed;
-                    NotAdminIcon.Visibility = admin ? Visibility.Collapsed : Visibility.Visible;
-                });
+                    try
+                    {
+                        IsAdminIcon.Visibility = admin ? Visibility.Visible : Visibility.Collapsed;
+                        NotAdminIcon.Visibility = admin ? Visibility.Collapsed : Visibility.Visible;
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = LogHelper.LogWarning($"Failed to update admin status icons: {ex.Message}");
+                    }
+                }))
+                {
+                    _ = LogHelper.LogWarning("Admin status dispatcher enqueue failed.");
+                }
             });
         };
 
@@ -79,10 +89,30 @@ public sealed partial class ShellPage : Page
         // Show restore point dialog if it's the first run
         _ = Task.Run(async () =>
         {
-            var settings = ApplicationData.Current.LocalSettings.Values;
-            if (!settings.ContainsKey("FirstRun") || (bool)settings["FirstRun"])
+            try
             {
-                DispatcherQueue.TryEnqueue(async () => await ShowRestorePointDialogAsync());
+                var settings = ApplicationData.Current.LocalSettings.Values;
+                if (!settings.ContainsKey("FirstRun") || (bool)settings["FirstRun"])
+                {
+                    if (!DispatcherQueue.TryEnqueue(async () =>
+                    {
+                        try
+                        {
+                            await ShowRestorePointDialogAsync();
+                        }
+                        catch (Exception ex)
+                        {
+                            _ = LogHelper.LogException(ex, "Restore point dialog failed");
+                        }
+                    }))
+                    {
+                        _ = LogHelper.LogWarning("Restore point dialog dispatcher enqueue failed.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogException(ex, "Restore point first-run check failed");
             }
         });
     }
@@ -292,11 +322,20 @@ public sealed partial class ShellPage : Page
             },
             PrimaryButtonText = "Continue".GetLocalized(),
             CloseButtonText = "Close".GetLocalized(),
-            XamlRoot = this.Content.XamlRoot,
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
         };
+
+        var xamlRoot = XamlRoot ?? (Content as FrameworkElement)?.XamlRoot;
+        if (xamlRoot is null)
+        {
+            _ = LogHelper.LogWarning("Restore point dialog skipped because XamlRoot is unavailable.");
+            return;
+        }
+
+        dialog.XamlRoot = xamlRoot;
+
         _ = LogHelper.Log("Showing Restore Point Dialog");
         var result = await dialog.ShowAsync();
         if (neverShowAgain.IsChecked == true)
@@ -369,7 +408,10 @@ public sealed partial class ShellPage : Page
         }
         else
         {
-            Current?.DispatcherQueue.TryEnqueue(Show);
+            if (Current?.DispatcherQueue.TryEnqueue(Show) != true)
+            {
+                _ = LogHelper.LogWarning("Notification dispatcher enqueue failed.");
+            }
         }
     }
 }

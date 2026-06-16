@@ -35,20 +35,28 @@ public class ActivationService : IActivationService
         App.MainWindow.Activate();
 
         // Defer the rest of the UI intialization to show the window faster
-        App.MainWindow.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, async () =>
+        if (!App.MainWindow.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, async () =>
         {
-            try
-            {
-                await EnsureShellAsync();
-                await HandleActivationAsync(activationArgs);
-                await StartupAsync();
-                _ = LogHelper.Log("ActivateAsync completed successfully");
-            }
-            catch (Exception ex)
-            {
-                _ = LogHelper.LogException(ex, "Deferred activation failed");
-            }
-        });
+            await RunDeferredActivationAsync(activationArgs);
+        }))
+        {
+            await RunDeferredActivationAsync(activationArgs);
+        }
+    }
+
+    private async Task RunDeferredActivationAsync(object activationArgs)
+    {
+        try
+        {
+            await EnsureShellAsync();
+            await HandleActivationAsync(activationArgs);
+            await StartupAsync();
+            _ = LogHelper.Log("ActivateAsync completed successfully");
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogException(ex, "Deferred activation failed");
+        }
     }
 
     private async Task EnsureShellAsync()

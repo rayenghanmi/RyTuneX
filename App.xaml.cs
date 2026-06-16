@@ -159,11 +159,41 @@ public partial class App : Application
     public static void ShowNotification(string title, string message, Microsoft.UI.Xaml.Controls.InfoBarSeverity severity, int duration) =>
         ShellPage.ShowNotification(title, message, severity, duration);
 
-    public static WindowEx MainWindow { get; } = new MainWindow();
+    private static readonly object MainWindowLock = new();
+    private static WindowEx? _mainWindow;
+
+    public static WindowEx MainWindow
+    {
+        get
+        {
+            if (_mainWindow is not null)
+            {
+                return _mainWindow;
+            }
+
+            lock (MainWindowLock)
+            {
+                return _mainWindow ??= CreateMainWindow();
+            }
+        }
+    }
 
     public static UIElement? AppTitlebar
     {
         get; set;
+    }
+
+    private static WindowEx CreateMainWindow()
+    {
+        try
+        {
+            return new MainWindow();
+        }
+        catch (Exception ex)
+        {
+            LogHelper.LogCriticalSync($"MainWindow creation failed: {ex}");
+            throw;
+        }
     }
 
     public App()
@@ -185,48 +215,67 @@ public partial class App : Application
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        // Initialize the Host when needed
-        _host ??= BuildHost();
-
-        base.OnLaunched(args);
-
-        // Apply RTL window style BEFORE title bar setup so the framework
-        // calculates caption button positions in the correct coordinate space
-        if (FlowDirectionSetting == Microsoft.UI.Xaml.FlowDirection.RightToLeft)
+        try
         {
+            // Initialize the Host when needed
+            _host ??= BuildHost();
+
+            base.OnLaunched(args);
+
+            // Apply RTL window style BEFORE title bar setup so the framework
+            // calculates caption button positions in the correct coordinate space
+            if (FlowDirectionSetting == Microsoft.UI.Xaml.FlowDirection.RightToLeft)
+            {
+                try
+                {
+                    var hwnd = WindowNative.GetWindowHandle(MainWindow);
+                    var exStyle = GetWindowLongPtr(hwnd, GWL_EXSTYLE);
+                    SetWindowLongPtr(hwnd, GWL_EXSTYLE, exStyle | WS_EX_LAYOUTRTL);
+                    SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0,
+                        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+                }
+                catch (Exception ex)
+                {
+                    _ = LogHelper.LogError($"RTL caption buttons failed: {ex.Message}");
+                }
+            }
+
+            // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
             try
             {
-                var hwnd = WindowNative.GetWindowHandle(MainWindow);
-                var exStyle = GetWindowLongPtr(hwnd, GWL_EXSTYLE);
-                SetWindowLongPtr(hwnd, GWL_EXSTYLE, exStyle | WS_EX_LAYOUTRTL);
-                SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0,
-                    SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+                MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+                MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
             }
             catch (Exception ex)
             {
-                _ = LogHelper.LogError($"RTL caption buttons failed: {ex.Message}");
+                _ = LogHelper.LogError($"TitleBar init failed: {ex}");
             }
-        }
 
-        // setting custom title bar when the app starts to prevent it from briefly show the standard titlebar
-        try
-        {
-            MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
-            MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
+            await App.GetService<IActivationService>().ActivateAsync(args);
+            StartSystemStateSync();
         }
         catch (Exception ex)
         {
-            _ = LogHelper.LogError($"TitleBar init failed: {ex}");
+            LogHelper.LogCriticalSync($"OnLaunched failed: {ex}");
+            throw;
         }
-
-        // Detect actual system state and sync to RyTuneX registry before any page loads
-        await SyncSystemStateAsync();
-
-        await App.GetService<IActivationService>().ActivateAsync(args);
     }
 
     // Fires once at launch to seed the RyTuneX registry with the real system state.
-    private static Task SyncSystemStateAsync() => Task.Run(SystemStateDetector.SyncToRegistry);
+    private static void StartSystemStateSync()
+    {
+        _ = Task.Run(() =>
+        {
+            try
+            {
+                SystemStateDetector.SyncToRegistry();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogCriticalSync($"System state sync failed: {ex}");
+            }
+        });
+    }
 
     private IHost BuildHost() => Microsoft.Extensions.Hosting.Host.
     CreateDefaultBuilder().
@@ -278,15 +327,21 @@ public partial class App : Application
             // Fallback: Read from disk only once
             _flowDirectionCache = Microsoft.UI.Xaml.FlowDirection.LeftToRight;
 
-            if (ApplicationData.Current.LocalSettings.Values.TryGetValue("SelectedLanguage", out var langObj)
-                && langObj is string lang)
+            try
             {
-                if (lang.StartsWith("ar", StringComparison.OrdinalIgnoreCase) ||
-                    lang.StartsWith("he", StringComparison.OrdinalIgnoreCase))
+                if (ApplicationData.Current.LocalSettings.Values.TryGetValue("SelectedLanguage", out var langObj)
+                    && langObj is string lang
+                    && (lang.StartsWith("ar", StringComparison.OrdinalIgnoreCase) ||
+                        lang.StartsWith("he", StringComparison.OrdinalIgnoreCase)))
                 {
                     _flowDirectionCache = Microsoft.UI.Xaml.FlowDirection.RightToLeft;
                 }
             }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogWarning($"Failed to read flow direction setting: {ex.Message}");
+            }
+
             return _flowDirectionCache.Value;
         }
     }

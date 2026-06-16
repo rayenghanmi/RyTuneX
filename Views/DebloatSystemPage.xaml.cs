@@ -436,6 +436,7 @@ public sealed partial class DebloatSystemPage : Page
                 if (uninstallString != null && !uninstallString.StartsWith("\"") && !uninstallString.EndsWith("\""))
                 {
                     uninstallString = $"\"{uninstallString}\"";
+                    await LogHelper.Log($"Quoted uninstall string for {appName}: {uninstallString}");
                 }
 
                 // Execute the uninstall command using cmd

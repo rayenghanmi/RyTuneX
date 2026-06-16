@@ -18,7 +18,15 @@ public sealed partial class MainWindow : WindowEx
     {
         InitializeComponent();
         LogHelper.Log("Initializing MainWindow");
-        AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
+        try
+        {
+            AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogWarning($"Failed to set window icon: {ex.Message}");
+        }
+
         Content = null;
         Title = "RyTuneX";
 
@@ -26,8 +34,14 @@ public sealed partial class MainWindow : WindowEx
         settings = new UISettings();
         settings.ColorValuesChanged += Settings_ColorValuesChanged;
 
-        // Set the appropriate backdrop
-        SetBackdrop();
+        try
+        {
+            SetBackdrop();
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogWarning($"Failed to set window backdrop: {ex.Message}");
+        }
 
         this.AppWindow.Closing += MainWindow_Closing;
     }
@@ -59,38 +73,60 @@ public sealed partial class MainWindow : WindowEx
                 if (xr != null)
                     dialog.XamlRoot = xr;
 
-                // Ensure dialog is shown on UI thread associated with XamlRoot
-                var tcs = new TaskCompletionSource<ContentDialogResult>();
-                dispatcherQueue.TryEnqueue(async () =>
+                ContentDialogResult result;
+                if (dispatcherQueue.HasThreadAccess)
                 {
-                    try
+                    result = await dialog.ShowAsync();
+                }
+                else
+                {
+                    var tcs = new TaskCompletionSource<ContentDialogResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+                    if (!dispatcherQueue.TryEnqueue(async () =>
                     {
-                        var r = await dialog.ShowAsync();
-                        tcs.SetResult(r);
-                    }
-                    catch (Exception ex)
+                        try
+                        {
+                            var r = await dialog.ShowAsync();
+                            tcs.TrySetResult(r);
+                        }
+                        catch (Exception ex)
+                        {
+                            tcs.TrySetException(ex);
+                        }
+                    }))
                     {
-                        tcs.SetException(ex);
+                        _ = LogHelper.LogWarning("Close dialog dispatcher enqueue failed.");
+                        return;
                     }
-                });
 
-                var result = await tcs.Task.ConfigureAwait(false);
+                    result = await tcs.Task.ConfigureAwait(false);
+                }
+
                 _ = LogHelper.Log($"Close dialog result: {result}");
                 if (result == ContentDialogResult.Primary)
                 {
                     // Run a background waiter that will close the dialog and exit when done
                     _ = Task.Run(async () =>
                     {
-                        var done = await OperationCancellationManager.WaitForPendingOperationsAsync(null);
-                        if (done)
+                        try
                         {
-                            // Mark exit requested and close on UI thread
-                            Interlocked.Exchange(ref _exitRequested, 1);
-                            dispatcherQueue.TryEnqueue(() =>
+                            var done = await OperationCancellationManager.WaitForPendingOperationsAsync(null);
+                            if (done)
                             {
-                                try { dialog.Hide(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error hiding dialog on exit: {ex.Message}"); }
-                                try { App.MainWindow.Close(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error closing window on exit: {ex.Message}"); }
-                            });
+                                // Mark exit requested and close on UI thread
+                                Interlocked.Exchange(ref _exitRequested, 1);
+                                if (!dispatcherQueue.TryEnqueue(() =>
+                                {
+                                    try { dialog.Hide(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error hiding dialog on exit: {ex.Message}"); }
+                                    try { App.MainWindow.Close(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error closing window on exit: {ex.Message}"); }
+                                }))
+                                {
+                                    _ = LogHelper.LogWarning("Deferred close dispatcher enqueue failed.");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _ = LogHelper.LogException(ex, "Deferred close failed");
                         }
                     });
                 }
@@ -100,11 +136,14 @@ public sealed partial class MainWindow : WindowEx
                     OperationCancellationManager.CancelAll();
                     // Mark exit requested immediately
                     Interlocked.Exchange(ref _exitRequested, 1);
-                    dispatcherQueue.TryEnqueue(() =>
+                    if (!dispatcherQueue.TryEnqueue(() =>
                     {
                         try { dialog.Hide(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error hiding dialog on force exit: {ex.Message}"); }
                         try { App.MainWindow.Close(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error closing window on force exit: {ex.Message}"); }
-                    });
+                    }))
+                    {
+                        _ = LogHelper.LogWarning("Force-close dispatcher enqueue failed.");
+                    }
                 }
                 else
                 {
@@ -139,9 +178,19 @@ public sealed partial class MainWindow : WindowEx
     private void Settings_ColorValuesChanged(UISettings sender, object args)
     {
         // This calls comes off-thread, hence we will need to dispatch it to current app's thread
-        dispatcherQueue.TryEnqueue(() =>
+        if (!dispatcherQueue.TryEnqueue(() =>
         {
-            TitleBarHelper.ApplySystemThemeToCaptionButtons();
-        });
+            try
+            {
+                TitleBarHelper.ApplySystemThemeToCaptionButtons();
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogWarning($"Failed to apply caption button colors: {ex.Message}");
+            }
+        }))
+        {
+            _ = LogHelper.LogWarning("Caption button dispatcher enqueue failed.");
+        }
     }
 }

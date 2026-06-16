@@ -1,4 +1,3 @@
-﻿using Microsoft.Management.Deployment;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -26,12 +25,7 @@ public sealed partial class PackagesPage : Page
     private readonly List<InstalledPackageEntry> _installedSnapshot = new();
 
     private CancellationTokenSource _cts = new();
-    private PackageManager? _packageManager;
-    private PackageCatalog? _wingetCatalog;
-    private PackageCatalog? _localCatalog;
-
     private bool? _isWingetAvailable;
-    private bool _useWingetCom;
     private bool _isUpdatesMode;
     private bool _isLoading;
     private bool _suppressSearch;
@@ -65,8 +59,6 @@ public sealed partial class PackagesPage : Page
         try { old.Cancel(); } catch { }
         old.Dispose();
 
-        _wingetCatalog = null;
-        _localCatalog = null;
         _isWingetAvailable = null;
         _isUpdatesMode = false;
         _updateablePackages.Clear();
@@ -104,26 +96,13 @@ public sealed partial class PackagesPage : Page
                 return;
             }
 
-            PackageCatalog? catalog = null;
-            if (_useWingetCom)
-            {
-                catalog = await EnsureWingetCatalogAsync();
-                if (catalog is null)
-                {
-                    SetErrorState("Could not connect to the winget source.");
-                    return;
-                }
-            }
-
             _allPackages.Clear();
             PackageList.Clear();
             LoadingState.Visibility = Visibility.Visible;
             PackagesGridView.Visibility = Visibility.Collapsed;
 
             var installedMap = await GetInstalledPackagesMapAsync();
-            var discovered = _useWingetCom && catalog is not null
-                ? await DiscoverPackagesAsync(catalog)
-                : await DiscoverPackagesFromWingetCliAsync();
+            var discovered = await DiscoverPackagesFromWingetCliAsync();
 
             if (discovered.Count < 200)
             {
@@ -564,17 +543,6 @@ public sealed partial class PackagesPage : Page
                 return false;
             }
 
-            _useWingetCom = string.Equals(
-                Environment.GetEnvironmentVariable("RYTUNEX_USE_WINGET_COM"),
-                "1",
-                StringComparison.OrdinalIgnoreCase);
-
-            if (_useWingetCom)
-            {
-                _isWingetAvailable = await EnsureWingetCatalogAsync() is not null;
-                return _isWingetAvailable.Value;
-            }
-
             _isWingetAvailable = true;
             return true;
         }
@@ -610,40 +578,6 @@ public sealed partial class PackagesPage : Page
         _ = await stdErr;
 
         return process.ExitCode == 0;
-    }
-
-    private async Task<List<DiscoveredPackageEntry>> DiscoverPackagesAsync(PackageCatalog catalog)
-    {
-        try
-        {
-            var packages = new List<DiscoveredPackageEntry>();
-            var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            // Winget's API treats ResultLimit = 0 as "use default server limit". To remove the limit, use a massive number.
-            var result = await catalog.FindPackagesAsync(new FindPackagesOptions { ResultLimit = int.MaxValue });
-
-            foreach (var match in result.Matches)
-            {
-                var cp = match.CatalogPackage;
-                var id = cp.Id?.Trim() ?? string.Empty;
-                if (string.IsNullOrWhiteSpace(id) || !seen.Add(id)) continue;
-                var name = string.IsNullOrWhiteSpace(cp.Name) ? FormatPackageName(id) : cp.Name;
-                var ver = cp.AvailableVersions.FirstOrDefault()?.Version;
-                packages.Add(new DiscoveredPackageEntry(id, name, string.IsNullOrWhiteSpace(ver) ? "N/A" : ver));
-            }
-
-            return packages;
-        }
-        catch (OperationCanceledException) { throw; }
-        catch (Exception ex) when (ex.Message.Contains("No such interface supported", StringComparison.OrdinalIgnoreCase))
-        {
-            await LogHelper.LogWarning($"COM catalog unavailable, falling back to CLI. {ex.Message}");
-            return await DiscoverPackagesFromWingetCliAsync();
-        }
-        catch (Exception ex)
-        {
-            await LogHelper.LogError($"Package discovery failed: {ex.Message}");
-            return [];
-        }
     }
 
     private async Task<List<DiscoveredPackageEntry>> DiscoverPackagesFromWingetCliAsync()
@@ -744,91 +678,13 @@ public sealed partial class PackagesPage : Page
         return packages;
     }
 
-    // Catalog connections
-    private async Task<PackageCatalog?> EnsureWingetCatalogAsync()
-    {
-        if (!_useWingetCom) return null;
-        if (_wingetCatalog is not null) return _wingetCatalog;
-        try
-        {
-            var src = await Task.Run(() =>
-            {
-                _packageManager ??= new PackageManager();
-                return _packageManager.GetPackageCatalogByName("winget");
-            });
-            src.AcceptSourceAgreements = true;
-            var r = await Task.Run(() => src.ConnectAsync().AsTask());
-            if (r.Status == ConnectResultStatus.Ok) { _wingetCatalog = r.PackageCatalog; return _wingetCatalog; }
-            await LogHelper.LogWarning($"Winget source failed: {r.Status}");
-        }
-        catch (Exception ex) { await LogHelper.LogError($"Winget connect error: {ex.Message}"); }
-        return null;
-    }
-
-    private async Task<PackageCatalog?> EnsureLocalCatalogAsync()
-    {
-        if (!_useWingetCom) return null;
-        if (_localCatalog is not null) return _localCatalog;
-        try
-        {
-            var src = await Task.Run(() =>
-            {
-                _packageManager ??= new PackageManager();
-                return _packageManager.GetLocalPackageCatalog(LocalPackageCatalog.InstalledPackages);
-            });
-            var r = await Task.Run(() => src.ConnectAsync().AsTask());
-            if (r.Status == ConnectResultStatus.Ok) { _localCatalog = r.PackageCatalog; return _localCatalog; }
-            await LogHelper.LogWarning($"Local catalog failed: {r.Status}");
-        }
-        catch (Exception ex) { await LogHelper.LogError($"Local catalog connect error: {ex.Message}"); }
-        return null;
-    }
-
     // Installed detection
     private async Task<Dictionary<string, (string Name, string Version)>> GetInstalledPackagesMapAsync()
     {
         var result = new Dictionary<string, (string Name, string Version)>(StringComparer.OrdinalIgnoreCase);
         _installedSnapshot.Clear();
 
-        if (!_useWingetCom)
-        {
-            await PopulateInstalledMapFallbackAsync(result);
-            return result;
-        }
-
-        try
-        {
-            var local = await EnsureLocalCatalogAsync();
-            if (local is null) return result;
-
-            foreach (var match in (await local.FindPackagesAsync(new FindPackagesOptions())).Matches)
-            {
-                var ip = match.CatalogPackage;
-                var ver = ip.InstalledVersion?.Version ?? ip.AvailableVersions.FirstOrDefault()?.Version ?? string.Empty;
-                var iid = ip.Id ?? string.Empty;
-                var iname = ip.Name ?? string.Empty;
-
-                _installedSnapshot.Add(new InstalledPackageEntry(
-                    iid, iname, ver, NormalizeLookupKey(iid), NormalizeLookupKey(iname)));
-
-                if (!string.IsNullOrWhiteSpace(iid))
-                {
-                    result[iid] = (iname, ver);
-                    foreach (var key in GetLookupKeys(iid, iname))
-                        result.TryAdd(key, (iname, ver));
-                }
-                if (!string.IsNullOrWhiteSpace(iname))
-                    result.TryAdd(NormalizeLookupKey(iname), (iname, ver));
-            }
-        }
-        catch (OperationCanceledException) { throw; }
-        catch (Exception ex)
-        {
-            await LogHelper.LogWarning($"Local catalog query failed: {ex.Message}");
-            if (ex.Message.Contains("No such interface supported", StringComparison.OrdinalIgnoreCase))
-                await PopulateInstalledMapFallbackAsync(result);
-        }
-
+        await PopulateInstalledMapFallbackAsync(result);
         return result;
     }
 
