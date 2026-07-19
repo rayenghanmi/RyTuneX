@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>啟用遊戲模式, 可優化系統資源以獲得更流暢的遊戲體驗.  可能會影響後臺程序. </value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>啟用全螢幕最佳化</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>允許 Windows 使用其全螢幕最佳化功能執行遊戲。僅在需要獨佔全螢幕模式的遊戲中停用此選項。</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>GPU 驅動程式效能最佳化</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>套用 AMD、NVIDIA 與 Intel 的登錄檔最佳化，以減少 GPU 電源狀態切換與顯示延遲。</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>從 Windows 更新中排除驅動程式</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>調整系統等待觸發懸停事件的時間. 禁用此功能可能加速互動, 但可能導致無意的啟用. </value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>最佳化鍵盤延遲</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>將鍵盤重複延遲設為最低，並將重複速度維持在最高，以獲得更快的輸入回應。</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>停用滑鼠加速</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>關閉 Windows 滑鼠指標加速，讓滑鼠移動在遊戲和精準操作中保持一致。</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>禁用自動完成</value>
@@ -1415,6 +1439,18 @@
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>新增極致效能計畫</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>停用 USB 節能</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>停用 USB 選擇性暫停與 USB 根集線器節能功能，以降低遊戲期間控制器的喚醒延遲。</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>停用電源限制</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>關閉 Windows 電源限制與 USB 節能恢復機制，讓前景應用程式保持快速回應。</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>新增極致效能計畫</value>
   </data>
@@ -1669,5 +1705,17 @@
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>正在載入...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>製造商</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>專用顯示記憶體</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>共用記憶體</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>類型</value>
   </data>
 </root>

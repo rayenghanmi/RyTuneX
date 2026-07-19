@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>מאפשר מצב משחק, הממטב את משאבי המערכת לחוויית משחק חלקה יותר. עשוי להשפיע על תהליכי רקע.</value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>הפעלת מיטוב מסך מלא</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>מאפשר ל-Windows להשתמש במסלול מיטוב המסך המלא עבור משחקים. השבת אפשרות זו רק עבור משחקים שדורשים מצב מסך מלא בלעדי.</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>שיפורי ביצועים למנהל ההתקן של ה-GPU</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>מחיל שינויים ברישום עבור AMD, NVIDIA ו-Intel כדי להפחית את המעבר בין מצבי צריכת החשמל של ה-GPU ואת השהיית התצוגה.</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>מנע עדכון מנהלי התקנים מ-Windows Updates</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>מתאים את הזמן שהמערכת ממתינה לפני הפעלת אירוע ריחוף. השבתה זו עשויה להאיץ אינטראקציות אך עלולה להוביל להפעלות לא מכוונות.</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>מיטוב זמן התגובה של המקלדת</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>מגדיר את השהיית החזרה של המקלדת לערך הנמוך ביותר ושומר על מהירות החזרה במקסימום לקבלת תגובת קלט מהירה יותר.</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>השבתת האצת העכבר</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>מבטל את האצת הסמן של Windows כדי שתנועת העכבר תישאר עקבית למשחקים ולשימוש מדויק.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>השבת השלמה אוטומטית</value>
@@ -1419,6 +1443,18 @@
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>הוספת תוכנית ביצועים מרביים</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>השבתת חיסכון בחשמל של USB</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>מבטל את ההשעיה הסלקטיבית של USB ואת חיסכון החשמל של רכזות ה-USB הראשיות כדי להפחית את זמן ההתעוררות של הבקר בזמן משחקים.</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>השבתת הגבלת צריכת החשמל</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>מבטל את הגבלת צריכת החשמל של Windows ואת מנגנון שחזור צריכת החשמל של USB כדי שיישומים בחזית יישארו מהירים ותגובתיים.</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>הוספת תוכנית ביצועים מרביים</value>
   </data>
@@ -1673,5 +1709,17 @@
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>טוען...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>יצרן</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>זיכרון VRAM ייעודי</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>זיכרון משותף</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>סוג</value>
   </data>
 </root>

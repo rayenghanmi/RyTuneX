@@ -25,7 +25,7 @@
     <WindowsPackageType>MSIX</WindowsPackageType>
     <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <Version>1.7.0</Version>
+    <Version>1.7.1</Version>
     <Authors>Rayen Ghanmi</Authors>
     <GenerateTestArtifacts>False</GenerateTestArtifacts>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
@@ -70,7 +70,9 @@
       <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260317003" />
       <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.5" />
       <PackageReference Include="System.Drawing.Common" Version="10.0.5" />
+      <PackageReference Include="System.Management" Version="10.0.10" />
       <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.5" />
+      <PackageReference Include="Vortice.DXGI" Version="3.8.3" />
       <PackageReference Include="WinUIEx" Version="2.9.0" />
   </ItemGroup>
   

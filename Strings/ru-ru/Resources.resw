@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>Включает игровой режим, который оптимизирует ресурсы системы для более плавного игрового опыта. Может повлиять на фоновые процессы.</value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>Включить оптимизацию полноэкранного режима</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>Позволяет Windows использовать оптимизацию полноэкранного режима для игр. Отключайте этот параметр только для игр, которым требуется эксклюзивный полноэкранный режим.</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>Оптимизация производительности драйвера GPU</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>Применяет изменения реестра для AMD, NVIDIA и Intel, чтобы уменьшить переключение состояний питания GPU и задержку вывода изображения.</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>Исключить драйвера из обновлений Windows</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>Регулирует время ожидания перед активацией события наведения мыши. Отключение этого может ускорить взаимодействие, но приведет к непреднамеренным активациям.</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>Оптимизировать задержку клавиатуры</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>Устанавливает минимальную задержку повтора клавиатуры и максимальную скорость повтора для более быстрого отклика при вводе.</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>Отключить ускорение мыши</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>Отключает ускорение указателя Windows, чтобы движение мыши оставалось стабильным в играх и при точном управлении.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>Отключить автозаполнение</value>
@@ -1416,6 +1440,18 @@
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>Добавить план максимальной производительности</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>Отключить энергосбережение USB</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>Отключает выборочную приостановку USB и энергосбережение корневых USB-концентраторов, чтобы уменьшить задержку пробуждения контроллера во время игр.</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>Отключить ограничение энергопотребления</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>Отключает ограничение энергопотребления Windows и механизм восстановления энергосбережения USB, чтобы активные приложения оставались отзывчивыми.</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Добавить план максимальной производительности</value>
   </data>
@@ -1670,5 +1706,17 @@
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>Загрузка...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Производитель</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>Выделенная видеопамять (VRAM)</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>Общая память</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Тип</value>
   </data>
 </root>

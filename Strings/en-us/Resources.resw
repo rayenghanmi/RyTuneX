@@ -1710,4 +1710,16 @@ Check your computer for memory problems</value>
   <data name="Loading.Text" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Vendor</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>Dedicated VRAM</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>Shared Memory</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
 </root>

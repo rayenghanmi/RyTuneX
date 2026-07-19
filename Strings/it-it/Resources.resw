@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>Abilita la modalità di gioco, che ottimizza le risorse di sistema per un'esperienza di gioco più fluida. Potrebbe influire sui processi in background.</value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>Attiva le ottimizzazioni a schermo intero</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>Consente a Windows di utilizzare il percorso di ottimizzazione a schermo intero per i giochi. Disattiva questa opzione solo per i giochi che richiedono la modalità a schermo intero esclusiva.</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>Ottimizzazioni delle prestazioni del driver GPU</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>Applica modifiche al registro per GPU AMD, NVIDIA e Intel per ridurre i cambi di stato energetico della GPU e la latenza del display.</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>Escludi driver da Windows Update</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>Regola il tempo di attesa del sistema prima di attivare un evento di passaggio del mouse. Disabilitare questa funzione può velocizzare le interazioni ma può portare ad attivazioni involontarie.</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>Ottimizza la latenza della tastiera</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>Imposta il ritardo di ripetizione della tastiera al valore minimo e mantiene la velocità di ripetizione al massimo per un input più reattivo.</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>Disattiva l'accelerazione del mouse</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>Disattiva l'accelerazione del puntatore di Windows per mantenere un movimento del mouse costante nei giochi e nelle attività che richiedono precisione.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>Disabilita il completamento automatico</value>
@@ -1419,6 +1443,18 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>Aggiungi piano Prestazioni elevate</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>Disattiva il risparmio energetico USB</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>Disattiva la sospensione selettiva USB e il risparmio energetico degli hub USB principali per ridurre la latenza di riattivazione del controller durante il gioco.</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>Disattiva la limitazione energetica</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>Disattiva la limitazione energetica di Windows e il comportamento di ripristino del risparmio energetico USB per mantenere reattive le applicazioni in primo piano.</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Aggiungi piano Prestazioni elevate</value>
   </data>
@@ -1673,5 +1709,17 @@ Controlla se il computer presenta problemi di memoria</value>
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>Caricamento...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Produttore</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>VRAM dedicata</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>Memoria condivisa</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tipo</value>
   </data>
 </root>

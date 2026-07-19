@@ -3,6 +3,29 @@
 All notable changes to this branch will be documented in this file.
 
 
+## 1.7.1 - Unreleased
+
+### Added
+
+- Introduced new optimization toggles:
+  - `Disable Usb PowerSaving`
+  - `Disable Power Throttling`
+  - `Disable Keyboard Latency`
+  - `Disable Mouse Acceleration`
+  - `Enable Fullscreen Optimizations`
+  - `Gpu Driver Tweaks`
+
+### Fixes
+
+- Fixed broken dark/light theme in `SystemInfo` page #97.
+- Resolved numerous reported crashes from older versions.
+- Fixed text encoding problems in the Repair scanning results #99.
+
+### Changes
+
+- Prevented Quick Access History and Task View settings from interfering with each other #103.
+- Replaced legacy APIs with modern Windows methods in `SystemInfo` page to prevent incorrect behavior #105.
+
 ## 1.7.0 - Released
 
 ### Added

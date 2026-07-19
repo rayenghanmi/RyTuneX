@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>Habilita o modo de jogo, que otimiza os recursos do sistema para uma experiência de jogo mais suave. Pode afetar processos em segundo plano.</value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>Ativar otimizações de tela inteira</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>Permite que o Windows use a otimização de tela inteira para jogos. Desative esta opção apenas para jogos que exigem o modo de tela inteira exclusivo.</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>Otimizações de desempenho do driver da GPU</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>Aplica ajustes no Registro para AMD, NVIDIA e Intel a fim de reduzir a troca de estados de energia da GPU e a latência da tela.</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>Excluir drivers das atualizações do Windows</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>Ajusta o tempo que o sistema espera antes de disparar um evento de foco. Desabilitar isso pode acelerar as interações, mas pode levar a ativações não intencionais.</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>Otimizar a latência do teclado</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>Define o atraso de repetição do teclado para o menor valor e mantém a velocidade de repetição no máximo para uma entrada mais responsiva.</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>Desativar aceleração do mouse</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>Desativa a aceleração do ponteiro do Windows para manter o movimento do mouse consistente em jogos e entradas de precisão.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>Desabilitar preenchimento automático</value>
@@ -1419,6 +1443,18 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>Adicionar plano de desempenho máximo</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>Desativar economia de energia USB</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>Desativa a suspensão seletiva de USB e a economia de energia dos hubs raiz USB para reduzir a latência de ativação do controlador durante os jogos.</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>Desativar limitação de energia</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>Desativa a limitação de energia do Windows e o comportamento de recuperação de economia de energia do USB para manter os aplicativos em primeiro plano responsivos.</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Adicionar plano de desempenho máximo</value>
   </data>
@@ -1673,5 +1709,17 @@ Verifique se há problemas de memória em seu computador</value>
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>Carregando...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Fabricante</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>VRAM dedicada</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>Memória compartilhada</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tipo</value>
   </data>
 </root>

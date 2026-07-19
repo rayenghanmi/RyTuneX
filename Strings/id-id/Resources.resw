@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>Mengaktifkan Gaming Mode, yang mengoptimalkan sumber daya sistem untuk pengalaman bermain game yang lebih lancar. Mungkin memengaruhi proses di latar belakang.</value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>Aktifkan Optimasi Layar Penuh</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>Memungkinkan Windows menggunakan jalur optimasi layar penuh untuk game. Nonaktifkan opsi ini hanya untuk game yang memerlukan mode layar penuh eksklusif.</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>Penyesuaian Performa Driver GPU</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>Menerapkan penyesuaian registri untuk AMD, NVIDIA, dan Intel guna mengurangi perpindahan status daya GPU serta latensi tampilan.</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>Kecualikan Driver Dari Pembaruan Windows</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>Menyesuaikan waktu tunggu sistem sebelum memicu kejadian hover. Menonaktifkan ini mungkin mempercepat interaksi tetapi dapat menyebabkan aktivasi yang tidak disengaja.</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>Optimalkan Latensi Keyboard</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>Mengatur jeda pengulangan keyboard ke nilai terendah dan mempertahankan kecepatan pengulangan pada maksimum agar input lebih responsif.</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>Nonaktifkan Akselerasi Mouse</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>Menonaktifkan akselerasi penunjuk Windows agar pergerakan mouse tetap konsisten untuk bermain game dan input presisi.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>Nonaktifkan Pelengkapan Otomatis</value>
@@ -1417,6 +1441,18 @@
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>Tambahkan Paket Daya Ultimate Performance</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>Nonaktifkan Penghematan Daya USB</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>Menonaktifkan USB Selective Suspend dan penghematan daya USB Root Hub untuk mengurangi latensi aktif kembali pengontrol saat bermain game.</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>Nonaktifkan Pembatasan Daya</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>Menonaktifkan pembatasan daya Windows dan perilaku pemulihan hemat daya USB agar aplikasi di latar depan tetap responsif.</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Tambahkan Paket Daya Ultimate Performance</value>
   </data>
@@ -1671,5 +1707,17 @@
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>Memuat...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Produsen</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>VRAM khusus</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>Memori Bersama</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Jenis</value>
   </data>
 </root>

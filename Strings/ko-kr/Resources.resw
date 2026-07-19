@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>더욱 원활한 게임 환경을 위해 시스템 리소스를 최적화하는 게임 모드를 활성화합니다. 백그라운드 프로세스에 영향을 미칠 수 있습니다.</value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>전체 화면 최적화 활성화</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>Windows가 게임에 전체 화면 최적화를 사용하도록 합니다. 독점 전체 화면 모드가 필요한 게임에서만 이 옵션을 비활성화하세요.</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>GPU 드라이버 성능 최적화</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>AMD, NVIDIA 및 Intel용 레지스트리 조정을 적용하여 GPU 전원 상태 전환과 디스플레이 지연 시간을 줄입니다.</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>Windows 업데이트에서 드라이버 제외</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>호버 이벤트를 트리거하기 전에 시스템이 대기하는 시간을 조정합니다. 이 기능을 비활성화하면 상호 작용 속도가 빨라질 수 있지만 의도치 않은 활성화로 이어질 수 있습니다.</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>키보드 지연 시간 최적화</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>키보드 반복 지연을 최소로 설정하고 반복 속도를 최대로 유지하여 입력 반응성을 높입니다.</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>마우스 가속 비활성화</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>게임과 정밀한 입력을 위해 Windows 포인터 가속을 비활성화하여 마우스 움직임을 일정하게 유지합니다.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>자동 완성 비활성화</value>
@@ -1419,6 +1443,18 @@
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>최고 성능 전원 계획 추가</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>USB 절전 기능 비활성화</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>USB 선택적 절전과 USB 루트 허브 절전 기능을 비활성화하여 게임 중 컨트롤러의 절전 해제 지연을 줄입니다.</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>전원 스로틀링 비활성화</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>Windows 전원 스로틀링과 USB 절전 복구 동작을 비활성화하여 전면에서 실행 중인 작업의 응답성을 유지합니다.</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>최고 성능 전원 계획 추가</value>
   </data>
@@ -1673,5 +1709,17 @@
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>로딩 중...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>제조사</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>전용 VRAM</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>공유 메모리</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>유형</value>
   </data>
 </root>

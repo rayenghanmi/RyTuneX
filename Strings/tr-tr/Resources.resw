@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>Daha akıcı bir oyun deneyimi için sistem kaynaklarını optimize eden Oyun Modunu etkinleştirir. Arka plan işlemlerini etkileyebilir.</value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>Tam ekran optimizasyonlarını etkinleştir</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>Windows'un oyunlar için tam ekran optimizasyonunu kullanmasını sağlar. Bu seçeneği yalnızca özel tam ekran moduna ihtiyaç duyan oyunlar için devre dışı bırakın.</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>GPU sürücüsü performans optimizasyonları</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>GPU güç durumu geçişlerini ve ekran gecikmesini azaltmak için AMD, NVIDIA ve Intel kayıt defteri ayarlarını uygular.</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>Sürücüleri Windows Güncelleştirmelerinden Hariç Tut</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>Sistemin bir gezinme olayını tetiklemeden önce beklediği süreyi ayarlar. Bunu devre dışı bırakmak etkileşimleri hızlandırabilir ancak istem dışı etkinleştirmelere yol açabilir.</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>Klavye gecikmesini optimize et</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>Daha hızlı giriş tepkisi için klavye tekrar gecikmesini en düşük değere, tekrar hızını ise en yüksek değere ayarlar.</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>Fare hızlandırmasını devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>Oyunlar ve hassas kullanım için fare hareketinin tutarlı kalmasını sağlamak amacıyla Windows işaretçi hızlandırmasını kapatır.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>Otomatik Tamamlamayı Devre Dışı Bırak</value>
@@ -1419,6 +1443,18 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>En Yüksek Performans Planını Ekle</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>USB güç tasarrufunu devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>Oyun sırasında denetleyicinin uyanma gecikmesini azaltmak için USB seçmeli askıya alma ve USB kök hub güç tasarrufunu devre dışı bırakır.</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>Güç kısıtlamasını devre dışı bırak</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>Windows güç kısıtlamasını ve USB güç tasarrufu kurtarma davranışını devre dışı bırakarak ön plandaki uygulamaların daha hızlı tepki vermesini sağlar.</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>En Yüksek Performans Planını Ekle</value>
   </data>
@@ -1673,5 +1709,17 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>Yükleniyor...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Üretici</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>Ayrılmış VRAM</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>Paylaşılan Bellek</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tür</value>
   </data>
 </root>

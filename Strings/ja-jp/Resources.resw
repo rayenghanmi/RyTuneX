@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>システムリソースを最適化してスムーズなゲーム体験を提供するゲームモードを有効にします. バックグラウンドプロセスに影響を与える可能性があります. </value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>全画面最適化を有効化</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>Windows がゲーム向けの全画面最適化を使用できるようにします。排他的フルスクリーンが必要なゲームでのみ、このオプションを無効にしてください。</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>GPUドライバーのパフォーマンス最適化</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>AMD、NVIDIA、Intel向けのレジストリ調整を適用し、GPUの電力状態切り替えと表示遅延を軽減します。</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>Windowsアップデートからドライバーを除外</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>システムがホバーイベントをトリガーするまでの時間を調整します. これを無効にすると、インタラクションが速くなりますが、意図しないアクティベーションが発生する可能性があります. </value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>キーボード遅延を最適化</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>キーボードのキーリピート開始時間を最短に設定し、リピート速度を最大にして入力の応答性を向上させます。</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>マウス加速を無効化</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>Windowsのポインター加速を無効にし、ゲームや精密な操作でもマウスの動きを一定に保ちます。</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>自動補完の無効化</value>
@@ -1419,6 +1443,18 @@
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>究極のパフォーマンスプランを追加</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>USB省電力機能を無効化</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>USB セレクティブ サスペンドと USB ルートハブの省電力機能を無効にし、ゲーム中のコントローラーの復帰遅延を低減します。</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>電力スロットリングを無効化</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>Windows の電力スロットリングと USB の省電力復帰動作を無効にし、フォアグラウンドのアプリケーションの応答性を維持します。</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>究極のパフォーマンスプランを追加</value>
   </data>
@@ -1673,5 +1709,17 @@
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>読み込み中...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>メーカー</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>専用VRAM</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>共有メモリ</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>種類</value>
   </data>
 </root>

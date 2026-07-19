@@ -522,6 +522,18 @@
   <data name="Feature_EnableGamingMode.Description" xml:space="preserve">
     <value>Aktiviert den Gaming-Modus, welcher Systemressourcen für ein flüssigeres Spielerlebnis optimiert. Kann Hintergrundprozesse beeinflussen.</value>
   </data>
+  <data name="Feature_EnableFullscreenOptimizations.Header" xml:space="preserve">
+    <value>Vollbildoptimierungen aktivieren</value>
+  </data>
+  <data name="Feature_EnableFullscreenOptimizations.Description" xml:space="preserve">
+    <value>Ermöglicht Windows, den Vollbildoptimierungspfad für Spiele zu verwenden. Deaktiviere diese Option nur bei Spielen, die exklusiven Vollbildmodus benötigen.</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Header" xml:space="preserve">
+    <value>Leistungsoptimierungen für GPU-Treiber</value>
+  </data>
+  <data name="Feature_GpuDriverTweaks.Description" xml:space="preserve">
+    <value>Wendet Registry-Optimierungen für AMD-, NVIDIA- und Intel-Grafikkarten an, um das Umschalten der GPU-Energiezustände und die Anzeigelatenz zu reduzieren.</value>
+  </data>
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Header" xml:space="preserve">
     <value>Treiber von Windows-Updates ausschließen</value>
   </data>
@@ -965,6 +977,18 @@
   </data>
   <data name="Feature_MouseHoverTime.Description" xml:space="preserve">
     <value>Passt die Zeit an, die das System wartet, bevor ein Hover-Ereignis ausgelöst wird. Das Deaktivieren kann Interaktionen beschleunigen, jedoch zu unbeabsichtigten Aktivierungen führen.</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Header" xml:space="preserve">
+    <value>Tastaturlatenz optimieren</value>
+  </data>
+  <data name="Feature_KeyboardLatency.Description" xml:space="preserve">
+    <value>Stellt die Tastatur-Wiederholungsverzögerung auf den niedrigsten Wert und die Wiederholgeschwindigkeit auf das Maximum, um eine schnellere Eingabe zu ermöglichen.</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Header" xml:space="preserve">
+    <value>Mausbeschleunigung deaktivieren</value>
+  </data>
+  <data name="Feature_DisableMouseAcceleration.Description" xml:space="preserve">
+    <value>Deaktiviert die Windows-Zeigerbeschleunigung, damit die Mausbewegung für Spiele und präzise Eingaben konstant bleibt.</value>
   </data>
   <data name="Feature_AutoComplete.Header" xml:space="preserve">
     <value>Automatische Vervollständigung deaktivieren</value>
@@ -1419,6 +1443,18 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="Feature_AddUltimatePowerPlan.Header" xml:space="preserve">
     <value>Ultimativen Leistungsplan hinzufügen</value>
   </data>
+  <data name="Feature_DisableUsbPowerSaving.Header" xml:space="preserve">
+    <value>USB-Energiesparen deaktivieren</value>
+  </data>
+  <data name="Feature_DisableUsbPowerSaving.Description" xml:space="preserve">
+    <value>Deaktiviert das selektive USB-Energiesparen und die Energieverwaltung der USB-Root-Hubs, um die Aufwecklatenz des Controllers beim Spielen zu verringern.</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Header" xml:space="preserve">
+    <value>Energiedrosselung deaktivieren</value>
+  </data>
+  <data name="Feature_DisablePowerThrottling.Description" xml:space="preserve">
+    <value>Deaktiviert die Windows-Energiedrosselung und das USB-Energieverwaltungsverhalten, damit aktive Anwendungen reaktionsschnell bleiben.</value>
+  </data>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Ultimativen Leistungsplan hinzufügen</value>
   </data>
@@ -1615,7 +1651,7 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
     <value>Standard</value>
   </data>
   <data name="ScanResults" xml:space="preserve">
-    <value>Scan-Ergebnisse</value>
+    <value>Scanergebnisse</value>
   </data>
   <data name="MicrosoftAccount" xml:space="preserve">
     <value>Microsoft-Konto</value>
@@ -1673,5 +1709,17 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>Wird geladen...</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Hersteller</value>
+  </data>
+  <data name="DedicatedVRAM" xml:space="preserve">
+    <value>Dedizierter VRAM</value>
+  </data>
+  <data name="SharedMemory" xml:space="preserve">
+    <value>Gemeinsam genutzter Speicher</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Typ</value>
   </data>
 </root>
