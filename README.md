@@ -113,9 +113,9 @@ RyTuneX is built on a modern Windows development stack, leveraging a layered arc
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/5aea5d7e-a4af-44ae-bab0-a1ba4f7ef37e" />
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/6cb4fbfa-e388-4cc3-b485-97c7cc64b64d" />
-    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/5aea5d7e-a4af-44ae-bab0-a1ba4f7ef37e" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/eb20b786-fc3c-4cc4-85d5-76080274eed4" />
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/9d428917-90e2-4de1-948d-ec87dde7f098" />
+    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/eb20b786-fc3c-4cc4-85d5-76080274eed4" />
   </picture>
   <p><em>RyTuneX - Clean, Modern, and Intuitive Interface</em></p>
 </div>
