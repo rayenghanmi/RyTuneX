@@ -35,21 +35,6 @@ public sealed partial class ShellPage : Page
         TitleBarBackButton.Resources["ButtonBackgroundDisabled"] = new SolidColorBrush(Colors.Transparent);
         TitleBarBackButton.Resources["ButtonBorderBrushDisabled"] = new SolidColorBrush(Colors.Transparent);
 
-        // Set corresponding visibility of Admin Icon based on administrator rights
-        this.Loaded += (s, e) =>
-        {
-            _ = Task.Run(() =>
-            {
-                var identity = WindowsIdentity.GetCurrent();
-                var principal = new WindowsPrincipal(identity);
-                var admin = principal.IsInRole(WindowsBuiltInRole.Administrator);
-
-                {
-                    _ = LogHelper.LogWarning("Admin status dispatcher enqueue failed.");
-                }
-            });
-        };
-
         Current = this;
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;

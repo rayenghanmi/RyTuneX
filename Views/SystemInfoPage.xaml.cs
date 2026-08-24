@@ -314,7 +314,7 @@ public sealed partial class SystemInfoPage : Page
 
                 try
                 {
-                    var factoryResult = DXGI.CreateDXGIFactory1(out IDXGIFactory1 factory);
+                    var factoryResult = DXGI.CreateDXGIFactory1(out IDXGIFactory1? factory);
                     if (factoryResult.Failure || factory == null)
                     {
                         _ = LogHelper.LogError($"DXGI: CreateDXGIFactory1 failed with HRESULT {factoryResult.Code:X8}");
@@ -325,7 +325,7 @@ public sealed partial class SystemInfoPage : Page
                         {
                             for (uint i = 0; ; i++)
                             {
-                                var result = factory.EnumAdapters1(i, out IDXGIAdapter1 adapter);
+                                var result = factory.EnumAdapters1(i, out IDXGIAdapter1? adapter);
                                 if (result.Failure || adapter == null) break;
 
                                 using (adapter)

@@ -32,7 +32,7 @@ All notable changes to this branch will be documented in this file.
 - Replaced legacy APIs with modern Windows methods in `SystemInfo` page to prevent incorrect behavior #105.
 - Reworked the Debloat logic to use the native Windows Deployment API instead of Powershell for app detection and removal.
 - All UI strings are now fully localized across all supported languages.
-- Replaced the 3 checkboxes in the `Repair` page with a single workflow for an enhanceed UX.
+- Replaced the 3 checkboxes in the `Repair` page with a single workflow for an enhanced UX.
 
 ## 1.7.0 - Released
 
