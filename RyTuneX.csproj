@@ -24,7 +24,7 @@
     <WindowsPackageType>MSIX</WindowsPackageType>
     <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <Version>1.7.1</Version>
+    <Version>1.7.2</Version>
     <Authors>Rayen Ghanmi</Authors>
     <GenerateTestArtifacts>False</GenerateTestArtifacts>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>

@@ -211,7 +211,9 @@ public sealed partial class DebloatSystemPage : Page
 
         try
         {
-            var totalApps = appListView.SelectedItems.Count;
+            // Snapshot selected items before starting
+            var selectedApps = appListView.SelectedItems.OfType<AppInfo>().ToList();
+            var totalApps = selectedApps.Count;
             var completedApps = 0;
 
             // Initialize status bar
@@ -222,7 +224,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallingStatusBar.Opacity = 1;
             });
 
-            foreach (var appInfo in appListView.SelectedItems.OfType<AppInfo>())
+            foreach (var appInfo in selectedApps)
             {
                 var selectedAppName = appInfo.Name;
 

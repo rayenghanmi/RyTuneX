@@ -96,17 +96,23 @@ internal partial class OptimizationOptions
         var defaultPath = Path.Combine(IconCacheDirectory, "defaulticon.png");
         if (File.Exists(defaultPath) && new FileInfo(defaultPath).Length > 0)
             return;
-
-        var largeIcons = new IntPtr[1];
-        ExtractIconEx(@"C:\Windows\System32\imageres.dll", 152, largeIcons, null, 1);
-        var hIcon = largeIcons[0];
-        if (hIcon != IntPtr.Zero)
+        try
         {
-            using var clonedIcon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(hIcon).Clone();
-            DestroyIcon(hIcon);
+            var largeIcons = new IntPtr[1];
+            ExtractIconEx(@"C:\Windows\System32\imageres.dll", 152, largeIcons, null, 1);
+            var hIcon = largeIcons[0];
+            if (hIcon != IntPtr.Zero)
+            {
+                using var clonedIcon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(hIcon).Clone();
+                DestroyIcon(hIcon);
 
-            using var bmp = clonedIcon.ToBitmap();
-            bmp.Save(defaultPath, ImageFormat.Png);
+                using var bmp = clonedIcon.ToBitmap();
+                bmp.Save(defaultPath, ImageFormat.Png);
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogWarning($"Failed to extract default icon: {ex.Message}");
         }
     }
 
@@ -439,6 +445,8 @@ internal partial class OptimizationOptions
             {
                 searchPattern = searchPattern.Split('_')[0];
             }
+            // Sanitize for PowerShell single-quoted strings
+            searchPattern = searchPattern.Replace("'", "''");
 
             var removeProvisioned = $"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.DisplayName -eq '{searchPattern}' -or $_.PackageName -like '*{searchPattern}*' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }}";
             await RunPowerShell(removeProvisioned).ConfigureAwait(false);
@@ -674,7 +682,7 @@ internal partial class OptimizationOptions
 
     private static int GetScale(string file)
     {
-        var m = Regex.Match(file, @"Scale-(\\d+)");
+        var m = Regex.Match(file, @"Scale-(\d+)");
         return m.Success ? int.Parse(m.Groups[1].Value) : 100;
     }
 
@@ -741,8 +749,11 @@ internal partial class OptimizationOptions
         };
 
         process.Start();
-        var output = await process.StandardOutput.ReadToEndAsync().ConfigureAwait(false);
+        var outputTask = process.StandardOutput.ReadToEndAsync();
+        var errorTask = process.StandardError.ReadToEndAsync();
         await process.WaitForExitAsync().ConfigureAwait(false);
+        var output = await outputTask.ConfigureAwait(false);
+        await errorTask.ConfigureAwait(false); // drain stderr to prevent deadlock
         return output.Trim();
     }
 
@@ -777,15 +788,7 @@ internal partial class OptimizationOptions
                     var savedState = rytunexKey.GetValue(valueName);
                     if (savedState is int state && state == 1)
                     {
-                        // Create a fake toggle switch to revert the optimization
-                        var fakeToggleSwitch = new ToggleSwitch
-                        {
-                            Tag = valueName,
-                            IsOn = false // Set to false to trigger the reverse action
-                        };
-
-                        // Call the method to revert
-                        await XamlSwitchesAsync(fakeToggleSwitch);
+                        await ExecuteToggleActionAsync(valueName, false, CancellationToken.None).ConfigureAwait(false);
                     }
                 }
             }

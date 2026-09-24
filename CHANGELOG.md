@@ -2,6 +2,35 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 1.7.2 - Unreleased
+
+### Added
+
+- Added Network Tools to the `Network` page: Flush DNS Cache, Release & Renew IP, Reset TCP/IP Stack, and shortcuts to Windows Network Settings and Network Connections.
+- Introduced new Network Optimization toggles:
+  - `Disable Network Throttling`
+  - `Disable Nagle's Algorithm`
+  - `Enable Receive-Side Scaling (RSS)`
+  - `Enable ECN (Explicit Congestion Notification)`
+  - `Enable Compound TCP (CTCP)`
+  - `Disable IPv6`
+- Added status notifications and administrative permission checks when managing startup apps in `Startup Apps` page.
+
+### Fixes
+
+- Fixed DNS preset selection not applying properly when running under localized languages.
+- Fixed potential process deadlock when executing command-line tasks by draining standard error.
+- Fixed regex parsing for asset scale factors during app icon extraction.
+- Fixed 64-bit registry redirection when reading and modifying service startup types in `Services` page.
+- Fixed an issue in `Optimize System` page where compression progress indicators would not reset if an error occurred.
+- Added exception handling to prevent crashes when extracting default system icons.
+
+### Changes
+
+- Redesigned the `Network` page with modern settings cards and smoother asynchronous loading.
+- Refactored optimization rollback logic to execute actions directly without creating UI switch instances.
+- Improved debloat uninstall flow to safely snapshot selected items before batch removal.
+- Updated localization across all supported languages for newly introduced features and messages.
 
 ## 1.7.1 - Released
 

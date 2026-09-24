@@ -68,6 +68,7 @@ public sealed partial class ServicesPage : Page
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error loading services: {ex.Message}");
+            App.ShowNotification("ServicesPage_Notification_Title".GetLocalized(), "ServicesPage_LoadError".GetLocalized(), Microsoft.UI.Xaml.Controls.InfoBarSeverity.Error, 5000);
         }
         finally
         {
@@ -304,6 +305,14 @@ public sealed partial class ServicesPage : Page
                 InfoBarSeverity.Success, 3000);
             await LoadServicesAsync();
         }
+        catch (System.ServiceProcess.TimeoutException)
+        {
+            _ = LogHelper.LogWarning($"Service {serviceName} did not respond in time during {action} operation.");
+            App.ShowNotification(
+                "ServicesPage_Notification_ControlErrorTitle".GetLocalized(),
+                "ServicesPage_Notification_ServiceTimeout".GetLocalized(),
+                InfoBarSeverity.Warning, 5000);
+        }
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error controlling service {serviceName}: {ex.Message}");
@@ -330,7 +339,10 @@ public sealed partial class ServicesPage : Page
 
             await Task.Run(() =>
             {
-                using var key = Registry.LocalMachine.OpenSubKey($@"SYSTEM\CurrentControlSet\Services\{serviceName}", true);
+                var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64 : RegistryView.Default;
+                using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView)
+                    .OpenSubKey($@"SYSTEM\CurrentControlSet\Services\{serviceName}", writable: true);
                 key?.SetValue("Start", startValue, RegistryValueKind.DWord);
             });
 
@@ -348,6 +360,17 @@ public sealed partial class ServicesPage : Page
                 service.StartType = startupType;
                 service.CanStart = service.Status != "Running" && startupType != "Disabled";
             }
+        }
+        catch (UnauthorizedAccessException)
+        {
+            _ = LogHelper.LogWarning($"Access denied when changing startup type for {serviceName}.");
+            App.ShowNotification(
+                "ServicesPage_Notification_StartupErrorTitle".GetLocalized(),
+                "ServicesPage_Notification_StartupTypeAdminRequired".GetLocalized(),
+                InfoBarSeverity.Warning, 4000);
+            _isUpdatingStartupType = true;
+            await LoadServicesAsync();
+            _isUpdatingStartupType = false;
         }
         catch (Exception ex)
         {
@@ -368,7 +391,10 @@ public sealed partial class ServicesPage : Page
     {
         try
         {
-            using var key = Registry.LocalMachine.OpenSubKey($@"SYSTEM\CurrentControlSet\Services\{serviceName}");
+            var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                ? RegistryView.Registry64 : RegistryView.Default;
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView)
+                .OpenSubKey($@"SYSTEM\CurrentControlSet\Services\{serviceName}");
             if (key?.GetValue("Start") is int startType)
             {
                 return startType switch

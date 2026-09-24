@@ -619,6 +619,12 @@
   <data name="NoNic" xml:space="preserve">
     <value>Не выбран сетевой интерфейс</value>
   </data>
+  <data name="NoInterfaceTitle" xml:space="preserve">
+    <value>Интерфейс не выбран</value>
+  </data>
+  <data name="NoInterfaceMessage" xml:space="preserve">
+    <value>Выберите сетевой интерфейс перед применением настроек DNS.</value>
+  </data>
   <data name="NotSet" xml:space="preserve">
     <value>Не установлено</value>
   </data>
@@ -1984,6 +1990,27 @@
   <data name="ServicesPage_RestartServiceTooltip.ToolTipService.ToolTip" xml:space="preserve">
     <value>Перезапустить службу</value>
   </data>
+  <data name="ServicesPage_Notification_Title" xml:space="preserve">
+    <value>Службы</value>
+  </data>
+  <data name="ServicesPage_LoadError" xml:space="preserve">
+    <value>Не удалось загрузить список служб. Могут потребоваться права администратора.</value>
+  </data>
+  <data name="ServicesPage_Notification_ServiceTimeout" xml:space="preserve">
+    <value>Служба не ответила вовремя. Пожалуйста, попробуйте ещё раз.</value>
+  </data>
+  <data name="ServicesPage_Notification_StartupTypeAdminRequired" xml:space="preserve">
+    <value>Для изменения типа запуска службы необходимы права администратора.</value>
+  </data>
+  <data name="StartupPage_Notification_FileNotFound" xml:space="preserve">
+    <value>Файл не найден по пути '{0}'. Он всё равно будет добавлен в автозагрузку, но может не запуститься.</value>
+  </data>
+  <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
+    <value>Включено {0} приложений автозагрузки. {1} не удалось (нужны права администратора).</value>
+  </data>
+  <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
+    <value>Отключено {0} приложений автозагрузки. {1} не удалось (нужны права администратора).</value>
+  </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Экспорт</value>
   </data>
@@ -2694,5 +2721,140 @@
   </data>
   <data name="Settings_RateAndReviewCard.Header" xml:space="preserve">
     <value>Оценить и оставить отзыв</value>
+  </data>
+  <data name="Network_ToolsSection.Text" xml:space="preserve">
+    <value>Network Tools</value>
+  </data>
+  <data name="Network_OptimizationSection.Text" xml:space="preserve">
+    <value>Network Optimization</value>
+  </data>
+  <data name="Network_CurrentDNSSection.Text" xml:space="preserve">
+    <value>Current DNS Servers</value>
+  </data>
+  <data name="Network_SetDNSSection.Text" xml:space="preserve">
+    <value>Set Custom DNS</value>
+  </data>
+  <data name="Network_FlushDNS.Header" xml:space="preserve">
+    <value>Flush DNS Cache</value>
+  </data>
+  <data name="Network_FlushDNS.Description" xml:space="preserve">
+    <value>Clears the local DNS resolver cache, forcing fresh DNS lookups for all domain names.</value>
+  </data>
+  <data name="Network_FlushDNS_Button.Content" xml:space="preserve">
+    <value>Flush DNS</value>
+  </data>
+  <data name="Network_ReleaseRenew.Header" xml:space="preserve">
+    <value>Release &amp; Renew IP</value>
+  </data>
+  <data name="Network_ReleaseRenew.Description" xml:space="preserve">
+    <value>Releases the current IP address and requests a new one from the DHCP server. Use if experiencing connectivity issues.</value>
+  </data>
+  <data name="Network_ReleaseRenew_Button.Content" xml:space="preserve">
+    <value>Release &amp; Renew</value>
+  </data>
+  <data name="Network_ResetTCPIP.Header" xml:space="preserve">
+    <value>Reset TCP/IP Stack</value>
+  </data>
+  <data name="Network_ResetTCPIP.Description" xml:space="preserve">
+    <value>Resets the TCP/IP stack and Winsock catalog to their default state. A system restart is required after this operation.</value>
+  </data>
+  <data name="Network_ResetTCPIP_Button.Content" xml:space="preserve">
+    <value>Reset TCP/IP</value>
+  </data>
+  <data name="Network_OpenNetworkSettings.Header" xml:space="preserve">
+    <value>Open Network Settings</value>
+  </data>
+  <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
+    <value>Opens the Windows Network &amp; Internet settings page.</value>
+  </data>
+  <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
+    <value>Open Settings</value>
+  </data>
+  <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
+    <value>Network Adapter Settings</value>
+  </data>
+  <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
+    <value>Opens the classic Network Connections panel to manage network adapters.</value>
+  </data>
+  <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
+    <value>Open Adapter Settings</value>
+  </data>
+  <data name="Network_DisableThrottling.Header" xml:space="preserve">
+    <value>Disable Network Throttling</value>
+  </data>
+  <data name="Network_DisableThrottling.Description" xml:space="preserve">
+    <value>Removes the 10 packets/ms throttle that Windows applies to network traffic when multimedia applications are running, improving throughput.</value>
+  </data>
+  <data name="Network_DisableNagle.Header" xml:space="preserve">
+    <value>Disable Nagle&apos;s Algorithm</value>
+  </data>
+  <data name="Network_DisableNagle.Description" xml:space="preserve">
+    <value>Reduces latency in TCP connections by sending packets immediately instead of buffering small ones. Beneficial for gaming and real-time applications.</value>
+  </data>
+  <data name="Network_EnableRSS.Header" xml:space="preserve">
+    <value>Enable Receive-Side Scaling (RSS)</value>
+  </data>
+  <data name="Network_EnableRSS.Description" xml:space="preserve">
+    <value>Distributes network receive processing across multiple CPU cores, improving throughput and reducing latency on multi-core systems.</value>
+  </data>
+  <data name="Network_EnableECN.Header" xml:space="preserve">
+    <value>Enable ECN (Explicit Congestion Notification)</value>
+  </data>
+  <data name="Network_EnableECN.Description" xml:space="preserve">
+    <value>Allows routers to signal network congestion without dropping packets, reducing retransmissions and improving throughput.</value>
+  </data>
+  <data name="Network_EnableCTCP.Header" xml:space="preserve">
+    <value>Enable Compound TCP (CTCP)</value>
+  </data>
+  <data name="Network_EnableCTCP.Description" xml:space="preserve">
+    <value>Uses a more aggressive congestion algorithm that increases throughput on high-bandwidth, high-latency connections.</value>
+  </data>
+  <data name="Network_DisableIPv6.Header" xml:space="preserve">
+    <value>Disable IPv6</value>
+  </data>
+  <data name="Network_DisableIPv6.Description" xml:space="preserve">
+    <value>Disables the IPv6 protocol stack. Only recommended if you are troubleshooting IPv6-related issues. A restart may be required.</value>
+  </data>
+  <data name="Network_NicSection.Text" xml:space="preserve">
+    <value>Network Interface</value>
+  </data>
+  <data name="Network_NicCard.Header" xml:space="preserve">
+    <value>Active Adapter</value>
+  </data>
+  <data name="Network_NicCard.Description" xml:space="preserve">
+    <value>Select the network adapter to configure DNS settings for.</value>
+  </data>
+  <data name="Network_IPv4Card.Header" xml:space="preserve">
+    <value>IPv4 DNS Servers</value>
+  </data>
+  <data name="Network_IPv4Card.Description" xml:space="preserve">
+    <value>Currently configured DNS servers for IPv4.</value>
+  </data>
+  <data name="Network_IPv6Card.Header" xml:space="preserve">
+    <value>IPv6 DNS Servers</value>
+  </data>
+  <data name="Network_IPv6Card.Description" xml:space="preserve">
+    <value>Currently configured DNS servers for IPv6.</value>
+  </data>
+  <data name="Network_SetDNSCard.Header" xml:space="preserve">
+    <value>DNS Preset</value>
+  </data>
+  <data name="Network_SetDNSCard.Description" xml:space="preserve">
+    <value>Choose a DNS provider and apply it to the selected network adapter.</value>
+  </data>
+  <data name="Network_ResetTCPIPWarningTitle" xml:space="preserve">
+    <value>Restart Required</value>
+  </data>
+  <data name="Network_ResetTCPIPWarningMessage" xml:space="preserve">
+    <value>TCP/IP stack and Winsock have been reset. Please restart your computer for the changes to take effect.</value>
+  </data>
+  <data name="Network_FlushDNSSuccess" xml:space="preserve">
+    <value>DNS cache flushed successfully.</value>
+  </data>
+  <data name="Network_ReleaseRenewSuccess" xml:space="preserve">
+    <value>IP address released and renewed successfully.</value>
+  </data>
+  <data name="Network_SuccessTitle" xml:space="preserve">
+    <value>Success</value>
   </data>
 </root>

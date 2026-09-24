@@ -158,32 +158,39 @@ public sealed partial class StartupPage : Page
 
     private async void ItemToggle_Toggled(object sender, RoutedEventArgs e)
     {
-        if (_isBusy) return;
-
-        if (sender is ToggleSwitch toggle && toggle.Tag is StartupItem item)
+        try
         {
-            // Ignore toggled events triggered by UI container virtualization during scrolling
-            if (toggle.FocusState == FocusState.Unfocused) return;
-            if (item.IsEnabled == toggle.IsOn) return;
+            if (_isBusy) return;
 
-            var newState = toggle.IsOn;
-            var success = await StartupHelper.SetStartupItemEnabledAsync(item, newState);
+            if (sender is ToggleSwitch toggle && toggle.Tag is StartupItem item)
+            {
+                // Ignore toggled events triggered by UI container virtualization during scrolling
+                if (toggle.FocusState == FocusState.Unfocused) return;
+                if (item.IsEnabled == toggle.IsOn) return;
 
-            if (success)
-            {
-                item.IsEnabled = newState;
-                UpdateSummaryCards();
-                var msg = newState
-                    ? string.Format("StartupPage_Notification_ToggledMessage".TryGetLocalized() ?? "Enabled {0}", item.Name)
-                    : string.Format("StartupPage_Notification_ToggledMessageDisabled".TryGetLocalized() ?? "Disabled {0}", item.Name);
-                App.ShowNotification("Startup Manager", msg, InfoBarSeverity.Success, 2500);
+                var newState = toggle.IsOn;
+                var success = await StartupHelper.SetStartupItemEnabledAsync(item, newState);
+
+                if (success)
+                {
+                    item.IsEnabled = newState;
+                    UpdateSummaryCards();
+                    var msg = newState
+                        ? string.Format("StartupPage_Notification_ToggledMessage".TryGetLocalized() ?? "Enabled {0}", item.Name)
+                        : string.Format("StartupPage_Notification_ToggledMessageDisabled".TryGetLocalized() ?? "Disabled {0}", item.Name);
+                    App.ShowNotification("Startup Manager", msg, InfoBarSeverity.Success, 2500);
+                }
+                else
+                {
+                    // Revert toggle state if operation failed
+                    toggle.IsOn = !newState;
+                    App.ShowNotification("Startup Manager", "StartupPage_Notification_AdminRequired".TryGetLocalized() ?? "Administrator privileges required to modify system startup items.", InfoBarSeverity.Warning, 4000);
+                }
             }
-            else
-            {
-                // Revert toggle state if operation failed
-                toggle.IsOn = !newState;
-                App.ShowNotification("Startup Manager", "StartupPage_Notification_AdminRequired".TryGetLocalized() ?? "Administrator privileges required to modify system startup items.", InfoBarSeverity.Warning, 4000);
-            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error in startup item toggle: {ex.Message}");
         }
     }
 
@@ -379,6 +386,13 @@ public sealed partial class StartupPage : Page
 
             var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
 
+            // Warn if path looks like a file but doesn't exist
+            if (!string.IsNullOrEmpty(targetPath) && Path.HasExtension(targetPath) && !File.Exists(targetPath))
+            {
+                var warnMsg = string.Format("StartupPage_Notification_FileNotFound".TryGetLocalized() ?? "File not found at '{0}'. It will still be added to startup, but may not launch.", targetPath);
+                App.ShowNotification(titleText, warnMsg, InfoBarSeverity.Warning, 4000);
+            }
+
             if (string.IsNullOrEmpty(appName) || string.IsNullOrEmpty(targetPath))
             {
                 var msg = "StartupPage_Notification_EmptyAppError".TryGetLocalized() ?? "App name and path cannot be empty.";
@@ -406,20 +420,28 @@ public sealed partial class StartupPage : Page
         var itemsToEnable = _filteredStartupItems.Where(x => !x.IsEnabled).ToList();
         if (itemsToEnable.Count == 0) return;
 
+        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
         int count = 0;
+        var failedCount = 0;
         foreach (var item in itemsToEnable)
         {
             if (await StartupHelper.SetStartupItemEnabledAsync(item, true))
             {
+                item.IsEnabled = true;
                 count++;
+            }
+            else
+            {
+                failedCount++;
             }
         }
 
         UpdateSummaryCards();
         ApplyFilterAndSort();
-        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
-        var msg = string.Format("StartupPage_Notification_EnabledCount".TryGetLocalized() ?? "Enabled {0} startup apps.", count);
-        App.ShowNotification(titleText, msg, InfoBarSeverity.Success, 3000);
+        var msg = failedCount > 0
+            ? string.Format("StartupPage_Notification_EnabledCountFailed".TryGetLocalized() ?? "Enabled {0} startup apps. {1} failed (admin required).", count, failedCount)
+            : string.Format("StartupPage_Notification_EnabledCount".TryGetLocalized() ?? "Enabled {0} startup apps.", count);
+        App.ShowNotification(titleText, msg, failedCount > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success, 3000);
     }
 
     private async void DisableAllButton_Click(object sender, RoutedEventArgs e)
@@ -427,19 +449,27 @@ public sealed partial class StartupPage : Page
         var itemsToDisable = _filteredStartupItems.Where(x => x.IsEnabled).ToList();
         if (itemsToDisable.Count == 0) return;
 
+        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
         int count = 0;
+        var failedCount = 0;
         foreach (var item in itemsToDisable)
         {
             if (await StartupHelper.SetStartupItemEnabledAsync(item, false))
             {
+                item.IsEnabled = false;
                 count++;
+            }
+            else
+            {
+                failedCount++;
             }
         }
 
         UpdateSummaryCards();
         ApplyFilterAndSort();
-        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
-        var msg = string.Format("StartupPage_Notification_DisabledCount".TryGetLocalized() ?? "Disabled {0} startup apps.", count);
-        App.ShowNotification(titleText, msg, InfoBarSeverity.Success, 3000);
+        var msg = failedCount > 0
+            ? string.Format("StartupPage_Notification_DisabledCountFailed".TryGetLocalized() ?? "Disabled {0} startup apps. {1} failed (admin required).", count, failedCount)
+            : string.Format("StartupPage_Notification_DisabledCount".TryGetLocalized() ?? "Disabled {0} startup apps.", count);
+        App.ShowNotification(titleText, msg, failedCount > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success, 3000);
     }
 }

@@ -270,15 +270,17 @@ public sealed partial class OptimizeSystemPage : Page
         _ = LogHelper.Log("Initializing Toggle Switches");
         try
         {
+            // Open the registry key once outside the loop to avoid repeated I/O per toggle switch
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default).CreateSubKey(RegistryBaseKey);
+
             foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
             {
                 if (toggleSwitch.Tag is string tagName)
                 {
                     // Retrieve the state from the 64-bit registry with 32-bit app
-                    using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? RegistryView.Registry64
-                            : RegistryView.Default).CreateSubKey(RegistryBaseKey);
                     if (key != null && key.GetValue(tagName) is int state)
                     {
                         toggleSwitch.IsOn = state == 1;
@@ -370,15 +372,10 @@ public sealed partial class OptimizeSystemPage : Page
         return output;
     }
 
-    private async Task<string> StartTask(string command)
-    {
-        return await StartTaskAsync(command);
-    }
-
     private async void CompressOSButton_Click(object sender, RoutedEventArgs e)
     {
         // Get the current compression status
-        var status = await StartTask("compact.exe /compactos:query");
+        var status = await StartTaskAsync("compact.exe /compactos:query");
 
         // Create a dialog to show the compression status and options
         var compressDialog = new ContentDialog
@@ -402,11 +399,17 @@ public sealed partial class OptimizeSystemPage : Page
             CompressOSButton.Visibility = Visibility.Collapsed;
             CompressOSProgressRing.Visibility = Visibility.Visible;
             CompressOSProgressText.Text = "Compressing".GetLocalized();
-            var result = await StartTask("compact.exe /compactos:always");
-            App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
-            CompressOSButton.Visibility = Visibility.Visible;
-            CompressOSProgressRing.Visibility = Visibility.Collapsed;
-            CompressOSProgressText.Text = string.Empty;
+            try
+            {
+                var result = await StartTaskAsync("compact.exe /compactos:always");
+                App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
+                CompressOSProgressText.Text = string.Empty;
+            }
+            finally
+            {
+                CompressOSButton.Visibility = Visibility.Visible;
+                CompressOSProgressRing.Visibility = Visibility.Collapsed;
+            }
         };
 
         // Handle the Decompress button click by setting UI elements and running the command
@@ -416,11 +419,17 @@ public sealed partial class OptimizeSystemPage : Page
             CompressOSButton.Visibility = Visibility.Collapsed;
             CompressOSProgressRing.Visibility = Visibility.Visible;
             CompressOSProgressText.Text = "Decompressing".GetLocalized();
-            var result = await StartTask("compact.exe /compactos:never");
-            App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
-            CompressOSButton.Visibility = Visibility.Visible;
-            CompressOSProgressRing.Visibility = Visibility.Collapsed;
-            CompressOSProgressText.Text = string.Empty;
+            try
+            {
+                var result = await StartTaskAsync("compact.exe /compactos:never");
+                App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
+                CompressOSProgressText.Text = string.Empty;
+            }
+            finally
+            {
+                CompressOSButton.Visibility = Visibility.Visible;
+                CompressOSProgressRing.Visibility = Visibility.Collapsed;
+            }
         };
         await compressDialog.ShowAsync();
     }
@@ -660,7 +669,14 @@ public sealed partial class OptimizeSystemPage : Page
             if (code_page == 0)
                 code_page = GetFallbackOEMCodePage();
 
-            _OEMConsoleEncoding = Encoding.GetEncoding(code_page);
+            try
+            {
+                _OEMConsoleEncoding = Encoding.GetEncoding(code_page);
+            }
+            catch
+            {
+                _OEMConsoleEncoding = Encoding.UTF8;
+            }
         }
         return _OEMConsoleEncoding!;
     }
