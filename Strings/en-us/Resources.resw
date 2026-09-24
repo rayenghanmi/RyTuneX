@@ -2227,6 +2227,33 @@ Check your computer for memory problems</value>
   <data name="StartupPage_Notification_DisabledCount" xml:space="preserve">
     <value>Disabled {0} startup apps.</value>
   </data>
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>{0} item(s) selected</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>Remove Selected</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Remove all selected startup items</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>Remove Startup Apps</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>Are you sure you want to remove {0} item(s) from startup?</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>Removed {0} startup item(s).</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>Removed {0} item(s). {1} failed (admin required).</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Select all</value>
+  </data>
 
   <data name="Intelligent_ScoreTitle" xml:space="preserve">
     <value>Optimization Score</value>

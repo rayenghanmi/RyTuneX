@@ -2726,138 +2726,165 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
     <value>Bewerten &amp; Rezensieren</value>
   </data>
   <data name="Network_ToolsSection.Text" xml:space="preserve">
-    <value>Network Tools</value>
+    <value>Netzwerk-Tools</value>
   </data>
   <data name="Network_OptimizationSection.Text" xml:space="preserve">
-    <value>Network Optimization</value>
+    <value>Netzwerkoptimierung</value>
   </data>
   <data name="Network_CurrentDNSSection.Text" xml:space="preserve">
-    <value>Current DNS Servers</value>
+    <value>Aktuelle DNS-Server</value>
   </data>
   <data name="Network_SetDNSSection.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
+    <value>Benutzerdefiniertes DNS festlegen</value>
   </data>
   <data name="Network_FlushDNS.Header" xml:space="preserve">
-    <value>Flush DNS Cache</value>
+    <value>DNS-Cache leeren</value>
   </data>
   <data name="Network_FlushDNS.Description" xml:space="preserve">
-    <value>Clears the local DNS resolver cache, forcing fresh DNS lookups for all domain names.</value>
+    <value>Leert den lokalen DNS-Auflösungscache und erzwingt neue DNS-Abfragen für alle Domänennamen.</value>
   </data>
   <data name="Network_FlushDNS_Button.Content" xml:space="preserve">
-    <value>Flush DNS</value>
+    <value>DNS leeren</value>
   </data>
   <data name="Network_ReleaseRenew.Header" xml:space="preserve">
-    <value>Release &amp; Renew IP</value>
+    <value>IP freigeben &amp; erneuern</value>
   </data>
   <data name="Network_ReleaseRenew.Description" xml:space="preserve">
-    <value>Releases the current IP address and requests a new one from the DHCP server. Use if experiencing connectivity issues.</value>
+    <value>Gibt die aktuelle IP-Adresse frei und fordert eine neue vom DHCP-Server an. Bei Verbindungsproblemen verwenden.</value>
   </data>
   <data name="Network_ReleaseRenew_Button.Content" xml:space="preserve">
-    <value>Release &amp; Renew</value>
+    <value>Freigeben &amp; Erneuern</value>
   </data>
   <data name="Network_ResetTCPIP.Header" xml:space="preserve">
-    <value>Reset TCP/IP Stack</value>
+    <value>TCP/IP-Stack zurücksetzen</value>
   </data>
   <data name="Network_ResetTCPIP.Description" xml:space="preserve">
-    <value>Resets the TCP/IP stack and Winsock catalog to their default state. A system restart is required after this operation.</value>
+    <value>Setzt den TCP/IP-Stack und den Winsock-Katalog auf die Standardwerte zurück. Ein Neustart ist erforderlich.</value>
   </data>
   <data name="Network_ResetTCPIP_Button.Content" xml:space="preserve">
-    <value>Reset TCP/IP</value>
+    <value>TCP/IP zurücksetzen</value>
   </data>
   <data name="Network_OpenNetworkSettings.Header" xml:space="preserve">
-    <value>Open Network Settings</value>
+    <value>Netzwerkeinstellungen öffnen</value>
   </data>
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
-    <value>Opens the Windows Network &amp; Internet settings page.</value>
+    <value>Öffnet die Seite Netzwerk &amp; Internet der Windows-Einstellungen.</value>
   </data>
   <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>Open Settings</value>
+    <value>Einstellungen öffnen</value>
   </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
-    <value>Network Adapter Settings</value>
+    <value>Netzwerkadapter-Einstellungen</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
-    <value>Opens the classic Network Connections panel to manage network adapters.</value>
+    <value>Öffnet die klassische Systemsteuerung für Netzwerkverbindungen zur Verwaltung der Adapter.</value>
   </data>
   <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>Open Adapter Settings</value>
+    <value>Adapter-Einstellungen öffnen</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
-    <value>Disable Network Throttling</value>
+    <value>Netzwerkdrosselung deaktivieren</value>
   </data>
   <data name="Network_DisableThrottling.Description" xml:space="preserve">
-    <value>Removes the 10 packets/ms throttle that Windows applies to network traffic when multimedia applications are running, improving throughput.</value>
+    <value>Entfernt die Drosselung von 10 Paketen/ms, die Windows bei laufenden Multimedia-Anwendungen anwendet, und verbessert den Durchsatz.</value>
   </data>
   <data name="Network_DisableNagle.Header" xml:space="preserve">
-    <value>Disable Nagle&apos;s Algorithm</value>
+    <value>Nagle-Algorithmus deaktivieren</value>
   </data>
   <data name="Network_DisableNagle.Description" xml:space="preserve">
-    <value>Reduces latency in TCP connections by sending packets immediately instead of buffering small ones. Beneficial for gaming and real-time applications.</value>
+    <value>Reduziert die Latenz bei TCP-Verbindungen, indem Pakete sofort gesendet statt gepuffert werden. Vorteilhaft für Gaming und Echtzeitanwendungen.</value>
   </data>
   <data name="Network_EnableRSS.Header" xml:space="preserve">
-    <value>Enable Receive-Side Scaling (RSS)</value>
+    <value>Receive-Side Scaling (RSS) aktivieren</value>
   </data>
   <data name="Network_EnableRSS.Description" xml:space="preserve">
-    <value>Distributes network receive processing across multiple CPU cores, improving throughput and reducing latency on multi-core systems.</value>
+    <value>Verteilt die Verarbeitung des Netzwerkempfangs auf mehrere CPU-Kerne, was den Durchsatz verbessert und die Latenz verringert.</value>
   </data>
   <data name="Network_EnableECN.Header" xml:space="preserve">
-    <value>Enable ECN (Explicit Congestion Notification)</value>
+    <value>ECN (Explicit Congestion Notification) aktivieren</value>
   </data>
   <data name="Network_EnableECN.Description" xml:space="preserve">
-    <value>Allows routers to signal network congestion without dropping packets, reducing retransmissions and improving throughput.</value>
+    <value>Ermöglicht es Routern, Überlastungen zu signalisieren, ohne Pakete zu verwerfen, wodurch Neuübertragungen reduziert werden.</value>
   </data>
   <data name="Network_EnableCTCP.Header" xml:space="preserve">
-    <value>Enable Compound TCP (CTCP)</value>
+    <value>Compound TCP (CTCP) aktivieren</value>
   </data>
   <data name="Network_EnableCTCP.Description" xml:space="preserve">
-    <value>Uses a more aggressive congestion algorithm that increases throughput on high-bandwidth, high-latency connections.</value>
+    <value>Verwendet einen aggressiveren Überlastungsalgorithmus, der den Durchsatz bei Verbindungen mit hoher Bandbreite und hoher Latenz erhöht.</value>
   </data>
   <data name="Network_DisableIPv6.Header" xml:space="preserve">
-    <value>Disable IPv6</value>
+    <value>IPv6 deaktivieren</value>
   </data>
   <data name="Network_DisableIPv6.Description" xml:space="preserve">
-    <value>Disables the IPv6 protocol stack. Only recommended if you are troubleshooting IPv6-related issues. A restart may be required.</value>
+    <value>Deaktiviert das IPv6-Protokoll. Nur empfohlen bei der Fehlersuche für IPv6-Probleme. Ein Neustart ist möglicherweise erforderlich.</value>
   </data>
   <data name="Network_NicSection.Text" xml:space="preserve">
-    <value>Network Interface</value>
+    <value>Netzwerkschnittstelle</value>
   </data>
   <data name="Network_NicCard.Header" xml:space="preserve">
-    <value>Active Adapter</value>
+    <value>Aktiver Adapter</value>
   </data>
   <data name="Network_NicCard.Description" xml:space="preserve">
-    <value>Select the network adapter to configure DNS settings for.</value>
+    <value>Wählen Sie den Netzwerkadapter aus, für den die DNS-Einstellungen konfiguriert werden sollen.</value>
   </data>
   <data name="Network_IPv4Card.Header" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
+    <value>IPv4-DNS-Server</value>
   </data>
   <data name="Network_IPv4Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv4.</value>
+    <value>Aktuell konfigurierte DNS-Server für IPv4.</value>
   </data>
   <data name="Network_IPv6Card.Header" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
+    <value>IPv6-DNS-Server</value>
   </data>
   <data name="Network_IPv6Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv6.</value>
+    <value>Aktuell konfigurierte DNS-Server für IPv6.</value>
   </data>
   <data name="Network_SetDNSCard.Header" xml:space="preserve">
-    <value>DNS Preset</value>
+    <value>DNS-Voreinstellung</value>
   </data>
   <data name="Network_SetDNSCard.Description" xml:space="preserve">
-    <value>Choose a DNS provider and apply it to the selected network adapter.</value>
+    <value>Wählen Sie einen DNS-Anbieter und wenden Sie ihn auf den ausgewählten Netzwerkadapter an.</value>
   </data>
   <data name="Network_ResetTCPIPWarningTitle" xml:space="preserve">
-    <value>Restart Required</value>
+    <value>Neustart erforderlich</value>
   </data>
   <data name="Network_ResetTCPIPWarningMessage" xml:space="preserve">
-    <value>TCP/IP stack and Winsock have been reset. Please restart your computer for the changes to take effect.</value>
+    <value>TCP/IP-Stack und Winsock wurden zurückgesetzt. Bitte starten Sie Ihren Computer neu, damit die Änderungen wirksam werden.</value>
   </data>
   <data name="Network_FlushDNSSuccess" xml:space="preserve">
-    <value>DNS cache flushed successfully.</value>
+    <value>DNS-Cache erfolgreich geleert.</value>
   </data>
   <data name="Network_ReleaseRenewSuccess" xml:space="preserve">
-    <value>IP address released and renewed successfully.</value>
+    <value>IP-Adresse erfolgreich freigegeben und erneuert.</value>
   </data>
   <data name="Network_SuccessTitle" xml:space="preserve">
-    <value>Success</value>
+    <value>Erfolg</value>
+  </data>
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>{0} Element(e) ausgewählt</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>Ausgewählte entfernen</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Alle ausgewählten Startelemente entfernen</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Auswahl aufheben</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>Autostart-Apps entfernen</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>Möchten Sie wirklich {0} Element(e) aus dem Autostart entfernen?</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>{0} Autostart-Element(e) entfernt.</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>{0} Element(e) entfernt. {1} fehlgeschlagen (Administrator erforderlich).</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Alles auswählen</value>
   </data>
 </root>

@@ -15,6 +15,7 @@ All notable changes to this branch will be documented in this file.
   - `Enable Compound TCP (CTCP)`
   - `Disable IPv6`
 - Added status notifications and administrative permission checks when managing startup apps in `Startup Apps` page.
+- Added multi-selection and batch removal support to the `Startup Apps` page #107.
 
 ### Fixes
 

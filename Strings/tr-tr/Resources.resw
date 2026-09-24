@@ -2726,138 +2726,165 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
     <value>Puanla ve Değerlendir</value>
   </data>
   <data name="Network_ToolsSection.Text" xml:space="preserve">
-    <value>Network Tools</value>
+    <value>Ağ Araçları</value>
   </data>
   <data name="Network_OptimizationSection.Text" xml:space="preserve">
-    <value>Network Optimization</value>
+    <value>Ağ İyileştirmesi</value>
   </data>
   <data name="Network_CurrentDNSSection.Text" xml:space="preserve">
-    <value>Current DNS Servers</value>
+    <value>Geçerli DNS Sunucuları</value>
   </data>
   <data name="Network_SetDNSSection.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
+    <value>Özel DNS Ayarla</value>
   </data>
   <data name="Network_FlushDNS.Header" xml:space="preserve">
-    <value>Flush DNS Cache</value>
+    <value>DNS Önbelleğini Temizle</value>
   </data>
   <data name="Network_FlushDNS.Description" xml:space="preserve">
-    <value>Clears the local DNS resolver cache, forcing fresh DNS lookups for all domain names.</value>
+    <value>Yerel DNS çözümleyici önbelleğini temizleyerek tüm alan adları için yeni DNS aramalarını zorunlu kılar.</value>
   </data>
   <data name="Network_FlushDNS_Button.Content" xml:space="preserve">
-    <value>Flush DNS</value>
+    <value>DNS'i Temizle</value>
   </data>
   <data name="Network_ReleaseRenew.Header" xml:space="preserve">
-    <value>Release &amp; Renew IP</value>
+    <value>IP'yi Bırak ve Yenile</value>
   </data>
   <data name="Network_ReleaseRenew.Description" xml:space="preserve">
-    <value>Releases the current IP address and requests a new one from the DHCP server. Use if experiencing connectivity issues.</value>
+    <value>Geçerli IP adresini bırakır ve DHCP sunucusundan yeni bir adres ister. Bağlantı sorunlarında kullanışlıdır.</value>
   </data>
   <data name="Network_ReleaseRenew_Button.Content" xml:space="preserve">
-    <value>Release &amp; Renew</value>
+    <value>Bırak ve Yenile</value>
   </data>
   <data name="Network_ResetTCPIP.Header" xml:space="preserve">
-    <value>Reset TCP/IP Stack</value>
+    <value>TCP/IP Yığınını Sıfırla</value>
   </data>
   <data name="Network_ResetTCPIP.Description" xml:space="preserve">
-    <value>Resets the TCP/IP stack and Winsock catalog to their default state. A system restart is required after this operation.</value>
+    <value>TCP/IP yığınını ve Winsock kataloğunu varsayılan duruma sıfırlar. Yeniden başlatma gereklidir.</value>
   </data>
   <data name="Network_ResetTCPIP_Button.Content" xml:space="preserve">
-    <value>Reset TCP/IP</value>
+    <value>TCP/IP'yi Sıfırla</value>
   </data>
   <data name="Network_OpenNetworkSettings.Header" xml:space="preserve">
-    <value>Open Network Settings</value>
+    <value>Ağ Ayarlarını Aç</value>
   </data>
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
-    <value>Opens the Windows Network &amp; Internet settings page.</value>
+    <value>Windows Ağ ve İnternet ayarları sayfasını açar.</value>
   </data>
   <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>Open Settings</value>
+    <value>Ayarları Aç</value>
   </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
-    <value>Network Adapter Settings</value>
+    <value>Ağ Bağdaştırıcısı Ayarları</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
-    <value>Opens the classic Network Connections panel to manage network adapters.</value>
+    <value>Bağdaştırıcıları yönetmek için klasik Ağ Bağlantıları panelini açar.</value>
   </data>
   <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>Open Adapter Settings</value>
+    <value>Bağdaştırıcıları Aç</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
-    <value>Disable Network Throttling</value>
+    <value>Ağ Darboğazını (Throttling) Devre Dışı Bırak</value>
   </data>
   <data name="Network_DisableThrottling.Description" xml:space="preserve">
-    <value>Removes the 10 packets/ms throttle that Windows applies to network traffic when multimedia applications are running, improving throughput.</value>
+    <value>Multimedya uygulamaları çalışırken Windows'un uyguladığı 10 paket/ms ağ sınırlamasını kaldırarak hızı artırır.</value>
   </data>
   <data name="Network_DisableNagle.Header" xml:space="preserve">
-    <value>Disable Nagle&apos;s Algorithm</value>
+    <value>Nagle Algoritmasını Devre Dışı Bırak</value>
   </data>
   <data name="Network_DisableNagle.Description" xml:space="preserve">
-    <value>Reduces latency in TCP connections by sending packets immediately instead of buffering small ones. Beneficial for gaming and real-time applications.</value>
+    <value>Küçük paketleri bekletmeyip hemen göndererek TCP gecikmesini azaltır. Oyunlar ve gerçek zamanlı uygulamalar için faydalıdır.</value>
   </data>
   <data name="Network_EnableRSS.Header" xml:space="preserve">
-    <value>Enable Receive-Side Scaling (RSS)</value>
+    <value>Receive-Side Scaling (RSS) Etkinleştir</value>
   </data>
   <data name="Network_EnableRSS.Description" xml:space="preserve">
-    <value>Distributes network receive processing across multiple CPU cores, improving throughput and reducing latency on multi-core systems.</value>
+    <value>Gelen ağ trafiği işlemeyi birden çok CPU çekirdeğine dağıtarak verimi artırır ve gecikmeyi azaltır.</value>
   </data>
   <data name="Network_EnableECN.Header" xml:space="preserve">
-    <value>Enable ECN (Explicit Congestion Notification)</value>
+    <value>ECN (Açık Tıkanıklık Bildirimi) Etkinleştir</value>
   </data>
   <data name="Network_EnableECN.Description" xml:space="preserve">
-    <value>Allows routers to signal network congestion without dropping packets, reducing retransmissions and improving throughput.</value>
+    <value>Yönlendiricilerin paket düşürmeden tıkanıklığı bildirmesini sağlar, yeniden iletimleri azaltır.</value>
   </data>
   <data name="Network_EnableCTCP.Header" xml:space="preserve">
-    <value>Enable Compound TCP (CTCP)</value>
+    <value>Compound TCP (CTCP) Etkinleştir</value>
   </data>
   <data name="Network_EnableCTCP.Description" xml:space="preserve">
-    <value>Uses a more aggressive congestion algorithm that increases throughput on high-bandwidth, high-latency connections.</value>
+    <value>Yüksek bant genişliği ve yüksek gecikmeli bağlantılarda veri aktarım hızını artıran daha kararlı bir algoritma kullanır.</value>
   </data>
   <data name="Network_DisableIPv6.Header" xml:space="preserve">
-    <value>Disable IPv6</value>
+    <value>IPv6'yı Devre Dışı Bırak</value>
   </data>
   <data name="Network_DisableIPv6.Description" xml:space="preserve">
-    <value>Disables the IPv6 protocol stack. Only recommended if you are troubleshooting IPv6-related issues. A restart may be required.</value>
+    <value>IPv6 protokol yığınını devre dışı bırakır. Yalnızca IPv6 sorunlarını giderirken önerilir. Yeniden başlatma gerekebilir.</value>
   </data>
   <data name="Network_NicSection.Text" xml:space="preserve">
-    <value>Network Interface</value>
+    <value>Ağ Bağdaştırıcısı</value>
   </data>
   <data name="Network_NicCard.Header" xml:space="preserve">
-    <value>Active Adapter</value>
+    <value>Etkin Bağdaştırıcı</value>
   </data>
   <data name="Network_NicCard.Description" xml:space="preserve">
-    <value>Select the network adapter to configure DNS settings for.</value>
+    <value>DNS ayarlarını yapılandırmak istediğiniz ağ bağdaştırıcısını seçin.</value>
   </data>
   <data name="Network_IPv4Card.Header" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
+    <value>IPv4 DNS Sunucuları</value>
   </data>
   <data name="Network_IPv4Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv4.</value>
+    <value>IPv4 için geçerli yapılandırılmış DNS sunucuları.</value>
   </data>
   <data name="Network_IPv6Card.Header" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
+    <value>IPv6 DNS Sunucuları</value>
   </data>
   <data name="Network_IPv6Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv6.</value>
+    <value>IPv6 için geçerli yapılandırılmış DNS sunucuları.</value>
   </data>
   <data name="Network_SetDNSCard.Header" xml:space="preserve">
-    <value>DNS Preset</value>
+    <value>DNS Önayarı</value>
   </data>
   <data name="Network_SetDNSCard.Description" xml:space="preserve">
-    <value>Choose a DNS provider and apply it to the selected network adapter.</value>
+    <value>Bir DNS sağlayıcısı seçin ve seçilen ağ bağdaştırıcısına uygulayın.</value>
   </data>
   <data name="Network_ResetTCPIPWarningTitle" xml:space="preserve">
-    <value>Restart Required</value>
+    <value>Yeniden Başlatma Gerekli</value>
   </data>
   <data name="Network_ResetTCPIPWarningMessage" xml:space="preserve">
-    <value>TCP/IP stack and Winsock have been reset. Please restart your computer for the changes to take effect.</value>
+    <value>TCP/IP yığını ve Winsock sıfırlandı. Değişikliklerin geçerli olması için lütfen bilgisayarınızı yeniden başlatın.</value>
   </data>
   <data name="Network_FlushDNSSuccess" xml:space="preserve">
-    <value>DNS cache flushed successfully.</value>
+    <value>DNS önbelleği başarıyla temizlendi.</value>
   </data>
   <data name="Network_ReleaseRenewSuccess" xml:space="preserve">
-    <value>IP address released and renewed successfully.</value>
+    <value>IP adresi başarıyla bırakıldı ve yenilendi.</value>
   </data>
   <data name="Network_SuccessTitle" xml:space="preserve">
-    <value>Success</value>
+    <value>Başarılı</value>
+  </data>
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>{0} öğe seçildi</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>Seçilenleri Kaldır</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Seçili tüm başlangıç öğelerini kaldır</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Seçimi temizle</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>Başlangıç Uygulamalarını Kaldır</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>{0} öğeyi başlangıçtan kaldırmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>{0} başlangıç öğesi kaldırıldı.</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>{0} öğe kaldırıldı. {1} başarısız oldu (yönetici izni gerekli).</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Tümünü seç</value>
   </data>
 </root>

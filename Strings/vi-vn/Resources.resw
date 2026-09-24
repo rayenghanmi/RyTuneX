@@ -2726,138 +2726,165 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
     <value>Đánh giá &amp; Nhận xét</value>
   </data>
   <data name="Network_ToolsSection.Text" xml:space="preserve">
-    <value>Network Tools</value>
+    <value>Công cụ mạng</value>
   </data>
   <data name="Network_OptimizationSection.Text" xml:space="preserve">
-    <value>Network Optimization</value>
+    <value>Tối ưu hóa mạng</value>
   </data>
   <data name="Network_CurrentDNSSection.Text" xml:space="preserve">
-    <value>Current DNS Servers</value>
+    <value>Máy chủ DNS hiện tại</value>
   </data>
   <data name="Network_SetDNSSection.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
+    <value>Đặt DNS tùy chỉnh</value>
   </data>
   <data name="Network_FlushDNS.Header" xml:space="preserve">
-    <value>Flush DNS Cache</value>
+    <value>Xóa bộ nhớ đệm DNS</value>
   </data>
   <data name="Network_FlushDNS.Description" xml:space="preserve">
-    <value>Clears the local DNS resolver cache, forcing fresh DNS lookups for all domain names.</value>
+    <value>Xóa bộ nhớ đệm phân giải DNS cục bộ, buộc tra cứu DNS mới cho tất cả các tên miền.</value>
   </data>
   <data name="Network_FlushDNS_Button.Content" xml:space="preserve">
-    <value>Flush DNS</value>
+    <value>Xóa DNS</value>
   </data>
   <data name="Network_ReleaseRenew.Header" xml:space="preserve">
-    <value>Release &amp; Renew IP</value>
+    <value>Giải phóng &amp; Làm mới IP</value>
   </data>
   <data name="Network_ReleaseRenew.Description" xml:space="preserve">
-    <value>Releases the current IP address and requests a new one from the DHCP server. Use if experiencing connectivity issues.</value>
+    <value>Giải phóng địa chỉ IP hiện tại và yêu cầu địa chỉ mới từ máy chủ DHCP. Hữu ích khi gặp sự cố kết nối mạng.</value>
   </data>
   <data name="Network_ReleaseRenew_Button.Content" xml:space="preserve">
-    <value>Release &amp; Renew</value>
+    <value>Làm mới IP</value>
   </data>
   <data name="Network_ResetTCPIP.Header" xml:space="preserve">
-    <value>Reset TCP/IP Stack</value>
+    <value>Đặt lại ngăn xếp TCP/IP</value>
   </data>
   <data name="Network_ResetTCPIP.Description" xml:space="preserve">
-    <value>Resets the TCP/IP stack and Winsock catalog to their default state. A system restart is required after this operation.</value>
+    <value>Đặt lại ngăn xếp TCP/IP và danh mục Winsock về mặc định. Cần khởi động lại máy tính sau thao tác này.</value>
   </data>
   <data name="Network_ResetTCPIP_Button.Content" xml:space="preserve">
-    <value>Reset TCP/IP</value>
+    <value>Đặt lại TCP/IP</value>
   </data>
   <data name="Network_OpenNetworkSettings.Header" xml:space="preserve">
-    <value>Open Network Settings</value>
+    <value>Mở cài đặt mạng</value>
   </data>
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
-    <value>Opens the Windows Network &amp; Internet settings page.</value>
+    <value>Mở trang cài đặt Mạng &amp; Internet của Windows.</value>
   </data>
   <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>Open Settings</value>
+    <value>Mở cài đặt</value>
   </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
-    <value>Network Adapter Settings</value>
+    <value>Cài đặt bộ điều hợp mạng</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
-    <value>Opens the classic Network Connections panel to manage network adapters.</value>
+    <value>Mở bảng Kết nối Mạng cổ điển để quản lý các bộ điều hợp.</value>
   </data>
   <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>Open Adapter Settings</value>
+    <value>Mở bộ điều hợp</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
-    <value>Disable Network Throttling</value>
+    <value>Tắt giới hạn băng thông mạng</value>
   </data>
   <data name="Network_DisableThrottling.Description" xml:space="preserve">
-    <value>Removes the 10 packets/ms throttle that Windows applies to network traffic when multimedia applications are running, improving throughput.</value>
+    <value>Loại bỏ giới hạn 10 gói/mili-giây mà Windows áp dụng cho mạng khi chạy ứng dụng đa phương tiện.</value>
   </data>
   <data name="Network_DisableNagle.Header" xml:space="preserve">
-    <value>Disable Nagle&apos;s Algorithm</value>
+    <value>Tắt thuật toán Nagle</value>
   </data>
   <data name="Network_DisableNagle.Description" xml:space="preserve">
-    <value>Reduces latency in TCP connections by sending packets immediately instead of buffering small ones. Beneficial for gaming and real-time applications.</value>
+    <value>Giảm độ trễ kết nối TCP bằng cách gửi các gói tin ngay lập tức. Rất hữu ích cho chơi game và ứng dụng thời gian thực.</value>
   </data>
   <data name="Network_EnableRSS.Header" xml:space="preserve">
-    <value>Enable Receive-Side Scaling (RSS)</value>
+    <value>Bật Receive-Side Scaling (RSS)</value>
   </data>
   <data name="Network_EnableRSS.Description" xml:space="preserve">
-    <value>Distributes network receive processing across multiple CPU cores, improving throughput and reducing latency on multi-core systems.</value>
+    <value>Phân phối xử lý nhận dữ liệu mạng trên nhiều lõi CPU, tăng thông lượng và giảm độ trễ trên hệ thống đa lõi.</value>
   </data>
   <data name="Network_EnableECN.Header" xml:space="preserve">
-    <value>Enable ECN (Explicit Congestion Notification)</value>
+    <value>Bật ECN (Thông báo tắc nghẽn rõ ràng)</value>
   </data>
   <data name="Network_EnableECN.Description" xml:space="preserve">
-    <value>Allows routers to signal network congestion without dropping packets, reducing retransmissions and improving throughput.</value>
+    <value>Cho phép bộ định tuyến thông báo tắc nghẽn mà không làm rớt gói tin, giảm việc truyền lại dữ liệu.</value>
   </data>
   <data name="Network_EnableCTCP.Header" xml:space="preserve">
-    <value>Enable Compound TCP (CTCP)</value>
+    <value>Bật Compound TCP (CTCP)</value>
   </data>
   <data name="Network_EnableCTCP.Description" xml:space="preserve">
-    <value>Uses a more aggressive congestion algorithm that increases throughput on high-bandwidth, high-latency connections.</value>
+    <value>Sử dụng thuật toán kiểm soát tắc nghẽn tối ưu giúp tăng tốc độ trên các kết nối băng thông rộng và độ trễ cao.</value>
   </data>
   <data name="Network_DisableIPv6.Header" xml:space="preserve">
-    <value>Disable IPv6</value>
+    <value>Tắt IPv6</value>
   </data>
   <data name="Network_DisableIPv6.Description" xml:space="preserve">
-    <value>Disables the IPv6 protocol stack. Only recommended if you are troubleshooting IPv6-related issues. A restart may be required.</value>
+    <value>Vô hiệu hóa ngăn xếp giao thức IPv6. Chỉ khuyến nghị nếu bạn đang khắc phục sự cố mạng liên quan đến IPv6.</value>
   </data>
   <data name="Network_NicSection.Text" xml:space="preserve">
-    <value>Network Interface</value>
+    <value>Giao diện mạng</value>
   </data>
   <data name="Network_NicCard.Header" xml:space="preserve">
-    <value>Active Adapter</value>
+    <value>Bộ điều hợp đang hoạt động</value>
   </data>
   <data name="Network_NicCard.Description" xml:space="preserve">
-    <value>Select the network adapter to configure DNS settings for.</value>
+    <value>Chọn bộ điều hợp mạng để cấu hình cài đặt DNS.</value>
   </data>
   <data name="Network_IPv4Card.Header" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
+    <value>Máy chủ DNS IPv4</value>
   </data>
   <data name="Network_IPv4Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv4.</value>
+    <value>Các máy chủ DNS hiện được cấu hình cho IPv4.</value>
   </data>
   <data name="Network_IPv6Card.Header" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
+    <value>Máy chủ DNS IPv6</value>
   </data>
   <data name="Network_IPv6Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv6.</value>
+    <value>Các máy chủ DNS hiện được cấu hình cho IPv6.</value>
   </data>
   <data name="Network_SetDNSCard.Header" xml:space="preserve">
-    <value>DNS Preset</value>
+    <value>Cài đặt trước DNS</value>
   </data>
   <data name="Network_SetDNSCard.Description" xml:space="preserve">
-    <value>Choose a DNS provider and apply it to the selected network adapter.</value>
+    <value>Chọn nhà cung cấp DNS và áp dụng cho bộ điều hợp mạng đã chọn.</value>
   </data>
   <data name="Network_ResetTCPIPWarningTitle" xml:space="preserve">
-    <value>Restart Required</value>
+    <value>Yêu cầu khởi động lại</value>
   </data>
   <data name="Network_ResetTCPIPWarningMessage" xml:space="preserve">
-    <value>TCP/IP stack and Winsock have been reset. Please restart your computer for the changes to take effect.</value>
+    <value>Ngăn xếp TCP/IP và Winsock đã được đặt lại. Vui lòng khởi động lại máy tính để các thay đổi có hiệu lực.</value>
   </data>
   <data name="Network_FlushDNSSuccess" xml:space="preserve">
-    <value>DNS cache flushed successfully.</value>
+    <value>Đã xóa bộ nhớ đệm DNS thành công.</value>
   </data>
   <data name="Network_ReleaseRenewSuccess" xml:space="preserve">
-    <value>IP address released and renewed successfully.</value>
+    <value>Đã giải phóng và làm mới địa chỉ IP thành công.</value>
   </data>
   <data name="Network_SuccessTitle" xml:space="preserve">
-    <value>Success</value>
+    <value>Thành công</value>
+  </data>
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>Đã chọn {0} mục</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>Xóa mục đã chọn</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Xóa tất cả các mục khởi động đã chọn</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Bỏ chọn tất cả</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>Xóa ứng dụng khởi động</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa {0} mục khỏi danh sách khởi động không?</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>Đã xóa {0} mục khởi động.</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>Đã xóa {0} mục. {1} thất bại (cần quyền quản trị viên).</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Chọn tất cả</value>
   </data>
 </root>

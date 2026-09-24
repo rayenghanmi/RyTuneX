@@ -2726,138 +2726,165 @@
     <value>평가 및 리뷰</value>
   </data>
   <data name="Network_ToolsSection.Text" xml:space="preserve">
-    <value>Network Tools</value>
+    <value>네트워크 도구</value>
   </data>
   <data name="Network_OptimizationSection.Text" xml:space="preserve">
-    <value>Network Optimization</value>
+    <value>네트워크 최적화</value>
   </data>
   <data name="Network_CurrentDNSSection.Text" xml:space="preserve">
-    <value>Current DNS Servers</value>
+    <value>현재 DNS 서버</value>
   </data>
   <data name="Network_SetDNSSection.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
+    <value>사용자 지정 DNS 설정</value>
   </data>
   <data name="Network_FlushDNS.Header" xml:space="preserve">
-    <value>Flush DNS Cache</value>
+    <value>DNS 캐시 플러시</value>
   </data>
   <data name="Network_FlushDNS.Description" xml:space="preserve">
-    <value>Clears the local DNS resolver cache, forcing fresh DNS lookups for all domain names.</value>
+    <value>로컬 DNS 확인자 캐시를 지우고 모든 도메인 이름에 대해 새로운 DNS 조회를 강제 실행합니다.</value>
   </data>
   <data name="Network_FlushDNS_Button.Content" xml:space="preserve">
-    <value>Flush DNS</value>
+    <value>DNS 플러시</value>
   </data>
   <data name="Network_ReleaseRenew.Header" xml:space="preserve">
-    <value>Release &amp; Renew IP</value>
+    <value>IP 해제 및 갱신</value>
   </data>
   <data name="Network_ReleaseRenew.Description" xml:space="preserve">
-    <value>Releases the current IP address and requests a new one from the DHCP server. Use if experiencing connectivity issues.</value>
+    <value>현재 IP 주소를 해제하고 DHCP 서버에 새 IP를 요청합니다. 연결 문제가 발생할 때 유용합니다.</value>
   </data>
   <data name="Network_ReleaseRenew_Button.Content" xml:space="preserve">
-    <value>Release &amp; Renew</value>
+    <value>해제 및 갱신</value>
   </data>
   <data name="Network_ResetTCPIP.Header" xml:space="preserve">
-    <value>Reset TCP/IP Stack</value>
+    <value>TCP/IP 스택 재설정</value>
   </data>
   <data name="Network_ResetTCPIP.Description" xml:space="preserve">
-    <value>Resets the TCP/IP stack and Winsock catalog to their default state. A system restart is required after this operation.</value>
+    <value>TCP/IP 스택 및 Winsock 카탈로그를 기본 상태로 재설정합니다. 작업 후 시스템 재부팅이 필요합니다.</value>
   </data>
   <data name="Network_ResetTCPIP_Button.Content" xml:space="preserve">
-    <value>Reset TCP/IP</value>
+    <value>TCP/IP 재설정</value>
   </data>
   <data name="Network_OpenNetworkSettings.Header" xml:space="preserve">
-    <value>Open Network Settings</value>
+    <value>네트워크 설정 열기</value>
   </data>
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
-    <value>Opens the Windows Network &amp; Internet settings page.</value>
+    <value>Windows 네트워크 및 인터넷 설정 페이지를 엽니다.</value>
   </data>
   <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>Open Settings</value>
+    <value>설정 열기</value>
   </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
-    <value>Network Adapter Settings</value>
+    <value>네트워크 어댑터 설정</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
-    <value>Opens the classic Network Connections panel to manage network adapters.</value>
+    <value>어댑터를 관리할 수 있는 클래식 네트워크 연결 창을 엽니다.</value>
   </data>
   <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>Open Adapter Settings</value>
+    <value>어댑터 설정 열기</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
-    <value>Disable Network Throttling</value>
+    <value>네트워크 제한(Throttling) 비활성화</value>
   </data>
   <data name="Network_DisableThrottling.Description" xml:space="preserve">
-    <value>Removes the 10 packets/ms throttle that Windows applies to network traffic when multimedia applications are running, improving throughput.</value>
+    <value>멀티미디어 앱 실행 시 Windows가 네트워크 트래픽에 적용하는 10패킷/ms 제한을 해제하여 처리량을 높입니다.</value>
   </data>
   <data name="Network_DisableNagle.Header" xml:space="preserve">
-    <value>Disable Nagle&apos;s Algorithm</value>
+    <value>네이글(Nagle) 알고리즘 비활성화</value>
   </data>
   <data name="Network_DisableNagle.Description" xml:space="preserve">
-    <value>Reduces latency in TCP connections by sending packets immediately instead of buffering small ones. Beneficial for gaming and real-time applications.</value>
+    <value>작은 패킷을 버퍼링하지 않고 즉시 전송하여 TCP 대기 시간을 줄입니다. 게임 및 실시간 앱에 효과적입니다.</value>
   </data>
   <data name="Network_EnableRSS.Header" xml:space="preserve">
-    <value>Enable Receive-Side Scaling (RSS)</value>
+    <value>수신 측 배율(RSS) 활성화</value>
   </data>
   <data name="Network_EnableRSS.Description" xml:space="preserve">
-    <value>Distributes network receive processing across multiple CPU cores, improving throughput and reducing latency on multi-core systems.</value>
+    <value>네트워크 수신 처리를 여러 CPU 코어에 분산하여 처리량을 향상시키고 대기 시간을 줄입니다.</value>
   </data>
   <data name="Network_EnableECN.Header" xml:space="preserve">
-    <value>Enable ECN (Explicit Congestion Notification)</value>
+    <value>명시적 정체 알림(ECN) 활성화</value>
   </data>
   <data name="Network_EnableECN.Description" xml:space="preserve">
-    <value>Allows routers to signal network congestion without dropping packets, reducing retransmissions and improving throughput.</value>
+    <value>라우터가 패킷을 삭제하지 않고 정체 상태를 알릴 수 있게 하여 재전송을 줄입니다.</value>
   </data>
   <data name="Network_EnableCTCP.Header" xml:space="preserve">
-    <value>Enable Compound TCP (CTCP)</value>
+    <value>Compound TCP (CTCP) 활성화</value>
   </data>
   <data name="Network_EnableCTCP.Description" xml:space="preserve">
-    <value>Uses a more aggressive congestion algorithm that increases throughput on high-bandwidth, high-latency connections.</value>
+    <value>고대역폭 및 고지연 연결에서 처리량을 향상시키는 보다 공격적인 정체 제어 알고리즘을 사용합니다.</value>
   </data>
   <data name="Network_DisableIPv6.Header" xml:space="preserve">
-    <value>Disable IPv6</value>
+    <value>IPv6 비활성화</value>
   </data>
   <data name="Network_DisableIPv6.Description" xml:space="preserve">
-    <value>Disables the IPv6 protocol stack. Only recommended if you are troubleshooting IPv6-related issues. A restart may be required.</value>
+    <value>IPv6 프로토콜 스택을 비활성화합니다. IPv6 관련 문제 해결 시에만 권장됩니다. 재부팅이 필요할 수 있습니다.</value>
   </data>
   <data name="Network_NicSection.Text" xml:space="preserve">
-    <value>Network Interface</value>
+    <value>네트워크 인터페이스</value>
   </data>
   <data name="Network_NicCard.Header" xml:space="preserve">
-    <value>Active Adapter</value>
+    <value>활성 어댑터</value>
   </data>
   <data name="Network_NicCard.Description" xml:space="preserve">
-    <value>Select the network adapter to configure DNS settings for.</value>
+    <value>DNS 설정을 구성할 네트워크 어댑터를 선택합니다.</value>
   </data>
   <data name="Network_IPv4Card.Header" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
+    <value>IPv4 DNS 서버</value>
   </data>
   <data name="Network_IPv4Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv4.</value>
+    <value>IPv4용으로 현재 구성된 DNS 서버입니다.</value>
   </data>
   <data name="Network_IPv6Card.Header" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
+    <value>IPv6 DNS 서버</value>
   </data>
   <data name="Network_IPv6Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv6.</value>
+    <value>IPv6용으로 현재 구성된 DNS 서버입니다.</value>
   </data>
   <data name="Network_SetDNSCard.Header" xml:space="preserve">
-    <value>DNS Preset</value>
+    <value>DNS 프리셋</value>
   </data>
   <data name="Network_SetDNSCard.Description" xml:space="preserve">
-    <value>Choose a DNS provider and apply it to the selected network adapter.</value>
+    <value>DNS 제공업체를 선택하고 지정된 네트워크 어댑터에 적용합니다.</value>
   </data>
   <data name="Network_ResetTCPIPWarningTitle" xml:space="preserve">
-    <value>Restart Required</value>
+    <value>다시 시작 필요</value>
   </data>
   <data name="Network_ResetTCPIPWarningMessage" xml:space="preserve">
-    <value>TCP/IP stack and Winsock have been reset. Please restart your computer for the changes to take effect.</value>
+    <value>TCP/IP 스택 및 Winsock이 재설정되었습니다. 변경 사항을 적용하려면 컴퓨터를 다시 시작하십시오.</value>
   </data>
   <data name="Network_FlushDNSSuccess" xml:space="preserve">
-    <value>DNS cache flushed successfully.</value>
+    <value>DNS 캐시를 성공적으로 플러시했습니다.</value>
   </data>
   <data name="Network_ReleaseRenewSuccess" xml:space="preserve">
-    <value>IP address released and renewed successfully.</value>
+    <value>IP 주소가 성공적으로 해제되고 갱신되었습니다.</value>
   </data>
   <data name="Network_SuccessTitle" xml:space="preserve">
-    <value>Success</value>
+    <value>성공</value>
+  </data>
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>{0}개 항목 선택됨</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>선택 항목 제거</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>선택된 시작 항목 모두 제거</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>선택 해제</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>시작 앱 제거</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>시작 프로그램에서 {0}개 항목을 제거하시겠습니까?</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>{0}개의 시작 항목이 제거되었습니다.</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>{0}개 항목을 제거했습니다. {1}개 실패 (관리자 권한 필요).</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>모두 선택</value>
   </data>
 </root>

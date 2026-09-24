@@ -2726,138 +2726,165 @@
     <value>评分与评价</value>
   </data>
   <data name="Network_ToolsSection.Text" xml:space="preserve">
-    <value>Network Tools</value>
+    <value>网络工具</value>
   </data>
   <data name="Network_OptimizationSection.Text" xml:space="preserve">
-    <value>Network Optimization</value>
+    <value>网络优化</value>
   </data>
   <data name="Network_CurrentDNSSection.Text" xml:space="preserve">
-    <value>Current DNS Servers</value>
+    <value>当前 DNS 服务器</value>
   </data>
   <data name="Network_SetDNSSection.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
+    <value>设置自定义 DNS</value>
   </data>
   <data name="Network_FlushDNS.Header" xml:space="preserve">
-    <value>Flush DNS Cache</value>
+    <value>刷新 DNS 缓存</value>
   </data>
   <data name="Network_FlushDNS.Description" xml:space="preserve">
-    <value>Clears the local DNS resolver cache, forcing fresh DNS lookups for all domain names.</value>
+    <value>清除本地 DNS 解析器缓存，强制对所有域名执行全新的 DNS 查询。</value>
   </data>
   <data name="Network_FlushDNS_Button.Content" xml:space="preserve">
-    <value>Flush DNS</value>
+    <value>刷新 DNS</value>
   </data>
   <data name="Network_ReleaseRenew.Header" xml:space="preserve">
-    <value>Release &amp; Renew IP</value>
+    <value>释放并续订 IP</value>
   </data>
   <data name="Network_ReleaseRenew.Description" xml:space="preserve">
-    <value>Releases the current IP address and requests a new one from the DHCP server. Use if experiencing connectivity issues.</value>
+    <value>释放当前 IP 地址并从 DHCP 服务器请求新地址。在遇到网络连接问题时非常有用。</value>
   </data>
   <data name="Network_ReleaseRenew_Button.Content" xml:space="preserve">
-    <value>Release &amp; Renew</value>
+    <value>释放并续订</value>
   </data>
   <data name="Network_ResetTCPIP.Header" xml:space="preserve">
-    <value>Reset TCP/IP Stack</value>
+    <value>重置 TCP/IP 协议栈</value>
   </data>
   <data name="Network_ResetTCPIP.Description" xml:space="preserve">
-    <value>Resets the TCP/IP stack and Winsock catalog to their default state. A system restart is required after this operation.</value>
+    <value>将 TCP/IP 协议栈和 Winsock 目录重置为默认状态。完成此操作后需要重启系统。</value>
   </data>
   <data name="Network_ResetTCPIP_Button.Content" xml:space="preserve">
-    <value>Reset TCP/IP</value>
+    <value>重置 TCP/IP</value>
   </data>
   <data name="Network_OpenNetworkSettings.Header" xml:space="preserve">
-    <value>Open Network Settings</value>
+    <value>打开网络设置</value>
   </data>
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
-    <value>Opens the Windows Network &amp; Internet settings page.</value>
+    <value>打开 Windows 网络和 Internet 设置页面。</value>
   </data>
   <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>Open Settings</value>
+    <value>打开设置</value>
   </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
-    <value>Network Adapter Settings</value>
+    <value>网络适配器设置</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
-    <value>Opens the classic Network Connections panel to manage network adapters.</value>
+    <value>打开传统网络连接面板以管理网络适配器。</value>
   </data>
   <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>Open Adapter Settings</value>
+    <value>打开适配器设置</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
-    <value>Disable Network Throttling</value>
+    <value>禁用网络限制 (Throttling)</value>
   </data>
   <data name="Network_DisableThrottling.Description" xml:space="preserve">
-    <value>Removes the 10 packets/ms throttle that Windows applies to network traffic when multimedia applications are running, improving throughput.</value>
+    <value>解除运行多媒体应用时 Windows 对网络流量施加的 10 数据包/毫秒限制，提高网络吞吐量。</value>
   </data>
   <data name="Network_DisableNagle.Header" xml:space="preserve">
-    <value>Disable Nagle&apos;s Algorithm</value>
+    <value>禁用 Nagle 算法</value>
   </data>
   <data name="Network_DisableNagle.Description" xml:space="preserve">
-    <value>Reduces latency in TCP connections by sending packets immediately instead of buffering small ones. Beneficial for gaming and real-time applications.</value>
+    <value>通过立即发送数据包而不是缓冲小数据包来减少 TCP 延迟。有利于游戏和实时应用程序。</value>
   </data>
   <data name="Network_EnableRSS.Header" xml:space="preserve">
-    <value>Enable Receive-Side Scaling (RSS)</value>
+    <value>启用接收端调整 (RSS)</value>
   </data>
   <data name="Network_EnableRSS.Description" xml:space="preserve">
-    <value>Distributes network receive processing across multiple CPU cores, improving throughput and reducing latency on multi-core systems.</value>
+    <value>将网络接收处理分配到多个 CPU 核心，提高多核系统上的吞吐量并减少延迟。</value>
   </data>
   <data name="Network_EnableECN.Header" xml:space="preserve">
-    <value>Enable ECN (Explicit Congestion Notification)</value>
+    <value>启用显式拥塞通知 (ECN)</value>
   </data>
   <data name="Network_EnableECN.Description" xml:space="preserve">
-    <value>Allows routers to signal network congestion without dropping packets, reducing retransmissions and improving throughput.</value>
+    <value>允许路由器在不丢包的情况下发出网络拥塞信号，从而减少重新传输并提高吞吐量。</value>
   </data>
   <data name="Network_EnableCTCP.Header" xml:space="preserve">
-    <value>Enable Compound TCP (CTCP)</value>
+    <value>启用复合 TCP (CTCP)</value>
   </data>
   <data name="Network_EnableCTCP.Description" xml:space="preserve">
-    <value>Uses a more aggressive congestion algorithm that increases throughput on high-bandwidth, high-latency connections.</value>
+    <value>使用更积极的拥塞算法，在高带宽、高延迟连接上显著提升网络吞吐量。</value>
   </data>
   <data name="Network_DisableIPv6.Header" xml:space="preserve">
-    <value>Disable IPv6</value>
+    <value>禁用 IPv6</value>
   </data>
   <data name="Network_DisableIPv6.Description" xml:space="preserve">
-    <value>Disables the IPv6 protocol stack. Only recommended if you are troubleshooting IPv6-related issues. A restart may be required.</value>
+    <value>禁用 IPv6 协议栈。仅建议在排查 IPv6 相关问题时使用。可能需要重启计算机。</value>
   </data>
   <data name="Network_NicSection.Text" xml:space="preserve">
-    <value>Network Interface</value>
+    <value>网络接口</value>
   </data>
   <data name="Network_NicCard.Header" xml:space="preserve">
-    <value>Active Adapter</value>
+    <value>活动适配器</value>
   </data>
   <data name="Network_NicCard.Description" xml:space="preserve">
-    <value>Select the network adapter to configure DNS settings for.</value>
+    <value>选择要配置 DNS 设置的网络适配器。</value>
   </data>
   <data name="Network_IPv4Card.Header" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
+    <value>IPv4 DNS 服务器</value>
   </data>
   <data name="Network_IPv4Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv4.</value>
+    <value>当前为 IPv4 配置的 DNS 服务器。</value>
   </data>
   <data name="Network_IPv6Card.Header" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
+    <value>IPv6 DNS 服务器</value>
   </data>
   <data name="Network_IPv6Card.Description" xml:space="preserve">
-    <value>Currently configured DNS servers for IPv6.</value>
+    <value>当前为 IPv6 配置的 DNS 服务器。</value>
   </data>
   <data name="Network_SetDNSCard.Header" xml:space="preserve">
-    <value>DNS Preset</value>
+    <value>DNS 预设</value>
   </data>
   <data name="Network_SetDNSCard.Description" xml:space="preserve">
-    <value>Choose a DNS provider and apply it to the selected network adapter.</value>
+    <value>选择 DNS 提供商并将其应用到所选网络适配器。</value>
   </data>
   <data name="Network_ResetTCPIPWarningTitle" xml:space="preserve">
-    <value>Restart Required</value>
+    <value>需要重启</value>
   </data>
   <data name="Network_ResetTCPIPWarningMessage" xml:space="preserve">
-    <value>TCP/IP stack and Winsock have been reset. Please restart your computer for the changes to take effect.</value>
+    <value>TCP/IP 协议栈和 Winsock 已重置。请重启计算机以使更改生效。</value>
   </data>
   <data name="Network_FlushDNSSuccess" xml:space="preserve">
-    <value>DNS cache flushed successfully.</value>
+    <value>DNS 缓存刷新成功。</value>
   </data>
   <data name="Network_ReleaseRenewSuccess" xml:space="preserve">
-    <value>IP address released and renewed successfully.</value>
+    <value>IP 地址已成功释放并续订。</value>
   </data>
   <data name="Network_SuccessTitle" xml:space="preserve">
-    <value>Success</value>
+    <value>成功</value>
+  </data>
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>已选择 {0} 个项目</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>删除所选</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>删除所有选中的启动项</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>清除选择</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>删除启动应用</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>确定要从启动项中删除 {0} 个项目吗？</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>已删除 {0} 个启动项目。</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>已删除 {0} 个项目。{1} 个失败（需要管理员权限）。</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>全选</value>
   </data>
 </root>

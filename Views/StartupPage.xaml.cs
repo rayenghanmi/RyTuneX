@@ -472,4 +472,125 @@ public sealed partial class StartupPage : Page
             : string.Format("StartupPage_Notification_DisabledCount".TryGetLocalized() ?? "Disabled {0} startup apps.", count);
         App.ShowNotification(titleText, msg, failedCount > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success, 3000);
     }
+
+    private void StartupListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var count = StartupListView.SelectedItems.Count;
+        if (count > 0)
+        {
+            var template = "StartupPage_SelectionCount".TryGetLocalized() ?? "{0} item(s) selected";
+            SelectionCountText.Text = string.Format(template, count);
+            SelectionBar.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            SelectionBar.Visibility = Visibility.Collapsed;
+        }
+
+        if (SelectAllCheckBox != null)
+        {
+            if (_filteredStartupItems.Count == 0 || count == 0)
+            {
+                SelectAllCheckBox.IsChecked = false;
+            }
+            else if (count >= _filteredStartupItems.Count)
+            {
+                SelectAllCheckBox.IsChecked = true;
+            }
+            else
+            {
+                SelectAllCheckBox.IsChecked = null; // Indeterminate
+            }
+        }
+    }
+
+    private void SelectAllCheckBox_Click(object sender, RoutedEventArgs e)
+    {
+        if (SelectAllCheckBox.IsChecked == true)
+        {
+            StartupListView.SelectAll();
+        }
+        else
+        {
+            StartupListView.SelectedItems.Clear();
+        }
+    }
+
+    private async void RemoveSelectedButton_Click(object sender, RoutedEventArgs e)
+    {
+        var selectedItems = StartupListView.SelectedItems.OfType<StartupItem>().ToList();
+        if (selectedItems.Count == 0) return;
+
+        var title = "StartupPage_BatchRemoveDialog_Title".TryGetLocalized() ?? "Remove Startup Apps";
+        var contentFormat = "StartupPage_BatchRemoveDialog_Content".TryGetLocalized()
+            ?? "Are you sure you want to remove {0} item(s) from startup?";
+        var primaryBtn = "StartupPage_RemoveDialog_PrimaryButton".TryGetLocalized() ?? "Remove";
+        var closeBtn = "StartupPage_RemoveDialog_CancelButton".TryGetLocalized() ?? "Cancel";
+
+        var confirmDialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            Title = title,
+            Content = string.Format(contentFormat, selectedItems.Count),
+            PrimaryButtonText = primaryBtn,
+            CloseButtonText = closeBtn,
+            DefaultButton = ContentDialogButton.Close
+        };
+
+        var result = await confirmDialog.ShowAsync();
+        if (result != ContentDialogResult.Primary) return;
+
+        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
+        int removedCount = 0;
+        int failedCount = 0;
+
+        RemoveSelectedButton.IsEnabled = false;
+        try
+        {
+            foreach (var item in selectedItems)
+            {
+                var success = await StartupHelper.RemoveStartupItemAsync(item);
+                if (success)
+                {
+                    _allStartupItems.Remove(item);
+                    removedCount++;
+                }
+                else
+                {
+                    failedCount++;
+                }
+            }
+        }
+        finally
+        {
+            RemoveSelectedButton.IsEnabled = true;
+        }
+
+        UpdateSummaryCards();
+        ApplyFilterAndSort();
+        StartupListView.SelectedItems.Clear();
+
+        if (failedCount > 0)
+        {
+            var msg = string.Format(
+                "StartupPage_Notification_BatchRemovedFailed".TryGetLocalized()
+                    ?? "Removed {0} item(s). {1} failed (admin required).",
+                removedCount, failedCount);
+            App.ShowNotification(titleText, msg, InfoBarSeverity.Warning, 4000);
+        }
+        else
+        {
+            var msg = string.Format(
+                "StartupPage_Notification_BatchRemoved".TryGetLocalized()
+                    ?? "Removed {0} startup item(s).",
+                removedCount);
+            App.ShowNotification(titleText, msg, InfoBarSeverity.Success, 3000);
+        }
+    }
+
+    private void ClearSelectionButton_Click(object sender, RoutedEventArgs e)
+    {
+        StartupListView.SelectedItems.Clear();
+    }
 }

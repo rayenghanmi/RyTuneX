@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -130,14 +131,49 @@
             </Button>
         </Grid>
 
+        <!-- Selection Action Bar (visible when items are selected) -->
+        <Border x:Name="SelectionBar" Grid.Row="2"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1" CornerRadius="6" Padding="12,8" Margin="0,0,0,8"
+                Visibility="Collapsed">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <FontIcon Glyph="&#xE762;" FontSize="14" Opacity="0.7"/>
+                    <TextBlock x:Name="SelectionCountText" VerticalAlignment="Center" FontSize="13" Opacity="0.85"/>
+                </StackPanel>
+                <Button x:Name="RemoveSelectedButton" Grid.Column="1"
+                        Click="RemoveSelectedButton_Click"
+                        x:Uid="StartupPage_RemoveSelectedButton">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon Glyph="&#xE74D;" FontSize="12" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                        <TextBlock x:Uid="StartupPage_RemoveSelectedButtonText" Text="Remove Selected"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="ClearSelectionButton" Grid.Column="2" Margin="8,0,0,0"
+                        Click="ClearSelectionButton_Click"
+                        x:Uid="StartupPage_ClearSelectionButton">
+                    <FontIcon Glyph="&#xE711;" FontSize="12"/>
+                </Button>
+            </Grid>
+        </Border>
+
         <!-- Results Count -->
-        <TextBlock x:Name="ResultsText" Grid.Row="2" FontSize="12" Opacity="0.7" Margin="0,0,0,8"/>
+        <TextBlock x:Name="ResultsText" Grid.Row="3" FontSize="12" Opacity="0.7" Margin="0,0,0,8"/>
 
         <!-- Column Headers -->
-        <Grid x:Name="HeaderGrid" Grid.Row="3" 
+        <!-- Column Headers -->
+        <Grid x:Name="HeaderGrid" Grid.Row="4" 
               Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" 
-              Padding="12,8" CornerRadius="4" Margin="0,0,0,8">
+              Padding="12,8" CornerRadius="4" Margin="0,0,0,8"
+              ColumnSpacing="8">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="2.2*"/>
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="1.2*"/>
@@ -146,115 +182,191 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="NameHeader" Tag="Name" Click="SortHeader_Click" 
+            <CheckBox x:Name="SelectAllCheckBox" Grid.Column="0"
+                      VerticalAlignment="Center" Margin="0,0,2,0" MinWidth="0"
+                      IsThreeState="True"
+                      Click="SelectAllCheckBox_Click"
+                      x:Uid="StartupPage_SelectAllCheckBox"/>
+
+            <Button x:Name="NameHeader" Tag="Name" Grid.Column="1" Click="SortHeader_Click" 
                     Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Left">
                 <TextBlock x:Uid="StartupPage_ColName" Text="App Name" FontWeight="SemiBold" FontSize="13"/>
             </Button>
-            <Button x:Name="PublisherHeader" Tag="Publisher" Grid.Column="1" Click="SortHeader_Click" 
+            <Button x:Name="PublisherHeader" Tag="Publisher" Grid.Column="2" Click="SortHeader_Click" 
                     Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Left">
                 <TextBlock x:Uid="StartupPage_ColPublisher" Text="Publisher" FontWeight="SemiBold" FontSize="13"/>
             </Button>
-            <Button x:Name="LocationHeader" Tag="Location" Grid.Column="2" Click="SortHeader_Click" 
+            <Button x:Name="LocationHeader" Tag="Location" Grid.Column="3" Click="SortHeader_Click" 
                     Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Center">
                 <TextBlock x:Uid="StartupPage_ColLocation" Text="Location" FontWeight="SemiBold" FontSize="13"/>
             </Button>
-            <Button x:Name="ImpactHeader" Tag="Impact" Grid.Column="3" Click="SortHeader_Click" 
+            <Button x:Name="ImpactHeader" Tag="Impact" Grid.Column="4" Click="SortHeader_Click" 
                     Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Center">
                 <TextBlock x:Uid="StartupPage_ColImpact" Text="Impact" FontWeight="SemiBold" FontSize="13"/>
             </Button>
-            <Button x:Name="StatusHeader" Tag="Status" Grid.Column="4" Click="SortHeader_Click" 
+            <Button x:Name="StatusHeader" Tag="Status" Grid.Column="5" Click="SortHeader_Click" 
                     Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Center">
                 <TextBlock x:Uid="StartupPage_ColStatus" Text="Status" FontWeight="SemiBold" FontSize="13"/>
             </Button>
-            <TextBlock x:Uid="StartupPage_ColActions" Grid.Column="5" Text="Actions" FontWeight="SemiBold" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Uid="StartupPage_ColActions" Grid.Column="6" Text="Actions" FontWeight="SemiBold" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
         <!-- Startup Items List -->
-        <Grid Grid.Row="4" Margin="0,0,0,24">
+        <Grid Grid.Row="5" Margin="0,0,0,24">
             <ProgressRing x:Name="LoadingRing" IsActive="True" Width="48" Height="48" 
                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <ListView x:Name="StartupListView" 
-                      SelectionMode="None"
+                      SelectionMode="Multiple"
+                      SelectionChanged="StartupListView_SelectionChanged"
                       Visibility="Collapsed">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0,0,0,4"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="PointerOver">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="CardBorder.Background"
+                                                            Value="{ThemeResource CardBackgroundFillColorSecondaryBrush}"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="CardBorder.Background"
+                                                            Value="{ThemeResource CardBackgroundFillColorTertiaryBrush}"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled"/>
+                                            </VisualStateGroup>
+                                            <VisualStateGroup x:Name="SelectionStates">
+                                                <VisualState x:Name="Unselected"/>
+                                                <VisualState x:Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="CardBorder.Background" Value="{ThemeResource CardBackgroundFillColorSecondaryBrush}"/>
+                                                        <Setter Target="ItemCheckBox.IsChecked" Value="True"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="SelectedSingleOrMultiple">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="CardBorder.Background" Value="{ThemeResource CardBackgroundFillColorSecondaryBrush}"/>
+                                                        <Setter Target="ItemCheckBox.IsChecked" Value="True"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+                                        <Border x:Name="CardBorder"
+                                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="4"
+                                            Padding="12,10">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <CheckBox x:Name="ItemCheckBox"
+                                                    Grid.Column="0"
+                                                    VerticalAlignment="Center"
+                                                    Margin="0,0,10,0"
+                                                    MinWidth="0"
+                                                    IsHitTestVisible="False"
+                                                    IsTabStop="False"
+                                                    IsChecked="{TemplateBinding IsSelected}" />
+                                                <ContentPresenter Grid.Column="1"
+                                                    HorizontalAlignment="Stretch"/>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:StartupItem">
-                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
-                                CornerRadius="4" Padding="12,10" Margin="0,2">
-                            <Grid ColumnSpacing="8">
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2.2*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="0.9*"/>
+                                <ColumnDefinition Width="1.1*"/>
+                                <ColumnDefinition Width="Auto" MinWidth="110"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Name & Command -->
+                            <Grid Grid.Column="0" VerticalAlignment="Center" ColumnSpacing="10">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2.2*"/>
-                                    <ColumnDefinition Width="1.5*"/>
-                                    <ColumnDefinition Width="1.2*"/>
-                                    <ColumnDefinition Width="0.9*"/>
-                                    <ColumnDefinition Width="1.1*"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="110"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-
-                                <!-- Name & Command -->
-                                <Grid Grid.Column="0" VerticalAlignment="Center" ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <FontIcon Grid.Column="0" Glyph="{x:Bind StatusGlyph}" FontSize="16" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" Opacity="0.8" VerticalAlignment="Center"/>
-                                    <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
-                                        <TextBlock Text="{x:Bind Name}" TextWrapping="Wrap" FontWeight="Medium" FontSize="13"/>
-                                        <TextBlock Text="{x:Bind Command}" FontSize="11" Opacity="0.5" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis"/>
-                                    </StackPanel>
-                                </Grid>
-
-                                <!-- Publisher & Description -->
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2" Margin="4,0">
-                                    <TextBlock Text="{x:Bind Publisher}" FontSize="12" Opacity="0.85" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{x:Bind Description}" FontSize="10" Opacity="0.5" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis"/>
-                                </StackPanel>
-
-                                <!-- Location -->
-                                <Border Grid.Column="2" Background="{ThemeResource SubtleFillColorSecondaryBrush}" 
-                                        CornerRadius="4" Padding="8,4" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Text="{x:Bind LocationDisplay}" FontSize="11" Opacity="0.8" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
-                                </Border>
-
-                                <!-- Impact -->
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4">
-                                    <FontIcon Glyph="{x:Bind ImpactGlyph}" FontSize="12" Opacity="0.8"/>
-                                    <TextBlock Text="{x:Bind ImpactText}" FontSize="11" FontWeight="SemiBold" TextWrapping="Wrap"/>
-                                </StackPanel>
-
-                                <!-- Status Toggle -->
-                                <ToggleSwitch Grid.Column="4" 
-                                              IsOn="{x:Bind IsEnabled, Mode=OneWay}"
-                                              Tag="{x:Bind}"
-                                              Toggled="ItemToggle_Toggled"
-                                              HorizontalAlignment="Center" 
-                                              VerticalAlignment="Center"
-                                              MinWidth="0"
-                                              Margin="0"
-                                              OnContent="" OffContent=""/>
-
-                                <!-- Actions -->
-                                <StackPanel Grid.Column="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4">
-                                    <Button Tag="{x:Bind}" 
-                                            Click="ItemDetails_Click" 
-                                            x:Uid="StartupPage_DetailsTooltip"
-                                            Padding="8,6">
-                                        <FontIcon Glyph="&#xE946;" FontSize="12"/>
-                                    </Button>
-                                    <Button Tag="{x:Bind}" 
-                                            Click="OpenFolder_Click" 
-                                            x:Uid="StartupPage_OpenFolderTooltip"
-                                            Padding="8,6">
-                                        <FontIcon Glyph="&#xE8DA;" FontSize="12"/>
-                                    </Button>
-                                    <Button Tag="{x:Bind}" 
-                                            Click="RemoveItem_Click" 
-                                            x:Uid="StartupPage_DeleteTooltip"
-                                            Padding="8,6">
-                                        <FontIcon Glyph="&#xE74D;" FontSize="12" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
-                                    </Button>
+                                <FontIcon Grid.Column="0" Glyph="{x:Bind StatusGlyph}" FontSize="16" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" Opacity="0.8" VerticalAlignment="Center"/>
+                                <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+                                    <TextBlock Text="{x:Bind Name}" TextWrapping="Wrap" FontWeight="Medium" FontSize="13"/>
+                                    <TextBlock Text="{x:Bind Command}" FontSize="11" Opacity="0.5" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis"/>
                                 </StackPanel>
                             </Grid>
-                        </Border>
+
+                            <!-- Publisher & Description -->
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2" Margin="4,0">
+                                <TextBlock Text="{x:Bind Publisher}" FontSize="12" Opacity="0.85" TextWrapping="Wrap"/>
+                                <TextBlock Text="{x:Bind Description}" FontSize="10" Opacity="0.5" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+
+                            <!-- Location -->
+                            <Border Grid.Column="2" Background="{ThemeResource SubtleFillColorSecondaryBrush}" 
+                                    CornerRadius="4" Padding="8,4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{x:Bind LocationDisplay}" FontSize="11" Opacity="0.8" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
+                            </Border>
+
+                            <!-- Impact -->
+                            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4">
+                                <FontIcon Glyph="{x:Bind ImpactGlyph}" FontSize="12" Opacity="0.8"/>
+                                <TextBlock Text="{x:Bind ImpactText}" FontSize="11" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                            </StackPanel>
+
+                            <!-- Status Toggle -->
+                            <ToggleSwitch Grid.Column="4" 
+                                          IsOn="{x:Bind IsEnabled, Mode=OneWay}"
+                                          Tag="{x:Bind}"
+                                          Toggled="ItemToggle_Toggled"
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"
+                                          MinWidth="0"
+                                          Margin="0"
+                                          OnContent="" OffContent=""/>
+
+                            <!-- Actions -->
+                            <StackPanel Grid.Column="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4">
+                                <Button Tag="{x:Bind}" 
+                                        Click="ItemDetails_Click" 
+                                        x:Uid="StartupPage_DetailsTooltip"
+                                        Padding="8,6">
+                                    <FontIcon Glyph="&#xE946;" FontSize="12"/>
+                                </Button>
+                                <Button Tag="{x:Bind}" 
+                                        Click="OpenFolder_Click" 
+                                        x:Uid="StartupPage_OpenFolderTooltip"
+                                        Padding="8,6">
+                                    <FontIcon Glyph="&#xE8DA;" FontSize="12"/>
+                                </Button>
+                                <Button Tag="{x:Bind}" 
+                                        Click="RemoveItem_Click" 
+                                        x:Uid="StartupPage_DeleteTooltip"
+                                        Padding="8,6">
+                                    <FontIcon Glyph="&#xE74D;" FontSize="12" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
