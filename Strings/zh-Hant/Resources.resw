@@ -148,20 +148,8 @@
   <data name="HomePage_QuickAction_RepairIssues.Text" xml:space="preserve">
     <value>修復問題</value>
   </data>
-  <data name="HomePage_QuickAction_ManageStartupApps.Text" xml:space="preserve">
-    <value>管理啟動應用程式</value>
-  </data>
   <data name="HomePage_QuickAction_CleanTemporaryFiles.Text" xml:space="preserve">
     <value>清理暫存檔案</value>
-  </data>
-  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>傳送反饋</value>
-  </data>
-  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>處理器</value>
-  </data>
-  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>顯示卡</value>
   </data>
   <data name="Debloat" xml:space="preserve">
     <value>精簡</value>
@@ -259,20 +247,11 @@
   <data name="Version" xml:space="preserve">
     <value>版本</value>
   </data>
-  <data name="VideoArchitecture" xml:space="preserve">
-    <value>視訊架構</value>
-  </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windows 目錄</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>刪除臨時檔案時出錯</value>
-  </data>
-  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>系統功能</value>
-  </data>
-  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>Windows 11 獨佔</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
     <value>選擇一個資料夾</value>
@@ -297,12 +276,6 @@
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
     <value>驅動程式</value>
-  </data>
-  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>匯出</value>
-  </data>
-  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>提取您的驅動程式到外部資料夾以便於備份</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
     <value>提取驅動程式</value>
@@ -460,12 +433,6 @@
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
     <value>禁用 Windows 中的 CoPilot AI 功能以幫助編寫程式碼.  不建議開發者使用</value>
   </data>
-  <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>基本優化</value>
-  </data>
-  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>效能調整</value>
-  </data>
   <data name="Feature_DisableSysMain.Header" xml:space="preserve">
     <value>禁用 SysMain</value>
   </data>
@@ -496,9 +463,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>不包括來自 Windows Update 的驅動程式更新.  可能會導致過時的驅動程式存在潛在的安全風險或相容性問題.  謹慎使用. </value>
   </data>
-  <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>高階優化</value>
-  </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
     <value>禁用系統還原</value>
   </data>
@@ -516,12 +480,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>禁用從 Microsoft Store 下載的應用程式的自動更新.  可能會使應用程式容易受到安全風險或缺乏新功能. </value>
-  </data>
-  <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>遙測</value>
-  </data>
-  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>增強隱私</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
     <value>禁用 SMBv1</value>
@@ -589,15 +547,6 @@
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
     <value>應用 DNS</value>
   </data>
-  <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>IPv4 DNS 伺服器</value>
-  </data>
-  <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>IPv6 DNS 伺服器</value>
-  </data>
-  <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>網路介面</value>
-  </data>
   <data name="Network_Primary.Text" xml:space="preserve">
     <value>主要</value>
   </data>
@@ -606,9 +555,6 @@
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
     <value>次要</value>
-  </data>
-  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>設定自定義 DNS</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
     <value>未找到 IPv4 DNS 地址</value>
@@ -643,26 +589,8 @@
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneX 是一個使用 WinUI 3 框架構建的尖端優化工具, 旨在提升 Windows 裝置的效能. 適用於 Windows 10 和 11, RyTuneX 幫助使用者輕鬆刪除頑固的預裝應用程式並優化系統資源. </value>
   </data>
-  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>檢查更新</value>
-  </data>
-  <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>有新版本 (</value>
-  </data>
-  <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>) 可用. 請更新至最新版本以享受新功能和改進. </value>
-  </data>
   <data name="UpdateTitle" xml:space="preserve">
     <value>RyTuneX 更新</value>
-  </data>
-  <data name="NetworkError" xml:space="preserve">
-    <value>發生錯誤. 請檢查您的網際網路連線並稍後重試. </value>
-  </data>
-  <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>您已經執行的是最新版本 (</value>
-  </data>
-  <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>). 當前沒有可用的更新. </value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>關閉</value>
@@ -682,17 +610,11 @@
   <data name="BatteryStatus" xml:space="preserve">
     <value>電池狀態</value>
   </data>
-  <data name="Chemistry" xml:space="preserve">
-    <value>化學成分</value>
-  </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>安全</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>發生了一個意外錯誤</value>
-  </data>
-  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>檢視日誌</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>總數: {0} 個應用</value>
@@ -832,12 +754,6 @@
   <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
     <value>關閉安全搜尋模式, 過濾掉搜尋結果中可能有害或不適當的內容. 禁用此功能會增加暴露於不安全內容的風險. </value>
   </data>
-  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
-    <value>禁用活動上傳</value>
-  </data>
-  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
-    <value>禁用活動資料上傳, 防止Microsoft收集您的使用資料以改善服務. 這有助於保持隱私. </value>
-  </data>
   <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
     <value>禁用剪貼簿同步</value>
   </data>
@@ -868,23 +784,11 @@
   <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
     <value>禁用查詢我的裝置功能, 該功能幫助在丟失裝置時找到它. 禁用此功能減少了找回丟失裝置的能力, 但提高了隱私性. </value>
   </data>
-  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>禁用活動反饋</value>
-  </data>
-  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>關閉顯示您最近活動的活動反饋, 有助於通過防止他人看到您在裝置上做了什麼來保護您的隱私. </value>
-  </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
     <value>禁用CDP(客戶資料平臺)</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
     <value>禁用CDP, 防止客戶資料平臺收集和使用您的資料進行分析和定向推薦. 這可以提高隱私性, 但可能會限制個性化功能. </value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>禁用隱私中的個性化體驗</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>禁用隱私設定中的個性化體驗, 停止Windows使用您的資料來定製您的體驗. 這可能減少個性化功能. </value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
     <value>禁用診斷彈窗</value>
@@ -897,12 +801,6 @@
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
     <value>禁用線上語音隱私, 防止Windows儲存或處理語音命令. 這提高了隱私性, 但會限制語音搜尋和命令等功能. </value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>禁用位置訪問</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>關閉應用和服務的位置資訊訪問, 防止它們使用裝置的GPS或網路位置. 這提高了隱私性, 但可能限制基於位置的服務. </value>
   </data>
   <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
     <value>禁用位置功能</value>
@@ -1006,9 +904,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>通過調整系統配置檔案設定來增強系統性能. 此功能優先考慮速度和效率, 提高整體系統響應能力和資源管理. </value>
   </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>裝置資訊</value>
-  </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>啟用經典上下文選單</value>
   </data>
@@ -1018,15 +913,9 @@
   <data name="DoNotShowCheckBox" xml:space="preserve">
     <value>不再顯示此訊息</value>
   </data>
-  <data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>建立還原點</value>
-  </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>強烈建議在對系統進行任何更改之前建立一個還原點. 
 在繼續之前, 是否要建立一個系統還原點?</value>
-  </data>
-  <data name="CreatingRestorePoint" xml:space="preserve">
-    <value>正在建立還原點</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>還原所有更改</value>
@@ -1041,9 +930,6 @@
     <value>您將還原 RyTuneX 對系統所做的所有更改(已解除安裝的應用程式除外)並重置應用程式的首選項. 
 
 您確定要繼續嗎?</value>
-  </data>
-  <data name="NoChangesFound" xml:space="preserve">
-    <value>未發現顯著更改. </value>
   </data>
   <data name="OperationStopped" xml:space="preserve">
     <value>操作已停止</value>
@@ -1071,20 +957,8 @@
   <data name="ScheduledLater" xml:space="preserve">
     <value>已安排在下次重啟時</value>
   </data>
-  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>掃描</value>
-  </data>
-  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>修復</value>
-  </data>
   <data name="RepairPage_StopButton.Content" xml:space="preserve">
     <value>停止</value>
-  </data>
-  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>請選擇至少一個選項以進行掃描/修復</value>
-  </data>
-  <data name="StatusTextBlockDefault" xml:space="preserve">
-    <value>請選擇至少一個選項以進行掃描/修復</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>電池健康</value>
@@ -1122,9 +996,6 @@
   <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
     <value>修復選項</value>
   </data>
-  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>診斷選項</value>
-  </data>
   <data name="OperationCompleted" xml:space="preserve">
     <value>操作完成</value>
   </data>
@@ -1148,12 +1019,6 @@
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
     <value>其他設定</value>
-  </data>
-  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>基本系統優化</value>
-  </data>
-  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>高階系統優化</value>
   </data>
   <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
     <value>沒有應用匹配您的搜尋</value>
@@ -1242,9 +1107,6 @@
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>阻止韌體在啟動時運行程式(例如, OEM 預裝軟體).</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>還原更改</value>
-  </data>
   <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>進口</value>
   </data>
@@ -1277,12 +1139,6 @@
   </data>
   <data name="KeepAppData" xml:space="preserve">
     <value>保留應用程式資料</value>
-  </data>
-  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>您正在以管理員身份執行</value>
-  </data>
-  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>請以管理員身份重新啟動應用程式以使更改生效</value>
   </data>
   <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
     <value>重新整理</value>
@@ -1404,12 +1260,6 @@
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>新增極致效能計畫</value>
   </data>
-  <data name="PoliciesPage_Warning" xml:space="preserve">
-    <value>此功能僅偵測原則支援的登錄項目。它不會偵測服務變更或非原則登錄調整。</value>
-  </data>
-  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
-    <value>此頁面會偵測並允許您移除本機群組原則覆寫。移除原則覆寫會將其恢復為未設定狀態。</value>
-  </data>
   <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>原則摘要</value>
   </data>
@@ -1433,12 +1283,6 @@
   </data>
   <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>未偵測到原則覆寫。</value>
-  </data>
-  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
-    <value>移除所有覆寫</value>
-  </data>
-  <data name="PoliciesPage_Title" xml:space="preserve">
-    <value>群組原則覆寫偵測</value>
   </data>
   <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>正在掃描原則...</value>
@@ -1595,15 +1439,6 @@
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>預設</value>
-  </data>
-  <data name="ScanResults" xml:space="preserve">
-    <value>掃描結果</value>
-  </data>
-  <data name="MicrosoftAccount" xml:space="preserve">
-    <value>Microsoft 帳戶</value>
-  </data>
-  <data name="LocalAccount" xml:space="preserve">
-    <value>本機帳戶</value>
   </data>
   <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
     <value>停用 Windows AI</value>
@@ -2223,7 +2058,33 @@
   <data name="StartupPage_Notification_DisabledCount" xml:space="preserve">
     <value>已禁用 {0} 個啟動應用程式。</value>
   </data>
-
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>已選取 {0} 個項目</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>移除所選</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>移除所有選取的啟動項目</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>清除選取</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>移除啟動應用程式</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>確定要從啟動項目中移除 {0} 個項目嗎？</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>已移除 {0} 個啟動項目。</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>已移除 {0} 個項目。{1} 個失敗（需要系統管理員權限）。</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>全選</value>
+  </data>
   <data name="Intelligent_ScoreTitle" xml:space="preserve">
     <value>最佳化得分</value>
   </data>
@@ -2395,9 +2256,6 @@
   <data name="Intelligent_Flyout_TechnicalDetails" xml:space="preserve">
     <value>技術詳細資料</value>
   </data>
-  <data name="Intelligent_Flyout_ScoreImpact" xml:space="preserve">
-    <value>評分影響: +{0} 分 ({1})</value>
-  </data>
   <data name="Intelligent_Flyout_PreApplyBackup" xml:space="preserve">
     <value>套用前備份: 儲存於 {0} (初始狀態: {1})</value>
   </data>
@@ -2407,7 +2265,6 @@
   <data name="Intelligent_Flyout_Status" xml:space="preserve">
     <value>目前狀態: {0}</value>
   </data>
-
   <data name="Intelligent_Verification_Active" xml:space="preserve">
     <value>已驗證啟用 ✓</value>
   </data>
@@ -2423,7 +2280,6 @@
   <data name="Intelligent_General_Category" xml:space="preserve">
     <value>一般</value>
   </data>
-
   <data name="Intelligent_Impact_BackgroundApps" xml:space="preserve">
     <value>釋放背景 CPU 週期，節省 200MB 以上 RAM。</value>
   </data>
@@ -2766,17 +2622,11 @@
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
     <value>開啟 Windows 網路和網際網路設定頁面。</value>
   </data>
-  <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>開啟設定</value>
-  </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
     <value>網路介面卡設定</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
     <value>開啟傳統網路連線控制台以管理網路介面卡。</value>
-  </data>
-  <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>開啟介面卡設定</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
     <value>停用網路節流 (Throttling)</value>
@@ -2856,31 +2706,187 @@
   <data name="Network_SuccessTitle" xml:space="preserve">
     <value>成功</value>
   </data>
-  <data name="StartupPage_SelectionCount" xml:space="preserve">
-    <value>已選取 {0} 個項目</value>
+  <data name="OptimizeSystemPage_TimerResolution.Text" xml:space="preserve">
+    <value>計時器解析度與延遲</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
-    <value>移除所選</value>
+  <data name="Feature_GlobalTimerResolution.Header" xml:space="preserve">
+    <value>啟用全域計時器解析度</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>移除所有選取的啟動項目</value>
+  <data name="Feature_GlobalTimerResolution.Description" xml:space="preserve">
+    <value>允許應用程式在全域要求更高的計時器解析度，從而降低遊戲與即時音訊的排程延遲。</value>
   </data>
-  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>清除選取</value>
+  <data name="Feature_DisableHPET.Header" xml:space="preserve">
+    <value>停用 HPET</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
-    <value>移除啟動應用程式</value>
+  <data name="Feature_DisableHPET.Description" xml:space="preserve">
+    <value>停用高精度事件計時器 (HPET) 並切換至 TSC 以獲得更低延遲的計時。需要重新啟動系統。</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
-    <value>確定要從啟動項目中移除 {0} 個項目嗎？</value>
+  <data name="Feature_DisableDynamicTick.Header" xml:space="preserve">
+    <value>停用動態計時週期 (Dynamic Tick)</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
-    <value>已移除 {0} 個啟動項目。</value>
+  <data name="Feature_DisableDynamicTick.Description" xml:space="preserve">
+    <value>強制系統計時器以恆定速率觸發而非動態調整，減少延遲敏感任務中的時脈抖動。</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>已移除 {0} 個項目。{1} 個失敗（需要系統管理員權限）。</value>
+  <data name="OptimizeSystemPage_MemoryOptimization.Text" xml:space="preserve">
+    <value>記憶體最佳化</value>
   </data>
-  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
-    <value>全選</value>
+  <data name="Feature_DisablePrefetch.Header" xml:space="preserve">
+    <value>停用 Prefetch 與 Superfetch</value>
+  </data>
+  <data name="Feature_DisablePrefetch.Description" xml:space="preserve">
+    <value>停用 Windows 預取與 Superfetch 預載以釋放 RAM 並減少固態硬碟的 I/O。建議 SSD 使用者開啟。</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Header" xml:space="preserve">
+    <value>啟用大型系統快取</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Description" xml:space="preserve">
+    <value>為檔案系統快取配置更多系統記憶體，改善大檔案工作負載下的磁碟讀取效能。</value>
+  </data>
+  <data name="Feature_DisableNDU.Header" xml:space="preserve">
+    <value>停用網路資料使用量監視器 (NDU)</value>
+  </data>
+  <data name="Feature_DisableNDU.Description" xml:space="preserve">
+    <value>停用 NDU 服務，該服務在長時間開機後已知會在部分系統上造成非分頁集區記憶體流失。</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Header" xml:space="preserve">
+    <value>停用分頁檔案加密</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Description" xml:space="preserve">
+    <value>停用 Windows 分頁檔案加密，以降低分頁作業期間的 CPU 負荷。</value>
+  </data>
+  <data name="FeaturesPage_NotificationControls.Text" xml:space="preserve">
+    <value>通知控制項</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Header" xml:space="preserve">
+    <value>停用鎖定畫面通知</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Description" xml:space="preserve">
+    <value>防止快顯通知顯示在鎖定畫面上，以提升隱私並減少干擾。</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Header" xml:space="preserve">
+    <value>停用所有快顯通知</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Description" xml:space="preserve">
+    <value>完全停用來自應用程式與系統的所有快顯橫幅通知。</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Header" xml:space="preserve">
+    <value>停用通知中心</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Description" xml:space="preserve">
+    <value>從工作列中移除控制中心與通知中心。需要重新啟動檔案總管。</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Header" xml:space="preserve">
+    <value>停用建議動作</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Description" xml:space="preserve">
+    <value>複製日期、電話號碼或地址時，停用智慧型剪貼簿建議動作彈出視窗。</value>
+  </data>
+  <data name="FeaturesPage_ContextMenu.Text" xml:space="preserve">
+    <value>快顯功能表自訂</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Header" xml:space="preserve">
+    <value>在快顯功能表新增「取得擁有權」</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Description" xml:space="preserve">
+    <value>在檔案與資料夾的按右鍵功能表新增「取得擁有權」選項，方便快速取得系統檔案權限。</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Header" xml:space="preserve">
+    <value>新增「在此處開啟命令提示字元」</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Description" xml:space="preserve">
+    <value>在資料夾背景按右鍵功能表新增「在此處開啟命令提示字元」選項。</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Header" xml:space="preserve">
+    <value>在快顯功能表新增「複製檔案路徑」</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Description" xml:space="preserve">
+    <value>在檔案按右鍵功能表新增「複製檔案路徑」選項，可一鍵將完整路徑複製到剪貼簿。</value>
+  </data>
+  <data name="PrivacyPage_PrivacyHardening.Text" xml:space="preserve">
+    <value>隱私強化</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Header" xml:space="preserve">
+    <value>停用 Wi-Fi 感知 (Wi-Fi Sense)</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Description" xml:space="preserve">
+    <value>停用自動連線至建議的開放式 Wi-Fi 熱點與聯絡人分享的網路功能。</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Header" xml:space="preserve">
+    <value>停用搜尋中的 Web 搜尋結果</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Description" xml:space="preserve">
+    <value>防止 Windows 搜尋將查詢傳送至 Bing 並顯示網頁搜尋結果。保持搜尋本機化與私密性。</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Header" xml:space="preserve">
+    <value>停用應用程式啟動追蹤</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Description" xml:space="preserve">
+    <value>阻止 Windows 追蹤您啟動的應用程式，以個人化 [開始] 功能表中最常用的應用程式清單。</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Header" xml:space="preserve">
+    <value>停用時間軸與活動歷程記錄</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Description" xml:space="preserve">
+    <value>停用 Windows 時間軸活動摘要，並防止活動資料發佈或上傳至雲端。</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Header" xml:space="preserve">
+    <value>停用 P2P 更新傳遞</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Description" xml:space="preserve">
+    <value>停用 Windows Update 對等互連傳遞最佳化，防止電腦在網際網路上與其他電腦共用更新資料。</value>
+  </data>
+  <data name="Network_DisableHotspot20.Header" xml:space="preserve">
+    <value>停用 Hotspot 2.0</value>
+  </data>
+  <data name="Network_DisableHotspot20.Description" xml:space="preserve">
+    <value>停用 Hotspot 2.0 (Passpoint) 自動 Wi-Fi 熱點探索與連線，以提升隱私。</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Header" xml:space="preserve">
+    <value>停用 NetBIOS over TCP/IP</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Description" xml:space="preserve">
+    <value>停用舊版的 NetBIOS over TCP/IP 名稱解析，以減少網路受攻擊面並提升安全性。</value>
+  </data>
+  <data name="OptimizeSystemPage_InputResponsiveness.Text" xml:space="preserve">
+    <value>輸入與回應速度</value>
+  </data>
+  <data name="OptimizeSystemPage_GamingGpu.Text" xml:space="preserve">
+    <value>遊戲與顯示卡</value>
+  </data>
+  <data name="OptimizeSystemPage_DiskFileSystem.Text" xml:space="preserve">
+    <value>磁碟與檔案系統</value>
+  </data>
+  <data name="OptimizeSystemPage_ServicesSystem.Text" xml:space="preserve">
+    <value>服務與系統</value>
+  </data>
+  <data name="OptimizeSystemPage_WindowsComponents.Text" xml:space="preserve">
+    <value>Windows 元件</value>
+  </data>
+  <data name="FeaturesPage_AppearanceUI.Text" xml:space="preserve">
+    <value>外觀與介面</value>
+  </data>
+  <data name="FeaturesPage_SystemServices.Text" xml:space="preserve">
+    <value>系統服務</value>
+  </data>
+  <data name="FeaturesPage_InputAccessibility.Text" xml:space="preserve">
+    <value>輸入與協助工具</value>
+  </data>
+  <data name="FeaturesPage_ExplorerShell.Text" xml:space="preserve">
+    <value>檔案總管與外殼</value>
+  </data>
+  <data name="FeaturesPage_Win11UI.Text" xml:space="preserve">
+    <value>Windows 11 介面</value>
+  </data>
+  <data name="FeaturesPage_WindowsAIEdge.Text" xml:space="preserve">
+    <value>Windows AI 與 Edge</value>
+  </data>
+  <data name="PrivacyPage_DataCollection.Text" xml:space="preserve">
+    <value>資料收集與輸入</value>
+  </data>
+  <data name="PrivacyPage_CloudSync.Text" xml:space="preserve">
+    <value>雲端與裝置同步</value>
+  </data>
+  <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
+    <value>位置與安全性</value>
   </data>
 </root>

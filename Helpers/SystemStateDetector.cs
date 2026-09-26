@@ -561,6 +561,64 @@ internal static class SystemStateDetector
                 DwordEquals(RegistryHive.LocalMachine,
                     @"SOFTWARE\Policies\Microsoft\Windows\WindowsAI", "AllowRecallEnablement", 0)),
 
+            // Timer Resolution
+            "GlobalTimerResolution" => DwordEquals(RegistryHive.LocalMachine,
+                @"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "GlobalTimerResolutionRequests", 1),
+
+            "HPET" => null, // bcdedit state, fall back to stored
+
+            "DynamicTick" => null, // bcdedit state, fall back to stored
+
+            // Memory Optimization
+            "Prefetch" => DwordEquals(RegistryHive.LocalMachine,
+                @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters", "EnablePrefetcher", 0),
+
+            "LargeSystemCache" => DwordEquals(RegistryHive.LocalMachine,
+                @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", 1),
+
+            "NDU" => ServiceDisabled("Ndu"),
+
+            "PageFileEncryption" => null, // fsutil state, fall back to stored
+
+            // Notification Controls
+            "LockScreenNotifications" => DwordEquals(RegistryHive.CurrentUser,
+                @"Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications", "NoToastApplicationNotificationOnLockScreen", 1),
+
+            "ToastNotifications" => DwordEquals(RegistryHive.CurrentUser,
+                @"Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications", "NoToastApplicationNotification", 1),
+
+            "NotificationCenter" => DwordEquals(RegistryHive.CurrentUser,
+                @"Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter", 1),
+
+            "SuggestedActions" => DwordEquals(RegistryHive.CurrentUser,
+                @"Software\Microsoft\Windows\CurrentVersion\SmartActionPlatform\SmartClipboard", "Disabled", 1),
+
+            // Privacy Hardening
+            "WiFiSense" => DwordEquals(RegistryHive.LocalMachine,
+                @"SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config", "AutoConnectAllowedOEM", 0),
+
+            "WebSearchResults" => All(
+                DwordEquals(RegistryHive.CurrentUser,
+                    @"Software\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", 1),
+                DwordEquals(RegistryHive.CurrentUser,
+                    @"Software\Microsoft\Windows\CurrentVersion\Search", "BingSearchEnabled", 0)),
+
+            "AppLaunchTracking" => DwordEquals(RegistryHive.CurrentUser,
+                @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", 0),
+
+            "TimelineHistory" => All(
+                DwordEquals(RegistryHive.LocalMachine,
+                    @"SOFTWARE\Policies\Microsoft\Windows\System", "EnableActivityFeed", 0),
+                DwordEquals(RegistryHive.LocalMachine,
+                    @"SOFTWARE\Policies\Microsoft\Windows\System", "PublishUserActivities", 0)),
+
+            // Context Menu
+            "TakeOwnership" => null, // shell handler, fall back to stored
+
+            "OpenCmdHere" => null, // shell handler, fall back to stored
+
+            "CopyFilePath" => null, // shell handler, fall back to stored
+
             _ => null
         };
     }

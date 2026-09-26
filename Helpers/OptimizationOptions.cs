@@ -1165,11 +1165,6 @@ internal partial class OptimizationOptions
                 else await OptimizeSystemHelper.EnableSafeSearchMode().ConfigureAwait(false);
                 break;
 
-            case "ActivityUploads":
-                if (isOn) await OptimizeSystemHelper.DisableActivityUploads().ConfigureAwait(false);
-                else await OptimizeSystemHelper.EnableActivityUploads().ConfigureAwait(false);
-                break;
-
             case "ClipboardSync":
                 if (isOn) await OptimizeSystemHelper.DisableClipboardSync().ConfigureAwait(false);
                 else await OptimizeSystemHelper.EnableClipboardSync().ConfigureAwait(false);
@@ -1193,11 +1188,6 @@ internal partial class OptimizationOptions
             case "FindMyDevice":
                 if (isOn) await OptimizeSystemHelper.DisableFindMyDevice().ConfigureAwait(false);
                 else await OptimizeSystemHelper.EnableFindMyDevice().ConfigureAwait(false);
-                break;
-
-            case "ActivityFeed":
-                if (isOn) await OptimizeSystemHelper.DisableActivityFeed().ConfigureAwait(false);
-                else await OptimizeSystemHelper.EnableActivityFeed().ConfigureAwait(false);
                 break;
 
             case "Cdp":
@@ -1373,6 +1363,96 @@ internal partial class OptimizationOptions
             case "WindowsAI":
                 if (isOn) await OptimizeSystemHelper.DisableWindowsAI().ConfigureAwait(false);
                 else await OptimizeSystemHelper.EnableWindowsAI().ConfigureAwait(false);
+                break;
+
+            case "GlobalTimerResolution":
+                if (isOn) await OptimizeSystemHelper.EnableGlobalTimerResolution().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableGlobalTimerResolution().ConfigureAwait(false);
+                break;
+
+            case "HPET":
+                if (isOn) await OptimizeSystemHelper.DisableHPET().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableHPET().ConfigureAwait(false);
+                break;
+
+            case "DynamicTick":
+                if (isOn) await OptimizeSystemHelper.DisableDynamicTick().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableDynamicTick().ConfigureAwait(false);
+                break;
+
+            case "Prefetch":
+                if (isOn) await OptimizeSystemHelper.DisablePrefetch().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnablePrefetch().ConfigureAwait(false);
+                break;
+
+            case "LargeSystemCache":
+                if (isOn) await OptimizeSystemHelper.EnableLargeSystemCache().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableLargeSystemCache().ConfigureAwait(false);
+                break;
+
+            case "NDU":
+                if (isOn) await OptimizeSystemHelper.DisableNDU().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableNDU().ConfigureAwait(false);
+                break;
+
+            case "PageFileEncryption":
+                if (isOn) await OptimizeSystemHelper.DisablePageFileEncryption().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnablePageFileEncryption().ConfigureAwait(false);
+                break;
+
+            case "LockScreenNotifications":
+                if (isOn) await OptimizeSystemHelper.DisableLockScreenNotifications().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLockScreenNotifications().ConfigureAwait(false);
+                break;
+
+            case "ToastNotifications":
+                if (isOn) await OptimizeSystemHelper.DisableToastNotifications().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableToastNotifications().ConfigureAwait(false);
+                break;
+
+            case "NotificationCenter":
+                if (isOn) await OptimizeSystemHelper.DisableNotificationCenter().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableNotificationCenter().ConfigureAwait(false);
+                break;
+
+            case "SuggestedActions":
+                if (isOn) await OptimizeSystemHelper.DisableSuggestedActions().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSuggestedActions().ConfigureAwait(false);
+                break;
+
+            case "WiFiSense":
+                if (isOn) await OptimizeSystemHelper.DisableWiFiSense().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWiFiSense().ConfigureAwait(false);
+                break;
+
+            case "WebSearchResults":
+                if (isOn) await OptimizeSystemHelper.DisableWebSearchResults().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWebSearchResults().ConfigureAwait(false);
+                break;
+
+            case "AppLaunchTracking":
+                if (isOn) await OptimizeSystemHelper.DisableAppLaunchTracking().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableAppLaunchTracking().ConfigureAwait(false);
+                break;
+
+            case "TimelineHistory":
+                if (isOn) await OptimizeSystemHelper.DisableTimelineHistory().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableTimelineHistory().ConfigureAwait(false);
+                break;
+
+            case "TakeOwnership":
+                if (isOn) await OptimizeSystemHelper.AddTakeOwnership().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RemoveTakeOwnership().ConfigureAwait(false);
+                break;
+
+            case "OpenCmdHere":
+                if (isOn) await OptimizeSystemHelper.AddOpenCmdHere().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RemoveOpenCmdHere().ConfigureAwait(false);
+                break;
+
+            case "CopyFilePath":
+                if (isOn) await OptimizeSystemHelper.AddCopyFilePath().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RemoveCopyFilePath().ConfigureAwait(false);
                 break;
 
             default:

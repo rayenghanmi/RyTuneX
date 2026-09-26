@@ -148,20 +148,8 @@
   <data name="HomePage_QuickAction_RepairIssues.Text" xml:space="preserve">
     <value>Repair Issues</value>
   </data>
-  <data name="HomePage_QuickAction_ManageStartupApps.Text" xml:space="preserve">
-    <value>Manage Startup Apps</value>
-  </data>
   <data name="HomePage_QuickAction_CleanTemporaryFiles.Text" xml:space="preserve">
     <value>Clean Temporary Files</value>
-  </data>
-  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>Send feedback</value>
-  </data>
-  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>Processor</value>
-  </data>
-  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>Graphics Card</value>
   </data>
   <data name="Debloat" xml:space="preserve">
     <value>Debloat</value>
@@ -259,20 +247,11 @@
   <data name="Version" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="VideoArchitecture" xml:space="preserve">
-    <value>Video Architecture</value>
-  </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windows Directory</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>Error Deleting Temp Files</value>
-  </data>
-  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>System Features</value>
-  </data>
-  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>Windows 11 Exclusive</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
     <value>Select a folder</value>
@@ -297,12 +276,6 @@
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
     <value>Drivers</value>
-  </data>
-  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>Extract your drivers to an external folder for easy backup</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
     <value>Extracting Drivers</value>
@@ -460,12 +433,6 @@
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
     <value>Disables the CoPilot AI feature in Windows for assistance with code writing. Not recommended for developers</value>
   </data>
-  <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>Basic Optimizations</value>
-  </data>
-  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>Performance Tweaks</value>
-  </data>
   <data name="Feature_DisableSysMain.Header" xml:space="preserve">
     <value>Disable SysMain</value>
   </data>
@@ -496,9 +463,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Excludes driver updates from Windows Update. May lead to outdated drivers with potential security risks or compatibility issues. Use with caution.</value>
   </data>
-  <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>Advanced Optimizations</value>
-  </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
     <value>Disable System Restore</value>
   </data>
@@ -516,12 +480,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Disables automatic updates for apps downloaded from the Microsoft Store. May leave apps vulnerable to security risks or lacking new features.</value>
-  </data>
-  <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>Telemetry</value>
-  </data>
-  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>Enhance Privacy</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
     <value>Disable SMBv1</value>
@@ -589,15 +547,6 @@
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
     <value>Apply DNS</value>
   </data>
-  <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>IPv4 DNS Servers</value>
-  </data>
-  <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>IPv6 DNS Servers</value>
-  </data>
-  <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>Network Interface</value>
-  </data>
   <data name="Network_Primary.Text" xml:space="preserve">
     <value>Primary</value>
   </data>
@@ -606,9 +555,6 @@
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
     <value>Secondary</value>
-  </data>
-  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>Set Custom DNS</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
     <value>No IPv4 DNS addresses found</value>
@@ -643,26 +589,8 @@
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneX is a cutting-edge optimizer built with the WinUI 3 framework, designed to amplify the performance of Windows devices. Crafted for both Windows 10 and 11, RyTuneX empowers users to effortlessly remove stubborn pre-installed apps and optimize system resources</value>
   </data>
-  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>Check for updates</value>
-  </data>
-  <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>A newer version (</value>
-  </data>
-  <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>) is available. Please update to the latest version to enjoy new features and improvements.</value>
-  </data>
   <data name="UpdateTitle" xml:space="preserve">
     <value>RyTuneX updates</value>
-  </data>
-  <data name="NetworkError" xml:space="preserve">
-    <value>There was an error. Make sure to check your internet connection and try again later.</value>
-  </data>
-  <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>You are already running the latest version (</value>
-  </data>
-  <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>). No updates are available at this time.</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
@@ -682,17 +610,11 @@
   <data name="BatteryStatus" xml:space="preserve">
     <value>Battery Status</value>
   </data>
-  <data name="Chemistry" xml:space="preserve">
-    <value>Chemistry</value>
-  </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>Security</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>There was an unexpected error</value>
-  </data>
-  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>View Logs</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Total: {0} App(s)</value>
@@ -832,12 +754,6 @@
   <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
     <value>Turns off Safe Search Mode, which filters out potentially harmful or inappropriate content from search results. Disabling this increases the risk of exposure to unsafe content.</value>
   </data>
-  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
-    <value>Disable Activity Uploads</value>
-  </data>
-  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
-    <value>Disables the uploading of activity data, preventing Microsoft from collecting your usage data for improving services. This helps maintain privacy.</value>
-  </data>
   <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
     <value>Disable Clipboard Sync</value>
   </data>
@@ -868,23 +784,11 @@
   <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
     <value>Disables the Find My Device feature, which helps locate your device if lost. Disabling this reduces your ability to recover a lost device but enhances privacy.</value>
   </data>
-  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>Disable Activity Feed</value>
-  </data>
-  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>Turns off the activity feed that shows your recent activities, helping to protect your privacy by preventing others from seeing what you've been doing on your device.</value>
-  </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
     <value>Disable CDP (Customer Data Platform)</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
     <value>Disables CDP, preventing the collection and use of your data by the customer data platform for analysis and targeted recommendations. This increases privacy but may limit personalization.</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>Disable Tailored Experiences in Privacy</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>Disables the tailored experiences feature in privacy settings, stopping Windows from using your data to customize your experiences. This may reduce personalization features.</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
     <value>Disable Diagnostics Toast</value>
@@ -897,12 +801,6 @@
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
     <value>Disables online speech privacy, preventing Windows from storing or processing voice commands. This increases privacy but limits voice features like voice search and commands.</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>Disable Location Access</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>Turns off location access for apps and services, preventing them from using your device's GPS or network location. This improves privacy but may limit location-based services.</value>
   </data>
   <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
     <value>Disable Location Features</value>
@@ -1006,9 +904,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>Enhances your system's performance by adjusting system profile settings. This feature prioritize speed and efficiency, improving overall system responsiveness and resource management.</value>
   </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>Device Information</value>
-  </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>Enable Classic Context Menu</value>
   </data>
@@ -1018,17 +913,11 @@
   <data name="DoNotShowCheckBox" xml:space="preserve">
     <value>Don't show this message again</value>
   </data>
-  <data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>Create Restore Point</value>
-  </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>It's highly recommended to create a restore point before making any changes to your system.
 
 
 Would you like to create a system restore point before proceeding?</value>
-  </data>
-  <data name="CreatingRestorePoint" xml:space="preserve">
-    <value>Creating Restore Point</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Revert all changes</value>
@@ -1044,9 +933,6 @@ Would you like to create a system restore point before proceeding?</value>
 
 
 Are you sure you want to continue?</value>
-  </data>
-  <data name="NoChangesFound" xml:space="preserve">
-    <value>No notable changes found.</value>
   </data>
   <data name="OperationStopped" xml:space="preserve">
     <value>Operation stopped</value>
@@ -1075,20 +961,8 @@ Check your computer for memory problems</value>
   <data name="ScheduledLater" xml:space="preserve">
     <value>Scheduled for next restart</value>
   </data>
-  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>Scan</value>
-  </data>
-  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>Repair</value>
-  </data>
   <data name="RepairPage_StopButton.Content" xml:space="preserve">
     <value>Stop</value>
-  </data>
-  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>Select at least one option to scan/repair</value>
-  </data>
-  <data name="StatusTextBlockDefault" xml:space="preserve">
-    <value>Select at least one option to scan/repair</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>Battery Health</value>
@@ -1126,9 +1000,6 @@ Check your computer for memory problems</value>
   <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
     <value>Repair Options</value>
   </data>
-  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>Diagnose Options</value>
-  </data>
   <data name="OperationCompleted" xml:space="preserve">
     <value>Operation Completed</value>
   </data>
@@ -1152,12 +1023,6 @@ Check your computer for memory problems</value>
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
     <value>Other Settings</value>
-  </data>
-  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>Basic System Optimizations</value>
-  </data>
-  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>Advanced System Optimizations</value>
   </data>
   <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
     <value>No apps match your search</value>
@@ -1246,9 +1111,6 @@ Check your computer for memory problems</value>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Stop firmware from running programs (e.g., OEM bloatware) during startup.</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Revert changes</value>
-  </data>
   <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Import</value>
   </data>
@@ -1281,12 +1143,6 @@ Check your computer for memory problems</value>
   </data>
   <data name="KeepAppData" xml:space="preserve">
     <value>Keep app data</value>
-  </data>
-  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>You're running as admin</value>
-  </data>
-  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Restart the app as admin for your changes to take effect</value>
   </data>
   <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
     <value>Refresh</value>
@@ -1408,12 +1264,6 @@ Check your computer for memory problems</value>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Add Ultimate Performance Plan</value>
   </data>
-  <data name="PoliciesPage_Warning" xml:space="preserve">
-    <value>This feature only detects policy-backed registry entries. It does not detect service changes or non-policy registry tweaks.</value>
-  </data>
-  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
-    <value>This page detects and allows you to remove Local Group Policy overrides. Removing a policy override returns it to Not Configured state.</value>
-  </data>
   <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>Policy Summary</value>
   </data>
@@ -1437,12 +1287,6 @@ Check your computer for memory problems</value>
   </data>
   <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>No policy overrides detected.</value>
-  </data>
-  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
-    <value>Remove All Overrides</value>
-  </data>
-  <data name="PoliciesPage_Title" xml:space="preserve">
-    <value>Group Policy Override Detection</value>
   </data>
   <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>Scanning policies...</value>
@@ -1599,15 +1443,6 @@ Check your computer for memory problems</value>
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>Default</value>
-  </data>
-  <data name="ScanResults" xml:space="preserve">
-    <value>Scan Results</value>
-  </data>
-  <data name="MicrosoftAccount" xml:space="preserve">
-    <value>Microsoft account</value>
-  </data>
-  <data name="LocalAccount" xml:space="preserve">
-    <value>Local account</value>
   </data>
   <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
     <value>Disable Windows AI</value>
@@ -2254,7 +2089,6 @@ Check your computer for memory problems</value>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Select all</value>
   </data>
-
   <data name="Intelligent_ScoreTitle" xml:space="preserve">
     <value>Optimization Score</value>
   </data>
@@ -2426,9 +2260,6 @@ Check your computer for memory problems</value>
   <data name="Intelligent_Flyout_TechnicalDetails" xml:space="preserve">
     <value>Technical Details</value>
   </data>
-  <data name="Intelligent_Flyout_ScoreImpact" xml:space="preserve">
-    <value>Score Impact: +{0} points ({1})</value>
-  </data>
   <data name="Intelligent_Flyout_PreApplyBackup" xml:space="preserve">
     <value>Pre-Apply Backup: Saved at {0} (Initial state: {1})</value>
   </data>
@@ -2438,7 +2269,6 @@ Check your computer for memory problems</value>
   <data name="Intelligent_Flyout_Status" xml:space="preserve">
     <value>Current State: {0}</value>
   </data>
-
   <data name="Intelligent_Verification_Active" xml:space="preserve">
     <value>Verified Active ✓</value>
   </data>
@@ -2454,7 +2284,6 @@ Check your computer for memory problems</value>
   <data name="Intelligent_General_Category" xml:space="preserve">
     <value>General</value>
   </data>
-
   <data name="Intelligent_Impact_BackgroundApps" xml:space="preserve">
     <value>Frees background CPU cycles and saves 200MB+ RAM.</value>
   </data>
@@ -2797,17 +2626,11 @@ Check your computer for memory problems</value>
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
     <value>Opens the Windows Network &amp; Internet settings page.</value>
   </data>
-  <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>Open Settings</value>
-  </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
     <value>Network Adapter Settings</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
     <value>Opens the classic Network Connections panel to manage network adapters.</value>
-  </data>
-  <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>Open Adapter Settings</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
     <value>Disable Network Throttling</value>
@@ -2886,5 +2709,188 @@ Check your computer for memory problems</value>
   </data>
   <data name="Network_SuccessTitle" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="OptimizeSystemPage_TimerResolution.Text" xml:space="preserve">
+    <value>Timer Resolution &amp; Latency</value>
+  </data>
+  <data name="Feature_GlobalTimerResolution.Header" xml:space="preserve">
+    <value>Enable Global Timer Resolution</value>
+  </data>
+  <data name="Feature_GlobalTimerResolution.Description" xml:space="preserve">
+    <value>Allows applications to request higher timer resolution globally, reducing scheduling latency for games and real-time audio.</value>
+  </data>
+  <data name="Feature_DisableHPET.Header" xml:space="preserve">
+    <value>Disable HPET</value>
+  </data>
+  <data name="Feature_DisableHPET.Description" xml:space="preserve">
+    <value>Disables the High Precision Event Timer and switches to TSC for lower latency timing. Requires a reboot.</value>
+  </data>
+  <data name="Feature_DisableDynamicTick.Header" xml:space="preserve">
+    <value>Disable Dynamic Tick</value>
+  </data>
+  <data name="Feature_DisableDynamicTick.Description" xml:space="preserve">
+    <value>Forces the system timer to fire at a constant rate instead of dynamically adjusting, reducing jitter in latency-sensitive workloads.</value>
+  </data>
+  <data name="OptimizeSystemPage_MemoryOptimization.Text" xml:space="preserve">
+    <value>Memory Optimization</value>
+  </data>
+  <data name="Feature_DisablePrefetch.Header" xml:space="preserve">
+    <value>Disable Prefetch &amp; Superfetch</value>
+  </data>
+  <data name="Feature_DisablePrefetch.Description" xml:space="preserve">
+    <value>Disables Windows Prefetcher and Superfetch preloading to free RAM and reduce disk I/O. Recommended for SSD users.</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Header" xml:space="preserve">
+    <value>Enable Large System Cache</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Description" xml:space="preserve">
+    <value>Allocates more system memory for file caching, improving disk read performance for file-heavy workloads.</value>
+  </data>
+  <data name="Feature_DisableNDU.Header" xml:space="preserve">
+    <value>Disable Network Data Usage Monitor</value>
+  </data>
+  <data name="Feature_DisableNDU.Description" xml:space="preserve">
+    <value>Disables the NDU service which is known to cause non-paged pool memory leaks on some systems over extended uptime.</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Header" xml:space="preserve">
+    <value>Disable Page File Encryption</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Description" xml:space="preserve">
+    <value>Disables encryption of the Windows page file to reduce CPU overhead during paging operations.</value>
+  </data>
+  <data name="FeaturesPage_NotificationControls.Text" xml:space="preserve">
+    <value>Notification Controls</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Header" xml:space="preserve">
+    <value>Disable Lock Screen Notifications</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Description" xml:space="preserve">
+    <value>Prevents toast notifications from appearing on the lock screen for improved privacy and fewer distractions.</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Header" xml:space="preserve">
+    <value>Disable All Toast Notifications</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Description" xml:space="preserve">
+    <value>Completely disables all pop-up toast notifications from apps and the system.</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Header" xml:space="preserve">
+    <value>Disable Notification Center</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Description" xml:space="preserve">
+    <value>Removes the Notification Center (Action Center) from the taskbar. Requires Explorer restart.</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Header" xml:space="preserve">
+    <value>Disable Suggested Actions</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Description" xml:space="preserve">
+    <value>Disables the smart clipboard suggested actions flyout that appears when copying dates, phone numbers, or addresses.</value>
+  </data>
+  <data name="FeaturesPage_ContextMenu.Text" xml:space="preserve">
+    <value>Context Menu Customization</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Header" xml:space="preserve">
+    <value>Add "Take Ownership" to Context Menu</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Description" xml:space="preserve">
+    <value>Adds a "Take Ownership" option to the right-click context menu for files and folders, allowing quick ownership transfer.</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Header" xml:space="preserve">
+    <value>Add "Open Command Prompt Here"</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Description" xml:space="preserve">
+    <value>Adds an "Open Command Prompt Here" option to the folder background right-click context menu.</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Header" xml:space="preserve">
+    <value>Add "Copy File Path" to Context Menu</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Description" xml:space="preserve">
+    <value>Adds a "Copy File Path" option to the right-click context menu for quick path copying to clipboard.</value>
+  </data>
+  <data name="PrivacyPage_PrivacyHardening.Text" xml:space="preserve">
+    <value>Privacy Hardening</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Header" xml:space="preserve">
+    <value>Disable Wi-Fi Sense</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Description" xml:space="preserve">
+    <value>Disables automatic connection to suggested open Wi-Fi hotspots and shared networks from contacts.</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Header" xml:space="preserve">
+    <value>Disable Web Results in Search</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Description" xml:space="preserve">
+    <value>Prevents Windows Search from sending queries to Bing and displaying web results. Keeps search local and private.</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Header" xml:space="preserve">
+    <value>Disable App Launch Tracking</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Description" xml:space="preserve">
+    <value>Stops Windows from tracking which apps you launch for personalization of the Start menu's Most Used list.</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Header" xml:space="preserve">
+    <value>Disable Timeline &amp; Activity History</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Description" xml:space="preserve">
+    <value>Disables Windows Timeline activity feed and prevents activity data from being published or uploaded to the cloud.</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Header" xml:space="preserve">
+    <value>Disable P2P Update Delivery</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Description" xml:space="preserve">
+    <value>Disables peer-to-peer delivery of Windows Updates, preventing your PC from sharing update data with other PCs on the internet.</value>
+  </data>
+  <data name="Network_DisableHotspot20.Header" xml:space="preserve">
+    <value>Disable Hotspot 2.0</value>
+  </data>
+  <data name="Network_DisableHotspot20.Description" xml:space="preserve">
+    <value>Disables Hotspot 2.0 (Passpoint) automatic Wi-Fi hotspot discovery and connection for improved privacy.</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Header" xml:space="preserve">
+    <value>Disable NetBIOS over TCP/IP</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Description" xml:space="preserve">
+    <value>Disables legacy NetBIOS name resolution over TCP/IP to reduce network attack surface and improve security.</value>
+  </data>
+  <data name="OptimizeSystemPage_InputResponsiveness.Text" xml:space="preserve">
+    <value>Input &amp; Responsiveness</value>
+  </data>
+  <data name="OptimizeSystemPage_GamingGpu.Text" xml:space="preserve">
+    <value>Gaming &amp; GPU</value>
+  </data>
+  <data name="OptimizeSystemPage_DiskFileSystem.Text" xml:space="preserve">
+    <value>Disk &amp; File System</value>
+  </data>
+  <data name="OptimizeSystemPage_ServicesSystem.Text" xml:space="preserve">
+    <value>Services &amp; System</value>
+  </data>
+  <data name="OptimizeSystemPage_WindowsComponents.Text" xml:space="preserve">
+    <value>Windows Components</value>
+  </data>
+  <data name="FeaturesPage_AppearanceUI.Text" xml:space="preserve">
+    <value>Appearance &amp; UI</value>
+  </data>
+  <data name="FeaturesPage_SystemServices.Text" xml:space="preserve">
+    <value>System Services</value>
+  </data>
+  <data name="FeaturesPage_InputAccessibility.Text" xml:space="preserve">
+    <value>Input &amp; Accessibility</value>
+  </data>
+  <data name="FeaturesPage_ExplorerShell.Text" xml:space="preserve">
+    <value>Explorer &amp; Shell</value>
+  </data>
+  <data name="FeaturesPage_Win11UI.Text" xml:space="preserve">
+    <value>Windows 11 UI</value>
+  </data>
+  <data name="FeaturesPage_WindowsAIEdge.Text" xml:space="preserve">
+    <value>Windows AI &amp; Edge</value>
+  </data>
+  <data name="PrivacyPage_DataCollection.Text" xml:space="preserve">
+    <value>Data Collection &amp; Input</value>
+  </data>
+  <data name="PrivacyPage_CloudSync.Text" xml:space="preserve">
+    <value>Cloud &amp; Device Sync</value>
+  </data>
+  <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
+    <value>Location &amp; Security</value>
   </data>
 </root>

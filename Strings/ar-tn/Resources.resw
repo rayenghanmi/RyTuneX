@@ -148,20 +148,8 @@
   <data name="HomePage_QuickAction_RepairIssues.Text" xml:space="preserve">
     <value>إصلاح المشاكل</value>
   </data>
-  <data name="HomePage_QuickAction_ManageStartupApps.Text" xml:space="preserve">
-    <value>إدارة تطبيقات بدء التشغيل</value>
-  </data>
   <data name="HomePage_QuickAction_CleanTemporaryFiles.Text" xml:space="preserve">
     <value>تنظيف الملفات المؤقتة</value>
-  </data>
-  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>ترك تقييم</value>
-  </data>
-  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>المعالج</value>
-  </data>
-  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>بطاقة الرسومات</value>
   </data>
   <data name="Debloat" xml:space="preserve">
     <value>إزالة التطبيقات</value>
@@ -259,20 +247,11 @@
   <data name="Version" xml:space="preserve">
     <value>الإصدار</value>
   </data>
-  <data name="VideoArchitecture" xml:space="preserve">
-    <value>هندسة الفيديو</value>
-  </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>دليل ويندوز</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>حدث خطأ أثناء حذف الملفات المؤقتة</value>
-  </data>
-  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>ميزات النظام</value>
-  </data>
-  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>حصري لويندوز 11</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
     <value>حدد مجلدًا</value>
@@ -297,12 +276,6 @@
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
     <value>التعريفات</value>
-  </data>
-  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>تصدير</value>
-  </data>
-  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>استخراج التعريفات إلى مجلد خارجي لسهولة النسخ الاحتياطي</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
     <value>جاري استخراج التعريفات</value>
@@ -460,12 +433,6 @@
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
     <value>يعطل ميزة CoPilot AI في ويندوز للمساعدة في كتابة الشيفرة. غير مُوصى به للمطورين</value>
   </data>
-  <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>التحسينات الأساسية</value>
-  </data>
-  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>إجراءات تعديل الأداء</value>
-  </data>
   <data name="Feature_DisableSysMain.Header" xml:space="preserve">
     <value>تعطيل SysMain</value>
   </data>
@@ -496,9 +463,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>يُستبعد تحديثات السائقين من تحديث ويندوز. قد يؤدي إلى سائقين قديمين مع مخاطر أمان محتملة أو مشكلات التوافق. استخدم بحذر</value>
   </data>
-  <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>التحسينات المتقدمة</value>
-  </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
     <value>تعطيل استعادة النظام</value>
   </data>
@@ -516,12 +480,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>يُعطل التحديثات التلقائية للتطبيقات التي تم تنزيلها من متجر مايكروسوفت. قد يترك التطبيقات عرضة لمخاطر الأمان أو تفتقر إلى ميزات جديدة</value>
-  </data>
-  <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>التجسس</value>
-  </data>
-  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>تعزيز الخصوصية</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
     <value>تعطيل SMBv1</value>
@@ -589,15 +547,6 @@
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
     <value>تطبيق DNS</value>
   </data>
-  <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>خوادم DNS IPv4</value>
-  </data>
-  <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>خوادم DNS IPv6</value>
-  </data>
-  <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>واجهة الشبكة</value>
-  </data>
   <data name="Network_Primary.Text" xml:space="preserve">
     <value>أساسي</value>
   </data>
@@ -606,9 +555,6 @@
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
     <value>ثانوي</value>
-  </data>
-  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>تعيين DNS مخصص</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
     <value>لم يتم العثور على عناوين DNS IPv4</value>
@@ -643,26 +589,8 @@
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneX هو أداة تحسين متقدمة تم بناؤها باستخدام إطار عمل WinUI 3، مصممة لتعزيز أداء أجهزة Windows. مصمم لنظامي Windows 10 و11، يمكّن RyTuneX المستخدمين من إزالة التطبيقات المثبتة مسبقًا بسهولة وتحسين موارد النظام</value>
   </data>
-  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>تحقق من التحديثات</value>
-  </data>
-  <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>نسخة أحدث (</value>
-  </data>
-  <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>) متوفرة. يُرجى التحديث إلى أحدث إصدار للاستمتاع بالميزات والتحسينات الجديدة.</value>
-  </data>
   <data name="UpdateTitle" xml:space="preserve">
     <value>تحديثات RyTuneX</value>
-  </data>
-  <data name="NetworkError" xml:space="preserve">
-    <value>حدث خطأ. تأكد من اتصالك بالإنترنت وحاول مرة أخرى لاحقًا.</value>
-  </data>
-  <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>أنت تستخدم أحدث إصدار بالفعل (</value>
-  </data>
-  <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>). لا توجد تحديثات متوفرة حاليًا.</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>إغلاق</value>
@@ -682,17 +610,11 @@
   <data name="BatteryStatus" xml:space="preserve">
     <value>حالة البطارية</value>
   </data>
-  <data name="Chemistry" xml:space="preserve">
-    <value>نوع التركيبة الكيميائية للبطارية</value>
-  </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>الأمان</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>حدث خطأ غير متوقع</value>
-  </data>
-  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>عرض السجلات</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>الإجمالي: {0} تطبيق(ات)</value>
@@ -832,12 +754,6 @@
   <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
     <value>يوقف وضع البحث الآمن، الذي يقوم بتصفية المحتوى الضار أو غير المناسب من نتائج البحث. تعطيل هذه الميزة يزيد من خطر التعرض لمحتوى غير آمن.</value>
   </data>
-  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
-    <value>تعطيل رفع الأنشطة</value>
-  </data>
-  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
-    <value>يوقف رفع بيانات الأنشطة، مما يمنع مايكروسوفت من جمع بيانات استخدامك لتحسين الخدمات. هذا يساعد في الحفاظ على الخصوصية.</value>
-  </data>
   <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
     <value>تعطيل مزامنة الحافظة</value>
   </data>
@@ -868,23 +784,11 @@
   <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
     <value>يوقف ميزة العثور على جهازي، التي تساعد في تحديد موقع جهازك إذا ضاع. تعطيل هذه الميزة يقلل من قدرتك على استرجاع جهاز ضائع ولكنه يعزز الخصوصية.</value>
   </data>
-  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>تعطيل موجز الأنشطة</value>
-  </data>
-  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>يوقف الموجز الذي يعرض الأنشطة الأخيرة، مما يساعد في حماية خصوصيتك عن طريق منع الآخرين من رؤية ما قمت به على جهازك.</value>
-  </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
     <value>تعطيل جمع بيانات الاستخدام</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
     <value>يمنع جمع بيانات الاستخدام من جهازك، مما يعزز خصوصيتك. تعطيل هذه الميزة قد يؤدي إلى تقليل بعض الخدمات التي تعتمد على هذه البيانات.</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>تعطيل التجارب المخصصة في الخصوصية</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>يُعطّل ميزة التجارب المخصصة في إعدادات الخصوصية، مما يمنع ويندوز من استخدام بياناتك لتخصيص تجاربك. قد يقلل ذلك من بعض ميزات التخصيص.</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
     <value>تعطيل إشعارات التشخيص</value>
@@ -897,12 +801,6 @@
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
     <value>يُعطّل خصوصية الصوت عبر الإنترنت، مما يمنع ويندوز من تخزين أو معالجة الأوامر الصوتية. هذا يزيد الخصوصية ولكنه يحد من ميزات الصوت مثل البحث الصوتي والأوامر.</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>تعطيل الوصول إلى الموقع</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>يُوقف الوصول إلى الموقع للتطبيقات والخدمات، مما يمنعها من استخدام GPS الجهاز أو الموقع الشبكي. هذا يحسن الخصوصية ولكنه قد يحد من الخدمات المعتمدة على الموقع.</value>
   </data>
   <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
     <value>تعطيل ميزات الموقع</value>
@@ -1006,9 +904,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>يعزز أداء النظام عن طريق تعديل إعدادات ملف النظام. تُعطي هذه الميزة الأولوية للسرعة والكفاءة، مما يحسن استجابة النظام وإدارة الموارد بشكل عام.</value>
   </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>معلومات الجهاز</value>
-  </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>تفعيل قائمة السياق الكلاسيكية</value>
   </data>
@@ -1018,17 +913,11 @@
   <data name="DoNotShowCheckBox" xml:space="preserve">
     <value>لا تعرض هذه الرسالة مرة أخرى</value>
   </data>
-  <data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>إنشاء نقطة استعادة</value>
-  </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>يُنصح بشدة بإنشاء نقطة استعادة قبل إجراء أي تغييرات على نظامك.
 
 
 هل ترغب في إنشاء نقطة استعادة للنظام قبل المتابعة؟</value>
-  </data>
-  <data name="CreatingRestorePoint" xml:space="preserve">
-    <value>جاري إنشاء نقطة استعادة</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>التراجع عن كل التغييرات</value>
@@ -1044,9 +933,6 @@
 
 
 هل أنت متأكد أنك تريد المتابعة؟</value>
-  </data>
-  <data name="NoChangesFound" xml:space="preserve">
-    <value>لم يتم العثور على تغييرات ملحوظة.</value>
   </data>
   <data name="OperationStopped" xml:space="preserve">
     <value>تم إيقاف العملية</value>
@@ -1075,20 +961,8 @@
   <data name="ScheduledLater" xml:space="preserve">
     <value>تمت الجدولة لإعادة التشغيل القادمة</value>
   </data>
-  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>فحص</value>
-  </data>
-  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>إصلاح</value>
-  </data>
   <data name="RepairPage_StopButton.Content" xml:space="preserve">
     <value>إيقاف</value>
-  </data>
-  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>اختر على الأقل خيارًا واحدًا للفحص/الإصلاح</value>
-  </data>
-  <data name="StatusTextBlockDefault" xml:space="preserve">
-    <value>اختر على الأقل خيارًا واحدًا للفحص/الإصلاح</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>حالة البطارية</value>
@@ -1126,9 +1000,6 @@
   <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
     <value>خيارات الإصلاح</value>
   </data>
-  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>خيارات التشخيص</value>
-  </data>
   <data name="OperationCompleted" xml:space="preserve">
     <value>اكتملت العملية</value>
   </data>
@@ -1152,12 +1023,6 @@
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
     <value>إعدادات أخرى</value>
-  </data>
-  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>تحسينات النظام الأساسية</value>
-  </data>
-  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>تحسينات النظام المتقدمة</value>
   </data>
   <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
     <value>لا توجد تطبيقات تطابق بحثك</value>
@@ -1246,9 +1111,6 @@
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>إيقاف تشغيل البرامج من البرامج الثابتة (مثل البرامج المثبتة مسبقاً) أثناء بدء التشغيل.</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>تراجع عن التغييرات</value>
-  </data>
   <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>استيراد</value>
   </data>
@@ -1281,12 +1143,6 @@
   </data>
   <data name="KeepAppData" xml:space="preserve">
     <value>احتفظ ببيانات التطبيق</value>
-  </data>
-  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>أنت تعمل كمشرف (مدير)</value>
-  </data>
-  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>أعد تشغيل التطبيق كمسؤول لتطبيق التغييرات</value>
   </data>
   <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
     <value>تحديث</value>
@@ -1408,12 +1264,6 @@
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>إضافة خطة الأداء النهائي</value>
   </data>
-  <data name="PoliciesPage_Warning" xml:space="preserve">
-    <value>تكتشف هذه الميزة فقط إدخالات السجل المدعومة بالسياسات. لا تكتشف تغييرات الخدمة أو تعديلات السجل غير المتعلقة بالسياسات.</value>
-  </data>
-  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
-    <value>تكشف هذه الصفحة وتتيح لك إزالة تجاوزات سياسة المجموعة المحلية. تؤدي إزالة تجاوز السياسة إلى إرجاعها إلى حالة غير مهيأة.</value>
-  </data>
   <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>ملخص السياسة</value>
   </data>
@@ -1437,12 +1287,6 @@
   </data>
   <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>لم يتم اكتشاف تجاوزات سياسة.</value>
-  </data>
-  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
-    <value>إزالة جميع التجاوزات</value>
-  </data>
-  <data name="PoliciesPage_Title" xml:space="preserve">
-    <value>كشف تجاوز سياسة المجموعة</value>
   </data>
   <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>جارٍ فحص السياسات...</value>
@@ -1599,15 +1443,6 @@
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>افتراضي</value>
-  </data>
-  <data name="ScanResults" xml:space="preserve">
-    <value>نتائج الفحص</value>
-  </data>
-  <data name="MicrosoftAccount" xml:space="preserve">
-    <value>حساب Microsoft</value>
-  </data>
-  <data name="LocalAccount" xml:space="preserve">
-    <value>حساب محلي</value>
   </data>
   <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
     <value>تعطيل ذكاء Windows</value>
@@ -2227,7 +2062,33 @@
   <data name="StartupPage_Notification_DisabledCount" xml:space="preserve">
     <value>تم تعطيل {0} من تطبيقات بدء التشغيل.</value>
   </data>
-
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>تم تحديد {0} عنصر/عناصر</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>إزالة المحدد</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>إزالة جميع عناصر بدء التشغيل المحددة</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>إلغاء التحديد</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>إزالة تطبيقات بدء التشغيل</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>هل أنت متأكد من إزالة {0} عنصر/عناصر من قائمة بدء التشغيل؟</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>تمت إزالة {0} عنصر/عناصر من بدء التشغيل.</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>تمت إزالة {0} عنصر/عناصر. فشل {1} (يلزم الإذن كمسؤول).</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>تحديد الكل</value>
+  </data>
   <data name="Intelligent_ScoreTitle" xml:space="preserve">
     <value>درجة التحسين</value>
   </data>
@@ -2399,9 +2260,6 @@
   <data name="Intelligent_Flyout_TechnicalDetails" xml:space="preserve">
     <value>التفاصيل التقنية</value>
   </data>
-  <data name="Intelligent_Flyout_ScoreImpact" xml:space="preserve">
-    <value>تأثير النتيجة: +{0} نقطة ({1})</value>
-  </data>
   <data name="Intelligent_Flyout_PreApplyBackup" xml:space="preserve">
     <value>النسخة الاحتياطية السابقة: حُفظت في {0} (الحالة الأولية: {1})</value>
   </data>
@@ -2411,7 +2269,6 @@
   <data name="Intelligent_Flyout_Status" xml:space="preserve">
     <value>الحالة الحالية: {0}</value>
   </data>
-
   <data name="Intelligent_Verification_Active" xml:space="preserve">
     <value>تم التحقق (نشط) ✓</value>
   </data>
@@ -2427,7 +2284,6 @@
   <data name="Intelligent_General_Category" xml:space="preserve">
     <value>عام</value>
   </data>
-
   <data name="Intelligent_Impact_BackgroundApps" xml:space="preserve">
     <value>يحرر دورات وحدة المعالجة المركزية ويوفر أكثر من 200 ميغابايت من الذاكرة.</value>
   </data>
@@ -2770,17 +2626,11 @@
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
     <value>يفتح صفحة إعدادات الشبكة والإنترنت في Windows.</value>
   </data>
-  <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>فتح الإعدادات</value>
-  </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
     <value>إعدادات محول الشبكة</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
     <value>يفتح لوحة اتصالات الشبكة الكلاسيكية لإدارة محولات الشبكة.</value>
-  </data>
-  <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>فتح المحولات</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
     <value>تعطيل خنق الشبكة</value>
@@ -2860,31 +2710,187 @@
   <data name="Network_SuccessTitle" xml:space="preserve">
     <value>نجاح</value>
   </data>
-  <data name="StartupPage_SelectionCount" xml:space="preserve">
-    <value>تم تحديد {0} عنصر/عناصر</value>
+  <data name="OptimizeSystemPage_TimerResolution.Text" xml:space="preserve">
+    <value>دقة المؤقت وزمن الانتقال</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
-    <value>إزالة المحدد</value>
+  <data name="Feature_GlobalTimerResolution.Header" xml:space="preserve">
+    <value>تمكين دقة المؤقت الشاملة</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>إزالة جميع عناصر بدء التشغيل المحددة</value>
+  <data name="Feature_GlobalTimerResolution.Description" xml:space="preserve">
+    <value>يسمح للتطبيقات بطلب دقة مؤقت أعلى عالميًا، مما يقلل من زمن انتقال الجدولة للألعاب والصوت في الوقت الفعلي.</value>
   </data>
-  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>إلغاء التحديد</value>
+  <data name="Feature_DisableHPET.Header" xml:space="preserve">
+    <value>تعطيل HPET</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
-    <value>إزالة تطبيقات بدء التشغيل</value>
+  <data name="Feature_DisableHPET.Description" xml:space="preserve">
+    <value>يعطل مؤقت الأحداث عالي الدقة (HPET) والتبديل إلى TSC للحصول على زمن انتقال أقل. يتطلب إعادة التشغيل.</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
-    <value>هل أنت متأكد من إزالة {0} عنصر/عناصر من قائمة بدء التشغيل؟</value>
+  <data name="Feature_DisableDynamicTick.Header" xml:space="preserve">
+    <value>تعطيل النبض الديناميكي (Dynamic Tick)</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
-    <value>تمت إزالة {0} عنصر/عناصر من بدء التشغيل.</value>
+  <data name="Feature_DisableDynamicTick.Description" xml:space="preserve">
+    <value>يجبر مؤقت النظام على العمل بمعدل ثابت بدلاً من التعديل ديناميكيًا، مما يقلل من التذبذب في المهام الحساسة لزمن الانتقال.</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>تمت إزالة {0} عنصر/عناصر. فشل {1} (يلزم الإذن كمسؤول).</value>
+  <data name="OptimizeSystemPage_MemoryOptimization.Text" xml:space="preserve">
+    <value>تحسين الذاكرة</value>
   </data>
-  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
-    <value>تحديد الكل</value>
+  <data name="Feature_DisablePrefetch.Header" xml:space="preserve">
+    <value>تعطيل Prefetch و Superfetch</value>
+  </data>
+  <data name="Feature_DisablePrefetch.Description" xml:space="preserve">
+    <value>يعطل التحميل المسبق لـ Windows Prefetcher و Superfetch لتوفير مساحة في الذاكرة العشوائية وتقليل عمليات الإدخال/الإخراج للقرص. يوصى به لمحركات SSD.</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Header" xml:space="preserve">
+    <value>تمكين ذاكرة التخزين المؤقت الكبيرة للنظام</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Description" xml:space="preserve">
+    <value>يخصص المزيد من ذاكرة النظام لذاكرة التخزين المؤقت لنظام الملفات، مما يحسن أداء قراءة القرص لأعباء عمل الملفات المكثفة.</value>
+  </data>
+  <data name="Feature_DisableNDU.Header" xml:space="preserve">
+    <value>تعطيل مراقب استخدام بيانات الشبكة (NDU)</value>
+  </data>
+  <data name="Feature_DisableNDU.Description" xml:space="preserve">
+    <value>يعطل خدمة NDU المعروفة بتسببها في تسرب ذاكرة التجمع غير المقسم على بعض الأنظمة مع فترات التشغيل الطويلة.</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Header" xml:space="preserve">
+    <value>تعطيل تشفير ملف ترحيل الصفحات</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Description" xml:space="preserve">
+    <value>يعطل تشفير ملف ترحيل صفحات Windows لتقليل الحمل على المعالج أثناء عمليات الترحيل.</value>
+  </data>
+  <data name="FeaturesPage_NotificationControls.Text" xml:space="preserve">
+    <value>عناصر التحكم في الإشعارات</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Header" xml:space="preserve">
+    <value>تعطيل إشعارات شاشة القفل</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Description" xml:space="preserve">
+    <value>يمنع ظهور الإشعارات المنبثقة على شاشة القفل لتحسين الخصوصية وتقليل الإلهاء.</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Header" xml:space="preserve">
+    <value>تعطيل كافة الإشعارات المنبثقة</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Description" xml:space="preserve">
+    <value>يعطل تمامًا جميع الإشعارات المنبثقة (Toast) الصادرة عن التطبيقات والنظام.</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Header" xml:space="preserve">
+    <value>تعطيل مركز الإشعارات</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Description" xml:space="preserve">
+    <value>يزيل مركز الإجراءات والإشعارات من شريط المهام. يتطلب إعادة تشغيل مستكشف Windows.</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Header" xml:space="preserve">
+    <value>تعطيل الإجراءات المقترحة</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Description" xml:space="preserve">
+    <value>يعطل القائمة المنبثقة للإجراءات المقترحة للحافظة الذكية عند نسخ التواريخ أو أرقام الهواتف أو العناوين.</value>
+  </data>
+  <data name="FeaturesPage_ContextMenu.Text" xml:space="preserve">
+    <value>تخصيص قائمة السياق</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Header" xml:space="preserve">
+    <value>إضافة "أخذ الملكية" إلى قائمة السياق</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Description" xml:space="preserve">
+    <value>يضيف خيار "أخذ الملكية" إلى قائمة النقر بزر الماوس الأيمن للملفات والمجلدات لنقل الأذونات بسرعة.</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Header" xml:space="preserve">
+    <value>إضافة "فتح موجه الأوامر هنا"</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Description" xml:space="preserve">
+    <value>يضيف خيار "فتح موجه الأوامر هنا" إلى قائمة النقر بزر الماوس الأيمن في خلفية المجلد.</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Header" xml:space="preserve">
+    <value>إضافة "نسخ مسار الملف" إلى قائمة السياق</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Description" xml:space="preserve">
+    <value>يضيف خيار "نسخ مسار الملف" إلى قائمة النقر بزر الماوس الأيمن لنسخ المسار الكامل للملف بنقرة واحدة إلى الحافظة.</value>
+  </data>
+  <data name="PrivacyPage_PrivacyHardening.Text" xml:space="preserve">
+    <value>تعزيز الخصوصية</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Header" xml:space="preserve">
+    <value>تعطيل ميزة استشعار Wi-Fi (Wi-Fi Sense)</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Description" xml:space="preserve">
+    <value>يعطل الاتصال التلقائي بنقاط اتصال Wi-Fi المفتوحة المقترحة والشبكات المشتركة بواسطة جهات الاتصال.</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Header" xml:space="preserve">
+    <value>تعطيل نتائج الويب في البحث</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Description" xml:space="preserve">
+    <value>يمنع بحث Windows من إرسال استعلامات البحث إلى Bing وعرض نتائج الويب. يحافظ على البحث محليًا وخاصًا.</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Header" xml:space="preserve">
+    <value>تعطيل تتبع تشغيل التطبيقات</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Description" xml:space="preserve">
+    <value>يمنع Windows من تتبع التطبيقات التي تقوم بتشغيلها لتخصيص قائمة التطبيقات الأكثر استخدامًا في قائمة ابدأ.</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Header" xml:space="preserve">
+    <value>تعطيل المخطط الزمني وسجل الأنشطة</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Description" xml:space="preserve">
+    <value>يعطل موجز أنشطة المخطط الزمني لـ Windows ويمنع نشر بيانات النشاط أو تحميلها إلى السحابة.</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Header" xml:space="preserve">
+    <value>تعطيل تسليم التحديثات عبر P2P</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Description" xml:space="preserve">
+    <value>يعطل تسليم تحديثات Windows من نظير إلى نظير، مما يمنع جهازك من مشاركة بيانات التحديث مع أجهزة أخرى عبر الإنترنت.</value>
+  </data>
+  <data name="Network_DisableHotspot20.Header" xml:space="preserve">
+    <value>تعطيل Hotspot 2.0</value>
+  </data>
+  <data name="Network_DisableHotspot20.Description" xml:space="preserve">
+    <value>يعطل الاكتشاف والاتصال التلقائي بنقاط اتصال Wi-Fi Hotspot 2.0 (Passpoint) لتحسين الخصوصية.</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Header" xml:space="preserve">
+    <value>تعطيل NetBIOS عبر TCP/IP</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Description" xml:space="preserve">
+    <value>يعطل بروتوكول NetBIOS القديم عبر TCP/IP لتقليل مساحة الهجوم على الشبكة وتحسين الأمان.</value>
+  </data>
+  <data name="OptimizeSystemPage_InputResponsiveness.Text" xml:space="preserve">
+    <value>الإدخال وسرعة الاستجابة</value>
+  </data>
+  <data name="OptimizeSystemPage_GamingGpu.Text" xml:space="preserve">
+    <value>الألعاب وبطاقة الرسوميات</value>
+  </data>
+  <data name="OptimizeSystemPage_DiskFileSystem.Text" xml:space="preserve">
+    <value>القرص ونظام الملفات</value>
+  </data>
+  <data name="OptimizeSystemPage_ServicesSystem.Text" xml:space="preserve">
+    <value>الخدمات والنظام</value>
+  </data>
+  <data name="OptimizeSystemPage_WindowsComponents.Text" xml:space="preserve">
+    <value>مكونات Windows</value>
+  </data>
+  <data name="FeaturesPage_AppearanceUI.Text" xml:space="preserve">
+    <value>المظهر وواجهة المستخدم</value>
+  </data>
+  <data name="FeaturesPage_SystemServices.Text" xml:space="preserve">
+    <value>خدمات النظام</value>
+  </data>
+  <data name="FeaturesPage_InputAccessibility.Text" xml:space="preserve">
+    <value>الإدخال وإمكانية الوصول</value>
+  </data>
+  <data name="FeaturesPage_ExplorerShell.Text" xml:space="preserve">
+    <value>مستكشف الملفات والواجهة</value>
+  </data>
+  <data name="FeaturesPage_Win11UI.Text" xml:space="preserve">
+    <value>واجهة Windows 11</value>
+  </data>
+  <data name="FeaturesPage_WindowsAIEdge.Text" xml:space="preserve">
+    <value>ذكاء Windows و Edge</value>
+  </data>
+  <data name="PrivacyPage_DataCollection.Text" xml:space="preserve">
+    <value>جمع البيانات والإدخال</value>
+  </data>
+  <data name="PrivacyPage_CloudSync.Text" xml:space="preserve">
+    <value>السحابة ومزامنة الأجهزة</value>
+  </data>
+  <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
+    <value>الموقع الجغرافي والأمان</value>
   </data>
 </root>

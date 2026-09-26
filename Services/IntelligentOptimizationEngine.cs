@@ -877,6 +877,209 @@ public static class IntelligentOptimizationEngine
             Risk = RiskLevel.Safe,
             ImpactDescription = "Removes clutter in Edge browser.",
             TechnicalDetails = "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge -> HubsSidebarEnabled = 0"
+        },
+        // Timer Resolution & Latency
+        new OptimizationItemModel
+        {
+            Tag = "GlobalTimerResolution",
+            Title = "Enable Global Timer Resolution",
+            Category = OptimizationCategory.Performance,
+            Description = "Allows applications to request higher timer resolution globally, reducing scheduling latency.",
+            ScoreWeight = 6,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Improves frame pacing consistency and reduces micro-stuttering in games.",
+            TechnicalDetails = "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel -> GlobalTimerResolutionRequests = 1"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "HPET",
+            Title = "Disable HPET (High Precision Event Timer)",
+            Category = OptimizationCategory.Performance,
+            Description = "Disables the HPET hardware timer and switches to TSC for lower latency timing.",
+            ScoreWeight = 5,
+            Risk = RiskLevel.Moderate,
+            ImpactDescription = "May reduce DPC latency on some systems; requires reboot.",
+            TechnicalDetails = "bcdedit /deletevalue useplatformclock; bcdedit /set useplatformtick yes"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "DynamicTick",
+            Title = "Disable Dynamic Tick",
+            Category = OptimizationCategory.Performance,
+            Description = "Forces the system timer to fire at a constant rate instead of dynamically adjusting, reducing jitter.",
+            ScoreWeight = 5,
+            Risk = RiskLevel.Moderate,
+            ImpactDescription = "Provides more consistent timer interrupts for latency-sensitive workloads; may increase power usage.",
+            TechnicalDetails = "bcdedit /set disabledynamictick yes"
+        },
+        // Memory Optimization
+        new OptimizationItemModel
+        {
+            Tag = "Prefetch",
+            Title = "Disable Prefetch & Superfetch",
+            Category = OptimizationCategory.Performance,
+            Description = "Disables Windows Prefetcher and Superfetch preloading to free RAM and reduce disk I/O on SSD systems.",
+            ScoreWeight = 7,
+            Risk = RiskLevel.Moderate,
+            ImpactDescription = "Frees RAM used by preloaded data; best for SSD users where prefetch provides minimal benefit.",
+            TechnicalDetails = "HKLM\\...\\PrefetchParameters -> EnablePrefetcher = 0, EnableSuperfetch = 0"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "LargeSystemCache",
+            Title = "Enable Large System Cache",
+            Category = OptimizationCategory.Performance,
+            Description = "Allocates more RAM for file system caching, improving disk read performance for file-heavy workloads.",
+            ScoreWeight = 5,
+            Risk = RiskLevel.Moderate,
+            ImpactDescription = "Boosts file I/O throughput; may reduce available RAM for applications on systems with limited memory.",
+            TechnicalDetails = "HKLM\\...\\Memory Management -> LargeSystemCache = 1"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "NDU",
+            Title = "Disable Network Data Usage Monitor (NDU)",
+            Category = OptimizationCategory.Performance,
+            Description = "Disables the Windows NDU service known to cause non-paged pool memory leaks on some systems.",
+            ScoreWeight = 7,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Prevents gradual memory leak that can consume GBs of non-paged pool over uptime.",
+            TechnicalDetails = "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Ndu -> Start = 4"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "PageFileEncryption",
+            Title = "Disable Page File Encryption",
+            Category = OptimizationCategory.Performance,
+            Description = "Disables encryption of the Windows page file to reduce CPU overhead during paging operations.",
+            ScoreWeight = 4,
+            Risk = RiskLevel.Moderate,
+            ImpactDescription = "Reduces CPU usage during memory paging; slightly reduces security of swapped data.",
+            TechnicalDetails = "fsutil behavior set encryptpagingfile 0"
+        },
+        // Notification Controls
+        new OptimizationItemModel
+        {
+            Tag = "LockScreenNotifications",
+            Title = "Disable Lock Screen Notifications",
+            Category = OptimizationCategory.FeaturesAndUsability,
+            Description = "Prevents toast notifications from appearing on the lock screen for improved privacy.",
+            ScoreWeight = 4,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Hides notification content from passersby when your device is locked.",
+            TechnicalDetails = "HKCU\\...\\PushNotifications -> NoToastApplicationNotificationOnLockScreen = 1"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "ToastNotifications",
+            Title = "Disable All Toast Notifications",
+            Category = OptimizationCategory.FeaturesAndUsability,
+            Description = "Completely disables all pop-up toast notifications from apps and system.",
+            ScoreWeight = 3,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Eliminates all notification pop-ups for a distraction-free experience.",
+            TechnicalDetails = "HKCU\\...\\PushNotifications -> NoToastApplicationNotification = 1"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "NotificationCenter",
+            Title = "Disable Notification Center",
+            Category = OptimizationCategory.FeaturesAndUsability,
+            Description = "Removes the Notification Center (Action Center) from the taskbar and system tray.",
+            ScoreWeight = 3,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Frees taskbar space and eliminates notification badge distractions.",
+            TechnicalDetails = "HKCU\\...\\Explorer -> DisableNotificationCenter = 1"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "SuggestedActions",
+            Title = "Disable Suggested Actions",
+            Category = OptimizationCategory.FeaturesAndUsability,
+            Description = "Disables the Windows smart clipboard suggested actions flyout that appears when copying content.",
+            ScoreWeight = 3,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Prevents unwanted popup menus when copying dates, phone numbers, or addresses.",
+            TechnicalDetails = "HKCU\\...\\SmartClipboard -> Disabled = 1"
+        },
+        // Privacy Hardening
+        new OptimizationItemModel
+        {
+            Tag = "WiFiSense",
+            Title = "Disable Wi-Fi Sense",
+            Category = OptimizationCategory.PrivacyAndTelemetry,
+            Description = "Disables automatic connection to suggested open Wi-Fi hotspots and shared networks.",
+            ScoreWeight = 6,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Prevents automatic connection to potentially insecure shared Wi-Fi networks.",
+            TechnicalDetails = "HKLM\\...\\wifinetworkmanager\\config -> AutoConnectAllowedOEM = 0"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "WebSearchResults",
+            Title = "Disable Web Results in Search",
+            Category = OptimizationCategory.PrivacyAndTelemetry,
+            Description = "Prevents Windows Search from sending queries to Bing and displaying web results.",
+            ScoreWeight = 8,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Keeps search local and private; speeds up Start menu search results.",
+            TechnicalDetails = "HKCU\\...\\Explorer -> DisableSearchBoxSuggestions = 1; BingSearchEnabled = 0"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "AppLaunchTracking",
+            Title = "Disable App Launch Tracking",
+            Category = OptimizationCategory.PrivacyAndTelemetry,
+            Description = "Stops Windows from tracking which apps you launch for personalization of the Start menu.",
+            ScoreWeight = 5,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Prevents Windows from recording app usage history; Start menu Most Used list may be affected.",
+            TechnicalDetails = "HKCU\\...\\Explorer\\Advanced -> Start_TrackProgs = 0"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "TimelineHistory",
+            Title = "Disable Timeline & Activity History",
+            Category = OptimizationCategory.PrivacyAndTelemetry,
+            Description = "Disables Windows Timeline activity feed and prevents activity data from being published or uploaded.",
+            ScoreWeight = 7,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Stops collection and cloud sync of activity history across devices.",
+            TechnicalDetails = "HKLM\\...\\System -> EnableActivityFeed = 0, PublishUserActivities = 0, UploadUserActivities = 0"
+        },
+        // Context Menu Customization
+        new OptimizationItemModel
+        {
+            Tag = "TakeOwnership",
+            Title = "Add 'Take Ownership' to Context Menu",
+            Category = OptimizationCategory.FeaturesAndUsability,
+            Description = "Adds a 'Take Ownership' option to the right-click context menu for files and folders.",
+            ScoreWeight = 3,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Quick one-click file ownership transfer for locked system files and folders.",
+            TechnicalDetails = "HKCR\\*\\shell\\runas + HKCR\\Directory\\shell\\runas -> takeown + icacls"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "OpenCmdHere",
+            Title = "Add 'Open Command Prompt Here' to Context Menu",
+            Category = OptimizationCategory.FeaturesAndUsability,
+            Description = "Adds an 'Open Command Prompt Here' option to the folder background right-click context menu.",
+            ScoreWeight = 2,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "Quick access to CMD at the current folder location from Explorer.",
+            TechnicalDetails = "HKCR\\Directory\\Background\\shell\\OpenCmdHere"
+        },
+        new OptimizationItemModel
+        {
+            Tag = "CopyFilePath",
+            Title = "Add 'Copy File Path' to Context Menu",
+            Category = OptimizationCategory.FeaturesAndUsability,
+            Description = "Adds a 'Copy File Path' option to the right-click context menu for quick path copying to clipboard.",
+            ScoreWeight = 2,
+            Risk = RiskLevel.Safe,
+            ImpactDescription = "One-click copy of the full file path to clipboard.",
+            TechnicalDetails = "HKCR\\*\\shell\\CopyFilePath -> cmd.exe /c echo \"%1\" | clip"
         }
     };
 

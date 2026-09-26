@@ -148,20 +148,8 @@
   <data name="HomePage_QuickAction_RepairIssues.Text" xml:space="preserve">
     <value>Ripara problemi</value>
   </data>
-  <data name="HomePage_QuickAction_ManageStartupApps.Text" xml:space="preserve">
-    <value>Gestisci app di avvio</value>
-  </data>
   <data name="HomePage_QuickAction_CleanTemporaryFiles.Text" xml:space="preserve">
     <value>Pulisci file temporanei</value>
-  </data>
-  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>Invia feedback</value>
-  </data>
-  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>Processore</value>
-  </data>
-  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>Scheda grafica</value>
   </data>
   <data name="Debloat" xml:space="preserve">
     <value>Debloat</value>
@@ -259,20 +247,11 @@
   <data name="Version" xml:space="preserve">
     <value>Versione</value>
   </data>
-  <data name="VideoArchitecture" xml:space="preserve">
-    <value>Architettura video</value>
-  </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Directory di Windows</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>Errore durante l'eliminazione dei file temporanei</value>
-  </data>
-  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>Funzionalità di sistema</value>
-  </data>
-  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>Esclusiva di Windows 11</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
     <value>Seleziona una cartella</value>
@@ -297,12 +276,6 @@
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
     <value>Driver</value>
-  </data>
-  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>Esporta</value>
-  </data>
-  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>Estrai i driver in una cartella esterna per un backup semplice</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
     <value>Estrazione driver</value>
@@ -460,12 +433,6 @@
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
     <value>Disabilita la funzionalità CoPilot AI in Windows per assistenza nella scrittura del codice. Non consigliato per gli sviluppatori</value>
   </data>
-  <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>Ottimizzazioni di base</value>
-  </data>
-  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>Modifiche delle prestazioni</value>
-  </data>
   <data name="Feature_DisableSysMain.Header" xml:space="preserve">
     <value>Disabilita SysMain</value>
   </data>
@@ -496,9 +463,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Esclude gli aggiornamenti dei driver da Windows Update. Potrebbe causare driver obsoleti con potenziali rischi per la sicurezza o problemi di compatibilità. Usare con cautela.</value>
   </data>
-  <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>Ottimizzazioni avanzate</value>
-  </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
     <value>Disabilita Ripristino configurazione di sistema</value>
   </data>
@@ -516,12 +480,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Disattiva gli aggiornamenti automatici per le app scaricate da Microsoft Store. Potrebbe lasciare le app vulnerabili a rischi per la sicurezza o prive di nuove funzionalità.</value>
-  </data>
-  <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>Telemetria</value>
-  </data>
-  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>Migliora la privacy</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
     <value>Disabilita SMBv1</value>
@@ -589,15 +547,6 @@
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
     <value>Applica DNS</value>
   </data>
-  <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>Server DNS IPv4</value>
-  </data>
-  <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>Server DNS IPv6</value>
-  </data>
-  <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>Interfaccia di rete</value>
-  </data>
   <data name="Network_Primary.Text" xml:space="preserve">
     <value>Primaria</value>
   </data>
@@ -606,9 +555,6 @@
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
     <value>Secondaria</value>
-  </data>
-  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>Imposta DNS personalizzato</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
     <value>Nessun indirizzo DNS IPv4 trovato</value>
@@ -643,26 +589,8 @@
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneX è un ottimizzatore all'avanguardia creato con il framework WinUI 3, progettato per amplificare le prestazioni dei dispositivi Windows. Progettato sia per Windows 10 che per 11, RyTuneX consente agli utenti di rimuovere senza sforzo app preinstallate ostinate e ottimizza le risorse di sistema</value>
   </data>
-  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>Controlla gli aggiornamenti</value>
-  </data>
-  <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>È disponibile una versione più recente (</value>
-  </data>
-  <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>). Aggiorna alla versione più recente per usufruire di nuove funzionalità e miglioramenti.</value>
-  </data>
   <data name="UpdateTitle" xml:space="preserve">
     <value>Aggiornamenti RyTuneX</value>
-  </data>
-  <data name="NetworkError" xml:space="preserve">
-    <value>Si è verificato un errore. Assicurati di controllare la tua connessione Internet e riprova più tardi.</value>
-  </data>
-  <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>Stai già eseguendo la versione più recente (</value>
-  </data>
-  <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>). Al momento non sono disponibili aggiornamenti.</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Vicino</value>
@@ -682,17 +610,11 @@
   <data name="BatteryStatus" xml:space="preserve">
     <value>Stato della batteria</value>
   </data>
-  <data name="Chemistry" xml:space="preserve">
-    <value>Chimica</value>
-  </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>Sicurezza</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Si è verificato un errore imprevisto</value>
-  </data>
-  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>Visualizza registri</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Totale: {0} app</value>
@@ -832,12 +754,6 @@
   <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
     <value>Disattiva la modalità di ricerca sicura, che filtra i contenuti potenzialmente dannosi o inappropriati dai risultati di ricerca. La disattivazione aumenta il rischio di esposizione a contenuti non sicuri.</value>
   </data>
-  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
-    <value>Disabilita caricamenti attività</value>
-  </data>
-  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
-    <value>Disabilita il caricamento dei dati sulle attività, impedendo a Microsoft di raccogliere i dati di utilizzo per migliorare i servizi. Ciò aiuta a mantenere la privacy.</value>
-  </data>
   <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
     <value>Disabilita la sincronizzazione degli appunti</value>
   </data>
@@ -868,23 +784,11 @@
   <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
     <value>Disattiva la funzionalità Trova il mio dispositivo, che aiuta a localizzare il dispositivo in caso di smarrimento. Disattivando questa opzione si riduce la possibilità di recuperare un dispositivo smarrito, ma si aumenta la privacy.</value>
   </data>
-  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>Disattiva feed attività</value>
-  </data>
-  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>Disattiva il feed attività che mostra le tue attività recenti, contribuendo a proteggere la tua privacy impedendo ad altri di vedere cosa hai fatto sul tuo dispositivo.</value>
-  </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
     <value>Disattiva CDP (Customer Data Platform)</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
     <value>Disattiva CDP, impedendo la raccolta e l'utilizzo dei tuoi dati da parte della piattaforma dati cliente per analisi e raccomandazioni mirate. Ciò aumenta la privacy ma potrebbe limitare la personalizzazione.</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>Disabilita Esperienze personalizzate in Privacy</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>Disabilita la funzionalità Esperienze personalizzate nelle impostazioni sulla privacy, impedendo a Windows di utilizzare i tuoi dati per personalizzare le tue esperienze. Ciò potrebbe ridurre le funzionalità di personalizzazione.</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
     <value>Disattiva Diagnostics Toast</value>
@@ -897,12 +801,6 @@
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
     <value>Disabilita la privacy vocale online, impedendo a Windows di archiviare o elaborare comandi vocali. Ciò aumenta la privacy ma limita le funzionalità vocali come la ricerca vocale e i comandi.</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>Disabilita l'accesso alla posizione</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>Disabilita l'accesso alla posizione per app e servizi, impedendo loro di utilizzare il GPS o la posizione di rete del dispositivo. Ciò migliora la privacy ma potrebbe limitare i servizi basati sulla posizione.</value>
   </data>
   <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
     <value>Disabilita le funzionalità di posizione</value>
@@ -1006,9 +904,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>Migliora le prestazioni del sistema regolando le impostazioni del profilo di sistema. Questa funzionalità dà priorità a velocità ed efficienza, migliorando la reattività complessiva del sistema e la gestione delle risorse.</value>
   </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>Informazioni sul dispositivo</value>
-  </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>Abilita il menu contestuale classico</value>
   </data>
@@ -1018,17 +913,11 @@
   <data name="DoNotShowCheckBox" xml:space="preserve">
     <value>Non visualizzare più questo messaggio</value>
   </data>
-  <data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>Crea punto di ripristino</value>
-  </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>Si consiglia vivamente di creare un punto di ripristino prima di apportare modifiche al sistema.
 
 
 Vuoi creare un punto di ripristino del sistema prima di procedere?</value>
-  </data>
-  <data name="CreatingRestorePoint" xml:space="preserve">
-    <value>Creazione del punto di ripristino</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Annulla tutte le modifiche</value>
@@ -1044,9 +933,6 @@ Vuoi creare un punto di ripristino del sistema prima di procedere?</value>
 
 
 Sei sicuro di voler continuare?</value>
-  </data>
-  <data name="NoChangesFound" xml:space="preserve">
-    <value>Nessuna modifica degna di nota trovata.</value>
   </data>
   <data name="OperationStopped" xml:space="preserve">
     <value>Operazione interrotta</value>
@@ -1075,20 +961,8 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="ScheduledLater" xml:space="preserve">
     <value>Pianificato per il prossimo riavvio</value>
   </data>
-  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>Scansione</value>
-  </data>
-  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>Riparazione</value>
-  </data>
   <data name="RepairPage_StopButton.Content" xml:space="preserve">
     <value>Arresta</value>
-  </data>
-  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>Seleziona almeno un'opzione per la scansione/riparazione</value>
-  </data>
-  <data name="StatusTextBlockDefault" xml:space="preserve">
-    <value>Seleziona almeno un'opzione per la scansione/riparazione</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>Stato della batteria</value>
@@ -1126,9 +1000,6 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
     <value>Opzioni di riparazione</value>
   </data>
-  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>Opzioni di diagnosi</value>
-  </data>
   <data name="OperationCompleted" xml:space="preserve">
     <value>Operazione completata</value>
   </data>
@@ -1152,12 +1023,6 @@ Controlla se il computer presenta problemi di memoria</value>
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
     <value>Altre impostazioni</value>
-  </data>
-  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>Ottimizzazioni di base del sistema</value>
-  </data>
-  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>Ottimizzazioni avanzate del sistema Ottimizzazioni</value>
   </data>
   <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
     <value>Nessuna app corrisponde alla tua ricerca</value>
@@ -1246,9 +1111,6 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Impedisci al firmware di eseguire programmi (ad esempio, bloatware OEM) durante l'avvio.</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Annulla modifiche</value>
-  </data>
   <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Importare</value>
   </data>
@@ -1281,12 +1143,6 @@ Controlla se il computer presenta problemi di memoria</value>
   </data>
   <data name="KeepAppData" xml:space="preserve">
     <value>Mantieni i dati dell'app</value>
-  </data>
-  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Stai eseguendo come amministratore</value>
-  </data>
-  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Riavvia l'app come amministratore affinché le modifiche abbiano effetto</value>
   </data>
   <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
     <value>Aggiorna</value>
@@ -1408,12 +1264,6 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Aggiungi piano Prestazioni elevate</value>
   </data>
-  <data name="PoliciesPage_Warning" xml:space="preserve">
-    <value>Questa funzione rileva solo le voci del Registro di sistema supportate dai criteri. Non rileva modifiche ai servizi o modifiche al Registro di sistema non correlate ai criteri.</value>
-  </data>
-  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
-    <value>Questa pagina rileva e consente di rimuovere le sostituzioni dei Criteri di gruppo locali. La rimozione di una sostituzione dei criteri la riporta allo stato Non configurato.</value>
-  </data>
   <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>Riepilogo criteri</value>
   </data>
@@ -1437,12 +1287,6 @@ Controlla se il computer presenta problemi di memoria</value>
   </data>
   <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>Nessuna sostituzione dei criteri rilevata.</value>
-  </data>
-  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
-    <value>Rimuovi tutte le sostituzioni</value>
-  </data>
-  <data name="PoliciesPage_Title" xml:space="preserve">
-    <value>Rilevamento override Criteri di gruppo</value>
   </data>
   <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>Scansione criteri...</value>
@@ -1599,15 +1443,6 @@ Controlla se il computer presenta problemi di memoria</value>
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>Predefinito</value>
-  </data>
-  <data name="ScanResults" xml:space="preserve">
-    <value>Risultati della scansione</value>
-  </data>
-  <data name="MicrosoftAccount" xml:space="preserve">
-    <value>Account Microsoft</value>
-  </data>
-  <data name="LocalAccount" xml:space="preserve">
-    <value>Account locale</value>
   </data>
   <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
     <value>Disattiva IA di Windows</value>
@@ -2227,7 +2062,33 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="StartupPage_Notification_DisabledCount" xml:space="preserve">
     <value>Disabilitate {0} app all'avvio.</value>
   </data>
-
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>{0} elemento/i selezionato/i</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>Rimuovi selezionati</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Rimuovi tutti gli elementi di avvio selezionati</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Deseleziona tutto</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>Rimuovi app di avvio</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>Sei sicuro di voler rimuovere {0} elemento/i dall'avvio?</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>{0} elemento/i di avvio rimosso/i.</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>{0} elemento/i rimosso/i. {1} non riusciti (privilegi di amministratore richiesti).</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Seleziona tutto</value>
+  </data>
   <data name="Intelligent_ScoreTitle" xml:space="preserve">
     <value>Punteggio di ottimizzazione</value>
   </data>
@@ -2399,9 +2260,6 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Intelligent_Flyout_TechnicalDetails" xml:space="preserve">
     <value>Dettagli tecnici</value>
   </data>
-  <data name="Intelligent_Flyout_ScoreImpact" xml:space="preserve">
-    <value>Impatto sul punteggio: +{0} punti ({1})</value>
-  </data>
   <data name="Intelligent_Flyout_PreApplyBackup" xml:space="preserve">
     <value>Backup pre-applicazione: Salvato il {0} (Stato iniziale: {1})</value>
   </data>
@@ -2411,7 +2269,6 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Intelligent_Flyout_Status" xml:space="preserve">
     <value>Stato attuale: {0}</value>
   </data>
-
   <data name="Intelligent_Verification_Active" xml:space="preserve">
     <value>Verificato attivo ✓</value>
   </data>
@@ -2427,7 +2284,6 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Intelligent_General_Category" xml:space="preserve">
     <value>Generale</value>
   </data>
-
   <data name="Intelligent_Impact_BackgroundApps" xml:space="preserve">
     <value>Libera cicli CPU in background e risparmia 200MB+ di RAM.</value>
   </data>
@@ -2770,17 +2626,11 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
     <value>Apre la pagina delle impostazioni Rete e Internet di Windows.</value>
   </data>
-  <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>Apri impostazioni</value>
-  </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
     <value>Impostazioni scheda di rete</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
     <value>Apre il pannello classico Connessioni di rete per gestire le schede.</value>
-  </data>
-  <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>Apri schede di rete</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
     <value>Disabilita limitazione di rete</value>
@@ -2860,31 +2710,187 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Network_SuccessTitle" xml:space="preserve">
     <value>Operazione completata</value>
   </data>
-  <data name="StartupPage_SelectionCount" xml:space="preserve">
-    <value>{0} elemento/i selezionato/i</value>
+  <data name="OptimizeSystemPage_TimerResolution.Text" xml:space="preserve">
+    <value>Risoluzione timer e latenza</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
-    <value>Rimuovi selezionati</value>
+  <data name="Feature_GlobalTimerResolution.Header" xml:space="preserve">
+    <value>Abilita risoluzione globale del timer</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Rimuovi tutti gli elementi di avvio selezionati</value>
+  <data name="Feature_GlobalTimerResolution.Description" xml:space="preserve">
+    <value>Consente alle applicazioni di richiedere una risoluzione del timer più elevata a livello globale, riducendo la latenza di pianificazione per giochi e audio in tempo reale.</value>
   </data>
-  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Deseleziona tutto</value>
+  <data name="Feature_DisableHPET.Header" xml:space="preserve">
+    <value>Disabilita HPET</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
-    <value>Rimuovi app di avvio</value>
+  <data name="Feature_DisableHPET.Description" xml:space="preserve">
+    <value>Disabilita l'High Precision Event Timer e passa a TSC per una latenza inferiore. Richiede il riavvio.</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
-    <value>Sei sicuro di voler rimuovere {0} elemento/i dall'avvio?</value>
+  <data name="Feature_DisableDynamicTick.Header" xml:space="preserve">
+    <value>Disabilita Dynamic Tick</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
-    <value>{0} elemento/i di avvio rimosso/i.</value>
+  <data name="Feature_DisableDynamicTick.Description" xml:space="preserve">
+    <value>Forza l'attivazione del timer di sistema a una frequenza costante anziché regolarsi dinamicamente, riducendo il jitter nei carichi sensibili alla latenza.</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0} elemento/i rimosso/i. {1} non riusciti (privilegi di amministratore richiesti).</value>
+  <data name="OptimizeSystemPage_MemoryOptimization.Text" xml:space="preserve">
+    <value>Ottimizzazione della memoria</value>
   </data>
-  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Seleziona tutto</value>
+  <data name="Feature_DisablePrefetch.Header" xml:space="preserve">
+    <value>Disabilita Prefetch e Superfetch</value>
+  </data>
+  <data name="Feature_DisablePrefetch.Description" xml:space="preserve">
+    <value>Disabilita il precaricamento di Windows Prefetcher e Superfetch per liberare RAM e ridurre l'I/O del disco. Consigliato per unità SSD.</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Header" xml:space="preserve">
+    <value>Abilita cache di sistema estesa</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Description" xml:space="preserve">
+    <value>Alloca più memoria di sistema per la cache dei file, migliorando le prestazioni di lettura del disco per carichi di lavoro intensivi.</value>
+  </data>
+  <data name="Feature_DisableNDU.Header" xml:space="preserve">
+    <value>Disabilita monitoraggio utilizzo dati di rete (NDU)</value>
+  </data>
+  <data name="Feature_DisableNDU.Description" xml:space="preserve">
+    <value>Disabilita il servizio NDU che può causare perdite di memoria nel pool non di paging su alcuni sistemi dopo un utilizzo prolungato.</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Header" xml:space="preserve">
+    <value>Disabilita crittografia del file di paging</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Description" xml:space="preserve">
+    <value>Disabilita la crittografia del file di paging di Windows per ridurre il carico della CPU durante le operazioni di paging.</value>
+  </data>
+  <data name="FeaturesPage_NotificationControls.Text" xml:space="preserve">
+    <value>Controlli notifiche</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Header" xml:space="preserve">
+    <value>Disabilita notifiche nella schermata di blocco</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Description" xml:space="preserve">
+    <value>Impedisce la visualizzazione delle notifiche popup nella schermata di blocco per una maggiore privacy e minori distrazioni.</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Header" xml:space="preserve">
+    <value>Disabilita tutte le notifiche popup</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Description" xml:space="preserve">
+    <value>Disabilita completamente tutte le notifiche popup (toast) da parte delle app e del sistema.</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Header" xml:space="preserve">
+    <value>Disabilita Centro notifiche</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Description" xml:space="preserve">
+    <value>Rimuove il Centro notifiche (Centro notifiche/azioni) dalla barra delle applicazioni. Richiede il riavvio di Explorer.</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Header" xml:space="preserve">
+    <value>Disabilita azioni suggerite</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Description" xml:space="preserve">
+    <value>Disabilita il menu a comparsa delle azioni suggerite dagli appunti intelligenti durante la copia di date, numeri o indirizzi.</value>
+  </data>
+  <data name="FeaturesPage_ContextMenu.Text" xml:space="preserve">
+    <value>Personalizzazione menu contestuale</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Header" xml:space="preserve">
+    <value>Aggiungi "Diventa proprietario" al menu contestuale</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Description" xml:space="preserve">
+    <value>Aggiunge l'opzione "Diventa proprietario" al menu contestuale di file e cartelle per trasferire rapidamente i permessi.</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Header" xml:space="preserve">
+    <value>Aggiungi "Apri prompt dei comandi qui"</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Description" xml:space="preserve">
+    <value>Aggiunge l'opzione per aprire il prompt dei comandi nella posizione corrente dal menu contestuale dello sfondo delle cartelle.</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Header" xml:space="preserve">
+    <value>Aggiungi "Copia percorso file" al menu contestuale</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Description" xml:space="preserve">
+    <value>Aggiunge l'opzione "Copia percorso file" al menu contestuale per copiare rapidamente il percorso completo negli appunti.</value>
+  </data>
+  <data name="PrivacyPage_PrivacyHardening.Text" xml:space="preserve">
+    <value>Rafforzamento della privacy</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Header" xml:space="preserve">
+    <value>Disabilita Sensore Wi-Fi (Wi-Fi Sense)</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Description" xml:space="preserve">
+    <value>Disabilita la connessione automatica agli hotspot Wi-Fi aperti suggeriti e alle reti condivise dai contatti.</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Header" xml:space="preserve">
+    <value>Disabilita risultati Web nella ricerca</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Description" xml:space="preserve">
+    <value>Impedisce a Windows Search di inviare query a Bing e mostrare risultati Web. Mantiene la ricerca locale e privata.</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Header" xml:space="preserve">
+    <value>Disabilita tracciamento avvio applicazioni</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Description" xml:space="preserve">
+    <value>Impedisce a Windows di tracciare le app avviate per personalizzare l'elenco delle più usate nel menu Start.</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Header" xml:space="preserve">
+    <value>Disabilita Cronologia attività e sequenza temporale</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Description" xml:space="preserve">
+    <value>Disabilita il feed di Windows Timeline e impedisce la pubblicazione o il caricamento dei dati di attività nel cloud.</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Header" xml:space="preserve">
+    <value>Disabilita recapito aggiornamenti P2P</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Description" xml:space="preserve">
+    <value>Disabilita la distribuzione peer-to-peer di Windows Update, impedendo al PC di condividere dati di aggiornamento con altri PC su Internet.</value>
+  </data>
+  <data name="Network_DisableHotspot20.Header" xml:space="preserve">
+    <value>Disabilita Hotspot 2.0</value>
+  </data>
+  <data name="Network_DisableHotspot20.Description" xml:space="preserve">
+    <value>Disabilita il rilevamento e la connessione automatica agli hotspot Wi-Fi Hotspot 2.0 (Passpoint) per una maggiore privacy.</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Header" xml:space="preserve">
+    <value>Disabilita NetBIOS su TCP/IP</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Description" xml:space="preserve">
+    <value>Disabilita la risoluzione dei nomi NetBIOS su TCP/IP legacy per ridurre la superficie di attacco di rete e migliorare la sicurezza.</value>
+  </data>
+  <data name="OptimizeSystemPage_InputResponsiveness.Text" xml:space="preserve">
+    <value>Input e reattività</value>
+  </data>
+  <data name="OptimizeSystemPage_GamingGpu.Text" xml:space="preserve">
+    <value>Giochi e scheda video</value>
+  </data>
+  <data name="OptimizeSystemPage_DiskFileSystem.Text" xml:space="preserve">
+    <value>Disco e file system</value>
+  </data>
+  <data name="OptimizeSystemPage_ServicesSystem.Text" xml:space="preserve">
+    <value>Servizi e sistema</value>
+  </data>
+  <data name="OptimizeSystemPage_WindowsComponents.Text" xml:space="preserve">
+    <value>Componenti di Windows</value>
+  </data>
+  <data name="FeaturesPage_AppearanceUI.Text" xml:space="preserve">
+    <value>Aspetto e interfaccia</value>
+  </data>
+  <data name="FeaturesPage_SystemServices.Text" xml:space="preserve">
+    <value>Servizi di sistema</value>
+  </data>
+  <data name="FeaturesPage_InputAccessibility.Text" xml:space="preserve">
+    <value>Input e accessibilità</value>
+  </data>
+  <data name="FeaturesPage_ExplorerShell.Text" xml:space="preserve">
+    <value>Esplora file e interfaccia</value>
+  </data>
+  <data name="FeaturesPage_Win11UI.Text" xml:space="preserve">
+    <value>Interfaccia di Windows 11</value>
+  </data>
+  <data name="FeaturesPage_WindowsAIEdge.Text" xml:space="preserve">
+    <value>IA di Windows ed Edge</value>
+  </data>
+  <data name="PrivacyPage_DataCollection.Text" xml:space="preserve">
+    <value>Raccolta dati e input</value>
+  </data>
+  <data name="PrivacyPage_CloudSync.Text" xml:space="preserve">
+    <value>Cloud e sincronizzazione dispositivi</value>
+  </data>
+  <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
+    <value>Posizione e sicurezza</value>
   </data>
 </root>

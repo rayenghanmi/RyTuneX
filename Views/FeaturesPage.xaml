@@ -25,9 +25,9 @@
                 <!-- Intelligent Score Header -->
                 <localControls:IntelligentScoreHeaderControl x:Name="ScoreHeader" TargetCategory="FeaturesAndUsability"/>
 
-                <!-- System Feature Control Toggles -->
+                <!-- Appearance & UI Section -->
                 <TextBlock Margin="6"
-                    x:Uid="FeaturesPage_SysFeat"
+                    x:Uid="FeaturesPage_AppearanceUI"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
 
                 <controls:SettingsCard x:Uid="Feature_DisableWindowsTransparency">
@@ -51,12 +51,10 @@
                     <ToggleSwitch x:Name="VerboseLogon" Tag="VerboseLogon"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableHibernation">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE708;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="Hibernation" Tag="Hibernation"/>
-                </controls:SettingsCard>
+                <!-- System Services Section -->
+                <TextBlock Margin="6"
+                    x:Uid="FeaturesPage_SystemServices"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
 
                 <controls:SettingsCard x:Uid="Feature_DisableHomeGroup">
                     <controls:SettingsCard.HeaderIcon>
@@ -86,32 +84,37 @@
                     <ToggleSwitch x:Name="Search" Tag="Search"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableErrorReporting">
+                <controls:SettingsCard x:Uid="Feature_DisableFaxService">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE9F9;"/>
+                        <FontIcon Glyph="&#xEF40;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="ErrorReporting" Tag="ErrorReporting"/>
+                    <ToggleSwitch x:Name="FaxService" Tag="FaxService"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableGameBar">
+                <controls:SettingsCard x:Uid="Feature_DisableInsiderService">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE990;"/>
+                        <FontIcon Glyph="&#xF1AD;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="GameBar" Tag="GameBar"/>
+                    <ToggleSwitch x:Name="InsiderService" Tag="InsiderService"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableQuickAccessHistory">
+                <controls:SettingsCard x:Uid="Feature_DisableHibernation">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE81C;"/>
+                        <FontIcon Glyph="&#xE708;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="QuickAccessHistory" Tag="QuickAccessHistory"/>
+                    <ToggleSwitch x:Name="Hibernation" Tag="Hibernation"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableMyPeople">
+                <!-- Input & Accessibility Section -->
+                <TextBlock Margin="6"
+                    x:Uid="FeaturesPage_InputAccessibility"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+
+                <controls:SettingsCard x:Uid="Feature_DisableStickyKeys">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE716;"/>
+                        <FontIcon Glyph="&#xE765;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="MyPeople" Tag="MyPeople"/>
+                    <ToggleSwitch x:Name="StickyKeys" Tag="StickyKeys"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableWindowsInk">
@@ -128,20 +131,6 @@
                     <ToggleSwitch x:Name="SpellingAndTypingFeatures" Tag="SpellingAndTypingFeatures"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableFaxService">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xEF40;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="FaxService" Tag="FaxService"/>
-                </controls:SettingsCard>
-
-                <controls:SettingsCard x:Uid="Feature_DisableInsiderService">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xF1AD;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="InsiderService" Tag="InsiderService"/>
-                </controls:SettingsCard>
-
                 <controls:SettingsCard x:Uid="Feature_DisableCloudClipboard">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xEBC3;"/>
@@ -149,11 +138,23 @@
                     <ToggleSwitch x:Name="CloudClipboard" Tag="CloudClipboard"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableStickyKeys">
+                <!-- Explorer & Shell Section -->
+                <TextBlock Margin="6"
+                    x:Uid="FeaturesPage_ExplorerShell"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
+
+                <controls:SettingsCard x:Uid="Feature_DisableQuickAccessHistory">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE765;"/>
+                        <FontIcon Glyph="&#xE81C;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="StickyKeys" Tag="StickyKeys"/>
+                    <ToggleSwitch x:Name="QuickAccessHistory" Tag="QuickAccessHistory"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableMyPeople">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE716;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="MyPeople" Tag="MyPeople"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableCastToDevice">
@@ -163,22 +164,57 @@
                     <ToggleSwitch x:Name="CastToDevice" Tag="CastToDevice"/>
                 </controls:SettingsCard>
 
-                <TextBlock Margin="6"
-                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                    x:Uid="FeaturesPage_Win11"/>
-                <controls:SettingsCard x:Uid="Feature_DisableVBS">
+                <controls:SettingsCard x:Uid="Feature_DisableErrorReporting">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xF552;"/>
+                        <FontIcon Glyph="&#xE9F9;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="VBS" Tag="VBS"/>
+                    <ToggleSwitch x:Name="ErrorReporting" Tag="ErrorReporting"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_EnableEndTask">
+                <controls:SettingsCard x:Uid="Feature_DisableGameBar">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE25B;"/>
+                        <FontIcon Glyph="&#xE990;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="EndTask" Tag="EndTask"/>
+                    <ToggleSwitch x:Name="GameBar" Tag="GameBar"/>
                 </controls:SettingsCard>
+
+                <!-- Notification Controls Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="FeaturesPage_NotificationControls"/>
+
+                <controls:SettingsCard x:Uid="Feature_DisableLockScreenNotifications">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE7F7;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="LockScreenNotifications" Tag="LockScreenNotifications"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableToastNotifications">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE7E7;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="ToastNotifications" Tag="ToastNotifications"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableNotificationCenter">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE91C;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="NotificationCenter" Tag="NotificationCenter"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableSuggestedActions">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE9D5;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="SuggestedActions" Tag="SuggestedActions"/>
+                </controls:SettingsCard>
+
+                <!-- Windows 11 UI Section -->
+                <TextBlock Margin="6"
+                    x:Uid="FeaturesPage_Win11UI"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
 
                 <controls:SettingsCard x:Uid="Feature_EnableClassicContextMenu">
                     <controls:SettingsCard.HeaderIcon>
@@ -229,6 +265,13 @@
                     <ToggleSwitch x:Name="FilesCompactMode" Tag="FilesCompactMode"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Feature_EnableEndTask">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE25B;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="EndTask" Tag="EndTask"/>
+                </controls:SettingsCard>
+
                 <controls:SettingsCard x:Uid="Feature_DisableStickers">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xF4AA;"/>
@@ -236,12 +279,10 @@
                     <ToggleSwitch x:Name="Stickers" Tag="Stickers"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableEdgeDiscoverBar">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xF6FA;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="EdgeDiscoverBar" Tag="EdgeDiscoverBar"/>
-                </controls:SettingsCard>
+                <!-- Windows AI & Edge Section -->
+                <TextBlock Margin="6"
+                    x:Uid="FeaturesPage_WindowsAIEdge"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"/>
 
                 <controls:SettingsCard x:Uid="Feature_DisableCoPilotAI">
                     <controls:SettingsCard.HeaderIcon>
@@ -263,6 +304,47 @@
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="WindowsAI" Tag="WindowsAI"/>
                 </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableEdgeDiscoverBar">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF6FA;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="EdgeDiscoverBar" Tag="EdgeDiscoverBar"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableVBS">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF552;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="VBS" Tag="VBS"/>
+                </controls:SettingsCard>
+
+                <!-- Context Menu Customization Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="FeaturesPage_ContextMenu"/>
+
+                <controls:SettingsCard x:Uid="Feature_AddTakeOwnership">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE7C1;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="TakeOwnership" Tag="TakeOwnership"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_AddOpenCmdHere">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE756;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="OpenCmdHere" Tag="OpenCmdHere"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_AddCopyFilePath">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE8C8;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="CopyFilePath" Tag="CopyFilePath"/>
+                </controls:SettingsCard>
+
 
             </StackPanel>
         </ScrollViewer>

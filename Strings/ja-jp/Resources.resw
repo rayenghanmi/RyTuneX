@@ -148,20 +148,8 @@
   <data name="HomePage_QuickAction_RepairIssues.Text" xml:space="preserve">
     <value>問題を修復</value>
   </data>
-  <data name="HomePage_QuickAction_ManageStartupApps.Text" xml:space="preserve">
-    <value>スタートアップアプリを管理</value>
-  </data>
   <data name="HomePage_QuickAction_CleanTemporaryFiles.Text" xml:space="preserve">
     <value>一時ファイルをクリーン</value>
-  </data>
-  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>フィードバックを送信</value>
-  </data>
-  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>プロセッサ</value>
-  </data>
-  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>グラフィックスカード</value>
   </data>
   <data name="Debloat" xml:space="preserve">
     <value>デブロート</value>
@@ -259,20 +247,11 @@
   <data name="Version" xml:space="preserve">
     <value>バージョン</value>
   </data>
-  <data name="VideoArchitecture" xml:space="preserve">
-    <value>ビデオアーキテクチャ</value>
-  </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Windowsディレクトリ</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>一時ファイルの削除エラー</value>
-  </data>
-  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>システム機能</value>
-  </data>
-  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>Windows 11専用</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
     <value>フォルダーを選択</value>
@@ -297,12 +276,6 @@
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
     <value>ドライバー</value>
-  </data>
-  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>エクスポート</value>
-  </data>
-  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>ドライバーを外部フォルダーに抽出して簡単にバックアップ</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
     <value>ドライバーを抽出中</value>
@@ -460,12 +433,6 @@
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
     <value>コード作成の支援のためのWindowsのCoPilot AI機能を無効にします. 開発者には推奨されません. </value>
   </data>
-  <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>基本的な最適化</value>
-  </data>
-  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>パフォーマンスの調整</value>
-  </data>
   <data name="Feature_DisableSysMain.Header" xml:space="preserve">
     <value>SysMainを無効にする</value>
   </data>
@@ -496,9 +463,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Windowsアップデートからドライバーの更新を除外します. セキュリティリスクや互換性の問題が発生する可能性があるため、注意して使用してください. </value>
   </data>
-  <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>高度な最適化</value>
-  </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
     <value>システムの復元を無効にする</value>
   </data>
@@ -516,12 +480,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Microsoft Storeからダウンロードしたアプリの自動更新を無効にします. アプリがセキュリティリスクにさらされたり、新機能が欠けたりする可能性があります. </value>
-  </data>
-  <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>テレメトリ</value>
-  </data>
-  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>プライバシーを強化</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
     <value>SMBv1を無効にする</value>
@@ -589,15 +547,6 @@
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
     <value>DNSを適用</value>
   </data>
-  <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>IPv4 DNSサーバー</value>
-  </data>
-  <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>IPv6 DNSサーバー</value>
-  </data>
-  <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>ネットワークインターフェース</value>
-  </data>
   <data name="Network_Primary.Text" xml:space="preserve">
     <value>プライマリ</value>
   </data>
@@ -606,9 +555,6 @@
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
     <value>セカンダリ</value>
-  </data>
-  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>カスタムDNSを設定</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
     <value>IPv4 DNSアドレスが見つかりません</value>
@@ -643,26 +589,8 @@
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneXは、WinUI 3フレームワークで構築された最先端の最適化ツールで、Windowsデバイスのパフォーマンスを向上させます. Windows 10および11の両方に対応し、ユーザーが頑固なプリインストールアプリを簡単に削除し、システムリソースを最適化できるようにします. </value>
   </data>
-  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>更新を確認</value>
-  </data>
-  <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>新しいバージョン（</value>
-  </data>
-  <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>）が利用可能です. 新機能と改善を楽しむために最新バージョンに更新してください. </value>
-  </data>
   <data name="UpdateTitle" xml:space="preserve">
     <value>RyTuneXの更新</value>
-  </data>
-  <data name="NetworkError" xml:space="preserve">
-    <value>エラーが発生しました. インターネット接続を確認し、後でもう一度お試しください. </value>
-  </data>
-  <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>最新バージョン（</value>
-  </data>
-  <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>）を既に使用しています. 現在、更新は利用できません. </value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>閉じる</value>
@@ -682,17 +610,11 @@
   <data name="BatteryStatus" xml:space="preserve">
     <value>バッテリーステータス</value>
   </data>
-  <data name="Chemistry" xml:space="preserve">
-    <value>化学</value>
-  </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>セキュリティ</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>予期しないエラーが発生しました</value>
-  </data>
-  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>ログを表示</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>合計: {0} アプリ</value>
@@ -832,12 +754,6 @@
   <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
     <value>有害または不適切なコンテンツを検索結果からフィルタリングするセーフサーチモードを無効にします. これを無効にすると、安全でないコンテンツに触れるリスクが高まります. </value>
   </data>
-  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
-    <value>アクティビティのアップロードを無効化</value>
-  </data>
-  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
-    <value>アクティビティデータのアップロードを無効にし、Microsoftがサービスの改善のために使用データを収集しないようにします. これにより、プライバシーが保護されます. </value>
-  </data>
   <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
     <value>クリップボードの同期を無効化</value>
   </data>
@@ -868,23 +784,11 @@
   <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
     <value>デバイス紛失時にデバイスを探す機能「Find My Device」を無効にします. これにより、デバイスを見つける能力が低下しますが、プライバシーが向上します. </value>
   </data>
-  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>アクティビティフィードの無効化</value>
-  </data>
-  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>最近のアクティビティを表示するフィードを無効にします. これにより、他の人があなたのデバイスで何をしているかを見えなくし、プライバシーを保護します. </value>
-  </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
     <value>CDP（顧客データプラットフォーム）の無効化</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
     <value>顧客データプラットフォームによるデータの収集と分析を無効にします. これによりプライバシーが向上しますが、パーソナライズ機能が制限される可能性があります. </value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>プライバシー設定のカスタマイズ体験無効化</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>プライバシー設定でのカスタマイズ体験機能を無効にします. これにより、Windowsがデータを使って体験をカスタマイズすることが止まります. これにより、パーソナライズ機能が低下する可能性があります. </value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
     <value>診断トースト通知の無効化</value>
@@ -897,12 +801,6 @@
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
     <value>音声コマンドの保存や処理を無効にします. これによりプライバシーが向上しますが、音声検索やコマンド機能が制限されます. </value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>位置情報アクセスの無効化</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>アプリやサービスがデバイスのGPSやネットワーク位置情報を使用しないようにします. これによりプライバシーが向上しますが、位置情報に依存するサービスが制限されます. </value>
   </data>
   <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
     <value>位置情報機能の無効化</value>
@@ -1006,9 +904,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>システムプロファイル設定を調整して、システムのパフォーマンスを向上させます. この機能により、速度と効率が優先され、システムの全体的なレスポンスとリソース管理が改善されます. </value>
   </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>デバイス情報</value>
-  </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>クラシックコンテキストメニューを有効にする</value>
   </data>
@@ -1018,17 +913,11 @@
   <data name="DoNotShowCheckBox" xml:space="preserve">
     <value>このメッセージを再表示しない</value>
   </data>
-  <data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>復元ポイントの作成</value>
-  </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>システムに変更を加える前に、復元ポイントを作成することを強くお勧めします. 
 
 
 続行する前にシステムの復元ポイントを作成しますか?</value>
-  </data>
-  <data name="CreatingRestorePoint" xml:space="preserve">
-    <value>復元ポイントを作成中</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>すべての変更を元に戻す</value>
@@ -1044,9 +933,6 @@
 
 
 本当に続行してよろしいですか?</value>
-  </data>
-  <data name="NoChangesFound" xml:space="preserve">
-    <value>注目すべき変更は見つかりませんでした. </value>
   </data>
   <data name="OperationStopped" xml:space="preserve">
     <value>操作が停止されました</value>
@@ -1075,20 +961,8 @@
   <data name="ScheduledLater" xml:space="preserve">
     <value>次回の再起動時にスケジュール済み</value>
   </data>
-  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>スキャン</value>
-  </data>
-  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>修復</value>
-  </data>
   <data name="RepairPage_StopButton.Content" xml:space="preserve">
     <value>停止</value>
-  </data>
-  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>スキャン/修復するには少なくとも 1 つのオプションを選択してください</value>
-  </data>
-  <data name="StatusTextBlockDefault" xml:space="preserve">
-    <value>スキャン/修復するには少なくとも 1 つのオプションを選択してください</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>バッテリーの健康状態</value>
@@ -1126,9 +1000,6 @@
   <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
     <value>修復オプション</value>
   </data>
-  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>診断オプション</value>
-  </data>
   <data name="OperationCompleted" xml:space="preserve">
     <value>操作が完了しました</value>
   </data>
@@ -1152,12 +1023,6 @@
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
     <value>その他の設定</value>
-  </data>
-  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>基本的なシステムの最適化</value>
-  </data>
-  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>高度なシステムの最適化</value>
   </data>
   <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
     <value>検索に一致するアプリはありません</value>
@@ -1246,9 +1111,6 @@
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>ファームウェアが起動時にプログラム (例: OEMの不要なソフトウェア) を実行するのを防ぎます。</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>変更を元に戻す</value>
-  </data>
   <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>輸入</value>
   </data>
@@ -1281,12 +1143,6 @@
   </data>
   <data name="KeepAppData" xml:space="preserve">
     <value>アプリのデータを保持する</value>
-  </data>
-  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>管理者として実行しています</value>
-  </data>
-  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>変更を反映させるには、アプリを管理者として再起動してください</value>
   </data>
   <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
     <value>更新</value>
@@ -1408,12 +1264,6 @@
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>究極のパフォーマンスプランを追加</value>
   </data>
-  <data name="PoliciesPage_Warning" xml:space="preserve">
-    <value>この機能は、ポリシーに基づくレジストリエントリのみを検出します。サービスの変更やポリシー以外のレジストリの調整は検出しません。</value>
-  </data>
-  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
-    <value>このページでは、ローカルグループポリシーのオーバーライドを検出して削除できます。ポリシーオーバーライドを削除すると、未構成状態に戻ります。</value>
-  </data>
   <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>ポリシーの概要</value>
   </data>
@@ -1437,12 +1287,6 @@
   </data>
   <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>ポリシーオーバーライドは検出されませんでした。</value>
-  </data>
-  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
-    <value>すべてのオーバーライドを削除</value>
-  </data>
-  <data name="PoliciesPage_Title" xml:space="preserve">
-    <value>グループポリシーオーバーライド検出</value>
   </data>
   <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>ポリシーをスキャン中...</value>
@@ -1599,15 +1443,6 @@
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>既定</value>
-  </data>
-  <data name="ScanResults" xml:space="preserve">
-    <value>スキャン結果</value>
-  </data>
-  <data name="MicrosoftAccount" xml:space="preserve">
-    <value>Microsoft アカウント</value>
-  </data>
-  <data name="LocalAccount" xml:space="preserve">
-    <value>ローカル アカウント</value>
   </data>
   <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
     <value>Windows の AI を無効化</value>
@@ -2227,7 +2062,33 @@
   <data name="StartupPage_Notification_DisabledCount" xml:space="preserve">
     <value>{0} 個のスタートアップ アプリを無効にしました。</value>
   </data>
-
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>{0}個のアイテムを選択中</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>選択したものを削除</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>選択したスタートアップアイテムをすべて削除</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>選択を解除</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>スタートアップアプリを削除</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>スタートアップから{0}個のアイテムを削除しますか？</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>{0}個のスタートアップアイテムを削除しました。</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>{0}個のアイテムを削除しました。{1}個が失敗しました（管理者権限が必要）。</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>すべて選択</value>
+  </data>
   <data name="Intelligent_ScoreTitle" xml:space="preserve">
     <value>最適化スコア</value>
   </data>
@@ -2399,9 +2260,6 @@
   <data name="Intelligent_Flyout_TechnicalDetails" xml:space="preserve">
     <value>技術詳細</value>
   </data>
-  <data name="Intelligent_Flyout_ScoreImpact" xml:space="preserve">
-    <value>スコアへの影響: +{0} ポイント ({1})</value>
-  </data>
   <data name="Intelligent_Flyout_PreApplyBackup" xml:space="preserve">
     <value>適用前バックアップ: {0} に保存 (初期状態: {1})</value>
   </data>
@@ -2411,7 +2269,6 @@
   <data name="Intelligent_Flyout_Status" xml:space="preserve">
     <value>現在の状態: {0}</value>
   </data>
-
   <data name="Intelligent_Verification_Active" xml:space="preserve">
     <value>適用確認済み ✓</value>
   </data>
@@ -2427,7 +2284,6 @@
   <data name="Intelligent_General_Category" xml:space="preserve">
     <value>全般</value>
   </data>
-
   <data name="Intelligent_Impact_BackgroundApps" xml:space="preserve">
     <value>バックグラウンドの CPU サイクルを解放し 200MB 以上の RAM を節約します。</value>
   </data>
@@ -2770,17 +2626,11 @@
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
     <value>Windowsの「ネットワークとインターネット」設定ページを開きます。</value>
   </data>
-  <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>設定を開く</value>
-  </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
     <value>ネットワークアダプター設定</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
     <value>アダプターを管理するためのクラシックなネットワーク接続パネルを開きます。</value>
-  </data>
-  <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>アダプターを開く</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
     <value>ネットワークスロットリングを無効化</value>
@@ -2860,31 +2710,187 @@
   <data name="Network_SuccessTitle" xml:space="preserve">
     <value>成功</value>
   </data>
-  <data name="StartupPage_SelectionCount" xml:space="preserve">
-    <value>{0}個のアイテムを選択中</value>
+  <data name="OptimizeSystemPage_TimerResolution.Text" xml:space="preserve">
+    <value>タイマー解像度とレイテンシ</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
-    <value>選択したものを削除</value>
+  <data name="Feature_GlobalTimerResolution.Header" xml:space="preserve">
+    <value>グローバル タイマー解像度を有効にする</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>選択したスタートアップアイテムをすべて削除</value>
+  <data name="Feature_GlobalTimerResolution.Description" xml:space="preserve">
+    <value>アプリケーションがグローバルにより高いタイマー解像度を要求できるようにし、ゲームやリアルタイム オーディオのスケジューリング レイテンシを低減します。</value>
   </data>
-  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>選択を解除</value>
+  <data name="Feature_DisableHPET.Header" xml:space="preserve">
+    <value>HPET を無効にする</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
-    <value>スタートアップアプリを削除</value>
+  <data name="Feature_DisableHPET.Description" xml:space="preserve">
+    <value>高精度イベント タイマー (HPET) を無効にし、TSC に切り替えてレイテンシを短縮します。再起動が必要です。</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
-    <value>スタートアップから{0}個のアイテムを削除しますか？</value>
+  <data name="Feature_DisableDynamicTick.Header" xml:space="preserve">
+    <value>ダイナミック ティックを無効にする</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
-    <value>{0}個のスタートアップアイテムを削除しました。</value>
+  <data name="Feature_DisableDynamicTick.Description" xml:space="preserve">
+    <value>システム タイマーを動的調整ではなく一定のレートで強制的にトリガーし、レイテンシに敏感な処理のジッターを軽減します。</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0}個のアイテムを削除しました。{1}個が失敗しました（管理者権限が必要）。</value>
+  <data name="OptimizeSystemPage_MemoryOptimization.Text" xml:space="preserve">
+    <value>メモリの最適化</value>
   </data>
-  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
-    <value>すべて選択</value>
+  <data name="Feature_DisablePrefetch.Header" xml:space="preserve">
+    <value>Prefetch と Superfetch を無効にする</value>
+  </data>
+  <data name="Feature_DisablePrefetch.Description" xml:space="preserve">
+    <value>Windows Prefetcher と Superfetch のプリロードを無効にして RAM を解放し、ディスク I/O を削減します。SSD ユーザーにおすすめです。</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Header" xml:space="preserve">
+    <value>大容量システム キャッシュを有効にする</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Description" xml:space="preserve">
+    <value>ファイル システム キャッシュにより多くのシステム メモリを割り当て、負荷の高いファイル読み取りパフォーマンスを向上させます。</value>
+  </data>
+  <data name="Feature_DisableNDU.Header" xml:space="preserve">
+    <value>ネットワーク データ使用量モニター (NDU) を無効にする</value>
+  </data>
+  <data name="Feature_DisableNDU.Description" xml:space="preserve">
+    <value>長時間の稼働後に非ページ プール メモリ リークを引き起こすことが知られている NDU サービスを無効にします。</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Header" xml:space="preserve">
+    <value>ページ ファイルの暗号化を無効にする</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Description" xml:space="preserve">
+    <value>Windows ページ ファイルの暗号化を無効にして、ページング操作時の CPU 負荷を軽減します。</value>
+  </data>
+  <data name="FeaturesPage_NotificationControls.Text" xml:space="preserve">
+    <value>通知コントロール</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Header" xml:space="preserve">
+    <value>ロック画面の通知を無効にする</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Description" xml:space="preserve">
+    <value>プライバシー保護と集中力向上のため、ロック画面にトースト通知が表示されないようにします。</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Header" xml:space="preserve">
+    <value>すべてのトースト通知を無効にする</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Description" xml:space="preserve">
+    <value>アプリやシステムからのすべてのポップアップ通知を完全に無効にします。</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Header" xml:space="preserve">
+    <value>通知センターを無効にする</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Description" xml:space="preserve">
+    <value>タスクバーからアクション センター (通知センター) を削除します。エクスプローラーの再起動が必要です。</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Header" xml:space="preserve">
+    <value>おすすめのアクションを無効にする</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Description" xml:space="preserve">
+    <value>日付、電話番号、住所をコピーしたときに表示されるスマート クリップボードのポップアップを無効にします。</value>
+  </data>
+  <data name="FeaturesPage_ContextMenu.Text" xml:space="preserve">
+    <value>コンテキスト メニューのカスタマイズ</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Header" xml:space="preserve">
+    <value>コンテキスト メニューに「所有権の取得」を追加</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Description" xml:space="preserve">
+    <value>ファイルやフォルダーの右クリック メニューに「所有権の取得」を追加し、権限をすばやく転送できるようにします。</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Header" xml:space="preserve">
+    <value>「ここでコマンド プロンプトを開く」を追加</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Description" xml:space="preserve">
+    <value>フォルダーの背景の右クリック メニューに「ここでコマンド プロンプトを開く」を追加します。</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Header" xml:space="preserve">
+    <value>コンテキスト メニューに「ファイル パスをコピー」を追加</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Description" xml:space="preserve">
+    <value>コンテキスト メニューに「ファイル パスをコピー」を追加し、ワンクリックでパス全体をクリップボードにコピーします。</value>
+  </data>
+  <data name="PrivacyPage_PrivacyHardening.Text" xml:space="preserve">
+    <value>プライバシーの強化</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Header" xml:space="preserve">
+    <value>Wi-Fi センサー (Wi-Fi Sense) を無効にする</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Description" xml:space="preserve">
+    <value>推奨されるオープン Wi-Fi ホットスポットや連絡先が共有したネットワークへの自動接続を無効にします。</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Header" xml:space="preserve">
+    <value>検索での Web 検索結果を無効にする</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Description" xml:space="preserve">
+    <value>Windows 検索が Bing にクエリを送信して Web 結果を表示するのを防ぎます。検索をローカルかつ非公開に保ちます。</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Header" xml:space="preserve">
+    <value>アプリの起動履歴トラッキングを無効にする</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Description" xml:space="preserve">
+    <value>スタート メニューの「よく使うアプリ」一覧をカスタマイズするためのアプリ起動履歴の追跡を停止します。</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Header" xml:space="preserve">
+    <value>タイムラインとアクティビティ履歴を無効にする</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Description" xml:space="preserve">
+    <value>Windows タイムラインのアクティビティ フィードを無効にし、アクティビティ データをクラウドに同期・公開しないようにします。</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Header" xml:space="preserve">
+    <value>更新プログラムの P2P 配信を無効にする</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Description" xml:space="preserve">
+    <value>Windows Update の配信の最適化 (P2P) を無効にし、PC がインターネット上の他の PC と更新データを共有しないようにします。</value>
+  </data>
+  <data name="Network_DisableHotspot20.Header" xml:space="preserve">
+    <value>Hotspot 2.0 を無効にする</value>
+  </data>
+  <data name="Network_DisableHotspot20.Description" xml:space="preserve">
+    <value>プライバシー向上のため、Hotspot 2.0 (Passpoint) の自動 Wi-Fi ホットスポット検出および接続を無効にします。</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Header" xml:space="preserve">
+    <value>NetBIOS over TCP/IP を無効にする</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Description" xml:space="preserve">
+    <value>ネットワークの攻撃対象領域を減らしセキュリティを強化するため、レガシーな NetBIOS 名前解決を無効にします。</value>
+  </data>
+  <data name="OptimizeSystemPage_InputResponsiveness.Text" xml:space="preserve">
+    <value>入力と応答性</value>
+  </data>
+  <data name="OptimizeSystemPage_GamingGpu.Text" xml:space="preserve">
+    <value>ゲームと GPU</value>
+  </data>
+  <data name="OptimizeSystemPage_DiskFileSystem.Text" xml:space="preserve">
+    <value>ディスクとファイル システム</value>
+  </data>
+  <data name="OptimizeSystemPage_ServicesSystem.Text" xml:space="preserve">
+    <value>サービスとシステム</value>
+  </data>
+  <data name="OptimizeSystemPage_WindowsComponents.Text" xml:space="preserve">
+    <value>Windows コンポーネント</value>
+  </data>
+  <data name="FeaturesPage_AppearanceUI.Text" xml:space="preserve">
+    <value>外観と UI</value>
+  </data>
+  <data name="FeaturesPage_SystemServices.Text" xml:space="preserve">
+    <value>システム サービス</value>
+  </data>
+  <data name="FeaturesPage_InputAccessibility.Text" xml:space="preserve">
+    <value>入力とアクセシビリティ</value>
+  </data>
+  <data name="FeaturesPage_ExplorerShell.Text" xml:space="preserve">
+    <value>エクスプローラーとシェル</value>
+  </data>
+  <data name="FeaturesPage_Win11UI.Text" xml:space="preserve">
+    <value>Windows 11 UI</value>
+  </data>
+  <data name="FeaturesPage_WindowsAIEdge.Text" xml:space="preserve">
+    <value>Windows AI と Edge</value>
+  </data>
+  <data name="PrivacyPage_DataCollection.Text" xml:space="preserve">
+    <value>データ収集と入力</value>
+  </data>
+  <data name="PrivacyPage_CloudSync.Text" xml:space="preserve">
+    <value>クラウドとデバイスの同期</value>
+  </data>
+  <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
+    <value>位置情報とセキュリティ</value>
   </data>
 </root>

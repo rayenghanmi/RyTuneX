@@ -148,20 +148,8 @@
   <data name="HomePage_QuickAction_RepairIssues.Text" xml:space="preserve">
     <value>Исправить проблемы</value>
   </data>
-  <data name="HomePage_QuickAction_ManageStartupApps.Text" xml:space="preserve">
-    <value>Управление автозагрузкой</value>
-  </data>
   <data name="HomePage_QuickAction_CleanTemporaryFiles.Text" xml:space="preserve">
     <value>Очистить временные файлы</value>
-  </data>
-  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>Отправить отзыв</value>
-  </data>
-  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>Процессор</value>
-  </data>
-  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>Графическая карта</value>
   </data>
   <data name="Debloat" xml:space="preserve">
     <value>Удаление ненужного</value>
@@ -259,20 +247,11 @@
   <data name="Version" xml:space="preserve">
     <value>Версия</value>
   </data>
-  <data name="VideoArchitecture" xml:space="preserve">
-    <value>Видеоструктура</value>
-  </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Папка Windows</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>Ошибка при удалении временных файлов</value>
-  </data>
-  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>Системные характеристики</value>
-  </data>
-  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>Эксклюзив Windows 11</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
     <value>Выберите папку</value>
@@ -297,12 +276,6 @@
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
     <value>Драйверы</value>
-  </data>
-  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>Экспорт</value>
-  </data>
-  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>Извлеките ваши драйверы в внешнюю папку для удобного резервного копирования</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
     <value>Извлечение драйверов</value>
@@ -460,12 +433,6 @@
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
     <value>Отключает функцию CoPilot AI в Windows для помощи в написании кода. Не рекомендуется для разработчиков</value>
   </data>
-  <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>Основные оптимизации</value>
-  </data>
-  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>Настройки производительности</value>
-  </data>
   <data name="Feature_DisableSysMain.Header" xml:space="preserve">
     <value>Отключить SysMain</value>
   </data>
@@ -496,9 +463,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Исключает обновления драйверов из Windows Update. Может привести к устаревшим драйверам с возможными рисками безопасности или проблемами совместимости. Используйте с осторожностью.</value>
   </data>
-  <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>Продвинутые оптимизации</value>
-  </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
     <value>Отключить восстановление системы</value>
   </data>
@@ -516,12 +480,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Отключает автоматические обновления для приложений, загруженных из Microsoft Store. Может оставить приложения уязвимыми для рисков безопасности или лишить новых функций.</value>
-  </data>
-  <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>Телеметрия</value>
-  </data>
-  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>Усилить конфиденциальность</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
     <value>Отключить SMBv1</value>
@@ -589,15 +547,6 @@
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
     <value>Применить DNS</value>
   </data>
-  <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>DNS-серверы IPv4</value>
-  </data>
-  <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>DNS-серверы IPv6</value>
-  </data>
-  <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>Сетевой интерфейс</value>
-  </data>
   <data name="Network_Primary.Text" xml:space="preserve">
     <value>Основной</value>
   </data>
@@ -606,9 +555,6 @@
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
     <value>Вторичный</value>
-  </data>
-  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>Установить собственный DNS</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
     <value>Не найдены адреса DNS IPv4</value>
@@ -643,26 +589,8 @@
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneX — это передовой оптимизатор, разработанный на основе фреймворка WinUI 3, предназначенный для повышения производительности устройств на Windows. Созданный для Windows 10 и 11, RyTuneX позволяет пользователям легко удалять упрямые предустановленные приложения и оптимизировать системные ресурсы.</value>
   </data>
-  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>Проверить обновления</value>
-  </data>
-  <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>Доступна новая версия (</value>
-  </data>
-  <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>) Пожалуйста, обновитесь до последней версии, чтобы наслаждаться новыми функциями и улучшениями.</value>
-  </data>
   <data name="UpdateTitle" xml:space="preserve">
     <value>Обновления RyTuneX</value>
-  </data>
-  <data name="NetworkError" xml:space="preserve">
-    <value>Произошла ошибка. Убедитесь, что ваше интернет-соединение работает, и попробуйте позже.</value>
-  </data>
-  <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>Вы уже используете последнюю версию (</value>
-  </data>
-  <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>). На данный момент обновления недоступны.</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Закрыть</value>
@@ -682,17 +610,11 @@
   <data name="BatteryStatus" xml:space="preserve">
     <value>Состояние аккумулятора</value>
   </data>
-  <data name="Chemistry" xml:space="preserve">
-    <value>Химический состав</value>
-  </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>Безопасность</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Произошла непредвиденная ошибка</value>
-  </data>
-  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>Просмотреть логи</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Всего: {0} приложений</value>
@@ -832,12 +754,6 @@
   <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
     <value>Отключает безопасный режим поиска, который фильтрует потенциально опасный или неподобающий контент в результатах поиска. Отключение этого увеличивает риск попадания на небезопасный контент.</value>
   </data>
-  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
-    <value>Отключить загрузку данных активности</value>
-  </data>
-  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
-    <value>Отключает загрузку данных активности, предотвращая сбор данных о вашем использовании для улучшения сервисов Microsoft. Это помогает сохранить конфиденциальность.</value>
-  </data>
   <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
     <value>Отключить синхронизацию буфера обмена</value>
   </data>
@@ -868,23 +784,11 @@
   <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
     <value>Отключает функцию поиска устройства, которая помогает найти ваше устройство в случае потери. Отключение этого уменьшает возможности восстановления устройства, но улучшает конфиденциальность.</value>
   </data>
-  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>Отключить ленту активности</value>
-  </data>
-  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>Отключает ленту активности, которая показывает ваши недавние действия, помогая защитить вашу конфиденциальность, предотвращая других от просмотра того, что вы делаете на устройстве.</value>
-  </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
     <value>Отключить CDP (Платформа данных клиентов)</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
     <value>Отключает CDP, предотвращая сбор и использование ваших данных платформой данных клиентов для анализа и таргетированных рекомендаций. Это повышает конфиденциальность, но может ограничить персонализацию.</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>Отключить персонализированные настройки конфиденциальности</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>Отключает функцию персонализированных рекомендаций в настройках конфиденциальности, не позволяя Windows использовать ваши данные для настройки пользовательского опыта. Это может уменьшить персонализацию.</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
     <value>Отключить уведомления о диагностике</value>
@@ -897,12 +801,6 @@
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
     <value>Отключает конфиденциальность онлайн-голоса, не позволяя Windows хранить или обрабатывать голосовые команды. Это увеличивает конфиденциальность, но ограничивает возможности голосового поиска и команд.</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>Отключить доступ к местоположению</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>Отключает доступ к местоположению для приложений и сервисов, предотвращая использование GPS или сетевого местоположения вашего устройства. Это улучшает конфиденциальность, но может ограничить местные сервисы.</value>
   </data>
   <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
     <value>Отключить функции местоположения</value>
@@ -1006,9 +904,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>Улучшает производительность системы, настраивая параметры профиля системы. Эта функция приоритетирует скорость и эффективность, улучшая общую отзывчивость системы и управление ресурсами.</value>
   </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>Информация о устройстве</value>
-  </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>Включить классическое контекстное меню</value>
   </data>
@@ -1018,14 +913,8 @@
   <data name="DoNotShowCheckBox" xml:space="preserve">
     <value>Больше не показывать это сообщение</value>
   </data>
-  <data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>Создать точку восстановления</value>
-  </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>Рекомендуется создать точку восстановления перед внесением изменений в систему. Хотите создать точку восстановления перед продолжением?</value>
-  </data>
-  <data name="CreatingRestorePoint" xml:space="preserve">
-    <value>Создание точки восстановления</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Отменить все изменения</value>
@@ -1041,9 +930,6 @@
 
 
 Вы уверены, что хотите продолжить?</value>
-  </data>
-  <data name="NoChangesFound" xml:space="preserve">
-    <value>Значительных изменений не найдено.</value>
   </data>
   <data name="OperationStopped" xml:space="preserve">
     <value>Операция остановлена</value>
@@ -1072,20 +958,8 @@
   <data name="ScheduledLater" xml:space="preserve">
     <value>Запланировано на следующую перезагрузку</value>
   </data>
-  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>Сканировать</value>
-  </data>
-  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>Восстановить</value>
-  </data>
   <data name="RepairPage_StopButton.Content" xml:space="preserve">
     <value>Остановить</value>
-  </data>
-  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>Выберите хотя бы один параметр для сканирования/восстановления</value>
-  </data>
-  <data name="StatusTextBlockDefault" xml:space="preserve">
-    <value>Выберите хотя бы один параметр для сканирования/восстановления</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>Состояние батареи</value>
@@ -1123,9 +997,6 @@
   <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
     <value>Опции восстановления</value>
   </data>
-  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>Опции диагностики</value>
-  </data>
   <data name="OperationCompleted" xml:space="preserve">
     <value>Операция завершена</value>
   </data>
@@ -1149,12 +1020,6 @@
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
     <value>Другие настройки</value>
-  </data>
-  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>Основные системные оптимизации</value>
-  </data>
-  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>Продвинутые системные оптимизации</value>
   </data>
   <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
     <value>Программы, соответствующие вашему запросу, не найдены</value>
@@ -1243,9 +1108,6 @@
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Предотвращает запуск программ (например, предустановленного OEM-программного обеспечения) прошивкой при запуске.</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Отменить изменения</value>
-  </data>
   <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Импорт</value>
   </data>
@@ -1278,12 +1140,6 @@
   </data>
   <data name="KeepAppData" xml:space="preserve">
     <value>Сохранить данные приложения</value>
-  </data>
-  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Вы запущены от имени администратора</value>
-  </data>
-  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Перезапустите приложение от имени администратора, чтобы изменения вступили в силу</value>
   </data>
   <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
     <value>Обновить</value>
@@ -1405,12 +1261,6 @@
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Добавить план максимальной производительности</value>
   </data>
-  <data name="PoliciesPage_Warning" xml:space="preserve">
-    <value>Эта функция обнаруживает только записи реестра, поддерживаемые политиками. Она не обнаруживает изменения служб или изменения реестра, не связанные с политиками.</value>
-  </data>
-  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
-    <value>Эта страница обнаруживает и позволяет удалять переопределения локальной групповой политики. Удаление переопределения политики возвращает её в состояние Не настроено.</value>
-  </data>
   <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>Сводка политик</value>
   </data>
@@ -1434,12 +1284,6 @@
   </data>
   <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>Переопределения политик не обнаружены.</value>
-  </data>
-  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
-    <value>Удалить все переопределения</value>
-  </data>
-  <data name="PoliciesPage_Title" xml:space="preserve">
-    <value>Обнаружение переопределения групповой политики</value>
   </data>
   <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>Сканирование политик...</value>
@@ -1596,15 +1440,6 @@
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>По умолчанию</value>
-  </data>
-  <data name="ScanResults" xml:space="preserve">
-    <value>Результаты сканирования</value>
-  </data>
-  <data name="MicrosoftAccount" xml:space="preserve">
-    <value>Учетная запись Microsoft</value>
-  </data>
-  <data name="LocalAccount" xml:space="preserve">
-    <value>Локальная учетная запись</value>
   </data>
   <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
     <value>Отключить ИИ Windows</value>
@@ -2224,7 +2059,33 @@
   <data name="StartupPage_Notification_DisabledCount" xml:space="preserve">
     <value>Отключено {0} приложений автозагрузки.</value>
   </data>
-
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>Выбрано элементов: {0}</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>Удалить выбранные</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Удалить все выбранные элементы автозапуска</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Снять выделение</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>Удалить приложения из автозапуска</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить {0} элемент(ов) из автозапуска?</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>Удалено {0} элемент(ов) из автозапуска.</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>Удалено {0} элемент(ов). {1} не удалось (требуются права администратора).</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Выбрать все</value>
+  </data>
   <data name="Intelligent_ScoreTitle" xml:space="preserve">
     <value>Оценка оптимизации</value>
   </data>
@@ -2396,9 +2257,6 @@
   <data name="Intelligent_Flyout_TechnicalDetails" xml:space="preserve">
     <value>Технические сведения</value>
   </data>
-  <data name="Intelligent_Flyout_ScoreImpact" xml:space="preserve">
-    <value>Влияние на оценку: +{0} очков ({1})</value>
-  </data>
   <data name="Intelligent_Flyout_PreApplyBackup" xml:space="preserve">
     <value>Резервная копия: Сохранена {0} (Исходное состояние: {1})</value>
   </data>
@@ -2408,7 +2266,6 @@
   <data name="Intelligent_Flyout_Status" xml:space="preserve">
     <value>Текущее состояние: {0}</value>
   </data>
-
   <data name="Intelligent_Verification_Active" xml:space="preserve">
     <value>Проверено (активно) ✓</value>
   </data>
@@ -2424,7 +2281,6 @@
   <data name="Intelligent_General_Category" xml:space="preserve">
     <value>Общие</value>
   </data>
-
   <data name="Intelligent_Impact_BackgroundApps" xml:space="preserve">
     <value>Освобождает фоновые циклы ЦП и экономит 200+ МБ ОЗУ.</value>
   </data>
@@ -2767,17 +2623,11 @@
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
     <value>Открывает страницу параметров Windows «Сеть и Интернет».</value>
   </data>
-  <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>Открыть параметры</value>
-  </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
     <value>Параметры сетевых адаптеров</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
     <value>Открывает классическую панель «Сетевые подключения» для управления адаптерами.</value>
-  </data>
-  <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>Открыть адаптеры</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
     <value>Отключить ограничение сети</value>
@@ -2857,31 +2707,187 @@
   <data name="Network_SuccessTitle" xml:space="preserve">
     <value>Успешно</value>
   </data>
-  <data name="StartupPage_SelectionCount" xml:space="preserve">
-    <value>Выбрано элементов: {0}</value>
+  <data name="OptimizeSystemPage_TimerResolution.Text" xml:space="preserve">
+    <value>Разрешение таймера и задержка</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
-    <value>Удалить выбранные</value>
+  <data name="Feature_GlobalTimerResolution.Header" xml:space="preserve">
+    <value>Включить глобальное разрешение таймера</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Удалить все выбранные элементы автозапуска</value>
+  <data name="Feature_GlobalTimerResolution.Description" xml:space="preserve">
+    <value>Позволяет приложениям глобально запрашивать более высокое разрешение таймера, снижая задержку планирования для игр и звука в реальном времени.</value>
   </data>
-  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Снять выделение</value>
+  <data name="Feature_DisableHPET.Header" xml:space="preserve">
+    <value>Отключить HPET</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
-    <value>Удалить приложения из автозапуска</value>
+  <data name="Feature_DisableHPET.Description" xml:space="preserve">
+    <value>Отключает высокоточный таймер событий (HPET) и переключается на TSC для уменьшения задержки. Требуется перезагрузка.</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить {0} элемент(ов) из автозапуска?</value>
+  <data name="Feature_DisableDynamicTick.Header" xml:space="preserve">
+    <value>Отключить динамический тик (Dynamic Tick)</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
-    <value>Удалено {0} элемент(ов) из автозапуска.</value>
+  <data name="Feature_DisableDynamicTick.Description" xml:space="preserve">
+    <value>Заставляет системный таймер срабатывать с постоянной частотой вместо динамической подстройки, уменьшая микродёргания в чувствительных к задержкам задачах.</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>Удалено {0} элемент(ов). {1} не удалось (требуются права администратора).</value>
+  <data name="OptimizeSystemPage_MemoryOptimization.Text" xml:space="preserve">
+    <value>Оптимизация памяти</value>
   </data>
-  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Выбрать все</value>
+  <data name="Feature_DisablePrefetch.Header" xml:space="preserve">
+    <value>Отключить Prefetch и Superfetch</value>
+  </data>
+  <data name="Feature_DisablePrefetch.Description" xml:space="preserve">
+    <value>Отключает предварительную выборку Windows Prefetcher и Superfetch для освобождения оперативной памяти и снижения нагрузки на диск. Рекомендуется для SSD.</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Header" xml:space="preserve">
+    <value>Включить большой системный кэш</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Description" xml:space="preserve">
+    <value>Выделяет больше оперативной памяти под кэш файловой системы, ускоряя операции чтения при интенсивной работе с файлами.</value>
+  </data>
+  <data name="Feature_DisableNDU.Header" xml:space="preserve">
+    <value>Отключить мониторинг сетевого трафика (NDU)</value>
+  </data>
+  <data name="Feature_DisableNDU.Description" xml:space="preserve">
+    <value>Отключает службу NDU, которая на некоторых системах вызывает утечку памяти в невыгружаемом пуле при длительной непрерывной работе.</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Header" xml:space="preserve">
+    <value>Отключить шифрование файла подкачки</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Description" xml:space="preserve">
+    <value>Отключает шифрование файла подкачки Windows для снижения нагрузки на процессор при операциях подкачки.</value>
+  </data>
+  <data name="FeaturesPage_NotificationControls.Text" xml:space="preserve">
+    <value>Управление уведомлениями</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Header" xml:space="preserve">
+    <value>Отключить уведомления на экране блокировки</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Description" xml:space="preserve">
+    <value>Предотвращает показ всплывающих уведомлений на экране блокировки для конфиденциальности и устранения отвлекающих факторов.</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Header" xml:space="preserve">
+    <value>Отключить все всплывающие уведомления</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Description" xml:space="preserve">
+    <value>Полностью отключает все всплывающие push-уведомления от приложений и операционной системы.</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Header" xml:space="preserve">
+    <value>Отключить Центр уведомлений</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Description" xml:space="preserve">
+    <value>Удаляет Центр уведомлений и действий из панели задач. Требуется перезапуск Проводника.</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Header" xml:space="preserve">
+    <value>Отключить предлагаемые действия</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Description" xml:space="preserve">
+    <value>Отключает меню предлагаемых действий смарт-буфера обмена при копировании дат, номеров телефонов или адресов.</value>
+  </data>
+  <data name="FeaturesPage_ContextMenu.Text" xml:space="preserve">
+    <value>Настройка контекстного меню</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Header" xml:space="preserve">
+    <value>Добавить пункт «Стать владельцем» в контекстное меню</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Description" xml:space="preserve">
+    <value>Добавляет команду «Стать владельцем» в контекстное меню файлов и папок для быстрой смены прав доступа.</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Header" xml:space="preserve">
+    <value>Добавить пункт «Открыть командную строку здесь»</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Description" xml:space="preserve">
+    <value>Добавляет команду для быстрого открытия командной строки в текущей папке из контекстного меню Проводника.</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Header" xml:space="preserve">
+    <value>Добавить пункт «Копировать путь к файлу» в контекстное меню</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Description" xml:space="preserve">
+    <value>Добавляет команду копирования полного пути к файлу в буфер обмена в один клик.</value>
+  </data>
+  <data name="PrivacyPage_PrivacyHardening.Text" xml:space="preserve">
+    <value>Усиление конфиденциальности</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Header" xml:space="preserve">
+    <value>Отключить контроль Wi-Fi (Wi-Fi Sense)</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Description" xml:space="preserve">
+    <value>Отключает автоматическое подключение к открытым точкам доступа Wi-Fi и сетям, к которым предоставили доступ контакты.</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Header" xml:space="preserve">
+    <value>Отключить результаты поиска в Интернете</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Description" xml:space="preserve">
+    <value>Запрещает поиску Windows отправлять запросы в Bing и показывать результаты из Интернета. Поиск остаётся локальным.</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Header" xml:space="preserve">
+    <value>Отключить отслеживание запуска приложений</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Description" xml:space="preserve">
+    <value>Запрещает Windows отслеживать запуск приложений для составления списка часто используемых программ в меню «Пуск».</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Header" xml:space="preserve">
+    <value>Отключить журнал действий и временную шкалу</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Description" xml:space="preserve">
+    <value>Отключает временную шкалу Windows (Timeline) и предотвращает передачу данных о вашей активности в облако.</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Header" xml:space="preserve">
+    <value>Отключить P2P-доставку обновлений</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Description" xml:space="preserve">
+    <value>Отключает пиринговую оптимизацию доставки обновлений Windows, запрещая отправлять файлы обновлений другим компьютерам в Интернете.</value>
+  </data>
+  <data name="Network_DisableHotspot20.Header" xml:space="preserve">
+    <value>Отключить Hotspot 2.0</value>
+  </data>
+  <data name="Network_DisableHotspot20.Description" xml:space="preserve">
+    <value>Отключает автоматический поиск и подключение к сетям Hotspot 2.0 (Passpoint) для повышения безопасности.</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Header" xml:space="preserve">
+    <value>Отключить NetBIOS через TCP/IP</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Description" xml:space="preserve">
+    <value>Отключает устаревший протокол разрешения имён NetBIOS через TCP/IP для снижения сетевой поверхности атак.</value>
+  </data>
+  <data name="OptimizeSystemPage_InputResponsiveness.Text" xml:space="preserve">
+    <value>Ввод и отзывчивость</value>
+  </data>
+  <data name="OptimizeSystemPage_GamingGpu.Text" xml:space="preserve">
+    <value>Игры и видеокарта</value>
+  </data>
+  <data name="OptimizeSystemPage_DiskFileSystem.Text" xml:space="preserve">
+    <value>Диск и файловая система</value>
+  </data>
+  <data name="OptimizeSystemPage_ServicesSystem.Text" xml:space="preserve">
+    <value>Службы и система</value>
+  </data>
+  <data name="OptimizeSystemPage_WindowsComponents.Text" xml:space="preserve">
+    <value>Компоненты Windows</value>
+  </data>
+  <data name="FeaturesPage_AppearanceUI.Text" xml:space="preserve">
+    <value>Внешний вид и интерфейс</value>
+  </data>
+  <data name="FeaturesPage_SystemServices.Text" xml:space="preserve">
+    <value>Системные службы</value>
+  </data>
+  <data name="FeaturesPage_InputAccessibility.Text" xml:space="preserve">
+    <value>Ввод и специальные возможности</value>
+  </data>
+  <data name="FeaturesPage_ExplorerShell.Text" xml:space="preserve">
+    <value>Проводник и оболочка</value>
+  </data>
+  <data name="FeaturesPage_Win11UI.Text" xml:space="preserve">
+    <value>Интерфейс Windows 11</value>
+  </data>
+  <data name="FeaturesPage_WindowsAIEdge.Text" xml:space="preserve">
+    <value>ИИ Windows и Edge</value>
+  </data>
+  <data name="PrivacyPage_DataCollection.Text" xml:space="preserve">
+    <value>Сбор данных и ввод</value>
+  </data>
+  <data name="PrivacyPage_CloudSync.Text" xml:space="preserve">
+    <value>Облако и синхронизация устройств</value>
+  </data>
+  <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
+    <value>Местоположение и безопасность</value>
   </data>
 </root>

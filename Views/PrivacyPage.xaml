@@ -123,20 +123,6 @@
                     <ToggleSwitch x:Name="FirefoxTelemetry" Tag="FirefoxTelemetry"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableActivityFeed">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE779;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="ActivityFeed" Tag="ActivityFeed"/>
-                </controls:SettingsCard>
-
-                <controls:SettingsCard x:Uid="Feature_DisableCdp">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xEF58;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="Cdp" Tag="Cdp"/>
-                </controls:SettingsCard>
-
                 <controls:SettingsCard x:Uid="Feature_DisableDiagnosticsToast">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE9D9;"/>
@@ -144,38 +130,10 @@
                     <ToggleSwitch x:Name="DiagnosticsToast" Tag="DiagnosticsToast"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableOnlineSpeechPrivacy">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE720;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="OnlineSpeechPrivacy" Tag="OnlineSpeechPrivacy"/>
-                </controls:SettingsCard>
-
-                <controls:SettingsCard x:Uid="Feature_DisableLocationFeatures">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE809;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="LocationFeatures" Tag="LocationFeatures"/>
-                </controls:SettingsCard>
-
-                <controls:SettingsCard x:Uid="Feature_DisableBiometrics">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE928;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="Biometrics" Tag="Biometrics"/>
-                </controls:SettingsCard>
-
-                <!-- Other Settings Section -->
+                <!-- Data Collection & Input Section -->
                 <TextBlock Margin="6"
                     Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
-                    x:Uid="OtherSettings"/>
-                <controls:SettingsCard x:Uid="Feature_DisableAutomaticRestartSignOn">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE777;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="AutomaticRestartSignOn" Tag="AutomaticRestartSignOn"/>
-                </controls:SettingsCard>
-
+                    x:Uid="PrivacyPage_DataCollection"/>
                 <controls:SettingsCard x:Uid="Feature_DisableHandwritingDataSharing">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE929;"/>
@@ -197,6 +155,13 @@
                     <ToggleSwitch x:Name="InputPersonalization" Tag="InputPersonalization"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Feature_DisableOnlineSpeechPrivacy">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE720;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="OnlineSpeechPrivacy" Tag="OnlineSpeechPrivacy"/>
+                </controls:SettingsCard>
+
                 <controls:SettingsCard x:Uid="Feature_DisableSafeSearchMode">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE773;"/>
@@ -204,13 +169,10 @@
                     <ToggleSwitch x:Name="SafeSearchMode" Tag="SafeSearchMode"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableActivityUploads">
-                    <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE8FD;"/>
-                    </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="ActivityUploads" Tag="ActivityUploads"/>
-                </controls:SettingsCard>
-
+                <!-- Cloud & Device Sync Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="PrivacyPage_CloudSync"/>
                 <controls:SettingsCard x:Uid="Feature_DisableClipboardSync">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xF0E3;"/>
@@ -232,11 +194,29 @@
                     <ToggleSwitch x:Name="SettingSync" Tag="SettingSync"/>
                 </controls:SettingsCard>
 
-                <controls:SettingsCard x:Uid="Feature_DisableVoiceActivation">
+                <controls:SettingsCard x:Uid="Feature_DisableCdp">
                     <controls:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xEFA9;"/>
+                        <FontIcon Glyph="&#xEF58;"/>
                     </controls:SettingsCard.HeaderIcon>
-                    <ToggleSwitch x:Name="VoiceActivation" Tag="VoiceActivation"/>
+                    <ToggleSwitch x:Name="Cdp" Tag="Cdp"/>
+                </controls:SettingsCard>
+
+                <!-- Location & Security Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="PrivacyPage_LocationSecurity"/>
+                <controls:SettingsCard x:Uid="Feature_DisableLocationFeatures">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE809;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="LocationFeatures" Tag="LocationFeatures"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableBiometrics">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE928;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="Biometrics" Tag="Biometrics"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableFindMyDevice">
@@ -244,6 +224,20 @@
                         <FontIcon Glyph="&#xE707;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="FindMyDevice" Tag="FindMyDevice"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableVoiceActivation">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xEFA9;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="VoiceActivation" Tag="VoiceActivation"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableAutomaticRestartSignOn">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE777;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="AutomaticRestartSignOn" Tag="AutomaticRestartSignOn"/>
                 </controls:SettingsCard>
 
                 <controls:SettingsCard x:Uid="Feature_DisableSMBv1">
@@ -258,6 +252,39 @@
                         <FontIcon Glyph="&#xF193;"/>
                     </controls:SettingsCard.HeaderIcon>
                     <ToggleSwitch x:Name="SMBv2" Tag="SMBv2"/>
+                </controls:SettingsCard>
+
+                <!-- Privacy Hardening Section -->
+                <TextBlock Margin="6"
+                    Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+                    x:Uid="PrivacyPage_PrivacyHardening"/>
+
+                <controls:SettingsCard x:Uid="Feature_DisableWiFiSense">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE701;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="WiFiSense" Tag="WiFiSense"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableWebSearchResults">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xF6FA;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="WebSearchResults" Tag="WebSearchResults"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableAppLaunchTracking">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE9F5;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="AppLaunchTracking" Tag="AppLaunchTracking"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Feature_DisableTimelineHistory">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE81C;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="TimelineHistory" Tag="TimelineHistory"/>
                 </controls:SettingsCard>
 
             </StackPanel>

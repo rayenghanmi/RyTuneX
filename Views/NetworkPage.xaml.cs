@@ -451,6 +451,57 @@ public sealed partial class NetworkPage : Page
                 catch { return false; }
             });
             IPv6Toggle.IsOn = ipv6Disabled;
+
+            // P2P Delivery Optimization: check DODownloadMode
+            bool p2pDisabled = await Task.Run(() =>
+            {
+                try
+                {
+                    using var key = Registry.LocalMachine.OpenSubKey(
+                        @"SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization");
+                    if (key == null) return false;
+                    var val = key.GetValue("DODownloadMode");
+                    return val is int v && v == 0;
+                }
+                catch { return false; }
+            });
+            P2PDeliveryToggle.IsOn = p2pDisabled;
+
+            // Hotspot 2.0
+            bool hotspotDisabled = await Task.Run(() =>
+            {
+                try
+                {
+                    using var key = Registry.LocalMachine.OpenSubKey(
+                        @"SOFTWARE\Microsoft\WlanSvc\AnqpCache");
+                    if (key == null) return false;
+                    var val = key.GetValue("OsuRegistrationStatus");
+                    return val is int v && v == 0;
+                }
+                catch { return false; }
+            });
+            Hotspot20Toggle.IsOn = hotspotDisabled;
+
+            // NetBIOS over TCP/IP
+            bool netbiosDisabled = await Task.Run(() =>
+            {
+                try
+                {
+                    using var interfacesKey = Registry.LocalMachine.OpenSubKey(
+                        @"SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces");
+                    if (interfacesKey == null) return false;
+                    foreach (var subKeyName in interfacesKey.GetSubKeyNames())
+                    {
+                        using var subKey = interfacesKey.OpenSubKey(subKeyName);
+                        if (subKey == null) continue;
+                        var val = subKey.GetValue("NetbiosOptions");
+                        if (val is int v && v == 2) return true;
+                    }
+                    return false;
+                }
+                catch { return false; }
+            });
+            NetBIOSToggle.IsOn = netbiosDisabled;
         }
         catch (Exception ex)
         {
@@ -644,6 +695,105 @@ public sealed partial class NetworkPage : Page
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error toggling IPv6: {ex.Message}");
+        }
+        finally
+        {
+            toggle.IsEnabled = true;
+        }
+    }
+
+    private async void P2PDeliveryToggle_Toggled(object sender, RoutedEventArgs e)
+    {
+        if (_isInitializing) return;
+        var toggle = (ToggleSwitch)sender;
+        toggle.IsEnabled = false;
+        try
+        {
+            bool disable = toggle.IsOn;
+            _ = LogHelper.Log($"P2P Delivery: {(disable ? "disabling" : "enabling")}");
+            await Task.Run(async () =>
+            {
+                if (disable)
+                    await OptimizationOptions.StartInCmd(
+                        "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\" /v DODownloadMode /t REG_DWORD /d 0 /f");
+                else
+                    await OptimizationOptions.StartInCmd(
+                        "reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\" /v DODownloadMode /f");
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error toggling P2P Delivery: {ex.Message}");
+        }
+        finally
+        {
+            toggle.IsEnabled = true;
+        }
+    }
+
+    private async void Hotspot20Toggle_Toggled(object sender, RoutedEventArgs e)
+    {
+        if (_isInitializing) return;
+        var toggle = (ToggleSwitch)sender;
+        toggle.IsEnabled = false;
+        try
+        {
+            bool disable = toggle.IsOn;
+            _ = LogHelper.Log($"Hotspot 2.0: {(disable ? "disabling" : "enabling")}");
+            await Task.Run(async () =>
+            {
+                if (disable)
+                {
+                    await OptimizationOptions.StartInCmd(
+                        "reg add \"HKLM\\SOFTWARE\\Microsoft\\WlanSvc\\AnqpCache\" /v OsuRegistrationStatus /t REG_DWORD /d 0 /f");
+                    await OptimizationOptions.StartInCmd(
+                        "reg add \"HKLM\\SOFTWARE\\Microsoft\\WcmSvc\\wifinetworkmanager\\config\" /v AutoConnectAllowedOEM /t REG_DWORD /d 0 /f");
+                }
+                else
+                {
+                    await OptimizationOptions.StartInCmd(
+                        "reg delete \"HKLM\\SOFTWARE\\Microsoft\\WlanSvc\\AnqpCache\" /v OsuRegistrationStatus /f");
+                    await OptimizationOptions.StartInCmd(
+                        "reg delete \"HKLM\\SOFTWARE\\Microsoft\\WcmSvc\\wifinetworkmanager\\config\" /v AutoConnectAllowedOEM /f");
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error toggling Hotspot 2.0: {ex.Message}");
+        }
+        finally
+        {
+            toggle.IsEnabled = true;
+        }
+    }
+
+    private async void NetBIOSToggle_Toggled(object sender, RoutedEventArgs e)
+    {
+        if (_isInitializing) return;
+        var toggle = (ToggleSwitch)sender;
+        toggle.IsEnabled = false;
+        try
+        {
+            bool disable = toggle.IsOn;
+            _ = LogHelper.Log($"NetBIOS: {(disable ? "disabling" : "enabling")}");
+            await Task.Run(() =>
+            {
+                using var interfacesKey = Registry.LocalMachine.OpenSubKey(
+                    @"SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces", writable: true);
+                if (interfacesKey == null) return;
+                foreach (var subKeyName in interfacesKey.GetSubKeyNames())
+                {
+                    using var subKey = interfacesKey.OpenSubKey(subKeyName, writable: true);
+                    if (subKey == null) continue;
+                    // 0 = default (use DHCP), 1 = enabled, 2 = disabled
+                    subKey.SetValue("NetbiosOptions", disable ? 2 : 0, RegistryValueKind.DWord);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error toggling NetBIOS: {ex.Message}");
         }
         finally
         {

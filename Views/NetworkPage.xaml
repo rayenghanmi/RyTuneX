@@ -221,6 +221,30 @@
                                   Toggled="IPv6Toggle_Toggled"/>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Network_DisableP2PDelivery">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE895;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="P2PDeliveryToggle"
+                                  Toggled="P2PDeliveryToggle_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Network_DisableHotspot20">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE701;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="Hotspot20Toggle"
+                                  Toggled="Hotspot20Toggle_Toggled"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Network_DisableNetBIOS">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE968;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                    <ToggleSwitch x:Name="NetBIOSToggle"
+                                  Toggled="NetBIOSToggle_Toggled"/>
+                </controls:SettingsCard>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

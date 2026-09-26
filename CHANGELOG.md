@@ -14,8 +14,36 @@ All notable changes to this branch will be documented in this file.
   - `Enable ECN (Explicit Congestion Notification)`
   - `Enable Compound TCP (CTCP)`
   - `Disable IPv6`
+  - `Disable P2P Update Delivery`
+  - `Disable Hotspot 2.0`
+  - `Disable NetBIOS over TCP/IP`
+- Introduced Timer Resolution & Latency optimizations (`Optimize System` page):
+  - `Enable Global Timer Resolution`
+  - `Disable HPET`
+  - `Disable Dynamic Tick`
+- Introduced Memory Optimization toggles (`Optimize System` page):
+  - `Disable Prefetch & Superfetch`
+  - `Enable Large System Cache`
+  - `Disable Network Data Usage Monitor (NDU)`
+  - `Disable Page File Encryption`
+- Introduced Notification Controls (`Features` page):
+  - `Disable Lock Screen Notifications`
+  - `Disable All Toast Notifications`
+  - `Disable Notification Center`
+  - `Disable Suggested Actions`
+- Introduced Context Menu Customization options (`Features` page):
+  - `Add "Take Ownership" to Context Menu`
+  - `Add "Open Command Prompt Here"`
+  - `Add "Copy File Path" to Context Menu`
+- Introduced Privacy Hardening optimizations (`Privacy` page):
+  - `Disable Wi-Fi Sense`
+  - `Disable Web Results in Search`
+  - `Disable App Launch Tracking`
+  - `Disable Timeline & Activity History`
 - Added status notifications and administrative permission checks when managing startup apps in `Startup Apps` page.
 - Added multi-selection and batch removal support to the `Startup Apps` page #107.
+- Added all new optimization toggles and network toggles to the in-app Search Engine (`AppSearchService`) with quick navigation and matching icons.
+- Integrated all new toggles into the Intelligent Optimization Engine catalog with risk assessments, score weights, and technical details.
 
 ### Fixes
 
@@ -28,6 +56,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
+- Reorganized toggles across `Optimize System`, `Features`, and `Privacy` pages into clean, dedicated thematic sections (e.g., Input & Responsiveness, Gaming & GPU, Memory Optimization, Windows AI & Edge, Privacy Hardening) for improved usability.
 - Redesigned the `Network` page with modern settings cards and smoother asynchronous loading.
 - Refactored optimization rollback logic to execute actions directly without creating UI switch instances.
 - Improved debloat uninstall flow to safely snapshot selected items before batch removal.

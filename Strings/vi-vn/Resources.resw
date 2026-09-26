@@ -148,20 +148,8 @@
   <data name="HomePage_QuickAction_RepairIssues.Text" xml:space="preserve">
     <value>Sửa chữa sự cố</value>
   </data>
-  <data name="HomePage_QuickAction_ManageStartupApps.Text" xml:space="preserve">
-    <value>Quản lý ứng dụng khởi động</value>
-  </data>
   <data name="HomePage_QuickAction_CleanTemporaryFiles.Text" xml:space="preserve">
     <value>Dọn dẹp tệp tạm thời</value>
-  </data>
-  <data name="SettingsPage_FeedbackButton.Content" xml:space="preserve">
-    <value>Gửi phản hồi</value>
-  </data>
-  <data name="SystemInfoPage_CPU.Text" xml:space="preserve">
-    <value>Bộ vi xử lý</value>
-  </data>
-  <data name="SystemInfoPage_GPU.Text" xml:space="preserve">
-    <value>Card đồ hoạ</value>
   </data>
   <data name="Debloat" xml:space="preserve">
     <value>Debloat</value>
@@ -259,20 +247,11 @@
   <data name="Version" xml:space="preserve">
     <value>Phiên bản</value>
   </data>
-  <data name="VideoArchitecture" xml:space="preserve">
-    <value>Kiến trúc xử lý video</value>
-  </data>
   <data name="WindowsDirectory" xml:space="preserve">
     <value>Thư mục Windows</value>
   </data>
   <data name="ErrTempDel" xml:space="preserve">
     <value>Có lỗi khi xoá tệp tin tạm thời</value>
-  </data>
-  <data name="FeaturesPage_SysFeat.Text" xml:space="preserve">
-    <value>Tính năng hệ thống</value>
-  </data>
-  <data name="FeaturesPage_Win11.Text" xml:space="preserve">
-    <value>Độc quyền cho Windows 11</value>
   </data>
   <data name="SystemInfoPage_FolderPathText.Text" xml:space="preserve">
     <value>Chọn thư mục</value>
@@ -297,12 +276,6 @@
   </data>
   <data name="SystemInfoPage_Drivers.Text" xml:space="preserve">
     <value>Drivers</value>
-  </data>
-  <data name="SystemInfoPage_ExtractButton.Content" xml:space="preserve">
-    <value>Xuất</value>
-  </data>
-  <data name="SystemInfoPage_ExtractDrivers.Text" xml:space="preserve">
-    <value>Trích xuất driver của bạn ra thư mục ngoài để sao lưu dễ dàng hơn</value>
   </data>
   <data name="SystemInfoPage_ExtractingStatusText.Text" xml:space="preserve">
     <value>Đang trích xuất driver</value>
@@ -460,12 +433,6 @@
   <data name="Feature_DisableCoPilotAI.Description" xml:space="preserve">
     <value>Vô hiệu hoá tính năng CoPilot AI trên Windows để hỗ trợ viết code. Không khuyến khích với nhà phát triển</value>
   </data>
-  <data name="OptimizeBasic.Text" xml:space="preserve">
-    <value>Các tối ưu cơ bản</value>
-  </data>
-  <data name="Feature_PerformanceTweaks.Header" xml:space="preserve">
-    <value>Điều chỉnh hiệu năng</value>
-  </data>
   <data name="Feature_DisableSysMain.Header" xml:space="preserve">
     <value>Vô hiệu hoá SysMain</value>
   </data>
@@ -496,9 +463,6 @@
   <data name="Feature_ExcludeDriversFromWindowsUpdates.Description" xml:space="preserve">
     <value>Không bao gồm cập nhật driver từ Windows Update. Có thể dẫn đến các trình điều khiển lỗi thời với các rủi ro bảo mật tiềm ẩn hoặc các vấn đề tương thích. Sử dụng cẩn thận</value>
   </data>
-  <data name="OptimizeAdvanced.Text" xml:space="preserve">
-    <value>Các tối ưu nâng cao</value>
-  </data>
   <data name="Feature_DisableSystemRestore.Header" xml:space="preserve">
     <value>Vô hiệu hoá System Restore</value>
   </data>
@@ -516,12 +480,6 @@
   </data>
   <data name="Feature_DisableStoreUpdates.Description" xml:space="preserve">
     <value>Vô hiệu hoá tự động cập nhật ứng dụng đã tải từ Microsoft Store. Có thể khiến ứng dụng dễ bị rủi ro bảo mật hoặc thiếu các tính năng mới.</value>
-  </data>
-  <data name="Privacy_Telemetry.Text" xml:space="preserve">
-    <value>Telemetry</value>
-  </data>
-  <data name="Feature_EnhancePrivacy.Header" xml:space="preserve">
-    <value>Cải thiện quyền riêng tư</value>
   </data>
   <data name="Feature_DisableSMBv1.Header" xml:space="preserve">
     <value>Vô hiệu hoá SMBv1</value>
@@ -589,15 +547,6 @@
   <data name="Network_ApplyDNS.Content" xml:space="preserve">
     <value>Áp dụng DNS</value>
   </data>
-  <data name="Network_IPv4Title.Text" xml:space="preserve">
-    <value>Máy chủ DNS IPv4</value>
-  </data>
-  <data name="Network_IPv6Title.Text" xml:space="preserve">
-    <value>Máy chủ DNS IPv6 DNS</value>
-  </data>
-  <data name="Network_NicTitle.Text" xml:space="preserve">
-    <value>Kết nối mạng</value>
-  </data>
   <data name="Network_Primary.Text" xml:space="preserve">
     <value>Chính</value>
   </data>
@@ -606,9 +555,6 @@
   </data>
   <data name="Network_Secondary.Text" xml:space="preserve">
     <value>Phụ</value>
-  </data>
-  <data name="Network_SetDNSTitle.Text" xml:space="preserve">
-    <value>Đặt DNS tùy chỉnh</value>
   </data>
   <data name="NoIPv4" xml:space="preserve">
     <value>Không tìm thấy địa chỉ DNS IPv4</value>
@@ -643,26 +589,8 @@
   <data name="AppDescription" xml:space="preserve">
     <value>RyTuneX là công cụ tối ưu hóa hiện đại sử dụng công nghệ WinUI 3, được thiết kế để giúp nâng cao hiệu suất cho các thiết bị Windows. Được thiết kế cho cả Windows 10 và 11, RyTuneX cho phép người dùng dễ dàng gỡ bỏ các ứng dụng cài sẵn khó chịu và tối ưu hóa tài nguyên hệ thống một cách hiệu quả.</value>
   </data>
-  <data name="SettingsPage_UpdateButton.Content" xml:space="preserve">
-    <value>Kiểm tra cập nhật</value>
-  </data>
-  <data name="AvailableUpdateContent0" xml:space="preserve">
-    <value>Phiên bản mới (</value>
-  </data>
-  <data name="AvailableUpdateContent1" xml:space="preserve">
-    <value>) đang có sẵn. Vui lòng cập nhật phiên bản mới nhất để sử dụng tính năng và các cải tiến mới.</value>
-  </data>
   <data name="UpdateTitle" xml:space="preserve">
     <value>Cập nhật RyTuneX</value>
-  </data>
-  <data name="NetworkError" xml:space="preserve">
-    <value>Đã có lỗi xảy ra. Vui lòng kiểm tra kết nối mạng và thử lại sau.</value>
-  </data>
-  <data name="UnavailableUpdate0" xml:space="preserve">
-    <value>Bạn đang sử dụng phiên bản mới nhất (</value>
-  </data>
-  <data name="UnavailableUpdate1" xml:space="preserve">
-    <value>). Không có bản cập nhật mới nào ngay bây giờ</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Đóng</value>
@@ -682,17 +610,11 @@
   <data name="BatteryStatus" xml:space="preserve">
     <value>Tình trạng pin</value>
   </data>
-  <data name="Chemistry" xml:space="preserve">
-    <value>Công nghệ</value>
-  </data>
   <data name="Shell_Security.Content" xml:space="preserve">
     <value>Bảo mật</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Đã có lỗi không xác định</value>
-  </data>
-  <data name="SettingsPage_LogsLink.Content" xml:space="preserve">
-    <value>Xem nhật ký</value>
   </data>
   <data name="TotalApps" xml:space="preserve">
     <value>Tổng cộng: {0} ứng dụng</value>
@@ -832,12 +754,6 @@
   <data name="Feature_DisableSafeSearchMode.Description" xml:space="preserve">
     <value>Tắt chế độ tìm kiếm an toàn, vốn giúp lọc nội dung có thể gây hại hoặc không phù hợp khỏi kết quả tìm kiếm. Vô hiệu hoá có thể gia tăng nguy cơ tiếp xúc với nội dung không an toàn.</value>
   </data>
-  <data name="Feature_DisableActivityUploads.Header" xml:space="preserve">
-    <value>Vô hiệu hoá tải lên dữ liệu</value>
-  </data>
-  <data name="Feature_DisableActivityUploads.Description" xml:space="preserve">
-    <value>Vô hiệu hoá việc tải lên dữ liệu hoạt động, ngừng thu thập dữ liệu sử dụng để tối ưu dịch vụ của Microsoft. Điều này giúp bảo vệ quyền riêng tư của bạn.</value>
-  </data>
   <data name="Feature_DisableClipboardSync.Header" xml:space="preserve">
     <value>Vô hiệu hoá đồng bộ clipboard</value>
   </data>
@@ -868,23 +784,11 @@
   <data name="Feature_DisableFindMyDevice.Description" xml:space="preserve">
     <value>Vô hiệu hoá tính năng Find My Device, vốn hỗ trợ bạn tìm lại thiết bị khi bị thất lạc. Vô hiệu hoá sẽ giảm khả năng truy tìm thiết bị nhưng giúp tăng cường quyền riêng tư.</value>
   </data>
-  <data name="Feature_DisableActivityFeed.Header" xml:space="preserve">
-    <value>Vô hiệu hoá Activity Feed</value>
-  </data>
-  <data name="Feature_DisableActivityFeed.Description" xml:space="preserve">
-    <value>Tắt activity feed, bảng hiển thị các hoạt động gần đây của bạn, giúp tăng cường quyền riêng tư bằng cách ngăn người khác theo dõi bạn đã làm gì trên thiết bị.</value>
-  </data>
   <data name="Feature_DisableCdp.Header" xml:space="preserve">
     <value>Vô hiệu hoá CDP (Customer Data Platform)</value>
   </data>
   <data name="Feature_DisableCdp.Description" xml:space="preserve">
     <value>Vô hiệu hoá CDP, ngăn chặn việc thu thập và sử dụng dữ liệu của bạn bởi nền tảng này cho mục đích phân tích và gợi ý theo mục tiêu. Điều này giúp tăng cường quyền riêng tư nhưng có thể hạn chế khả năng cá nhân hoá.</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Header" xml:space="preserve">
-    <value>Vô hiệu hoá cá nhân hoá trải nghiệm trong quyền riêng tư</value>
-  </data>
-  <data name="Feature_DisableTailoredExperiencesInPrivacy.Description" xml:space="preserve">
-    <value>Vô hiệu hoá tính năng cá nhân hoá trải nghiệm trong phần cài đặt quyền riêng tư, ngăn Windows sử dụng dữ liệu của bạn để tuỳ biến trải nghiệm. Điều này có thể làm giảm mức độ cá nhân hoá.</value>
   </data>
   <data name="Feature_DisableDiagnosticsToast.Header" xml:space="preserve">
     <value>Vô hiệu hoá Diagnostics Toast</value>
@@ -897,12 +801,6 @@
   </data>
   <data name="Feature_DisableOnlineSpeechPrivacy.Description" xml:space="preserve">
     <value>Vô hiệu hoá quyền riêng tư cho giọng nói trực tuyến, ngăn Windows lưu trữ hoặc xử lý các lệnh bằng giọng nói. Điều này giúp tăng cường quyền riêng tư nhưng có thể hạn chế các tính năng như tìm kiếm hoặc điều khiển bằng giọng nói.</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Header" xml:space="preserve">
-    <value>Vô hiệu hoá quyền truy cập vị trí</value>
-  </data>
-  <data name="Feature_DisableLocationAccess.Description" xml:space="preserve">
-    <value>Tắt quyền truy cập vị trí của ứng dụng và dịch vụ, ngăn việc sử dụng GPS hoặc vị trí mạng từ thiết bị. Điều này giúp tăng cường quyền riêng tư nhưng có thể hạn chế các dịch vụ dựa trên vị trí.</value>
   </data>
   <data name="Feature_DisableLocationFeatures.Header" xml:space="preserve">
     <value>Vô hiệu hoá các tính năng định vị</value>
@@ -1006,9 +904,6 @@
   <data name="Feature_SystemProfile.Description" xml:space="preserve">
     <value>Cải thiện hiệu suất hệ thống bằng cách điều chỉnh các thiết lập của hệ thống. Tính năng này ưu tiên tốc độ và hiệu quả, tối ưu phản hồi tổng hệ của hệ thống và quản lý tài nguyên.</value>
   </data>
-  <data name="SystemInfoPage_DeviceInfo.Text" xml:space="preserve">
-    <value>Thông tin thiết bị</value>
-  </data>
   <data name="Feature_EnableClassicContextMenu.Header" xml:space="preserve">
     <value>Bật menu chuột phải cổ điển</value>
   </data>
@@ -1018,17 +913,11 @@
   <data name="DoNotShowCheckBox" xml:space="preserve">
     <value>Không hiển thị lại thông báo này</value>
   </data>
-  <data name="RestorePointDialogTitle" xml:space="preserve">
-    <value>Tạo điểm khôi phục</value>
-  </data>
   <data name="RestorePointDialogText" xml:space="preserve">
     <value>Khuyến khích bạn tạo một điểm khôi phục trước khi thực hiện bất kỳ thay đổi nào đối với hệ thống.
 
 
 Bạn có muốn tạo điểm khôi phục hệ thống trước khi tiếp tục không?</value>
-  </data>
-  <data name="CreatingRestorePoint" xml:space="preserve">
-    <value>Đang tạo điểm khôi phục</value>
   </data>
   <data name="Settings_RevertChanges.Header" xml:space="preserve">
     <value>Hoàn tác thay đổi</value>
@@ -1044,9 +933,6 @@ Bạn có muốn tạo điểm khôi phục hệ thống trước khi tiếp t�
 
 
 Bạn có chắc chắn muốn tiếp tục không?</value>
-  </data>
-  <data name="NoChangesFound" xml:space="preserve">
-    <value>Không có thay đổi nào đáng chú ý được tìm thấy.</value>
   </data>
   <data name="OperationStopped" xml:space="preserve">
     <value>Tác vụ đã dừng</value>
@@ -1075,20 +961,8 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="ScheduledLater" xml:space="preserve">
     <value>Đặt lịch cho lần khởi động tiếp theo</value>
   </data>
-  <data name="RepairPage_ScanButton.Content" xml:space="preserve">
-    <value>Quét</value>
-  </data>
-  <data name="RepairPage_RepairButton.Content" xml:space="preserve">
-    <value>Sửa chữa</value>
-  </data>
   <data name="RepairPage_StopButton.Content" xml:space="preserve">
     <value>Dừng</value>
-  </data>
-  <data name="RepairPage_StatusTextBlock.Text" xml:space="preserve">
-    <value>Chọn tối thiểu một tuỳ chọn để quét/sửa chửa</value>
-  </data>
-  <data name="StatusTextBlockDefault" xml:space="preserve">
-    <value>Chọn tối thiểu một tuỳ chọn để quét/sửa chửa</value>
   </data>
   <data name="RepairPage_BatteryHealth.Header" xml:space="preserve">
     <value>Tình trạng pin</value>
@@ -1126,9 +1000,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="RepairPage_RepairOptions.Text" xml:space="preserve">
     <value>Tuỳ chọn sửa chửa</value>
   </data>
-  <data name="RepairPage_DiagnoseOptions.Text" xml:space="preserve">
-    <value>Tuỳ chọn phân tích</value>
-  </data>
   <data name="OperationCompleted" xml:space="preserve">
     <value>Hoàn thành tác vụ</value>
   </data>
@@ -1152,12 +1023,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="OtherSettings.Text" xml:space="preserve">
     <value>Cài đặt khác</value>
-  </data>
-  <data name="OptimizeSystemPage_BasicOptimization.Text" xml:space="preserve">
-    <value>Tối ưu hệ thống cơ bản</value>
-  </data>
-  <data name="OptimizeSystemPage_AdvancedOptimization.Text" xml:space="preserve">
-    <value>Tối ưu hệ thống nâng cao</value>
   </data>
   <data name="DebloatSystemPage_NoAppFound.Text" xml:space="preserve">
     <value>Không có ứng dụng nào khớp với tìm kiếm</value>
@@ -1246,9 +1111,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Feature_WPBT.Description" xml:space="preserve">
     <value>Dừng phần cứng khỏi việc chạy các chương trình (ví dụ: bloatware của OEM) khi khởi động.</value>
   </data>
-  <data name="Settings_RevertTitle.Text" xml:space="preserve">
-    <value>Hoàn tác thay đổi</value>
-  </data>
   <data name="SettingsPageImportButton.Text" xml:space="preserve">
     <value>Nhập</value>
   </data>
@@ -1281,12 +1143,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="KeepAppData" xml:space="preserve">
     <value>Giữ lại dữ liệu ứng dụng</value>
-  </data>
-  <data name="IsAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Bạn đang chạy với quyền quản trị</value>
-  </data>
-  <data name="NotAdminIcon.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Khởi động lại ứng dụng với quyền quản trị để các thay đổi có hiệu lực</value>
   </data>
   <data name="SecurityPage_RefreshButton.Text" xml:space="preserve">
     <value>Làm mới</value>
@@ -1408,12 +1264,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="AddUltimatePowerPlanTitle" xml:space="preserve">
     <value>Thêm gói hiệu suất tối đa</value>
   </data>
-  <data name="PoliciesPage_Warning" xml:space="preserve">
-    <value>Tính năng này chỉ phát hiện các mục đăng ký được hỗ trợ bởi chính sách. Nó không phát hiện các thay đổi dịch vụ hoặc các điều chỉnh đăng ký không liên quan đến chính sách.</value>
-  </data>
-  <data name="PoliciesPage_InfoMessage" xml:space="preserve">
-    <value>Trang này phát hiện và cho phép bạn xóa các ghi đè chính sách nhóm cục bộ. Việc xóa ghi đè chính sách sẽ đưa nó về trạng thái Chưa cấu hình.</value>
-  </data>
   <data name="PoliciesPage_PolicySummary" xml:space="preserve">
     <value>Tóm tắt chính sách</value>
   </data>
@@ -1437,12 +1287,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="PoliciesPage_NoPoliciesDetected" xml:space="preserve">
     <value>Không phát hiện ghi đè chính sách nào.</value>
-  </data>
-  <data name="PoliciesPage_RemoveAllOverrides" xml:space="preserve">
-    <value>Xóa tất cả ghi đè</value>
-  </data>
-  <data name="PoliciesPage_Title" xml:space="preserve">
-    <value>Phát hiện ghi đè chính sách nhóm</value>
   </data>
   <data name="PoliciesPage_ScanningPolicies" xml:space="preserve">
     <value>Đang quét chính sách...</value>
@@ -1599,15 +1443,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="Feature_WindowsUpdates_Default.Content" xml:space="preserve">
     <value>Mặc định</value>
-  </data>
-  <data name="ScanResults" xml:space="preserve">
-    <value>Kết quả quét</value>
-  </data>
-  <data name="MicrosoftAccount" xml:space="preserve">
-    <value>Tài khoản Microsoft</value>
-  </data>
-  <data name="LocalAccount" xml:space="preserve">
-    <value>Tài khoản cục bộ</value>
   </data>
   <data name="Feature_DisableWindowsAI.Header" xml:space="preserve">
     <value>Tắt AI của Windows</value>
@@ -2227,7 +2062,33 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="StartupPage_Notification_DisabledCount" xml:space="preserve">
     <value>Đã tắt {0} ứng dụng khởi động.</value>
   </data>
-
+  <data name="StartupPage_SelectionCount" xml:space="preserve">
+    <value>Đã chọn {0} mục</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
+    <value>Xóa mục đã chọn</value>
+  </data>
+  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Xóa tất cả các mục khởi động đã chọn</value>
+  </data>
+  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Bỏ chọn tất cả</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
+    <value>Xóa ứng dụng khởi động</value>
+  </data>
+  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa {0} mục khỏi danh sách khởi động không?</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
+    <value>Đã xóa {0} mục khởi động.</value>
+  </data>
+  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
+    <value>Đã xóa {0} mục. {1} thất bại (cần quyền quản trị viên).</value>
+  </data>
+  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Chọn tất cả</value>
+  </data>
   <data name="Intelligent_ScoreTitle" xml:space="preserve">
     <value>Điểm tối ưu hóa</value>
   </data>
@@ -2399,9 +2260,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Intelligent_Flyout_TechnicalDetails" xml:space="preserve">
     <value>Chi tiết kỹ thuật</value>
   </data>
-  <data name="Intelligent_Flyout_ScoreImpact" xml:space="preserve">
-    <value>Tác động điểm: +{0} điểm ({1})</value>
-  </data>
   <data name="Intelligent_Flyout_PreApplyBackup" xml:space="preserve">
     <value>Sao lưu trước áp dụng: Đã lưu lúc {0} (Trạng thái ban đầu: {1})</value>
   </data>
@@ -2411,7 +2269,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Intelligent_Flyout_Status" xml:space="preserve">
     <value>Trạng thái hiện tại: {0}</value>
   </data>
-
   <data name="Intelligent_Verification_Active" xml:space="preserve">
     <value>Đã xác minh đang bật ✓</value>
   </data>
@@ -2427,7 +2284,6 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Intelligent_General_Category" xml:space="preserve">
     <value>Chung</value>
   </data>
-
   <data name="Intelligent_Impact_BackgroundApps" xml:space="preserve">
     <value>Giải phóng chu kỳ CPU nền và tiết kiệm hơn 200MB RAM.</value>
   </data>
@@ -2770,17 +2626,11 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Network_OpenNetworkSettings.Description" xml:space="preserve">
     <value>Mở trang cài đặt Mạng &amp; Internet của Windows.</value>
   </data>
-  <data name="Network_OpenNetworkSettings_Button.Content" xml:space="preserve">
-    <value>Mở cài đặt</value>
-  </data>
   <data name="Network_OpenAdapterSettings.Header" xml:space="preserve">
     <value>Cài đặt bộ điều hợp mạng</value>
   </data>
   <data name="Network_OpenAdapterSettings.Description" xml:space="preserve">
     <value>Mở bảng Kết nối Mạng cổ điển để quản lý các bộ điều hợp.</value>
-  </data>
-  <data name="Network_OpenAdapterSettings_Button.Content" xml:space="preserve">
-    <value>Mở bộ điều hợp</value>
   </data>
   <data name="Network_DisableThrottling.Header" xml:space="preserve">
     <value>Tắt giới hạn băng thông mạng</value>
@@ -2860,31 +2710,187 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Network_SuccessTitle" xml:space="preserve">
     <value>Thành công</value>
   </data>
-  <data name="StartupPage_SelectionCount" xml:space="preserve">
-    <value>Đã chọn {0} mục</value>
+  <data name="OptimizeSystemPage_TimerResolution.Text" xml:space="preserve">
+    <value>Độ phân giải bộ đếm thời gian &amp; Độ trễ</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButtonText.Text" xml:space="preserve">
-    <value>Xóa mục đã chọn</value>
+  <data name="Feature_GlobalTimerResolution.Header" xml:space="preserve">
+    <value>Bật độ phân giải bộ đếm thời gian toàn cầu</value>
   </data>
-  <data name="StartupPage_RemoveSelectedButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Xóa tất cả các mục khởi động đã chọn</value>
+  <data name="Feature_GlobalTimerResolution.Description" xml:space="preserve">
+    <value>Cho phép các ứng dụng yêu cầu độ phân giải bộ đếm thời gian cao hơn trên toàn hệ thống, giảm độ trễ lập lịch cho trò chơi và âm thanh thời gian thực.</value>
   </data>
-  <data name="StartupPage_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Bỏ chọn tất cả</value>
+  <data name="Feature_DisableHPET.Header" xml:space="preserve">
+    <value>Tắt HPET</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Title" xml:space="preserve">
-    <value>Xóa ứng dụng khởi động</value>
+  <data name="Feature_DisableHPET.Description" xml:space="preserve">
+    <value>Tắt Bộ đếm thời gian sự kiện độ chính xác cao (HPET) và chuyển sang TSC để có độ trễ thấp hơn. Yêu cầu khởi động lại.</value>
   </data>
-  <data name="StartupPage_BatchRemoveDialog_Content" xml:space="preserve">
-    <value>Bạn có chắc muốn xóa {0} mục khỏi danh sách khởi động không?</value>
+  <data name="Feature_DisableDynamicTick.Header" xml:space="preserve">
+    <value>Tắt Dynamic Tick</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemoved" xml:space="preserve">
-    <value>Đã xóa {0} mục khởi động.</value>
+  <data name="Feature_DisableDynamicTick.Description" xml:space="preserve">
+    <value>Buộc bộ đếm thời gian hệ thống kích hoạt ở tốc độ không đổi thay vì điều chỉnh linh hoạt, giảm hiện tượng giật hình trong các tác vụ nhạy cảm với độ trễ.</value>
   </data>
-  <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>Đã xóa {0} mục. {1} thất bại (cần quyền quản trị viên).</value>
+  <data name="OptimizeSystemPage_MemoryOptimization.Text" xml:space="preserve">
+    <value>Tối ưu hóa bộ nhớ</value>
   </data>
-  <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Chọn tất cả</value>
+  <data name="Feature_DisablePrefetch.Header" xml:space="preserve">
+    <value>Tắt Prefetch &amp; Superfetch</value>
+  </data>
+  <data name="Feature_DisablePrefetch.Description" xml:space="preserve">
+    <value>Tắt tính năng tải trước của Windows Prefetcher và Superfetch để giải phóng RAM và giảm I/O ổ đĩa. Khuyên dùng cho người dùng SSD.</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Header" xml:space="preserve">
+    <value>Bật bộ nhớ đệm hệ thống lớn</value>
+  </data>
+  <data name="Feature_EnableLargeSystemCache.Description" xml:space="preserve">
+    <value>Phân bổ thêm bộ nhớ hệ thống cho bộ nhớ đệm hệ thống tệp, cải thiện hiệu suất đọc ổ đĩa cho các tác vụ tệp nặng.</value>
+  </data>
+  <data name="Feature_DisableNDU.Header" xml:space="preserve">
+    <value>Tắt theo dõi sử dụng dữ liệu mạng (NDU)</value>
+  </data>
+  <data name="Feature_DisableNDU.Description" xml:space="preserve">
+    <value>Tắt dịch vụ NDU vốn được biết đến là nguyên nhân gây rò rỉ bộ nhớ non-paged pool trên một số hệ thống sau thời gian dài hoạt động.</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Header" xml:space="preserve">
+    <value>Tắt mã hóa tệp hoán đổi (Pagefile)</value>
+  </data>
+  <data name="Feature_DisablePageFileEncryption.Description" xml:space="preserve">
+    <value>Tắt mã hóa tệp hoán đổi của Windows để giảm tải CPU trong các hoạt động hoán đổi bộ nhớ.</value>
+  </data>
+  <data name="FeaturesPage_NotificationControls.Text" xml:space="preserve">
+    <value>Kiểm soát thông báo</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Header" xml:space="preserve">
+    <value>Tắt thông báo trên màn hình khóa</value>
+  </data>
+  <data name="Feature_DisableLockScreenNotifications.Description" xml:space="preserve">
+    <value>Ngăn thông báo biểu ngữ xuất hiện trên màn hình khóa để tăng cường quyền riêng tư và giảm sự phân tâm.</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Header" xml:space="preserve">
+    <value>Tắt tất cả thông báo biểu ngữ</value>
+  </data>
+  <data name="Feature_DisableToastNotifications.Description" xml:space="preserve">
+    <value>Vô hiệu hóa hoàn toàn tất cả các thông báo bật lên từ ứng dụng và hệ thống.</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Header" xml:space="preserve">
+    <value>Tắt Trung tâm thông báo</value>
+  </data>
+  <data name="Feature_DisableNotificationCenter.Description" xml:space="preserve">
+    <value>Xóa Trung tâm thông báo và thao tác khỏi thanh tác vụ. Yêu cầu khởi động lại Explorer.</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Header" xml:space="preserve">
+    <value>Tắt thao tác được đề xuất</value>
+  </data>
+  <data name="Feature_DisableSuggestedActions.Description" xml:space="preserve">
+    <value>Tắt menu thao tác được đề xuất của bảng tạm thông minh khi sao chép ngày, số điện thoại hoặc địa chỉ.</value>
+  </data>
+  <data name="FeaturesPage_ContextMenu.Text" xml:space="preserve">
+    <value>Tùy chỉnh menu ngữ cảnh</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Header" xml:space="preserve">
+    <value>Thêm "Chiếm quyền sở hữu" vào menu ngữ cảnh</value>
+  </data>
+  <data name="Feature_AddTakeOwnership.Description" xml:space="preserve">
+    <value>Thêm tùy chọn "Chiếm quyền sở hữu" vào menu chuột phải của tệp và thư mục để chuyển giao quyền nhanh chóng.</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Header" xml:space="preserve">
+    <value>Thêm "Mở Command Prompt tại đây"</value>
+  </data>
+  <data name="Feature_AddOpenCmdHere.Description" xml:space="preserve">
+    <value>Thêm tùy chọn mở cửa sổ Command Prompt tại vị trí hiện tại từ menu chuột phải nền thư mục.</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Header" xml:space="preserve">
+    <value>Thêm "Sao chép đường dẫn tệp" vào menu ngữ cảnh</value>
+  </data>
+  <data name="Feature_AddCopyFilePath.Description" xml:space="preserve">
+    <value>Thêm tùy chọn vào menu ngữ cảnh để sao chép đường dẫn tệp đầy đủ vào bảng tạm chỉ bằng một cú nhấp chuột.</value>
+  </data>
+  <data name="PrivacyPage_PrivacyHardening.Text" xml:space="preserve">
+    <value>Tăng cường quyền riêng tư</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Header" xml:space="preserve">
+    <value>Tắt Wi-Fi Sense</value>
+  </data>
+  <data name="Feature_DisableWiFiSense.Description" xml:space="preserve">
+    <value>Tắt tự động kết nối với các điểm phát sóng Wi-Fi mở được đề xuất và mạng được chia sẻ bởi danh bạ.</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Header" xml:space="preserve">
+    <value>Tắt kết quả Web trong tìm kiếm</value>
+  </data>
+  <data name="Feature_DisableWebSearchResults.Description" xml:space="preserve">
+    <value>Ngăn Windows Search gửi truy vấn đến Bing và hiển thị kết quả web. Giữ cho việc tìm kiếm hoàn toàn cục bộ và riêng tư.</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Header" xml:space="preserve">
+    <value>Tắt theo dõi khởi chạy ứng dụng</value>
+  </data>
+  <data name="Feature_DisableAppLaunchTracking.Description" xml:space="preserve">
+    <value>Ngăn Windows theo dõi các ứng dụng bạn mở để cá nhân hóa danh sách hay dùng trong menu Bắt đầu.</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Header" xml:space="preserve">
+    <value>Tắt dòng thời gian &amp; Lịch sử hoạt động</value>
+  </data>
+  <data name="Feature_DisableTimelineHistory.Description" xml:space="preserve">
+    <value>Tắt nguồn cấp dữ liệu Dòng thời gian của Windows và ngăn dữ liệu hoạt động được xuất bản hoặc tải lên đám mây.</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Header" xml:space="preserve">
+    <value>Tắt phân phối bản cập nhật P2P</value>
+  </data>
+  <data name="Network_DisableP2PDelivery.Description" xml:space="preserve">
+    <value>Tắt tối ưu hóa phân phối ngang hàng của Windows Update, ngăn máy tính chia sẻ dữ liệu cập nhật với các máy tính khác trên internet.</value>
+  </data>
+  <data name="Network_DisableHotspot20.Header" xml:space="preserve">
+    <value>Tắt Hotspot 2.0</value>
+  </data>
+  <data name="Network_DisableHotspot20.Description" xml:space="preserve">
+    <value>Tắt tính năng tự động khám phá và kết nối điểm phát sóng Wi-Fi Hotspot 2.0 (Passpoint) để nâng cao quyền riêng tư.</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Header" xml:space="preserve">
+    <value>Tắt NetBIOS qua TCP/IP</value>
+  </data>
+  <data name="Network_DisableNetBIOS.Description" xml:space="preserve">
+    <value>Tắt phân giải tên NetBIOS cũ qua TCP/IP để giảm bề mặt tấn công mạng và tăng cường bảo mật.</value>
+  </data>
+  <data name="OptimizeSystemPage_InputResponsiveness.Text" xml:space="preserve">
+    <value>Nhập liệu &amp; Độ phản hồi</value>
+  </data>
+  <data name="OptimizeSystemPage_GamingGpu.Text" xml:space="preserve">
+    <value>Trò chơi &amp; Card đồ họa</value>
+  </data>
+  <data name="OptimizeSystemPage_DiskFileSystem.Text" xml:space="preserve">
+    <value>Ổ đĩa &amp; Hệ thống tệp</value>
+  </data>
+  <data name="OptimizeSystemPage_ServicesSystem.Text" xml:space="preserve">
+    <value>Dịch vụ &amp; Hệ thống</value>
+  </data>
+  <data name="OptimizeSystemPage_WindowsComponents.Text" xml:space="preserve">
+    <value>Thành phần Windows</value>
+  </data>
+  <data name="FeaturesPage_AppearanceUI.Text" xml:space="preserve">
+    <value>Giao diện &amp; Trực quan</value>
+  </data>
+  <data name="FeaturesPage_SystemServices.Text" xml:space="preserve">
+    <value>Dịch vụ hệ thống</value>
+  </data>
+  <data name="FeaturesPage_InputAccessibility.Text" xml:space="preserve">
+    <value>Nhập liệu &amp; Trợ năng</value>
+  </data>
+  <data name="FeaturesPage_ExplorerShell.Text" xml:space="preserve">
+    <value>Trình khám phá tệp &amp; Vỏ hệ thống</value>
+  </data>
+  <data name="FeaturesPage_Win11UI.Text" xml:space="preserve">
+    <value>Giao diện Windows 11</value>
+  </data>
+  <data name="FeaturesPage_WindowsAIEdge.Text" xml:space="preserve">
+    <value>AI Windows &amp; Edge</value>
+  </data>
+  <data name="PrivacyPage_DataCollection.Text" xml:space="preserve">
+    <value>Thu thập dữ liệu &amp; Nhập liệu</value>
+  </data>
+  <data name="PrivacyPage_CloudSync.Text" xml:space="preserve">
+    <value>Đám mây &amp; Đồng bộ thiết bị</value>
+  </data>
+  <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
+    <value>Vị trí &amp; Bảo mật</value>
   </data>
 </root>

@@ -10,7 +10,6 @@ public static class AppSearchService
     private static readonly List<(string ResourceKeyPrefix, Type PageType, string Category, string Glyph, string ToggleTag)> FeatureMap =
     [
         ("IntelligentOptimizer", typeof(OptimizeSystemPage), "Optimize", "\uE9F5", "IntelligentOptimizer"),
-        // OptimizeSystemPage - Basic (icons match OptimizeSystemPage.xaml)
         ("Feature_PowerMode", typeof(OptimizeSystemPage), "Optimize", "\uEBB7", "PowerMode"),
         ("Feature_AddUltimatePowerPlan", typeof(OptimizeSystemPage), "Optimize", "\uE945", "AddUltimatePowerPlan"),
         ("Feature_DisableUsbPowerSaving", typeof(OptimizeSystemPage), "Optimize", "\uE945", "UsbPowerSaving"),
@@ -31,8 +30,6 @@ public static class AppSearchService
         ("Feature_ServiceTimeouts", typeof(OptimizeSystemPage), "Optimize", "\uE823", "ServiceTimeouts"),
         ("Feature_RemoteRegistry", typeof(OptimizeSystemPage), "Optimize", "\uED5C", "RemoteRegistry"),
         ("Feature_FileExtensionsAndHiddenFiles", typeof(OptimizeSystemPage), "Optimize", "\uF19D", "FileExtensionsAndHiddenFiles"),
-        
-        // OptimizeSystemPage - Advanced
         ("Feature_SystemProfile", typeof(OptimizeSystemPage), "Optimize", "\uE9F5", "SystemProfile"),
         ("Feature_DisableSysMain", typeof(OptimizeSystemPage), "Optimize", "\uEC4A", "SysMain"),
         ("Feature_EnableGamingMode", typeof(OptimizeSystemPage), "Optimize", "\uE7FC", "GamingMode"),
@@ -45,15 +42,11 @@ public static class AppSearchService
         ("Feature_OptimizeNTFS", typeof(OptimizeSystemPage), "Optimize", "\uE9F3", "OptimizeNTFS"),
         ("Feature_PrioritizeForegroundApplications", typeof(OptimizeSystemPage), "Optimize", "\uE9D9", "PrioritizeForegroundApplications"),
         ("Feature_WPBT", typeof(OptimizeSystemPage), "Optimize", "\uE9E9", "WPBT"),
-        
-        // OptimizeSystemPage - Other
         ("Feature_DisableSystemRestore", typeof(OptimizeSystemPage), "Optimize", "\uE777", "SystemRestore"),
         ("Feature_DisableCortana", typeof(OptimizeSystemPage), "Optimize", "\uED66", "Cortana"),
         ("Feature_DisableStoreUpdates", typeof(OptimizeSystemPage), "Optimize", "\uE719", "StoreUpdates"),
         ("Feature_WindowsUpdates", typeof(OptimizeSystemPage), "Optimize", "\uE8D8", "AutomaticUpdates"),
         ("Feature_DisableSmartScreen", typeof(OptimizeSystemPage), "Optimize", "\uF8A5", "SmartScreen"),
-
-        // PrivacyPage - Advertising (glyphs match PrivacyPage.xaml)
         ("Feature_DisableAdvertisingID", typeof(PrivacyPage), "Privacy", "\uEE57", "AdvertisingID"),
         ("Feature_DisableBluetoothAdvertising", typeof(PrivacyPage), "Privacy", "\uE702", "BluetoothAdvertising"),
         ("Feature_DisableNewsAndInterests", typeof(PrivacyPage), "Privacy", "\uF586", "NewsAndInterests"),
@@ -61,28 +54,22 @@ public static class AppSearchService
         ("Feature_DisableTailoredExperiences", typeof(PrivacyPage), "Privacy", "\uEADF", "TailoredExperiences"),
         ("Feature_DisableCloudOptimizedContent", typeof(PrivacyPage), "Privacy", "\uE753", "CloudOptimizedContent"),
         ("Feature_DisableFeedbackNotifications", typeof(PrivacyPage), "Privacy", "\uED15", "FeedbackNotifications"),
-
-        // PrivacyPage - Telemetry (glyphs match PrivacyPage.xaml)
         ("Feature_DisableTelemetryServices", typeof(PrivacyPage), "Privacy", "\uE9F9", "TelemetryServices"),
         ("Feature_DisableEdgeTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "EdgeTelemetry"),
         ("Feature_DisableVisualStudioTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "VisualStudioTelemetry"),
         ("Feature_DisableNvidiaTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "NvidiaTelemetry"),
         ("Feature_DisableChromeTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "ChromeTelemetry"),
         ("Feature_DisableFirefoxTelemetry", typeof(PrivacyPage), "Privacy", "\uE9F9", "FirefoxTelemetry"),
-        ("Feature_DisableActivityFeed", typeof(PrivacyPage), "Privacy", "\uE779", "ActivityFeed"),
         ("Feature_DisableCdp", typeof(PrivacyPage), "Privacy", "\uEF58", "Cdp"),
         ("Feature_DisableDiagnosticsToast", typeof(PrivacyPage), "Privacy", "\uE9D9", "DiagnosticsToast"),
         ("Feature_DisableOnlineSpeechPrivacy", typeof(PrivacyPage), "Privacy", "\uE720", "OnlineSpeechPrivacy"),
         ("Feature_DisableLocationFeatures", typeof(PrivacyPage), "Privacy", "\uE809", "LocationFeatures"),
         ("Feature_DisableBiometrics", typeof(PrivacyPage), "Privacy", "\uE928", "Biometrics"),
-        
-        // PrivacyPage - Other Privacy (glyphs match PrivacyPage.xaml)
         ("Feature_DisableAutomaticRestartSignOn", typeof(PrivacyPage), "Privacy", "\uE777", "AutomaticRestartSignOn"),
         ("Feature_DisableHandwritingDataSharing", typeof(PrivacyPage), "Privacy", "\uE929", "HandwritingDataSharing"),
         ("Feature_DisableTextInputDataCollection", typeof(PrivacyPage), "Privacy", "\uE961", "TextInputDataCollection"),
         ("Feature_DisableInputPersonalization", typeof(PrivacyPage), "Privacy", "\uF180", "InputPersonalization"),
         ("Feature_DisableSafeSearchMode", typeof(PrivacyPage), "Privacy", "\uE773", "SafeSearchMode"),
-        ("Feature_DisableActivityUploads", typeof(PrivacyPage), "Privacy", "\uE8FD", "ActivityUploads"),
         ("Feature_DisableClipboardSync", typeof(PrivacyPage), "Privacy", "\uF0E3", "ClipboardSync"),
         ("Feature_DisableMessageSync", typeof(PrivacyPage), "Privacy", "\uE90A", "MessageSync"),
         ("Feature_DisableSettingSync", typeof(PrivacyPage), "Privacy", "\uE895", "SettingSync"),
@@ -90,8 +77,6 @@ public static class AppSearchService
         ("Feature_DisableFindMyDevice", typeof(PrivacyPage), "Privacy", "\uE707", "FindMyDevice"),
         ("Feature_DisableSMBv1", typeof(PrivacyPage), "Privacy", "\uF193", "SMBv1"),
         ("Feature_DisableSMBv2", typeof(PrivacyPage), "Privacy", "\uF193", "SMBv2"),
-
-        // FeaturesPage - System Features (glyphs match FeaturesPage.xaml)
         ("Feature_DisableWindowsTransparency", typeof(FeaturesPage), "Features", "\uF5ED", "WindowsTransparency"),
         ("Feature_EnableWindowsDarkMode", typeof(FeaturesPage), "Features", "\uE790", "WindowsDarkMode"),
         ("Feature_EnableVerboseLogon", typeof(FeaturesPage), "Features", "\uE946", "VerboseLogon"),
@@ -111,8 +96,6 @@ public static class AppSearchService
         ("Feature_DisableCloudClipboard", typeof(FeaturesPage), "Features", "\uEBC3", "CloudClipboard"),
         ("Feature_DisableStickyKeys", typeof(FeaturesPage), "Features", "\uE765", "StickyKeys"),
         ("Feature_DisableCastToDevice", typeof(FeaturesPage), "Features", "\uEC15", "CastToDevice"),
-        
-        // FeaturesPage - Windows 11 Exclusive (glyphs match FeaturesPage.xaml)
         ("Feature_DisableVBS", typeof(FeaturesPage), "Features", "\uF552", "VBS"),
         ("Feature_EnableEndTask", typeof(FeaturesPage), "Features", "\uE25B", "EndTask"),
         ("Feature_EnableClassicContextMenu", typeof(FeaturesPage), "Features", "\uE8C8", "ClassicContextMenu"),
@@ -126,6 +109,34 @@ public static class AppSearchService
         ("Feature_DisableEdgeDiscoverBar", typeof(FeaturesPage), "Features", "\uF6FA", "EdgeDiscoverBar"),
         ("Feature_DisableCoPilotAI", typeof(FeaturesPage), "Features", "\uE99A", "CoPilotAI"),
         ("Feature_DisableWindowsRecall", typeof(FeaturesPage), "Features", "\uE82F", "WindowsRecall"),
+        ("Feature_DisableWindowsAI", typeof(FeaturesPage), "Features", "\uE99A", "WindowsAI"),
+        ("Feature_DisableLockScreenNotifications", typeof(FeaturesPage), "Features", "\uE7F7", "LockScreenNotifications"),
+        ("Feature_DisableToastNotifications", typeof(FeaturesPage), "Features", "\uE7E7", "ToastNotifications"),
+        ("Feature_DisableNotificationCenter", typeof(FeaturesPage), "Features", "\uE91C", "NotificationCenter"),
+        ("Feature_DisableSuggestedActions", typeof(FeaturesPage), "Features", "\uE9D5", "SuggestedActions"),
+        ("Feature_AddTakeOwnership", typeof(FeaturesPage), "Features", "\uE7C1", "TakeOwnership"),
+        ("Feature_AddOpenCmdHere", typeof(FeaturesPage), "Features", "\uE756", "OpenCmdHere"),
+        ("Feature_AddCopyFilePath", typeof(FeaturesPage), "Features", "\uE8C8", "CopyFilePath"),
+        ("Feature_GlobalTimerResolution", typeof(OptimizeSystemPage), "Optimize", "\uE916", "GlobalTimerResolution"),
+        ("Feature_DisableHPET", typeof(OptimizeSystemPage), "Optimize", "\uE823", "HPET"),
+        ("Feature_DisableDynamicTick", typeof(OptimizeSystemPage), "Optimize", "\uECAD", "DynamicTick"),
+        ("Feature_DisablePrefetch", typeof(OptimizeSystemPage), "Optimize", "\uE7B8", "Prefetch"),
+        ("Feature_EnableLargeSystemCache", typeof(OptimizeSystemPage), "Optimize", "\uE964", "LargeSystemCache"),
+        ("Feature_DisableNDU", typeof(OptimizeSystemPage), "Optimize", "\uE968", "NDU"),
+        ("Feature_DisablePageFileEncryption", typeof(OptimizeSystemPage), "Optimize", "\uE8D7", "PageFileEncryption"),
+        ("Feature_DisableWiFiSense", typeof(PrivacyPage), "Privacy", "\uE701", "WiFiSense"),
+        ("Feature_DisableWebSearchResults", typeof(PrivacyPage), "Privacy", "\uF6FA", "WebSearchResults"),
+        ("Feature_DisableAppLaunchTracking", typeof(PrivacyPage), "Privacy", "\uE9F5", "AppLaunchTracking"),
+        ("Feature_DisableTimelineHistory", typeof(PrivacyPage), "Privacy", "\uE81C", "TimelineHistory"),
+        ("Network_DisableThrottling", typeof(NetworkPage), "Network", "\uEC4A", "NetworkThrottling"),
+        ("Network_DisableNagle", typeof(NetworkPage), "Network", "\uE8E9", "NagleAlgorithm"),
+        ("Network_EnableRSS", typeof(NetworkPage), "Network", "\uE9D9", "RSS"),
+        ("Network_EnableECN", typeof(NetworkPage), "Network", "\uE9E9", "ECN"),
+        ("Network_EnableCTCP", typeof(NetworkPage), "Network", "\uECAD", "CTCP"),
+        ("Network_DisableIPv6", typeof(NetworkPage), "Network", "\uE703", "IPv6"),
+        ("Network_DisableP2PDelivery", typeof(NetworkPage), "Network", "\uE895", "P2PDelivery"),
+        ("Network_DisableHotspot20", typeof(NetworkPage), "Network", "\uE701", "Hotspot20"),
+        ("Network_DisableNetBIOS", typeof(NetworkPage), "Network", "\uE968", "NetBIOS"),
     ];
 
     // Navigation pages with their resource keys for localization
