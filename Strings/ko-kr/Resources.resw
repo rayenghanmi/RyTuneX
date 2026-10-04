@@ -2893,4 +2893,136 @@
   <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
     <value>위치 및 보안</value>
   </data>
+  <data name="Shell_StressTest.Content" xml:space="preserve">
+    <value>스트레스 테스트</value>
+  </data>
+  <data name="StressTestPage_Title.Text" xml:space="preserve">
+    <value>스트레스 테스트</value>
+  </data>
+  <data name="StressTestPage_Description.Text" xml:space="preserve">
+    <value>하드웨어를 한계까지 테스트하고 부하 상태에서 실시간 성능을 모니터링합니다.</value>
+  </data>
+  <data name="StressTestPage_StartAll.Text" xml:space="preserve">
+    <value>모두 시작</value>
+  </data>
+  <data name="StressTestPage_StopAll.Text" xml:space="preserve">
+    <value>모두 중지</value>
+  </data>
+  <data name="StressTestPage_CPU.Text" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="StressTestPage_RAM.Text" xml:space="preserve">
+    <value>RAM</value>
+  </data>
+  <data name="StressTestPage_Disk.Text" xml:space="preserve">
+    <value>디스크</value>
+  </data>
+  <data name="StressTestPage_GPU.Text" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="StressTestPage_CpuStressTest.Text" xml:space="preserve">
+    <value>CPU 스트레스 테스트</value>
+  </data>
+  <data name="StressTestPage_CpuStressTestDesc.Text" xml:space="preserve">
+    <value>병렬 정수 및 부동 소수점 워크로드를 사용한 모든 코어 연산 부하</value>
+  </data>
+  <data name="StressTestPage_RamStressTest.Text" xml:space="preserve">
+    <value>RAM 스트레스 테스트</value>
+  </data>
+  <data name="StressTestPage_RamStressTestDesc.Text" xml:space="preserve">
+    <value>안정성 문제를 감지하기 위한 순차 및 무작위 메모리 액세스 패턴</value>
+  </data>
+  <data name="StressTestPage_DiskStressTest.Text" xml:space="preserve">
+    <value>디스크 스트레스 테스트</value>
+  </data>
+  <data name="StressTestPage_DiskStressTestDesc.Text" xml:space="preserve">
+    <value>시스템 드라이브의 순차 읽기/쓰기 처리량 벤치마크</value>
+  </data>
+  <data name="StressTestPage_GpuStressTest.Text" xml:space="preserve">
+    <value>GPU 스트레스 테스트</value>
+  </data>
+  <data name="StressTestPage_GpuStressTestDesc.Text" xml:space="preserve">
+    <value>GPU를 최대 100%까지 부하를 주는 하드웨어 가속 3D 레이마칭 프랙탈 및 볼륨 파이프라인</value>
+  </data>
+  <data name="StressTestPage_Start.Text" xml:space="preserve">
+    <value>시작</value>
+  </data>
+  <data name="StressTestPage_Stop.Text" xml:space="preserve">
+    <value>중지</value>
+  </data>
+  <data name="StressTestPage_Usage.Text" xml:space="preserve">
+    <value>사용량</value>
+  </data>
+  <data name="StressTestPage_Threads.Text" xml:space="preserve">
+    <value>스레드</value>
+  </data>
+  <data name="StressTestPage_Score.Text" xml:space="preserve">
+    <value>점수</value>
+  </data>
+  <data name="StressTestPage_Status.Text" xml:space="preserve">
+    <value>상태</value>
+  </data>
+  <data name="StressTestPage_Idle.Text" xml:space="preserve">
+    <value>유휴</value>
+  </data>
+  <data name="StressTestPage_Running.Text" xml:space="preserve">
+    <value>실행 중</value>
+  </data>
+  <data name="StressTestPage_Allocating.Text" xml:space="preserve">
+    <value>할당 중</value>
+  </data>
+  <data name="StressTestPage_RunningHlsl.Text" xml:space="preserve">
+    <value>실행 중 (HLSL 컴퓨트)</value>
+  </data>
+  <data name="StressTestPage_Allocated.Text" xml:space="preserve">
+    <value>할당됨</value>
+  </data>
+  <data name="StressTestPage_Bandwidth.Text" xml:space="preserve">
+    <value>대역폭</value>
+  </data>
+  <data name="StressTestPage_WriteSpeed.Text" xml:space="preserve">
+    <value>쓰기</value>
+  </data>
+  <data name="StressTestPage_ReadSpeed.Text" xml:space="preserve">
+    <value>읽기</value>
+  </data>
+  <data name="StressTestPage_IOPS.Text" xml:space="preserve">
+    <value>IOPS</value>
+  </data>
+  <data name="StressTestPage_GFLOPS.Text" xml:space="preserve">
+    <value>GFLOPS</value>
+  </data>
+  <data name="StressTestPage_VRAM.Text" xml:space="preserve">
+    <value>VRAM</value>
+  </data>
+  <data name="StressTestPage_Temperature.Text" xml:space="preserve">
+    <value>온도</value>
+  </data>
+  <data name="StressTestPage_FPS.Text" xml:space="preserve">
+    <value>FPS</value>
+  </data>
+  <data name="StressTestPage_RamPercentCombo.Header" xml:space="preserve">
+    <value>RAM 비율 (%)</value>
+  </data>
+  <data name="StressTestPage_AllCores.Text" xml:space="preserve">
+    <value>모든 코어</value>
+  </data>
+  <data name="StressTestPage_AllCoresWithCount" xml:space="preserve">
+    <value>모든 코어 ({0})</value>
+  </data>
+  <data name="StressTestPage_SelectedCoresCount" xml:space="preserve">
+    <value>{0}/{1} 코어</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Title" xml:space="preserve">
+    <value>CPU 코어 선택</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Apply" xml:space="preserve">
+    <value>적용</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
+    <value>최소 하나의 코어를 선택하세요.</value>
+  </data>
 </root>

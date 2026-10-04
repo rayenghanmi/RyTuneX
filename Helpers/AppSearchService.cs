@@ -155,6 +155,7 @@ public static class AppSearchService
         ("Shell_Services", typeof(ServicesPage), "\uEA86"),
         ("Shell_Startup", typeof(StartupPage), "\uE7B8"),
         ("Shell_SystemInfo", typeof(SystemInfoPage), "\uE770"),
+        ("Shell_StressTest", typeof(StressTestPage), "\uECAD"),
         ("Settings", typeof(SettingsPage), "\uE713")
     ];
 

@@ -2893,4 +2893,136 @@
   <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
     <value>מיקום ואבטחה</value>
   </data>
+  <data name="Shell_StressTest.Content" xml:space="preserve">
+    <value>בדיקת מאמץ</value>
+  </data>
+  <data name="StressTestPage_Title.Text" xml:space="preserve">
+    <value>בדיקת מאמץ</value>
+  </data>
+  <data name="StressTestPage_Description.Text" xml:space="preserve">
+    <value>דחוף את החומרה שלך לקצה גבול היכולת ועקוב אחר הביצועים בזמן אמת תחת עומס.</value>
+  </data>
+  <data name="StressTestPage_StartAll.Text" xml:space="preserve">
+    <value>התחל הכל</value>
+  </data>
+  <data name="StressTestPage_StopAll.Text" xml:space="preserve">
+    <value>עצור הכל</value>
+  </data>
+  <data name="StressTestPage_CPU.Text" xml:space="preserve">
+    <value>מעבד</value>
+  </data>
+  <data name="StressTestPage_RAM.Text" xml:space="preserve">
+    <value>זיכרון</value>
+  </data>
+  <data name="StressTestPage_Disk.Text" xml:space="preserve">
+    <value>דיסק</value>
+  </data>
+  <data name="StressTestPage_GPU.Text" xml:space="preserve">
+    <value>מעבד גרפי</value>
+  </data>
+  <data name="StressTestPage_CpuStressTest.Text" xml:space="preserve">
+    <value>בדיקת מאמץ למעבד</value>
+  </data>
+  <data name="StressTestPage_CpuStressTestDesc.Text" xml:space="preserve">
+    <value>עומס חישובי על כל הליבות באמצעות עיבוד מקבילי של מספרים שלמים ונקודה צפה</value>
+  </data>
+  <data name="StressTestPage_RamStressTest.Text" xml:space="preserve">
+    <value>בדיקת מאמץ לזיכרון</value>
+  </data>
+  <data name="StressTestPage_RamStressTestDesc.Text" xml:space="preserve">
+    <value>דפוסי גישה סדרתיים ואקראיים לזיכרון לזיהוי בעיות יציבות</value>
+  </data>
+  <data name="StressTestPage_DiskStressTest.Text" xml:space="preserve">
+    <value>בדיקת מאמץ לדיסק</value>
+  </data>
+  <data name="StressTestPage_DiskStressTestDesc.Text" xml:space="preserve">
+    <value>מדד תפוקת קריאה/כתיבה סדרתית בכונן המערכת</value>
+  </data>
+  <data name="StressTestPage_GpuStressTest.Text" xml:space="preserve">
+    <value>בדיקת מאמץ למעבד גרפי</value>
+  </data>
+  <data name="StressTestPage_GpuStressTestDesc.Text" xml:space="preserve">
+    <value>צינור עיבוד תלת-ממדי פרקטלי ונפחי של raymarching בהאצת חומרה להעמסת המעבד הגרפי עד 100%</value>
+  </data>
+  <data name="StressTestPage_Start.Text" xml:space="preserve">
+    <value>התחל</value>
+  </data>
+  <data name="StressTestPage_Stop.Text" xml:space="preserve">
+    <value>עצור</value>
+  </data>
+  <data name="StressTestPage_Usage.Text" xml:space="preserve">
+    <value>שימוש</value>
+  </data>
+  <data name="StressTestPage_Threads.Text" xml:space="preserve">
+    <value>תהליכונים</value>
+  </data>
+  <data name="StressTestPage_Score.Text" xml:space="preserve">
+    <value>ציון</value>
+  </data>
+  <data name="StressTestPage_Status.Text" xml:space="preserve">
+    <value>מצב</value>
+  </data>
+  <data name="StressTestPage_Idle.Text" xml:space="preserve">
+    <value>לא פעיל</value>
+  </data>
+  <data name="StressTestPage_Running.Text" xml:space="preserve">
+    <value>פועל</value>
+  </data>
+  <data name="StressTestPage_Allocating.Text" xml:space="preserve">
+    <value>מקצה זיכרון</value>
+  </data>
+  <data name="StressTestPage_RunningHlsl.Text" xml:space="preserve">
+    <value>פועל (חישוב HLSL)</value>
+  </data>
+  <data name="StressTestPage_Allocated.Text" xml:space="preserve">
+    <value>הוקצה</value>
+  </data>
+  <data name="StressTestPage_Bandwidth.Text" xml:space="preserve">
+    <value>רוחב פס</value>
+  </data>
+  <data name="StressTestPage_WriteSpeed.Text" xml:space="preserve">
+    <value>כתיבה</value>
+  </data>
+  <data name="StressTestPage_ReadSpeed.Text" xml:space="preserve">
+    <value>קריאה</value>
+  </data>
+  <data name="StressTestPage_IOPS.Text" xml:space="preserve">
+    <value>IOPS</value>
+  </data>
+  <data name="StressTestPage_GFLOPS.Text" xml:space="preserve">
+    <value>GFLOPS</value>
+  </data>
+  <data name="StressTestPage_VRAM.Text" xml:space="preserve">
+    <value>VRAM</value>
+  </data>
+  <data name="StressTestPage_Temperature.Text" xml:space="preserve">
+    <value>טמפרטורה</value>
+  </data>
+  <data name="StressTestPage_FPS.Text" xml:space="preserve">
+    <value>FPS</value>
+  </data>
+  <data name="StressTestPage_RamPercentCombo.Header" xml:space="preserve">
+    <value>% מהזיכרון</value>
+  </data>
+  <data name="StressTestPage_AllCores.Text" xml:space="preserve">
+    <value>כל הליבות</value>
+  </data>
+  <data name="StressTestPage_AllCoresWithCount" xml:space="preserve">
+    <value>כל הליבות ({0})</value>
+  </data>
+  <data name="StressTestPage_SelectedCoresCount" xml:space="preserve">
+    <value>{0} מתוך {1} ליבות</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Title" xml:space="preserve">
+    <value>בחר ליבות מעבד</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Apply" xml:space="preserve">
+    <value>החל</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Cancel" xml:space="preserve">
+    <value>ביטול</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
+    <value>בחר לפחות ליבה אחת.</value>
+  </data>
 </root>

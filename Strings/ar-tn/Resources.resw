@@ -2893,4 +2893,136 @@
   <data name="PrivacyPage_LocationSecurity.Text" xml:space="preserve">
     <value>الموقع الجغرافي والأمان</value>
   </data>
+  <data name="Shell_StressTest.Content" xml:space="preserve">
+    <value>اختبار الضغط</value>
+  </data>
+  <data name="StressTestPage_Title.Text" xml:space="preserve">
+    <value>اختبار الضغط</value>
+  </data>
+  <data name="StressTestPage_Description.Text" xml:space="preserve">
+    <value>ادفع أجهزتك إلى أقصى حدودها وراقب الأداء الفعلي تحت الضغط.</value>
+  </data>
+  <data name="StressTestPage_StartAll.Text" xml:space="preserve">
+    <value>بدء الكل</value>
+  </data>
+  <data name="StressTestPage_StopAll.Text" xml:space="preserve">
+    <value>إيقاف الكل</value>
+  </data>
+  <data name="StressTestPage_CPU.Text" xml:space="preserve">
+    <value>المعالج</value>
+  </data>
+  <data name="StressTestPage_RAM.Text" xml:space="preserve">
+    <value>الذاكرة</value>
+  </data>
+  <data name="StressTestPage_Disk.Text" xml:space="preserve">
+    <value>القرص</value>
+  </data>
+  <data name="StressTestPage_GPU.Text" xml:space="preserve">
+    <value>معالج الرسوميات</value>
+  </data>
+  <data name="StressTestPage_CpuStressTest.Text" xml:space="preserve">
+    <value>اختبار ضغط المعالج</value>
+  </data>
+  <data name="StressTestPage_CpuStressTestDesc.Text" xml:space="preserve">
+    <value>حمل حسابي على جميع الأنوية باستخدام عمليات الأعداد الصحيحة والنقطة العائمة المتوازية</value>
+  </data>
+  <data name="StressTestPage_RamStressTest.Text" xml:space="preserve">
+    <value>اختبار ضغط الذاكرة</value>
+  </data>
+  <data name="StressTestPage_RamStressTestDesc.Text" xml:space="preserve">
+    <value>أنماط وصول متسلسلة وعشوائية للذاكرة لاكتشاف مشاكل الاستقرار</value>
+  </data>
+  <data name="StressTestPage_DiskStressTest.Text" xml:space="preserve">
+    <value>اختبار ضغط القرص</value>
+  </data>
+  <data name="StressTestPage_DiskStressTestDesc.Text" xml:space="preserve">
+    <value>قياس أداء سرعة القراءة والكتابة المتسلسلة على محرك أقراص النظام</value>
+  </data>
+  <data name="StressTestPage_GpuStressTest.Text" xml:space="preserve">
+    <value>اختبار ضغط معالج الرسوميات</value>
+  </data>
+  <data name="StressTestPage_GpuStressTestDesc.Text" xml:space="preserve">
+    <value>مسار حسابي وحجمي لكسور raymarching ثلاثية الأبعاد مسرعة بالعتاد لضغط معالج الرسوميات حتى 100%</value>
+  </data>
+  <data name="StressTestPage_Start.Text" xml:space="preserve">
+    <value>بدء</value>
+  </data>
+  <data name="StressTestPage_Stop.Text" xml:space="preserve">
+    <value>إيقاف</value>
+  </data>
+  <data name="StressTestPage_Usage.Text" xml:space="preserve">
+    <value>الاستخدام</value>
+  </data>
+  <data name="StressTestPage_Threads.Text" xml:space="preserve">
+    <value>الخيوط</value>
+  </data>
+  <data name="StressTestPage_Score.Text" xml:space="preserve">
+    <value>النتيجة</value>
+  </data>
+  <data name="StressTestPage_Status.Text" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="StressTestPage_Idle.Text" xml:space="preserve">
+    <value>خامل</value>
+  </data>
+  <data name="StressTestPage_Running.Text" xml:space="preserve">
+    <value>قيد التشغيل</value>
+  </data>
+  <data name="StressTestPage_Allocating.Text" xml:space="preserve">
+    <value>جارٍ التخصيص</value>
+  </data>
+  <data name="StressTestPage_RunningHlsl.Text" xml:space="preserve">
+    <value>قيد التشغيل (حوسبة HLSL)</value>
+  </data>
+  <data name="StressTestPage_Allocated.Text" xml:space="preserve">
+    <value>مخصصة</value>
+  </data>
+  <data name="StressTestPage_Bandwidth.Text" xml:space="preserve">
+    <value>عرض النطاق</value>
+  </data>
+  <data name="StressTestPage_WriteSpeed.Text" xml:space="preserve">
+    <value>كتابة</value>
+  </data>
+  <data name="StressTestPage_ReadSpeed.Text" xml:space="preserve">
+    <value>قراءة</value>
+  </data>
+  <data name="StressTestPage_IOPS.Text" xml:space="preserve">
+    <value>IOPS</value>
+  </data>
+  <data name="StressTestPage_GFLOPS.Text" xml:space="preserve">
+    <value>GFLOPS</value>
+  </data>
+  <data name="StressTestPage_VRAM.Text" xml:space="preserve">
+    <value>VRAM</value>
+  </data>
+  <data name="StressTestPage_Temperature.Text" xml:space="preserve">
+    <value>درجة الحرارة</value>
+  </data>
+  <data name="StressTestPage_FPS.Text" xml:space="preserve">
+    <value>FPS</value>
+  </data>
+  <data name="StressTestPage_RamPercentCombo.Header" xml:space="preserve">
+    <value>% من الذاكرة</value>
+  </data>
+  <data name="StressTestPage_AllCores.Text" xml:space="preserve">
+    <value>جميع الأنوية</value>
+  </data>
+  <data name="StressTestPage_AllCoresWithCount" xml:space="preserve">
+    <value>جميع الأنوية ({0})</value>
+  </data>
+  <data name="StressTestPage_SelectedCoresCount" xml:space="preserve">
+    <value>{0} من {1} أنوية</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Title" xml:space="preserve">
+    <value>تحديد أنوية المعالج</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Apply" xml:space="preserve">
+    <value>تطبيق</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
+    <value>يرجى تحديد نواة واحدة على الأقل.</value>
+  </data>
 </root>

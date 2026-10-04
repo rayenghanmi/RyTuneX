@@ -74,6 +74,8 @@
       <PackageReference Include="System.Drawing.Common" Version="10.0.10" />
       <PackageReference Include="System.Management" Version="10.0.10" />
       <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.10" />
+      <PackageReference Include="Vortice.D3DCompiler" Version="3.8.3" />
+      <PackageReference Include="Vortice.Direct3D11" Version="3.8.3" />
       <PackageReference Include="Vortice.DXGI" Version="3.8.3" />
       <PackageReference Include="WinUIEx" Version="2.9.2" />
   </ItemGroup>
