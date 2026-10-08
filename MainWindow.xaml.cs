@@ -59,11 +59,11 @@ public sealed partial class MainWindow : WindowEx
 
                 var dialog = new ContentDialog
                 {
-                    Title = "Operations in progress",
-                    Content = "There are background optimization operations running. Do you want to wait for them to finish or exit now?",
-                    PrimaryButtonText = "Wait",
-                    CloseButtonText = "Cancel",
-                    SecondaryButtonText = "Exit",
+                    Title = "MainWindow_OperationsInProgress_Title".GetLocalized(),
+                    Content = "MainWindow_OperationsInProgress_Content".GetLocalized(),
+                    PrimaryButtonText = "MainWindow_OperationsInProgress_Wait".GetLocalized(),
+                    CloseButtonText = "MainWindow_OperationsInProgress_Cancel".GetLocalized(),
+                    SecondaryButtonText = "MainWindow_OperationsInProgress_Exit".GetLocalized(),
                     PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
                 };

@@ -11,10 +11,41 @@ namespace RyTuneX.Helpers;
 
 public static class IntelligentCardEnhancer
 {
-    private static readonly HashSet<int> HookedToggleHashCodes = new();
+    private static readonly object Sentinel = new();
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<ToggleSwitch, object> HookedToggles = new();
+    private static readonly HashSet<ToggleSwitch> SuppressedToggles = new();
 
-    // Scans a Page for all ToggleSwitches and SettingsCards, attaching intelligent badges,
-    // risk indicators, score weight chips, per-item rollback buttons, and technical detail flyouts
+    public static bool IsSuppressed(ToggleSwitch toggle)
+    {
+        lock (SuppressedToggles)
+        {
+            return SuppressedToggles.Contains(toggle);
+        }
+    }
+
+    public static void SetToggleIsOnSilently(ToggleSwitch toggle, bool isOn)
+    {
+        if (toggle.IsOn == isOn) return;
+
+        lock (SuppressedToggles)
+        {
+            SuppressedToggles.Add(toggle);
+        }
+
+        try
+        {
+            toggle.IsOn = isOn;
+        }
+        finally
+        {
+            lock (SuppressedToggles)
+            {
+                SuppressedToggles.Remove(toggle);
+            }
+        }
+    }
+
+    // Enhance page controls
     public static void EnhancePage(Page page)
     {
         if (page == null) return;
@@ -48,14 +79,19 @@ public static class IntelligentCardEnhancer
 
     private static void EnhanceToggleControl(Page page, ToggleSwitch toggle, string tag)
     {
-        // Hook up live Toggled event for real-time backup, score, & UI update
-        if (HookedToggleHashCodes.Add(toggle.GetHashCode()))
+        // Handle toggle state change
+        if (HookedToggles.TryAdd(toggle, Sentinel))
         {
             toggle.Toggled += async (s, e) =>
             {
+                if (IsSuppressed(toggle))
+                {
+                    return;
+                }
+
                 try
                 {
-                    // Save pre-apply snapshot for per-item rollback if user turned it ON
+                    // Save pre-apply backup
                     if (toggle.IsOn)
                     {
                         var itemModel = IntelligentOptimizationEngine.GetItemByTag(tag);
@@ -82,9 +118,9 @@ public static class IntelligentCardEnhancer
 
         // Query backup info and catalog metadata
         var (hasBackup, preState, backupDt, details) = ItemRollbackService.GetBackupInfo(tag);
-        var catalogItem = IntelligentOptimizationEngine.GetItemByTag(tag);
-
         var settingsCard = FindParent<SettingsCard>(toggle);
+        var catalogItem = IntelligentOptimizationEngine.GetItemByTag(tag)
+            ?? OptimizeFunctionInspector.CreateItemModel(tag, page, toggle, settingsCard);
 
         if (settingsCard != null)
         {
@@ -172,7 +208,7 @@ public static class IntelligentCardEnhancer
             VerticalAlignment = VerticalAlignment.Center
         };
 
-        // Risk Level / Recommendation Badge
+        // Risk level badge
         var (riskLabel, riskBg, riskFg) = GetRiskBadgeInfo(risk, catalogItem?.IsRecommended ?? false, isOptimal);
         var riskBadge = new Border
         {
@@ -188,10 +224,18 @@ public static class IntelligentCardEnhancer
             Foreground = riskFg,
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold
         };
+        if (catalogItem?.IsRecommended == true && !isOptimal)
+        {
+            ToolTipService.SetToolTip(riskBadge, $"{riskLabel} • {"Intelligent_Badge_Recommended".GetLocalized()}");
+        }
+        else
+        {
+            ToolTipService.SetToolTip(riskBadge, riskLabel);
+        }
         barStack.Children.Add(riskBadge);
 
-        // Score Weight Chip (+X pts) Only displayed for unapplied items to indicate potential gain
-        if (!isOptimal)
+        // Score weight chip
+        if (!isOptimal && risk != RiskLevel.Cosmetic)
         {
             var scoreChip = new Border
             {
@@ -210,7 +254,7 @@ public static class IntelligentCardEnhancer
             barStack.Children.Add(scoreChip);
         }
 
-        // Per-Item Rollback Button
+        // Rollback button
         var rollbackBtn = new Button
         {
             IsEnabled = hasBackup,
@@ -220,8 +264,9 @@ public static class IntelligentCardEnhancer
         };
 
         var (_, preState, _, _) = ItemRollbackService.GetBackupInfo(tag);
+        string preStateStr = preState ? "Intelligent_State_On".GetLocalized() : "Intelligent_State_Off".GetLocalized();
         ToolTipService.SetToolTip(rollbackBtn, hasBackup
-            ? string.Format("Intelligent_Flyout_PreApplyBackup".GetLocalized(), $"{backupDt:g}", preState ? "ON" : "OFF")
+            ? string.Format("Intelligent_Flyout_PreApplyBackup".GetLocalized(), $"{backupDt:g}", preStateStr)
             : "Intelligent_Flyout_NoBackup".GetLocalized());
 
         var rollbackStack = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
@@ -234,11 +279,13 @@ public static class IntelligentCardEnhancer
             rollbackBtn.IsEnabled = false;
             _ = LogHelper.Log($"[IntelligentCardEnhancer] User clicked per-item rollback for tag '{tag}'");
 
+            // Capture state before rollback
+            var (_, targetState, _, _) = ItemRollbackService.GetBackupInfo(tag);
+
             bool success = await ItemRollbackService.RollbackItemAsync(tag);
             if (success)
             {
-                var (_, newPreState, _, _) = ItemRollbackService.GetBackupInfo(tag);
-                toggle.IsOn = newPreState;
+                SetToggleIsOnSilently(toggle, targetState);
 
                 var scoreHeader = FindVisualChildren<IntelligentScoreHeaderControl>(page).FirstOrDefault();
                 if (scoreHeader != null)
@@ -248,11 +295,15 @@ public static class IntelligentCardEnhancer
 
                 EnhanceToggleControl(page, toggle, tag);
             }
+            else
+            {
+                rollbackBtn.IsEnabled = true;
+            }
         };
 
         barStack.Children.Add(rollbackBtn);
 
-        // Details / Info Flyout Button
+        // Details flyout button
         var detailsBtn = new Button
         {
             Style = GetResourceStyle("DefaultButtonStyle"),
@@ -266,7 +317,7 @@ public static class IntelligentCardEnhancer
         ToolTipService.SetToolTip(detailsBtn, "Intelligent_Flyout_TechnicalDetails".GetLocalized());
 
         var flyout = new Flyout();
-        var flyoutStack = new StackPanel { Width = 300, Spacing = 8 };
+        var flyoutStack = new StackPanel { Width = 340, Spacing = 8 };
 
         var titleBlock = new TextBlock
         {
@@ -279,24 +330,32 @@ public static class IntelligentCardEnhancer
 
         var riskTextBlock = new TextBlock
         {
-            Text = $"Category: {catalogItem?.CategoryDisplay ?? "Optimization"} • Risk: {risk}",
+            Text = string.Format("Intelligent_Flyout_CategoryRisk".GetLocalized(), catalogItem?.CategoryDisplay ?? "Intelligent_General_Optimization".GetLocalized(), risk),
             FontSize = 11,
             Foreground = GetResourceBrush("TextFillColorSecondaryBrush", new SolidColorBrush(Colors.Gray))
         };
         flyoutStack.Children.Add(riskTextBlock);
 
-        if (!string.IsNullOrEmpty(catalogItem?.Description))
+        var desc = !string.IsNullOrEmpty(catalogItem?.Description)
+            ? catalogItem.Description
+            : OptimizeFunctionInspector.GetFunctionInfo(tag).ActionSummary;
+
+        if (!string.IsNullOrEmpty(desc))
         {
             var descBlock = new TextBlock
             {
-                Text = catalogItem.Description,
+                Text = desc,
                 FontSize = 11,
                 TextWrapping = TextWrapping.Wrap
             };
             flyoutStack.Children.Add(descBlock);
         }
 
-        if (!string.IsNullOrEmpty(catalogItem?.ImpactDescription))
+        var impact = !string.IsNullOrEmpty(catalogItem?.ImpactDescription)
+            ? catalogItem.ImpactDescription
+            : OptimizeFunctionInspector.GetFunctionInfo(tag).ActionSummary;
+
+        if (!string.IsNullOrEmpty(impact) && impact != desc)
         {
             var impactBorder = new Border
             {
@@ -306,33 +365,75 @@ public static class IntelligentCardEnhancer
             };
             impactBorder.Child = new TextBlock
             {
-                Text = $"Impact: {catalogItem.ImpactDescription}",
+                Text = string.Format("Intelligent_Flyout_Impact".GetLocalized(), impact),
                 FontSize = 11,
                 TextWrapping = TextWrapping.Wrap
             };
             flyoutStack.Children.Add(impactBorder);
         }
 
-        var techDetails = details ?? catalogItem?.TechnicalDetails ?? GetTechnicalDetailsForTag(tag);
-        var techBlock = new TextBlock
-        {
-            Text = $"Technical Key / Action:\n{techDetails}",
-            FontSize = 10,
-            FontFamily = new FontFamily("Consolas"),
-            TextWrapping = TextWrapping.Wrap,
-            Foreground = GetResourceBrush("TextFillColorSecondaryBrush", new SolidColorBrush(Colors.Gray))
-        };
-        flyoutStack.Children.Add(techBlock);
+        var currentTechDetails = catalogItem?.TechnicalDetails ?? GetTechnicalDetailsForTag(tag);
+        var techDetails = !string.IsNullOrEmpty(currentTechDetails) ? currentTechDetails : details;
 
+        if (!string.IsNullOrEmpty(techDetails))
+        {
+            var techHeader = new TextBlock
+            {
+                Text = "Intelligent_Flyout_TechnicalDetails".TryGetLocalized() ?? "Technical Details",
+                FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
+                FontSize = 11,
+                Margin = new Thickness(0, 4, 0, 0)
+            };
+            flyoutStack.Children.Add(techHeader);
+
+            var techBorder = new Border
+            {
+                Background = GetResourceBrush("SubtleFillColorSecondaryBrush", new SolidColorBrush(Windows.UI.Color.FromArgb(20, 128, 128, 128))),
+                CornerRadius = new CornerRadius(4),
+                Padding = new Thickness(8, 6, 8, 6)
+            };
+
+            var techBlock = new TextBlock
+            {
+                Text = techDetails,
+                FontSize = 10,
+                FontFamily = new FontFamily("Consolas"),
+                TextWrapping = TextWrapping.Wrap,
+                Foreground = GetResourceBrush("TextFillColorSecondaryBrush", new SolidColorBrush(Colors.Gray))
+            };
+            techBorder.Child = techBlock;
+            flyoutStack.Children.Add(techBorder);
+        }
+
+        var currentToggleStateStr = toggle.IsOn ? "Intelligent_State_On".GetLocalized() : "Intelligent_State_Off".GetLocalized();
         var backupInfoBlock = new TextBlock
         {
-            Text = string.Format("Intelligent_Flyout_Status".GetLocalized(), isOptimal ? "Intelligent_Badge_Optimal".GetLocalized() : (toggle.IsOn ? "ON" : "OFF")),
+            Text = string.Format("Intelligent_Flyout_Status".GetLocalized(), isOptimal ? "Intelligent_Badge_Optimal".GetLocalized() : currentToggleStateStr),
             FontSize = 10,
             Foreground = isOptimal ? new SolidColorBrush(Colors.MediumSeaGreen) : GetResourceBrush("TextFillColorSecondaryBrush", new SolidColorBrush(Colors.Gray))
         };
         flyoutStack.Children.Add(backupInfoBlock);
 
-        flyout.Content = flyoutStack;
+        if (hasBackup && backupDt.HasValue)
+        {
+            var originalStateStr = preState ? "Intelligent_State_On".GetLocalized() : "Intelligent_State_Off".GetLocalized();
+            var rollbackText = new TextBlock
+            {
+                Text = string.Format("Intelligent_Flyout_RollbackPoint".GetLocalized(), $"{backupDt.Value:g}", originalStateStr),
+                FontSize = 10,
+                Foreground = new SolidColorBrush(Colors.SteelBlue)
+            };
+            flyoutStack.Children.Add(rollbackText);
+        }
+
+        var scrollViewer = new ScrollViewer
+        {
+            Content = flyoutStack,
+            MaxHeight = 440,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+        };
+
+        flyout.Content = scrollViewer;
         detailsBtn.Flyout = flyout;
         barStack.Children.Add(detailsBtn);
 
@@ -349,13 +450,9 @@ public static class IntelligentCardEnhancer
             return ("Intelligent_Badge_Optimal".GetLocalized(), new SolidColorBrush(Windows.UI.Color.FromArgb(255, 34, 139, 34)), white);
         }
 
-        if (isRecommended)
-        {
-            return ("Intelligent_Badge_Recommended".GetLocalized(), new SolidColorBrush(Windows.UI.Color.FromArgb(255, 0, 120, 212)), white);
-        }
-
         return risk switch
         {
+            RiskLevel.Cosmetic => ("Intelligent_Badge_Cosmetic".TryGetLocalized() ?? "Cosmetic", new SolidColorBrush(Windows.UI.Color.FromArgb(255, 96, 125, 139)), white),
             RiskLevel.Safe => ("Intelligent_Badge_Safe".GetLocalized(), new SolidColorBrush(Windows.UI.Color.FromArgb(255, 46, 117, 182)), white),
             RiskLevel.Moderate => ("Intelligent_Badge_Moderate".GetLocalized(), new SolidColorBrush(Windows.UI.Color.FromArgb(255, 216, 119, 0)), white),
             RiskLevel.Advanced => ("Intelligent_Badge_Advanced".GetLocalized(), new SolidColorBrush(Windows.UI.Color.FromArgb(255, 112, 48, 160)), white),
@@ -391,22 +488,9 @@ public static class IntelligentCardEnhancer
         return null;
     }
 
-    private static string GetTechnicalDetailsForTag(string tag)
+    public static string GetTechnicalDetailsForTag(string tag)
     {
-        return tag switch
-        {
-            "BackgroundApps" => "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications -> GlobalUserDisabled = 1",
-            "TelemetryServices" => "Services DiagTrack & dmwappushservice -> Start = Disabled; AllowTelemetry = 0",
-            "WindowsAI" => "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI -> DisableAIDataAnalysis = 1",
-            "WindowsRecall" => "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI -> DisableRecall = 1",
-            "CoPilotAI" => "HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot -> TurnOffWindowsCopilot = 1",
-            "ClassicContextMenu" => "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32",
-            "SystemProfile" => "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile -> SystemResponsiveness = 10",
-            "MenuShowDelay" => "HKCU\\Control Panel\\Desktop -> MenuShowDelay = 0",
-            "KeyboardLatency" => "HKCU\\Control Panel\\Keyboard -> KeyboardDelay = 0, KeyboardSpeed = 31",
-            "MouseAcceleration" => "HKCU\\Control Panel\\Mouse -> MouseSpeed = 0, MouseThreshold1 = 0, MouseThreshold2 = 0",
-            _ => $"HKLM\\SOFTWARE\\RyTuneX\\Optimizations\\{tag}"
-        };
+        return OptimizeFunctionInspector.GetTechnicalDetailsForTag(tag);
     }
 
     public static List<ToggleSwitch> GetAllToggleSwitches(DependencyObject root)
@@ -499,7 +583,7 @@ public static class IntelligentCardEnhancer
         }
     }
 
-    private static T? FindParent<T>(DependencyObject element) where T : DependencyObject
+    public static T? FindParent<T>(DependencyObject element) where T : DependencyObject
     {
         DependencyObject current = element;
         while (current != null)

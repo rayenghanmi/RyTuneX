@@ -12,7 +12,6 @@ public sealed partial class FeaturesPage : Page
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
     private string? _pendingScrollTarget;
-    private static readonly StringComparer ToggleKeyComparer = StringComparer.OrdinalIgnoreCase;
 
     public FeaturesPage()
     {
@@ -49,19 +48,39 @@ public sealed partial class FeaturesPage : Page
         _ = LogHelper.Log("Initializing Toggle Switches");
         try
         {
-            var toggleStates = await Task.Run(ReadToggleStates);
+            // Open the registry key once outside the loop to avoid repeated I/O per toggle switch
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default).CreateSubKey(RegistryBaseKey);
 
             foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
             {
                 if (toggleSwitch.Tag is string tagName)
                 {
-                    if (toggleStates.TryGetValue(tagName, out var currentState))
+                    // Prevent duplicate event handler registration on re-navigation
+                    toggleSwitch.Toggled -= ToggleSwitch_Toggled;
+
+                    // 1. Try live system state detection first (ground truth)
+                    var liveState = SystemStateDetector.DetectState(tagName);
+
+                    bool targetState;
+                    if (liveState.HasValue)
                     {
-                        toggleSwitch.IsOn = currentState;
+                        targetState = liveState.Value;
+                        // Sync the saved registry to match live state so they stay consistent
+                        try { key?.SetValue(tagName, targetState ? 1 : 0, RegistryValueKind.DWord); } catch { }
+                    }
+                    else
+                    {
+                        // 2. Fall back to saved RyTuneX registry state
+                        targetState = key != null && key.GetValue(tagName) is int state && state == 1;
                     }
 
+                    // Set toggle without triggering the Toggled event (handler removed above)
+                    toggleSwitch.IsOn = targetState;
+
                     // Subscribe to the Toggled event
-                    toggleSwitch.Toggled -= ToggleSwitch_Toggled;
                     toggleSwitch.Toggled += ToggleSwitch_Toggled;
                 }
             }
@@ -106,6 +125,11 @@ public sealed partial class FeaturesPage : Page
         try
         {
             var toggleSwitch = (ToggleSwitch)sender;
+            if (IntelligentCardEnhancer.IsSuppressed(toggleSwitch))
+            {
+                return;
+            }
+
             _ = LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }
@@ -113,37 +137,5 @@ public sealed partial class FeaturesPage : Page
         {
             _ = LogHelper.LogError(ex.Message);
         }
-    }
-
-    private static Dictionary<string, bool> ReadToggleStates()
-    {
-        var states = new Dictionary<string, bool>(ToggleKeyComparer);
-        using var key = OpenOptimizationsKey(writable: false) ?? OpenOptimizationsKey(writable: true);
-        if (key == null)
-        {
-            return states;
-        }
-
-        foreach (var valueName in key.GetValueNames())
-        {
-            if (key.GetValue(valueName) is int state)
-            {
-                states[valueName] = state == 1;
-            }
-        }
-
-        return states;
-    }
-
-    private static RegistryKey? OpenOptimizationsKey(bool writable)
-    {
-        var registryView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-            ? RegistryView.Registry64
-            : RegistryView.Default;
-
-        var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView);
-        return writable
-            ? baseKey.CreateSubKey(RegistryBaseKey)
-            : baseKey.OpenSubKey(RegistryBaseKey, writable);
     }
 }

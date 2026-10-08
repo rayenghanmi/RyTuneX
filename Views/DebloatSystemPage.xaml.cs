@@ -401,7 +401,7 @@ public sealed partial class DebloatSystemPage : Page
                 var sizeStr = FormatBytes(bytesCleared);
                 App.ShowNotification(
                     RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
-                    string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc")) + $" (Cleared: {sizeStr})",
+                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc") + string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("DebloatPage_ClearedSize"), sizeStr),
                     InfoBarSeverity.Success, 5000);
 
                 ReviewPromptHelper.NotifyOptimizationCompleted(XamlRoot);

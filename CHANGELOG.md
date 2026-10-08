@@ -6,7 +6,14 @@ All notable changes to this branch will be documented in this file.
 
 ### Added
 
-- Added Network Tools to the `Network` page: Flush DNS Cache, Release & Renew IP, Reset TCP/IP Stack, and shortcuts to Windows Network Settings and Network Connections.
+- Added a dedicated `Stress Test` page to evaluate system stability and thermal performance under sustained loads.
+- Implemented a multi-threaded **Stress Engine** (`StressEngine`) supporting CPU stress tests, RAM memory allocation testing, GPU compute workloads, real-time hardware telemetry (CPU utilization, temperatures, memory usage), customizable thread allocation, duration timers, and emergency temperature cutoff thresholds.
+- Integrated the `Stress Test` page into the main navigation menu and in-app search indexing (`AppSearchService`).
+- Implemented runtime dynamic code inspection in `OptimizeFunctionInspector` to analyze embedded helper source files (`OptimizeSystemHelper.cs`, `OptimizationOptions.cs`) and extract commands, registry keys, and technical summaries on the fly without hardcoded lists.
+- Introduced a dedicated `Cosmetic` risk level to classify visual personalization, theme settings, desktop layouts, and context menu shortcuts as non-intrusive aesthetic preferences rather than core performance tweaks.
+- Added `IntelligentCardEnhancer` to dynamically augment optimization cards with risk badges (`Safe`, `Cosmetic`, `Moderate`, `Caution`), point gain chips (`+X pts`), per-item rollback buttons, and rich technical detail flyouts across all pages.
+- Introduced `IntelligentScoreHeaderControl` with domain-specific optimization scoring (Performance, Privacy, Features), interactive preset filters (`Recommended`, `Safe`, `Moderate`), score gain calculation, and preview dialogs.
+- Added hardware-aware recommendations based on detected system specifications (CPU cores, RAM capacity, SSD vs HDD, desktop vs laptop, and GPU hardware).
 - Introduced new Network Optimization toggles:
   - `Disable Network Throttling`
   - `Disable Nagle's Algorithm`
@@ -47,6 +54,13 @@ All notable changes to this branch will be documented in this file.
 
 ### Fixes
 
+- Fixed inverted toggle logic for `LowDiskSpaceChecks` and `FileExtensionsAndHiddenFiles` in `OptimizationOptions`.
+- Corrected registry values in `OptimizeSystemHelper` when configuring file extension and hidden file visibility (`Hidden` registry value).
+- Fixed detection criteria in `SystemStateDetector` for low disk space checks, hidden files, and credential synchronization user overrides.
+- Fixed operating system detection on Windows 11 where the registry product name still reported Windows 10 for build numbers >= 22000.
+- Fixed event handler duplication and state desynchronization when navigating back and forth across optimization pages.
+- Added toggle event suppression to prevent unwanted execution cascades during silent UI synchronization.
+- Fixed unlocalized strings across the `Processes` page, `Packages` page, `LogViewer` dialog, and exit confirmation dialog in `MainWindow`.
 - Fixed DNS preset selection not applying properly when running under localized languages.
 - Fixed potential process deadlock when executing command-line tasks by draining standard error.
 - Fixed regex parsing for asset scale factors during app icon extraction.
@@ -56,6 +70,9 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
+- Refactored `IntelligentOptimizationEngine` to operate dynamically across pages without relying on static item collections.
+- Updated optimization risk badges on toggle cards to reflect their actual risk classifications (`Safe`, `Cosmetic`, `Moderate`, `Caution`) rather than being overridden as "Recommended".
+- Simplified code documentation across `IntelligentCardEnhancer`, `OptimizeFunctionInspector`, and `IntelligentOptimizationEngine` into clean, concise single-line comments.
 - Reorganized toggles across `Optimize System`, `Features`, and `Privacy` pages into clean, dedicated thematic sections (e.g., Input & Responsiveness, Gaming & GPU, Memory Optimization, Windows AI & Edge, Privacy Hardening) for improved usability.
 - Redesigned the `Network` page with modern settings cards and smoother asynchronous loading.
 - Refactored optimization rollback logic to execute actions directly without creating UI switch instances.

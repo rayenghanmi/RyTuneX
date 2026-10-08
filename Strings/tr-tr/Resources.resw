@@ -3025,4 +3025,187 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
     <value>En az bir çekirdek seçin.</value>
   </data>
+  <data name="Intelligent_Domain_Optimizer" xml:space="preserve">
+    <value>Sistem İyileştirici</value>
+  </data>
+  <data name="Intelligent_DetectingHardware" xml:space="preserve">
+    <value>Donanım algılanıyor...</value>
+  </data>
+  <data name="Intelligent_StatusMessageDefault" xml:space="preserve">
+    <value>Tüm optimizasyon ayarları için tarar, analiz eder, önizler, uygular, doğrular ve öğe bazında geri almayı destekler.</value>
+  </data>
+  <data name="Intelligent_Metric_NonIntrusive" xml:space="preserve">
+    <value>Güvenli / Müdahalesiz</value>
+  </data>
+  <data name="Intelligent_Btn_Apply" xml:space="preserve">
+    <value>Uygula</value>
+  </data>
+  <data name="Intelligent_Preview_DialogDefaultTitle" xml:space="preserve">
+    <value>Akıllı Optimizasyon Önizlemesi</value>
+  </data>
+  <data name="Intelligent_State_On" xml:space="preserve">
+    <value>AÇIK</value>
+  </data>
+  <data name="Intelligent_State_Off" xml:space="preserve">
+    <value>KAPALI</value>
+  </data>
+  <data name="Intelligent_Status_Optional" xml:space="preserve">
+    <value>İsteğe Bağlı</value>
+  </data>
+  <data name="Intelligent_General_Optimization" xml:space="preserve">
+    <value>Optimizasyon</value>
+  </data>
+  <data name="Intelligent_Flyout_CategoryRisk" xml:space="preserve">
+    <value>Kategori: {0} • Risk: {1}</value>
+  </data>
+  <data name="Intelligent_Flyout_Impact" xml:space="preserve">
+    <value>Etki: {0}</value>
+  </data>
+  <data name="Intelligent_Flyout_RollbackPoint" xml:space="preserve">
+    <value>Geri Alma Noktası: {0} • Orijinal: {1}</value>
+  </data>
+  <data name="OptimizeInspector_ConfiguresCount" xml:space="preserve">
+    <value>{1} için {0} sistem ayarını yapılandırır.</value>
+  </data>
+  <data name="OptimizeInspector_OptimizesDefault" xml:space="preserve">
+    <value>Windows yapılandırmasında {0} ayarını optimize eder.</value>
+  </data>
+  <data name="OptimizeInspector_SafetyLine" xml:space="preserve">
+    <value>Güvenlik: {0} • Ağırlık: +{1} puan • Durum: {2}</value>
+  </data>
+  <data name="OptimizeInspector_SafetyNote" xml:space="preserve">
+    <value>Güvenlik Notu: {0}</value>
+  </data>
+  <data name="OptimizeInspector_ActionsRegistry" xml:space="preserve">
+    <value>Eylemler ve Kayıt Defteri:</value>
+  </data>
+  <data name="OptimizeInspector_Commands" xml:space="preserve">
+    <value>Komutlar:</value>
+  </data>
+  <data name="OptimizeInspector_ReasonCaution" xml:space="preserve">
+    <value>Dikkat: Yalnızca deneyimli kullanıcılar tarafından ayarlanması gereken gelişmiş Windows özelliği.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerateRec" xml:space="preserve">
+    <value>Önerilen (Orta): Ayarlama araçlarında doğrulanmış yüksek etkili performans optimizasyonu.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerate" xml:space="preserve">
+    <value>Orta: Deneyimli kullanıcı optimizasyonu. Orta önayarına dahil edilmiştir.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonPersonalPref" xml:space="preserve">
+    <value>İsteğe Bağlı (Güvenli): Görsel düzen veya öznel kullanıcı tercihi. Tüm Güvenli önayarına dahildir.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonSafeRec" xml:space="preserve">
+    <value>Önerilen: Gizliliği ve yanıt hızını artırmak için güvenli ve müdahalesiz optimizasyon.</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Title" xml:space="preserve">
+    <value>İşlemler devam ediyor</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Content" xml:space="preserve">
+    <value>Arka planda çalışan optimizasyon işlemleri var. Tamamlanmalarını beklemek mi yoksa şimdi çıkmak mı istersiniz?</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Wait" xml:space="preserve">
+    <value>Bekle</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Cancel" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Exit" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>Günlük Görüntüleyici</value>
+  </data>
+  <data name="LogViewer_FilterPlaceholder" xml:space="preserve">
+    <value>Düzeye göre filtrele</value>
+  </data>
+  <data name="LogViewer_FilterAll" xml:space="preserve">
+    <value>Tümü</value>
+  </data>
+  <data name="LogViewer_FilterInfo" xml:space="preserve">
+    <value>Bilgi</value>
+  </data>
+  <data name="LogViewer_FilterWarn" xml:space="preserve">
+    <value>Uyarı</value>
+  </data>
+  <data name="LogViewer_FilterError" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="LogViewer_FilterCritical" xml:space="preserve">
+    <value>Kritik</value>
+  </data>
+  <data name="LogViewer_EntriesCount" xml:space="preserve">
+    <value>{0} / {1} girdi</value>
+  </data>
+  <data name="LogViewer_SearchPlaceholder" xml:space="preserve">
+    <value>Günlüklerde ara...</value>
+  </data>
+  <data name="LogViewer_NoEntries" xml:space="preserve">
+    <value>Günlük girdisi bulunamadı.</value>
+  </data>
+  <data name="LogViewer_NewSession" xml:space="preserve">
+    <value>Yeni Oturum</value>
+  </data>
+  <data name="LogViewer_CopyButton" xml:space="preserve">
+    <value>Kopyala</value>
+  </data>
+  <data name="LogViewer_OpenFileButton" xml:space="preserve">
+    <value>Dosyayı Aç</value>
+  </data>
+  <data name="ProcessesPage_TotalProcesses.Text" xml:space="preserve">
+    <value>Toplam İşlem</value>
+  </data>
+  <data name="ProcessesPage_TotalMemory.Text" xml:space="preserve">
+    <value>Toplam Bellek</value>
+  </data>
+  <data name="ProcessesPage_TotalThreads.Text" xml:space="preserve">
+    <value>Toplam İş Parçacığı</value>
+  </data>
+  <data name="ProcessesPage_EndTaskTooltip.Text" xml:space="preserve">
+    <value>Görevi Sonlandır</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedTitle" xml:space="preserve">
+    <value>İşlem Sonlandırıldı</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedMessage" xml:space="preserve">
+    <value>'{0}' işlemi (PID: {1}) başarıyla sonlandırıldı.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundTitle" xml:space="preserve">
+    <value>İşlem Bulunamadı</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundMessage" xml:space="preserve">
+    <value>{0} PID numaralı işlem artık mevcut değil.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorTitle" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorMessage" xml:space="preserve">
+    <value>İşlem sonlandırılamadı: {0}</value>
+  </data>
+  <data name="PackagesPage_Notification_Title" xml:space="preserve">
+    <value>Paketler</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesInstall" xml:space="preserve">
+    <value>Yükleme için paket seçilmedi.</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesUpdate" xml:space="preserve">
+    <value>Güncelleme için paket seçilmedi.</value>
+  </data>
+  <data name="PackagesPage_Notification_InstallCompleted" xml:space="preserve">
+    <value>Yükleme tamamlandı: {0} başarılı, {1} başarısız.</value>
+  </data>
+  <data name="PackagesPage_Notification_UpdateCompleted" xml:space="preserve">
+    <value>Güncelleme tamamlandı: {0} başarılı, {1} başarısız.</value>
+  </data>
+  <data name="DebloatPage_ClearedSize" xml:space="preserve">
+    <value> (Temizlenen: {0})</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Güç Planı Oluştur</value>
+  </data>
+  <data name="Search_Category_Navigation" xml:space="preserve">
+    <value>Gezinme</value>
+  </data>
+  <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
+    <value>Başlangıç öğeleri yüklenemedi: {0}</value>
+  </data>
 </root>

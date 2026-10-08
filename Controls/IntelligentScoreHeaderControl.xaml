@@ -251,24 +251,21 @@
         </Border>
 
         <ContentDialog x:Name="PreviewDialog" Title="Intelligent Optimization Preview" PrimaryButtonText="Apply Selected Optimizations" CloseButtonText="Cancel" DefaultButton="Primary">
-            <StackPanel Spacing="12" Width="440">
+            <StackPanel Spacing="12" Width="460">
                 <TextBlock x:Name="PreviewDialogDescText" Text="Review the proposed optimization changes before applying. Pre-apply rollback points will be automatically saved." FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
                 
-                <ScrollViewer MaxHeight="300">
+                <ScrollViewer MaxHeight="380">
                     <ListView x:Name="PreviewListView" SelectionMode="None">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:OptimizationItemModel">
-                                <Grid Padding="6,6" Margin="0,2" CornerRadius="{StaticResource ControlCornerRadius}" Background="{ThemeResource SubtleFillColorSecondaryBrush}">
+                                <Grid Padding="8,6" Margin="0,2" CornerRadius="{StaticResource ControlCornerRadius}" Background="{ThemeResource SubtleFillColorSecondaryBrush}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <CheckBox Grid.Column="0" IsChecked="{x:Bind IsSelectedForApply, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
-                                        <TextBlock Text="{x:Bind Title}" FontWeight="SemiBold" FontSize="12"/>
-                                        <TextBlock Text="{x:Bind TechnicalDetails}" FontSize="10" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontFamily="Consolas" TextWrapping="Wrap"/>
-                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{x:Bind Title}" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     <Border Grid.Column="2" Background="{ThemeResource SystemAccentColor}" CornerRadius="4" Padding="6,2" VerticalAlignment="Center" Margin="6,0,0,0">
                                         <TextBlock Text="{x:Bind RiskDisplay}" FontSize="10" Foreground="White" FontWeight="SemiBold"/>
                                     </Border>

@@ -762,10 +762,11 @@ internal partial class OptimizationOptions
         try
         {
             // Get all toggle switches that have been applied (saved state == 1)
-            using var rytunexKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
                 Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                     ? RegistryView.Registry64
-                    : RegistryView.Default).OpenSubKey(RegistryBaseKey);
+                    : RegistryView.Default);
+            using var rytunexKey = baseKey.OpenSubKey(RegistryBaseKey);
 
             if (rytunexKey != null)
             {
@@ -773,22 +774,29 @@ internal partial class OptimizationOptions
 
                 foreach (var valueName in valueNames)
                 {
-                    // Handle Windows Updates mode separately
-                    if (valueName == "WindowsUpdatesMode")
+                    try
                     {
-                        var savedMode = rytunexKey.GetValue(valueName) as string;
-                        if (!string.IsNullOrEmpty(savedMode) && !savedMode.Equals("Default", StringComparison.OrdinalIgnoreCase))
+                        // Handle Windows Updates mode separately
+                        if (valueName == "WindowsUpdatesMode")
                         {
-                            // Revert Windows Updates to default
-                            await OptimizeSystemHelper.SetWindowsUpdatesDefault().ConfigureAwait(false);
+                            var savedMode = rytunexKey.GetValue(valueName) as string;
+                            if (!string.IsNullOrEmpty(savedMode) && !savedMode.Equals("Default", StringComparison.OrdinalIgnoreCase))
+                            {
+                                await OptimizeSystemHelper.SetWindowsUpdatesDefault().ConfigureAwait(false);
+                            }
+                            continue;
                         }
-                        continue;
-                    }
 
-                    var savedState = rytunexKey.GetValue(valueName);
-                    if (savedState is int state && state == 1)
+                        var savedState = rytunexKey.GetValue(valueName);
+                        if (savedState is int state && state == 1)
+                        {
+                            await ExecuteToggleActionAsync(valueName, false, CancellationToken.None).ConfigureAwait(false);
+                        }
+                    }
+                    catch (Exception itemEx)
                     {
-                        await ExecuteToggleActionAsync(valueName, false, CancellationToken.None).ConfigureAwait(false);
+                        // Log individual toggle revert failure but continue with remaining items
+                        _ = LogHelper.LogError($"RevertAllChanges: Failed to revert '{valueName}': {itemEx.Message}");
                     }
                 }
             }
@@ -864,6 +872,15 @@ internal partial class OptimizationOptions
                 ReviewPromptHelper.NotifyOptimizationCompleted();
             }
         }
+    }
+
+    // Executes a toggle action directly without requiring a UI ToggleSwitch element.
+    public static async Task ExecuteToggleDirectAsync(string tag, bool isOn)
+    {
+        if (string.IsNullOrEmpty(tag)) return;
+
+        _toggleQueue.Enqueue(ct => ExecuteToggleActionAsync(tag, isOn, ct));
+        await Task.Run(() => ProcessToggleQueueAsync(_toggleCts.Token)).ConfigureAwait(false);
     }
 
     private static async Task ExecuteToggleActionAsync(string? tag, bool isOn, CancellationToken ct)
@@ -961,8 +978,8 @@ internal partial class OptimizationOptions
                 break;
 
             case "LowDiskSpaceChecks":
-                if (isOn) await OptimizeSystemHelper.EnableLowDiskSpaceChecks().ConfigureAwait(false);
-                else await OptimizeSystemHelper.DisableLowDiskSpaceChecks().ConfigureAwait(false);
+                if (isOn) await OptimizeSystemHelper.DisableLowDiskSpaceChecks().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLowDiskSpaceChecks().ConfigureAwait(false);
                 break;
 
             case "LinkResolve":
@@ -981,8 +998,8 @@ internal partial class OptimizationOptions
                 break;
 
             case "FileExtensionsAndHiddenFiles":
-                if (isOn) await OptimizeSystemHelper.HideFileExtensionsAndHiddenFiles().ConfigureAwait(false);
-                else await OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles().ConfigureAwait(false);
+                if (isOn) await OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles().ConfigureAwait(false);
+                else await OptimizeSystemHelper.HideFileExtensionsAndHiddenFiles().ConfigureAwait(false);
                 break;
 
             case "SystemProfile":

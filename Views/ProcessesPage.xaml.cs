@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using RyTuneX.Helpers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -253,25 +254,38 @@ public sealed partial class ProcessesPage : Page
                 process.Kill();
             });
 
-            App.ShowNotification("Process Ended", $"Process '{processName}' (PID: {processId}) was terminated successfully.", InfoBarSeverity.Success, 3000);
+            App.ShowNotification(
+                "ProcessesPage_Notification_ProcessEndedTitle".GetLocalized(),
+                string.Format("ProcessesPage_Notification_ProcessEndedMessage".GetLocalized(), processName, processId),
+                InfoBarSeverity.Success,
+                3000);
             await RefreshProcessesAsync();
         }
         catch (ArgumentException)
         {
             _ = LogHelper.LogWarning($"Process with PID {processId} no longer exists.");
-            App.ShowNotification("Process Not Found", $"Process with PID {processId} no longer exists.", InfoBarSeverity.Warning, 3000);
+            App.ShowNotification(
+                "ProcessesPage_Notification_ProcessNotFoundTitle".GetLocalized(),
+                string.Format("ProcessesPage_Notification_ProcessNotFoundMessage".GetLocalized(), processId),
+                InfoBarSeverity.Warning,
+                3000);
             await RefreshProcessesAsync();
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error ending process {processId}: {ex.Message}");
-            App.ShowNotification("Error", $"Failed to end process: {ex.Message}", InfoBarSeverity.Error, 5000);
+            App.ShowNotification(
+                "ProcessesPage_Notification_ProcessErrorTitle".GetLocalized(),
+                string.Format("ProcessesPage_Notification_ProcessErrorMessage".GetLocalized(), ex.Message),
+                InfoBarSeverity.Error,
+                5000);
         }
     }
 }
 
 internal class ProcessInfoItem : INotifyPropertyChanged
 {
+    public string EndTaskTooltip => "ProcessesPage_EndTaskTooltip.Text".GetLocalized();
     private string _name = string.Empty;
     private int _id;
     private double _memoryMB;

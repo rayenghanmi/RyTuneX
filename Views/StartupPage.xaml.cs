@@ -47,7 +47,7 @@ public sealed partial class StartupPage : Page
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error loading startup items: {ex.Message}");
-            App.ShowNotification("Startup Manager", $"Failed to load startup items: {ex.Message}", InfoBarSeverity.Error, 4000);
+            App.ShowNotification("StartupPage_Title".GetLocalized(), string.Format("StartupPage_Notification_LoadFailed".GetLocalized(), ex.Message), InfoBarSeverity.Error, 4000);
         }
         finally
         {
@@ -178,13 +178,13 @@ public sealed partial class StartupPage : Page
                     var msg = newState
                         ? string.Format("StartupPage_Notification_ToggledMessage".TryGetLocalized() ?? "Enabled {0}", item.Name)
                         : string.Format("StartupPage_Notification_ToggledMessageDisabled".TryGetLocalized() ?? "Disabled {0}", item.Name);
-                    App.ShowNotification("Startup Manager", msg, InfoBarSeverity.Success, 2500);
+                    App.ShowNotification("StartupPage_Title".GetLocalized(), msg, InfoBarSeverity.Success, 2500);
                 }
                 else
                 {
                     // Revert toggle state if operation failed
                     toggle.IsOn = !newState;
-                    App.ShowNotification("Startup Manager", "StartupPage_Notification_AdminRequired".TryGetLocalized() ?? "Administrator privileges required to modify system startup items.", InfoBarSeverity.Warning, 4000);
+                    App.ShowNotification("StartupPage_Title".GetLocalized(), "StartupPage_Notification_AdminRequired".TryGetLocalized() ?? "Administrator privileges required to modify system startup items.", InfoBarSeverity.Warning, 4000);
                 }
             }
         }

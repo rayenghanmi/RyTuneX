@@ -3025,4 +3025,187 @@
   <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
     <value>少なくとも1つのコアを選択してください。</value>
   </data>
+  <data name="Intelligent_Domain_Optimizer" xml:space="preserve">
+    <value>システム最適化</value>
+  </data>
+  <data name="Intelligent_DetectingHardware" xml:space="preserve">
+    <value>ハードウェアを検出中...</value>
+  </data>
+  <data name="Intelligent_StatusMessageDefault" xml:space="preserve">
+    <value>すべての最適化設定について、スキャン、分析、プレビュー、適用、検証、項目別ロールバックをサポートします。</value>
+  </data>
+  <data name="Intelligent_Metric_NonIntrusive" xml:space="preserve">
+    <value>安全 / 非侵入的</value>
+  </data>
+  <data name="Intelligent_Btn_Apply" xml:space="preserve">
+    <value>適用</value>
+  </data>
+  <data name="Intelligent_Preview_DialogDefaultTitle" xml:space="preserve">
+    <value>インテリジェント最適化プレビュー</value>
+  </data>
+  <data name="Intelligent_State_On" xml:space="preserve">
+    <value>オン</value>
+  </data>
+  <data name="Intelligent_State_Off" xml:space="preserve">
+    <value>オフ</value>
+  </data>
+  <data name="Intelligent_Status_Optional" xml:space="preserve">
+    <value>オプション</value>
+  </data>
+  <data name="Intelligent_General_Optimization" xml:space="preserve">
+    <value>最適化</value>
+  </data>
+  <data name="Intelligent_Flyout_CategoryRisk" xml:space="preserve">
+    <value>カテゴリ: {0} • リスク: {1}</value>
+  </data>
+  <data name="Intelligent_Flyout_Impact" xml:space="preserve">
+    <value>影響: {0}</value>
+  </data>
+  <data name="Intelligent_Flyout_RollbackPoint" xml:space="preserve">
+    <value>ロールバック地点: {0} • 初期状態: {1}</value>
+  </data>
+  <data name="OptimizeInspector_ConfiguresCount" xml:space="preserve">
+    <value>{1} のシステム設定を {0} 件構成します。</value>
+  </data>
+  <data name="OptimizeInspector_OptimizesDefault" xml:space="preserve">
+    <value>Windows 構成の {0} を最適化します。</value>
+  </data>
+  <data name="OptimizeInspector_SafetyLine" xml:space="preserve">
+    <value>安全性: {0} • スコア: +{1} 点 • 状態: {2}</value>
+  </data>
+  <data name="OptimizeInspector_SafetyNote" xml:space="preserve">
+    <value>安全性ノート: {0}</value>
+  </data>
+  <data name="OptimizeInspector_ActionsRegistry" xml:space="preserve">
+    <value>アクションとレジストリ:</value>
+  </data>
+  <data name="OptimizeInspector_Commands" xml:space="preserve">
+    <value>コマンド:</value>
+  </data>
+  <data name="OptimizeInspector_ReasonCaution" xml:space="preserve">
+    <value>注意: パワーユーザーのみが調整すべき Windows の高度な機能です。</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerateRec" xml:space="preserve">
+    <value>推奨 (中程度): チューニングツールで実証済みの効果の高いパフォーマンス最適化。</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerate" xml:space="preserve">
+    <value>中程度: パワーユーザー向け最適化。「中程度」プリセットに含まれます。</value>
+  </data>
+  <data name="OptimizeInspector_ReasonPersonalPref" xml:space="preserve">
+    <value>オプション (安全): 視覚レイアウトや個人の好み。「すべて安全」プリセットに含まれます。</value>
+  </data>
+  <data name="OptimizeInspector_ReasonSafeRec" xml:space="preserve">
+    <value>推奨: プライバシーと応答性を高める、安全で非侵入的な最適化。</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Title" xml:space="preserve">
+    <value>処理を実行中</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Content" xml:space="preserve">
+    <value>バックグラウンドで最適化処理が実行中です。完了を待ちますか、それとも今すぐ終了しますか？</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Wait" xml:space="preserve">
+    <value>待機</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Exit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>ログビューアー</value>
+  </data>
+  <data name="LogViewer_FilterPlaceholder" xml:space="preserve">
+    <value>レベルでフィルター</value>
+  </data>
+  <data name="LogViewer_FilterAll" xml:space="preserve">
+    <value>すべて</value>
+  </data>
+  <data name="LogViewer_FilterInfo" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="LogViewer_FilterWarn" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="LogViewer_FilterError" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="LogViewer_FilterCritical" xml:space="preserve">
+    <value>重大</value>
+  </data>
+  <data name="LogViewer_EntriesCount" xml:space="preserve">
+    <value>{0} / {1} 件のエントリ</value>
+  </data>
+  <data name="LogViewer_SearchPlaceholder" xml:space="preserve">
+    <value>ログを検索...</value>
+  </data>
+  <data name="LogViewer_NoEntries" xml:space="preserve">
+    <value>ログエントリが見つかりません。</value>
+  </data>
+  <data name="LogViewer_NewSession" xml:space="preserve">
+    <value>新しいセッション</value>
+  </data>
+  <data name="LogViewer_CopyButton" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="LogViewer_OpenFileButton" xml:space="preserve">
+    <value>ファイルを開く</value>
+  </data>
+  <data name="ProcessesPage_TotalProcesses.Text" xml:space="preserve">
+    <value>合計プロセス</value>
+  </data>
+  <data name="ProcessesPage_TotalMemory.Text" xml:space="preserve">
+    <value>合計メモリ</value>
+  </data>
+  <data name="ProcessesPage_TotalThreads.Text" xml:space="preserve">
+    <value>合計スレッド</value>
+  </data>
+  <data name="ProcessesPage_EndTaskTooltip.Text" xml:space="preserve">
+    <value>タスクの終了</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedTitle" xml:space="preserve">
+    <value>プロセス終了</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedMessage" xml:space="preserve">
+    <value>プロセス '{0}' (PID: {1}) は正常に終了しました。</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundTitle" xml:space="preserve">
+    <value>プロセスが見つかりません</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundMessage" xml:space="preserve">
+    <value>PID {0} のプロセスは既に存在しません。</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorTitle" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorMessage" xml:space="preserve">
+    <value>プロセスの終了に失敗しました: {0}</value>
+  </data>
+  <data name="PackagesPage_Notification_Title" xml:space="preserve">
+    <value>パッケージ</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesInstall" xml:space="preserve">
+    <value>インストールするパッケージが選択されていません。</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesUpdate" xml:space="preserve">
+    <value>更新するパッケージが選択されていません。</value>
+  </data>
+  <data name="PackagesPage_Notification_InstallCompleted" xml:space="preserve">
+    <value>インストール完了: 成功 {0} 件、失敗 {1} 件。</value>
+  </data>
+  <data name="PackagesPage_Notification_UpdateCompleted" xml:space="preserve">
+    <value>更新完了: 成功 {0} 件、失敗 {1} 件。</value>
+  </data>
+  <data name="DebloatPage_ClearedSize" xml:space="preserve">
+    <value> (削除済み: {0})</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>電源プランの作成</value>
+  </data>
+  <data name="Search_Category_Navigation" xml:space="preserve">
+    <value>ナビゲーション</value>
+  </data>
+  <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
+    <value>スタートアップ項目の読み込みに失敗しました: {0}</value>
+  </data>
 </root>

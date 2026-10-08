@@ -155,16 +155,16 @@ internal static partial class LogViewerHelper
         // Filter bar
         var filterCombo = new ComboBox
         {
-            PlaceholderText = "Filter by level",
+            PlaceholderText = "LogViewer_FilterPlaceholder".GetLocalized(),
             MinWidth = 150,
             VerticalAlignment = VerticalAlignment.Center,
             Items =
             {
-                new ComboBoxItem { Content = "All", Tag = LogLevel.All },
-                new ComboBoxItem { Content = "Info", Tag = LogLevel.Info },
-                new ComboBoxItem { Content = "Warning", Tag = LogLevel.Warn },
-                new ComboBoxItem { Content = "Error", Tag = LogLevel.Error },
-                new ComboBoxItem { Content = "Critical", Tag = LogLevel.Critical }
+                new ComboBoxItem { Content = "LogViewer_FilterAll".GetLocalized(), Tag = LogLevel.All },
+                new ComboBoxItem { Content = "LogViewer_FilterInfo".GetLocalized(), Tag = LogLevel.Info },
+                new ComboBoxItem { Content = "LogViewer_FilterWarn".GetLocalized(), Tag = LogLevel.Warn },
+                new ComboBoxItem { Content = "LogViewer_FilterError".GetLocalized(), Tag = LogLevel.Error },
+                new ComboBoxItem { Content = "LogViewer_FilterCritical".GetLocalized(), Tag = LogLevel.Critical }
             },
             SelectedIndex = 0
         };
@@ -179,7 +179,7 @@ internal static partial class LogViewerHelper
 
         var searchBox = new AutoSuggestBox
         {
-            PlaceholderText = "Search logs...",
+            PlaceholderText = "LogViewer_SearchPlaceholder".GetLocalized(),
             QueryIcon = new SymbolIcon(Symbol.Find),
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -261,7 +261,7 @@ internal static partial class LogViewerHelper
         // Empty state
         var emptyText = new TextBlock
         {
-            Text = "No log entries found.",
+            Text = "LogViewer_NoEntries".GetLocalized(),
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
             Foreground = (SolidColorBrush)Application.Current.Resources["TextFillColorSecondaryBrush"],
@@ -304,7 +304,7 @@ internal static partial class LogViewerHelper
 
             var logCount = list.Count(e => !e.IsSessionMarker);
             var totalLogCount = allEntries.Count(e => !e.IsSessionMarker);
-            countBadge.Text = $"{logCount} of {totalLogCount} entries";
+            countBadge.Text = string.Format("LogViewer_EntriesCount".GetLocalized(), logCount, totalLogCount);
             emptyText.Visibility = logCount == 0 ? Visibility.Visible : Visibility.Collapsed;
             logListView.Visibility = logCount == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
@@ -346,8 +346,8 @@ internal static partial class LogViewerHelper
             Content = rootPanel,
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             CloseButtonText = "Close".GetLocalized(),
-            PrimaryButtonText = "Copy",
-            SecondaryButtonText = "Open File",
+            PrimaryButtonText = "LogViewer_CopyButton".GetLocalized(),
+            SecondaryButtonText = "LogViewer_OpenFileButton".GetLocalized(),
             Resources =
             {
                 ["ContentDialogMaxWidth"] = 800d,
@@ -494,7 +494,7 @@ internal static partial class LogViewerHelper
                 new FontIcon { Glyph = "\uE9D9", FontSize = 20 },
                 new TextBlock
                 {
-                    Text = "Log Viewer",
+                    Text = "LogViewer_Title".GetLocalized(),
                     Style = (Style)Application.Current.Resources["SubtitleTextBlockStyle"]
                 },
                 new TextBlock
@@ -563,6 +563,11 @@ internal static partial class LogViewerHelper
         var container = (StackPanel)root.Children[0];
         var separatorRow = (Grid)container.Children[0];
         var sessionLabel = (StackPanel)separatorRow.Children[1];
+
+        if (sessionLabel.Children.Count > 1 && sessionLabel.Children[1] is TextBlock sessionTextBlock)
+        {
+            sessionTextBlock.Text = "LogViewer_NewSession".GetLocalized();
+        }
 
         var timestampText = (TextBlock)sessionLabel.Children[2];
         timestampText.Text = FormatTimestamp(entry.Timestamp);

@@ -128,14 +128,24 @@ public static class ItemRollbackService
 
         try
         {
-            // Execute the toggle action back to the pre-apply state
-            var fakeToggle = new Microsoft.UI.Xaml.Controls.ToggleSwitch
+            // Execute the toggle action directly without creating UI elements
+            // Save the target state to the RyTuneX registry
+            try
             {
-                Tag = tag,
-                IsOn = preApplyState
-            };
+                var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default;
+                using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView);
+                using var key = baseKey.CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
+                key?.SetValue(tag, preApplyState ? 1 : 0, RegistryValueKind.DWord);
+            }
+            catch (Exception regEx)
+            {
+                _ = LogHelper.LogError($"[ItemRollbackService] Failed to save registry state for {tag}: {regEx.Message}");
+            }
 
-            await OptimizationOptions.XamlSwitchesAsync(fakeToggle).ConfigureAwait(false);
+            // Call the optimization helper directly
+            await OptimizationOptions.ExecuteToggleDirectAsync(tag, preApplyState).ConfigureAwait(false);
 
             await Task.Delay(300).ConfigureAwait(false);
 

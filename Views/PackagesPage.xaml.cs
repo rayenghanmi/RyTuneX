@@ -510,8 +510,12 @@ public sealed partial class PackagesPage : Page
 
         if (selected.Count == 0)
         {
-            ShellPage.ShowNotification("Packages",
-                $"No packages selected for {(_isUpdatesMode ? "update" : "install")}.",
+            var noSelMsg = _isUpdatesMode
+                ? "PackagesPage_Notification_NoPackagesUpdate".GetLocalized()
+                : "PackagesPage_Notification_NoPackagesInstall".GetLocalized();
+            ShellPage.ShowNotification(
+                "PackagesPage_Notification_Title".GetLocalized(),
+                noSelMsg,
                 InfoBarSeverity.Warning);
             return;
         }
@@ -628,8 +632,12 @@ public sealed partial class PackagesPage : Page
                 StatusText.Visibility = Visibility.Visible;
             }
 
-            ShellPage.ShowNotification("Packages",
-                $"{(_isUpdatesMode ? "Update" : "Installation")} completed: {ok} succeeded, {fail} failed.",
+            var compMsg = _isUpdatesMode
+                ? string.Format("PackagesPage_Notification_UpdateCompleted".GetLocalized(), ok, fail)
+                : string.Format("PackagesPage_Notification_InstallCompleted".GetLocalized(), ok, fail);
+            ShellPage.ShowNotification(
+                "PackagesPage_Notification_Title".GetLocalized(),
+                compMsg,
                 fail == 0 ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
         }
     }

@@ -48,19 +48,35 @@ public sealed partial class PrivacyPage : Page
         _ = LogHelper.Log("Initializing Toggle Switches");
         try
         {
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default).CreateSubKey(RegistryBaseKey);
+
             foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
             {
                 if (toggleSwitch.Tag is string tagName)
                 {
-                    // Retrieve the state from the 64-bit registry with 32-bit app
-                    using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? RegistryView.Registry64
-                            : RegistryView.Default).CreateSubKey(RegistryBaseKey);
-                    if (key != null && key.GetValue(tagName) is int state)
+                    // Prevent duplicate event handler registration on re-navigation
+                    toggleSwitch.Toggled -= ToggleSwitch_Toggled;
+
+                    // 1. Try live system state detection first (ground truth)
+                    var liveState = SystemStateDetector.DetectState(tagName);
+
+                    bool targetState;
+                    if (liveState.HasValue)
                     {
-                        toggleSwitch.IsOn = state == 1;
+                        targetState = liveState.Value;
+                        // Sync the saved registry to match live state
+                        try { key?.SetValue(tagName, targetState ? 1 : 0, RegistryValueKind.DWord); } catch { }
                     }
+                    else
+                    {
+                        // 2. Fall back to saved RyTuneX registry state
+                        targetState = key != null && key.GetValue(tagName) is int state && state == 1;
+                    }
+
+                    toggleSwitch.IsOn = targetState;
 
                     // Subscribe to the Toggled event
                     toggleSwitch.Toggled += ToggleSwitch_Toggled;
@@ -106,6 +122,11 @@ public sealed partial class PrivacyPage : Page
         try
         {
             var toggleSwitch = (ToggleSwitch)sender;
+            if (IntelligentCardEnhancer.IsSuppressed(toggleSwitch))
+            {
+                return;
+            }
+
             _ = LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }

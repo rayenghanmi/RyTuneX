@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -2245,6 +2245,9 @@ Check your computer for memory problems</value>
   <data name="Intelligent_Badge_Safe" xml:space="preserve">
     <value>Safe</value>
   </data>
+  <data name="Intelligent_Badge_Cosmetic" xml:space="preserve">
+    <value>Cosmetic</value>
+  </data>
   <data name="Intelligent_Badge_Moderate" xml:space="preserve">
     <value>Moderate</value>
   </data>
@@ -3024,5 +3027,191 @@ Check your computer for memory problems</value>
   </data>
   <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
     <value>Select at least one core.</value>
+  </data>
+  <data name="Intelligent_Domain_Optimizer" xml:space="preserve">
+    <value>System Optimizer</value>
+  </data>
+  <data name="Intelligent_DetectingHardware" xml:space="preserve">
+    <value>Detecting Hardware...</value>
+  </data>
+  <data name="Intelligent_StatusMessageDefault" xml:space="preserve">
+    <value>Scans, analyzes, previews, applies, verifies, and supports per-item rollback for all optimization settings.</value>
+  </data>
+  <data name="Intelligent_Metric_NonIntrusive" xml:space="preserve">
+    <value>Safe / Non-Intrusive</value>
+  </data>
+  <data name="Intelligent_Btn_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Intelligent_Preview_DialogDefaultTitle" xml:space="preserve">
+    <value>Intelligent Optimization Preview</value>
+  </data>
+  <data name="Intelligent_State_On" xml:space="preserve">
+    <value>ON</value>
+  </data>
+  <data name="Intelligent_State_Off" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="Intelligent_Status_Optional" xml:space="preserve">
+    <value>Optional</value>
+  </data>
+  <data name="Intelligent_General_Optimization" xml:space="preserve">
+    <value>Optimization</value>
+  </data>
+  <data name="Intelligent_Flyout_CategoryRisk" xml:space="preserve">
+    <value>Category: {0} • Risk: {1}</value>
+  </data>
+  <data name="Intelligent_Flyout_Impact" xml:space="preserve">
+    <value>Impact: {0}</value>
+  </data>
+  <data name="Intelligent_Flyout_RollbackPoint" xml:space="preserve">
+    <value>Rollback Point: {0} • Original: {1}</value>
+  </data>
+  <data name="OptimizeInspector_ConfiguresCount" xml:space="preserve">
+    <value>Configures {0} system settings for {1}.</value>
+  </data>
+  <data name="OptimizeInspector_OptimizesDefault" xml:space="preserve">
+    <value>Optimizes {0} in Windows configuration.</value>
+  </data>
+  <data name="OptimizeInspector_SafetyLine" xml:space="preserve">
+    <value>Safety: {0} • Weight: +{1} pts • Status: {2}</value>
+  </data>
+  <data name="OptimizeInspector_SafetyNote" xml:space="preserve">
+    <value>Safety Note: {0}</value>
+  </data>
+  <data name="OptimizeInspector_ActionsRegistry" xml:space="preserve">
+    <value>Actions &amp; Registry:</value>
+  </data>
+  <data name="OptimizeInspector_Commands" xml:space="preserve">
+    <value>Commands:</value>
+  </data>
+  <data name="OptimizeInspector_ReasonCaution" xml:space="preserve">
+    <value>Caution: Advanced Windows feature that should only be adjusted by power users.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerateRec" xml:space="preserve">
+    <value>Recommended (Moderate): High-impact performance optimization verified in tuning tools.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerate" xml:space="preserve">
+    <value>Moderate: Power-user optimization. Included in Advanced / Moderate preset for deep system tuning.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonPersonalPref" xml:space="preserve">
+    <value>Optional (Safe): Visual layout or subjective user preference. Included in All Safe preset.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonCosmetic" xml:space="preserve">
+    <value>Optional (Cosmetic): Visual layout, appearance, or personal workflow preference.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonSafeRec" xml:space="preserve">
+    <value>Recommended: Safe, non-intrusive optimization to boost privacy and responsiveness.</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Title" xml:space="preserve">
+    <value>Operations in progress</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Content" xml:space="preserve">
+    <value>There are background optimization operations running. Do you want to wait for them to finish or exit now?</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Wait" xml:space="preserve">
+    <value>Wait</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>Log Viewer</value>
+  </data>
+  <data name="LogViewer_FilterPlaceholder" xml:space="preserve">
+    <value>Filter by level</value>
+  </data>
+  <data name="LogViewer_FilterAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="LogViewer_FilterInfo" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="LogViewer_FilterWarn" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="LogViewer_FilterError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="LogViewer_FilterCritical" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="LogViewer_EntriesCount" xml:space="preserve">
+    <value>{0} of {1} entries</value>
+  </data>
+  <data name="LogViewer_SearchPlaceholder" xml:space="preserve">
+    <value>Search logs...</value>
+  </data>
+  <data name="LogViewer_NoEntries" xml:space="preserve">
+    <value>No log entries found.</value>
+  </data>
+  <data name="LogViewer_NewSession" xml:space="preserve">
+    <value>New Session</value>
+  </data>
+  <data name="LogViewer_CopyButton" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="LogViewer_OpenFileButton" xml:space="preserve">
+    <value>Open File</value>
+  </data>
+  <data name="ProcessesPage_TotalProcesses.Text" xml:space="preserve">
+    <value>Total Processes</value>
+  </data>
+  <data name="ProcessesPage_TotalMemory.Text" xml:space="preserve">
+    <value>Total Memory</value>
+  </data>
+  <data name="ProcessesPage_TotalThreads.Text" xml:space="preserve">
+    <value>Total Threads</value>
+  </data>
+  <data name="ProcessesPage_EndTaskTooltip.Text" xml:space="preserve">
+    <value>End Task</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedTitle" xml:space="preserve">
+    <value>Process Ended</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedMessage" xml:space="preserve">
+    <value>Process '{0}' (PID: {1}) was terminated successfully.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundTitle" xml:space="preserve">
+    <value>Process Not Found</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundMessage" xml:space="preserve">
+    <value>Process with PID {0} no longer exists.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorMessage" xml:space="preserve">
+    <value>Failed to end process: {0}</value>
+  </data>
+  <data name="PackagesPage_Notification_Title" xml:space="preserve">
+    <value>Packages</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesInstall" xml:space="preserve">
+    <value>No packages selected for installation.</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesUpdate" xml:space="preserve">
+    <value>No packages selected for update.</value>
+  </data>
+  <data name="PackagesPage_Notification_InstallCompleted" xml:space="preserve">
+    <value>Installation completed: {0} succeeded, {1} failed.</value>
+  </data>
+  <data name="PackagesPage_Notification_UpdateCompleted" xml:space="preserve">
+    <value>Update completed: {0} succeeded, {1} failed.</value>
+  </data>
+  <data name="DebloatPage_ClearedSize" xml:space="preserve">
+    <value> (Cleared: {0})</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Create Power Plan</value>
+  </data>
+  <data name="Search_Category_Navigation" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
+  <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
+    <value>Failed to load startup items: {0}</value>
   </data>
 </root>

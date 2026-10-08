@@ -280,11 +280,27 @@ public sealed partial class OptimizeSystemPage : Page
             {
                 if (toggleSwitch.Tag is string tagName)
                 {
-                    // Retrieve the state from the 64-bit registry with 32-bit app
-                    if (key != null && key.GetValue(tagName) is int state)
+                    // Prevent duplicate event handler registration on re-navigation
+                    toggleSwitch.Toggled -= ToggleSwitch_Toggled;
+
+                    // 1. Try live system state detection first (ground truth)
+                    var liveState = SystemStateDetector.DetectState(tagName);
+
+                    bool targetState;
+                    if (liveState.HasValue)
                     {
-                        toggleSwitch.IsOn = state == 1;
+                        targetState = liveState.Value;
+                        // Sync the saved registry to match live state so they stay consistent
+                        try { key?.SetValue(tagName, targetState ? 1 : 0, RegistryValueKind.DWord); } catch { }
                     }
+                    else
+                    {
+                        // 2. Fall back to saved RyTuneX registry state
+                        targetState = key != null && key.GetValue(tagName) is int state && state == 1;
+                    }
+
+                    // Set toggle without triggering the Toggled event (handler removed above)
+                    toggleSwitch.IsOn = targetState;
 
                     // Subscribe to the Toggled event
                     toggleSwitch.Toggled += ToggleSwitch_Toggled;
@@ -330,6 +346,11 @@ public sealed partial class OptimizeSystemPage : Page
         try
         {
             var toggleSwitch = (ToggleSwitch)sender;
+            if (IntelligentCardEnhancer.IsSuppressed(toggleSwitch))
+            {
+                return;
+            }
+
             _ = LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }

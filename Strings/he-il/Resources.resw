@@ -3025,4 +3025,187 @@
   <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
     <value>בחר לפחות ליבה אחת.</value>
   </data>
+  <data name="Intelligent_Domain_Optimizer" xml:space="preserve">
+    <value>ממטב המערכת</value>
+  </data>
+  <data name="Intelligent_DetectingHardware" xml:space="preserve">
+    <value>מזהה חומרה...</value>
+  </data>
+  <data name="Intelligent_StatusMessageDefault" xml:space="preserve">
+    <value>סורק, מנתח, מציג תצוגה מקדימה, מחיל, מוודא ותומך בשחזור לכל פריט עבור כל הגדרות המיטוב.</value>
+  </data>
+  <data name="Intelligent_Metric_NonIntrusive" xml:space="preserve">
+    <value>בטוח / לא פולשני</value>
+  </data>
+  <data name="Intelligent_Btn_Apply" xml:space="preserve">
+    <value>החל</value>
+  </data>
+  <data name="Intelligent_Preview_DialogDefaultTitle" xml:space="preserve">
+    <value>תצוגה מקדימה של מיטוב חכם</value>
+  </data>
+  <data name="Intelligent_State_On" xml:space="preserve">
+    <value>פעיל</value>
+  </data>
+  <data name="Intelligent_State_Off" xml:space="preserve">
+    <value>כבוי</value>
+  </data>
+  <data name="Intelligent_Status_Optional" xml:space="preserve">
+    <value>אופציונלי</value>
+  </data>
+  <data name="Intelligent_General_Optimization" xml:space="preserve">
+    <value>מיטוב</value>
+  </data>
+  <data name="Intelligent_Flyout_CategoryRisk" xml:space="preserve">
+    <value>קטגוריה: {0} • סיכון: {1}</value>
+  </data>
+  <data name="Intelligent_Flyout_Impact" xml:space="preserve">
+    <value>השפעה: {0}</value>
+  </data>
+  <data name="Intelligent_Flyout_RollbackPoint" xml:space="preserve">
+    <value>נקודת שחזור: {0} • מקור: {1}</value>
+  </data>
+  <data name="OptimizeInspector_ConfiguresCount" xml:space="preserve">
+    <value>מגדיר {0} הגדרות מערכת עבור {1}.</value>
+  </data>
+  <data name="OptimizeInspector_OptimizesDefault" xml:space="preserve">
+    <value>ממטב את {0} בתצורת Windows.</value>
+  </data>
+  <data name="OptimizeInspector_SafetyLine" xml:space="preserve">
+    <value>בטיחות: {0} • משקל: +{1} נק' • מצב: {2}</value>
+  </data>
+  <data name="OptimizeInspector_SafetyNote" xml:space="preserve">
+    <value>הערת בטיחות: {0}</value>
+  </data>
+  <data name="OptimizeInspector_ActionsRegistry" xml:space="preserve">
+    <value>פעולות ורישום:</value>
+  </data>
+  <data name="OptimizeInspector_Commands" xml:space="preserve">
+    <value>פקודות:</value>
+  </data>
+  <data name="OptimizeInspector_ReasonCaution" xml:space="preserve">
+    <value>זהירות: תכונה מתקדמת של Windows שמומלץ לשנותה רק על ידי משתמשים מנוסים.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerateRec" xml:space="preserve">
+    <value>מומלץ (מתון): מיטוב ביצועים בעל השפעה רבה שאומת בכלי כוונון.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerate" xml:space="preserve">
+    <value>מתון: מיטוב למשתמשים מתקדמים. נכלל בפרופיל המתון.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonPersonalPref" xml:space="preserve">
+    <value>אופציונלי (בטוח): העדפה חזותית או אישית. נכלל בפרופיל הבטוח.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonSafeRec" xml:space="preserve">
+    <value>מומלץ: מיטוב בטוח ולא פולשני לשיפור הפרטיות ומהירות התגובה.</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Title" xml:space="preserve">
+    <value>פעולות מתבצעות</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Content" xml:space="preserve">
+    <value>ישנן פעולות מיטוב הפועלות ברקע. האם להמתין לסיומן או לצאת כעת?</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Wait" xml:space="preserve">
+    <value>המתן</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Cancel" xml:space="preserve">
+    <value>בטל</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Exit" xml:space="preserve">
+    <value>צא</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>מציג יומנים</value>
+  </data>
+  <data name="LogViewer_FilterPlaceholder" xml:space="preserve">
+    <value>סנן לפי רמה</value>
+  </data>
+  <data name="LogViewer_FilterAll" xml:space="preserve">
+    <value>הכל</value>
+  </data>
+  <data name="LogViewer_FilterInfo" xml:space="preserve">
+    <value>מידע</value>
+  </data>
+  <data name="LogViewer_FilterWarn" xml:space="preserve">
+    <value>אזהרה</value>
+  </data>
+  <data name="LogViewer_FilterError" xml:space="preserve">
+    <value>שגיאה</value>
+  </data>
+  <data name="LogViewer_FilterCritical" xml:space="preserve">
+    <value>קריטי</value>
+  </data>
+  <data name="LogViewer_EntriesCount" xml:space="preserve">
+    <value>{0} מתוך {1} רשומות</value>
+  </data>
+  <data name="LogViewer_SearchPlaceholder" xml:space="preserve">
+    <value>חיפוש ביומנים...</value>
+  </data>
+  <data name="LogViewer_NoEntries" xml:space="preserve">
+    <value>לא נמצאו רשומות יומן.</value>
+  </data>
+  <data name="LogViewer_NewSession" xml:space="preserve">
+    <value>הפעלה חדשה</value>
+  </data>
+  <data name="LogViewer_CopyButton" xml:space="preserve">
+    <value>העתק</value>
+  </data>
+  <data name="LogViewer_OpenFileButton" xml:space="preserve">
+    <value>פתח קובץ</value>
+  </data>
+  <data name="ProcessesPage_TotalProcesses.Text" xml:space="preserve">
+    <value>סה"כ תהליכים</value>
+  </data>
+  <data name="ProcessesPage_TotalMemory.Text" xml:space="preserve">
+    <value>סה"כ זיכרון</value>
+  </data>
+  <data name="ProcessesPage_TotalThreads.Text" xml:space="preserve">
+    <value>סה"כ תהליכונים</value>
+  </data>
+  <data name="ProcessesPage_EndTaskTooltip.Text" xml:space="preserve">
+    <value>סיים משימה</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedTitle" xml:space="preserve">
+    <value>התהליך הסתיים</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedMessage" xml:space="preserve">
+    <value>התהליך '{0}' (PID: {1}) הופסק בהצלחה.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundTitle" xml:space="preserve">
+    <value>תהליך לא נמצא</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundMessage" xml:space="preserve">
+    <value>התהליך עם מזהה {0} אינו קיים עוד.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorTitle" xml:space="preserve">
+    <value>שגיאה</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorMessage" xml:space="preserve">
+    <value>סיום התהליך נכשל: {0}</value>
+  </data>
+  <data name="PackagesPage_Notification_Title" xml:space="preserve">
+    <value>חבילות</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesInstall" xml:space="preserve">
+    <value>לא נבחרו חבילות להתקנה.</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesUpdate" xml:space="preserve">
+    <value>לא נבחרו חבילות לעדכון.</value>
+  </data>
+  <data name="PackagesPage_Notification_InstallCompleted" xml:space="preserve">
+    <value>ההתקנה הושלמה: {0} הצליחו, {1} נכשלו.</value>
+  </data>
+  <data name="PackagesPage_Notification_UpdateCompleted" xml:space="preserve">
+    <value>העדכון הושלם: {0} הצליחו, {1} נכשלו.</value>
+  </data>
+  <data name="DebloatPage_ClearedSize" xml:space="preserve">
+    <value> (נוקה: {0})</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>צור תוכנית צריכת חשמל</value>
+  </data>
+  <data name="Search_Category_Navigation" xml:space="preserve">
+    <value>ניווט</value>
+  </data>
+  <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
+    <value>טעינת פריטי ההפעלה נכשלה: {0}</value>
+  </data>
 </root>

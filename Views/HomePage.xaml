@@ -69,7 +69,21 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Vertical" Margin="24,8,0,16">
-                    <TextBlock Text="RyTuneX" FontSize="36" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <TextBlock Text="RyTuneX"
+                       FontSize="36"
+                       FontWeight="Bold"
+                       Margin="0,0,0,4">
+                        <TextBlock.Foreground>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="{ThemeResource TextFillColorPrimary}" Offset="0"/>
+                                <GradientStop Color="{ThemeResource TextFillColorPrimary}" Offset="0.84"/>
+                                <GradientStop Color="#FF5E92" Offset="0.84"/>
+                                <GradientStop Color="#FF5E92" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+
+
                     <TextBlock Text="{x:Bind _versionDescription}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="14"/>
                 </StackPanel>
 

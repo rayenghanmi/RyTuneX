@@ -206,10 +206,16 @@ public sealed partial class SystemInfoPage : Page
                 using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
 
                 var productName = key?.GetValue("ProductName") as string ?? string.Empty;
+                var buildNumber = key?.GetValue("CurrentBuildNumber") as string ?? string.Empty;
+
+                if (int.TryParse(buildNumber, out int buildNum) && buildNum >= 22000)
+                {
+                    productName = productName.Replace("10", "11");
+                }
+
                 var displayVersion = key?.GetValue("DisplayVersion") as string
                                       ?? key?.GetValue("ReleaseId") as string
                                       ?? string.Empty;
-                var buildNumber = key?.GetValue("CurrentBuildNumber") as string ?? string.Empty;
                 var ubr = key?.GetValue("UBR");
                 var fullBuild = ubr != null ? $"{buildNumber}.{ubr}" : buildNumber;
                 var registeredOwner = key?.GetValue("RegisteredOwner") as string ?? string.Empty;

@@ -3025,4 +3025,187 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
     <value>Sélectionnez au moins un cœur.</value>
   </data>
+  <data name="Intelligent_Domain_Optimizer" xml:space="preserve">
+    <value>Optimiseur du système</value>
+  </data>
+  <data name="Intelligent_DetectingHardware" xml:space="preserve">
+    <value>Détection du matériel...</value>
+  </data>
+  <data name="Intelligent_StatusMessageDefault" xml:space="preserve">
+    <value>Analyse, inspecte, prévisualise, applique, vérifie et prend en charge le rollback par élément pour tous les réglages.</value>
+  </data>
+  <data name="Intelligent_Metric_NonIntrusive" xml:space="preserve">
+    <value>Sûr / Non intrusif</value>
+  </data>
+  <data name="Intelligent_Btn_Apply" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
+  <data name="Intelligent_Preview_DialogDefaultTitle" xml:space="preserve">
+    <value>Aperçu de l'optimisation intelligente</value>
+  </data>
+  <data name="Intelligent_State_On" xml:space="preserve">
+    <value>ACTIVÉ</value>
+  </data>
+  <data name="Intelligent_State_Off" xml:space="preserve">
+    <value>DÉSACTIVÉ</value>
+  </data>
+  <data name="Intelligent_Status_Optional" xml:space="preserve">
+    <value>Optionnel</value>
+  </data>
+  <data name="Intelligent_General_Optimization" xml:space="preserve">
+    <value>Optimisation</value>
+  </data>
+  <data name="Intelligent_Flyout_CategoryRisk" xml:space="preserve">
+    <value>Catégorie : {0} • Risque : {1}</value>
+  </data>
+  <data name="Intelligent_Flyout_Impact" xml:space="preserve">
+    <value>Impact : {0}</value>
+  </data>
+  <data name="Intelligent_Flyout_RollbackPoint" xml:space="preserve">
+    <value>Point de restauration : {0} • État d'origine : {1}</value>
+  </data>
+  <data name="OptimizeInspector_ConfiguresCount" xml:space="preserve">
+    <value>Configure {0} paramètres système pour {1}.</value>
+  </data>
+  <data name="OptimizeInspector_OptimizesDefault" xml:space="preserve">
+    <value>Optimise {0} dans la configuration Windows.</value>
+  </data>
+  <data name="OptimizeInspector_SafetyLine" xml:space="preserve">
+    <value>Sécurité : {0} • Poids : +{1} pts • Statut : {2}</value>
+  </data>
+  <data name="OptimizeInspector_SafetyNote" xml:space="preserve">
+    <value>Note de sécurité : {0}</value>
+  </data>
+  <data name="OptimizeInspector_ActionsRegistry" xml:space="preserve">
+    <value>Actions et Registre :</value>
+  </data>
+  <data name="OptimizeInspector_Commands" xml:space="preserve">
+    <value>Commandes :</value>
+  </data>
+  <data name="OptimizeInspector_ReasonCaution" xml:space="preserve">
+    <value>Attention : Fonctionnalité avancée de Windows qui ne doit être ajustée que par des utilisateurs avertis.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerateRec" xml:space="preserve">
+    <value>Recommandé (Modéré) : Optimisation des performances à fort impact vérifiée dans les outils de réglage.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerate" xml:space="preserve">
+    <value>Modéré : Optimisation avancée pour utilisateurs expérimentés. Incluse dans le profil Modéré.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonPersonalPref" xml:space="preserve">
+    <value>Optionnel (Sûr) : Préférence visuelle ou subjective. Incluse dans le profil Tout sécurisé.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonSafeRec" xml:space="preserve">
+    <value>Recommandé : Optimisation sûre et non intrusive pour améliorer la confidentialité et la réactivité.</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Title" xml:space="preserve">
+    <value>Opérations en cours</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Content" xml:space="preserve">
+    <value>Des opérations d'optimisation en arrière-plan sont en cours. Voulez-vous attendre qu'elles se terminent ou quitter maintenant ?</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Wait" xml:space="preserve">
+    <value>Attendre</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Exit" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>Visionneuse de journaux</value>
+  </data>
+  <data name="LogViewer_FilterPlaceholder" xml:space="preserve">
+    <value>Filtrer par niveau</value>
+  </data>
+  <data name="LogViewer_FilterAll" xml:space="preserve">
+    <value>Tous</value>
+  </data>
+  <data name="LogViewer_FilterInfo" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="LogViewer_FilterWarn" xml:space="preserve">
+    <value>Avertissement</value>
+  </data>
+  <data name="LogViewer_FilterError" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="LogViewer_FilterCritical" xml:space="preserve">
+    <value>Critique</value>
+  </data>
+  <data name="LogViewer_EntriesCount" xml:space="preserve">
+    <value>{0} sur {1} entrées</value>
+  </data>
+  <data name="LogViewer_SearchPlaceholder" xml:space="preserve">
+    <value>Rechercher dans les journaux...</value>
+  </data>
+  <data name="LogViewer_NoEntries" xml:space="preserve">
+    <value>Aucune entrée de journal trouvée.</value>
+  </data>
+  <data name="LogViewer_NewSession" xml:space="preserve">
+    <value>Nouvelle session</value>
+  </data>
+  <data name="LogViewer_CopyButton" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="LogViewer_OpenFileButton" xml:space="preserve">
+    <value>Ouvrir le fichier</value>
+  </data>
+  <data name="ProcessesPage_TotalProcesses.Text" xml:space="preserve">
+    <value>Total des processus</value>
+  </data>
+  <data name="ProcessesPage_TotalMemory.Text" xml:space="preserve">
+    <value>Mémoire totale</value>
+  </data>
+  <data name="ProcessesPage_TotalThreads.Text" xml:space="preserve">
+    <value>Total des threads</value>
+  </data>
+  <data name="ProcessesPage_EndTaskTooltip.Text" xml:space="preserve">
+    <value>Fin de tâche</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedTitle" xml:space="preserve">
+    <value>Processus terminé</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedMessage" xml:space="preserve">
+    <value>Le processus « {0} » (PID : {1}) a été arrêté avec succès.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundTitle" xml:space="preserve">
+    <value>Processus introuvable</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundMessage" xml:space="preserve">
+    <value>Le processus avec le PID {0} n'existe plus.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorMessage" xml:space="preserve">
+    <value>Échec de l'arrêt du processus : {0}</value>
+  </data>
+  <data name="PackagesPage_Notification_Title" xml:space="preserve">
+    <value>Paquets</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesInstall" xml:space="preserve">
+    <value>Aucun paquet sélectionné pour l'installation.</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesUpdate" xml:space="preserve">
+    <value>Aucun paquet sélectionné pour la mise à jour.</value>
+  </data>
+  <data name="PackagesPage_Notification_InstallCompleted" xml:space="preserve">
+    <value>Installation terminée : {0} réussis, {1} échoués.</value>
+  </data>
+  <data name="PackagesPage_Notification_UpdateCompleted" xml:space="preserve">
+    <value>Mise à jour terminée : {0} réussies, {1} échouées.</value>
+  </data>
+  <data name="DebloatPage_ClearedSize" xml:space="preserve">
+    <value> (Nettoyé : {0})</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Créer un mode d'alimentation</value>
+  </data>
+  <data name="Search_Category_Navigation" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
+  <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
+    <value>Échec du chargement des éléments au démarrage : {0}</value>
+  </data>
 </root>

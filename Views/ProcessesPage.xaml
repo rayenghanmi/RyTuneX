@@ -139,7 +139,7 @@
                                 <Button Grid.Column="4"
                                         Tag="{x:Bind Id}"
                                         Click="EndTask_Click"
-                                        ToolTipService.ToolTip="End Task"
+                                        ToolTipService.ToolTip="{x:Bind EndTaskTooltip}"
                                         HorizontalAlignment="Center"
                                         Padding="12,6">
                                     <StackPanel Orientation="Horizontal" Spacing="6">

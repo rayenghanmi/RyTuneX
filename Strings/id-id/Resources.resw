@@ -3023,4 +3023,187 @@
   <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
     <value>Pilih setidaknya satu inti.</value>
   </data>
+  <data name="Intelligent_Domain_Optimizer" xml:space="preserve">
+    <value>Pengoptimal Sistem</value>
+  </data>
+  <data name="Intelligent_DetectingHardware" xml:space="preserve">
+    <value>Mendeteksi Perangkat Keras...</value>
+  </data>
+  <data name="Intelligent_StatusMessageDefault" xml:space="preserve">
+    <value>Memindai, menganalisis, melihat pratinjau, menerapkan, memverifikasi, dan mendukung pemulihan per item untuk semua pengaturan.</value>
+  </data>
+  <data name="Intelligent_Metric_NonIntrusive" xml:space="preserve">
+    <value>Aman / Non-Intrusif</value>
+  </data>
+  <data name="Intelligent_Btn_Apply" xml:space="preserve">
+    <value>Terapkan</value>
+  </data>
+  <data name="Intelligent_Preview_DialogDefaultTitle" xml:space="preserve">
+    <value>Pratinjau Optimasi Cerdas</value>
+  </data>
+  <data name="Intelligent_State_On" xml:space="preserve">
+    <value>AKTIF</value>
+  </data>
+  <data name="Intelligent_State_Off" xml:space="preserve">
+    <value>NONAKTIF</value>
+  </data>
+  <data name="Intelligent_Status_Optional" xml:space="preserve">
+    <value>Opsional</value>
+  </data>
+  <data name="Intelligent_General_Optimization" xml:space="preserve">
+    <value>Optimasi</value>
+  </data>
+  <data name="Intelligent_Flyout_CategoryRisk" xml:space="preserve">
+    <value>Kategori: {0} • Risiko: {1}</value>
+  </data>
+  <data name="Intelligent_Flyout_Impact" xml:space="preserve">
+    <value>Dampak: {0}</value>
+  </data>
+  <data name="Intelligent_Flyout_RollbackPoint" xml:space="preserve">
+    <value>Titik Pemulihan: {0} • Awal: {1}</value>
+  </data>
+  <data name="OptimizeInspector_ConfiguresCount" xml:space="preserve">
+    <value>Mengonfigurasi {0} pengaturan sistem untuk {1}.</value>
+  </data>
+  <data name="OptimizeInspector_OptimizesDefault" xml:space="preserve">
+    <value>Mengoptimalkan {0} dalam konfigurasi Windows.</value>
+  </data>
+  <data name="OptimizeInspector_SafetyLine" xml:space="preserve">
+    <value>Keamanan: {0} • Bobot: +{1} poin • Status: {2}</value>
+  </data>
+  <data name="OptimizeInspector_SafetyNote" xml:space="preserve">
+    <value>Catatan Keamanan: {0}</value>
+  </data>
+  <data name="OptimizeInspector_ActionsRegistry" xml:space="preserve">
+    <value>Tindakan &amp; Registri:</value>
+  </data>
+  <data name="OptimizeInspector_Commands" xml:space="preserve">
+    <value>Perintah:</value>
+  </data>
+  <data name="OptimizeInspector_ReasonCaution" xml:space="preserve">
+    <value>Perhatian: Fitur lanjutan Windows yang hanya boleh diubah oleh pengguna ahli.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerateRec" xml:space="preserve">
+    <value>Disarankan (Moderat): Optimasi performa tinggi yang telah diverifikasi dalam alat tuning.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerate" xml:space="preserve">
+    <value>Moderat: Optimasi pengguna tingkat lanjut. Termasuk dalam preset Moderat.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonPersonalPref" xml:space="preserve">
+    <value>Opsional (Aman): Tata letak visual atau preferensi pengguna. Termasuk dalam preset Semua Aman.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonSafeRec" xml:space="preserve">
+    <value>Disarankan: Optimasi aman dan tidak mengganggu untuk meningkatkan privasi dan responsivitas.</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Title" xml:space="preserve">
+    <value>Operasi sedang berlangsung</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Content" xml:space="preserve">
+    <value>Operasi optimasi latar belakang sedang berjalan. Apakah Anda ingin menunggu hingga selesai atau keluar sekarang?</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Wait" xml:space="preserve">
+    <value>Tunggu</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Cancel" xml:space="preserve">
+    <value>Batal</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Exit" xml:space="preserve">
+    <value>Keluar</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>Penampil Log</value>
+  </data>
+  <data name="LogViewer_FilterPlaceholder" xml:space="preserve">
+    <value>Filter berdasarkan tingkat</value>
+  </data>
+  <data name="LogViewer_FilterAll" xml:space="preserve">
+    <value>Semua</value>
+  </data>
+  <data name="LogViewer_FilterInfo" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="LogViewer_FilterWarn" xml:space="preserve">
+    <value>Peringatan</value>
+  </data>
+  <data name="LogViewer_FilterError" xml:space="preserve">
+    <value>Kesalahan</value>
+  </data>
+  <data name="LogViewer_FilterCritical" xml:space="preserve">
+    <value>Kritis</value>
+  </data>
+  <data name="LogViewer_EntriesCount" xml:space="preserve">
+    <value>{0} dari {1} entri</value>
+  </data>
+  <data name="LogViewer_SearchPlaceholder" xml:space="preserve">
+    <value>Cari log...</value>
+  </data>
+  <data name="LogViewer_NoEntries" xml:space="preserve">
+    <value>Tidak ada entri log yang ditemukan.</value>
+  </data>
+  <data name="LogViewer_NewSession" xml:space="preserve">
+    <value>Sesi Baru</value>
+  </data>
+  <data name="LogViewer_CopyButton" xml:space="preserve">
+    <value>Salin</value>
+  </data>
+  <data name="LogViewer_OpenFileButton" xml:space="preserve">
+    <value>Buka File</value>
+  </data>
+  <data name="ProcessesPage_TotalProcesses.Text" xml:space="preserve">
+    <value>Total Proses</value>
+  </data>
+  <data name="ProcessesPage_TotalMemory.Text" xml:space="preserve">
+    <value>Total Memori</value>
+  </data>
+  <data name="ProcessesPage_TotalThreads.Text" xml:space="preserve">
+    <value>Total Thread</value>
+  </data>
+  <data name="ProcessesPage_EndTaskTooltip.Text" xml:space="preserve">
+    <value>Akhiri Tugas</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedTitle" xml:space="preserve">
+    <value>Proses Diakhiri</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedMessage" xml:space="preserve">
+    <value>Proses '{0}' (PID: {1}) berhasil dihentikan.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundTitle" xml:space="preserve">
+    <value>Proses Tidak Ditemukan</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundMessage" xml:space="preserve">
+    <value>Proses dengan PID {0} sudah tidak ada.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorTitle" xml:space="preserve">
+    <value>Kesalahan</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorMessage" xml:space="preserve">
+    <value>Gagal mengakhiri proses: {0}</value>
+  </data>
+  <data name="PackagesPage_Notification_Title" xml:space="preserve">
+    <value>Paket</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesInstall" xml:space="preserve">
+    <value>Tidak ada paket yang dipilih untuk dipasang.</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesUpdate" xml:space="preserve">
+    <value>Tidak ada paket yang dipilih untuk diperbarui.</value>
+  </data>
+  <data name="PackagesPage_Notification_InstallCompleted" xml:space="preserve">
+    <value>Pemasangan selesai: {0} berhasil, {1} gagal.</value>
+  </data>
+  <data name="PackagesPage_Notification_UpdateCompleted" xml:space="preserve">
+    <value>Pembaruan selesai: {0} berhasil, {1} gagal.</value>
+  </data>
+  <data name="DebloatPage_ClearedSize" xml:space="preserve">
+    <value> (Dibersihkan: {0})</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Buat Skema Daya</value>
+  </data>
+  <data name="Search_Category_Navigation" xml:space="preserve">
+    <value>Navigasi</value>
+  </data>
+  <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
+    <value>Gagal memuat item startup: {0}</value>
+  </data>
 </root>

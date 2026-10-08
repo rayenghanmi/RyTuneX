@@ -3025,4 +3025,187 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
     <value>Vui lòng chọn ít nhất một lõi.</value>
   </data>
+  <data name="Intelligent_Domain_Optimizer" xml:space="preserve">
+    <value>Bộ tối ưu hệ thống</value>
+  </data>
+  <data name="Intelligent_DetectingHardware" xml:space="preserve">
+    <value>Đang nhận diện phần cứng...</value>
+  </data>
+  <data name="Intelligent_StatusMessageDefault" xml:space="preserve">
+    <value>Quét, phân tích, xem trước, áp dụng, xác minh và hỗ trợ khôi phục từng mục cho tất cả các thiết lập.</value>
+  </data>
+  <data name="Intelligent_Metric_NonIntrusive" xml:space="preserve">
+    <value>An toàn / Không can thiệp sâu</value>
+  </data>
+  <data name="Intelligent_Btn_Apply" xml:space="preserve">
+    <value>Áp dụng</value>
+  </data>
+  <data name="Intelligent_Preview_DialogDefaultTitle" xml:space="preserve">
+    <value>Xem trước tối ưu hóa thông minh</value>
+  </data>
+  <data name="Intelligent_State_On" xml:space="preserve">
+    <value>BẬT</value>
+  </data>
+  <data name="Intelligent_State_Off" xml:space="preserve">
+    <value>TẮT</value>
+  </data>
+  <data name="Intelligent_Status_Optional" xml:space="preserve">
+    <value>Tùy chọn</value>
+  </data>
+  <data name="Intelligent_General_Optimization" xml:space="preserve">
+    <value>Tối ưu hóa</value>
+  </data>
+  <data name="Intelligent_Flyout_CategoryRisk" xml:space="preserve">
+    <value>Danh mục: {0} • Rủi ro: {1}</value>
+  </data>
+  <data name="Intelligent_Flyout_Impact" xml:space="preserve">
+    <value>Tác động: {0}</value>
+  </data>
+  <data name="Intelligent_Flyout_RollbackPoint" xml:space="preserve">
+    <value>Điểm khôi phục: {0} • Ban đầu: {1}</value>
+  </data>
+  <data name="OptimizeInspector_ConfiguresCount" xml:space="preserve">
+    <value>Cấu hình {0} cài đặt hệ thống cho {1}.</value>
+  </data>
+  <data name="OptimizeInspector_OptimizesDefault" xml:space="preserve">
+    <value>Tối ưu hóa {0} trong cấu hình Windows.</value>
+  </data>
+  <data name="OptimizeInspector_SafetyLine" xml:space="preserve">
+    <value>Độ an toàn: {0} • Điểm: +{1} • Trạng thái: {2}</value>
+  </data>
+  <data name="OptimizeInspector_SafetyNote" xml:space="preserve">
+    <value>Ghi chú an toàn: {0}</value>
+  </data>
+  <data name="OptimizeInspector_ActionsRegistry" xml:space="preserve">
+    <value>Hành động &amp; Registry:</value>
+  </data>
+  <data name="OptimizeInspector_Commands" xml:space="preserve">
+    <value>Lệnh:</value>
+  </data>
+  <data name="OptimizeInspector_ReasonCaution" xml:space="preserve">
+    <value>Thận trọng: Tính năng nâng cao của Windows chỉ nên điều chỉnh bởi người dùng có kinh nghiệm.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerateRec" xml:space="preserve">
+    <value>Khuyên dùng (Vừa phải): Tối ưu hóa hiệu năng rõ rệt đã được kiểm chứng qua các công cụ tinh chỉnh.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerate" xml:space="preserve">
+    <value>Vừa phải: Tối ưu cho người dùng nâng cao. Đã bao gồm trong cấu hình Vừa phải.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonPersonalPref" xml:space="preserve">
+    <value>Tùy chọn (An toàn): Giao diện trực quan hoặc sở thích cá nhân. Đã bao gồm trong mục Tất cả an toàn.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonSafeRec" xml:space="preserve">
+    <value>Khuyên dùng: Tối ưu an toàn, không can thiệp sâu để tăng tính riêng tư và độ phản hồi.</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Title" xml:space="preserve">
+    <value>Đang thực hiện tác vụ</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Content" xml:space="preserve">
+    <value>Có các tác vụ tối ưu hóa đang chạy ngầm. Bạn có muốn đợi hoàn tất hay thoát ngay bây giờ?</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Wait" xml:space="preserve">
+    <value>Chờ</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Exit" xml:space="preserve">
+    <value>Thoát</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>Trình xem nhật ký</value>
+  </data>
+  <data name="LogViewer_FilterPlaceholder" xml:space="preserve">
+    <value>Lọc theo mức độ</value>
+  </data>
+  <data name="LogViewer_FilterAll" xml:space="preserve">
+    <value>Tất cả</value>
+  </data>
+  <data name="LogViewer_FilterInfo" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="LogViewer_FilterWarn" xml:space="preserve">
+    <value>Cảnh báo</value>
+  </data>
+  <data name="LogViewer_FilterError" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="LogViewer_FilterCritical" xml:space="preserve">
+    <value>Nghiêm trọng</value>
+  </data>
+  <data name="LogViewer_EntriesCount" xml:space="preserve">
+    <value>{0} / {1} mục</value>
+  </data>
+  <data name="LogViewer_SearchPlaceholder" xml:space="preserve">
+    <value>Tìm kiếm nhật ký...</value>
+  </data>
+  <data name="LogViewer_NoEntries" xml:space="preserve">
+    <value>Không tìm thấy mục nhật ký nào.</value>
+  </data>
+  <data name="LogViewer_NewSession" xml:space="preserve">
+    <value>Phiên mới</value>
+  </data>
+  <data name="LogViewer_CopyButton" xml:space="preserve">
+    <value>Sao chép</value>
+  </data>
+  <data name="LogViewer_OpenFileButton" xml:space="preserve">
+    <value>Mở tệp</value>
+  </data>
+  <data name="ProcessesPage_TotalProcesses.Text" xml:space="preserve">
+    <value>Tổng số tiến trình</value>
+  </data>
+  <data name="ProcessesPage_TotalMemory.Text" xml:space="preserve">
+    <value>Tổng bộ nhớ</value>
+  </data>
+  <data name="ProcessesPage_TotalThreads.Text" xml:space="preserve">
+    <value>Tổng số luồng</value>
+  </data>
+  <data name="ProcessesPage_EndTaskTooltip.Text" xml:space="preserve">
+    <value>Kết thúc tác vụ</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedTitle" xml:space="preserve">
+    <value>Tiến trình đã dừng</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedMessage" xml:space="preserve">
+    <value>Tiến trình '{0}' (PID: {1}) đã được dừng thành công.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundTitle" xml:space="preserve">
+    <value>Không tìm thấy tiến trình</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundMessage" xml:space="preserve">
+    <value>Tiến trình có PID {0} không còn tồn tại.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorTitle" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorMessage" xml:space="preserve">
+    <value>Không thể dừng tiến trình: {0}</value>
+  </data>
+  <data name="PackagesPage_Notification_Title" xml:space="preserve">
+    <value>Gói ứng dụng</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesInstall" xml:space="preserve">
+    <value>Chưa chọn gói nào để cài đặt.</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesUpdate" xml:space="preserve">
+    <value>Chưa chọn gói nào để cập nhật.</value>
+  </data>
+  <data name="PackagesPage_Notification_InstallCompleted" xml:space="preserve">
+    <value>Cài đặt hoàn tất: {0} thành công, {1} thất bại.</value>
+  </data>
+  <data name="PackagesPage_Notification_UpdateCompleted" xml:space="preserve">
+    <value>Cập nhật hoàn tất: {0} thành công, {1} thất bại.</value>
+  </data>
+  <data name="DebloatPage_ClearedSize" xml:space="preserve">
+    <value> (Đã dọn: {0})</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Tạo sơ đồ nguồn</value>
+  </data>
+  <data name="Search_Category_Navigation" xml:space="preserve">
+    <value>Điều hướng</value>
+  </data>
+  <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
+    <value>Không thể tải các mục khởi động: {0}</value>
+  </data>
 </root>

@@ -102,7 +102,7 @@ internal static class SystemStateDetector
                     @"Control Panel\Desktop", "LowLevelHooksTimeout", "1000")),
 
             "LowDiskSpaceChecks" => DwordEquals(RegistryHive.CurrentUser,
-                @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoLowDiskSpaceChecks", 0),
+                @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoLowDiskSpaceChecks", 1),
 
             "LinkResolve" => All(
                 DwordEquals(RegistryHive.CurrentUser,
@@ -121,7 +121,7 @@ internal static class SystemStateDetector
 
             "FileExtensionsAndHiddenFiles" => All(
                 DwordEquals(RegistryHive.CurrentUser,
-                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", 1),
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", 0),
                 DwordEquals(RegistryHive.CurrentUser,
                     @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Hidden", 1)),
 
@@ -328,7 +328,7 @@ internal static class SystemStateDetector
                 DwordEquals(RegistryHive.LocalMachine,
                     @"Software\Policies\Microsoft\Windows\SettingSync", "DisableCredentialsSettingSync", 2),
                 DwordEquals(RegistryHive.LocalMachine,
-                    @"Software\Policies\Microsoft\Windows\SettingSync", "DisableCredentialsSettingSyncUserOverride", 2),
+                    @"Software\Policies\Microsoft\Windows\SettingSync", "DisableCredentialsSettingSyncUserOverride", 1),
                 DwordEquals(RegistryHive.LocalMachine,
                     @"Software\Policies\Microsoft\Windows\SettingSync", "DisableApplicationSettingSync", 2)),
 

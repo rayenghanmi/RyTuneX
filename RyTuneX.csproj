@@ -93,4 +93,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Helpers\OptimizeSystemHelper.cs" />
+    <EmbeddedResource Include="Helpers\OptimizationOptions.cs" />
+  </ItemGroup>
+
 </Project>

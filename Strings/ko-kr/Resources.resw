@@ -3025,4 +3025,187 @@
   <data name="StressTestPage_SelectCpuCoresDialog_Warning" xml:space="preserve">
     <value>최소 하나의 코어를 선택하세요.</value>
   </data>
+  <data name="Intelligent_Domain_Optimizer" xml:space="preserve">
+    <value>시스템 최적화</value>
+  </data>
+  <data name="Intelligent_DetectingHardware" xml:space="preserve">
+    <value>하드웨어 감지 중...</value>
+  </data>
+  <data name="Intelligent_StatusMessageDefault" xml:space="preserve">
+    <value>모든 최적화 설정에 대해 검사, 분석, 미리보기, 적용, 검증 및 항목별 롤백을 지원합니다.</value>
+  </data>
+  <data name="Intelligent_Metric_NonIntrusive" xml:space="preserve">
+    <value>안전 / 비침해적</value>
+  </data>
+  <data name="Intelligent_Btn_Apply" xml:space="preserve">
+    <value>적용</value>
+  </data>
+  <data name="Intelligent_Preview_DialogDefaultTitle" xml:space="preserve">
+    <value>지능형 최적화 미리보기</value>
+  </data>
+  <data name="Intelligent_State_On" xml:space="preserve">
+    <value>켜짐</value>
+  </data>
+  <data name="Intelligent_State_Off" xml:space="preserve">
+    <value>꺼짐</value>
+  </data>
+  <data name="Intelligent_Status_Optional" xml:space="preserve">
+    <value>선택 사항</value>
+  </data>
+  <data name="Intelligent_General_Optimization" xml:space="preserve">
+    <value>최적화</value>
+  </data>
+  <data name="Intelligent_Flyout_CategoryRisk" xml:space="preserve">
+    <value>카테고리: {0} • 위험도: {1}</value>
+  </data>
+  <data name="Intelligent_Flyout_Impact" xml:space="preserve">
+    <value>영향: {0}</value>
+  </data>
+  <data name="Intelligent_Flyout_RollbackPoint" xml:space="preserve">
+    <value>롤백 지점: {0} • 원래 상태: {1}</value>
+  </data>
+  <data name="OptimizeInspector_ConfiguresCount" xml:space="preserve">
+    <value>{1}에 대해 {0}개의 시스템 설정을 구성합니다.</value>
+  </data>
+  <data name="OptimizeInspector_OptimizesDefault" xml:space="preserve">
+    <value>Windows 구성에서 {0}을(를) 최적화합니다.</value>
+  </data>
+  <data name="OptimizeInspector_SafetyLine" xml:space="preserve">
+    <value>안전도: {0} • 가중치: +{1}점 • 상태: {2}</value>
+  </data>
+  <data name="OptimizeInspector_SafetyNote" xml:space="preserve">
+    <value>안전 참고사항: {0}</value>
+  </data>
+  <data name="OptimizeInspector_ActionsRegistry" xml:space="preserve">
+    <value>작업 및 레지스트리:</value>
+  </data>
+  <data name="OptimizeInspector_Commands" xml:space="preserve">
+    <value>명령:</value>
+  </data>
+  <data name="OptimizeInspector_ReasonCaution" xml:space="preserve">
+    <value>주의: 숙련된 고급 사용자만 변경해야 하는 Windows 고급 기능입니다.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerateRec" xml:space="preserve">
+    <value>추천 (보통): 튜닝 도구에서 검증된 영향력 높은 성능 최적화입니다.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonModerate" xml:space="preserve">
+    <value>보통: 고급 사용자를 위한 최적화입니다. '보통' 프리셋에 포함됩니다.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonPersonalPref" xml:space="preserve">
+    <value>선택 사항 (안전): 시각적 레이아웃 또는 개인 선호 설정입니다. '모두 안전' 프리셋에 포함됩니다.</value>
+  </data>
+  <data name="OptimizeInspector_ReasonSafeRec" xml:space="preserve">
+    <value>추천: 개인정보 보호와 반응 속도를 높이는 안전하고 비침해적인 최적화입니다.</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Title" xml:space="preserve">
+    <value>작업 진행 중</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Content" xml:space="preserve">
+    <value>백그라운드 최적화 작업이 실행 중입니다. 완료될 때까지 기다리시겠습니까, 아니면 지금 종료하시겠습니까?</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Wait" xml:space="preserve">
+    <value>기다리기</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="MainWindow_OperationsInProgress_Exit" xml:space="preserve">
+    <value>종료</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>로그 뷰어</value>
+  </data>
+  <data name="LogViewer_FilterPlaceholder" xml:space="preserve">
+    <value>수준별 필터링</value>
+  </data>
+  <data name="LogViewer_FilterAll" xml:space="preserve">
+    <value>전체</value>
+  </data>
+  <data name="LogViewer_FilterInfo" xml:space="preserve">
+    <value>정보</value>
+  </data>
+  <data name="LogViewer_FilterWarn" xml:space="preserve">
+    <value>경고</value>
+  </data>
+  <data name="LogViewer_FilterError" xml:space="preserve">
+    <value>오류</value>
+  </data>
+  <data name="LogViewer_FilterCritical" xml:space="preserve">
+    <value>치명적</value>
+  </data>
+  <data name="LogViewer_EntriesCount" xml:space="preserve">
+    <value>{1}개 중 {0}개 항목</value>
+  </data>
+  <data name="LogViewer_SearchPlaceholder" xml:space="preserve">
+    <value>로그 검색...</value>
+  </data>
+  <data name="LogViewer_NoEntries" xml:space="preserve">
+    <value>로그 항목이 없습니다.</value>
+  </data>
+  <data name="LogViewer_NewSession" xml:space="preserve">
+    <value>새 세션</value>
+  </data>
+  <data name="LogViewer_CopyButton" xml:space="preserve">
+    <value>복사</value>
+  </data>
+  <data name="LogViewer_OpenFileButton" xml:space="preserve">
+    <value>파일 열기</value>
+  </data>
+  <data name="ProcessesPage_TotalProcesses.Text" xml:space="preserve">
+    <value>총 프로세스</value>
+  </data>
+  <data name="ProcessesPage_TotalMemory.Text" xml:space="preserve">
+    <value>총 메모리</value>
+  </data>
+  <data name="ProcessesPage_TotalThreads.Text" xml:space="preserve">
+    <value>총 스레드</value>
+  </data>
+  <data name="ProcessesPage_EndTaskTooltip.Text" xml:space="preserve">
+    <value>작업 끝내기</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedTitle" xml:space="preserve">
+    <value>프로세스 종료됨</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessEndedMessage" xml:space="preserve">
+    <value>'{0}' 프로세스(PID: {1})가 성공적으로 종료되었습니다.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundTitle" xml:space="preserve">
+    <value>프로세스를 찾을 수 없음</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessNotFoundMessage" xml:space="preserve">
+    <value>PID {0}인 프로세스가 더 이상 존재하지 않습니다.</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorTitle" xml:space="preserve">
+    <value>오류</value>
+  </data>
+  <data name="ProcessesPage_Notification_ProcessErrorMessage" xml:space="preserve">
+    <value>프로세스 종료 실패: {0}</value>
+  </data>
+  <data name="PackagesPage_Notification_Title" xml:space="preserve">
+    <value>패키지</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesInstall" xml:space="preserve">
+    <value>설치할 패키지가 선택되지 않았습니다.</value>
+  </data>
+  <data name="PackagesPage_Notification_NoPackagesUpdate" xml:space="preserve">
+    <value>업데이트할 패키지가 선택되지 않았습니다.</value>
+  </data>
+  <data name="PackagesPage_Notification_InstallCompleted" xml:space="preserve">
+    <value>설치 완료: 성공 {0}개, 실패 {1}개.</value>
+  </data>
+  <data name="PackagesPage_Notification_UpdateCompleted" xml:space="preserve">
+    <value>업데이트 완료: 성공 {0}개, 실패 {1}개.</value>
+  </data>
+  <data name="DebloatPage_ClearedSize" xml:space="preserve">
+    <value> (정리됨: {0})</value>
+  </data>
+  <data name="Feature_CreatePowerPlanButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>전원 관리 옵션 만들기</value>
+  </data>
+  <data name="Search_Category_Navigation" xml:space="preserve">
+    <value>탐색</value>
+  </data>
+  <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
+    <value>시작 프로그램 항목을 불러오지 못했습니다: {0}</value>
+  </data>
 </root>

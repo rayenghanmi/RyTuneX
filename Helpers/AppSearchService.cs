@@ -206,7 +206,7 @@ public static class AppSearchService
                 DisplayName = displayName,
                 Glyph = glyph,
                 PageTypeName = pageType.FullName!,
-                Category = "Navigation"
+                Category = "Search_Category_Navigation".GetLocalized()
             });
         }
 

@@ -33,6 +33,8 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
         }
     }
 
+    private readonly SemaphoreSlim _refreshLock = new(1, 1);
+    private bool _isRefreshPending;
     private List<OptimizationItemModel> _allScannedItems = new();
     private Page? _parentPage;
     private string _selectedMode = "Recommended"; // "Recommended", "AllSafe", "Advanced"
@@ -79,14 +81,20 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
         if (ScoreLabelText != null) ScoreLabelText.Text = "Intelligent_ScoreTitle".GetLocalized();
         if (HealthGradeText != null) HealthGradeText.Text = "Intelligent_HealthGrade_Scanning".GetLocalized();
 
+        if (DomainTitleText != null && TargetCategory == "All") DomainTitleText.Text = "Intelligent_Domain_Optimizer".GetLocalized();
+        if (SystemSummaryText != null) SystemSummaryText.Text = "Intelligent_DetectingHardware".GetLocalized();
+        if (StatusMessageText != null && TargetCategory == "All") StatusMessageText.Text = "Intelligent_StatusMessageDefault".GetLocalized();
+        if (DomainMetric3Text != null) DomainMetric3Text.Text = "Intelligent_Metric_NonIntrusive".GetLocalized();
+
         if (ModeRecText != null) ModeRecText.Text = "Intelligent_Mode_Rec".GetLocalized();
         if (ModeSafeText != null) ModeSafeText.Text = "Intelligent_Mode_Safe".GetLocalized();
-        if (ModeAdvText != null) ModeAdvText.Text = "Intelligent_Mode_Adv".GetLocalized();
+        if (ModeAdvText != null) ModeAdvText.Text = "Intelligent_Mode_Adv".TryGetLocalized() ?? "Intelligent_Badge_Moderate".TryGetLocalized() ?? "Mod";
 
         if (ModeRecommendedBtn != null) ToolTipService.SetToolTip(ModeRecommendedBtn, "Intelligent_Mode_Rec_Tooltip".GetLocalized());
         if (ModeAllSafeBtn != null) ToolTipService.SetToolTip(ModeAllSafeBtn, "Intelligent_Mode_Safe_Tooltip".GetLocalized());
-        if (ModeAdvancedBtn != null) ToolTipService.SetToolTip(ModeAdvancedBtn, "Intelligent_Mode_Adv_Tooltip".GetLocalized());
+        if (ModeAdvancedBtn != null) ToolTipService.SetToolTip(ModeAdvancedBtn, "Intelligent_Mode_Adv_Tooltip".TryGetLocalized() ?? "Moderate: Includes power-user & moderate tweaks");
 
+        if (MainApplyBtnText != null) MainApplyBtnText.Text = "Intelligent_Btn_Apply".GetLocalized();
         if (PreviewBtnText != null) PreviewBtnText.Text = "Intelligent_Btn_Preview".GetLocalized();
         if (RollbackBtnText != null) RollbackBtnText.Text = "Intelligent_Btn_Rollback".GetLocalized();
 
@@ -95,47 +103,116 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
         if (HomeNavPrivText != null) HomeNavPrivText.Text = "Intelligent_Domain_PrivTitle".GetLocalized();
         if (HomeNavFeatText != null) HomeNavFeatText.Text = "Intelligent_Domain_FeatTitle".GetLocalized();
 
+        if (PreviewDialog != null)
+        {
+            PreviewDialog.Title = "Intelligent_Preview_DialogDefaultTitle".GetLocalized();
+            PreviewDialog.PrimaryButtonText = "Intelligent_Preview_ApplyBtn".GetLocalized();
+            PreviewDialog.CloseButtonText = "Intelligent_Preview_CancelBtn".GetLocalized();
+        }
         if (PreviewDialogDescText != null) PreviewDialogDescText.Text = "Intelligent_Preview_Desc".GetLocalized();
+
+        UpdateApplyButtonText();
     }
 
     public async Task RefreshScoreAsync()
     {
+        if (!await _refreshLock.WaitAsync(0))
+        {
+            _isRefreshPending = true;
+            return;
+        }
+
         try
         {
-            MainProgressBar.Visibility = Visibility.Visible;
-            MainProgressBar.IsIndeterminate = true;
+            do
+            {
+                _isRefreshPending = false;
+                try
+                {
+                    MainProgressBar.Visibility = Visibility.Visible;
+                    MainProgressBar.IsIndeterminate = true;
 
-            _allScannedItems = await IntelligentOptimizationEngine.ScanAsync();
-            var score = IntelligentOptimizationEngine.Analyse(_allScannedItems);
-            IntelligentOptimizationEngine.Recommend(_allScannedItems);
+                    if (_parentPage != null && _parentPage is not HomePage)
+                    {
+                        _allScannedItems = await IntelligentOptimizationEngine.ScanPageAsync(_parentPage);
+                    }
+                    else
+                    {
+                        _allScannedItems = await IntelligentOptimizationEngine.ScanAsync();
+                    }
 
-            UpdateUI(score);
+                    // Sync visual toggle states
+                    if (_parentPage != null)
+                    {
+                        var pageToggles = IntelligentCardEnhancer.FindVisualChildren<ToggleSwitch>(_parentPage);
+                        foreach (var t in pageToggles)
+                        {
+                            if (t.Tag is string tTag && !string.IsNullOrEmpty(tTag))
+                            {
+                                var item = _allScannedItems.FirstOrDefault(i => string.Equals(i.Tag, tTag, StringComparison.OrdinalIgnoreCase));
+                                if (item != null)
+                                {
+                                    item.IsApplied = t.IsOn;
+                                }
+                            }
+                        }
+                    }
 
-            MainProgressBar.IsIndeterminate = false;
-            MainProgressBar.Visibility = Visibility.Collapsed;
+                    var score = IntelligentOptimizationEngine.Analyse(_allScannedItems);
+                    IntelligentOptimizationEngine.Recommend(_allScannedItems);
+
+                    UpdateUI(score);
+                }
+                finally
+                {
+                    MainProgressBar.IsIndeterminate = false;
+                    MainProgressBar.Visibility = Visibility.Collapsed;
+                }
+            } while (_isRefreshPending);
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"[IntelligentScoreHeader] Error refreshing score: {ex.Message}");
             MainProgressBar.Visibility = Visibility.Collapsed;
         }
+        finally
+        {
+            _refreshLock.Release();
+        }
+    }
+
+    private int CalculateItemsScore(List<OptimizationItemModel> items)
+    {
+        var scoreable = items.Where(i => i.Risk == RiskLevel.Safe || i.Risk == RiskLevel.Moderate).ToList();
+        if (scoreable.Count == 0) return 100;
+
+        int appliedWeight = scoreable.Where(i => i.IsApplied).Sum(i => i.ScoreWeight);
+        int totalWeight = scoreable.Sum(i => i.ScoreWeight);
+
+        return totalWeight > 0 ? (int)Math.Round((double)appliedWeight / totalWeight * 100) : 100;
     }
 
     private void UpdateUI(IntelligentScoreModel score)
     {
         var category = TargetCategory;
         SystemSummaryText.Text = score.SystemSummary;
+        var pageTags = GetParentPageToggleTags();
 
         if (category == "Performance")
         {
             DomainIcon.Glyph = "\uE9D9";
             DomainTitleText.Text = "Intelligent_Domain_PerfTitle".GetLocalized();
             ScoreLabelText.Text = "Intelligent_ScoreTitle".GetLocalized();
-            ScoreText.Text = $"{score.PerformanceScore}%";
-            ScoreRing.Value = score.PerformanceScore;
-            HealthGradeText.Text = GetGrade(score.PerformanceScore);
 
-            var catItems = _allScannedItems.Where(i => i.Category == OptimizationCategory.Performance).ToList();
+            var catItems = pageTags.Count > 0
+                ? _allScannedItems.Where(i => pageTags.Contains(i.Tag)).ToList()
+                : _allScannedItems.Where(i => i.Category == OptimizationCategory.Performance).ToList();
+
+            int pageScore = CalculateItemsScore(catItems);
+            ScoreText.Text = $"{pageScore}%";
+            ScoreRing.Value = pageScore;
+            HealthGradeText.Text = GetGrade(pageScore);
+
             int active = catItems.Count(i => i.IsApplied);
             int total = catItems.Count;
             int recCount = catItems.Count(i => i.IsRecommended && !i.IsApplied);
@@ -160,11 +237,16 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
             DomainIcon.Glyph = "\uE7B3";
             DomainTitleText.Text = "Intelligent_Domain_PrivTitle".GetLocalized();
             ScoreLabelText.Text = "Intelligent_ScoreTitle".GetLocalized();
-            ScoreText.Text = $"{score.PrivacyScore}%";
-            ScoreRing.Value = score.PrivacyScore;
-            HealthGradeText.Text = GetGrade(score.PrivacyScore);
 
-            var catItems = _allScannedItems.Where(i => i.Category == OptimizationCategory.PrivacyAndTelemetry).ToList();
+            var catItems = pageTags.Count > 0
+                ? _allScannedItems.Where(i => pageTags.Contains(i.Tag)).ToList()
+                : _allScannedItems.Where(i => i.Category == OptimizationCategory.PrivacyAndTelemetry).ToList();
+
+            int pageScore = CalculateItemsScore(catItems);
+            ScoreText.Text = $"{pageScore}%";
+            ScoreRing.Value = pageScore;
+            HealthGradeText.Text = GetGrade(pageScore);
+
             int active = catItems.Count(i => i.IsApplied);
             int total = catItems.Count;
             int recCount = catItems.Count(i => i.IsRecommended && !i.IsApplied);
@@ -189,11 +271,16 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
             DomainIcon.Glyph = "\uE74C";
             DomainTitleText.Text = "Intelligent_Domain_FeatTitle".GetLocalized();
             ScoreLabelText.Text = "Intelligent_ScoreTitle".GetLocalized();
-            ScoreText.Text = $"{score.FeaturesScore}%";
-            ScoreRing.Value = score.FeaturesScore;
-            HealthGradeText.Text = GetGrade(score.FeaturesScore);
 
-            var catItems = _allScannedItems.Where(i => i.Category == OptimizationCategory.FeaturesAndUsability).ToList();
+            var catItems = pageTags.Count > 0
+                ? _allScannedItems.Where(i => pageTags.Contains(i.Tag)).ToList()
+                : _allScannedItems.Where(i => i.Category == OptimizationCategory.FeaturesAndUsability).ToList();
+
+            int pageScore = CalculateItemsScore(catItems);
+            ScoreText.Text = $"{pageScore}%";
+            ScoreRing.Value = pageScore;
+            HealthGradeText.Text = GetGrade(pageScore);
+
             int active = catItems.Count(i => i.IsApplied);
             int total = catItems.Count;
             int recCount = catItems.Count(i => i.IsRecommended && !i.IsApplied);
@@ -258,9 +345,10 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
     private void CalculateGain(List<OptimizationItemModel> catItems)
     {
-        var unapplied = catItems.Where(i => !i.IsApplied && (i.Risk == RiskLevel.Safe || i.IsRecommended));
+        var scoreable = catItems.Where(i => i.Risk == RiskLevel.Safe || i.Risk == RiskLevel.Moderate).ToList();
+        var unapplied = scoreable.Where(i => !i.IsApplied && (i.Risk == RiskLevel.Safe || i.IsRecommended));
         int gainPoints = unapplied.Sum(i => i.ScoreWeight);
-        int totalWeight = catItems.Sum(i => i.ScoreWeight);
+        int totalWeight = scoreable.Sum(i => i.ScoreWeight);
         int gainPct = totalWeight > 0 ? (int)Math.Round((double)gainPoints / totalWeight * 100) : 0;
 
         if (gainPct > 0)
@@ -296,8 +384,8 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
     private void UpdateModeButtonsUI()
     {
         if (ModeRecommendedBtn != null) ModeRecommendedBtn.IsChecked = _selectedMode == "Recommended";
-        if (ModeAllSafeBtn != null) ModeAllSafeBtn.IsChecked = _selectedMode == "AllSafe";
-        if (ModeAdvancedBtn != null) ModeAdvancedBtn.IsChecked = _selectedMode == "Advanced";
+        if (ModeAllSafeBtn != null) ModeAllSafeBtn.IsChecked = _selectedMode is "AllSafe" or "Safe";
+        if (ModeAdvancedBtn != null) ModeAdvancedBtn.IsChecked = _selectedMode is "Advanced" or "Moderate";
     }
 
     private void UpdateApplyButtonText()
@@ -309,8 +397,8 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
         string modeLabel = _selectedMode switch
         {
-            "AllSafe" => "Intelligent_Mode_Safe".GetLocalized(),
-            "Advanced" => "Intelligent_Mode_Adv".GetLocalized(),
+            "AllSafe" or "Safe" => "Intelligent_Mode_Safe".GetLocalized(),
+            "Advanced" or "Moderate" => "Intelligent_Badge_Moderate".TryGetLocalized() ?? "Intelligent_Mode_Adv".GetLocalized(),
             _ => "Intelligent_Mode_Rec".GetLocalized()
         };
 
@@ -321,16 +409,16 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
     private List<OptimizationItemModel> GetCandidateItemsForMode(string mode)
     {
-        var pageTags = GetParentPageToggleTags();
-        var domainFiltered = _allScannedItems
-            .Where(i => pageTags.Count == 0 || pageTags.Contains(i.Tag))
-            .ToList();
+        var domainFiltered = (_parentPage != null && _parentPage is not HomePage)
+            ? _allScannedItems
+            : _allScannedItems.Where(i => GetParentPageToggleTags().Count == 0 || GetParentPageToggleTags().Contains(i.Tag)).ToList();
 
         return mode switch
         {
-            "AllSafe" => domainFiltered.Where(i => !i.IsApplied && i.Risk == RiskLevel.Safe).ToList(),
-            "Advanced" => domainFiltered.Where(i => !i.IsApplied && (i.Risk == RiskLevel.Safe || i.Risk == RiskLevel.Moderate || i.Risk == RiskLevel.Advanced)).ToList(),
-            _ => domainFiltered.Where(i => !i.IsApplied && (i.IsRecommended || i.Risk == RiskLevel.Safe)).ToList()
+            "Cosmetic" => domainFiltered.Where(i => !i.IsApplied && i.Risk == RiskLevel.Cosmetic).ToList(),
+            "AllSafe" or "Safe" => domainFiltered.Where(i => !i.IsApplied && i.Risk == RiskLevel.Safe).ToList(),
+            "Advanced" or "Moderate" => domainFiltered.Where(i => !i.IsApplied && (i.Risk == RiskLevel.Safe || i.Risk == RiskLevel.Moderate)).ToList(),
+            _ => domainFiltered.Where(i => !i.IsApplied && i.IsRecommended).ToList()
         };
     }
 
@@ -342,8 +430,8 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
         {
             string modeName = _selectedMode switch
             {
-                "AllSafe" => "Intelligent_Mode_Safe".GetLocalized(),
-                "Advanced" => "Intelligent_Mode_Adv".GetLocalized(),
+                "AllSafe" or "Safe" => "Intelligent_Mode_Safe".GetLocalized(),
+                "Advanced" or "Moderate" => "Intelligent_Badge_Moderate".TryGetLocalized() ?? "Intelligent_Mode_Adv".GetLocalized(),
                 _ => "Intelligent_Mode_Rec".GetLocalized()
             };
             StatusMessageText.Text = string.Format("Intelligent_Status_AllActive".GetLocalized(), modeName);
@@ -355,9 +443,12 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
     private async void Preview_Click(object sender, RoutedEventArgs e)
     {
-        var pageTags = GetParentPageToggleTags();
-        var allUnappliedOnPage = _allScannedItems
-            .Where(i => !i.IsApplied && (pageTags.Count == 0 || pageTags.Contains(i.Tag)))
+        var domainFiltered = (_parentPage != null && _parentPage is not HomePage)
+            ? _allScannedItems
+            : _allScannedItems.Where(i => GetParentPageToggleTags().Count == 0 || GetParentPageToggleTags().Contains(i.Tag)).ToList();
+
+        var allUnappliedOnPage = domainFiltered
+            .Where(i => !i.IsApplied)
             .ToList();
 
         if (allUnappliedOnPage.Count == 0)
@@ -380,8 +471,8 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
         string modeName = _selectedMode switch
         {
-            "AllSafe" => "Intelligent_Mode_Safe".GetLocalized(),
-            "Advanced" => "Intelligent_Mode_Adv".GetLocalized(),
+            "AllSafe" or "Safe" => "Intelligent_Mode_Safe".GetLocalized(),
+            "Advanced" or "Moderate" => "Intelligent_Badge_Moderate".TryGetLocalized() ?? "Intelligent_Mode_Adv".GetLocalized(),
             _ => "Intelligent_Mode_Rec".GetLocalized()
         };
         PreviewDialog.Title = string.Format("Intelligent_Preview_Title".GetLocalized(), modeName);
@@ -402,9 +493,12 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
     private async void RollbackPageItems_Click(object sender, RoutedEventArgs e)
     {
-        var pageTags = GetParentPageToggleTags();
-        var itemsToRollback = _allScannedItems
-            .Where(i => i.RollbackAvailable && (pageTags.Count == 0 || pageTags.Contains(i.Tag)))
+        var domainFiltered = (_parentPage != null && _parentPage is not HomePage)
+            ? _allScannedItems
+            : _allScannedItems.Where(i => GetParentPageToggleTags().Count == 0 || GetParentPageToggleTags().Contains(i.Tag)).ToList();
+
+        var itemsToRollback = domainFiltered
+            .Where(i => i.RollbackAvailable)
             .ToList();
 
         if (itemsToRollback.Count == 0)
@@ -419,6 +513,19 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
         foreach (var item in itemsToRollback)
         {
             await IntelligentOptimizationEngine.RollbackItemAsync(item);
+        }
+
+        // Sync page toggle switches
+        if (_parentPage != null)
+        {
+            var rolledMap = itemsToRollback.ToDictionary(i => i.Tag, i => i.IsApplied, StringComparer.OrdinalIgnoreCase);
+            foreach (var toggle in IntelligentCardEnhancer.FindVisualChildren<ToggleSwitch>(_parentPage))
+            {
+                if (toggle.Tag is string tag && rolledMap.TryGetValue(tag, out var newState))
+                {
+                    IntelligentCardEnhancer.SetToggleIsOnSilently(toggle, newState);
+                }
+            }
         }
 
         await RefreshScoreAsync();
@@ -450,6 +557,19 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
             StatusMessageText.Text = "Intelligent_Status_Verifying".GetLocalized();
             await IntelligentOptimizationEngine.VerifyAsync(items);
+
+            // Sync page toggle switches
+            if (_parentPage != null)
+            {
+                var appliedTags = new HashSet<string>(items.Select(i => i.Tag), StringComparer.OrdinalIgnoreCase);
+                foreach (var toggle in IntelligentCardEnhancer.FindVisualChildren<ToggleSwitch>(_parentPage))
+                {
+                    if (toggle.Tag is string tag && appliedTags.Contains(tag))
+                    {
+                        IntelligentCardEnhancer.SetToggleIsOnSilently(toggle, true);
+                    }
+                }
+            }
 
             await RefreshScoreAsync();
 
