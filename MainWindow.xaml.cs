@@ -59,6 +59,7 @@ public sealed partial class MainWindow : WindowEx
 
                 var dialog = new ContentDialog
                 {
+                    RequestedTheme = (this.Content as FrameworkElement)?.ActualTheme ?? ElementTheme.Default,
                     Title = "MainWindow_OperationsInProgress_Title".GetLocalized(),
                     Content = "MainWindow_OperationsInProgress_Content".GetLocalized(),
                     PrimaryButtonText = "MainWindow_OperationsInProgress_Wait".GetLocalized(),

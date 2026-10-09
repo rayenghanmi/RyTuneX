@@ -402,6 +402,7 @@ public sealed partial class OptimizeSystemPage : Page
         var compressDialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
@@ -561,9 +562,12 @@ public sealed partial class OptimizeSystemPage : Page
                 }
             };
 
+            contentPanel.RequestedTheme = ActualTheme;
+
             var createDialog = new ContentDialog
             {
                 XamlRoot = XamlRoot,
+                RequestedTheme = ActualTheme,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 Title = "CreatePowerPlanTitle".GetLocalized(),

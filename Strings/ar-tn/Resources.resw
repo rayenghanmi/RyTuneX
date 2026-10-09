@@ -1462,6 +1462,27 @@
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>اختر سمة ألوان التطبيق</value>
   </data>
+  <data name="Settings_AccentColorExpander.Header" xml:space="preserve">
+    <value>لون التمييز</value>
+  </data>
+  <data name="Settings_AccentColorExpander.Description" xml:space="preserve">
+    <value>اختر بين نمط RyTuneX، ألوان النظام الحالية أو لون مخصص</value>
+  </data>
+  <data name="Settings_AccentColor_RyTuneX.Text" xml:space="preserve">
+    <value>نمط RyTuneX</value>
+  </data>
+  <data name="Settings_AccentColor_System.Text" xml:space="preserve">
+    <value>ألوان النظام الحالية</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Text" xml:space="preserve">
+    <value>لون مخصص</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Header" xml:space="preserve">
+    <value>لون تمييز مخصص</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Description" xml:space="preserve">
+    <value>حدد لون التمييز المفضل لديك</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
     <value>نمط التنقل</value>
   </data>

@@ -1462,6 +1462,27 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>Chọn chủ đề màu của ứng dụng</value>
   </data>
+  <data name="Settings_AccentColorExpander.Header" xml:space="preserve">
+    <value>Màu nhấn</value>
+  </data>
+  <data name="Settings_AccentColorExpander.Description" xml:space="preserve">
+    <value>Chọn giữa phong cách RyTuneX, màu hệ thống hoặc màu tùy chỉnh</value>
+  </data>
+  <data name="Settings_AccentColor_RyTuneX.Text" xml:space="preserve">
+    <value>Phong cách RyTuneX</value>
+  </data>
+  <data name="Settings_AccentColor_System.Text" xml:space="preserve">
+    <value>Màu hệ thống hiện tại</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Text" xml:space="preserve">
+    <value>Màu tùy chỉnh</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Header" xml:space="preserve">
+    <value>Màu nhấn tùy chỉnh</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Description" xml:space="preserve">
+    <value>Chọn màu nhấn bạn muốn</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
     <value>Kiểu điều hướng</value>
   </data>

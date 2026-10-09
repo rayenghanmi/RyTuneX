@@ -1462,6 +1462,27 @@
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>アプリのカラーテーマを選択します</value>
   </data>
+  <data name="Settings_AccentColorExpander.Header" xml:space="preserve">
+    <value>アクセントカラー</value>
+  </data>
+  <data name="Settings_AccentColorExpander.Description" xml:space="preserve">
+    <value>RyTuneX スタイル、システムカラー、またはカスタムカラーから選択します</value>
+  </data>
+  <data name="Settings_AccentColor_RyTuneX.Text" xml:space="preserve">
+    <value>RyTuneX スタイル</value>
+  </data>
+  <data name="Settings_AccentColor_System.Text" xml:space="preserve">
+    <value>現在のシステムカラー</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Text" xml:space="preserve">
+    <value>カスタムカラー</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Header" xml:space="preserve">
+    <value>カスタムアクセントカラー</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Description" xml:space="preserve">
+    <value>お好みのアクセントカラーを選択してください</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
     <value>ナビゲーションスタイル</value>
   </data>

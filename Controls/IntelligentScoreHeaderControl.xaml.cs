@@ -48,9 +48,13 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
     private void IntelligentScoreHeaderControl_Loaded(object sender, RoutedEventArgs e)
     {
         _parentPage = FindParentPage(this);
-        if (PreviewDialog != null && PreviewDialog.XamlRoot == null && this.XamlRoot != null)
+        if (PreviewDialog != null)
         {
-            PreviewDialog.XamlRoot = this.XamlRoot;
+            PreviewDialog.RequestedTheme = this.ActualTheme;
+            if (PreviewDialog.XamlRoot == null && this.XamlRoot != null)
+            {
+                PreviewDialog.XamlRoot = this.XamlRoot;
+            }
         }
 
         // Auto-detect page category if not explicitly set
@@ -464,6 +468,7 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
             item.IsSelectedForApply = modeCandidates.Contains(item.Tag);
         }
 
+        PreviewDialog.RequestedTheme = this.ActualTheme;
         if (PreviewDialog.XamlRoot == null && this.XamlRoot != null)
         {
             PreviewDialog.XamlRoot = this.XamlRoot;

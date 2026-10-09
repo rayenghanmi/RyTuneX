@@ -1460,6 +1460,27 @@
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>Pilih tema warna aplikasi</value>
   </data>
+  <data name="Settings_AccentColorExpander.Header" xml:space="preserve">
+    <value>Warna Aksen</value>
+  </data>
+  <data name="Settings_AccentColorExpander.Description" xml:space="preserve">
+    <value>Pilih antara gaya RyTuneX, warna sistem, atau warna kustom</value>
+  </data>
+  <data name="Settings_AccentColor_RyTuneX.Text" xml:space="preserve">
+    <value>Gaya RyTuneX</value>
+  </data>
+  <data name="Settings_AccentColor_System.Text" xml:space="preserve">
+    <value>Warna Sistem Saat Ini</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Text" xml:space="preserve">
+    <value>Warna Kustom</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Header" xml:space="preserve">
+    <value>Warna Aksen Kustom</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Description" xml:space="preserve">
+    <value>Pilih warna aksen yang Anda inginkan</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
     <value>Gaya Navigasi</value>
   </data>

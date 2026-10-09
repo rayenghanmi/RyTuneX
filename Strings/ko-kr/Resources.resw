@@ -1462,6 +1462,27 @@
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>앱 색상 테마를 선택하세요</value>
   </data>
+  <data name="Settings_AccentColorExpander.Header" xml:space="preserve">
+    <value>강조 색상</value>
+  </data>
+  <data name="Settings_AccentColorExpander.Description" xml:space="preserve">
+    <value>RyTuneX 스타일, 현재 시스템 색상 또는 사용자 지정 색상 중에서 선택합니다</value>
+  </data>
+  <data name="Settings_AccentColor_RyTuneX.Text" xml:space="preserve">
+    <value>RyTuneX 스타일</value>
+  </data>
+  <data name="Settings_AccentColor_System.Text" xml:space="preserve">
+    <value>현재 시스템 색상</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Text" xml:space="preserve">
+    <value>사용자 지정 색상</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Header" xml:space="preserve">
+    <value>사용자 지정 강조 색상</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Description" xml:space="preserve">
+    <value>원하는 강조 색상을 선택하세요</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
     <value>탐색 스타일</value>
   </data>

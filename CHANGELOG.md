@@ -6,6 +6,7 @@ All notable changes to this branch will be documented in this file.
 
 ### Added
 
+- Added accent color personalization in Settings to choose between RyTuneX style, Windows system accent, or a custom color.
 - Added a dedicated `Stress Test` page to evaluate system stability and thermal performance under sustained loads.
 - Implemented a multi-threaded **Stress Engine** (`StressEngine`) supporting CPU stress tests, RAM memory allocation testing, GPU compute workloads, real-time hardware telemetry (CPU utilization, temperatures, memory usage), customizable thread allocation, duration timers, and emergency temperature cutoff thresholds.
 - Integrated the `Stress Test` page into the main navigation menu and in-app search indexing (`AppSearchService`).

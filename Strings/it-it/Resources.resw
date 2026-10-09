@@ -1462,6 +1462,27 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>Scegli il tema colore dell'app</value>
   </data>
+  <data name="Settings_AccentColorExpander.Header" xml:space="preserve">
+    <value>Colore di accento</value>
+  </data>
+  <data name="Settings_AccentColorExpander.Description" xml:space="preserve">
+    <value>Scegli tra lo stile RyTuneX, i colori di sistema correnti o un colore personalizzato</value>
+  </data>
+  <data name="Settings_AccentColor_RyTuneX.Text" xml:space="preserve">
+    <value>Stile RyTuneX</value>
+  </data>
+  <data name="Settings_AccentColor_System.Text" xml:space="preserve">
+    <value>Colori di sistema correnti</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Text" xml:space="preserve">
+    <value>Colore personalizzato</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Header" xml:space="preserve">
+    <value>Colore di accento personalizzato</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Description" xml:space="preserve">
+    <value>Seleziona il tuo colore di accento preferito</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
     <value>Stile di navigazione</value>
   </data>

@@ -1462,6 +1462,27 @@ Check your computer for memory problems</value>
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>Choose the app color theme</value>
   </data>
+  <data name="Settings_AccentColorExpander.Header" xml:space="preserve">
+    <value>Accent Color</value>
+  </data>
+  <data name="Settings_AccentColorExpander.Description" xml:space="preserve">
+    <value>Choose between RyTuneX style, Windows accent color, or a custom color</value>
+  </data>
+  <data name="Settings_AccentColor_RyTuneX.Text" xml:space="preserve">
+    <value>RyTuneX Style</value>
+  </data>
+  <data name="Settings_AccentColor_System.Text" xml:space="preserve">
+    <value>Current System Colors</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Text" xml:space="preserve">
+    <value>Custom Color</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Header" xml:space="preserve">
+    <value>Custom Accent Color</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Description" xml:space="preserve">
+    <value>Select your preferred accent color</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
     <value>Navigation Style</value>
   </data>

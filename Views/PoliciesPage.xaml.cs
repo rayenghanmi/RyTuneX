@@ -259,6 +259,7 @@ public sealed partial class PoliciesPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "PoliciesPage_ConfirmRemoveAllTitle".GetLocalized(),
@@ -296,6 +297,7 @@ public sealed partial class PoliciesPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "PoliciesPage_ConfirmRemoveCategoryTitle".GetLocalized(),
@@ -343,6 +345,7 @@ public sealed partial class PoliciesPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "PoliciesPage_ConfirmRemoveSelectedTitle".GetLocalized(),
@@ -404,6 +407,7 @@ public sealed partial class PoliciesPage : Page
                 var restartDialog = new ContentDialog
                 {
                     XamlRoot = XamlRoot,
+                    RequestedTheme = ActualTheme,
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                     Title = "PoliciesPage_RestartExplorerTitle".GetLocalized(),

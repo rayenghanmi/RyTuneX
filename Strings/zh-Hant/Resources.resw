@@ -1458,6 +1458,27 @@
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>選擇應用程式的色彩主題</value>
   </data>
+  <data name="Settings_AccentColorExpander.Header" xml:space="preserve">
+    <value>強調色</value>
+  </data>
+  <data name="Settings_AccentColorExpander.Description" xml:space="preserve">
+    <value>在 RyTuneX 風格、系統顏色或自訂顏色之間進行選擇</value>
+  </data>
+  <data name="Settings_AccentColor_RyTuneX.Text" xml:space="preserve">
+    <value>RyTuneX 風格</value>
+  </data>
+  <data name="Settings_AccentColor_System.Text" xml:space="preserve">
+    <value>目前系統顏色</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Text" xml:space="preserve">
+    <value>自訂顏色</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Header" xml:space="preserve">
+    <value>自訂強調色</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Description" xml:space="preserve">
+    <value>選擇您偏好的強調色</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
     <value>導覽樣式</value>
   </data>

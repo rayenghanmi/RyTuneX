@@ -6,15 +6,20 @@ using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
+using RyTuneX.Models;
+using RyTuneX.Services;
 using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.Storage;
+using Windows.UI.ViewManagement;
 
 namespace RyTuneX.Views;
 
 public sealed partial class SettingsPage : Page
 {
     private readonly IThemeSelectorService _themeSelectorService;
+    private readonly IAccentColorService _accentColorService;
+    private bool _isUpdatingColorPicker;
 
     private string _versionDescription;
     private string? _pendingScrollTarget;
@@ -28,6 +33,7 @@ public sealed partial class SettingsPage : Page
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
 
         _themeSelectorService = App.GetService<IThemeSelectorService>();
+        _accentColorService = App.GetService<IAccentColorService>();
 
         // Set the default language based on the stored setting or the system if not set explicitly
         SetDefaultLanguageBasedOnSystem();
@@ -35,6 +41,7 @@ public sealed partial class SettingsPage : Page
         _versionDescription = "Version".GetLocalized() + " " + GetVersionDescription();
 
         InitializeThemeComboBox();
+        InitializeAccentColorSection();
         InitializeNavigationStyleComboBox();
 
         Loaded += SettingsPage_Loaded;
@@ -101,6 +108,89 @@ public sealed partial class SettingsPage : Page
                 _ = LogHelper.Log($"Theme changed to: {tag}");
             }
         }
+    }
+
+    private void InitializeAccentColorSection()
+    {
+        _isUpdatingColorPicker = true;
+        try
+        {
+            var uiSettings = new UISettings();
+            var systemAccent = uiSettings.GetColorValue(UIColorType.Accent);
+            SystemColorDot.Background = new SolidColorBrush(systemAccent);
+
+            var customColor = _accentColorService.CustomColor;
+            CustomColorDot.Background = new SolidColorBrush(customColor);
+            CustomColorPreviewBorder.Background = new SolidColorBrush(customColor);
+            CustomColorHexText.Text = AccentColorService.ColorToHex(customColor);
+            CustomColorPicker.Color = customColor;
+
+            var currentMode = _accentColorService.Mode.ToString();
+            foreach (ComboBoxItem item in AccentColorComboBox.Items)
+            {
+                if (item.Tag as string == currentMode)
+                {
+                    AccentColorComboBox.SelectedItem = item;
+                    break;
+                }
+            }
+
+            AccentColorSettingsExpander.IsExpanded = (_accentColorService.Mode == AccentColorMode.Custom);
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to initialize accent color section: {ex.Message}");
+        }
+        finally
+        {
+            _isUpdatingColorPicker = false;
+        }
+    }
+
+    private async void AccentColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (AccentColorComboBox.SelectedItem is ComboBoxItem selected)
+        {
+            var tag = selected.Tag as string;
+            if (string.IsNullOrEmpty(tag))
+            {
+                return;
+            }
+
+            if (Enum.TryParse<AccentColorMode>(tag, out var mode))
+            {
+                AccentColorSettingsExpander.IsExpanded = (mode == AccentColorMode.Custom);
+                await _accentColorService.SetAccentColorModeAsync(mode);
+                _ = LogHelper.Log($"Accent color mode changed to: {tag}");
+            }
+        }
+    }
+
+    private async void CustomColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
+    {
+        if (_isUpdatingColorPicker)
+        {
+            return;
+        }
+
+        var newColor = args.NewColor;
+        CustomColorPreviewBorder.Background = new SolidColorBrush(newColor);
+        CustomColorDot.Background = new SolidColorBrush(newColor);
+        CustomColorHexText.Text = AccentColorService.ColorToHex(newColor);
+
+        if (_accentColorService.Mode != AccentColorMode.Custom)
+        {
+            foreach (ComboBoxItem item in AccentColorComboBox.Items)
+            {
+                if (item.Tag as string == "Custom")
+                {
+                    AccentColorComboBox.SelectedItem = item;
+                    break;
+                }
+            }
+        }
+
+        await _accentColorService.SetCustomColorAsync(newColor);
     }
 
     private void NavigationStyleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -298,6 +388,7 @@ public sealed partial class SettingsPage : Page
         var contentPanel = new StackPanel
         {
             Orientation = Orientation.Vertical,
+            RequestedTheme = ActualTheme,
             Children =
             {
                 new TextBlock
@@ -313,6 +404,7 @@ public sealed partial class SettingsPage : Page
         var revertDialog = new ContentDialog()
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "RyTuneX",
@@ -345,6 +437,7 @@ public sealed partial class SettingsPage : Page
                 var currentDialog = new ContentDialog()
                 {
                     XamlRoot = XamlRoot,
+                    RequestedTheme = ActualTheme,
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     Title = "RyTuneX",
                     Content = new StackPanel

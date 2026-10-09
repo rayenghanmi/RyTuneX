@@ -162,7 +162,7 @@ public sealed partial class StressTestPage : Page
             Margin = new Thickness(0, 0, 0, 10)
         };
 
-        var content = new StackPanel { Spacing = 0, MinWidth = 360 };
+        var content = new StackPanel { Spacing = 0, MinWidth = 360, RequestedTheme = ActualTheme };
         content.Children.Add(allCheck);
         content.Children.Add(separator);
         content.Children.Add(new ScrollViewer
@@ -175,6 +175,7 @@ public sealed partial class StressTestPage : Page
 
         var dialog = new ContentDialog
         {
+            RequestedTheme = ActualTheme,
             Title = "StressTestPage_SelectCpuCoresDialog_Title".TryGetLocalized() ?? "Select CPU Cores",
             Content = content,
             PrimaryButtonText = "StressTestPage_SelectCpuCoresDialog_Apply".TryGetLocalized() ?? "Apply",

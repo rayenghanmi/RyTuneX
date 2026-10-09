@@ -206,7 +206,7 @@ public sealed partial class StartupPage : Page
     {
         if (sender is Button button && button.Tag is StartupItem item)
         {
-            var stack = new StackPanel { Spacing = 10, Margin = new Thickness(0, 10, 0, 0) };
+            var stack = new StackPanel { Spacing = 10, Margin = new Thickness(0, 10, 0, 0), RequestedTheme = ActualTheme };
 
             void AddDetail(string label, string val)
             {
@@ -239,6 +239,7 @@ public sealed partial class StartupPage : Page
             var dialog = new ContentDialog
             {
                 XamlRoot = XamlRoot,
+                RequestedTheme = ActualTheme,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 Title = "StartupPage_DetailsDialog_Title".TryGetLocalized() ?? "Startup App Details",
                 Content = stack,
@@ -261,6 +262,7 @@ public sealed partial class StartupPage : Page
             var confirmDialog = new ContentDialog
             {
                 XamlRoot = XamlRoot,
+                RequestedTheme = ActualTheme,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 Title = title,
                 Content = string.Format(contentFormat, item.Name),
@@ -352,6 +354,7 @@ public sealed partial class StartupPage : Page
         var stack = new StackPanel
         {
             Spacing = 12,
+            RequestedTheme = ActualTheme,
             Children =
             {
                 nameBox,
@@ -366,6 +369,7 @@ public sealed partial class StartupPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "StartupPage_AddDialog_Title".TryGetLocalized() ?? "Add Startup App",
@@ -530,6 +534,7 @@ public sealed partial class StartupPage : Page
         var confirmDialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             Title = title,
             Content = string.Format(contentFormat, selectedItems.Count),

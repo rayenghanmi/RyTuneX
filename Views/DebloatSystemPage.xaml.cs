@@ -503,12 +503,14 @@ public sealed partial class DebloatSystemPage : Page
         var contentStackPanel = new StackPanel
         {
             Orientation = Orientation.Vertical,
+            RequestedTheme = ActualTheme,
             Children = { firstLineTextBlock, scrollViewer, lastLineTextBlock }
         };
 
         var confirmationDialog = new ContentDialog()
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),

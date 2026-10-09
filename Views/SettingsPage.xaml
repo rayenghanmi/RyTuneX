@@ -60,6 +60,57 @@
                         <ComboBoxItem x:Uid="Settings_Theme_Default" Tag="Default"/>
                     </ComboBox>
                 </controls:SettingsCard>
+                <controls:SettingsExpander x:Name="AccentColorSettingsExpander"
+                                           x:Uid="Settings_AccentColorExpander"
+                                           HeaderIcon="{ui:FontIcon Glyph=&#xE771;}">
+                    <ComboBox x:Name="AccentColorComboBox"
+                              VerticalAlignment="Center"
+                              SelectionChanged="AccentColorComboBox_SelectionChanged">
+                        <ComboBoxItem Tag="RyTuneX">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Border Width="14" Height="14" CornerRadius="7" Background="#FF5E92" VerticalAlignment="Center"/>
+                                <TextBlock x:Uid="Settings_AccentColor_RyTuneX" Text="RyTuneX Style" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="System">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Border x:Name="SystemColorDot" Width="14" Height="14" CornerRadius="7" VerticalAlignment="Center"/>
+                                <TextBlock x:Uid="Settings_AccentColor_System" Text="Current System Colors" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Custom">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Border x:Name="CustomColorDot" Width="14" Height="14" CornerRadius="7" VerticalAlignment="Center"/>
+                                <TextBlock x:Uid="Settings_AccentColor_Custom" Text="Custom Color" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+                    <controls:SettingsExpander.Items>
+                        <controls:SettingsCard x:Name="CustomColorSettingsCard"
+                                               x:Uid="Settings_CustomColorSettingsCard">
+                            <DropDownButton x:Name="CustomColorDropDownButton" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Border x:Name="CustomColorPreviewBorder"
+                                            Width="16" Height="16"
+                                            CornerRadius="8"
+                                            BorderThickness="1"
+                                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"/>
+                                    <TextBlock x:Name="CustomColorHexText" Text="#FF5E92" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <DropDownButton.Flyout>
+                                    <Flyout Placement="BottomEdgeAlignedRight">
+                                        <ColorPicker x:Name="CustomColorPicker"
+                                                     IsColorChannelTextInputVisible="True"
+                                                     IsHexInputVisible="True"
+                                                     IsAlphaEnabled="False"
+                                                     ColorSpectrumShape="Ring"
+                                                     ColorChanged="CustomColorPicker_ColorChanged"/>
+                                    </Flyout>
+                                </DropDownButton.Flyout>
+                            </DropDownButton>
+                        </controls:SettingsCard>
+                    </controls:SettingsExpander.Items>
+                </controls:SettingsExpander>
                 <controls:SettingsCard x:Uid="Settings_NavigationStyle"
                                        HeaderIcon="{ui:FontIcon Glyph=&#xE700;}">
                     <ComboBox x:Name="NavigationStyleComboBox"

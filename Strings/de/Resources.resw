@@ -1462,6 +1462,27 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="Settings_ThemeSettingsCard.Description" xml:space="preserve">
     <value>Wählen Sie das Farbdesign der App</value>
   </data>
+  <data name="Settings_AccentColorExpander.Header" xml:space="preserve">
+    <value>Akzentfarbe</value>
+  </data>
+  <data name="Settings_AccentColorExpander.Description" xml:space="preserve">
+    <value>Wählen Sie zwischen RyTuneX-Stil, Systemfarben oder einer benutzerdefinierten Farbe</value>
+  </data>
+  <data name="Settings_AccentColor_RyTuneX.Text" xml:space="preserve">
+    <value>RyTuneX-Stil</value>
+  </data>
+  <data name="Settings_AccentColor_System.Text" xml:space="preserve">
+    <value>Aktuelle Systemfarben</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Text" xml:space="preserve">
+    <value>Benutzerdefinierte Farbe</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Header" xml:space="preserve">
+    <value>Benutzerdefinierte Akzentfarbe</value>
+  </data>
+  <data name="Settings_CustomColorSettingsCard.Description" xml:space="preserve">
+    <value>Wählen Sie Ihre bevorzugte Akzentfarbe</value>
+  </data>
   <data name="Settings_NavigationStyle.Header" xml:space="preserve">
     <value>Navigationsstil</value>
   </data>

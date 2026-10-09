@@ -278,9 +278,11 @@ public sealed partial class ShellPage : Page
 
         var dialog = new ContentDialog
         {
+            RequestedTheme = ActualTheme,
             Title = "RestorePointTitle".GetLocalized(),
             Content = new StackPanel
             {
+                RequestedTheme = ActualTheme,
                 Children =
             {
                 new TextBlock
