@@ -1865,10 +1865,10 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
     <value>Fichier introuvable à '{0}'. Il sera quand même ajouté au démarrage, mais il est possible qu'il ne se lance pas.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>{0} applications de démarrage activées. {1} ont échoué (droits admin requis).</value>
+    <value>{0} applications de démarrage activées. {1} ont échoué.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>{0} applications de démarrage désactivées. {1} ont échoué (droits admin requis).</value>
+    <value>{0} applications de démarrage désactivées. {1} ont échoué.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Exporter</value>
@@ -2105,7 +2105,7 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
     <value>{0} élément(s) de démarrage supprimé(s).</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0} élément(s) supprimé(s). {1} ont échoué (droits d'administrateur requis).</value>
+    <value>{0} élément(s) supprimé(s). {1} ont échoué.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Tout sélectionner</value>
@@ -3228,5 +3228,8 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Échec du chargement des éléments au démarrage : {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>Échec de la mise à jour de l'état de l'élément de démarrage '{0}'.</value>
   </data>
 </root>

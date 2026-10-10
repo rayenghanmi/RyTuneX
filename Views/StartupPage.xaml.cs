@@ -1,10 +1,12 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
 using System.Collections.ObjectModel;
+using Windows.System;
 
 namespace RyTuneX.Views;
 
@@ -15,10 +17,15 @@ public sealed partial class StartupPage : Page
     private string _currentSort = "Name";
     private bool _sortAscending = true;
     private bool _isBusy;
+    private readonly HashSet<string> _togglingItemIds = [];
+    private readonly PointerEventHandler _togglePointerPressedHandler;
+    private ToggleSwitch? _lastInteractedToggle;
+    private long _lastUserInteractionTick;
 
     public StartupPage()
     {
         InitializeComponent();
+        _togglePointerPressedHandler = new PointerEventHandler(ItemToggle_PointerPressed);
         _ = LogHelper.Log("Initializing StartupPage");
         StartupListView.ItemsSource = _filteredStartupItems;
         Loaded += StartupPage_Loaded;
@@ -156,18 +163,73 @@ public sealed partial class StartupPage : Page
         await LoadStartupItemsAsync();
     }
 
+    private void ItemToggle_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is ToggleSwitch toggle)
+        {
+            toggle.RemoveHandler(UIElement.PointerPressedEvent, _togglePointerPressedHandler);
+            toggle.AddHandler(UIElement.PointerPressedEvent, _togglePointerPressedHandler, true);
+
+            toggle.PreviewKeyDown -= ItemToggle_PreviewKeyDown;
+            toggle.PreviewKeyDown += ItemToggle_PreviewKeyDown;
+        }
+    }
+
+    private void ItemToggle_Unloaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is ToggleSwitch toggle)
+        {
+            toggle.RemoveHandler(UIElement.PointerPressedEvent, _togglePointerPressedHandler);
+            toggle.PreviewKeyDown -= ItemToggle_PreviewKeyDown;
+        }
+    }
+
+    private void ItemToggle_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is ToggleSwitch toggle)
+        {
+            _lastInteractedToggle = toggle;
+            _lastUserInteractionTick = Environment.TickCount64;
+        }
+    }
+
+    private void ItemToggle_PreviewKeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Space && sender is ToggleSwitch toggle)
+        {
+            _lastInteractedToggle = toggle;
+            _lastUserInteractionTick = Environment.TickCount64;
+        }
+    }
+
     private async void ItemToggle_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
             if (_isBusy) return;
+            if (sender is not ToggleSwitch toggle) return;
 
-            if (sender is ToggleSwitch toggle && toggle.Tag is StartupItem item)
+            // Only proceed if this toggle change was initiated by user interaction
+            bool isUserInitiated = ReferenceEquals(_lastInteractedToggle, toggle) &&
+                                   (Environment.TickCount64 - _lastUserInteractionTick) < 2500;
+            _lastInteractedToggle = null;
+
+            if (!isUserInitiated)
             {
-                // Ignore toggled events triggered by UI container virtualization during scrolling
-                if (toggle.FocusState == FocusState.Unfocused) return;
-                if (item.IsEnabled == toggle.IsOn) return;
+                return;
+            }
 
+            var item = (toggle.DataContext as StartupItem) ?? (toggle.Tag as StartupItem);
+            if (item == null) return;
+
+            if (item.IsEnabled == toggle.IsOn) return;
+            if (_togglingItemIds.Contains(item.Id)) return;
+
+            _togglingItemIds.Add(item.Id);
+            toggle.IsEnabled = false;
+
+            try
+            {
                 var newState = toggle.IsOn;
                 var success = await StartupHelper.SetStartupItemEnabledAsync(item, newState);
 
@@ -182,10 +244,17 @@ public sealed partial class StartupPage : Page
                 }
                 else
                 {
-                    // Revert toggle state if operation failed
-                    toggle.IsOn = !newState;
-                    App.ShowNotification("StartupPage_Title".GetLocalized(), "StartupPage_Notification_AdminRequired".TryGetLocalized() ?? "Administrator privileges required to modify system startup items.", InfoBarSeverity.Warning, 4000);
+                    // Revert toggle state if operation failed (isUserInitiated will be false, preventing recursion)
+                    toggle.IsOn = item.IsEnabled;
+
+                    var msg = string.Format("StartupPage_Notification_ToggleFailed".TryGetLocalized() ?? "Failed to update state for '{0}'.", item.Name);
+                    App.ShowNotification("StartupPage_Title".GetLocalized(), msg, InfoBarSeverity.Warning, 3500);
                 }
+            }
+            finally
+            {
+                toggle.IsEnabled = true;
+                _togglingItemIds.Remove(item.Id);
             }
         }
         catch (Exception ex)
@@ -421,60 +490,78 @@ public sealed partial class StartupPage : Page
 
     private async void EnableAllButton_Click(object sender, RoutedEventArgs e)
     {
-        var itemsToEnable = _filteredStartupItems.Where(x => !x.IsEnabled).ToList();
-        if (itemsToEnable.Count == 0) return;
-
-        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
-        int count = 0;
-        var failedCount = 0;
-        foreach (var item in itemsToEnable)
+        if (_isBusy) return;
+        _isBusy = true;
+        try
         {
-            if (await StartupHelper.SetStartupItemEnabledAsync(item, true))
-            {
-                item.IsEnabled = true;
-                count++;
-            }
-            else
-            {
-                failedCount++;
-            }
-        }
+            var itemsToEnable = _filteredStartupItems.Where(x => !x.IsEnabled).ToList();
+            if (itemsToEnable.Count == 0) return;
 
-        UpdateSummaryCards();
-        ApplyFilterAndSort();
-        var msg = failedCount > 0
-            ? string.Format("StartupPage_Notification_EnabledCountFailed".TryGetLocalized() ?? "Enabled {0} startup apps. {1} failed (admin required).", count, failedCount)
-            : string.Format("StartupPage_Notification_EnabledCount".TryGetLocalized() ?? "Enabled {0} startup apps.", count);
-        App.ShowNotification(titleText, msg, failedCount > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success, 3000);
+            var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
+            int count = 0;
+            var failedCount = 0;
+            foreach (var item in itemsToEnable)
+            {
+                if (await StartupHelper.SetStartupItemEnabledAsync(item, true))
+                {
+                    item.IsEnabled = true;
+                    count++;
+                }
+                else
+                {
+                    failedCount++;
+                }
+            }
+
+            UpdateSummaryCards();
+            ApplyFilterAndSort();
+            var msg = failedCount > 0
+                ? string.Format("StartupPage_Notification_EnabledCountFailed".TryGetLocalized() ?? "Enabled {0} startup apps. {1} failed.", count, failedCount)
+                : string.Format("StartupPage_Notification_EnabledCount".TryGetLocalized() ?? "Enabled {0} startup apps.", count);
+            App.ShowNotification(titleText, msg, failedCount > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success, 3000);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
     }
 
     private async void DisableAllButton_Click(object sender, RoutedEventArgs e)
     {
-        var itemsToDisable = _filteredStartupItems.Where(x => x.IsEnabled).ToList();
-        if (itemsToDisable.Count == 0) return;
-
-        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
-        int count = 0;
-        var failedCount = 0;
-        foreach (var item in itemsToDisable)
+        if (_isBusy) return;
+        _isBusy = true;
+        try
         {
-            if (await StartupHelper.SetStartupItemEnabledAsync(item, false))
-            {
-                item.IsEnabled = false;
-                count++;
-            }
-            else
-            {
-                failedCount++;
-            }
-        }
+            var itemsToDisable = _filteredStartupItems.Where(x => x.IsEnabled).ToList();
+            if (itemsToDisable.Count == 0) return;
 
-        UpdateSummaryCards();
-        ApplyFilterAndSort();
-        var msg = failedCount > 0
-            ? string.Format("StartupPage_Notification_DisabledCountFailed".TryGetLocalized() ?? "Disabled {0} startup apps. {1} failed (admin required).", count, failedCount)
-            : string.Format("StartupPage_Notification_DisabledCount".TryGetLocalized() ?? "Disabled {0} startup apps.", count);
-        App.ShowNotification(titleText, msg, failedCount > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success, 3000);
+            var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
+            int count = 0;
+            var failedCount = 0;
+            foreach (var item in itemsToDisable)
+            {
+                if (await StartupHelper.SetStartupItemEnabledAsync(item, false))
+                {
+                    item.IsEnabled = false;
+                    count++;
+                }
+                else
+                {
+                    failedCount++;
+                }
+            }
+
+            UpdateSummaryCards();
+            ApplyFilterAndSort();
+            var msg = failedCount > 0
+                ? string.Format("StartupPage_Notification_DisabledCountFailed".TryGetLocalized() ?? "Disabled {0} startup apps. {1} failed.", count, failedCount)
+                : string.Format("StartupPage_Notification_DisabledCount".TryGetLocalized() ?? "Disabled {0} startup apps.", count);
+            App.ShowNotification(titleText, msg, failedCount > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success, 3000);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
     }
 
     private void StartupListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -580,7 +667,7 @@ public sealed partial class StartupPage : Page
         {
             var msg = string.Format(
                 "StartupPage_Notification_BatchRemovedFailed".TryGetLocalized()
-                    ?? "Removed {0} item(s). {1} failed (admin required).",
+                    ?? "Removed {0} item(s). {1} failed.",
                 removedCount, failedCount);
             App.ShowNotification(titleText, msg, InfoBarSeverity.Warning, 4000);
         }

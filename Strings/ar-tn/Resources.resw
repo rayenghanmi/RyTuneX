@@ -1865,10 +1865,10 @@
     <value>لم يُعثر على الملف في '{0}'. سيتم إضافته إلى بدء التشغيل، لكنه قد لا يعمل.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>تم تفعيل {0} تطبيقات بدء التشغيل. فشل {1} (يلزم الوصول كمسؤول).</value>
+    <value>تم تفعيل {0} تطبيقات بدء التشغيل. فشل {1}.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>تم تعطيل {0} تطبيقات بدء التشغيل. فشل {1} (يلزم الوصول كمسؤول).</value>
+    <value>تم تعطيل {0} تطبيقات بدء التشغيل. فشل {1}.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>تصدير</value>
@@ -2105,7 +2105,7 @@
     <value>تمت إزالة {0} عنصر/عناصر من بدء التشغيل.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>تمت إزالة {0} عنصر/عناصر. فشل {1} (يلزم الإذن كمسؤول).</value>
+    <value>تمت إزالة {0} عنصر/عناصر. فشل {1}.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>تحديد الكل</value>
@@ -3228,5 +3228,8 @@
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>فشل تحميل عناصر بدء التشغيل: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>فشل تحديث حالة عنصر بدء التشغيل '{0}'.</value>
   </data>
 </root>

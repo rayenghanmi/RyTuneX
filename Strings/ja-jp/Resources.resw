@@ -1865,10 +1865,10 @@
     <value>'{0}' にファイルが見つかりません。スタートアップには追加されますが、起動しない可能性があります。</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>{0} 個のスタートアップアプリを有効化しました。{1} 個が失敗しました（管理者権限が必要）。</value>
+    <value>{0} 個のスタートアップアプリを有効化しました。{1} 個が失敗しました。</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>{0} 個のスタートアップアプリを無効化しました。{1} 個が失敗しました（管理者権限が必要）。</value>
+    <value>{0} 個のスタートアップアプリを無効化しました。{1} 個が失敗しました。</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>エクスポート</value>
@@ -2105,7 +2105,7 @@
     <value>{0}個のスタートアップアイテムを削除しました。</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0}個のアイテムを削除しました。{1}個が失敗しました（管理者権限が必要）。</value>
+    <value>{0}個のアイテムを削除しました。{1}個が失敗しました。</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>すべて選択</value>
@@ -3228,5 +3228,8 @@
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>スタートアップ項目の読み込みに失敗しました: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>'{0}' のスタートアップ項目の状態の更新に失敗しました。</value>
   </data>
 </root>

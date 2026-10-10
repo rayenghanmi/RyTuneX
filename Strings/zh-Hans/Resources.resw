@@ -1865,10 +1865,10 @@
     <value>在“{0}”处未找到文件。仍会将其添加到启动项，但可能无法启动。</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>已启用 {0} 个启动应用。{1} 个失败（需要管理员权限）。</value>
+    <value>已启用 {0} 个启动应用。{1} 个失败。</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>已禁用 {0} 个启动应用。{1} 个失败（需要管理员权限）。</value>
+    <value>已禁用 {0} 个启动应用。{1} 个失败。</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>导出</value>
@@ -2105,7 +2105,7 @@
     <value>已删除 {0} 个启动项目。</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>已删除 {0} 个项目。{1} 个失败（需要管理员权限）。</value>
+    <value>已删除 {0} 个项目。{1} 个失败。</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>全选</value>
@@ -3228,5 +3228,8 @@
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>无法加载启动项: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>无法更新“{0}”的启动项状态。</value>
   </data>
 </root>

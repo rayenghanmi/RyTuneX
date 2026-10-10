@@ -1865,10 +1865,10 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
     <value>Datei unter '{0}' nicht gefunden. Sie wird trotzdem beim Start hinzugefügt, startet möglicherweise aber nicht.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>{0} Autostart-Apps aktiviert. {1} fehlgeschlagen (Administratorrechte erforderlich).</value>
+    <value>{0} Autostart-Apps aktiviert. {1} fehlgeschlagen.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>{0} Autostart-Apps deaktiviert. {1} fehlgeschlagen (Administratorrechte erforderlich).</value>
+    <value>{0} Autostart-Apps deaktiviert. {1} fehlgeschlagen.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Exportieren</value>
@@ -2105,7 +2105,7 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
     <value>{0} Autostart-Element(e) entfernt.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0} Element(e) entfernt. {1} fehlgeschlagen (Administrator erforderlich).</value>
+    <value>{0} Element(e) entfernt. {1} fehlgeschlagen.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Alles auswählen</value>
@@ -3228,5 +3228,8 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Autostart-Einträge konnten nicht geladen werden: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>Status für Autostart-Eintrag '{0}' konnte nicht aktualisiert werden.</value>
   </data>
 </root>

@@ -1865,10 +1865,10 @@ Verifica si hay problemas de memoria en tu computadora</value>
     <value>No se encontró el archivo en '{0}'. Se añadirá al inicio igualmente, pero puede que no se inicie.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>{0} aplicaciones de inicio habilitadas. {1} fallaron (se requiere administrador).</value>
+    <value>{0} aplicaciones de inicio habilitadas. {1} fallaron.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>{0} aplicaciones de inicio deshabilitadas. {1} fallaron (se requiere administrador).</value>
+    <value>{0} aplicaciones de inicio deshabilitadas. {1} fallaron.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Exportar</value>
@@ -2105,7 +2105,7 @@ Verifica si hay problemas de memoria en tu computadora</value>
     <value>Se han eliminado {0} elemento(s) de inicio.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>Se han eliminado {0} elemento(s). {1} fallaron (se requieren permisos de administrador).</value>
+    <value>Se han eliminado {0} elemento(s). {1} fallaron.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Seleccionar todo</value>
@@ -3228,5 +3228,8 @@ Verifica si hay problemas de memoria en tu computadora</value>
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Error al cargar elementos de inicio: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>No se pudo actualizar el estado del elemento de inicio '{0}'.</value>
   </data>
 </root>

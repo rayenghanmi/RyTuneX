@@ -167,7 +167,6 @@
         <TextBlock x:Name="ResultsText" Grid.Row="3" FontSize="12" Opacity="0.7" Margin="0,0,0,8"/>
 
         <!-- Column Headers -->
-        <!-- Column Headers -->
         <Grid x:Name="HeaderGrid" Grid.Row="4" 
               Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" 
               Padding="12,8" CornerRadius="4" Margin="0,0,0,8"
@@ -338,6 +337,8 @@
                             <ToggleSwitch Grid.Column="4" 
                                           IsOn="{x:Bind IsEnabled, Mode=OneWay}"
                                           Tag="{x:Bind}"
+                                          Loaded="ItemToggle_Loaded"
+                                          Unloaded="ItemToggle_Unloaded"
                                           Toggled="ItemToggle_Toggled"
                                           HorizontalAlignment="Center" 
                                           VerticalAlignment="Center"

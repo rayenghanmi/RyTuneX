@@ -1865,10 +1865,10 @@
     <value>'{0}'에서 파일을 찾을 수 없습니다. 시작 프로그램에는 추가되지만 실행되지 않을 수 있습니다.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>시작 프로그램 {0}개를 활성화했습니다. {1}개 실패(관리자 권한 필요).</value>
+    <value>시작 프로그램 {0}개를 활성화했습니다. {1}개 실패.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>시작 프로그램 {0}개를 비활성화했습니다. {1}개 실패(관리자 권한 필요).</value>
+    <value>시작 프로그램 {0}개를 비활성화했습니다. {1}개 실패.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>내보내기</value>
@@ -2105,7 +2105,7 @@
     <value>{0}개의 시작 항목이 제거되었습니다.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0}개 항목을 제거했습니다. {1}개 실패 (관리자 권한 필요).</value>
+    <value>{0}개 항목을 제거했습니다. {1}개 실패.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>모두 선택</value>
@@ -3228,5 +3228,8 @@
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>시작 프로그램 항목을 불러오지 못했습니다: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>'{0}' 시작 프로그램 항목 상태를 업데이트하지 못했습니다.</value>
   </data>
 </root>

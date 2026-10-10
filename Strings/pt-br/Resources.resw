@@ -1865,10 +1865,10 @@ Verifique se há problemas de memória em seu computador</value>
     <value>Arquivo não encontrado em '{0}'. Ele ainda será adicionado à inicialização, mas pode não iniciar.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>{0} aplicativos de inicialização habilitados. {1} falharam (admin necessário).</value>
+    <value>{0} aplicativos de inicialização habilitados. {1} falharam.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>{0} aplicativos de inicialização desabilitados. {1} falharam (admin necessário).</value>
+    <value>{0} aplicativos de inicialização desabilitados. {1} falharam.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Exportar</value>
@@ -2105,7 +2105,7 @@ Verifique se há problemas de memória em seu computador</value>
     <value>{0} item(ns) de inicialização removido(s).</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0} item(ns) removido(s). {1} falharam (privilégios de administrador necessários).</value>
+    <value>{0} item(ns) removido(s). {1} falharam.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Selecionar tudo</value>
@@ -3228,5 +3228,8 @@ Verifique se há problemas de memória em seu computador</value>
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Falha ao carregar itens de inicialização: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>Falha ao atualizar o estado do item de inicialização para '{0}'.</value>
   </data>
 </root>

@@ -1865,10 +1865,10 @@ Controlla se il computer presenta problemi di memoria</value>
     <value>File non trovato in '{0}'. Verrà comunque aggiunto all'avvio, ma potrebbe non avviarsi.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>{0} app di avvio abilitate. {1} non riuscite (privilegi admin richiesti).</value>
+    <value>{0} app di avvio abilitate. {1} non riuscite.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>{0} app di avvio disabilitate. {1} non riuscite (privilegi admin richiesti).</value>
+    <value>{0} app di avvio disabilitate. {1} non riuscite.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Esporta</value>
@@ -2105,7 +2105,7 @@ Controlla se il computer presenta problemi di memoria</value>
     <value>{0} elemento/i di avvio rimosso/i.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0} elemento/i rimosso/i. {1} non riusciti (privilegi di amministratore richiesti).</value>
+    <value>{0} elemento/i rimosso/i. {1} non riusciti.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Seleziona tutto</value>
@@ -3228,5 +3228,8 @@ Controlla se il computer presenta problemi di memoria</value>
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Impossibile caricare gli elementi di avvio: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>Impossibile aggiornare lo stato dell'elemento di avvio per '{0}'.</value>
   </data>
 </root>

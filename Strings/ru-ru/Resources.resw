@@ -1862,10 +1862,10 @@
     <value>Файл не найден по пути '{0}'. Он всё равно будет добавлен в автозагрузку, но может не запуститься.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>Включено {0} приложений автозагрузки. {1} не удалось (нужны права администратора).</value>
+    <value>Включено {0} приложений автозагрузки. {1} не удалось.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>Отключено {0} приложений автозагрузки. {1} не удалось (нужны права администратора).</value>
+    <value>Отключено {0} приложений автозагрузки. {1} не удалось.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Экспорт</value>
@@ -2102,7 +2102,7 @@
     <value>Удалено {0} элемент(ов) из автозапуска.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>Удалено {0} элемент(ов). {1} не удалось (требуются права администратора).</value>
+    <value>Удалено {0} элемент(ов). {1} не удалось.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Выбрать все</value>
@@ -3225,5 +3225,8 @@
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Не удалось загрузить элементы автозагрузки: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>Не удалось обновить состояние элемента автозагрузки для '{0}'.</value>
   </data>
 </root>

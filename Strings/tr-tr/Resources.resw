@@ -1865,10 +1865,10 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
     <value>'{0}' konumunda dosya bulunamadı. Başlangıca eklenecek, ancak başlatulamayabilir.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>{0} başlangıç uygulaması etkinleştirildi. {1} başarısız oldu (yönetici gerekli).</value>
+    <value>{0} başlangıç uygulaması etkinleştirildi. {1} başarısız oldu.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>{0} başlangıç uygulaması devre dışı bırakıldı. {1} başarısız oldu (yönetici gerekli).</value>
+    <value>{0} başlangıç uygulaması devre dışı bırakıldı. {1} başarısız oldu.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Dışa Aktar</value>
@@ -2105,7 +2105,7 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
     <value>{0} başlangıç öğesi kaldırıldı.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0} öğe kaldırıldı. {1} başarısız oldu (yönetici izni gerekli).</value>
+    <value>{0} öğe kaldırıldı. {1} başarısız oldu.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Tümünü seç</value>
@@ -3228,5 +3228,8 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Başlangıç öğeleri yüklenemedi: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>'{0}' için başlangıç öğesi durumu güncellenemedi.</value>
   </data>
 </root>

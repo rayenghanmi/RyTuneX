@@ -68,6 +68,9 @@ All notable changes to this branch will be documented in this file.
 - Fixed 64-bit registry redirection when reading and modifying service startup types in `Services` page.
 - Fixed an issue in `Optimize System` page where compression progress indicators would not reset if an error occurred.
 - Added exception handling to prevent crashes when extracting default system icons.
+- Fixed an issue in `Startup Apps` page where scheduled tasks could not be toggled due to missing Task Scheduler directory path resolution, migrating mutations to the native in-process `Schedule.Service` COM API #108.
+- Fixed a UI virtualization recycling bug in `Startup Apps` page where scrolling down the list automatically toggled startup items.
+- Removed misleading administrator privilege warnings on startup item toggle failures when already running elevated #108.
 
 ### Changes
 

@@ -1865,10 +1865,10 @@ Check your computer for memory problems</value>
     <value>File not found at '{0}'. It will still be added to startup, but may not launch.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>Enabled {0} startup apps. {1} failed (admin required).</value>
+    <value>Enabled {0} startup apps. {1} failed.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>Disabled {0} startup apps. {1} failed (admin required).</value>
+    <value>Disabled {0} startup apps. {1} failed.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Export</value>
@@ -2105,7 +2105,7 @@ Check your computer for memory problems</value>
     <value>Removed {0} startup item(s).</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>Removed {0} item(s). {1} failed (admin required).</value>
+    <value>Removed {0} item(s). {1} failed.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Select all</value>
@@ -3234,5 +3234,8 @@ Check your computer for memory problems</value>
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Failed to load startup items: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>Failed to update startup item state for '{0}'.</value>
   </data>
 </root>

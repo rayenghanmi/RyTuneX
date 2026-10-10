@@ -1863,10 +1863,10 @@
     <value>File tidak ditemukan di '{0}'. File akan tetap ditambahkan ke startup, namun mungkin tidak akan berjalan.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>{0} aplikasi startup diaktifkan. {1} gagal (perlu admin).</value>
+    <value>{0} aplikasi startup diaktifkan. {1} gagal.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>{0} aplikasi startup dinonaktifkan. {1} gagal (perlu admin).</value>
+    <value>{0} aplikasi startup dinonaktifkan. {1} gagal.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Ekspor</value>
@@ -2103,7 +2103,7 @@
     <value>{0} item startup berhasil dihapus.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>{0} item dihapus. {1} gagal (diperlukan hak administrator).</value>
+    <value>{0} item dihapus. {1} gagal.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Pilih semua</value>
@@ -3226,5 +3226,8 @@
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Gagal memuat item startup: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>Gagal memperbarui status item startup untuk '{0}'.</value>
   </data>
 </root>

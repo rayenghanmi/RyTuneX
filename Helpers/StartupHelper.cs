@@ -166,7 +166,7 @@ public static class StartupHelper
     {
         try
         {
-            var script = "Get-ScheduledTask | Where-Object { $_.State -ne 'Disabled' -or $_.Triggers } | Where-Object { $t = $_.Triggers; $t | Where-Object { $_.cimClass.CimClassName -like '*LogonTrigger*' -or $_.cimClass.CimClassName -like '*BootTrigger*' } } | Select-Object TaskName, TaskPath, State | ConvertTo-Json -Compress";
+            var script = "Get-ScheduledTask | Where-Object { $_.State -ne 'Disabled' -or $_.Triggers } | Where-Object { $t = $_.Triggers; $t | Where-Object { $_.cimClass.CimClassName -like '*LogonTrigger*' -or $_.cimClass.CimClassName -like '*BootTrigger*' } } | Select-Object TaskName, TaskPath, State, @{N='Execute';E={($_.Actions | Where-Object { $_.Execute }).Execute -join ';'}}, @{N='Arguments';E={($_.Actions | Where-Object { $_.Execute }).Arguments -join ';'}} | ConvertTo-Json -Compress";
 
             var psi = new ProcessStartInfo
             {
@@ -182,7 +182,7 @@ public static class StartupHelper
             if (proc == null) return;
 
             var output = proc.StandardOutput.ReadToEnd();
-            proc.WaitForExit(3000);
+            proc.WaitForExit(5000);
 
             if (string.IsNullOrWhiteSpace(output)) return;
 
@@ -204,25 +204,64 @@ public static class StartupHelper
                 var taskName = el.GetProperty("TaskName").GetString() ?? "";
                 if (string.IsNullOrWhiteSpace(taskName)) continue;
 
+                var taskPath = el.TryGetProperty("TaskPath", out var tp) ? tp.GetString() ?? "" : "";
+                var trimmedPath = taskPath.Trim('\\');
+                var fullTaskPath = string.IsNullOrEmpty(trimmedPath)
+                    ? $@"\{taskName}"
+                    : $@"\{trimmedPath}\{taskName}";
+
+                var rawExe = el.TryGetProperty("Execute", out var exeProp) ? exeProp.GetString() ?? "" : "";
+                if (rawExe.Contains(';'))
+                {
+                    rawExe = rawExe.Split(';')[0];
+                }
+                rawExe = Environment.ExpandEnvironmentVariables(rawExe.Trim('\"', ' '));
+                var exePath = ExtractExecutablePath(rawExe);
+
+                var rawArgs = el.TryGetProperty("Arguments", out var argProp) ? argProp.GetString() ?? "" : "";
+                if (rawArgs.Contains(';'))
+                {
+                    rawArgs = rawArgs.Split(';')[0];
+                }
+                rawArgs = Environment.ExpandEnvironmentVariables(rawArgs.Trim());
+
+                var isValid = string.IsNullOrEmpty(exePath) || File.Exists(exePath);
+                var publisher = !string.IsNullOrEmpty(exePath) && File.Exists(exePath)
+                    ? GetPublisher(exePath)
+                    : "Scheduled Task";
+                var description = !string.IsNullOrEmpty(exePath) && File.Exists(exePath)
+                    ? GetDescription(exePath, taskName)
+                    : (string.IsNullOrEmpty(trimmedPath) ? $"Windows Scheduled Task: {taskName}" : $"Windows Scheduled Task ({taskPath}): {taskName}");
+                var fileSize = !string.IsNullOrEmpty(exePath) && File.Exists(exePath)
+                    ? new FileInfo(exePath).Length
+                    : 0;
+
+                var command = !string.IsNullOrEmpty(exePath)
+                    ? (!string.IsNullOrWhiteSpace(rawArgs) ? $"\"{exePath}\" {rawArgs}" : $"\"{exePath}\"")
+                    : $"schtasks /Run /TN \"{fullTaskPath}\"";
+
                 var stateStr = el.TryGetProperty("State", out var s) ? s.ToString() : "";
                 var isEnabled = !stateStr.Equals("Disabled", StringComparison.OrdinalIgnoreCase);
 
-                var impact = CalculateImpact(taskName, taskName, "Windows / Scheduled Task", true, 0);
+                var impact = CalculateImpact(taskName, exePath, publisher, isValid, fileSize);
 
                 list.Add(new StartupItem
                 {
-                    Id = $"Task_{taskName}",
+                    Id = $"Task_{fullTaskPath}",
                     Name = taskName,
-                    Command = $"schtasks /Run /TN \"{taskName}\"",
-                    ExecutablePath = "schtasks.exe",
-                    Publisher = "Scheduled Task",
-                    Description = $"Windows Scheduled Task: {taskName}",
+                    Command = command,
+                    ExecutablePath = !string.IsNullOrEmpty(exePath) ? exePath : "schtasks.exe",
+                    Publisher = publisher,
+                    Description = description,
                     Location = "Scheduled Task",
                     LocationType = StartupLocationType.ScheduledTask,
-                    TaskName = taskName,
+                    TaskName = fullTaskPath,
+                    TaskPath = taskPath,
+                    FilePath = !string.IsNullOrEmpty(exePath) && File.Exists(exePath) ? exePath : null,
                     IsEnabled = isEnabled,
-                    IsValid = true,
-                    Impact = impact
+                    IsValid = isValid,
+                    Impact = impact,
+                    FileSizeBytes = fileSize
                 });
             }
         }
@@ -471,19 +510,131 @@ public static class StartupHelper
             {
                 if (item.LocationType == StartupLocationType.ScheduledTask)
                 {
-                    if (string.IsNullOrEmpty(item.TaskName)) return false;
-                    var flag = enable ? "/Enable" : "/Disable";
-                    var psi = new ProcessStartInfo
+                    var (folderPath, leafName) = ResolveTaskFolderAndName(
+                        !string.IsNullOrEmpty(item.TaskName) ? item.TaskName : item.Name,
+                        item.TaskPath);
+                    var fullPath = folderPath == @"\" ? $@"\{leafName}" : $@"{folderPath}\{leafName}";
+
+                    // Native in-process COM Schedule.Service
+                    try
                     {
-                        FileName = "schtasks.exe",
-                        Arguments = $"/Change /TN \"{item.TaskName}\" {flag}",
-                        UseShellExecute = false,
-                        CreateNoWindow = true
-                    };
-                    using var p = Process.Start(psi);
-                    p?.WaitForExit(3000);
-                    item.IsEnabled = enable;
-                    return p?.ExitCode == 0;
+                        var serviceType = Type.GetTypeFromProgID("Schedule.Service");
+                        if (serviceType != null)
+                        {
+                            dynamic? service = Activator.CreateInstance(serviceType);
+                            if (service != null)
+                            {
+                                try
+                                {
+                                    service.Connect();
+                                    dynamic folder = service.GetFolder(folderPath);
+                                    try
+                                    {
+                                        dynamic task = folder.GetTask(leafName);
+                                        try
+                                        {
+                                            task.Enabled = enable;
+                                            item.IsEnabled = enable;
+                                            return true;
+                                        }
+                                        finally
+                                        {
+                                            Marshal.ReleaseComObject(task);
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        Marshal.ReleaseComObject(folder);
+                                    }
+                                }
+                                finally
+                                {
+                                    Marshal.ReleaseComObject(service);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = LogHelper.LogWarning($"COM Schedule.Service failed for '{leafName}' in '{folderPath}': {ex.Message}");
+                    }
+
+                    // schtasks.exe /Change
+                    var flag = enable ? "/Enable" : "/Disable";
+                    var schtasksExe = Path.Combine(Environment.SystemDirectory, "schtasks.exe");
+                    try
+                    {
+                        var psi = new ProcessStartInfo
+                        {
+                            FileName = schtasksExe,
+                            Arguments = $"/Change /TN \"{fullPath}\" {flag}",
+                            UseShellExecute = false,
+                            CreateNoWindow = true,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true
+                        };
+                        using var p = Process.Start(psi);
+                        if (p != null)
+                        {
+                            var stdout = p.StandardOutput.ReadToEnd();
+                            var stderr = p.StandardError.ReadToEnd();
+                            p.WaitForExit(4000);
+                            if (p.ExitCode == 0)
+                            {
+                                item.IsEnabled = enable;
+                                return true;
+                            }
+                            _ = LogHelper.LogWarning($"schtasks /Change failed for {fullPath} (Exit {p.ExitCode}): {stderr.Trim()}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = LogHelper.LogWarning($"schtasks /Change execution error for {fullPath}: {ex.Message}");
+                    }
+
+                    // PowerShell Enable/Disable-ScheduledTask
+                    try
+                    {
+                        var psAction = enable ? "Enable-ScheduledTask" : "Disable-ScheduledTask";
+                        var psFolder = folderPath.EndsWith('\\') ? folderPath : folderPath + @"\";
+                        var psScript = $"{psAction} -TaskPath '{psFolder}' -TaskName '{leafName}'";
+                        var psPsi = new ProcessStartInfo
+                        {
+                            FileName = "powershell.exe",
+                            Arguments = $"-NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"{psScript}\"",
+                            UseShellExecute = false,
+                            CreateNoWindow = true,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true
+                        };
+                        using var psProc = Process.Start(psPsi);
+                        if (psProc != null)
+                        {
+                            var psOut = psProc.StandardOutput.ReadToEnd();
+                            var psErr = psProc.StandardError.ReadToEnd();
+                            psProc.WaitForExit(6000);
+                            if (psProc.ExitCode == 0)
+                            {
+                                item.IsEnabled = enable;
+                                return true;
+                            }
+                            _ = LogHelper.LogWarning($"PowerShell {psAction} failed for {fullPath}: {psErr.Trim()}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = LogHelper.LogWarning($"PowerShell fallback error for {fullPath}: {ex.Message}");
+                    }
+
+                    // Verify state
+                    var verifiedState = IsScheduledTaskEnabled(leafName, folderPath);
+                    if (verifiedState.HasValue && verifiedState.Value == enable)
+                    {
+                        item.IsEnabled = enable;
+                        return true;
+                    }
+
+                    return false;
                 }
 
                 string approvedPath = item.LocationType switch
@@ -499,17 +650,50 @@ public static class StartupHelper
                 var view = item.View;
                 var name = item.ValueName ?? item.Name;
 
-                using var baseKey = RegistryKey.OpenBaseKey(hive, view);
-                using var subKey = baseKey.CreateSubKey(approvedPath, true);
-                if (subKey != null)
+                try
                 {
-                    byte[] bytes = enable
-                        ? new byte[] { 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
-                        : new byte[] { 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+                    using var baseKey = RegistryKey.OpenBaseKey(hive, view);
+                    using var subKey = baseKey.CreateSubKey(approvedPath, true);
+                    if (subKey != null)
+                    {
+                        byte[] bytes = enable
+                            ? new byte[] { 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
+                            : new byte[] { 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
-                    subKey.SetValue(name, bytes, RegistryValueKind.Binary);
-                    item.IsEnabled = enable;
-                    return true;
+                        subKey.SetValue(name, bytes, RegistryValueKind.Binary);
+                        item.IsEnabled = enable;
+                        return true;
+                    }
+                }
+                catch (UnauthorizedAccessException) when (hive == RegistryHive.LocalMachine)
+                {
+                    // Direct HKLM write denied: elevate via reg.exe with runas
+                    try
+                    {
+                        var hexData = enable ? "020000000000000000000000" : "030000000000000000000000";
+                        var regViewFlag = item.View == RegistryView.Registry32 ? " /reg:32" : " /reg:64";
+                        var regArgs = $"add \"HKLM\\{approvedPath}\" /v \"{name}\" /t REG_BINARY /d \"{hexData}\" /f{regViewFlag}";
+                        var elevatedPsi = new ProcessStartInfo
+                        {
+                            FileName = "reg.exe",
+                            Arguments = regArgs,
+                            UseShellExecute = true,
+                            Verb = "runas",
+                            CreateNoWindow = true,
+                            WindowStyle = ProcessWindowStyle.Hidden
+                        };
+                        using var elevatedProc = Process.Start(elevatedPsi);
+                        elevatedProc?.WaitForExit(5000);
+                        if (elevatedProc?.ExitCode == 0)
+                        {
+                            item.IsEnabled = enable;
+                            return true;
+                        }
+                    }
+                    catch (System.ComponentModel.Win32Exception)
+                    {
+                        // UAC cancelled
+                    }
                 }
             }
             catch (Exception ex)
@@ -528,17 +712,101 @@ public static class StartupHelper
             {
                 if (item.LocationType == StartupLocationType.ScheduledTask)
                 {
-                    if (string.IsNullOrEmpty(item.TaskName)) return false;
-                    var psi = new ProcessStartInfo
+                    var (folderPath, leafName) = ResolveTaskFolderAndName(
+                        !string.IsNullOrEmpty(item.TaskName) ? item.TaskName : item.Name,
+                        item.TaskPath);
+                    var fullPath = folderPath == @"\" ? $@"\{leafName}" : $@"{folderPath}\{leafName}";
+
+                    // In-process COM DeleteTask
+                    try
                     {
-                        FileName = "schtasks.exe",
-                        Arguments = $"/Delete /TN \"{item.TaskName}\" /F",
-                        UseShellExecute = false,
-                        CreateNoWindow = true
-                    };
-                    using var p = Process.Start(psi);
-                    p?.WaitForExit(3000);
-                    return p?.ExitCode == 0;
+                        var serviceType = Type.GetTypeFromProgID("Schedule.Service");
+                        if (serviceType != null)
+                        {
+                            dynamic? service = Activator.CreateInstance(serviceType);
+                            if (service != null)
+                            {
+                                try
+                                {
+                                    service.Connect();
+                                    dynamic folder = service.GetFolder(folderPath);
+                                    try
+                                    {
+                                        folder.DeleteTask(leafName, 0);
+                                        return true;
+                                    }
+                                    finally
+                                    {
+                                        Marshal.ReleaseComObject(folder);
+                                    }
+                                }
+                                finally
+                                {
+                                    Marshal.ReleaseComObject(service);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = LogHelper.LogWarning($"COM DeleteTask failed for '{leafName}' in '{folderPath}': {ex.Message}");
+                    }
+
+                    // schtasks.exe /Delete
+                    var schtasksExe = Path.Combine(Environment.SystemDirectory, "schtasks.exe");
+                    try
+                    {
+                        var psi = new ProcessStartInfo
+                        {
+                            FileName = schtasksExe,
+                            Arguments = $"/Delete /TN \"{fullPath}\" /F",
+                            UseShellExecute = false,
+                            CreateNoWindow = true,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true
+                        };
+                        using var p = Process.Start(psi);
+                        if (p != null)
+                        {
+                            p.StandardOutput.ReadToEnd();
+                            p.StandardError.ReadToEnd();
+                            p.WaitForExit(4000);
+                            if (p.ExitCode == 0) return true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = LogHelper.LogWarning($"schtasks /Delete error for {fullPath}: {ex.Message}");
+                    }
+
+                    // PowerShell Unregister-ScheduledTask
+                    try
+                    {
+                        var psFolder = folderPath.EndsWith('\\') ? folderPath : folderPath + @"\";
+                        var psScript = $"Unregister-ScheduledTask -TaskPath '{psFolder}' -TaskName '{leafName}' -Confirm:$false";
+                        var psPsi = new ProcessStartInfo
+                        {
+                            FileName = "powershell.exe",
+                            Arguments = $"-NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"{psScript}\"",
+                            UseShellExecute = false,
+                            CreateNoWindow = true,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true
+                        };
+                        using var psProc = Process.Start(psPsi);
+                        if (psProc != null)
+                        {
+                            psProc.StandardOutput.ReadToEnd();
+                            psProc.StandardError.ReadToEnd();
+                            psProc.WaitForExit(6000);
+                            if (psProc.ExitCode == 0) return true;
+                        }
+                    }
+                    catch { }
+
+                    // Verify if task still exists
+                    var exists = IsScheduledTaskEnabled(leafName, folderPath);
+                    return exists == null; // null means deleted / not found
                 }
 
                 if (item.LocationType is StartupLocationType.UserStartupFolder or StartupLocationType.CommonStartupFolder)
@@ -631,13 +899,17 @@ public static class StartupHelper
                 ? item.FilePath
                 : item.ExecutablePath;
 
-            if (File.Exists(target))
+            if (!string.IsNullOrEmpty(target) && File.Exists(target))
             {
                 Process.Start("explorer.exe", $"/select,\"{target}\"");
             }
-            else if (Directory.Exists(Path.GetDirectoryName(target)))
+            else if (!string.IsNullOrEmpty(target) && Directory.Exists(Path.GetDirectoryName(target)))
             {
                 Process.Start("explorer.exe", $"\"{Path.GetDirectoryName(target)}\"");
+            }
+            else if (item.LocationType == StartupLocationType.ScheduledTask)
+            {
+                Process.Start("taskschd.msc");
             }
         }
         catch (Exception ex)
@@ -767,5 +1039,161 @@ public static class StartupHelper
         }
 
         return StartupImpact.Low;
+    }
+
+    public static bool IsProcessElevated()
+    {
+        try
+        {
+            using var identity = System.Security.Principal.WindowsIdentity.GetCurrent();
+            var principal = new System.Security.Principal.WindowsPrincipal(identity);
+            return principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public static void RestartAsAdministrator()
+    {
+        try
+        {
+            var aliasPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Microsoft", "WindowsApps", "RyTuneX.exe");
+
+            string target = File.Exists(aliasPath)
+                ? aliasPath
+                : (Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "");
+
+            if (!string.IsNullOrEmpty(target) && File.Exists(target))
+            {
+                var psi = new ProcessStartInfo
+                {
+                    FileName = target,
+                    UseShellExecute = true,
+                    Verb = "runas"
+                };
+                Process.Start(psi);
+                App.MainWindow?.Close();
+                Environment.Exit(0);
+            }
+        }
+        catch (System.ComponentModel.Win32Exception)
+        {
+            // UAC cancelled
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"RestartAsAdministrator failed: {ex.Message}");
+        }
+    }
+
+    public static bool? IsScheduledTaskEnabled(string taskName, string? taskPath = null)
+    {
+        var (folderPath, leafName) = ResolveTaskFolderAndName(taskName, taskPath);
+
+        // In-process COM attempt
+        try
+        {
+            var serviceType = Type.GetTypeFromProgID("Schedule.Service");
+            if (serviceType != null)
+            {
+                dynamic? service = Activator.CreateInstance(serviceType);
+                if (service != null)
+                {
+                    try
+                    {
+                        service.Connect();
+                        dynamic folder = service.GetFolder(folderPath);
+                        try
+                        {
+                            dynamic task = folder.GetTask(leafName);
+                            try
+                            {
+                                bool isEnabled = task.Enabled;
+                                return isEnabled;
+                            }
+                            finally
+                            {
+                                Marshal.ReleaseComObject(task);
+                            }
+                        }
+                        finally
+                        {
+                            Marshal.ReleaseComObject(folder);
+                        }
+                    }
+                    finally
+                    {
+                        Marshal.ReleaseComObject(service);
+                    }
+                }
+            }
+        }
+        catch
+        {
+            // Fall through to schtasks.exe
+        }
+
+        // schtasks.exe fallback
+        try
+        {
+            var fullPath = folderPath == @"\" ? $@"\{leafName}" : $@"{folderPath}\{leafName}";
+            var psi = new ProcessStartInfo
+            {
+                FileName = Path.Combine(Environment.SystemDirectory, "schtasks.exe"),
+                Arguments = $"/Query /TN \"{fullPath}\" /FO CSV /NH",
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+            using var p = Process.Start(psi);
+            if (p == null) return null;
+            var output = p.StandardOutput.ReadToEnd();
+            var err = p.StandardError.ReadToEnd();
+            p.WaitForExit(3000);
+            if (p.ExitCode != 0 || string.IsNullOrWhiteSpace(output)) return null;
+
+            // CSV output: "TaskName","Next Run Time","Status"
+            var parts = output.Trim().Split(',');
+            if (parts.Length >= 3)
+            {
+                var status = parts[2].Trim('\"', ' ', '\r', '\n');
+                return !status.Equals("Disabled", StringComparison.OrdinalIgnoreCase);
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogWarning($"IsScheduledTaskEnabled check failed for {taskName}: {ex.Message}");
+        }
+        return null;
+    }
+
+    private static (string FolderPath, string LeafName) ResolveTaskFolderAndName(string taskName, string? taskPath)
+    {
+        string leafName = taskName;
+        string folderPath = @"\";
+
+        if (!string.IsNullOrWhiteSpace(taskPath))
+        {
+            var trimmed = taskPath.Trim('\\');
+            folderPath = string.IsNullOrEmpty(trimmed) ? @"\" : $@"\{trimmed}";
+        }
+
+        if (leafName.Contains('\\'))
+        {
+            var lastSlash = leafName.LastIndexOf('\\');
+            if (string.IsNullOrWhiteSpace(taskPath) || folderPath == @"\")
+            {
+                var folderPart = leafName.Substring(0, lastSlash).Trim('\\');
+                folderPath = string.IsNullOrEmpty(folderPart) ? @"\" : $@"\{folderPart}";
+            }
+            leafName = leafName.Substring(lastSlash + 1);
+        }
+
+        return (folderPath, leafName);
     }
 }

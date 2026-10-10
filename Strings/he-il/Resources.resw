@@ -1865,10 +1865,10 @@
     <value>הקובץ לא נמצא ב-'{0}'. הוא עדיין יתווסף לאתחול, אך ייתכן שלא יופעל.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>הופעלו {0} יישומי אתחול. {1} נכשלו (נדרשות הרשאות מנהל).</value>
+    <value>הופעלו {0} יישומי אתחול. {1} נכשلو.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>הושבתו {0} יישומי אתחול. {1} נכשלו (נדרשות הרשאות מנהל).</value>
+    <value>הושבתו {0} יישומי אתחול. {1} נכשلو.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>ייצא</value>
@@ -2105,7 +2105,7 @@
     <value>הוסרו {0} פריט/ים מההפעלה.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>הוסרו {0} פריט/ים. {1} נכשלו (נדרשות הרשאות מנהל).</value>
+    <value>הוסרו {0} פריט/ים. {1} נכשלו.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>בחר הכל</value>
@@ -3228,5 +3228,8 @@
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>טעינת פריטי ההפעלה נכשלה: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>נכשל עדכון מצב פריט האתחול עבור '{0}'.</value>
   </data>
 </root>

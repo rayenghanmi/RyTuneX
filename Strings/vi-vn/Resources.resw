@@ -1865,10 +1865,10 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
     <value>Không tìm thấy tệp tại '{0}'. Tệp vẫn sẽ được thêm vào khởi động, nhưng có thể không chạy được.</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>Đã bật {0} ứng dụng khởi động. {1} thất bại (cần quyền admin).</value>
+    <value>Đã bật {0} ứng dụng khởi động. {1} thất bại.</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>Đã tắt {0} ứng dụng khởi động. {1} thất bại (cần quyền admin).</value>
+    <value>Đã tắt {0} ứng dụng khởi động. {1} thất bại.</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>Xuất</value>
@@ -2105,7 +2105,7 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
     <value>Đã xóa {0} mục khởi động.</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>Đã xóa {0} mục. {1} thất bại (cần quyền quản trị viên).</value>
+    <value>Đã xóa {0} mục. {1} thất bại.</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>Chọn tất cả</value>
@@ -3228,5 +3228,8 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>Không thể tải các mục khởi động: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>Không thể cập nhật trạng thái mục khởi động cho '{0}'.</value>
   </data>
 </root>

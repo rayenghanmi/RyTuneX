@@ -1861,10 +1861,10 @@
     <value>在「{0}」找不到檔案。仍將其新增至啟動項目，但可能無法啟動。</value>
   </data>
   <data name="StartupPage_Notification_EnabledCountFailed" xml:space="preserve">
-    <value>已啟用 {0} 個啟動應用程式。{1} 個失敗（需要管理員）。</value>
+    <value>已啟用 {0} 個啟動應用程式。{1} 個失敗。</value>
   </data>
   <data name="StartupPage_Notification_DisabledCountFailed" xml:space="preserve">
-    <value>已停用 {0} 個啟動應用程式。{1} 個失敗（需要管理員）。</value>
+    <value>已停用 {0} 個啟動應用程式。{1} 個失敗。</value>
   </data>
   <data name="SystemInfoPage_ExportButton.Content" xml:space="preserve">
     <value>匯出</value>
@@ -2101,7 +2101,7 @@
     <value>已移除 {0} 個啟動項目。</value>
   </data>
   <data name="StartupPage_Notification_BatchRemovedFailed" xml:space="preserve">
-    <value>已移除 {0} 個項目。{1} 個失敗（需要系統管理員權限）。</value>
+    <value>已移除 {0} 個項目。{1} 個失敗。</value>
   </data>
   <data name="StartupPage_SelectAllCheckBox.ToolTipService.ToolTip" xml:space="preserve">
     <value>全選</value>
@@ -3224,5 +3224,8 @@
   </data>
   <data name="StartupPage_Notification_LoadFailed" xml:space="preserve">
     <value>無法載入啟動項目: {0}</value>
+  </data>
+  <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
+    <value>無法更新「{0}」的啟動項目狀態。</value>
   </data>
 </root>
