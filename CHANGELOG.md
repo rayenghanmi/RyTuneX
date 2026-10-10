@@ -2,7 +2,7 @@
 
 All notable changes to this branch will be documented in this file.
 
-## 1.7.2 - Unreleased
+## 1.8.0 - Unreleased
 
 ### Added
 
@@ -71,6 +71,11 @@ All notable changes to this branch will be documented in this file.
 
 ### Changes
 
+- Enabled Native AOT (Ahead-of-Time) compilation for x64 packages, compiling the application directly into native machine code to eliminate JIT overhead.
+- Enabled assembly trimming (ILLink) and ReadyToRun (R2R) compilation for x86 packages alongside self-contained deployment (`SelfContained=true`).
+- Drastically reduced application cold startup loading time from 3.19s down to 1.93s (~39.5% faster app launch).
+- Substantially decreased Microsoft Store bundle size from 119 MB down to 75 MB (~37% size reduction).
+- Added MSIX payload deduplication target to resolve assembly collisions during multi-architecture packaging.
 - Refactored `IntelligentOptimizationEngine` to operate dynamically across pages without relying on static item collections.
 - Updated optimization risk badges on toggle cards to reflect their actual risk classifications (`Safe`, `Cosmetic`, `Moderate`, `Caution`) rather than being overridden as "Recommended".
 - Simplified code documentation across `IntelligentCardEnhancer`, `OptimizeFunctionInspector`, and `IntelligentOptimizationEngine` into clean, concise single-line comments.

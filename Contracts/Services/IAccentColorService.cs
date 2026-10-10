@@ -1,5 +1,5 @@
-﻿using Windows.UI;
-using RyTuneX.Models;
+﻿using RyTuneX.Models;
+using Windows.UI;
 
 namespace RyTuneX.Contracts.Services;
 

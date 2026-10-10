@@ -22,9 +22,10 @@
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxBundle>Always</AppxBundle>
     <WindowsPackageType>MSIX</WindowsPackageType>
+    <SelfContained>true</SelfContained>
     <StartupObject>RyTuneX.Program</StartupObject>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <Version>1.7.2</Version>
+    <Version>1.8.0</Version>
     <Authors>Rayen Ghanmi</Authors>
     <GenerateTestArtifacts>False</GenerateTestArtifacts>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
@@ -59,7 +60,52 @@
       <StripSymbols>true</StripSymbols>
       <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
       <EnableBindingDiagnostics>false</EnableBindingDiagnostics>
+	  <PublishTrimmed>true</PublishTrimmed>
+      <TrimMode>partial</TrimMode>
+      <PublishReadyToRun>true</PublishReadyToRun>
   </PropertyGroup>
+
+  <PropertyGroup Condition="('$(Platform)' == 'x64' or '$(RuntimeIdentifier)' == 'win-x64') and '$(Configuration)' != 'Debug'">
+      <PlatformTarget>x64</PlatformTarget>
+      <PublishAot Condition="'$(UapAppxPackageBuildMode)' != '' or '$(AppxBundle)' == 'Always'">false</PublishAot>
+      <PublishAot Condition="'$(PublishAot)' == ''">true</PublishAot>
+      <PublishTrimmed>true</PublishTrimmed>
+      <PublishReadyToRun Condition="'$(PublishAot)' != 'true'">true</PublishReadyToRun>
+      <PublishReadyToRun Condition="'$(PublishAot)' == 'true'">false</PublishReadyToRun>
+      <IncludePublishItemsOutputGroup Condition="'$(PublishAot)' == 'true'">true</IncludePublishItemsOutputGroup>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="('$(Platform)' == 'x86' or '$(RuntimeIdentifier)' == 'win-x86') and '$(Configuration)' != 'Debug'">
+      <PlatformTarget>x86</PlatformTarget>
+      <PublishAot>false</PublishAot>
+      <PublishTrimmed>true</PublishTrimmed>
+      <TrimMode>partial</TrimMode>
+      <PublishReadyToRun>true</PublishReadyToRun>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PublishAot)' == 'true'">
+      <IlcUseEnvironmentalTools Condition="'$(IlcUseEnvironmentalTools)' == '' and Exists('C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\link.exe')">true</IlcUseEnvironmentalTools>
+      <CppLinker Condition="'$(CppLinker)' == '' and Exists('C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\link.exe')">C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\link.exe</CppLinker>
+      <CppLibCreator Condition="'$(CppLibCreator)' == '' and Exists('C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\lib.exe')">C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\lib.exe</CppLibCreator>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(PublishAot)' == 'true' and '$(IlcUseEnvironmentalTools)' == 'true'">
+      <AdditionalNativeLibraryDirectories Include="C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.44.35207\lib\x64" />
+      <AdditionalNativeLibraryDirectories Include="C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\um\x64" />
+      <AdditionalNativeLibraryDirectories Include="C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\ucrt\x64" />
+  </ItemGroup>
+
+  <Target Name="DeduplicateAotMsixPayload"
+          BeforeTargets="_ComputeAppxPackagePayload"
+          Condition="'$(PublishTrimmed)' == 'true'">
+    <CallTarget Targets="__BackCalculateOptimizationInputAssemblies">
+      <Output TaskParameter="TargetOutputs" ItemName="_OptimizationInputsToRemove"/>
+    </CallTarget>
+    <ItemGroup>
+      <_PackagingOutputsUnexpanded Remove="@(_OptimizationInputsToRemove)" />
+      <_PackagingOutputsOutsideLayout Remove="@(_OptimizationInputsToRemove)" />
+    </ItemGroup>
+  </Target>
 
   <ItemGroup>
       <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
@@ -72,6 +118,7 @@
       <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.3.1" />
       <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.10" />
       <PackageReference Include="System.Drawing.Common" Version="10.0.10" />
+      <PackageReference Include="System.Formats.Nrbf" Version="10.0.10" />
       <PackageReference Include="System.Management" Version="10.0.10" />
       <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.10" />
       <PackageReference Include="Vortice.D3DCompiler" Version="3.8.3" />
