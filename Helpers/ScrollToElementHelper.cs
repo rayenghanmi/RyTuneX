@@ -30,13 +30,6 @@ public static class ScrollToElementHelper
         // Small delay to ensure the page is fully loaded
         await Task.Delay(100);
 
-        // Find the ScrollViewer
-        var scrollViewer = FindChild<ScrollViewer>(root);
-        if (scrollViewer == null)
-        {
-            return;
-        }
-
         // Find the target element by tag
         var targetElement = FindElementByTag(root, optionTag);
         if (targetElement == null)
@@ -48,13 +41,22 @@ public static class ScrollToElementHelper
         var settingsCard = FindParentSettingsCard(targetElement);
         var elementToScrollTo = settingsCard ?? targetElement;
 
-        // Calculate the position relative to the ScrollViewer
-        var transform = elementToScrollTo.TransformToVisual(scrollViewer);
-        var position = transform.TransformPoint(new Windows.Foundation.Point(0, 0));
+        // Native modern WinUI 3 animated bring-into-view (supports both ScrollView and ScrollViewer)
+        elementToScrollTo.StartBringIntoView(new BringIntoViewOptions
+        {
+            AnimationDesired = true,
+            VerticalAlignmentRatio = 0.2
+        });
 
-        // Scroll to the element with some offset for better visibility
-        var scrollOffset = Math.Max(0, position.Y + scrollViewer.VerticalOffset - 100);
-        scrollViewer.ChangeView(null, scrollOffset, null, false);
+        // Fallback explicit scroll offset if standard ScrollViewer is present
+        var scrollViewer = FindChild<ScrollViewer>(root);
+        if (scrollViewer != null)
+        {
+            var transform = elementToScrollTo.TransformToVisual(scrollViewer);
+            var position = transform.TransformPoint(new Windows.Foundation.Point(0, 0));
+            var scrollOffset = Math.Max(0, position.Y + scrollViewer.VerticalOffset - 100);
+            scrollViewer.ChangeView(null, scrollOffset, null, false);
+        }
 
         // Highlight the element and keep it highlighted until click
         HighlightElementUntilClick(elementToScrollTo, root);

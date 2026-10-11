@@ -3232,4 +3232,13 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>Không thể cập nhật trạng thái mục khởi động cho '{0}'.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>PC Copilot+</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>Được hỗ trợ</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>Không được hỗ trợ</value>
+  </data>
 </root>

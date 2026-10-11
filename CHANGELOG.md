@@ -52,6 +52,8 @@ All notable changes to this branch will be documented in this file.
 - Added multi-selection and batch removal support to the `Startup Apps` page #107.
 - Added all new optimization toggles and network toggles to the in-app Search Engine (`AppSearchService`) with quick navigation and matching icons.
 - Integrated all new toggles into the Intelligent Optimization Engine catalog with risk assessments, score weights, and technical details.
+- Added Copilot+ PC / AI hardware capability detection in `System Info` page using Windows App SDK `AICapabilities`.
+- Added persistent picker state (`SettingsIdentifier`) and user-friendly dialog titles across file and folder pickers.
 
 ### Fixes
 
@@ -87,6 +89,11 @@ All notable changes to this branch will be documented in this file.
 - Refactored optimization rollback logic to execute actions directly without creating UI switch instances.
 - Improved debloat uninstall flow to safely snapshot selected items before batch removal.
 - Updated localization across all supported languages for newly introduced features and messages.
+- Upgraded `Microsoft.WindowsAppSDK` to version 2.5.1 and updated dependencies (`DevWinUI` to 10.7.0, `WinUIEx` to 2.9.3, `Microsoft.Extensions.Hosting` to 10.0.12).
+- Rebuilt the application title bar using the official WinUI 3 `<TitleBar>` control (`Microsoft.UI.Xaml.Controls.TitleBar`), replacing the custom grid and custom buttons with native window chrome integration.
+- Removed legacy `SendMessage(hwnd, WM_ACTIVATE)` window activation P/Invoke workaround from `TitleBarHelper`, eliminating window repaint flickers during theme changes.
+- Implemented custom application startup entry point (`Program.cs`) opting into Windows App SDK 2.3+ XAML rendering engine optimizations (`DefaultStyleOptimizations`, `IconNoGridOptimization`, `DeferContextFlyoutInit`).
+- Modernized `ScrollToElementHelper` to use native WinUI `StartBringIntoView` with animated transitions, providing smooth scrolling across both `ScrollView` and `ScrollViewer` containers.
 
 ## 1.7.1 - Released
 

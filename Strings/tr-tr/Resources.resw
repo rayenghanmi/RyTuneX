@@ -3232,4 +3232,13 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>'{0}' için başlangıç öğesi durumu güncellenemedi.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>Copilot+ Bilgisayarı</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>Destekleniyor</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>Desteklenmiyor</value>
+  </data>
 </root>

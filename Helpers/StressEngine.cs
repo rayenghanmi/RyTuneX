@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Management;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Vortice.D3DCompiler;
 using Vortice.Direct3D;
@@ -598,34 +597,41 @@ public sealed class StressEngine : IDisposable
 
     // --- GPU Monitoring (NVML + Performance Counters) ---
 
-    // Detects GPU name and VRAM via WMI and raises the onResult callback on the calling thread.
+    // Detects GPU name and VRAM via DXGI and raises the onResult callback on the calling thread.
     public void DetectGpuInfo(Action<string, ulong> onResult)
     {
         _ = Task.Run(() =>
         {
             try
             {
-                using var searcher = new ManagementObjectSearcher("SELECT Caption, AdapterRAM FROM Win32_VideoController");
-                foreach (var obj in searcher.Get())
+                var factoryResult = DXGI.CreateDXGIFactory1(out IDXGIFactory1? factory);
+                if (!factoryResult.Failure && factory != null)
                 {
-                    var name = obj["Caption"]?.ToString();
-                    if (!string.IsNullOrEmpty(name))
+                    using (factory)
                     {
-                        var ramObj = obj["AdapterRAM"];
-                        ulong vramBytes = 0;
-                        if (ramObj != null)
+                        for (uint i = 0; ; i++)
                         {
-                            ulong.TryParse(ramObj.ToString(), out vramBytes);
-                        }
+                            var result = factory.EnumAdapters1(i, out IDXGIAdapter1? adapter);
+                            if (result.Failure || adapter == null) break;
 
-                        if (vramBytes > 0)
-                        {
-                            var vramMb = vramBytes / (1024 * 1024);
-                            _vramDisplay = $"{vramMb:N0} MB VRAM";
-                        }
+                            using (adapter)
+                            {
+                                var desc = adapter.Description1;
+                                if ((desc.Flags & AdapterFlags.Software) != 0) continue;
 
-                        onResult(name, vramBytes);
-                        return;
+                                var name = desc.Description;
+                                var vramBytes = (ulong)desc.DedicatedVideoMemory;
+
+                                if (vramBytes > 0)
+                                {
+                                    var vramMb = vramBytes / (1024 * 1024);
+                                    _vramDisplay = $"{vramMb:N0} MB VRAM";
+                                }
+
+                                onResult(name, vramBytes);
+                                return;
+                            }
+                        }
                     }
                 }
             }

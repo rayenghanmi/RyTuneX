@@ -3230,4 +3230,13 @@
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>Gagal memperbarui status item startup untuk '{0}'.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>PC Copilot+</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>Didukung</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>Tidak didukung</value>
+  </data>
 </root>

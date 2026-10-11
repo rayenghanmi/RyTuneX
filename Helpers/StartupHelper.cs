@@ -412,15 +412,26 @@ public static class StartupHelper
     {
         try
         {
-            // Check Win32_StartupCommand via WMI / ManagementObject
-            using var searcher = new System.Management.ManagementObjectSearcher($"SELECT * FROM Win32_StartupCommand WHERE Name = '{appName.Replace("'", "''")}'");
-            foreach (var obj in searcher.Get())
+            var runKeys = new[]
             {
-                var cmd = obj["Command"]?.ToString();
-                if (!string.IsNullOrWhiteSpace(cmd))
+                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",
+                @"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce",
+                @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run"
+            };
+            var hives = new[] { RegistryHive.CurrentUser, RegistryHive.LocalMachine };
+            foreach (var hive in hives)
+            {
+                using var baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Default);
+                foreach (var runKeyPath in runKeys)
                 {
-                    var path = ExtractExecutablePath(cmd);
-                    if (File.Exists(path)) return path;
+                    using var subKey = baseKey.OpenSubKey(runKeyPath);
+                    if (subKey == null) continue;
+                    var rawVal = subKey.GetValue(appName)?.ToString();
+                    if (!string.IsNullOrWhiteSpace(rawVal))
+                    {
+                        var path = ExtractExecutablePath(rawVal);
+                        if (File.Exists(path)) return path;
+                    }
                 }
             }
         }

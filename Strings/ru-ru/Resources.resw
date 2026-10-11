@@ -3229,4 +3229,13 @@
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>Не удалось обновить состояние элемента автозагрузки для '{0}'.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>ПК Copilot+</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>Поддерживается</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>Не поддерживается</value>
+  </data>
 </root>

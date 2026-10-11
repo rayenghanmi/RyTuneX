@@ -3232,4 +3232,13 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>Échec de la mise à jour de l'état de l'élément de démarrage '{0}'.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>PC Copilot+</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>Pris en charge</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>Non pris en charge</value>
+  </data>
 </root>

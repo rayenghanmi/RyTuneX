@@ -535,7 +535,9 @@ public sealed partial class SettingsPage : Page
     {
         var picker = new FileOpenPicker(App.MainWindow.AppWindow.Id)
         {
-            SuggestedStartLocation = PickerLocationId.Desktop
+            SuggestedStartLocation = PickerLocationId.Desktop,
+            Title = "Import Registry Settings",
+            SettingsIdentifier = "RyTuneX_RegistryImportPicker"
         };
         picker.FileTypeFilter.Add(".reg");
 

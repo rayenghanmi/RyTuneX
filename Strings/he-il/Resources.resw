@@ -3232,4 +3232,13 @@
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>נכשל עדכון מצב פריט האתחול עבור '{0}'.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>מחשב Copilot+</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>נתמך</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>לא נתמך</value>
+  </data>
 </root>

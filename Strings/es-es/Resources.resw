@@ -3232,4 +3232,13 @@ Verifica si hay problemas de memoria en tu computadora</value>
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>No se pudo actualizar el estado del elemento de inicio '{0}'.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>PC Copilot+</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>Compatible</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>No compatible</value>
+  </data>
 </root>

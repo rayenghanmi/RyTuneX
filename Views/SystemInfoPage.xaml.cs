@@ -3,10 +3,11 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
 using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Helpers;
-using System.Management;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.Text;
 using Vortice.DXGI;
 using Windows.ApplicationModel.DataTransfer;
@@ -17,6 +18,67 @@ namespace RyTuneX.Views;
 public sealed partial class SystemInfoPage : Page
 {
     private const string DisplayClassGuidPath = @"SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}";
+
+    private const uint FILE_SHARE_READ = 0x00000001;
+    private const uint FILE_SHARE_WRITE = 0x00000002;
+    private const uint OPEN_EXISTING = 3;
+    private const uint IOCTL_STORAGE_QUERY_PROPERTY = 0x002D1400;
+    private const uint IOCTL_DISK_GET_DRIVE_GEOMETRY_EX = 0x000700A0;
+
+    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    private static extern SafeFileHandle CreateFile(
+        string lpFileName,
+        uint dwDesiredAccess,
+        uint dwShareMode,
+        IntPtr lpSecurityAttributes,
+        uint dwCreationDisposition,
+        uint dwFlagsAndAttributes,
+        IntPtr hTemplateFile);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool DeviceIoControl(
+        SafeFileHandle hDevice,
+        uint dwIoControlCode,
+        IntPtr lpInBuffer,
+        uint nInBufferSize,
+        IntPtr lpOutBuffer,
+        uint nOutBufferSize,
+        out uint lpBytesReturned,
+        IntPtr lpOverlapped);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GetLogicalProcessorInformationEx(
+        int relationshipType,
+        IntPtr buffer,
+        ref uint returnedLength);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern uint GetSystemFirmwareTable(
+        uint firmwareTableProviderSignature,
+        uint firmwareTableID,
+        IntPtr pFirmwareTableBuffer,
+        uint bufferSize);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GetPhysicallyInstalledSystemMemory(out ulong totalMemoryInKilobytes);
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    private class MEMORYSTATUSEX
+    {
+        public uint dwLength;
+        public uint dwMemoryLoad;
+        public ulong ullTotalPhys;
+        public ulong ullAvailPhys;
+        public ulong ullTotalPageFile;
+        public ulong ullAvailPageFile;
+        public ulong ullTotalVirtual;
+        public ulong ullAvailVirtual;
+        public ulong ullAvailExtendedVirtual;
+        public MEMORYSTATUSEX() { dwLength = (uint)Marshal.SizeOf(this); }
+    }
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern bool GlobalMemoryStatusEx([In, Out] MEMORYSTATUSEX lpBuffer);
 
     public SystemInfoPage()
     {
@@ -257,6 +319,166 @@ public sealed partial class SystemInfoPage : Page
         });
     }
 
+    private static byte[]? GetRawSmbiosTable()
+    {
+        try
+        {
+            uint smbiosSig = 0x52534D42; // 'RSMB'
+            uint size = GetSystemFirmwareTable(smbiosSig, 0, IntPtr.Zero, 0);
+            if (size == 0) return null;
+
+            IntPtr ptr = Marshal.AllocHGlobal((int)size);
+            try
+            {
+                if (GetSystemFirmwareTable(smbiosSig, 0, ptr, size) > 0)
+                {
+                    byte[] data = new byte[size];
+                    Marshal.Copy(ptr, data, 0, (int)size);
+                    return data;
+                }
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(ptr);
+            }
+        }
+        catch { }
+        return null;
+    }
+
+    private static string GetSmbiosString(byte[] raw, int strTableStart, byte strIndex)
+    {
+        if (strIndex == 0) return string.Empty;
+        int cur = 1;
+        int s = strTableStart;
+        while (s < raw.Length && cur < strIndex)
+        {
+            while (s < raw.Length && raw[s] != 0) s++;
+            s++;
+            cur++;
+        }
+        int end = s;
+        while (end < raw.Length && raw[end] != 0) end++;
+        return s < raw.Length ? Encoding.ASCII.GetString(raw, s, Math.Max(0, end - s)).Trim() : string.Empty;
+    }
+
+    private static int GetPhysicalCoreCount()
+    {
+        try
+        {
+            uint length = 0;
+            GetLogicalProcessorInformationEx(0, IntPtr.Zero, ref length); // RelationProcessorCore = 0
+            if (length == 0) return Environment.ProcessorCount;
+
+            IntPtr ptr = Marshal.AllocHGlobal((int)length);
+            try
+            {
+                if (GetLogicalProcessorInformationEx(0, ptr, ref length))
+                {
+                    int cores = 0;
+                    int offset = 0;
+                    while (offset < length)
+                    {
+                        IntPtr current = IntPtr.Add(ptr, offset);
+                        int relationship = Marshal.ReadInt32(current, 0);
+                        int size = Marshal.ReadInt32(current, 4);
+                        if (size <= 0) break;
+                        if (relationship == 0) cores++;
+                        offset += size;
+                    }
+                    return cores > 0 ? cores : Environment.ProcessorCount;
+                }
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(ptr);
+            }
+        }
+        catch { }
+        return Environment.ProcessorCount;
+    }
+
+    private static (long l2Kb, long l3Kb) GetCacheSizes()
+    {
+        long l2Total = 0;
+        long l3Total = 0;
+        try
+        {
+            uint length = 0;
+            GetLogicalProcessorInformationEx(2, IntPtr.Zero, ref length); // RelationCache = 2
+            if (length == 0) return (0, 0);
+
+            IntPtr ptr = Marshal.AllocHGlobal((int)length);
+            try
+            {
+                if (GetLogicalProcessorInformationEx(2, ptr, ref length))
+                {
+                    int offset = 0;
+                    while (offset < length)
+                    {
+                        IntPtr current = IntPtr.Add(ptr, offset);
+                        int relationship = Marshal.ReadInt32(current, 0);
+                        int size = Marshal.ReadInt32(current, 4);
+                        if (size <= 0) break;
+                        if (relationship == 2)
+                        {
+                            byte level = Marshal.ReadByte(current, 8);
+                            int cacheSize = Marshal.ReadInt32(current, 12);
+                            int type = Marshal.ReadInt32(current, 16);
+                            if (level == 2 && (type == 0 || type == 2)) l2Total += cacheSize;
+                            if (level == 3 && (type == 0 || type == 2)) l3Total += cacheSize;
+                        }
+                        offset += size;
+                    }
+                }
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(ptr);
+            }
+        }
+        catch { }
+        return (l2Total / 1024, l3Total / 1024);
+    }
+
+    private static string GetCpuSocketDesignation()
+    {
+        try
+        {
+            var raw = GetRawSmbiosTable();
+            if (raw == null) return string.Empty;
+
+            int offset = 8;
+            while (offset < raw.Length - 4)
+            {
+                byte type = raw[offset];
+                byte len = raw[offset + 1];
+                if (len == 0) break;
+
+                int strTableStart = offset + len;
+                int nextStruct = strTableStart;
+                while (nextStruct < raw.Length - 1 && !(raw[nextStruct] == 0 && raw[nextStruct + 1] == 0))
+                {
+                    nextStruct++;
+                }
+
+                if (type == 4) // Processor Information
+                {
+                    if (len > 4)
+                    {
+                        byte socketIdx = raw[offset + 4];
+                        var socket = GetSmbiosString(raw, strTableStart, socketIdx);
+                        if (!string.IsNullOrWhiteSpace(socket)) return socket;
+                    }
+                }
+
+                offset = nextStruct + 2;
+            }
+        }
+        catch { }
+        return string.Empty;
+    }
+
     private static Task<string> GetCpuInformation()
     {
         return Task.Run(() =>
@@ -265,36 +487,65 @@ public sealed partial class SystemInfoPage : Page
             {
                 _ = LogHelper.Log("Getting CPU Info");
 
-                using var searcher = new ManagementObjectSearcher(
-                    "SELECT Name, Manufacturer, Architecture, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed, SocketDesignation, L2CacheSize, L3CacheSize FROM Win32_Processor");
+                var sb = new StringBuilder(512);
 
-                using var results = searcher.Get();
-                var cpu = results.Cast<ManagementObject>().FirstOrDefault();
-                if (cpu == null) return string.Empty;
-
-                var archCode = cpu["Architecture"]?.ToString() ?? string.Empty;
-                var arch = archCode switch
+                string name = string.Empty;
+                string manufacturer = string.Empty;
+                string maxSpeed = string.Empty;
+                try
                 {
-                    "0" => "x86",
-                    "1" => "MIPS",
-                    "2" => "Alpha",
-                    "3" => "PowerPC",
-                    "5" => "ARM",
-                    "6" => "Itanium-based systems",
-                    "9" => "x64",
-                    _ => "Unknown",
+                    using var key = Registry.LocalMachine.OpenSubKey(@"HARDWARE\DESCRIPTION\System\CentralProcessor\0");
+                    if (key != null)
+                    {
+                        name = (key.GetValue("ProcessorNameString") as string)?.Trim() ?? string.Empty;
+                        manufacturer = (key.GetValue("VendorIdentifier") as string)?.Trim() ?? string.Empty;
+                        var mhz = key.GetValue("~MHz");
+                        if (mhz != null)
+                        {
+                            maxSpeed = mhz.ToString() ?? string.Empty;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _ = LogHelper.LogWarning($"Failed to read CPU registry info: {ex.Message}");
+                }
+
+                var arch = RuntimeInformation.OSArchitecture switch
+                {
+                    Architecture.X64 => "x64",
+                    Architecture.Arm64 => "ARM64",
+                    Architecture.X86 => "x86",
+                    Architecture.Arm => "ARM",
+                    _ => RuntimeInformation.OSArchitecture.ToString()
                 };
 
-                var sb = new StringBuilder(512);
-                AppendField(sb, "Name", cpu["Name"]?.ToString() ?? string.Empty);
-                AppendField(sb, "Manufacturer", cpu["Manufacturer"]?.ToString() ?? string.Empty);
-                if (!string.IsNullOrEmpty(archCode)) AppendField(sb, "Architecture", arch);
-                AppendField(sb, "Cores", cpu["NumberOfCores"]?.ToString() ?? "0");
-                AppendField(sb, "LogicalProcessors", cpu["NumberOfLogicalProcessors"]?.ToString() ?? "0");
-                AppendField(sb, "MaxSpeed", cpu["MaxClockSpeed"]?.ToString() ?? "0", " MHz");
-                AppendField(sb, "SocketDesignation", cpu["SocketDesignation"]?.ToString() ?? string.Empty);
-                AppendField(sb, "L2Cache", cpu["L2CacheSize"]?.ToString() ?? "0", " KB");
-                AppendField(sb, "L3Cache", cpu["L3CacheSize"]?.ToString() ?? "0", " KB");
+                int logicalCores = Environment.ProcessorCount;
+                int physicalCores = GetPhysicalCoreCount();
+                if (physicalCores <= 0) physicalCores = logicalCores;
+
+                var (l2Kb, l3Kb) = GetCacheSizes();
+                var socket = GetCpuSocketDesignation();
+
+                AppendField(sb, "Name", name);
+                AppendField(sb, "Manufacturer", manufacturer);
+                AppendField(sb, "Architecture", arch);
+                AppendField(sb, "Cores", physicalCores.ToString());
+                AppendField(sb, "LogicalProcessors", logicalCores.ToString());
+                if (!string.IsNullOrEmpty(maxSpeed)) AppendField(sb, "MaxSpeed", maxSpeed, " MHz");
+                if (!string.IsNullOrEmpty(socket)) AppendField(sb, "SocketDesignation", socket);
+                if (l2Kb > 0) AppendField(sb, "L2Cache", l2Kb.ToString(), " KB");
+                if (l3Kb > 0) AppendField(sb, "L3Cache", l3Kb.ToString(), " KB");
+
+                try
+                {
+                    var isCopilotPlus = Microsoft.Windows.AI.AICapabilities.HasAICapability(Microsoft.Windows.AI.AICapabilityCategory.CopilotPlusPC);
+                    AppendField(sb, "CopilotPlusPC", SafeGetLocalized(isCopilotPlus ? "Supported" : "NotSupported"));
+                }
+                catch (Exception ex)
+                {
+                    _ = LogHelper.LogWarning($"AICapabilities check skipped or not supported: {ex.Message}");
+                }
 
                 return sb.ToString();
             }
@@ -372,42 +623,54 @@ public sealed partial class SystemInfoPage : Page
                 }
                 catch (Exception ex)
                 {
-                    _ = LogHelper.LogError($"DXGI enumeration threw an exception, falling back to WMI: {ex}");
+                    _ = LogHelper.LogError($"DXGI enumeration threw an exception, falling back to registry: {ex}");
                 }
 
-                // Fallback using WMI
+                // Fallback using Display Class Registry
                 if (!dxgiSucceeded)
                 {
                     sb.Clear();
                     try
                     {
-                        using var searcher = new ManagementObjectSearcher(
-                            "SELECT Caption, AdapterRAM, DriverVersion FROM Win32_VideoController");
-                        using var results = searcher.Get();
                         var fallbackNumber = 0;
-
-                        foreach (ManagementObject gpuObj in results.Cast<ManagementObject>())
+                        using var classKey = Registry.LocalMachine.OpenSubKey(DisplayClassGuidPath);
+                        if (classKey != null)
                         {
-                            if (fallbackNumber > 0) sb.AppendLine();
+                            foreach (var subKeyName in classKey.GetSubKeyNames())
+                            {
+                                if (subKeyName.Length != 4 || !int.TryParse(subKeyName, out _)) continue;
+                                using var subKey = classKey.OpenSubKey(subKeyName);
+                                if (subKey == null) continue;
 
-                            var name = gpuObj["Caption"]?.ToString() ?? string.Empty;
-                            var ramRaw = gpuObj["AdapterRAM"];
-                            var ramMb = ramRaw != null
-                                ? Math.Round(Convert.ToDouble(ramRaw) / (1024 * 1024)).ToString("0")
-                                : string.Empty;
-                            var driver = gpuObj["DriverVersion"]?.ToString() ?? string.Empty;
+                                var name = subKey.GetValue("DriverDesc") as string;
+                                if (string.IsNullOrWhiteSpace(name)) continue;
 
-                            sb.Append("GPU".GetLocalized()).Append(' ').Append(fallbackNumber).AppendLine(":");
-                            AppendField(sb, "Name", name, null, true);
-                            AppendField(sb, "AdapterRAM", ramMb, " MB", true);
-                            AppendField(sb, "DriverVersion", driver, null, true);
+                                if (fallbackNumber > 0) sb.AppendLine();
 
-                            fallbackNumber++;
+                                var driver = subKey.GetValue("DriverVersion") as string ?? string.Empty;
+                                var provider = subKey.GetValue("ProviderName") as string ?? string.Empty;
+                                var memRaw = subKey.GetValue("HardwareInformation.qwMemorySize")
+                                             ?? subKey.GetValue("HardwareInformation.MemorySize");
+
+                                string ramMb = string.Empty;
+                                if (memRaw != null && long.TryParse(memRaw.ToString(), out var memBytes) && memBytes > 0)
+                                {
+                                    ramMb = Math.Round(memBytes / (1024.0 * 1024.0)).ToString("0");
+                                }
+
+                                sb.Append("GPU".GetLocalized()).Append(' ').Append(fallbackNumber).AppendLine(":");
+                                AppendField(sb, "Name", name, null, true);
+                                if (!string.IsNullOrEmpty(provider)) AppendField(sb, "Vendor", provider, null, true);
+                                if (!string.IsNullOrEmpty(ramMb)) AppendField(sb, "DedicatedVRAM", ramMb, " MB", true);
+                                AppendField(sb, "DriverVersion", driver, null, true);
+
+                                fallbackNumber++;
+                            }
                         }
                     }
                     catch (Exception ex)
                     {
-                        _ = LogHelper.LogError($"WMI GPU fallback also failed: {ex}");
+                        _ = LogHelper.LogError($"Registry GPU fallback failed: {ex}");
                         return string.Empty;
                     }
                 }
@@ -504,32 +767,101 @@ public sealed partial class SystemInfoPage : Page
             {
                 _ = LogHelper.Log("Getting RAM Info");
 
-                using var searcher = new ManagementObjectSearcher(
-                    "SELECT DeviceLocator, Capacity, Speed, Manufacturer FROM Win32_PhysicalMemory");
-
-                using var results = searcher.Get();
                 var sb = new StringBuilder(512);
-                var moduleNumber = 1;
+                int moduleNumber = 1;
 
-                foreach (ManagementObject module in results.Cast<ManagementObject>())
+                var raw = GetRawSmbiosTable();
+                if (raw != null)
                 {
-                    if (moduleNumber > 1) sb.AppendLine();
+                    int offset = 8;
+                    while (offset < raw.Length - 4)
+                    {
+                        byte type = raw[offset];
+                        byte len = raw[offset + 1];
+                        if (len == 0) break;
 
-                    var device = module["DeviceLocator"]?.ToString() ?? string.Empty;
-                    var capacityRaw = module["Capacity"];
-                    var capacity = capacityRaw != null
-                        ? Math.Round(Convert.ToDouble(capacityRaw) / (1024 * 1024 * 1024)).ToString("0")
-                        : string.Empty;
-                    var speed = module["Speed"]?.ToString() ?? string.Empty;
-                    var manufacturer = module["Manufacturer"]?.ToString() ?? string.Empty;
+                        int strTableStart = offset + len;
+                        int nextStruct = strTableStart;
+                        while (nextStruct < raw.Length - 1 && !(raw[nextStruct] == 0 && raw[nextStruct + 1] == 0))
+                        {
+                            nextStruct++;
+                        }
 
-                    sb.Append("RAMModule".GetLocalized()).Append(' ').Append(moduleNumber).AppendLine(":");
-                    AppendField(sb, "DeviceLocator", device, null, true);
-                    AppendField(sb, "Capacity", capacity, " GB", true);
-                    AppendField(sb, "Speed", speed, " MHz", true);
-                    AppendField(sb, "Manufacturer", manufacturer, null, true);
+                        if (type == 17) // Memory Device
+                        {
+                            ushort sizeVal = BitConverter.ToUInt16(raw, offset + 12);
+                            long capMb = 0;
+                            if (sizeVal != 0 && sizeVal != 0xFFFF)
+                            {
+                                if (sizeVal == 0x7FFF && len >= 0x20)
+                                {
+                                    capMb = BitConverter.ToUInt32(raw, offset + 0x1C);
+                                }
+                                else if ((sizeVal & 0x8000) != 0)
+                                {
+                                    capMb = (sizeVal & 0x7FFF) / 1024;
+                                }
+                                else
+                                {
+                                    capMb = sizeVal;
+                                }
+                            }
 
-                    moduleNumber++;
+                            if (capMb > 0)
+                            {
+                                byte locIdx = len > 16 ? raw[offset + 16] : (byte)0;
+                                byte mfgIdx = len > 23 ? raw[offset + 23] : (byte)0;
+                                ushort speed = len >= 23 ? BitConverter.ToUInt16(raw, offset + 21) : (ushort)0;
+                                if (len >= 34)
+                                {
+                                    ushort confSpeed = BitConverter.ToUInt16(raw, offset + 32);
+                                    if (confSpeed > 0) speed = confSpeed;
+                                }
+
+                                var device = GetSmbiosString(raw, strTableStart, locIdx);
+                                if (string.IsNullOrWhiteSpace(device)) device = $"DIMM {moduleNumber - 1}";
+                                var manufacturer = GetSmbiosString(raw, strTableStart, mfgIdx);
+                                var capGb = (long)Math.Round(capMb / 1024.0);
+
+                                if (moduleNumber > 1) sb.AppendLine();
+                                sb.Append("RAMModule".GetLocalized()).Append(' ').Append(moduleNumber).AppendLine(":");
+                                AppendField(sb, "DeviceLocator", device, null, true);
+                                AppendField(sb, "Capacity", capGb.ToString(), " GB", true);
+                                if (speed > 0) AppendField(sb, "Speed", speed.ToString(), " MHz", true);
+                                if (!string.IsNullOrWhiteSpace(manufacturer)) AppendField(sb, "Manufacturer", manufacturer, null, true);
+
+                                moduleNumber++;
+                            }
+                        }
+
+                        offset = nextStruct + 2;
+                    }
+                }
+
+                // Fallback to GlobalMemoryStatusEx or GetPhysicallyInstalledSystemMemory if no modules found
+                if (moduleNumber == 1)
+                {
+                    ulong totalMb = 0;
+                    if (GetPhysicallyInstalledSystemMemory(out ulong kb) && kb > 0)
+                    {
+                        totalMb = kb / 1024;
+                    }
+                    else
+                    {
+                        var memStatus = new MEMORYSTATUSEX();
+                        if (GlobalMemoryStatusEx(memStatus) && memStatus.ullTotalPhys > 0)
+                        {
+                            totalMb = memStatus.ullTotalPhys / (1024 * 1024);
+                        }
+                    }
+
+                    if (totalMb > 0)
+                    {
+                        var capGb = (long)Math.Round(totalMb / 1024.0);
+                        sb.Append("RAMModule".GetLocalized()).Append(" 1:\n");
+                        AppendField(sb, "DeviceLocator", "System Memory", null, true);
+                        AppendField(sb, "Capacity", capGb.ToString(), " GB", true);
+                    }
                 }
 
                 return sb.ToString();
@@ -550,90 +882,115 @@ public sealed partial class SystemInfoPage : Page
             {
                 _ = LogHelper.Log("Getting Disks Info");
 
-                var mediaTypeByIndex = new Dictionary<uint, string>();
-                try
-                {
-                    var storageScope = new ManagementScope(@"\\.\root\Microsoft\Windows\Storage");
-                    storageScope.Connect();
-                    using var storageSearcher = new ManagementObjectSearcher(storageScope,
-                        new ObjectQuery("SELECT DeviceId, MediaType FROM MSFT_PhysicalDisk"));
-                    using var storageResults = storageSearcher.Get();
-                    foreach (ManagementObject disk in storageResults.Cast<ManagementObject>())
-                    {
-                        if (uint.TryParse(disk["DeviceId"]?.ToString(), out var id))
-                        {
-                            var mediaTypeCode = disk["MediaType"]?.ToString() ?? string.Empty;
-                            mediaTypeByIndex[id] = mediaTypeCode switch
-                            {
-                                "3" => "HDD",
-                                "4" => "SSD",
-                                "5" => "SCM",
-                                _ => "Unknown",
-                            };
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Falls back to no media type if this namespace is unavailable
-                    _ = LogHelper.LogError($"Error querying MSFT_PhysicalDisk: {ex}");
-                }
-
-                List<ManagementObject> disks;
-                using (var searcher = new ManagementObjectSearcher(
-                    "SELECT Index, Caption, Size, InterfaceType, Manufacturer, Model FROM Win32_DiskDrive"))
-                using (var results = searcher.Get())
-                {
-                    disks = results.Cast<ManagementObject>().ToList();
-                }
-
-                if (disks.Count == 0)
-                {
-                    _ = LogHelper.LogError("Win32_DiskDrive query returned zero drives");
-                }
-
                 var sb = new StringBuilder(512);
-                var diskNumber = 0;
+                int diskNumber = 0;
 
-                foreach (var disk in disks)
+                for (int i = 0; i < 32; i++)
                 {
+                    string drivePath = $@"\\.\PhysicalDrive{i}";
+                    using var handle = CreateFile(
+                        drivePath,
+                        0,
+                        FILE_SHARE_READ | FILE_SHARE_WRITE,
+                        IntPtr.Zero,
+                        OPEN_EXISTING,
+                        0,
+                        IntPtr.Zero);
+
+                    if (handle.IsInvalid) continue;
+
+                    int querySize = 12;
+                    IntPtr queryPtr = Marshal.AllocHGlobal(querySize);
+                    int outBufferSize = 2048;
+                    IntPtr outBuffer = Marshal.AllocHGlobal(outBufferSize);
                     try
                     {
-                        if (diskNumber > 0) sb.AppendLine();
+                        Marshal.WriteInt32(queryPtr, 0, 0); // StorageDeviceProperty
+                        Marshal.WriteInt32(queryPtr, 4, 0); // PropertyStandardQuery
 
-                        var name = disk["Caption"]?.ToString() ?? string.Empty;
-                        var sizeRaw = disk["Size"];
-                        var size = sizeRaw != null
-                            ? Math.Round(Convert.ToDouble(sizeRaw) / 1e9).ToString("0")
-                            : string.Empty;
-                        var iface = disk["InterfaceType"]?.ToString() ?? string.Empty;
-                        var manuf = disk["Manufacturer"]?.ToString() ?? string.Empty;
-                        var model = disk["Model"]?.ToString() ?? string.Empty;
-
-                        uint? index = null;
-                        if (disk["Index"] != null && uint.TryParse(disk["Index"].ToString(), out var parsedIndex))
+                        if (DeviceIoControl(handle, IOCTL_STORAGE_QUERY_PROPERTY, queryPtr, (uint)querySize, outBuffer, (uint)outBufferSize, out _, IntPtr.Zero))
                         {
-                            index = parsedIndex;
+                            int vendorOffset = Marshal.ReadInt32(outBuffer, 12);
+                            int productOffset = Marshal.ReadInt32(outBuffer, 16);
+                            int busType = Marshal.ReadInt32(outBuffer, 28);
+
+                            string vendor = vendorOffset > 0 ? Marshal.PtrToStringAnsi(IntPtr.Add(outBuffer, vendorOffset))?.Trim() ?? string.Empty : string.Empty;
+                            string product = productOffset > 0 ? Marshal.PtrToStringAnsi(IntPtr.Add(outBuffer, productOffset))?.Trim() ?? string.Empty : string.Empty;
+
+                            string iface = busType switch
+                            {
+                                11 => "SATA",
+                                17 => "NVMe",
+                                7 => "USB",
+                                3 => "ATA",
+                                1 => "SCSI",
+                                8 => "RAID",
+                                14 => "Virtual",
+                                _ => "Unknown"
+                            };
+
+                            string mediaType = busType == 17 ? "SSD" : "Unknown";
+                            Marshal.WriteInt32(queryPtr, 0, 7); // StorageDeviceSeekPenaltyProperty
+                            Marshal.WriteInt32(queryPtr, 4, 0);
+                            if (DeviceIoControl(handle, IOCTL_STORAGE_QUERY_PROPERTY, queryPtr, (uint)querySize, outBuffer, (uint)outBufferSize, out _, IntPtr.Zero))
+                            {
+                                byte incursPenalty = Marshal.ReadByte(outBuffer, 8);
+                                mediaType = incursPenalty == 0 ? "SSD" : "HDD";
+                            }
+
+                            long diskSizeBytes = 0;
+                            IntPtr geomBuffer = Marshal.AllocHGlobal(256);
+                            try
+                            {
+                                if (DeviceIoControl(handle, IOCTL_DISK_GET_DRIVE_GEOMETRY_EX, IntPtr.Zero, 0, geomBuffer, 256, out _, IntPtr.Zero))
+                                {
+                                    diskSizeBytes = Marshal.ReadInt64(geomBuffer, 24);
+                                }
+                            }
+                            finally
+                            {
+                                Marshal.FreeHGlobal(geomBuffer);
+                            }
+
+                            long sizeGb = diskSizeBytes > 0 ? (long)Math.Round(diskSizeBytes / 1e9) : 0;
+                            string name = !string.IsNullOrWhiteSpace(vendor) && !product.StartsWith(vendor, StringComparison.OrdinalIgnoreCase)
+                                ? $"{vendor} {product}".Trim()
+                                : product;
+                            if (string.IsNullOrWhiteSpace(name)) name = $"PhysicalDrive {i}";
+
+                            if (diskNumber > 0) sb.AppendLine();
+                            sb.Append("Disk".GetLocalized()).Append(' ').Append(diskNumber).AppendLine(":");
+                            AppendField(sb, "Name", name, null, true);
+                            if (sizeGb > 0) AppendField(sb, "Size", sizeGb.ToString(), " GB", true);
+                            AppendField(sb, "Type", mediaType, null, true);
+                            AppendField(sb, "InterfaceType", iface, null, true);
+                            if (!string.IsNullOrWhiteSpace(vendor)) AppendField(sb, "Manufacturer", vendor, null, true);
+                            if (!string.IsNullOrWhiteSpace(product)) AppendField(sb, "Model", product, null, true);
+
+                            diskNumber++;
                         }
-                        var mediaType = index.HasValue && mediaTypeByIndex.TryGetValue(index.Value, out var mt) ? mt : string.Empty;
-
-                        sb.Append("Disk".GetLocalized()).Append(' ').Append(diskNumber).AppendLine(":");
-                        AppendField(sb, "Name", name, null, true);
-                        AppendField(sb, "Size", size, " GB", true);
-                        AppendField(sb, "Type", mediaType, null, true);
-                        AppendField(sb, "InterfaceType", iface, null, true);
-                        AppendField(sb, "Manufacturer", manuf, null, true);
-                        AppendField(sb, "Model", model, null, true);
-
-                        diskNumber++;
-                    }
-                    catch (Exception diskEx)
-                    {
-                        _ = LogHelper.LogError($"Error reading a disk entry, skipping it: {diskEx}");
                     }
                     finally
                     {
-                        disk.Dispose();
+                        Marshal.FreeHGlobal(queryPtr);
+                        Marshal.FreeHGlobal(outBuffer);
+                    }
+                }
+
+                if (diskNumber == 0)
+                {
+                    foreach (var drive in DriveInfo.GetDrives().Where(d => d.IsReady && d.DriveType == DriveType.Fixed))
+                    {
+                        if (diskNumber > 0) sb.AppendLine();
+                        var name = string.IsNullOrWhiteSpace(drive.VolumeLabel) ? drive.Name : $"{drive.Name} ({drive.VolumeLabel})";
+                        var sizeGb = (long)Math.Round(drive.TotalSize / 1e9);
+
+                        sb.Append("Disk".GetLocalized()).Append(' ').Append(diskNumber).AppendLine(":");
+                        AppendField(sb, "Name", name, null, true);
+                        AppendField(sb, "Size", sizeGb.ToString(), " GB", true);
+                        AppendField(sb, "Type", "Fixed Disk", null, true);
+                        AppendField(sb, "InterfaceType", drive.DriveFormat, null, true);
+                        diskNumber++;
                     }
                 }
 
@@ -796,7 +1153,9 @@ public sealed partial class SystemInfoPage : Page
         await LogHelper.Log("SelectPathButton_Click invoked");
         var folderPicker = new FolderPicker(App.MainWindow.AppWindow.Id)
         {
-            SuggestedStartLocation = PickerLocationId.Desktop
+            SuggestedStartLocation = PickerLocationId.Desktop,
+            Title = "Select Driver Export Folder",
+            SettingsIdentifier = "RyTuneX_DriverExportPicker"
         };
 
         var folder = await folderPicker.PickSingleFolderAsync();

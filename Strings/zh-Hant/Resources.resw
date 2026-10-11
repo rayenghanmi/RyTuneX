@@ -3228,4 +3228,13 @@
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>無法更新「{0}」的啟動項目狀態。</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>Copilot+ PC</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>支援</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>不支援</value>
+  </data>
 </root>

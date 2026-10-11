@@ -3232,4 +3232,13 @@
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>'{0}' のスタートアップ項目の状態の更新に失敗しました。</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>Copilot+ PC</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>対応</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>非対応</value>
+  </data>
 </root>

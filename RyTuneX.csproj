@@ -9,7 +9,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
 	<Platforms>x86;x64</Platforms>
 	<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-    <PublishProfile>Properties\PublishProfiles\win-$(Platform).pubxml</PublishProfile>
+    <PublishProfile Condition="'$(Platform)' == 'x64' or '$(Platform)' == 'x86' or '$(Platform)' == 'ARM64'">Properties\PublishProfiles\win-$(Platform).pubxml</PublishProfile>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWinUI>true</UseWinUI>
@@ -31,6 +31,7 @@
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
     <NoWarn>$(NoWarn);CS0618</NoWarn>
   </PropertyGroup>
 
@@ -95,11 +96,11 @@
       <AdditionalNativeLibraryDirectories Include="C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\ucrt\x64" />
   </ItemGroup>
 
-  <Target Name="DeduplicateAotMsixPayload"
-          BeforeTargets="_ComputeAppxPackagePayload"
-          Condition="'$(PublishTrimmed)' == 'true'">
+
+
+  <Target Name="DeduplicateAotMsixPayload" BeforeTargets="_ComputeAppxPackagePayload" Condition="'$(PublishTrimmed)' == 'true'">
     <CallTarget Targets="__BackCalculateOptimizationInputAssemblies">
-      <Output TaskParameter="TargetOutputs" ItemName="_OptimizationInputsToRemove"/>
+      <Output TaskParameter="TargetOutputs" ItemName="_OptimizationInputsToRemove" />
     </CallTarget>
     <ItemGroup>
       <_PackagingOutputsUnexpanded Remove="@(_OptimizationInputsToRemove)" />
@@ -113,18 +114,17 @@
       <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
       <PackageReference Include="CommunityToolkit.WinUI.Controls.Segmented" Version="8.2.251219" />
       <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
-      <PackageReference Include="DevWinUI" Version="10.1.0" />
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
-      <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.3.1" />
-      <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.10" />
-      <PackageReference Include="System.Drawing.Common" Version="10.0.10" />
-      <PackageReference Include="System.Formats.Nrbf" Version="10.0.10" />
-      <PackageReference Include="System.Management" Version="10.0.10" />
-      <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.10" />
+      <PackageReference Include="DevWinUI" Version="10.7.0" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
+      <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.5.1" />
+      <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.12" />
+      <PackageReference Include="System.Drawing.Common" Version="10.0.12" />
+      <PackageReference Include="System.Formats.Nrbf" Version="10.0.12" />
+      <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.12" />
       <PackageReference Include="Vortice.D3DCompiler" Version="3.8.3" />
       <PackageReference Include="Vortice.Direct3D11" Version="3.8.3" />
       <PackageReference Include="Vortice.DXGI" Version="3.8.3" />
-      <PackageReference Include="WinUIEx" Version="2.9.2" />
+      <PackageReference Include="WinUIEx" Version="2.9.3" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

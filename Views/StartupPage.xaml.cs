@@ -382,7 +382,9 @@ public sealed partial class StartupPage : Page
             {
                 var picker = new FileOpenPicker(App.MainWindow.AppWindow.Id)
                 {
-                    SuggestedStartLocation = PickerLocationId.Desktop
+                    SuggestedStartLocation = PickerLocationId.Desktop,
+                    Title = "Select Application or Script",
+                    SettingsIdentifier = "RyTuneX_StartupAppPicker"
                 };
                 picker.FileTypeFilter.Add(".exe");
                 picker.FileTypeFilter.Add(".bat");

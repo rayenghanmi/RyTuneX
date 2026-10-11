@@ -3232,4 +3232,13 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>Status für Autostart-Eintrag '{0}' konnte nicht aktualisiert werden.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>Copilot+ PC</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>Unterstützt</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>Nicht unterstützt</value>
+  </data>
 </root>

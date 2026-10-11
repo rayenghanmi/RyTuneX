@@ -3232,4 +3232,13 @@
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>فشل تحديث حالة عنصر بدء التشغيل '{0}'.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>كمبيوتر Copilot+</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>مدعوم</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>غير مدعوم</value>
+  </data>
 </root>

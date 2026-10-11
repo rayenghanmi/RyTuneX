@@ -3232,4 +3232,13 @@ Controlla se il computer presenta problemi di memoria</value>
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>Impossibile aggiornare lo stato dell'elemento di avvio per '{0}'.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>PC Copilot+</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>Supportato</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>Non supportato</value>
+  </data>
 </root>

@@ -3232,4 +3232,13 @@
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>无法更新“{0}”的启动项状态。</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>Copilot+ PC</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>受支持</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>不受支持</value>
+  </data>
 </root>

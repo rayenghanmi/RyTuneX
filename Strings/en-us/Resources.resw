@@ -3238,4 +3238,13 @@ Check your computer for memory problems</value>
   <data name="StartupPage_Notification_ToggleFailed" xml:space="preserve">
     <value>Failed to update startup item state for '{0}'.</value>
   </data>
+  <data name="CopilotPlusPC" xml:space="preserve">
+    <value>Copilot+ PC</value>
+  </data>
+  <data name="Supported" xml:space="preserve">
+    <value>Supported</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>Not Supported</value>
+  </data>
 </root>

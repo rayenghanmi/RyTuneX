@@ -1,6 +1,4 @@
 ﻿using DevWinUI;
-using Microsoft.UI;
-using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -8,9 +6,9 @@ using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.ViewModels;
-using Windows.Foundation;
 using Windows.Storage;
 using Windows.System;
+using TitleBar = Microsoft.UI.Xaml.Controls.TitleBar;
 
 namespace RyTuneX.Views;
 
@@ -31,9 +29,6 @@ public sealed partial class ShellPage : Page
         InitializeComponent();
         this.FlowDirection = App.FlowDirectionSetting;
 
-        TitleBarBackButton.Resources["ButtonBackgroundDisabled"] = new SolidColorBrush(Colors.Transparent);
-        TitleBarBackButton.Resources["ButtonBorderBrushDisabled"] = new SolidColorBrush(Colors.Transparent);
-
         Current = this;
         LogHelper.Log("Initializing ShellPage");
         ViewModel.NavigationService.Frame = NavigationFrame;
@@ -50,10 +45,6 @@ public sealed partial class ShellPage : Page
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
-
-        SetTitleBarPassthroughRegions();
-        TitleBarBackButton.SizeChanged += (_, _) => SetTitleBarPassthroughRegions();
-        TitleBarSearchBox.SizeChanged += (_, _) => SetTitleBarPassthroughRegions();
 
         // Initialize search cache without blocking the UI thread
         WarmUpSearchCache();
@@ -168,75 +159,14 @@ public sealed partial class ShellPage : Page
         }
     }
 
-    private void TitleBarBackButton_Click(object sender, RoutedEventArgs e)
+    private void AppTitleBar_BackRequested(TitleBar sender, object args)
     {
         ViewModel.NavigationService.GoBack();
     }
 
-    private void TitleBarBackButton_PointerEntered(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
-    {
-        AnimatedIcon.SetState(BackAnimatedIcon, "PointerOver");
-    }
-
-    private void TitleBarBackButton_PointerExited(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
-    {
-        AnimatedIcon.SetState(BackAnimatedIcon, "Normal");
-    }
-
-    private void SetTitleBarPassthroughRegions()
-    {
-        if (AppTitleBar.XamlRoot is null)
-        {
-            return;
-        }
-
-        var scaleAdjustment = AppTitleBar.XamlRoot.RasterizationScale;
-        var nonClientSrc = InputNonClientPointerSource.GetForWindowId(App.MainWindow.AppWindow.Id);
-
-        var rects = new List<Windows.Graphics.RectInt32>();
-
-        // Back button passthrough
-        var backTransform = TitleBarBackButton.TransformToVisual(null);
-        var backBounds = backTransform.TransformBounds(new Rect(0, 0, TitleBarBackButton.ActualWidth, TitleBarBackButton.ActualHeight));
-        rects.Add(ScaleRect(backBounds, scaleAdjustment));
-
-        // Search box passthrough
-        if (TitleBarSearchBox.Visibility == Visibility.Visible)
-        {
-            var searchTransform = TitleBarSearchBox.TransformToVisual(null);
-            var searchBounds = searchTransform.TransformBounds(new Rect(0, 0, TitleBarSearchBox.ActualWidth, TitleBarSearchBox.ActualHeight));
-            rects.Add(ScaleRect(searchBounds, scaleAdjustment));
-        }
-
-        // WS_EX_LAYOUTRTL mirrors Win32 input coordinates but TransformToVisual
-        // returns compositor coordinates (unmirrored). Mirror the passthrough rects
-        // so they match the coordinate space the system uses for hit-testing.
-        if (App.FlowDirectionSetting == FlowDirection.RightToLeft)
-        {
-            var windowWidthPx = App.MainWindow.AppWindow.Size.Width;
-            for (var i = 0; i < rects.Count; i++)
-            {
-                var r = rects[i];
-                rects[i] = new Windows.Graphics.RectInt32(
-                    windowWidthPx - r.X - r.Width, r.Y, r.Width, r.Height);
-            }
-        }
-
-        nonClientSrc.SetRegionRects(NonClientRegionKind.Passthrough, rects.ToArray());
-    }
-
-    private static Windows.Graphics.RectInt32 ScaleRect(Rect bounds, double scale)
-    {
-        return new Windows.Graphics.RectInt32(
-            (int)Math.Round(bounds.X * scale),
-            (int)Math.Round(bounds.Y * scale),
-            (int)Math.Round(bounds.Width * scale),
-            (int)Math.Round(bounds.Height * scale));
-    }
-
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {
-        App.AppTitlebar = AppTitleBarText;
+        App.AppTitlebar = AppTitleBar;
     }
 
     private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
