@@ -9,10 +9,15 @@ public static class Program
     {
         try
         {
-            // Windows App SDK 2.3+ XAML performance optimizations
+            // Windows App SDK 2.x+ XAML performance & memory optimizations
             XamlOptionalChanges.EnableChange(XamlChangeId.DefaultStyleOptimizations);
             XamlOptionalChanges.EnableChange(XamlChangeId.IconNoGridOptimization);
             XamlOptionalChanges.EnableChange(XamlChangeId.DeferContextFlyoutInit);
+            XamlOptionalChanges.EnableChange(XamlChangeId.OptimizeApplyStyles);
+            XamlOptionalChanges.Lock();
+
+            // Configure garbage collection latency for interactive desktop responsiveness
+            System.Runtime.GCSettings.LatencyMode = System.Runtime.GCLatencyMode.Interactive;
         }
         catch (Exception ex)
         {

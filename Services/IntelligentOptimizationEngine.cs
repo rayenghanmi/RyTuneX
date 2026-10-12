@@ -8,11 +8,62 @@ namespace RyTuneX.Services;
 
 public static class IntelligentOptimizationEngine
 {
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, (bool? State, DateTime Timestamp)> _stateCache = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly TimeSpan StateCacheTtl = TimeSpan.FromMinutes(10);
+    private static Task<List<OptimizationItemModel>>? _activeFullScanTask;
+    private static readonly object _fullScanLock = new();
+
+    public static void InvalidateCache()
+    {
+        _stateCache.Clear();
+        lock (_fullScanLock)
+        {
+            _activeFullScanTask = null;
+        }
+    }
+
+    public static bool TryGetCachedState(string tag, out bool isApplied)
+    {
+        if (_stateCache.TryGetValue(tag, out var entry) && (DateTime.UtcNow - entry.Timestamp) < StateCacheTtl && entry.State.HasValue)
+        {
+            isApplied = entry.State.Value;
+            return true;
+        }
+        isApplied = false;
+        return false;
+    }
+
+    public static void SetCachedState(string tag, bool isApplied)
+    {
+        _stateCache[tag] = (isApplied, DateTime.UtcNow);
+        lock (_fullScanLock)
+        {
+            _activeFullScanTask = null;
+        }
+    }
+
+    public static void PrewarmCatalog()
+    {
+        _ = ScanAsync();
+    }
+
     // Build master catalog
     public static List<OptimizationItemModel> GetCatalog()
     {
         var tags = OptimizeFunctionInspector.GetAllKnownTags();
         return tags.Select(tag => OptimizeFunctionInspector.CreateItemModel(tag)).ToList();
+    }
+
+    public static List<OptimizationItemModel> GetCatalogByCategory(string category)
+    {
+        var all = GetCatalog();
+        if (category.Equals("Performance", StringComparison.OrdinalIgnoreCase))
+            return all.Where(i => i.Category == OptimizationCategory.Performance).ToList();
+        if (category.Equals("PrivacyAndTelemetry", StringComparison.OrdinalIgnoreCase))
+            return all.Where(i => i.Category == OptimizationCategory.PrivacyAndTelemetry).ToList();
+        if (category.Equals("FeaturesAndUsability", StringComparison.OrdinalIgnoreCase))
+            return all.Where(i => i.Category == OptimizationCategory.FeaturesAndUsability).ToList();
+        return all;
     }
 
     // Get item model by tag
@@ -82,10 +133,45 @@ public static class IntelligentOptimizationEngine
     }
 
     // Scan system optimizations
-    public static async Task<List<OptimizationItemModel>> ScanAsync(IProgress<string>? progress = null)
+    public static Task<List<OptimizationItemModel>> ScanAsync(IProgress<string>? progress = null)
     {
-        var catalog = GetCatalog();
-        return await ScanItemsAsync(catalog, progress).ConfigureAwait(false);
+        lock (_fullScanLock)
+        {
+            if (_activeFullScanTask != null && !_activeFullScanTask.IsCompleted)
+            {
+                _ = LogHelper.Log("[IntelligentEngine] Full scan already in progress; reusing active task.");
+                return _activeFullScanTask;
+            }
+
+            OptimizeFunctionInspector.EnsureInitialized();
+            var catalog = GetCatalog();
+            _activeFullScanTask = ScanItemsAsync(catalog, progress);
+            return _activeFullScanTask;
+        }
+    }
+
+    public static async Task<List<OptimizationItemModel>> ScanCategoryAsync(string category, IProgress<string>? progress = null)
+    {
+        Task<List<OptimizationItemModel>>? activeTask;
+        lock (_fullScanLock)
+        {
+            activeTask = _activeFullScanTask;
+        }
+
+        if (activeTask != null && !activeTask.IsCompleted)
+        {
+            var fullList = await activeTask.ConfigureAwait(false);
+            if (category.Equals("Performance", StringComparison.OrdinalIgnoreCase))
+                return fullList.Where(i => i.Category == OptimizationCategory.Performance).ToList();
+            if (category.Equals("PrivacyAndTelemetry", StringComparison.OrdinalIgnoreCase))
+                return fullList.Where(i => i.Category == OptimizationCategory.PrivacyAndTelemetry).ToList();
+            if (category.Equals("FeaturesAndUsability", StringComparison.OrdinalIgnoreCase))
+                return fullList.Where(i => i.Category == OptimizationCategory.FeaturesAndUsability).ToList();
+            return fullList;
+        }
+
+        var categoryItems = GetCatalogByCategory(category);
+        return await ScanItemsAsync(categoryItems, progress).ConfigureAwait(false);
     }
 
     public static async Task<List<OptimizationItemModel>> ScanAsync(Page? page, IProgress<string>? progress = null)
@@ -97,7 +183,7 @@ public static class IntelligentOptimizationEngine
         return await ScanAsync(progress).ConfigureAwait(false);
     }
 
-    private static async Task<List<OptimizationItemModel>> ScanItemsAsync(List<OptimizationItemModel> items, IProgress<string>? progress = null)
+    public static async Task<List<OptimizationItemModel>> ScanItemsAsync(List<OptimizationItemModel> items, IProgress<string>? progress = null)
     {
         _ = LogHelper.Log($"[IntelligentEngine] === STEP 1: SCAN SYSTEM START ({items.Count} items) ===");
         progress?.Report("Scanning system hardware profile and registry state...");
@@ -106,12 +192,27 @@ public static class IntelligentOptimizationEngine
 
         await Task.Run(() =>
         {
+            var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                ? RegistryView.Registry64
+                : RegistryView.Default;
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView);
+            using var syncKey = baseKey.CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
+
             foreach (var item in items)
             {
                 progress?.Report($"Scanning {item.CategoryDisplay}: {item.Title}...");
 
-                // Detect live state
-                var detectedState = SystemStateDetector.DetectState(item.Tag);
+                // Detect live state with caching
+                bool? detectedState;
+                if (_stateCache.TryGetValue(item.Tag, out var cached) && (DateTime.UtcNow - cached.Timestamp) < StateCacheTtl)
+                {
+                    detectedState = cached.State;
+                }
+                else
+                {
+                    detectedState = SystemStateDetector.DetectState(item.Tag);
+                    _stateCache[item.Tag] = (detectedState, DateTime.UtcNow);
+                }
 
                 if (detectedState.HasValue)
                 {
@@ -119,11 +220,6 @@ public static class IntelligentOptimizationEngine
                     // Sync saved state
                     try
                     {
-                        var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? RegistryView.Registry64
-                            : RegistryView.Default;
-                        using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView);
-                        using var syncKey = baseKey.CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
                         syncKey?.SetValue(item.Tag, detectedState.Value ? 1 : 0, RegistryValueKind.DWord);
                     }
                     catch { }
@@ -363,6 +459,7 @@ public static class IntelligentOptimizationEngine
             }
         }
 
+        InvalidateCache();
         await Task.Delay(400).ConfigureAwait(false);
         _ = LogHelper.Log("[IntelligentEngine] === STEP 5: APPLY FINISHED ===");
     }
@@ -430,6 +527,7 @@ public static class IntelligentOptimizationEngine
         bool success = await ItemRollbackService.RollbackItemAsync(item.Tag).ConfigureAwait(false);
         if (success)
         {
+            InvalidateCache();
             item.IsApplied = preApplyState;
             item.RollbackAvailable = false;
             item.BackupDate = null;

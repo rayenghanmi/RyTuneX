@@ -37,6 +37,7 @@ public static class OptimizeFunctionInspector
 
     // Tag category mappings
     private static readonly ConcurrentDictionary<string, OptimizationCategory> TagCategoryMap = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly ConcurrentDictionary<string, OptimizationItemModel> ItemModelCache = new(StringComparer.OrdinalIgnoreCase);
 
     public static void EnsureInitialized()
     {
@@ -791,6 +792,15 @@ public static class OptimizeFunctionInspector
     {
         EnsureInitialized();
 
+        if (ItemModelCache.TryGetValue(tag, out var cachedModel))
+        {
+            if (toggle != null)
+            {
+                cachedModel.IsApplied = toggle.IsOn;
+            }
+            return cachedModel;
+        }
+
         var info = GetFunctionInfo(tag);
 
         // Determine category
@@ -865,6 +875,7 @@ public static class OptimizeFunctionInspector
             IsApplied = toggle?.IsOn ?? false
         };
 
+        ItemModelCache[tag] = model;
         return model;
     }
 

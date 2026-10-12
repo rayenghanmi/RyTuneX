@@ -33,6 +33,11 @@
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
     <NoWarn>$(NoWarn);CS0618</NoWarn>
+    <!-- Modern .NET 10 & WinUI Runtime Performance & Memory Optimization -->
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <GarbageCollectionAdaptationMode>1</GarbageCollectionAdaptationMode>
+    <TieredPGO>true</TieredPGO>
   </PropertyGroup>
 
   <ItemGroup>

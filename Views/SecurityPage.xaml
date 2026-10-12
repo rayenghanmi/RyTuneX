@@ -83,10 +83,6 @@
                 
                 <ScrollView>
                     <controls:WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <controls:WrapPanel.ChildrenTransitions>
-                            <EntranceThemeTransition FromVerticalOffset="50" />
-                            <RepositionThemeTransition IsStaggeringEnabled="False" />
-                        </controls:WrapPanel.ChildrenTransitions>
 
                         <Grid Padding="10" Width="280" Height="140" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="5">
                             <FontIcon Glyph="&#xEA18;" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>

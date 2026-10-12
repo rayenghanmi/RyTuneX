@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
+using RyTuneX.Services;
 
 namespace RyTuneX.Views;
 
@@ -12,6 +13,7 @@ public sealed partial class FeaturesPage : Page
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
     private string? _pendingScrollTarget;
+    private bool _isInitialized;
 
     public FeaturesPage()
     {
@@ -19,6 +21,7 @@ public sealed partial class FeaturesPage : Page
         LogHelper.Log("Initializing FeaturesPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += FeaturesPage_Loaded;
+        Unloaded += FeaturesPage_Unloaded;
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -28,13 +31,22 @@ public sealed partial class FeaturesPage : Page
         if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
         {
             _pendingScrollTarget = optionTag;
+            if (_isInitialized)
+            {
+                _ = ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+                _pendingScrollTarget = null;
+            }
         }
     }
 
     private async void FeaturesPage_Loaded(object sender, RoutedEventArgs e)
     {
-        await InitializeToggleSwitchesAsync();
-        IntelligentCardEnhancer.EnhancePage(this);
+        if (!_isInitialized)
+        {
+            await InitializeToggleSwitchesAsync();
+            IntelligentCardEnhancer.EnhancePage(this);
+            _isInitialized = true;
+        }
 
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
         {
@@ -48,41 +60,76 @@ public sealed partial class FeaturesPage : Page
         _ = LogHelper.Log("Initializing Toggle Switches");
         try
         {
-            // Open the registry key once outside the loop to avoid repeated I/O per toggle switch
-            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                    ? RegistryView.Registry64
-                    : RegistryView.Default).CreateSubKey(RegistryBaseKey);
+            var toggleSwitches = IntelligentCardEnhancer.GetAllToggleSwitches(this);
+            var tags = toggleSwitches
+                .Select(t => (t.Tag as string) ?? t.Name)
+                .Where(t => !string.IsNullOrEmpty(t))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
 
-            foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
+            var states = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+            var missingTags = new List<string>();
+
+            foreach (var tagName in tags)
             {
-                if (toggleSwitch.Tag is string tagName)
+                if (IntelligentOptimizationEngine.TryGetCachedState(tagName, out bool cached))
                 {
-                    // Prevent duplicate event handler registration on re-navigation
-                    toggleSwitch.Toggled -= ToggleSwitch_Toggled;
-
-                    // 1. Try live system state detection first (ground truth)
-                    var liveState = SystemStateDetector.DetectState(tagName);
-
-                    bool targetState;
-                    if (liveState.HasValue)
-                    {
-                        targetState = liveState.Value;
-                        // Sync the saved registry to match live state so they stay consistent
-                        try { key?.SetValue(tagName, targetState ? 1 : 0, RegistryValueKind.DWord); } catch { }
-                    }
-                    else
-                    {
-                        // 2. Fall back to saved RyTuneX registry state
-                        targetState = key != null && key.GetValue(tagName) is int state && state == 1;
-                    }
-
-                    // Set toggle without triggering the Toggled event (handler removed above)
-                    toggleSwitch.IsOn = targetState;
-
-                    // Subscribe to the Toggled event
-                    toggleSwitch.Toggled += ToggleSwitch_Toggled;
+                    states[tagName] = cached;
                 }
+                else
+                {
+                    missingTags.Add(tagName);
+                }
+            }
+
+            if (missingTags.Count > 0)
+            {
+                var detected = await Task.Run(() =>
+                {
+                    var dict = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+                    var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                        ? RegistryView.Registry64
+                        : RegistryView.Default;
+                    using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView);
+                    using var key = baseKey.CreateSubKey(RegistryBaseKey);
+
+                    foreach (var tagName in missingTags)
+                    {
+                        var liveState = SystemStateDetector.DetectState(tagName);
+                        bool targetState;
+                        if (liveState.HasValue)
+                        {
+                            targetState = liveState.Value;
+                            try { key?.SetValue(tagName, targetState ? 1 : 0, RegistryValueKind.DWord); } catch { }
+                        }
+                        else
+                        {
+                            targetState = key != null && key.GetValue(tagName) is int state && state == 1;
+                        }
+
+                        IntelligentOptimizationEngine.SetCachedState(tagName, targetState);
+                        dict[tagName] = targetState;
+                    }
+
+                    return dict;
+                });
+
+                foreach (var kvp in detected)
+                {
+                    states[kvp.Key] = kvp.Value;
+                }
+            }
+
+            foreach (var toggleSwitch in toggleSwitches)
+            {
+                var tagName = (toggleSwitch.Tag as string) ?? toggleSwitch.Name;
+                if (states.TryGetValue(tagName, out bool targetState))
+                {
+                    IntelligentCardEnhancer.SetToggleIsOnSilently(toggleSwitch, targetState);
+                }
+
+                toggleSwitch.Toggled -= ToggleSwitch_Toggled;
+                toggleSwitch.Toggled += ToggleSwitch_Toggled;
             }
         }
         catch (Exception ex)
@@ -120,6 +167,11 @@ public sealed partial class FeaturesPage : Page
             }
         }
     }
+    private void FeaturesPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        // When cached (NavigationCacheMode.Required), keep event subscriptions active
+    }
+
     private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
@@ -130,7 +182,9 @@ public sealed partial class FeaturesPage : Page
                 return;
             }
 
-            _ = LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            var tagName = (toggleSwitch.Tag as string) ?? toggleSwitch.Name;
+            _ = LogHelper.Log($"ToggleSwitch Tag: {tagName}, IsOn: {toggleSwitch.IsOn}");
+            IntelligentOptimizationEngine.SetCachedState(tagName, toggleSwitch.IsOn);
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }
         catch (Exception ex)

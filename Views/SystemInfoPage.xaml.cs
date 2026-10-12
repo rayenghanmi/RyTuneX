@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
 using Microsoft.Windows.Storage.Pickers;
@@ -80,11 +81,13 @@ public sealed partial class SystemInfoPage : Page
     [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
     private static extern bool GlobalMemoryStatusEx([In, Out] MEMORYSTATUSEX lpBuffer);
 
+    private static (string Os, string Cpu, string Gpu, string Ram, string Disk, string Network, string Battery)? _cachedSystemInfo;
+
     public SystemInfoPage()
     {
         InitializeComponent();
         _ = LogHelper.Log("Initializing SystemInfoPage");
-        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         _ = UpdateSystemInfoAsync();
     }
 
@@ -120,6 +123,7 @@ public sealed partial class SystemInfoPage : Page
         if (string.IsNullOrWhiteSpace(info)) return;
 
         var lines = info.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+        var secondaryBrush = Application.Current.Resources["TextFillColorSecondaryBrush"] as Brush;
 
         for (int i = 0; i < lines.Length; i++)
         {
@@ -137,10 +141,11 @@ public sealed partial class SystemInfoPage : Page
                     FontWeight = FontWeights.SemiBold
                 });
 
-                var valueRun = (Run)Microsoft.UI.Xaml.Markup.XamlReader.Load(
-                    @"<Run xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" Foreground=""{ThemeResource TextFillColorSecondaryBrush}"" />"
-                );
-                valueRun.Text = value + (i < lines.Length - 1 ? "\n" : "");
+                var valueRun = new Run
+                {
+                    Text = value + (i < lines.Length - 1 ? "\n" : ""),
+                    Foreground = secondaryBrush
+                };
                 textBlock.Inlines.Add(valueRun);
             }
             else
@@ -160,23 +165,40 @@ public sealed partial class SystemInfoPage : Page
         {
             _ = LogHelper.Log("Updating SystemInfo");
 
-            var osInformationTask = GetOsInformation();
-            var cpuInformationTask = GetCpuInformation();
-            var gpuInformationTask = GetGpuInformation();
-            var ramInformationTask = GetRamInformation();
-            var diskInformationTask = GetDiskInformation();
-            var networkInformationTask = GetNetworkInformation();
-            var batteryInformationTask = GetBatteryInformation();
+            string osInformation;
+            string cpuInformation;
+            string gpuInformation;
+            string ramInformation;
+            string diskInformation;
+            string networkInformation;
+            string batteryInformation;
 
-            await Task.WhenAll(osInformationTask, cpuInformationTask, gpuInformationTask, ramInformationTask, diskInformationTask, networkInformationTask, batteryInformationTask).ConfigureAwait(false);
+            if (_cachedSystemInfo.HasValue)
+            {
+                (osInformation, cpuInformation, gpuInformation, ramInformation, diskInformation, networkInformation, batteryInformation) = _cachedSystemInfo.Value;
+            }
+            else
+            {
+                var osInformationTask = GetOsInformation();
+                var cpuInformationTask = GetCpuInformation();
+                var gpuInformationTask = GetGpuInformation();
+                var ramInformationTask = GetRamInformation();
+                var diskInformationTask = GetDiskInformation();
+                var networkInformationTask = GetNetworkInformation();
+                var batteryInformationTask = GetBatteryInformation();
 
-            var osInformation = osInformationTask.Result;
-            var cpuInformation = cpuInformationTask.Result;
-            var gpuInformation = gpuInformationTask.Result;
-            var ramInformation = ramInformationTask.Result;
-            var diskInformation = diskInformationTask.Result;
-            var networkInformation = networkInformationTask.Result;
-            var batteryInformation = batteryInformationTask.Result;
+                await Task.WhenAll(osInformationTask, cpuInformationTask, gpuInformationTask, ramInformationTask, diskInformationTask, networkInformationTask, batteryInformationTask).ConfigureAwait(false);
+
+                osInformation = osInformationTask.Result;
+                cpuInformation = cpuInformationTask.Result;
+                gpuInformation = gpuInformationTask.Result;
+                ramInformation = ramInformationTask.Result;
+                diskInformation = diskInformationTask.Result;
+                networkInformation = networkInformationTask.Result;
+                batteryInformation = batteryInformationTask.Result;
+
+                _cachedSystemInfo = (osInformation, cpuInformation, gpuInformation, ramInformation, diskInformation, networkInformation, batteryInformation);
+            }
 
             // Extract summary fields from the info strings
             var osCaption = GetFirstLine(osInformation);

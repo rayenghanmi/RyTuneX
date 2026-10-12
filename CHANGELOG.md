@@ -73,6 +73,12 @@ All notable changes to this branch will be documented in this file.
 - Fixed an issue in `Startup Apps` page where scheduled tasks could not be toggled due to missing Task Scheduler directory path resolution, migrating mutations to the native in-process `Schedule.Service` COM API #108.
 - Fixed a UI virtualization recycling bug in `Startup Apps` page where scrolling down the list automatically toggled startup items.
 - Removed misleading administrator privilege warnings on startup item toggle failures when already running elevated #108.
+- Fixed navigation button freezing and UI thread hangs when navigating to toggle-heavy pages (`Optimize System`, `Features`, and `Privacy`).
+- Fixed a race condition between page loading and `IntelligentScoreHeaderControl` where optimization states were inadvertently overwritten with uninitialized toggle values.
+- Replaced eager upfront instantiation of technical detail flyouts across all cards with lightweight, on-demand creation upon clicking the info button.
+- Eliminated redundant external process launches during page initialization by querying system culture OEM code pages in-process instead of spawning `cmd.exe /c "chcp"`.
+- Decoupled power plan and automatic update querying on the `Optimize System` page to execute asynchronously in the background without blocking the UI thread.
+- Fixed duplicate concurrent system scans on startup by implementing in-flight task deduplication in `IntelligentOptimizationEngine.ScanAsync` and preventing redundant dual `RefreshScoreAsync` scheduling in `IntelligentScoreHeaderControl`.
 
 ### Changes
 
@@ -94,6 +100,9 @@ All notable changes to this branch will be documented in this file.
 - Removed legacy `SendMessage(hwnd, WM_ACTIVATE)` window activation P/Invoke workaround from `TitleBarHelper`, eliminating window repaint flickers during theme changes.
 - Implemented custom application startup entry point (`Program.cs`) opting into Windows App SDK 2.3+ XAML rendering engine optimizations (`DefaultStyleOptimizations`, `IconNoGridOptimization`, `DeferContextFlyoutInit`).
 - Modernized `ScrollToElementHelper` to use native WinUI `StartBringIntoView` with animated transitions, providing smooth scrolling across both `ScrollView` and `ScrollViewer` containers.
+- Enhanced `GetAllToggleSwitches` in `IntelligentCardEnhancer` to traverse both logical containers (`Panel.Children`, `ContentControl.Content`, `Border.Child`, `ScrollViewer.Content`) and visual tree elements, caching results per page with `ConditionalWeakTable` to eliminate repeated visual tree walks.
+- Optimized `IntelligentCardEnhancer` DOM mutation by updating existing badge controls in-place rather than tearing down and reconstructing `SettingsCard.Content`.
+- Optimized `InitializeToggleSwitchesAsync` across all toggle pages to retrieve live states directly from the pre-warmed cache (`PrewarmCatalog`) and apply them silently prior to initial render, eliminating simultaneous switch sliding animations.
 
 ## 1.7.1 - Released
 

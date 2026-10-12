@@ -27,9 +27,12 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
     private static void OnTargetCategoryChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is IntelligentScoreHeaderControl control)
+        if (d is IntelligentScoreHeaderControl control && control.IsLoaded)
         {
-            _ = control.RefreshScoreAsync();
+            control.DispatcherQueue?.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+            {
+                _ = control.RefreshScoreAsync();
+            });
         }
     }
 
@@ -37,12 +40,20 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
     private bool _isRefreshPending;
     private List<OptimizationItemModel> _allScannedItems = new();
     private Page? _parentPage;
+    private HashSet<string>? _cachedParentPageTags;
     private string _selectedMode = "Recommended"; // "Recommended", "AllSafe", "Advanced"
 
     public IntelligentScoreHeaderControl()
     {
         InitializeComponent();
         Loaded += IntelligentScoreHeaderControl_Loaded;
+        Unloaded += IntelligentScoreHeaderControl_Unloaded;
+    }
+
+    private void IntelligentScoreHeaderControl_Unloaded(object sender, RoutedEventArgs e)
+    {
+        _cachedParentPageTags = null;
+        _parentPage = null;
     }
 
     private void IntelligentScoreHeaderControl_Loaded(object sender, RoutedEventArgs e)
@@ -58,26 +69,36 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
         }
 
         // Auto-detect page category if not explicitly set
+        bool categoryChanged = false;
         if (TargetCategory == "All" && _parentPage != null)
         {
             var pageName = _parentPage.GetType().Name;
             if (pageName.Contains("OptimizeSystem", StringComparison.OrdinalIgnoreCase))
             {
                 TargetCategory = "Performance";
+                categoryChanged = true;
             }
             else if (pageName.Contains("Privacy", StringComparison.OrdinalIgnoreCase))
             {
                 TargetCategory = "PrivacyAndTelemetry";
+                categoryChanged = true;
             }
             else if (pageName.Contains("Features", StringComparison.OrdinalIgnoreCase))
             {
                 TargetCategory = "FeaturesAndUsability";
+                categoryChanged = true;
             }
         }
 
         LocalizeStaticControls();
         UpdateModeButtonsUI();
-        _ = RefreshScoreAsync();
+        if (!categoryChanged)
+        {
+            DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+            {
+                _ = RefreshScoreAsync();
+            });
+        }
     }
 
     private void LocalizeStaticControls()
@@ -133,30 +154,43 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
                 _isRefreshPending = false;
                 try
                 {
+                    await Task.Yield();
                     MainProgressBar.Visibility = Visibility.Visible;
                     MainProgressBar.IsIndeterminate = true;
 
-                    if (_parentPage != null && _parentPage is not HomePage)
+                    _parentPage ??= FindParentPage(this);
+                    if (TargetCategory != "All")
+                    {
+                        _allScannedItems = await IntelligentOptimizationEngine.ScanCategoryAsync(TargetCategory);
+                    }
+                    else if (_parentPage != null && _parentPage is not HomePage)
                     {
                         _allScannedItems = await IntelligentOptimizationEngine.ScanPageAsync(_parentPage);
                     }
-                    else
+                    else if (_parentPage is HomePage || TargetCategory == "All")
                     {
                         _allScannedItems = await IntelligentOptimizationEngine.ScanAsync();
                     }
+                    else
+                    {
+                        return;
+                    }
 
-                    // Sync visual toggle states
+                    // Sync scanned items with live toggle states on the page
                     if (_parentPage != null)
                     {
-                        var pageToggles = IntelligentCardEnhancer.FindVisualChildren<ToggleSwitch>(_parentPage);
+                        var pageToggles = IntelligentCardEnhancer.GetAllToggleSwitches(_parentPage);
+                        _cachedParentPageTags = new HashSet<string>(pageToggles.Select(t => (t.Tag as string) ?? t.Name).Where(t => !string.IsNullOrEmpty(t))!, StringComparer.OrdinalIgnoreCase);
                         foreach (var t in pageToggles)
                         {
-                            if (t.Tag is string tTag && !string.IsNullOrEmpty(tTag))
+                            var tTag = (t.Tag as string) ?? t.Name;
+                            if (!string.IsNullOrEmpty(tTag))
                             {
                                 var item = _allScannedItems.FirstOrDefault(i => string.Equals(i.Tag, tTag, StringComparison.OrdinalIgnoreCase));
                                 if (item != null)
                                 {
                                     item.IsApplied = t.IsOn;
+                                    IntelligentOptimizationEngine.SetCachedState(tTag, t.IsOn);
                                 }
                             }
                         }
@@ -610,6 +644,7 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
     private HashSet<string> GetParentPageToggleTags()
     {
+        if (_cachedParentPageTags != null) return _cachedParentPageTags;
         var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         if (_parentPage == null) return set;
 
@@ -620,6 +655,7 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
                 set.Add(tag);
             }
         }
+        _cachedParentPageTags = set;
         return set;
     }
 

@@ -30,9 +30,14 @@ public sealed partial class UsageGraph : UserControl
         ((UsageGraph)d).ApplyGraphColor();
     }
 
+    private readonly PointCollection _linePoints = [];
+    private readonly PointCollection _fillPoints = [];
+
     public UsageGraph()
     {
         InitializeComponent();
+        LinePolyline.Points = _linePoints;
+        FillPolygon.Points = _fillPoints;
         Loaded += (_, _) => ApplyGraphColor();
     }
 
@@ -94,6 +99,8 @@ public sealed partial class UsageGraph : UserControl
 
         if (width <= 0 || height <= 0 || _values.Count == 0)
         {
+            _linePoints.Clear();
+            _fillPoints.Clear();
             return;
         }
 
@@ -103,11 +110,11 @@ public sealed partial class UsageGraph : UserControl
         // Offset so the newest point is always at the right edge
         var startX = width - (count - 1) * stepX;
 
-        var linePoints = new PointCollection();
-        var fillPoints = new PointCollection();
+        _linePoints.Clear();
+        _fillPoints.Clear();
 
         // Bottom-left corner of fill area
-        fillPoints.Add(new Windows.Foundation.Point(startX, height));
+        _fillPoints.Add(new Windows.Foundation.Point(startX, height));
 
         for (var i = 0; i < count; i++)
         {
@@ -115,14 +122,11 @@ public sealed partial class UsageGraph : UserControl
             var y = height - (_values[i] / 100.0 * height);
             var point = new Windows.Foundation.Point(x, y);
 
-            linePoints.Add(point);
-            fillPoints.Add(point);
+            _linePoints.Add(point);
+            _fillPoints.Add(point);
         }
 
         // Bottom-right corner of fill area
-        fillPoints.Add(new Windows.Foundation.Point(startX + (count - 1) * stepX, height));
-
-        LinePolyline.Points = linePoints;
-        FillPolygon.Points = fillPoints;
+        _fillPoints.Add(new Windows.Foundation.Point(startX + (count - 1) * stepX, height));
     }
 }

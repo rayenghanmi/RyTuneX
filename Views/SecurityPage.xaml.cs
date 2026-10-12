@@ -19,20 +19,7 @@ public sealed partial class SecurityPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing SecurityPage");
-
-        // Initialize cancellation token
-        _cancellationTokenSource = new CancellationTokenSource();
-
-        // Start initial check asynchronously
-        _ = CheckSecurityStatusAsync(_cancellationTokenSource.Token);
-
-        // Auto-refresh every 30 seconds
-        _refreshTimer = new DispatcherTimer
-        {
-            Interval = TimeSpan.FromSeconds(30)
-        };
-        _refreshTimer.Tick += async (s, e) => await CheckSecurityStatusAsync(_cancellationTokenSource.Token);
-        _refreshTimer.Start();
+        NavigationCacheMode = NavigationCacheMode.Disabled;
 
         // Clean up on unload
         Unloaded += (s, e) =>
@@ -40,6 +27,7 @@ public sealed partial class SecurityPage : Page
             _refreshTimer?.Stop();
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = null;
         };
 
         Loaded += SecurityPage_Loaded;
@@ -57,10 +45,26 @@ public sealed partial class SecurityPage : Page
 
     private async void SecurityPage_Loaded(object sender, RoutedEventArgs e)
     {
+        _cancellationTokenSource ??= new CancellationTokenSource();
+        _ = CheckSecurityStatusAsync(_cancellationTokenSource.Token);
+
+        _refreshTimer ??= new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+        _refreshTimer.Tick -= RefreshTimer_Tick;
+        _refreshTimer.Tick += RefreshTimer_Tick;
+        _refreshTimer.Start();
+
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
         {
             await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
             _pendingScrollTarget = null;
+        }
+    }
+
+    private async void RefreshTimer_Tick(object? sender, object e)
+    {
+        if (_cancellationTokenSource != null && !_cancellationTokenSource.IsCancellationRequested)
+        {
+            await CheckSecurityStatusAsync(_cancellationTokenSource.Token);
         }
     }
 

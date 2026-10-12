@@ -12,6 +12,7 @@ namespace RyTuneX.Views;
 
 public sealed partial class StartupPage : Page
 {
+    private static List<StartupItem>? _cachedStartupItems;
     private List<StartupItem> _allStartupItems = [];
     private readonly ObservableCollection<StartupItem> _filteredStartupItems = [];
     private string _currentSort = "Name";
@@ -29,6 +30,15 @@ public sealed partial class StartupPage : Page
         _ = LogHelper.Log("Initializing StartupPage");
         StartupListView.ItemsSource = _filteredStartupItems;
         Loaded += StartupPage_Loaded;
+        Unloaded += StartupPage_Unloaded;
+    }
+
+    private void StartupPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        Loaded -= StartupPage_Loaded;
+        Unloaded -= StartupPage_Unloaded;
+        _filteredStartupItems.Clear();
+        StartupListView.ItemsSource = null;
     }
 
     private async void StartupPage_Loaded(object sender, RoutedEventArgs e)
@@ -36,11 +46,23 @@ public sealed partial class StartupPage : Page
         await LoadStartupItemsAsync();
     }
 
-    private async Task LoadStartupItemsAsync()
+    private async Task LoadStartupItemsAsync(bool forceRefresh = false)
     {
         if (_isBusy) return;
-        _isBusy = true;
 
+        if (!forceRefresh && _cachedStartupItems != null)
+        {
+            _allStartupItems = _cachedStartupItems;
+            StartupListView.ItemsSource = _filteredStartupItems;
+            UpdateSummaryCards();
+            ApplyFilterAndSort();
+            LoadingRing.IsActive = false;
+            LoadingRing.Visibility = Visibility.Collapsed;
+            StartupListView.Visibility = Visibility.Visible;
+            return;
+        }
+
+        _isBusy = true;
         LoadingRing.IsActive = true;
         LoadingRing.Visibility = Visibility.Visible;
         StartupListView.Visibility = Visibility.Collapsed;
@@ -48,6 +70,8 @@ public sealed partial class StartupPage : Page
         try
         {
             _allStartupItems = await StartupHelper.GetStartupItemsAsync();
+            _cachedStartupItems = _allStartupItems;
+            StartupListView.ItemsSource = _filteredStartupItems;
             UpdateSummaryCards();
             ApplyFilterAndSort();
         }
@@ -160,7 +184,8 @@ public sealed partial class StartupPage : Page
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
-        await LoadStartupItemsAsync();
+        _cachedStartupItems = null;
+        await LoadStartupItemsAsync(forceRefresh: true);
     }
 
     private void ItemToggle_Loaded(object sender, RoutedEventArgs e)

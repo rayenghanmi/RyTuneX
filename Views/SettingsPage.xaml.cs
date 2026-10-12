@@ -23,6 +23,7 @@ public sealed partial class SettingsPage : Page
 
     private string _versionDescription;
     private string? _pendingScrollTarget;
+    private bool _isInitialized;
 
     public static string latestVersionString = string.Empty;
 
@@ -40,11 +41,13 @@ public sealed partial class SettingsPage : Page
 
         _versionDescription = "Version".GetLocalized() + " " + GetVersionDescription();
 
-        InitializeThemeComboBox();
-        InitializeAccentColorSection();
-        InitializeNavigationStyleComboBox();
-
         Loaded += SettingsPage_Loaded;
+        Unloaded += SettingsPage_Unloaded;
+    }
+
+    private void SettingsPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        // When cached (NavigationCacheMode.Required), keep event subscriptions active
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -59,6 +62,15 @@ public sealed partial class SettingsPage : Page
 
     private async void SettingsPage_Loaded(object sender, RoutedEventArgs e)
     {
+        if (!_isInitialized)
+        {
+            await Task.Yield();
+            InitializeThemeComboBox();
+            InitializeAccentColorSection();
+            InitializeNavigationStyleComboBox();
+            _isInitialized = true;
+        }
+
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
         {
             await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);

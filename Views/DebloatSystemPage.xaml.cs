@@ -13,7 +13,8 @@ namespace RyTuneX.Views;
 public sealed partial class DebloatSystemPage : Page
 {
     public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
-    private readonly CancellationTokenSource cancellationTokenSource = new();
+    private static (List<AppInfo> Apps, HashSet<string> UninstallableNames)? _cachedInstalledApps;
+    private CancellationTokenSource? _loadCts;
     private CancellationTokenSource? _uninstallBatchCts;
     private Guid? _uninstallBatchRegistrationId;
     private List<AppInfo> allApps = new();
@@ -24,7 +25,7 @@ public sealed partial class DebloatSystemPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing DebloatSystemPage");
-        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         Loaded += DebloatSystemPage_Loaded;
         Unloaded += DebloatSystemPage_Unloaded;
     }
@@ -34,15 +35,19 @@ public sealed partial class DebloatSystemPage : Page
         try
         {
             // Cancel any ongoing operations for this page
-            try { cancellationTokenSource.Cancel(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error cancelling CTS: {ex.Message}"); }
-            try { _filterAnimationCts?.Cancel(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error cancelling filter CTS: {ex.Message}"); }
+            try { _loadCts?.Cancel(); _loadCts?.Dispose(); _loadCts = null; } catch { }
+            try { _filterAnimationCts?.Cancel(); } catch { }
 
             if (_uninstallBatchCts != null)
             {
-                try { _uninstallBatchCts.Cancel(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error cancelling uninstall CTS: {ex.Message}"); }
+                try { _uninstallBatchCts.Cancel(); } catch { }
                 _uninstallBatchCts.Dispose();
                 _uninstallBatchCts = null;
             }
+
+            AppList.Clear();
+            allApps.Clear();
+            uninstallableAppNames.Clear();
         }
         catch (Exception ex)
         {
@@ -62,6 +67,14 @@ public sealed partial class DebloatSystemPage : Page
 
     private async void DebloatSystemPage_Loaded(object sender, RoutedEventArgs e)
     {
+        if (allApps.Count == 0)
+        {
+            _loadCts?.Cancel();
+            _loadCts?.Dispose();
+            _loadCts = new CancellationTokenSource();
+            LoadInstalledApps(_loadCts.Token);
+        }
+
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
         {
             await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
@@ -87,7 +100,18 @@ public sealed partial class DebloatSystemPage : Page
 
             _ = LogHelper.Log("Loading InstalledApps");
 
-            var (installedApps, fetchedUninstallableNames) = await Task.Run(OptimizationOptions.GetInstalledApps).ConfigureAwait(false);
+            (List<AppInfo> installedApps, HashSet<string> fetchedUninstallableNames) data;
+            if (_cachedInstalledApps.HasValue)
+            {
+                data = _cachedInstalledApps.Value;
+            }
+            else
+            {
+                data = await Task.Run(OptimizationOptions.GetInstalledApps).ConfigureAwait(false);
+                _cachedInstalledApps = data;
+            }
+
+            var (installedApps, fetchedUninstallableNames) = data;
 
             DispatcherQueue.TryEnqueue(() =>
             {
@@ -353,7 +377,11 @@ public sealed partial class DebloatSystemPage : Page
     private void ReloadApps_Click(object sender, RoutedEventArgs e)
     {
         _ = LogHelper.Log("Reloading installed apps list");
-        LoadInstalledApps(cancellationTokenSource.Token);
+        _cachedInstalledApps = null;
+        _loadCts?.Cancel();
+        _loadCts?.Dispose();
+        _loadCts = new CancellationTokenSource();
+        LoadInstalledApps(_loadCts.Token);
     }
 
     private void appsFilter_SelectionChanged(object sender, RoutedEventArgs e)
@@ -361,7 +389,10 @@ public sealed partial class DebloatSystemPage : Page
         if (allApps.Count == 0)
         {
             // First load — fetch all apps
-            LoadInstalledApps(cancellationTokenSource.Token);
+            _loadCts?.Cancel();
+            _loadCts?.Dispose();
+            _loadCts = new CancellationTokenSource();
+            LoadInstalledApps(_loadCts.Token);
             return;
         }
 

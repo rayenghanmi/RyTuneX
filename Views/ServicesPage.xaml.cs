@@ -18,11 +18,21 @@ public sealed partial class ServicesPage : Page
     private bool _isUpdatingStartupType;
     private HashSet<ComboBox> _userInteractedComboBoxes = [];
 
+    private static List<ServiceInfoItem>? _cachedServices;
+
     public ServicesPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing ServicesPage");
         Loaded += ServicesPage_Loaded;
+        Unloaded += ServicesPage_Unloaded;
+    }
+
+    private void ServicesPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        _allServices.Clear();
+        _filteredServices.Clear();
+        ServicesListView.ItemsSource = null;
     }
 
     private async void ServicesPage_Loaded(object sender, RoutedEventArgs e)
@@ -39,28 +49,43 @@ public sealed partial class ServicesPage : Page
 
         try
         {
-            _allServices = await Task.Run(() =>
+            if (_cachedServices != null && _cachedServices.Count > 0)
             {
-                return ServiceController.GetServices()
-                    .Select(s =>
+                _allServices = [.. _cachedServices];
+            }
+            else
+            {
+                _allServices = await Task.Run(() =>
+                {
+                    var controllers = ServiceController.GetServices();
+                    var list = new List<ServiceInfoItem>(controllers.Length);
+                    foreach (var s in controllers)
                     {
-                        var startType = GetServiceStartType(s.ServiceName);
-                        var isRunning = s.Status == ServiceControllerStatus.Running;
-                        var canStop = s.Status == ServiceControllerStatus.Running && s.CanStop;
-
-                        return new ServiceInfoItem
+                        try
                         {
-                            Name = s.ServiceName,
-                            DisplayName = s.DisplayName,
-                            Status = s.Status.ToString(),
-                            StartType = startType,
-                            CanStart = !isRunning && startType != "Disabled",
-                            CanStop = canStop
-                        };
-                    })
-                    .OrderBy(s => s.DisplayName)
-                    .ToList();
-            });
+                            var startType = GetServiceStartType(s.ServiceName);
+                            var isRunning = s.Status == ServiceControllerStatus.Running;
+                            var canStop = isRunning && s.CanStop;
+
+                            list.Add(new ServiceInfoItem
+                            {
+                                Name = s.ServiceName,
+                                DisplayName = s.DisplayName,
+                                Status = s.Status.ToString(),
+                                StartType = startType,
+                                CanStart = !isRunning && startType != "Disabled",
+                                CanStop = canStop
+                            });
+                        }
+                        finally
+                        {
+                            s.Dispose();
+                        }
+                    }
+                    return list.OrderBy(s => s.DisplayName).ToList();
+                });
+                _cachedServices = [.. _allServices];
+            }
 
             UpdateSummary();
             ApplyFilterAndSort();
@@ -170,6 +195,7 @@ public sealed partial class ServicesPage : Page
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
         _ = LogHelper.Log("Manually refreshing services list");
+        _cachedServices = null;
         await LoadServicesAsync();
     }
 

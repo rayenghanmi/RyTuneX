@@ -287,12 +287,6 @@
 						  Visibility="Collapsed"
 						  ItemContainerStyle="{StaticResource PackageItemContainerStyle}"
 						  ItemTemplate="{StaticResource PackageItemTemplate}">
-					<ListView.ItemContainerTransitions>
-						<TransitionCollection>
-							<EntranceThemeTransition FromVerticalOffset="24"/>
-							<RepositionThemeTransition IsStaggeringEnabled="False"/>
-						</TransitionCollection>
-					</ListView.ItemContainerTransitions>
 				</ListView>
 
 				<!-- Updates list -->
@@ -303,12 +297,6 @@
 						  Visibility="Collapsed"
 						  ItemContainerStyle="{StaticResource PackageItemContainerStyle}"
 						  ItemTemplate="{StaticResource PackageItemTemplate}">
-					<ListView.ItemContainerTransitions>
-						<TransitionCollection>
-							<EntranceThemeTransition FromVerticalOffset="24"/>
-							<RepositionThemeTransition IsStaggeringEnabled="False"/>
-						</TransitionCollection>
-					</ListView.ItemContainerTransitions>
 				</ListView>
 
 				<!-- Empty / error state -->

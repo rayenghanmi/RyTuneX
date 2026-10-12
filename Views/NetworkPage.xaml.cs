@@ -34,7 +34,7 @@ public sealed partial class NetworkPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing NetworkPage");
-        this.NavigationCacheMode = NavigationCacheMode.Required;
+        this.NavigationCacheMode = NavigationCacheMode.Disabled;
         Loaded += NetworkPage_Loaded;
     }
 
@@ -428,9 +428,8 @@ public sealed partial class NetworkPage : Page
             });
             NagleToggle.IsOn = nagleDisabled;
 
-            // RSS, ECN, CTCP: parse netsh output
-            var netshOutput = await Task.Run(async () =>
-                await OptimizationOptions.RunPowerShell("netsh int tcp show global"));
+            // RSS, ECN, CTCP: parse netsh output directly without PowerShell overhead
+            var netshOutput = await RunNetshGlobalAsync();
 
             RSSToggle.IsOn = ParseNetshBoolValue(netshOutput, "Receive-Side Scaling State", "enabled");
             ECNToggle.IsOn = ParseNetshBoolValue(netshOutput, "ECN Capability", "enabled");
@@ -525,6 +524,36 @@ public sealed partial class NetworkPage : Page
 
     private static bool ParseNetshStringValue(string output, string label, string expectedValue)
         => ParseNetshBoolValue(output, label, expectedValue);
+
+    private static async Task<string> RunNetshGlobalAsync()
+    {
+        return await Task.Run(async () =>
+        {
+            try
+            {
+                using var process = new System.Diagnostics.Process
+                {
+                    StartInfo = new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = "netsh.exe",
+                        Arguments = "int tcp show global",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        CreateNoWindow = true
+                    }
+                };
+                process.Start();
+                var output = await process.StandardOutput.ReadToEndAsync().ConfigureAwait(false);
+                await process.WaitForExitAsync().ConfigureAwait(false);
+                return output.Trim();
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }).ConfigureAwait(false);
+    }
 
     private async void NetworkThrottlingToggle_Toggled(object sender, RoutedEventArgs e)
     {

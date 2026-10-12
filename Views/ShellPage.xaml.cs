@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Media;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
+using RyTuneX.Services;
 using RyTuneX.ViewModels;
 using Windows.Storage;
 using Windows.System;
@@ -31,6 +32,7 @@ public sealed partial class ShellPage : Page
 
         Current = this;
         LogHelper.Log("Initializing ShellPage");
+        NavigationFrame.CacheSize = 20;
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
         App.MainWindow.ExtendsContentIntoTitleBar = true;
@@ -87,6 +89,7 @@ public sealed partial class ShellPage : Page
             try
             {
                 AppSearchService.InitializeCache();
+                IntelligentOptimizationEngine.PrewarmCatalog();
             }
             catch (Exception ex)
             {

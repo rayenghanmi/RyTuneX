@@ -117,6 +117,13 @@ public class NavigationService : INavigationService
                 frame.BackStack.Clear();
                 frame.Tag = false;
             }
+            else if (frame.BackStack.Count > 20)
+            {
+                while (frame.BackStack.Count > 10)
+                {
+                    frame.BackStack.RemoveAt(0);
+                }
+            }
 
             if (frame.GetPageViewModel() is INavigationAware navigationAware)
             {

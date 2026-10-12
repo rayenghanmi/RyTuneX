@@ -65,11 +65,20 @@ public sealed partial class HomePage : Page
 
             var installedAppsCount = await Task.Run(() => GetInstalledAppsCount(), cancellationToken).ConfigureAwait(false);
             var servicesCount = await Task.Run(() => GetServicesCount(), cancellationToken).ConfigureAwait(false);
-            var processesCount = await Task.Run(() => Process.GetProcesses().Length, cancellationToken).ConfigureAwait(false);
+            var processesCount = await Task.Run(() =>
+            {
+                var procs = Process.GetProcesses();
+                var count = procs.Length;
+                foreach (var p in procs) p.Dispose();
+                return count;
+            }, cancellationToken).ConfigureAwait(false);
 
-            _prevBytesReceived = GetTotalBytesReceived();
-            _prevBytesSent = GetTotalBytesSent();
+            var (initRx, initTx) = GetTotalNetworkBytes();
+            _prevBytesReceived = initRx;
+            _prevBytesSent = initTx;
             _lastSampleTime = DateTime.UtcNow;
+
+            var processCountTick = 0;
 
             while (!cancellationToken.IsCancellationRequested)
             {
@@ -78,9 +87,16 @@ public sealed partial class HomePage : Page
                 var diskUsageVal = GetDiskUsage();
                 var (networkUploadUsage, networkDownloadUsage) = GetNetworkThroughputMbps();
 
-                if (DateTime.UtcNow.Second % 2 == 0)
+                if (++processCountTick >= 15)
                 {
-                    processesCount = Process.GetProcesses().Length;
+                    processCountTick = 0;
+                    try
+                    {
+                        var procs = Process.GetProcesses();
+                        processesCount = procs.Length;
+                        foreach (var p in procs) p.Dispose();
+                    }
+                    catch { }
                 }
 
                 try
@@ -114,7 +130,7 @@ public sealed partial class HomePage : Page
                     _ = LogHelper.LogWarning($"Error updating UI: {ex.Message}");
                 }
 
-                await Task.Delay(500, cancellationToken).ConfigureAwait(false);
+                await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
             }
         }
         catch (OperationCanceledException)
@@ -186,8 +202,7 @@ public sealed partial class HomePage : Page
         try
         {
             var now = DateTime.UtcNow;
-            var currentReceived = GetTotalBytesReceived();
-            var currentSent = GetTotalBytesSent();
+            var (currentReceived, currentSent) = GetTotalNetworkBytes();
 
             if (_lastSampleTime == DateTime.MinValue)
             {
@@ -216,8 +231,28 @@ public sealed partial class HomePage : Page
         catch { return (0.0, 0.0); }
     }
 
-    private static long GetTotalBytesReceived() => NetworkInterface.GetAllNetworkInterfaces().Where(ni => ni.OperationalStatus == OperationalStatus.Up).Sum(ni => ni.GetIPStatistics().BytesReceived);
-    private static long GetTotalBytesSent() => NetworkInterface.GetAllNetworkInterfaces().Where(ni => ni.OperationalStatus == OperationalStatus.Up).Sum(ni => ni.GetIPStatistics().BytesSent);
+    private static (long Rx, long Tx) GetTotalNetworkBytes()
+    {
+        try
+        {
+            long rx = 0;
+            long tx = 0;
+            foreach (var ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.OperationalStatus == OperationalStatus.Up)
+                {
+                    var stats = ni.GetIPStatistics();
+                    rx += stats.BytesReceived;
+                    tx += stats.BytesSent;
+                }
+            }
+            return (rx, tx);
+        }
+        catch
+        {
+            return (0, 0);
+        }
+    }
 
     private int GetInstalledAppsCount()
     {

@@ -69,7 +69,7 @@ public sealed partial class RepairPage : Page
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         InitializeComponent();
         LogHelper.Log("Initializing RepairPage");
-        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         Loaded += RepairPage_Loaded;
         Unloaded += RepairPage_Unloaded;
         SetState(RepairState.Idle);

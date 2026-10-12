@@ -22,7 +22,7 @@ public sealed partial class StressTestPage : Page
     public StressTestPage()
     {
         InitializeComponent();
-        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         LogHelper.Log("Initializing StressTestPage");
 
         // Wire up engine events

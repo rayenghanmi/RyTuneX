@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Helpers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ public sealed partial class ProcessesPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing ProcessesPage");
+        NavigationCacheMode = NavigationCacheMode.Disabled;
         ProcessListView.ItemsSource = _filteredProcesses;
         Loaded += ProcessesPage_Loaded;
         Unloaded += ProcessesPage_Unloaded;
@@ -34,6 +36,8 @@ public sealed partial class ProcessesPage : Page
     private void ProcessesPage_Unloaded(object sender, RoutedEventArgs e)
     {
         StopAutoRefresh();
+        _allProcesses.Clear();
+        _filteredProcesses.Clear();
     }
 
     private void StartAutoRefresh()
@@ -43,7 +47,7 @@ public sealed partial class ProcessesPage : Page
             return;
         }
 
-        _refreshTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _refreshTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
         _refreshTimer.Tick += async (_, _) => await RefreshProcessesAsync();
         _refreshTimer.Start();
     }
@@ -106,26 +110,30 @@ public sealed partial class ProcessesPage : Page
     {
         return await Task.Run(() =>
         {
-            return Process.GetProcesses()
-                .Select(p =>
+            var processes = Process.GetProcesses();
+            var list = new List<ProcessInfoItem>(processes.Length);
+            foreach (var p in processes)
+            {
+                try
                 {
-                    try
+                    list.Add(new ProcessInfoItem
                     {
-                        return new ProcessInfoItem
-                        {
-                            Name = p.ProcessName,
-                            Id = p.Id,
-                            MemoryMB = p.WorkingSet64 / (1024.0 * 1024.0),
-                            ThreadCount = p.Threads.Count
-                        };
-                    }
-                    catch (Exception ex)
-                    {
-                        _ = LogHelper.LogWarning($"Error reading process info for {p.ProcessName}: {ex.Message}");
-                        return new ProcessInfoItem { Name = p.ProcessName, Id = p.Id };
-                    }
-                })
-                .ToList();
+                        Name = p.ProcessName,
+                        Id = p.Id,
+                        MemoryMB = p.WorkingSet64 / (1024.0 * 1024.0),
+                        ThreadCount = p.Threads.Count
+                    });
+                }
+                catch
+                {
+                    list.Add(new ProcessInfoItem { Name = p.ProcessName, Id = p.Id });
+                }
+                finally
+                {
+                    p.Dispose();
+                }
+            }
+            return list;
         });
     }
 

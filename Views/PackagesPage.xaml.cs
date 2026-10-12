@@ -19,7 +19,11 @@ public sealed partial class PackagesPage : Page
     public ObservableCollection<WingetPackage> PackageList { get; set; } = new();
     public ObservableCollection<WingetPackage> UpdatesList { get; set; } = new();
 
-    // All packages fetched on load, only rebuilt on Refresh.
+    // All packages fetched on load, cached statically to avoid repeated winget CLI scans
+    private static List<WingetPackage>? _cachedAllPackages;
+    private static List<WingetPackage>? _cachedUpdateablePackages;
+    private static List<InstalledPackageEntry>? _cachedInstalledSnapshot;
+
     private List<WingetPackage> _allPackages = new();
     private List<WingetPackage> _updateablePackages = new();
     private readonly List<InstalledPackageEntry> _installedSnapshot = new();
@@ -39,14 +43,41 @@ public sealed partial class PackagesPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing PackagesPage");
-        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         Loaded += PackagesPage_Loaded;
+        Unloaded += PackagesPage_Unloaded;
+    }
+
+    private void PackagesPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        try { _cts.Cancel(); } catch { }
+        PackageList.Clear();
+        UpdatesList.Clear();
+        _allPackages.Clear();
+        _updateablePackages.Clear();
+        _installedSnapshot.Clear();
     }
 
     private async void PackagesPage_Loaded(object sender, RoutedEventArgs e)
     {
         _isPageLoaded = true;
         if (_isLoading || _isOperating) return;
+
+        if (_cachedAllPackages != null && _cachedAllPackages.Count > 0)
+        {
+            _allPackages = [.. _cachedAllPackages];
+            if (_cachedUpdateablePackages != null) _updateablePackages = [.. _cachedUpdateablePackages];
+            if (_cachedInstalledSnapshot != null) _installedSnapshot.AddRange(_cachedInstalledSnapshot);
+
+            PackageList.Clear();
+            foreach (var p in _allPackages) PackageList.Add(p);
+
+            LoadingState.Visibility = Visibility.Collapsed;
+            PackagesGridView.Visibility = Visibility.Visible;
+            StatusText.Visibility = Visibility.Collapsed;
+            return;
+        }
+
         if (_allPackages.Count == 0)
             await LoadPackagesAsync();
     }
@@ -83,6 +114,9 @@ public sealed partial class PackagesPage : Page
 
         _isWingetAvailable = null;
         _isUpdatesMode = false;
+        _cachedAllPackages = null;
+        _cachedUpdateablePackages = null;
+        _cachedInstalledSnapshot = null;
         _allPackages.Clear();
         _updateablePackages.Clear();
         _installedSnapshot.Clear();
@@ -197,6 +231,7 @@ public sealed partial class PackagesPage : Page
 
             built.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.CurrentCultureIgnoreCase));
             _allPackages = built;
+            _cachedAllPackages = [.. _allPackages];
 
             _ = LogHelper.Log($"Loaded {_allPackages.Count} packages, {matched} already installed.");
 

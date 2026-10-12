@@ -107,7 +107,7 @@
             </controls:WrapPanel>
         </Grid>
 
-        <ScrollViewer Padding="24,14,24,0" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <Grid Padding="24,14,24,0" Grid.Row="1">
             <Grid Margin="0,0,0,38">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -126,12 +126,6 @@
                     Visibility="Collapsed"
                     ItemsSource="{x:Bind AppList}"
                     SelectionMode="Multiple">
-                    <ListView.ItemContainerTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition FromVerticalOffset="40" />
-                            <RepositionThemeTransition IsStaggeringEnabled="False" />
-                        </TransitionCollection>
-                    </ListView.ItemContainerTransitions>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -241,7 +235,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-        </ScrollViewer>
+        </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
