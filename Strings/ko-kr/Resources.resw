@@ -3241,4 +3241,57 @@
   <data name="NotSupported" xml:space="preserve">
     <value>지원 안 됨</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Windows 업데이트 감지됨</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Windows가 빌드 {0}에서 {1}(으)로 업데이트되었습니다.
+
+Windows 업데이트는 시스템 최적화 설정을 기본값으로 초기화하는 경우가 많습니다.
+
+RyTuneX에 저장된 모든 최적화, 기능 및 개인정보 보호 설정({2}개 항목)을 다시 적용하시겠습니까?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Windows가 빌드 {0}에서 {1}(으)로 업데이트되었습니다.
+
+Windows 업데이트는 시스템 최적화 설정을 기본값으로 초기화하는 경우가 많습니다.
+
+RyTuneX에 저장된 모든 설정을 다시 적용하시겠습니까(총 {2}개: 최적화 {3}개, 기능 {4}개, 개인정보 보호 {5}개)?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>모든 설정 다시 적용</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>최적화, 기능 및 개인정보 보호 설정을 다시 적용하는 중...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>{0}개의 설정을 성공적으로 다시 적용했습니다.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>{0}개의 설정을 성공적으로 다시 적용했습니다 (최적화 {1}개, 기능 {2}개, 개인정보 보호 {3}개).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Windows 업데이트 감지</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Windows 업데이트 후 최적화, 기능 및 개인정보 보호 설정을 다시 적용하도록 안내</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>모든 설정 다시 적용</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>RyTuneX에 현재 구성된 모든 최적화, 기능 및 개인정보 보호 설정을 다시 적용합니다</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>최적화, 기능 및 개인정보 보호 설정을 다시 적용하는 중...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>저장된 {0}개의 설정(최적화 {1}개, 기능 {2}개, 개인정보 보호 {3}개)을 지금 시스템에 다시 적용하시겠습니까?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>저장된 {0}개의 설정을 지금 시스템에 다시 적용하시겠습니까?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>현재 RyTuneX에 다시 적용할 저장된 최적화, 기능 또는 개인정보 보호 설정이 없습니다.</value>
+  </data>
 </root>

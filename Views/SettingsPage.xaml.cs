@@ -68,6 +68,7 @@ public sealed partial class SettingsPage : Page
             InitializeThemeComboBox();
             InitializeAccentColorSection();
             InitializeNavigationStyleComboBox();
+            InitializeDetectSystemUpdatesToggle();
             _isInitialized = true;
         }
 
@@ -89,6 +90,17 @@ public sealed partial class SettingsPage : Page
                 break;
             }
         }
+    }
+
+    private void InitializeDetectSystemUpdatesToggle()
+    {
+        DetectSystemUpdatesToggle.IsOn = SystemUpdateHelper.IsDetectionEnabled;
+    }
+
+    private void DetectSystemUpdatesToggle_Toggled(object sender, RoutedEventArgs e)
+    {
+        if (!_isInitialized) return;
+        SystemUpdateHelper.IsDetectionEnabled = DetectSystemUpdatesToggle.IsOn;
     }
 
     private void InitializeThemeComboBox()
@@ -382,6 +394,77 @@ public sealed partial class SettingsPage : Page
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Failed to open support page: {ex.Message}");
+        }
+    }
+
+    private async void ReapplyOptimizations_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var count = OptimizationOptions.GetSavedOptimizationsCount();
+            if (count == 0)
+            {
+                App.ShowNotification("RyTuneX", "NoSavedOptimizations".TryGetLocalized() ?? "No optimizations, features, or privacy settings are currently saved in RyTuneX to re-apply.", InfoBarSeverity.Informational, 4000);
+                return;
+            }
+
+            var xamlRoot = XamlRoot ?? App.MainWindow.Content?.XamlRoot;
+            if (xamlRoot == null) return;
+
+            string dialogText = string.Format("ReapplyOptimizationsDialogContentSimple".TryGetLocalized() ?? "Re-apply {0} saved setting(s) to your system now?", count);
+
+            var cleanPrimaryButtonStyle = new Style(typeof(Button))
+            {
+                BasedOn = Application.Current.Resources.TryGetValue("AccentButtonStyle", out var abs) && abs is Style absStyle ? absStyle : null
+            };
+
+            var cleanCloseButtonStyle = new Style(typeof(Button))
+            {
+                BasedOn = Application.Current.Resources.TryGetValue("DefaultButtonStyle", out var dbs) && dbs is Style dbsStyle ? dbsStyle : null
+            };
+
+            var dialog = new ContentDialog
+            {
+                XamlRoot = xamlRoot,
+                RequestedTheme = ActualTheme,
+                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
+                Title = "RyTuneX",
+                Content = new TextBlock
+                {
+                    Text = dialogText,
+                    TextWrapping = TextWrapping.Wrap
+                },
+                CloseButtonText = "Close".GetLocalized(),
+                PrimaryButtonText = "Continue".GetLocalized(),
+                PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
+                DefaultButton = ContentDialogButton.None
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                App.ShowNotification(
+                    "RyTuneX",
+                    "ReapplyingOptimizations".TryGetLocalized() ?? "Currently re-applying optimizations, features, and privacy settings...",
+                    InfoBarSeverity.Informational,
+                    3000);
+
+                var appliedCount = await Task.Run(() => OptimizationOptions.ReapplyAllOptimizationsAsync());
+
+                string successMsg = string.Format("SystemUpdate_ReappliedSuccess".TryGetLocalized() ?? "Successfully re-applied {0} setting(s).", appliedCount);
+
+                App.ShowNotification(
+                    "RyTuneX",
+                    successMsg,
+                    InfoBarSeverity.Success,
+                    5000);
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to re-apply settings: {ex.Message}");
+            App.ShowNotification("RyTuneX", "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
         }
     }
 

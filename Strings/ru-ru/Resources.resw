@@ -3238,4 +3238,57 @@
   <data name="NotSupported" xml:space="preserve">
     <value>Не поддерживается</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Обнаружено обновление Windows</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Система Windows была обновлена со сборки {0} до {1}.
+
+Обновления Windows часто сбрасывают системные оптимизации до значений по умолчанию.
+
+Хотите, чтобы RyTuneX повторно применил все сохраненные оптимизации, компоненты и параметры конфиденциальности ({2} элементов)?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Система Windows была обновлена со сборки {0} до {1}.
+
+Обновления Windows часто сбрасывают системные оптимизации до значений по умолчанию.
+
+Хотите, чтобы RyTuneX повторно применил все сохраненные параметры ({2} всего: {3} оптимизаций, {4} компонентов, {5} параметров конфиденциальности)?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>Повторно применить все параметры</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>Повторное применение оптимизаций, компонентов и конфиденциальности...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>Успешно повторно применено параметров: {0}.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>Успешно повторно применено параметров: {0} ({1} оптимизаций, {2} компонентов, {3} конфиденциальности).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Обнаруживать обновления Windows</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Предлагать повторно применить оптимизации, компоненты и конфиденциальность после обновления Windows</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>Повторно применить все параметры</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>Повторно применить все оптимизации, компоненты и параметры конфиденциальности, настроенные в RyTuneX</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>Повторное применение оптимизаций, компонентов и параметров конфиденциальности...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>Повторно применить сохраненные параметры ({0}: {1} оптимизаций, {2} компонентов, {3} конфиденциальности) в системе сейчас?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>Повторно применить {0} сохраненных параметров в системе сейчас?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>В RyTuneX в данный момент нет сохраненных оптимизаций, компонентов или параметров конфиденциальности для повторного применения.</value>
+  </data>
 </root>

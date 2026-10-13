@@ -3241,4 +3241,57 @@ Vérifiez votre ordinateur pour détecter d'éventuels problèmes de mémoire</v
   <data name="NotSupported" xml:space="preserve">
     <value>Non pris en charge</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Mise à jour Windows détectée</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Windows a été mis à jour de la build {0} vers la build {1}.
+
+Les mises à jour de Windows réinitialisent souvent les modifications du système à leurs valeurs par défaut.
+
+Voulez-vous que RyTuneX réapplique toutes vos optimisations, fonctionnalités et paramètres de confidentialité enregistrés ({2} éléments) ?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Windows a été mis à jour de la build {0} vers la build {1}.
+
+Les mises à jour de Windows réinitialisent souvent les modifications du système à leurs valeurs par défaut.
+
+Voulez-vous que RyTuneX réapplique tous vos paramètres enregistrés ({2} au total : {3} optimisations, {4} fonctionnalités, {5} confidentialité) ?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>Réappliquer tous les paramètres</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>Réapplication des optimisations, fonctionnalités et paramètres de confidentialité...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>{0} paramètre(s) réappliqué(s) avec succès.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>{0} paramètre(s) réappliqué(s) avec succès ({1} optimisations, {2} fonctionnalités, {3} confidentialité).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Détecter les mises à jour Windows</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Proposer de réappliquer les optimisations, fonctionnalités et confidentialité après une mise à jour Windows</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>Réappliquer tous les paramètres</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>Réappliquer toutes les optimisations, fonctionnalités et paramètres de confidentialité enregistrés dans RyTuneX</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>Réapplication des optimisations, fonctionnalités et paramètres de confidentialité...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>Réappliquer {0} paramètre(s) enregistré(s) ({1} optimisations, {2} fonctionnalités, {3} confidentialité) sur votre système maintenant ?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>Réappliquer {0} paramètre(s) enregistré(s) sur votre système maintenant ?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>Aucune optimisation, fonctionnalité ou paramètre de confidentialité n'est actuellement enregistré dans RyTuneX pour réapplication.</value>
+  </data>
 </root>

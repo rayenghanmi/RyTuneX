@@ -3241,4 +3241,57 @@ Verifique se há problemas de memória em seu computador</value>
   <data name="NotSupported" xml:space="preserve">
     <value>Não suportado</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Atualização do Windows Detectada</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>O Windows foi atualizado da compilação {0} para a {1}.
+
+As atualizações do Windows costumam redefinir as otimizações do sistema para os valores padrão.
+
+Deseja que o RyTuneX reaplique todas as suas otimizações, recursos e configurações de privacidade salvas ({2} itens)?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>O Windows foi atualizado da compilação {0} para a {1}.
+
+As atualizações do Windows costumam redefinir as otimizações do sistema para os valores padrão.
+
+Deseja que o RyTuneX reaplique todas as configurações salvas ({2} no total: {3} otimizações, {4} recursos, {5} privacidade)?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>Reaplicar Todas as Configurações</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>Reaplicando otimizações, recursos e configurações de privacidade...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>{0} configuração(ões) reaplicada(s) com sucesso.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>{0} configuração(ões) reaplicada(s) com sucesso ({1} otimizações, {2} recursos, {3} privacidade).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Detectar atualizações do Windows</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Sugerir reaplicar otimizações, recursos e privacidade após uma atualização do Windows</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>Reaplicar todas as configurações</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>Reaplicar todas as otimizações, recursos e privacidade atualmente configurados no RyTuneX</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>Reaplicando otimizações, recursos e configurações de privacidade...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>Reaplicar {0} configuração(ões) salva(s) ({1} otimizações, {2} recursos, {3} privacidade) ao seu sistema agora?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>Reaplicar {0} configuração(ões) salva(s) ao seu sistema agora?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>Nenhuma otimização, recurso ou configuração de privacidade está salva atualmente no RyTuneX para reaplicação.</value>
+  </data>
 </root>

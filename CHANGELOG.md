@@ -54,6 +54,7 @@ All notable changes to this branch will be documented in this file.
 - Integrated all new toggles into the Intelligent Optimization Engine catalog with risk assessments, score weights, and technical details.
 - Added Copilot+ PC / AI hardware capability detection in `System Info` page using Windows App SDK `AICapabilities`.
 - Added persistent picker state (`SettingsIdentifier`) and user-friendly dialog titles across file and folder pickers.
+- Added Windows OS update detection on startup to prompt re-applying saved optimizations, features, and privacy tweaks after a system update, alongside manual re-application in Settings.
 
 ### Fixes
 

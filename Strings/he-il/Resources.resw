@@ -3241,4 +3241,57 @@
   <data name="NotSupported" xml:space="preserve">
     <value>לא נתמך</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>זוהה עדכון Windows</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>‏Windows עודכן מגרסת build‏ {0} לגרסה {1}.
+
+עדכוני Windows מאפסים לעתים קרובות את התאמות המערכת להגדרות ברירת המחדל.
+
+האם ברצונך ש-RyTuneX יחיל מחדש את כל האופטימיזציות, התכונות והגדרות הפרטיות השמורות ({2} פריטים)?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>‏Windows עודכן מגרסת build‏ {0} לגרסה {1}.
+
+עדכוני Windows מאפסים לעתים קרובות את התאמות המערכת להגדרות ברירת המחדל.
+
+האם ברצונך ש-RyTuneX יחיל מחדש את כל ההגדרות השמורות ({2} בסך הכל: {3} אופטימיזציות, {4} תכונות, {5} פרטיות)?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>החל מחדש את כל ההגדרות</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>מחיל מחדש אופטימיזציות, תכונות והגדרות פרטיות...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>{0} הגדרות הוחלו מחדש בהצלחה.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>{0} הגדרות הוחלו מחדש בהצלחה ({1} אופטימיזציות, {2} תכונות, {3} פרטיות).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>זהה עדכוני Windows</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>הצע להחיל מחדש אופטימיזציות, תכונות ופרטיות לאחר עדכון Windows</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>החל מחדש את כל ההגדרות</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>החל מחדש את כל האופטימיזציות, התכונות והגדרות הפרטיות שהוגדרו ב-RyTuneX</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>מחיל מחדש אופטימיזציות, תכונות והגדרות פרטיות...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>האם להחיל מחדש {0} הגדרות שמורות ({1} אופטימיזציות, {2} תכונות, {3} פרטיות) על המערכת כעת?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>האם להחיל מחדש {0} הגדרות שמורות על המערכת כעת?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>אין כרגע אופטימיזציות, תכונות או הגדרות פרטיות שמורות ב-RyTuneX להחלה מחדש.</value>
+  </data>
 </root>

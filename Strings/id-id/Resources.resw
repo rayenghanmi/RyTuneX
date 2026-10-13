@@ -3239,4 +3239,57 @@
   <data name="NotSupported" xml:space="preserve">
     <value>Tidak didukung</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Pembaruan Windows Terdeteksi</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Windows telah diperbarui dari build {0} ke {1}.
+
+Pembaruan Windows sering kali mengembalikan penyesuaian sistem ke nilai default.
+
+Apakah Anda ingin RyTuneX menerapkan ulang semua optimasi, fitur, dan privasi yang disimpan ({2} item)?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Windows telah diperbarui dari build {0} ke {1}.
+
+Pembaruan Windows sering kali mengembalikan penyesuaian sistem ke nilai default.
+
+Apakah Anda ingin RyTuneX menerapkan ulang semua pengaturan yang disimpan ({2} total: {3} optimasi, {4} fitur, {5} privasi)?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>Terapkan Ulang Semua Pengaturan</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>Sedang menerapkan ulang optimasi, fitur, dan pengaturan privasi...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>Berhasil menerapkan ulang {0} pengaturan.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>Berhasil menerapkan ulang {0} pengaturan ({1} optimasi, {2} fitur, {3} privasi).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Deteksi pembaruan Windows</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Minta untuk menerapkan ulang optimasi, fitur, dan privasi setelah pembaruan Windows</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>Terapkan ulang semua pengaturan</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>Terapkan ulang semua optimasi, fitur, dan privasi yang saat ini dikonfigurasi di RyTuneX</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>Sedang menerapkan ulang optimasi, fitur, dan pengaturan privasi...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>Terapkan ulang {0} pengaturan tersimpan ({1} optimasi, {2} fitur, {3} privasi) ke sistem Anda sekarang?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>Terapkan ulang {0} pengaturan tersimpan ke sistem Anda sekarang?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>Tidak ada optimasi, fitur, atau pengaturan privasi yang saat ini disimpan di RyTuneX untuk diterapkan ulang.</value>
+  </data>
 </root>

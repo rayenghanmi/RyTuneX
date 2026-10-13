@@ -155,6 +155,20 @@
                     </controls:SettingsCard.HeaderIcon>
                 </controls:SettingsCard>
 
+                <controls:SettingsCard x:Uid="Settings_ReapplyOptimizations"
+                    IsClickEnabled="True"
+                    Click="ReapplyOptimizations_Click">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE72C;"/>
+                    </controls:SettingsCard.HeaderIcon>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Uid="Settings_DetectSystemUpdates"
+                    HeaderIcon="{ui:FontIcon Glyph=&#xE777;}">
+                    <ToggleSwitch x:Name="DetectSystemUpdatesToggle"
+                                  Toggled="DetectSystemUpdatesToggle_Toggled"/>
+                </controls:SettingsCard>
+
                 <controls:SettingsCard x:Uid="Settings_ViewLogs"
                     IsClickEnabled="True"
                     Click="ViewLogsCard_Click">

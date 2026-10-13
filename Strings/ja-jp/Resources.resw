@@ -3241,4 +3241,57 @@
   <data name="NotSupported" xml:space="preserve">
     <value>非対応</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Windows の更新プログラムが検出されました</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Windows がビルド {0} から {1} に更新されました。
+
+Windows の更新プログラムにより、システムの最適化が既定値にリセットされることがよくあります。
+
+RyTuneX で保存されたすべての最適化、機能、プライバシー設定 ({2} 項目) を再適用しますか？</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Windows がビルド {0} から {1} に更新されました。
+
+Windows の更新プログラムにより、システムの最適化が既定値にリセットされることがよくあります。
+
+RyTuneX で保存されたすべての設定を再適用しますか (合計 {2} 件: 最適化 {3} 件、機能 {4} 件、プライバシー {5} 件)？</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>すべての設定を再適用</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>最適化、機能、プライバシー設定を再適用しています...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>{0} 件の設定が正常に再適用されました。</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>{0} 件の設定が正常に再適用されました (最適化 {1} 件、機能 {2} 件、プライバシー {3} 件)。</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Windows の更新を検出</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Windows 更新後に最適化、機能、プライバシー設定の再適用を提案します</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>すべての設定を再適用</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>現在 RyTuneX で構成されているすべての最適化、機能、プライバシー設定を再適用します</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>最適化、機能、プライバシー設定を再適用しています...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>保存された {0} 件の設定 (最適化 {1} 件、機能 {2} 件、プライバシー {3} 件) を今すぐシステムに再適用しますか？</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>保存された {0} 件の設定を今すぐシステムに再適用しますか？</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>現在 RyTuneX に再適用可能な最適化、機能、プライバシー設定は保存されていません。</value>
+  </data>
 </root>

@@ -51,11 +51,13 @@ public sealed partial class ShellPage : Page
         // Initialize search cache without blocking the UI thread
         WarmUpSearchCache();
 
-        // Show restore point dialog if it's the first run
+        // Show restore point dialog if it's the first run, or system update suggestion
         _ = Task.Run(async () =>
         {
             try
             {
+                await Task.Delay(1500);
+
                 var settings = ApplicationData.Current.LocalSettings.Values;
                 if (!settings.ContainsKey("FirstRun") || (bool)settings["FirstRun"])
                 {
@@ -74,10 +76,27 @@ public sealed partial class ShellPage : Page
                         _ = LogHelper.LogWarning("Restore point dialog dispatcher enqueue failed.");
                     }
                 }
+                else if (SystemUpdateHelper.IsUpdatePending && SystemUpdateHelper.PendingUpdateResult != null)
+                {
+                    if (!DispatcherQueue.TryEnqueue(async () =>
+                    {
+                        try
+                        {
+                            await ShowSystemUpdateDialogAsync(SystemUpdateHelper.PendingUpdateResult);
+                        }
+                        catch (Exception ex)
+                        {
+                            _ = LogHelper.LogException(ex, "System update dialog failed");
+                        }
+                    }))
+                    {
+                        _ = LogHelper.LogWarning("System update dialog dispatcher enqueue failed.");
+                    }
+                }
             }
             catch (Exception ex)
             {
-                _ = LogHelper.LogException(ex, "Restore point first-run check failed");
+                _ = LogHelper.LogException(ex, "Startup dialog checks failed");
             }
         });
     }
@@ -260,6 +279,89 @@ public sealed partial class ShellPage : Page
             {
                 _ = LogHelper.LogError($"Failed to open System Properties Protection: {ex.Message}");
             }
+        }
+    }
+
+    private async Task ShowSystemUpdateDialogAsync(SystemUpdateCheckResult updateResult)
+    {
+        var xamlRoot = XamlRoot ?? (Content as FrameworkElement)?.XamlRoot ?? App.MainWindow.Content?.XamlRoot;
+        if (xamlRoot is null)
+        {
+            _ = LogHelper.LogWarning("System update dialog skipped because XamlRoot is unavailable.");
+            return;
+        }
+
+        int totalSaved = OptimizationOptions.GetSavedOptimizationsCount();
+
+        string contentText = string.Format(
+            "SystemUpdate_DialogContent".TryGetLocalized() ?? "Windows was updated from build {0} to {1}.\n\nWindows updates frequently reset system tweaks back to default values.\n\nWould you like RyTuneX to re-apply all your saved optimizations, features, and privacy settings ({2} items)?",
+            updateResult.PreviousBuild.FullBuildString,
+            updateResult.CurrentBuild.FullBuildString,
+            totalSaved);
+
+        var dialog = new ContentDialog
+        {
+            RequestedTheme = ActualTheme,
+            Title = "SystemUpdate_DialogTitle".TryGetLocalized() ?? "Windows Update Detected",
+            Content = new StackPanel
+            {
+                RequestedTheme = ActualTheme,
+                Spacing = 12,
+                Children =
+                {
+                    new TextBlock
+                    {
+                        Text = contentText,
+                        TextWrapping = TextWrapping.Wrap
+                    }
+                }
+            },
+            PrimaryButtonText = "SystemUpdate_ReapplyButton".TryGetLocalized() ?? "Re-apply All Settings",
+            CloseButtonText = "Close".GetLocalized(),
+            DefaultButton = ContentDialogButton.None,
+            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
+        };
+
+        dialog.XamlRoot = xamlRoot;
+
+        _ = LogHelper.Log($"[SystemUpdateHelper] Showing system update suggestion dialog ({updateResult.PreviousBuild.FullBuildString} -> {updateResult.CurrentBuild.FullBuildString})");
+        var result = await dialog.ShowAsync();
+
+        try
+        {
+            if (result == ContentDialogResult.Primary)
+            {
+                ShowNotification(
+                    "SystemUpdate_DialogTitle".TryGetLocalized() ?? "Windows Update Detected",
+                    "SystemUpdate_ReapplyingMessage".TryGetLocalized() ?? "Currently re-applying optimizations, features, and privacy settings...",
+                    InfoBarSeverity.Informational,
+                    3000);
+
+                var appliedCount = await Task.Run(() => OptimizationOptions.ReapplyAllOptimizationsAsync());
+
+                string successMsg = string.Format(
+                    "SystemUpdate_ReappliedSuccess".TryGetLocalized() ?? "Successfully re-applied {0} setting(s).",
+                    appliedCount);
+
+                ShowNotification(
+                    "RyTuneX",
+                    successMsg,
+                    InfoBarSeverity.Success,
+                    5000);
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to re-apply settings: {ex.Message}");
+        }
+        finally
+        {
+            SystemUpdateHelper.SaveWindowsBuild(updateResult.CurrentBuild);
+            SystemUpdateHelper.IsUpdatePending = false;
+            SystemUpdateHelper.PendingUpdateResult = null;
+            _ = Task.Run(() => SystemStateDetector.SyncToRegistry());
         }
     }
 

@@ -252,6 +252,17 @@ public partial class App : Application
             }
 
             await App.GetService<IActivationService>().ActivateAsync(args);
+
+            // Check for OS update before system state sync
+            try
+            {
+                SystemUpdateHelper.CheckForSystemUpdate();
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"System update check during launch failed: {ex.Message}");
+            }
+
             StartSystemStateSync();
         }
         catch (Exception ex)
@@ -268,6 +279,14 @@ public partial class App : Application
         {
             try
             {
+                // If a system update was detected and optimizations are pending re-application,
+                // do not overwrite the RyTuneX registry key with the un-optimized OS state.
+                if (SystemUpdateHelper.IsUpdatePending)
+                {
+                    _ = LogHelper.Log("[SystemStateDetector] Postponing sync: system update pending re-application.");
+                    return;
+                }
+
                 SystemStateDetector.SyncToRegistry();
             }
             catch (Exception ex)

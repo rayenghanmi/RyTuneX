@@ -3241,4 +3241,57 @@ Kiểm tra máy tính để phát hiện sự cố bộ nhớ.</value>
   <data name="NotSupported" xml:space="preserve">
     <value>Không được hỗ trợ</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Phát hiện bản cập nhật Windows</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Windows đã được cập nhật từ bản dựng {0} lên {1}.
+
+Các bản cập nhật Windows thường đặt lại các tinh chỉnh hệ thống về giá trị mặc định.
+
+Bạn có muốn RyTuneX áp dụng lại tất cả tối ưu hóa, tính năng và quyền riêng tư đã lưu ({2} mục) không?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Windows đã được cập nhật từ bản dựng {0} lên {1}.
+
+Các bản cập nhật Windows thường đặt lại các tinh chỉnh hệ thống về giá trị mặc định.
+
+Bạn có muốn RyTuneX áp dụng lại tất cả cài đặt đã lưu không (Tổng cộng {2}: {3} tối ưu hóa, {4} tính năng, {5} quyền riêng tư)?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>Áp dụng lại tất cả cài đặt</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>Đang áp dụng lại các tối ưu hóa, tính năng và quyền riêng tư...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>Đã áp dụng lại thành công {0} cài đặt.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>Đã áp dụng lại thành công {0} cài đặt ({1} tối ưu hóa, {2} tính năng, {3} quyền riêng tư).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Phát hiện bản cập nhật Windows</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Nhắc áp dụng lại các tối ưu hóa, tính năng và quyền riêng tư sau khi cập nhật Windows</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>Áp dụng lại tất cả cài đặt</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>Áp dụng lại tất cả các tối ưu hóa, tính năng và quyền riêng tư hiện được định cấu hình trong RyTuneX</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>Đang áp dụng lại các tối ưu hóa, tính năng và quyền riêng tư...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>Áp dụng lại {0} cài đặt đã lưu ({1} tối ưu hóa, {2} tính năng, {3} quyền riêng tư) vào hệ thống của bạn bây giờ?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>Áp dụng lại {0} cài đặt đã lưu vào hệ thống của bạn bây giờ?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>Hiện không có tối ưu hóa, tính năng hoặc cài đặt quyền riêng tư nào được lưu trong RyTuneX để áp dụng lại.</value>
+  </data>
 </root>

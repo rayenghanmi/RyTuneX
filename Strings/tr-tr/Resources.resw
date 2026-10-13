@@ -3241,4 +3241,57 @@ Bilgisayarınızda bellek sorunları olup olmadığını kontrol edin</value>
   <data name="NotSupported" xml:space="preserve">
     <value>Desteklenmiyor</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Windows Güncellemesi Algılandı</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Windows, {0} derlemesinden {1} derlemesine güncellendi.
+
+Windows güncellemeleri genellikle sistem optimizasyonlarını varsayılan değerlere sıfırlar.
+
+RyTuneX'in kayıtlı tüm optimizasyonları, özellikleri ve gizlilik ayarlarını ({2} öge) yeniden uygulamasını ister misiniz?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Windows, {0} derlemesinden {1} derlemesine güncellendi.
+
+Windows güncellemeleri genellikle sistem optimizasyonlarını varsayılan değerlere sıfırlar.
+
+RyTuneX'in kayıtlı tüm ayarları yeniden uygulamasını ister misiniz (Toplam {2}: {3} optimizasyon, {4} özellik, {5} gizlilik ayarı)?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>Tüm Ayarları Yeniden Uygula</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>Optimizasyonlar, özellikler ve gizlilik ayarları yeniden uygulanıyor...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>{0} ayar başarıyla yeniden uygulandı.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>{0} ayar başarıyla yeniden uygulandı ({1} optimizasyon, {2} özellik, {3} gizlilik).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Windows güncellemelerini algıla</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Windows güncellemesinden sonra optimizasyonları, özellikleri ve gizliliği yeniden uygulamayı öner</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>Tüm ayarları yeniden uygula</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>RyTuneX içinde yapılandırılmış tüm optimizasyonları, özellikleri ve gizlilik ayarlarını yeniden uygula</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>Optimizasyonlar, özellikler ve gizlilik ayarları yeniden uygulanıyor...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>Kayıtlı {0} ayar ({1} optimizasyon, {2} özellik, {3} gizlilik) şimdi sisteminize yeniden uygulansın mı?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>Kayıtlı {0} ayar şimdi sisteminize yeniden uygulansın mı?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>RyTuneX'te yeniden uygulanacak kayıtlı herhangi bir optimizasyon, özellik veya gizlilik ayarı bulunamadı.</value>
+  </data>
 </root>

@@ -3241,4 +3241,57 @@ Sind Sie sicher, dass Sie fortfahren möchten?</value>
   <data name="NotSupported" xml:space="preserve">
     <value>Nicht unterstützt</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Windows-Update erkannt</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Windows wurde von Build {0} auf {1} aktualisiert.
+
+Windows-Updates setzen Systemoptimierungen häufig auf die Standardwerte zurück.
+
+Möchten Sie, dass RyTuneX alle gespeicherten Optimierungen, Funktionen und Datenschutzeinstellungen ({2} Elemente) erneut anwendet?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Windows wurde von Build {0} auf {1} aktualisiert.
+
+Windows-Updates setzen Systemoptimierungen häufig auf die Standardwerte zurück.
+
+Möchten Sie, dass RyTuneX alle gespeicherten Einstellungen erneut anwendet ({2} insgesamt: {3} Optimierungen, {4} Funktionen, {5} Datenschutzeinstellungen)?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>Alle Einstellungen erneut anwenden</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>Optimierungen, Funktionen und Datenschutzeinstellungen werden erneut angewendet...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>{0} Einstellung(en) erfolgreich erneut angewendet.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>{0} Einstellung(en) erfolgreich erneut angewendet ({1} Optimierungen, {2} Funktionen, {3} Datenschutz).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Windows-Updates erkennen</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Nach einem Windows-Update vorschlagen, Optimierungen, Funktionen und Datenschutz erneut anzuwenden</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>Alle Einstellungen erneut anwenden</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>Alle in RyTuneX konfigurierten Optimierungen, Funktionen und Datenschutzeinstellungen erneut anwenden</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>Optimierungen, Funktionen und Datenschutzeinstellungen werden erneut angewendet...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>{0} gespeicherte Einstellung(en) ({1} Optimierungen, {2} Funktionen, {3} Datenschutz) jetzt auf Ihr System anwenden?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>{0} gespeicherte Einstellung(en) jetzt auf Ihr System anwenden?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>Derzeit sind keine Optimierungen, Funktionen oder Datenschutzeinstellungen in RyTuneX gespeichert, die erneut angewendet werden können.</value>
+  </data>
 </root>

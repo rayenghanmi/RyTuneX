@@ -3241,4 +3241,57 @@
   <data name="NotSupported" xml:space="preserve">
     <value>不受支持</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>检测到 Windows 更新</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Windows 已从内部版本 {0} 更新至 {1}。
+
+Windows 更新通常会将系统优化设置重置为默认值。
+
+是否希望 RyTuneX 重新应用所有已保存的优化、功能和隐私设置（共 {2} 项）？</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Windows 已从内部版本 {0} 更新至 {1}。
+
+Windows 更新通常会将系统优化设置重置为默认值。
+
+是否希望 RyTuneX 重新应用所有已保存的设置（共 {2} 项：{3} 项优化、{4} 项功能、{5} 项隐私）？</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>重新应用所有设置</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>正在重新应用优化、功能和隐私设置...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>已成功重新应用 {0} 项设置。</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>已成功重新应用 {0} 项设置（{1} 项优化、{2} 项功能、{3} 项隐私）。</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>检测 Windows 更新</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>在 Windows 更新后提示重新应用优化、功能和隐私设置</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>重新应用所有设置</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>重新应用当前在 RyTuneX 中配置的所有优化、功能和隐私设置</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>正在重新应用优化、功能和隐私设置...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>是否立即将 {0} 项已保存的设置（{1} 项优化、{2} 项功能、{3} 项隐私）重新应用到您的系统？</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>是否立即将 {0} 项已保存的设置重新应用到您的系统？</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>RyTuneX 中当前未保存任何可重新应用的优化、功能或隐私设置。</value>
+  </data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
+using RyTuneX.Services;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Drawing.Imaging;
@@ -806,6 +807,115 @@ internal partial class OptimizationOptions
             _ = LogHelper.LogError($"RevertAllChanges: {ex.Message}\n Stack Trace: {ex.StackTrace}");
         }
     }
+
+    public static int GetSavedOptimizationsCount()
+    {
+        try
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default);
+            using var rytunexKey = baseKey.OpenSubKey(RegistryBaseKey);
+
+            if (rytunexKey == null) return 0;
+
+            int count = 0;
+            foreach (var valueName in rytunexKey.GetValueNames())
+            {
+                var val = rytunexKey.GetValue(valueName);
+                if (val is int || (valueName == "WindowsUpdatesMode" && val is string s && !s.Equals("Default", StringComparison.OrdinalIgnoreCase)))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"GetSavedOptimizationsCount failed: {ex.Message}");
+            return 0;
+        }
+    }
+
+    public static async Task<int> ReapplyAllOptimizationsAsync(CancellationToken ct = default)
+    {
+        int appliedCount = 0;
+        try
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default);
+            using var rytunexKey = baseKey.OpenSubKey(RegistryBaseKey);
+
+            if (rytunexKey != null)
+            {
+                var valueNames = rytunexKey.GetValueNames();
+
+                foreach (var valueName in valueNames)
+                {
+                    if (ct.IsCancellationRequested) break;
+
+                    try
+                    {
+                        // Handle Windows Updates mode separately
+                        if (valueName == "WindowsUpdatesMode")
+                        {
+                            var savedMode = rytunexKey.GetValue(valueName) as string;
+                            if (!string.IsNullOrEmpty(savedMode) && !savedMode.Equals("Default", StringComparison.OrdinalIgnoreCase))
+                            {
+                                switch (savedMode)
+                                {
+                                    case "Security":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesSecurityOnly().ConfigureAwait(false);
+                                        appliedCount++;
+                                        break;
+                                    case "Manually":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesManually().ConfigureAwait(false);
+                                        appliedCount++;
+                                        break;
+                                    case "Disabled":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesDisabled().ConfigureAwait(false);
+                                        appliedCount++;
+                                        break;
+                                }
+                                _ = LogHelper.Log($"Re-applied Windows Updates mode: {savedMode}");
+                            }
+                            continue;
+                        }
+
+                        var savedState = rytunexKey.GetValue(valueName);
+                        if (savedState is int state)
+                        {
+                            // 1 = turn on, 0 = turn off
+                            bool isOn = state == 1;
+                            await ExecuteToggleActionAsync(valueName, isOn, ct).ConfigureAwait(false);
+                            IntelligentOptimizationEngine.SetCachedState(valueName, isOn);
+                            appliedCount++;
+                            _ = LogHelper.Log($"Re-applied setting: {valueName} = {(isOn ? 1 : 0)}");
+                        }
+                    }
+                    catch (Exception itemEx)
+                    {
+                        _ = LogHelper.LogError($"ReapplyAllOptimizations: Failed to re-apply '{valueName}': {itemEx.Message}");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"ReapplyAllOptimizations: {ex.Message}\n Stack Trace: {ex.StackTrace}");
+        }
+
+        if (appliedCount > 0)
+        {
+            ReviewPromptHelper.NotifyOptimizationCompleted();
+        }
+
+        return appliedCount;
+    }
+
     public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)
     {
         if (toggleSwitch == null || toggleSwitch.Tag == null) return;
@@ -883,7 +993,7 @@ internal partial class OptimizationOptions
         await Task.Run(() => ProcessToggleQueueAsync(_toggleCts.Token)).ConfigureAwait(false);
     }
 
-    private static async Task ExecuteToggleActionAsync(string? tag, bool isOn, CancellationToken ct)
+    internal static async Task ExecuteToggleActionAsync(string? tag, bool isOn, CancellationToken ct = default)
     {
         if (string.IsNullOrEmpty(tag)) return;
 

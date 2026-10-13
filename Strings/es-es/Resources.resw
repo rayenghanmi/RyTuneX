@@ -3241,4 +3241,57 @@ Verifica si hay problemas de memoria en tu computadora</value>
   <data name="NotSupported" xml:space="preserve">
     <value>No compatible</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>Actualización de Windows detectada</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>Windows se ha actualizado de la compilación {0} a la {1}.
+
+Las actualizaciones de Windows suelen restablecer los ajustes del sistema a sus valores predeterminados.
+
+¿Desea que RyTuneX vuelva a aplicar todas las optimizaciones, funciones y configuraciones de privacidad guardadas ({2} elementos)?</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>Windows se ha actualizado de la compilación {0} a la {1}.
+
+Las actualizaciones de Windows suelen restablecer los ajustes del sistema a sus valores predeterminados.
+
+¿Desea que RyTuneX vuelva a aplicar todas las configuraciones guardadas ({2} en total: {3} optimizaciones, {4} funciones, {5} privacidad)?</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>Volver a aplicar todas las configuraciones</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>Volviendo a aplicar optimizaciones, funciones y privacidad...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>Se volvieron a aplicar con éxito {0} configuración(es).</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>Se volvieron a aplicar con éxito {0} configuración(es) ({1} optimizaciones, {2} funciones, {3} privacidad).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>Detectar actualizaciones de Windows</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>Sugerir volver a aplicar optimizaciones, funciones y privacidad tras una actualización de Windows</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>Volver a aplicar todas las configuraciones</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>Volver a aplicar todas las optimizaciones, funciones y configuraciones de privacidad guardadas en RyTuneX</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>Volviendo a aplicar optimizaciones, funciones y configuraciones de privacidad...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>¿Desea volver a aplicar {0} configuración(es) guardada(s) ({1} optimizaciones, {2} funciones, {3} privacidad) a su sistema ahora?</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>¿Desea volver a aplicar {0} configuración(es) guardada(s) a su sistema ahora?</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>No hay optimizaciones, funciones ni configuraciones de privacidad guardadas actualmente en RyTuneX para volver a aplicar.</value>
+  </data>
 </root>

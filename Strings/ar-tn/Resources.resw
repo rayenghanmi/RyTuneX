@@ -3241,4 +3241,57 @@
   <data name="NotSupported" xml:space="preserve">
     <value>غير مدعوم</value>
   </data>
+  <data name="SystemUpdate_DialogTitle" xml:space="preserve">
+    <value>تم اكتشاف تحديث لنظام Windows</value>
+  </data>
+  <data name="SystemUpdate_DialogContent" xml:space="preserve">
+    <value>تم تحديث نظام Windows من البنية {0} إلى {1}.
+
+تقوم تحديثات Windows عادةً بإعادة ضبط تعديلات النظام إلى الوضع الافتراضي.
+
+هل ترغب في أن يقوم RyTuneX بإعادة تطبيق جميع التحسينات والميزات وإعدادات الخصوصية المحفوظة ({2} إعداد)؟</value>
+  </data>
+  <data name="SystemUpdate_DialogContentWithBreakdown" xml:space="preserve">
+    <value>تم تحديث نظام Windows من البنية {0} إلى {1}.
+
+تقوم تحديثات Windows عادةً بإعادة ضبط تعديلات النظام إلى الوضع الافتراضي.
+
+هل ترغب في أن يقوم RyTuneX بإعادة تطبيق جميع الإعدادات المحفوظة ({2} في المجموع: {3} تحسينات، {4} ميزات، {5} إعدادات خصوصية)؟</value>
+  </data>
+  <data name="SystemUpdate_ReapplyButton" xml:space="preserve">
+    <value>إعادة تطبيق كافة الإعدادات</value>
+  </data>
+  <data name="SystemUpdate_ReapplyingMessage" xml:space="preserve">
+    <value>جارٍ إعادة تطبيق التحسينات والميزات وإعدادات الخصوصية...</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccess" xml:space="preserve">
+    <value>تمت إعادة تطبيق {0} إعداد بنجاح.</value>
+  </data>
+  <data name="SystemUpdate_ReappliedSuccessWithBreakdown" xml:space="preserve">
+    <value>تمت إعادة تطبيق {0} إعداد بنجاح ({1} تحسينات، {2} ميزات، {3} خصوصية).</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Header" xml:space="preserve">
+    <value>اكتشاف تحديثات Windows</value>
+  </data>
+  <data name="Settings_DetectSystemUpdates.Description" xml:space="preserve">
+    <value>اقتراح إعادة تطبيق التحسينات والميزات وإعدادات الخصوصية بعد تحديث نظام Windows</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Header" xml:space="preserve">
+    <value>إعادة تطبيق كافة الإعدادات</value>
+  </data>
+  <data name="Settings_ReapplyOptimizations.Description" xml:space="preserve">
+    <value>إعادة تطبيق جميع التحسينات والميزات وإعدادات الخصوصية المحددة حالياً في RyTuneX</value>
+  </data>
+  <data name="ReapplyingOptimizations" xml:space="preserve">
+    <value>جارٍ إعادة تطبيق التحسينات والميزات وإعدادات الخصوصية...</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContent" xml:space="preserve">
+    <value>هل تريد إعادة تطبيق {0} إعداد محفوظ ({1} تحسينات، {2} ميزات، {3} خصوصية) على نظامك الآن؟</value>
+  </data>
+  <data name="ReapplyOptimizationsDialogContentSimple" xml:space="preserve">
+    <value>هل تريد إعادة تطبيق {0} إعداد محفوظ على نظامك الآن؟</value>
+  </data>
+  <data name="NoSavedOptimizations" xml:space="preserve">
+    <value>لا توجد أي تحسينات أو ميزات أو إعدادات خصوصية محفوظة حالياً في RyTuneX لإعادة تطبيقها.</value>
+  </data>
 </root>
