@@ -3290,4 +3290,103 @@ Windows 更新通常會將系統最佳化調整重設為預設值。
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>RyTuneX 中目前未儲存任何可重新套用的最佳化、功能或隱私權設定。</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>深度清理</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>選取要清理的類別。系統會自動掃描大小。</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>正在掃描系統...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>已選總計: {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>清理所選項目</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>已成功清理 {0} 資料。</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>部分項目無法清理。請查看記錄以取得詳細資訊。</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>全選</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>取消全選</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>暫存檔案</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>使用者與系統暫存檔案、市集與 Xbox 快取</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>Windows Update 快取</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>Windows Update 下載與傳遞最佳化快取</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>Windows 檔案總管快取</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>縮圖、圖示、網際網路快取與最近的項目</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>損毀傾印 &amp; 錯誤報告</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>Windows 錯誤報告、損毀傾印與診斷</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>瀏覽器快取</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>Chrome、Edge、Brave 與 Firefox 快取資料</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>GPU 著色器快取</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>NVIDIA、AMD 與 DirectX 著色器編譯快取</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>系統記錄</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>CBS、DISM、安裝記錄與搜尋索引資料</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>OEM &amp; 原廠記錄</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>Dell、HP、Lenovo、ASUS 與 Acer 支援記錄</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>Windows 預先擷取</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>應用程式預先擷取與啟動最佳化資料</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>網路快取</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>DNS 解析器快取與 Winsock 目錄重設</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>資源回收筒</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>目前在資源回收筒中的所有項目</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>字型快取</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>Windows 字型轉譯快取檔案</value>
+  </data>
 </root>

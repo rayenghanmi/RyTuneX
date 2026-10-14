@@ -3294,4 +3294,103 @@
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>لا توجد أي تحسينات أو ميزات أو إعدادات خصوصية محفوظة حالياً في RyTuneX لإعادة تطبيقها.</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>تنظيف عميق</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>اختر الفئات التي تريد تنظيفها. يتم فحص الأحجام تلقائيًا.</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>جاري فحص النظام...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>الإجمالي المحدد: {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>تنظيف المحدد</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>تم تنظيف {0} من البيانات بنجاح.</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>تعذر تنظيف بعض العناصر. تحقق من السجل للتفاصيل.</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>تحديد الكل</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>إلغاء تحديد الكل</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>الملفات المؤقتة</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>ملفات مؤقتة للمستخدم والنظام، ذاكرة التخزين المؤقت للمتجر وXbox</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>ذاكرة تحديث Windows</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>ذاكرة تنزيل تحديث Windows وتحسين التسليم</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>ذاكرة مستكشف Windows</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>الصور المصغرة والأيقونات وذاكرة الإنترنت والعناصر الأخيرة</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>تقارير الأعطال والأخطاء</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>تقارير أخطاء Windows وتفريغ الأعطال والتشخيصات</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>ذاكرة المتصفح</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>بيانات ذاكرة التخزين المؤقت لـ Chrome وEdge وBrave وFirefox</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>ذاكرة تظليل GPU</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>ذاكرة تجميع تظليل NVIDIA وAMD وDirectX</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>سجلات النظام</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>سجلات CBS وDISM والإعداد وبيانات فهرس البحث</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>سجلات الشركات المصنعة</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>سجلات دعم Dell وHP وLenovo وASUS وAcer</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>الجلب المسبق لـ Windows</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>بيانات الجلب المسبق وتحسين تشغيل التطبيقات</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>ذاكرة الشبكة</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>ذاكرة محلل DNS وإعادة تعيين كتالوج Winsock</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>سلة المحذوفات</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>جميع العناصر الموجودة حاليًا في سلة المحذوفات</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>ذاكرة الخطوط</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>ملفات ذاكرة عرض خطوط Windows</value>
+  </data>
 </root>

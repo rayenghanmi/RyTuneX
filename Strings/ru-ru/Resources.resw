@@ -3291,4 +3291,103 @@
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>В RyTuneX в данный момент нет сохраненных оптимизаций, компонентов или параметров конфиденциальности для повторного применения.</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>Глубокая очистка</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>Выберите категории для очистки. Размеры определяются автоматически.</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>Сканирование системы...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>Всего выбрано: {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>Очистить выбранное</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>Успешно очищено {0} данных.</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>Некоторые элементы не удалось очистить. Подробности см. в журнале.</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>Выбрать все</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>Снять выделение</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>Временные файлы</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>Временные файлы пользователя и системы, кэш Store и Xbox</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>Кэш Центра обновления Windows</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>Кэш загрузок Windows Update и оптимизации доставки</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>Кэш Проводника Windows</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>Эскизы, значки, кэш Интернета и недавние элементы</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>Дампы сбоев &amp; отчеты об ошибках</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>Отчеты об ошибках Windows, дампы памяти и диагностика</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>Кэш браузеров</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>Данные кэша Chrome, Edge, Brave и Firefox</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>Кэш шейдеров GPU</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>Кэш компиляции шейдеров NVIDIA, AMD и DirectX</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>Системные журналы</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>Журналы CBS, DISM, установки и данные индекса поиска</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>Журналы OEM &amp; производителей</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>Журналы поддержки Dell, HP, Lenovo, ASUS и Acer</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>Windows Prefetch</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>Данные предварительной выборки и оптимизации запуска программ</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>Сетевой кэш</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>Кэш распознавателя DNS и сброс каталога Winsock</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>Корзина</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>Все объекты, находящиеся в корзине</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>Кэш шрифтов</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>Файлы кэша отрисовки шрифтов Windows</value>
+  </data>
 </root>

@@ -3294,4 +3294,103 @@ Windows 更新通常会将系统优化设置重置为默认值。
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>RyTuneX 中当前未保存任何可重新应用的优化、功能或隐私设置。</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>深度清理</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>选择要清理的类别。系统会自动扫描大小。</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>正在扫描系统...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>已选总计: {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>清理所选项</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>已成功清理 {0} 数据。</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>部分项目无法清理。请查看日志获取详细信息。</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>取消全选</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>临时文件</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>用户和系统临时文件、应用商店及 Xbox 缓存</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>Windows 更新缓存</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>Windows 更新下载及传递优化缓存</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>Windows 资源管理器缓存</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>缩略图、图标、网络缓存和最近使用的项目</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>崩溃转储 &amp; 错误报告</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>Windows 错误报告、崩溃转储和诊断数据</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>浏览器缓存</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>Chrome、Edge、Brave 和 Firefox 缓存数据</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>GPU 着色器缓存</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>NVIDIA、AMD 和 DirectX 着色器编译缓存</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>系统日志</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>CBS、DISM、安装日志和搜索索引数据</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>OEM &amp; 厂商日志</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>Dell、HP、Lenovo、ASUS 和 Acer 支持日志</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>Windows 预取文件</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>应用程序预取和启动优化数据</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>网络缓存</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>DNS 解析程序缓存和 Winsock 目录重置</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>回收站</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>当前回收站中的所有文件</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>字体缓存</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>Windows 字体渲染缓存文件</value>
+  </data>
 </root>

@@ -3294,4 +3294,103 @@ Bạn có muốn RyTuneX áp dụng lại tất cả cài đặt đã lưu khôn
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>Hiện không có tối ưu hóa, tính năng hoặc cài đặt quyền riêng tư nào được lưu trong RyTuneX để áp dụng lại.</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>Dọn dẹp chuyên sâu</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>Chọn các mục bạn muốn dọn dẹp. Dung lượng được quét tự động.</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>Đang quét hệ thống...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>Tổng đã chọn: {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>Dọn dẹp mục đã chọn</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>Đã dọn dẹp thành công {0} dữ liệu.</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>Một số mục không thể dọn dẹp. Kiểm tra nhật ký để biết chi tiết.</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>Chọn tất cả</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>Bỏ chọn tất cả</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>Tệp tạm thời</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>Tệp tạm của người dùng và hệ thống, bộ nhớ cache Store và Xbox</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>Bộ nhớ cache Windows Update</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>Bộ nhớ cache tải xuống Windows Update và tối ưu hóa phân phối</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>Bộ nhớ cache File Explorer</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>Hình thu nhỏ, biểu tượng, cache internet và các mục gần đây</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>Bản kết xuất sự cố &amp; báo cáo lỗi</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>Báo cáo lỗi Windows, kết xuất sự cố và chẩn đoán</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>Bộ nhớ cache trình duyệt</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>Dữ liệu cache của Chrome, Edge, Brave và Firefox</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>Bộ nhớ cache Shader GPU</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>Bộ nhớ cache biên dịch shader của NVIDIA, AMD và DirectX</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>Nhật ký hệ thống</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>Nhật ký CBS, DISM, cài đặt và dữ liệu chỉ mục tìm kiếm</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>Nhật ký OEM &amp; nhà sản xuất</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>Nhật ký hỗ trợ của Dell, HP, Lenovo, ASUS và Acer</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>Windows Prefetch</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>Dữ liệu tìm nạp trước và tối ưu hóa khởi chạy ứng dụng</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>Bộ nhớ cache mạng</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>Bộ nhớ cache phân giải DNS và đặt lại danh mục Winsock</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>Thùng rác</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>Tất cả các mục hiện có trong Thùng rác</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>Bộ nhớ cache phông chữ</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>Tệp cache kết xuất phông chữ Windows</value>
+  </data>
 </root>

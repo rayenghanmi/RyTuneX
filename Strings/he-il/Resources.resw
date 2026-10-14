@@ -3294,4 +3294,103 @@
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>אין כרגע אופטימיזציות, תכונות או הגדרות פרטיות שמורות ב-RyTuneX להחלה מחדש.</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>ניקוי עמוק</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>בחר את הקטגוריות שברצונך לנקות. הגדלים נסרקים אוטומטית.</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>סורק את המערכת...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>סה"כ נבחר: {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>נקה נבחרים</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>נוקו {0} של נתונים בהצלחה.</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>לא ניתן היה לנקות חלק מהפריטים. בדוק את היומן לפרטים.</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>בחר הכל</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>בטל בחירת הכל</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>קבצים זמניים</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>קבצים זמניים של המשתמש והמערכת, מטמון Store ו-Xbox</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>מטמון Windows Update</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>מטמון הורדת Windows Update ואופטימיזציית משלוח</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>מטמון סייר Windows</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>תמונות ממוזערות, סמלים, מטמון אינטרנט ופריטים אחרונים</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>דמפים של קריסות &amp; דוחות שגיאות</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>דוחות שגיאות Windows, דמפים של קריסות ואבחונים</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>מטמון דפדפן</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>נתוני מטמון של Chrome, Edge, Brave ו-Firefox</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>מטמון שיידר GPU</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>מטמון קומפילציית שיידר של NVIDIA, AMD ו-DirectX</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>יומני מערכת</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>יומני CBS, DISM, התקנה ונתוני אינדקס חיפוש</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>יומני OEM &amp; יצרן</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>יומני תמיכה של Dell, HP, Lenovo, ASUS ו-Acer</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>Prefetch של Windows</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>נתוני טעינה מוקדמת ואופטימיזציית הפעלת יישומים</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>מטמון רשת</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>מטמון מפענח DNS ואיפוס קטלוג Winsock</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>סל המיחזור</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>כל הפריטים הנמצאים כעת בסל המיחזור</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>מטמון גופנים</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>קבצי מטמון עיבוד גופני Windows</value>
+  </data>
 </root>

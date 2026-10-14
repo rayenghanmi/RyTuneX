@@ -3292,4 +3292,103 @@ Apakah Anda ingin RyTuneX menerapkan ulang semua pengaturan yang disimpan ({2} t
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>Tidak ada optimasi, fitur, atau pengaturan privasi yang saat ini disimpan di RyTuneX untuk diterapkan ulang.</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>Pembersihan Mendalam</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>Pilih kategori yang ingin dibersihkan. Ukuran dipindai secara otomatis.</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>Memindai sistem...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>Total dipilih: {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>Bersihkan yang Dipilih</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>Berhasil membersihkan {0} data.</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>Beberapa item tidak dapat dibersihkan. Periksa log untuk detailnya.</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>Pilih Semua</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>Batalkan Semua</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>File Sementara</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>File sementara pengguna dan sistem, cache Store dan Xbox</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>Cache Windows Update</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>Cache unduhan Windows Update dan optimasi pengiriman</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>Cache Windows Explorer</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>Thumbnail, ikon, cache internet, dan item terbaru</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>Dump Crash &amp; Laporan Kesalahan</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>Laporan kesalahan Windows, dump crash, dan diagnostik</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>Cache Browser</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>Data cache Chrome, Edge, Brave, dan Firefox</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>Cache Shader GPU</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>Cache kompilasi shader NVIDIA, AMD, dan DirectX</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>Log Sistem</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>Log CBS, DISM, penginstalan, dan data indeks pencarian</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>Log OEM &amp; Vendor</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>Log dukungan Dell, HP, Lenovo, ASUS, dan Acer</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>Windows Prefetch</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>Data prefetch dan optimasi peluncuran aplikasi</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>Cache Jaringan</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>Cache resolver DNS dan reset katalog Winsock</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>Tempat Sampah</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>Semua item yang saat ini ada di Tempat Sampah</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>Cache Font</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>File cache rendering font Windows</value>
+  </data>
 </root>

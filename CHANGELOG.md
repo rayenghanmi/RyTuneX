@@ -55,6 +55,7 @@ All notable changes to this branch will be documented in this file.
 - Added Copilot+ PC / AI hardware capability detection in `System Info` page using Windows App SDK `AICapabilities`.
 - Added persistent picker state (`SettingsIdentifier`) and user-friendly dialog titles across file and folder pickers.
 - Added Windows OS update detection on startup to prompt re-applying saved optimizations, features, and privacy tweaks after a system update, alongside manual re-application in Settings.
+- Added an interactive **Deep Clean** dialog (`DeepCleanEngine`) to replace the basic temporary file cleanup with 12 selectable cleanup targets (Temporary Files, Windows Update Cache, Explorer Cache, Crash Dumps, Browser Caches, GPU Shader Cache, System Logs, OEM Logs, Prefetch, Network Cache, Recycle Bin, and Font Cache), real-time asynchronous size scanning, safe service lifecycle handling.
 
 ### Fixes
 

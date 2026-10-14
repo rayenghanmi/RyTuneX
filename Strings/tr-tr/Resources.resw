@@ -3294,4 +3294,103 @@ RyTuneX'in kayıtlı tüm ayarları yeniden uygulamasını ister misiniz (Toplam
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>RyTuneX'te yeniden uygulanacak kayıtlı herhangi bir optimizasyon, özellik veya gizlilik ayarı bulunamadı.</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>Derin Temizlik</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>Temizlemek istediğiniz kategorileri seçin. Boyutlar otomatik olarak taranır.</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>Sistem taranıyor...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>Toplam seçilen: {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>Seçilenleri Temizle</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>{0} boyutunda veri başarıyla temizlendi.</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>Bazı öğeler temizlenemedi. Ayrıntılar için günlüğü kontrol edin.</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>Tümünü Seç</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>Tüm Seçimi Kaldır</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>Geçici Dosyalar</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>Kullanıcı ve sistem geçici dosyaları, Store ve Xbox önbelleği</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>Windows Update Önbelleği</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>Windows Update indirme ve teslim eniyileme önbelleği</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>Windows Gezgini Önbelleği</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>Küçük resimler, simgeler, internet önbelleği ve son öğeler</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>Kilitlenme Dökümleri &amp; Hata Raporları</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>Windows hata raporları, bellek dökümleri ve tanılamalar</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>Tarayıcı Önbelleği</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>Chrome, Edge, Brave ve Firefox önbellek verileri</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>GPU Gölgelendirici Önbelleği</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>NVIDIA, AMD ve DirectX gölgelendirici derleme önbelleği</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>Sistem Günlükleri</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>CBS, DISM, kurulum günlükleri ve arama dizini verileri</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>OEM &amp; Üretici Günlükleri</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>Dell, HP, Lenovo, ASUS ve Acer destek günlükleri</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>Windows Prefetch</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>Uygulama önceden getirme ve başlatma iyileştirme verileri</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>Ağ Önbelleği</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>DNS çözümleyici önbelleği ve Winsock kataloğu sıfırlama</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>Geri Dönüşüm Kutusu</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>Şu anda Geri Dönüşüm Kutusu'ndaki tüm öğeler</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>Yazı Tipi Önbelleği</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>Windows yazı tipi işleme önbellek dosyaları</value>
+  </data>
 </root>

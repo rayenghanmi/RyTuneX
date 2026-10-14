@@ -3294,4 +3294,103 @@ RyTuneX で保存されたすべての設定を再適用しますか (合計 {2}
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>現在 RyTuneX に再適用可能な最適化、機能、プライバシー設定は保存されていません。</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>ディープクリーン</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>クリーンアップするカテゴリを選択してください。サイズは自動的にスキャンされます。</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>システムをスキャン中...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>選択合計: {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>選択項目をクリーンアップ</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>{0} のデータを正常にクリーンアップしました。</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>一部の項目をクリーンアップできませんでした。詳細はログを確認してください。</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>すべて選択</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>すべて選択解除</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>一時ファイル</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>ユーザーとシステムの一時ファイル、StoreとXboxのキャッシュ</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>Windows Update キャッシュ</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>Windows Update のダウンロードと配信の最適化キャッシュ</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>エクスプローラーのキャッシュ</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>サムネイル、アイコン、インターネットキャッシュ、最近使った項目</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>クラッシュダンプ &amp; エラー報告</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>Windows エラー報告、クラッシュダンプ、診断データ</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>ブラウザーのキャッシュ</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>Chrome、Edge、Brave、Firefox のキャッシュデータ</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>GPU シェーダーキャッシュ</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>NVIDIA、AMD、DirectX シェーダーコンパイルキャッシュ</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>システムログ</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>CBS、DISM、セットアップログ、検索インデックスデータ</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>OEM &amp; ベンダーログ</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>Dell、HP、Lenovo、ASUS、Acer のサポートログ</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>Windows Prefetch</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>アプリケーションのプリフェッチと起動最適化データ</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>ネットワークキャッシュ</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>DNS リゾルバーキャッシュと Winsock カタログのリセット</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>ごみ箱</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>現在ごみ箱にあるすべてのアイテム</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>フォントキャッシュ</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>Windows フォントレンダリングキャッシュファイル</value>
+  </data>
 </root>

@@ -3294,4 +3294,103 @@ Voulez-vous que RyTuneX réapplique tous vos paramètres enregistrés ({2} au to
   <data name="NoSavedOptimizations" xml:space="preserve">
     <value>Aucune optimisation, fonctionnalité ou paramètre de confidentialité n'est actuellement enregistré dans RyTuneX pour réapplication.</value>
   </data>
+  <data name="DeepClean_Title" xml:space="preserve">
+    <value>Nettoyage en profondeur</value>
+  </data>
+  <data name="DeepClean_Description" xml:space="preserve">
+    <value>Sélectionnez les catégories à nettoyer. Les tailles sont analysées automatiquement.</value>
+  </data>
+  <data name="DeepClean_Scanning" xml:space="preserve">
+    <value>Analyse du système...</value>
+  </data>
+  <data name="DeepClean_TotalSelected" xml:space="preserve">
+    <value>Total sélectionné : {0}</value>
+  </data>
+  <data name="DeepClean_CleanButton" xml:space="preserve">
+    <value>Nettoyer la sélection</value>
+  </data>
+  <data name="DeepClean_CompleteDesc" xml:space="preserve">
+    <value>{0} de données ont été nettoyés avec succès.</value>
+  </data>
+  <data name="DeepClean_Error" xml:space="preserve">
+    <value>Certains éléments n'ont pas pu être nettoyés. Consultez le journal pour plus de détails.</value>
+  </data>
+  <data name="DeepClean_SelectAll" xml:space="preserve">
+    <value>Tout sélectionner</value>
+  </data>
+  <data name="DeepClean_DeselectAll" xml:space="preserve">
+    <value>Tout désélectionner</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles" xml:space="preserve">
+    <value>Fichiers temporaires</value>
+  </data>
+  <data name="DeepClean_Cat_TempFiles_Desc" xml:space="preserve">
+    <value>Fichiers temporaires utilisateur et système, cache du Store et Xbox</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache" xml:space="preserve">
+    <value>Cache Windows Update</value>
+  </data>
+  <data name="DeepClean_Cat_UpdateCache_Desc" xml:space="preserve">
+    <value>Cache de téléchargement Windows Update et optimisation de la distribution</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache" xml:space="preserve">
+    <value>Cache de l'Explorateur Windows</value>
+  </data>
+  <data name="DeepClean_Cat_ExplorerCache_Desc" xml:space="preserve">
+    <value>Miniatures, icônes, cache Internet et éléments récents</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps" xml:space="preserve">
+    <value>Vidages mémoire &amp; rapports d'erreurs</value>
+  </data>
+  <data name="DeepClean_Cat_CrashDumps_Desc" xml:space="preserve">
+    <value>Rapports d'erreurs Windows, vidages mémoire et diagnostics</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache" xml:space="preserve">
+    <value>Cache du navigateur</value>
+  </data>
+  <data name="DeepClean_Cat_BrowserCache_Desc" xml:space="preserve">
+    <value>Données de cache de Chrome, Edge, Brave et Firefox</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache" xml:space="preserve">
+    <value>Cache des shaders GPU</value>
+  </data>
+  <data name="DeepClean_Cat_ShaderCache_Desc" xml:space="preserve">
+    <value>Cache de compilation des shaders NVIDIA, AMD et DirectX</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs" xml:space="preserve">
+    <value>Journaux système</value>
+  </data>
+  <data name="DeepClean_Cat_SystemLogs_Desc" xml:space="preserve">
+    <value>Journaux CBS, DISM, d'installation et données d'index de recherche</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs" xml:space="preserve">
+    <value>Journaux OEM &amp; constructeur</value>
+  </data>
+  <data name="DeepClean_Cat_OEMLogs_Desc" xml:space="preserve">
+    <value>Journaux de support Dell, HP, Lenovo, ASUS et Acer</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch" xml:space="preserve">
+    <value>Prefetch Windows</value>
+  </data>
+  <data name="DeepClean_Cat_Prefetch_Desc" xml:space="preserve">
+    <value>Données de prélecture et d'optimisation du lancement des applications</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache" xml:space="preserve">
+    <value>Cache réseau</value>
+  </data>
+  <data name="DeepClean_Cat_NetworkCache_Desc" xml:space="preserve">
+    <value>Cache du résolveur DNS et réinitialisation du catalogue Winsock</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin" xml:space="preserve">
+    <value>Corbeille</value>
+  </data>
+  <data name="DeepClean_Cat_RecycleBin_Desc" xml:space="preserve">
+    <value>Tous les éléments actuellement dans la Corbeille</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache" xml:space="preserve">
+    <value>Cache des polices</value>
+  </data>
+  <data name="DeepClean_Cat_FontCache_Desc" xml:space="preserve">
+    <value>Fichiers de cache de rendu des polices Windows</value>
+  </data>
 </root>
