@@ -2,10 +2,10 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
-using RyTuneX.Services;
 using RyTuneX.ViewModels;
 using Windows.Storage;
 using Windows.System;
@@ -38,6 +38,8 @@ public sealed partial class ShellPage : Page
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
+        AppTitleBar.SizeChanged += AppTitleBar_SizeChanged;
+        NavigationFrame.Navigated += NavigationFrame_Navigated;
         TitleBarSearchBox.PlaceholderText = "Search".GetLocalized();
 
         var savedStyle = ApplicationData.Current.LocalSettings.Values["NavigationStyle"] as string ?? "Auto";
@@ -47,6 +49,7 @@ public sealed partial class ShellPage : Page
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
+        UpdateTitleBarCentering();
 
         // Initialize search cache without blocking the UI thread
         WarmUpSearchCache();
@@ -103,12 +106,11 @@ public sealed partial class ShellPage : Page
 
     private static void WarmUpSearchCache()
     {
-        _ = Task.Run(async () =>
+        _ = Task.Run(() =>
         {
             try
             {
                 AppSearchService.InitializeCache();
-                IntelligentOptimizationEngine.PrewarmCatalog();
             }
             catch (Exception ex)
             {
@@ -193,15 +195,82 @@ public sealed partial class ShellPage : Page
 
     private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
     {
-        if (sender.PaneDisplayMode == NavigationViewPaneDisplayMode.Top)
+        TitleBarSearchBox.Visibility = Visibility.Visible;
+    }
+
+    private void AppTitleBar_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        UpdateTitleBarCentering();
+    }
+
+    private void NavigationFrame_Navigated(object sender, NavigationEventArgs e)
+    {
+        DispatcherQueue.TryEnqueue(UpdateTitleBarCentering);
+    }
+
+    private void UpdateTitleBarCentering()
+    {
+        try
         {
-            TitleBarSearchBox.Visibility = Visibility.Visible;
+            if (FlowDirection == FlowDirection.RightToLeft)
+            {
+                return;
+            }
+
+            if (AppTitleBar == null || TitleBarContentGrid == null || TitleBarLeftHeaderContainer == null)
+            {
+                return;
+            }
+
+            if (!AppTitleBar.IsLoaded || !TitleBarContentGrid.IsLoaded || !TitleBarLeftHeaderContainer.IsLoaded)
+            {
+                return;
+            }
+
+            if (AppTitleBar.ActualWidth <= 0 || TitleBarContentGrid.ActualWidth <= 0)
+            {
+                return;
+            }
+
+            // Measure the right inset (caption buttons column width)
+            var contentTransform = TitleBarContentGrid.TransformToVisual(AppTitleBar);
+            var contentOrigin = contentTransform.TransformPoint(new Windows.Foundation.Point(0, 0));
+            var rightInset = AppTitleBar.ActualWidth - (contentOrigin.X + TitleBarContentGrid.ActualWidth);
+
+            if (rightInset <= 0)
+            {
+                return;
+            }
+
+            // Measure offset of LeftHeader from left edge
+            var headerTransform = TitleBarLeftHeaderContainer.TransformToVisual(AppTitleBar);
+            var headerOrigin = headerTransform.TransformPoint(new Windows.Foundation.Point(0, 0));
+            var leftOffset = Math.Max(0.0, headerOrigin.X);
+
+            // Minimum width needed for the icon + app name text
+            var baseWidth = TitleBarLeftHeaderContent?.ActualWidth > 0
+                ? TitleBarLeftHeaderContent.ActualWidth + 10.0
+                : 104.0;
+
+            // When window is wide enough, balance left column with right caption buttons column
+            double targetWidth;
+            if (AppTitleBar.ActualWidth >= 640.0)
+            {
+                targetWidth = Math.Max(baseWidth, rightInset - leftOffset);
+            }
+            else
+            {
+                targetWidth = baseWidth;
+            }
+
+            if (Math.Abs(TitleBarLeftHeaderContainer.Width - targetWidth) > 0.5)
+            {
+                TitleBarLeftHeaderContainer.Width = targetWidth;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            TitleBarSearchBox.Visibility = sender.DisplayMode == NavigationViewDisplayMode.Minimal
-                ? Visibility.Collapsed
-                : Visibility.Visible;
+            _ = LogHelper.LogWarning($"TitleBar centering update skipped: {ex.Message}");
         }
     }
 

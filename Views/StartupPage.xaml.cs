@@ -58,13 +58,15 @@ public sealed partial class StartupPage : Page
             ApplyFilterAndSort();
             LoadingRing.IsActive = false;
             LoadingRing.Visibility = Visibility.Collapsed;
+            StartupLoadingPlaceholder.Visibility = Visibility.Collapsed;
             StartupListView.Visibility = Visibility.Visible;
             return;
         }
 
         _isBusy = true;
-        LoadingRing.IsActive = true;
-        LoadingRing.Visibility = Visibility.Visible;
+        LoadingRing.IsActive = false;
+        LoadingRing.Visibility = Visibility.Collapsed;
+        StartupLoadingPlaceholder.Visibility = Visibility.Visible;
         StartupListView.Visibility = Visibility.Collapsed;
 
         try
@@ -84,6 +86,7 @@ public sealed partial class StartupPage : Page
         {
             LoadingRing.IsActive = false;
             LoadingRing.Visibility = Visibility.Collapsed;
+            StartupLoadingPlaceholder.Visibility = Visibility.Collapsed;
             StartupListView.Visibility = Visibility.Visible;
             _isBusy = false;
         }

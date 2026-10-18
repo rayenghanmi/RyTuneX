@@ -27,12 +27,16 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
     private static void OnTargetCategoryChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is IntelligentScoreHeaderControl control && control.IsLoaded)
+        if (d is IntelligentScoreHeaderControl control)
         {
-            control.DispatcherQueue?.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+            control.UpdatePlaceholderForCategory();
+            if (control.IsLoaded)
             {
-                _ = control.RefreshScoreAsync();
-            });
+                control.DispatcherQueue?.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+                {
+                    _ = control.RefreshScoreAsync();
+                });
+            }
         }
     }
 
@@ -90,6 +94,7 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
             }
         }
 
+        UpdatePlaceholderForCategory();
         LocalizeStaticControls();
         UpdateModeButtonsUI();
         if (!categoryChanged)
@@ -98,6 +103,25 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
             {
                 _ = RefreshScoreAsync();
             });
+        }
+    }
+
+    private void UpdatePlaceholderForCategory()
+    {
+        if (HomePlaceholderPanel == null || ActionPlaceholderPanel == null) return;
+
+        if (HomeNavigationPanel?.Visibility != Visibility.Visible && PageActionPanel?.Visibility != Visibility.Visible)
+        {
+            if (TargetCategory == "All")
+            {
+                HomePlaceholderPanel.Visibility = Visibility.Visible;
+                ActionPlaceholderPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                HomePlaceholderPanel.Visibility = Visibility.Collapsed;
+                ActionPlaceholderPanel.Visibility = Visibility.Visible;
+            }
         }
     }
 
@@ -212,6 +236,18 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
         {
             _ = LogHelper.LogError($"[IntelligentScoreHeader] Error refreshing score: {ex.Message}");
             MainProgressBar.Visibility = Visibility.Collapsed;
+            HomePlaceholderPanel.Visibility = Visibility.Collapsed;
+            ActionPlaceholderPanel.Visibility = Visibility.Collapsed;
+            if (TargetCategory == "All")
+            {
+                PageActionPanel.Visibility = Visibility.Collapsed;
+                HomeNavigationPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PageActionPanel.Visibility = Visibility.Visible;
+                HomeNavigationPanel.Visibility = Visibility.Collapsed;
+            }
         }
         finally
         {
@@ -232,6 +268,8 @@ public sealed partial class IntelligentScoreHeaderControl : UserControl
 
     private void UpdateUI(IntelligentScoreModel score)
     {
+        HomePlaceholderPanel.Visibility = Visibility.Collapsed;
+        ActionPlaceholderPanel.Visibility = Visibility.Collapsed;
         var category = TargetCategory;
         SystemSummaryText.Text = score.SystemSummary;
         var pageTags = GetParentPageToggleTags();

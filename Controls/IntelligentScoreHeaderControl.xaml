@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:models="using:RyTuneX.Models"
+    xmlns:helpers="using:RyTuneX.Helpers"
     mc:Ignorable="d">
 
     <StackPanel Spacing="14">
@@ -111,7 +112,40 @@
                     </controls:WrapPanel>
                 </StackPanel>
 
-                <StackPanel x:Name="PageActionPanel" Grid.Column="2" VerticalAlignment="Center" Spacing="6" Width="200">
+                <!-- Skeleton placeholder for Home page (Tune By Domain) -->
+                <StackPanel x:Name="HomePlaceholderPanel" Grid.Column="2" VerticalAlignment="Center" Spacing="6" Width="215" Visibility="Visible" helpers:ShimmerEffect.IsActive="True">
+                    <Border Height="14" Width="95" HorizontalAlignment="Left" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="3" Opacity="0.5" Margin="2,0,0,2"/>
+                    <StackPanel Spacing="5">
+                        <Border Height="31" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.4"/>
+                        <Border Height="31" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.4"/>
+                        <Border Height="31" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.4"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Skeleton placeholder for domain action pages (Optimize, Privacy, Features) -->
+                <StackPanel x:Name="ActionPlaceholderPanel" Grid.Column="2" VerticalAlignment="Center" Spacing="6" Width="215" Visibility="Collapsed" helpers:ShimmerEffect.IsActive="True">
+                    <Grid ColumnSpacing="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Height="28" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.4"/>
+                        <Border Grid.Column="1" Height="28" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.4"/>
+                        <Border Grid.Column="2" Height="28" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.4"/>
+                    </Grid>
+                    <Border Height="32" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.5"/>
+                    <Grid ColumnSpacing="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Height="28" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.4"/>
+                        <Border Grid.Column="1" Height="28" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="{StaticResource ControlCornerRadius}" Opacity="0.4"/>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel x:Name="PageActionPanel" Grid.Column="2" VerticalAlignment="Center" Spacing="6" Width="215" Visibility="Collapsed">
                     <Grid ColumnSpacing="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

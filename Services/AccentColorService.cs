@@ -35,7 +35,7 @@ public class AccentColorService : IAccentColorService
                 var dispatcher = App.MainWindow?.DispatcherQueue;
                 if (dispatcher != null)
                 {
-                    dispatcher.TryEnqueue(ApplyAccentColor);
+                    dispatcher.TryEnqueue(() => ApplyAccentColor(true));
                 }
             }
         };
@@ -87,10 +87,12 @@ public class AccentColorService : IAccentColorService
 
     public void RefreshAccentColor()
     {
-        ApplyAccentColor();
+        ApplyAccentColor(refreshVisualTree: true);
     }
 
-    public void ApplyAccentColor()
+    public void ApplyAccentColor() => ApplyAccentColor(false);
+
+    public void ApplyAccentColor(bool refreshVisualTree)
     {
         void Execute()
         {
@@ -161,8 +163,8 @@ public class AccentColorService : IAccentColorService
                 UpdateBrushResource("AccentTextFillColorPrimaryBrush", baseColor);
                 UpdateBrushResource("AccentAAFillColorDefaultBrush", baseColor);
 
-                // Refresh theme resource bindings if the visual tree is loaded
-                if (App.MainWindow?.Content is FrameworkElement root)
+                // Refresh theme resource bindings only when explicitly requested
+                if (refreshVisualTree && App.MainWindow?.Content is FrameworkElement root)
                 {
                     var currentTheme = root.RequestedTheme;
                     var temp = currentTheme == ElementTheme.Dark ? ElementTheme.Light : ElementTheme.Dark;

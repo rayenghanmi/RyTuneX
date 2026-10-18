@@ -209,8 +209,11 @@ public partial class App : Application
         // Catch truly fatal AppDomain exceptions (native crashes, thread aborts, etc.)
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-        LogHelper.Log("___________ New Session ___________");
-        LogHelper.Log($"App version: {Views.SettingsPage.GetVersionDescription()}, OS: {Environment.OSVersion}, Runtime: {System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}");
+        _ = Task.Run(() =>
+        {
+            LogHelper.Log("___________ New Session ___________");
+            LogHelper.Log($"App version: {RuntimeHelper.GetVersionDescription()}, OS: {Environment.OSVersion}, Runtime: {System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}");
+        });
     }
 
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
@@ -245,6 +248,7 @@ public partial class App : Application
             {
                 MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
                 MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
+                MainWindow.AppWindow.TitleBar.ButtonInactiveBackgroundColor = Microsoft.UI.Colors.Transparent;
             }
             catch (Exception ex)
             {
@@ -253,17 +257,30 @@ public partial class App : Application
 
             await App.GetService<IActivationService>().ActivateAsync(args);
 
-            // Check for OS update before system state sync
-            try
+            // Defer non-critical background system sync and update checks
+            // to allow instant and silky smooth window appearance and interaction
+            _ = Task.Run(async () =>
             {
-                SystemUpdateHelper.CheckForSystemUpdate();
-            }
-            catch (Exception ex)
-            {
-                _ = LogHelper.LogError($"System update check during launch failed: {ex.Message}");
-            }
+                try
+                {
+                    await Task.Delay(2500);
 
-            StartSystemStateSync();
+                    try
+                    {
+                        SystemUpdateHelper.CheckForSystemUpdate();
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = LogHelper.LogError($"System update check during launch failed: {ex.Message}");
+                    }
+
+                    StartSystemStateSync();
+                }
+                catch (Exception ex)
+                {
+                    _ = LogHelper.LogException(ex, "Deferred background startup sync failed");
+                }
+            });
         }
         catch (Exception ex)
         {
@@ -296,46 +313,65 @@ public partial class App : Application
         });
     }
 
-    private IHost BuildHost() => Microsoft.Extensions.Hosting.Host.
-    CreateDefaultBuilder().
-       UseContentRoot(AppContext.BaseDirectory).
-       ConfigureServices((context, services) =>
-       {
-           // Default Activation Handler
-           services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
+    private IHost BuildHost()
+    {
+        var services = new ServiceCollection();
 
-           // Services
-           services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
-           services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
-           services.AddSingleton<IAccentColorService, AccentColorService>();
-           services.AddTransient<INavigationViewService, NavigationViewService>();
+        // Default Activation Handler
+        services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
-           services.AddSingleton<IActivationService, ActivationService>();
-           services.AddSingleton<IPageService, PageService>();
-           services.AddSingleton<INavigationService, NavigationService>();
+        // Services
+        services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
+        services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+        services.AddSingleton<IAccentColorService, AccentColorService>();
+        services.AddTransient<INavigationViewService, NavigationViewService>();
 
-           // Core Services
-           services.AddSingleton<IFileService, FileService>();
+        services.AddSingleton<IActivationService, ActivationService>();
+        services.AddSingleton<IPageService, PageService>();
+        services.AddSingleton<INavigationService, NavigationService>();
 
-           // Views and ViewModels
-           services.AddTransient<SettingsPage>();
-           services.AddTransient<OptimizeSystemPage>();
-           services.AddTransient<SystemInfoPage>();
-           services.AddTransient<DebloatSystemPage>();
-           services.AddTransient<HomePage>();
-           services.AddTransient<NetworkPage>();
-           services.AddTransient<SecurityPage>();
-           services.AddTransient<RepairPage>();
-           services.AddTransient<ProcessesPage>();
-           services.AddTransient<ServicesPage>();
-           services.AddTransient<StartupPage>();
-           services.AddTransient<ShellPage>();
-           services.AddTransient<ShellViewModel>();
+        // Core Services
+        services.AddSingleton<IFileService, FileService>();
 
-           // Configuration
-           services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
-       }).
-       Build();
+        // Views and ViewModels
+        services.AddTransient<SettingsPage>();
+        services.AddTransient<OptimizeSystemPage>();
+        services.AddTransient<SystemInfoPage>();
+        services.AddTransient<DebloatSystemPage>();
+        services.AddTransient<HomePage>();
+        services.AddTransient<NetworkPage>();
+        services.AddTransient<SecurityPage>();
+        services.AddTransient<RepairPage>();
+        services.AddTransient<ProcessesPage>();
+        services.AddTransient<ServicesPage>();
+        services.AddTransient<StartupPage>();
+        services.AddTransient<ShellPage>();
+        services.AddTransient<ShellViewModel>();
+
+        // Configuration
+        services.AddSingleton<Microsoft.Extensions.Options.IOptions<LocalSettingsOptions>>(
+            Microsoft.Extensions.Options.Options.Create(new LocalSettingsOptions
+            {
+                ApplicationDataFolder = "RyTuneX/ApplicationData",
+                LocalSettingsFile = "LocalSettings.json"
+            }));
+
+        var serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions
+        {
+            ValidateOnBuild = false,
+            ValidateScopes = false
+        });
+
+        return new SimpleHost(serviceProvider);
+    }
+
+    private sealed class SimpleHost(IServiceProvider services) : IHost
+    {
+        public IServiceProvider Services => services;
+        public Task StartAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public Task StopAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public void Dispose() => (services as IDisposable)?.Dispose();
+    }
 
     // Sets flow direction based on the current language.
     public static Microsoft.UI.Xaml.FlowDirection FlowDirectionSetting

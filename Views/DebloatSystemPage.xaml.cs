@@ -20,6 +20,7 @@ public sealed partial class DebloatSystemPage : Page
     private List<AppInfo> allApps = new();
     private HashSet<string> uninstallableAppNames = new(StringComparer.OrdinalIgnoreCase);
     private string? _pendingScrollTarget;
+    private bool _isLoading;
 
     public DebloatSystemPage()
     {
@@ -36,7 +37,6 @@ public sealed partial class DebloatSystemPage : Page
         {
             // Cancel any ongoing operations for this page
             try { _loadCts?.Cancel(); _loadCts?.Dispose(); _loadCts = null; } catch { }
-            try { _filterAnimationCts?.Cancel(); } catch { }
 
             if (_uninstallBatchCts != null)
             {
@@ -67,7 +67,7 @@ public sealed partial class DebloatSystemPage : Page
 
     private async void DebloatSystemPage_Loaded(object sender, RoutedEventArgs e)
     {
-        if (allApps.Count == 0)
+        if (allApps.Count == 0 && !_isLoading)
         {
             _loadCts?.Cancel();
             _loadCts?.Dispose();
@@ -84,6 +84,9 @@ public sealed partial class DebloatSystemPage : Page
 
     private async void LoadInstalledApps(CancellationToken cancellationToken = default)
     {
+        if (_isLoading) return;
+        _isLoading = true;
+
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -92,10 +95,14 @@ public sealed partial class DebloatSystemPage : Page
             {
                 gettingAppsLoading.Visibility = Visibility.Visible;
                 appListView.Visibility = Visibility.Collapsed;
+                installedAppsCount.Visibility = Visibility.Collapsed;
+                AppSearchBox.IsEnabled = false;
+                appsFilter.IsEnabled = false;
+                reloadButton.IsEnabled = false;
+                TempButton.IsEnabled = false;
                 uninstallButton.IsEnabled = false;
                 uninstallingStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallTip");
                 uninstallingStatusBar.Opacity = 0;
-                appsFilter.IsEnabled = false;
             });
 
             _ = LogHelper.Log("Loading InstalledApps");
@@ -126,35 +133,51 @@ public sealed partial class DebloatSystemPage : Page
                 appsFilter.Visibility = Visibility.Visible;
                 appsFilterText.Visibility = Visibility.Visible;
                 reloadButton.Visibility = Visibility.Visible;
+                reloadButton.IsEnabled = true;
                 uninstallButton.Visibility = Visibility.Visible;
                 appListView.Visibility = Visibility.Visible;
                 appListView.IsEnabled = true;
                 uninstallButton.IsEnabled = true;
                 uninstallingStatusText.Visibility = Visibility.Visible;
                 AppSearchBox.Visibility = Visibility.Visible;
+                AppSearchBox.IsEnabled = true;
                 gettingAppsLoading.Visibility = Visibility.Collapsed;
                 TempStackButtonTextBar.Visibility = Visibility.Visible;
+                TempButton.IsEnabled = true;
             });
         }
         catch (OperationCanceledException ex)
         {
             _ = LogHelper.Log($"Operation canceled: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                gettingAppsLoading.Visibility = Visibility.Collapsed;
+                AppSearchBox.IsEnabled = true;
+                appsFilter.IsEnabled = true;
+                reloadButton.IsEnabled = true;
+                TempButton.IsEnabled = true;
+            });
         }
         catch (Exception ex)
         {
             _ = LogHelper.Log($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                gettingAppsLoading.Visibility = Visibility.Collapsed;
+                AppSearchBox.IsEnabled = true;
+                appsFilter.IsEnabled = true;
+                reloadButton.IsEnabled = true;
+                TempButton.IsEnabled = true;
+            });
+        }
+        finally
+        {
+            _isLoading = false;
         }
     }
 
-    private CancellationTokenSource? _filterAnimationCts;
-
-    private async void ApplyFilter()
+    private void ApplyFilter()
     {
-        // Cancel any in-progress staggered animation
-        _filterAnimationCts?.Cancel();
-        _filterAnimationCts = new CancellationTokenSource();
-        var ct = _filterAnimationCts.Token;
-
         var searchText = AppSearchBox?.Text?.Trim() ?? string.Empty;
 
         var filtered = appsFilter.SelectedIndex switch
@@ -171,37 +194,13 @@ public sealed partial class DebloatSystemPage : Page
 
         var result = filtered.OrderBy(app => app.Name).ToList();
 
-        // Detach to clear without per-item animations
-        appListView.ItemsSource = null;
-        AppList.Clear();
-        appListView.ItemsSource = AppList;
-
         installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), result.Count);
         noAppFoundText.Visibility = result.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
-        // Animate visible items one by one, then bulk-add the rest (off-screen)
-        const int animatedCount = 20;
-        const int delayMs = 30;
-
-        var animated = Math.Min(animatedCount, result.Count);
-        for (var i = 0; i < animated; i++)
+        AppList.Clear();
+        foreach (var app in result)
         {
-            if (ct.IsCancellationRequested) return;
-            AppList.Add(result[i]);
-            await Task.Delay(delayMs, ct).ConfigureAwait(true);
-        }
-
-        if (ct.IsCancellationRequested) return;
-
-        // Bulk-add remaining off-screen items without animation
-        if (animated < result.Count)
-        {
-            appListView.ItemsSource = null;
-            for (var i = animated; i < result.Count; i++)
-            {
-                AppList.Add(result[i]);
-            }
-            appListView.ItemsSource = AppList;
+            AppList.Add(app);
         }
     }
 
@@ -378,6 +377,8 @@ public sealed partial class DebloatSystemPage : Page
     {
         _ = LogHelper.Log("Reloading installed apps list");
         _cachedInstalledApps = null;
+        allApps.Clear();
+        AppList.Clear();
         _loadCts?.Cancel();
         _loadCts?.Dispose();
         _loadCts = new CancellationTokenSource();
@@ -388,11 +389,6 @@ public sealed partial class DebloatSystemPage : Page
     {
         if (allApps.Count == 0)
         {
-            // First load — fetch all apps
-            _loadCts?.Cancel();
-            _loadCts?.Dispose();
-            _loadCts = new CancellationTokenSource();
-            LoadInstalledApps(_loadCts.Token);
             return;
         }
 

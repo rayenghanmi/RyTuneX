@@ -56,6 +56,7 @@ All notable changes to this branch will be documented in this file.
 - Added persistent picker state (`SettingsIdentifier`) and user-friendly dialog titles across file and folder pickers.
 - Added Windows OS update detection on startup to prompt re-applying saved optimizations, features, and privacy tweaks after a system update, alongside manual re-application in Settings.
 - Added an interactive **Deep Clean** dialog (`DeepCleanEngine`) to replace the basic temporary file cleanup with 12 selectable cleanup targets (Temporary Files, Windows Update Cache, Explorer Cache, Crash Dumps, Browser Caches, GPU Shader Cache, System Logs, OEM Logs, Prefetch, Network Cache, Recycle Bin, and Font Cache), real-time asynchronous size scanning, safe service lifecycle handling.
+- Integrated skeleton shimmer placeholders across `Debloat System`, `Packages`, `Startup Apps`, and `IntelligentScoreHeaderControl`.
 
 ### Fixes
 
@@ -81,6 +82,7 @@ All notable changes to this branch will be documented in this file.
 - Eliminated redundant external process launches during page initialization by querying system culture OEM code pages in-process instead of spawning `cmd.exe /c "chcp"`.
 - Decoupled power plan and automatic update querying on the `Optimize System` page to execute asynchronously in the background without blocking the UI thread.
 - Fixed duplicate concurrent system scans on startup by implementing in-flight task deduplication in `IntelligentOptimizationEngine.ScanAsync` and preventing redundant dual `RefreshScoreAsync` scheduling in `IntelligentScoreHeaderControl`.
+- Fixed an issue where the DNS selection dropdown menu on the `Network` page was hardcoded to always reset back to "Automatic" on app startup and interface changes.
 
 ### Changes
 

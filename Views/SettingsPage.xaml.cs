@@ -9,7 +9,6 @@ using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.Services;
 using System.Diagnostics;
-using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.UI.ViewManagement;
 
@@ -294,22 +293,8 @@ public sealed partial class SettingsPage : Page
         }
     }
 
-    public static string GetVersionDescription()
-    {
-        Version version;
+    public static string GetVersionDescription() => RuntimeHelper.GetVersionDescription();
 
-        if (RuntimeHelper.IsMSIX)
-        {
-            var packageVersion = Package.Current.Id.Version;
-
-            version = new(packageVersion.Major, packageVersion.Minor, packageVersion.Build);
-        }
-        else
-        {
-            version = typeof(SettingsPage).Assembly.GetName().Version!;
-        }
-        return $"{version.Major}.{version.Minor}.{version.Build}";
-    }
 
     public string VersionDescription
     {

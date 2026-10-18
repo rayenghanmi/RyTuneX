@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
 using System.Diagnostics;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
@@ -58,7 +59,6 @@ public sealed partial class NetworkPage : Page
             _isInitializing = true;
             await PopulateNetworkInterfacesAsync();
             DisplayNetworkInfo();
-            cmbDNSOptions.SelectedIndex = 0;
             await InitializeNetworkOptimizationTogglesAsync();
         }
         catch (Exception ex)
@@ -104,7 +104,7 @@ public sealed partial class NetworkPage : Page
         }
     }
 
-    private async void DisplayNetworkInfo()
+    private void DisplayNetworkInfo()
     {
         try
         {
@@ -140,6 +140,8 @@ public sealed partial class NetworkPage : Page
                     txtIPv6DNSPrimary.Text = "NoIPv6".GetLocalized();
                     txtIPv6DNSSecondary.Text = "NoIPv6".GetLocalized();
                 }
+
+                cmbDNSOptions.SelectedIndex = DetectCurrentDNSIndex(nic);
             }
             else
             {
@@ -147,6 +149,7 @@ public sealed partial class NetworkPage : Page
                 txtIPv4DNSSecondary.Text = "NoNic".GetLocalized();
                 txtIPv6DNSPrimary.Text = "NoNic".GetLocalized();
                 txtIPv6DNSSecondary.Text = "NoNic".GetLocalized();
+                cmbDNSOptions.SelectedIndex = 0;
             }
         }
         catch (Exception ex)
@@ -170,8 +173,15 @@ public sealed partial class NetworkPage : Page
         {
             var selectedIndex = cmbDNSOptions.SelectedIndex;
             _ = LogHelper.Log($"Applying DNS index {selectedIndex} on interface: {selectedInterfaceName}");
-            var (dnsv4, dnsv6) = GetDNSAddressesByIndex(selectedIndex);
-            await SetDNS(selectedInterfaceName, dnsv4, dnsv6);
+            if (selectedIndex <= 0)
+            {
+                await ResetDefaultDNS(selectedInterfaceName);
+            }
+            else
+            {
+                var (dnsv4, dnsv6) = GetDNSAddressesByIndex(selectedIndex);
+                await SetDNS(selectedInterfaceName, dnsv4, dnsv6);
+            }
             DisplayNetworkInfo();
         }
         catch (Exception ex)
@@ -184,13 +194,150 @@ public sealed partial class NetworkPage : Page
         }
     }
 
+    private static int DetectCurrentDNSIndex(NetworkInterface nic)
+    {
+        try
+        {
+            var configuredIps = new List<IPAddress>();
+            bool registryQueried = false;
+            string? ns4 = null;
+            string? ns6 = null;
+
+            var adapterId = nic.Id.StartsWith("{") ? nic.Id : $"{{{nic.Id}}}";
+
+            try
+            {
+                using var k4 = Registry.LocalMachine.OpenSubKey($@"SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{adapterId}");
+                if (k4 != null)
+                {
+                    registryQueried = true;
+                    ns4 = k4.GetValue("NameServer") as string;
+                }
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"Error reading IPv4 NameServer registry: {ex.Message}");
+            }
+
+            try
+            {
+                using var k6 = Registry.LocalMachine.OpenSubKey($@"SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\Interfaces\{adapterId}");
+                if (k6 != null)
+                {
+                    registryQueried = true;
+                    ns6 = k6.GetValue("NameServer") as string;
+                }
+            }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"Error reading IPv6 NameServer registry: {ex.Message}");
+            }
+
+            // If registry was successfully queried and both NameServer values are empty,
+            // then the interface is explicitly set to Automatic (DHCP).
+            if (registryQueried && string.IsNullOrWhiteSpace(ns4) && string.IsNullOrWhiteSpace(ns6))
+            {
+                return 0; // Automatic
+            }
+
+            // Extract IPs from static NameServer registry values if present
+            if (!string.IsNullOrWhiteSpace(ns4))
+            {
+                var parts = ns4.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var part in parts)
+                {
+                    if (IPAddress.TryParse(part.Trim(), out var ip))
+                    {
+                        configuredIps.Add(ip);
+                    }
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(ns6))
+            {
+                var parts = ns6.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var part in parts)
+                {
+                    if (IPAddress.TryParse(part.Trim(), out var ip))
+                    {
+                        configuredIps.Add(ip);
+                    }
+                }
+            }
+
+            // If registry could not be queried or yielded no IPs, fall back to active DnsAddresses
+            if (configuredIps.Count == 0)
+            {
+                try
+                {
+                    configuredIps.AddRange(nic.GetIPProperties().DnsAddresses);
+                }
+                catch (Exception ex)
+                {
+                    _ = LogHelper.LogError($"Error getting DnsAddresses from nic: {ex.Message}");
+                }
+            }
+
+            if (configuredIps.Count == 0)
+            {
+                return 0; // Automatic
+            }
+
+            int bestIndex = 0;
+            int bestScore = 0;
+
+            for (int i = 1; i <= 10; i++)
+            {
+                var (dnsv4, dnsv6) = GetDNSAddressesByIndex(i);
+                int score = 0;
+
+                if (dnsv4.Length > 0 && IPAddress.TryParse(dnsv4[0], out var v4Primary) &&
+                    configuredIps.Any(ip => ip.Equals(v4Primary)))
+                {
+                    score += 10;
+                }
+
+                if (dnsv4.Length > 1 && IPAddress.TryParse(dnsv4[1], out var v4Secondary) &&
+                    configuredIps.Any(ip => ip.Equals(v4Secondary)))
+                {
+                    score += 5;
+                }
+
+                if (dnsv6.Length > 0 && IPAddress.TryParse(dnsv6[0], out var v6Primary) &&
+                    configuredIps.Any(ip => ip.Equals(v6Primary)))
+                {
+                    score += 10;
+                }
+
+                if (dnsv6.Length > 1 && IPAddress.TryParse(dnsv6[1], out var v6Secondary) &&
+                    configuredIps.Any(ip => ip.Equals(v6Secondary)))
+                {
+                    score += 5;
+                }
+
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestIndex = i;
+                }
+            }
+
+            return bestIndex;
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error detecting current DNS index: {ex.Message}");
+            return 0;
+        }
+    }
+
     private static (string[] dnsv4, string[] dnsv6) GetDNSAddressesByIndex(int index)
     {
         return index switch
         {
             1 /* Cloudflare */          => (new[] { "1.1.1.1", "1.0.0.1" }, new[] { "2606:4700:4700::1111", "2606:4700:4700::1001" }),
             2 /* OpenDNS */             => (new[] { "208.67.222.222", "208.67.220.220" }, new[] { "2620:0:ccc::2", "2620:0:ccd::2" }),
-            3 /* Quad9 */               => (new[] { "9.9.9.9", "149.112.112.112" }, new[] { "2620:fe::fe", string.Empty }),
+            3 /* Quad9 */               => (new[] { "9.9.9.9", "149.112.112.112" }, new[] { "2620:fe::fe", "2620:fe::9" }),
             4 /* Google */              => (new[] { "8.8.8.8", "8.8.4.4" }, new[] { "2001:4860:4860::8888", "2001:4860:4860::8844" }),
             5 /* AlternateDNS */        => (new[] { "76.76.19.19", "76.223.122.150" }, new[] { "2602:fcbc::ad", "2602:fcbc:2::ad" }),
             6 /* Adguard */             => (new[] { "94.140.14.14", "94.140.15.15" }, new[] { "2a10:50c0::ad1:ff", "2a10:50c0::ad2:ff" }),
@@ -429,11 +576,21 @@ public sealed partial class NetworkPage : Page
             NagleToggle.IsOn = nagleDisabled;
 
             // RSS, ECN, CTCP: parse netsh output directly without PowerShell overhead
-            var netshOutput = await RunNetshGlobalAsync();
+            var netshGlobalTask = RunNetshAsync("int tcp show global");
+            var netshSupplementalTask = RunNetshAsync("int tcp show supplemental");
+            await Task.WhenAll(netshGlobalTask, netshSupplementalTask);
+
+            var netshOutput = await netshGlobalTask;
+            var netshSupplemental = await netshSupplementalTask;
 
             RSSToggle.IsOn = ParseNetshBoolValue(netshOutput, "Receive-Side Scaling State", "enabled");
             ECNToggle.IsOn = ParseNetshBoolValue(netshOutput, "ECN Capability", "enabled");
-            CongestionToggle.IsOn = ParseNetshStringValue(netshOutput, "Congestion Control Provider", "ctcp");
+
+            bool isCTCP = ParseNetshStringValue(netshSupplemental, "Congestion Control Provider", "ctcp")
+                       || ParseNetshStringValue(netshOutput, "Congestion Control Provider", "ctcp")
+                       || ParseNetshStringValue(netshOutput, "Add-On Congestion Control Provider", "ctcp");
+
+            CongestionToggle.IsOn = isCTCP;
 
             // IPv6: check DisabledComponents registry
             bool ipv6Disabled = await Task.Run(() =>
@@ -525,7 +682,7 @@ public sealed partial class NetworkPage : Page
     private static bool ParseNetshStringValue(string output, string label, string expectedValue)
         => ParseNetshBoolValue(output, label, expectedValue);
 
-    private static async Task<string> RunNetshGlobalAsync()
+    private static async Task<string> RunNetshAsync(string arguments)
     {
         return await Task.Run(async () =>
         {
@@ -536,7 +693,7 @@ public sealed partial class NetworkPage : Page
                     StartInfo = new System.Diagnostics.ProcessStartInfo
                     {
                         FileName = "netsh.exe",
-                        Arguments = "int tcp show global",
+                        Arguments = arguments,
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
@@ -554,6 +711,8 @@ public sealed partial class NetworkPage : Page
             }
         }).ConfigureAwait(false);
     }
+
+    private static Task<string> RunNetshGlobalAsync() => RunNetshAsync("int tcp show global");
 
     private async void NetworkThrottlingToggle_Toggled(object sender, RoutedEventArgs e)
     {
@@ -683,9 +842,27 @@ public sealed partial class NetworkPage : Page
         {
             bool enable = toggle.IsOn;
             _ = LogHelper.Log($"CTCP: {(enable ? "enabling" : "disabling")}");
+            string provider = enable ? "ctcp" : "default";
+            string psProvider = enable ? "CTCP" : "Default";
+
             await Task.Run(async () =>
+            {
+                int exitCode = await OptimizationOptions.StartInCmd(
+                    $"netsh int tcp set supplemental template=internet congestionprovider={provider}");
                 await OptimizationOptions.StartInCmd(
-                    $"netsh int tcp set global congestionprovider={(enable ? "ctcp" : "default")}"));
+                    $"netsh int tcp set supplemental template=custom congestionprovider={provider}");
+                await OptimizationOptions.StartInCmd(
+                    $"netsh int tcp set supplemental internet congestionprovider={provider}");
+
+                await OptimizationOptions.StartInCmd(
+                    $"powershell -NoProfile -ExecutionPolicy Bypass -Command \"Set-NetTCPSetting -SettingName Internet,InternetCustom -CongestionProvider {psProvider} -ErrorAction SilentlyContinue\"");
+
+                if (exitCode != 0)
+                {
+                    await OptimizationOptions.StartInCmd(
+                        $"netsh int tcp set global congestionprovider={provider}");
+                }
+            });
         }
         catch (Exception ex)
         {
