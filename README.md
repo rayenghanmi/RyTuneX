@@ -1,10 +1,11 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/c88b9d96-9a7c-4072-8dc7-8c2dffe3bccd" alt="RyTuneX Logo" />
+  <img src="https://github.com/user-attachments/assets/d967f905-92a2-471d-8601-f598c16db9f3" alt="RyTuneX Logo" />
 </div>
+
 <br/>
 <p align="center" style="font-size: 1.1rem; color: #555;">
-  <strong>Streamline. Optimize. Dominate.</strong><br>
-  Your one-stop solution for enhancing Windows 10 and 11. Built with precision, designed for performance.
+  <strong>Streamline. Tune. Dominate.</strong><br>
+  An advanced system tuning engine for Windows 10 and 11. Built with precision, engineered for peak performance.
 </p>
 
 <div align="center" style="margin: 20px 0;">
@@ -38,18 +39,16 @@ Install RyTuneX directly from the Microsoft Store for the best experience:
 - Seamless integration with Windows
 
 ### Option 2: Windows Package Manager (WinGet)
-You can also install RyTuneX via the command line using WinGet:
+Install RyTuneX via the command line using WinGet:
 
-```powershell
-winget install --id 9PDH8M7HF2SQ
-```
+    winget install --id 9PDH8M7HF2SQ
 
 > [!IMPORTANT]  
-> Always install RyTuneX from **Microsoft Store** to ensure authenticity and security (RyTuneX no longer provides packages for sideloading).
+> Always install RyTuneX from the **Microsoft Store** to ensure authenticity and security (RyTuneX no longer provides packages for sideloading).
 
 ## 💡 Why Choose RyTuneX?
-- **Effortless Optimization**: Instantly boost your system's speed and reliability.
-- **Smart Features**: From app removal to privacy protection, we've got you covered.
+- **Precision System Tuning**: Deep OS-level configuration to maximize responsiveness, speed, and reliability.
+- **Complete Control**: Granular management over system services, processes, packages, telemetry, and policies.
 
 <div align="center" style="margin: 20px 0;">
   <a href="https://youtube.com/@rayen.ghanmi.23?sub_confirmation=1"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"></a>
@@ -58,16 +57,15 @@ winget install --id 9PDH8M7HF2SQ
   <a href="https://www.facebook.com/rayen.ghanmi.23"><img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook"></a>
   <a href="https://www.instagram.com/rayen.ghanmi.23"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"></a>
   <a href="https://discord.gg/gyBzyd364t"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
-</div>
   <a href="https://t.me/rytunex"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"></a>
 </div>
 
 ## 🤝 Join the Community
-Get the most out of RyTuneX by connecting with fellow users and sharing your experiences. Have questions or feedback? Let’s make RyTuneX even better together!
+Get the most out of RyTuneX by connecting with fellow users and sharing your configurations. Have questions or feedback? Let’s make RyTuneX even better together!
 
 ## ℹ️ About
 
-RyTuneX is a comprehensive system optimization tool designed to **enhance** the **performance**, **privacy**, and **usability** of Windows systems. Built with the **WinUI 3** framework and leveraging **.NET 10**, RyTuneX provides a modern and responsive user experience. It is crafted specifically for **Windows 10 (20H1 and up)** and **Windows 11**. whether you're **a gamer** or **an advanced user**, RyTuneX allows you to remove **pre-installed apps**, manage **system settings**, and optimize **performance**.
+RyTuneX is an **advanced system tuning engine** engineered to elevate the **performance**, **privacy**, and **control** of Windows environments. Built with **WinUI 3** and **.NET 10**, RyTuneX delivers a native, responsive experience tailored for **Windows 10 (20H1 and up)** and **Windows 11**. Whether you are a **competitive gamer**, **power user**, or **system administrator**, RyTuneX equips you with low-level tuning controls, package management, policy enforcement, and telemetry blocking.
 
 <div align="center" style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/.NET10-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Badge" />
@@ -75,17 +73,16 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
   <img src="https://img.shields.io/badge/Windows_11-0078d4?style=for-the-badge&logo=windows-11&logoColor=white" alt="Windows 11 Badge" />
 </div>
 
-## 🌟 Features
+## 🌟 Core Capabilities
 
-- 🧹 **Selective App Removal**: Uninstall unwanted pre-installed apps with ease. This feature allows users to debloat their system by removing bloatware and unnecessary applications that come pre-installed with Windows. By doing so, users can free up valuable system resources and improve overall performance.
-
-- ⚡ **System Optimizations**: Streamline your system by reducing resource usage, and improving overall system efficiency. Choose from a range of basic and advanced options for both beginner and expert users.
-
-- 🛡️ **Privacy Enhancements**: Enhance your privacy by blocking telemetry and data collection. RyTuneX provides tools to enhance user privacy by disabling tracking and data collection features inherent in Windows. This ensures that users have greater control over their personal data and can protect their privacy more effectively.
-
-- 🎨 **Modern Design**: Enjoy a sleek and intuitive interface powered by WinUI 3. The application boasts a modern design that is both user-friendly and visually appealing, making system optimization tasks straightforward. The interface is designed to be clean and easy to navigate, allowing users to quickly access the features they need.
-
-- 💻 **Cross-Compatible**: RyTuneX is compatible with both **Windows 10 (20H1 and up)** and **Windows 11**, ensuring seamless performance optimization across different Windows versions. The app delivers a consistent experience, allowing users to fully benefit from its features regardless of their operating system version.
+- 🧠 **Intelligent Tuning Engine**: Hardware-aware recommendations, domain-specific scoring (Performance, Privacy, Features), risk classification badges (`Safe`, `Cosmetic`, `Moderate`, `Caution`), on-demand technical inspection flyouts, and per-item rollback.
+- ⚡ **Low-Level Latency & OS Tuning**: Fine-tune timer resolution, HPET, dynamic tick, memory caching, power throttling, and GPU/input latency alongside automated post-Windows Update re-application.
+- 🔥 **Multi-Threaded Stress Engine**: Built-in stability and thermal testing across CPU, RAM, and GPU compute workloads with real-time hardware telemetry, thread allocation controls, and emergency thermal cutoffs.
+- 🧹 **Debloating & Deep Clean Engine**: Remove pre-installed UWP/Win32 bloatware via native Windows Deployment APIs and reclaim disk space across 12 targeted caches (Shader Cache, Windows Update, Crash Dumps, Browsers, Prefetch).
+- 🛡️ **Privacy & AI Hardening**: Lock down OS telemetry, activity history, launch tracking, Copilot+ AI features, Windows Recall, and background data collection.
+- 🌐 **Network & Stack Optimization**: Configure custom DNS profiles and tune TCP/IP performance (`Nagle's Algorithm`, `RSS`, `ECN`, `CTCP`, `Network Throttling`, `NetBIOS`).
+- 🧰 **Unified System Management**: Control Startup Apps (COM Task Scheduler & Registry), active Processes, Windows Services, 27+ Group Policy categories, Security status, and WinGet packages.
+- 🚀 **Native AOT & WinUI 3 Architecture**: Compiled directly to native machine code (x64 Native AOT / x86 R2R) on .NET 10 and Windows App SDK 2.5.1 for near-instant startup and minimal memory footprint.
 
 <div align="center" style="margin: 20px 0;">
   <a href="https://rayenghanmi.github.io/rytunex/docs.html"><img src="https://img.shields.io/badge/Read%20the%20Docs-Technical%20Reference-blue?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Read the Docs"></a>
@@ -93,58 +90,48 @@ RyTuneX is a comprehensive system optimization tool designed to **enhance** the 
 
 ## 🏗️ Technical Architecture
 
-RyTuneX is built on a modern Windows development stack, leveraging a layered architecture to ensure stability, performance, and maintainability:
+RyTuneX is built on a modern Windows development stack, leveraging a layered architecture for native speed, low overhead, and maintainability:
 
 <p align="center">
   <img src="https://img.shields.io/badge/WinUI%203-0078D4?style=flat-square&logo=windows&logoColor=white" alt="WinUI 3" />
-  <img src="https://img.shields.io/badge/Windows_App_SDK-1.8-0078D4?style=flat-square&logo=windows&logoColor=white" alt="Windows App SDK 1.8" />
+  <img src="https://img.shields.io/badge/Windows_App_SDK-2.5.1-0078D4?style=flat-square&logo=windows&logoColor=white" alt="Windows App SDK 2.5.1" />
   <img src="https://img.shields.io/badge/C%23-14-239120?style=flat-square&logo=c-sharp&logoColor=white" alt="C# 14" />
-  <img src="https://img.shields.io/badge/.NET-10-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt=".NET 10" />
+  <img src="https://img.shields.io/badge/.NET_10-Native_AOT-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt=".NET 10 Native AOT" />
   <img src="https://img.shields.io/badge/Windows_PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white" alt="PowerShell" />
 </p>
 
-- 🖥️ **UI Framework**: Native rendering with **WinUI 3** and the **Windows App SDK 1.8**, fully supporting Fluent Design, Mica backdrop, and Adaptive Layouts.
-- ⚙️ **Managed Runtime**: Written in **C# 14** running on **.NET 10 Desktop Runtime**, enabling fast async/await operations and robust memory management.
-- 🔗 **Service Layer**: Decoupled core services (e.g., `OptimizationOptions`, `PolicyHelper`) manage background tasks, package parsing, and API interactions.
-- 🔧 **Deep OS Interop**: Direct platform interactions using **Win32 APIs (P/Invoke)**, **PowerShell**, **WMI**, and **COM** for reliable registry tweaks, UWP app removals, policy scanning, and WinGet catalog management.
-- 🔒 **Safety First Development**: Implements an atomic State Management system to securely track toggle states, ensuring a 1-click **Revert All Changes** safe harbor for users.
+- 🖥️ **UI Framework**: Native rendering with **WinUI 3** and **Windows App SDK 2.5.1**, featuring XAML rendering optimizations (`DefaultStyleOptimizations`, `IconNoGridOptimization`), native `<TitleBar>` chrome, Mica/Acrylic backdrops, and custom accent personalization.
+- ⚙️ **Native Compilation**: Written in **C# 14** on **.NET 10**, utilizing **Native AOT** (x64) and **ReadyToRun + ILLink Trimming** (x86) for self-contained deployment, zero JIT overhead, and sub-2-second cold startups.
+- 🔗 **Dynamic Engine & Service Layer**: Powered by decoupled services (`IntelligentOptimizationEngine`, `OptimizeFunctionInspector`, `StressEngine`, `DeepCleanEngine`) for dynamic runtime code inspection, pre-warmed state caching, and asynchronous execution.
+- 🔧 **Deep OS Interop**: Direct platform execution via **Win32 APIs (P/Invoke)**, **Windows Deployment API**, **COM (`Schedule.Service`)**, **WMI**, and **PowerShell** for registry tuning, native UWP/Win32 debloating, policy scanning, and WinGet management.
+- 🔒 **Atomic State & Rollback**: Real-time registry state detection (`SystemStateDetector`) paired with granular **per-item rollback** and a 1-click **Revert All Changes** failsafe.
 
 ## 📸 UI Preview
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/eb20b786-fc3c-4cc4-85d5-76080274eed4" />
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/9d428917-90e2-4de1-948d-ec87dde7f098" />
-    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/eb20b786-fc3c-4cc4-85d5-76080274eed4" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/6ae788e2-99fe-4f5a-a0f0-ac37f6c7a40c" />
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/5049e89b-38f3-4dbd-95cd-3922380361c1" />
+    <img alt="RyTuneX Interface" src="https://github.com/user-attachments/assets/6ae788e2-99fe-4f5a-a0f0-ac37f6c7a40c" />
   </picture>
-  <p><em>RyTuneX - Clean, Modern, and Intuitive Interface</em></p>
+  <p>RyTuneX | Advanced System Tuning Engine</p>
 </div>
+
 
 ## 🚀 Usage Guide
 
 > [!WARNING]  
-> Always create a restore point before applying any optimizations.
+> Always create a system restore point before applying deep system tuning changes.
 
-### ⚡ System Optimizations
-To optimize your system, go to the **Optimize** tab and toggle the available options based on your needs. Changes will take effect after a system restart.
-
-### 🧹 Debloat Unwanted Apps
-In the **Debloat** tab, you can view a list of installed apps. Select the ones you want to remove and click **Uninstall selected App(s)**. A restart may be required to complete the process.
-
-### 🛡️ Privacy Enhancements
-Head to the **Privacy** tab to configure your privacy settings. Toggle the switches to enable or disable features that impact telemetry, advertising, and more. Changes will take effect after a restart.
-
-### 🌐 Network & Security Management
-Use the **Network** module to assign custom DNS profiles or manage connections, and head over to **Security** to control Defender and SmartScreen configurations locally.
-
-### 🧰 Advanced Workloads (Policies, WinGet, Processes, Services, Repair)
-Explore deeper configuration by updating applications via the **Packages (WinGet)** page, scanning override settings with the **Policies** scanner, managing active system resources securely under the **Processes** and **Services** modules, and restoring corrupted system states using the built-in **Repair** module.
-
-### ⚙️ Windows Features Management
-Use the **Features** tab to modify specific Windows features. Toggle the switches to adjust the settings, and restart your system to apply the changes.
-
-### 📊 System Information
-The **Device** page provides a comprehensive view of your system’s hardware and OS. This helps you understand your setup and make more informed decisions about optimizations.
+- **🏠 Home**: Monitor real-time CPU, GPU, RAM, Disk, and Network usage graphs alongside quick system actions.
+- **⚡ Optimize**: Apply hardware-aware performance, memory, power, and timer/latency tweaks using preset filters (`Recommended`, `Safe`, `Moderate`), risk badges, and per-item rollback.
+- **🧹 Debloat & Deep Clean**: Uninstall pre-installed UWP/Win32 apps in bulk and run asynchronous **Deep Clean** scans across 12 system, browser, and GPU shader cache targets.
+- **🛡️ Privacy**: Harden Windows against telemetry, activity history, launch tracking, web search injection, and background data collection.
+- **⚙️ Features**: Customize context menus (`Take Ownership`, `Copy File Path`), notification behavior, taskbar layouts, and disable Windows AI, Copilot, and Recall components.
+- **🔥 Stress Test**: Benchmark CPU, RAM, and GPU stability under sustained loads with customizable thread allocation, real-time thermal telemetry, and emergency temperature cutoffs.
+- **🌐 Network & Security**: Apply low-latency TCP/IP network stack tweaks (`Nagle's Algorithm`, `RSS`, `ECN`, `CTCP`), assign custom DNS presets, and audit real-time Windows Defender, Firewall, BitLocker, and SmartScreen states.
+- **🧰 System Workloads**: Manage boot entries in **Startup Apps**, install software via **Packages (WinGet)**, clear overrides across 27+ categories in **Policies**, control live **Processes** and **Services**, and run system repair routines in **Repair**.
+- **📊 System Info**: Inspect detailed hardware specifications, battery health, Copilot+ AI hardware capabilities, and extract or import device drivers.
 
 ## 🛠️ Get Involved
 
@@ -161,18 +148,16 @@ Check out the [contribution guide](https://github.com/rayenghanmi/RyTuneX/blob/m
   </p>
 </div>
 
-> *More translations will dynamically ship with each new release!*
+> *More translations dynamically ship with each new release!*
 
 ### Want to add your language?
 
-If you're interested in contributing translations, please follow these steps:
-
 1. **Clone the File**: Clone the [Resources.resw](../testing/Strings/en-us/Resources.resw) file.
-2. **Translate the File**: Translate its contents into your desired language.
-3. **Save and Structure**: Save the translated file as `Resources.resw` inside a new folder named with your language code (e.g., `fr-fr` for French).
-4. **Create a Pull Request**: Submit a pull request to the `testing` branch, ensuring the new `resw` file is included in the correct language folder within the `Strings` directory.
+2. **Translate the File**: Translate its contents into your target language.
+3. **Save and Structure**: Save the translated file as `Resources.resw` inside a folder named with your language code (e.g., `fr-fr` for French).
+4. **Create a Pull Request**: Submit a pull request to the `testing` branch with the new `.resw` file inside the `Strings` directory.
 
-Thank you for helping make RyTuneX accessible to more people!
+Thank you for helping make RyTuneX accessible to more users!
 
 ## 📄 License
 
@@ -180,10 +165,10 @@ This project is licensed under the [GNU Affero General Public License v3.0](http
 
 ## 📫 Contact
 
--   E-mail: [rytunex@gmail.com](mailto:rytunex@gmail.com)
--   Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
--   Facebook: [@rytunex](https://www.facebook.com/rytunex)
--   Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
--   Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
+- E-mail: [rytunex@gmail.com](mailto:rytunex@gmail.com)
+- Twitter: [@rayen_ghanmi_23](https://twitter.com/rayen_ghanmi_23)
+- Facebook: [@rytunex](https://www.facebook.com/rytunex)
+- Discord: [RyTuneX](https://discord.gg/gyBzyd364t)
+- Instagram: [@rayen.ghanmi.23](https://instagram.com/rayen.ghanmi.23)
 
 We’re here to support and listen to your feedback!
