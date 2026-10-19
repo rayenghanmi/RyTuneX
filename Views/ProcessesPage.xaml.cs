@@ -1,5 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
+using RyTuneX.Helpers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -19,6 +21,7 @@ public sealed partial class ProcessesPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing ProcessesPage");
+        NavigationCacheMode = NavigationCacheMode.Disabled;
         ProcessListView.ItemsSource = _filteredProcesses;
         Loaded += ProcessesPage_Loaded;
         Unloaded += ProcessesPage_Unloaded;
@@ -33,6 +36,8 @@ public sealed partial class ProcessesPage : Page
     private void ProcessesPage_Unloaded(object sender, RoutedEventArgs e)
     {
         StopAutoRefresh();
+        _allProcesses.Clear();
+        _filteredProcesses.Clear();
     }
 
     private void StartAutoRefresh()
@@ -42,7 +47,7 @@ public sealed partial class ProcessesPage : Page
             return;
         }
 
-        _refreshTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _refreshTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
         _refreshTimer.Tick += async (_, _) => await RefreshProcessesAsync();
         _refreshTimer.Start();
     }
@@ -105,26 +110,30 @@ public sealed partial class ProcessesPage : Page
     {
         return await Task.Run(() =>
         {
-            return Process.GetProcesses()
-                .Select(p =>
+            var processes = Process.GetProcesses();
+            var list = new List<ProcessInfoItem>(processes.Length);
+            foreach (var p in processes)
+            {
+                try
                 {
-                    try
+                    list.Add(new ProcessInfoItem
                     {
-                        return new ProcessInfoItem
-                        {
-                            Name = p.ProcessName,
-                            Id = p.Id,
-                            MemoryMB = p.WorkingSet64 / (1024.0 * 1024.0),
-                            ThreadCount = p.Threads.Count
-                        };
-                    }
-                    catch (Exception ex)
-                    {
-                        _ = LogHelper.LogWarning($"Error reading process info for {p.ProcessName}: {ex.Message}");
-                        return new ProcessInfoItem { Name = p.ProcessName, Id = p.Id };
-                    }
-                })
-                .ToList();
+                        Name = p.ProcessName,
+                        Id = p.Id,
+                        MemoryMB = p.WorkingSet64 / (1024.0 * 1024.0),
+                        ThreadCount = p.Threads.Count
+                    });
+                }
+                catch
+                {
+                    list.Add(new ProcessInfoItem { Name = p.ProcessName, Id = p.Id });
+                }
+                finally
+                {
+                    p.Dispose();
+                }
+            }
+            return list;
         });
     }
 
@@ -253,25 +262,38 @@ public sealed partial class ProcessesPage : Page
                 process.Kill();
             });
 
-            App.ShowNotification("Process Ended", $"Process '{processName}' (PID: {processId}) was terminated successfully.", InfoBarSeverity.Success, 3000);
+            App.ShowNotification(
+                "ProcessesPage_Notification_ProcessEndedTitle".GetLocalized(),
+                string.Format("ProcessesPage_Notification_ProcessEndedMessage".GetLocalized(), processName, processId),
+                InfoBarSeverity.Success,
+                3000);
             await RefreshProcessesAsync();
         }
         catch (ArgumentException)
         {
             _ = LogHelper.LogWarning($"Process with PID {processId} no longer exists.");
-            App.ShowNotification("Process Not Found", $"Process with PID {processId} no longer exists.", InfoBarSeverity.Warning, 3000);
+            App.ShowNotification(
+                "ProcessesPage_Notification_ProcessNotFoundTitle".GetLocalized(),
+                string.Format("ProcessesPage_Notification_ProcessNotFoundMessage".GetLocalized(), processId),
+                InfoBarSeverity.Warning,
+                3000);
             await RefreshProcessesAsync();
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error ending process {processId}: {ex.Message}");
-            App.ShowNotification("Error", $"Failed to end process: {ex.Message}", InfoBarSeverity.Error, 5000);
+            App.ShowNotification(
+                "ProcessesPage_Notification_ProcessErrorTitle".GetLocalized(),
+                string.Format("ProcessesPage_Notification_ProcessErrorMessage".GetLocalized(), ex.Message),
+                InfoBarSeverity.Error,
+                5000);
         }
     }
 }
 
 internal class ProcessInfoItem : INotifyPropertyChanged
 {
+    public string EndTaskTooltip => "ProcessesPage_EndTaskTooltip.Text".GetLocalized();
     private string _name = string.Empty;
     private int _id;
     private double _memoryMB;

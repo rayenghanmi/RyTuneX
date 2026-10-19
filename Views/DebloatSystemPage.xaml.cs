@@ -13,18 +13,20 @@ namespace RyTuneX.Views;
 public sealed partial class DebloatSystemPage : Page
 {
     public ObservableCollection<Tuple<string, string, bool>> AppList { get; set; } = new();
-    private readonly CancellationTokenSource cancellationTokenSource = new();
+    private static (List<AppInfo> Apps, HashSet<string> UninstallableNames)? _cachedInstalledApps;
+    private CancellationTokenSource? _loadCts;
     private CancellationTokenSource? _uninstallBatchCts;
     private Guid? _uninstallBatchRegistrationId;
     private List<AppInfo> allApps = new();
     private HashSet<string> uninstallableAppNames = new(StringComparer.OrdinalIgnoreCase);
     private string? _pendingScrollTarget;
+    private bool _isLoading;
 
     public DebloatSystemPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing DebloatSystemPage");
-        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         Loaded += DebloatSystemPage_Loaded;
         Unloaded += DebloatSystemPage_Unloaded;
     }
@@ -34,15 +36,18 @@ public sealed partial class DebloatSystemPage : Page
         try
         {
             // Cancel any ongoing operations for this page
-            try { cancellationTokenSource.Cancel(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error cancelling CTS: {ex.Message}"); }
-            try { _filterAnimationCts?.Cancel(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error cancelling filter CTS: {ex.Message}"); }
+            try { _loadCts?.Cancel(); _loadCts?.Dispose(); _loadCts = null; } catch { }
 
             if (_uninstallBatchCts != null)
             {
-                try { _uninstallBatchCts.Cancel(); } catch (Exception ex) { _ = LogHelper.LogWarning($"Error cancelling uninstall CTS: {ex.Message}"); }
+                try { _uninstallBatchCts.Cancel(); } catch { }
                 _uninstallBatchCts.Dispose();
                 _uninstallBatchCts = null;
             }
+
+            AppList.Clear();
+            allApps.Clear();
+            uninstallableAppNames.Clear();
         }
         catch (Exception ex)
         {
@@ -62,6 +67,14 @@ public sealed partial class DebloatSystemPage : Page
 
     private async void DebloatSystemPage_Loaded(object sender, RoutedEventArgs e)
     {
+        if (allApps.Count == 0 && !_isLoading)
+        {
+            _loadCts?.Cancel();
+            _loadCts?.Dispose();
+            _loadCts = new CancellationTokenSource();
+            LoadInstalledApps(_loadCts.Token);
+        }
+
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
         {
             await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
@@ -71,6 +84,9 @@ public sealed partial class DebloatSystemPage : Page
 
     private async void LoadInstalledApps(CancellationToken cancellationToken = default)
     {
+        if (_isLoading) return;
+        _isLoading = true;
+
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -79,15 +95,30 @@ public sealed partial class DebloatSystemPage : Page
             {
                 gettingAppsLoading.Visibility = Visibility.Visible;
                 appListView.Visibility = Visibility.Collapsed;
+                installedAppsCount.Visibility = Visibility.Collapsed;
+                AppSearchBox.IsEnabled = false;
+                appsFilter.IsEnabled = false;
+                reloadButton.IsEnabled = false;
+                TempButton.IsEnabled = false;
                 uninstallButton.IsEnabled = false;
                 uninstallingStatusText.Text = RyTuneX.Helpers.ResourceExtensions.GetLocalized("UninstallTip");
                 uninstallingStatusBar.Opacity = 0;
-                appsFilter.IsEnabled = false;
             });
 
             _ = LogHelper.Log("Loading InstalledApps");
 
-            var (installedApps, fetchedUninstallableNames) = await Task.Run(OptimizationOptions.GetInstalledApps).ConfigureAwait(false);
+            (List<AppInfo> installedApps, HashSet<string> fetchedUninstallableNames) data;
+            if (_cachedInstalledApps.HasValue)
+            {
+                data = _cachedInstalledApps.Value;
+            }
+            else
+            {
+                data = await Task.Run(OptimizationOptions.GetInstalledApps).ConfigureAwait(false);
+                _cachedInstalledApps = data;
+            }
+
+            var (installedApps, fetchedUninstallableNames) = data;
 
             DispatcherQueue.TryEnqueue(() =>
             {
@@ -102,35 +133,51 @@ public sealed partial class DebloatSystemPage : Page
                 appsFilter.Visibility = Visibility.Visible;
                 appsFilterText.Visibility = Visibility.Visible;
                 reloadButton.Visibility = Visibility.Visible;
+                reloadButton.IsEnabled = true;
                 uninstallButton.Visibility = Visibility.Visible;
                 appListView.Visibility = Visibility.Visible;
                 appListView.IsEnabled = true;
                 uninstallButton.IsEnabled = true;
                 uninstallingStatusText.Visibility = Visibility.Visible;
                 AppSearchBox.Visibility = Visibility.Visible;
+                AppSearchBox.IsEnabled = true;
                 gettingAppsLoading.Visibility = Visibility.Collapsed;
                 TempStackButtonTextBar.Visibility = Visibility.Visible;
+                TempButton.IsEnabled = true;
             });
         }
         catch (OperationCanceledException ex)
         {
             _ = LogHelper.Log($"Operation canceled: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                gettingAppsLoading.Visibility = Visibility.Collapsed;
+                AppSearchBox.IsEnabled = true;
+                appsFilter.IsEnabled = true;
+                reloadButton.IsEnabled = true;
+                TempButton.IsEnabled = true;
+            });
         }
         catch (Exception ex)
         {
             _ = LogHelper.Log($"Error loading installed apps: {ex.Message}\nStack Trace: {ex.StackTrace}");
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                gettingAppsLoading.Visibility = Visibility.Collapsed;
+                AppSearchBox.IsEnabled = true;
+                appsFilter.IsEnabled = true;
+                reloadButton.IsEnabled = true;
+                TempButton.IsEnabled = true;
+            });
+        }
+        finally
+        {
+            _isLoading = false;
         }
     }
 
-    private CancellationTokenSource? _filterAnimationCts;
-
-    private async void ApplyFilter()
+    private void ApplyFilter()
     {
-        // Cancel any in-progress staggered animation
-        _filterAnimationCts?.Cancel();
-        _filterAnimationCts = new CancellationTokenSource();
-        var ct = _filterAnimationCts.Token;
-
         var searchText = AppSearchBox?.Text?.Trim() ?? string.Empty;
 
         var filtered = appsFilter.SelectedIndex switch
@@ -147,37 +194,13 @@ public sealed partial class DebloatSystemPage : Page
 
         var result = filtered.OrderBy(app => app.Name).ToList();
 
-        // Detach to clear without per-item animations
-        appListView.ItemsSource = null;
-        AppList.Clear();
-        appListView.ItemsSource = AppList;
-
         installedAppsCount.Text = string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TotalApps"), result.Count);
         noAppFoundText.Visibility = result.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
-        // Animate visible items one by one, then bulk-add the rest (off-screen)
-        const int animatedCount = 20;
-        const int delayMs = 30;
-
-        var animated = Math.Min(animatedCount, result.Count);
-        for (var i = 0; i < animated; i++)
+        AppList.Clear();
+        foreach (var app in result)
         {
-            if (ct.IsCancellationRequested) return;
-            AppList.Add(result[i]);
-            await Task.Delay(delayMs, ct).ConfigureAwait(true);
-        }
-
-        if (ct.IsCancellationRequested) return;
-
-        // Bulk-add remaining off-screen items without animation
-        if (animated < result.Count)
-        {
-            appListView.ItemsSource = null;
-            for (var i = animated; i < result.Count; i++)
-            {
-                AppList.Add(result[i]);
-            }
-            appListView.ItemsSource = AppList;
+            AppList.Add(app);
         }
     }
 
@@ -211,7 +234,9 @@ public sealed partial class DebloatSystemPage : Page
 
         try
         {
-            var totalApps = appListView.SelectedItems.Count;
+            // Snapshot selected items before starting
+            var selectedApps = appListView.SelectedItems.OfType<AppInfo>().ToList();
+            var totalApps = selectedApps.Count;
             var completedApps = 0;
 
             // Initialize status bar
@@ -222,7 +247,7 @@ public sealed partial class DebloatSystemPage : Page
                 uninstallingStatusBar.Opacity = 1;
             });
 
-            foreach (var appInfo in appListView.SelectedItems.OfType<AppInfo>())
+            foreach (var appInfo in selectedApps)
             {
                 var selectedAppName = appInfo.Name;
 
@@ -351,15 +376,19 @@ public sealed partial class DebloatSystemPage : Page
     private void ReloadApps_Click(object sender, RoutedEventArgs e)
     {
         _ = LogHelper.Log("Reloading installed apps list");
-        LoadInstalledApps(cancellationTokenSource.Token);
+        _cachedInstalledApps = null;
+        allApps.Clear();
+        AppList.Clear();
+        _loadCts?.Cancel();
+        _loadCts?.Dispose();
+        _loadCts = new CancellationTokenSource();
+        LoadInstalledApps(_loadCts.Token);
     }
 
     private void appsFilter_SelectionChanged(object sender, RoutedEventArgs e)
     {
         if (allApps.Count == 0)
         {
-            // First load — fetch all apps
-            LoadInstalledApps(cancellationTokenSource.Token);
             return;
         }
 
@@ -379,66 +408,274 @@ public sealed partial class DebloatSystemPage : Page
     {
         try
         {
-            _ = LogHelper.Log("Starting temp files removal");
-            // Update UI to show progress
+            // Show the deep clean dialog for scanning and category selection
+            var selectedCategories = await ShowDeepCleanDialogAsync();
+            if (selectedCategories == null || selectedCategories.Count == 0) return;
+
+            _ = LogHelper.Log($"Deep clean: starting with {selectedCategories.Count} selected categories");
+
+            // Show progress on the button
             TempButton.IsEnabled = false;
             TempButtonProgressRing.Visibility = Visibility.Visible;
             TempButtonIcon.Visibility = Visibility.Collapsed;
 
-            // Execute temp removal commands
-            var (success, bytesCleared) = await OptimizeSystemHelper.RemoveTempFiles();
+            // Execute cleaning for all selected categories
+            var (success, bytesCleared) = await DeepCleanEngine.CleanCategoriesAsync(selectedCategories);
 
-            // Reset UI after task completion
+            // Reset button UI
             TempButton.IsEnabled = true;
             TempButtonProgressRing.Visibility = Visibility.Collapsed;
             TempButtonIcon.Visibility = Visibility.Visible;
 
             if (success)
             {
-                // Show success notification with cleared size
-                var sizeStr = FormatBytes(bytesCleared);
+                var sizeStr = DeepCleanEngine.FormatBytes(bytesCleared);
                 App.ShowNotification(
-                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
-                    string.Format(RyTuneX.Helpers.ResourceExtensions.GetLocalized("TempDelSucc")) + $" (Cleared: {sizeStr})",
+                    ResourceExtensions.GetLocalized("DeepClean_Title"),
+                    string.Format(ResourceExtensions.GetLocalized("DeepClean_CompleteDesc"), sizeStr),
                     InfoBarSeverity.Success, 5000);
-
                 ReviewPromptHelper.NotifyOptimizationCompleted(XamlRoot);
             }
             else
             {
-                // Show error notification
                 App.ShowNotification(
-                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
-                    RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel"),
+                    ResourceExtensions.GetLocalized("DeepClean_Title"),
+                    ResourceExtensions.GetLocalized("DeepClean_Error"),
                     InfoBarSeverity.Error, 5000);
             }
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogException(ex, "TempButton_Click");
-            // Restore UI in case of unexpected error
             TempButton.IsEnabled = true;
             TempButtonProgressRing.Visibility = Visibility.Collapsed;
             TempButtonIcon.Visibility = Visibility.Visible;
 
-            // Show error notification
             App.ShowNotification(
-                RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),
-                RyTuneX.Helpers.ResourceExtensions.GetLocalized("ErrTempDel"),
+                ResourceExtensions.GetLocalized("DeepClean_Title"),
+                ResourceExtensions.GetLocalized("DeepClean_Error"),
                 InfoBarSeverity.Error, 5000);
         }
+    }
 
-        // Helper to format bytes as readable string
-        static string FormatBytes(long bytes)
+    // Displays the Deep Clean dialog with categorized scanning and selection
+    private async Task<List<CleanupCategory>?> ShowDeepCleanDialogAsync()
+    {
+        var categories = DeepCleanEngine.GetCategories();
+
+        // Root content panel
+        var mainPanel = new StackPanel { Spacing = 12, MinWidth = 480 };
+
+        // Description text
+        mainPanel.Children.Add(new TextBlock
         {
-            if (bytes < 1024) return $"{bytes} B";
-            double kb = bytes / 1024.0;
-            if (kb < 1024) return $"{kb:F1} KB";
-            double mb = kb / 1024.0;
-            if (mb < 1024) return $"{mb:F1} MB";
-            double gb = mb / 1024.0;
-            return $"{gb:F2} GB";
+            Text = ResourceExtensions.GetLocalized("DeepClean_Description"),
+            TextWrapping = TextWrapping.Wrap,
+            Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"],
+            Margin = new Thickness(0, 0, 0, 4)
+        });
+
+        // Scanning progress indicator
+        var scanningRing = new ProgressRing { Width = 16, Height = 16, IsActive = true };
+        var scanningText = new TextBlock
+        {
+            Text = ResourceExtensions.GetLocalized("DeepClean_Scanning"),
+            VerticalAlignment = VerticalAlignment.Center,
+            Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"]
+        };
+        var scanningPanel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            Spacing = 8,
+            Children = { scanningRing, scanningText }
+        };
+        mainPanel.Children.Add(scanningPanel);
+
+        // Select All / Deselect All links
+        var selectAllBtn = new HyperlinkButton { Content = ResourceExtensions.GetLocalized("DeepClean_SelectAll"), Padding = new Thickness(4, 2, 4, 2) };
+        var deselectAllBtn = new HyperlinkButton { Content = ResourceExtensions.GetLocalized("DeepClean_DeselectAll"), Padding = new Thickness(4, 2, 4, 2) };
+        var buttonPanel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            Spacing = 8,
+            Children = { selectAllBtn, deselectAllBtn }
+        };
+        mainPanel.Children.Add(buttonPanel);
+
+        // Build the category rows
+        var categoriesPanel = new StackPanel { Spacing = 2 };
+        var sizeTexts = new Dictionary<string, TextBlock>();
+        var checkBoxes = new Dictionary<string, CheckBox>();
+
+        foreach (var cat in categories)
+        {
+            var row = BuildCategoryRow(cat, out var sizeText, out var checkBox);
+            categoriesPanel.Children.Add(row);
+            sizeTexts[cat.Id] = sizeText;
+            checkBoxes[cat.Id] = checkBox;
         }
+
+        var scrollViewer = new ScrollViewer
+        {
+            Content = categoriesPanel,
+            MaxHeight = 400,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled
+        };
+        mainPanel.Children.Add(scrollViewer);
+
+        // Total selected size
+        var totalText = new TextBlock
+        {
+            Text = string.Format(ResourceExtensions.GetLocalized("DeepClean_TotalSelected"), "..."),
+            Style = (Style)Application.Current.Resources["BodyStrongTextBlockStyle"],
+            Margin = new Thickness(0, 8, 0, 0)
+        };
+        mainPanel.Children.Add(totalText);
+
+        // Create the dialog
+        var dialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (Brush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
+            Title = ResourceExtensions.GetLocalized("DeepClean_Title"),
+            Content = mainPanel,
+            PrimaryButtonText = ResourceExtensions.GetLocalized("DeepClean_CleanButton"),
+            CloseButtonText = ResourceExtensions.GetLocalized("Close"),
+            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
+            IsPrimaryButtonEnabled = true
+        };
+
+        // Update total and button state based on selections
+        void UpdateTotal()
+        {
+            var selected = categories.Where(c => c.IsSelected).ToList();
+            var totalSize = selected.Where(c => c.SizeScanned).Sum(c => c.SizeBytes);
+            totalText.Text = string.Format(
+                ResourceExtensions.GetLocalized("DeepClean_TotalSelected"),
+                DeepCleanEngine.FormatBytes(totalSize));
+            dialog.IsPrimaryButtonEnabled = selected.Count > 0;
+        }
+
+        // Wire checkbox events
+        foreach (var cat in categories)
+        {
+            var catRef = cat;
+            checkBoxes[cat.Id].Checked += (s, e) => { catRef.IsSelected = true; UpdateTotal(); };
+            checkBoxes[cat.Id].Unchecked += (s, e) => { catRef.IsSelected = false; UpdateTotal(); };
+        }
+
+        // Wire Select All / Deselect All
+        selectAllBtn.Click += (s, e) =>
+        {
+            foreach (var cat in categories) { cat.IsSelected = true; checkBoxes[cat.Id].IsChecked = true; }
+            UpdateTotal();
+        };
+        deselectAllBtn.Click += (s, e) =>
+        {
+            foreach (var cat in categories) { cat.IsSelected = false; checkBoxes[cat.Id].IsChecked = false; }
+            UpdateTotal();
+        };
+
+        // Start scanning all categories in parallel
+        _ = Task.Run(async () =>
+        {
+            var scanTasks = categories.Select(async cat =>
+            {
+                await DeepCleanEngine.ScanCategoryAsync(cat);
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    sizeTexts[cat.Id].Text = cat.SizeBytes > 0
+                        ? DeepCleanEngine.FormatBytes(cat.SizeBytes)
+                        : "—";
+                    UpdateTotal();
+                });
+            });
+            await Task.WhenAll(scanTasks);
+            DispatcherQueue.TryEnqueue(() => scanningPanel.Visibility = Visibility.Collapsed);
+        });
+
+        // Show dialog and return selected categories
+        var result = await dialog.ShowAsync();
+        return result == ContentDialogResult.Primary
+            ? categories.Where(c => c.IsSelected).ToList()
+            : null;
+    }
+
+    // Builds a single category row for the deep clean dialog
+    private Border BuildCategoryRow(CleanupCategory category, out TextBlock sizeText, out CheckBox checkBox)
+    {
+        checkBox = new CheckBox
+        {
+            IsChecked = true,
+            MinWidth = 0,
+            VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(0, 0, 4, 0)
+        };
+
+        var icon = new FontIcon
+        {
+            Glyph = category.Glyph,
+            FontSize = 16,
+            Foreground = (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"],
+            VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(0, 0, 12, 0)
+        };
+
+        var nameText = new TextBlock
+        {
+            Text = ResourceExtensions.GetLocalized(category.NameKey),
+            Style = (Style)Application.Current.Resources["BodyTextBlockStyle"]
+        };
+
+        var descText = new TextBlock
+        {
+            Text = ResourceExtensions.GetLocalized(category.DescriptionKey),
+            Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"],
+            Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"],
+            TextTrimming = TextTrimming.CharacterEllipsis
+        };
+
+        var textPanel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
+        textPanel.Children.Add(nameText);
+        textPanel.Children.Add(descText);
+
+        sizeText = new TextBlock
+        {
+            Text = "...",
+            Style = (Style)Application.Current.Resources["BodyTextBlockStyle"],
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"],
+            MinWidth = 70,
+            TextAlignment = TextAlignment.Right
+        };
+
+        var contentGrid = new Grid { VerticalAlignment = VerticalAlignment.Center };
+        contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+        contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+        Grid.SetColumn(checkBox, 0);
+        Grid.SetColumn(icon, 1);
+        Grid.SetColumn(textPanel, 2);
+        Grid.SetColumn(sizeText, 3);
+
+        contentGrid.Children.Add(checkBox);
+        contentGrid.Children.Add(icon);
+        contentGrid.Children.Add(textPanel);
+        contentGrid.Children.Add(sizeText);
+
+        return new Border
+        {
+            Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"],
+            CornerRadius = new CornerRadius(4),
+            Padding = new Thickness(12, 10, 16, 10),
+            Child = contentGrid
+        };
     }
 
     private void AppSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -501,12 +738,14 @@ public sealed partial class DebloatSystemPage : Page
         var contentStackPanel = new StackPanel
         {
             Orientation = Orientation.Vertical,
+            RequestedTheme = ActualTheme,
             Children = { firstLineTextBlock, scrollViewer, lastLineTextBlock }
         };
 
         var confirmationDialog = new ContentDialog()
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = RyTuneX.Helpers.ResourceExtensions.GetLocalized("Debloat"),

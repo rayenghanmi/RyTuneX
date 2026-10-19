@@ -1,17 +1,15 @@
 ﻿using DevWinUI;
-using Microsoft.UI;
-using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
 using RyTuneX.ViewModels;
-using System.Security.Principal;
-using Windows.Foundation;
 using Windows.Storage;
 using Windows.System;
+using TitleBar = Microsoft.UI.Xaml.Controls.TitleBar;
 
 namespace RyTuneX.Views;
 
@@ -32,31 +30,16 @@ public sealed partial class ShellPage : Page
         InitializeComponent();
         this.FlowDirection = App.FlowDirectionSetting;
 
-        TitleBarBackButton.Resources["ButtonBackgroundDisabled"] = new SolidColorBrush(Colors.Transparent);
-        TitleBarBackButton.Resources["ButtonBorderBrushDisabled"] = new SolidColorBrush(Colors.Transparent);
-
-        // Set corresponding visibility of Admin Icon based on administrator rights
-        this.Loaded += (s, e) =>
-        {
-            _ = Task.Run(() =>
-            {
-                var identity = WindowsIdentity.GetCurrent();
-                var principal = new WindowsPrincipal(identity);
-                var admin = principal.IsInRole(WindowsBuiltInRole.Administrator);
-
-                {
-                    _ = LogHelper.LogWarning("Admin status dispatcher enqueue failed.");
-                }
-            });
-        };
-
         Current = this;
         LogHelper.Log("Initializing ShellPage");
+        NavigationFrame.CacheSize = 20;
         ViewModel.NavigationService.Frame = NavigationFrame;
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
+        AppTitleBar.SizeChanged += AppTitleBar_SizeChanged;
+        NavigationFrame.Navigated += NavigationFrame_Navigated;
         TitleBarSearchBox.PlaceholderText = "Search".GetLocalized();
 
         var savedStyle = ApplicationData.Current.LocalSettings.Values["NavigationStyle"] as string ?? "Auto";
@@ -66,19 +49,18 @@ public sealed partial class ShellPage : Page
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
-
-        SetTitleBarPassthroughRegions();
-        TitleBarBackButton.SizeChanged += (_, _) => SetTitleBarPassthroughRegions();
-        TitleBarSearchBox.SizeChanged += (_, _) => SetTitleBarPassthroughRegions();
+        UpdateTitleBarCentering();
 
         // Initialize search cache without blocking the UI thread
         WarmUpSearchCache();
 
-        // Show restore point dialog if it's the first run
+        // Show restore point dialog if it's the first run, or system update suggestion
         _ = Task.Run(async () =>
         {
             try
             {
+                await Task.Delay(1500);
+
                 var settings = ApplicationData.Current.LocalSettings.Values;
                 if (!settings.ContainsKey("FirstRun") || (bool)settings["FirstRun"])
                 {
@@ -97,17 +79,34 @@ public sealed partial class ShellPage : Page
                         _ = LogHelper.LogWarning("Restore point dialog dispatcher enqueue failed.");
                     }
                 }
+                else if (SystemUpdateHelper.IsUpdatePending && SystemUpdateHelper.PendingUpdateResult != null)
+                {
+                    if (!DispatcherQueue.TryEnqueue(async () =>
+                    {
+                        try
+                        {
+                            await ShowSystemUpdateDialogAsync(SystemUpdateHelper.PendingUpdateResult);
+                        }
+                        catch (Exception ex)
+                        {
+                            _ = LogHelper.LogException(ex, "System update dialog failed");
+                        }
+                    }))
+                    {
+                        _ = LogHelper.LogWarning("System update dialog dispatcher enqueue failed.");
+                    }
+                }
             }
             catch (Exception ex)
             {
-                _ = LogHelper.LogException(ex, "Restore point first-run check failed");
+                _ = LogHelper.LogException(ex, "Startup dialog checks failed");
             }
         });
     }
 
     private static void WarmUpSearchCache()
     {
-        _ = Task.Run(async () =>
+        _ = Task.Run(() =>
         {
             try
             {
@@ -184,88 +183,94 @@ public sealed partial class ShellPage : Page
         }
     }
 
-    private void TitleBarBackButton_Click(object sender, RoutedEventArgs e)
+    private void AppTitleBar_BackRequested(TitleBar sender, object args)
     {
         ViewModel.NavigationService.GoBack();
     }
 
-    private void TitleBarBackButton_PointerEntered(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
-    {
-        AnimatedIcon.SetState(BackAnimatedIcon, "PointerOver");
-    }
-
-    private void TitleBarBackButton_PointerExited(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
-    {
-        AnimatedIcon.SetState(BackAnimatedIcon, "Normal");
-    }
-
-    private void SetTitleBarPassthroughRegions()
-    {
-        if (AppTitleBar.XamlRoot is null)
-        {
-            return;
-        }
-
-        var scaleAdjustment = AppTitleBar.XamlRoot.RasterizationScale;
-        var nonClientSrc = InputNonClientPointerSource.GetForWindowId(App.MainWindow.AppWindow.Id);
-
-        var rects = new List<Windows.Graphics.RectInt32>();
-
-        // Back button passthrough
-        var backTransform = TitleBarBackButton.TransformToVisual(null);
-        var backBounds = backTransform.TransformBounds(new Rect(0, 0, TitleBarBackButton.ActualWidth, TitleBarBackButton.ActualHeight));
-        rects.Add(ScaleRect(backBounds, scaleAdjustment));
-
-        // Search box passthrough
-        if (TitleBarSearchBox.Visibility == Visibility.Visible)
-        {
-            var searchTransform = TitleBarSearchBox.TransformToVisual(null);
-            var searchBounds = searchTransform.TransformBounds(new Rect(0, 0, TitleBarSearchBox.ActualWidth, TitleBarSearchBox.ActualHeight));
-            rects.Add(ScaleRect(searchBounds, scaleAdjustment));
-        }
-
-        // WS_EX_LAYOUTRTL mirrors Win32 input coordinates but TransformToVisual
-        // returns compositor coordinates (unmirrored). Mirror the passthrough rects
-        // so they match the coordinate space the system uses for hit-testing.
-        if (App.FlowDirectionSetting == FlowDirection.RightToLeft)
-        {
-            var windowWidthPx = App.MainWindow.AppWindow.Size.Width;
-            for (var i = 0; i < rects.Count; i++)
-            {
-                var r = rects[i];
-                rects[i] = new Windows.Graphics.RectInt32(
-                    windowWidthPx - r.X - r.Width, r.Y, r.Width, r.Height);
-            }
-        }
-
-        nonClientSrc.SetRegionRects(NonClientRegionKind.Passthrough, rects.ToArray());
-    }
-
-    private static Windows.Graphics.RectInt32 ScaleRect(Rect bounds, double scale)
-    {
-        return new Windows.Graphics.RectInt32(
-            (int)Math.Round(bounds.X * scale),
-            (int)Math.Round(bounds.Y * scale),
-            (int)Math.Round(bounds.Width * scale),
-            (int)Math.Round(bounds.Height * scale));
-    }
-
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {
-        App.AppTitlebar = AppTitleBarText;
+        App.AppTitlebar = AppTitleBar;
     }
 
     private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
     {
-        if (sender.PaneDisplayMode == NavigationViewPaneDisplayMode.Top)
+        TitleBarSearchBox.Visibility = Visibility.Visible;
+    }
+
+    private void AppTitleBar_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        UpdateTitleBarCentering();
+    }
+
+    private void NavigationFrame_Navigated(object sender, NavigationEventArgs e)
+    {
+        DispatcherQueue.TryEnqueue(UpdateTitleBarCentering);
+    }
+
+    private void UpdateTitleBarCentering()
+    {
+        try
         {
-            TitleBarSearchBox.Visibility = Visibility.Visible;
+            if (FlowDirection == FlowDirection.RightToLeft)
+            {
+                return;
+            }
+
+            if (AppTitleBar == null || TitleBarContentGrid == null || TitleBarLeftHeaderContainer == null)
+            {
+                return;
+            }
+
+            if (!AppTitleBar.IsLoaded || !TitleBarContentGrid.IsLoaded || !TitleBarLeftHeaderContainer.IsLoaded)
+            {
+                return;
+            }
+
+            if (AppTitleBar.ActualWidth <= 0 || TitleBarContentGrid.ActualWidth <= 0)
+            {
+                return;
+            }
+
+            // Measure the right inset (caption buttons column width)
+            var contentTransform = TitleBarContentGrid.TransformToVisual(AppTitleBar);
+            var contentOrigin = contentTransform.TransformPoint(new Windows.Foundation.Point(0, 0));
+            var rightInset = AppTitleBar.ActualWidth - (contentOrigin.X + TitleBarContentGrid.ActualWidth);
+
+            if (rightInset <= 0)
+            {
+                return;
+            }
+
+            // Measure offset of LeftHeader from left edge
+            var headerTransform = TitleBarLeftHeaderContainer.TransformToVisual(AppTitleBar);
+            var headerOrigin = headerTransform.TransformPoint(new Windows.Foundation.Point(0, 0));
+            var leftOffset = Math.Max(0.0, headerOrigin.X);
+
+            // Minimum width needed for the icon + app name text
+            var baseWidth = TitleBarLeftHeaderContent?.ActualWidth > 0
+                ? TitleBarLeftHeaderContent.ActualWidth + 10.0
+                : 104.0;
+
+            // When window is wide enough, balance left column with right caption buttons column
+            double targetWidth;
+            if (AppTitleBar.ActualWidth >= 640.0)
+            {
+                targetWidth = Math.Max(baseWidth, rightInset - leftOffset);
+            }
+            else
+            {
+                targetWidth = baseWidth;
+            }
+
+            if (Math.Abs(TitleBarLeftHeaderContainer.Width - targetWidth) > 0.5)
+            {
+                TitleBarLeftHeaderContainer.Width = targetWidth;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            TitleBarSearchBox.Visibility = sender.DisplayMode == NavigationViewDisplayMode.Minimal
-                ? Visibility.Collapsed
-                : Visibility.Visible;
+            _ = LogHelper.LogWarning($"TitleBar centering update skipped: {ex.Message}");
         }
     }
 
@@ -294,9 +299,11 @@ public sealed partial class ShellPage : Page
 
         var dialog = new ContentDialog
         {
+            RequestedTheme = ActualTheme,
             Title = "RestorePointTitle".GetLocalized(),
             Content = new StackPanel
             {
+                RequestedTheme = ActualTheme,
                 Children =
             {
                 new TextBlock
@@ -341,6 +348,89 @@ public sealed partial class ShellPage : Page
             {
                 _ = LogHelper.LogError($"Failed to open System Properties Protection: {ex.Message}");
             }
+        }
+    }
+
+    private async Task ShowSystemUpdateDialogAsync(SystemUpdateCheckResult updateResult)
+    {
+        var xamlRoot = XamlRoot ?? (Content as FrameworkElement)?.XamlRoot ?? App.MainWindow.Content?.XamlRoot;
+        if (xamlRoot is null)
+        {
+            _ = LogHelper.LogWarning("System update dialog skipped because XamlRoot is unavailable.");
+            return;
+        }
+
+        int totalSaved = OptimizationOptions.GetSavedOptimizationsCount();
+
+        string contentText = string.Format(
+            "SystemUpdate_DialogContent".TryGetLocalized() ?? "Windows was updated from build {0} to {1}.\n\nWindows updates frequently reset system tweaks back to default values.\n\nWould you like RyTuneX to re-apply all your saved optimizations, features, and privacy settings ({2} items)?",
+            updateResult.PreviousBuild.FullBuildString,
+            updateResult.CurrentBuild.FullBuildString,
+            totalSaved);
+
+        var dialog = new ContentDialog
+        {
+            RequestedTheme = ActualTheme,
+            Title = "SystemUpdate_DialogTitle".TryGetLocalized() ?? "Windows Update Detected",
+            Content = new StackPanel
+            {
+                RequestedTheme = ActualTheme,
+                Spacing = 12,
+                Children =
+                {
+                    new TextBlock
+                    {
+                        Text = contentText,
+                        TextWrapping = TextWrapping.Wrap
+                    }
+                }
+            },
+            PrimaryButtonText = "SystemUpdate_ReapplyButton".TryGetLocalized() ?? "Re-apply All Settings",
+            CloseButtonText = "Close".GetLocalized(),
+            DefaultButton = ContentDialogButton.None,
+            PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
+        };
+
+        dialog.XamlRoot = xamlRoot;
+
+        _ = LogHelper.Log($"[SystemUpdateHelper] Showing system update suggestion dialog ({updateResult.PreviousBuild.FullBuildString} -> {updateResult.CurrentBuild.FullBuildString})");
+        var result = await dialog.ShowAsync();
+
+        try
+        {
+            if (result == ContentDialogResult.Primary)
+            {
+                ShowNotification(
+                    "SystemUpdate_DialogTitle".TryGetLocalized() ?? "Windows Update Detected",
+                    "SystemUpdate_ReapplyingMessage".TryGetLocalized() ?? "Currently re-applying optimizations, features, and privacy settings...",
+                    InfoBarSeverity.Informational,
+                    3000);
+
+                var appliedCount = await Task.Run(() => OptimizationOptions.ReapplyAllOptimizationsAsync());
+
+                string successMsg = string.Format(
+                    "SystemUpdate_ReappliedSuccess".TryGetLocalized() ?? "Successfully re-applied {0} setting(s).",
+                    appliedCount);
+
+                ShowNotification(
+                    "RyTuneX",
+                    successMsg,
+                    InfoBarSeverity.Success,
+                    5000);
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to re-apply settings: {ex.Message}");
+        }
+        finally
+        {
+            SystemUpdateHelper.SaveWindowsBuild(updateResult.CurrentBuild);
+            SystemUpdateHelper.IsUpdatePending = false;
+            SystemUpdateHelper.PendingUpdateResult = null;
+            _ = Task.Run(() => SystemStateDetector.SyncToRegistry());
         }
     }
 

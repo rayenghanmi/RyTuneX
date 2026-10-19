@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Markup;
 using Microsoft.UI.Xaml.Media;
+using RyTuneX.Contracts.Services;
 using System.Collections.ObjectModel;
 using System.Text;
 using Windows.ApplicationModel.DataTransfer;
@@ -70,11 +71,26 @@ internal static partial class LogViewerHelper
         return true;
     }
 
+    private static readonly SolidColorBrush TextPrimaryLightBrush = new(Windows.UI.Color.FromArgb(228, 0, 0, 0));
+    private static readonly SolidColorBrush TextPrimaryDarkBrush = new(Windows.UI.Color.FromArgb(255, 255, 255, 255));
+    private static readonly SolidColorBrush TextSecondaryLightBrush = new(Windows.UI.Color.FromArgb(158, 0, 0, 0));
+    private static readonly SolidColorBrush TextSecondaryDarkBrush = new(Windows.UI.Color.FromArgb(197, 255, 255, 255));
+    private static readonly SolidColorBrush TextTertiaryLightBrush = new(Windows.UI.Color.FromArgb(114, 0, 0, 0));
+    private static readonly SolidColorBrush TextTertiaryDarkBrush = new(Windows.UI.Color.FromArgb(138, 255, 255, 255));
+
+    private static readonly SolidColorBrush CardBackgroundLightBrush = new(Windows.UI.Color.FromArgb(255, 255, 255, 255));
+    private static readonly SolidColorBrush CardBackgroundDarkBrush = new(Windows.UI.Color.FromArgb(255, 45, 45, 45));
+    private static readonly SolidColorBrush CardSecondaryLightBrush = new(Windows.UI.Color.FromArgb(13, 0, 0, 0));
+    private static readonly SolidColorBrush CardSecondaryDarkBrush = new(Windows.UI.Color.FromArgb(26, 255, 255, 255));
+    private static readonly SolidColorBrush BorderLightBrush = new(Windows.UI.Color.FromArgb(26, 0, 0, 0));
+    private static readonly SolidColorBrush BorderDarkBrush = new(Windows.UI.Color.FromArgb(21, 255, 255, 255));
+    private static readonly SolidColorBrush DividerLightBrush = new(Windows.UI.Color.FromArgb(26, 0, 0, 0));
+    private static readonly SolidColorBrush DividerDarkBrush = new(Windows.UI.Color.FromArgb(21, 255, 255, 255));
+
     private const string LogEntryTemplateXaml =
         """
         <DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'>
-            <Grid Padding='4,6,8,6' Margin='0,1,0,1' CornerRadius='4'
-                  Background='{ThemeResource CardBackgroundFillColorDefaultBrush}'>
+            <Grid Padding='4,6,8,6' Margin='0,1,0,1' CornerRadius='4' BorderThickness='1'>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width='Auto'/>
                     <ColumnDefinition Width='*'/>
@@ -84,13 +100,10 @@ internal static partial class LogViewerHelper
                     <StackPanel Orientation='Horizontal' Spacing='4'>
                         <FontIcon FontSize='12' VerticalAlignment='Top' Margin='0,2,6,0'/>
                         <TextBlock FontSize='11' FontFamily='Cascadia Mono, Consolas, Courier New'
-                                   Foreground='{ThemeResource TextFillColorTertiaryBrush}'
                                    VerticalAlignment='Top' Margin='0,2,8,0'/>
-                        <Border Background='{ThemeResource CardBackgroundFillColorSecondaryBrush}'
-                                CornerRadius='4' Padding='5,1,5,1' Margin='2,0,0,0'
+                        <Border CornerRadius='4' Padding='5,1,5,1' Margin='2,0,0,0'
                                 VerticalAlignment='Center'>
-                            <TextBlock FontSize='10' FontFamily='Cascadia Mono, Consolas, Courier New'
-                                       Foreground='{ThemeResource TextFillColorSecondaryBrush}'/>
+                            <TextBlock FontSize='10' FontFamily='Cascadia Mono, Consolas, Courier New'/>
                         </Border>
                     </StackPanel>
                     <TextBlock TextWrapping='Wrap' IsTextSelectionEnabled='True' FontSize='12.5'
@@ -112,25 +125,16 @@ internal static partial class LogViewerHelper
                             <ColumnDefinition Width='Auto'/>
                             <ColumnDefinition Width='*'/>
                         </Grid.ColumnDefinitions>
-                        <Border Height='1' VerticalAlignment='Center'
-                                Background='{ThemeResource DividerStrokeColorDefaultBrush}'/>
+                        <Border Height='1' VerticalAlignment='Center'/>
                         <StackPanel Grid.Column='1' Orientation='Horizontal' Spacing='6'
                                     Padding='12,0,12,0' HorizontalAlignment='Center'>
-                            <FontIcon Glyph='&#xE768;' FontSize='10'
-                                      Foreground='{ThemeResource TextFillColorTertiaryBrush}'
-                                      VerticalAlignment='Center'/>
-                            <TextBlock Text='New Session' FontSize='11' FontWeight='SemiBold'
-                                       Foreground='{ThemeResource TextFillColorTertiaryBrush}'
-                                       VerticalAlignment='Center'/>
-                            <TextBlock FontSize='10'
-                                       Foreground='{ThemeResource TextFillColorTertiaryBrush}'
-                                       Opacity='0.7' VerticalAlignment='Center'/>
+                            <FontIcon Glyph='&#xE768;' FontSize='10' VerticalAlignment='Center'/>
+                            <TextBlock Text='New Session' FontSize='11' FontWeight='SemiBold' VerticalAlignment='Center'/>
+                            <TextBlock FontSize='10' Opacity='0.7' VerticalAlignment='Center'/>
                         </StackPanel>
-                        <Border Grid.Column='2' Height='1' VerticalAlignment='Center'
-                                Background='{ThemeResource DividerStrokeColorDefaultBrush}'/>
+                        <Border Grid.Column='2' Height='1' VerticalAlignment='Center'/>
                     </Grid>
                     <TextBlock FontSize='10' FontFamily='Cascadia Mono, Consolas, Courier New'
-                               Foreground='{ThemeResource TextFillColorTertiaryBrush}'
                                Opacity='0.7' HorizontalAlignment='Center'
                                TextTrimming='CharacterEllipsis'/>
                 </StackPanel>
@@ -149,22 +153,53 @@ internal static partial class LogViewerHelper
 
     public static async Task ShowLogViewerAsync(XamlRoot xamlRoot)
     {
+        var appTheme = ElementTheme.Default;
+        try
+        {
+            appTheme = App.GetService<IThemeSelectorService>().Theme;
+        }
+        catch
+        {
+        }
+
+        if (appTheme == ElementTheme.Default)
+        {
+            if (App.MainWindow?.Content is FrameworkElement rootElement)
+            {
+                appTheme = rootElement.ActualTheme;
+            }
+            else if (xamlRoot?.Content is FrameworkElement rootFe)
+            {
+                appTheme = rootFe.ActualTheme;
+            }
+        }
+
+        if (appTheme == ElementTheme.Default)
+        {
+            appTheme = Application.Current.RequestedTheme == ApplicationTheme.Light
+                ? ElementTheme.Light
+                : ElementTheme.Dark;
+        }
+
+        _activeTheme = appTheme;
+        var isLight = appTheme == ElementTheme.Light;
+
         var allEntries = await LoadLogEntriesAsync();
         var currentFilter = LogLevel.All;
 
         // Filter bar
         var filterCombo = new ComboBox
         {
-            PlaceholderText = "Filter by level",
+            PlaceholderText = "LogViewer_FilterPlaceholder".GetLocalized(),
             MinWidth = 150,
             VerticalAlignment = VerticalAlignment.Center,
             Items =
             {
-                new ComboBoxItem { Content = "All", Tag = LogLevel.All },
-                new ComboBoxItem { Content = "Info", Tag = LogLevel.Info },
-                new ComboBoxItem { Content = "Warning", Tag = LogLevel.Warn },
-                new ComboBoxItem { Content = "Error", Tag = LogLevel.Error },
-                new ComboBoxItem { Content = "Critical", Tag = LogLevel.Critical }
+                new ComboBoxItem { Content = "LogViewer_FilterAll".GetLocalized(), Tag = LogLevel.All },
+                new ComboBoxItem { Content = "LogViewer_FilterInfo".GetLocalized(), Tag = LogLevel.Info },
+                new ComboBoxItem { Content = "LogViewer_FilterWarn".GetLocalized(), Tag = LogLevel.Warn },
+                new ComboBoxItem { Content = "LogViewer_FilterError".GetLocalized(), Tag = LogLevel.Error },
+                new ComboBoxItem { Content = "LogViewer_FilterCritical".GetLocalized(), Tag = LogLevel.Critical }
             },
             SelectedIndex = 0
         };
@@ -172,14 +207,14 @@ internal static partial class LogViewerHelper
         var countBadge = new TextBlock
         {
             VerticalAlignment = VerticalAlignment.Center,
-            Foreground = (SolidColorBrush)Application.Current.Resources["TextFillColorSecondaryBrush"],
+            Foreground = isLight ? TextSecondaryLightBrush : TextSecondaryDarkBrush,
             FontSize = 12,
             Margin = new Thickness(8, 0, 0, 0)
         };
 
         var searchBox = new AutoSuggestBox
         {
-            PlaceholderText = "Search logs...",
+            PlaceholderText = "LogViewer_SearchPlaceholder".GetLocalized(),
             QueryIcon = new SymbolIcon(Symbol.Find),
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -261,10 +296,10 @@ internal static partial class LogViewerHelper
         // Empty state
         var emptyText = new TextBlock
         {
-            Text = "No log entries found.",
+            Text = "LogViewer_NoEntries".GetLocalized(),
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
-            Foreground = (SolidColorBrush)Application.Current.Resources["TextFillColorSecondaryBrush"],
+            Foreground = isLight ? TextSecondaryLightBrush : TextSecondaryDarkBrush,
             Margin = new Thickness(0, 40, 0, 40),
             Visibility = Visibility.Collapsed
         };
@@ -304,7 +339,7 @@ internal static partial class LogViewerHelper
 
             var logCount = list.Count(e => !e.IsSessionMarker);
             var totalLogCount = allEntries.Count(e => !e.IsSessionMarker);
-            countBadge.Text = $"{logCount} of {totalLogCount} entries";
+            countBadge.Text = string.Format("LogViewer_EntriesCount".GetLocalized(), logCount, totalLogCount);
             emptyText.Visibility = logCount == 0 ? Visibility.Visible : Visibility.Collapsed;
             logListView.Visibility = logCount == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
@@ -336,24 +371,34 @@ internal static partial class LogViewerHelper
             Repopulate();
         };
 
+        var primaryTextBrush = isLight ? TextPrimaryLightBrush : TextPrimaryDarkBrush;
+
         // --- Dialog ---
         var dialog = new ContentDialog
         {
             XamlRoot = xamlRoot,
+            RequestedTheme = appTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
-            Title = CreateDialogTitle(),
+            Foreground = primaryTextBrush,
+            Title = CreateDialogTitle(appTheme),
             Content = rootPanel,
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
             CloseButtonText = "Close".GetLocalized(),
-            PrimaryButtonText = "Copy",
-            SecondaryButtonText = "Open File",
+            PrimaryButtonText = "LogViewer_CopyButton".GetLocalized(),
+            SecondaryButtonText = "LogViewer_OpenFileButton".GetLocalized(),
             Resources =
             {
                 ["ContentDialogMaxWidth"] = 800d,
-                ["ContentDialogMinWidth"] = 800d
+                ["ContentDialogMinWidth"] = 800d,
+                ["ContentDialogForeground"] = primaryTextBrush,
+                ["ContentDialogTitleForeground"] = primaryTextBrush,
             }
         };
+        rootPanel.RequestedTheme = appTheme;
+        filterCombo.RequestedTheme = appTheme;
+        searchBox.RequestedTheme = appTheme;
+        logListView.RequestedTheme = appTheme;
 
         dialog.PrimaryButtonClick += (_, args) =>
         {
@@ -483,25 +528,36 @@ internal static partial class LogViewerHelper
         return entries;
     }
 
-    private static StackPanel CreateDialogTitle()
+    private static StackPanel CreateDialogTitle(ElementTheme theme)
     {
+        var isLight = theme == ElementTheme.Light;
+        var primaryBrush = isLight ? TextPrimaryLightBrush : TextPrimaryDarkBrush;
+        var secondaryBrush = isLight ? TextSecondaryLightBrush : TextSecondaryDarkBrush;
+
         return new StackPanel
         {
             Orientation = Orientation.Horizontal,
             Spacing = 10,
+            RequestedTheme = theme,
             Children =
             {
-                new FontIcon { Glyph = "\uE9D9", FontSize = 20 },
+                new FontIcon
+                {
+                    Glyph = "\uE9D9",
+                    FontSize = 20,
+                    Foreground = primaryBrush
+                },
                 new TextBlock
                 {
-                    Text = "Log Viewer",
-                    Style = (Style)Application.Current.Resources["SubtitleTextBlockStyle"]
+                    Text = "LogViewer_Title".GetLocalized(),
+                    Style = (Style)Application.Current.Resources["SubtitleTextBlockStyle"],
+                    Foreground = primaryBrush
                 },
                 new TextBlock
                 {
                     Text = $"— {DateTime.Now:yyyy-MM-dd}",
                     VerticalAlignment = VerticalAlignment.Bottom,
-                    Foreground = (SolidColorBrush)Application.Current.Resources["TextFillColorSecondaryBrush"],
+                    Foreground = secondaryBrush,
                     FontSize = 12,
                     Margin = new Thickness(0, 0, 0, 2)
                 }
@@ -527,7 +583,11 @@ internal static partial class LogViewerHelper
 
     private static void BindLogEntry(Grid root, LogEntry entry)
     {
+        var isLight = _activeTheme == ElementTheme.Light;
         var levelColor = GetLevelColor(entry.Level);
+
+        root.Background = isLight ? CardBackgroundLightBrush : CardBackgroundDarkBrush;
+        root.BorderBrush = isLight ? BorderLightBrush : BorderDarkBrush;
 
         var levelBar = (Border)root.Children[0];
         levelBar.Background = new SolidColorBrush(levelColor);
@@ -542,6 +602,7 @@ internal static partial class LogViewerHelper
 
         var timestampBlock = (TextBlock)headerRow.Children[1];
         timestampBlock.Text = FormatTimestamp(entry.Timestamp);
+        timestampBlock.Foreground = isLight ? TextTertiaryLightBrush : TextTertiaryDarkBrush;
 
         var callerBadge = (Border)headerRow.Children[2];
         if (string.IsNullOrEmpty(entry.Caller))
@@ -551,7 +612,10 @@ internal static partial class LogViewerHelper
         else
         {
             callerBadge.Visibility = Visibility.Visible;
-            ((TextBlock)callerBadge.Child).Text = entry.Caller;
+            callerBadge.Background = isLight ? CardSecondaryLightBrush : CardSecondaryDarkBrush;
+            var callerText = (TextBlock)callerBadge.Child;
+            callerText.Text = entry.Caller;
+            callerText.Foreground = isLight ? TextSecondaryLightBrush : TextSecondaryDarkBrush;
         }
 
         messageBlock.Text = entry.Message;
@@ -560,12 +624,35 @@ internal static partial class LogViewerHelper
 
     private static void BindSessionMarker(Grid root, LogEntry entry)
     {
+        var isLight = _activeTheme == ElementTheme.Light;
+        var tertiaryBrush = isLight ? TextTertiaryLightBrush : TextTertiaryDarkBrush;
+        var dividerBrush = isLight ? DividerLightBrush : DividerDarkBrush;
+
         var container = (StackPanel)root.Children[0];
         var separatorRow = (Grid)container.Children[0];
+        var leftLine = (Border)separatorRow.Children[0];
         var sessionLabel = (StackPanel)separatorRow.Children[1];
+        var rightLine = (Border)separatorRow.Children[2];
 
-        var timestampText = (TextBlock)sessionLabel.Children[2];
-        timestampText.Text = FormatTimestamp(entry.Timestamp);
+        leftLine.Background = dividerBrush;
+        rightLine.Background = dividerBrush;
+
+        if (sessionLabel.Children.Count > 0 && sessionLabel.Children[0] is FontIcon icon)
+        {
+            icon.Foreground = tertiaryBrush;
+        }
+
+        if (sessionLabel.Children.Count > 1 && sessionLabel.Children[1] is TextBlock sessionTextBlock)
+        {
+            sessionTextBlock.Text = "LogViewer_NewSession".GetLocalized();
+            sessionTextBlock.Foreground = tertiaryBrush;
+        }
+
+        if (sessionLabel.Children.Count > 2 && sessionLabel.Children[2] is TextBlock timestampText)
+        {
+            timestampText.Text = FormatTimestamp(entry.Timestamp);
+            timestampText.Foreground = tertiaryBrush;
+        }
 
         var sessionInfoText = (TextBlock)container.Children[1];
         if (string.IsNullOrEmpty(entry.SessionInfo))
@@ -576,6 +663,7 @@ internal static partial class LogViewerHelper
         {
             sessionInfoText.Visibility = Visibility.Visible;
             sessionInfoText.Text = entry.SessionInfo;
+            sessionInfoText.Foreground = tertiaryBrush;
         }
     }
 
@@ -653,13 +741,31 @@ internal static partial class LogViewerHelper
         };
     }
 
+    private static ElementTheme _activeTheme = ElementTheme.Default;
+
+    private static Brush GetThemeBrush(string key, ElementTheme theme)
+    {
+        var isLight = theme == ElementTheme.Light;
+        return key switch
+        {
+            "TextFillColorPrimaryBrush" => isLight ? TextPrimaryLightBrush : TextPrimaryDarkBrush,
+            "TextFillColorSecondaryBrush" => isLight ? TextSecondaryLightBrush : TextSecondaryDarkBrush,
+            "TextFillColorTertiaryBrush" => isLight ? TextTertiaryLightBrush : TextTertiaryDarkBrush,
+            "CardBackgroundFillColorDefaultBrush" => isLight ? CardBackgroundLightBrush : CardBackgroundDarkBrush,
+            "CardBackgroundFillColorSecondaryBrush" => isLight ? CardSecondaryLightBrush : CardSecondaryDarkBrush,
+            "DividerStrokeColorDefaultBrush" => isLight ? DividerLightBrush : DividerDarkBrush,
+            _ => isLight ? TextPrimaryLightBrush : TextPrimaryDarkBrush
+        };
+    }
+
     private static Brush GetMessageBrush(string level)
     {
+        var isLight = _activeTheme == ElementTheme.Light;
         return level switch
         {
             "ERROR" or "CRITICAL" => new SolidColorBrush(GetLevelColor(level)),
             "WARN" => new SolidColorBrush(GetLevelColor(level)),
-            _ => (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"]
+            _ => isLight ? TextPrimaryLightBrush : TextPrimaryDarkBrush
         };
     }
 

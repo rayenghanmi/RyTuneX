@@ -22,6 +22,17 @@ public static class ItemRollbackService
         return subKey ?? (writable ? rootKey.CreateSubKey(BackupRegistryBaseKey) : null!);
     }
 
+    private static HashSet<string>? _cachedRollbackTags;
+    private static readonly object RollbackLock = new();
+
+    public static void InvalidateRollbackCache()
+    {
+        lock (RollbackLock)
+        {
+            _cachedRollbackTags = null;
+        }
+    }
+
     // Saves a pre-apply snapshot of an item's state before applying an optimization
     // Only saves if a snapshot does not already exist (to preserve true initial state)
     public static void SavePreApplyBackup(string tag, bool currentState, string technicalDetails)
@@ -47,6 +58,7 @@ public static class ItemRollbackService
                 itemKey.SetValue("PreApplyState", currentState ? 1 : 0, RegistryValueKind.DWord);
                 itemKey.SetValue("BackupTimestamp", DateTime.UtcNow.ToString("o"), RegistryValueKind.String);
                 itemKey.SetValue("TechnicalDetails", technicalDetails ?? string.Empty, RegistryValueKind.String);
+                InvalidateRollbackCache();
                 _ = LogHelper.Log($"[ItemRollbackService] Created rollback point for '{tag}' (PreApplyState={currentState})");
             }
         }
@@ -60,6 +72,12 @@ public static class ItemRollbackService
     public static (bool HasBackup, bool PreApplyState, DateTime? BackupDate, string? TechnicalDetails) GetBackupInfo(string tag)
     {
         if (string.IsNullOrWhiteSpace(tag)) return (false, false, null, null);
+
+        var rollbackTags = GetAvailableRollbackTags();
+        if (!rollbackTags.Contains(tag))
+        {
+            return (false, false, null, null);
+        }
 
         try
         {
@@ -95,23 +113,32 @@ public static class ItemRollbackService
     // Returns all item tags that currently have an active rollback point saved
     public static HashSet<string> GetAvailableRollbackTags()
     {
-        var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        try
+        lock (RollbackLock)
         {
-            using var baseKey = GetBaseKey(writable: false);
-            if (baseKey != null)
+            if (_cachedRollbackTags != null)
             {
-                foreach (var subKeyName in baseKey.GetSubKeyNames())
+                return _cachedRollbackTags;
+            }
+
+            var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            try
+            {
+                using var baseKey = GetBaseKey(writable: false);
+                if (baseKey != null)
                 {
-                    result.Add(subKeyName);
+                    foreach (var subKeyName in baseKey.GetSubKeyNames())
+                    {
+                        result.Add(subKeyName);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                _ = LogHelper.LogError($"[ItemRollbackService] Error listing rollback tags: {ex.Message}");
+            }
+            _cachedRollbackTags = result;
+            return result;
         }
-        catch (Exception ex)
-        {
-            _ = LogHelper.LogError($"[ItemRollbackService] Error listing rollback tags: {ex.Message}");
-        }
-        return result;
     }
 
     // Performs per-item rollback for a single item back to its saved pre-apply state
@@ -128,14 +155,24 @@ public static class ItemRollbackService
 
         try
         {
-            // Execute the toggle action back to the pre-apply state
-            var fakeToggle = new Microsoft.UI.Xaml.Controls.ToggleSwitch
+            // Execute the toggle action directly without creating UI elements
+            // Save the target state to the RyTuneX registry
+            try
             {
-                Tag = tag,
-                IsOn = preApplyState
-            };
+                var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default;
+                using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView);
+                using var key = baseKey.CreateSubKey(@"SOFTWARE\RyTuneX\Optimizations");
+                key?.SetValue(tag, preApplyState ? 1 : 0, RegistryValueKind.DWord);
+            }
+            catch (Exception regEx)
+            {
+                _ = LogHelper.LogError($"[ItemRollbackService] Failed to save registry state for {tag}: {regEx.Message}");
+            }
 
-            await OptimizationOptions.XamlSwitchesAsync(fakeToggle).ConfigureAwait(false);
+            // Call the optimization helper directly
+            await OptimizationOptions.ExecuteToggleDirectAsync(tag, preApplyState).ConfigureAwait(false);
 
             await Task.Delay(300).ConfigureAwait(false);
 
@@ -175,6 +212,7 @@ public static class ItemRollbackService
         {
             using var baseKey = GetBaseKey(writable: true);
             baseKey?.DeleteSubKeyTree(tag, throwOnMissingSubKey: false);
+            InvalidateRollbackCache();
         }
         catch (Exception ex)
         {

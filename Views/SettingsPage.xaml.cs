@@ -6,18 +6,23 @@ using Microsoft.Win32;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Contracts.Services;
 using RyTuneX.Helpers;
+using RyTuneX.Models;
+using RyTuneX.Services;
 using System.Diagnostics;
-using Windows.ApplicationModel;
 using Windows.Storage;
+using Windows.UI.ViewManagement;
 
 namespace RyTuneX.Views;
 
 public sealed partial class SettingsPage : Page
 {
     private readonly IThemeSelectorService _themeSelectorService;
+    private readonly IAccentColorService _accentColorService;
+    private bool _isUpdatingColorPicker;
 
     private string _versionDescription;
     private string? _pendingScrollTarget;
+    private bool _isInitialized;
 
     public static string latestVersionString = string.Empty;
 
@@ -28,16 +33,20 @@ public sealed partial class SettingsPage : Page
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
 
         _themeSelectorService = App.GetService<IThemeSelectorService>();
+        _accentColorService = App.GetService<IAccentColorService>();
 
         // Set the default language based on the stored setting or the system if not set explicitly
         SetDefaultLanguageBasedOnSystem();
 
         _versionDescription = "Version".GetLocalized() + " " + GetVersionDescription();
 
-        InitializeThemeComboBox();
-        InitializeNavigationStyleComboBox();
-
         Loaded += SettingsPage_Loaded;
+        Unloaded += SettingsPage_Unloaded;
+    }
+
+    private void SettingsPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        // When cached (NavigationCacheMode.Required), keep event subscriptions active
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -52,6 +61,16 @@ public sealed partial class SettingsPage : Page
 
     private async void SettingsPage_Loaded(object sender, RoutedEventArgs e)
     {
+        if (!_isInitialized)
+        {
+            await Task.Yield();
+            InitializeThemeComboBox();
+            InitializeAccentColorSection();
+            InitializeNavigationStyleComboBox();
+            InitializeDetectSystemUpdatesToggle();
+            _isInitialized = true;
+        }
+
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
         {
             await ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
@@ -70,6 +89,17 @@ public sealed partial class SettingsPage : Page
                 break;
             }
         }
+    }
+
+    private void InitializeDetectSystemUpdatesToggle()
+    {
+        DetectSystemUpdatesToggle.IsOn = SystemUpdateHelper.IsDetectionEnabled;
+    }
+
+    private void DetectSystemUpdatesToggle_Toggled(object sender, RoutedEventArgs e)
+    {
+        if (!_isInitialized) return;
+        SystemUpdateHelper.IsDetectionEnabled = DetectSystemUpdatesToggle.IsOn;
     }
 
     private void InitializeThemeComboBox()
@@ -101,6 +131,89 @@ public sealed partial class SettingsPage : Page
                 _ = LogHelper.Log($"Theme changed to: {tag}");
             }
         }
+    }
+
+    private void InitializeAccentColorSection()
+    {
+        _isUpdatingColorPicker = true;
+        try
+        {
+            var uiSettings = new UISettings();
+            var systemAccent = uiSettings.GetColorValue(UIColorType.Accent);
+            SystemColorDot.Background = new SolidColorBrush(systemAccent);
+
+            var customColor = _accentColorService.CustomColor;
+            CustomColorDot.Background = new SolidColorBrush(customColor);
+            CustomColorPreviewBorder.Background = new SolidColorBrush(customColor);
+            CustomColorHexText.Text = AccentColorService.ColorToHex(customColor);
+            CustomColorPicker.Color = customColor;
+
+            var currentMode = _accentColorService.Mode.ToString();
+            foreach (ComboBoxItem item in AccentColorComboBox.Items)
+            {
+                if (item.Tag as string == currentMode)
+                {
+                    AccentColorComboBox.SelectedItem = item;
+                    break;
+                }
+            }
+
+            AccentColorSettingsExpander.IsExpanded = (_accentColorService.Mode == AccentColorMode.Custom);
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to initialize accent color section: {ex.Message}");
+        }
+        finally
+        {
+            _isUpdatingColorPicker = false;
+        }
+    }
+
+    private async void AccentColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (AccentColorComboBox.SelectedItem is ComboBoxItem selected)
+        {
+            var tag = selected.Tag as string;
+            if (string.IsNullOrEmpty(tag))
+            {
+                return;
+            }
+
+            if (Enum.TryParse<AccentColorMode>(tag, out var mode))
+            {
+                AccentColorSettingsExpander.IsExpanded = (mode == AccentColorMode.Custom);
+                await _accentColorService.SetAccentColorModeAsync(mode);
+                _ = LogHelper.Log($"Accent color mode changed to: {tag}");
+            }
+        }
+    }
+
+    private async void CustomColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
+    {
+        if (_isUpdatingColorPicker)
+        {
+            return;
+        }
+
+        var newColor = args.NewColor;
+        CustomColorPreviewBorder.Background = new SolidColorBrush(newColor);
+        CustomColorDot.Background = new SolidColorBrush(newColor);
+        CustomColorHexText.Text = AccentColorService.ColorToHex(newColor);
+
+        if (_accentColorService.Mode != AccentColorMode.Custom)
+        {
+            foreach (ComboBoxItem item in AccentColorComboBox.Items)
+            {
+                if (item.Tag as string == "Custom")
+                {
+                    AccentColorComboBox.SelectedItem = item;
+                    break;
+                }
+            }
+        }
+
+        await _accentColorService.SetCustomColorAsync(newColor);
     }
 
     private void NavigationStyleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -180,22 +293,8 @@ public sealed partial class SettingsPage : Page
         }
     }
 
-    public static string GetVersionDescription()
-    {
-        Version version;
+    public static string GetVersionDescription() => RuntimeHelper.GetVersionDescription();
 
-        if (RuntimeHelper.IsMSIX)
-        {
-            var packageVersion = Package.Current.Id.Version;
-
-            version = new(packageVersion.Major, packageVersion.Minor, packageVersion.Build);
-        }
-        else
-        {
-            version = typeof(SettingsPage).Assembly.GetName().Version!;
-        }
-        return $"{version.Major}.{version.Minor}.{version.Build}";
-    }
 
     public string VersionDescription
     {
@@ -283,6 +382,77 @@ public sealed partial class SettingsPage : Page
         }
     }
 
+    private async void ReapplyOptimizations_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var count = OptimizationOptions.GetSavedOptimizationsCount();
+            if (count == 0)
+            {
+                App.ShowNotification("RyTuneX", "NoSavedOptimizations".TryGetLocalized() ?? "No optimizations, features, or privacy settings are currently saved in RyTuneX to re-apply.", InfoBarSeverity.Informational, 4000);
+                return;
+            }
+
+            var xamlRoot = XamlRoot ?? App.MainWindow.Content?.XamlRoot;
+            if (xamlRoot == null) return;
+
+            string dialogText = string.Format("ReapplyOptimizationsDialogContentSimple".TryGetLocalized() ?? "Re-apply {0} saved setting(s) to your system now?", count);
+
+            var cleanPrimaryButtonStyle = new Style(typeof(Button))
+            {
+                BasedOn = Application.Current.Resources.TryGetValue("AccentButtonStyle", out var abs) && abs is Style absStyle ? absStyle : null
+            };
+
+            var cleanCloseButtonStyle = new Style(typeof(Button))
+            {
+                BasedOn = Application.Current.Resources.TryGetValue("DefaultButtonStyle", out var dbs) && dbs is Style dbsStyle ? dbsStyle : null
+            };
+
+            var dialog = new ContentDialog
+            {
+                XamlRoot = xamlRoot,
+                RequestedTheme = ActualTheme,
+                Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+                BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
+                Title = "RyTuneX",
+                Content = new TextBlock
+                {
+                    Text = dialogText,
+                    TextWrapping = TextWrapping.Wrap
+                },
+                CloseButtonText = "Close".GetLocalized(),
+                PrimaryButtonText = "Continue".GetLocalized(),
+                PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
+                DefaultButton = ContentDialogButton.None
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                App.ShowNotification(
+                    "RyTuneX",
+                    "ReapplyingOptimizations".TryGetLocalized() ?? "Currently re-applying optimizations, features, and privacy settings...",
+                    InfoBarSeverity.Informational,
+                    3000);
+
+                var appliedCount = await Task.Run(() => OptimizationOptions.ReapplyAllOptimizationsAsync());
+
+                string successMsg = string.Format("SystemUpdate_ReappliedSuccess".TryGetLocalized() ?? "Successfully re-applied {0} setting(s).", appliedCount);
+
+                App.ShowNotification(
+                    "RyTuneX",
+                    successMsg,
+                    InfoBarSeverity.Success,
+                    5000);
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Failed to re-apply settings: {ex.Message}");
+            App.ShowNotification("RyTuneX", "UnexpectedError".GetLocalized(), InfoBarSeverity.Error, 5000);
+        }
+    }
+
     private async void RevertChanges_Click(object sender, RoutedEventArgs e)
     {
         // Checkbox for keeping app data
@@ -298,6 +468,7 @@ public sealed partial class SettingsPage : Page
         var contentPanel = new StackPanel
         {
             Orientation = Orientation.Vertical,
+            RequestedTheme = ActualTheme,
             Children =
             {
                 new TextBlock
@@ -313,6 +484,7 @@ public sealed partial class SettingsPage : Page
         var revertDialog = new ContentDialog()
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "RyTuneX",
@@ -345,6 +517,7 @@ public sealed partial class SettingsPage : Page
                 var currentDialog = new ContentDialog()
                 {
                     XamlRoot = XamlRoot,
+                    RequestedTheme = ActualTheme,
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     Title = "RyTuneX",
                     Content = new StackPanel
@@ -442,7 +615,9 @@ public sealed partial class SettingsPage : Page
     {
         var picker = new FileOpenPicker(App.MainWindow.AppWindow.Id)
         {
-            SuggestedStartLocation = PickerLocationId.Desktop
+            SuggestedStartLocation = PickerLocationId.Desktop,
+            Title = "Import Registry Settings",
+            SettingsIdentifier = "RyTuneX_RegistryImportPicker"
         };
         picker.FileTypeFilter.Add(".reg");
 

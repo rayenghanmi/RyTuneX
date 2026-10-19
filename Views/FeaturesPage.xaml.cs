@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
+using RyTuneX.Services;
 
 namespace RyTuneX.Views;
 
@@ -12,7 +13,7 @@ public sealed partial class FeaturesPage : Page
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
     private string? _pendingScrollTarget;
-    private static readonly StringComparer ToggleKeyComparer = StringComparer.OrdinalIgnoreCase;
+    private bool _isInitialized;
 
     public FeaturesPage()
     {
@@ -20,6 +21,7 @@ public sealed partial class FeaturesPage : Page
         LogHelper.Log("Initializing FeaturesPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += FeaturesPage_Loaded;
+        Unloaded += FeaturesPage_Unloaded;
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -29,13 +31,22 @@ public sealed partial class FeaturesPage : Page
         if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
         {
             _pendingScrollTarget = optionTag;
+            if (_isInitialized)
+            {
+                _ = ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+                _pendingScrollTarget = null;
+            }
         }
     }
 
     private async void FeaturesPage_Loaded(object sender, RoutedEventArgs e)
     {
-        await InitializeToggleSwitchesAsync();
-        IntelligentCardEnhancer.EnhancePage(this);
+        if (!_isInitialized)
+        {
+            await InitializeToggleSwitchesAsync();
+            IntelligentCardEnhancer.EnhancePage(this);
+            _isInitialized = true;
+        }
 
         if (!string.IsNullOrEmpty(_pendingScrollTarget))
         {
@@ -49,21 +60,76 @@ public sealed partial class FeaturesPage : Page
         _ = LogHelper.Log("Initializing Toggle Switches");
         try
         {
-            var toggleStates = await Task.Run(ReadToggleStates);
+            var toggleSwitches = IntelligentCardEnhancer.GetAllToggleSwitches(this);
+            var tags = toggleSwitches
+                .Select(t => (t.Tag as string) ?? t.Name)
+                .Where(t => !string.IsNullOrEmpty(t))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
 
-            foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
+            var states = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+            var missingTags = new List<string>();
+
+            foreach (var tagName in tags)
             {
-                if (toggleSwitch.Tag is string tagName)
+                if (IntelligentOptimizationEngine.TryGetCachedState(tagName, out bool cached))
                 {
-                    if (toggleStates.TryGetValue(tagName, out var currentState))
+                    states[tagName] = cached;
+                }
+                else
+                {
+                    missingTags.Add(tagName);
+                }
+            }
+
+            if (missingTags.Count > 0)
+            {
+                var detected = await Task.Run(() =>
+                {
+                    var dict = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+                    var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                        ? RegistryView.Registry64
+                        : RegistryView.Default;
+                    using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView);
+                    using var key = baseKey.CreateSubKey(RegistryBaseKey);
+
+                    foreach (var tagName in missingTags)
                     {
-                        toggleSwitch.IsOn = currentState;
+                        var liveState = SystemStateDetector.DetectState(tagName);
+                        bool targetState;
+                        if (liveState.HasValue)
+                        {
+                            targetState = liveState.Value;
+                            try { key?.SetValue(tagName, targetState ? 1 : 0, RegistryValueKind.DWord); } catch { }
+                        }
+                        else
+                        {
+                            targetState = key != null && key.GetValue(tagName) is int state && state == 1;
+                        }
+
+                        IntelligentOptimizationEngine.SetCachedState(tagName, targetState);
+                        dict[tagName] = targetState;
                     }
 
-                    // Subscribe to the Toggled event
-                    toggleSwitch.Toggled -= ToggleSwitch_Toggled;
-                    toggleSwitch.Toggled += ToggleSwitch_Toggled;
+                    return dict;
+                });
+
+                foreach (var kvp in detected)
+                {
+                    states[kvp.Key] = kvp.Value;
                 }
+            }
+
+            foreach (var toggleSwitch in toggleSwitches)
+            {
+                var tagName = (toggleSwitch.Tag as string) ?? toggleSwitch.Name;
+                if (states.TryGetValue(tagName, out bool targetState))
+                {
+                    IntelligentCardEnhancer.SetToggleIsOnSilently(toggleSwitch, targetState);
+                }
+
+                toggleSwitch.Toggled -= ToggleSwitch_Toggled;
+                toggleSwitch.Toggled += ToggleSwitch_Toggled;
             }
         }
         catch (Exception ex)
@@ -101,49 +167,29 @@ public sealed partial class FeaturesPage : Page
             }
         }
     }
+    private void FeaturesPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        // When cached (NavigationCacheMode.Required), keep event subscriptions active
+    }
+
     private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
             var toggleSwitch = (ToggleSwitch)sender;
-            _ = LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            if (IntelligentCardEnhancer.IsSuppressed(toggleSwitch))
+            {
+                return;
+            }
+
+            var tagName = (toggleSwitch.Tag as string) ?? toggleSwitch.Name;
+            _ = LogHelper.Log($"ToggleSwitch Tag: {tagName}, IsOn: {toggleSwitch.IsOn}");
+            IntelligentOptimizationEngine.SetCachedState(tagName, toggleSwitch.IsOn);
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogError(ex.Message);
         }
-    }
-
-    private static Dictionary<string, bool> ReadToggleStates()
-    {
-        var states = new Dictionary<string, bool>(ToggleKeyComparer);
-        using var key = OpenOptimizationsKey(writable: false) ?? OpenOptimizationsKey(writable: true);
-        if (key == null)
-        {
-            return states;
-        }
-
-        foreach (var valueName in key.GetValueNames())
-        {
-            if (key.GetValue(valueName) is int state)
-            {
-                states[valueName] = state == 1;
-            }
-        }
-
-        return states;
-    }
-
-    private static RegistryKey? OpenOptimizationsKey(bool writable)
-    {
-        var registryView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-            ? RegistryView.Registry64
-            : RegistryView.Default;
-
-        var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView);
-        return writable
-            ? baseKey.CreateSubKey(RegistryBaseKey)
-            : baseKey.OpenSubKey(RegistryBaseKey, writable);
     }
 }

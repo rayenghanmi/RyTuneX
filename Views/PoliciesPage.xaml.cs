@@ -8,6 +8,7 @@ namespace RyTuneX.Views;
 
 public sealed partial class PoliciesPage : Page
 {
+    private static IReadOnlyList<PolicyHelper.PolicyState>? _cachedPolicyStates;
     private CancellationTokenSource? _cancellationTokenSource;
     private Guid? _cancellationRegistrationId;
     private IReadOnlyList<PolicyHelper.PolicyState>? _policyStates;
@@ -17,8 +18,9 @@ public sealed partial class PoliciesPage : Page
     {
         InitializeComponent();
         LogHelper.Log("Initializing PoliciesPage");
-        NavigationCacheMode = NavigationCacheMode.Required;
+        NavigationCacheMode = NavigationCacheMode.Disabled;
         Loaded += PoliciesPage_Loaded;
+        Unloaded += PoliciesPage_Unloaded;
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -45,13 +47,43 @@ public sealed partial class PoliciesPage : Page
         }
     }
 
+    private void PoliciesPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        Loaded -= PoliciesPage_Loaded;
+        Unloaded -= PoliciesPage_Unloaded;
+        ConfiguredPoliciesListView.SelectionChanged -= ConfiguredPoliciesListView_SelectionChanged;
+
+        _cancellationTokenSource?.Cancel();
+        if (_cancellationRegistrationId.HasValue)
+        {
+            OperationCancellationManager.Unregister(_cancellationRegistrationId.Value);
+            _cancellationRegistrationId = null;
+        }
+
+        ConfiguredPoliciesListView.ItemsSource = null;
+        CategorySummaryRepeater.ItemsSource = null;
+        _policyStates = null;
+    }
+
     private void ConfiguredPoliciesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         RemoveSelectedButton.IsEnabled = ConfiguredPoliciesListView.SelectedItems.Count > 0;
     }
 
-    private async Task ScanPoliciesAsync()
+    private async Task ScanPoliciesAsync(bool forceRefresh = false)
     {
+        if (!forceRefresh && _cachedPolicyStates != null)
+        {
+            _policyStates = _cachedPolicyStates;
+            UpdateSummary();
+            UpdateCategorySummary();
+            UpdateConfiguredPoliciesList();
+            ScanProgressRing.Visibility = Visibility.Collapsed;
+            ScanProgressRing.IsActive = false;
+            RefreshButton.IsEnabled = true;
+            return;
+        }
+
         _cancellationTokenSource?.Cancel();
         if (_cancellationRegistrationId.HasValue)
         {
@@ -72,6 +104,7 @@ public sealed partial class PoliciesPage : Page
 
             // Detect policy states
             _policyStates = await PolicyHelper.DetectPolicyStatesAsync(_cancellationTokenSource.Token);
+            _cachedPolicyStates = _policyStates;
 
             // Update UI on dispatcher thread
             DispatcherQueue.TryEnqueue(() =>
@@ -243,7 +276,8 @@ public sealed partial class PoliciesPage : Page
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
         _ = LogHelper.Log("Manually refreshing group policy scan");
-        await ScanPoliciesAsync();
+        _cachedPolicyStates = null;
+        await ScanPoliciesAsync(forceRefresh: true);
     }
 
     private async void RemoveAllButton_Click(object sender, RoutedEventArgs e)
@@ -259,6 +293,7 @@ public sealed partial class PoliciesPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "PoliciesPage_ConfirmRemoveAllTitle".GetLocalized(),
@@ -296,6 +331,7 @@ public sealed partial class PoliciesPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "PoliciesPage_ConfirmRemoveCategoryTitle".GetLocalized(),
@@ -343,6 +379,7 @@ public sealed partial class PoliciesPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "PoliciesPage_ConfirmRemoveSelectedTitle".GetLocalized(),
@@ -404,6 +441,7 @@ public sealed partial class PoliciesPage : Page
                 var restartDialog = new ContentDialog
                 {
                     XamlRoot = XamlRoot,
+                    RequestedTheme = ActualTheme,
                     Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                     BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                     Title = "PoliciesPage_RestartExplorerTitle".GetLocalized(),
@@ -421,7 +459,8 @@ public sealed partial class PoliciesPage : Page
             }
 
             // Rescan policies
-            await ScanPoliciesAsync();
+            _cachedPolicyStates = null;
+            await ScanPoliciesAsync(forceRefresh: true);
         }
         catch (Exception ex)
         {

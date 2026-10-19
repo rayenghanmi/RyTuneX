@@ -56,7 +56,10 @@ public class NavigationViewService : INavigationViewService
     {
         if (args.IsSettingsInvoked)
         {
-            _navigationService.NavigateTo(typeof(RyTuneX.Views.SettingsPage).FullName!);
+            sender.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+            {
+                _navigationService.NavigateTo(typeof(RyTuneX.Views.SettingsPage).FullName!, null, false);
+            });
         }
         else
         {
@@ -64,7 +67,10 @@ public class NavigationViewService : INavigationViewService
 
             if (selectedItem?.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
             {
-                _navigationService.NavigateTo(pageKey);
+                sender.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+                {
+                    _navigationService.NavigateTo(pageKey, null, false);
+                });
             }
         }
     }

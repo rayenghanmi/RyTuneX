@@ -20,94 +20,81 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="AppTitleBar"
-              Grid.Row="0"
-              Height="48"
-              IsHitTestVisible="True"
-              VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="BackButtonColumn" Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="128"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="TitleBarBackButton"
-                    Grid.Column="0"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    IsEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
-                    Click="TitleBarBackButton_Click"
-                    PointerEntered="TitleBarBackButton_PointerEntered"
-                    PointerExited="TitleBarBackButton_PointerExited"
-                    VerticalAlignment="Center"
-                    Width="38" Height="42"
-                    Padding="10"
-                    Margin="2,2,8,0">
-                <AnimatedIcon x:Name="BackAnimatedIcon">
-                    <AnimatedIcon.Source>
-                        <animatedvisuals:AnimatedBackVisualSource/>
-                    </AnimatedIcon.Source>
-                    <AnimatedIcon.FallbackIconSource>
-                        <SymbolIconSource Symbol="Back"/>
-                    </AnimatedIcon.FallbackIconSource>
-                </AnimatedIcon>
-            </Button>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Image x:Name="ShellTitleBarImage" Source="/Assets/WindowIcon.ico"
-                    HorizontalAlignment="Left"
-                    Width="22"
-                    Height="22"/>
-                <TextBlock x:Name="AppTitleBarText"
-                    Text="RyTuneX"
-                    VerticalAlignment="Center"
-                    Margin="12,0,0,0"
-                    TextWrapping="NoWrap"
-                    FontSize="14"
-                    Style="{StaticResource BodyTextBlockStyle}"/>
-            </StackPanel>
-            
-            <!-- Search Box in Title Bar -->
-            <AutoSuggestBox x:Name="TitleBarSearchBox"
-                            Grid.Column="3"
-                            Width="400"
-                            MinWidth="200"
-                            BorderThickness="0"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            CornerRadius="16"
-                            QueryIcon="Find"
-                            TextMemberPath="DisplayName"
-                            TextChanged="TitleBarSearchBox_TextChanged"
-                            SuggestionChosen="TitleBarSearchBox_SuggestionChosen"
-                            QuerySubmitted="TitleBarSearchBox_QuerySubmitted">
-                <AutoSuggestBox.ItemTemplate>
-                    <DataTemplate x:DataType="models:SearchableItem">
-                        <Grid Padding="4,8" ColumnSpacing="12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <FontIcon Grid.Column="0" 
-                                      Glyph="{x:Bind Glyph}" 
-                                      FontSize="16"
-                                      VerticalAlignment="Center"
-                                      Opacity="0.8"/>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="{x:Bind DisplayName}" 
-                                           Style="{StaticResource BodyTextBlockStyle}"
-                                           TextTrimming="CharacterEllipsis"/>
-                                <TextBlock Text="{x:Bind Category}" 
-                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                           Opacity="0.6"
-                                           TextTrimming="CharacterEllipsis"/>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </AutoSuggestBox.ItemTemplate>
-            </AutoSuggestBox>
-        </Grid>
+        <TitleBar x:Name="AppTitleBar"
+                  Grid.Row="0"
+                  IsBackButtonVisible="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
+                  IsBackButtonEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
+                  BackRequested="AppTitleBar_BackRequested">
+            <TitleBar.Resources>
+                <HorizontalAlignment x:Key="TitleBarContentHorizontalAlignment">Stretch</HorizontalAlignment>
+            </TitleBar.Resources>
+            <TitleBar.LeftHeader>
+                <Grid x:Name="TitleBarLeftHeaderContainer"
+                      Width="144"
+                      VerticalAlignment="Center">
+                    <StackPanel x:Name="TitleBarLeftHeaderContent"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Margin="10,0,0,0">
+                        <Image x:Name="ShellTitleBarImage"
+                               Source="ms-appx:///Assets/WindowIcon.ico"
+                               Width="22"
+                               Height="22"
+                               VerticalAlignment="Center"/>
+                        <TextBlock x:Name="AppTitleBarText"
+                                   Text="RyTuneX"
+                                   FontSize="14"
+                                   Margin="12,0,0,0"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </TitleBar.LeftHeader>
+            <TitleBar.Content>
+                <Grid x:Name="TitleBarContentGrid" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <AutoSuggestBox x:Name="TitleBarSearchBox"
+                                    MaxWidth="500"
+                                    MinWidth="160"
+                                    Margin="16,0"
+                                    BorderThickness="0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Stretch"
+                                    CornerRadius="16"
+                                    QueryIcon="Find"
+                                    TextMemberPath="DisplayName"
+                                    TextChanged="TitleBarSearchBox_TextChanged"
+                                    SuggestionChosen="TitleBarSearchBox_SuggestionChosen"
+                                    QuerySubmitted="TitleBarSearchBox_QuerySubmitted">
+                        <AutoSuggestBox.ItemTemplate>
+                            <DataTemplate x:DataType="models:SearchableItem">
+                                <Grid Padding="4,8" ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Grid.Column="0" 
+                                              Glyph="{x:Bind Glyph}" 
+                                              FontSize="16"
+                                              VerticalAlignment="Center"
+                                              Opacity="0.8"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="{x:Bind DisplayName}" 
+                                                   Style="{StaticResource BodyTextBlockStyle}"
+                                                   TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Text="{x:Bind Category}" 
+                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Opacity="0.6"
+                                                   TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </AutoSuggestBox.ItemTemplate>
+                    </AutoSuggestBox>
+                </Grid>
+            </TitleBar.Content>
+        </TitleBar>
+
         <NavigationView
             x:Name="NavigationViewControl"
             Grid.Row="1"
@@ -195,6 +182,11 @@
                 <NavigationViewItem x:Uid="Shell_SystemInfo" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.SystemInfoPage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE770;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_StressTest" helpers:NavigationHelper.NavigateTo="RyTuneX.Views.StressTestPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xECAD;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>

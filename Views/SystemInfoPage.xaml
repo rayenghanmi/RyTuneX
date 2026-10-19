@@ -35,10 +35,6 @@
                     </StackPanel>
                 </Border>
                 <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="6">
-                    <StackPanel.ChildrenTransitions>
-                        <EntranceThemeTransition FromVerticalOffset="50" />
-                        <RepositionThemeTransition IsStaggeringEnabled="False" />
-                    </StackPanel.ChildrenTransitions>
 
                     <!-- OS -->
                     <controls:SettingsExpander

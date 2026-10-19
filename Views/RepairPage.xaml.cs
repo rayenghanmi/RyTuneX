@@ -69,7 +69,7 @@ public sealed partial class RepairPage : Page
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         InitializeComponent();
         LogHelper.Log("Initializing RepairPage");
-        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         Loaded += RepairPage_Loaded;
         Unloaded += RepairPage_Unloaded;
         SetState(RepairState.Idle);
@@ -979,6 +979,7 @@ public sealed partial class RepairPage : Page
         var memDialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],

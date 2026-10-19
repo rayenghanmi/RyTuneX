@@ -18,11 +18,21 @@ public sealed partial class ServicesPage : Page
     private bool _isUpdatingStartupType;
     private HashSet<ComboBox> _userInteractedComboBoxes = [];
 
+    private static List<ServiceInfoItem>? _cachedServices;
+
     public ServicesPage()
     {
         InitializeComponent();
         LogHelper.Log("Initializing ServicesPage");
         Loaded += ServicesPage_Loaded;
+        Unloaded += ServicesPage_Unloaded;
+    }
+
+    private void ServicesPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        _allServices.Clear();
+        _filteredServices.Clear();
+        ServicesListView.ItemsSource = null;
     }
 
     private async void ServicesPage_Loaded(object sender, RoutedEventArgs e)
@@ -39,28 +49,43 @@ public sealed partial class ServicesPage : Page
 
         try
         {
-            _allServices = await Task.Run(() =>
+            if (_cachedServices != null && _cachedServices.Count > 0)
             {
-                return ServiceController.GetServices()
-                    .Select(s =>
+                _allServices = [.. _cachedServices];
+            }
+            else
+            {
+                _allServices = await Task.Run(() =>
+                {
+                    var controllers = ServiceController.GetServices();
+                    var list = new List<ServiceInfoItem>(controllers.Length);
+                    foreach (var s in controllers)
                     {
-                        var startType = GetServiceStartType(s.ServiceName);
-                        var isRunning = s.Status == ServiceControllerStatus.Running;
-                        var canStop = s.Status == ServiceControllerStatus.Running && s.CanStop;
-
-                        return new ServiceInfoItem
+                        try
                         {
-                            Name = s.ServiceName,
-                            DisplayName = s.DisplayName,
-                            Status = s.Status.ToString(),
-                            StartType = startType,
-                            CanStart = !isRunning && startType != "Disabled",
-                            CanStop = canStop
-                        };
-                    })
-                    .OrderBy(s => s.DisplayName)
-                    .ToList();
-            });
+                            var startType = GetServiceStartType(s.ServiceName);
+                            var isRunning = s.Status == ServiceControllerStatus.Running;
+                            var canStop = isRunning && s.CanStop;
+
+                            list.Add(new ServiceInfoItem
+                            {
+                                Name = s.ServiceName,
+                                DisplayName = s.DisplayName,
+                                Status = s.Status.ToString(),
+                                StartType = startType,
+                                CanStart = !isRunning && startType != "Disabled",
+                                CanStop = canStop
+                            });
+                        }
+                        finally
+                        {
+                            s.Dispose();
+                        }
+                    }
+                    return list.OrderBy(s => s.DisplayName).ToList();
+                });
+                _cachedServices = [.. _allServices];
+            }
 
             UpdateSummary();
             ApplyFilterAndSort();
@@ -68,6 +93,7 @@ public sealed partial class ServicesPage : Page
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error loading services: {ex.Message}");
+            App.ShowNotification("ServicesPage_Notification_Title".GetLocalized(), "ServicesPage_LoadError".GetLocalized(), Microsoft.UI.Xaml.Controls.InfoBarSeverity.Error, 5000);
         }
         finally
         {
@@ -169,6 +195,7 @@ public sealed partial class ServicesPage : Page
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
         _ = LogHelper.Log("Manually refreshing services list");
+        _cachedServices = null;
         await LoadServicesAsync();
     }
 
@@ -304,6 +331,14 @@ public sealed partial class ServicesPage : Page
                 InfoBarSeverity.Success, 3000);
             await LoadServicesAsync();
         }
+        catch (System.ServiceProcess.TimeoutException)
+        {
+            _ = LogHelper.LogWarning($"Service {serviceName} did not respond in time during {action} operation.");
+            App.ShowNotification(
+                "ServicesPage_Notification_ControlErrorTitle".GetLocalized(),
+                "ServicesPage_Notification_ServiceTimeout".GetLocalized(),
+                InfoBarSeverity.Warning, 5000);
+        }
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error controlling service {serviceName}: {ex.Message}");
@@ -330,7 +365,10 @@ public sealed partial class ServicesPage : Page
 
             await Task.Run(() =>
             {
-                using var key = Registry.LocalMachine.OpenSubKey($@"SYSTEM\CurrentControlSet\Services\{serviceName}", true);
+                var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64 : RegistryView.Default;
+                using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView)
+                    .OpenSubKey($@"SYSTEM\CurrentControlSet\Services\{serviceName}", writable: true);
                 key?.SetValue("Start", startValue, RegistryValueKind.DWord);
             });
 
@@ -348,6 +386,17 @@ public sealed partial class ServicesPage : Page
                 service.StartType = startupType;
                 service.CanStart = service.Status != "Running" && startupType != "Disabled";
             }
+        }
+        catch (UnauthorizedAccessException)
+        {
+            _ = LogHelper.LogWarning($"Access denied when changing startup type for {serviceName}.");
+            App.ShowNotification(
+                "ServicesPage_Notification_StartupErrorTitle".GetLocalized(),
+                "ServicesPage_Notification_StartupTypeAdminRequired".GetLocalized(),
+                InfoBarSeverity.Warning, 4000);
+            _isUpdatingStartupType = true;
+            await LoadServicesAsync();
+            _isUpdatingStartupType = false;
         }
         catch (Exception ex)
         {
@@ -368,7 +417,10 @@ public sealed partial class ServicesPage : Page
     {
         try
         {
-            using var key = Registry.LocalMachine.OpenSubKey($@"SYSTEM\CurrentControlSet\Services\{serviceName}");
+            var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                ? RegistryView.Registry64 : RegistryView.Default;
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView)
+                .OpenSubKey($@"SYSTEM\CurrentControlSet\Services\{serviceName}");
             if (key?.GetValue("Start") is int startType)
             {
                 return startType switch

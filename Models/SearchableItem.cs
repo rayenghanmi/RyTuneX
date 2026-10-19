@@ -33,8 +33,7 @@ public sealed class SearchableItem
         get; init;
     }
 
-    // The tag/name of the specific option on the page (e.g., toggle switch name).
-    // Used to scroll to or highlight the specific option after navigation.
+    // Tag of the specific option on the page, used to scroll to/highlight it after navigation.
 
     public string? OptionTag
     {

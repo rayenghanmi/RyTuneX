@@ -43,6 +43,7 @@ public class StartupItem : INotifyPropertyChanged
     public string? ValueName { get; set; }
     public string? FilePath { get; set; }
     public string? TaskName { get; set; }
+    public string? TaskPath { get; set; }
     public bool IsValid { get; set; } = true;
     public StartupImpact Impact { get; set; } = StartupImpact.Low;
     public long FileSizeBytes { get; set; }

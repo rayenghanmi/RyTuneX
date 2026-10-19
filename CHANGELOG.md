@@ -2,6 +2,112 @@
 
 All notable changes to this branch will be documented in this file.
 
+## 1.8.0 - Released
+
+### Added
+
+- Added accent color personalization in Settings to choose between RyTuneX style, Windows system accent, or a custom color.
+- Added a dedicated `Stress Test` page to evaluate system stability and thermal performance under sustained loads.
+- Implemented a multi-threaded **Stress Engine** (`StressEngine`) supporting CPU stress tests, RAM memory allocation testing, GPU compute workloads, real-time hardware telemetry (CPU utilization, temperatures, memory usage), customizable thread allocation, duration timers, and emergency temperature cutoff thresholds.
+- Integrated the `Stress Test` page into the main navigation menu and in-app search indexing (`AppSearchService`).
+- Implemented runtime dynamic code inspection in `OptimizeFunctionInspector` to analyze embedded helper source files (`OptimizeSystemHelper.cs`, `OptimizationOptions.cs`) and extract commands, registry keys, and technical summaries on the fly without hardcoded lists.
+- Introduced a dedicated `Cosmetic` risk level to classify visual personalization, theme settings, desktop layouts, and context menu shortcuts as non-intrusive aesthetic preferences rather than core performance tweaks.
+- Added `IntelligentCardEnhancer` to dynamically augment optimization cards with risk badges (`Safe`, `Cosmetic`, `Moderate`, `Caution`), point gain chips (`+X pts`), per-item rollback buttons, and rich technical detail flyouts across all pages.
+- Introduced `IntelligentScoreHeaderControl` with domain-specific optimization scoring (Performance, Privacy, Features), interactive preset filters (`Recommended`, `Safe`, `Moderate`), score gain calculation, and preview dialogs.
+- Added hardware-aware recommendations based on detected system specifications (CPU cores, RAM capacity, SSD vs HDD, desktop vs laptop, and GPU hardware).
+- Introduced new Network Optimization toggles:
+  - `Disable Network Throttling`
+  - `Disable Nagle's Algorithm`
+  - `Enable Receive-Side Scaling (RSS)`
+  - `Enable ECN (Explicit Congestion Notification)`
+  - `Enable Compound TCP (CTCP)`
+  - `Disable IPv6`
+  - `Disable P2P Update Delivery`
+  - `Disable Hotspot 2.0`
+  - `Disable NetBIOS over TCP/IP`
+- Introduced Timer Resolution & Latency optimizations (`Optimize System` page):
+  - `Enable Global Timer Resolution`
+  - `Disable HPET`
+  - `Disable Dynamic Tick`
+- Introduced Memory Optimization toggles (`Optimize System` page):
+  - `Disable Prefetch & Superfetch`
+  - `Enable Large System Cache`
+  - `Disable Network Data Usage Monitor (NDU)`
+  - `Disable Page File Encryption`
+- Introduced Notification Controls (`Features` page):
+  - `Disable Lock Screen Notifications`
+  - `Disable All Toast Notifications`
+  - `Disable Notification Center`
+  - `Disable Suggested Actions`
+- Introduced Context Menu Customization options (`Features` page):
+  - `Add "Take Ownership" to Context Menu`
+  - `Add "Open Command Prompt Here"`
+  - `Add "Copy File Path" to Context Menu`
+- Introduced Privacy Hardening optimizations (`Privacy` page):
+  - `Disable Wi-Fi Sense`
+  - `Disable Web Results in Search`
+  - `Disable App Launch Tracking`
+  - `Disable Timeline & Activity History`
+- Added status notifications and administrative permission checks when managing startup apps in `Startup Apps` page.
+- Added multi-selection and batch removal support to the `Startup Apps` page #107.
+- Added all new optimization toggles and network toggles to the in-app Search Engine (`AppSearchService`) with quick navigation and matching icons.
+- Integrated all new toggles into the Intelligent Optimization Engine catalog with risk assessments, score weights, and technical details.
+- Added Copilot+ PC / AI hardware capability detection in `System Info` page using Windows App SDK `AICapabilities`.
+- Added persistent picker state (`SettingsIdentifier`) and user-friendly dialog titles across file and folder pickers.
+- Added Windows OS update detection on startup to prompt re-applying saved optimizations, features, and privacy tweaks after a system update, alongside manual re-application in Settings.
+- Added an interactive **Deep Clean** dialog (`DeepCleanEngine`) to replace the basic temporary file cleanup with 12 selectable cleanup targets (Temporary Files, Windows Update Cache, Explorer Cache, Crash Dumps, Browser Caches, GPU Shader Cache, System Logs, OEM Logs, Prefetch, Network Cache, Recycle Bin, and Font Cache), real-time asynchronous size scanning, safe service lifecycle handling.
+- Integrated skeleton shimmer placeholders across `Debloat System`, `Packages`, `Startup Apps`, and `IntelligentScoreHeaderControl`.
+
+### Fixes
+
+- Fixed inverted toggle logic for `LowDiskSpaceChecks` and `FileExtensionsAndHiddenFiles` in `OptimizationOptions`.
+- Corrected registry values in `OptimizeSystemHelper` when configuring file extension and hidden file visibility (`Hidden` registry value).
+- Fixed detection criteria in `SystemStateDetector` for low disk space checks, hidden files, and credential synchronization user overrides.
+- Fixed operating system detection on Windows 11 where the registry product name still reported Windows 10 for build numbers >= 22000.
+- Fixed event handler duplication and state desynchronization when navigating back and forth across optimization pages.
+- Added toggle event suppression to prevent unwanted execution cascades during silent UI synchronization.
+- Fixed unlocalized strings across the `Processes` page, `Packages` page, `LogViewer` dialog, and exit confirmation dialog in `MainWindow`.
+- Fixed DNS preset selection not applying properly when running under localized languages.
+- Fixed potential process deadlock when executing command-line tasks by draining standard error.
+- Fixed regex parsing for asset scale factors during app icon extraction.
+- Fixed 64-bit registry redirection when reading and modifying service startup types in `Services` page.
+- Fixed an issue in `Optimize System` page where compression progress indicators would not reset if an error occurred.
+- Added exception handling to prevent crashes when extracting default system icons.
+- Fixed an issue in `Startup Apps` page where scheduled tasks could not be toggled due to missing Task Scheduler directory path resolution, migrating mutations to the native in-process `Schedule.Service` COM API #108.
+- Fixed a UI virtualization recycling bug in `Startup Apps` page where scrolling down the list automatically toggled startup items.
+- Removed misleading administrator privilege warnings on startup item toggle failures when already running elevated #108.
+- Fixed navigation button freezing and UI thread hangs when navigating to toggle-heavy pages (`Optimize System`, `Features`, and `Privacy`).
+- Fixed a race condition between page loading and `IntelligentScoreHeaderControl` where optimization states were inadvertently overwritten with uninitialized toggle values.
+- Replaced eager upfront instantiation of technical detail flyouts across all cards with lightweight, on-demand creation upon clicking the info button.
+- Eliminated redundant external process launches during page initialization by querying system culture OEM code pages in-process instead of spawning `cmd.exe /c "chcp"`.
+- Decoupled power plan and automatic update querying on the `Optimize System` page to execute asynchronously in the background without blocking the UI thread.
+- Fixed duplicate concurrent system scans on startup by implementing in-flight task deduplication in `IntelligentOptimizationEngine.ScanAsync` and preventing redundant dual `RefreshScoreAsync` scheduling in `IntelligentScoreHeaderControl`.
+- Fixed an issue where the DNS selection dropdown menu on the `Network` page was hardcoded to always reset back to "Automatic" on app startup and interface changes.
+- Fixed an issue in `Stress Test` page where clicking "Start All" froze the application and caused both "Start All" and "Stop All" buttons to stay disabled, by lowering worker thread priority to `BelowNormal`, optimizing GPU compute dispatches to preserve DWM/DirectX composition, and making test lifecycle operations asynchronous.
+
+### Changes
+
+- Enabled Native AOT (Ahead-of-Time) compilation for x64 packages, compiling the application directly into native machine code to eliminate JIT overhead.
+- Enabled assembly trimming (ILLink) and ReadyToRun (R2R) compilation for x86 packages alongside self-contained deployment (`SelfContained=true`).
+- Drastically reduced application cold startup loading time from 3.19s down to 1.93s (~39.5% faster app launch).
+- Substantially decreased Microsoft Store bundle size from 119 MB down to 75 MB (~37% size reduction).
+- Added MSIX payload deduplication target to resolve assembly collisions during multi-architecture packaging.
+- Refactored `IntelligentOptimizationEngine` to operate dynamically across pages without relying on static item collections.
+- Updated optimization risk badges on toggle cards to reflect their actual risk classifications (`Safe`, `Cosmetic`, `Moderate`, `Caution`) rather than being overridden as "Recommended".
+- Simplified code documentation across `IntelligentCardEnhancer`, `OptimizeFunctionInspector`, and `IntelligentOptimizationEngine` into clean, concise single-line comments.
+- Reorganized toggles across `Optimize System`, `Features`, and `Privacy` pages into clean, dedicated thematic sections (e.g., Input & Responsiveness, Gaming & GPU, Memory Optimization, Windows AI & Edge, Privacy Hardening) for improved usability.
+- Redesigned the `Network` page with modern settings cards and smoother asynchronous loading.
+- Refactored optimization rollback logic to execute actions directly without creating UI switch instances.
+- Improved debloat uninstall flow to safely snapshot selected items before batch removal.
+- Updated localization across all supported languages for newly introduced features and messages.
+- Upgraded `Microsoft.WindowsAppSDK` to version 2.5.1 and updated dependencies (`DevWinUI` to 10.7.0, `WinUIEx` to 2.9.3, `Microsoft.Extensions.Hosting` to 10.0.12).
+- Rebuilt the application title bar using the official WinUI 3 `<TitleBar>` control (`Microsoft.UI.Xaml.Controls.TitleBar`), replacing the custom grid and custom buttons with native window chrome integration.
+- Removed legacy `SendMessage(hwnd, WM_ACTIVATE)` window activation P/Invoke workaround from `TitleBarHelper`, eliminating window repaint flickers during theme changes.
+- Implemented custom application startup entry point (`Program.cs`) opting into Windows App SDK 2.3+ XAML rendering engine optimizations (`DefaultStyleOptimizations`, `IconNoGridOptimization`, `DeferContextFlyoutInit`).
+- Modernized `ScrollToElementHelper` to use native WinUI `StartBringIntoView` with animated transitions, providing smooth scrolling across both `ScrollView` and `ScrollViewer` containers.
+- Enhanced `GetAllToggleSwitches` in `IntelligentCardEnhancer` to traverse both logical containers (`Panel.Children`, `ContentControl.Content`, `Border.Child`, `ScrollViewer.Content`) and visual tree elements, caching results per page with `ConditionalWeakTable` to eliminate repeated visual tree walks.
+- Optimized `IntelligentCardEnhancer` DOM mutation by updating existing badge controls in-place rather than tearing down and reconstructing `SettingsCard.Content`.
+- Optimized `InitializeToggleSwitchesAsync` across all toggle pages to retrieve live states directly from the pre-warmed cache (`PrewarmCatalog`) and apply them silently prior to initial render, eliminating simultaneous switch sliding animations.
 
 ## 1.7.1 - Released
 
@@ -32,7 +138,7 @@ All notable changes to this branch will be documented in this file.
 - Replaced legacy APIs with modern Windows methods in `SystemInfo` page to prevent incorrect behavior #105.
 - Reworked the Debloat logic to use the native Windows Deployment API instead of Powershell for app detection and removal.
 - All UI strings are now fully localized across all supported languages.
-- Replaced the 3 checkboxes in the `Repair` page with a single workflow for an enhanceed UX.
+- Replaced the 3 checkboxes in the `Repair` page with a single workflow for an enhanced UX.
 
 ## 1.7.0 - Released
 

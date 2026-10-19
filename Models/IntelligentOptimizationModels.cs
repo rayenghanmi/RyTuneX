@@ -16,6 +16,7 @@ public enum OptimizationCategory
 public enum RiskLevel
 {
     Safe,
+    Cosmetic,
     Moderate,
     Advanced,
     Caution
@@ -190,6 +191,7 @@ public class OptimizationItemModel : INotifyPropertyChanged
 
     public string RiskDisplay => Risk switch
     {
+        RiskLevel.Cosmetic => "Intelligent_Badge_Cosmetic".TryGetLocalized() ?? "Cosmetic",
         RiskLevel.Safe => "Intelligent_Badge_Safe".GetLocalized(),
         RiskLevel.Moderate => "Intelligent_Badge_Moderate".GetLocalized(),
         RiskLevel.Advanced => "Intelligent_Badge_Advanced".GetLocalized(),

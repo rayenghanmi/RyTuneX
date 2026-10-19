@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:helpers="using:RyTuneX.Helpers"
     mc:Ignorable="d">
     <Page.Resources>
         <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
@@ -35,7 +36,8 @@
                             MinWidth="80"
                             MaxWidth="300"
                             Height="34"
-                            Visibility="Collapsed"
+                            Visibility="Visible"
+                            IsEnabled="False"
                             QueryIcon="Zoom"
                             TextChanged="AppSearchBox_TextChanged"
                             QuerySubmitted="AppSearchBox_QuerySubmitted"/>
@@ -47,8 +49,8 @@
                         HorizontalAlignment="Right"
                         Orientation="Vertical"
                         VerticalAlignment="Center"
-                        Visibility="Collapsed">
-                <Button x:Name="TempButton" Click="TempButton_Click">
+                        Visibility="Visible">
+                <Button x:Name="TempButton" Click="TempButton_Click" IsEnabled="False">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <ProgressRing x:Name="TempButtonProgressRing" 
                             Width="16" 
@@ -72,7 +74,8 @@
                            VerticalAlignment="Center"
                            TextWrapping="Wrap"/>
                 <Button x:Name="reloadButton"
-                        Visibility="Collapsed"
+                        Visibility="Visible"
+                        IsEnabled="False"
                         Click="ReloadApps_Click"
                         Padding="6"
                         MinWidth="0"
@@ -87,18 +90,18 @@
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center">
-                <StackPanel x:Name="appsFilterText" Margin="0,6,0,6" Visibility="Collapsed" Orientation="Horizontal">
+                <StackPanel x:Name="appsFilterText" Margin="0,6,0,6" Visibility="Visible" Orientation="Horizontal">
                     <FontIcon Glyph="&#xE71C;" FontSize="{StaticResource TextBoxIconFontSize}"/>
                     <TextBlock x:Uid="DebloatSystemPage_AppsFilter" Style="{StaticResource DetailBodyBaseMediumStyle}" Margin="6,0,0,0" VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <ComboBox Width="190" x:Name="appsFilter" Margin="8,6,0,6" VerticalAlignment="Center" Visibility="Collapsed" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
+                <ComboBox Width="190" x:Name="appsFilter" Margin="8,6,0,6" VerticalAlignment="Center" Visibility="Visible" IsEnabled="False" SelectedIndex="0" SelectionChanged="appsFilter_SelectionChanged">
                     <ComboBoxItem x:Uid="DebloatSystemPage_StandardApps" Tag="Standard"/>
                     <ComboBoxItem x:Uid="DebloatSystemPage_AllApps" Tag="All"/>
                     <ComboBoxItem x:Uid="DebloatSystemPage_Win32Apps" Tag="Win32"/>
                 </ComboBox>
 
-                <Button Margin="12,6,0,6" x:Name="uninstallButton" Visibility="Collapsed" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}">
+                <Button Margin="12,6,0,6" x:Name="uninstallButton" Visibility="Visible" IsEnabled="False" Click="UninstallSelectedApp_Click" Style="{ThemeResource AccentButtonStyle}">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <FontIcon Glyph="&#xE74D;" FontSize="16"/>
                         <TextBlock x:Uid="DebloatSystemPage_UninstallButton"/>
@@ -107,18 +110,186 @@
             </controls:WrapPanel>
         </Grid>
 
-        <ScrollViewer Padding="24,14,24,0" Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="0,0,0,38">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+        <Grid Padding="24,14,24,4" Grid.Row="1">
+            <TextBlock x:Uid="DebloatSystemPage_NoAppFound" x:Name="noAppFoundText" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
 
-                <TextBlock x:Uid="DebloatSystemPage_NoAppFound" Grid.Row="1" x:Name="noAppFoundText" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
-
-                <StackPanel Margin="10" x:Name="gettingAppsLoading" Grid.Row="1" VerticalAlignment="Center" Visibility="Visible">
-                    <ProgressRing Margin="20" Width="100" Height="100" IsIndeterminate="True"/>
-                    <TextBlock x:Uid="DebloatSystemPage_FetchingInstalledApps" HorizontalAlignment="Center" Style="{StaticResource DetailBodyBaseMediumStyle}"/>
+            <!-- Skeleton Placeholder when loading debloat apps list -->
+            <StackPanel x:Name="gettingAppsLoading" VerticalAlignment="Top" Visibility="Visible">
+                    <ProgressBar IsIndeterminate="True" Height="2" Margin="0,0,0,8" Opacity="0.6"/>
+                    <StackPanel Spacing="3" helpers:ShimmerEffect.IsActive="True">
+                        <!-- Skeleton Item 1 -->
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1" CornerRadius="4" Padding="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="18" Height="18" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.4" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Width="48" Height="48" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.5" Margin="0,0,18,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                                        <Border Height="14" Width="190" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.6"/>
+                                        <Border Height="10" Width="110" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Border Grid.Column="2" Width="40" Height="16" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <!-- Skeleton Item 2 -->
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1" CornerRadius="4" Padding="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="18" Height="18" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.4" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Width="48" Height="48" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.5" Margin="0,0,18,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                                        <Border Height="14" Width="140" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.6"/>
+                                        <Border Height="10" Width="80" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Border Grid.Column="2" Width="40" Height="16" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <!-- Skeleton Item 3 -->
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1" CornerRadius="4" Padding="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="18" Height="18" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.4" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Width="48" Height="48" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.5" Margin="0,0,18,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                                        <Border Height="14" Width="230" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.6"/>
+                                        <Border Height="10" Width="130" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <!-- Skeleton Item 4 -->
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1" CornerRadius="4" Padding="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="18" Height="18" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.4" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Width="48" Height="48" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.5" Margin="0,0,18,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                                        <Border Height="14" Width="170" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.6"/>
+                                        <Border Height="10" Width="95" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Border Grid.Column="2" Width="40" Height="16" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <!-- Skeleton Item 5 -->
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1" CornerRadius="4" Padding="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="18" Height="18" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.4" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Width="48" Height="48" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.5" Margin="0,0,18,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                                        <Border Height="14" Width="210" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.6"/>
+                                        <Border Height="10" Width="120" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <!-- Skeleton Item 6 -->
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1" CornerRadius="4" Padding="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="18" Height="18" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.4" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Width="48" Height="48" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.5" Margin="0,0,18,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                                        <Border Height="14" Width="150" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.6"/>
+                                        <Border Height="10" Width="85" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Border Grid.Column="2" Width="40" Height="16" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <!-- Skeleton Item 7 -->
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1" CornerRadius="4" Padding="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="18" Height="18" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.4" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Width="48" Height="48" CornerRadius="4" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.5" Margin="0,0,18,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                                        <Border Height="14" Width="180" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.6"/>
+                                        <Border Height="10" Width="105" HorizontalAlignment="Left" CornerRadius="3" Background="{ThemeResource SubtleFillColorSecondaryBrush}" Opacity="0.3"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
                 </StackPanel>
 
                 <ListView x:Name="appListView"
@@ -126,12 +297,6 @@
                     Visibility="Collapsed"
                     ItemsSource="{x:Bind AppList}"
                     SelectionMode="Multiple">
-                    <ListView.ItemContainerTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition FromVerticalOffset="40" />
-                            <RepositionThemeTransition IsStaggeringEnabled="False" />
-                        </TransitionCollection>
-                    </ListView.ItemContainerTransitions>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -240,15 +405,14 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </Grid>
-        </ScrollViewer>
-        <Grid Grid.Row="2">
+        </Grid>
+        <Grid Grid.Row="2" Padding="24,4,24,8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="uninstallingStatusText" Margin="36,6" Grid.Column="0" Style="{StaticResource CaptionTextBlockStyle}" Visibility="Collapsed" TextWrapping="Wrap"/>
-            <ProgressBar x:Name="uninstallingStatusBar" Margin="0,0,36,0" Grid.Column="1" Width="Auto" Minimum="0" Maximum="100"/>
+            <TextBlock x:Name="uninstallingStatusText" Margin="0,0,16,0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" Visibility="Collapsed" TextWrapping="Wrap"/>
+            <ProgressBar x:Name="uninstallingStatusBar" Margin="0" Grid.Column="1" VerticalAlignment="Center" Width="Auto" Minimum="0" Maximum="100" Opacity="0"/>
         </Grid>
     </Grid>
 </Page>

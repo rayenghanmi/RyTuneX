@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
+using RyTuneX.Services;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Drawing.Imaging;
@@ -96,17 +97,23 @@ internal partial class OptimizationOptions
         var defaultPath = Path.Combine(IconCacheDirectory, "defaulticon.png");
         if (File.Exists(defaultPath) && new FileInfo(defaultPath).Length > 0)
             return;
-
-        var largeIcons = new IntPtr[1];
-        ExtractIconEx(@"C:\Windows\System32\imageres.dll", 152, largeIcons, null, 1);
-        var hIcon = largeIcons[0];
-        if (hIcon != IntPtr.Zero)
+        try
         {
-            using var clonedIcon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(hIcon).Clone();
-            DestroyIcon(hIcon);
+            var largeIcons = new IntPtr[1];
+            ExtractIconEx(@"C:\Windows\System32\imageres.dll", 152, largeIcons, null, 1);
+            var hIcon = largeIcons[0];
+            if (hIcon != IntPtr.Zero)
+            {
+                using var clonedIcon = (System.Drawing.Icon)System.Drawing.Icon.FromHandle(hIcon).Clone();
+                DestroyIcon(hIcon);
 
-            using var bmp = clonedIcon.ToBitmap();
-            bmp.Save(defaultPath, ImageFormat.Png);
+                using var bmp = clonedIcon.ToBitmap();
+                bmp.Save(defaultPath, ImageFormat.Png);
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogWarning($"Failed to extract default icon: {ex.Message}");
         }
     }
 
@@ -439,6 +446,8 @@ internal partial class OptimizationOptions
             {
                 searchPattern = searchPattern.Split('_')[0];
             }
+            // Sanitize for PowerShell single-quoted strings
+            searchPattern = searchPattern.Replace("'", "''");
 
             var removeProvisioned = $"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.DisplayName -eq '{searchPattern}' -or $_.PackageName -like '*{searchPattern}*' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }}";
             await RunPowerShell(removeProvisioned).ConfigureAwait(false);
@@ -674,7 +683,7 @@ internal partial class OptimizationOptions
 
     private static int GetScale(string file)
     {
-        var m = Regex.Match(file, @"Scale-(\\d+)");
+        var m = Regex.Match(file, @"Scale-(\d+)");
         return m.Success ? int.Parse(m.Groups[1].Value) : 100;
     }
 
@@ -741,8 +750,11 @@ internal partial class OptimizationOptions
         };
 
         process.Start();
-        var output = await process.StandardOutput.ReadToEndAsync().ConfigureAwait(false);
+        var outputTask = process.StandardOutput.ReadToEndAsync();
+        var errorTask = process.StandardError.ReadToEndAsync();
         await process.WaitForExitAsync().ConfigureAwait(false);
+        var output = await outputTask.ConfigureAwait(false);
+        await errorTask.ConfigureAwait(false); // drain stderr to prevent deadlock
         return output.Trim();
     }
 
@@ -751,10 +763,11 @@ internal partial class OptimizationOptions
         try
         {
             // Get all toggle switches that have been applied (saved state == 1)
-            using var rytunexKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
                 Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
                     ? RegistryView.Registry64
-                    : RegistryView.Default).OpenSubKey(RegistryBaseKey);
+                    : RegistryView.Default);
+            using var rytunexKey = baseKey.OpenSubKey(RegistryBaseKey);
 
             if (rytunexKey != null)
             {
@@ -762,30 +775,29 @@ internal partial class OptimizationOptions
 
                 foreach (var valueName in valueNames)
                 {
-                    // Handle Windows Updates mode separately
-                    if (valueName == "WindowsUpdatesMode")
+                    try
                     {
-                        var savedMode = rytunexKey.GetValue(valueName) as string;
-                        if (!string.IsNullOrEmpty(savedMode) && !savedMode.Equals("Default", StringComparison.OrdinalIgnoreCase))
+                        // Handle Windows Updates mode separately
+                        if (valueName == "WindowsUpdatesMode")
                         {
-                            // Revert Windows Updates to default
-                            await OptimizeSystemHelper.SetWindowsUpdatesDefault().ConfigureAwait(false);
+                            var savedMode = rytunexKey.GetValue(valueName) as string;
+                            if (!string.IsNullOrEmpty(savedMode) && !savedMode.Equals("Default", StringComparison.OrdinalIgnoreCase))
+                            {
+                                await OptimizeSystemHelper.SetWindowsUpdatesDefault().ConfigureAwait(false);
+                            }
+                            continue;
                         }
-                        continue;
-                    }
 
-                    var savedState = rytunexKey.GetValue(valueName);
-                    if (savedState is int state && state == 1)
-                    {
-                        // Create a fake toggle switch to revert the optimization
-                        var fakeToggleSwitch = new ToggleSwitch
+                        var savedState = rytunexKey.GetValue(valueName);
+                        if (savedState is int state && state == 1)
                         {
-                            Tag = valueName,
-                            IsOn = false // Set to false to trigger the reverse action
-                        };
-
-                        // Call the method to revert
-                        await XamlSwitchesAsync(fakeToggleSwitch);
+                            await ExecuteToggleActionAsync(valueName, false, CancellationToken.None).ConfigureAwait(false);
+                        }
+                    }
+                    catch (Exception itemEx)
+                    {
+                        // Log individual toggle revert failure but continue with remaining items
+                        _ = LogHelper.LogError($"RevertAllChanges: Failed to revert '{valueName}': {itemEx.Message}");
                     }
                 }
             }
@@ -795,6 +807,115 @@ internal partial class OptimizationOptions
             _ = LogHelper.LogError($"RevertAllChanges: {ex.Message}\n Stack Trace: {ex.StackTrace}");
         }
     }
+
+    public static int GetSavedOptimizationsCount()
+    {
+        try
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default);
+            using var rytunexKey = baseKey.OpenSubKey(RegistryBaseKey);
+
+            if (rytunexKey == null) return 0;
+
+            int count = 0;
+            foreach (var valueName in rytunexKey.GetValueNames())
+            {
+                var val = rytunexKey.GetValue(valueName);
+                if (val is int || (valueName == "WindowsUpdatesMode" && val is string s && !s.Equals("Default", StringComparison.OrdinalIgnoreCase)))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"GetSavedOptimizationsCount failed: {ex.Message}");
+            return 0;
+        }
+    }
+
+    public static async Task<int> ReapplyAllOptimizationsAsync(CancellationToken ct = default)
+    {
+        int appliedCount = 0;
+        try
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                    ? RegistryView.Registry64
+                    : RegistryView.Default);
+            using var rytunexKey = baseKey.OpenSubKey(RegistryBaseKey);
+
+            if (rytunexKey != null)
+            {
+                var valueNames = rytunexKey.GetValueNames();
+
+                foreach (var valueName in valueNames)
+                {
+                    if (ct.IsCancellationRequested) break;
+
+                    try
+                    {
+                        // Handle Windows Updates mode separately
+                        if (valueName == "WindowsUpdatesMode")
+                        {
+                            var savedMode = rytunexKey.GetValue(valueName) as string;
+                            if (!string.IsNullOrEmpty(savedMode) && !savedMode.Equals("Default", StringComparison.OrdinalIgnoreCase))
+                            {
+                                switch (savedMode)
+                                {
+                                    case "Security":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesSecurityOnly().ConfigureAwait(false);
+                                        appliedCount++;
+                                        break;
+                                    case "Manually":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesManually().ConfigureAwait(false);
+                                        appliedCount++;
+                                        break;
+                                    case "Disabled":
+                                        await OptimizeSystemHelper.SetWindowsUpdatesDisabled().ConfigureAwait(false);
+                                        appliedCount++;
+                                        break;
+                                }
+                                _ = LogHelper.Log($"Re-applied Windows Updates mode: {savedMode}");
+                            }
+                            continue;
+                        }
+
+                        var savedState = rytunexKey.GetValue(valueName);
+                        if (savedState is int state)
+                        {
+                            // 1 = turn on, 0 = turn off
+                            bool isOn = state == 1;
+                            await ExecuteToggleActionAsync(valueName, isOn, ct).ConfigureAwait(false);
+                            IntelligentOptimizationEngine.SetCachedState(valueName, isOn);
+                            appliedCount++;
+                            _ = LogHelper.Log($"Re-applied setting: {valueName} = {(isOn ? 1 : 0)}");
+                        }
+                    }
+                    catch (Exception itemEx)
+                    {
+                        _ = LogHelper.LogError($"ReapplyAllOptimizations: Failed to re-apply '{valueName}': {itemEx.Message}");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"ReapplyAllOptimizations: {ex.Message}\n Stack Trace: {ex.StackTrace}");
+        }
+
+        if (appliedCount > 0)
+        {
+            ReviewPromptHelper.NotifyOptimizationCompleted();
+        }
+
+        return appliedCount;
+    }
+
     public static async Task XamlSwitchesAsync(ToggleSwitch toggleSwitch)
     {
         if (toggleSwitch == null || toggleSwitch.Tag == null) return;
@@ -863,7 +984,16 @@ internal partial class OptimizationOptions
         }
     }
 
-    private static async Task ExecuteToggleActionAsync(string? tag, bool isOn, CancellationToken ct)
+    // Executes a toggle action directly without requiring a UI ToggleSwitch element.
+    public static async Task ExecuteToggleDirectAsync(string tag, bool isOn)
+    {
+        if (string.IsNullOrEmpty(tag)) return;
+
+        _toggleQueue.Enqueue(ct => ExecuteToggleActionAsync(tag, isOn, ct));
+        await Task.Run(() => ProcessToggleQueueAsync(_toggleCts.Token)).ConfigureAwait(false);
+    }
+
+    internal static async Task ExecuteToggleActionAsync(string? tag, bool isOn, CancellationToken ct = default)
     {
         if (string.IsNullOrEmpty(tag)) return;
 
@@ -958,8 +1088,8 @@ internal partial class OptimizationOptions
                 break;
 
             case "LowDiskSpaceChecks":
-                if (isOn) await OptimizeSystemHelper.EnableLowDiskSpaceChecks().ConfigureAwait(false);
-                else await OptimizeSystemHelper.DisableLowDiskSpaceChecks().ConfigureAwait(false);
+                if (isOn) await OptimizeSystemHelper.DisableLowDiskSpaceChecks().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLowDiskSpaceChecks().ConfigureAwait(false);
                 break;
 
             case "LinkResolve":
@@ -978,8 +1108,8 @@ internal partial class OptimizationOptions
                 break;
 
             case "FileExtensionsAndHiddenFiles":
-                if (isOn) await OptimizeSystemHelper.HideFileExtensionsAndHiddenFiles().ConfigureAwait(false);
-                else await OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles().ConfigureAwait(false);
+                if (isOn) await OptimizeSystemHelper.ShowFileExtensionsAndHiddenFiles().ConfigureAwait(false);
+                else await OptimizeSystemHelper.HideFileExtensionsAndHiddenFiles().ConfigureAwait(false);
                 break;
 
             case "SystemProfile":
@@ -1162,11 +1292,6 @@ internal partial class OptimizationOptions
                 else await OptimizeSystemHelper.EnableSafeSearchMode().ConfigureAwait(false);
                 break;
 
-            case "ActivityUploads":
-                if (isOn) await OptimizeSystemHelper.DisableActivityUploads().ConfigureAwait(false);
-                else await OptimizeSystemHelper.EnableActivityUploads().ConfigureAwait(false);
-                break;
-
             case "ClipboardSync":
                 if (isOn) await OptimizeSystemHelper.DisableClipboardSync().ConfigureAwait(false);
                 else await OptimizeSystemHelper.EnableClipboardSync().ConfigureAwait(false);
@@ -1190,11 +1315,6 @@ internal partial class OptimizationOptions
             case "FindMyDevice":
                 if (isOn) await OptimizeSystemHelper.DisableFindMyDevice().ConfigureAwait(false);
                 else await OptimizeSystemHelper.EnableFindMyDevice().ConfigureAwait(false);
-                break;
-
-            case "ActivityFeed":
-                if (isOn) await OptimizeSystemHelper.DisableActivityFeed().ConfigureAwait(false);
-                else await OptimizeSystemHelper.EnableActivityFeed().ConfigureAwait(false);
                 break;
 
             case "Cdp":
@@ -1370,6 +1490,96 @@ internal partial class OptimizationOptions
             case "WindowsAI":
                 if (isOn) await OptimizeSystemHelper.DisableWindowsAI().ConfigureAwait(false);
                 else await OptimizeSystemHelper.EnableWindowsAI().ConfigureAwait(false);
+                break;
+
+            case "GlobalTimerResolution":
+                if (isOn) await OptimizeSystemHelper.EnableGlobalTimerResolution().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableGlobalTimerResolution().ConfigureAwait(false);
+                break;
+
+            case "HPET":
+                if (isOn) await OptimizeSystemHelper.DisableHPET().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableHPET().ConfigureAwait(false);
+                break;
+
+            case "DynamicTick":
+                if (isOn) await OptimizeSystemHelper.DisableDynamicTick().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableDynamicTick().ConfigureAwait(false);
+                break;
+
+            case "Prefetch":
+                if (isOn) await OptimizeSystemHelper.DisablePrefetch().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnablePrefetch().ConfigureAwait(false);
+                break;
+
+            case "LargeSystemCache":
+                if (isOn) await OptimizeSystemHelper.EnableLargeSystemCache().ConfigureAwait(false);
+                else await OptimizeSystemHelper.DisableLargeSystemCache().ConfigureAwait(false);
+                break;
+
+            case "NDU":
+                if (isOn) await OptimizeSystemHelper.DisableNDU().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableNDU().ConfigureAwait(false);
+                break;
+
+            case "PageFileEncryption":
+                if (isOn) await OptimizeSystemHelper.DisablePageFileEncryption().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnablePageFileEncryption().ConfigureAwait(false);
+                break;
+
+            case "LockScreenNotifications":
+                if (isOn) await OptimizeSystemHelper.DisableLockScreenNotifications().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableLockScreenNotifications().ConfigureAwait(false);
+                break;
+
+            case "ToastNotifications":
+                if (isOn) await OptimizeSystemHelper.DisableToastNotifications().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableToastNotifications().ConfigureAwait(false);
+                break;
+
+            case "NotificationCenter":
+                if (isOn) await OptimizeSystemHelper.DisableNotificationCenter().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableNotificationCenter().ConfigureAwait(false);
+                break;
+
+            case "SuggestedActions":
+                if (isOn) await OptimizeSystemHelper.DisableSuggestedActions().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableSuggestedActions().ConfigureAwait(false);
+                break;
+
+            case "WiFiSense":
+                if (isOn) await OptimizeSystemHelper.DisableWiFiSense().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWiFiSense().ConfigureAwait(false);
+                break;
+
+            case "WebSearchResults":
+                if (isOn) await OptimizeSystemHelper.DisableWebSearchResults().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableWebSearchResults().ConfigureAwait(false);
+                break;
+
+            case "AppLaunchTracking":
+                if (isOn) await OptimizeSystemHelper.DisableAppLaunchTracking().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableAppLaunchTracking().ConfigureAwait(false);
+                break;
+
+            case "TimelineHistory":
+                if (isOn) await OptimizeSystemHelper.DisableTimelineHistory().ConfigureAwait(false);
+                else await OptimizeSystemHelper.EnableTimelineHistory().ConfigureAwait(false);
+                break;
+
+            case "TakeOwnership":
+                if (isOn) await OptimizeSystemHelper.AddTakeOwnership().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RemoveTakeOwnership().ConfigureAwait(false);
+                break;
+
+            case "OpenCmdHere":
+                if (isOn) await OptimizeSystemHelper.AddOpenCmdHere().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RemoveOpenCmdHere().ConfigureAwait(false);
+                break;
+
+            case "CopyFilePath":
+                if (isOn) await OptimizeSystemHelper.AddCopyFilePath().ConfigureAwait(false);
+                else await OptimizeSystemHelper.RemoveCopyFilePath().ConfigureAwait(false);
                 break;
 
             default:

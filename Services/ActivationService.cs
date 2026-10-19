@@ -11,30 +11,37 @@ public class ActivationService : IActivationService
     private readonly ActivationHandler<LaunchActivatedEventArgs> _defaultHandler;
     private readonly IEnumerable<IActivationHandler> _activationHandlers;
     private readonly IThemeSelectorService _themeSelectorService;
+    private readonly IAccentColorService _accentColorService;
     private UIElement? _shell = null;
     private bool _initializedShell = false;
 
-    public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, IThemeSelectorService themeSelectorService)
+    public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, IThemeSelectorService themeSelectorService, IAccentColorService accentColorService)
     {
         _defaultHandler = defaultHandler;
         _activationHandlers = activationHandlers;
         _themeSelectorService = themeSelectorService;
+        _accentColorService = accentColorService;
     }
 
     public async Task ActivateAsync(object activationArgs)
     {
         _ = LogHelper.Log("ActivateAsync started");
-        await InitializeAsync(); // only load theme
+        await InitializeAsync();
 
-        // Present an empty frame immediately to show a window asap
         if (App.MainWindow.Content == null)
         {
             App.MainWindow.Content = new Frame();
         }
 
+        if (App.MainWindow.Content is FrameworkElement rootFe)
+        {
+            rootFe.RequestedTheme = _themeSelectorService.Theme;
+        }
+
+        // Show the window with its Mica backdrop immediately
         App.MainWindow.Activate();
 
-        // Defer the rest of the UI intialization to show the window faster
+        // Defer the rest of the UI initialization to show the Mica window immediately without a black box
         if (!App.MainWindow.DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, async () =>
         {
             await RunDeferredActivationAsync(activationArgs);
@@ -67,9 +74,14 @@ public class ActivationService : IActivationService
         }
 
         _shell = App.GetService<ShellPage>();
+        if (_shell is FrameworkElement fe)
+        {
+            fe.RequestedTheme = _themeSelectorService.Theme;
+        }
         App.MainWindow.Content = _shell;
         _initializedShell = true;
         _ = LogHelper.Log("Shell initialized");
+        await Task.CompletedTask;
     }
 
     private async Task HandleActivationAsync(object activationArgs)
@@ -89,6 +101,7 @@ public class ActivationService : IActivationService
     private async Task InitializeAsync()
     {
         await _themeSelectorService.InitializeAsync().ConfigureAwait(false);
+        await _accentColorService.InitializeAsync().ConfigureAwait(false);
         await Task.CompletedTask;
     }
 

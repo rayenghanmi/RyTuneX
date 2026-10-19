@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using RyTuneX.Helpers;
+using RyTuneX.Services;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -15,7 +16,10 @@ namespace RyTuneX.Views;
 public sealed partial class OptimizeSystemPage : Page
 {
     private const string RegistryBaseKey = @"SOFTWARE\RyTuneX\Optimizations";
+    private static List<(string Guid, string Name)>? _cachedPowerPlans;
+    private static string? _cachedActivePowerPlanGuid;
     private string? _pendingScrollTarget;
+    private bool _isInitialized;
     private bool _isInitializingPowerMode;
     private bool _isInitializingWindowsUpdates;
 
@@ -25,6 +29,7 @@ public sealed partial class OptimizeSystemPage : Page
         LogHelper.Log("Initializing OptimizeSystemPage");
         this.NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Required;
         Loaded += OptimizeSystemPage_Loaded;
+        Unloaded += OptimizeSystemPage_Unloaded;
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -35,27 +40,38 @@ public sealed partial class OptimizeSystemPage : Page
         if (e.Parameter is string optionTag && !string.IsNullOrEmpty(optionTag))
         {
             _pendingScrollTarget = optionTag;
+            if (_isInitialized)
+            {
+                _ = ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+                _pendingScrollTarget = null;
+            }
         }
     }
 
     // Start initialization in the background so navigation UI is not blocked
     private void OptimizeSystemPage_Loaded(object sender, RoutedEventArgs e)
     {
-        _ = InitializeAsync();
+        if (!_isInitialized)
+        {
+            _ = InitializeAsync();
+        }
+        else if (!string.IsNullOrEmpty(_pendingScrollTarget))
+        {
+            _ = ScrollToElementHelper.ScrollToElementAsync(this, _pendingScrollTarget);
+            _pendingScrollTarget = null;
+        }
     }
 
     // Perform the heavier initialization work asynchronously without blocking the UI navigation
     private async Task InitializeAsync()
     {
-        // Allow the UI to finish rendering and release the pressed state on the menu
-        await Task.Yield();
-
         try
         {
             await InitializeToggleSwitchesAsync();
-            await InitializePowerModeAsync();
-            await InitializeWindowsUpdatesAsync();
+            _ = InitializePowerModeAsync();
+            _ = InitializeWindowsUpdatesAsync();
             IntelligentCardEnhancer.EnhancePage(this);
+            _isInitialized = true;
 
             // Scroll to the target element if there's a pending scroll target
             if (!string.IsNullOrEmpty(_pendingScrollTarget))
@@ -75,13 +91,21 @@ public sealed partial class OptimizeSystemPage : Page
         _isInitializingPowerMode = true;
         try
         {
-            // Get all available power plans from the system
-            var powerPlans = await GetAvailablePowerPlansAsync();
-            var activePlanGuid = await GetActivePowerPlanGuidAsync();
+            if (_cachedPowerPlans == null || _cachedActivePowerPlanGuid == null)
+            {
+                var plans = await Task.Run(async () =>
+                {
+                    var p = await GetAvailablePowerPlansAsync();
+                    var a = await GetActivePowerPlanGuidAsync();
+                    return (p, a);
+                });
+                _cachedPowerPlans = plans.p;
+                _cachedActivePowerPlanGuid = plans.a;
+            }
 
             PowerModeComboBox.Items.Clear();
 
-            foreach (var (guid, name) in powerPlans)
+            foreach (var (guid, name) in _cachedPowerPlans)
             {
                 var item = new ComboBoxItem
                 {
@@ -91,7 +115,7 @@ public sealed partial class OptimizeSystemPage : Page
                 PowerModeComboBox.Items.Add(item);
 
                 // Select the active plan
-                if (!string.IsNullOrEmpty(activePlanGuid) && guid.Equals(activePlanGuid, StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrEmpty(_cachedActivePowerPlanGuid) && guid.Equals(_cachedActivePowerPlanGuid, StringComparison.OrdinalIgnoreCase))
                 {
                     PowerModeComboBox.SelectedItem = item;
                 }
@@ -173,6 +197,7 @@ public sealed partial class OptimizeSystemPage : Page
 
         if (PowerModeComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is string guid)
         {
+            _cachedActivePowerPlanGuid = guid;
             await SetPowerPlanAsync(guid);
         }
     }
@@ -270,23 +295,76 @@ public sealed partial class OptimizeSystemPage : Page
         _ = LogHelper.Log("Initializing Toggle Switches");
         try
         {
-            foreach (var toggleSwitch in FindVisualChildren<ToggleSwitch>(this))
+            var toggleSwitches = IntelligentCardEnhancer.GetAllToggleSwitches(this);
+            var tags = toggleSwitches
+                .Select(t => (t.Tag as string) ?? t.Name)
+                .Where(t => !string.IsNullOrEmpty(t))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            var states = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+            var missingTags = new List<string>();
+
+            foreach (var tagName in tags)
             {
-                if (toggleSwitch.Tag is string tagName)
+                if (IntelligentOptimizationEngine.TryGetCachedState(tagName, out bool cached))
                 {
-                    // Retrieve the state from the 64-bit registry with 32-bit app
-                    using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
-                        Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
-                            ? RegistryView.Registry64
-                            : RegistryView.Default).CreateSubKey(RegistryBaseKey);
-                    if (key != null && key.GetValue(tagName) is int state)
+                    states[tagName] = cached;
+                }
+                else
+                {
+                    missingTags.Add(tagName);
+                }
+            }
+
+            if (missingTags.Count > 0)
+            {
+                var detected = await Task.Run(() =>
+                {
+                    var dict = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+                    var regView = Environment.Is64BitOperatingSystem && !Environment.Is64BitProcess
+                        ? RegistryView.Registry64
+                        : RegistryView.Default;
+                    using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, regView);
+                    using var key = baseKey.CreateSubKey(RegistryBaseKey);
+
+                    foreach (var tagName in missingTags)
                     {
-                        toggleSwitch.IsOn = state == 1;
+                        var liveState = SystemStateDetector.DetectState(tagName);
+                        bool targetState;
+                        if (liveState.HasValue)
+                        {
+                            targetState = liveState.Value;
+                            try { key?.SetValue(tagName, targetState ? 1 : 0, RegistryValueKind.DWord); } catch { }
+                        }
+                        else
+                        {
+                            targetState = key != null && key.GetValue(tagName) is int state && state == 1;
+                        }
+
+                        IntelligentOptimizationEngine.SetCachedState(tagName, targetState);
+                        dict[tagName] = targetState;
                     }
 
-                    // Subscribe to the Toggled event
-                    toggleSwitch.Toggled += ToggleSwitch_Toggled;
+                    return dict;
+                });
+
+                foreach (var kvp in detected)
+                {
+                    states[kvp.Key] = kvp.Value;
                 }
+            }
+
+            foreach (var toggleSwitch in toggleSwitches)
+            {
+                var tagName = (toggleSwitch.Tag as string) ?? toggleSwitch.Name;
+                if (states.TryGetValue(tagName, out bool targetState))
+                {
+                    IntelligentCardEnhancer.SetToggleIsOnSilently(toggleSwitch, targetState);
+                }
+
+                toggleSwitch.Toggled -= ToggleSwitch_Toggled;
+                toggleSwitch.Toggled += ToggleSwitch_Toggled;
             }
         }
         catch (Exception ex)
@@ -323,12 +401,24 @@ public sealed partial class OptimizeSystemPage : Page
             }
         }
     }
+    private void OptimizeSystemPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        // When cached (NavigationCacheMode.Required), keep event subscriptions active
+    }
+
     private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
         try
         {
             var toggleSwitch = (ToggleSwitch)sender;
-            _ = LogHelper.Log($"ToggleSwitch Tag: {toggleSwitch.Tag}, IsOn: {toggleSwitch.IsOn}");
+            if (IntelligentCardEnhancer.IsSuppressed(toggleSwitch))
+            {
+                return;
+            }
+
+            var tagName = (toggleSwitch.Tag as string) ?? toggleSwitch.Name;
+            _ = LogHelper.Log($"ToggleSwitch Tag: {tagName}, IsOn: {toggleSwitch.IsOn}");
+            IntelligentOptimizationEngine.SetCachedState(tagName, toggleSwitch.IsOn);
             await OptimizationOptions.XamlSwitchesAsync(toggleSwitch);
         }
         catch (Exception ex)
@@ -355,7 +445,7 @@ public sealed partial class OptimizeSystemPage : Page
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
-                StandardOutputEncoding = encoding ?? await GetOEMConsoleEncoding(),
+                StandardOutputEncoding = encoding ?? GetOEMConsoleEncoding(),
             }
         };
 
@@ -370,20 +460,16 @@ public sealed partial class OptimizeSystemPage : Page
         return output;
     }
 
-    private async Task<string> StartTask(string command)
-    {
-        return await StartTaskAsync(command);
-    }
-
     private async void CompressOSButton_Click(object sender, RoutedEventArgs e)
     {
         // Get the current compression status
-        var status = await StartTask("compact.exe /compactos:query");
+        var status = await StartTaskAsync("compact.exe /compactos:query");
 
         // Create a dialog to show the compression status and options
         var compressDialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             PrimaryButtonStyle = (Style)Application.Current.Resources["AccentButtonStyle"],
@@ -402,11 +488,17 @@ public sealed partial class OptimizeSystemPage : Page
             CompressOSButton.Visibility = Visibility.Collapsed;
             CompressOSProgressRing.Visibility = Visibility.Visible;
             CompressOSProgressText.Text = "Compressing".GetLocalized();
-            var result = await StartTask("compact.exe /compactos:always");
-            App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
-            CompressOSButton.Visibility = Visibility.Visible;
-            CompressOSProgressRing.Visibility = Visibility.Collapsed;
-            CompressOSProgressText.Text = string.Empty;
+            try
+            {
+                var result = await StartTaskAsync("compact.exe /compactos:always");
+                App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
+                CompressOSProgressText.Text = string.Empty;
+            }
+            finally
+            {
+                CompressOSButton.Visibility = Visibility.Visible;
+                CompressOSProgressRing.Visibility = Visibility.Collapsed;
+            }
         };
 
         // Handle the Decompress button click by setting UI elements and running the command
@@ -416,11 +508,17 @@ public sealed partial class OptimizeSystemPage : Page
             CompressOSButton.Visibility = Visibility.Collapsed;
             CompressOSProgressRing.Visibility = Visibility.Visible;
             CompressOSProgressText.Text = "Decompressing".GetLocalized();
-            var result = await StartTask("compact.exe /compactos:never");
-            App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
-            CompressOSButton.Visibility = Visibility.Visible;
-            CompressOSProgressRing.Visibility = Visibility.Collapsed;
-            CompressOSProgressText.Text = string.Empty;
+            try
+            {
+                var result = await StartTaskAsync("compact.exe /compactos:never");
+                App.ShowNotification("SystemCompressionTitle".GetLocalized(), result, InfoBarSeverity.Success, 5000);
+                CompressOSProgressText.Text = string.Empty;
+            }
+            finally
+            {
+                CompressOSButton.Visibility = Visibility.Visible;
+                CompressOSProgressRing.Visibility = Visibility.Collapsed;
+            }
         };
         await compressDialog.ShowAsync();
     }
@@ -531,9 +629,12 @@ public sealed partial class OptimizeSystemPage : Page
                 }
             };
 
+            contentPanel.RequestedTheme = ActualTheme;
+
             var createDialog = new ContentDialog
             {
                 XamlRoot = XamlRoot,
+                RequestedTheme = ActualTheme,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
                 Title = "CreatePowerPlanTitle".GetLocalized(),
@@ -645,7 +746,7 @@ public sealed partial class OptimizeSystemPage : Page
     }
 
     private Encoding? _OEMConsoleEncoding;
-    private async Task<Encoding> GetOEMConsoleEncoding()
+    private Encoding GetOEMConsoleEncoding()
     {
         if (_OEMConsoleEncoding == null)
         {
@@ -653,14 +754,19 @@ public sealed partial class OptimizeSystemPage : Page
             int code_page = (int)GetConsoleOutputCP();
             if (code_page == 0)
             {
-                var output = await StartTaskAsync("chcp", Console.OutputEncoding);
-                var match = Regex.Match(output, @"(\d+)");
-                if (match.Success && int.TryParse(match.Value, out code_page)) {; }
+                code_page = System.Globalization.CultureInfo.CurrentCulture.TextInfo.OEMCodePage;
             }
             if (code_page == 0)
                 code_page = GetFallbackOEMCodePage();
 
-            _OEMConsoleEncoding = Encoding.GetEncoding(code_page);
+            try
+            {
+                _OEMConsoleEncoding = Encoding.GetEncoding(code_page);
+            }
+            catch
+            {
+                _OEMConsoleEncoding = Encoding.UTF8;
+            }
         }
         return _OEMConsoleEncoding!;
     }

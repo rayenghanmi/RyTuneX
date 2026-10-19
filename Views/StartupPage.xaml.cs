@@ -1,27 +1,44 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.Windows.Storage.Pickers;
 using RyTuneX.Helpers;
 using RyTuneX.Models;
 using System.Collections.ObjectModel;
+using Windows.System;
 
 namespace RyTuneX.Views;
 
 public sealed partial class StartupPage : Page
 {
+    private static List<StartupItem>? _cachedStartupItems;
     private List<StartupItem> _allStartupItems = [];
     private readonly ObservableCollection<StartupItem> _filteredStartupItems = [];
     private string _currentSort = "Name";
     private bool _sortAscending = true;
     private bool _isBusy;
+    private readonly HashSet<string> _togglingItemIds = [];
+    private readonly PointerEventHandler _togglePointerPressedHandler;
+    private ToggleSwitch? _lastInteractedToggle;
+    private long _lastUserInteractionTick;
 
     public StartupPage()
     {
         InitializeComponent();
+        _togglePointerPressedHandler = new PointerEventHandler(ItemToggle_PointerPressed);
         _ = LogHelper.Log("Initializing StartupPage");
         StartupListView.ItemsSource = _filteredStartupItems;
         Loaded += StartupPage_Loaded;
+        Unloaded += StartupPage_Unloaded;
+    }
+
+    private void StartupPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        Loaded -= StartupPage_Loaded;
+        Unloaded -= StartupPage_Unloaded;
+        _filteredStartupItems.Clear();
+        StartupListView.ItemsSource = null;
     }
 
     private async void StartupPage_Loaded(object sender, RoutedEventArgs e)
@@ -29,30 +46,47 @@ public sealed partial class StartupPage : Page
         await LoadStartupItemsAsync();
     }
 
-    private async Task LoadStartupItemsAsync()
+    private async Task LoadStartupItemsAsync(bool forceRefresh = false)
     {
         if (_isBusy) return;
-        _isBusy = true;
 
-        LoadingRing.IsActive = true;
-        LoadingRing.Visibility = Visibility.Visible;
+        if (!forceRefresh && _cachedStartupItems != null)
+        {
+            _allStartupItems = _cachedStartupItems;
+            StartupListView.ItemsSource = _filteredStartupItems;
+            UpdateSummaryCards();
+            ApplyFilterAndSort();
+            LoadingRing.IsActive = false;
+            LoadingRing.Visibility = Visibility.Collapsed;
+            StartupLoadingPlaceholder.Visibility = Visibility.Collapsed;
+            StartupListView.Visibility = Visibility.Visible;
+            return;
+        }
+
+        _isBusy = true;
+        LoadingRing.IsActive = false;
+        LoadingRing.Visibility = Visibility.Collapsed;
+        StartupLoadingPlaceholder.Visibility = Visibility.Visible;
         StartupListView.Visibility = Visibility.Collapsed;
 
         try
         {
             _allStartupItems = await StartupHelper.GetStartupItemsAsync();
+            _cachedStartupItems = _allStartupItems;
+            StartupListView.ItemsSource = _filteredStartupItems;
             UpdateSummaryCards();
             ApplyFilterAndSort();
         }
         catch (Exception ex)
         {
             _ = LogHelper.LogError($"Error loading startup items: {ex.Message}");
-            App.ShowNotification("Startup Manager", $"Failed to load startup items: {ex.Message}", InfoBarSeverity.Error, 4000);
+            App.ShowNotification("StartupPage_Title".GetLocalized(), string.Format("StartupPage_Notification_LoadFailed".GetLocalized(), ex.Message), InfoBarSeverity.Error, 4000);
         }
         finally
         {
             LoadingRing.IsActive = false;
             LoadingRing.Visibility = Visibility.Collapsed;
+            StartupLoadingPlaceholder.Visibility = Visibility.Collapsed;
             StartupListView.Visibility = Visibility.Visible;
             _isBusy = false;
         }
@@ -153,37 +187,107 @@ public sealed partial class StartupPage : Page
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
-        await LoadStartupItemsAsync();
+        _cachedStartupItems = null;
+        await LoadStartupItemsAsync(forceRefresh: true);
+    }
+
+    private void ItemToggle_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is ToggleSwitch toggle)
+        {
+            toggle.RemoveHandler(UIElement.PointerPressedEvent, _togglePointerPressedHandler);
+            toggle.AddHandler(UIElement.PointerPressedEvent, _togglePointerPressedHandler, true);
+
+            toggle.PreviewKeyDown -= ItemToggle_PreviewKeyDown;
+            toggle.PreviewKeyDown += ItemToggle_PreviewKeyDown;
+        }
+    }
+
+    private void ItemToggle_Unloaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is ToggleSwitch toggle)
+        {
+            toggle.RemoveHandler(UIElement.PointerPressedEvent, _togglePointerPressedHandler);
+            toggle.PreviewKeyDown -= ItemToggle_PreviewKeyDown;
+        }
+    }
+
+    private void ItemToggle_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is ToggleSwitch toggle)
+        {
+            _lastInteractedToggle = toggle;
+            _lastUserInteractionTick = Environment.TickCount64;
+        }
+    }
+
+    private void ItemToggle_PreviewKeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Space && sender is ToggleSwitch toggle)
+        {
+            _lastInteractedToggle = toggle;
+            _lastUserInteractionTick = Environment.TickCount64;
+        }
     }
 
     private async void ItemToggle_Toggled(object sender, RoutedEventArgs e)
     {
-        if (_isBusy) return;
-
-        if (sender is ToggleSwitch toggle && toggle.Tag is StartupItem item)
+        try
         {
-            // Ignore toggled events triggered by UI container virtualization during scrolling
-            if (toggle.FocusState == FocusState.Unfocused) return;
+            if (_isBusy) return;
+            if (sender is not ToggleSwitch toggle) return;
+
+            // Only proceed if this toggle change was initiated by user interaction
+            bool isUserInitiated = ReferenceEquals(_lastInteractedToggle, toggle) &&
+                                   (Environment.TickCount64 - _lastUserInteractionTick) < 2500;
+            _lastInteractedToggle = null;
+
+            if (!isUserInitiated)
+            {
+                return;
+            }
+
+            var item = (toggle.DataContext as StartupItem) ?? (toggle.Tag as StartupItem);
+            if (item == null) return;
+
             if (item.IsEnabled == toggle.IsOn) return;
+            if (_togglingItemIds.Contains(item.Id)) return;
 
-            var newState = toggle.IsOn;
-            var success = await StartupHelper.SetStartupItemEnabledAsync(item, newState);
+            _togglingItemIds.Add(item.Id);
+            toggle.IsEnabled = false;
 
-            if (success)
+            try
             {
-                item.IsEnabled = newState;
-                UpdateSummaryCards();
-                var msg = newState
-                    ? string.Format("StartupPage_Notification_ToggledMessage".TryGetLocalized() ?? "Enabled {0}", item.Name)
-                    : string.Format("StartupPage_Notification_ToggledMessageDisabled".TryGetLocalized() ?? "Disabled {0}", item.Name);
-                App.ShowNotification("Startup Manager", msg, InfoBarSeverity.Success, 2500);
+                var newState = toggle.IsOn;
+                var success = await StartupHelper.SetStartupItemEnabledAsync(item, newState);
+
+                if (success)
+                {
+                    item.IsEnabled = newState;
+                    UpdateSummaryCards();
+                    var msg = newState
+                        ? string.Format("StartupPage_Notification_ToggledMessage".TryGetLocalized() ?? "Enabled {0}", item.Name)
+                        : string.Format("StartupPage_Notification_ToggledMessageDisabled".TryGetLocalized() ?? "Disabled {0}", item.Name);
+                    App.ShowNotification("StartupPage_Title".GetLocalized(), msg, InfoBarSeverity.Success, 2500);
+                }
+                else
+                {
+                    // Revert toggle state if operation failed (isUserInitiated will be false, preventing recursion)
+                    toggle.IsOn = item.IsEnabled;
+
+                    var msg = string.Format("StartupPage_Notification_ToggleFailed".TryGetLocalized() ?? "Failed to update state for '{0}'.", item.Name);
+                    App.ShowNotification("StartupPage_Title".GetLocalized(), msg, InfoBarSeverity.Warning, 3500);
+                }
             }
-            else
+            finally
             {
-                // Revert toggle state if operation failed
-                toggle.IsOn = !newState;
-                App.ShowNotification("Startup Manager", "StartupPage_Notification_AdminRequired".TryGetLocalized() ?? "Administrator privileges required to modify system startup items.", InfoBarSeverity.Warning, 4000);
+                toggle.IsEnabled = true;
+                _togglingItemIds.Remove(item.Id);
             }
+        }
+        catch (Exception ex)
+        {
+            _ = LogHelper.LogError($"Error in startup item toggle: {ex.Message}");
         }
     }
 
@@ -199,7 +303,7 @@ public sealed partial class StartupPage : Page
     {
         if (sender is Button button && button.Tag is StartupItem item)
         {
-            var stack = new StackPanel { Spacing = 10, Margin = new Thickness(0, 10, 0, 0) };
+            var stack = new StackPanel { Spacing = 10, Margin = new Thickness(0, 10, 0, 0), RequestedTheme = ActualTheme };
 
             void AddDetail(string label, string val)
             {
@@ -232,6 +336,7 @@ public sealed partial class StartupPage : Page
             var dialog = new ContentDialog
             {
                 XamlRoot = XamlRoot,
+                RequestedTheme = ActualTheme,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 Title = "StartupPage_DetailsDialog_Title".TryGetLocalized() ?? "Startup App Details",
                 Content = stack,
@@ -254,6 +359,7 @@ public sealed partial class StartupPage : Page
             var confirmDialog = new ContentDialog
             {
                 XamlRoot = XamlRoot,
+                RequestedTheme = ActualTheme,
                 Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
                 Title = title,
                 Content = string.Format(contentFormat, item.Name),
@@ -304,7 +410,9 @@ public sealed partial class StartupPage : Page
             {
                 var picker = new FileOpenPicker(App.MainWindow.AppWindow.Id)
                 {
-                    SuggestedStartLocation = PickerLocationId.Desktop
+                    SuggestedStartLocation = PickerLocationId.Desktop,
+                    Title = "Select Application or Script",
+                    SettingsIdentifier = "RyTuneX_StartupAppPicker"
                 };
                 picker.FileTypeFilter.Add(".exe");
                 picker.FileTypeFilter.Add(".bat");
@@ -345,6 +453,7 @@ public sealed partial class StartupPage : Page
         var stack = new StackPanel
         {
             Spacing = 12,
+            RequestedTheme = ActualTheme,
             Children =
             {
                 nameBox,
@@ -359,6 +468,7 @@ public sealed partial class StartupPage : Page
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
             Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
             BorderBrush = (SolidColorBrush)Application.Current.Resources["AccentAAFillColorDefaultBrush"],
             Title = "StartupPage_AddDialog_Title".TryGetLocalized() ?? "Add Startup App",
@@ -378,6 +488,13 @@ public sealed partial class StartupPage : Page
             var isUserScope = scopeRadioUser.IsChecked == true;
 
             var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
+
+            // Warn if path looks like a file but doesn't exist
+            if (!string.IsNullOrEmpty(targetPath) && Path.HasExtension(targetPath) && !File.Exists(targetPath))
+            {
+                var warnMsg = string.Format("StartupPage_Notification_FileNotFound".TryGetLocalized() ?? "File not found at '{0}'. It will still be added to startup, but may not launch.", targetPath);
+                App.ShowNotification(titleText, warnMsg, InfoBarSeverity.Warning, 4000);
+            }
 
             if (string.IsNullOrEmpty(appName) || string.IsNullOrEmpty(targetPath))
             {
@@ -403,43 +520,199 @@ public sealed partial class StartupPage : Page
 
     private async void EnableAllButton_Click(object sender, RoutedEventArgs e)
     {
-        var itemsToEnable = _filteredStartupItems.Where(x => !x.IsEnabled).ToList();
-        if (itemsToEnable.Count == 0) return;
-
-        int count = 0;
-        foreach (var item in itemsToEnable)
+        if (_isBusy) return;
+        _isBusy = true;
+        try
         {
-            if (await StartupHelper.SetStartupItemEnabledAsync(item, true))
-            {
-                count++;
-            }
-        }
+            var itemsToEnable = _filteredStartupItems.Where(x => !x.IsEnabled).ToList();
+            if (itemsToEnable.Count == 0) return;
 
-        UpdateSummaryCards();
-        ApplyFilterAndSort();
-        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
-        var msg = string.Format("StartupPage_Notification_EnabledCount".TryGetLocalized() ?? "Enabled {0} startup apps.", count);
-        App.ShowNotification(titleText, msg, InfoBarSeverity.Success, 3000);
+            var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
+            int count = 0;
+            var failedCount = 0;
+            foreach (var item in itemsToEnable)
+            {
+                if (await StartupHelper.SetStartupItemEnabledAsync(item, true))
+                {
+                    item.IsEnabled = true;
+                    count++;
+                }
+                else
+                {
+                    failedCount++;
+                }
+            }
+
+            UpdateSummaryCards();
+            ApplyFilterAndSort();
+            var msg = failedCount > 0
+                ? string.Format("StartupPage_Notification_EnabledCountFailed".TryGetLocalized() ?? "Enabled {0} startup apps. {1} failed.", count, failedCount)
+                : string.Format("StartupPage_Notification_EnabledCount".TryGetLocalized() ?? "Enabled {0} startup apps.", count);
+            App.ShowNotification(titleText, msg, failedCount > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success, 3000);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
     }
 
     private async void DisableAllButton_Click(object sender, RoutedEventArgs e)
     {
-        var itemsToDisable = _filteredStartupItems.Where(x => x.IsEnabled).ToList();
-        if (itemsToDisable.Count == 0) return;
-
-        int count = 0;
-        foreach (var item in itemsToDisable)
+        if (_isBusy) return;
+        _isBusy = true;
+        try
         {
-            if (await StartupHelper.SetStartupItemEnabledAsync(item, false))
+            var itemsToDisable = _filteredStartupItems.Where(x => x.IsEnabled).ToList();
+            if (itemsToDisable.Count == 0) return;
+
+            var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
+            int count = 0;
+            var failedCount = 0;
+            foreach (var item in itemsToDisable)
             {
-                count++;
+                if (await StartupHelper.SetStartupItemEnabledAsync(item, false))
+                {
+                    item.IsEnabled = false;
+                    count++;
+                }
+                else
+                {
+                    failedCount++;
+                }
             }
+
+            UpdateSummaryCards();
+            ApplyFilterAndSort();
+            var msg = failedCount > 0
+                ? string.Format("StartupPage_Notification_DisabledCountFailed".TryGetLocalized() ?? "Disabled {0} startup apps. {1} failed.", count, failedCount)
+                : string.Format("StartupPage_Notification_DisabledCount".TryGetLocalized() ?? "Disabled {0} startup apps.", count);
+            App.ShowNotification(titleText, msg, failedCount > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success, 3000);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    private void StartupListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var count = StartupListView.SelectedItems.Count;
+        if (count > 0)
+        {
+            var template = "StartupPage_SelectionCount".TryGetLocalized() ?? "{0} item(s) selected";
+            SelectionCountText.Text = string.Format(template, count);
+            SelectionBar.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            SelectionBar.Visibility = Visibility.Collapsed;
+        }
+
+        if (SelectAllCheckBox != null)
+        {
+            if (_filteredStartupItems.Count == 0 || count == 0)
+            {
+                SelectAllCheckBox.IsChecked = false;
+            }
+            else if (count >= _filteredStartupItems.Count)
+            {
+                SelectAllCheckBox.IsChecked = true;
+            }
+            else
+            {
+                SelectAllCheckBox.IsChecked = null; // Indeterminate
+            }
+        }
+    }
+
+    private void SelectAllCheckBox_Click(object sender, RoutedEventArgs e)
+    {
+        if (SelectAllCheckBox.IsChecked == true)
+        {
+            StartupListView.SelectAll();
+        }
+        else
+        {
+            StartupListView.SelectedItems.Clear();
+        }
+    }
+
+    private async void RemoveSelectedButton_Click(object sender, RoutedEventArgs e)
+    {
+        var selectedItems = StartupListView.SelectedItems.OfType<StartupItem>().ToList();
+        if (selectedItems.Count == 0) return;
+
+        var title = "StartupPage_BatchRemoveDialog_Title".TryGetLocalized() ?? "Remove Startup Apps";
+        var contentFormat = "StartupPage_BatchRemoveDialog_Content".TryGetLocalized()
+            ?? "Are you sure you want to remove {0} item(s) from startup?";
+        var primaryBtn = "StartupPage_RemoveDialog_PrimaryButton".TryGetLocalized() ?? "Remove";
+        var closeBtn = "StartupPage_RemoveDialog_CancelButton".TryGetLocalized() ?? "Cancel";
+
+        var confirmDialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            RequestedTheme = ActualTheme,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            Title = title,
+            Content = string.Format(contentFormat, selectedItems.Count),
+            PrimaryButtonText = primaryBtn,
+            CloseButtonText = closeBtn,
+            DefaultButton = ContentDialogButton.Close
+        };
+
+        var result = await confirmDialog.ShowAsync();
+        if (result != ContentDialogResult.Primary) return;
+
+        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
+        int removedCount = 0;
+        int failedCount = 0;
+
+        RemoveSelectedButton.IsEnabled = false;
+        try
+        {
+            foreach (var item in selectedItems)
+            {
+                var success = await StartupHelper.RemoveStartupItemAsync(item);
+                if (success)
+                {
+                    _allStartupItems.Remove(item);
+                    removedCount++;
+                }
+                else
+                {
+                    failedCount++;
+                }
+            }
+        }
+        finally
+        {
+            RemoveSelectedButton.IsEnabled = true;
         }
 
         UpdateSummaryCards();
         ApplyFilterAndSort();
-        var titleText = "StartupPage_Title".TryGetLocalized() ?? "Startup Manager";
-        var msg = string.Format("StartupPage_Notification_DisabledCount".TryGetLocalized() ?? "Disabled {0} startup apps.", count);
-        App.ShowNotification(titleText, msg, InfoBarSeverity.Success, 3000);
+        StartupListView.SelectedItems.Clear();
+
+        if (failedCount > 0)
+        {
+            var msg = string.Format(
+                "StartupPage_Notification_BatchRemovedFailed".TryGetLocalized()
+                    ?? "Removed {0} item(s). {1} failed.",
+                removedCount, failedCount);
+            App.ShowNotification(titleText, msg, InfoBarSeverity.Warning, 4000);
+        }
+        else
+        {
+            var msg = string.Format(
+                "StartupPage_Notification_BatchRemoved".TryGetLocalized()
+                    ?? "Removed {0} startup item(s).",
+                removedCount);
+            App.ShowNotification(titleText, msg, InfoBarSeverity.Success, 3000);
+        }
+    }
+
+    private void ClearSelectionButton_Click(object sender, RoutedEventArgs e)
+    {
+        StartupListView.SelectedItems.Clear();
     }
 }
