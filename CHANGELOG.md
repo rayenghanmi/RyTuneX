@@ -83,6 +83,7 @@ All notable changes to this branch will be documented in this file.
 - Decoupled power plan and automatic update querying on the `Optimize System` page to execute asynchronously in the background without blocking the UI thread.
 - Fixed duplicate concurrent system scans on startup by implementing in-flight task deduplication in `IntelligentOptimizationEngine.ScanAsync` and preventing redundant dual `RefreshScoreAsync` scheduling in `IntelligentScoreHeaderControl`.
 - Fixed an issue where the DNS selection dropdown menu on the `Network` page was hardcoded to always reset back to "Automatic" on app startup and interface changes.
+- Fixed an issue in `Stress Test` page where clicking "Start All" froze the application and caused both "Start All" and "Stop All" buttons to stay disabled, by lowering worker thread priority to `BelowNormal`, optimizing GPU compute dispatches to preserve DWM/DirectX composition, and making test lifecycle operations asynchronous.
 
 ### Changes
 

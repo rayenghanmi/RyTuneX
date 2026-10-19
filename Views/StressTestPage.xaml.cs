@@ -59,7 +59,6 @@ public sealed partial class StressTestPage : Page
 
     private void StressTestPage_Unloaded(object sender, RoutedEventArgs e)
     {
-        StopAllTests();
         StopMonitoring();
         _stressEngine.Dispose();
     }
@@ -251,7 +250,7 @@ public sealed partial class StressTestPage : Page
                 var elapsed = anyRunning ? DateTime.UtcNow - _testStartTime : TimeSpan.Zero;
                 var gpuGFlops = isGpuRunning ? _stressEngine.CurrentGFlops : 0;
 
-                DispatcherQueue.TryEnqueue(() =>
+                DispatcherQueue?.TryEnqueue(() =>
                 {
                     if (ct.IsCancellationRequested) return;
 
@@ -301,39 +300,68 @@ public sealed partial class StressTestPage : Page
         }
     }
 
-    private void StartAll_Click(object sender, RoutedEventArgs e)
+    private async void StartAll_Click(object sender, RoutedEventArgs e)
     {
         _testStartTime = DateTime.UtcNow;
-        if (!_stressEngine.IsCpuRunning) StartCpuTest();
-        if (!_stressEngine.IsRamRunning) StartRamTest();
-        if (!_stressEngine.IsDiskRunning) StartDiskTest();
-        if (!_stressEngine.IsGpuRunning) StartGpuTest();
-
         StartAllButton.IsEnabled = false;
         StopAllButton.IsEnabled = true;
+
+        if (!_stressEngine.IsCpuRunning) StartCpuTest();
+        await Task.Yield();
+        if (!_stressEngine.IsRamRunning) StartRamTest();
+        await Task.Yield();
+        if (!_stressEngine.IsDiskRunning) StartDiskTest();
+        await Task.Yield();
+        if (!_stressEngine.IsGpuRunning) StartGpuTest();
+
+        UpdateGlobalButtons();
     }
 
-    private void StopAll_Click(object sender, RoutedEventArgs e) => StopAllTests();
+    private async void StopAll_Click(object sender, RoutedEventArgs e)
+    {
+        StartAllButton.IsEnabled = false;
+        StopAllButton.IsEnabled = false;
+
+        await Task.Run(() =>
+        {
+            _stressEngine.StopCpu();
+            _stressEngine.StopRam();
+            _stressEngine.StopDisk();
+            _stressEngine.StopGpu();
+        });
+
+        UpdateGlobalButtons();
+    }
 
     private void StopAllTests()
     {
-        StopCpuTest();
-        StopRamTest();
-        StopDiskTest();
-        StopGpuTest();
-
-        DispatcherQueue?.TryEnqueue(() =>
+        _ = Task.Run(() =>
         {
-            StartAllButton.IsEnabled = true;
-            StopAllButton.IsEnabled = false;
+            _stressEngine.StopCpu();
+            _stressEngine.StopRam();
+            _stressEngine.StopDisk();
+            _stressEngine.StopGpu();
         });
     }
 
     private void UpdateGlobalButtons()
     {
-        var anyRunning = _stressEngine.IsCpuRunning || _stressEngine.IsRamRunning
-                      || _stressEngine.IsDiskRunning || _stressEngine.IsGpuRunning;
-        StartAllButton.IsEnabled = !anyRunning;
+        if (DispatcherQueue == null) return;
+        if (!DispatcherQueue.HasThreadAccess)
+        {
+            DispatcherQueue.TryEnqueue(UpdateGlobalButtons);
+            return;
+        }
+
+        var isCpu = _stressEngine.IsCpuRunning;
+        var isRam = _stressEngine.IsRamRunning;
+        var isDisk = _stressEngine.IsDiskRunning;
+        var isGpu = _stressEngine.IsGpuRunning;
+
+        var anyRunning = isCpu || isRam || isDisk || isGpu;
+        var allRunning = isCpu && isRam && isDisk && isGpu;
+
+        StartAllButton.IsEnabled = !allRunning;
         StopAllButton.IsEnabled = anyRunning;
     }
 
@@ -354,12 +382,12 @@ public sealed partial class StressTestPage : Page
 
         // Disable the selector while test is running
         SelectCoresButton.IsEnabled = false;
-        UpdateGlobalButtons();
 
         _stressEngine.StartCpu(_selectedCpuIndices);
+        UpdateGlobalButtons();
     }
 
-    private void StopCpuTest() => _stressEngine.StopCpu();
+    private void StopCpuTest() => _ = Task.Run(() => _stressEngine.StopCpu());
 
     private void OnCpuStopped()
     {
@@ -390,12 +418,12 @@ public sealed partial class StressTestPage : Page
         RamStartIcon.Glyph = "\uE71A";
         RamStartText.Text = "StressTestPage_Stop.Text".TryGetLocalized() ?? "Stop";
         RamStatusText.Text = "StressTestPage_Allocating.Text".TryGetLocalized() ?? "Allocating";
-        UpdateGlobalButtons();
 
         _stressEngine.StartRam(targetPercent);
+        UpdateGlobalButtons();
     }
 
-    private void StopRamTest() => _stressEngine.StopRam();
+    private void StopRamTest() => _ = Task.Run(() => _stressEngine.StopRam());
 
     private void OnRamStopped()
     {
@@ -438,11 +466,12 @@ public sealed partial class StressTestPage : Page
         DiskStartIcon.Glyph = "\uE71A";
         DiskStartText.Text = "StressTestPage_Stop.Text".TryGetLocalized() ?? "Stop";
         DiskStatusText.Text = "StressTestPage_Running.Text".TryGetLocalized() ?? "Running";
-        UpdateGlobalButtons();
+
         _stressEngine.StartDisk();
+        UpdateGlobalButtons();
     }
 
-    private void StopDiskTest() => _stressEngine.StopDisk();
+    private void StopDiskTest() => _ = Task.Run(() => _stressEngine.StopDisk());
 
     private void OnDiskStopped()
     {
@@ -486,7 +515,7 @@ public sealed partial class StressTestPage : Page
         LogHelper.Log("[StressTestPage] Hardware HLSL GPU stress test started");
     }
 
-    private void StopGpuTest() => _stressEngine.StopGpu();
+    private void StopGpuTest() => _ = Task.Run(() => _stressEngine.StopGpu());
 
     private void OnGpuStopped()
     {

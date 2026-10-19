@@ -18,8 +18,10 @@ public sealed class StressEngine : IDisposable
     private string _gpuRenderer = "Unknown";
     private string _gpuVendor = "Unknown";
 
-    // ~83.886 GFLOP per dispatch: 2048 groups × 256 threads × 4000 iters × ~40 FP ops
-    private const double GFlopsPerDispatch = (2048.0 * 256 * 4000 * 40) / 1e9;
+    private int _gpuStoppedFired;
+
+    // ~2.621 GFLOP per dispatch: 512 groups × 256 threads × 1000 iters × ~40 FP ops
+    private const double GFlopsPerDispatch = (512.0 * 256 * 1000 * 40) / 1e9;
 
     public bool IsGpuRunning => _gpuRunning;
     // Compute dispatches per second (raw engine rate).
@@ -75,6 +77,7 @@ public sealed class StressEngine : IDisposable
     {
         if (_gpuRunning) return;
 
+        _gpuStoppedFired = 0;
         _gpuCts = new CancellationTokenSource();
         _gpuRunning = true;
         _totalFrames = 0;
@@ -96,13 +99,21 @@ public sealed class StressEngine : IDisposable
         _gpuRunning = false;
         _gpuCts?.Cancel();
 
-        try { _gpuThread?.Join(500); } catch { }
+        try { _gpuThread?.Join(50); } catch { }
 
         _gpuThread = null;
         _gpuCts?.Dispose();
         _gpuCts = null;
 
-        GpuStopped?.Invoke();
+        RaiseGpuStopped();
+    }
+
+    private void RaiseGpuStopped()
+    {
+        if (Interlocked.Exchange(ref _gpuStoppedFired, 1) == 0)
+        {
+            GpuStopped?.Invoke();
+        }
     }
 
     private void GpuRenderLoop(CancellationToken ct)
@@ -164,7 +175,7 @@ public sealed class StressEngine : IDisposable
                 return;
             }
 
-            // HLSL compute shader — heavy math loop, saturates GPU at ~100% with < 15ms queue latency
+            // HLSL compute shader — balanced math loop, saturates GPU to 100% while allowing smooth DWM composition
             const string hlslCode = @"
             RWStructuredBuffer<float4> Output : register(u0);
 
@@ -173,7 +184,7 @@ public sealed class StressEngine : IDisposable
             {
                 float4 val = float4(id.x * 0.001, 1.0, 2.0, 3.0);
                 [loop]
-                for (uint i = 0; i < 4000; i++)
+                for (uint i = 0; i < 1000; i++)
                 {
                     val = sin(val * 1.0001) * cos(val * 0.9999) + sqrt(abs(val) + 1.0);
                     val += frac(val * 1.6180339887);
@@ -184,7 +195,7 @@ public sealed class StressEngine : IDisposable
             var shaderBytecode = Compiler.Compile(hlslCode, "CSMain", "ComputeShader.hlsl", "cs_5_0");
             using var computeShader = device.CreateComputeShader(shaderBytecode.Span);
 
-            const int threadGroupCount = 2048; // 2048 * 256 = 524,288 threads
+            const int threadGroupCount = 512; // 512 * 256 = 131,072 threads
             const int totalThreads = threadGroupCount * 256;
 
             using var buffer = device.CreateBuffer(new BufferDescription
@@ -232,13 +243,17 @@ public sealed class StressEngine : IDisposable
                         break;
 
                     spinCount++;
-                    if (spinCount < 60)
+                    if (spinCount < 40)
                     {
-                        Thread.SpinWait(20);
+                        Thread.SpinWait(15);
+                    }
+                    else if (spinCount < 120)
+                    {
+                        Thread.Yield();
                     }
                     else
                     {
-                        Thread.Yield();
+                        Thread.Sleep(1);
                     }
                 }
 
@@ -284,7 +299,7 @@ public sealed class StressEngine : IDisposable
         finally
         {
             _gpuRunning = false;
-            GpuStopped?.Invoke();
+            RaiseGpuStopped();
         }
     }
 
@@ -305,7 +320,7 @@ public sealed class StressEngine : IDisposable
             var t = new Thread(() => CpuWorker(idx, ct))
             {
                 IsBackground = true,
-                Priority = ThreadPriority.AboveNormal,
+                Priority = ThreadPriority.BelowNormal,
                 Name = $"RyTuneX_CpuStress_CPU{idx}"
             };
             _cpuThreads.Add(t);
@@ -321,10 +336,10 @@ public sealed class StressEngine : IDisposable
         _cpuCts?.Dispose();
         _cpuCts = null;
 
-        // Give each stress thread a moment to exit gracefully
+        // Give each stress thread a moment to exit gracefully without stalling callers
         foreach (var t in _cpuThreads)
         {
-            try { t.Join(300); } catch { }
+            try { t.Join(20); } catch { }
         }
         _cpuThreads.Clear();
 
@@ -375,6 +390,11 @@ public sealed class StressEngine : IDisposable
             if (localIterations % 10 == 0)
             {
                 Interlocked.Add(ref _cpuIterations, 10);
+            }
+
+            if (localIterations % 50 == 0)
+            {
+                Thread.Yield();
             }
         }
 
@@ -434,8 +454,11 @@ public sealed class StressEngine : IDisposable
                 try
                 {
                     _ramBlocks[i] = new byte[blockSize];
-                    // Touch all pages to force physical commit
-                    Random.Shared.NextBytes(_ramBlocks[i]);
+                    // Touch memory page-by-page (4KB) to force physical commit rapidly without heavy random-generation overhead
+                    for (int p = 0; p < blockSize; p += 4096)
+                    {
+                        _ramBlocks[i][p] = 0xAA;
+                    }
                     allocatedMb += blockSize / (1024 * 1024);
                     RamAllocated?.Invoke(allocatedMb);
                 }
