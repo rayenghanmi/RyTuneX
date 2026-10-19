@@ -9,7 +9,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
 	<Platforms>x86;x64</Platforms>
 	<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-    <PublishProfile Condition="'$(Platform)' == 'x64' or '$(Platform)' == 'x86' or '$(Platform)' == 'ARM64'">Properties\PublishProfiles\win-$(Platform).pubxml</PublishProfile>
+	<PublishProfile>Properties\PublishProfiles\win-$(Platform).pubxml</PublishProfile>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWinUI>true</UseWinUI>

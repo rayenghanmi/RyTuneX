@@ -2,7 +2,7 @@
 
 All notable changes to this branch will be documented in this file.
 
-## 1.8.0 - Unreleased
+## 1.8.0 - Released
 
 ### Added
 
