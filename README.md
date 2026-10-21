@@ -133,6 +133,23 @@ RyTuneX is built on a modern Windows development stack, leveraging a layered arc
 - **🧰 System Workloads**: Manage boot entries in **Startup Apps**, install software via **Packages (WinGet)**, clear overrides across 27+ categories in **Policies**, control live **Processes** and **Services**, and run system repair routines in **Repair**.
 - **📊 System Info**: Inspect detailed hardware specifications, battery health, Copilot+ AI hardware capabilities, and extract or import device drivers.
 
+## 📱 RyTuneX for Android
+
+RyTuneX isn't just for Windows. **RyTuneX-Android** is the mobile edition of the tuning engine, built with **Jetpack Compose** and **Material 3** for **Android 8.0+**.
+
+- 🔓 **No Root Required**: Runs through **Shizuku** (UID 2000) via Wireless Debugging.
+- ⚡ **Hardware-Aware Profiles**: Live device telemetry with one-tap profiles (`Extreme Gaming`, `Adaptive Endurance`, `RyTuneX Fluid`, `Reset to Stock`).
+- 🎛️ **Display & Rendering Control**: Lock hardware refresh rates, adjust animation scales, force GPU rendering paths, and pre-compile apps with ART AOT.
+- 🔒 **Privacy & Network**: System-wide encrypted DNS-over-TLS (Cloudflare, AdGuard, Quad9, Google, or custom), plus reduced background radio chatter and telemetry.
+- 👆 **Touch Latency Boosts**: Tweaks aimed at a more responsive touchscreen.
+
+<div align="center" style="margin: 20px 0;">
+  <a href="https://github.com/rayenghanmi/RyTuneX-Android"><img src="https://img.shields.io/badge/RyTuneX-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="RyTuneX Android"></a>
+</div>
+
+> [!NOTE]
+> RyTuneX-Android is a separate project with its own releases and issue tracker.
+
 ## 🛠️ Get Involved
 
 RyTuneX is an open-source project. Contributions are welcome!  
